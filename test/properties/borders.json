@@ -1,0 +1,37 @@
+{
+  "border": {
+    "layout": {
+      "light": {
+        "value": "1px solid {color.border.light.value}",
+        "comment": ""
+      },
+      "dark": {
+        "value": "1px solid {color.border.dark.value}",
+        "comment": ""
+      },
+      "base": {
+        "value": "1px solid {color.border.base.value}",
+        "comment": ""
+      }
+    },
+
+    "input": {
+      "base": {
+        "value": "1px solid {color.border.base.value}",
+        "comment": ""
+      },
+      "focus": {
+        "value": "1px solid {color.border.focus.value}",
+        "comment": ""
+      },
+      "error": {
+        "value": "1px solid {color.border.base.value}",
+        "comment": ""
+      },
+      "button": {
+        "value": "1px solid {color.font.link.value}",
+        "comment": ""
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "a": "{b} bar",
+  "b": "{c} baz",
+  "c": "{d} bla",
+  "d": "{e} boo",
+  "e": "{f} bae",
+  "f": "{g} bee",
+  "g": "foo bon"
+}

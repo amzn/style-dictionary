@@ -1,0 +1,32 @@
+<% var props = _.filter(allProperties, function(prop) {
+  return prop.attributes.category !== 'asset' &&
+         prop.attributes.category !== 'border' &&
+         prop.attributes.category !== 'shadow' &&
+         prop.attributes.category !== 'transition';
+}); %>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Do not edit directly
+  Generated on <%= new Date() %>
+-->
+<plist version="1.0">
+  <dict>
+    <% _.each(props, function(prop) {
+    %><key><%= prop.name %></key>
+    <% if (prop.attributes.category === 'color') { %><dict>
+      <key>r</key>
+      <real><%= prop.value[0]/255 %></real>
+      <key>g</key>
+      <real><%= prop.value[1]/255 %></real>
+      <key>b</key>
+      <real><%= prop.value[2]/255 %></real>
+      <key>a</key>
+      <real>1</real>
+    <% } else if (prop.attributes.category === 'size') { %></dict>
+      <integer><%= prop.value %></integer>
+    <% } else { %></dict>
+      <string><%= prop.value %></string>
+    <% } }); %>
+  </dict>
+</plist>

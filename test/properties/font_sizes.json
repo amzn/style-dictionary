@@ -1,0 +1,30 @@
+{
+  "size": {
+    "font": {
+      "tiny": {
+        "value": "11px"
+      },
+      "small": {
+        "value": "13px"
+      },
+      "medium": {
+        "value": "15px"
+      },
+      "large": {
+        "value": "17px"
+      },
+      "xl": {
+        "value": "21px"
+      },
+      "xxl": {
+        "value": "25px"
+      },
+      "xxxl": {
+        "value": "30px"
+      },
+      "base": {
+        "value": "{size.font.medium.value}"
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+//  Do not edit directly
+//  Generated on <%= new Date() %>
+
+#import <UIKit/UIKit.h>
+
+<% _.each(allProperties, function(prop) {
+  if (prop.attributes.category === 'color') {
+    %>#define <%= prop.name %> [UIColor colorWithRed:<%= (prop.value[0]/255).toFixed(2) %>f green:<%= (prop.value[1]/255).toFixed(2) %>f blue:<%= (prop.value[2]/255).toFixed(2) %>f alpha:1.0f]<%
+  } if (prop.attributes.category === 'content') {
+    %>#define <%= prop.name %> @"<%= prop.value %>"<%
+  } if (prop.attributes.category === 'size') {
+    %>#define <%= prop.name %> <%= prop.value %>.0f<% } %>
+<% }); %>

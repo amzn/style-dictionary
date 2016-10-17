@@ -1,0 +1,17 @@
+#!/bin/sh
+set -e # fail script on any individual command failing
+
+SRCROOT=$PWD
+
+# Get the current directory we are in
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )"/.. && pwd )"
+
+echo "Building a style dictionary"
+if [ -e $PWD/build.js ]; then
+  echo "Using local build.js"
+  node "$PWD/build.js"
+else
+  # Calls build.js in this package from the directory of
+  # the calling package.
+  node "$DIR/lib/commonjs/style-dictionary/build.js"
+fi

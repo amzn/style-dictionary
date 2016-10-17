@@ -1,0 +1,37 @@
+{
+  "name": "style-dictionary",
+  "version": "1.0.0",
+  "description": "A node module to build a style dictionary package. A style dictionary consists of JSON files with the definitions of style properties like colors, typography, sizes, icons, etc. The style dictionary package also consists of a config.json which explains how to transform values (px -> pt, hex -> rgb, etc.) as well as what files to build.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha --recursive -c"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dbanksdesign/Style-Dictionary.git"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/dbanksdesign/Style-Dictionary/issues"
+  },
+  "contributors": [
+    "Yuliya Baran <baranyu@amazon.com>",
+    "Charles Dorner <dornerc@amazon.com>",
+    "Danny Banks <djb@amazon.com>"
+  ],
+  "homepage": "https://github.com/dbanksdesign/Style-Dictionary#readme",
+  "dependencies": {
+    "color": "^0.11.3",
+    "fs-extra": "^0.30.0",
+    "glob": "^7.1.1",
+    "lodash": "^4.16.4"
+  },
+  "devDependencies": {
+    "mocha": "^3.1.2",
+    "should": "^11.1.1"
+  }
+}
