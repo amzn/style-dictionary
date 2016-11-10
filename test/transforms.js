@@ -2,7 +2,7 @@ var assert     = require('assert'),
     should     = require('should'),
     helpers    = require('./helpers'),
     transforms = require('../lib/common/transforms');
-console.log("hi");
+
 
 describe('transforms', function() {
   describe('name/cti/camel', function() {

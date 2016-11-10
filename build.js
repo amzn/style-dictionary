@@ -1,5 +1,5 @@
 var fs = require('fs');
-var StyleDictionary = require('../index');
+var StyleDictionary = require('style-dictionary');
 
 var pwd = process.cwd();
 var config = JSON.parse( fs.readFileSync(pwd + '/config.json') );
