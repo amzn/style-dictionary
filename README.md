@@ -44,7 +44,8 @@ The StyleDictionary is a collection of JSON text files.  It uses key/value pairs
 	}
 }
 ```
-Here we are creating some basic 
+
+Here we are creating some basic font size definitions.  The style definition size.font.small.value is "10px" for example.  The style definition size.font.base.value automatically takes on the value found in size.font.medium.value, so both of those resolve to "16px".
 
 
 # Options using the style dictionary
