@@ -72,3 +72,6 @@ xcuserdata/
 *.moved-aside
 *.xccheckout
 *.xcscmblueprint
+=======
+# npm package tars
+*.tgz

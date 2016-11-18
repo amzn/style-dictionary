@@ -13,5 +13,5 @@ if [ -e $PWD/build.js ]; then
 else
   # Calls build.js in this package from the directory of
   # the calling package.
-  node "$DIR/lib/commonjs/style-dictionary/build.js"
+  node "$DIR/style-dictionary/build.js"
 fi
