@@ -35,3 +35,40 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+
+# Native Builds
+build/
+
+# Android Specific Files
+.gradle/
+local.properties
+*.log
+bin/
+gen/
+out/
+*.class
+.navigation/
+captures/
+*.apk
+*.ap_
+*.iml
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/libraries
+*.jks
+
+# IOS Specific Files
+build/
+DerivedData/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+*.moved-aside
+*.xccheckout
+*.xcscmblueprint
