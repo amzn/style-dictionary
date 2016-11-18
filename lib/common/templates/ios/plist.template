@@ -23,6 +23,7 @@
       <real><%= prop.value[2]/255 %></real>
       <key>a</key>
       <real>1</real>
+      </dict>
     <% } else if (prop.attributes.category === 'size') { %></dict>
       <integer><%= prop.value %></integer>
     <% } else { %></dict>
