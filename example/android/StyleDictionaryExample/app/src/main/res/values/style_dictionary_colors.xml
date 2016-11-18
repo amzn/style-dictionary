@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Do not edit directly
+  Generated on Fri Nov 18 2016 11:51:45 GMT-0800 (PST)
+-->
+
+<resources>
+  <color name="color_blue_0">#04728A</color>
+  <color name="color_blue_1">#048BA8</color>
+  <color name="color_blue_2">#31A0B7</color>
+  <color name="color_blue_3">#5FB5C7</color>
+  <color name="color_blue_4">#8CCAD7</color>
+  <color name="color_grey_0">#353531</color>
+  <color name="color_grey_1">#595956</color>
+  <color name="color_grey_2">#7E7E7B</color>
+  <color name="color_grey_3">#A3A3A1</color>
+  <color name="color_grey_4">#C7C7C6</color>
+  <color name="color_white">#FFFFFF</color>
+  <color name="color_orange_0">#86351E</color>
+  <color name="color_orange_1">#B24628</color>
+  <color name="color_orange_2">#C84F2D</color>
+  <color name="color_orange_3">#F46036</color>
+  <color name="color_orange_4">#F8997F</color>
+  
+</resources>

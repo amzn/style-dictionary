@@ -1,0 +1,9 @@
+// Do not edit directly
+//  Generated on <%= new Date() %>
+
+<% _.each(allProperties, function(prop) {
+  if (prop.attributes.category === 'color') {
+    var name = prop.name.split('-').join('_').replace('color_', '').toUpperCase();
+    %>export const <%= name %> = '<%= prop.value %>';<%
+  } %>
+<% }); %>
