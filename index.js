@@ -1,4 +1,5 @@
 module.exports = {
+  VERSION: '1.0.0',
   properties: {},
   allProperties: [],
   defaultBuildPath: 'build/',
