@@ -42,8 +42,6 @@ build/
 # Android Specific Files
 .gradle/
 local.properties
-*.log
-bin/
 gen/
 out/
 *.class
@@ -58,7 +56,6 @@ captures/
 *.jks
 
 # IOS Specific Files
-build/
 DerivedData/
 *.pbxuser
 !default.pbxuser

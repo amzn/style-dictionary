@@ -1,0 +1,27 @@
+#!/usr/bin/env node
+
+'use strict';
+
+var fs = require('fs'),
+    program = require('commander'),
+    path = require('path'),
+    StyleDictionary = require('style-dictionary'),
+    pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf8'));
+
+program
+  .version(pkg.version)
+  .description(pkg.description)
+  .usage('[options]')
+  .option('-c, --config <path>', 'set config path. defaults to ./config.json')
+  .parse(process.argv);
+
+var configPath = program.config ? program.config : './config.json';
+
+console.log("Reading config file from " + configPath);
+var config = JSON.parse( fs.readFileSync(configPath) );
+
+// Create a style dictionary object with the config
+var styleDictionary = StyleDictionary.extend( config );
+
+console.log("Building your style dictionary");
+styleDictionary.buildAllPlatforms();

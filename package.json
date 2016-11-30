@@ -36,6 +36,7 @@
   "homepage": "https://github.com/dbanksdesign/Style-Dictionary#readme",
   "dependencies": {
     "color": "^0.11.3",
+    "commander": "^2.9.0",
     "fs-extra": "^0.30.0",
     "glob": "^7.1.1",
     "lodash": "^4.16.4"
