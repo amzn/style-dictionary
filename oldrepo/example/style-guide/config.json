@@ -1,0 +1,47 @@
+{
+  "source": [
+    "properties/**/*.json"
+  ],
+  "platforms": {
+    "ios": {
+      "transformGroup": "ios",
+      "files": [
+        {
+          "destination": "ios/StyleDictionaryExample/StyleDictionaryExample/StyleDictionary.h",
+          "template": "ios/headers"
+        },
+        {
+          "destination": "ios/StyleDictionaryExample/StyleDictionaryExample/StyleDictionary.plist",
+          "template": "ios/plist"
+        }
+      ],
+      "actions": [
+        "ios/copy"
+      ]
+    },
+    "android": {
+      "transformGroup": "android",
+      "files": [
+        {
+          "destination": "android/StyleDictionaryExample/app/src/main/res/values/style_dictionary_colors.xml",
+          "template": "android/colors"
+        }
+      ],
+      "actions": [
+        "android/copy"
+      ]
+    },
+    "reactNative": {
+      "transformGroup": "web",
+      "files": [
+        {
+          "destination": "react-native/StyleDictionaryExample/colorStyles.js",
+          "template": "reactNative/colors"
+        }
+      ],
+      "actions": [
+        "reactNative/copy"
+      ]
+    }
+  }
+}

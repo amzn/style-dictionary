@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Do not edit directly
+  Generated on <%= new Date() %>
+-->
+<% var props = _.filter(allProperties, function(prop) {
+  return prop.attributes.category === 'time';
+}); %>
+<resources>
+  <% _.each(props, function(prop) {
+  %><integer name="<%= prop.name %>"><%= prop.value %></integer><% if (prop.comment) { %><!-- <%= prop.comment %> --><% } %>
+  <% }); %>
+</resources>

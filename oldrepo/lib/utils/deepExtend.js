@@ -1,0 +1,58 @@
+var _ = require('lodash');
+
+/**
+ * Performs an deep extend on the objects, from right to left.
+ * @param {...Object} object - Any number of JS objects
+ * @returns {Object}
+ */
+function deepExtend(object) {
+  var src, copyIsArray, copy, name, options, clone,
+    target = arguments[0] || {},
+    i = 1,
+    length = arguments.length;
+
+  // Handle case when target is a string or something (possible in deep copy)
+  if ( typeof target !== "object" ) {
+    target = {};
+  }
+
+  for ( ; i < length; i++) {
+    // Only deal with non-null/undefined values
+    if ( (options = arguments[ i ]) != null ) {
+      // Extend the base object
+      for (name in options) {
+        if (!options.hasOwnProperty(name))
+          continue;
+
+        src = target[name];
+        copy = options[name];
+
+        // Prevent never-ending loop
+        if (target === copy) {
+          continue;
+        }
+
+        // Recurse if we're merging plain objects or arrays
+        if ( copy && ( _.isPlainObject(copy) || (copyIsArray = _.isArray(copy)) ) ) {
+          if ( copyIsArray ) {
+            copyIsArray = false;
+            clone = src && _.isArray(src) ? src : [];
+          } else {
+            clone = src && _.isPlainObject(src) ? src : {};
+          }
+
+          // Never move original objects, clone them
+          target[ name ] = deepExtend( clone, copy );
+
+          // Don't bring in undefined values
+        } else if ( copy !== undefined ) {
+          target[ name ] = copy;
+        }
+      }
+    }
+  }
+
+  return target;
+}
+
+module.exports = deepExtend;

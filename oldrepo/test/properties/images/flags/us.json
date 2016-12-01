@@ -1,0 +1,22 @@
+{
+  "asset": {
+    "image": {
+      "flag": {
+        "us": {
+          "mdpi": {
+            "value": "test/assets/images/mdpi/flag_us_base.png"
+          },
+          "hdpi": {
+            "value": "test/assets/images/hdpi/flag_us_base.png"
+          },
+          "xhdpi": {
+            "value": "test/assets/images/xhdpi/flag_us_base.png"
+          },
+          "xxhdpi": {
+            "value": "test/assets/images/xxhdpi/flag_us_base.png"
+          }
+        }
+      }
+    }
+  }
+}
