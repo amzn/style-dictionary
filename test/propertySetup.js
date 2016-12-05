@@ -1,31 +1,24 @@
-var assert = require('assert'),
-  should = require('should'),
-  propertySetup = require('../lib/transform/propertySetup');
+var assert = require('chai').assert,
+    propertySetup = require('../lib/transform/propertySetup');
 
 
 describe('propertySetup', function() {
   it('should error if property is not an object', function() {
-    propertySetup.bind(
-      null,
-      'foo',
-      []
-    ).should.throw();
+    assert.throws(
+      propertySetup.bind(null, 'foo', [])
+    );
   });
 
   it('should error if name in not a string', function() {
-    propertySetup.bind(
-      {},
-      null,
-      []
-    ).should.throw();
+    assert.throws(
+      propertySetup.bind({}, null, [])
+    );
   });
 
   it('should error path is not an array', function() {
-    propertySetup.bind(
-      {},
-      'name',
-      null
-    ).should.throw();
+    assert.throws(
+      propertySetup.bind({}, 'name', null)
+    );
   });
 
 
@@ -35,11 +28,11 @@ describe('propertySetup', function() {
       "white",
       ["color","base"]
     );
-    test.should.be.an.Object;
-    test.should.have.property('value').and.be.a.String;
-    test.should.have.property('original').and.be.an.Object;
-    test.should.have.property('attributes').and.be.an.Object;
-    test.should.have.property('path').and.be.an.Array;
+    assert.isObject(test);
+    assert.property(test, 'value');
+    assert.property(test, 'original');
+    assert.property(test, 'attributes');
+    assert.property(test, 'path');
   });
 
 
@@ -50,7 +43,7 @@ describe('propertySetup', function() {
       "white",
       ["color","base"]
     );
-    test.should.eql(original);
+    assert.deepEqual(test, original);
   });
 
   it('should use attributes if already set', function() {
@@ -60,7 +53,7 @@ describe('propertySetup', function() {
       "white",
       ["color","base"]
     );
-    test.attributes.should.eql(attributes);
+    assert.deepEqual(test.attributes, attributes);
   });
 
   it('should use the name on the property if set', function() {
@@ -70,7 +63,7 @@ describe('propertySetup', function() {
       'white',
       ["color","base"]
     );
-    test.name.should.eql(name);
+    assert.equal(test.name, name);
   });
 
   it('should use the name passed in if not set on the property', function() {
@@ -79,6 +72,6 @@ describe('propertySetup', function() {
       'white',
       ["color","base"]
     );
-    test.name.should.eql('white');
+    assert.equal(test.name, 'white');
   });
 });

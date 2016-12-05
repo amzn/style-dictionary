@@ -3,7 +3,7 @@ module.exports = {
   properties: {},
   allProperties: [],
   defaultBuildPath: 'build/',
-  
+
   transform: require('./lib/common/transforms'),
   transformGroup: require('./lib/common/transformGroups'),
   format: require('./lib/common/formats'),

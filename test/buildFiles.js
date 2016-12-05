@@ -1,59 +1,49 @@
-//var assert          = require('assert'),
-//    should          = require('should'),
-//    helpers         = require('./helpers'),
-//    StyleDictionary = require('../index');
-//
-//// Test configs
-//var config = helpers.fileToJSON('test/configs/test.json');
-//var test = StyleDictionary.create(config);
-//var test2 = StyleDictionary.create({
-//  "source": ["test/properties/**/*.json"],
-//  "platforms": {
-//    "web": {
-//      "transformGroup": "web",
-//      "prefix": "smop",
-//      "buildPath": "test/output/web/",
-//      "files": [
-//        {
-//          "destination": "_icons.scss",
-//          "format": "scss/icons"
-//        },{
-//          "destination": "_variables.scss",
-//          "format": "scss/variables"
-//        },{
-//          "destination": "_icon_font.scss",
-//          "format": "scss/font"
-//        },{
-//          "destination": "_styles.js",
-//          "format": "javascript/module"
-//        }
-//      ]
-//    }
-//  }
-//});
-//
-//
-//describe('buildFiles', function() {
-//  beforeEach(function() {
-//    helpers.clearOutput();
-//  });
-//
-//
-//  it('should work', function() {
-//    //console.log(test);
-//    test.buildFiles( test.options.platforms.web, {
-//      properties: test.properties,
-//      allProperties: StyleDictionary.utils.flattenProperties( test.properties )
-//    });
-//    //helpers.fileExists('./test/output/web/_icons.scss').should.be.true;
-//    //helpers.fileExists('./test/output/web/_icon_font.scss').should.be.true;
-//    //helpers.fileExists('./test/output/web/_variables.scss').should.be.true;
-//  });
-//
-//  it('should work with buildPath', function() {
-//    //test2.buildFiles( test2.options.platforms.web, test );
-//    //helpers.fileExists('./test/output/web/_icons.scss').should.be.true;
-//    //helpers.fileExists('./test/output/web/_icon_font.scss').should.be.true;
-//    //helpers.fileExists('./test/output/web/_variables.scss').should.be.true;
-//  });
-//});
+var assert     = require('chai').assert,
+    helpers    = require('./helpers'),
+    buildFiles = require('../lib/buildFiles');
+
+var dictionary = {
+  properties: {
+    foo: 'bar'
+  }
+};
+
+var platform = {
+  files: [
+    {
+      destination: 'test/output/test.json',
+      format: function(dictionary) {
+        return JSON.stringify(dictionary.properties)
+      }
+    }
+  ]
+};
+
+var platformWithBuildPath = {
+  buildPath: 'test/output/',
+  files: [
+    {
+      destination: 'test.json',
+      format: function(dictionary) {
+        return JSON.stringify(dictionary.properties)
+      }
+    }
+  ]
+};
+
+describe('buildFiles', function() {
+  beforeEach(function() {
+    helpers.clearOutput();
+  });
+
+
+ it('should work without buildPath', function() {
+   buildFiles( dictionary, platform );
+   assert(helpers.fileExists('./test/output/test.json'));
+ });
+
+ it('should work with buildPath', function() {
+   buildFiles( dictionary, platformWithBuildPath );
+   assert(helpers.fileExists('./test/output/test.json'));
+ });
+});

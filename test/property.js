@@ -1,7 +1,6 @@
-var assert = require('assert'),
-  should = require('should'),
-  helpers         = require('./helpers'),
-  transformProperty = require('../lib/transform/property');
+var assert            = require('chai').assert,
+    helpers           = require('./helpers'),
+    transformProperty = require('../lib/transform/property');
 
 
 var options = {
@@ -29,8 +28,8 @@ var options = {
 describe('transformProperty', function() {
   it('should work', function() {
     var test = transformProperty({attributes:{baz:'blah'}}, options);
-    test.attributes.bar.should.eql('foo');
-    test.name.should.eql('hello');
+    assert.equal(test.attributes.bar, 'foo');
+    assert.equal(test.name, 'hello');
   });
 
   // Add more tests

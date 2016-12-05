@@ -1,5 +1,4 @@
-var assert          = require('assert'),
-    should          = require('should'),
+var assert          = require('chai').assert,
     helpers         = require('./helpers'),
     StyleDictionary = require('../index');
 
@@ -14,7 +13,7 @@ describe('buildAllPlatforms', function() {
 
   it('should work', function() {
     test.buildAllPlatforms();
-    helpers.fileExists('./test/output/web/_icons.scss').should.be.true;
-    helpers.fileExists('./test/output/android/colors.xml').should.be.true;
+    assert(helpers.fileExists('./test/output/web/_icons.scss'));
+    assert(helpers.fileExists('./test/output/android/colors.xml'));
   });
 });

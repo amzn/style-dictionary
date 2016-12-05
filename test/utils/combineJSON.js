@@ -1,40 +1,32 @@
-var assert      = require('assert'),
-    should      = require('should'),
-    fs          = require('fs'),
-    helpers     = require('../helpers'),
+var assert      = require('chai').assert,
     combineJSON = require('../../lib/utils/combineJSON');
 
 
 describe('combineJSON', function() {
   it('should return an object', function () {
     var test = combineJSON(["test/json_files/*.json"]);
-    test.should.be.an.instanceOf(Object);
-  });
-
-  it('should return null if no files are found', function () {
-    var test = combineJSON(["test/json_files/*.foo"]);
-    test.should.be.empty;
+    assert.isObject(test);
   });
 
   it('should handle wildcards', function () {
     var test = combineJSON(["test/json_files/*.json"]);
-    test.should.be.an.instanceOf(Object);
+    assert.isObject(test);
   });
 
   it('should do a deep merge', function() {
     var test = combineJSON(["test/json_files/shallow/*.json"], true);
-    (test.a).should.eql(2);
-    (test.b).should.eql({"a":1, "c":2});
-    (test.d.e.f.g).should.eql(1);
-    (test.d.e.f.h).should.eql(2);
+    assert.equal(test.a, 2);
+    assert.deepEqual(test.b, {"a":1, "c":2});
+    assert.equal(test.d.e.f.g, 1);
+    assert.equal(test.d.e.f.h, 2);
   });
 
   it('should do a shallow merge', function() {
     var test = combineJSON(["test/json_files/shallow/*.json"]);
-    (test.a).should.equal(2);
-    (test.b).should.eql({"c":2});
-    (test.c).should.eql([3,4]);
-    (test.d.e.f.h).should.equal(2);
-    (!!test.d.e.f.g).should.be.false;
+    assert.equal(test.a, 2);
+    assert.deepEqual(test.b, {"c":2});
+    assert.deepEqual(test.c, [3,4]);
+    assert(!test.d.e.f.g);
+    assert.equal(test.d.e.f.h, 2);
   });
 });

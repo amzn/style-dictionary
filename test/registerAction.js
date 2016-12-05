@@ -1,54 +1,71 @@
-var assert = require('assert'),
-    should = require('should'),
-    StyleDictionary = require('../index');
+var assert = require('chai').assert,
+    StyleDictionary = require('../index').extend({});
 
 
 describe('registerAction', function() {
   it('should error if name is not a string', function() {
-    StyleDictionary.registerAction.bind({
-      action: function() {}
-    }).should.throw();
+    assert.throws(
+      StyleDictionary.registerAction.bind({
+        action: function() {}
+      })
+    );
 
-    StyleDictionary.registerAction.bind({
-      name: 1,
-      action: function() {}
-    }).should.throw();
+    assert.throws(
+      StyleDictionary.registerAction.bind({
+        name: 1,
+        action: function() {}
+      })
+    );
 
-    StyleDictionary.registerAction.bind({
-      name: [],
-      action: function() {}
-    }).should.throw();
+    assert.throws(
+      StyleDictionary.registerAction.bind({
+        name: [],
+        action: function() {}
+      })
+    );
 
-    StyleDictionary.registerAction.bind({
-      name: {},
-      action: function() {}
-    }).should.throw();
+    assert.throws(
+      StyleDictionary.registerAction.bind({
+        name: {},
+        action: function() {}
+      })
+    );
   });
 
   it('should error if formatter is not a function', function() {
-    StyleDictionary.registerAction.bind({
-      name: 'test'
-    }).should.throw();
+    assert.throws(
+      StyleDictionary.registerAction.bind({
+        name: 'test'
+      })
+    );
 
-    StyleDictionary.registerAction.bind({
-      name: 'test',
-      action: 1
-    }).should.throw();
+    assert.throws(
+      StyleDictionary.registerAction.bind({
+        name: 'test',
+        action: 1
+      })
+    );
 
-    StyleDictionary.registerAction.bind({
-      name: 'test',
-      action: 'name'
-    }).should.throw();
+    assert.throws(
+      StyleDictionary.registerAction.bind({
+        name: 'test',
+        action: 'name'
+      })
+    );
 
-    StyleDictionary.registerAction.bind({
-      name: 'test',
-      action: []
-    }).should.throw();
+    assert.throws(
+      StyleDictionary.registerAction.bind({
+        name: 'test',
+        action: []
+      })
+    );
 
-    StyleDictionary.registerAction.bind({
-      name: 'test',
-      action: {}
-    }).should.throw();
+    assert.throws(
+      StyleDictionary.registerAction.bind({
+        name: 'test',
+        action: {}
+      })
+    );
   });
 
   it('should work if name and formatter are good', function() {
@@ -57,21 +74,11 @@ describe('registerAction', function() {
       action: function() {}
     });
 
-    StyleDictionary.action['scss'].should.be.a.Function;
+    assert.isFunction(StyleDictionary.action['scss']);
   });
 
-
-  // it('should properly pass the registered action to instances', function() {
-  //   var test = StyleDictionary.create({});
-  //   test.action['scss'].should.be.a.Function;
-  // });
-  //
-  // it('should work on the instance as well', function() {
-  //   var test = StyleDictionary.create({});
-  //   test.registerAction({
-  //     name: 'foo',
-  //     action: function() {}
-  //   });
-  //   test.action['foo'].should.be.a.Function;
-  // });
+  it('should properly pass the registered format to instances', function() {
+    var test = StyleDictionary.extend({});
+    assert.isFunction(test.action['scss']);
+  });
 });
