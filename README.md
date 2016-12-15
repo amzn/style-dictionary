@@ -51,11 +51,12 @@ Here we are creating some basic font size definitions.  The style definition siz
 # Using the output of StyleDictionary in a project
 
 Show examples of how to use in:
--iOS
--Android
--html/CSS
--react
--react native
+
+- iOS
+- Android
+- html/CSS
+- react
+- react native
 
 
 # Installing StyleDictionary for use from the CLI
