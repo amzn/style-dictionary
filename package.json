@@ -17,7 +17,8 @@
     "NOTICE"
   ],
   "scripts": {
-    "test": "mocha --recursive -c"
+    "test": "mocha --recursive -c",
+    "install-cli": "npm install -g $(npm pack)"
   },
   "repository": {
     "type": "git",

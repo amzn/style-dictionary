@@ -60,13 +60,14 @@ Show examples of how to use in:
 
 # Installing StyleDictionary for use from the CLI
 
+Note that you must have node (and npm) installed.
+
 Execute the following from the command line:
 
 ```
 git clone https://github.com/amznlabs/style-dictionary.git ./sdtemp
 cd sdtemp
-npm pack
-npm install -g style-dictionary-1.0.0.tgz
+npm run install-cli
 cd ..
 rm -rf sdtemp
 ```
