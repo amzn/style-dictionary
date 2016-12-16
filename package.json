@@ -35,7 +35,8 @@
   ],
   "scripts": {
     "lint": "eslint index.js lib/**/*.js test/**/*.js",
-    "test": "npm run lint && mocha --recursive -c"
+    "test": "npm run lint && mocha --recursive -c",
+    "install-cli": "npm install -g $(npm pack)"
   },
   "repository": {
     "type": "git",
