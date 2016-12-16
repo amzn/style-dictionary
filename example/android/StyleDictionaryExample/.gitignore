@@ -1,3 +1,6 @@
+# Style Dictionary
+app/src/main/res/values/style_dictionary*
+
 *.iml
 .gradle
 /local.properties

@@ -10,7 +10,7 @@ import {
   StyleSheet,
   View
 } from 'react-native';
-import * as COLORS from './colorStyles';
+import * as COLORS from './styleDictionary/colors';
 
 export default class StyleDictionaryExample extends Component {
   render() {

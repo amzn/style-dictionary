@@ -5,42 +5,41 @@
   "platforms": {
     "ios": {
       "transformGroup": "ios",
+      "buildPath": "../ios/StyleDictionaryExample/StyleDictionaryExample/",
       "files": [
         {
-          "destination": "ios/StyleDictionaryExample/StyleDictionaryExample/StyleDictionary.h",
+          "destination": "StyleDictionary.h",
           "template": "ios/headers"
         },
         {
-          "destination": "ios/StyleDictionaryExample/StyleDictionaryExample/StyleDictionary.plist",
+          "destination": "StyleDictionary.plist",
           "template": "ios/plist"
         }
-      ],
-      "actions": [
-        "ios/copy"
       ]
     },
     "android": {
       "transformGroup": "android",
+      "buildPath": "../android/StyleDictionaryExample/app/src/main/res/values/",
       "files": [
         {
-          "destination": "android/StyleDictionaryExample/app/src/main/res/values/style_dictionary_colors.xml",
+          "destination": "style_dictionary_colors.xml",
           "template": "android/colors"
         }
-      ],
-      "actions": [
-        "android/copy"
       ]
     },
     "reactNative": {
-      "transformGroup": "web",
+      "transforms": ["attribute/cti","name/ti/constant","size/px"],
+      "buildPath": "../react-native/StyleDictionaryExample/styleDictionary/",
       "files": [
         {
-          "destination": "react-native/StyleDictionaryExample/colorStyles.js",
-          "template": "reactNative/colors"
+          "destination": "colors.js",
+          "format": "javascript/es6",
+          "filter": {
+            "attributes": {
+              "category": "color"
+            }
+          }
         }
-      ],
-      "actions": [
-        "reactNative/copy"
       ]
     }
   }
