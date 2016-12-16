@@ -1,5 +1,4 @@
-var assert          = require('assert'),
-    should          = require('should'),
+var assert          = require('chai').assert,
     helpers         = require('./helpers'),
     fs              = require('fs-extra'),
     StyleDictionary = require('../index');
@@ -27,7 +26,7 @@ describe('buildPlatform', function() {
 
     it('should write to a file properly', function() {
       test.buildPlatform('android');
-      fs.existsSync('./test/output/action.txt').should.be.true;
+      assert(helpers.fileExists('./test/output/action.txt'));
     });
   });
 });

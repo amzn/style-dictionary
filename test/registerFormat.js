@@ -1,54 +1,69 @@
-var assert = require('assert'),
-    should = require('should'),
-    StyleDictionary = require('../index');
+var assert = require('chai').assert,
+    StyleDictionary = require('../index').extend({});
 
 
 describe('registerFormat', function() {
   it('should error if name is not a string', function() {
-    StyleDictionary.registerFormat.bind({
-      formatter: function() {}
-    }).should.throw();
+    assert.throws(
+      StyleDictionary.registerFormat.bind({formatter: function() {}})
+    );
 
-    StyleDictionary.registerFormat.bind({
-      name: 1,
-      formatter: function() {}
-    }).should.throw();
+    assert.throws(
+      StyleDictionary.registerFormat.bind({
+        name: 1,
+        formatter: function() {}
+      })
+    );
 
-    StyleDictionary.registerFormat.bind({
-      name: [],
-      formatter: function() {}
-    }).should.throw();
+    assert.throws(
+      StyleDictionary.registerFormat.bind({
+        name: [],
+        formatter: function() {}
+      })
+    );
 
-    StyleDictionary.registerFormat.bind({
-      name: {},
-      formatter: function() {}
-    }).should.throw();
+    assert.throws(
+      StyleDictionary.registerFormat.bind({
+        name: {},
+        formatter: function() {}
+      })
+    );
   });
 
   it('should error if formatter is not a function', function() {
-    StyleDictionary.registerFormat.bind({
-      name: 'test'
-    }).should.throw();
+    assert.throws(
+      StyleDictionary.registerFormat.bind({
+        name: 'test'
+      })
+    );
 
-    StyleDictionary.registerFormat.bind({
-      name: 'test',
-      formatter: 1
-    }).should.throw();
+    assert.throws(
+      StyleDictionary.registerFormat.bind({
+        name: 'test',
+        formatter: 1
+      })
+    );
 
-    StyleDictionary.registerFormat.bind({
-      name: 'test',
-      formatter: 'name'
-    }).should.throw();
+    assert.throws(
+      StyleDictionary.registerFormat.bind({
+        name: 'test',
+        formatter: 'name'
+      })
+    );
 
-    StyleDictionary.registerFormat.bind({
-      name: 'test',
-      formatter: []
-    }).should.throw();
+    assert.throws(
+      StyleDictionary.registerFormat.bind({
+        name: 'test',
+        formatter: []
+      })
+    );
 
-    StyleDictionary.registerFormat.bind({
-      name: 'test',
-      formatter: {}
-    }).should.throw();
+    assert.throws(
+      StyleDictionary.registerFormat.bind({
+        name: 'test',
+        formatter: {}
+      })
+    );
   });
 
   it('should work if name and formatter are good', function() {
@@ -57,11 +72,11 @@ describe('registerFormat', function() {
       formatter: function() {}
     });
 
-    StyleDictionary.format['scss'].should.be.a.Function;
+    assert.isFunction(StyleDictionary.format['scss']);
   });
 
   it('should properly pass the registered format to instances', function() {
     var test = StyleDictionary.extend({});
-    test.format['scss'].should.be.a.Function;
+    assert.isFunction(test.format['scss']);
   });
 });

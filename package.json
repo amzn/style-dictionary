@@ -2,6 +2,23 @@
   "name": "style-dictionary",
   "version": "1.0.0",
   "description": "A node module to build a style dictionary package. A style dictionary consists of JSON files with the definitions of style properties like colors, typography, sizes, icons, etc. The style dictionary package also consists of a config.json which explains how to transform values (px -> pt, hex -> rgb, etc.) as well as what files to build.",
+  "keywords": [
+    "style dictionary",
+    "style",
+    "dictionary",
+    "amazon",
+    "css",
+    "design",
+    "properties",
+    "tokens",
+    "sass",
+    "scss",
+    "iOS",
+    "Android",
+    "react",
+    "react native",
+    "style guide"
+  ],
   "main": "index.js",
   "bin": {
     "style-dictionary": "./bin/style-dictionary"
@@ -17,24 +34,26 @@
     "NOTICE"
   ],
   "scripts": {
-    "test": "mocha --recursive -c",
+    "lint": "eslint index.js lib/**/*.js test/**/*.js",
+    "test": "npm run lint && mocha --recursive -c",
     "install-cli": "npm install -g $(npm pack)"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dbanksdesign/Style-Dictionary.git"
+    "url": "git://github.com/amznlabs/style-dictionary.git"
   },
-  "author": "",
+  "author": "Amazon Labs",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/dbanksdesign/Style-Dictionary/issues"
+    "url": "https://github.com/amznlabs/style-dictionary/issues"
   },
   "contributors": [
     "Yuliya Baran <baranyu@amazon.com>",
     "Charles Dorner <dornerc@amazon.com>",
+    "Dustin Boudreau <boudrd@amazon.com>",
     "Danny Banks <djb@amazon.com>"
   ],
-  "homepage": "https://github.com/dbanksdesign/Style-Dictionary#readme",
+  "homepage": "https://github.com/amznlabs/style-dictionary",
   "dependencies": {
     "color": "^0.11.3",
     "commander": "^2.9.0",
@@ -43,7 +62,8 @@
     "lodash": "^4.16.4"
   },
   "devDependencies": {
-    "mocha": "^3.1.2",
-    "should": "^11.1.1"
+    "chai": "^3.5.0",
+    "eslint": "^3.11.1",
+    "mocha": "^3.1.2"
   }
 }

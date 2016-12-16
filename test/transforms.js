@@ -1,5 +1,4 @@
-var assert     = require('assert'),
-    should     = require('should'),
+var assert     = require('chai').assert,
     helpers    = require('./helpers'),
     transforms = require('../lib/common/transforms');
 
@@ -7,86 +6,86 @@ var assert     = require('assert'),
 describe('transforms', function() {
   describe('name/cti/camel', function() {
     it('should handle prefix', function() {
-      transforms["name/cti/camel"].transformer(
+      assert.equal(transforms["name/cti/camel"].transformer(
         {
           path: ['one','two','three']
         },{
           prefix: 'prefix'
         }
-      ).should.eql('prefixOneTwoThree');
+      ), 'prefixOneTwoThree');
     });
 
     it('should handle no prefix', function() {
-      transforms["name/cti/camel"].transformer(
+      assert.equal(transforms["name/cti/camel"].transformer(
         {
           path: ['one','two','three']
         },{
         }
-      ).should.eql('oneTwoThree');
+      ), 'oneTwoThree');
     });
   });
 
 
   describe('name/cti/kebab', function() {
     it('should handle prefix', function() {
-      transforms["name/cti/kebab"].transformer(
+      assert.equal(transforms["name/cti/kebab"].transformer(
         {
           path: ['one','two','three']
         },{
           prefix: 'prefix'
         }
-      ).should.eql('prefix-one-two-three');
+      ), 'prefix-one-two-three');
     });
 
     it('should handle no prefix', function() {
-      transforms["name/cti/kebab"].transformer(
+      assert.equal(transforms["name/cti/kebab"].transformer(
         {
           path: ['one','two','three']
         },{
         }
-      ).should.eql('one-two-three');
+      ), 'one-two-three');
     });
   });
 
   describe('name/cti/snake', function() {
     it('should handle prefix', function() {
-      transforms["name/cti/snake"].transformer(
+      assert.equal(transforms["name/cti/snake"].transformer(
         {
           path: ['one','two','three']
         },{
           prefix: 'prefix'
         }
-      ).should.eql('prefix_one_two_three');
+      ), 'prefix_one_two_three');
     });
 
     it('should handle no prefix', function() {
-      transforms["name/cti/snake"].transformer(
+      assert.equal(transforms["name/cti/snake"].transformer(
         {
           path: ['one','two','three']
         },{
         }
-      ).should.eql('one_two_three');
+      ), 'one_two_three');
     });
   });
 
   describe('name/cti/constant', function() {
     it('should handle prefix', function() {
-      transforms["name/cti/constant"].transformer(
+      assert.equal(transforms["name/cti/constant"].transformer(
         {
           path: ['one','two','three']
         },{
           prefix: 'prefix'
         }
-      ).should.eql('PREFIX_ONE_TWO_THREE');
+      ), 'PREFIX_ONE_TWO_THREE');
     });
 
     it('should handle no prefix', function() {
-      transforms["name/cti/constant"].transformer(
+      assert.equal(transforms["name/cti/constant"].transformer(
         {
           path: ['one','two','three']
         },{
         }
-      ).should.eql('ONE_TWO_THREE');
+      ), 'ONE_TWO_THREE');
     });
   });
 });

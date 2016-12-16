@@ -1,5 +1,4 @@
-var assert  = require('assert'),
-  should    = require('should'),
+var assert  = require('chai').assert,
   helpers   = require('./helpers'),
   buildFile = require('../lib/buildFile');
 
@@ -13,19 +12,19 @@ describe('buildFile', function() {
   });
 
   it('should error if format doesnt exist or isnt a function', function() {
-    buildFile.bind('test/output/test.txt', {}, {}, {}).should.throw();
-    buildFile.bind('test/output/test.txt', [], {}, {}).should.throw();
-    buildFile.bind('test/output/test.txt', null, {}, {}).should.throw();
+    assert.throws(buildFile.bind('test/output/test.txt', {}, {}, {}));
+    assert.throws(buildFile.bind('test/output/test.txt', [], {}, {}));
+    assert.throws(buildFile.bind('test/output/test.txt', null, {}, {}));
   });
 
   it('should error if destination doesnt exist or isnt a string', function() {
-    buildFile.bind({},   format, {}, {}).should.throw();
-    buildFile.bind([],   format, {}, {}).should.throw();
-    buildFile.bind(null, format, {}, {}).should.throw();
+    assert.throws(buildFile.bind({},   format, {}, {}));
+    assert.throws(buildFile.bind([],   format, {}, {}));
+    assert.throws(buildFile.bind(null, format, {}, {}));
   });
 
   it('should write to a file properly', function() {
     buildFile('test.txt', format, {buildPath: 'test/output/'}, {});
-    helpers.fileExists('./test/output/test.txt').should.be.true;
+    assert(helpers.fileExists('./test/output/test.txt'));
   });
 });

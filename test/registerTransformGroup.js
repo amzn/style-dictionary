@@ -1,61 +1,52 @@
-var assert = require('assert'),
-    should = require('should'),
-    StyleDictionary = require('../index');
+var assert = require('chai').assert,
+    StyleDictionary = require('../index').extend({});
 
 
 describe('registerTransformGroup', function() {
   it('should error if name is not a string', function() {
-    StyleDictionary.registerTransformGroup.bind({
-      transforms: ['foo']
-    }).should.throw();
+    assert.throws(
+      StyleDictionary.registerTransformGroup.bind({transforms: ['foo']})
+    );
 
-    StyleDictionary.registerTransformGroup.bind({
-      name: 1,
-      transforms: ['foo']
-    }).should.throw();
+    assert.throws(
+      StyleDictionary.registerTransformGroup.bind({name: 1, transforms: ['foo']})
+    );
 
-    StyleDictionary.registerTransformGroup.bind({
-      name: [],
-      transforms: ['foo']
-    }).should.throw();
+    assert.throws(
+      StyleDictionary.registerTransformGroup.bind({name: [], transforms: ['foo']})
+    );
 
-    StyleDictionary.registerTransformGroup.bind({
-      name: {},
-      transforms: ['foo']
-    }).should.throw();
+    assert.throws(
+      StyleDictionary.registerTransformGroup.bind({name: {}, transforms: ['foo']})
+    );
 
-    StyleDictionary.registerTransformGroup.bind({
-      name: function() {},
-      transforms: ['foo']
-    }).should.throw();
+    assert.throws(
+      StyleDictionary.registerTransformGroup.bind({name: function() {}, transforms: ['foo']})
+    );
   });
 
   it('should error if transforms isnt an array', function() {
-    StyleDictionary.registerTransformGroup.bind({
-      name: 'foo'
-    }).should.throw();
+    assert.throws(
+      StyleDictionary.registerTransformGroup.bind({name: 'foo'})
+    );
 
-    StyleDictionary.registerTransformGroup.bind({
-      name: 'foo',
-      transforms: 'foo'
-    }).should.throw();
+    assert.throws(
+      StyleDictionary.registerTransformGroup.bind({name: 'foo', transforms: 'foo'})
+    );
 
-    StyleDictionary.registerTransformGroup.bind({
-      name: 'foo',
-      transforms: {}
-    }).should.throw();
+    assert.throws(
+      StyleDictionary.registerTransformGroup.bind({name: 'foo', transforms: {}})
+    );
 
-    StyleDictionary.registerTransformGroup.bind({
-      name: 'foo',
-      transforms: function() {}
-    }).should.throw();
+    assert.throws(
+      StyleDictionary.registerTransformGroup.bind({name: 'foo', transforms: function() {}})
+    );
   });
 
   it('should error if transforms arent registered', function() {
-    StyleDictionary.registerTransformGroup.bind({
-      name: 'foo',
-      transforms: ['bar']
-    }).should.throw();
+    assert.throws(
+      StyleDictionary.registerTransformGroup.bind({name: 'foo', transforms: ['bar']})
+    );
   });
 
   it('should work if everything is good', function() {
@@ -64,13 +55,13 @@ describe('registerTransformGroup', function() {
       transforms: ['foo']
     });
 
-    StyleDictionary.transformGroup.foo.should.be.an.Array;
-    StyleDictionary.transformGroup.foo[0].should.be.a.String;
+    assert.isArray(StyleDictionary.transformGroup.foo);
+    assert.isString(StyleDictionary.transformGroup.foo[0]);
   });
 
   it('should properly pass the registered format to instances', function() {
     var test = StyleDictionary.extend({});
-    test.transformGroup.foo.should.be.an.Array;
-    test.transformGroup.foo[0].should.be.a.String;
+    assert.isArray(test.transformGroup.foo);
+    assert.isString(test.transformGroup.foo[0]);
   });
 });

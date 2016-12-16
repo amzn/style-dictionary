@@ -13,9 +13,6 @@
           "destination": "_variables.scss",
           "format": "scss/variables"
         },{
-          "destination": "_icon_font.scss",
-          "format": "scss/font"
-        },{
           "destination": "_styles.js",
           "format": "javascript/module"
         }

@@ -1,6 +1,4 @@
-var assert          = require('assert'),
-    should          = require('should'),
-    fs              = require('fs-extra'),
+var assert          = require('chai').assert,
     helpers         = require('./helpers'),
     StyleDictionary = require('../index');
 
@@ -15,24 +13,23 @@ describe('buildPlatform', function() {
 
   it('should build the proper files', function() {
     test.buildPlatform('web');
-    helpers.fileExists('./test/output/web/_icons.scss').should.be.true;
-    helpers.fileExists('./test/output/web/_icon_font.scss').should.be.true;
-    helpers.fileExists('./test/output/web/_styles.js').should.be.true;
-    helpers.fileExists('./test/output/web/_variables.scss').should.be.true;
+    assert(helpers.fileExists('./test/output/web/_icons.scss'));
+    assert(helpers.fileExists('./test/output/web/_styles.js'));
+    assert(helpers.fileExists('./test/output/web/_variables.scss'));
   });
 
   it('should do android stuff', function() {
     test.buildPlatform('android');
-    helpers.fileExists('./test/output/android/main/res/drawable-hdpi/flag_us.png').should.be.true;
-    helpers.fileExists('./test/output/android/main/res/drawable-xhdpi/flag_us.png').should.be.true;
-    helpers.fileExists('./test/output/android/colors.xml').should.be.true;
-    helpers.fileExists('./test/output/android/dimens.xml').should.be.true;
-    helpers.fileExists('./test/output/android/font_dimen.xml').should.be.true;
+    assert(helpers.fileExists('./test/output/android/main/res/drawable-hdpi/flag_us.png'));
+    assert(helpers.fileExists('./test/output/android/main/res/drawable-xhdpi/flag_us.png'));
+    assert(helpers.fileExists('./test/output/android/colors.xml'));
+    assert(helpers.fileExists('./test/output/android/dimens.xml'));
+    assert(helpers.fileExists('./test/output/android/font_dimen.xml'));
   });
 
   it('should do ios stuff', function() {
     test.buildPlatform('ios');
-    helpers.fileExists('./test/output/ios/style_dictionary.plist').should.be.true;
-    helpers.fileExists('./test/output/ios/style_dictionary.h').should.be.true;
+    assert(helpers.fileExists('./test/output/ios/style_dictionary.plist'));
+    assert(helpers.fileExists('./test/output/ios/style_dictionary.h'));
   });
 });

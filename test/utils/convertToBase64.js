@@ -1,19 +1,18 @@
-var assert          = require('assert'),
-    should          = require('should'),
+var assert          = require('chai').assert,
     convertToBase64 = require('../../lib/utils/convertToBase64.js');
 
 describe('base64', function() {
   it('should error if filePath isnt a string', function() {
-    convertToBase64.bind().should.throw();
-    convertToBase64.bind([]).should.throw();
-    convertToBase64.bind({}).should.throw();
+    assert.throws(convertToBase64);
+    assert.throws(convertToBase64.bind([]));
+    assert.throws(convertToBase64.bind({}));
   });
 
   it('should error if filePath isnt a file', function() {
-    convertToBase64.bind('foo').should.throw();
+    assert.throws(convertToBase64.bind('foo'));
   });
 
   it('should return a string', function() {
-    convertToBase64('test/configs/test.json').should.be.a.String;
+    assert.isString(convertToBase64('test/configs/test.json'));
   });
 });
