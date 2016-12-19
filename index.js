@@ -1,7 +1,8 @@
-module.exports = {
+var StyleDictionary = {
   VERSION: '1.0.0',
   properties: {},
   allProperties: [],
+  options: {},
   defaultBuildPath: 'build/',
 
   transform: require('./lib/common/transforms'),
@@ -16,8 +17,11 @@ module.exports = {
   registerTemplate: require('./lib/register/template'),
   registerAction: require('./lib/register/action'),
 
+  exportPlatform: require('./lib/exportPlatform'),
   buildPlatform: require('./lib/buildPlatform'),
   buildAllPlatforms: require('./lib/buildAllPlatforms'),
 
   extend: require('./lib/extend')
 };
+
+module.exports = StyleDictionary;
