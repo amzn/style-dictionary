@@ -100,4 +100,131 @@ describe('resolveObject', function() {
       resolveObject.bind( helpers.fileToJSON(__dirname + '/../json_files/circular_4.json'))
     );
   });
+
+  describe('ignoreKeys', function() {
+    it('should handle default value of original', function() {
+      var test = resolveObject({
+        foo: { value: 'bar' },
+        bar: {
+          value: '{foo.value}',
+          original: '{foo.value}'
+        }
+      });
+
+      assert.equal(
+        test.bar.original,
+        '{foo.value}'
+      );
+    });
+
+    it('should handle any nested keys under the ignoreKey', function() {
+      var test = resolveObject({
+        foo: { value: 'bar' },
+        bar: {
+          value: '{foo.value}',
+          original: {
+            value: '{foo.value}',
+            foo: {
+              bar: '{foo.value}'
+            }
+          }
+        }
+      });
+
+      assert.equal(
+        test.bar.original.value,
+        '{foo.value}'
+      );
+      assert.equal(
+        test.bar.original.foo.bar,
+        '{foo.value}'
+      );
+    });
+
+    it('should handle passing in custom ignoreKeys', function() {
+      var test = resolveObject({
+        foo: { value: 'bar' },
+        bar: {
+          value: '{foo.value}',
+          baz: '{foo.value}'
+        }
+      }, {
+        ignoreKeys: ['baz']
+      });
+
+      assert.equal(
+        test.bar.baz,
+        '{foo.value}'
+      );
+    });
+
+    it('should handle multiple keys', function() {
+      var test = resolveObject({
+        foo: { value: 'bar' },
+        bar: {
+          value: '{foo.value}',
+          original: '{foo.value}',
+          baz: '{foo.value}'
+        }
+      },{
+        ignoreKeys: ['baz','original']
+      });
+
+      assert.equal(
+        test.bar.original,
+        '{foo.value}'
+      );
+      assert.equal(
+        test.bar.baz,
+        '{foo.value}'
+      );
+    });
+
+    it('should not ignore anything if set to null or empty array', function() {
+      var test = resolveObject({
+        foo: { value: 'bar' },
+        bar: {
+          value: '{foo.value}',
+          original: '{foo.value}'
+        }
+      },{
+        ignoreKeys: []
+      });
+
+      assert.equal(
+        test.bar.original,
+        'bar'
+      );
+
+      var test2 = resolveObject({
+        foo: { value: 'bar' },
+        bar: {
+          value: '{foo.value}',
+          original: '{foo.value}'
+        }
+      },{
+        ignoreKeys: null
+      });
+
+      assert.equal(
+        test2.bar.original,
+        'bar'
+      );
+
+      var test3 = resolveObject({
+        foo: { value: 'bar' },
+        bar: {
+          value: '{foo.value}',
+          original: '{foo.value}'
+        }
+      },{
+        ignoreKeys: undefined
+      });
+
+      assert.equal(
+        test3.bar.original,
+        'bar'
+      );
+    });
+  });
 });
