@@ -5,17 +5,20 @@
   "platforms": {
     "ios": {
       "transformGroup": "ios",
-      "buildPath": "ios/StyleDictionaryExample/StyleDictionaryExample/",
-      "files": [
-        {
-          "destination": "StyleDictionary.h",
-          "template": "ios/headers"
-        },
-        {
-          "destination": "StyleDictionary.plist",
-          "template": "ios/plist"
-        }
-      ]
+      "buildPath": "ios/StyleDictionaryExample/StyleDictionaryExample/StyleDictionary/",
+      "files": [{
+        "destination": "StyleDictionaryMacros.h",
+        "template": "ios/headers"
+      },{
+        "destination": "StyleDictionary.h",
+        "template": "ios/singleton.h",
+        "className": "StyleDictionary"
+      },{
+        "destination": "StyleDictionary.m",
+        "template": "ios/singleton.m",
+        "className": "StyleDictionary"
+      }],
+      "actions": ["copy_assets"]
     },
     "android": {
       "transformGroup": "android",

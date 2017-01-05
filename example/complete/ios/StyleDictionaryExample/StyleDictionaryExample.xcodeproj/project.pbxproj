@@ -9,11 +9,18 @@
 /* Begin PBXBuildFile section */
 		0647C9761DC2734100CC5D3E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0647C9751DC2734100CC5D3E /* main.m */; };
 		0647C9791DC2734100CC5D3E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0647C9781DC2734100CC5D3E /* AppDelegate.m */; };
-		0647C97C1DC2734100CC5D3E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0647C97B1DC2734100CC5D3E /* ViewController.m */; };
+		0647C97C1DC2734100CC5D3E /* ColorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0647C97B1DC2734100CC5D3E /* ColorViewController.m */; };
 		0647C97F1DC2734100CC5D3E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0647C97D1DC2734100CC5D3E /* Main.storyboard */; };
 		0647C9811DC2734100CC5D3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0647C9801DC2734100CC5D3E /* Assets.xcassets */; };
 		0647C9841DC2734100CC5D3E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0647C9821DC2734100CC5D3E /* LaunchScreen.storyboard */; };
-		0647C98D1DC273BB00CC5D3E /* StyleDictionary.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0647C98C1DC273BB00CC5D3E /* StyleDictionary.plist */; };
+		2667DCA11E1F2C0D00C558C1 /* IconViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2667DCA01E1F2C0D00C558C1 /* IconViewController.m */; };
+		2667DCA41E1F2C9500C558C1 /* IconFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 2667DCA31E1F2C9500C558C1 /* IconFont.m */; };
+		2667DCA71E1F2CEB00C558C1 /* ColorBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 2667DCA61E1F2CEB00C558C1 /* ColorBox.m */; };
+		2667DCAC1E1F2D9000C558C1 /* StyleDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 2667DCAA1E1F2D9000C558C1 /* StyleDictionary.m */; };
+		2667DCB31E1F2F5700C558C1 /* MaterialIcons-Regular.eot in Resources */ = {isa = PBXBuildFile; fileRef = 2667DCAF1E1F2F5700C558C1 /* MaterialIcons-Regular.eot */; };
+		2667DCB41E1F2F5700C558C1 /* MaterialIcons-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2667DCB01E1F2F5700C558C1 /* MaterialIcons-Regular.ttf */; };
+		2667DCB51E1F2F5700C558C1 /* MaterialIcons-Regular.woff in Resources */ = {isa = PBXBuildFile; fileRef = 2667DCB11E1F2F5700C558C1 /* MaterialIcons-Regular.woff */; };
+		2667DCB61E1F2F5700C558C1 /* MaterialIcons-Regular.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 2667DCB21E1F2F5700C558C1 /* MaterialIcons-Regular.woff2 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,14 +28,25 @@
 		0647C9751DC2734100CC5D3E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0647C9771DC2734100CC5D3E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0647C9781DC2734100CC5D3E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		0647C97A1DC2734100CC5D3E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		0647C97B1DC2734100CC5D3E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		0647C97A1DC2734100CC5D3E /* ColorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorViewController.h; sourceTree = "<group>"; };
+		0647C97B1DC2734100CC5D3E /* ColorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ColorViewController.m; sourceTree = "<group>"; };
 		0647C97E1DC2734100CC5D3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0647C9801DC2734100CC5D3E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0647C9831DC2734100CC5D3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0647C9851DC2734100CC5D3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0647C98B1DC2738B00CC5D3E /* StyleDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StyleDictionary.h; sourceTree = "<group>"; };
-		0647C98C1DC273BB00CC5D3E /* StyleDictionary.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = StyleDictionary.plist; sourceTree = "<group>"; };
+		2667DC9F1E1F2C0D00C558C1 /* IconViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconViewController.h; sourceTree = "<group>"; };
+		2667DCA01E1F2C0D00C558C1 /* IconViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconViewController.m; sourceTree = "<group>"; };
+		2667DCA21E1F2C9500C558C1 /* IconFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconFont.h; sourceTree = "<group>"; };
+		2667DCA31E1F2C9500C558C1 /* IconFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconFont.m; sourceTree = "<group>"; };
+		2667DCA51E1F2CEB00C558C1 /* ColorBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorBox.h; sourceTree = "<group>"; };
+		2667DCA61E1F2CEB00C558C1 /* ColorBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorBox.m; sourceTree = "<group>"; };
+		2667DCA91E1F2D9000C558C1 /* StyleDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StyleDictionary.h; sourceTree = "<group>"; };
+		2667DCAA1E1F2D9000C558C1 /* StyleDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StyleDictionary.m; sourceTree = "<group>"; };
+		2667DCAB1E1F2D9000C558C1 /* StyleDictionaryMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StyleDictionaryMacros.h; sourceTree = "<group>"; };
+		2667DCAF1E1F2F5700C558C1 /* MaterialIcons-Regular.eot */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MaterialIcons-Regular.eot"; sourceTree = "<group>"; };
+		2667DCB01E1F2F5700C558C1 /* MaterialIcons-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MaterialIcons-Regular.ttf"; sourceTree = "<group>"; };
+		2667DCB11E1F2F5700C558C1 /* MaterialIcons-Regular.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MaterialIcons-Regular.woff"; sourceTree = "<group>"; };
+		2667DCB21E1F2F5700C558C1 /* MaterialIcons-Regular.woff2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MaterialIcons-Regular.woff2"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,17 +79,22 @@
 		0647C9731DC2734100CC5D3E /* StyleDictionaryExample */ = {
 			isa = PBXGroup;
 			children = (
+				2667DCA81E1F2D9000C558C1 /* StyleDictionary */,
 				0647C9771DC2734100CC5D3E /* AppDelegate.h */,
 				0647C9781DC2734100CC5D3E /* AppDelegate.m */,
-				0647C97A1DC2734100CC5D3E /* ViewController.h */,
-				0647C97B1DC2734100CC5D3E /* ViewController.m */,
+				0647C97A1DC2734100CC5D3E /* ColorViewController.h */,
+				0647C97B1DC2734100CC5D3E /* ColorViewController.m */,
 				0647C97D1DC2734100CC5D3E /* Main.storyboard */,
 				0647C9801DC2734100CC5D3E /* Assets.xcassets */,
 				0647C9821DC2734100CC5D3E /* LaunchScreen.storyboard */,
 				0647C9851DC2734100CC5D3E /* Info.plist */,
 				0647C9741DC2734100CC5D3E /* Supporting Files */,
-				0647C98B1DC2738B00CC5D3E /* StyleDictionary.h */,
-				0647C98C1DC273BB00CC5D3E /* StyleDictionary.plist */,
+				2667DC9F1E1F2C0D00C558C1 /* IconViewController.h */,
+				2667DCA01E1F2C0D00C558C1 /* IconViewController.m */,
+				2667DCA21E1F2C9500C558C1 /* IconFont.h */,
+				2667DCA31E1F2C9500C558C1 /* IconFont.m */,
+				2667DCA51E1F2CEB00C558C1 /* ColorBox.h */,
+				2667DCA61E1F2CEB00C558C1 /* ColorBox.m */,
 			);
 			path = StyleDictionaryExample;
 			sourceTree = "<group>";
@@ -84,6 +107,36 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		2667DCA81E1F2D9000C558C1 /* StyleDictionary */ = {
+			isa = PBXGroup;
+			children = (
+				2667DCAD1E1F2F5700C558C1 /* assets */,
+				2667DCA91E1F2D9000C558C1 /* StyleDictionary.h */,
+				2667DCAA1E1F2D9000C558C1 /* StyleDictionary.m */,
+				2667DCAB1E1F2D9000C558C1 /* StyleDictionaryMacros.h */,
+			);
+			path = StyleDictionary;
+			sourceTree = "<group>";
+		};
+		2667DCAD1E1F2F5700C558C1 /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				2667DCAE1E1F2F5700C558C1 /* fonts */,
+			);
+			path = assets;
+			sourceTree = "<group>";
+		};
+		2667DCAE1E1F2F5700C558C1 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				2667DCAF1E1F2F5700C558C1 /* MaterialIcons-Regular.eot */,
+				2667DCB01E1F2F5700C558C1 /* MaterialIcons-Regular.ttf */,
+				2667DCB11E1F2F5700C558C1 /* MaterialIcons-Regular.woff */,
+				2667DCB21E1F2F5700C558C1 /* MaterialIcons-Regular.woff2 */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -91,6 +144,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0647C9881DC2734100CC5D3E /* Build configuration list for PBXNativeTarget "StyleDictionaryExample" */;
 			buildPhases = (
+				2667DC9E1E1F2AD400C558C1 /* ShellScript */,
 				0647C96D1DC2734100CC5D3E /* Sources */,
 				0647C96E1DC2734100CC5D3E /* Frameworks */,
 				0647C96F1DC2734100CC5D3E /* Resources */,
@@ -143,22 +197,45 @@
 			buildActionMask = 2147483647;
 			files = (
 				0647C9841DC2734100CC5D3E /* LaunchScreen.storyboard in Resources */,
+				2667DCB31E1F2F5700C558C1 /* MaterialIcons-Regular.eot in Resources */,
 				0647C9811DC2734100CC5D3E /* Assets.xcassets in Resources */,
-				0647C98D1DC273BB00CC5D3E /* StyleDictionary.plist in Resources */,
+				2667DCB41E1F2F5700C558C1 /* MaterialIcons-Regular.ttf in Resources */,
+				2667DCB51E1F2F5700C558C1 /* MaterialIcons-Regular.woff in Resources */,
+				2667DCB61E1F2F5700C558C1 /* MaterialIcons-Regular.woff2 in Resources */,
 				0647C97F1DC2734100CC5D3E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2667DC9E1E1F2AD400C558C1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd ../.. && npm run build";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		0647C96D1DC2734100CC5D3E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0647C97C1DC2734100CC5D3E /* ViewController.m in Sources */,
+				0647C97C1DC2734100CC5D3E /* ColorViewController.m in Sources */,
 				0647C9791DC2734100CC5D3E /* AppDelegate.m in Sources */,
 				0647C9761DC2734100CC5D3E /* main.m in Sources */,
+				2667DCA71E1F2CEB00C558C1 /* ColorBox.m in Sources */,
+				2667DCAC1E1F2D9000C558C1 /* StyleDictionary.m in Sources */,
+				2667DCA41E1F2C9500C558C1 /* IconFont.m in Sources */,
+				2667DCA11E1F2C0D00C558C1 /* IconViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,6 +390,7 @@
 				0647C98A1DC2734100CC5D3E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -1,0 +1,69 @@
+//  Do not edit directly
+//  Generated on <%= new Date() %>
+
+#import <Foundation/Foundation.h>
+#import "<%= this.className %>.h"
+
+@interface <%= this.className %> ()
+@property(nonatomic, strong) NSDictionary *properties;
+@end
+
+@implementation <%= this.className %>
+
++ (<%= this.className %> *)sharedInstance {
+  static <%= this.className %> *singleton;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    singleton = [[<%= this.className %> alloc] init];
+  });
+  return singleton;
+}
+
+- (NSDictionary *)properties {
+  return _properties;
+}
+
+- (NSDictionary *)getProperty:(NSString *)keyPath {
+  return [_properties valueForKeyPath:keyPath];
+}
+
+- (nonnull)getValue:(NSString *)keyPath {
+  return [_properties valueForKeyPath:[NSString stringWithFormat:@"%@.value", keyPath]];
+}
+
+- (instancetype)init {
+  self = [super init];
+
+  if (self) {
+    _properties = <%= buildDictionary(properties) %>;
+  }
+
+  return self;
+}
+
+@end
+
+<% function buildDictionary(props, indent) {
+  indent = indent || '  ';
+  if (props.hasOwnProperty('value')) {
+    var to_ret = '@{\n';
+    to_ret += indent + '@"value": ' + props.value + ',\n';
+
+    for(var name in props.attributes) {
+      if (props.attributes[name]) {
+        to_ret += indent + '@"' + name + '": @"' + props.attributes[name] + '",\n';
+      }
+    }
+
+    // remove last comma
+    return to_ret.slice(0, -2) + '\n' + indent + '}';
+  } else {
+    var to_ret = '@{\n';
+    for(var name in props) {
+      to_ret += indent + '@"' + name + '": ' + buildDictionary(props[name], indent + '  ') + ',\n';
+    }
+    // remove last comma
+    return to_ret.slice(0, -2) + '\n' + indent + '}';
+  }
+} %>
+

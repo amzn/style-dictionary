@@ -1,0 +1,14 @@
+//  Do not edit directly
+//  Generated on <%= new Date() %>
+
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
+@interface <%= this.className %> : NSObject
+
++ (<%= this.className %> *)sharedInstance;
+- (NSDictionary *)properties;
+- (NSDictionary *)getProperty:(NSString *)keyPath;
+- (nonnull)getValue:(NSString *)keyPath;
+
+@end
