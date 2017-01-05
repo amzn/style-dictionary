@@ -3,7 +3,6 @@ var StyleDictionary = {
   properties: {},
   allProperties: [],
   options: {},
-  defaultBuildPath: 'build/',
 
   transform: require('./lib/common/transforms'),
   transformGroup: require('./lib/common/transformGroups'),

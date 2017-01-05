@@ -12,15 +12,27 @@ describe('buildFile', function() {
   });
 
   it('should error if format doesnt exist or isnt a function', function() {
-    assert.throws(buildFile.bind('test/output/test.txt', {}, {}, {}));
-    assert.throws(buildFile.bind('test/output/test.txt', [], {}, {}));
-    assert.throws(buildFile.bind('test/output/test.txt', null, {}, {}));
+    assert.throws(function() {
+      buildFile('test/output/test.txt', {}, {}, {})
+    });
+    assert.throws(function() {
+      buildFile('test/output/test.txt', [], {}, {})
+    });
+    assert.throws(function() {
+      buildFile('test/output/test.txt', null, {}, {})
+    });
   });
 
   it('should error if destination doesnt exist or isnt a string', function() {
-    assert.throws(buildFile.bind({},   format, {}, {}));
-    assert.throws(buildFile.bind([],   format, {}, {}));
-    assert.throws(buildFile.bind(null, format, {}, {}));
+    assert.throws(function() {
+      buildFile({}, format, {}, {})
+    });
+    assert.throws(function() {
+      buildFile([], format, {}, {})
+    });
+    assert.throws(function() {
+      buildFile(null, format, {}, {})
+    });
   });
 
   it('should write to a file properly', function() {

@@ -11,6 +11,16 @@ describe('buildPlatform', function() {
     helpers.clearOutput();
   });
 
+  it('should throw if passed a platform that doesn\'t exist', function() {
+    assert.throws(function() {
+      test.buildPlatform('foobar');
+    });
+
+    assert.doesNotThrow(function() {
+      test.buildPlatform('web');
+    });
+  });
+
   it('should build the proper files', function() {
     test.buildPlatform('web');
     assert(helpers.fileExists('./test/output/web/_icons.scss'));

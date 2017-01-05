@@ -31,19 +31,36 @@ var platformWithBuildPath = {
   ]
 };
 
+var platformWithBadBuildPath = {
+  buildPath: 'test/output',
+  files: [
+    {
+      destination: 'test.json',
+      format: function(dictionary) {
+        return JSON.stringify(dictionary.properties)
+      }
+    }
+  ]
+};
+
 describe('buildFiles', function() {
   beforeEach(function() {
     helpers.clearOutput();
   });
 
+  it('should throw if build path doesn\'t have a trailing slash', function() {
+    assert.throws(function() {
+      buildFiles( dictionary, platformWithBadBuildPath );
+    });
+  });
 
- it('should work without buildPath', function() {
-   buildFiles( dictionary, platform );
-   assert(helpers.fileExists('./test/output/test.json'));
- });
+  it('should work without buildPath', function() {
+    buildFiles( dictionary, platform );
+    assert(helpers.fileExists('./test/output/test.json'));
+  });
 
- it('should work with buildPath', function() {
-   buildFiles( dictionary, platformWithBuildPath );
-   assert(helpers.fileExists('./test/output/test.json'));
- });
+  it('should work with buildPath', function() {
+    buildFiles( dictionary, platformWithBuildPath );
+    assert(helpers.fileExists('./test/output/test.json'));
+  });
 });
