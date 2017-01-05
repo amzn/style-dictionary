@@ -66,4 +66,16 @@ describe('exportPlatform', function() {
       -1
     );
   });
+
+  // Make sure when we perform transforms and resolve references
+  // we don't mutate the original object added to the property.
+  it('properties should have original value untouched', function() {
+    var dictionary = test.exportPlatform('web');
+    var properties = helpers.fileToJSON('test/properties/colors.json');
+
+    assert.equal(
+      dictionary.color.font.link.original.value,
+      properties.color.font.link.value
+    );
+  });
 });
