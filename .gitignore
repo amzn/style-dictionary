@@ -50,9 +50,7 @@ captures/
 *.apk
 *.ap_
 *.iml
-.idea/workspace.xml
-.idea/tasks.xml
-.idea/libraries
+.idea/
 *.jks
 
 # IOS Specific Files

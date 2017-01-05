@@ -5,7 +5,7 @@
   "platforms": {
     "ios": {
       "transformGroup": "ios",
-      "buildPath": "../ios/StyleDictionaryExample/StyleDictionaryExample/",
+      "buildPath": "ios/StyleDictionaryExample/StyleDictionaryExample/",
       "files": [
         {
           "destination": "StyleDictionary.h",
@@ -19,7 +19,7 @@
     },
     "android": {
       "transformGroup": "android",
-      "buildPath": "../android/StyleDictionaryExample/app/src/main/res/values/",
+      "buildPath": "android/StyleDictionaryExample/app/src/main/res/values/",
       "files": [
         {
           "destination": "style_dictionary_colors.xml",
@@ -29,7 +29,7 @@
     },
     "reactNative": {
       "transforms": ["attribute/cti","name/ti/constant","size/px"],
-      "buildPath": "../react-native/StyleDictionaryExample/styleDictionary/",
+      "buildPath": "react-native/StyleDictionaryExample/styleDictionary/",
       "files": [
         {
           "destination": "colors.js",
