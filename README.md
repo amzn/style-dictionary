@@ -17,12 +17,65 @@ A style dictionary is a toolkit for everyone in an organization to use. A design
 TODO: insert video
 
 
+# Installing StyleDictionary for use from the CLI
+
+Note that you must have node (and npm) installed.
+
+In the terminal, switch to the root level of the style-dictionary project, and execute the following from the command line:
+
+```
+npm run install-cli
+```
+
+
 # Tutorial
 
-TODO: add tutorial
+Now that you have StyleDictionary installed, lets use it.  Starting from the root level of the style-dictionary project, open the "example" subdirectory, and then the "starter" subdirectory. Now execute this command:
+
+```
+style-dictionary
+```
+
+You should see this output:
+
+```
+Reading config file from ./config.json
+Building your style dictionary
+```
+
+Doesn't look like much happened, but your styles have been built and incorporated into the projects inside that directory.  Lets take a look.  Open the "style-guide" subdirectory and execute this command:
+
+```
+npm start-website
+```
+
+Now go to this address in your browser:
+
+```
+http://localhost:8080/index.html
+```
+It should look like this:
+
+* insert photo
+
+Looks nice.  Now lets make a change.  Edit the file in 'example/starter/style-dictionary/properties/color.json', changing color.blue.light from '#000055' to '#0000FF'.  Now re-run style-dictionary and reload the page in your browser.  Tada!  Now it looks like this:
+
+* insert photo
+
+Whats great about this is that if you run the android project, the iOS project, the react-native project, etc, is that they will _all_ be updated with this change.
+
+Go ahead and change color.blue.light back to '#000055'.  Lets change color.background.warning from '{color.blue.light}' to '{color.orange.light}'.
+
+In the same folder as 'colors.json', edit 'icons.json' and modify icon.something.warning from '{icon.something.exclamation}' to '{icon.something.yield}'.  Re-run style-dictionary and reload the page in your browser.  Now it should look like this:
+
+* insert photo
+
+Now all warnings will look like this, across all platforms and all applications, including your style guide.  Make sense?
 
 
-# How do you build a StyleDictionary?
+
+
+# So what is a StyleDictionary?
 
 The StyleDictionary is a collection of JSON text files.  It uses key/value pairs to save style definitions within a file.  There is a straightforward method for referencing other style keys within the value - enabling you to have a single place to change a style and have it propagate across all of your other styles.
 
@@ -49,8 +102,19 @@ The StyleDictionary is a collection of JSON text files.  It uses key/value pairs
 }
 ```
 
-Here we are creating some basic font size definitions.  The style definition size.font.small.value is "10px" for example.  The style definition size.font.base.value automatically takes on the value found in size.font.medium.value, so both of those resolve to "16px".
+Here we are creating some basic size font definitions.  The style definition size.font.small.value is "10px" for example.  The style definition size.font.base.value automatically takes on the value found in size.font.medium.value, so both of those resolve to "16px".
 
+# How to deal with separate codebases / remote development
+
+The best solution for situations where the codebases for your various platforms are separate is to have a single accessible place where you store your StyleDictionary output (E.G. AWS S3).  The StyleDictionary run simply creates the output files and automatically uploads them where they can be accessed by the build scripts of the various platforms/teams.
+
+* insert example
+
+# Creating your own output type (platform)
+
+In config.json, the 'platforms' attribute defines what the various processing techniques are created and applied to develop the final output to be incorporated into your project.
+
+TODO TODO TODO
 
 # Using the output of StyleDictionary in a project
 
@@ -62,16 +126,6 @@ Show examples of how to use in:
 - react
 - react native
 
-
-# Installing StyleDictionary for use from the CLI
-
-Note that you must have node (and npm) installed.
-
-Execute the following from the command line:
-
-```
-npm install -g style-dictionary
-```
 
 # Configuring StyleDictionary (config.json)
 
