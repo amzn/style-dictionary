@@ -1,0 +1,19 @@
+@import "../styleDictionary/variables";
+@import "base";
+@import "colors";
+@import "fonts";
+@import "property";
+@import "header";
+
+
+body {
+  background: $color-background-base;
+  font-family: $font-family-base;
+  padding-top: ($size-padding-base * 2) + 1;
+  margin: 0;
+}
+
+.icon {
+  font-family: 'Icons', sans-serif;
+  font-style: normal;
+}

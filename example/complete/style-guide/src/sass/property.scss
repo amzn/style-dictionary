@@ -1,0 +1,45 @@
+@import "../styleDictionary/variables";
+@import "mixins";
+
+.property-tree {
+  padding: $size-padding-xl;
+}
+
+.property-node {
+  max-height: 0;
+  overflow: hidden;
+  position: relative;
+  border-left: 0.125rem solid $color-border-light;
+  transition: all 1s cubic-bezier(0.175, 0.885, 0.320, 1.275);
+
+  .property-tree > &,
+  .expanded > & {
+    max-height: 9999px;
+  }
+
+  .property-node > & {
+    margin-left: $size-padding-large;
+  }
+}
+
+.property-node-title {
+  position: relative;
+  padding: $size-padding-base;
+  border-top: 1px solid $color-border-light;
+
+
+  & > .property-node-icon {
+    position: absolute;
+    top: 50%;
+    right: $size-padding-base;
+    font-size: $size-icon-small;
+    line-height: 1;
+    color: $color-font-quaternary;
+    margin-top: -$size-icon-small/2;
+    transition: all 1s cubic-bezier(0.175, 0.885, 0.320, 1.275);
+  }
+
+  &.expanded > .property-node-icon {
+    transform: rotate(180deg);
+  }
+}

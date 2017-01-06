@@ -1,0 +1,9 @@
+@mixin allcaps() {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+@mixin icon() {
+  font-family: 'Icons', sans-serif;
+  font-style: normal;
+}

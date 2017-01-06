@@ -1,0 +1,30 @@
+@import "../styleDictionary/variables";
+
+.inverse {
+  color: $color-font-inverse-base;
+}
+
+.color-group {
+  float: left;
+  width: 23%;
+  margin-left: 2%;
+  margin-bottom: $size-padding-large;
+}
+
+.color-group-header {
+  padding: $size-padding-base;
+  font-size: $size-font-xl;
+}
+
+.color {
+  overflow: hidden;
+  padding: $size-padding-base;
+}
+
+.color-title {
+  float: left;
+}
+
+.color-value {
+  float: right;
+}

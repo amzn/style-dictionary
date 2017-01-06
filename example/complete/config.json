@@ -44,6 +44,25 @@
           }
         }
       ]
+    },
+
+    "react": {
+      "transformGroup": "web",
+      "buildPath": "style-guide/src/styleDictionary/",
+      "files": [{
+        "destination": "properties.js",
+        "format": "javascript/module"
+      }]
+    },
+
+    "scss": {
+      "transforms": ["attribute/cti", "name/cti/kebab", "time/seconds", "content/icon", "size/rem", "color/hex"],
+      "buildPath": "style-guide/src/styleDictionary/",
+      "files": [{
+        "destination": "variables.scss",
+        "format": "scss/variables"
+      }],
+      "actions": ["copy_assets"]
     }
   }
 }

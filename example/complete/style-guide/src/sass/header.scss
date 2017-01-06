@@ -1,0 +1,21 @@
+@import "../styleDictionary/variables";
+@import "mixins";
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 0 $size-padding-base;
+  border-bottom: 1px solid $color-border-base;
+  background: $color-background-base;
+  z-index: 9999;
+}
+
+.nav-link {
+  display: inline-block;
+  text-decoration: none;
+  line-height: 1;
+  padding: $size-padding-base;
+  @include allcaps();
+}

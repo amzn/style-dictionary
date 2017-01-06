@@ -1,0 +1,25 @@
+{
+  "env": {
+    "node": true,
+    "browser": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "globals": {
+    "Buffer": true,
+    "escape": true
+  },
+  "extends": "eslint:recommended",
+  "rules": {
+    "no-console": 0,
+    "no-unused-vars": 1
+  },
+  "plugins": [
+    "react"
+  ]
+}

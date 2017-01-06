@@ -8,12 +8,16 @@ var fs = require('fs'),
     StyleDictionary = require('../index.js'),
     pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf8'));
 
+function list(val) {
+  return val.split(',');
+}
+
 program
   .version(pkg.version)
   .description(pkg.description)
   .usage('[options]')
   .option('-c, --config <path>', 'set config path. defaults to ./config.json')
-  .option('-p, --platform <platform>', 'only build a specific platform. Must be defined in the config')
+  .option('-p, --platform <platforms>', 'only build a specific platform. Must be defined in the config', list)
   .parse(process.argv);
 
 var configPath = program.config ? program.config : './config.json';
@@ -25,9 +29,11 @@ var config = JSON.parse( fs.readFileSync(configPath) );
 var styleDictionary = StyleDictionary.extend( config );
 
 console.log("Building your style dictionary");
-if (program.platform) {
-  console.log('Building platform: ' + program.platform);
-  styleDictionary.buildPlatform( program.platform );
+if (program.platform && program.platform.length > 0) {
+  program.platform.forEach(function(platform) {
+    console.log('Building platform: ' + platform);
+    styleDictionary.buildPlatform( platform );
+  });
 } else {
   console.log('Building all platforms');
   styleDictionary.buildAllPlatforms();

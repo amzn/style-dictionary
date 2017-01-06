@@ -1,0 +1,47 @@
+@import "../styleDictionary/variables";
+
+body {
+  font-size: 100%;
+  line-height: 1.5;
+  color: $color-font-base;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: $size-padding-large;
+  margin-bottom: $size-padding-base;
+  word-wrap: break-word;
+
+  &:first-child { margin-top: 0; }
+}
+
+h1 {
+  font-size: $size-font-xxxl;
+}
+
+h2 {
+  font-size: $size-font-xxl;
+}
+
+h3 {
+  font-size: $size-font-xl;
+}
+
+h4 {
+  font-size: $size-font-large;
+  margin-bottom: 0;
+}
+
+h5 {
+}
+
+
+a {
+  text-decoration: none;
+  color: $color-font-link;
+  transition: all 0.3s linear;
+
+  &:hover,
+  &:active {
+    color: $color-font-active;
+  }
+}
