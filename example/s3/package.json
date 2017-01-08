@@ -14,6 +14,6 @@
   "devDependencies": {
     "aws-sdk": "^2.7.21",
     "fs-extra": "^1.0.0",
-    "style-dictionary": "file:///Users/djb/Dev/style-dictionary-workspace/Style-Dictionary/style-dictionary-1.0.0.tgz"
+    "style-dictionary": "^2.0.0"
   }
 }

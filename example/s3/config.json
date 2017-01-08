@@ -65,7 +65,7 @@
     },
 
     "scss": {
-      "transforms": ["attribute/cti", "name/cti/kebab", "time/seconds", "content/icon", "size/rem", "color/hex"],
+      "transformGroup": "scss",
       "buildPath": "build/sass/",
       "files": [{
         "destination": "variables.scss",
@@ -74,7 +74,7 @@
     },
 
     "assets": {
-      "transforms": ["attribute/cti"],
+      "transformGroup": "assets",
       "buildPath": "build/",
       "actions": ["copy_assets"]
     }

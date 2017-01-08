@@ -1,4 +1,3 @@
-1. Add template for obj-c header file https://github.com/alexito4/Sketch-Color-Theme-Plugin/tree/master/Example
 1. Make actions return before performing the next action (useful for async processes)
 1. Clean up templates/formats/transforms
 1. Document easy dependency/importing of style dictionaries

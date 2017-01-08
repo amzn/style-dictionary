@@ -1,0 +1,22 @@
+{
+  "source": ["properties/**/*.json"],
+  "platforms": {
+    "js": {
+      "transformGroup": "web",
+      "buildPath": "build/",
+      "files": [{
+        "destination": "index.js",
+        "format": "javascript/module"
+      }]
+    },
+
+    "scss": {
+      "transformGroup": "scss",
+      "buildPath": "build/sass/",
+      "files": [{
+        "destination": "variables.scss",
+        "format": "scss/variables"
+      }]
+    }
+  }
+}
