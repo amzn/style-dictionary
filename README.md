@@ -24,16 +24,23 @@ Note that you must have node (and npm) installed.
 In the terminal, switch to the root level of the style-dictionary project, and execute the following from the command line:
 
 ```
-npm run install-cli
+npm install -g style-dictionary
 ```
 
 
 # Tutorial
 
-Now that you have StyleDictionary installed, lets use it.  Starting from the root level of the style-dictionary project, open the "example" subdirectory, and then the "starter" subdirectory. Now execute this command:
+Now that you have StyleDictionary installed, lets use it. This package comes with some examples to start you off. 
+ ```
+ mkdir MyStyleDictionary
+ cd MyStyleDictionary
+ style-dictionary init complete
+ ```
+ 
+Now you have an example project set up. You can make changes to the style dictionary and rebuild the project by running:
 
 ```
-style-dictionary
+style-dictionary build
 ```
 
 You should see this output:
@@ -58,7 +65,7 @@ It should look like this:
 
 * insert photo
 
-Looks nice.  Now lets make a change.  Edit the file in 'example/starter/style-dictionary/properties/color.json', changing color.blue.light from '#000055' to '#0000FF'.  Now re-run style-dictionary and reload the page in your browser.  Tada!  Now it looks like this:
+Looks nice.  Now lets make a change.  Edit the file in 'properties/color.json', changing color.blue.light from '#000055' to '#0000FF'.  Now re-run style-dictionary and reload the page in your browser.  Tada!  Now it looks like this:
 
 * insert photo
 

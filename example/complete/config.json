@@ -47,16 +47,25 @@
     },
 
     "react": {
-      "transformGroup": "web",
+      "transforms": ["attribute/cti", "name/ti/constant", "color/hex"],
       "buildPath": "style-guide/src/styleDictionary/",
       "files": [{
-        "destination": "properties.js",
-        "format": "javascript/module"
+        "destination": "colors.js",
+        "format": "javascript/es6",
+        "filter": {
+          "attributes": { "category": "color" }
+        }
+      },{
+        "destination": "sizes.js",
+        "format": "javascript/es6",
+        "filter": {
+          "attributes": { "category": "size" }
+        }
       }]
     },
 
     "scss": {
-      "transforms": ["attribute/cti", "name/cti/kebab", "time/seconds", "content/icon", "size/rem", "color/hex"],
+      "transformGroup": "scss",
       "buildPath": "style-guide/src/styleDictionary/",
       "files": [{
         "destination": "variables.scss",

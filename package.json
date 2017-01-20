@@ -29,6 +29,7 @@
   "files": [
     "bin",
     "lib",
+    "example",
     "index.js",
     "LICENSE",
     "NOTICE"
