@@ -1,0 +1,22 @@
+<% _.forOwn(model, function(modelChildValue, modelChildKey) { %>
+  <% if(modelChildValue._isProperty === true) { %>
+    <div class="style-guide-property" data-path="<%= modelChildValue.path.join("-") %>">
+      <div class="style-guide-property-path"><%= modelChildValue.path.join(".") %></div>
+      <div class="style-guide-property-name"><%= modelChildValue.name %></div>
+      <% if(modelChildValue.attributes && JSON.stringify(modelChildValue.attributes)!=="{}") { %>
+        <div class="style-guide-property-attributes-control"></div>
+      <% } %>
+      <div class="style-guide-property-value"><%= modelChildValue.value %></div>
+      <% if(modelChildValue.attributes && JSON.stringify(modelChildValue.attributes)!=="{}") { %>
+        <div class="style-guide-property-attributes"><%= JSON.stringify(modelChildValue.attributes) %></div>
+      <% } %>
+    </div>
+  <% } else { %>
+    <div class="style-guide-property-hierarchy">
+      <div class="style-guide-property-hierarchy-name"><%= modelChildKey %></div>
+      <div class="style-guide-properties">
+        <%= recursivePropertyTemplate(modelChildValue) %>
+      </div>
+    </div>
+  <% } %>
+<% }); %>

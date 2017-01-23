@@ -1,0 +1,45 @@
+<%
+  var organizedProperties = {};
+
+  _.each(allProperties, function(property) {
+    var currOrgObjPos = organizedProperties;
+    property.path.forEach(currPathStage) {
+      if(!currOrgObjPos[currPathStage]) {
+        currOrgObjPos[currPathStage] = {};
+      }
+      currOrgObjPos = currOrgObjPos[currPathStage];
+    }
+    currOrgObjPos = property;
+    currOrgObjPos._isProperty = true;
+  });
+%>
+<html>
+<head>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+
+  <style>
+  </style>
+</head>
+<body>
+  <div class="nav-bar">
+    <div class="title">Style Guide</div>
+    <div class="nav-search">
+      <span>Search for</span>
+      <input class="search-box" type="text" />
+      <span>in </span>
+      <label lass="search-modifier" for="use_path"><input class="search-modifier use_path" name="use_path" type="checkbox" checked />name</label>
+      <label lass="search-modifier" for="use_value"><input class="search-modifier use_value" name="use_value" type="checkbox" checked />value</label>
+      <label lass="search-modifier" for="use_attributes"><input class="search-modifier use_attributes" name="use_attributes" type="checkbox" checked />attributes</label>
+    </div>
+  </div>
+
+  <div class="style-guide">
+    <%= recursivePropertyTemplate(organizedProperties) %>
+  </div>
+
+  <script src="http://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+  <script src="js/style-dictionary-properties.js"></script>
+  <script src="js/main.js"></script>
+</body>

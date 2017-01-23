@@ -1,0 +1,172 @@
+html, body {
+	min-width: 400px;
+	margin-top: 50px;
+}
+
+
+
+.hidden {
+	display: none;
+}
+
+.collapsed > div {
+	display: none;
+}
+
+
+
+.nav-bar {
+	position: fixed;
+    top: 0;
+	height: 50px;
+	width: 100%;
+	box-sizing: border-box;
+	padding: 10px 15px;
+	border-bottom: 1px solid #333;
+	background: #777;
+	color: #ddd;
+    font-weight: 100;
+    z-index: 1;
+}
+
+.title {
+	float: left;
+	font-size: 1.75em;
+    margin-top: -2px;
+}
+
+.nav-search {
+	text-align: right;
+    font-size: 1.2em;
+    margin-top: 3px;
+}
+
+.search-box {
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+
+
+
+.styleMenu {
+    position: fixed;
+    top: 50px;
+    height: 35px;
+    overflow: hidden;
+    width: 100%;
+    border-bottom: 1px solid #000;
+    background: #ccc;
+}
+
+.key {
+    float: left;
+    height: 29px;
+    padding: 3px 10px;
+    line-height: 29px;
+    border-right: 1px solid #999;
+    font-size: 1.2em;
+}
+
+.key.selected {
+	font-weight: bold;
+}
+
+.key.selected.last-selected::after {
+	content: "\2715";
+	display: inline-block;
+	margin: 0px 0px 0px 8px;
+	font-size: 0.75em;
+}
+
+
+
+.style-guide-all-properties {
+    margin: 15px;
+    border: 1px solid #ccc;
+    width: calc(100% - 30px);
+    box-sizing: border-box;
+}
+
+.style-guide-property {
+    padding: 15px;
+    border-top: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.style-guide-property:first-of-type {
+	border-top: 0 none;
+}
+
+.style-guide-property::after {
+	content: "";
+	clear: both;
+}
+
+.style-guide-property-path {
+	display: inline-block;
+    vertical-align: middle;
+}
+
+.style-guide-property-value {
+	float: right;
+}
+
+.style-guide-property .style-guide-property-attributes-control {
+	display: inline-block;
+	width: 0; 
+	height: 0; 
+	border-top: 7px solid transparent;
+	border-bottom: 7px solid transparent;
+	border-left: 7px solid black;
+    border-radius: 10px;
+
+	-webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+
+    -webkit-transform-origin: 50% 50%;
+    -moz-transform-origin: 50% 50%;
+    -ms-transform-origin: 50% 50%;
+    -o-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+
+    -webkit-transition: 80ms linear all;
+    -moz-transition: 80ms linear all;
+    -ms-transition: 80ms linear all;
+    -o-transition: 80ms linear all;
+    transition: 80ms linear all;
+
+    margin-left: 3px;
+    vertical-align: middle;
+}
+
+.style-guide-property.minimized .style-guide-property-attributes-control {
+	-webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.style-guide-property .style-guide-property-attributes {
+	height: auto;
+	padding-top: 5px;
+	overflow: hidden;
+	text-align: right;
+}
+
+.style-guide-property.minimized .style-guide-property-attributes {
+	height: 0px;
+	padding-top: 0px;
+}
+
+.style-guide-property-name {
+	display: none;
+}
+
+.style-guide-property-name {
+	display: none;
+}

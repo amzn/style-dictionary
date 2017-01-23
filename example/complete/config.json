@@ -45,7 +45,6 @@
         }
       ]
     },
-
     "react": {
       "transformGroup": "web",
       "buildPath": "style-guide/src/styleDictionary/",
@@ -54,7 +53,6 @@
         "format": "javascript/module"
       }]
     },
-
     "scss": {
       "transforms": ["attribute/cti", "name/cti/kebab", "time/seconds", "content/icon", "size/rem", "color/hex"],
       "buildPath": "style-guide/src/styleDictionary/",
@@ -62,6 +60,36 @@
         "destination": "variables.scss",
         "format": "scss/variables"
       }],
+      "actions": ["copy_assets"]
+    },
+    "staticStyleGuideHTML":{
+      "buildPath": "static-style-guide/public/",
+      "files": [
+        {
+          "destination": "index.html",
+          "template": "static-style-guide/index.html"  
+        }
+      ]
+    },
+    "staticStyleGuideJS": {
+      "transformGroup": "web",
+      "buildPath": "static-style-guide/public/js/",
+      "files": [{
+        "name": "__style_properties",
+        "destination": "style-dictionary-properties.js",
+        "format": "javascript/object"
+      }]
+    },
+    "staticStyleGuideCSS": {
+      "transforms": ["attribute/cti", "name/cti/kebab", "time/seconds", "content/icon", "size/rem", "color/hex"],
+      "buildPath": "static-style-guide/public/css/",
+      "files": [{
+        "destination": "variables.css",
+        "format": "css/variables"
+      }]
+    },
+    "staticStyleGuideAssets": {
+      "buildPath": "static-style-guide/public/",
       "actions": ["copy_assets"]
     }
   }
