@@ -14,7 +14,7 @@ $(function () {
 		var $e = $('.search-box');
 		var searchVals = $e.val().split(" ");
 
-		$('.hidden').removeClass('hidden');
+		$('.style-guide-property.search-hidden').removeClass('search-hidden').not('.nav-hidden').removeClass('hidden');
 
 		if(!$('.use_attributes')[0].checked) {
 			$('.style-guide-property').addClass('minimized');
@@ -23,14 +23,16 @@ $(function () {
 		$('.style-guide-property').each(function (i, e) {
 			var $e = $(e);
 			var hidden = false;
+			var foundInAttribute;
 
 			searchVals.some(function (searchVal) {
+				foundInAttribute = $e.find('.style-guide-property-attributes').text().indexOf(searchVal)>-1;
 				if(
 						(!$('.use_path')[0].checked || $e.find('.style-guide-property-path').text().indexOf(searchVal) === -1)
 					&&
 						(!$('.use_value')[0].checked || $e.find('.style-guide-property-value').text().indexOf(searchVal) === -1)
 					&&
-						(!$('.use_attributes')[0].checked || $e.find('.style-guide-property-attributes').text().indexOf(searchVal) === -1)
+						(!$('.use_attributes')[0].checked || !foundInAttribute)
 				) {
 					hidden = true;
 					return true;
@@ -38,9 +40,9 @@ $(function () {
 			});
 
 			if(hidden) {
-				$e.addClass('hidden');
+				$e.addClass('search-hidden hidden');
 			}
-			else if($('.use_attributes')[0].checked) {
+			else if($('.use_attributes')[0].checked && foundInAttribute) {
 				$e.removeClass('minimized');
 			}
 		});
@@ -112,13 +114,16 @@ $(function () {
 			$('.key[data-owner=' + (buildPath || DEFAULT_PATH) + '][data-value=' + key + ']').removeClass('hidden').addClass('selected' + (i===currPathArr.length-1 ? ' last-selected' : ''));
 			buildPath += (buildPath ? SEPARATOR+key : key);
 		});
-		if(buildPath) {
-			$('.key[data-owner=' + buildPath + ']').removeClass('hidden');
-		}
 
 		if(buildPath) {
-			$('.style-guide-property').addClass('hidden');
-			$('.style-guide-property[data-path^='+buildPath+']').removeClass('hidden');			
+			$('.key[data-owner=' + buildPath + ']').removeClass('hidden');
+			$('.style-guide-property').addClass('nav-hidden hidden');
+			if(buildPath===DEFAULT_PATH) {
+				$('.style-guide-property.nav-hidden').removeClass('nav-hidden').not('.search-hidden').removeClass('hidden');
+			}
+			else {
+				$('.style-guide-property[data-path^='+buildPath+']').removeClass('nav-hidden').not('.search-hidden').removeClass('hidden');
+			}
 		}
 	});
 });

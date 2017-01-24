@@ -1,17 +1,23 @@
 <%
-  var organizedProperties = {};
+  var organizedProperties = [];
 
-  _.each(allProperties, function(property) {
-    var currOrgObjPos = organizedProperties;
-    property.path.forEach(currPathStage) {
-      if(!currOrgObjPos[currPathStage]) {
-        currOrgObjPos[currPathStage] = {};
-      }
-      currOrgObjPos = currOrgObjPos[currPathStage];
-    }
-    currOrgObjPos = property;
-    currOrgObjPos._isProperty = true;
+  _.each(model.allProperties, function(property) {
+    var propPath = property.path.join("-");
+    organizedProperties[propPath] = _.assignIn({_isProperty:true}, property);
   });
+
+  // _.each(model.allProperties, function(property) {
+  //   var currOrgObjPos = organizedProperties;
+  //   property.path.forEach(function (currPathStage) {
+  //     if(!currOrgObjPos[currPathStage]) {
+  //       currOrgObjPos[currPathStage] = {};
+  //     }
+  //     currOrgObjPos = currOrgObjPos[currPathStage];
+  //   });
+  //   currOrgObjPos = _.assignIn(currOrgObjPos, property);
+  //   currOrgObjPos._isProperty = true;
+  //   console.log(currOrgObjPos);
+  // });
 %>
 <html>
 <head>

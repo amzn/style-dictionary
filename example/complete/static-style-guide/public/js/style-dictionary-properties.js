@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Thu Jan 19 2017 14:35:10 GMT-0800 (PST)
+ * Generated on Mon Jan 23 2017 16:24:35 GMT-0800 (PST)
  */
 
 var __style_properties = {
@@ -453,7 +453,7 @@ var __style_properties = {
     "base": {
       "red": {
         "50": {
-          "value": "#000000",
+          "value": "#FFE5EE",
           "attributes": {
             "font": "base",
             "category": "color",
@@ -462,7 +462,7 @@ var __style_properties = {
             "subitem": "50"
           },
           "original": {
-            "value": "#000000",
+            "value": "#FFE5EE",
             "attributes": {
               "font": "base"
             }

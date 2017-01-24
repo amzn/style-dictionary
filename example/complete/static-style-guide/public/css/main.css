@@ -88,6 +88,10 @@ html, body {
     box-sizing: border-box;
 }
 
+.style-guide {
+    border-bottom: 1px solid #ccc;
+}
+
 .style-guide-property {
     padding: 15px;
     border-top: 1px solid #ccc;
@@ -113,34 +117,40 @@ html, body {
 }
 
 .style-guide-property .style-guide-property-attributes-control {
-	display: inline-block;
-	width: 0; 
-	height: 0; 
-	border-top: 7px solid transparent;
-	border-bottom: 7px solid transparent;
-	border-left: 7px solid black;
-    border-radius: 10px;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
 
-	-webkit-transform: rotate(90deg);
+    /* border-top: 7px solid transparent; */
+    /* border-bottom: 7px solid transparent; */
+    /* border-left: 7px solid black; */
+    /* border-radius: 10px; */
+
+    -webkit-transform: rotate(90deg);
     -moz-transform: rotate(90deg);
     -ms-transform: rotate(90deg);
     -o-transform: rotate(90deg);
     transform: rotate(90deg);
-
     -webkit-transform-origin: 50% 50%;
     -moz-transform-origin: 50% 50%;
     -ms-transform-origin: 50% 50%;
     -o-transform-origin: 50% 50%;
     transform-origin: 50% 50%;
-
     -webkit-transition: 80ms linear all;
     -moz-transition: 80ms linear all;
     -ms-transition: 80ms linear all;
     -o-transition: 80ms linear all;
     transition: 80ms linear all;
-
-    margin-left: 3px;
+    
+    margin-left: 2px;
+    margin-top: 0px;
+    box-sizing: border-box;
+    overflow: hidden;
     vertical-align: middle;
+}
+
+.style-guide-property .style-guide-property-attributes-control::after {
+    content: "\25b6";
 }
 
 .style-guide-property.minimized .style-guide-property-attributes-control {
