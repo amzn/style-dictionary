@@ -4,9 +4,17 @@
   var checkForStyle = function(modelChildValue, modelChildKey) {
     var toStyle = "";
     if(modelChildValue.value.match(colorRegex)) {
-      toStyle += "background-color:" + modelChildValue.value + ";";
-      if(modelChildValue.attributes && modelChildValue.attributes.font=="inverse") {
-        toStyle += "color:#fff;";
+      if(modelChildValue.path.indexOf('font')>-1) {
+        toStyle += "color:" + modelChildValue.value + ";";
+        if(modelChildValue.path.indexOf('inverse')>-1 || (modelChildValue.attributes && modelChildValue.attributes.background=="inverse")) {
+          toStyle += "background-color:#000;";
+        }
+      }
+      else {
+        toStyle += "background-color:" + modelChildValue.value + ";";
+        if(modelChildValue.path.indexOf('inverse')>-1 || (modelChildValue.attributes && modelChildValue.attributes.font=="inverse")) {
+          toStyle += "color:#fff;";
+        }
       }
     }
     return toStyle;
