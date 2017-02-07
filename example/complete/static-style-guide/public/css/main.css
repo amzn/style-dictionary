@@ -99,7 +99,7 @@ html, body {
 }
 
 .style-guide-property:first-of-type {
-	border-top: 0 none;
+	border-top: 0;
 }
 
 .style-guide-property::after {
