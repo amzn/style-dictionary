@@ -1,8 +1,25 @@
-html, body {
-	min-width: 400px;
-	margin-top: 50px;
+:root {
+    --nav-bar-height: calc( var(--size-padding-tiny) + var(--size-padding-xxl));
+    --style-menu-bar-height: calc(3.25 * var(--size-padding-tiny) + var(--size-padding-large));
+    --min-body-width: calc(25 * var(--size-padding-xl));
 }
 
+html, body {
+	min-width: var(--min-body-width);
+    background: var(--color-background-base);
+    color: var(--color-font-base);
+    font-family: var(--font-family-base);
+}
+
+body {
+    margin-top: calc( var(--nav-bar-height) + var(--style-menu-bar-height) );
+}
+
+
+.inverse {
+    background: var(--color-background-inverse);
+    color: var(--color-font-inverse-base);
+}
 
 
 .hidden {
@@ -18,32 +35,33 @@ html, body {
 .nav-bar {
 	position: fixed;
     top: 0;
-	height: 50px;
+	height: var(--nav-bar-height);
 	width: 100%;
+    min-width: var(--min-body-width);
 	box-sizing: border-box;
-	padding: 10px 15px;
-	border-bottom: 1px solid #333;
-	background: #777;
-	color: #ddd;
+	padding: var(--size-padding-small) var(--size-padding-base);
+	border-bottom: 1px solid var(--color-base-grey-800);
+	background: var(--color-background-inverse);
+	color: var(--color-font-inverse-tertiary);
     font-weight: 100;
     z-index: 1;
 }
 
 .title {
 	float: left;
-	font-size: 1.75em;
-    margin-top: -2px;
+	font-size: var(--size-font-xl);
+    margin-top: -var(--size-padding-tiny);
 }
 
 .nav-search {
 	text-align: right;
-    font-size: 1.2em;
-    margin-top: 3px;
+    font-size: var(--size-font-medium);
+    margin-top: var(--size-padding-tiny);
 }
 
 .search-box {
-    padding-left: 3px;
-    padding-right: 3px;
+    padding-left: var(--size-padding-tiny);
+    padding-right: var(--size-padding-tiny);
 }
 
 
@@ -51,21 +69,22 @@ html, body {
 
 .styleMenu {
     position: fixed;
-    top: 50px;
-    height: 35px;
+    top: var(--nav-bar-height);
+    height: var(--style-menu-bar-height);
     overflow: hidden;
     width: 100%;
-    border-bottom: 1px solid #000;
-    background: #ccc;
+    border-bottom: 1px solid var(--color-base-grey-900);
+    background: var(--color-base-grey-400);
+    z-index: 1;
 }
 
 .key {
     float: left;
-    height: 29px;
-    padding: 3px 10px;
-    line-height: 29px;
-    border-right: 1px solid #999;
-    font-size: 1.2em;
+    height: var(--style-menu-bar-height);
+    padding: 0 var(--size-padding-small);
+    line-height: var(--style-menu-bar-height);
+    border-right: 1px solid var(--color-base-grey-500);
+    font-size: var(--size-font-medium);
 }
 
 .key.selected {
@@ -75,26 +94,20 @@ html, body {
 .key.selected.last-selected::after {
 	content: "\2715";
 	display: inline-block;
-	margin: 0px 0px 0px 8px;
-	font-size: 0.75em;
+	margin: 0 var(--size-padding-small);
+	font-size: var(--size-font-small);
 }
 
 
 
-.style-guide-all-properties {
-    margin: 15px;
-    border: 1px solid #ccc;
-    width: calc(100% - 30px);
-    box-sizing: border-box;
-}
 
 .style-guide {
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid var(--color-base-grey-400);
 }
 
 .style-guide-property {
-    padding: 15px;
-    border-top: 1px solid #ccc;
+    padding: var(--size-padding-base);
+    border-top: 1px solid var(--color-base-grey-400);
     box-sizing: border-box;
 }
 
@@ -118,13 +131,8 @@ html, body {
 
 .style-guide-property .style-guide-property-attributes-control {
     display: inline-block;
-    width: 14px;
-    height: 14px;
-
-    /* border-top: 7px solid transparent; */
-    /* border-bottom: 7px solid transparent; */
-    /* border-left: 7px solid black; */
-    /* border-radius: 10px; */
+    width: var(--size-font-medium);
+    height: var(--size-font-medium);
 
     -webkit-transform: rotate(90deg);
     -moz-transform: rotate(90deg);
@@ -142,8 +150,8 @@ html, body {
     -o-transition: 80ms linear all;
     transition: 80ms linear all;
     
-    margin-left: 2px;
-    margin-top: 0px;
+    margin-left: var(--size-padding-tiny);
+    margin-top: 0;
     box-sizing: border-box;
     overflow: hidden;
     vertical-align: middle;
@@ -163,14 +171,14 @@ html, body {
 
 .style-guide-property .style-guide-property-attributes {
 	height: auto;
-	padding-top: 5px;
+	padding-top: var(--size-padding-small);
 	overflow: hidden;
 	text-align: right;
 }
 
 .style-guide-property.minimized .style-guide-property-attributes {
-	height: 0px;
-	padding-top: 0px;
+	height: 0;
+	padding-top: 0;
 }
 
 .style-guide-property-name {

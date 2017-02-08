@@ -19,44 +19,12 @@
       return 'inverse';
     }
   };
-
-  var checkPropSetProp = function (property, pathArr, propertyName) {
-    if(pathArr.every(function (string) { return property.path.indexOf(string)>-1; })) {
-      %> <%= propertyName %>: var(--<%= property.path.join('-') %>); <%
-    }
-  };
-
-  %> <style> <%
-    %> body { <%
-    allProperties.forEach(function(property) {
-      if(property.path.indexOf('base')!==-1) {
-        if(property.path.indexOf('inverse')==-1) {
-            checkPropSetProp(property, ['font','color','base'], 'color');
-            checkPropSetProp(property, ['font','family', 'base'], 'font-family');
-            checkPropSetProp(property, ['background','color','base'], 'background-color');
-        }
-      }
-    });
-    %> } <%
-    %> .inverse { <%
-    allProperties.forEach(function(property) {
-      if(property.path.indexOf('base')!==-1) {
-        if(property.path.indexOf('inverse')!==-1) {
-            checkPropSetProp(property, ['font','color','base','inverse'], 'color');
-            checkPropSetProp(property, ['background','color','inverse'], 'background-color');
-        }
-      }
-    });
-    %> } <%
-  %> </style> <%
 %>
 <html>
 <head>
   <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/main.css">
-
-  <style>
-  </style>
 </head>
 <body>
   <div class="nav-bar">

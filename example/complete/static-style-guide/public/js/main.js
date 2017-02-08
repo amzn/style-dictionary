@@ -85,7 +85,7 @@ $(function () {
 
 	var styleMenu = buildStyleMenuHTMLRecursive(__style_properties);
 
-	$(document.body).append('<div class="styleMenu">' + styleMenu + '</div>');
+	$(document.body).prepend('<div class="styleMenu">' + styleMenu + '</div>');
 	$('.key').addClass('hidden');
 	$('.key[data-owner=' + DEFAULT_PATH + ']').removeClass('hidden');
 
