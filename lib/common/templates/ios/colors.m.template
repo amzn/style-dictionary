@@ -1,0 +1,44 @@
+//
+// <%= this.destination %>
+//
+// Generated at <%= new Date() %>
+//
+
+#import "<%= this.className %>.h"
+<% var props = _.filter(allProperties, this.filter); %>
+
+@implementation <%= this.className %>
+
++ (UIColor *)color:(<%= this.type %>)colorEnum{
+  return [[[self values] objectAtIndex:colorEnum] valueForKey:@"value"];
+}
+
++ (NSArray *)values {
+  static NSArray* colorArray;
+  static dispatch_once_t onceToken;
+
+  dispatch_once(&onceToken, ^{
+    colorArray = @[
+      <%= _.map(props, buildProperty).join(',\n') %>
+    ];
+  });
+
+  return colorArray;
+}
+
+@end
+
+<% function buildProperty(prop) {
+  var to_ret = '@{\n';
+  to_ret += '  ' + '@"value": ' + prop.value + ',\n';
+  to_ret += '  ' + '@"name": @"' + prop.name + '",\n';
+
+  for(var name in prop.attributes) {
+    if (prop.attributes[name]) {
+      to_ret += '    ' + '@"' + name + '": @"' + prop.attributes[name] + '",\n';
+    }
+  }
+
+  // remove last comma
+  return to_ret.slice(0, -2) + '\n' + '  ' + '}';
+} %>

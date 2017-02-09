@@ -1,0 +1,15 @@
+//
+// <%= this.destination %>
+//
+// Generated at <%= new Date() %>
+//
+
+#import <Foundation/Foundation.h>
+<% var props = _.filter(allProperties, this.filter); %>
+
+<% _.each(props, function(prop) {  %>
+extern NSString * const <%= prop.name %>;<% }); %>
+
+@interface <%= this.className %> : NSObject
++ (NSArray *)values;
+@end

@@ -6,9 +6,8 @@
 
 @interface <%= this.className %> : NSObject
 
-+ (<%= this.className %> *)sharedInstance;
-- (NSDictionary *)properties;
-- (NSDictionary *)getProperty:(NSString *)keyPath;
-- (nonnull)getValue:(NSString *)keyPath;
++ (NSDictionary *)properties;
++ (NSDictionary *)getProperty:(NSString *)keyPath;
++ (nonnull)getValue:(NSString *)keyPath;
 
 @end

@@ -1,0 +1,17 @@
+//
+// <%= this.destination %>
+//
+// Generated at <%= new Date() %>
+//
+
+#import <UIKit/UIKit.h>
+<% var props = _.filter(allProperties, this.filter); %>
+
+typedef NS_ENUM(NSInteger, <%= this.type %>) {
+<%= _.map(props, function(prop) { return prop.name; }).join(',\n') %>
+};
+
+@interface <%= this.className %> : NSObject
++ (NSArray *)values;
++ (UIColor *)color:(<%= this.type %>)color;
+@end

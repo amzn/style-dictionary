@@ -1,44 +1,27 @@
 //  Do not edit directly
 //  Generated on <%= new Date() %>
 
-#import <Foundation/Foundation.h>
 #import "<%= this.className %>.h"
-
-@interface <%= this.className %> ()
-@property(nonatomic, strong) NSDictionary *properties;
-@end
 
 @implementation <%= this.className %>
 
-+ (<%= this.className %> *)sharedInstance {
-  static <%= this.className %> *singleton;
++ (NSDictionary *)getProperty:(NSString *)keyPath {
+  return [[self properties] valueForKeyPath:keyPath];
+}
+
++ (nonnull)getValue:(NSString *)keyPath {
+  return [[self properties] valueForKeyPath:[NSString stringWithFormat:@"%@.value", keyPath]];
+}
+
++ (NSDictionary *)properties {
+  static NSDictionary * dictionary;
   static dispatch_once_t onceToken;
+
   dispatch_once(&onceToken, ^{
-    singleton = [[<%= this.className %> alloc] init];
+    dictionary = <%= buildDictionary(properties) %>;
   });
-  return singleton;
-}
 
-- (NSDictionary *)properties {
-  return _properties;
-}
-
-- (NSDictionary *)getProperty:(NSString *)keyPath {
-  return [_properties valueForKeyPath:keyPath];
-}
-
-- (nonnull)getValue:(NSString *)keyPath {
-  return [_properties valueForKeyPath:[NSString stringWithFormat:@"%@.value", keyPath]];
-}
-
-- (instancetype)init {
-  self = [super init];
-
-  if (self) {
-    _properties = <%= buildDictionary(properties) %>;
-  }
-
-  return self;
+  return dictionary;
 }
 
 @end
@@ -47,7 +30,9 @@
   indent = indent || '  ';
   if (props.hasOwnProperty('value')) {
     var to_ret = '@{\n';
-    to_ret += indent + '@"value": ' + props.value + ',\n';
+    var value = props.attributes.category === 'size' ? '@' + props.value : props.value;
+    to_ret += indent + '@"value": ' + value + ',\n';
+    to_ret += indent + '@"name": @"' + props.name + '",\n';
 
     for(var name in props.attributes) {
       if (props.attributes[name]) {
@@ -66,4 +51,3 @@
     return to_ret.slice(0, -2) + '\n' + indent + '}';
   }
 } %>
-

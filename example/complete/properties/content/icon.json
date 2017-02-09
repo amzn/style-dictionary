@@ -1,7 +1,7 @@
 {
   "content": {
     "icon": {
-      "threed_rotation" :                                {"value": "threed_rotation"},
+      "3d_rotation" :                                    {"value": "3d_rotation"},
       "airline_seat_individual_suite" :                  {"value": "airline_seat_individual_suite"},
       "airline_seat_legroom_reduced" :                   {"value": "airline_seat_legroom_reduced"},
       "airline_seat_legroom_normal" :                    {"value": "airline_seat_legroom_normal"},

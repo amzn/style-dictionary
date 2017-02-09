@@ -1,0 +1,32 @@
+{
+  "name": "StyleDictionaryExample",
+  "version": "0.1.0",
+  "summary": "An example StyleDictionary cocoapod and example app.",
+  "description": "An example StyleDictionary cocoapod and example app.",
+  "homepage": "homepage",
+  "license": {
+    "type": "Apache-2.0",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Danny Banks": "djb@amazon.com"
+  },
+  "source": {
+    "git": "",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "10.2"
+  },
+  "source_files": "StyleDictionaryExample/Classes/**/*.{h,m}",
+  "public_header_files": "StyleDictionaryExample/Classes/**/*.h",
+  "resource_bundles": {
+    "StyleDictionaryExample": [
+      "StyleDictionaryExample/assets/**/*"
+    ]
+  },
+  "frameworks": [
+    "UIKit",
+    "QuartzCore"
+  ]
+}
