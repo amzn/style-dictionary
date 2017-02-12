@@ -12,18 +12,16 @@
 // express or implied. See the License for the specific language governing
 // permissions and limitations under the License.
 //
-// <%= this.destination %>
-//
-// Do not edit directly, generated on <%= new Date() %>
+//  UIColor+StyleDictionary.h
 //
 
-#import <Foundation/Foundation.h>
-<% var props = _.filter(allProperties, this.filter);
-   var type = this.type; %>
+#import <UIKit/UIKit.h>
 
-<% _.each(props, function(prop) {  %>
-extern <%= type %> const <%= prop.name %>;<% }); %>
+#import <UIKit/UIKit.h>
+#import "StyleDictionaryColor.h"
 
-@interface <%= this.className %> : NSObject
-+ (NSArray *)values;
+@interface UIColor (StyleDictionaryColor)
+
++ (instancetype)styleDictionaryColor:(StyleDictionaryColorName)color;
+
 @end

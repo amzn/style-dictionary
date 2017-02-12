@@ -1,0 +1,16 @@
+PODS:
+  - StyleDictionary (0.1.0)
+
+DEPENDENCIES:
+  - StyleDictionary (from `../../`)
+
+EXTERNAL SOURCES:
+  StyleDictionary:
+    :path: ../../
+
+SPEC CHECKSUMS:
+  StyleDictionary: 8db49ccfc0bb0865d76f74903ed3a734e71d1514
+
+PODFILE CHECKSUM: ec1f1cbad8251d242946ad120e9a8be9cd2c6518
+
+COCOAPODS: 1.2.0

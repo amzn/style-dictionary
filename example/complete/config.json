@@ -3,14 +3,9 @@
     "properties/**/*.json"
   ],
   "platforms": {
-    "ios-assets": {
-      "transformGroup": "ios",
-      "buildPath": "ios/StyleDictionaryExample/StyleDictionaryExample/",
-      "actions": ["copy_assets"]
-    },
     "ios": {
       "transformGroup": "ios",
-      "buildPath": "ios/StyleDictionaryExample/StyleDictionaryExample/Classes/Generated/",
+      "buildPath": "ios/Classes/Generated/",
       "prefix": "StyleDictionary",
       "files": [{
         "destination": "StyleDictionarySize.h",
@@ -139,7 +134,7 @@
       "files": [
         {
           "destination": "index.html",
-          "template": "static-style-guide/index.html"  
+          "template": "static-style-guide/index.html"
         }
       ]
     },

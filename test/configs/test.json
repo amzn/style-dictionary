@@ -46,7 +46,7 @@
           "template": "ios/plist"
         },{
           "destination": "style_dictionary.h",
-          "template": "ios/headers"
+          "template": "ios/macros"
         }
       ]
     }

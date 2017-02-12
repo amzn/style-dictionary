@@ -1,6 +1,0 @@
-framework module Pods_StyleDictionaryExample_Example {
-  umbrella header "Pods-StyleDictionaryExample_Example-umbrella.h"
-
-  export *
-  module * { export * }
-}

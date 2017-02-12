@@ -18,12 +18,10 @@
 //
 
 #import <Foundation/Foundation.h>
-<% var props = _.filter(allProperties, this.filter);
-   var type = this.type; %>
+#import <UIKit/UIKit.h>
 
-<% _.each(props, function(prop) {  %>
-extern <%= type %> const <%= prop.name %>;<% }); %>
+<% var props = _.filter(allProperties, this.filter); %>
 
-@interface <%= this.className %> : NSObject
-+ (NSArray *)values;
-@end
+<% _.each(props, function(prop) {
+  %>#define <%= prop.name %> <%= prop.value %>
+<% }); %>

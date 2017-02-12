@@ -12,18 +12,14 @@
 // express or implied. See the License for the specific language governing
 // permissions and limitations under the License.
 //
-// <%= this.destination %>
-//
-// Do not edit directly, generated on <%= new Date() %>
+//  BaseColorViewController.h
 //
 
-#import <Foundation/Foundation.h>
-<% var props = _.filter(allProperties, this.filter);
-   var type = this.type; %>
+#import <UIKit/UIKit.h>
+#import <StyleDictionary/StyleDictionary.h>
+#import <StyleDictionary/StyleDictionaryProperties.h>
+#import "ColorCell.h"
 
-<% _.each(props, function(prop) {  %>
-extern <%= type %> const <%= prop.name %>;<% }); %>
+@interface BaseColorViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
-@interface <%= this.className %> : NSObject
-+ (NSArray *)values;
 @end

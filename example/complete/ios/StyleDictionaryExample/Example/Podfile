@@ -1,9 +1,0 @@
-use_frameworks!
-
-target 'StyleDictionaryExample_Example' do
-  pod 'StyleDictionaryExample', :path => '../'
-
-  target 'StyleDictionaryExample_Tests' do
-    inherit! :search_paths
-  end
-end
