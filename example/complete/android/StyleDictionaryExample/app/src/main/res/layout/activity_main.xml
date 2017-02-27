@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/size_padding_medium"
+    android:paddingRight="@dimen/size_padding_medium"
+    android:paddingTop="@dimen/size_padding_medium"
+    android:paddingBottom="@dimen/size_padding_medium"
     tools:context="com.amazon.styledictionaryexample.MainActivity">
 
     <LinearLayout
@@ -16,86 +16,33 @@
         android:layout_height="match_parent"
         android:weightSum="1">
 
-        <FrameLayout
+        <Button
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="@color/color_blue_0"></FrameLayout>
+            android:layout_height="wrap_content"
+            android:id="@+id/activity_main_colors_button"
+            android:layout_marginBottom="@dimen/size_padding_base"
+            android:text="@string/title_all_colors" />
 
-        <FrameLayout
+        <Button
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="@color/color_blue_1"
-            android:layout_gravity="center_horizontal" />
+            android:layout_height="wrap_content"
+            android:id="@+id/activity_main_icons_button"
+            android:layout_marginBottom="@dimen/size_padding_base"
+            android:text="@string/title_icon_list" />
 
-        <FrameLayout
+        <Button
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="@color/color_blue_2"></FrameLayout>
+            android:layout_height="wrap_content"
+            android:id="@+id/activity_main_sizes_button"
+            android:layout_marginBottom="@dimen/size_padding_base"
+            android:text="@string/title_all_sizes"/>
 
-        <FrameLayout
+        <Button
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="@color/color_blue_3" />
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="@color/color_blue_4" />
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="@color/color_grey_0" />
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="@color/color_grey_1" />
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="@color/color_grey_2" />
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="@color/color_grey_3" />
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="@color/color_grey_4" />
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="@color/color_white" />
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="@color/color_orange_0" />
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="@color/color_orange_1" />
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="@color/color_orange_2" />
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="@color/color_orange_3" />
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="@color/color_orange_4" />
+            android:layout_height="wrap_content"
+            android:id="@+id/activity_main_properties_button"
+            android:layout_marginBottom="@dimen/size_padding_base"
+            android:text="@string/title_all_properties" />
 
     </LinearLayout>
 </RelativeLayout>

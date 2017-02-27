@@ -1,0 +1,55 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.amazon.styledictionaryexample.icon.IconDetailFragment"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_background_base"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:id="@+id/color_swatch"
+        android:background="@color/color_brand_secondary_base">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/icon_display"
+            android:textSize="@dimen/size_icon_xxl"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:text="@string/content_icon_ac_unit"
+            android:textColor="@color/color_font_inverse_base"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_background_base"
+        android:orientation="vertical"
+        android:padding="@dimen/size_padding_base">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/icon_detail_title"
+            android:textSize="@dimen/size_font_xl"
+            android:textColor="@color/color_font_tertiary"
+            android:layout_marginBottom="@dimen/size_padding_base"
+            android:text="" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/icon_detail_body"
+            android:textSize="@dimen/size_font_large"
+            android:textColor="@color/color_font_secondary"
+            android:layout_marginBottom="@dimen/size_padding_base"
+            android:text="" />
+
+    </LinearLayout>
+</LinearLayout>

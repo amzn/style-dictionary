@@ -80,14 +80,35 @@
 
     "android": {
       "transformGroup": "android",
-      "buildPath": "android/StyleDictionaryExample/app/src/main/res/values/",
-      "files": [
-        {
-          "destination": "style_dictionary_colors.xml",
-          "template": "android/colors"
-        }
-      ]
+      "buildPath": "android/StyleDictionaryExample/styledictionary/src/main/res/values/",
+      "files": [{
+        "destination": "style_dictionary_colors.xml",
+        "template": "android/colors"
+      },{
+        "destination": "style_dictionary_font_dimens.xml",
+        "template": "android/fontDimens"
+      },{
+        "destination": "style_dictionary_dimens.xml",
+        "template": "android/dimens"
+      },{
+        "destination": "style_dictionary_integers.xml",
+        "template": "android/integers"
+     },{
+        "destination": "style_dictionary_strings.xml",
+        "template": "android/strings"
+      }]
     },
+
+    "android-asset": {
+      "transformGroup": "android",
+      "buildPath": "android/StyleDictionaryExample/app/src/main/",
+      "files": [{
+        "destination": "assets/data/properties.json",
+        "format": "json"
+      }],
+      "actions": ["copy_assets"]
+    },
+
     "reactNative": {
       "transforms": ["attribute/cti","name/ti/constant","size/px"],
       "buildPath": "react-native/StyleDictionaryExample/styleDictionary/",

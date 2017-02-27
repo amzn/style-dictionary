@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Do not edit directly
+  Generated on Sun Feb 26 2017 16:05:46 GMT-0800 (PST)
+-->
+
+<resources>
+  <dimen name="size_icon_small">24.00sp</dimen>
+  <dimen name="size_icon_base">32.00sp</dimen>
+  <dimen name="size_icon_large">40.00sp</dimen>
+  <dimen name="size_icon_xl">48.00sp</dimen>
+  <dimen name="size_icon_xxl">80.00sp</dimen>
+  <dimen name="size_padding_tiny">4.00dp</dimen>
+  <dimen name="size_padding_small">8.00dp</dimen>
+  <dimen name="size_padding_medium">16.00dp</dimen>
+  <dimen name="size_padding_large">24.00dp</dimen>
+  <dimen name="size_padding_xl">32.00dp</dimen>
+  <dimen name="size_padding_xxl">48.00dp</dimen>
+  <dimen name="size_padding_base">16.00dp</dimen>
+  
+</resources>
