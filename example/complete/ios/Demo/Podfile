@@ -1,0 +1,6 @@
+use_frameworks!
+
+target 'StyleDictionary_Demo' do
+  pod 'StyleDictionary', :path => '../../'
+
+end

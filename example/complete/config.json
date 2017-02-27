@@ -5,21 +5,79 @@
   "platforms": {
     "ios": {
       "transformGroup": "ios",
-      "buildPath": "ios/StyleDictionaryExample/StyleDictionaryExample/StyleDictionary/",
+      "buildPath": "ios/Classes/Generated/",
+      "prefix": "StyleDictionary",
       "files": [{
-        "destination": "StyleDictionaryMacros.h",
-        "template": "ios/headers"
+        "destination": "StyleDictionarySize.h",
+        "template": "ios/static.h",
+        "type": "float",
+        "className": "StyleDictionarySize",
+        "filter": {
+          "attributes": {
+            "category": "size"
+          }
+        }
       },{
-        "destination": "StyleDictionary.h",
+        "destination": "StyleDictionarySize.m",
+        "template": "ios/static.m",
+        "type": "float",
+        "className": "StyleDictionarySize",
+        "filter": {
+          "attributes": {
+            "category": "size"
+          }
+        }
+      },{
+        "destination": "StyleDictionaryIcons.h",
+        "template": "ios/strings.h",
+        "className": "StyleDictionaryIcons",
+        "filter": {
+          "attributes": {
+            "category": "content",
+            "type": "icon"
+          }
+        }
+      },{
+        "destination": "StyleDictionaryIcons.m",
+        "template": "ios/strings.m",
+        "className": "StyleDictionaryIcons",
+        "filter": {
+          "attributes": {
+            "category": "content",
+            "type": "icon"
+          }
+        }
+      },{
+        "destination": "StyleDictionaryColor.h",
+        "template": "ios/colors.h",
+        "className": "StyleDictionaryColor",
+        "type": "StyleDictionaryColorName",
+        "filter": {
+          "attributes": {
+            "category": "color"
+          }
+        }
+      },{
+        "destination": "StyleDictionaryColor.m",
+        "template": "ios/colors.m",
+        "className": "StyleDictionaryColor",
+        "type": "StyleDictionaryColorName",
+        "filter": {
+          "attributes": {
+            "category": "color"
+          }
+        }
+      },{
+        "destination": "StyleDictionaryProperties.h",
         "template": "ios/singleton.h",
-        "className": "StyleDictionary"
+        "className": "StyleDictionaryProperties"
       },{
-        "destination": "StyleDictionary.m",
+        "destination": "StyleDictionaryProperties.m",
         "template": "ios/singleton.m",
-        "className": "StyleDictionary"
-      }],
-      "actions": ["copy_assets"]
+        "className": "StyleDictionaryProperties"
+      }]
     },
+
     "android": {
       "transformGroup": "android",
       "buildPath": "android/StyleDictionaryExample/app/src/main/res/values/",
@@ -76,7 +134,7 @@
       "files": [
         {
           "destination": "index.html",
-          "template": "static-style-guide/index.html"  
+          "template": "static-style-guide/index.html"
         }
       ]
     },
