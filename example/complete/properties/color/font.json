@@ -6,7 +6,7 @@
       "tertiary":     { "value": "{color.base.grey.600.value}"  },
       "quaternary":   { "value": "{color.base.grey.400.value}"  },
       "link":         { "value": "{color.brand.primary.base.value}" },
-      "active":       { "value": "{color.brand.secondary.base.value}"   },
+      "active":       { "value": "{color.brand.secondary.base.value}" },
       "error":        { "value": "{color.base.red.600.value}"      },
       "warning":      { "value": "{color.base.orange.800.value}"   },
       "success":      { "value": "{color.base.green.600.value}"    },

@@ -8,7 +8,7 @@
       "buildPath": "build/ios/",
       "files": [{
         "destination": "StyleDictionaryMacros.h",
-        "template": "ios/headers"
+        "template": "ios/macros"
       },{
         "destination": "StyleDictionary.h",
         "template": "ios/singleton.h",

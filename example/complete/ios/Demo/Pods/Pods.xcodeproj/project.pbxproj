@@ -1,0 +1,792 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		01AB48AC9642140FC816BA4B8BE41F30 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BF675A168132FD52AED630F977FE906 /* UIKit.framework */; };
+		037F519289CC03CA32D65DA187444DBB /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 4D52D057E49E0B0530720BADFDFF6FF8 /* fonts */; };
+		077A5EEC52C82C121560096243216B61 /* StyleDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 3805D13B740E2253CD96A6295220A064 /* StyleDictionary.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		0A0692B7ECB212F139805C1CEABE0C99 /* UIColor+StyleDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = E59F0407EB3E1CD6B4BA306FF06B269C /* UIColor+StyleDictionary.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1096056442F3F751D94AD5442D73C3B5 /* Pods-StyleDictionary_Demo-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 063072AC5071BD03E7A714BECC400DCA /* Pods-StyleDictionary_Demo-dummy.m */; };
+		10BCB57A9D6FA5E944E9931C23AB7032 /* MaterialIcons-Regular.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 10B35BF3BAD95D52517090CF5288E2CF /* MaterialIcons-Regular.woff2 */; };
+		18A7A7B32B49EA7CD8C1CEA9C30B129F /* StyleDictionarySize.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F65C596E925474CACE720159A23A18 /* StyleDictionarySize.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		193BDE946F141ECCA6191A87F1CD5B73 /* UIFont+MaterialIcons.m in Sources */ = {isa = PBXBuildFile; fileRef = 855F0B9B51EA8C5826CF9EDC33658E1F /* UIFont+MaterialIcons.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		1F604CE99B27BA46E51DE7A92D74DD47 /* StyleDictionaryColor.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D37D5780C2A493344D0C33632CC047B /* StyleDictionaryColor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		231578BB862B09A3037A65AF695FA215 /* UIFont+MaterialIcons.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E60AC63DBFAF12BE4079630689BE491 /* UIFont+MaterialIcons.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2917CB7D265A84CC8D2CAA00057451A8 /* StyleDictionary.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3883D5BD0B3D5409C602997F82EE7C47 /* StyleDictionary.bundle */; };
+		2B94D9B322714B99BACF7EACD43CE429 /* StyleDictionaryProperties.h in Headers */ = {isa = PBXBuildFile; fileRef = A109F23E30438881FE5738AEB4ABC074 /* StyleDictionaryProperties.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		35168638F4FD0B43978C6BDEA605C502 /* StyleDictionaryIcons.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E25C19E68AC6139730B047B9BB24AA0 /* StyleDictionaryIcons.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		518DBE5E1C34B2B133A9CE17F755D6FE /* Pods-StyleDictionary_Demo-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D94CFF561CCF3816632682FFECF336F1 /* Pods-StyleDictionary_Demo-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54F198953C38FD78E8A8E9F896BED362 /* StyleDictionaryIcons.h in Headers */ = {isa = PBXBuildFile; fileRef = CF23FB98339CE2FC3C5161B16D0DE538 /* StyleDictionaryIcons.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55A0A17DC269C4CAB7FBBF6066749DA1 /* UIButton+StyleDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = 36ECAF416E66271ECB9991FCCC71EFEB /* UIButton+StyleDictionary.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5BD7360A3263024F501550C4528E02A6 /* UIColor+StyleDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 99AA2FE1F988A9EACCC17CA265E0ADEC /* UIColor+StyleDictionary.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		61A9589021FA8A3F2A9C07AA7AD8869E /* StyleDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = F856055482CC8AB8A64137E114319008 /* StyleDictionary.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		620A2351A8099F537063F1CE4DE9D80A /* MaterialIcons-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5F5430DDCEB918C778F997C4A654FF02 /* MaterialIcons-Regular.ttf */; };
+		779BC20653E7D52F0D7CD94EFE274628 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC32878090C4B2B93381956161EC0930 /* Foundation.framework */; };
+		7D80691BE2B73BA1A2408B9E86E2A7AA /* StyleDictionary-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1965196E9FF35BE0F670EA5FE071F014 /* StyleDictionary-dummy.m */; };
+		873247CB38297A7185F90C8E54426827 /* StyleDictionary-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D4E1AE5D7957B5FBF5AF71BC81FDBEB8 /* StyleDictionary-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8C5F4CA506BC82A85A3B7A53B8F6FF39 /* StyleDictionarySize.h in Headers */ = {isa = PBXBuildFile; fileRef = EF95C59B892FAC0074FE816F7C92FF2A /* StyleDictionarySize.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A1C30055E3C6FFC379DB5CF60338DCB6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0203FCF2E38F9E0B8C4E69853543A3E /* QuartzCore.framework */; };
+		A340BDCA0D5ED620D9391FB3E271078A /* StyleDictionaryButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CAA7D712D84200BC7DBA8C8AD461DED /* StyleDictionaryButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B13F6F69470E7477C7CEF57D2EBDD5EA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC32878090C4B2B93381956161EC0930 /* Foundation.framework */; };
+		BA5D4FE89EBF9B21944C8A87BDFC8A8E /* StyleDictionaryColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EC02A1DE1CB70B6DFB47B10D05E46D8 /* StyleDictionaryColor.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		D1CD902F3E967626EA11D917A9D53BDD /* StyleDictionaryButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 200384DA248EC9A0414C6A0DD8E78E48 /* StyleDictionaryButton.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		DCD6DC9FF69081994C3FE1FD8A83AC8A /* MaterialIcons-Regular.eot in Resources */ = {isa = PBXBuildFile; fileRef = 0D37D98E1DB8630F34CE9BCDD2DAF100 /* MaterialIcons-Regular.eot */; };
+		E01EAE3063E420D456623C77202C4E95 /* MaterialIcons-Regular.woff in Resources */ = {isa = PBXBuildFile; fileRef = 9F570BA9A33753EC9E6B7A87BF9FB2A4 /* MaterialIcons-Regular.woff */; };
+		F62A52E2040875ECE18CB4BBB1ABCD04 /* UIButton+StyleDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A9D6A98985993EAA4ABCBC95C4FB64 /* UIButton+StyleDictionary.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		F688DC98E329AFCB618C99978E8B2F76 /* StyleDictionaryProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB1F38910339AF66219C0C6B55F2694 /* StyleDictionaryProperties.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1DC9A3E310EBA2F0CA6782D2CDB5B56E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1129B9460E672C57239A72FDA665C3D5;
+			remoteInfo = "StyleDictionary-StyleDictionary";
+		};
+		434C9CCBED13A7702653E6985CBAC05C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8B6B1059297A632FAA6ED85A8810F5D6;
+			remoteInfo = StyleDictionary;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		063072AC5071BD03E7A714BECC400DCA /* Pods-StyleDictionary_Demo-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-StyleDictionary_Demo-dummy.m"; sourceTree = "<group>"; };
+		0669921CA61B2EFDE150C4B87E870E6B /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0D37D5780C2A493344D0C33632CC047B /* StyleDictionaryColor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = StyleDictionaryColor.h; sourceTree = "<group>"; };
+		0D37D98E1DB8630F34CE9BCDD2DAF100 /* MaterialIcons-Regular.eot */ = {isa = PBXFileReference; includeInIndex = 1; path = "MaterialIcons-Regular.eot"; sourceTree = "<group>"; };
+		10B35BF3BAD95D52517090CF5288E2CF /* MaterialIcons-Regular.woff2 */ = {isa = PBXFileReference; includeInIndex = 1; path = "MaterialIcons-Regular.woff2"; sourceTree = "<group>"; };
+		184B84B8C62C84C1B371442C127066DD /* Pods-StyleDictionary_Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-StyleDictionary_Demo.debug.xcconfig"; sourceTree = "<group>"; };
+		1965196E9FF35BE0F670EA5FE071F014 /* StyleDictionary-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "StyleDictionary-dummy.m"; sourceTree = "<group>"; };
+		200384DA248EC9A0414C6A0DD8E78E48 /* StyleDictionaryButton.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = StyleDictionaryButton.m; sourceTree = "<group>"; };
+		29E95B09783A2A4C2612FBA9D8CB4CEF /* Pods-StyleDictionary_Demo-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-StyleDictionary_Demo-acknowledgements.markdown"; sourceTree = "<group>"; };
+		2DF40469EE1E2FD0B8506C2F81B55908 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		36ECAF416E66271ECB9991FCCC71EFEB /* UIButton+StyleDictionary.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIButton+StyleDictionary.h"; sourceTree = "<group>"; };
+		37DB2012D6B8D0527076C778CCE7A6CE /* StyleDictionary.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = StyleDictionary.modulemap; sourceTree = "<group>"; };
+		3805D13B740E2253CD96A6295220A064 /* StyleDictionary.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = StyleDictionary.m; sourceTree = "<group>"; };
+		3883D5BD0B3D5409C602997F82EE7C47 /* StyleDictionary.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = StyleDictionary.bundle; path = StyleDictionary.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		3CAA7D712D84200BC7DBA8C8AD461DED /* StyleDictionaryButton.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = StyleDictionaryButton.h; sourceTree = "<group>"; };
+		4D52D057E49E0B0530720BADFDFF6FF8 /* fonts */ = {isa = PBXFileReference; includeInIndex = 1; path = fonts; sourceTree = "<group>"; };
+		5BF675A168132FD52AED630F977FE906 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		5E25C19E68AC6139730B047B9BB24AA0 /* StyleDictionaryIcons.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = StyleDictionaryIcons.m; sourceTree = "<group>"; };
+		5E60AC63DBFAF12BE4079630689BE491 /* UIFont+MaterialIcons.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIFont+MaterialIcons.h"; sourceTree = "<group>"; };
+		5EC02A1DE1CB70B6DFB47B10D05E46D8 /* StyleDictionaryColor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = StyleDictionaryColor.m; sourceTree = "<group>"; };
+		5F5430DDCEB918C778F997C4A654FF02 /* MaterialIcons-Regular.ttf */ = {isa = PBXFileReference; includeInIndex = 1; path = "MaterialIcons-Regular.ttf"; sourceTree = "<group>"; };
+		63F3A707A37437C909552D6F8FC0556D /* Pods-StyleDictionary_Demo-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-StyleDictionary_Demo-frameworks.sh"; sourceTree = "<group>"; };
+		6490B5C18EAF0E167738811B04074758 /* Pods-StyleDictionary_Demo-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-StyleDictionary_Demo-resources.sh"; sourceTree = "<group>"; };
+		6A33EB9FA41D91FA7113FCD3274924FB /* Pods-StyleDictionary_Demo-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-StyleDictionary_Demo-acknowledgements.plist"; sourceTree = "<group>"; };
+		855F0B9B51EA8C5826CF9EDC33658E1F /* UIFont+MaterialIcons.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIFont+MaterialIcons.m"; sourceTree = "<group>"; };
+		86C5C0223B8AE3BF8882DBA1C416E001 /* Pods-StyleDictionary_Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-StyleDictionary_Demo.release.xcconfig"; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		99AA2FE1F988A9EACCC17CA265E0ADEC /* UIColor+StyleDictionary.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIColor+StyleDictionary.m"; sourceTree = "<group>"; };
+		9F570BA9A33753EC9E6B7A87BF9FB2A4 /* MaterialIcons-Regular.woff */ = {isa = PBXFileReference; includeInIndex = 1; path = "MaterialIcons-Regular.woff"; sourceTree = "<group>"; };
+		A109F23E30438881FE5738AEB4ABC074 /* StyleDictionaryProperties.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = StyleDictionaryProperties.h; sourceTree = "<group>"; };
+		AEB1F38910339AF66219C0C6B55F2694 /* StyleDictionaryProperties.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = StyleDictionaryProperties.m; sourceTree = "<group>"; };
+		B8F65C596E925474CACE720159A23A18 /* StyleDictionarySize.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = StyleDictionarySize.m; sourceTree = "<group>"; };
+		CF23FB98339CE2FC3C5161B16D0DE538 /* StyleDictionaryIcons.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = StyleDictionaryIcons.h; sourceTree = "<group>"; };
+		D0D50F5A24E5AF7234C7239E601C58F9 /* Pods-StyleDictionary_Demo.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-StyleDictionary_Demo.modulemap"; sourceTree = "<group>"; };
+		D4E1AE5D7957B5FBF5AF71BC81FDBEB8 /* StyleDictionary-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "StyleDictionary-umbrella.h"; sourceTree = "<group>"; };
+		D94B88CD67D4252DEC244269EADE2763 /* StyleDictionary-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "StyleDictionary-prefix.pch"; sourceTree = "<group>"; };
+		D94CFF561CCF3816632682FFECF336F1 /* Pods-StyleDictionary_Demo-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-StyleDictionary_Demo-umbrella.h"; sourceTree = "<group>"; };
+		D9A9D6A98985993EAA4ABCBC95C4FB64 /* UIButton+StyleDictionary.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIButton+StyleDictionary.m"; sourceTree = "<group>"; };
+		E0203FCF2E38F9E0B8C4E69853543A3E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		E296A23C4CFF959D40F88795F46EE8C8 /* StyleDictionary.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = StyleDictionary.xcconfig; sourceTree = "<group>"; };
+		E59F0407EB3E1CD6B4BA306FF06B269C /* UIColor+StyleDictionary.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIColor+StyleDictionary.h"; sourceTree = "<group>"; };
+		E6E8744332FE023C8DEC29E893F4A9BB /* ResourceBundle-StyleDictionary-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-StyleDictionary-Info.plist"; sourceTree = "<group>"; };
+		EC32878090C4B2B93381956161EC0930 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		EF95C59B892FAC0074FE816F7C92FF2A /* StyleDictionarySize.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = StyleDictionarySize.h; sourceTree = "<group>"; };
+		F55C3EFE26A84A2B2A1CFD9BFAA61E43 /* StyleDictionary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = StyleDictionary.framework; path = StyleDictionary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F59840AD7982F9773055B2DB0DB45169 /* Pods_StyleDictionary_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_StyleDictionary_Demo.framework; path = "Pods-StyleDictionary_Demo.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F856055482CC8AB8A64137E114319008 /* StyleDictionary.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = StyleDictionary.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		810ABA0203575FE0AEE6D37BDF45F082 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF17255CE69FA6B859B1B1155CB8369F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				779BC20653E7D52F0D7CD94EFE274628 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F68CB81C60FEC9D9950CD964FAF6BAC7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B13F6F69470E7477C7CEF57D2EBDD5EA /* Foundation.framework in Frameworks */,
+				A1C30055E3C6FFC379DB5CF60338DCB6 /* QuartzCore.framework in Frameworks */,
+				01AB48AC9642140FC816BA4B8BE41F30 /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		122DA2E5084A4393C29BE363C764795C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E5E9260013FA223D81B907D9285F6EA1 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1F8F590008BFE0EA5F7C1AB45140E075 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				FF4136FE2F730AD09397C4EB0C30C297 /* assets */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		341BC9A8E086A241E371FC53E0CACD07 /* StyleDictionary */ = {
+			isa = PBXGroup;
+			children = (
+				3C84A59F311874E52E426509EACE004B /* ios */,
+				1F8F590008BFE0EA5F7C1AB45140E075 /* Resources */,
+				A5C64C79CF353408126E8E1BD8E4F46F /* Support Files */,
+			);
+			name = StyleDictionary;
+			path = ../../..;
+			sourceTree = "<group>";
+		};
+		3C84A59F311874E52E426509EACE004B /* ios */ = {
+			isa = PBXGroup;
+			children = (
+				4000471D905347C4A83690E870F109AB /* Classes */,
+			);
+			name = ios;
+			path = ios;
+			sourceTree = "<group>";
+		};
+		4000471D905347C4A83690E870F109AB /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				F856055482CC8AB8A64137E114319008 /* StyleDictionary.h */,
+				3805D13B740E2253CD96A6295220A064 /* StyleDictionary.m */,
+				3CAA7D712D84200BC7DBA8C8AD461DED /* StyleDictionaryButton.h */,
+				200384DA248EC9A0414C6A0DD8E78E48 /* StyleDictionaryButton.m */,
+				36ECAF416E66271ECB9991FCCC71EFEB /* UIButton+StyleDictionary.h */,
+				D9A9D6A98985993EAA4ABCBC95C4FB64 /* UIButton+StyleDictionary.m */,
+				E59F0407EB3E1CD6B4BA306FF06B269C /* UIColor+StyleDictionary.h */,
+				99AA2FE1F988A9EACCC17CA265E0ADEC /* UIColor+StyleDictionary.m */,
+				5E60AC63DBFAF12BE4079630689BE491 /* UIFont+MaterialIcons.h */,
+				855F0B9B51EA8C5826CF9EDC33658E1F /* UIFont+MaterialIcons.m */,
+				95A4168CC11DF01395986BDBBC19651A /* Generated */,
+			);
+			name = Classes;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		5E4FF01D4E6483A488DABAD3D91EF228 /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				341BC9A8E086A241E371FC53E0CACD07 /* StyleDictionary */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
+				5E4FF01D4E6483A488DABAD3D91EF228 /* Development Pods */,
+				122DA2E5084A4393C29BE363C764795C /* Frameworks */,
+				AE4AD2B4631BD9F17F8D9DC3B53487CC /* Products */,
+				B964AB0FFA46A1E2925BE92242D282DC /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		95A4168CC11DF01395986BDBBC19651A /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				0D37D5780C2A493344D0C33632CC047B /* StyleDictionaryColor.h */,
+				5EC02A1DE1CB70B6DFB47B10D05E46D8 /* StyleDictionaryColor.m */,
+				CF23FB98339CE2FC3C5161B16D0DE538 /* StyleDictionaryIcons.h */,
+				5E25C19E68AC6139730B047B9BB24AA0 /* StyleDictionaryIcons.m */,
+				A109F23E30438881FE5738AEB4ABC074 /* StyleDictionaryProperties.h */,
+				AEB1F38910339AF66219C0C6B55F2694 /* StyleDictionaryProperties.m */,
+				EF95C59B892FAC0074FE816F7C92FF2A /* StyleDictionarySize.h */,
+				B8F65C596E925474CACE720159A23A18 /* StyleDictionarySize.m */,
+			);
+			name = Generated;
+			path = Generated;
+			sourceTree = "<group>";
+		};
+		A5C64C79CF353408126E8E1BD8E4F46F /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				0669921CA61B2EFDE150C4B87E870E6B /* Info.plist */,
+				E6E8744332FE023C8DEC29E893F4A9BB /* ResourceBundle-StyleDictionary-Info.plist */,
+				37DB2012D6B8D0527076C778CCE7A6CE /* StyleDictionary.modulemap */,
+				E296A23C4CFF959D40F88795F46EE8C8 /* StyleDictionary.xcconfig */,
+				1965196E9FF35BE0F670EA5FE071F014 /* StyleDictionary-dummy.m */,
+				D94B88CD67D4252DEC244269EADE2763 /* StyleDictionary-prefix.pch */,
+				D4E1AE5D7957B5FBF5AF71BC81FDBEB8 /* StyleDictionary-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "ios/Demo/Pods/Target Support Files/StyleDictionary";
+			sourceTree = "<group>";
+		};
+		AE4AD2B4631BD9F17F8D9DC3B53487CC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F59840AD7982F9773055B2DB0DB45169 /* Pods_StyleDictionary_Demo.framework */,
+				3883D5BD0B3D5409C602997F82EE7C47 /* StyleDictionary.bundle */,
+				F55C3EFE26A84A2B2A1CFD9BFAA61E43 /* StyleDictionary.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B964AB0FFA46A1E2925BE92242D282DC /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				FF8C74E4BFC8CEB872A2D13FADD3CAE3 /* Pods-StyleDictionary_Demo */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		E24EB7977804A2AF2614786E462BF19D /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				0D37D98E1DB8630F34CE9BCDD2DAF100 /* MaterialIcons-Regular.eot */,
+				5F5430DDCEB918C778F997C4A654FF02 /* MaterialIcons-Regular.ttf */,
+				9F570BA9A33753EC9E6B7A87BF9FB2A4 /* MaterialIcons-Regular.woff */,
+				10B35BF3BAD95D52517090CF5288E2CF /* MaterialIcons-Regular.woff2 */,
+			);
+			name = fonts;
+			path = fonts;
+			sourceTree = "<group>";
+		};
+		E5E9260013FA223D81B907D9285F6EA1 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				EC32878090C4B2B93381956161EC0930 /* Foundation.framework */,
+				E0203FCF2E38F9E0B8C4E69853543A3E /* QuartzCore.framework */,
+				5BF675A168132FD52AED630F977FE906 /* UIKit.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		FF4136FE2F730AD09397C4EB0C30C297 /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				4D52D057E49E0B0530720BADFDFF6FF8 /* fonts */,
+				E24EB7977804A2AF2614786E462BF19D /* fonts */,
+			);
+			name = assets;
+			path = assets;
+			sourceTree = "<group>";
+		};
+		FF8C74E4BFC8CEB872A2D13FADD3CAE3 /* Pods-StyleDictionary_Demo */ = {
+			isa = PBXGroup;
+			children = (
+				2DF40469EE1E2FD0B8506C2F81B55908 /* Info.plist */,
+				D0D50F5A24E5AF7234C7239E601C58F9 /* Pods-StyleDictionary_Demo.modulemap */,
+				29E95B09783A2A4C2612FBA9D8CB4CEF /* Pods-StyleDictionary_Demo-acknowledgements.markdown */,
+				6A33EB9FA41D91FA7113FCD3274924FB /* Pods-StyleDictionary_Demo-acknowledgements.plist */,
+				063072AC5071BD03E7A714BECC400DCA /* Pods-StyleDictionary_Demo-dummy.m */,
+				63F3A707A37437C909552D6F8FC0556D /* Pods-StyleDictionary_Demo-frameworks.sh */,
+				6490B5C18EAF0E167738811B04074758 /* Pods-StyleDictionary_Demo-resources.sh */,
+				D94CFF561CCF3816632682FFECF336F1 /* Pods-StyleDictionary_Demo-umbrella.h */,
+				184B84B8C62C84C1B371442C127066DD /* Pods-StyleDictionary_Demo.debug.xcconfig */,
+				86C5C0223B8AE3BF8882DBA1C416E001 /* Pods-StyleDictionary_Demo.release.xcconfig */,
+			);
+			name = "Pods-StyleDictionary_Demo";
+			path = "Target Support Files/Pods-StyleDictionary_Demo";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		45B2773D1399256FA796BE96E9ECE7A0 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				518DBE5E1C34B2B133A9CE17F755D6FE /* Pods-StyleDictionary_Demo-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA47D3F4D2375DC7AAD99ACF2F0F97AC /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				873247CB38297A7185F90C8E54426827 /* StyleDictionary-umbrella.h in Headers */,
+				61A9589021FA8A3F2A9C07AA7AD8869E /* StyleDictionary.h in Headers */,
+				A340BDCA0D5ED620D9391FB3E271078A /* StyleDictionaryButton.h in Headers */,
+				1F604CE99B27BA46E51DE7A92D74DD47 /* StyleDictionaryColor.h in Headers */,
+				54F198953C38FD78E8A8E9F896BED362 /* StyleDictionaryIcons.h in Headers */,
+				2B94D9B322714B99BACF7EACD43CE429 /* StyleDictionaryProperties.h in Headers */,
+				8C5F4CA506BC82A85A3B7A53B8F6FF39 /* StyleDictionarySize.h in Headers */,
+				55A0A17DC269C4CAB7FBBF6066749DA1 /* UIButton+StyleDictionary.h in Headers */,
+				0A0692B7ECB212F139805C1CEABE0C99 /* UIColor+StyleDictionary.h in Headers */,
+				231578BB862B09A3037A65AF695FA215 /* UIFont+MaterialIcons.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		1129B9460E672C57239A72FDA665C3D5 /* StyleDictionary-StyleDictionary */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 46C2284476DC9313066E7161335D9862 /* Build configuration list for PBXNativeTarget "StyleDictionary-StyleDictionary" */;
+			buildPhases = (
+				F2447A611532809182390132E3DCD8E9 /* Sources */,
+				810ABA0203575FE0AEE6D37BDF45F082 /* Frameworks */,
+				9FB4F9F726362DB3E1A9C026FB97516E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "StyleDictionary-StyleDictionary";
+			productName = "StyleDictionary-StyleDictionary";
+			productReference = 3883D5BD0B3D5409C602997F82EE7C47 /* StyleDictionary.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		282FEBE1AD3C25A7B3573F330BEC9067 /* Pods-StyleDictionary_Demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AAC4C4A024862328750BEB4BCFD3D8E1 /* Build configuration list for PBXNativeTarget "Pods-StyleDictionary_Demo" */;
+			buildPhases = (
+				C61709224C66CB5B17581792492DC319 /* Sources */,
+				BF17255CE69FA6B859B1B1155CB8369F /* Frameworks */,
+				45B2773D1399256FA796BE96E9ECE7A0 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2C1EDEE896D7AC66345FF02BADE00C48 /* PBXTargetDependency */,
+			);
+			name = "Pods-StyleDictionary_Demo";
+			productName = "Pods-StyleDictionary_Demo";
+			productReference = F59840AD7982F9773055B2DB0DB45169 /* Pods_StyleDictionary_Demo.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		8B6B1059297A632FAA6ED85A8810F5D6 /* StyleDictionary */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 70F0DD3EF0F63290ED7F153EC7569D89 /* Build configuration list for PBXNativeTarget "StyleDictionary" */;
+			buildPhases = (
+				32CA4E1AAE00E18299C2687820CE30BC /* Sources */,
+				F68CB81C60FEC9D9950CD964FAF6BAC7 /* Frameworks */,
+				6B9E2C365D069CA9A3658BA66C2E3004 /* Resources */,
+				FA47D3F4D2375DC7AAD99ACF2F0F97AC /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1D1BFA27E704FDC03F25540A593E6D6C /* PBXTargetDependency */,
+			);
+			name = StyleDictionary;
+			productName = StyleDictionary;
+			productReference = F55C3EFE26A84A2B2A1CFD9BFAA61E43 /* StyleDictionary.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0700;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = AE4AD2B4631BD9F17F8D9DC3B53487CC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				282FEBE1AD3C25A7B3573F330BEC9067 /* Pods-StyleDictionary_Demo */,
+				8B6B1059297A632FAA6ED85A8810F5D6 /* StyleDictionary */,
+				1129B9460E672C57239A72FDA665C3D5 /* StyleDictionary-StyleDictionary */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6B9E2C365D069CA9A3658BA66C2E3004 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2917CB7D265A84CC8D2CAA00057451A8 /* StyleDictionary.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9FB4F9F726362DB3E1A9C026FB97516E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				037F519289CC03CA32D65DA187444DBB /* fonts in Resources */,
+				DCD6DC9FF69081994C3FE1FD8A83AC8A /* MaterialIcons-Regular.eot in Resources */,
+				620A2351A8099F537063F1CE4DE9D80A /* MaterialIcons-Regular.ttf in Resources */,
+				E01EAE3063E420D456623C77202C4E95 /* MaterialIcons-Regular.woff in Resources */,
+				10BCB57A9D6FA5E944E9931C23AB7032 /* MaterialIcons-Regular.woff2 in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		32CA4E1AAE00E18299C2687820CE30BC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7D80691BE2B73BA1A2408B9E86E2A7AA /* StyleDictionary-dummy.m in Sources */,
+				077A5EEC52C82C121560096243216B61 /* StyleDictionary.m in Sources */,
+				D1CD902F3E967626EA11D917A9D53BDD /* StyleDictionaryButton.m in Sources */,
+				BA5D4FE89EBF9B21944C8A87BDFC8A8E /* StyleDictionaryColor.m in Sources */,
+				35168638F4FD0B43978C6BDEA605C502 /* StyleDictionaryIcons.m in Sources */,
+				F688DC98E329AFCB618C99978E8B2F76 /* StyleDictionaryProperties.m in Sources */,
+				18A7A7B32B49EA7CD8C1CEA9C30B129F /* StyleDictionarySize.m in Sources */,
+				F62A52E2040875ECE18CB4BBB1ABCD04 /* UIButton+StyleDictionary.m in Sources */,
+				5BD7360A3263024F501550C4528E02A6 /* UIColor+StyleDictionary.m in Sources */,
+				193BDE946F141ECCA6191A87F1CD5B73 /* UIFont+MaterialIcons.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C61709224C66CB5B17581792492DC319 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1096056442F3F751D94AD5442D73C3B5 /* Pods-StyleDictionary_Demo-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2447A611532809182390132E3DCD8E9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1D1BFA27E704FDC03F25540A593E6D6C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "StyleDictionary-StyleDictionary";
+			target = 1129B9460E672C57239A72FDA665C3D5 /* StyleDictionary-StyleDictionary */;
+			targetProxy = 1DC9A3E310EBA2F0CA6782D2CDB5B56E /* PBXContainerItemProxy */;
+		};
+		2C1EDEE896D7AC66345FF02BADE00C48 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = StyleDictionary;
+			target = 8B6B1059297A632FAA6ED85A8810F5D6 /* StyleDictionary */;
+			targetProxy = 434C9CCBED13A7702653E6985CBAC05C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1A47DB2A10DC47B8CA265B7B8997580D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E296A23C4CFF959D40F88795F46EE8C8 /* StyleDictionary.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/StyleDictionary/StyleDictionary-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/StyleDictionary/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/StyleDictionary/StyleDictionary.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = StyleDictionary;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		397684C7B850F4DA51FD606D4AFEC586 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E296A23C4CFF959D40F88795F46EE8C8 /* StyleDictionary.xcconfig */;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/StyleDictionary";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/StyleDictionary/ResourceBundle-StyleDictionary-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_NAME = StyleDictionary;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		3D40D8C6D6A8E517CFF3BE4E633585CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 184B84B8C62C84C1B371442C127066DD /* Pods-StyleDictionary_Demo.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-StyleDictionary_Demo/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-StyleDictionary_Demo/Pods-StyleDictionary_Demo.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_StyleDictionary_Demo;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		59B62D620C4645BAC3E43A421D773BB3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 86C5C0223B8AE3BF8882DBA1C416E001 /* Pods-StyleDictionary_Demo.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-StyleDictionary_Demo/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-StyleDictionary_Demo/Pods-StyleDictionary_Demo.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_StyleDictionary_Demo;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		5A016800997574D3F5340DA2F1B7B1BE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E296A23C4CFF959D40F88795F46EE8C8 /* StyleDictionary.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/StyleDictionary/StyleDictionary-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/StyleDictionary/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/StyleDictionary/StyleDictionary.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = StyleDictionary;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		8DED8AD26D381A6ACFF202E5217EC498 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9E1E4E48AF2EAB23169E611BF694090A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		B954529A34A2A27BDB972EB508822DEC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E296A23C4CFF959D40F88795F46EE8C8 /* StyleDictionary.xcconfig */;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/StyleDictionary";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/StyleDictionary/ResourceBundle-StyleDictionary-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_NAME = StyleDictionary;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9E1E4E48AF2EAB23169E611BF694090A /* Debug */,
+				8DED8AD26D381A6ACFF202E5217EC498 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		46C2284476DC9313066E7161335D9862 /* Build configuration list for PBXNativeTarget "StyleDictionary-StyleDictionary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B954529A34A2A27BDB972EB508822DEC /* Debug */,
+				397684C7B850F4DA51FD606D4AFEC586 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		70F0DD3EF0F63290ED7F153EC7569D89 /* Build configuration list for PBXNativeTarget "StyleDictionary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5A016800997574D3F5340DA2F1B7B1BE /* Debug */,
+				1A47DB2A10DC47B8CA265B7B8997580D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AAC4C4A024862328750BEB4BCFD3D8E1 /* Build configuration list for PBXNativeTarget "Pods-StyleDictionary_Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3D40D8C6D6A8E517CFF3BE4E633585CA /* Debug */,
+				59B62D620C4645BAC3E43A421D773BB3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}

@@ -1,0 +1,6 @@
+framework module StyleDictionary {
+  umbrella header "StyleDictionary-umbrella.h"
+
+  export *
+  module * { export * }
+}

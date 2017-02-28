@@ -1,8 +1,0 @@
-//  Do not edit directly
-//  Generated on <%= new Date() %>
-
-#import <UIKit/UIKit.h>
-
-<% _.each(allProperties, function(prop) {
-  %>#define <%= prop.name %> <%= prop.value %>
-<% }); %>
