@@ -88,47 +88,7 @@
         }
       ]
     },
-    "reactNative": {
-      "transforms": ["attribute/cti","name/ti/constant","size/px"],
-      "buildPath": "react-native/StyleDictionaryExample/styleDictionary/",
-      "files": [
-        {
-          "destination": "colors.js",
-          "format": "javascript/es6",
-          "filter": {
-            "attributes": {
-              "category": "color"
-            }
-          }
-        }
-      ]
-    },
-    "react": {
-      "transforms": ["attribute/cti", "name/ti/constant", "color/hex"],
-      "buildPath": "style-guide/src/styleDictionary/",
-      "files": [{
-        "destination": "colors.js",
-        "format": "javascript/es6",
-        "filter": {
-          "attributes": { "category": "color" }
-        }
-      },{
-        "destination": "sizes.js",
-        "format": "javascript/es6",
-        "filter": {
-          "attributes": { "category": "size" }
-        }
-      }]
-    },
-    "scss": {
-      "transformGroup": "scss",
-      "buildPath": "style-guide/src/styleDictionary/",
-      "files": [{
-        "destination": "variables.scss",
-        "format": "scss/variables"
-      }],
-      "actions": ["copy_assets"]
-    },
+
     "staticStyleGuideHTML":{
       "buildPath": "static-style-guide/public/",
       "files": [
@@ -148,7 +108,7 @@
       }]
     },
     "staticStyleGuideCSS": {
-      "transforms": ["attribute/cti", "name/cti/kebab", "time/seconds", "content/icon", "size/rem", "color/hex"],
+      "transformGroup": "scss",
       "buildPath": "static-style-guide/public/css/",
       "files": [{
         "destination": "variables.css",

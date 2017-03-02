@@ -1,11 +1,11 @@
 {
-  "name": "style-dictionary-webpack-example",
+  "name": "style-dictionary-example-react",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "stats": "webpack --profile --json > stats.json",
-    "style-dictionary": "cd .. && style-dictionary --platform react,scss",
+    "style-dictionary": "cd .. && style-dictionary build",
     "start": "npm run style-dictionary && webpack-dev-server",
     "build": "npm run style-dictionary && webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
