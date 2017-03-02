@@ -101,7 +101,7 @@
 
     "android-asset": {
       "transformGroup": "android",
-      "buildPath": "android/StyleDictionaryExample/app/src/main/",
+      "buildPath": "android/StyleDictionaryExample/styledictionary/src/main/",
       "files": [{
         "destination": "assets/data/properties.json",
         "format": "json"

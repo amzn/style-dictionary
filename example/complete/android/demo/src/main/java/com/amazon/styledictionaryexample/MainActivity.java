@@ -14,6 +14,7 @@
 package com.amazon.styledictionaryexample;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.widget.Button;
 
@@ -22,15 +23,14 @@ import com.amazon.styledictionaryexample.icon.IconListActivity;
 import com.amazon.styledictionaryexample.property.PropertiesActivity;
 import com.amazon.styledictionaryexample.util.StyleDictionaryHelper;
 
-import org.json.JSONObject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
-    JSONObject json;
+    private Typeface iconFont;
+
     @BindView(R.id.activity_main_properties_button) Button propertiesButton;
     @BindView(R.id.activity_main_colors_button) Button colorsButton;
 

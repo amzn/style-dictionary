@@ -44,9 +44,9 @@
 
 <% function buildDictionary(props, indent) {
   indent = indent || '  ';
+  var to_ret = '@{\n';
   if (props.hasOwnProperty('value')) {
-    var to_ret = '@{\n';
-    var value = props.attributes.category === 'size' ? '@' + props.value : props.value;
+    var value = props.attributes.category === 'size' || props.attributes.category === 'time' ? '@' + props.value : props.value;
     to_ret += indent + '@"value": ' + value + ',\n';
     to_ret += indent + '@"name": @"' + props.name + '",\n';
 
@@ -59,7 +59,6 @@
     // remove last comma
     return to_ret.slice(0, -2) + '\n' + indent + '}';
   } else {
-    var to_ret = '@{\n';
     for(var name in props) {
       to_ret += indent + '@"' + name + '": ' + buildDictionary(props[name], indent + '  ') + ',\n';
     }

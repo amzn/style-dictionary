@@ -1,0 +1,12 @@
+# Style Dictionary
+styledictionary/src/main/res/values/style_dictionary_*
+styledictionary/src/main/assets/
+
+*.iml
+.gradle
+local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+build
+captures
