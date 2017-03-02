@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Do not edit directly
+  Generated on Sun Feb 26 2017 16:05:46 GMT-0800 (PST)
+-->
+
+<resources>
+  <dimen name="size_font_tiny">12.00sp</dimen>
+  <dimen name="size_font_small">14.00sp</dimen>
+  <dimen name="size_font_medium">16.00sp</dimen>
+  <dimen name="size_font_large">20.00sp</dimen>
+  <dimen name="size_font_xl">24.00sp</dimen>
+  <dimen name="size_font_xxl">32.00sp</dimen>
+  <dimen name="size_font_xxxl">48.00sp</dimen>
+  <dimen name="size_font_base">16.00sp</dimen>
+  
+</resources>

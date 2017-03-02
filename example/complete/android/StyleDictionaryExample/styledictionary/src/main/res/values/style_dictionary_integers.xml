@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Do not edit directly
+  Generated on Sun Feb 26 2017 16:05:46 GMT-0800 (PST)
+-->
+
+<resources>
+  <integer name="time_transition_short">200</integer>
+  <integer name="time_transition_base">400</integer>
+  <integer name="time_transition_long">600</integer>
+  <integer name="time_transition_xl">1000</integer>
+  <integer name="time_delay_short">50</integer>
+  <integer name="time_delay_base">100</integer>
+  <integer name="time_delay_long">200</integer>
+  <integer name="time_duration_short">2000</integer>
+  <integer name="time_duration_base">4000</integer>
+  <integer name="time_duration_long">6000</integer>
+  
+</resources>

@@ -15,13 +15,13 @@
       "button": {
         "primary": {
           "base":     { "value": "{color.brand.primary.base.value}" },
-          "disabled": { "value": "{color.brand.primary.lighter.value}" },
+          "disabled": { "value": "{color.brand.primary.light.value}" },
           "active":   { "value": "{color.brand.primary.dark.value}" }
         },
 
         "secondary": {
-          "base":     { "value": "{color.background.base.value}" },
-          "disabled": { "value": "{color.background.alt.value}" },
+          "base":     { "value": "{color.brand.secondary.base.value}" },
+          "disabled": { "value": "{color.brand.secondary.light.value}" },
           "active":   { "value": "{color.brand.secondary.dark.value}" }
         }
       }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.RecyclerView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/base_color_list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/size_padding_medium"
+    android:paddingRight="@dimen/size_padding_medium"
+    android:paddingTop="0dp"
+    android:paddingBottom="@dimen/size_padding_medium"
+    app:layoutManager="LinearLayoutManager"
+    tools:context="com.amazon.styledictionaryexample.color.BaseColorActivity"
+    tools:listitem="@layout/base_color_list_content" />

@@ -1,0 +1,22 @@
+{
+   "time": {
+     "transition": {
+       "short": { "value":"200" },
+       "base":  { "value":"400" },
+       "long":  { "value":"600" },
+       "xl":    { "value":"1000" }
+     },
+
+     "delay": {
+       "short": { "value":"50" },
+       "base":  { "value":"100" },
+       "long":  { "value":"200" }
+     },
+
+     "duration": {
+       "short": { "value":"2000" },
+       "base":  { "value":"4000" },
+       "long":  { "value":"6000" }
+     }
+   }
+ }

@@ -30,7 +30,6 @@ program
   .option('-p, --platform [platform]', 'only build specific platforms. Must be defined in the config', collect, [])
   .action(styleDictionaryBuild);
 
-
 program
   .command('init <type>')
   .description('Generates a starter style dictionary')

@@ -1,0 +1,50 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="android:Theme.Material.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/color_brand_primary_base</item>
+        <item name="colorPrimaryDark">@color/color_brand_primary_dark</item>
+        <item name="colorAccent">@color/color_brand_secondary_base</item>
+        <item name="android:navigationBarColor">@color/color_background_inverse</item>
+
+        <!-- enable window content transitions -->
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowContentTransitions">true</item>
+
+        <!-- specify enter and exit transitions -->
+        <item name="android:windowEnterTransition">@android:transition/slide_right</item>
+        <item name="android:windowExitTransition">@android:transition/slide_left</item>
+
+        <item name="android:windowAllowEnterTransitionOverlap">true</item>
+        <item name="android:windowAllowReturnTransitionOverlap">true</item>
+        <item name="android:colorPrimary">@color/color_brand_primary_base</item>
+        <item name="android:colorPrimaryDark">@color/color_brand_primary_dark</item>
+        <item name="android:colorBackground">@color/color_background_base</item>
+        <item name="android:colorForeground">@color/color_font_inverse_base</item>
+        <item name="android:colorAccent">@color/color_brand_secondary_base</item>
+        <!--<item name="android:colorButtonNormal">@color/color_background_button_primary_base</item>-->
+
+        <item name="android:buttonStyle">@style/ButtonAppTheme</item>
+    </style>
+
+
+    <style name="AppTheme.NoActionBar" parent="AppTheme">
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:actionBarStyle">@style/TransparentActionBar</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
+    <style name="ButtonAppTheme" parent="@android:style/Widget.Material.Button">
+        <item name="android:background">@color/color_background_button_primary_base</item>
+        <item name="android:textColor">@color/color_font_button_primary</item>
+        <item name="android:textSize">@dimen/size_font_large</item>
+        <item name="android:padding">@dimen/size_padding_base</item>
+        <item name="android:letterSpacing">0.1</item>
+    </style>
+
+    <style name="TransparentActionBar" parent="@android:style/Widget.Material.Light.ActionBar.Solid">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+</resources>
