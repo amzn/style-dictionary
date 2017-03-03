@@ -80,7 +80,7 @@
 
     "android": {
       "transformGroup": "android",
-      "buildPath": "android/StyleDictionaryExample/styledictionary/src/main/res/values/",
+      "buildPath": "android/styledictionary/src/main/res/values/",
       "files": [{
         "destination": "style_dictionary_colors.xml",
         "template": "android/colors"
@@ -101,7 +101,7 @@
 
     "android-asset": {
       "transformGroup": "android",
-      "buildPath": "android/StyleDictionaryExample/styledictionary/src/main/",
+      "buildPath": "android/styledictionary/src/main/",
       "files": [{
         "destination": "assets/data/properties.json",
         "format": "json"
