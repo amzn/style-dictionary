@@ -29,7 +29,7 @@
     [super viewDidLoad];
     [self.navigationItem setTitle:@"Background Colors"];
     
-    self.allColors = [StyleDictionaryColor values];
+    self.allColors = [[[StyleDictionaryProperties properties] valueForKeyPath:@"color.background"] allValues];
     NSMutableArray *backgroundColors = [[NSMutableArray alloc] init];
     
     for (int i=0; i<[self.allColors count]; i++) {

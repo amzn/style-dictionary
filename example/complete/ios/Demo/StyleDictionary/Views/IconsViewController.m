@@ -28,7 +28,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableData = [StyleDictionaryIcons values];
+    NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"name"
+                                                                  ascending:YES
+                                                                   selector:@selector(localizedStandardCompare:)];
+    self.tableData = [[[[StyleDictionaryProperties properties] valueForKeyPath:@"content.icon"] allValues] sortedArrayUsingDescriptors:@[descriptor]];
     
     // init table view
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];

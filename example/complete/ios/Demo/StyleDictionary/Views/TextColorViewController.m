@@ -29,18 +29,14 @@
     [super viewDidLoad];
     [self.navigationItem setTitle:@"Text Colors"];
     
-    self.allColors = [StyleDictionaryColor values];
+    self.allColors = [[[StyleDictionaryProperties properties] valueForKeyPath:@"color.font"] allValues];
 
     NSMutableArray *baseFontColors = [[NSMutableArray alloc] init];
-    NSMutableArray *inverseFontColors = [[NSMutableArray alloc] init];
+    NSArray *inverseFontColors = [[[StyleDictionaryProperties properties] valueForKeyPath:@"color.font.inverse"] allValues];
     
     for (int i=0; i<[self.allColors count]; i++) {
-        if ([[self.allColors[i] valueForKey:@"type"] isEqualToString:@"font"]) {
-            if ([[self.allColors[i] valueForKey:@"item"] isEqualToString:@"inverse"]) {
-                [inverseFontColors addObject:self.allColors[i]];
-            } else if ([self.allColors[i] valueForKey:@"subitem"] == nil) {
-                [baseFontColors addObject:self.allColors[i]];
-            }
+        if ([self.allColors[i] valueForKey:@"subitem"] == nil) {
+            [baseFontColors addObject:self.allColors[i]];
         }
     }
 

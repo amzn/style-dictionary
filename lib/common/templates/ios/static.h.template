@@ -1,3 +1,4 @@
+<%
 //
 // Copyright 2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 //
@@ -12,6 +13,7 @@
 // express or implied. See the License for the specific language governing
 // permissions and limitations under the License.
 //
+%>
 // <%= this.destination %>
 //
 // Do not edit directly, generated on <%= new Date() %>
@@ -23,7 +25,3 @@
 
 <% _.each(props, function(prop) {  %>
 extern <%= type %> const <%= prop.name %>;<% }); %>
-
-@interface <%= this.className %> : NSObject
-+ (NSArray *)values;
-@end

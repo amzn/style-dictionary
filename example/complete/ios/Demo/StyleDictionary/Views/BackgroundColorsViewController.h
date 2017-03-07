@@ -17,6 +17,7 @@
 
 #import <UIKit/UIKit.h>
 #import <StyleDictionary/StyleDictionary.h>
+#import <StyleDictionary/StyleDictionaryProperties.h>
 #import "CardViewCell.h"
 #import "ColorDetailViewController.h"
 
