@@ -1,7 +1,7 @@
 {
   "name": "style-dictionary",
   "version": "2.0.0",
-  "description": "A node module to build a style dictionary package. A style dictionary consists of JSON files with the definitions of style properties like colors, typography, sizes, icons, etc. The style dictionary package also consists of a config.json which explains how to transform values (px -> pt, hex -> rgb, etc.) as well as what files to build.",
+  "description": "Style once, use everywhere. A build system for creating cross-platform styles.",
   "keywords": [
     "style dictionary",
     "style",

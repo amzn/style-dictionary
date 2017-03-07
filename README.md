@@ -1,188 +1,195 @@
-# TODO: StyleDictionary logo
+# Style Dictionary
 
-StyleDictionary is a system that provides you with simple end-to-end reliability and consistency of your design across platforms.  With a single place to create and edit your styles, a single command exports these rules to all the places you need them - iOS, Android, HTML, style documentation, etc.  It is implemented to run via Node.js and is available via npm.
+> *Style once, use everywhere.*
 
-
-# What problem does StyleDictionary solve?
+A Style Dictionary is a system that allows you to define styles once, in a way for any platform or language to consume. A single place to create and edit your styles, and a single command exports these rules to all the places you need them - iOS, Android, CSS, JS, HTML, sketch files, style documentation, etc. It is available as a CLI through npm, but can also be used like any normal node module if you want to extend its functionality.
 
 When you are managing user experiences, it can be quite challenging to keep styles consistent and synchronized across multiple development platforms and devices.  At the same time, designers, developers, PMs and others must be able to have consistent and up-to-date style documentation to enable effective work and communication.  Even then, mistakes inevitably happen and the design may not be implemented accurately.  StyleDictionary solves this by automatically generating style definitions across all platforms from a single source - removing roadblocks, errors, and inefficiencies across your workflow.
 
-## Write once, use everywhere.
 
-A style dictionary is a toolkit for everyone in an organization to use. A designers can use a sketch plugin, a PM can use a style guide website, a web developer can use sass files, an iOS developer can use a static library, etc. The style dictionary is the single source of truth.
-
-
-# Demo
-
-TODO: insert video
-
-
-# Installing StyleDictionary for use from the CLI
-
-Note that you must have node (and npm) installed.
-
-In the terminal, switch to the root level of the style-dictionary project, and execute the following from the command line:
-
-```
-npm install -g style-dictionary
-```
+## Contents
+* [Installation](#installation)
+* [Usage](#usage)
+* [Example](#example)
+* [Quick Start](#quick-start)
+* [Style Properties](#style-properties)
+* [Extending](#extending)
+* [Contributing](#contributing)
+* [License](#license)
 
 
-# Tutorial
+## Installation
+*Note that you must have node (and npm) installed.*
 
-Now that you have StyleDictionary installed, lets use it. This package comes with some examples to start you off. 
- ```
- mkdir MyStyleDictionary
- cd MyStyleDictionary
- style-dictionary init complete
- ```
- 
-Now you have an example project set up. You can make changes to the style dictionary and rebuild the project by running:
-
-```
-style-dictionary build
+If you want to use the CLI, you can install it globally via npm:
+```bash
+$ npm install -g style-dictionary
 ```
 
-You should see this output:
-
-```
-Reading config file from ./config.json
-Building your style dictionary
+Or you can install it like a normal npm dependency. This is a build tool so you are most likely going to want to save it as a dev dependency:
+```bash
+$ npm install -D style-dictionary
 ```
 
-Doesn't look like much happened, but your styles have been built and incorporated into the projects inside that directory.  Lets take a look.  Open the "style-guide" subdirectory and execute this command:
 
+## Usage
+### CLI
+```bash
+$ style-dictionary build
 ```
-npm start-website
+Call this in the root directory of your project. The only thing needed is a `config.json` file. There are also arguments:
+| Flag | Short Flag | Description |
+| --- | --- | --- |
+| --config \[path\] | -h | et the config file to use. Must be a .json file |
+| --platform \[platform\] | -p | Only build a specific platform defined in the config file. |
+| --help | -h | Display help content |
+| --version | -v | Display the version |
+
+### Node
+You can also use the style dictionary build system in node if you want to [extend](#extend) the functionality or use it in another build system like Grunt or Gulp.
+```javascript
+const StyleDictionary = require('style-dictionary').extend('config.json');
+
+StyleDictionary.buildAllPlatforms();
 ```
 
-Now go to this address in your browser:
+The `.extend()` method is an overloaded method that can also take an object with the configuration in the same format as a config.json file.
+```javascript
+const StyleDictionary = require('style-dictionary').extend({
+  source: ['properties/**/*.json'],
+  platforms: {
+    scss: {
+      transformGroup: 'scss',
+      buildPath: 'build/',
+      files: [{
+        destination: 'variables.scss',
+        format: 'scss/variables'
+      }]
+    }
+    // ...
+  }
+});
 
+StyleDictionary.buildAllPlatforms();
 ```
-http://localhost:8080/index.html
+
+## Example
+[Take a look at some of our examples](example/)
+
+A style dictionary is a collection of style properties, key/value pairs that describe stylistic attributes like colors, sizes, icons, motion, etc. A style dictionary defines these style properties in JSON files, and can also include static assets like images and fonts. Here is a basic example of what the package structure can look like:
 ```
-It should look like this:
-
-* insert photo
-
-Looks nice.  Now lets make a change.  Edit the file in 'properties/color.json', changing color.blue.light from '#000055' to '#0000FF'.  Now re-run style-dictionary and reload the page in your browser.  Tada!  Now it looks like this:
-
-* insert photo
-
-Whats great about this is that if you run the android project, the iOS project, the react-native project, etc, is that they will _all_ be updated with this change.
-
-Go ahead and change color.blue.light back to '#000055'.  Lets change color.background.warning from '{color.blue.light}' to '{color.orange.light}'.
-
-In the same folder as 'colors.json', edit 'icons.json' and modify icon.something.warning from '{icon.something.exclamation}' to '{icon.something.yield}'.  Re-run style-dictionary and reload the page in your browser.  Now it should look like this:
-
-* insert photo
-
-Now all warnings will look like this, across all platforms and all applications, including your style guide.  Make sense?
-
-
-
-
-# So what is a StyleDictionary?
-
-The StyleDictionary is a collection of JSON text files.  It uses key/value pairs to save style definitions within a file.  There is a straightforward method for referencing other style keys within the value - enabling you to have a single place to change a style and have it propagate across all of your other styles.
-
-# Quick Example
-
+├── config.json
+├── properties/
+│   ├── size/
+│       ├── font.json
+│   ├── color/
+│       ├── font.json
+│   ...
+├── assets/
+│   ├── fonts/
+│   ├── images/
 ```
+
+### config.json
+This tells the style dictionary build system how and what to build. The default file path is config.json in the root of the project, but you can name it whatever you want, just pass in the `--config` flag.
+```json
 {
-	"size": {
-		"font": {
-			"small": {
-				"value": "10px"
-			},
-			"medium": {
-				"value": "16px"
-			},
-			"large": {
-				"value": "24px"
-			},
-			"base": {
-				"value": "{size.font.medium.value}"
-			}
-		}
-	}
+  "source": ["properties/**/*.json"],
+  "platforms": {
+    "scss": {
+      "transformGroup": "scss",
+      "buildPath": "build/",
+      "files": [{
+        "destination": "scss/_variables.scss",
+        "format": "scss/variables"
+      }]
+    },
+    "android": {
+      "transformGroup": "android",
+      "buildPath": "build/android/",
+      "files": [{
+        "destination": "font_dimens.xml",
+        "template": "android/fontDimens"
+      }]
+    }
+  }
+}
+```
+| Attribute | Type | Description |
+| :--- | :--- | :--- |
+| source | Array | Paths to the property json files. Can have globs. |
+| platforms | Object | Sets of platform files to be built. |
+| platforms | Array | Paths to the property json files. Can have globs. |
+| platform.transformGroup | String (optional) | Apply a group of transforms to the properties, must either define this or `transforms`. |
+| platform.transforms | Array (optional) | Transforms to apply sequentially to all properties. Can be a built-in one or you can create your own. |
+| platform.buildPath | String (optional) | Base path to build the files, must end with a trailing slash. |
+| platform.files | Array (optional) | Files to be generated for this platform. |
+| platform.file.destination | String (optional) | Location to build the file, will be appended to the buildPath. |
+| platform.file.format | String (optional) | Format used to generate the file. Can be a built-in one or you can create your own. Must declare a format or a template. |
+| platform.file.template | String (optional) | Template used to generate the file. Can be a built-in one or you can create your own. [More on formats and templates](https://github.com/amznlabs/style-dictionary/wiki/Formats-and-Templates) |
+
+### Properties
+```json
+{
+  "size": {
+    "font": {
+      "small" : { "value": "10px" },
+      "medium": { "value": "16px" },
+      "large" : { "value": "24px" },
+      "base"  : { "value": "{size.font.medium.value}" }
+    }
+  }
 }
 ```
 
-Here we are creating some basic size font definitions.  The style definition size.font.small.value is "10px" for example.  The style definition size.font.base.value automatically takes on the value found in size.font.medium.value, so both of those resolve to "16px".
+Here we are creating some basic font size properties. The style definition size.font.small.value is "10px" for example.  The style definition size.font.base.value automatically takes on the value found in size.font.medium.value, so both of those resolve to "16px".
 
-# How to deal with separate codebases / remote development
+Now what the style dictionary build system will do with this information is convert it to different formats so that you can use these values in any type of codebase. From this one file you can generate any number of files like:
 
-The best solution for situations where the codebases for your various platforms are separate is to have a single accessible place where you store your StyleDictionary output (E.G. AWS S3).  The StyleDictionary run simply creates the output files and automatically uploads them where they can be accessed by the build scripts of the various platforms/teams.
-
-* insert example
-
-# Creating your own output type (platform)
-
-In config.json, the 'platforms' attribute defines what the various processing techniques are created and applied to develop the final output to be incorporated into your project.
-
-TODO TODO TODO
-
-# Using the output of StyleDictionary in a project
-
-Show examples of how to use in:
-
-- iOS
-- Android
-- html/CSS
-- react
-- react native
-
-
-# Configuring StyleDictionary (config.json)
-
-
-
-
-# CLI options for StyleDictionary
-
-- -h or --help for usage
-    - style-dictionary --help
-- -v or --version for version information
-    - style-dictionary --version 
-- -c or --config to specify which config file you want to run
-    - style-dictionary --config ./config.json
-
-
-# Core concepts
-
-To learn a little more about the internal structure of how the style dictionary build process works, lets outline some core concepts.
-
-## How it builds
-![build structure](https://github.com/amznlabs/style-dictionary/blob/master/images/build-diagram.png)
-
-1. The build system looks for a config file, if you don't specify it looks for config.json in the current directory.
-1. It finds all the JSON files in the source attribute in the config and performs a deep merge.
-1. From this all properties object, we iterate over the platforms in the config and:
-  1. Perform all transforms, in order, defined in the transforms attribute or transformGroup.
-  1. Build all files defined in the files array
-  1. Perform any actions defined in the actions attribute
-
-If you are using the Style Dictionary in node, when you use the extend method with either a config object or a path to a config object, it will perform the deep merge and pass back a StyleDictionary object with all the methods and properties filled in.
-
+```scss
+$size-font-small: 10px;
+$size-font-medium: 16px;
+$size-font-large: 24px;
+$size-font-base: 16px;
 ```
-var StyleDictionary = require('style-dictionary');
 
-// extend performs the deep merge of the properties
-var styleDictionary = StyleDictionary.extend( pwd + '/config.json' );
+```xml
+<dimen name="font-small">10sp</dimen>
+<dimen name="font-medium">16sp</dimen>
+<dimen name="font-large">24sp</dimen>
+<dimen name="font-base">16sp</dimen>
+```
 
-// You can also extend with an object
-// var styleDictionary = StyleDictionary.extend({ /* config options */ });
-
-// This will perform step 3, for each platform execute transforms,
-// build files, and perform actions of each platform
-styleDictionary.buildAllPlatforms();
+```objc
+float const SizeFontSmall = 10.00f;
+float const SizeFontMedium = 16.00f;
+float const SizeFontLarge = 24.00f;
+float const SizeFontBase = 16.00f;
 ```
 
 
-### Style Properties
+## Quick Start
+The style dictionary framework comes with some example code to get you stared. After installing the node module, create a directory and `cd` into it.
+```
+$ mkdir MyStyleDictionary
+$ cd MyStyleDictionary
+```
+Now run
+```
+$ style-dictionary init basic
+```
+This command will copy over the example files found in [example](example/) in this repo. Now you have an example project set up. You can make changes to the style dictionary and rebuild the project by running:
 
-A style property is an attribute to describe something visually. It is atomic (it cannot be broken down further). Style properties have a name, a value, and optional attributes or metadata. The name of a property can be anything, but we have a proposed naming structure that works really well in the next section. 
+```
+$ style-dictionary build
+```
+
+Take a look at the documentation for the example code
+
+
+## Style Properties
+
+A style property is an attribute to describe something visually. It is atomic (it cannot be broken down further). Style properties have a name, a value, and optional attributes or metadata. The name of a property can be anything, but we have a proposed naming structure that works really well in the next section.
 
 ### Category/Type/Item Structure
 
@@ -198,24 +205,45 @@ While not exactly necessary, we feel this classification structure of style prop
   }
 }
 ```
- 
- The CTI is implicit in the structure, the category and type is 'size' and 'font', and there are 2 properties 'base' and 'large'. 
- 
- Structuring style properties in this manner gives us consistent naming and accessing of these properties. You don't need to remember if it is button_color_error or error_button_color, it is color_background_button_error! 
- 
+
+ The CTI is implicit in the structure, the category and type is 'size' and 'font', and there are 2 properties 'base' and 'large'.
+
+ Structuring style properties in this manner gives us consistent naming and accessing of these properties. You don't need to remember if it is button_color_error or error_button_color, it is color_background_button_error!
+
  Technically, you can organize and name your style properties however you want, there are no restrictions. But we have a good amount of helpers if you do use this structure, like the 'attribute/cti' transform which adds attributes to the property of its CTI based on the path in the object. There are a lot of name transforms as well for when you want a flat structure like for sass variables.
- 
- Also, the CTI structure provides a good mechanism to target transforms for specific kinds of properties. All of the transforms provided by the framework use the CTI of a property to know if it should be applied. For instance, the 'color/hex' transform only applies to properties of the category 'color'. 
 
-### Platform
-A platform defines transforms (or a transformGroup), files to be built, and any additional configuration like variable prefixes. Think of a platform as a way to describe how to interact with the style dictionary. For example, maybe we want to use only the colors in Javascript as arrays for rendering lines in a d3 line chart. You would define a platform that outputs a JS module that looks something like this:
+ Also, the CTI structure provides a good mechanism to target transforms for specific kinds of properties. All of the transforms provided by the framework use the CTI of a property to know if it should be applied. For instance, the 'color/hex' transform only applies to properties of the category 'color'.
 
+
+## Extending
+
+The style dictionary build system is made to be extended. We don't know exactly how everyone will want to use style dictionaries in their project, which is why it is easy to create custom transforms, templates, and formats.
+
+```javascript
+const StyleDictionary = require('style-dictionary').extend('config.json');
+
+StyleDictionary.registerTransform({
+  name: 'time/seconds',
+  type: 'value',
+  matcher: function(prop) {
+    return prop.attributes.category === 'time';
+  },
+  transformer: function(prop) {
+    return (parseInt(prop.original.value) / 1000).toString() + 's';
+  }
+});
+
+StyleDictionary.buildAllPlatforms();
 ```
-module.exports = {
-  chart_colors_1: ['#ff9900', '', '', '', ''],
-  chart_colors_2: ['#ff9900', '', '', '', ''],
-  ...
-}
-```
 
-A platform is like a pivot table in excel. You start with the raw data and pivot it in a way that makes sense. 
+For more information on creating your own transforms, templates, and formats, take a look at our [wiki](https://github.com/amznlabs/style-dictionary/wiki). 
+
+
+## Contributing
+
+Please help make this framework better. For more information take a look at [CONTRIBUTING.md](CONTRIBUTING.md)
+
+
+## License
+
+[Apache 2.0](LICENSE)
