@@ -131,6 +131,9 @@
       "transformGroup": "scss",
       "buildPath": "static-style-guide/public/css/",
       "files": [{
+        "destination": "fonts.css",
+        "format": "css/fonts"
+      },{
         "destination": "variables.css",
         "format": "css/variables"
       }]
