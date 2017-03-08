@@ -65,7 +65,7 @@ body {
 .title {
 	float: left;
 	font-size: var(--size-font-xl);
-    margin-top: -var(--size-padding-tiny);
+    margin-top: var(--size-padding-tiny);
 }
 
 .nav-search {
@@ -164,7 +164,7 @@ body {
     -ms-transition: 80ms linear all;
     -o-transition: 80ms linear all;
     transition: 80ms linear all;
-    
+
     margin-left: var(--size-padding-tiny);
     margin-top: 0;
     box-sizing: border-box;
