@@ -2,6 +2,7 @@
   "asset": {
     "font": {
       "icon": {
+        "name" : { "value": "MaterialIcons" },
         "ttf"  : { "value": "assets/fonts/MaterialIcons-Regular.ttf" },
         "otf"  : { "value": "assets/fonts/MaterialIcons-Regular.otf" },
         "eot"  : { "value": "assets/fonts/MaterialIcons-Regular.eot" },
