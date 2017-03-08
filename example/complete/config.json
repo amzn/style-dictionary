@@ -109,7 +109,7 @@
       "actions": ["copy_assets"]
     },
 
-    "staticStyleGuideHTML":{
+    "staticStyleGuide-html":{
       "buildPath": "static-style-guide/public/",
       "files": [
         {
@@ -118,7 +118,7 @@
         }
       ]
     },
-    "staticStyleGuideJS": {
+    "staticStyleGuide-js": {
       "transformGroup": "web",
       "buildPath": "static-style-guide/public/js/",
       "files": [{
@@ -127,7 +127,7 @@
         "format": "javascript/object"
       }]
     },
-    "staticStyleGuideCSS": {
+    "staticStyleGuide-css": {
       "transformGroup": "scss",
       "buildPath": "static-style-guide/public/css/",
       "files": [{
@@ -135,7 +135,7 @@
         "format": "css/variables"
       }]
     },
-    "staticStyleGuideAssets": {
+    "staticStyleGuide-assets": {
       "buildPath": "static-style-guide/public/",
       "actions": ["copy_assets"]
     }
