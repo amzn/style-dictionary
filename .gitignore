@@ -71,11 +71,5 @@ xcuserdata/
 # npm package tars
 *.tgz
 
-# StaticStyleGuide
-example/complete/static-style-guide/public/js/style-dictionary-properties.js
-example/complete/static-style-guide/public/css/variables.css
-example/complete/static-style-guide/public/assets
-example/complete/static-style-guide/public/index.html
-
 # Mac directory hidden files
 *.DS_Store
