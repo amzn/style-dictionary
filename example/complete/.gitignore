@@ -1,6 +1,13 @@
-# Style Dictionary Generated Files
+# Style Dictionary Generated Files (ios)
 ios/assets
 ios/Classes/Generated
+
+# Style Dictionary Generated Files (static-style-guide)
+static-style-guide/public/js/style-dictionary-properties.js
+static-style-guide/public/css/fonts.css
+static-style-guide/public/css/variables.css
+static-style-guide/public/assets
+static-style-guide/public/index.html
 
 # OS X
 .DS_Store
