@@ -45,6 +45,15 @@ body {
 	display: none;
 }
 
+.icon-font {
+    font-style: inherit;
+    font-family: var(--font-family-icons);
+    display: inline-block;
+    margin-left: var(--size-padding-medium);
+    vertical-align: middle;
+    font-size: larger;
+}
+
 
 
 .nav-bar {

@@ -3,6 +3,9 @@
     "family": {
       "base": {
         "value": "Open Sans"
+      },
+      "icons": {
+        "value": "MaterialIcons"
       }
     }
   }
