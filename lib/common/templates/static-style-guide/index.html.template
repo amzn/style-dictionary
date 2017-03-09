@@ -62,7 +62,7 @@
         <% if(property.attributes && JSON.stringify(property.attributes)!=="{}") { %>
           <div class="style-guide-property-attributes-control"></div>
         <% } %>
-        <div class="style-guide-property-value"><%= property.value %></div>
+        <div class="style-guide-property-value"><%= property.value %><% if(property.path.indexOf('icon')!=-1 && property.path.indexOf('content')!=-1) { %><i class="icon-font"><%= property.value %></i><% } %></div>
         <% if(property.attributes && JSON.stringify(property.attributes)!=="{}") { %>
           <div class="style-guide-property-attributes"><%= JSON.stringify(property.attributes) %></div>
         <% } %>
