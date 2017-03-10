@@ -57,11 +57,11 @@
   ],
   "homepage": "https://github.com/amznlabs/style-dictionary",
   "dependencies": {
-    "color": "^0.11.3",
     "commander": "^2.9.0",
     "fs-extra": "^0.30.0",
     "glob": "^7.1.1",
-    "lodash": "^4.16.4"
+    "lodash": "^4.16.4",
+    "tinycolor2": "^1.4.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
