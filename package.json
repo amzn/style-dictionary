@@ -37,6 +37,7 @@
   "scripts": {
     "lint": "eslint index.js lib/**/*.js test/**/*.js",
     "test": "npm run lint && mocha --recursive -c",
+    "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha -- test",
     "install-cli": "npm install -g $(npm pack)"
   },
   "repository": {
@@ -65,6 +66,7 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "eslint": "^3.11.1",
+    "istanbul": "^0.4.5",
     "mocha": "^3.1.2"
   }
 }

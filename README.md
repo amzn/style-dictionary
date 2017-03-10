@@ -1,4 +1,5 @@
 # Style Dictionary
+[![npm version](https://badge.fury.io/js/style-dictionary.svg)](https://badge.fury.io/js/style-dictionary)
 
 > *Style once, use everywhere.*
 
