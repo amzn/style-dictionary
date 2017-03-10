@@ -51,7 +51,7 @@ body {
     display: inline-block;
     margin-left: var(--size-padding-medium);
     vertical-align: middle;
-    font-size: larger;
+    font-size: var(--size-font-xl);
 }
 
 
