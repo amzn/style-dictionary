@@ -2,10 +2,10 @@
   "font": {
     "family": {
       "base": {
-        "value": "Open Sans"
+        "value": "{asset.font.opensans.name.value}"
       },
       "icons": {
-        "value": "MaterialIcons"
+        "value": "{asset.font.icon.name.value}"
       }
     }
   }
