@@ -157,6 +157,13 @@ describe('transforms', function() {
       assert.equal(value, "#aaaaaa");
     });
 
+    it('should handle hex8 colors', function() {
+      var value = transforms["color/hex"].transformer({
+        value: "#aaaaaaaa"
+      });
+      assert.equal(value, "#aaaaaa");
+    });
+
     it('should handle rgb colors', function() {
       var value = transforms["color/hex"].transformer({
         value: "rgb(170,170,170)"
@@ -213,33 +220,29 @@ describe('transforms', function() {
 
     it('should handle rgb colors', function() {
       var value = transforms["color/hex8"].transformer({
-        value: {
-          r: '170',
-          g: '170',
-          b: '170'
-        }
-      });
-      var value2 = transforms["color/hex8"].transformer({
         value: "rgb(170,170,170)"
-      });
-      assert.equal(value, "#aaaaaaff");
-      assert.equal(value2, "#aaaaaaff");
-    });
-
-    it('should handle rgba (object) colors', function() {
-      var value = transforms["color/hex8"].transformer({
-        value: {
-          r: '170',
-          g: '170',
-          b: '170',
-          a: 0.6
-        }
       });
       var value2 = transforms["color/hex8"].transformer({
         value: "rgba(170,170,170,0.6)"
       });
-      assert.equal(value, "#aaaaaa99");
+      assert.equal(value, "#aaaaaaff");
       assert.equal(value2, "#aaaaaa99");
+    });
+  });
+
+  describe('color/hex8android', function() {
+    it('should handle colors without alpha', function() {
+      var value = transforms["color/hex8android"].transformer({
+        value: "#aaaaaa"
+      });
+      assert.equal(value, "#ffaaaaaa");
+    });
+
+    it('should handle colors with alpha', function() {
+      var value = transforms["color/hex8android"].transformer({
+        value: "#aaaaaa99"
+      });
+      assert.equal(value, "#99aaaaaa");
     });
   });
 

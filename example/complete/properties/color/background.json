@@ -24,6 +24,11 @@
           "disabled": { "value": "{color.brand.secondary.light.value}" },
           "active":   { "value": "{color.brand.secondary.dark.value}" }
         }
+      },
+
+      "overlay": {
+        "light": { "value": "#FFFFFFCC" },
+        "dark":  { "value": "#00000044" }
       }
     }
   }
