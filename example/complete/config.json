@@ -116,7 +116,8 @@
           "destination": "index.html",
           "template": "static-style-guide/index.html"
         }
-      ]
+      ],
+      "actions": ["copy_assets"]
     },
     "staticStyleGuide-js": {
       "transformGroup": "web",
@@ -137,10 +138,6 @@
         "destination": "variables.css",
         "format": "css/variables"
       }]
-    },
-    "staticStyleGuide-assets": {
-      "buildPath": "static-style-guide/public/",
-      "actions": ["copy_assets"]
-    }
+    
   }
 }
