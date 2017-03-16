@@ -133,11 +133,11 @@
       "buildPath": "static-style-guide/public/css/",
       "files": [{
         "destination": "fonts.css",
-        "format": "css/fonts"
+        "template": "css/fonts.css"
       },{
         "destination": "variables.css",
         "format": "css/variables"
       }]
-    
+    }
   }
 }
