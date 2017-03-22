@@ -24,6 +24,9 @@
       else {
         toStyle += "background-color:" + property.value + ";";
       }
+      if (property.attributes.font === 'inverse') {
+        toStyle += "color:var(--color-font-inverse-base);";
+      }
     }
     return toStyle;
   };
