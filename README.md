@@ -1,5 +1,7 @@
 # Style Dictionary
-[![npm version](https://badge.fury.io/js/style-dictionary.svg)](https://badge.fury.io/js/style-dictionary)
+[![npm version](https://img.shields.io/npm/v/style-dictionary.svg?style=flat-square)](https://badge.fury.io/js/style-dictionary)
+[![npm version](https://img.shields.io/npm/l/style-dictionary.svg?style=flat-square)](https://badge.fury.io/js/style-dictionary)
+[![code climate](https://img.shields.io/codeclimate/github/amzn/style-dictionary.svg?style=flat-square)](https://codeclimate.com/github/amzn/style-dictionary)
 
 > *Style once, use everywhere.*
 
