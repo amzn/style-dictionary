@@ -18,19 +18,25 @@ var assert = require('chai').assert,
 describe('propertySetup', function() {
   it('should error if property is not an object', function() {
     assert.throws(
-      propertySetup.bind(null, 'foo', [])
+      propertySetup.bind(null, null, 'foo', []),
+      Error,
+      'Property object must be an object'
     );
   });
 
   it('should error if name in not a string', function() {
     assert.throws(
-      propertySetup.bind({}, null, [])
+      propertySetup.bind(null, {}, null, []),
+      Error,
+      'Name must be a string'
     );
   });
 
   it('should error path is not an array', function() {
     assert.throws(
-      propertySetup.bind({}, 'name', null)
+      propertySetup.bind(null, {}, 'name', null),
+      Error,
+      'Path must be an array'
     );
   });
 

@@ -44,6 +44,15 @@ var platformWithBuildPath = {
   ]
 };
 
+var platformWithoutFormatter = {
+  buildPath: 'test/output/',
+  files: [
+    {
+      destination: 'test.json',
+    }
+  ]
+};
+
 var platformWithBadBuildPath = {
   buildPath: 'test/output',
   files: [
@@ -62,9 +71,19 @@ describe('buildFiles', function() {
   });
 
   it('should throw if build path doesn\'t have a trailing slash', function() {
-    assert.throws(function() {
-      buildFiles( dictionary, platformWithBadBuildPath );
-    });
+    assert.throws(
+      buildFiles.bind(null, dictionary, platformWithBadBuildPath),
+      Error,
+      'Build path must end in a trailing slash or you will get weird file names.'
+    );
+  });
+
+  it('should throw if template or formatter missing', function() {
+    assert.throws(
+      buildFiles.bind(null, dictionary, platformWithoutFormatter),
+      Error,
+      'Please supply a template or formatter'
+    );
   });
 
   it('should work without buildPath', function() {

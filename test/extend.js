@@ -59,13 +59,21 @@ describe('extend', function() {
   describe('includes', function() {
     it('should throw if include isnt an array', function() {
       assert.throws(
-        StyleDictionary.extend.bind({include: {}})
+        StyleDictionary.extend.bind(null, {
+          include: {}
+        }),
+        Error,
+        'include must be an array'
       );
     });
 
     it('should throw if a path in the includes array doesnt resolve', function() {
       assert.throws(
-        StyleDictionary.extend.bind({include: ['foo']})
+        StyleDictionary.extend.bind(null, {
+          include: ['foo']
+        }),
+        Error,
+        "Cannot find module \'foo\'"
       );
     });
 
@@ -89,13 +97,21 @@ describe('extend', function() {
   describe('source', function() {
     it('should throw if source isnt an array', function() {
       assert.throws(
-        StyleDictionary.extend.bind({source: {}})
+        StyleDictionary.extend.bind(null, {
+          source: {}
+        }),
+        Error,
+        'source must be an array'
       );
     });
 
     it('should throw if a path in the source array doesnt resolve', function() {
       assert.throws(
-        StyleDictionary.extend.bind({include: ['foo']})
+        StyleDictionary.extend.bind(null, {
+          include: ['foo']
+        }),
+        Error,
+        "Cannot find module \'foo\'"
       );
     });
 

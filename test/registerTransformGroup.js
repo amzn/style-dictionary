@@ -18,47 +18,96 @@ var assert = require('chai').assert,
 describe('registerTransformGroup', function() {
   it('should error if name is not a string', function() {
     assert.throws(
-      StyleDictionary.registerTransformGroup.bind({transforms: ['foo']})
+      StyleDictionary.registerTransformGroup.bind(null, {
+        transforms: ['foo']
+      }),
+      Error,
+      'transform name must be a string'
     );
 
     assert.throws(
-      StyleDictionary.registerTransformGroup.bind({name: 1, transforms: ['foo']})
+      StyleDictionary.registerTransformGroup.bind(null, {
+        name: 1,
+        transforms: ['foo']
+      }),
+      Error,
+      'transform name must be a string'
     );
 
     assert.throws(
-      StyleDictionary.registerTransformGroup.bind({name: [], transforms: ['foo']})
+      StyleDictionary.registerTransformGroup.bind(null, {
+        name: [],
+        transforms: ['foo']
+      }),
+      Error,
+      'transform name must be a string'
     );
 
     assert.throws(
-      StyleDictionary.registerTransformGroup.bind({name: {}, transforms: ['foo']})
+      StyleDictionary.registerTransformGroup.bind(null, {
+        name: {},
+        transforms: ['foo']
+      }),
+      Error,
+      'transform name must be a string'
     );
 
     assert.throws(
-      StyleDictionary.registerTransformGroup.bind({name: function() {}, transforms: ['foo']})
+      StyleDictionary.registerTransformGroup.bind(null, {
+        name: function() {},
+        transforms: ['foo']
+      }),
+      Error,
+      'transform name must be a string'
     );
   });
 
   it('should error if transforms isnt an array', function() {
     assert.throws(
-      StyleDictionary.registerTransformGroup.bind({name: 'foo'})
+      StyleDictionary.registerTransformGroup.bind(null, {
+        name: 'foo'
+      }),
+      Error,
+      'transforms must be an array of registered value transforms'
     );
 
     assert.throws(
-      StyleDictionary.registerTransformGroup.bind({name: 'foo', transforms: 'foo'})
+      StyleDictionary.registerTransformGroup.bind(null, {
+        name: 'foo',
+        transforms: 'foo'
+      }),
+      Error,
+      'transforms must be an array of registered value transforms'
     );
 
     assert.throws(
-      StyleDictionary.registerTransformGroup.bind({name: 'foo', transforms: {}})
+      StyleDictionary.registerTransformGroup.bind(null, {
+        name: 'foo',
+        transforms: {}
+      }),
+      Error,
+      'transforms must be an array of registered value transforms'
     );
 
     assert.throws(
-      StyleDictionary.registerTransformGroup.bind({name: 'foo', transforms: function() {}})
+      StyleDictionary.registerTransformGroup.bind(null, {
+        name: 'foo',
+        transforms: function() {}
+      }),
+      Error,
+      'transforms must be an array of registered value transforms'
     );
   });
 
   it('should error if transforms arent registered', function() {
     assert.throws(
-      StyleDictionary.registerTransformGroup.bind({name: 'foo', transforms: ['bar']})
+      StyleDictionary.registerTransformGroup.bind({ transforms: { bar: 'cat' } },
+      {
+        name: 'foo',
+        transforms: ['bar']
+      }),
+      Error,
+      'transforms must be an array of registered value transforms'
     );
   });
 

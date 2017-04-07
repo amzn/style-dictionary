@@ -18,64 +18,82 @@ var assert = require('chai').assert,
 describe('registerFormat', function() {
   it('should error if name is not a string', function() {
     assert.throws(
-      StyleDictionary.registerFormat.bind({formatter: function() {}})
+      StyleDictionary.registerFormat.bind(null, {
+        formatter: function() {}
+      }),
+      Error,
+      'transform name must be a string'
     );
 
     assert.throws(
-      StyleDictionary.registerFormat.bind({
+      StyleDictionary.registerFormat.bind(null, {
         name: 1,
         formatter: function() {}
-      })
+      }),
+      Error,
+      'transform name must be a string'
     );
 
     assert.throws(
-      StyleDictionary.registerFormat.bind({
+      StyleDictionary.registerFormat.bind(null, {
         name: [],
         formatter: function() {}
       })
     );
 
     assert.throws(
-      StyleDictionary.registerFormat.bind({
+      StyleDictionary.registerFormat.bind(null, {
         name: {},
         formatter: function() {}
-      })
+      }),
+      Error,
+      'transform name must be a string'
     );
   });
 
   it('should error if formatter is not a function', function() {
     assert.throws(
-      StyleDictionary.registerFormat.bind({
+      StyleDictionary.registerFormat.bind(null, {
         name: 'test'
-      })
+      }),
+      Error,
+      'format formatter must be a function'
     );
 
     assert.throws(
-      StyleDictionary.registerFormat.bind({
+      StyleDictionary.registerFormat.bind(null, {
         name: 'test',
         formatter: 1
-      })
+      }),
+      Error,
+      'format formatter must be a function'
     );
 
     assert.throws(
-      StyleDictionary.registerFormat.bind({
+      StyleDictionary.registerFormat.bind(null, {
         name: 'test',
         formatter: 'name'
-      })
+      }),
+      Error,
+      'format formatter must be a function'
     );
 
     assert.throws(
-      StyleDictionary.registerFormat.bind({
+      StyleDictionary.registerFormat.bind(null, {
         name: 'test',
         formatter: []
-      })
+      }),
+      Error,
+      'format formatter must be a function'
     );
 
     assert.throws(
-      StyleDictionary.registerFormat.bind({
+      StyleDictionary.registerFormat.bind(null, {
         name: 'test',
         formatter: {}
-      })
+      }),
+      Error,
+      'format formatter must be a function'
     );
   });
 

@@ -18,9 +18,21 @@ var assert        = require('chai').assert,
 
 describe('resolveObject', function() {
   it('should error on non-objects', function() {
-    assert.throws(resolveObject.bind('foo'));
-    assert.throws(resolveObject);
-    assert.throws(resolveObject.bind(0));
+    assert.throws(
+      resolveObject.bind(null, 'foo'),
+      Error,
+      'Please pass an object in'
+    );
+    assert.throws(
+      resolveObject.bind(null),
+      Error,
+      'Please pass an object in'
+    );
+    assert.throws(
+      resolveObject.bind(null, 0),
+      Error,
+      'Please pass an object in'
+    );
   });
 
   it('should do simple references', function() {
@@ -101,16 +113,32 @@ describe('resolveObject', function() {
 
   it('should gracefully handle circular references', function() {
     assert.throws(
-      resolveObject.bind(helpers.fileToJSON(__dirname + '/../json_files/circular.json'))
+      resolveObject.bind(null,
+        helpers.fileToJSON(__dirname + '/../json_files/circular.json')
+      ),
+      Error,
+      'Circular definition: a | d'
     );
     assert.throws(
-      resolveObject.bind( helpers.fileToJSON(__dirname + '/../json_files/circular_2.json'))
+      resolveObject.bind(null,
+        helpers.fileToJSON(__dirname + '/../json_files/circular_2.json')
+      ),
+      Error,
+      'Circular definition: a.b.c | d'
     );
     assert.throws(
-      resolveObject.bind( helpers.fileToJSON(__dirname + '/../json_files/circular_3.json'))
+      resolveObject.bind(null,
+        helpers.fileToJSON(__dirname + '/../json_files/circular_3.json')
+      ),
+      Error,
+      'Circular definition: a.b.c | d.e.f'
     );
     assert.throws(
-      resolveObject.bind( helpers.fileToJSON(__dirname + '/../json_files/circular_4.json'))
+      resolveObject.bind(null,
+        helpers.fileToJSON(__dirname + '/../json_files/circular_4.json')
+      ),
+      Error,
+      'Circular definition: a.b.c | g.h'
     );
   });
 
