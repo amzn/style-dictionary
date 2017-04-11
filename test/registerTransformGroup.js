@@ -101,10 +101,10 @@ describe('registerTransformGroup', function() {
 
   it('should error if transforms arent registered', function() {
     assert.throws(
-      StyleDictionary.registerTransformGroup.bind({ transforms: { bar: 'cat' } },
+      StyleDictionary.registerTransformGroup.bind(StyleDictionary,
       {
         name: 'foo',
-        transforms: ['bar']
+        transforms: ['foo']
       }),
       Error,
       'transforms must be an array of registered value transforms'
@@ -114,16 +114,18 @@ describe('registerTransformGroup', function() {
   it('should work if everything is good', function() {
     StyleDictionary.registerTransformGroup({
       name: 'foo',
-      transforms: ['foo']
+      transforms: ['size/px']
     });
 
     assert.isArray(StyleDictionary.transformGroup.foo);
     assert.isString(StyleDictionary.transformGroup.foo[0]);
+    assert.equal(StyleDictionary.transformGroup.foo[0], 'size/px');
   });
 
   it('should properly pass the registered format to instances', function() {
     var test = StyleDictionary.extend({});
     assert.isArray(test.transformGroup.foo);
     assert.isString(test.transformGroup.foo[0]);
+    assert.equal(test.transformGroup.foo[0], 'size/px');
   });
 });
