@@ -35,9 +35,9 @@
     "NOTICE"
   ],
   "scripts": {
-    "lint": "eslint index.js lib/**/*.js test/**/*.js",
+    "lint": "eslint index.js lib/**/*.js test/*.js test/**/*.js",
     "test": "npm run lint && mocha --recursive -c",
-    "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha -- test",
+    "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha -- test/*.js test/**/*.js",
     "install-cli": "npm install -g $(npm pack)"
   },
   "repository": {

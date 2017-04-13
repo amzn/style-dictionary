@@ -18,35 +18,56 @@ var assert = require('chai').assert,
 describe('registerTransform', function() {
   it('should error if type is not a string', function() {
     assert.throws(
-      StyleDictionary.registerTransform.bind({type: 3})
+      StyleDictionary.registerTransform.bind(null, {
+        type: 3
+      }),
+      Error,
+      'type must be a string'
     );
   });
 
   it('should error if type is not a valid type', function() {
     assert.throws(
-      StyleDictionary.registerTransform.bind({type: 'foo'})
+      StyleDictionary.registerTransform.bind(null, {
+        type: 'foo'
+      }),
+      Error,
+      'foo type is not one of: name, value, attribute'
     );
   });
 
   it('should error if name is not a string', function() {
     assert.throws(
-      StyleDictionary.registerTransform.bind({type: 'name'})
+      StyleDictionary.registerTransform.bind(null, {
+        type: 'name'
+      }),
+      Error,
+      'name must be a string'
     );
   });
 
   it('should error if matcher is not a function', function() {
     assert.throws(
-      StyleDictionary.registerTransform.bind({type: 'name', matcher: 'foo'})
+      StyleDictionary.registerTransform.bind(null, {
+        type: 'name',
+        name: 'name',
+        matcher: 'foo'
+      }),
+      Error,
+      'matcher must be a function'
     );
   });
 
   it('should error if transformer is not a function', function() {
     assert.throws(
-      StyleDictionary.registerTransform.bind({
+      StyleDictionary.registerTransform.bind(null, {
         type: 'name',
+        name: 'name',
         matcher: function() { return true; },
         transformer: 'foo'
-      })
+      }),
+      Error,
+      'transformer must be a function'
     );
   });
 

@@ -18,66 +18,84 @@ var assert = require('chai').assert,
 describe('registerAction', function() {
   it('should error if name is not a string', function() {
     assert.throws(
-      StyleDictionary.registerAction.bind({
+      StyleDictionary.registerAction.bind(null, {
         action: function() {}
-      })
+      }),
+      Error,
+      'transform name must be a string'
     );
 
     assert.throws(
-      StyleDictionary.registerAction.bind({
+      StyleDictionary.registerAction.bind(null, {
         name: 1,
         action: function() {}
-      })
+      }),
+      Error,
+      'transform name must be a string'
     );
 
     assert.throws(
-      StyleDictionary.registerAction.bind({
+      StyleDictionary.registerAction.bind(null, {
         name: [],
         action: function() {}
-      })
+      }),
+      Error,
+      'transform name must be a string'
     );
 
     assert.throws(
-      StyleDictionary.registerAction.bind({
+      StyleDictionary.registerAction.bind(null, {
         name: {},
         action: function() {}
-      })
+      }),
+      Error,
+      'transform name must be a string'
     );
   });
 
   it('should error if formatter is not a function', function() {
     assert.throws(
-      StyleDictionary.registerAction.bind({
+      StyleDictionary.registerAction.bind(null, {
         name: 'test'
-      })
+      }),
+      Error,
+      'format formatter must be a function'
     );
 
     assert.throws(
-      StyleDictionary.registerAction.bind({
+      StyleDictionary.registerAction.bind(null, {
         name: 'test',
         action: 1
-      })
+      }),
+      Error,
+      'format formatter must be a function'
     );
 
     assert.throws(
-      StyleDictionary.registerAction.bind({
+      StyleDictionary.registerAction.bind(null, {
         name: 'test',
         action: 'name'
-      })
+      }),
+      Error,
+      'format formatter must be a function'
     );
 
     assert.throws(
-      StyleDictionary.registerAction.bind({
+      StyleDictionary.registerAction.bind(null, {
         name: 'test',
         action: []
-      })
+      }),
+      Error,
+      'format formatter must be a function'
     );
 
     assert.throws(
-      StyleDictionary.registerAction.bind({
+      StyleDictionary.registerAction.bind(null, {
         name: 'test',
         action: {}
-      })
+      }),
+      Error,
+      'format formatter must be a function'
     );
   });
 

@@ -25,9 +25,11 @@ describe('buildPlatform', function() {
   });
 
   it('should throw if passed a platform that doesn\'t exist', function() {
-    assert.throws(function() {
-      test.buildPlatform('foobar');
-    });
+    assert.throws(
+      test.buildPlatform.bind(test, 'foobar'),
+      Error,
+      'Platform foobar doesn\'t exist'
+    );
 
     assert.doesNotThrow(function() {
       test.buildPlatform('web');

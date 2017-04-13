@@ -25,27 +25,39 @@ describe('buildFile', function() {
   });
 
   it('should error if format doesnt exist or isnt a function', function() {
-    assert.throws(function() {
-      buildFile('test/output/test.txt', {}, {}, {})
-    });
-    assert.throws(function() {
-      buildFile('test/output/test.txt', [], {}, {})
-    });
-    assert.throws(function() {
-      buildFile('test/output/test.txt', null, {}, {})
-    });
+    assert.throws(
+      buildFile.bind(null, 'test/output/test.txt', {}, {}, {}),
+      Error,
+      'Please enter a valid file format'
+    );
+    assert.throws(
+      buildFile.bind(null, 'test/output/test.txt', [], {}, {}),
+      Error,
+      'Please enter a valid file format'
+    );
+    assert.throws(
+      buildFile.bind(null, 'test/output/test.txt', null, {}, {}),
+      Error,
+      'Please enter a valid file format'
+    );
   });
 
   it('should error if destination doesnt exist or isnt a string', function() {
-    assert.throws(function() {
-      buildFile({}, format, {}, {})
-    });
-    assert.throws(function() {
-      buildFile([], format, {}, {})
-    });
-    assert.throws(function() {
-      buildFile(null, format, {}, {})
-    });
+    assert.throws(
+      buildFile.bind(null, {}, format, {}, {}),
+      Error,
+      'Please enter a valid destination'
+    );
+    assert.throws(
+      buildFile.bind(null, [], format, {}, {}),
+      Error,
+      'Please enter a valid destination'
+    );
+    assert.throws(
+      buildFile.bind(null, null, format, {}, {}),
+      Error,
+      'Please enter a valid destination'
+    );
   });
 
   it('should write to a file properly', function() {
