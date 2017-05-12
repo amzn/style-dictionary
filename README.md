@@ -1,3 +1,5 @@
+<img src="https://cloud.githubusercontent.com/assets/2113376/26018832/0433d85e-3726-11e7-8ef8-be6983e078a0.png" width="100" style="float:right;" />
+
 # Style Dictionary
 [![npm version](https://img.shields.io/npm/v/style-dictionary.svg?style=flat-square)](https://badge.fury.io/js/style-dictionary)
 [![npm version](https://img.shields.io/npm/l/style-dictionary.svg?style=flat-square)](https://badge.fury.io/js/style-dictionary)
