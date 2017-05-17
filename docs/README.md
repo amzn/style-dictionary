@@ -1,3 +1,7 @@
+<a href="">
+  <img src="https://cloud.githubusercontent.com/assets/2113376/26018832/0433d85e-3726-11e7-8ef8-be6983e078a0.png" alt="Style Dictionary logo" title="StyleDictionary" width="100" align="right" />
+</a>
+
 # Style Dictionary
 > *Style once, use everywhere.*
 
