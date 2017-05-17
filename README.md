@@ -133,7 +133,7 @@ This tells the style dictionary build system how and what to build. The default 
 | platform.files | Array (optional) | Files to be generated for this platform. |
 | platform.file.destination | String (optional) | Location to build the file, will be appended to the buildPath. |
 | platform.file.format | String (optional) | Format used to generate the file. Can be a built-in one or you can create your own. Must declare a format or a template. |
-| platform.file.template | String (optional) | Template used to generate the file. Can be a built-in one or you can create your own. [More on formats and templates](https://github.com/amznlabs/style-dictionary/wiki/Formats-and-Templates) |
+| platform.file.template | String (optional) | Template used to generate the file. Can be a built-in one or you can create your own. [More on formats and templates](https://github.com/amznlabs/style-dictionary/tree/master/docs/formats_and_templates.md) |
 
 ### Properties
 ```json
@@ -243,7 +243,7 @@ StyleDictionary.registerTransform({
 StyleDictionary.buildAllPlatforms();
 ```
 
-For more information on creating your own transforms, templates, and formats, take a look at our [wiki](https://github.com/amznlabs/style-dictionary/wiki). 
+For more information on creating your own transforms, templates, and formats, take a look at our [docs](https://github.com/amznlabs/style-dictionary/tree/master/docs). 
 
 
 ## Contributing
