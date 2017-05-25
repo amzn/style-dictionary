@@ -31,8 +31,8 @@ var test = StyleDictionary.extend({
   }
 });
 
-describe('buildPlatform', function() {
-  describe('handle actions', function() {
+describe('cleanPlatform', function() {
+  describe('clean actions', function() {
     beforeEach(function() {
       helpers.clearOutput();
     });

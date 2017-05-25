@@ -33,6 +33,9 @@ var StyleDictionary = {
   buildPlatform: require('./lib/buildPlatform'),
   buildAllPlatforms: require('./lib/buildAllPlatforms'),
 
+  cleanPlatform: require('./lib/cleanPlatform'),
+  cleanAllPlatforms: require('./lib/cleanAllPlatforms'),
+
   extend: require('./lib/extend')
 };
 
