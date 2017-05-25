@@ -11,31 +11,23 @@
  * and limitations under the License.
  */
 
-var fs   = require('fs-extra'),
-    glob = require('glob');
+var assert  = require('chai').assert,
+  helpers   = require('./helpers'),
+  buildFile = require('../lib/buildFile'),
+  cleanFile = require('../lib/cleanFile');
 
-module.exports = {
-  clearOutput: function() {
-    fs.emptyDirSync('test/output');
-  },
+function format() {
+  return "hi";
+}
 
-  fileToJSON: function(path) {
-    return fs.readJsonSync(path);
-  },
+describe('cleanFile', function() {
+  beforeEach(function() {
+    helpers.clearOutput();
+  });
 
-  fileExists: function(filePath) {
-    try {
-      return fs.statSync(filePath).isFile();
-    } catch (err) {
-      return false;
-    }
-  },
-
-  fileDoesNotExist: function(filePath) {
-    try {
-      return fs.existsSync(filePath);
-    } catch (err) {
-      return false;
-    }
-  }
-};
+  it('should delete a file properly', function() {
+    buildFile('test.txt', format, {buildPath: 'test/output/'}, {});
+    cleanFile('test.txt', format, {buildPath: 'test/output/'}, {});
+    assert(helpers.fileDoesNotExist('./test/output/test.txt'));
+  });
+});
