@@ -33,7 +33,7 @@ module.exports = {
 
   fileDoesNotExist: function(filePath) {
     try {
-      return fs.existsSync(filePath);
+      return !fs.existsSync(filePath);
     } catch (err) {
       return false;
     }
