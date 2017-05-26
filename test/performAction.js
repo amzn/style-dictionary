@@ -20,6 +20,9 @@ StyleDictionary.registerAction({
   name: 'test',
   action: function() {
     fs.writeFileSync('./test/output/action.txt', 'hi')
+  },
+  clean: function() {
+    fs.removeSync('./test/output/action.txt')
   }
 });
 
