@@ -22,7 +22,7 @@ describe('registerAction', function() {
         action: function() {}
       }),
       Error,
-      'transform name must be a string'
+      'name must be a string'
     );
 
     assert.throws(
@@ -31,7 +31,7 @@ describe('registerAction', function() {
         action: function() {}
       }),
       Error,
-      'transform name must be a string'
+      'name must be a string'
     );
 
     assert.throws(
@@ -40,7 +40,7 @@ describe('registerAction', function() {
         action: function() {}
       }),
       Error,
-      'transform name must be a string'
+      'name must be a string'
     );
 
     assert.throws(
@@ -49,17 +49,17 @@ describe('registerAction', function() {
         action: function() {}
       }),
       Error,
-      'transform name must be a string'
+      'name must be a string'
     );
   });
 
-  it('should error if formatter is not a function', function() {
+  it('should error if action is not a function', function() {
     assert.throws(
       StyleDictionary.registerAction.bind(null, {
         name: 'test'
       }),
       Error,
-      'format formatter must be a function'
+      'action must be a function'
     );
 
     assert.throws(
@@ -68,7 +68,7 @@ describe('registerAction', function() {
         action: 1
       }),
       Error,
-      'format formatter must be a function'
+      'action must be a function'
     );
 
     assert.throws(
@@ -77,7 +77,7 @@ describe('registerAction', function() {
         action: 'name'
       }),
       Error,
-      'format formatter must be a function'
+      'action must be a function'
     );
 
     assert.throws(
@@ -86,7 +86,7 @@ describe('registerAction', function() {
         action: []
       }),
       Error,
-      'format formatter must be a function'
+      'action must be a function'
     );
 
     assert.throws(
@@ -95,21 +95,31 @@ describe('registerAction', function() {
         action: {}
       }),
       Error,
-      'format formatter must be a function'
+      'action must be a function'
     );
   });
 
-  it('should work if name and formatter are good', function() {
+  it('should work if name and action are good', function() {
     StyleDictionary.registerAction({
       name: 'scss',
       action: function() {}
     });
 
-    assert.isFunction(StyleDictionary.action['scss']);
+    assert.isFunction(StyleDictionary.action['scss'].action);
+  });
+
+  it('should handle a clean function', function() {
+    StyleDictionary.registerAction({
+      name: 'scss',
+      action: function() {},
+      clean: function() {}
+    });
+
+    assert.isFunction(StyleDictionary.action['scss'].clean);
   });
 
   it('should properly pass the registered format to instances', function() {
     var test = StyleDictionary.extend({});
-    assert.isFunction(test.action['scss']);
+    assert.isFunction(test.action['scss'].action);
   });
 });
