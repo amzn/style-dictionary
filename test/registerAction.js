@@ -19,7 +19,7 @@ describe('registerAction', function() {
   it('should error if name is not a string', function() {
     assert.throws(
       StyleDictionary.registerAction.bind(null, {
-        action: function() {}
+        do: function() {}
       }),
       Error,
       'name must be a string'
@@ -28,7 +28,7 @@ describe('registerAction', function() {
     assert.throws(
       StyleDictionary.registerAction.bind(null, {
         name: 1,
-        action: function() {}
+        do: function() {}
       }),
       Error,
       'name must be a string'
@@ -37,7 +37,7 @@ describe('registerAction', function() {
     assert.throws(
       StyleDictionary.registerAction.bind(null, {
         name: [],
-        action: function() {}
+        do: function() {}
       }),
       Error,
       'name must be a string'
@@ -46,80 +46,80 @@ describe('registerAction', function() {
     assert.throws(
       StyleDictionary.registerAction.bind(null, {
         name: {},
-        action: function() {}
+        do: function() {}
       }),
       Error,
       'name must be a string'
     );
   });
 
-  it('should error if action is not a function', function() {
+  it('should error if do is not a function', function() {
     assert.throws(
       StyleDictionary.registerAction.bind(null, {
         name: 'test'
       }),
       Error,
-      'action must be a function'
+      'do must be a function'
     );
 
     assert.throws(
       StyleDictionary.registerAction.bind(null, {
         name: 'test',
-        action: 1
+        do: 1
       }),
       Error,
-      'action must be a function'
+      'do must be a function'
     );
 
     assert.throws(
       StyleDictionary.registerAction.bind(null, {
         name: 'test',
-        action: 'name'
+        do: 'name'
       }),
       Error,
-      'action must be a function'
+      'do must be a function'
     );
 
     assert.throws(
       StyleDictionary.registerAction.bind(null, {
         name: 'test',
-        action: []
+        do: []
       }),
       Error,
-      'action must be a function'
+      'do must be a function'
     );
 
     assert.throws(
       StyleDictionary.registerAction.bind(null, {
         name: 'test',
-        action: {}
+        do: {}
       }),
       Error,
-      'action must be a function'
+      'do must be a function'
     );
   });
 
-  it('should work if name and action are good', function() {
+  it('should work if name and do are good', function() {
     StyleDictionary.registerAction({
       name: 'scss',
-      action: function() {}
+      do: function() {}
     });
 
-    assert.isFunction(StyleDictionary.action['scss'].action);
+    assert.isFunction(StyleDictionary.action['scss'].do);
   });
 
-  it('should handle a clean function', function() {
+  it('should handle an undo function', function() {
     StyleDictionary.registerAction({
       name: 'scss',
-      action: function() {},
-      clean: function() {}
+      do: function() {},
+      undo: function() {}
     });
 
-    assert.isFunction(StyleDictionary.action['scss'].clean);
+    assert.isFunction(StyleDictionary.action['scss'].undo);
   });
 
   it('should properly pass the registered format to instances', function() {
     var test = StyleDictionary.extend({});
-    assert.isFunction(test.action['scss'].action);
+    assert.isFunction(test.action['scss'].do);
   });
 });

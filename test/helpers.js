@@ -31,11 +31,20 @@ module.exports = {
     }
   },
 
-  fileDoesNotExist: function(filePath) {
+  pathDoesNotExist: function(path) {
     try {
-      return !fs.existsSync(filePath);
+      return !fs.existsSync(path);
     } catch (err) {
       return false;
     }
+  },
+
+  dirDoesNotExist: function(dirPath) {
+    return this.pathDoesNotExist(dirPath);
+  },
+
+  fileDoesNotExist: function(filePath) {
+    return this.pathDoesNotExist(filePath);
+
   }
 };

@@ -18,10 +18,10 @@ var assert          = require('chai').assert,
 
 StyleDictionary.registerAction({
   name: 'test',
-  action: function() {
+  do: function() {
     fs.writeFileSync('./test/output/action.txt', 'hi')
   },
-  clean: function() {
+  undo: function() {
     fs.removeSync('./test/output/action.txt')
   }
 });
