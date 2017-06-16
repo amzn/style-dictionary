@@ -42,12 +42,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/amznlabs/style-dictionary.git"
+    "url": "git://github.com/amzn/style-dictionary.git"
   },
   "author": "Amazon Labs",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/amznlabs/style-dictionary/issues"
+    "url": "https://github.com/amzn/style-dictionary/issues"
   },
   "contributors": [
     "Yuliya Baran <baranyu@amazon.com>",
@@ -55,7 +55,7 @@
     "Dustin Boudreau <boudrd@amazon.com>",
     "Danny Banks <djb@amazon.com>"
   ],
-  "homepage": "https://github.com/amznlabs/style-dictionary",
+  "homepage": "https://github.com/amzn/style-dictionary",
   "dependencies": {
     "commander": "^2.9.0",
     "fs-extra": "^0.30.0",

@@ -1,6 +1,4 @@
-<a href="">
-  <img src="https://cloud.githubusercontent.com/assets/2113376/26018832/0433d85e-3726-11e7-8ef8-be6983e078a0.png" alt="Style Dictionary logo" title="StyleDictionary" width="100" align="right" />
-</a>
+<img src="https://github.com/amzn/style-dictionary/raw/master/images/logo.png" alt="Style Dictionary logo" title="StyleDictionary" width="100" align="right" />
 
 [![npm version](https://img.shields.io/npm/v/style-dictionary.svg?style=flat-square)](https://badge.fury.io/js/style-dictionary)
 [![npm version](https://img.shields.io/npm/l/style-dictionary.svg?style=flat-square)](https://badge.fury.io/js/style-dictionary)
@@ -38,6 +36,10 @@ Or you can install it like a normal npm dependency. This is a build tool so you 
 $ npm install -D style-dictionary
 ```
 
+If you want to install it with yarn:
+```bash
+$ yarn add style-dictionary --dev
+```
 
 ## Usage
 ### CLI
@@ -45,6 +47,7 @@ $ npm install -D style-dictionary
 $ style-dictionary build
 ```
 Call this in the root directory of your project. The only thing needed is a `config.json` file. There are also arguments:
+
 | Flag | Short Flag | Description |
 | --- | --- | --- |
 | --config \[path\] | -h | et the config file to use. Must be a .json file |
@@ -133,7 +136,7 @@ This tells the style dictionary build system how and what to build. The default 
 | platform.files | Array (optional) | Files to be generated for this platform. |
 | platform.file.destination | String (optional) | Location to build the file, will be appended to the buildPath. |
 | platform.file.format | String (optional) | Format used to generate the file. Can be a built-in one or you can create your own. Must declare a format or a template. |
-| platform.file.template | String (optional) | Template used to generate the file. Can be a built-in one or you can create your own. [More on formats and templates](https://github.com/amznlabs/style-dictionary/tree/master/docs/formats_and_templates.md) |
+| platform.file.template | String (optional) | Template used to generate the file. Can be a built-in one or you can create your own. [More on formats and templates](https://amzn.github.io/style-dictionary/formats_and_templates) |
 
 ### Properties
 ```json
@@ -176,8 +179,9 @@ float const SizeFontBase = 16.00f;
 
 
 ## Quick Start
-The style dictionary framework comes with some example code to get you stared. After installing the node module, create a directory and `cd` into it.
+The style dictionary framework comes with some example code to get you stared. Install the node module globally, create a directory and `cd` into it.
 ```
+$ npm i -g style-dictionary
 $ mkdir MyStyleDictionary
 $ cd MyStyleDictionary
 ```
@@ -243,7 +247,7 @@ StyleDictionary.registerTransform({
 StyleDictionary.buildAllPlatforms();
 ```
 
-For more information on creating your own transforms, templates, and formats, take a look at our [docs](https://github.com/amznlabs/style-dictionary/tree/master/docs). 
+For more information on creating your own transforms, templates, and formats, take a look at our [docs](https://amzn.github.io/style-dictionary/).
 
 
 ## Contributing

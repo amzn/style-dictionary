@@ -5,7 +5,7 @@
 ```javascript
 const StyleDictionary = require('style-dictionary');
 const styleDictionary = StyleDictionary.extend('config.json');
- 
+
 styleDictionary.registerFormat({
   name: 'json',
   // dictionary has properties in object form, and allProperties as a flat array
@@ -28,7 +28,7 @@ const Handlebars = require('handlebars');
 const styleDictionary = StyleDictionary.extend('config.json');
 
 const template = Handlebars.compile( fs.readFileSync('templates/MyTemplate.hbs') );
- 
+
 styleDictionary.registerFormat({
   name: 'myTemplate',
   formatter: function(dictionary, platform) {
@@ -42,8 +42,8 @@ styleDictionary.registerFormat({
 styleDictionary.buildAllPlatforms();
 ```
 
-## Built in Formats
-[lib/common/formats.js](https://github.com/amznlabs/style-dictionary/blob/master/lib/common/formats.js)
+## Default Formats
+[lib/common/formats.js](https://github.com/amzn/style-dictionary/blob/master/lib/common/formats.js)
 
 <table>
   <thead>
@@ -91,3 +91,6 @@ styleDictionary.buildAllPlatforms();
     </tr>
   </tbody>
 </table>
+
+
+## Default Templates

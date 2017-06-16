@@ -17,9 +17,9 @@
 7. **Fail loudly.** If you reference a property that doesn't exist or format something wrong, it should break the build. This prevents unexpected errors down the line.
 
 ## Core concepts
-* [Build Process](https://github.com/amznlabs/style-dictionary/tree/master/docs/build_process.md)
-* [Transforms](https://github.com/amznlabs/style-dictionary/tree/master/docs/transforms.md)
-* [Formats and Templates](https://github.com/amznlabs/style-dictionary/tree/master/docs/formats_and_templates.md)
-* [Property Structure](https://github.com/amznlabs/style-dictionary/tree/master/docs/property_structure.md)
-* [Extending](https://github.com/amznlabs/style-dictionary/tree/master/docs/extending.md)
-* [Configuration](https://github.com/amznlabs/style-dictionary/tree/master/docs/configuration.md)
+* [Build Process](https://amzn.github.io/style-dictionary/build_process)
+* [Transforms](https://amzn.github.io/style-dictionary/transforms)
+* [Formats and Templates](https://amzn.github.io/style-dictionary/formats_and_templates)
+* [Property Structure](https://amzn.github.io/style-dictionary/property_structure)
+* [Extending](https://amzn.github.io/style-dictionary/extending)
+* [Configuration](https://amzn.github.io/style-dictionary/configuration)
