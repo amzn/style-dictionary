@@ -42,55 +42,9 @@ styleDictionary.registerFormat({
 styleDictionary.buildAllPlatforms();
 ```
 
-## Default Formats
-[lib/common/formats.js](https://github.com/amzn/style-dictionary/blob/master/lib/common/formats.js)
+## [Default Formats](https://amzn.github.io/style-dictionary/default_formats)
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>css/variables</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>scss/variables</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>scss/icons</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>javascript/module</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>javascript/object</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>javascript/es6</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>json</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>json/asset</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>sketch/palette</td>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
+This package comes with some default formats for you to use. These formats should be as generic as possible. If you have an idea for other formats or how to improve some, please file an issue.
 
 
-## Default Templates
+## [Default Templates](https://amzn.github.io/style-dictionary/default_templates)

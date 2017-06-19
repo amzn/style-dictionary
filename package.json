@@ -38,13 +38,16 @@
     "lint": "eslint index.js lib/**/*.js test/*.js test/**/*.js",
     "test": "npm run lint && mocha --recursive -c",
     "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha -- test/*.js test/**/*.js",
+    "preversion": "npm test",
+    "version": "node ./scripts/version.js && npm run generate-docs",
+    "generate-docs": "node ./scripts/generateDocs.js",
     "install-cli": "npm install -g $(npm pack)"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/amzn/style-dictionary.git"
   },
-  "author": "Amazon Labs",
+  "author": "Amazon",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/amzn/style-dictionary/issues"
