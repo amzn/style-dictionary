@@ -9,22 +9,22 @@ There are 3 types of transforms: attribute, name, and value.
 
 ### Attribute
 
-An attribute transform adds to the attributes object on a property. This is for including any meta-data about a property such as it's CTI or other information. 
+An attribute transform adds to the attributes object on a property. This is for including any meta-data about a property such as it's CTI or other information.
 
 ### Name
 
-A name transform transform the name of a property. You should really only be apply one name transformer because they will override each other if you use more than one. 
+A name transform transform the name of a property. You should really only be apply one name transformer because they will override each other if you use more than one.
 
 ### Value
 
-The value transform is the most important as this is the one that changes the representation of the value. Colors can be turned into hex values, rgb, hsl, hsv, etc. Value transforms have a matcher function so that they only get run on certain properties. This allows us to only run a color transform on just the colors and not every property. 
+The value transform is the most important as this is the one that changes the representation of the value. Colors can be turned into hex values, rgb, hsl, hsv, etc. Value transforms have a matcher function so that they only get run on certain properties. This allows us to only run a color transform on just the colors and not every property.
 
 ## Adding Custom Transforms
-Having built-in transforms is nice, but the real power is in defining your own. You can add custom transforms in node with the `registerTransform` method on the style dictionary class. 
+Having built-in transforms is nice, but the real power is in defining your own. You can add custom transforms in node with the `registerTransform` method on the style dictionary class.
 ```javascript
 const StyleDictionary = require('style-dictionary');
 const styleDictionary = StyleDictionary.extend('config.json');
- 
+
 styleDictionary.registerTransform({
   name: 'color/rgb',
   type: 'value',
@@ -39,10 +39,10 @@ styleDictionary.registerTransform({
 styleDictionary.buildAllPlatforms();
 ```
 
-You must supply a name, type, and transformer function to the registerTransform method. If you omit the matcher function, it will match all properties. 
+You must supply a name, type, and transformer function to the registerTransform method. If you omit the matcher function, it will match all properties.
 
 ## Built-in Transforms
-[lib/common/transforms.js](https://github.com/amznlabs/style-dictionary/blob/master/lib/common/transforms.js)
+[lib/common/transforms.js](https://github.com/amzn/style-dictionary/blob/master/lib/common/transforms.js)
 
 <table>
   <thead>

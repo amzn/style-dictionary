@@ -136,4 +136,4 @@ Now lets make a change and see how that affects things. Open up `properties/colo
 
 **Huzzah!**
 
-Now go forth and create! Take a look at all the built-in [transforms](https://github.com/amznlabs/style-dictionary/wiki/Transforms#built-in-transforms), [formats, and templates](https://github.com/amznlabs/style-dictionary/wiki/Formats-and-Templates#built-in-formats). 
+Now go forth and create! Take a look at all the built-in [transforms](https://amzn.github.io/style-dictionary/transforms#built-in-transforms), [formats, and templates](https://amzn.github.io/style-dictionary/formats_and_templates#built-in-formats).
