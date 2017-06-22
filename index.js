@@ -12,7 +12,7 @@
  */
 
 var StyleDictionary = {
-  VERSION: '2.0.0',
+  VERSION: require('./package.json').version,
   properties: {},
   allProperties: [],
   options: {},
