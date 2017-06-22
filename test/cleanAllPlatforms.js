@@ -13,36 +13,21 @@
 
 var assert          = require('chai').assert,
     helpers         = require('./helpers'),
-    fs              = require('fs-extra'),
     StyleDictionary = require('../index');
 
-StyleDictionary.registerAction({
-  name: 'test',
-  do: function() {
-    fs.writeFileSync('./test/output/action.txt', 'hi')
-  },
-  undo: function() {
-    fs.removeSync('./test/output/action.txt')
-  }
-});
+// Test configs
+var config = helpers.fileToJSON(__dirname + '/configs/test.json');
+var test = StyleDictionary.extend(config);
 
-var test = StyleDictionary.extend({
-  "platforms": {
-    "android": {
-      "actions": ["test"]
-    }
-  }
-});
+describe('cleanAllPlatforms', function() {
+  beforeEach(function() {
+    helpers.clearOutput();
+  });
 
-describe('buildPlatform', function() {
-  describe('handle actions', function() {
-    beforeEach(function() {
-      helpers.clearOutput();
-    });
-
-    it('should write to a file properly', function() {
-      test.buildPlatform('android');
-      assert(helpers.fileExists('./test/output/action.txt'));
-    });
+  it('should work', function() {
+    test.buildAllPlatforms();
+    test.cleanAllPlatforms();
+    assert(helpers.fileDoesNotExist('./test/output/web/_icons.scss'));
+    assert(helpers.fileDoesNotExist('./test/output/android/colors.xml'));
   });
 });

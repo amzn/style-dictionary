@@ -11,24 +11,23 @@
  * and limitations under the License.
  */
 
-var _ = require('lodash');
+var assert  = require('chai').assert,
+  helpers   = require('./helpers'),
+  buildFile = require('../lib/buildFile'),
+  cleanFile = require('../lib/cleanFile');
 
-/**
- * Performs any actions in a platform config. Pretty
- * simple really. Actions should be an array of functions,
- * the calling function should map the functions accordingly.
- * @memberOf StyleDictionary
- * @param {Object} dictionary
- * @param {Object} platform
- * @returns {null}
- */
-function performActions(dictionary, platform) {
-  if (platform.actions) {
-    _.each(platform.actions, function(action) {
-      action.do(dictionary, platform);
-    });
-  }
+function format() {
+  return "hi";
 }
 
+describe('cleanFile', function() {
+  beforeEach(function() {
+    helpers.clearOutput();
+  });
 
-module.exports = performActions;
+  it('should delete a file properly', function() {
+    buildFile('test.txt', format, {buildPath: 'test/output/'}, {});
+    cleanFile('test.txt', format, {buildPath: 'test/output/'}, {});
+    assert(helpers.fileDoesNotExist('./test/output/test.txt'));
+  });
+});

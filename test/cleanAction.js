@@ -34,15 +34,16 @@ var test = StyleDictionary.extend({
   }
 });
 
-describe('buildPlatform', function() {
-  describe('handle actions', function() {
+describe('cleanPlatform', function() {
+  describe('clean actions', function() {
     beforeEach(function() {
       helpers.clearOutput();
     });
 
-    it('should write to a file properly', function() {
+    it('should delete a file properly', function() {
       test.buildPlatform('android');
-      assert(helpers.fileExists('./test/output/action.txt'));
+      test.cleanPlatform('android');
+      assert(helpers.fileDoesNotExist('./test/output/action.txt'));
     });
   });
 });

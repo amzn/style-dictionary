@@ -29,5 +29,22 @@ module.exports = {
     } catch (err) {
       return false;
     }
+  },
+
+  pathDoesNotExist: function(path) {
+    try {
+      return !fs.existsSync(path);
+    } catch (err) {
+      return false;
+    }
+  },
+
+  dirDoesNotExist: function(dirPath) {
+    return this.pathDoesNotExist(dirPath);
+  },
+
+  fileDoesNotExist: function(filePath) {
+    return this.pathDoesNotExist(filePath);
+
   }
 };
