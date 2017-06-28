@@ -50,7 +50,7 @@ Call this in the root directory of your project. The only thing needed is a `con
 
 | Flag | Short Flag | Description |
 | --- | --- | --- |
-| --config \[path\] | -h | et the config file to use. Must be a .json file |
+| --config \[path\] | -h | Set the config file to use. Must be a .json file |
 | --platform \[platform\] | -p | Only build a specific platform defined in the config file. |
 | --help | -h | Display help content |
 | --version | -v | Display the version |
@@ -185,7 +185,7 @@ $ npm i -g style-dictionary
 $ mkdir MyStyleDictionary
 $ cd MyStyleDictionary
 ```
-Now run
+Now run:
 ```
 $ style-dictionary init basic
 ```
@@ -195,7 +195,7 @@ This command will copy over the example files found in [example](example/) in th
 $ style-dictionary build
 ```
 
-Take a look at the documentation for the example code
+Take a look at the documentation for the example code.
 
 
 ## Style Properties

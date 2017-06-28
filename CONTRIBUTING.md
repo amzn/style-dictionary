@@ -32,7 +32,7 @@ We use ESLint on the code to ensure a consistent style. Any new code committed m
 1. **Do not mutate property names or values in a format or template.** Mutations like this should happen in a transformer.
 1. **Be as generic as possible.** Do not hard-code any values or configuration in formats or templates.
 1. **Fail loudly.** Users should be aware if something is missing or configurations aren't correct. This will help debug any issues instead of failing silently.
-1. **Rely of few dependencies.** This framework is meant to be extended and allows for customization. We don't want to bring a slew of dependencies that most people don't need.
+1. **Rely on few dependencies.** This framework is meant to be extended and allows for customization. We don't want to bring a slew of dependencies that most people don't need.
 
 ## What should be included?
 
