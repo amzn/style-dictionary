@@ -42,4 +42,17 @@ describe('combineJSON', function() {
     assert(!test.d.e.f.g);
     assert.equal(test.d.e.f.h, 2);
   });
+
+  it('should fail if there is a collision and it is passed a collision function', function() {
+    assert.throws(
+      combineJSON.bind(null, ["test/json_files/shallow/*.json"], true, function Collision(opts) {
+        assert.equal(opts.key, 'a');
+        assert.equal(opts.target[opts.key], 1);
+        assert.equal(opts.copy[opts.key], 2);
+        throw new Error('test');
+      }),
+      Error,
+      'test'
+    );
+  });
 });
