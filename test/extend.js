@@ -132,4 +132,34 @@ describe('extend', function() {
   });
 
 
+  // This is to allow style dictionaries to depend on other style dictionaries and
+  // override properties. Useful for skinning
+  it('should not throw a collision error if a source file collides with an include', function() {
+    var test = StyleDictionary.extend({
+      include: [__dirname + "/properties/paddings.json"],
+      source: [__dirname + "/properties/paddings.json"],
+      log: 'error'
+    });
+    assert.deepEqual(test.properties, helpers.fileToJSON(__dirname + "/properties/paddings.json"));
+  });
+
+  it('should throw a error if the collision is in source files and log is set to error', function() {
+    assert.throws(
+      StyleDictionary.extend.bind(null, {
+        source: [__dirname + "/properties/paddings.json", __dirname + "/properties/paddings.json"],
+        log: 'error'
+      }),
+      Error,
+      'Collision detected at:'
+    );
+  });
+
+  it('should throw a warning if the collision is in source files and log is set to warn', function() {
+    assert.doesNotThrow(
+      StyleDictionary.extend.bind(null, {
+        source: [__dirname + "/properties/paddings.json", __dirname + "/properties/paddings.json"],
+        log: 'warn'
+      })
+    );
+  });
 });
