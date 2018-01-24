@@ -192,6 +192,10 @@ section.cover .cover-main {
   margin: 20vh 20vw;
 }
 
+.app-name-link {
+  white-space: nowrap;
+}
+
 .app-sub-sidebar li:before {
   display: none;
 }
