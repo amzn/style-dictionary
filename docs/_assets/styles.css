@@ -14,7 +14,7 @@
 body {
   font-size: 100%;
   line-height: 1.5;
-  font-family: 'Open Sans';
+  font-family: 'Open Sans','Source Sans Pro','Helvetica Neue',Arial,sans-serif;
 }
 
 * {
