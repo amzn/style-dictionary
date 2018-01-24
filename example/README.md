@@ -2,8 +2,13 @@
 
 # Examples
 
-Here you can find some sample projects to get started. Some of them are about specific use-cases like using Yaml instead of JSON or uploading to s3.
+Here you can find some sample projects to get started. You can start a new project from these examples using the CLI:
+```bash
+$ mkdir MyStyleD
+$ cd MyStyleD
+$ style-dictionary init basic
+```
 
 ## Do you have another way to use a style dictionary?
 
-Let us know by [filing an issue][https://github.com/amzn/style-dictionary/issues] or sending us an email: style-dictionary@amazon.com.
+Let us know by [filing an issue](https://github.com/amzn/style-dictionary/issues) or sending us an email: style-dictionary@amazon.com.

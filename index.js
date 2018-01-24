@@ -11,6 +11,18 @@
  * and limitations under the License.
  */
 
+/**
+ * Style Dictionary module
+ *
+ * @module style-dictionary
+ * @typicalname StyleDictionary
+ * @example
+ * ```js
+ * const StyleDictionary = require('style-dictionary').extend('config.json');
+ *
+ * StyleDictionary.buildAllPlatforms();
+ * ```
+ */
 var StyleDictionary = {
   VERSION: require('./package.json').version,
   properties: {},

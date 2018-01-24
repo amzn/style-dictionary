@@ -1,0 +1,39 @@
+# Transforms
+
+Transforms are functions that transform a property so that each platform can consume the property in different ways. A simple example is changing pixel values to point values for iOS and dp or sp for Android. Transforms are applied in a non-destructive way so each platform can transform the properties. Transforms are performed sequentially, so the order you use transforms matters. You can define custom transforms with the [`registerTransform`](api.md#registertransform).
+
+You use transforms in your config file under platforms > [platform] > transforms
+
+```json
+{
+  "source": ["properties/**/*.json"],
+  "platforms": {
+    "android": {
+      "transforms": ["attribute/cti", "name/cti/kebab", "color/hex", "size/rem"]
+    }
+  }
+}
+```
+
+A transform consists of 4 parts: type, name, matcher, and transformer. Transforms are run on all properties where the matcher returns true. *NOTE: if you don't provide a matcher function, it will match all properties.*
+
+### Transform Types
+There are 3 types of transforms: attribute, name, and value.
+
+**Attribute:** An attribute transform adds to the attributes object on a property. This is for including any meta-data about a property such as it's CTI or other information.
+
+**Name:** A name transform transform the name of a property. You should really only be apply one name transformer because they will override each other if you use more than one.
+
+**Value:** The value transform is the most important as this is the one that changes the representation of the value. Colors can be turned into hex values, rgb, hsl, hsv, etc. Value transforms have a matcher function so that they only get run on certain properties. This allows us to only run a color transform on just the colors and not every property.
+
+----
+
+## Pre-defined Transforms
+
+[lib/common/transforms.js](https://github.com/amzn/style-dictionary/blob/master/lib/common/transforms.js)
+
+> All the pre-defined transforms included use the [CTI structure](package_structure.md#properties) for the match properties. If you structure your style properties differently you will need to write [custom transforms](#custom-transforms) or make sure the property CTIs are on the attributes of your properties.
+
+{{#namespace name="Transforms"}}
+{{>members~}}
+{{/namespace}}
