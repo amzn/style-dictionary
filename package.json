@@ -70,6 +70,7 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "docsify": "^4.5.7",
+    "docsify-cli": "^4.2.0",
     "eslint": "^3.11.1",
     "istanbul": "^0.4.5",
     "jsdoc-to-markdown": "^3.0.3",
