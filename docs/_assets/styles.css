@@ -1,11 +1,16 @@
 :root {
-  --theme-color: #22D4C0;
+  --theme-color: #1FC5BF;
   --theme-color-light: #99EBE2;
-  --theme-color-dark: #01B39F;
-  --theme-color-secondary: #634299;
+  --theme-color-dark: #00B3AC;
+  --theme-color-secondary: #6A5096;
   --theme-color-secondary-dark: #3F1C77;
-  --theme-color-secondary-light: #926AD1;
+  --theme-color-secondary-light: #C4B2E1;
+
+  --text-color-base: #2E2E46;
+  --text-color-secondary: #646473;
+  --text-color-tertiary: #81818E;
 }
+
 
 ::selection {
   background: var(--theme-color-light);
@@ -15,6 +20,7 @@ body {
   font-size: 100%;
   line-height: 1.5;
   font-family: 'Open Sans','Source Sans Pro','Helvetica Neue',Arial,sans-serif;
+  color: var(--text-color-base);
 }
 
 * {
@@ -24,7 +30,7 @@ body {
 div.search {
   border-bottom: 2px solid #787881;
   border: none;
-  background-color: #29D0CA;
+  background-color: var(--theme-color-secondary-light);
   padding: 0;
 }
 
@@ -39,13 +45,9 @@ div.search {
   background-color: rgba(255,255,255,1);
 }
 
-.search input::placeholder {
-  /* color: rgba(255,255,255,0.75); */
-}
-
 aside.sidebar {
   border: none;
-  background-color: #05827E;
+  background-color: var(--theme-color-secondary);
   color: #fff;
   width: 20%;
 }
@@ -69,7 +71,7 @@ body.close .sidebar {
 
 .sidebar .sidebar-nav ul li.active>a {
   color: #fff;
-  border-right: 0.2rem solid #29D0CA;
+  border-right: 0.2rem solid var(--theme-color-secondary-light,#29D0CA);
 }
 
 .search .results-panel.show {
@@ -98,7 +100,6 @@ body.close .sidebar {
 }
 
 .search a:hover {
-  /* background-color: var(--theme-color-secondary); */
   color: var(--theme-color-dark);
 }
 
@@ -106,6 +107,19 @@ body.close .sidebar {
   margin: 0;
   padding: 1rem;
   background-color: #F1F1F2;
+}
+
+.sidebar > h1 {
+  font-size: 2rem;
+}
+
+.sidebar-logo {
+  display: block;
+  width: 4rem;
+  vertical-align: bottom;
+  line-height: 1.6;
+  height: 4rem;
+  margin: 0 auto;
 }
 
 body .sidebar-toggle {
@@ -122,6 +136,11 @@ th {
 
 .markdown-section blockquote {
   margin: 1em 0;
+}
+
+.markdown-section em,
+.markdown-section blockquote {
+  color: var(--text-color-tertiary);
 }
 
 .cover-main img {
@@ -142,15 +161,14 @@ section.cover .cover-main a::before {
 }
 
 section.cover .cover-main blockquote {
-  /* border: 0.1rem solid var(--theme-color); */
   font-style: italic;
   color: #868C91;
 }
 
 section.cover .cover-main>p:last-child a:first-child {
   border-width: 0.2rem;
-  color: var(--theme-color-secondary-light);
-  border-color: var(--theme-color-secondary-light);
+  color: var(--theme-color-secondary);
+  border-color: var(--theme-color-secondary);
 }
 
 section.cover .cover-main>p:last-child a:last-child {

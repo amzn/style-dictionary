@@ -1,4 +1,4 @@
-![logo](_assets/logo-v2.png)
+![logo](_assets/logo.png)
 
 # Style Dictionary
 
