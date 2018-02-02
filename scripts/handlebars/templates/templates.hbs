@@ -1,0 +1,65 @@
+# Templates
+
+Templates are one of the ways to create files that act as interfaces for your style dictionary. For example, you want to be able to
+use your style dictionary in Android. You can use the `android/colors` template which will create an Anroid resource XML file from
+your style dictionary. You can define custom templates with the [`registerTemplate`](api.md#registertemplate).
+
+Templates and Formats serve the same purpose: use your style dictionary as data to build a file. You use templates in your config
+file under platforms > [platform] > files > [file]
+
+```json
+{
+  "source": ["properties/**/*.json"],
+  "platforms": {
+    "android": {
+      "transformGroup": "android",
+      "files": [
+        {
+          "template": "android/colors",
+          "destination": "colors.xml"
+        }
+      ]
+    }
+  }
+}
+```
+
+>*__How are Templates different than Formats?__*
+
+>Mainly syntactic sugar; anything you can do in a Template you can do in a Format. Use whichever is easier for you to write. We find
+that Templates are good if you have a lot of boilerplate code around where the style dictionary will go (like writing ObjectiveC files).
+Formats are better if there is little to no boilerplate code like a flat SCSS variables file.
+
+### Using a different templating language
+
+If you are partial to Handlebars or some other templating language, anything will work as long as there is a node module for it.
+All you need to do is register a custom format which calls your template and returns a string. Here is a quick example for Handlebars.
+
+```js
+const StyleDictionary = require('style-dictionary').extend('config.json');
+const Handlebars = require('handlebars');
+
+const template = Handlebars.compile( fs.readFileSync('templates/MyTemplate.hbs') );
+
+styleDictionary.registerFormat({
+  name: 'myTemplate',
+  formatter: function(dictionary, platform) {
+    return template({
+      properties: dictionary.properties,
+      options: platform
+    });
+  }
+});
+
+styleDictionary.buildAllPlatforms();
+```
+
+----
+
+## Pre-defined Templates
+
+[lib/common/templates.js](https://github.com/amzn/style-dictionary/blob/master/lib/common/templates.js)
+
+{{#namespace name="Templates"}}
+{{>members~}}
+{{/namespace}}

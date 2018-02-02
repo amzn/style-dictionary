@@ -1,0 +1,26 @@
+# Transform Groups
+
+Transform Groups are a way to easily define and use groups of transforms. They are an array of transforms. You can define custom transform groups with the [`registerTransformGroup`](api.md#registertransformgroup).
+
+You use transformGroups in your config file under platforms > [platform] > transformGroup
+
+```json
+{
+  "source": ["properties/**/*.json"],
+  "platforms": {
+    "android": {
+      "transformGroup": "android"
+    }
+  }
+}
+```
+
+----
+
+## Pre-defined Transform groups
+
+[lib/common/transformGroups.js](https://github.com/amzn/style-dictionary/blob/master/lib/common/transformGroups.js)
+
+{{#namespace name="TransformGroups"}}
+{{>members~}}
+{{/namespace}}

@@ -41,6 +41,7 @@
     "preversion": "npm test",
     "version": "node ./scripts/version.js && npm run generate-docs",
     "generate-docs": "node ./scripts/generateDocs.js",
+    "serve-docs": "docsify serve docs -p 3000 -P 12345",
     "install-cli": "npm install -g $(npm pack)"
   },
   "repository": {
@@ -68,8 +69,11 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "docsify": "^4.5.7",
+    "docsify-cli": "^4.2.0",
     "eslint": "^3.11.1",
     "istanbul": "^0.4.5",
+    "jsdoc-to-markdown": "^3.0.3",
     "mocha": "^3.1.2"
   }
 }

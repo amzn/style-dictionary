@@ -2,7 +2,7 @@
 
 Here is what the build system is doing under the hood.
 
-![build structure](https://github.com/amzn/style-dictionary/raw/master/images/build-diagram.png)
+![build structure](assets/build-diagram.png)
 
 ## CLI
 
@@ -19,7 +19,7 @@ Here is what the build system is doing under the hood.
 
 If you use this as a node module, the steps are slightly different, but the overall.
 
-1. When you call the `extend` method, you can either pass it a path to a JSON config file, or give it a plain object that has the configuration. This will perform steps 1-3 above.
+1. When you call the [`extend`](api.md#extend) method, you can either pass it a path to a JSON config file, or give it a plain object that has the configuration. This will perform steps 1-3 above.
 1. Then you can now call `buildAllPlatforms` or other methods like `buildPlatform('scss')` or `exportPlatform('javascript')`. This is equivalent to step 4 above.
 
 ```javascript

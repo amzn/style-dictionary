@@ -1,7 +1,8 @@
-<img src="https://github.com/amzn/style-dictionary/raw/master/images/logo.png" alt="Style Dictionary logo" title="StyleDictionary" width="100" align="right" />
+<img src="docs/assets/logo.png" alt="Style Dictionary logo" title="StyleDictionary" width="100" align="right" />
 
 [![npm version](https://img.shields.io/npm/v/style-dictionary.svg?style=flat-square)](https://badge.fury.io/js/style-dictionary)
-[![npm version](https://img.shields.io/npm/l/style-dictionary.svg?style=flat-square)](https://badge.fury.io/js/style-dictionary)
+![license](https://img.shields.io/npm/l/style-dictionary.svg?style=flat-square)
+[![Build Status](https://img.shields.io/travis/amzn/style-dictionary.svg?style=flat-square)](https://travis-ci.org/amzn/style-dictionary)
 [![code climate](https://img.shields.io/codeclimate/github/amzn/style-dictionary.svg?style=flat-square)](https://codeclimate.com/github/amzn/style-dictionary)
 
 > *Style once, use everywhere.*
