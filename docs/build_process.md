@@ -2,7 +2,7 @@
 
 Here is what the build system is doing under the hood.
 
-![build structure](_assets/build-diagram.png)
+![build structure](assets/build-diagram.png)
 
 ## CLI
 

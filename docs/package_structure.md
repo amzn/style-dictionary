@@ -87,7 +87,7 @@ The above JSON snippet has 2 style properties, `color.font.base` and `color.font
 
 This is not required by any means, but we feel this classification structure of style properties makes the most sense semantically. Style properties can be organized into a hierarchical tree structure with the top level, category, defining the primitive nature of the property. For example, we have the color category and every property underneath is always a color. As you proceed down the tree, you get more specific about what that color is. Is it a background color, a text color, or a border color? What kind of text color is it? You get the point. It's like the animal kingdom classification:
 
-![](_assets/cti.png)
+![](assets/cti.png)
 
 Now you can structure your property json files like simple objects:
 
