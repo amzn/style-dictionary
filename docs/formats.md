@@ -119,6 +119,38 @@ var StyleDictionary = {
 
 * * *
 
+### javascript/umd 
+
+
+Creates a [UMD](https://github.com/umdjs/umd) module of the style
+dictionary. Name the module by adding a 'name' attribute on the file object
+in your config.
+
+**Example**  
+```js
+(function(root, factory) {
+  if (typeof module === "object" && module.exports) {
+    module.exports = factory();
+  } else if (typeof exports === "object") {
+    exports["_styleDictionary"] = factory();
+  } else if (typeof define === "function" && define.amd) {
+    define([], factory);
+  } else {
+    root["_styleDictionary"] = factory();
+  }
+}(this, function() {
+  return {
+    "color": {
+      "red": {
+        "value": "#FF0000"
+      }
+    }
+  };
+}))
+```
+
+* * *
+
 ### javascript/es6 
 
 
