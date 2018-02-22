@@ -57,4 +57,54 @@ describe('buildPlatform', function() {
     assert(helpers.fileExists('./test/output/ios/style_dictionary.plist'));
     assert(helpers.fileExists('./test/output/ios/style_dictionary.h'));
   });
+
+  it('should handle non-string values in properties', function() {
+    var test = StyleDictionary.extend({
+      source: ['test/properties/nonString.json'],
+      platforms: {
+        test: {
+          buildPath: "test/output/",
+          transformGroup: "scss",
+          files: [
+            {
+              "destination": "output.json",
+              "format": "json"
+            }
+          ]
+        }
+      }
+    });
+    test.buildPlatform('test');
+    assert(helpers.fileExists('./test/output/output.json'));
+    var input = helpers.fileToJSON('./test/properties/nonString.json');
+    var output = helpers.fileToJSON('./test/output/output.json');
+    assert.deepEqual(output.color.otherRed.value, input.color.red.value);
+    assert.deepEqual(output.color.otherBlue.value, input.color.blue.value);
+    assert.equal(output.size.otherLarge.value, input.size.large.value);
+  });
+
+  it('should handle non-property nodes', function() {
+    var test = StyleDictionary.extend({
+      source: ['test/properties/nonPropertyNode.json'],
+      platforms: {
+        test: {
+          buildPath: "test/output/",
+          transformGroup: "scss",
+          files: [
+            {
+              "destination": "output.json",
+              "format": "json"
+            }
+          ]
+        }
+      }
+    });
+    test.buildPlatform('test');
+    assert(helpers.fileExists('./test/output/output.json'));
+    var input = helpers.fileToJSON('./test/properties/nonPropertyNode.json');
+    var output = helpers.fileToJSON('./test/output/output.json');
+    assert.deepEqual(output.color.comment, input.color.comment);
+    assert.deepEqual(output.color.base.comment, input.color.base.comment);
+    assert.equal(output.color.base.attributes.comment, input.color.base.attributes.comment);
+  });
 });
