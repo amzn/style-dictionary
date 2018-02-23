@@ -268,4 +268,12 @@ describe('resolveObject', function() {
       );
     });
   });
+
+  it('should handle spaces', function() {
+    var test = resolveObject({
+      foo: { value: 'bar' },
+      bar: { value: '{ foo.value }'}
+    });
+    assert.equal(test.foo.value, test.bar.value);
+  });
 });
