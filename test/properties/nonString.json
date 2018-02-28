@@ -1,0 +1,30 @@
+{
+  "color": {
+    "red": {
+      "value": {
+        "r": 255,
+        "g": 0,
+        "b": 0,
+        "a": 1
+      }
+    },
+    "blue": {
+      "value": [0,0,255,1]
+    },
+    "otherRed": {
+      "value": "{color.red.value}"
+    },
+    "otherBlue": {
+      "value": "{color.blue.value}"
+    }
+  },
+
+  "size": {
+    "large": {
+      "value": 20
+    },
+    "otherLarge": {
+      "value": "{size.large.value}"
+    }
+  }
+}

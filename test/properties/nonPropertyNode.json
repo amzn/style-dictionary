@@ -1,0 +1,12 @@
+{
+  "color": {
+    "base": {
+      "red": { "value": "#f00" },
+      "comment": "testing",
+      "attributes": {
+        "comment": "more testing"
+      }
+    },
+    "comment": "testing"
+  }
+}
