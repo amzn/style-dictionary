@@ -64,7 +64,7 @@ describe('buildPlatform', function() {
       platforms: {
         test: {
           buildPath: "test/output/",
-          transformGroup: "scss",
+          transforms: ["attribute/cti","size/px","color/hex"],
           files: [
             {
               "destination": "output.json",
@@ -76,11 +76,22 @@ describe('buildPlatform', function() {
     });
     test.buildPlatform('test');
     assert(helpers.fileExists('./test/output/output.json'));
-    var input = helpers.fileToJSON('./test/properties/nonString.json');
+    // var input = helpers.fileToJSON('./test/properties/nonString.json');
     var output = helpers.fileToJSON('./test/output/output.json');
-    assert.deepEqual(output.color.otherRed.value, input.color.red.value);
-    assert.deepEqual(output.color.otherBlue.value, input.color.blue.value);
-    assert.equal(output.size.otherLarge.value, input.size.large.value);
+
+    // Make sure transforms run on non-string values as they normally would
+    assert.equal(output.color.red.value, output.color.otherRed.value);
+    assert.equal(output.color.red.value, "#ff0000");
+    assert.equal(output.size.large.value, output.size.otherLarge.value);
+    assert.equal(output.size.large.value, "20px");
+
+    // Make sure
+    assert.equal(output.number.test.value, output.number.otherTest.value);
+    assert.isNumber(output.number.otherTest.value);
+    assert.deepEqual(output.array.test.value, output.array.otherTest.value);
+    assert.isArray(output.array.otherTest.value);
+    assert.deepEqual(output.object.test.value, output.object.otherTest.value);
+    assert.isObject(output.object.otherTest.value);
   });
 
   it('should handle non-property nodes', function() {
