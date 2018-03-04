@@ -8,14 +8,8 @@
         "a": 1
       }
     },
-    "blue": {
-      "value": [0,0,255,1]
-    },
     "otherRed": {
       "value": "{color.red.value}"
-    },
-    "otherBlue": {
-      "value": "{color.blue.value}"
     }
   },
 
@@ -26,5 +20,27 @@
     "otherLarge": {
       "value": "{size.large.value}"
     }
+  },
+
+  "number": {
+    "test": { "value": 20 },
+    "otherTest": { "value": "{number.test.value}" }
+  },
+
+  "array": {
+    "test": { "value": ["foo","bar"] },
+    "otherTest": { "value": "{array.test.value}" }
+  },
+
+  "object": {
+    "test": {
+      "value": {
+        "foo": "bar",
+        "test": {
+          "bar": "foo"
+        }
+      }
+    },
+    "otherTest": { "value": "{object.test.value}" }
   }
 }
