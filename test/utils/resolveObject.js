@@ -276,4 +276,9 @@ describe('resolveObject', function() {
     });
     assert.equal(test.foo.value, test.bar.value);
   });
+
+  it('should collect multiple reference errors', function() {
+    var test = resolveObject( helpers.fileToJSON(__dirname + '/../json_files/multiple_reference_errors.json') );
+
+  });
 });
