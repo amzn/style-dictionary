@@ -15,7 +15,7 @@ When you are managing user experiences, it can be quite challenging to keep styl
 For detailed usage head to https://amzn.github.io/style-dictionary
 
 ## Watch the Demo on Youtube
-[![Watch the video](images/fake_player.png)](http://youtu.be/1HREvonfqhY)
+[![Watch the video](/images/fake_player.png)](http://youtu.be/1HREvonfqhY)
 
 ## Contents
 * [Installation](#installation)
