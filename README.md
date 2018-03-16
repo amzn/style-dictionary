@@ -14,6 +14,9 @@ When you are managing user experiences, it can be quite challenging to keep styl
 
 For detailed usage head to https://amzn.github.io/style-dictionary
 
+## Demo
+[![Watch the video](http://img.youtube.com/vi/1HREvonfqhY/0.jpg)](http://youtu.be/1HREvonfqhY)
+
 ## Contents
 * [Installation](#installation)
 * [Usage](#usage)
