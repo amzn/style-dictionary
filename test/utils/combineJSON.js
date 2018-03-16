@@ -45,10 +45,10 @@ describe('combineJSON', function() {
 
   it('should fail on invalid JSON', function() {
     assert.throws(
-      combineJSON(["test/json_files/broken/*.json"]),
+      combineJSON.bind(null, ["test/json_files/broken/*.json"], true),
       SyntaxError,
-	  /failed to parse JSON/
-	);
+      /failed to parse JSON/
+    );
   });
 
   it('should fail if there is a collision and it is passed a collision function', function() {
