@@ -278,7 +278,12 @@ describe('resolveObject', function() {
   });
 
   it('should collect multiple reference errors', function() {
-    var test = resolveObject( helpers.fileToJSON(__dirname + '/../json_files/multiple_reference_errors.json') );
-
+    assert.throws(
+      resolveObject.bind(null,
+        helpers.fileToJSON(__dirname + '/../json_files/multiple_reference_errors.json')
+      ),
+      Error,
+      'Failed due to 3 errors:'
+    );
   });
 });
