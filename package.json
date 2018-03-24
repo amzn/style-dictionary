@@ -74,6 +74,7 @@
     "eslint": "^3.11.1",
     "istanbul": "^0.4.5",
     "jsdoc-to-markdown": "^3.0.3",
+    "less": "^3.0.1",
     "mocha": "^3.1.2"
   }
 }

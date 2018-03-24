@@ -36,11 +36,23 @@ describe('buildPlatform', function() {
     });
   });
 
-  it('should build the proper files', function() {
+  it('should build web platform files', function() {
     test.buildPlatform('web');
-    assert(helpers.fileExists('./test/output/web/_icons.scss'));
+    assert(helpers.fileExists('./test/output/web/_icons.css'));
     assert(helpers.fileExists('./test/output/web/_styles.js'));
-    assert(helpers.fileExists('./test/output/web/_variables.scss'));
+    assert(helpers.fileExists('./test/output/web/_variables.css'));
+  });
+
+  it('should build scss platform files', function() {
+    test.buildPlatform('scss');
+    assert(helpers.fileExists('./test/output/scss/_icons.scss'));
+    assert(helpers.fileExists('./test/output/scss/_variables.scss'));
+  });
+
+  it('should build less platform files', function() {
+    test.buildPlatform('less');
+    assert(helpers.fileExists('./test/output/less/_icons.less'));
+    assert(helpers.fileExists('./test/output/less/_variables.less'));
   });
 
   it('should do android stuff', function() {
