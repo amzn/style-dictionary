@@ -26,7 +26,7 @@ describe('buildAllPlatforms', function() {
 
   it('should work', function() {
     test.buildAllPlatforms();
-    assert(helpers.fileExists('./test/output/web/_icons.scss'));
+    assert(helpers.fileExists('./test/output/web/_icons.css'));
     assert(helpers.fileExists('./test/output/android/colors.xml'));
   });
 });

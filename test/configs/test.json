@@ -2,9 +2,26 @@
   "source": ["test/properties/**/*.json"],
   "platforms": {
     "web": {
-      "transformGroup": "scss",
+      "transformGroup": "web",
       "prefix": "smop",
       "buildPath": "test/output/web/",
+      "files": [
+        {
+          "destination": "_icons.css",
+          "format": "scss/icons"
+        },{
+          "destination": "_variables.css",
+          "format": "scss/variables"
+        },{
+          "destination": "_styles.js",
+          "format": "javascript/module"
+        }
+      ]
+    },
+    "scss": {
+      "transformGroup": "scss",
+      "prefix": "smop",
+      "buildPath": "test/output/scss/",
       "files": [
         {
           "destination": "_icons.scss",
@@ -12,9 +29,20 @@
         },{
           "destination": "_variables.scss",
           "format": "scss/variables"
+        }
+      ]
+    },
+    "less": {
+      "transformGroup": "less",
+      "prefix": "smop",
+      "buildPath": "test/output/less/",
+      "files": [
+        {
+          "destination": "_icons.less",
+          "format": "less/icons"
         },{
-          "destination": "_styles.js",
-          "format": "javascript/module"
+          "destination": "_variables.less",
+          "format": "less/variables"
         }
       ]
     },
