@@ -1,0 +1,11 @@
+source:
+  - "properties/**/*.yml"
+
+platforms:
+  scss:
+    transformGroup: "scss"
+    buildPath: "build/sass/"
+    files:
+      -
+        destination: "variables.scss"
+        format: "scss/variables"

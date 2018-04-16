@@ -1,0 +1,16 @@
+{
+  "name": "style-dictionary-yaml-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build.js",
+  "scripts": {
+    "start": "node build.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "js-yaml": "^3.11.0",
+    "style-dictionary": "2.1.0"
+  }
+}
