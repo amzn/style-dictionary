@@ -13,7 +13,7 @@ A Style Dictionary is a system that allows you to define styles once, in a way f
 When you are managing user experiences, it can be quite challenging to keep styles consistent and synchronized across multiple development platforms and devices.  At the same time, designers, developers, PMs and others must be able to have consistent and up-to-date style documentation to enable effective work and communication.  Even then, mistakes inevitably happen and the design may not be implemented accurately.  StyleDictionary solves this by automatically generating style definitions across all platforms from a single source - removing roadblocks, errors, and inefficiencies across your workflow.
 
 ## Watch the Demo on Youtube
-[![Watch the video](/images/fake_player.png)](http://youtu.be/1HREvonfqhY)
+[![Watch the video](assets/fake_player.png)](http://youtu.be/1HREvonfqhY)
 
 ## The basics
 __A style dictionary consists of:__
