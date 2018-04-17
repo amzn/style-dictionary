@@ -11,8 +11,7 @@
  * and limitations under the License.
  */
 
-var fs   = require('fs-extra'),
-    glob = require('glob');
+var fs   = require('fs-extra');
 
 module.exports = {
   clearOutput: function() {

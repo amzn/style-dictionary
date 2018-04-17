@@ -49,9 +49,7 @@ describe('deepExtend', function() {
   });
 
   it('shouldn\'t fail loudly if it is a normal deep extend', function () {
-    var test = deepExtend([{foo: {bar:'bar'}}, {foo: {baz:'baz'}}], function(name) {
-
-    });
+    var test = deepExtend([{foo: {bar:'bar'}}, {foo: {baz:'baz'}}], function() {});
     assert.equal(test.foo.bar, 'bar');
     assert.equal(test.foo.baz, 'baz');
   });
@@ -59,7 +57,7 @@ describe('deepExtend', function() {
   describe('collision detection', function() {
     it('should call the collision function if a collision happens', function () {
       assert.throws(
-        deepExtend.bind(null, [{foo: {bar:'bar'}}, {foo: {bar:'baz'}}], function(opts) {
+        deepExtend.bind(null, [{foo: {bar:'bar'}}, {foo: {bar:'baz'}}], function() {
           throw new Error('danger danger. high voltage.');
         }),
         Error,

@@ -11,9 +11,7 @@
  * and limitations under the License.
  */
 
-var assert  = require('chai').assert,
-    fs = require('fs-extra'),
-    helpers = require('../helpers'),
+var vm = require('vm'),
     formats = require('../../lib/common/formats');
 
 var file = {
@@ -33,8 +31,14 @@ var dictionary = {
 var formatter = formats['javascript/object'].bind(file);
 
 describe('formats', function() {
-  describe('javascript/module', function() {
-    // Can't test a non-node type js file (without module.exports)
-    // TODO: figure out how to test this
+  describe('javascript/object', function() {
+    it('should be valid JS syntax', function(done){
+      try {
+        vm.runInNewContext(formatter(dictionary))
+        return done();
+      } catch (err) {
+        return done(new Error(err));
+      }
+    });
   });
 });

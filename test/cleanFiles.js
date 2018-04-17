@@ -45,27 +45,6 @@ var platformWithBuildPath = {
   ]
 };
 
-var platformWithoutFormatter = {
-  buildPath: 'test/output/',
-  files: [
-    {
-      destination: 'test.json',
-    }
-  ]
-};
-
-var platformWithBadBuildPath = {
-  buildPath: 'test/output',
-  files: [
-    {
-      destination: 'test.json',
-      format: function(dictionary) {
-        return JSON.stringify(dictionary.properties)
-      }
-    }
-  ]
-};
-
 describe('cleanFiles', function() {
   beforeEach(function() {
     helpers.clearOutput();
