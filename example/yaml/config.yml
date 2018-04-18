@@ -1,6 +1,6 @@
 source:
   - "properties/**/*.yml"
-
+log: "warn"
 platforms:
   scss:
     transformGroup: "scss"
