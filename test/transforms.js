@@ -13,7 +13,6 @@
 
 var assert     = require('chai').assert,
     path       = require('path'),
-    helpers    = require('./helpers'),
     transforms = require('../lib/common/transforms');
 
 

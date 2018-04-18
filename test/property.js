@@ -12,7 +12,6 @@
  */
 
 var assert            = require('chai').assert,
-    helpers           = require('./helpers'),
     transformProperty = require('../lib/transform/property');
 
 
@@ -20,20 +19,20 @@ var options = {
   transforms: [
     {
       type: 'attribute',
-      transformer: function(prop) {
+      transformer: function() {
         return {
           foo: 'bar'
         }
       }
     },{
       type: 'attribute',
-      transformer: function(prop) {
+      transformer: function() {
         return {bar: 'foo'}
       }
     },{
       type: 'name',
       matcher: function(prop) { return prop.attributes.foo === 'bar'; },
-      transformer: function(prop) { return "hello"; }
+      transformer: function() { return "hello"; }
     }
   ]
 };
