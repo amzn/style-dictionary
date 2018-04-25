@@ -34,6 +34,11 @@ When you publish this npm module, the prepublish hook will run, calling the styl
 
 One way to use the style dictionary framework is to build files for each platform and upload those build artifacts to an s3 bucket. The platforms can pull these files down during their build process.
 
+## yaml
+[View on Github](https://github.com/amzn/style-dictionary/tree/master/example/yaml)
+
+Maybe JSON isn't your thing and you want to use Yaml instead. We got you covered. Take a look at the example here which uses Yaml files instead of JSON for both the config and property files. It should give you a good starting point. 
+
 ----
 
 > More coming soon...
