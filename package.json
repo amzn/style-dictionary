@@ -24,7 +24,7 @@
     "style-dictionary": "./bin/style-dictionary"
   },
   "engines": {
-    "node": ">=4.2.4"
+    "node": ">=6.0.0"
   },
   "files": [
     "bin",
@@ -42,8 +42,12 @@
     "version": "node ./scripts/version.js && npm run generate-docs",
     "generate-docs": "node ./scripts/generateDocs.js",
     "serve-docs": "docsify serve docs -p 3000 -P 12345",
-    "install-cli": "npm install -g $(npm pack)",
-    "precommit": "npm test"
+    "install-cli": "npm install -g $(npm pack)"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test"
+    }
   },
   "repository": {
     "type": "git",
@@ -73,7 +77,7 @@
     "docsify": "^4.5.7",
     "docsify-cli": "^4.2.0",
     "eslint": "^3.11.1",
-    "husky": "^0.14.3",
+    "husky": "^1.0.0-rc.2",
     "istanbul": "^0.4.5",
     "jsdoc-to-markdown": "^3.0.3",
     "less": "^3.0.1",
