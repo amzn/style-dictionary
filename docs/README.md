@@ -38,7 +38,7 @@ Let's take a look at a very basic example.
 }
 ```
 
-Here we are creating some basic font size properties. The style property `size.font.small` is "10px" for example. The style definition size.font.base.value automatically takes on the value found in size.font.medium.value, so both of those resolve to "16px".
+Here we are creating some basic font size properties. The style property `size.font.small` is "10px" for example. The style definition size.font.base.value is automatically aliased to the value found in size.font.medium.value, so both of those resolve to "16px".
 
 Now what the style dictionary build system will do with this information is convert it to different formats so that you can use these values in any type of codebase. From this one file you can generate any number of files like:
 
