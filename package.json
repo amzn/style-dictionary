@@ -70,6 +70,7 @@
     "fs-extra": "^0.30.0",
     "glob": "^7.1.1",
     "lodash": "^4.16.4",
+    "resolve-cwd": "^2.0.0",
     "tinycolor2": "^1.4.1"
   },
   "devDependencies": {
