@@ -83,11 +83,11 @@ $content-icon-email: '\E001';
 
 Creates a LESS file with variable definitions based on the style dictionary
 
+**Color-background-base:**: #f0f0f0;  
+**Color-background-alt:**: #eeeeee;
+```  
 **Example**  
 ```less
-@color-background-base: #f0f0f0;
-@color-background-alt: #eeeeee;
-```
 
 * * *
 
@@ -96,11 +96,11 @@ Creates a LESS file with variable definitions based on the style dictionary
 
 Creates a LESS file with variable definitions and helper classes for icons
 
+**Content-icon-email:**: '\E001';
+.icon.email:before { content:@content-icon-email; }
+```  
 **Example**  
 ```less
-@content-icon-email: '\E001';
-.icon.email:before { content:@content-icon-email; }
-```
 
 * * *
 

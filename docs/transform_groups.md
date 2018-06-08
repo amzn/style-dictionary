@@ -29,7 +29,7 @@ Transforms:
 [attribute/cti](transforms.md#attributecti)
 [name/cti/kebab](transforms.md#namectikebab)
 [size/px](transforms.md#sizepx)
-[color/hex](transforms.md#colorhex)
+[color/css](transforms.md#colorcss)
 
 
 * * *
@@ -44,7 +44,8 @@ Transforms:
 [time/seconds](transforms.md#timeseconds)
 [content/icon](transforms.md#contenticon)
 [size/rem](transforms.md#sizerem)
-[color/hex](transforms.md#colorhex)
+[color/css](transforms.md#colorcss)
+
 
 * * *
 

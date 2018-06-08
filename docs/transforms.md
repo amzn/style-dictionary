@@ -247,6 +247,21 @@ Transforms the value into an UIColor class for iOS
 
 * * *
 
+### color/css 
+
+
+Transforms the value into a hex or rgb string depending on if it has transparency
+
+```css
+// Matches: prop.attributes.category === 'color'
+// Returns:
+#000000
+rgba(0,0,0,0.5)
+```
+
+
+* * *
+
 ### size/sp 
 
 
