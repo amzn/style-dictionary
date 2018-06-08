@@ -67,22 +67,22 @@
   "homepage": "https://github.com/amzn/style-dictionary",
   "dependencies": {
     "commander": "^2.9.0",
-    "fs-extra": "^0.30.0",
+    "fs-extra": "^6.0.1",
     "glob": "^7.1.1",
     "lodash": "^4.16.4",
     "resolve-cwd": "^2.0.0",
     "tinycolor2": "^1.4.1"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "docsify": "^4.5.7",
-    "docsify-cli": "^4.2.0",
-    "eslint": "^3.11.1",
-    "husky": "^1.0.0-rc.2",
+    "chai": "^4.1.2",
+    "docsify": "^4.6.10",
+    "docsify-cli": "^4.2.1",
+    "eslint": "^4.19.1",
+    "husky": "^1.0.0-rc.8",
     "istanbul": "^0.4.5",
-    "jsdoc-to-markdown": "^3.0.3",
+    "jsdoc-to-markdown": "^4.0.1",
     "less": "^3.0.1",
-    "mocha": "^3.1.2",
+    "mocha": "^5.2.0",
     "node-sass": "^4.8.3"
   }
 }

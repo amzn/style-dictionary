@@ -37,7 +37,7 @@ describe('base64', function() {
     assert.throws(
       convertToBase64.bind(null, 'foo'),
       Error,
-      "ENOENT: no such file or directory, open \'foo\'"
+      "ENOENT: no such file or directory, open 'foo'"
     );
   });
 
