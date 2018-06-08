@@ -73,7 +73,7 @@ describe('extend', function() {
           include: ['foo']
         }),
         Error,
-        "Cannot find module \'foo\'"
+        "Cannot find module 'foo'"
       );
     });
 
@@ -111,7 +111,7 @@ describe('extend', function() {
           include: ['foo']
         }),
         Error,
-        "Cannot find module \'foo\'"
+        "Cannot find module 'foo'"
       );
     });
 
