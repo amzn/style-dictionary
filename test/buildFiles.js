@@ -12,12 +12,14 @@
  */
 
 var assert     = require('chai').assert,
+    expect     = require('chai').expect,
     helpers    = require('./helpers'),
     buildFiles = require('../lib/buildFiles');
 
 var dictionary = {
   properties: {
-    foo: 'bar'
+    foo: { value: 'bar' },
+    bingo: { value: 'bango' }
   }
 };
 
@@ -40,6 +42,21 @@ var platformWithBuildPath = {
       format: function(dictionary) {
         return JSON.stringify(dictionary.properties)
       }
+    }
+  ]
+};
+
+var platformWithFilter = {
+  buildPath: 'test/output/',
+  files: [
+    {
+      destination: 'test.json',
+      filter: function(property) {
+        return property.value === "bango"
+      },
+      format: function(dictionary) {
+        return JSON.stringify(dictionary.properties)
+      },
     }
   ]
 };
@@ -94,5 +111,13 @@ describe('buildFiles', function() {
   it('should work with buildPath', function() {
     buildFiles( dictionary, platformWithBuildPath );
     assert(helpers.fileExists('./test/output/test.json'));
+  });
+
+  it('should work with a filter', function() {
+    buildFiles( dictionary, platformWithFilter );
+    assert(helpers.fileExists('./test/output/test.json'));
+    var output = require("./output/test.json")
+    expect(output).to.not.have.any.keys("foo")
+    expect(output).to.have.all.keys("bingo")
   });
 });
