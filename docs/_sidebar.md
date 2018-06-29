@@ -3,13 +3,16 @@
   - [Quick Start](quick_start.md)
   - [Examples](examples.md)
   - [Package structure](package_structure.md)
+  - [Config](config.md)
+  - [Properties](properties.md)
   - [Extending](extending.md)
 
 - Reference
+  - [Architecture](architecture.md)
+  - [Build process](how_to_build.md)
   - [API](api.md)
   - [Transforms](transforms.md)
   - [Transform groups](transform_groups.md)
   - [Formats](formats.md)
   - [Templates](templates.md)
   - [Actions](actions.md)
-  - [Build process](build_process.md)

@@ -4,8 +4,11 @@ Formats are one of the ways to create files that act as interfaces for your styl
 use your style dictionary in CSS. You can use the `css/variables` template which will create a CSS file with variables from
 your style dictionary. You can define custom formats with the [`registerFormat`](api.md#registerformat).
 
-Templates and Formats serve the same purpose: use your style dictionary as data to build a file. You use formats in your config
-file under platforms > [platform] > files > [file]
+Templates and Formats serve the same purpose; they build a file from your style definitions. Templates are better for files that
+require extensive header or footer output beyond just the style data. Formats are better for files that contain only the
+style data without other content.
+
+You use templates in your config file under platforms > [platform] > files > [file] > format
 
 ```json
 {
@@ -15,7 +18,7 @@ file under platforms > [platform] > files > [file]
       "transformGroup": "css",
       "files": [
         {
-          "template": "css/variables",
+          "format": "css/variables",
           "destination": "variables.css"
         }
       ]

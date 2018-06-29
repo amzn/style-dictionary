@@ -1,6 +1,6 @@
 # Transform Groups
 
-Transform Groups are a way to easily define and use groups of transforms. They are an array of transforms. You can define custom transform groups with the [`registerTransformGroup`](api.md#registertransformgroup).
+Transform Groups are a way to easily use multiple transforms at once. They are an array of transforms. You can define a custom transform group with the [`registerTransformGroup`](api.md#registertransformgroup).
 
 You use transformGroups in your config file under platforms > [platform] > transformGroup
 
@@ -21,7 +21,7 @@ You use transformGroups in your config file under platforms > [platform] > trans
 
 [lib/common/transformGroups.js](https://github.com/amzn/style-dictionary/blob/master/lib/common/transformGroups.js)
 
-### web 
+### web
 
 
 Transforms:
@@ -34,7 +34,7 @@ Transforms:
 
 * * *
 
-### scss 
+### scss
 
 
 Transforms:
@@ -49,7 +49,7 @@ Transforms:
 
 * * *
 
-### less 
+### less
 
 
 Transforms:
@@ -64,7 +64,7 @@ Transforms:
 
 * * *
 
-### html 
+### html
 
 
 Transforms:
@@ -76,7 +76,7 @@ Transforms:
 
 * * *
 
-### android 
+### android
 
 
 Transforms:
@@ -90,7 +90,7 @@ Transforms:
 
 * * *
 
-### ios 
+### ios
 
 
 Transforms:
@@ -106,7 +106,7 @@ Transforms:
 
 * * *
 
-### assets 
+### assets
 
 
 Transforms:
@@ -115,4 +115,3 @@ Transforms:
 
 
 * * *
-

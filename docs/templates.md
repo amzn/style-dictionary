@@ -1,11 +1,14 @@
 # Templates
 
-Templates are one of the ways to create files that act as interfaces for your style dictionary. For example, you want to be able to
-use your style dictionary in Android. You can use the `android/colors` template which will create an Anroid resource XML file from
-your style dictionary. You can define custom templates with the [`registerTemplate`](api.md#registertemplate).
+Templates are one of the ways to create files (formats are the other) that act as interfaces for your style dictionary. For example,
+you want to be able to use your style dictionary in Android. You can use the `android/colors` template which will create an Android
+resource XML file from your style dictionary. You can define custom templates with the [`registerTemplate`](api.md#registertemplate).
 
-Templates and Formats serve the same purpose: use your style dictionary as data to build a file. You use templates in your config
-file under platforms > [platform] > files > [file]
+Templates and Formats serve the same purpose; they build a file from your style definitions. Templates are better for files that
+require extensive header or footer output beyond just the style data. Formats are better for files that contain only the
+style data without other content.
+
+You use templates in your config file under platforms > [platform] > files > [file] > template
 
 ```json
 {
@@ -60,7 +63,7 @@ styleDictionary.buildAllPlatforms();
 
 [lib/common/templates.js](https://github.com/amzn/style-dictionary/blob/master/lib/common/templates.js)
 
-### android/colors 
+### android/colors
 
 
 Creates a color resource xml file with all the colors in your style dictionary.
@@ -76,7 +79,7 @@ Creates a color resource xml file with all the colors in your style dictionary.
 
 * * *
 
-### android/dimens 
+### android/dimens
 
 
 Creates a dimen resource xml file with all the sizes in your style dictionary.
@@ -92,7 +95,7 @@ Creates a dimen resource xml file with all the sizes in your style dictionary.
 
 * * *
 
-### android/fontDimens 
+### android/fontDimens
 
 
 Creates a dimen resource xml file with all the font sizes in your style dictionary.
@@ -108,7 +111,7 @@ Creates a dimen resource xml file with all the font sizes in your style dictiona
 
 * * *
 
-### android/integers 
+### android/integers
 
 
 Creates a resource xml file with all the integers in your style dictionary. It filters your
@@ -129,7 +132,7 @@ style properties by `prop.attributes.category === 'time'`
 
 * * *
 
-### android/strings 
+### android/strings
 
 
 Creates a resource xml file with all the strings in your style dictionary. Filters your
@@ -146,7 +149,7 @@ style properties by `prop.attributes.category === 'content'`
 
 * * *
 
-### ios/macros 
+### ios/macros
 
 
 Creates an Objective-C header file with macros for style properties
@@ -162,7 +165,7 @@ Creates an Objective-C header file with macros for style properties
 
 * * *
 
-### ios/plist 
+### ios/plist
 
 
 Creates an Objective-C plist file
@@ -174,7 +177,7 @@ Creates an Objective-C plist file
 
 * * *
 
-### ios/singleton.m 
+### ios/singleton.m
 
 
 Creates an Objective-C implementation file of a style dictionary singleton class
@@ -186,7 +189,7 @@ Creates an Objective-C implementation file of a style dictionary singleton class
 
 * * *
 
-### ios/singleton.h 
+### ios/singleton.h
 
 
 Creates an Objective-C header file of a style dictionary singleton class
@@ -198,7 +201,7 @@ Creates an Objective-C header file of a style dictionary singleton class
 
 * * *
 
-### ios/static.h 
+### ios/static.h
 
 
 Creates an Objective-C header file of a static style dictionary class
@@ -210,7 +213,7 @@ Creates an Objective-C header file of a static style dictionary class
 
 * * *
 
-### ios/static.m 
+### ios/static.m
 
 
 Creates an Objective-C implementation file of a static style dictionary class
@@ -222,7 +225,7 @@ Creates an Objective-C implementation file of a static style dictionary class
 
 * * *
 
-### ios/colors.h 
+### ios/colors.h
 
 
 Creates an Objective-C header file of a color class
@@ -234,7 +237,7 @@ Creates an Objective-C header file of a color class
 
 * * *
 
-### ios/colors.m 
+### ios/colors.m
 
 
 Creates an Objective-C implementation file of a color class
@@ -246,7 +249,7 @@ Creates an Objective-C implementation file of a color class
 
 * * *
 
-### ios/strings.h 
+### ios/strings.h
 
 
 Creates an Objective-C header file of strings
@@ -258,7 +261,7 @@ Creates an Objective-C header file of strings
 
 * * *
 
-### ios/strings.m 
+### ios/strings.m
 
 
 Creates an Objective-C implementation file of strings
@@ -270,7 +273,7 @@ Creates an Objective-C implementation file of strings
 
 * * *
 
-### css/fonts.css 
+### css/fonts.css
 
 
 Creates CSS file with @font-face declarations
@@ -282,7 +285,7 @@ Creates CSS file with @font-face declarations
 
 * * *
 
-### static-style-guide/index.html 
+### static-style-guide/index.html
 
 
 Creates a generic static html page
@@ -293,4 +296,3 @@ Creates a generic static html page
 
 
 * * *
-
