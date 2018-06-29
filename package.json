@@ -71,7 +71,8 @@
     "glob": "^7.1.1",
     "lodash": "^4.16.4",
     "resolve-cwd": "^2.0.0",
-    "tinycolor2": "^1.4.1"
+    "tinycolor2": "^1.4.1",
+    "chalk": "^2.4.1"
   },
   "devDependencies": {
     "chai": "^4.1.2",

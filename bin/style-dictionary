@@ -6,7 +6,8 @@ var fs = require('fs-extra'),
     program = require('commander'),
     path = require('path'),
     StyleDictionary = require('..'),
-    pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf8'));
+    pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf8')),
+    chalk = require('chalk');
 
 function collect(val, arr) {
   arr.push(val);
