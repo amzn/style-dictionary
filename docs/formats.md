@@ -37,7 +37,7 @@ Formats are better if there is little to no boilerplate code like a flat SCSS va
 
 [lib/common/formats.js](https://github.com/amzn/style-dictionary/blob/master/lib/common/formats.js)
 
-### css/variables
+### css/variables 
 
 
 Creates a CSS file with variable definitions based on the style dictionary
@@ -52,7 +52,7 @@ Creates a CSS file with variable definitions based on the style dictionary
 
 * * *
 
-### scss/variables
+### scss/variables 
 
 
 Creates a SCSS file with variable definitions based on the style dictionary
@@ -65,7 +65,7 @@ $color-background-alt: #eeeeee;
 
 * * *
 
-### scss/icons
+### scss/icons 
 
 
 Creates a SCSS file with variable definitions and helper classes for icons
@@ -78,33 +78,33 @@ $content-icon-email: '\E001';
 
 * * *
 
-### less/variables
+### less/variables 
 
 
 Creates a LESS file with variable definitions based on the style dictionary
 
+**Color-background-base:**: #f0f0f0;  
+**Color-background-alt:**: #eeeeee;
+```  
 **Example**  
 ```less
-@color-background-base: #f0f0f0;
-@color-background-alt: #eeeeee;
-```
 
 * * *
 
-### less/icons
+### less/icons 
 
 
 Creates a LESS file with variable definitions and helper classes for icons
 
+**Content-icon-email:**: '\E001';
+.icon.email:before { content:@content-icon-email; }
+```  
 **Example**  
 ```less
-@content-icon-email: '\E001';
-.icon.email:before { content:@content-icon-email; }
-```
 
 * * *
 
-### javascript/module
+### javascript/module 
 
 
 Creates a CommonJS module with the whole style dictionary
@@ -124,7 +124,7 @@ module.exports = {
 
 * * *
 
-### javascript/object
+### javascript/object 
 
 
 Creates a JS file a global var that is a plain javascript object of the style dictionary.
@@ -145,7 +145,7 @@ var StyleDictionary = {
 
 * * *
 
-### javascript/umd
+### javascript/umd 
 
 
 Creates a [UMD](https://github.com/umdjs/umd) module of the style
@@ -177,7 +177,7 @@ in your config.
 
 * * *
 
-### javascript/es6
+### javascript/es6 
 
 
 Creates a ES6 module of the style dictionary. You can filter the style dictionary
@@ -210,7 +210,7 @@ export const BackgroundAlt = '#fcfcfcfc';
 
 * * *
 
-### json
+### json 
 
 
 Creates a JSON file of the style dictionary.
@@ -230,7 +230,7 @@ Creates a JSON file of the style dictionary.
 
 * * *
 
-### json/asset
+### json/asset 
 
 
 Creates a JSON file of just the assets defined in the style dictionary.
@@ -250,7 +250,7 @@ Creates a JSON file of just the assets defined in the style dictionary.
 
 * * *
 
-### sketch/palette
+### sketch/palette 
 
 
 Creates a sketchpalette file of all the base colors
@@ -269,3 +269,4 @@ Creates a sketchpalette file of all the base colors
 ```
 
 * * *
+
