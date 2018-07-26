@@ -34,7 +34,7 @@ StyleDictionary.registerTransform({
   name: 'name/uppercase',
   type: 'name',
   transformer: function(prop) {
-    return prop.path.join('_').toUppercase();
+    return prop.path.join('_').toUpperCase();
   }
 });
 
