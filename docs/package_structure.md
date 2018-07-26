@@ -38,6 +38,7 @@ The default way is to use a config.json file in the root of your package. Here i
       "transforms": ["attribute/cti", "name/cti/snake", "color/hex", "size/remToSp", "size/remToDp"],
       "buildPath": "build/android/src/main/res/values/",
       "files": [{
+        "filter": { "category": "color" },
         "destination": "style_dictionary_colors.xml",
         "template": "android/colors"
       }]
@@ -56,6 +57,7 @@ The default way is to use a config.json file in the root of your package. Here i
 | platform.files | Array (optional) | Files to be generated for this platform. |
 | platform.file.destination | String (optional) | Location to build the file, will be appended to the buildPath. |
 | platform.file.format | String (optional) | [Format](formats.md) used to generate the file. Can be a built-in one or you can create your own. Must declare a format or a template. |
+| platform.file.filter | Function|Object (optional) | A function or object used to filter the properties that will be included in the file. If a function is provided, each property will be passed to the function and the result (true or false) will determine whether the property is included. If an object is provided, each property will be matched against the object using a partial deep comparison to determine whether the property is included. |
 | platform.file.template | String (optional) | [Template](templates.md) used to generate the file. Can be a built-in one or you can create your own. |
 | platform.actions | Array[String] (optional) | [Actions](actions.md) to be performed after the files are built for that platform. Actions can be any arbitrary code you want to run like copying files, generating assets, etc. You can use pre-defined actions or create custom actions. |
 
