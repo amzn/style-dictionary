@@ -42,7 +42,7 @@ Formats are better if there is little to no boilerplate code like a flat SCSS va
 
 Creates a CSS file with variable definitions based on the style dictionary
 
-**Example**  
+**Example**
 ```css
 :root {
   --color-background-base: #f0f0f0;
@@ -57,7 +57,7 @@ Creates a CSS file with variable definitions based on the style dictionary
 
 Creates a SCSS file with variable definitions based on the style dictionary
 
-**Example**  
+**Example**
 ```scss
 $color-background-base: #f0f0f0;
 $color-background-alt: #eeeeee;
@@ -70,7 +70,7 @@ $color-background-alt: #eeeeee;
 
 Creates a SCSS file with variable definitions and helper classes for icons
 
-**Example**  
+**Example**
 ```scss
 $content-icon-email: '\E001';
 .icon.email:before { content:$content-icon-email; }
@@ -83,7 +83,7 @@ $content-icon-email: '\E001';
 
 Creates a LESS file with variable definitions based on the style dictionary
 
-**Example**  
+**Example**
 ```less
 @color-background-base: #f0f0f0;
 @color-background-alt: #eeeeee;
@@ -96,7 +96,7 @@ Creates a LESS file with variable definitions based on the style dictionary
 
 Creates a LESS file with variable definitions and helper classes for icons
 
-**Example**  
+**Example**
 ```less
 @content-icon-email: '\E001';
 .icon.email:before { content:@content-icon-email; }
@@ -109,7 +109,7 @@ Creates a LESS file with variable definitions and helper classes for icons
 
 Creates a CommonJS module with the whole style dictionary
 
-**Example**  
+**Example**
 ```js
 module.exports = {
   color: {
@@ -130,7 +130,7 @@ module.exports = {
 Creates a JS file a global var that is a plain javascript object of the style dictionary.
 Name the variable by adding a 'name' attribute on the file object in your config.
 
-**Example**  
+**Example**
 ```js
 var StyleDictionary = {
   color: {
@@ -152,7 +152,7 @@ Creates a [UMD](https://github.com/umdjs/umd) module of the style
 dictionary. Name the module by adding a 'name' attribute on the file object
 in your config.
 
-**Example**  
+**Example**
 ```js
 (function(root, factory) {
   if (typeof module === "object" && module.exports) {
@@ -188,12 +188,15 @@ file object in the config.
 {
   "platforms": {
     "js": {
+      "transformGroup": "js",
       "files": [
         {
           "format": "javascript/es6",
           "destination": "colors.js",
           "filter": {
-            "category": "color"
+            "attributes": {
+              "category": "color"
+            }
           }
         }
       ]
@@ -202,10 +205,10 @@ file object in the config.
 }
 ```
 
-**Example**  
+**Example**
 ```js
-export const BackgroundBase = '#ffffff';
-export const BackgroundAlt = '#fcfcfcfc';
+export const ColorBackgroundBase = '#ffffff';
+export const ColorBackgroundAlt = '#fcfcfcfc';
 ```
 
 * * *
@@ -215,7 +218,7 @@ export const BackgroundAlt = '#fcfcfcfc';
 
 Creates a JSON file of the style dictionary.
 
-**Example**  
+**Example**
 ```json
 {
   "color": {
@@ -235,7 +238,7 @@ Creates a JSON file of the style dictionary.
 
 Creates a JSON file of just the assets defined in the style dictionary.
 
-**Example**  
+**Example**
 ```js
 {
   "asset": {
@@ -255,7 +258,7 @@ Creates a JSON file of just the assets defined in the style dictionary.
 
 Creates a sketchpalette file of all the base colors
 
-**Example**  
+**Example**
 ```json
 {
   "compatibleVersion": "1.0",
