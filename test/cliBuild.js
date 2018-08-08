@@ -12,24 +12,22 @@
  */
 
 var assert          = require('chai').assert,
-    helpers         = require('./helpers'),
-    StyleDictionary = require('../index');
+    childProcess    = require("child_process"),
+    helpers         = require('./helpers');
 
-describe('buildAllPlatforms', function() {
+describe('cliBuildWithJsConfig', function() {
   beforeEach(function() {
     helpers.clearOutput();
   });
 
   it('should work with json config', function() {
-    var test = StyleDictionary.extend(__dirname + '/configs/test.json');
-    test.buildAllPlatforms();
+    childProcess.execSync("node ./bin/style-dictionary build --config ./test/configs/test.json")
     assert(helpers.fileExists('./test/output/web/_icons.css'));
     assert(helpers.fileExists('./test/output/android/colors.xml'));
   });
 
-  it('should work with js config', function() {
-    var test = StyleDictionary.extend(__dirname + '/configs/test.js');
-    test.buildAllPlatforms();
+  it('should work with javascript config', function() {
+    childProcess.execSync("node ./bin/style-dictionary build --config ./test/configs/test.js")
     assert(helpers.fileExists('./test/output/web/_icons.css'));
     assert(helpers.fileExists('./test/output/android/colors.xml'));
   });
