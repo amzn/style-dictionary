@@ -19,9 +19,11 @@ When you are managing user experiences, it can be quite challenging to keep styl
 __A style dictionary consists of:__
 1. [Style properties](#style-properties) organized in JSON files
 1. Static assets that can be used across platforms
+1. A configuration that defines how to modify and manipulate those properties and assets into deliverables
 
 __What a style dictionary does:__
-1. Allows the style properties and assets to be consumed in any platform or language
+1. Allows style properties and assets to be consumed in any platform or language for rendering styles
+1. Allows the creation of digital media for use by humans (e.g. documentation, design libraries, etc)
 
 Let's take a look at a very basic example.
 
@@ -68,12 +70,17 @@ This is a very simple example, take a deeper dive into the style dictionary fram
 The style dictionary framework is completely extensible and modular so you can create any type of file from a style dictionary.
 If there is a new language, platform, file type, you can extend the style dictionary framework to create the files you need.
 
-__Some other things you can build with a style dictionary__
+__Some things you can build with a style dictionary__
+1. Styling files for any platform
 1. Images and graphics
 1. Sketch files
 1. Documentation site
-1. _Literally anything_
+1. _Literally anything you want styles in_
 
+The value is that they are consistent and up to date.
+
+
+## TODO: remove everything below here and move to the properties file
 
 ## Style Properties
 

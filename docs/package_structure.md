@@ -20,7 +20,7 @@ Here is a basic example of what a style dictionary package looks like.
 
 | Name | Description |
 | :--- | :--- |
-| config.json | This is where the [`configuration`](config) for the style dictionary lives, where you define what happens when Style Dictionary runs |
+| config.json | This is where the [configuration](config) for the style dictionary lives, where you define what happens when Style Dictionary runs |
 | properties | Properties are saved as a collection of JSON files. We usually keep them in a `properties` directory, but you can put them wherever you like, they just need to be referenced in the `source` attribute on your `config.json` file. |
 
 Style properties are what make up a style dictionary. You can structure your properties however you want to, the only requirement is the property contains a "value" attribute. This is how the build system knows which nodes are properties as opposed to structure. This allows you to have different levels of nesting.

@@ -1,7 +1,7 @@
 # Quick Start
 
 ## Installation
-*Note that you must have node (and npm) installed.*
+*Note that you must have [node (and npm)](https://www.npmjs.com/get-npm) installed before you can follow this guide.*
 
 If you want to use the CLI, you can install it globally via npm:
 ```bash
@@ -195,7 +195,7 @@ const StyleDictionary = require('style-dictionary').extend('config.json');
 StyleDictionary.buildAllPlatforms();
 ```
 
-The `.extend()` method is an overloaded method that can also take an object with the configuration in the same format as a config.json file.
+The `.extend()` method is an overloaded method that can also take a [configuration](config) object.
 ```javascript
 const StyleDictionary = require('style-dictionary').extend({
   source: ['properties/**/*.json'],

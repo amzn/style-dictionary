@@ -23,9 +23,9 @@ Before you can build a style dictionary you need to have:
 
 ## Custom build system
 
-If you need to create your own build system (e.g. create custom transforms, tranformgroups, templates, etc), you can do so by creating a node module.
+If you need to create your own build system (e.g. create custom transforms, tranformGroups, formats, templates, etc), you can do so by creating a node module.
 
-1. When you call the [`extend`](api.md#extend) method, you can either pass it a path to a JSON config file, or give it a plain object that has the configuration. This will perform steps 1-3 above.
+1. When you call the [extend](api.md#extend) method, you can either pass it a path to a JSON config file, or give it a plain object that has the configuration. This will perform steps 1-3 above.
 1. Then you can now call `buildAllPlatforms` or other methods like `buildPlatform('scss')` or `exportPlatform('javascript')`. This is equivalent to step 4 above.
 
 ```javascript

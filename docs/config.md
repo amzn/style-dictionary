@@ -1,8 +1,8 @@
-# configuration
+# Configuration
 
 Style dictionaries are configuration driven. Your config file defines what executes and what to output when the style dictionary builds.
 
-The default is to use a config.json file in the root of your package, but you can also specify a custom location when you use the [`CLI`](how_to_build#cli) or when creating a [`custom build system`](how_to_build#cli).
+By default, Style Dictionary looks for a config.json file in the root of your package. You can also specify a custom location when you use the [CLI](how_to_build#cli). If you are using a [custom build system](how_to_build#custom-build-system), you can specify a custom location for a configuration file or use an inline configuration JSON object.
 
 ## config.json
  Here is a quick example:
