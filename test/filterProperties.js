@@ -13,7 +13,6 @@
 
 var assert  = require('chai').assert,
     expect = require('chai').expect,
-    fs = require('fs-extra'),
     helpers = require('./helpers'),
     flattenProperties = require("../lib/utils/flattenProperties"),
     filterProperties = require('../lib/filterProperties');
