@@ -43,6 +43,6 @@ var props = _.filter(allProperties, function(prop) {
       <integer><%= prop.value %></integer>
     <% } else { %></dict>
       <string><%= prop.value %></string>
-    <% } }); %>
+    <% } %><% if (prop.comment) { %><!-- <%= prop.comment %> --><% } %><% }); %>
   </dict>
 </plist>
