@@ -153,4 +153,24 @@ describe('buildPlatform', function() {
     var output = helpers.fileToJSON('./test/output/output.json');
     assert.deepEqual(output.size.large.comment, input.size.large.comment);
   });
+
+  it('should throw an error if given a transformGroup that doesn\'t exist', function() {
+    var test = StyleDictionary.extend({
+      source: ['properties/**/*.json'],
+      platforms: {
+        test: {
+          transformGroup: 'test',
+          files: [{
+            destination: 'test/output/test.css',
+            format: 'css/variables'
+          }]
+        }
+      }
+    });
+    assert.throws(
+      test.buildPlatform.bind(test, 'test'),
+      Error,
+      'transformGroup test doesn\'t exist'
+    );
+  });
 });
