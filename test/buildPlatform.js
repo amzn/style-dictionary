@@ -130,4 +130,24 @@ describe('buildPlatform', function() {
     assert.deepEqual(output.color.base.comment, input.color.base.comment);
     assert.equal(output.color.base.attributes.comment, input.color.base.attributes.comment);
   });
+
+  it('should throw an error if given a transformGroup that doesn\'t exist', function() {
+    var test = StyleDictionary.extend({
+      source: ['properties/**/*.json'],
+      platforms: {
+        test: {
+          transformGroup: 'test',
+          files: [{
+            destination: 'test/output/test.css',
+            format: 'css/variables'
+          }]
+        }
+      }
+    });
+    assert.throws(
+      test.buildPlatform.bind(test, 'test'),
+      Error,
+      'transformGroup test doesn\'t exist'
+    );
+  });
 });
