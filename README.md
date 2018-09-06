@@ -1,4 +1,4 @@
-<img src="docs/assets/logo.png" alt="Style Dictionary logo" title="StyleDictionary" width="100" align="right" />
+<img src="docs/assets/logo.png" alt="Style Dictionary logo and mascot" title="&quot;Pascal&quot;" width="100" align="right" />
 
 [![npm version](https://img.shields.io/npm/v/style-dictionary.svg?style=flat-square)](https://badge.fury.io/js/style-dictionary)
 ![license](https://img.shields.io/npm/l/style-dictionary.svg?style=flat-square)
@@ -275,6 +275,11 @@ StyleDictionary.buildAllPlatforms();
 
 For more information on creating your own transforms, templates, and formats, take a look at our [docs](https://amzn.github.io/style-dictionary/).
 
+## Mascot
+
+The mascot for Style Dictionary is ["Pascal"](https://github.com/amzn/style-dictionary/issues/97) the chameleon (seen below). You can also find them blending in as the logo throughout the documentation.
+
+<img src="docs/assets/logo.png" alt="Style Dictionary logo and mascot" title="&quot;Pascal&quot;" width="240" />
 
 ## Contributing
 
