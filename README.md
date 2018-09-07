@@ -230,6 +230,27 @@ While not exactly necessary, we feel this classification structure of style prop
 
  Also, the CTI structure provides a good mechanism to target transforms for specific kinds of properties. All of the transforms provided by the framework use the CTI of a property to know if it should be applied. For instance, the 'color/hex' transform only applies to properties of the category 'color'.
 
+You can also add a _comment_ to a style property:
+
+```
+{
+  "size": {
+    "font": {
+      "base":  {
+        "value": "16",
+        "comment": "the base size of the font"
+      },
+      "large": {
+        "value": "20",
+        "comment": "the large size of the font"
+      }
+    }
+  }
+}
+```
+
+The comment  will appear in the output files, where relevant or the output format supports comments.
+
 
 ## Extending
 
