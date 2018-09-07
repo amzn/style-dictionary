@@ -126,8 +126,51 @@ describe('buildPlatform', function() {
     assert(helpers.fileExists('./test/output/output.json'));
     var input = helpers.fileToJSON('./test/properties/nonPropertyNode.json');
     var output = helpers.fileToJSON('./test/output/output.json');
-    assert.deepEqual(output.color.comment, input.color.comment);
-    assert.deepEqual(output.color.base.comment, input.color.base.comment);
-    assert.equal(output.color.base.attributes.comment, input.color.base.attributes.comment);
+    assert.deepEqual(output.color.key1, input.color.key1);
+    assert.deepEqual(output.color.base.red.key2, input.color.base.red.key2);
+    assert.equal(output.color.base.attributes.key3, input.color.base.attributes.key3);
+  });
+
+  it('should handle comments', function() {
+    var test = StyleDictionary.extend({
+      source: ['test/properties/comment.json'],
+      platforms: {
+        test: {
+          buildPath: "test/output/",
+          transformGroup: "scss",
+          files: [
+            {
+              "destination": "output.json",
+              "format": "json"
+            }
+          ]
+        }
+      }
+    });
+    test.buildPlatform('test');
+    assert(helpers.fileExists('./test/output/output.json'));
+    var input = helpers.fileToJSON('./test/properties/comment.json');
+    var output = helpers.fileToJSON('./test/output/output.json');
+    assert.deepEqual(output.size.large.comment, input.size.large.comment);
+  });
+
+  it('should throw an error if given a transformGroup that doesn\'t exist', function() {
+    var test = StyleDictionary.extend({
+      source: ['properties/**/*.json'],
+      platforms: {
+        test: {
+          transformGroup: 'test',
+          files: [{
+            destination: 'test/output/test.css',
+            format: 'css/variables'
+          }]
+        }
+      }
+    });
+    assert.throws(
+      test.buildPlatform.bind(test, 'test'),
+      Error,
+      'transformGroup test doesn\'t exist'
+    );
   });
 });

@@ -35,6 +35,13 @@ describe('resolveObject', function() {
     );
   });
 
+  it('should not mutate the original object', function() {
+    var original = helpers.fileToJSON(__dirname + '/../json_files/nested_references.json');
+    var test = resolveObject( original );
+    assert.equal(original.a.b.d, '{e.f.g}');
+    assert.equal(test.a.b.d, 2);
+  });
+
   it('should do simple references', function() {
     var test = resolveObject( helpers.fileToJSON(__dirname + '/../json_files/simple.json') );
     assert.equal(test.bar, 'bar');
