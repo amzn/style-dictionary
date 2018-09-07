@@ -180,9 +180,7 @@ in your config.
 ### javascript/es6
 
 
-Creates a ES6 module of the style dictionary. You can filter the style dictionary
-to only export properties of a certain type by adding a 'filter' attribute on the
-file object in the config.
+Creates a ES6 module of the style dictionary.
 
 ```json
 {
@@ -272,3 +270,4 @@ Creates a sketchpalette file of all the base colors
 ```
 
 * * *
+
