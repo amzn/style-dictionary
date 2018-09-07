@@ -1,12 +1,14 @@
 {
   "color": {
+    "key1": "testing",
     "base": {
-      "red": { "value": "#f00" },
-      "comment": "testing",
+      "red": {
+        "value": "#f00",
+        "key2": "also testing"
+      },
       "attributes": {
-        "comment": "more testing"
+        "key3": "more testing"
       }
-    },
-    "comment": "testing"
+    }
   }
 }

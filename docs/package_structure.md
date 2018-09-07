@@ -57,7 +57,7 @@ The default way is to use a config.json file in the root of your package. Here i
 | platform.files | Array (optional) | Files to be generated for this platform. |
 | platform.file.destination | String (optional) | Location to build the file, will be appended to the buildPath. |
 | platform.file.format | String (optional) | [Format](formats.md) used to generate the file. Can be a built-in one or you can create your own. Must declare a format or a template. |
-| platform.file.filter | Function|Object (optional) | A function or object used to filter the properties that will be included in the file. If a function is provided, each property will be passed to the function and the result (true or false) will determine whether the property is included. If an object is provided, each property will be matched against the object using a partial deep comparison to determine whether the property is included. |
+| platform.file.filter | Function/Object (optional) | A function or object used to filter the properties that will be included in the file. If a function is provided, each property will be passed to the function and the result (true or false) will determine whether the property is included. If an object is provided, each property will be matched against the object using a partial deep comparison to determine whether the property is included. |
 | platform.file.template | String (optional) | [Template](templates.md) used to generate the file. Can be a built-in one or you can create your own. |
 | platform.actions | Array[String] (optional) | [Actions](actions.md) to be performed after the files are built for that platform. Actions can be any arbitrary code you want to run like copying files, generating assets, etc. You can use pre-defined actions or create custom actions. |
 
@@ -111,6 +111,27 @@ Structuring style properties in this manner gives us consistent naming and acces
 You can organize and name your style properties however you want, there are no restrictions. But there are a good amount of helpers if you do use this structure, like the 'attribute/cti' transform which adds attributes to the property of its CTI based on the path in the object. There are a lot of name transforms as well for when you want a flat structure like for sass variables.
 
 Also, the CTI structure provides a good mechanism to target transforms for specific kinds of properties. All of the transforms provided by the framework use the CTI structure to know if it should be applied. For instance, the 'color/hex' transform only applies to properties of the category 'color'.
+
+You can also add a _comment_ to a style property:
+
+```
+{
+  "size": {
+    "font": {
+      "base":  {
+        "value": "16",
+        "comment": "the base size of the font"
+      },
+      "large": {
+        "value": "20",
+        "comment": "the large size of the font"
+      }
+    }
+  }
+}
+```
+
+The comment  will appear in the output files, where relevant or the output format supports comments.
 
 ----
 
