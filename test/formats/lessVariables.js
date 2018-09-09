@@ -46,12 +46,14 @@ var dictionary = {
   }]
 };
 
+var config = {};
+
 var formatter = formats['less/variables'].bind(file);
 
 describe('formats', function() {
   describe('less/variables', function() {
     it('should have a valid less syntax', function(done) {
-      less.render(formatter(dictionary))
+      less.render(formatter(dictionary, config))
         .then(function(output) {
           assert.isDefined(output);
           done();

@@ -28,13 +28,15 @@ var dictionary = {
   }
 };
 
+var config = {};
+
 var formatter = formats['javascript/object'].bind(file);
 
 describe('formats', function() {
   describe('javascript/object', function() {
     it('should be valid JS syntax', function(done){
       try {
-        vm.runInNewContext(formatter(dictionary))
+        vm.runInNewContext(formatter(dictionary, config))
         return done();
       } catch (err) {
         return done(new Error(err));

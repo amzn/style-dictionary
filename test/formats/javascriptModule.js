@@ -34,6 +34,8 @@ var dictionary = {
   }
 };
 
+var config = {};
+
 var formatter = formats['javascript/module'].bind(file);
 
 describe('formats', function() {
@@ -43,7 +45,7 @@ describe('formats', function() {
     });
 
     it('should be a valid JS file', function() {
-      fs.writeFileSync('./test/output/output.js', formatter(dictionary) );
+      fs.writeFileSync('./test/output/output.js', formatter(dictionary, config) );
       var test = require('../output/output.js');
       assert.equal( test.color.red.value, dictionary.properties.color.red.value );
     });
