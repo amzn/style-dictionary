@@ -21,10 +21,15 @@ var props = _.filter(allProperties, function(prop) {
 }); %>
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<!--
-  Do not edit directly
-  Generated on <%= new Date() %>
--->
+<%
+    if(!this.hideDoNotEdit) {
+        print("<!--\n   Do not edit directly");
+        if(!this.hideTimestamp) {
+            print("\n  Generated on " + new Date());
+        }
+        print("\n-->");
+    }
+%>
 <plist version="1.0">
   <dict>
     <% _.each(props, function(prop) {

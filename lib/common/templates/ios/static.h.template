@@ -16,7 +16,14 @@
 %>
 // <%= this.destination %>
 //
-// Do not edit directly, generated on <%= new Date() %>
+<%
+    if(!this.hideDoNotEdit) {
+        print("// Do not edit directly");
+        if(!this.hideTimestamp) {
+            print("\n// Generated on " + new Date());
+        }
+    }
+%>
 //
 
 #import <Foundation/Foundation.h>
