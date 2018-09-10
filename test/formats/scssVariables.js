@@ -46,15 +46,13 @@ var dictionary = {
   }]
 };
 
-var config = {};
-
 var formatter = formats['scss/variables'].bind(file);
 
 describe('formats', function() {
   describe('scss/variables', function() {
     it('should have a valid scss syntax', function(done) {
       scss.render({
-        data: formatter(dictionary, config),
+        data: formatter(dictionary),
       }, function(err, result) {
         if(err) {
           return done(new Error(err));

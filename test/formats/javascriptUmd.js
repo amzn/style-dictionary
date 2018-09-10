@@ -34,8 +34,6 @@ var dictionary = {
   }
 };
 
-var config = {};
-
 var formatter = formats['javascript/umd'].bind(file);
 
 describe('formats', function() {
@@ -45,7 +43,7 @@ describe('formats', function() {
     });
 
     it('should be a valid JS file', function() {
-      fs.writeFileSync('./test/output/umd.js', formatter(dictionary, config) );
+      fs.writeFileSync('./test/output/umd.js', formatter(dictionary) );
       var test = require('../output/umd.js');
       assert.equal( test.color.red.value, dictionary.properties.color.red.value );
     });

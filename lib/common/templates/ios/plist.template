@@ -22,11 +22,11 @@ var props = _.filter(allProperties, function(prop) {
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <%
-    if(!this.hideDoNotEdit) {
-        print("<!--\n   Do not edit directly");
-        if(!this.hideTimestamp) {
-            print("\n  Generated on " + new Date());
-        }
+    // for backward compatibility we need to have the user explicitly hide it
+    var showHeader = (this.options && this.options.hasOwnProperty('showHeader')) ? this.options.showHeader : true;
+    if(showHeader) {
+        print("<!--\n  Do not edit directly");
+        print("\n  Generated on " + new Date());
         print("\n-->");
     }
 %>
