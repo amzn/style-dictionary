@@ -12,7 +12,7 @@
  */
 
 var assert = require('chai').assert;
-var helpers = require('./helpers');
+var helpers = require('./__helpers');
 var _ = require('lodash');
 var StyleDictionary = require('../index');
 
@@ -28,12 +28,12 @@ describe('extend', () => {
 
   describe('method signature', () => {
     it('should accept a string as a path to a JSON file', () => {
-      var SD = StyleDictionary.extend(__dirname + '/configs/test.json');
+      var SD = StyleDictionary.extend(__dirname + '/__configs/test.json');
       assert.property(SD.platforms, 'web');
     });
 
     it('should accept an object as options', () => {
-      var config = helpers.fileToJSON(__dirname + '/configs/test.json');
+      var config = helpers.fileToJSON(__dirname + '/__configs/test.json');
       var SD = StyleDictionary.extend(config);
       assert.property(SD.platforms, 'web');
     });
@@ -82,7 +82,7 @@ describe('extend', () => {
 
     it('should update properties if there are includes', () => {
       var SD = StyleDictionary.extend({
-        include: [__dirname + '/configs/include.json']
+        include: [__dirname + '/__configs/include.json']
       });
       assert.isObject(SD.properties.size.padding.tiny);
     });
@@ -90,7 +90,7 @@ describe('extend', () => {
     it('should override existing properties if there are includes', () => {
       var SD = StyleDictionary.extend({
         properties: test_props,
-        include: [__dirname + '/configs/include.json']
+        include: [__dirname + '/__configs/include.json']
       });
       assert.equal(SD.properties.size.padding.tiny.value, '3');
     });

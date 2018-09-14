@@ -13,7 +13,7 @@
 
 var assert = require('chai').assert;
 var expect = require('chai').expect;
-var helpers = require('./helpers');
+var helpers = require('./__helpers');
 var buildFiles = require('../lib/buildFiles');
 
 var dictionary = {

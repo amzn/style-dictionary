@@ -12,7 +12,7 @@
  */
 
 var assert     = require('chai').assert,
-    helpers    = require('./helpers'),
+    helpers    = require('./__helpers'),
     buildFiles = require('../lib/buildFiles'),
     cleanFiles = require('../lib/cleanFiles');
 

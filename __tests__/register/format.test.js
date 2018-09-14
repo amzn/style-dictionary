@@ -15,6 +15,7 @@ var StyleDictionary = require('../../index');
 var StyleDictionaryExtended = StyleDictionary.extend({});
 
 describe('register/format', () => {
+
   it('should error if name is not a string', () => {
     expect(
       StyleDictionaryExtended.registerFormat.bind(null, {
@@ -92,4 +93,5 @@ describe('register/format', () => {
     var SDE2 = StyleDictionaryExtended.extend({});
     expect(typeof SDE2.format['scss']).toBe('function');
   });
+
 });

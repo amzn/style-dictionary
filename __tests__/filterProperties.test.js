@@ -12,7 +12,7 @@
  */
 
 var expect = require('chai').expect;
-var helpers = require('./helpers');
+var helpers = require('./__helpers');
 var flattenProperties = require("../lib/utils/flattenProperties");
 var filterProperties = require('../lib/filterProperties');
 

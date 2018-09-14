@@ -13,7 +13,7 @@
 
 var assert = require('chai').assert;
 var childProcess = require("child_process");
-var helpers = require('./helpers');
+var helpers = require('./__helpers');
 
 describe('cliBuildWithJsConfig', () => {
   beforeEach(() => {
@@ -21,13 +21,13 @@ describe('cliBuildWithJsConfig', () => {
   });
 
   it('should work with json config', () => {
-    childProcess.execSync("node ./bin/style-dictionary build --config ./__tests__/configs/test.json")
+    childProcess.execSync("node ./bin/style-dictionary build --config ./__tests__/__configs/test.json")
     assert(helpers.fileExists('./__tests__/output/web/_icons.css'), 'file [output/web/_icons.css] should exist');
     assert(helpers.fileExists('./__tests__/output/android/colors.xml'), 'file [output/android/colors.xml] should exist');
   });
 
   it('should work with javascript config', () => {
-    childProcess.execSync("node ./bin/style-dictionary build --config ./__tests__/configs/test.js")
+    childProcess.execSync("node ./bin/style-dictionary build --config ./__tests__/__configs/test.js")
     assert(helpers.fileExists('./__tests__/output/web/_icons.css'), 'file [output/web/_icons.css] should exist');
     assert(helpers.fileExists('./__tests__/output/android/colors.xml'), 'file [output/android/colors.xml] should exist');
   });

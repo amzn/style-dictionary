@@ -12,7 +12,7 @@
  */
 
 var resolveObject = require('../../lib/utils/resolveObject');
-var helpers = require('../helpers');
+var helpers = require('../__helpers');
 
 describe('resolveObject', () => {
 
@@ -29,19 +29,19 @@ describe('resolveObject', () => {
   });
 
   it('should not mutate the original object', () => {
-    var original = helpers.fileToJSON(__dirname + '/../json_files/nested_references.json');
+    var original = helpers.fileToJSON(__dirname + '/../__json_files/nested_references.json');
     var test = resolveObject( original );
     expect(original).toHaveProperty('a.b.d', '{e.f.g}');
     expect(test).toHaveProperty('a.b.d', 2);
   });
 
   it('should do simple references', () => {
-    var test = resolveObject( helpers.fileToJSON(__dirname + '/../json_files/simple.json') );
+    var test = resolveObject( helpers.fileToJSON(__dirname + '/../__json_files/simple.json') );
     expect(test).toHaveProperty('bar', 'bar');
   });
 
   it('should do nested references', () => {
-    var obj = helpers.fileToJSON(__dirname + '/../json_files/nested_references.json');
+    var obj = helpers.fileToJSON(__dirname + '/../__json_files/nested_references.json');
     var test = resolveObject( obj );
     expect(test).toHaveProperty('i', 2);
     expect(test).toHaveProperty('a.b.d', 2);
@@ -49,13 +49,13 @@ describe('resolveObject', () => {
   });
 
   it('should handle nested pointers', () => {
-    var test = resolveObject( helpers.fileToJSON(__dirname + '/../json_files/nested_pointers.json') );
+    var test = resolveObject( helpers.fileToJSON(__dirname + '/../__json_files/nested_pointers.json') );
     expect(test).toHaveProperty('b', 1);
     expect(test).toHaveProperty('c', 1);
   });
 
   it('should handle deep nested pointers', () => {
-    var test = resolveObject( helpers.fileToJSON(__dirname + '/../json_files/nested_pointers_2.json') );
+    var test = resolveObject( helpers.fileToJSON(__dirname + '/../__json_files/nested_pointers_2.json') );
     expect(test).toHaveProperty('a', 1);
     expect(test).toHaveProperty('b', 1);
     expect(test).toHaveProperty('c', 1);
@@ -68,7 +68,7 @@ describe('resolveObject', () => {
   test(
     'should handle deep nested pointers with string interpolation',
     () => {
-      var test = resolveObject( helpers.fileToJSON(__dirname + '/../json_files/nested_pointers_3.json') );
+      var test = resolveObject( helpers.fileToJSON(__dirname + '/../__json_files/nested_pointers_3.json') );
       expect(test).toHaveProperty('a', 'foo bon bee bae boo bla baz bar');
       expect(test).toHaveProperty('b', 'foo bon bee bae boo bla baz');
       expect(test).toHaveProperty('c', 'foo bon bee bae boo bla');
@@ -80,7 +80,7 @@ describe('resolveObject', () => {
   );
 
   it('should handle deep nested pointers and nested references', () => {
-    var test = resolveObject( helpers.fileToJSON(__dirname + '/../json_files/nested_pointers_4.json') );
+    var test = resolveObject( helpers.fileToJSON(__dirname + '/../__json_files/nested_pointers_4.json') );
     expect(test).toHaveProperty('a.a.a', 1);
     expect(test).toHaveProperty('b.b.b', 1);
     expect(test).toHaveProperty('c.c.c', 1);
@@ -92,7 +92,7 @@ describe('resolveObject', () => {
 
 
   it('should keep the type of the referenced property', () => {
-    var test = resolveObject( helpers.fileToJSON(__dirname + '/../json_files/reference_type.json') );
+    var test = resolveObject( helpers.fileToJSON(__dirname + '/../__json_files/reference_type.json') );
     expect(test).toHaveProperty('d', 1);
     expect(typeof test.d).toBe('number');
     expect(typeof test.e).toBe('object');
@@ -101,7 +101,7 @@ describe('resolveObject', () => {
   });
 
   it('should handle and evaluate items in an array', () => {
-    var test = resolveObject( helpers.fileToJSON(__dirname + '/../json_files/array.json') );
+    var test = resolveObject( helpers.fileToJSON(__dirname + '/../__json_files/array.json') );
     expect(test.d[0]).toBe(2);
     expect(test.d[1]).toBe(1);
     expect(test.e[0].a).toBe(1);
@@ -110,29 +110,29 @@ describe('resolveObject', () => {
 
   it('should throw if pointers don\'t exist', () => {
     expect(
-      resolveObject.bind( helpers.fileToJSON(__dirname + '/../json_files/non_existent.json'))
+      resolveObject.bind( helpers.fileToJSON(__dirname + '/../__json_files/non_existent.json'))
     ).toThrow();
   });
 
   it('should gracefully handle circular references', () => {
     expect(
       resolveObject.bind(null,
-        helpers.fileToJSON(__dirname + '/../json_files/circular.json')
+        helpers.fileToJSON(__dirname + '/../__json_files/circular.json')
       )
     ).toThrow('Circular definition: a | d');
     expect(
       resolveObject.bind(null,
-        helpers.fileToJSON(__dirname + '/../json_files/circular_2.json')
+        helpers.fileToJSON(__dirname + '/../__json_files/circular_2.json')
       )
     ).toThrow('Circular definition: a.b.c | d');
     expect(
       resolveObject.bind(null,
-        helpers.fileToJSON(__dirname + '/../json_files/circular_3.json')
+        helpers.fileToJSON(__dirname + '/../__json_files/circular_3.json')
       )
     ).toThrow('Circular definition: a.b.c | d.e.f');
     expect(
       resolveObject.bind(null,
-        helpers.fileToJSON(__dirname + '/../json_files/circular_4.json')
+        helpers.fileToJSON(__dirname + '/../__json_files/circular_4.json')
       )
     ).toThrow('Circular definition: a.b.c | g.h');
   });
@@ -241,7 +241,7 @@ describe('resolveObject', () => {
   it('should collect multiple reference errors', () => {
     expect(
       resolveObject.bind(null,
-        helpers.fileToJSON(__dirname + '/../json_files/multiple_reference_errors.json')
+        helpers.fileToJSON(__dirname + '/../__json_files/multiple_reference_errors.json')
       )
     ).toThrow('Failed due to 3 errors:');
   });

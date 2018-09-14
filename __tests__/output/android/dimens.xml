@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Do not edit directly
+  Generated on Fri Sep 14 2018 16:53:19 GMT+0100 (BST)
+-->
+<resources>
+  <dimen name="size_large">320.00dp</dimen><!-- this is a comment -->
+  <dimen name="size_other_large">320.00dp</dimen>
+  <dimen name="size_padding_tiny">48.00dp</dimen>
+  <dimen name="size_padding_small">80.00dp</dimen>
+  <dimen name="size_padding_base">160.00dp</dimen>
+  <dimen name="size_padding_large">240.00dp</dimen>
+  <dimen name="size_padding_xl">320.00dp</dimen>
+  <dimen name="size_padding_xxl">480.00dp</dimen>
+  
+</resources>

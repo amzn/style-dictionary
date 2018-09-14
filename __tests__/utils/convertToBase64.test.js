@@ -33,6 +33,6 @@ describe('convertToBase64', () => {
   });
 
   it('should return a string', () => {
-    expect(typeof convertToBase64('__tests__/configs/test.json')).toBe('string');
+    expect(typeof convertToBase64('__tests__/__configs/test.json')).toBe('string');
   });
 });

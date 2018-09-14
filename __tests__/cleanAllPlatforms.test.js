@@ -12,8 +12,8 @@
  */
 
 var assert = require('chai').assert;
-var helpers = require('./helpers');
-var config = helpers.fileToJSON(__dirname + '/configs/test.json');
+var helpers = require('./__helpers');
+var config = helpers.fileToJSON(__dirname + '/__configs/test.json');
 var StyleDictionary = require('../index').extend(config);
 
 describe('cleanAllPlatforms', () => {

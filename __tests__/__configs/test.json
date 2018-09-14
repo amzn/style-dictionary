@@ -1,5 +1,5 @@
 {
-  "source": ["__tests__/properties/**/*.json"],
+  "source": ["__tests__/__properties/**/*.json"],
   "platforms": {
     "web": {
       "transformGroup": "web",

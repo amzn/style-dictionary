@@ -12,7 +12,7 @@
  */
 
 var assert = require('chai').assert;
-var helpers = require('./helpers');
+var helpers = require('./__helpers');
 var fs = require('fs-extra');
 var StyleDictionary = require('../index').extend({
   "platforms": {

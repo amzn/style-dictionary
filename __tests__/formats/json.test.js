@@ -13,7 +13,7 @@
 
 var assert  = require('chai').assert,
     fs = require('fs-extra'),
-    helpers = require('../helpers'),
+    helpers = require('../__helpers'),
     formats = require('../../lib/common/formats');
 
 var file = {

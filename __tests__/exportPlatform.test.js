@@ -12,9 +12,9 @@
  */
 
 var assert = require('chai').assert;
-var helpers = require('./helpers');
+var helpers = require('./__helpers');
 var keys = require('lodash/keys');
-var config = helpers.fileToJSON(__dirname + '/configs/test.json');
+var config = helpers.fileToJSON(__dirname + '/__configs/test.json');
 var StyleDictionary = require('../index').extend(config);
 
 describe('exportPlatform', () => {
@@ -81,7 +81,7 @@ describe('exportPlatform', () => {
   // we don't mutate the original object added to the property.
   it('properties should have original value untouched', () => {
     var dictionary = StyleDictionary.exportPlatform('web');
-    var properties = helpers.fileToJSON(__dirname + '/properties/colors.json');
+    var properties = helpers.fileToJSON(__dirname + '/__properties/colors.json');
 
     assert.equal(
       dictionary.color.font.link.original.value,

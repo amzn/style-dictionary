@@ -12,7 +12,7 @@
  */
 
 var assert = require('chai').assert;
-var helpers = require('./helpers');
+var helpers = require('./__helpers');
 var StyleDictionary = require('../index');
 
 describe('buildAllPlatforms', () => {
@@ -21,14 +21,14 @@ describe('buildAllPlatforms', () => {
   });
 
   it('should work with json config', () => {
-    var test = StyleDictionary.extend(__dirname + '/configs/test.json');
+    var test = StyleDictionary.extend(__dirname + '/__configs/test.json');
     test.buildAllPlatforms();
     assert(helpers.fileExists('./__tests__/output/web/_icons.css'), 'file [output/web/_icons.css] should exist');
     assert(helpers.fileExists('./__tests__/output/android/colors.xml'), 'file [output/android/colors.xml] should exist');
   });
 
   it('should work with js config', () => {
-    var test = StyleDictionary.extend(__dirname + '/configs/test.js');
+    var test = StyleDictionary.extend(__dirname + '/__configs/test.js');
     test.buildAllPlatforms();
     assert(helpers.fileExists('./__tests__/output/web/_icons.css'), 'file [output/web/_icons.css] should exist');
     assert(helpers.fileExists('./__tests__/output/android/colors.xml'), 'file [output/android/colors.xml] should exist');
