@@ -11,11 +11,10 @@
  * and limitations under the License.
  */
 
-var assert  = require('chai').assert,
-    formats = require('../../lib/common/formats');
+var formats = require('../../lib/common/formats');
 
 var file = {
-  "destination": "output/",
+  "destination": "__output/",
   "format": "javascript/es6",
   "filter": {
     "attributes": {
@@ -49,6 +48,15 @@ var dictionary = {
 var formatter = formats['javascript/es6'].bind(file);
 
 describe('formats', () => {
+
+  // beforeEach(() => {
+  //   helpers.clearOutput();
+  // });
+
+  // afterEach(() => {
+  //   helpers.clearOutput();
+  // });
+
   describe('es6Constants', () => {
     it('should be a valid JS file', () => {
       // TODO: add tests here,
@@ -56,4 +64,5 @@ describe('formats', () => {
       // test outputting an ES6 JS file by importing it.
     });
   });
+
 });

@@ -11,12 +11,11 @@
  * and limitations under the License.
  */
 
-var assert  = require('chai').assert,
-    less = require('less'),
-    formats = require('../../lib/common/formats');
+var formats = require('../../lib/common/formats');
+var less = require('less');
 
 var file = {
-  "destination": "output/",
+  "destination": "__output/",
   "format": "less/variables",
   "name": "foo"
 };
@@ -50,15 +49,17 @@ var formatter = formats['less/variables'].bind(file);
 
 describe('formats', () => {
   describe('less/variables', () => {
+
     it('should have a valid less syntax', done => {
       less.render(formatter(dictionary))
         .then(function(output) {
-          assert.isDefined(output);
+          expect(output).toBeDefined();
           done();
         })
         .catch(function(err) {
-           done(new Error(err))
+          done(new Error(err))
         });
     });
+
   });
 });

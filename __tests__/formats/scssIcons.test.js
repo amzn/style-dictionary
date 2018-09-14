@@ -11,12 +11,11 @@
  * and limitations under the License.
  */
 
-var assert  = require('chai').assert,
-    scss    = require('node-sass'),
-    formats = require('../../lib/common/formats');
+var formats = require('../../lib/common/formats');
+var scss = require('node-sass');
 
 var file = {
-  "destination": "output/",
+  "destination": "__output/",
   "format": "scss/icons",
   "name": "foo"
 };
@@ -44,11 +43,11 @@ var config = {
   prefix: 'sd' // Style-Dictionary Prefix
 };
 
-
 var formatter = formats['scss/icons'].bind(file);
 
 describe('formats', () => {
   describe('scss/icons', () => {
+
     it('should have a valid scss syntax', done => {
       scss.render({
         data: formatter(dictionary, config),
@@ -56,9 +55,10 @@ describe('formats', () => {
         if(err) {
           return done(new Error(err));
         }
-        assert.isDefined(result.css);
+        expect(result.css).toBeDefined();
         return done();
       });
     });
+
   });
 });

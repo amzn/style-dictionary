@@ -11,12 +11,12 @@
  * and limitations under the License.
  */
 
-var assert  = require('chai').assert,
-    _ = require('lodash'),
-    formats = require('../../lib/common/formats');
+var formats = require('../../lib/common/formats');
+var _ = require('lodash');
+var helpers = require('../__helpers');
 
 var file = {
-  "destination": "output/",
+  "destination": "__output/",
   "format": "javascript/es6",
   "filter": {
     "attributes": {
@@ -34,10 +34,22 @@ var dictionary = {
 };
 
 describe('formats', () => {
-  _.each(_.keys(formats), function(key) {
-    test(key + ' should return a string', () => {
-      var formatter = formats[key].bind(file);
-      assert.isString( formatter(dictionary, file) );
+
+  beforeEach(() => {
+    helpers.clearOutput();
+  });
+
+  afterEach(() => {
+    helpers.clearOutput();
+  });
+
+  describe('all', () => {
+      _.each(_.keys(formats), function(key) {
+      it(key + ' should return a string', () => {
+        var formatter = formats[key].bind(file);
+        expect(typeof formatter(dictionary, file)).toBe('string');
+      });
     });
   });
+
 });

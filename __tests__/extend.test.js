@@ -101,7 +101,7 @@ describe('extend', () => {
       var StyleDictionaryExtended = StyleDictionary.extend({
         "source": [__dirname + "/__properties/paddings.json"]
       });
-      expect(StyleDictionaryExtended.properties).toMatchObject(helpers.fileToJSON(__dirname + "/__properties/paddings.json"));
+      expect(StyleDictionaryExtended.properties).toEqual(helpers.fileToJSON(__dirname + "/__properties/paddings.json"));
     });
 
     it('should override existing properties source is given', () => {
@@ -109,7 +109,7 @@ describe('extend', () => {
         properties: test_props,
         source: [__dirname + "/__properties/paddings.json"]
       });
-      expect(StyleDictionaryExtended.properties).toMatchObject(helpers.fileToJSON(__dirname + "/__properties/paddings.json"));
+      expect(StyleDictionaryExtended.properties).toEqual(helpers.fileToJSON(__dirname + "/__properties/paddings.json"));
     });
   });
 
@@ -122,7 +122,7 @@ describe('extend', () => {
       source: [__dirname + "/__properties/paddings.json"],
       log: 'error'
     });
-    expect(StyleDictionaryExtended.properties).toMatchObject(helpers.fileToJSON(__dirname + "/__properties/paddings.json"));
+    expect(StyleDictionaryExtended.properties).toEqual(helpers.fileToJSON(__dirname + "/__properties/paddings.json"));
   });
 
   it('should throw a error if the collision is in source files and log is set to error', () => {

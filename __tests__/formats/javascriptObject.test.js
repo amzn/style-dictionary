@@ -11,11 +11,11 @@
  * and limitations under the License.
  */
 
-var vm = require('vm'),
-    formats = require('../../lib/common/formats');
+var formats = require('../../lib/common/formats');
+var vm = require('vm');
 
 var file = {
-  "destination": "output/",
+  "destination": "__output/",
   "format": "javascript/object",
   "name": "foo"
 };
@@ -32,6 +32,7 @@ var formatter = formats['javascript/object'].bind(file);
 
 describe('formats', () => {
   describe('javascript/object', () => {
+
     it('should be valid JS syntax', done => {
       try {
         vm.runInNewContext(formatter(dictionary))
@@ -40,5 +41,6 @@ describe('formats', () => {
         return done(new Error(err));
       }
     });
+
   });
 });

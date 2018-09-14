@@ -35,13 +35,15 @@ var options = {
   ]
 };
 
-describe('transform/property', () => {
+describe('transform', () => {
+  describe('property', () => {
 
-  it('should work', () => {
-    var test = property({attributes:{baz:'blah'}}, options);
-    expect(test).toHaveProperty('attributes.bar', 'foo');
-    expect(test).toHaveProperty('name', 'hello');
+    it('should work', () => {
+      var test = property({attributes:{baz:'blah'}}, options);
+      expect(test).toHaveProperty('attributes.bar', 'foo');
+      expect(test).toHaveProperty('name', 'hello');
+    });
+
+    // Add more tests
   });
-
-  // Add more tests
 });

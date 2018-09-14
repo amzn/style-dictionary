@@ -11,13 +11,12 @@
  * and limitations under the License.
  */
 
-var assert  = require('chai').assert,
-    fs = require('fs-extra'),
-    helpers = require('../__helpers'),
-    formats = require('../../lib/common/formats');
+var formats = require('../../lib/common/formats');
+var fs = require('fs-extra');
+var helpers = require('../__helpers');
 
 var file = {
-  "destination": "output/",
+  "destination": "__output/",
   "format": "json"
 };
 
@@ -32,15 +31,21 @@ var dictionary = {
 var formatter = formats['json'].bind(file);
 
 describe('formats', () => {
-  describe('javascript/module', () => {
+  describe('json', () => {
+
     beforeEach(() => {
+      helpers.clearOutput();
+    });
+
+    afterEach(() => {
       helpers.clearOutput();
     });
 
     it('should be a valid JSON file', () => {
       fs.writeFileSync('./__tests__/__output/output.json', formatter(dictionary) );
-      var test = require('../output/output.json');
-      assert.equal( test.color.red.value, dictionary.properties.color.red.value );
+      var test = require('../__output/output.json');
+      expect(test.color.red.value).toEqual(dictionary.properties.color.red.value);
     });
   });
+
 });

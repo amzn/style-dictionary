@@ -14,84 +14,86 @@
 var StyleDictionary = require('../../index');
 var StyleDictionaryExtended = StyleDictionary.extend({});
 
-describe('register/format', () => {
+describe('register', () => {
+  describe('format', () => {
 
-  it('should error if name is not a string', () => {
-    expect(
-      StyleDictionaryExtended.registerFormat.bind(null, {
-        formatter: function() {}
-      })
-    ).toThrow('transform name must be a string');
+    it('should error if name is not a string', () => {
+      expect(
+        StyleDictionaryExtended.registerFormat.bind(null, {
+          formatter: function() {}
+        })
+      ).toThrow('transform name must be a string');
 
-    expect(
-      StyleDictionaryExtended.registerFormat.bind(null, {
-        name: 1,
-        formatter: function() {}
-      })
-    ).toThrow('transform name must be a string');
+      expect(
+        StyleDictionaryExtended.registerFormat.bind(null, {
+          name: 1,
+          formatter: function() {}
+        })
+      ).toThrow('transform name must be a string');
 
-    expect(
-      StyleDictionaryExtended.registerFormat.bind(null, {
-        name: [],
-        formatter: function() {}
-      })
-    );
+      expect(
+        StyleDictionaryExtended.registerFormat.bind(null, {
+          name: [],
+          formatter: function() {}
+        })
+      );
 
-    expect(
-      StyleDictionaryExtended.registerFormat.bind(null, {
-        name: {},
-        formatter: function() {}
-      })
-    ).toThrow('transform name must be a string');
-  });
-
-  it('should error if formatter is not a function', () => {
-    expect(
-      StyleDictionaryExtended.registerFormat.bind(null, {
-        name: 'test'
-      })
-    ).toThrow('format formatter must be a function');
-
-    expect(
-      StyleDictionaryExtended.registerFormat.bind(null, {
-        name: 'test',
-        formatter: 1
-      })
-    ).toThrow('format formatter must be a function');
-
-    expect(
-      StyleDictionaryExtended.registerFormat.bind(null, {
-        name: 'test',
-        formatter: 'name'
-      })
-    ).toThrow('format formatter must be a function');
-
-    expect(
-      StyleDictionaryExtended.registerFormat.bind(null, {
-        name: 'test',
-        formatter: []
-      })
-    ).toThrow('format formatter must be a function');
-
-    expect(
-      StyleDictionaryExtended.registerFormat.bind(null, {
-        name: 'test',
-        formatter: {}
-      })
-    ).toThrow('format formatter must be a function');
-  });
-
-  it('should work if name and formatter are good', () => {
-    StyleDictionaryExtended.registerFormat({
-      name: 'scss',
-      formatter: function() {}
+      expect(
+        StyleDictionaryExtended.registerFormat.bind(null, {
+          name: {},
+          formatter: function() {}
+        })
+      ).toThrow('transform name must be a string');
     });
-    expect(typeof StyleDictionaryExtended.format['scss']).toBe('function');
-  });
 
-  it('should properly pass the registered format to instances', () => {
-    var SDE2 = StyleDictionaryExtended.extend({});
-    expect(typeof SDE2.format['scss']).toBe('function');
-  });
+    it('should error if formatter is not a function', () => {
+      expect(
+        StyleDictionaryExtended.registerFormat.bind(null, {
+          name: 'test'
+        })
+      ).toThrow('format formatter must be a function');
 
+      expect(
+        StyleDictionaryExtended.registerFormat.bind(null, {
+          name: 'test',
+          formatter: 1
+        })
+      ).toThrow('format formatter must be a function');
+
+      expect(
+        StyleDictionaryExtended.registerFormat.bind(null, {
+          name: 'test',
+          formatter: 'name'
+        })
+      ).toThrow('format formatter must be a function');
+
+      expect(
+        StyleDictionaryExtended.registerFormat.bind(null, {
+          name: 'test',
+          formatter: []
+        })
+      ).toThrow('format formatter must be a function');
+
+      expect(
+        StyleDictionaryExtended.registerFormat.bind(null, {
+          name: 'test',
+          formatter: {}
+        })
+      ).toThrow('format formatter must be a function');
+    });
+
+    it('should work if name and formatter are good', () => {
+      StyleDictionaryExtended.registerFormat({
+        name: 'scss',
+        formatter: function() {}
+      });
+      expect(typeof StyleDictionaryExtended.format['scss']).toBe('function');
+    });
+
+    it('should properly pass the registered format to instances', () => {
+      var SDE2 = StyleDictionaryExtended.extend({});
+      expect(typeof SDE2.format['scss']).toBe('function');
+    });
+
+  });
 });

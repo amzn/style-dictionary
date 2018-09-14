@@ -11,7 +11,6 @@
  * and limitations under the License.
  */
 
-var assert = require('chai').assert;
 var helpers = require('./__helpers');
 var keys = require('lodash/keys');
 var config = helpers.fileToJSON(__dirname + '/__configs/test.json');
@@ -20,61 +19,51 @@ var StyleDictionary = require('../index').extend(config);
 describe('exportPlatform', () => {
 
   it('should throw if not given a proper platform', () => {
-    assert.throws(StyleDictionary.exportPlatform, Error);
+    expect(
+      StyleDictionary.exportPlatform, Error
+    ).toThrow();
   });
 
   it('should throw if not given a proper platform', () => {
-    assert.throws(function(){
-      StyleDictionary.exportPlatform('foo');
-    });
+    expect(
+      function(){
+        StyleDictionary.exportPlatform('foo');
+      }
+    ).toThrow();
   });
 
   it('should not throw if given a proper platform', () => {
-    assert.doesNotThrow(function(){
-      StyleDictionary.exportPlatform('web');
-    });
+    expect(
+      function(){
+        StyleDictionary.exportPlatform('web');
+      }
+    ).not.toThrow();
   });
 
   it('should return an object', () => {
     var dictionary = StyleDictionary.exportPlatform('web');
-    assert.isObject(dictionary);
+    expect(typeof dictionary).toBe('object');
   });
 
   it('should have the same structure as the original properties', () => {
     var dictionary = StyleDictionary.exportPlatform('web');
-    assert.deepEqual(
-      keys(dictionary),
-      keys(StyleDictionary.properties)
-    );
+    expect(keys(dictionary)).toEqual(keys(StyleDictionary.properties));
   });
 
   it('should have resolved references', () => {
     var dictionary = StyleDictionary.exportPlatform('web');
-    assert.equal(
-      dictionary.color.font.link.value,
-      dictionary.color.base.blue['100'].value
-    );
+    expect(dictionary.color.font.link.value).toEqual(dictionary.color.base.blue['100'].value);
   });
 
   it('should have applied transforms', () => {
     var dictionary = StyleDictionary.exportPlatform('web');
-    assert(
-      dictionary.size.padding.base.value.indexOf('px')
-    );
+    expect(dictionary.size.padding.base.value.indexOf('px')).toBeGreaterThan(0);
   });
 
   it('should not have mutated the original properties', () => {
     var dictionary = StyleDictionary.exportPlatform('web');
-
-    assert.notEqual(
-      dictionary.color.font.link.value,
-      StyleDictionary.properties.color.font.link.value
-    );
-
-    assert.equal(
-      StyleDictionary.properties.size.padding.base.value.indexOf('px'),
-      -1
-    );
+    expect(dictionary.color.font.link.value).not.toEqual(StyleDictionary.properties.color.font.link.value);
+    expect(StyleDictionary.properties.size.padding.base.value.indexOf('px')).toBe(-1);
   });
 
   // Make sure when we perform transforms and resolve references
@@ -82,10 +71,7 @@ describe('exportPlatform', () => {
   it('properties should have original value untouched', () => {
     var dictionary = StyleDictionary.exportPlatform('web');
     var properties = helpers.fileToJSON(__dirname + '/__properties/colors.json');
-
-    assert.equal(
-      dictionary.color.font.link.original.value,
-      properties.color.font.link.value
-    );
+    expect(dictionary.color.font.link.original.value).toEqual(properties.color.font.link.value);
   });
+
 });
