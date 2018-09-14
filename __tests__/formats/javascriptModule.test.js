@@ -43,8 +43,8 @@ describe('formats', () => {
     });
 
     it('should be a valid JS file', () => {
-      fs.writeFileSync('./__tests__/output/output.js', formatter(dictionary) );
-      var test = require('../output/output.js');
+      fs.writeFileSync('./__tests__/__output/output.js', formatter(dictionary) );
+      var test = require('../__output/output.js');
       assert.equal( test.color.red.value, dictionary.properties.color.red.value );
     });
   });

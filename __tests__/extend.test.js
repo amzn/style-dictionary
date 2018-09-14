@@ -11,7 +11,6 @@
  * and limitations under the License.
  */
 
-var assert = require('chai').assert;
 var helpers = require('./__helpers');
 var _ = require('lodash');
 var StyleDictionary = require('../index');
@@ -28,150 +27,120 @@ describe('extend', () => {
 
   describe('method signature', () => {
     it('should accept a string as a path to a JSON file', () => {
-      var SD = StyleDictionary.extend(__dirname + '/__configs/test.json');
-      assert.property(SD.platforms, 'web');
+      var StyleDictionaryExtended = StyleDictionary.extend(__dirname + '/__configs/test.json');
+      expect(StyleDictionaryExtended).toHaveProperty('platforms', 'web');
     });
 
     it('should accept an object as options', () => {
       var config = helpers.fileToJSON(__dirname + '/__configs/test.json');
-      var SD = StyleDictionary.extend(config);
-      assert.property(SD.platforms, 'web');
+      var StyleDictionaryExtended = StyleDictionary.extend(config);
+      expect(StyleDictionaryExtended).toHaveProperty('platforms', 'web');
     });
 
     it('should override attributes', () => {
-      var SD = StyleDictionary.extend({
+      var StyleDictionaryExtended = StyleDictionary.extend({
         properties: {
           foo: 'bar'
         }
       });
-      assert.equal(SD.properties.foo, 'bar');
+      expect(StyleDictionaryExtended).toHaveProperty('properties.foo', 'bar');
     });
 
     it('should have all same properties', () => {
-      var SD = StyleDictionary.extend({});
-      _.each(_.keys(StyleDictionary), function(property) {
-        assert.property(SD, property)
+      var StyleDictionaryExtended = StyleDictionary.extend({});
+      _.each(_.keys(StyleDictionaryExtended), function(property) {
+        expect(StyleDictionaryExtended).toHaveProperty(property);
       });
     });
   });
 
-
   describe('includes', () => {
     it('should throw if include isnt an array', () => {
-      assert.throws(
-        StyleDictionary.extend.bind(null, {
-          include: {}
-        }),
-        Error,
-        'include must be an array'
-      );
+      expect(
+        StyleDictionary.extend.bind(null, {include: {}})
+      ).toThrow('include must be an array');
     });
 
-    test(
-      'should throw if a path in the includes array doesnt resolve',
-      () => {
-        assert.throws(
-          StyleDictionary.extend.bind(null, {
-            include: ['foo']
-          }),
-          Error,
-          "Cannot find module 'foo'"
-        );
-      }
-    );
+    it('should throw if a path in the includes array doesnt resolve', () => {
+      expect(
+        StyleDictionary.extend.bind(null, {include: ['foo']})
+      ).toThrow("Cannot find module 'foo'");
+    });
 
     it('should update properties if there are includes', () => {
-      var SD = StyleDictionary.extend({
+      var StyleDictionaryExtended = StyleDictionary.extend({
         include: [__dirname + '/__configs/include.json']
       });
-      assert.isObject(SD.properties.size.padding.tiny);
+      expect(typeof StyleDictionaryExtended.properties.size.padding.tiny).toBe('object');
     });
 
     it('should override existing properties if there are includes', () => {
-      var SD = StyleDictionary.extend({
+      var StyleDictionaryExtended = StyleDictionary.extend({
         properties: test_props,
         include: [__dirname + '/__configs/include.json']
       });
-      assert.equal(SD.properties.size.padding.tiny.value, '3');
+      expect(StyleDictionaryExtended).toHaveProperty('properties.size.padding.tiny.value', '3');
     });
   });
 
 
   describe('source', () => {
     it('should throw if source isnt an array', () => {
-      assert.throws(
-        StyleDictionary.extend.bind(null, {
-          source: {}
-        }),
-        Error,
-        'source must be an array'
-      );
+      expect(
+        StyleDictionary.extend.bind(null, {source: {}})
+      ).toThrow('source must be an array');
     });
 
     it('should throw if a path in the source array doesnt resolve', () => {
-      assert.throws(
-        StyleDictionary.extend.bind(null, {
-          include: ['foo']
-        }),
-        Error,
-        "Cannot find module 'foo'"
-      );
+      expect(
+        StyleDictionary.extend.bind(null, {include: ['foo']})
+      ).toThrow("Cannot find module 'foo'");
     });
 
     it('should build the properties object if a source is given', () => {
-      var SD = StyleDictionary.extend({
-        "source": [__dirname + "/properties/paddings.json"]
+      var StyleDictionaryExtended = StyleDictionary.extend({
+        "source": [__dirname + "/__properties/paddings.json"]
       });
-      assert.deepEqual(SD.properties, helpers.fileToJSON(__dirname + "/properties/paddings.json"));
+      expect(StyleDictionaryExtended.properties).toMatchObject(helpers.fileToJSON(__dirname + "/__properties/paddings.json"));
     });
 
     it('should override existing properties source is given', () => {
-      var SD = StyleDictionary.extend({
+      var StyleDictionaryExtended = StyleDictionary.extend({
         properties: test_props,
-        source: [__dirname + "/properties/paddings.json"]
+        source: [__dirname + "/__properties/paddings.json"]
       });
-      assert.deepEqual(SD.properties, helpers.fileToJSON(__dirname + "/properties/paddings.json"));
+      expect(StyleDictionaryExtended.properties).toMatchObject(helpers.fileToJSON(__dirname + "/__properties/paddings.json"));
     });
   });
 
 
   // This is to allow style dictionaries to depend on other style dictionaries and
   // override properties. Useful for skinning
-  test(
-    'should not throw a collision error if a source file collides with an include',
-    () => {
-      var SD = StyleDictionary.extend({
-        include: [__dirname + "/properties/paddings.json"],
-        source: [__dirname + "/properties/paddings.json"],
+  it('should not throw a collision error if a source file collides with an include', () => {
+    var StyleDictionaryExtended = StyleDictionary.extend({
+      include: [__dirname + "/__properties/paddings.json"],
+      source: [__dirname + "/__properties/paddings.json"],
+      log: 'error'
+    });
+    expect(StyleDictionaryExtended.properties).toMatchObject(helpers.fileToJSON(__dirname + "/__properties/paddings.json"));
+  });
+
+  it('should throw a error if the collision is in source files and log is set to error', () => {
+    expect(
+      StyleDictionary.extend.bind(null, {
+        source: [__dirname + "/__properties/paddings.json", __dirname + "/__properties/paddings.json"],
         log: 'error'
-      });
-      assert.deepEqual(SD.properties, helpers.fileToJSON(__dirname + "/properties/paddings.json"));
-    }
-  );
+      })
+    ).toThrow('Collision detected at:');
+  });
 
-  test(
-    'should throw a error if the collision is in source files and log is set to error',
-    () => {
-      assert.throws(
-        StyleDictionary.extend.bind(null, {
-          source: [__dirname + "/properties/paddings.json", __dirname + "/properties/paddings.json"],
-          log: 'error'
-        }),
-        Error,
-        'Collision detected at:'
-      );
-    }
-  );
+  it('should throw a warning if the collision is in source files and log is set to warn', () => {
+    expect(
+      StyleDictionary.extend.bind(null, {
+        source: [__dirname + "/__properties/paddings.json", __dirname + "/__properties/paddings.json"],
+        log: 'warn'
+      })
+    ).not.toThrow();
+  });
 
-  test(
-    'should throw a warning if the collision is in source files and log is set to warn',
-    () => {
-      assert.doesNotThrow(
-        StyleDictionary.extend.bind(null, {
-          source: [__dirname + "/properties/paddings.json", __dirname + "/properties/paddings.json"],
-          log: 'warn'
-        })
-      );
-    }
-  );
 });

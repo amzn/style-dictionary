@@ -11,26 +11,29 @@
  * and limitations under the License.
  */
 
-var assert = require('chai').assert;
 var helpers = require('./__helpers');
+var config = helpers.fileToJSON(__dirname + '/__configs/test.json');
 var StyleDictionary = require('../index');
+var StyleDictionaryExtended = StyleDictionary.extend(config);
 
 describe('buildAllPlatforms', () => {
-  beforeEach(() => {
+
+  beforeAll(() => {
+    helpers.clearOutput();
+    StyleDictionaryExtended.buildAllPlatforms();
+  });
+
+  afterAll(() => {
     helpers.clearOutput();
   });
 
   it('should work with json config', () => {
-    var test = StyleDictionary.extend(__dirname + '/__configs/test.json');
-    test.buildAllPlatforms();
-    assert(helpers.fileExists('./__tests__/output/web/_icons.css'), 'file [output/web/_icons.css] should exist');
-    assert(helpers.fileExists('./__tests__/output/android/colors.xml'), 'file [output/android/colors.xml] should exist');
+    expect(helpers.fileExists('./__tests__/__output/web/_icons.css')).toBeTruthy();
+    expect(helpers.fileExists('./__tests__/__output/android/colors.xml')).toBeTruthy();
   });
 
   it('should work with js config', () => {
-    var test = StyleDictionary.extend(__dirname + '/__configs/test.js');
-    test.buildAllPlatforms();
-    assert(helpers.fileExists('./__tests__/output/web/_icons.css'), 'file [output/web/_icons.css] should exist');
-    assert(helpers.fileExists('./__tests__/output/android/colors.xml'), 'file [output/android/colors.xml] should exist');
+    expect(helpers.fileExists('./__tests__/__output/web/_icons.css')).toBeTruthy();
+    expect(helpers.fileExists('./__tests__/__output/android/colors.xml')).toBeTruthy();
   });
 });

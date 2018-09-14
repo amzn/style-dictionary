@@ -24,7 +24,7 @@ var dictionary = {
 var platform = {
   files: [
     {
-      destination: '__tests__/output/test.json',
+      destination: '__tests__/__output/test.json',
       format: function(dictionary) {
         return JSON.stringify(dictionary.properties)
       }
@@ -33,7 +33,7 @@ var platform = {
 };
 
 var platformWithBuildPath = {
-  buildPath: '__tests__/output/',
+  buildPath: '__tests__/__output/',
   files: [
     {
       destination: 'test.json',
@@ -50,19 +50,19 @@ describe('cleanFiles', () => {
     helpers.clearOutput();
   });
 
-  afterAll(() => {
+  afterEach(() => {
     helpers.clearOutput();
   });
 
   it('should delete without buildPath', () => {
     buildFiles( dictionary, platform );
     cleanFiles( dictionary, platform );
-    expect(helpers.fileDoesNotExist('./__tests__/output/test.json')).toBeTruthy();
+    expect(helpers.fileDoesNotExist('./__tests__/__output/test.json')).toBeTruthy();
   });
 
   it('should delete with buildPath', () => {
     buildFiles( dictionary, platformWithBuildPath );
     cleanFiles( dictionary, platformWithBuildPath );
-    expect(helpers.fileDoesNotExist('./__tests__/output/test.json')).toBeTruthy();
+    expect(helpers.fileDoesNotExist('./__tests__/__output/test.json')).toBeTruthy();
   });
 });

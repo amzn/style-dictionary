@@ -11,57 +11,49 @@
  * and limitations under the License.
  */
 
-var assert  = require('chai').assert,
-  helpers   = require('./__helpers'),
-  buildFile = require('../lib/buildFile');
+var buildFile = require('../lib/buildFile');
+var helpers   = require('./__helpers');
 
 function format() {
   return "hi";
 }
 
 describe('buildFile', () => {
+
   beforeEach(() => {
     helpers.clearOutput();
   });
 
+  afterEach(() => {
+    helpers.clearOutput();
+  });
+
   it('should error if format doesnt exist or isnt a function', () => {
-    assert.throws(
-      buildFile.bind(null, '__tests__/output/test.txt', {}, {}, {}),
-      Error,
-      'Please enter a valid file format'
-    );
-    assert.throws(
-      buildFile.bind(null, '__tests__/output/test.txt', [], {}, {}),
-      Error,
-      'Please enter a valid file format'
-    );
-    assert.throws(
-      buildFile.bind(null, '__tests__/output/test.txt', null, {}, {}),
-      Error,
-      'Please enter a valid file format'
-    );
+    expect(
+      buildFile.bind(null, '__tests__/__output/test.txt', {}, {}, {})
+    ).toThrow('Please enter a valid file format');
+    expect(
+      buildFile.bind(null, '__tests__/__output/test.txt', [], {}, {})
+    ).toThrow('Please enter a valid file format');
+    expect(
+      buildFile.bind(null, '__tests__/__output/test.txt', null, {}, {})
+    ).toThrow('Please enter a valid file format');
   });
 
   it('should error if destination doesnt exist or isnt a string', () => {
-    assert.throws(
-      buildFile.bind(null, {}, format, {}, {}),
-      Error,
-      'Please enter a valid destination'
-    );
-    assert.throws(
-      buildFile.bind(null, [], format, {}, {}),
-      Error,
-      'Please enter a valid destination'
-    );
-    assert.throws(
-      buildFile.bind(null, null, format, {}, {}),
-      Error,
-      'Please enter a valid destination'
-    );
+    expect(
+      buildFile.bind(null, {}, format, {}, {})
+    ).toThrow('Please enter a valid destination');
+    expect(
+      buildFile.bind(null, [], format, {}, {})
+    ).toThrow('Please enter a valid destination');
+    expect(
+      buildFile.bind(null, null, format, {}, {})
+    ).toThrow('Please enter a valid destination');
   });
 
   it('should write to a file properly', () => {
-    buildFile('test.txt', format, {buildPath: '__tests__/output/'}, {});
-    assert(helpers.fileExists('./__tests__/output/test.txt'));
+    buildFile('test.txt', format, {buildPath: '__tests__/__output/'}, {});
+    expect(helpers.fileExists('./__tests__/__output/test.txt')).toBeTruthy();
   });
 });

@@ -25,28 +25,29 @@ var StyleDictionaryExtended = StyleDictionary.extend({
 StyleDictionaryExtended.registerAction({
   name: 'test',
   do: function() {
-    fs.writeFileSync('./__tests__/output/action.txt', 'hi')
+    fs.writeFileSync('./__tests__/__output/action.txt', 'hi')
   },
   undo: function() {
-    fs.removeSync('./__tests__/output/action.txt')
+    fs.removeSync('./__tests__/__output/action.txt')
   }
 });
 
-describe('cleanPlatform', () => {
+describe('cleanAction', () => {
 
   describe('clean actions', () => {
+
     beforeEach(() => {
       helpers.clearOutput();
     });
 
-    afterAll(() => {
+    afterEach(() => {
       helpers.clearOutput();
     });
 
     it('should delete a file properly', () => {
       StyleDictionaryExtended.buildPlatform('android');
       StyleDictionaryExtended.cleanPlatform('android');
-      expect(helpers.fileDoesNotExist('./__tests__/output/action.txt')).toBeTruthy();
+      expect(helpers.fileDoesNotExist('./__tests__/__output/action.txt')).toBeTruthy();
     });
   });
 

@@ -25,14 +25,14 @@ describe('cleanFile', () => {
     helpers.clearOutput();
   });
 
-  afterAll(() => {
+  afterEach(() => {
     helpers.clearOutput();
   });
 
   it('should delete a file properly', () => {
-    buildFile('test.txt', format, {buildPath: '__tests__/output/'}, {});
-    cleanFile('test.txt', format, {buildPath: '__tests__/output/'}, {});
-    expect(helpers.fileDoesNotExist('./__tests__/output/test.txt')).toBeTruthy();
+    buildFile('test.txt', format, {buildPath: '__tests__/__output/'}, {});
+    cleanFile('test.txt', format, {buildPath: '__tests__/__output/'}, {});
+    expect(helpers.fileDoesNotExist('./__tests__/__output/test.txt')).toBeTruthy();
   });
 
 });

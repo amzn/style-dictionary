@@ -43,7 +43,7 @@ describe('formats', () => {
     });
 
     it('should be a valid JS file', () => {
-      fs.writeFileSync('./__tests__/output/umd.js', formatter(dictionary) );
+      fs.writeFileSync('./__tests__/__output/umd.js', formatter(dictionary) );
       var test = require('../output/umd.js');
       assert.equal( test.color.red.value, dictionary.properties.color.red.value );
     });

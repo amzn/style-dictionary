@@ -22,15 +22,15 @@ describe('cleanAllPlatforms', () => {
     helpers.clearOutput();
   });
 
-  afterAll(() => {
+  afterEach(() => {
     helpers.clearOutput();
   });
 
   it('should work', () => {
     StyleDictionaryExtended.buildAllPlatforms();
     StyleDictionaryExtended.cleanAllPlatforms();
-    expect(helpers.fileDoesNotExist('./__tests__/output/web/_icons.scss')).toBeTruthy();
-    expect(helpers.fileDoesNotExist('./__tests__/output/android/colors.xml')).toBeTruthy();
+    expect(helpers.fileDoesNotExist('./__tests__/__output/web/_icons.scss')).toBeTruthy();
+    expect(helpers.fileDoesNotExist('./__tests__/__output/android/colors.xml')).toBeTruthy();
   });
 
 });

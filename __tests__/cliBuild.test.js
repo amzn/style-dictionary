@@ -11,24 +11,28 @@
  * and limitations under the License.
  */
 
-var assert = require('chai').assert;
 var childProcess = require("child_process");
 var helpers = require('./__helpers');
 
 describe('cliBuildWithJsConfig', () => {
-  beforeEach(() => {
+
+  beforeAll(() => {
+    helpers.clearOutput();
+    childProcess.execSync("node ./bin/style-dictionary build --config ./__tests__/__configs/test.js")
+  });
+
+  afterAll(() => {
     helpers.clearOutput();
   });
 
   it('should work with json config', () => {
-    childProcess.execSync("node ./bin/style-dictionary build --config ./__tests__/__configs/test.json")
-    assert(helpers.fileExists('./__tests__/output/web/_icons.css'), 'file [output/web/_icons.css] should exist');
-    assert(helpers.fileExists('./__tests__/output/android/colors.xml'), 'file [output/android/colors.xml] should exist');
+    expect(helpers.fileExists('./__tests__/__output/web/_icons.css')).toBeTruthy();
+    expect(helpers.fileExists('./__tests__/__output/android/colors.xml')).toBeTruthy();
   });
 
   it('should work with javascript config', () => {
-    childProcess.execSync("node ./bin/style-dictionary build --config ./__tests__/__configs/test.js")
-    assert(helpers.fileExists('./__tests__/output/web/_icons.css'), 'file [output/web/_icons.css] should exist');
-    assert(helpers.fileExists('./__tests__/output/android/colors.xml'), 'file [output/android/colors.xml] should exist');
+    expect(helpers.fileExists('./__tests__/__output/web/_icons.css')).toBeTruthy();
+    expect(helpers.fileExists('./__tests__/__output/android/colors.xml')).toBeTruthy();
   });
+
 });
