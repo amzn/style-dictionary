@@ -50,9 +50,11 @@
       "__tests__"
     ],
     "testPathIgnorePatterns": [
-      "/__tests__/helpers.js",
-      "/__tests__/configs/",
-      "/__tests__/json_files/",
+      "/__tests__/__helpers.js",
+      "/__tests__/__assets/",
+      "/__tests__/__configs/",
+      "/__tests__/__json_files/",
+      "/__tests__/__properties/",
       "/__tests__/output/"
     ]
 
