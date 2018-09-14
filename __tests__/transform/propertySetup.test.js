@@ -49,7 +49,7 @@ describe('transform/propertySetup', () => {
   });
 
 
-  test('should not do anything and return the property if it has been setup previously', () => {
+  it('should not do anything and return the property if it has been setup previously', () => {
     var original = {value: "#fff", original:{}};
     var test = propertySetup(
       original,

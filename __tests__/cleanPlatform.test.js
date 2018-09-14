@@ -11,10 +11,10 @@
  * and limitations under the License.
  */
 
-var assert = require('chai').assert;
 var helpers = require('./__helpers');
 var config = helpers.fileToJSON(__dirname + '/__configs/test.json');
-var StyleDictionary = require('../index').extend(config);
+var StyleDictionary = require('../index');
+var StyleDictionaryExtended = StyleDictionary.extend(config);
 
 describe('cleanPlatform', () => {
   beforeEach(() => {
@@ -22,27 +22,27 @@ describe('cleanPlatform', () => {
   });
 
   it('should delete the proper files', () => {
-    StyleDictionary.buildPlatform('web');
-    StyleDictionary.cleanPlatform('web');
-    assert(helpers.fileDoesNotExist('./__tests__/output/web/_icons.scss'));
-    assert(helpers.fileDoesNotExist('./__tests__/output/web/_styles.js'));
-    assert(helpers.fileDoesNotExist('./__tests__/output/web/_variables.scss'));
+    StyleDictionaryExtended.buildPlatform('web');
+    StyleDictionaryExtended.cleanPlatform('web');
+    expect(helpers.fileDoesNotExist('./__tests__/output/web/_icons.scss')).toBeTruthy();
+    expect(helpers.fileDoesNotExist('./__tests__/output/web/_styles.js')).toBeTruthy();
+    expect(helpers.fileDoesNotExist('./__tests__/output/web/_variables.scss')).toBeTruthy();
   });
 
   it('should delete android stuff', () => {
-    StyleDictionary.buildPlatform('android');
-    StyleDictionary.cleanPlatform('android');
-    assert(helpers.fileDoesNotExist('./__tests__/output/android/main/res/drawable-hdpi/flag_us.png'));
-    assert(helpers.fileDoesNotExist('./__tests__/output/android/main/res/drawable-xhdpi/flag_us.png'));
-    assert(helpers.fileDoesNotExist('./__tests__/output/android/colors.xml'));
-    assert(helpers.fileDoesNotExist('./__tests__/output/android/dimens.xml'));
-    assert(helpers.fileDoesNotExist('./__tests__/output/android/font_dimen.xml'));
+    StyleDictionaryExtended.buildPlatform('android');
+    StyleDictionaryExtended.cleanPlatform('android');
+    expect(helpers.fileDoesNotExist('./__tests__/output/android/main/res/drawable-hdpi/flag_us.png')).toBeTruthy();
+    expect(helpers.fileDoesNotExist('./__tests__/output/android/main/res/drawable-xhdpi/flag_us.png')).toBeTruthy();
+    expect(helpers.fileDoesNotExist('./__tests__/output/android/colors.xml')).toBeTruthy();
+    expect(helpers.fileDoesNotExist('./__tests__/output/android/dimens.xml')).toBeTruthy();
+    expect(helpers.fileDoesNotExist('./__tests__/output/android/font_dimen.xml')).toBeTruthy();
   });
 
   it('should delete ios stuff', () => {
-    StyleDictionary.buildPlatform('ios');
-    StyleDictionary.cleanPlatform('ios');
-    assert(helpers.fileDoesNotExist('./__tests__/output/ios/style_dictionary.plist'));
-    assert(helpers.fileDoesNotExist('./__tests__/output/ios/style_dictionary.h'));
+    StyleDictionaryExtended.buildPlatform('ios');
+    StyleDictionaryExtended.cleanPlatform('ios');
+    expect(helpers.fileDoesNotExist('./__tests__/output/ios/style_dictionary.plist')).toBeTruthy();
+    expect(helpers.fileDoesNotExist('./__tests__/output/ios/style_dictionary.h')).toBeTruthy();
   });
 });

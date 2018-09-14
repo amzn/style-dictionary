@@ -11,23 +11,28 @@
  * and limitations under the License.
  */
 
-var assert  = require('chai').assert,
-  helpers   = require('./__helpers'),
-  buildFile = require('../lib/buildFile'),
-  cleanFile = require('../lib/cleanFile');
+var helpers   = require('./__helpers');
+var buildFile = require('../lib/buildFile');
+var cleanFile = require('../lib/cleanFile');
 
 function format() {
   return "hi";
 }
 
 describe('cleanFile', () => {
+
   beforeEach(() => {
+    helpers.clearOutput();
+  });
+
+  afterAll(() => {
     helpers.clearOutput();
   });
 
   it('should delete a file properly', () => {
     buildFile('test.txt', format, {buildPath: '__tests__/output/'}, {});
     cleanFile('test.txt', format, {buildPath: '__tests__/output/'}, {});
-    assert(helpers.fileDoesNotExist('./__tests__/output/test.txt'));
+    expect(helpers.fileDoesNotExist('./__tests__/output/test.txt')).toBeTruthy();
   });
+
 });

@@ -11,11 +11,10 @@
  * and limitations under the License.
  */
 
-var assert     = require('chai').assert,
-    helpers    = require('./__helpers'),
-    buildFiles = require('../lib/buildFiles'),
-    cleanFiles = require('../lib/cleanFiles'),
-    cleanDirs  = require('../lib/cleanDirs');
+var helpers    = require('./__helpers');
+var buildFiles = require('../lib/buildFiles');
+var cleanFiles = require('../lib/cleanFiles');
+var cleanDirs  = require('../lib/cleanDirs');
 
 var dictionary = {
   properties: {
@@ -47,7 +46,12 @@ var platformWithBuildPath = {
 };
 
 describe('cleanDirs', () => {
+
   beforeEach(() => {
+    helpers.clearOutput();
+  });
+
+  afterAll(() => {
     helpers.clearOutput();
   });
 
@@ -55,15 +59,15 @@ describe('cleanDirs', () => {
     buildFiles( dictionary, platform );
     cleanFiles( dictionary, platform );
     cleanDirs( dictionary, platform );
-    assert(helpers.dirDoesNotExist('./__tests__/output/extradir1/extradir2'));
-    assert(helpers.dirDoesNotExist('./__tests__/output/extradir1'));
+    expect(helpers.dirDoesNotExist('./__tests__/output/extradir1/extradir2')).toBeTruthy();
+    expect(helpers.dirDoesNotExist('./__tests__/output/extradir1')).toBeTruthy();
   });
 
   it('should delete with buildPath', () => {
     buildFiles( dictionary, platformWithBuildPath );
     cleanFiles( dictionary, platformWithBuildPath );
     cleanDirs( dictionary, platformWithBuildPath );
-    assert(helpers.dirDoesNotExist('./__tests__/output/extradir1/extradir2'));
-    assert(helpers.dirDoesNotExist('./__tests__/output/extradir1'));
+    expect(helpers.dirDoesNotExist('./__tests__/output/extradir1/extradir2')).toBeTruthy();
+    expect(helpers.dirDoesNotExist('./__tests__/output/extradir1')).toBeTruthy();
   });
 });

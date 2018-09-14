@@ -11,10 +11,10 @@
  * and limitations under the License.
  */
 
-var assert = require('chai').assert;
 var helpers = require('./__helpers');
 var fs = require('fs-extra');
-var StyleDictionary = require('../index').extend({
+var StyleDictionary = require('../index');
+var StyleDictionaryExtended = StyleDictionary.extend({
   "platforms": {
     "android": {
       "actions": ["test"]
@@ -22,7 +22,7 @@ var StyleDictionary = require('../index').extend({
   }
 });
 
-StyleDictionary.registerAction({
+StyleDictionaryExtended.registerAction({
   name: 'test',
   do: function() {
     fs.writeFileSync('./__tests__/output/action.txt', 'hi')
@@ -33,15 +33,21 @@ StyleDictionary.registerAction({
 });
 
 describe('cleanPlatform', () => {
+
   describe('clean actions', () => {
     beforeEach(() => {
       helpers.clearOutput();
     });
 
+    afterAll(() => {
+      helpers.clearOutput();
+    });
+
     it('should delete a file properly', () => {
-      StyleDictionary.buildPlatform('android');
-      StyleDictionary.cleanPlatform('android');
-      assert(helpers.fileDoesNotExist('./__tests__/output/action.txt'));
+      StyleDictionaryExtended.buildPlatform('android');
+      StyleDictionaryExtended.cleanPlatform('android');
+      expect(helpers.fileDoesNotExist('./__tests__/output/action.txt')).toBeTruthy();
     });
   });
+
 });

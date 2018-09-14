@@ -32,15 +32,15 @@ StyleDictionaryExtended.registerAction({
   }
 });
 
-beforeAll(() => {
-  helpers.clearOutput();
-});
-
-afterAll(() => {
-  helpers.clearOutput();
-});
-
 describe('performAction', () => {
+
+  beforeEach(() => {
+    helpers.clearOutput();
+  });
+
+  afterAll(() => {
+    helpers.clearOutput();
+  });
 
   describe('handle actions', () => {
     it('should write to a file properly', () => {

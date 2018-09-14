@@ -11,18 +11,22 @@
  * and limitations under the License.
  */
 
-var assert  = require('chai').assert,
-  helpers   = require('./__helpers'),
-  buildFile = require('../lib/buildFile'),
-  cleanFile = require('../lib/cleanFile'),
-  cleanDir = require('../lib/cleanDir');
+var helpers   = require('./__helpers');
+var buildFile = require('../lib/buildFile');
+var cleanFile = require('../lib/cleanFile');
+var cleanDir = require('../lib/cleanDir');
 
 function format() {
   return "hi";
 }
 
 describe('cleanDir', () => {
+
   beforeEach(() => {
+    helpers.clearOutput();
+  });
+
+  afterAll(() => {
     helpers.clearOutput();
   });
 
@@ -30,7 +34,8 @@ describe('cleanDir', () => {
     buildFile('test.txt', format, {buildPath: '__tests__/output/extradir1/extradir2/'}, {});
     cleanFile('test.txt', format, {buildPath: '__tests__/output/extradir1/extradir2/'}, {});
     cleanDir('test.txt', format, {buildPath: '__tests__/output/extradir1/extradir2/'}, {});
-    assert(helpers.dirDoesNotExist('./__tests__/output/extradir1/extradir2'));
-    assert(helpers.dirDoesNotExist('./__tests__/output/extradir1'));
+    expect(helpers.dirDoesNotExist('./__tests__/output/extradir1/extradir2')).toBeTruthy();
+    expect(helpers.dirDoesNotExist('./__tests__/output/extradir1')).toBeTruthy();
   });
+
 });

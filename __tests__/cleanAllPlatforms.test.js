@@ -11,20 +11,26 @@
  * and limitations under the License.
  */
 
-var assert = require('chai').assert;
 var helpers = require('./__helpers');
 var config = helpers.fileToJSON(__dirname + '/__configs/test.json');
-var StyleDictionary = require('../index').extend(config);
+var StyleDictionary = require('../index');
+var StyleDictionaryExtended = StyleDictionary.extend(config);
 
 describe('cleanAllPlatforms', () => {
+
   beforeEach(() => {
     helpers.clearOutput();
   });
 
-  it('should work', () => {
-    StyleDictionary.buildAllPlatforms();
-    StyleDictionary.cleanAllPlatforms();
-    assert(helpers.fileDoesNotExist('./__tests__/output/web/_icons.scss'));
-    assert(helpers.fileDoesNotExist('./__tests__/output/android/colors.xml'));
+  afterAll(() => {
+    helpers.clearOutput();
   });
+
+  it('should work', () => {
+    StyleDictionaryExtended.buildAllPlatforms();
+    StyleDictionaryExtended.cleanAllPlatforms();
+    expect(helpers.fileDoesNotExist('./__tests__/output/web/_icons.scss')).toBeTruthy();
+    expect(helpers.fileDoesNotExist('./__tests__/output/android/colors.xml')).toBeTruthy();
+  });
+
 });

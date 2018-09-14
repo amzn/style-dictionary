@@ -11,10 +11,9 @@
  * and limitations under the License.
  */
 
-var assert     = require('chai').assert,
-    helpers    = require('./__helpers'),
-    buildFiles = require('../lib/buildFiles'),
-    cleanFiles = require('../lib/cleanFiles');
+var helpers    = require('./__helpers');
+var buildFiles = require('../lib/buildFiles');
+var cleanFiles = require('../lib/cleanFiles');
 
 var dictionary = {
   properties: {
@@ -46,19 +45,24 @@ var platformWithBuildPath = {
 };
 
 describe('cleanFiles', () => {
+
   beforeEach(() => {
+    helpers.clearOutput();
+  });
+
+  afterAll(() => {
     helpers.clearOutput();
   });
 
   it('should delete without buildPath', () => {
     buildFiles( dictionary, platform );
     cleanFiles( dictionary, platform );
-    assert(helpers.fileDoesNotExist('./__tests__/output/test.json'));
+    expect(helpers.fileDoesNotExist('./__tests__/output/test.json')).toBeTruthy();
   });
 
   it('should delete with buildPath', () => {
     buildFiles( dictionary, platformWithBuildPath );
     cleanFiles( dictionary, platformWithBuildPath );
-    assert(helpers.fileDoesNotExist('./__tests__/output/test.json'));
+    expect(helpers.fileDoesNotExist('./__tests__/output/test.json')).toBeTruthy();
   });
 });
