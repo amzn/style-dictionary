@@ -11,68 +11,66 @@
  * and limitations under the License.
  */
 
-var assert     = require('chai').assert,
-    deepExtend = require('../../lib/utils/deepExtend');
-
+var deepExtend = require('../../lib/utils/deepExtend');
 
 describe('deepExtend', () => {
+
   it('should return an object', () => {
     var test = deepExtend();
-    assert.isObject(test);
+    expect(typeof test).toBe('object')
   });
 
   it('should override properties from right to left', () => {
     var test = deepExtend([{foo:'bar'}, {foo:'baz'}]);
-    assert.equal(test.foo, 'baz');
+    expect(test).toHaveProperty('foo', 'baz');
 
     var test2 = deepExtend([{foo:'bar'}, {foo:'baz'}, {foo:'blah'}]);
-    assert.equal(test2.foo, 'blah');
+    expect(test2).toHaveProperty('foo', 'blah');
   });
 
   it('should override nested properties', () => {
     var test = deepExtend([{foo: {foo:'bar'}}, {foo: {foo:'baz'}}]);
-    assert.equal(test.foo.foo, 'baz');
+    expect(test).toHaveProperty('foo.foo', 'baz');
 
     var test2 = deepExtend([{foo:{foo:'bar'}}, {foo:{foo:'baz'}}, {foo:{foo:'blah'}}]);
-    assert.equal(test2.foo.foo, 'blah');
+    expect(test2).toHaveProperty('foo.foo', 'blah');
   });
 
   it('should override nested properties', () => {
     var test = deepExtend([{foo: {bar:'bar'}}, {foo: {baz:'baz'}}]);
-    assert.equal(test.foo.baz, 'baz');
-    assert.equal(test.foo.bar, 'bar');
+    expect(test).toHaveProperty('foo.baz', 'baz');
+    expect(test).toHaveProperty('foo.bar', 'bar');
 
     var test2 = deepExtend([{foo:{bar:'bar'}}, {foo:{baz:'baz'}}, {foo:{blah:'blah'}}]);
-    assert.equal(test2.foo.baz, 'baz');
-    assert.equal(test2.foo.bar, 'bar');
-    assert.equal(test2.foo.blah, 'blah');
+    expect(test2).toHaveProperty('foo.baz', 'baz');
+    expect(test2).toHaveProperty('foo.bar', 'bar');
+    expect(test2).toHaveProperty('foo.blah', 'blah');
   });
 
   it('shouldn\'t fail loudly if it is a normal deep extend', () => {
     var test = deepExtend([{foo: {bar:'bar'}}, {foo: {baz:'baz'}}], function() {});
-    assert.equal(test.foo.bar, 'bar');
-    assert.equal(test.foo.baz, 'baz');
+    expect(test).toHaveProperty('foo.baz', 'baz');
+    expect(test).toHaveProperty('foo.bar', 'bar');
   });
 
   describe('collision detection', () => {
     it('should call the collision function if a collision happens', () => {
-      assert.throws(
+      expect(
         deepExtend.bind(null, [{foo: {bar:'bar'}}, {foo: {bar:'baz'}}], function() {
           throw new Error('danger danger. high voltage.');
-        }),
-        Error,
-        'danger danger. high voltage.'
-      );
+        })
+      ).toThrow('danger danger. high voltage.');
     });
 
     it('the collision function should have the proper arguments', () => {
       var test = deepExtend([{foo: {bar:'bar'}}, {foo: {bar:'baz'}}], function(opts) {
-        assert.equal(opts.target.bar, 'bar');
-        assert.equal(opts.copy.bar, 'baz');
-        assert.equal(opts.path[0], 'foo');
-        assert.equal(opts.key, 'bar');
+        expect(opts).toHaveProperty('target.bar', 'bar');
+        expect(opts).toHaveProperty('copy.bar', 'baz');
+        expect(opts.path[0]).toBe('foo');
+        expect(opts).toHaveProperty('key', 'bar');
       });
-      assert.equal(test.foo.bar, 'baz');
+      expect(test).toHaveProperty('foo.bar', 'baz');
     });
   });
+
 });

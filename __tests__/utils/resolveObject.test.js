@@ -11,145 +11,130 @@
  * and limitations under the License.
  */
 
-var assert = require('chai').assert;
-var helpers = require('../helpers');
 var resolveObject = require('../../lib/utils/resolveObject');
-
+var helpers = require('../helpers');
 
 describe('resolveObject', () => {
+
   it('should error on non-objects', () => {
-    assert.throws(
-      resolveObject.bind(null, 'foo'),
-      Error,
-      'Please pass an object in'
-    );
-    assert.throws(
+    expect(
       resolveObject.bind(null),
-      Error,
-      'Please pass an object in'
-    );
-    assert.throws(
+    ).toThrow('Please pass an object in');
+    expect(
+      resolveObject.bind(null, 'foo'),
+    ).toThrow('Please pass an object in');
+    expect(
       resolveObject.bind(null, 0),
-      Error,
-      'Please pass an object in'
-    );
+    ).toThrow('Please pass an object in');
   });
 
   it('should not mutate the original object', () => {
     var original = helpers.fileToJSON(__dirname + '/../json_files/nested_references.json');
     var test = resolveObject( original );
-    assert.equal(original.a.b.d, '{e.f.g}');
-    assert.equal(test.a.b.d, 2);
+    expect(original).toHaveProperty('a.b.d', '{e.f.g}');
+    expect(test).toHaveProperty('a.b.d', 2);
   });
 
   it('should do simple references', () => {
     var test = resolveObject( helpers.fileToJSON(__dirname + '/../json_files/simple.json') );
-    assert.equal(test.bar, 'bar');
+    expect(test).toHaveProperty('bar', 'bar');
   });
 
   it('should do nested references', () => {
     var obj = helpers.fileToJSON(__dirname + '/../json_files/nested_references.json');
     var test = resolveObject( obj );
-    assert.equal(test.i, 2);
-    assert.equal(test.a.b.d, 2);
-    assert.equal(test.e.f.h, 1);
+    expect(test).toHaveProperty('i', 2);
+    expect(test).toHaveProperty('a.b.d', 2);
+    expect(test).toHaveProperty('e.f.h', 1);
   });
 
   it('should handle nested pointers', () => {
     var test = resolveObject( helpers.fileToJSON(__dirname + '/../json_files/nested_pointers.json') );
-    assert.equal(test.b, 1);
-    assert.equal(test.c, 1);
+    expect(test).toHaveProperty('b', 1);
+    expect(test).toHaveProperty('c', 1);
   });
 
   it('should handle deep nested pointers', () => {
     var test = resolveObject( helpers.fileToJSON(__dirname + '/../json_files/nested_pointers_2.json') );
-    assert.equal(test.a, 1);
-    assert.equal(test.b, 1);
-    assert.equal(test.c, 1);
-    assert.equal(test.d, 1);
-    assert.equal(test.e, 1);
-    assert.equal(test.f, 1);
-    assert.equal(test.g, 1);
+    expect(test).toHaveProperty('a', 1);
+    expect(test).toHaveProperty('b', 1);
+    expect(test).toHaveProperty('c', 1);
+    expect(test).toHaveProperty('d', 1);
+    expect(test).toHaveProperty('e', 1);
+    expect(test).toHaveProperty('f', 1);
+    expect(test).toHaveProperty('g', 1);
   });
 
   test(
     'should handle deep nested pointers with string interpolation',
     () => {
       var test = resolveObject( helpers.fileToJSON(__dirname + '/../json_files/nested_pointers_3.json') );
-      assert.equal(test.a, 'foo bon bee bae boo bla baz bar');
-      assert.equal(test.b, 'foo bon bee bae boo bla baz');
-      assert.equal(test.c, 'foo bon bee bae boo bla');
-      assert.equal(test.d, 'foo bon bee bae boo');
-      assert.equal(test.e, 'foo bon bee bae');
-      assert.equal(test.f, 'foo bon bee');
-      assert.equal(test.g, 'foo bon');
+      expect(test).toHaveProperty('a', 'foo bon bee bae boo bla baz bar');
+      expect(test).toHaveProperty('b', 'foo bon bee bae boo bla baz');
+      expect(test).toHaveProperty('c', 'foo bon bee bae boo bla');
+      expect(test).toHaveProperty('d', 'foo bon bee bae boo');
+      expect(test).toHaveProperty('e', 'foo bon bee bae');
+      expect(test).toHaveProperty('f', 'foo bon bee');
+      expect(test).toHaveProperty('g', 'foo bon');
     }
   );
 
   it('should handle deep nested pointers and nested references', () => {
     var test = resolveObject( helpers.fileToJSON(__dirname + '/../json_files/nested_pointers_4.json') );
-    assert.equal(test.a.a.a, 1);
-    assert.equal(test.b.b.b, 1);
-    assert.equal(test.c.c.c, 1);
-    assert.equal(test.d.d.d, 1);
-    assert.equal(test.e.e.e, 1);
-    assert.equal(test.f.f.f, 1);
-    assert.equal(test.g.g.g, 1);
+    expect(test).toHaveProperty('a.a.a', 1);
+    expect(test).toHaveProperty('b.b.b', 1);
+    expect(test).toHaveProperty('c.c.c', 1);
+    expect(test).toHaveProperty('d.d.d', 1);
+    expect(test).toHaveProperty('e.e.e', 1);
+    expect(test).toHaveProperty('f.f.f', 1);
+    expect(test).toHaveProperty('g.g.g', 1);
   });
 
 
   it('should keep the type of the referenced property', () => {
     var test = resolveObject( helpers.fileToJSON(__dirname + '/../json_files/reference_type.json') );
-    assert.equal(test.d, 1);
-    assert.isNumber(test.d);
-    assert.isObject(test.e);
-    assert.isArray(test.g);
-    assert.equal(test.e.c, 2);
+    expect(test).toHaveProperty('d', 1);
+    expect(typeof test.d).toBe('number');
+    expect(typeof test.e).toBe('object');
+    expect(Array.isArray(test.f)).toBeTruthy();
+    expect(test).toHaveProperty('e.c', 2);
   });
 
   it('should handle and evaluate items in an array', () => {
     var test = resolveObject( helpers.fileToJSON(__dirname + '/../json_files/array.json') );
-    assert.equal(test.d[0], 2);
-    assert.equal(test.d[1], 1);
-    assert.equal(test.e[0].a, 1);
-    assert.equal(test.e[1].a, 2);
+    expect(test.d[0]).toBe(2);
+    expect(test.d[1]).toBe(1);
+    expect(test.e[0].a).toBe(1);
+    expect(test.e[1].a).toBe(2);
   });
 
   it('should throw if pointers don\'t exist', () => {
-    assert.throws(
+    expect(
       resolveObject.bind( helpers.fileToJSON(__dirname + '/../json_files/non_existent.json'))
-    );
+    ).toThrow();
   });
 
   it('should gracefully handle circular references', () => {
-    assert.throws(
+    expect(
       resolveObject.bind(null,
         helpers.fileToJSON(__dirname + '/../json_files/circular.json')
-      ),
-      Error,
-      'Circular definition: a | d'
-    );
-    assert.throws(
+      )
+    ).toThrow('Circular definition: a | d');
+    expect(
       resolveObject.bind(null,
         helpers.fileToJSON(__dirname + '/../json_files/circular_2.json')
-      ),
-      Error,
-      'Circular definition: a.b.c | d'
-    );
-    assert.throws(
+      )
+    ).toThrow('Circular definition: a.b.c | d');
+    expect(
       resolveObject.bind(null,
         helpers.fileToJSON(__dirname + '/../json_files/circular_3.json')
-      ),
-      Error,
-      'Circular definition: a.b.c | d.e.f'
-    );
-    assert.throws(
+      )
+    ).toThrow('Circular definition: a.b.c | d.e.f');
+    expect(
       resolveObject.bind(null,
         helpers.fileToJSON(__dirname + '/../json_files/circular_4.json')
-      ),
-      Error,
-      'Circular definition: a.b.c | g.h'
-    );
+      )
+    ).toThrow('Circular definition: a.b.c | g.h');
   });
 
   describe('ignoreKeys', () => {
@@ -161,11 +146,7 @@ describe('resolveObject', () => {
           original: '{foo.value}'
         }
       });
-
-      assert.equal(
-        test.bar.original,
-        '{foo.value}'
-      );
+      expect(test).toHaveProperty ('bar.original', '{foo.value}');
     });
 
     it('should handle any nested keys under the ignoreKey', () => {
@@ -181,15 +162,8 @@ describe('resolveObject', () => {
           }
         }
       });
-
-      assert.equal(
-        test.bar.original.value,
-        '{foo.value}'
-      );
-      assert.equal(
-        test.bar.original.foo.bar,
-        '{foo.value}'
-      );
+      expect(test).toHaveProperty ('bar.original.value', '{foo.value}');
+      expect(test).toHaveProperty ('bar.original.foo.bar', '{foo.value}');
     });
 
     it('should handle passing in custom ignoreKeys', () => {
@@ -202,11 +176,7 @@ describe('resolveObject', () => {
       }, {
         ignoreKeys: ['baz']
       });
-
-      assert.equal(
-        test.bar.baz,
-        '{foo.value}'
-      );
+      expect(test).toHaveProperty ('bar.baz', '{foo.value}');
     });
 
     it('should handle multiple keys', () => {
@@ -220,15 +190,8 @@ describe('resolveObject', () => {
       },{
         ignoreKeys: ['baz','original']
       });
-
-      assert.equal(
-        test.bar.original,
-        '{foo.value}'
-      );
-      assert.equal(
-        test.bar.baz,
-        '{foo.value}'
-      );
+      expect(test).toHaveProperty ('bar.original', '{foo.value}');
+      expect(test).toHaveProperty ('bar.baz', '{foo.value}');
     });
 
     it('should not ignore anything if set to null or empty array', () => {
@@ -241,11 +204,7 @@ describe('resolveObject', () => {
       },{
         ignoreKeys: []
       });
-
-      assert.equal(
-        test.bar.original,
-        'bar'
-      );
+      expect(test).toHaveProperty ('bar.original', 'bar');
 
       var test2 = resolveObject({
         foo: { value: 'bar' },
@@ -256,11 +215,7 @@ describe('resolveObject', () => {
       },{
         ignoreKeys: null
       });
-
-      assert.equal(
-        test2.bar.original,
-        'bar'
-      );
+      expect(test2).toHaveProperty ('bar.original', 'bar');
 
       var test3 = resolveObject({
         foo: { value: 'bar' },
@@ -271,11 +226,7 @@ describe('resolveObject', () => {
       },{
         ignoreKeys: undefined
       });
-
-      assert.equal(
-        test3.bar.original,
-        'bar'
-      );
+      expect(test3).toHaveProperty ('bar.original', 'bar');
     });
   });
 
@@ -284,16 +235,15 @@ describe('resolveObject', () => {
       foo: { value: 'bar' },
       bar: { value: '{ foo.value }'}
     });
-    assert.equal(test.foo.value, test.bar.value);
+    expect(test).toHaveProperty ('foo.value', test.bar.value);
   });
 
   it('should collect multiple reference errors', () => {
-    assert.throws(
+    expect(
       resolveObject.bind(null,
         helpers.fileToJSON(__dirname + '/../json_files/multiple_reference_errors.json')
-      ),
-      Error,
-      'Failed due to 3 errors:'
-    );
+      )
+    ).toThrow('Failed due to 3 errors:');
   });
+
 });

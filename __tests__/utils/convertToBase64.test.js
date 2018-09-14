@@ -11,37 +11,28 @@
  * and limitations under the License.
  */
 
-var assert = require('chai').assert;
 var convertToBase64 = require('../../lib/utils/convertToBase64.js');
 
-describe('base64', () => {
+describe('convertToBase64', () => {
   it('should error if filePath isnt a string', () => {
-    assert.throws(
-      convertToBase64.bind(null),
-      Error,
-      'filePath name must be a string'
-    );
-    assert.throws(
-      convertToBase64.bind(null, []),
-      Error,
-      'filePath name must be a string'
-    );
-    assert.throws(
-      convertToBase64.bind(null, {}),
-      Error,
-      'filePath name must be a string'
-    );
+    expect(
+      convertToBase64.bind(null)
+    ).toThrow('filePath name must be a string');
+    expect(
+      convertToBase64.bind(null, [])
+    ).toThrow('filePath name must be a string');
+    expect(
+      convertToBase64.bind(null, {})
+    ).toThrow('filePath name must be a string');
   });
 
   it('should error if filePath isnt a file', () => {
-    assert.throws(
-      convertToBase64.bind(null, 'foo'),
-      Error,
-      "ENOENT: no such file or directory, open 'foo'"
-    );
+    expect(
+      convertToBase64.bind(null, 'foo')
+    ).toThrow("ENOENT: no such file or directory, open 'foo'");
   });
 
   it('should return a string', () => {
-    assert.isString(convertToBase64('__tests__/configs/test.json'));
+    expect(typeof convertToBase64('__tests__/configs/test.json')).toBe('string');
   });
 });
