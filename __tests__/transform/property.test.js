@@ -11,8 +11,7 @@
  * and limitations under the License.
  */
 
-var transformProperty = require('../lib/transform/property');
-
+var property = require('../../lib/transform/property');
 
 var options = {
   transforms: [
@@ -36,11 +35,12 @@ var options = {
   ]
 };
 
-describe('transformProperty', () => {
+describe('transform/property', () => {
+
   it('should work', () => {
-    var test = transformProperty({attributes:{baz:'blah'}}, options);
-    expect(test.attributes.bar).toEqual('foo');
-    expect(test.name).toEqual('hello');
+    var test = property({attributes:{baz:'blah'}}, options);
+    expect(test).toHaveProperty('attributes.bar', 'foo');
+    expect(test).toHaveProperty('name', 'hello');
   });
 
   // Add more tests

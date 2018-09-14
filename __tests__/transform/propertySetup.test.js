@@ -11,33 +11,26 @@
  * and limitations under the License.
  */
 
-var assert = require('chai').assert,
-    propertySetup = require('../lib/transform/propertySetup');
+var propertySetup = require('../../lib/transform/propertySetup');
 
+describe('transform/propertySetup', () => {
 
-describe('propertySetup', () => {
   it('should error if property is not an object', () => {
-    assert.throws(
-      propertySetup.bind(null, null, 'foo', []),
-      Error,
-      'Property object must be an object'
-    );
+    expect(
+      propertySetup.bind(null, null, 'foo', [])
+    ).toThrow('Property object must be an object');
   });
 
   it('should error if name in not a string', () => {
-    assert.throws(
-      propertySetup.bind(null, {}, null, []),
-      Error,
-      'Name must be a string'
-    );
+    expect(
+      propertySetup.bind(null, {}, null, [])
+    ).toThrow('Name must be a string');
   });
 
   it('should error path is not an array', () => {
-    assert.throws(
-      propertySetup.bind(null, {}, 'name', null),
-      Error,
-      'Path must be an array'
-    );
+    expect(
+      propertySetup.bind(null, {}, 'name', null)
+    ).toThrow('Path must be an array');
   });
 
 
@@ -47,26 +40,24 @@ describe('propertySetup', () => {
       "white",
       ["color","base"]
     );
-    assert.isObject(test);
-    assert.property(test, 'value');
-    assert.property(test, 'original');
-    assert.property(test, 'attributes');
-    assert.property(test, 'path');
+    expect(typeof test).toBe('object');
+    expect(test);
+    expect(test).toHaveProperty('value');
+    expect(test).toHaveProperty('original');
+    expect(test).toHaveProperty('attributes');
+    expect(test).toHaveProperty('path');
   });
 
 
-  test(
-    'should not do anything and return the property if it has been setup previously',
-    () => {
-      var original = {value: "#fff", original:{}};
-      var test = propertySetup(
-        original,
-        "white",
-        ["color","base"]
-      );
-      assert.deepEqual(test, original);
-    }
-  );
+  test('should not do anything and return the property if it has been setup previously', () => {
+    var original = {value: "#fff", original:{}};
+    var test = propertySetup(
+      original,
+      "white",
+      ["color","base"]
+    );
+    expect(test).toMatchObject(original);
+  });
 
   it('should use attributes if already set', () => {
     var attributes = {"foo":"bar"};
@@ -75,7 +66,7 @@ describe('propertySetup', () => {
       "white",
       ["color","base"]
     );
-    assert.deepEqual(test.attributes, attributes);
+    expect(test.attributes).toMatchObject(attributes);
   });
 
   it('should use the name on the property if set', () => {
@@ -85,7 +76,7 @@ describe('propertySetup', () => {
       'white',
       ["color","base"]
     );
-    assert.equal(test.name, name);
+    expect(test).toHaveProperty('name', name);
   });
 
   it('should use the name passed in if not set on the property', () => {
@@ -94,6 +85,7 @@ describe('propertySetup', () => {
       'white',
       ["color","base"]
     );
-    assert.equal(test.name, 'white');
+    expect(test).toHaveProperty('name', 'white');
   });
+
 });
