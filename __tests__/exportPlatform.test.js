@@ -18,9 +18,11 @@ var StyleDictionary = require('../index').extend(config);
 
 describe('exportPlatform', () => {
 
-  it('should throw if not given a proper platform', () => {
+  it('should throw if not given a platform', () => {
     expect(
-      StyleDictionary.exportPlatform, Error
+      function(){
+        StyleDictionary.exportPlatform()
+      }
     ).toThrow();
   });
 
