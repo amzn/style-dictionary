@@ -15,6 +15,8 @@ var formats = require('../../lib/common/formats');
 var helpers = require('../__helpers');
 var _ = require('lodash');
 
+var MockDate = require('mockdate');
+
 var file = {
   "destination": "__output/",
   "format": "javascript/es6",
@@ -34,6 +36,14 @@ var dictionary = {
 };
 
 describe('formats', () => {
+
+  beforeAll(() => {
+    MockDate.set('1/1/2000');
+  });
+
+  afterAll(() => {
+    MockDate.reset();
+  });
 
   describe('all', () => {
     _.each(_.keys(formats), function(key) {
