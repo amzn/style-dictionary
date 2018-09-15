@@ -14,6 +14,7 @@
 var filterProperties = require('../lib/filterProperties');
 var helpers = require('./__helpers');
 var flattenProperties = require("../lib/utils/flattenProperties");
+var _ = require('lodash');
 
 var colorRed = {
   "value": "#FF0000",
@@ -84,6 +85,7 @@ var dictionary = {
 }
 
 describe('filterProperties', () => {
+
   beforeEach(() => {
     helpers.clearOutput();
   });
@@ -98,23 +100,28 @@ describe('filterProperties', () => {
 
   it('should work with a filter function', () => {
     var filter = function(property) {
-      return property.path.includes("size")
+      return property.path.includes("size");
     }
-    var filteredDictionary = filterProperties(dictionary, filter)
-    // TODO
-    // expect(filteredDictionary.allProperties).to.not.have.any.members([colorRed, colorBlue])
-    // expect(filteredDictionary.allProperties).to.have.all.members([sizeSmall, sizeLarge])
-    // expect(filteredDictionary.properties).to.not.have.any.keys("color")
-    // expect(filteredDictionary.properties).to.have.all.keys("size")
+    var filteredDictionary = filterProperties(dictionary, filter);
+    _.each(filteredDictionary.allProperties, function(property) {
+      expect(property).not.toBe(colorRed);
+      expect(property).not.toBe(colorBlue);
+    });
+    expect(filteredDictionary.allProperties).toEqual([sizeSmall, sizeLarge]);
+    expect(filteredDictionary.properties).toHaveProperty('size');
+    expect(filteredDictionary.properties).not.toHaveProperty('color');
   });
 
   it('should work with a filter object', () => {
-    var filter = { "attributes": { "category": "size" } }
-    var filteredDictionary = filterProperties(dictionary, filter)
-    // TODO
-    // expect(filteredDictionary.allProperties).to.not.have.any.members([colorRed, colorBlue])
-    // expect(filteredDictionary.allProperties).to.have.all.members([sizeSmall, sizeLarge])
-    // expect(filteredDictionary.properties).to.not.have.any.keys("color")
-    // expect(filteredDictionary.properties).to.have.all.keys("size")
+    var filter = { "attributes": { "category": "size" } };
+    var filteredDictionary = filterProperties(dictionary, filter);
+    _.each(filteredDictionary.allProperties, function(property) {
+      expect(property).not.toBe(colorRed);
+      expect(property).not.toBe(colorBlue);
+    });
+    expect(filteredDictionary.allProperties).toEqual([sizeSmall, sizeLarge]);
+    expect(filteredDictionary.properties).toHaveProperty('size');
+    expect(filteredDictionary.properties).not.toHaveProperty('color');
+
   });
 });

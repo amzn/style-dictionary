@@ -12,8 +12,8 @@
  */
 
 var helpers = require('./__helpers');
-var _ = require('lodash');
 var StyleDictionary = require('../index');
+var _ = require('lodash');
 
 var test_props = {
   size: {
@@ -28,13 +28,13 @@ describe('extend', () => {
   describe('method signature', () => {
     it('should accept a string as a path to a JSON file', () => {
       var StyleDictionaryExtended = StyleDictionary.extend(__dirname + '/__configs/test.json');
-      expect(StyleDictionaryExtended).toHaveProperty('platforms', 'web');
+      expect(StyleDictionaryExtended).toHaveProperty('platforms.web');
     });
 
     it('should accept an object as options', () => {
       var config = helpers.fileToJSON(__dirname + '/__configs/test.json');
       var StyleDictionaryExtended = StyleDictionary.extend(config);
-      expect(StyleDictionaryExtended).toHaveProperty('platforms', 'web');
+      expect(StyleDictionaryExtended).toHaveProperty('platforms.web');
     });
 
     it('should override attributes', () => {

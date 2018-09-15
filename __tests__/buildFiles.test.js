@@ -13,6 +13,7 @@
 
 var buildFiles = require('../lib/buildFiles');
 var helpers = require('./__helpers');
+var _ = require('lodash');
 
 var dictionary = {
   properties: {
@@ -113,12 +114,14 @@ describe('buildFiles', () => {
   });
 
   it('should work with a filter', () => {
-    buildFiles( dictionary, platformWithFilter );
+    buildFiles(dictionary, platformWithFilter);
     expect(helpers.fileExists('./__tests__/__output/test.json')).toBeTruthy();
     var output = require("./__output/test.json")
-    console.log(JSON.stringify(output));
-    // TODO
-    // expect(output).to.not.have.any.keys("foo")
-    // expect(output).to.have.all.keys("bingo")
+    expect(output).toHaveProperty('bingo');
+    expect(output).not.toHaveProperty('foo');
+    _.each(output, function(property) {
+      expect(property.value).toBe('bango');
+    });
   });
+
 });

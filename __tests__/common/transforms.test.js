@@ -11,429 +11,431 @@
  * and limitations under the License.
  */
 
-var assert     = require('chai').assert,
-    path       = require('path'),
-    transforms = require('../../lib/common/transforms');
+var transforms = require('../../lib/common/transforms');
+var path = require('path');
 
+describe('common', () => {
+  describe('transforms', () => {
 
-describe('transforms', () => {
-  describe('name/cti/camel', () => {
-    it('should handle prefix', () => {
-      assert.equal(transforms["name/cti/camel"].transformer(
-        {
-          path: ['one','two','three']
-        },{
-          prefix: 'prefix'
-        }
-      ), 'prefixOneTwoThree');
-    });
-
-    it('should handle no prefix', () => {
-      assert.equal(transforms["name/cti/camel"].transformer(
-        {
-          path: ['one','two','three']
-        },{
-        }
-      ), 'oneTwoThree');
-    });
-  });
-
-
-  describe('name/cti/kebab', () => {
-    it('should handle prefix', () => {
-      assert.equal(transforms["name/cti/kebab"].transformer(
-        {
-          path: ['one','two','three']
-        },{
-          prefix: 'prefix'
-        }
-      ), 'prefix-one-two-three');
-    });
-
-    it('should handle no prefix', () => {
-      assert.equal(transforms["name/cti/kebab"].transformer(
-        {
-          path: ['one','two','three']
-        },{
-        }
-      ), 'one-two-three');
-    });
-  });
-
-  describe('name/cti/snake', () => {
-    it('should handle prefix', () => {
-      assert.equal(transforms["name/cti/snake"].transformer(
-        {
-          path: ['one','two','three']
-        },{
-          prefix: 'prefix'
-        }
-      ), 'prefix_one_two_three');
-    });
-
-    it('should handle no prefix', () => {
-      assert.equal(transforms["name/cti/snake"].transformer(
-        {
-          path: ['one','two','three']
-        },{
-        }
-      ), 'one_two_three');
-    });
-  });
-
-  describe('name/cti/constant', () => {
-    it('should handle prefix', () => {
-      assert.equal(transforms["name/cti/constant"].transformer(
-        {
-          path: ['one','two','three']
-        },{
-          prefix: 'prefix'
-        }
-      ), 'PREFIX_ONE_TWO_THREE');
-    });
-
-    it('should handle no prefix', () => {
-      assert.equal(transforms["name/cti/constant"].transformer(
-        {
-          path: ['one','two','three']
-        },{
-        }
-      ), 'ONE_TWO_THREE');
-    });
-  });
-
-  describe('name/ti/constant', () => {
-    it('should handle prefix', () => {
-      assert.equal(transforms["name/ti/constant"].transformer(
-        {
-          path: ['one','two','three']
-        },{
-          prefix: 'prefix'
-        }
-      ), 'PREFIX_TWO_THREE');
-    });
-
-    it('should handle no prefix', () => {
-      assert.equal(transforms["name/ti/constant"].transformer(
-        {
-          path: ['one','two','three']
-        },{
-        }
-      ), 'TWO_THREE');
-    });
-  });
-
-  describe('attribute/color', () => {
-    it('should handle normal colors', () => {
-      var attributes = transforms["attribute/color"].transformer({
-        value: "#aaaaaa"
+    describe('name/cti/camel', () => {
+      it('should handle prefix', () => {
+        expect(transforms["name/cti/camel"].transformer(
+          {
+            path: ['one','two','three']
+          },{
+            prefix: 'prefix'
+          }
+        )).toBe('prefixOneTwoThree');
       });
-      assert.equal(attributes.rgb.a, 1);
-      assert.equal(attributes.rgb.r, 170);
-      assert.equal(attributes.hsl.s, 0);
-    });
-    it('should handle colors with transparency', () => {
-      var attributes = transforms["attribute/color"].transformer({
-        value: "#aaaaaa99"
-      });
-      var attributes2 = transforms["attribute/color"].transformer({
-        value: "rgba(170,170,170,0.6)"
-      });
-      assert.equal(attributes.rgb.a, 0.6);
-      assert.equal(attributes.rgb.r, 170);
-      assert.equal(attributes.hsl.s, 0);
-      assert.equal(attributes2.rgb.a, 0.6);
-      assert.equal(attributes2.rgb.r, 170);
-      assert.equal(attributes2.hsl.s, 0);
-    });
-  });
 
-  describe('color/hex', () => {
-    it('should handle hex colors', () => {
-      var value = transforms["color/hex"].transformer({
-        value: "#aaaaaa"
+      it('should handle no prefix', () => {
+        expect(transforms["name/cti/camel"].transformer(
+          {
+            path: ['one','two','three']
+          },{
+          }
+        )).toBe('oneTwoThree');
       });
-      assert.equal(value, "#aaaaaa");
     });
 
-    it('should handle hex8 colors', () => {
-      var value = transforms["color/hex"].transformer({
-        value: "#aaaaaaaa"
+
+    describe('name/cti/kebab', () => {
+      it('should handle prefix', () => {
+        expect(transforms["name/cti/kebab"].transformer(
+          {
+            path: ['one','two','three']
+          },{
+            prefix: 'prefix'
+          }
+        )).toBe('prefix-one-two-three');
       });
-      assert.equal(value, "#aaaaaa");
+
+      it('should handle no prefix', () => {
+        expect(transforms["name/cti/kebab"].transformer(
+          {
+            path: ['one','two','three']
+          },{
+          }
+        )).toBe('one-two-three');
+      });
     });
 
-    it('should handle rgb colors', () => {
-      var value = transforms["color/hex"].transformer({
-        value: "rgb(170,170,170)"
+    describe('name/cti/snake', () => {
+      it('should handle prefix', () => {
+        expect(transforms["name/cti/snake"].transformer(
+          {
+            path: ['one','two','three']
+          },{
+            prefix: 'prefix'
+          }
+        )).toBe('prefix_one_two_three');
       });
-      assert.equal(value, "#aaaaaa");
+
+      it('should handle no prefix', () => {
+        expect(transforms["name/cti/snake"].transformer(
+          {
+            path: ['one','two','three']
+          },{
+          }
+        )).toBe('one_two_three');
+      });
     });
 
-    it('should handle rgb (object) colors', () => {
-      var value = transforms["color/hex"].transformer({
-        value: {
-          r: '170',
-          g: '170',
-          b: '170'
-        }
+    describe('name/cti/constant', () => {
+      it('should handle prefix', () => {
+        expect(transforms["name/cti/constant"].transformer(
+          {
+            path: ['one','two','three']
+          },{
+            prefix: 'prefix'
+          }
+        )).toBe('PREFIX_ONE_TWO_THREE');
       });
-      var value2 = transforms["color/hex"].transformer({
-        value: "rgb(170,170,170)"
+
+      it('should handle no prefix', () => {
+        expect(transforms["name/cti/constant"].transformer(
+          {
+            path: ['one','two','three']
+          },{
+          }
+        )).toBe('ONE_TWO_THREE');
       });
-      assert.equal(value, "#aaaaaa");
-      assert.equal(value2, "#aaaaaa");
     });
 
-    it('should handle hsl colors', () => {
-      var value = transforms["color/hex"].transformer({
-        value: {
-          h: '0',
-          s: '0',
-          l: '0.5'
-        }
+    describe('name/ti/constant', () => {
+      it('should handle prefix', () => {
+        expect(transforms["name/ti/constant"].transformer(
+          {
+            path: ['one','two','three']
+          },{
+            prefix: 'prefix'
+          }
+        )).toBe('PREFIX_TWO_THREE');
       });
-      var value2 = transforms["color/hex"].transformer({
-        value: "hsl(0,0,0.5)"
-      });
-      assert.equal(value, "#808080");
-      assert.equal(value2, "#808080");
-    });
-  });
 
-
-  describe('color/hex8', () => {
-    it('should handle hex colors', () => {
-      var value = transforms["color/hex8"].transformer({
-        value: "#aaaaaa"
+      it('should handle no prefix', () => {
+        expect(transforms["name/ti/constant"].transformer(
+          {
+            path: ['one','two','three']
+          },{
+          }
+        )).toBe('TWO_THREE');
       });
-      assert.equal(value, "#aaaaaaff");
     });
 
-    it('should handle rgb colors', () => {
-      var value = transforms["color/hex8"].transformer({
-        value: "rgb(170,170,170)"
+    describe('attribute/color', () => {
+      it('should handle normal colors', () => {
+        var attributes = transforms["attribute/color"].transformer({
+          value: "#aaaaaa"
+        });
+        expect(attributes).toHaveProperty('rgb.a', 1);
+        expect(attributes).toHaveProperty('rgb.r', 170);
+        expect(attributes).toHaveProperty('hsl.s', 0);
       });
-      assert.equal(value, "#aaaaaaff");
+      it('should handle colors with transparency', () => {
+        var attributes = transforms["attribute/color"].transformer({
+          value: "#aaaaaa99"
+        });
+        var attributes2 = transforms["attribute/color"].transformer({
+          value: "rgba(170,170,170,0.6)"
+        });
+        expect(attributes).toHaveProperty('rgb.a', 0.6);
+        expect(attributes).toHaveProperty('rgb.r', 170);
+        expect(attributes).toHaveProperty('hsl.s', 0);
+        expect(attributes2).toHaveProperty('rgb.a', 0.6);
+        expect(attributes2).toHaveProperty('rgb.r', 170);
+        expect(attributes2).toHaveProperty('hsl.s', 0);
+      });
     });
 
-    it('should handle rgb colors', () => {
-      var value = transforms["color/hex8"].transformer({
-        value: "rgb(170,170,170)"
+    describe('color/hex', () => {
+      it('should handle hex colors', () => {
+        var value = transforms["color/hex"].transformer({
+          value: "#aaaaaa"
+        });
+        expect(value).toBe("#aaaaaa");
       });
-      var value2 = transforms["color/hex8"].transformer({
-        value: "rgba(170,170,170,0.6)"
-      });
-      assert.equal(value, "#aaaaaaff");
-      assert.equal(value2, "#aaaaaa99");
-    });
-  });
 
-  describe('color/hex8android', () => {
-    it('should handle colors without alpha', () => {
-      var value = transforms["color/hex8android"].transformer({
-        value: "#aaaaaa"
+      it('should handle hex8 colors', () => {
+        var value = transforms["color/hex"].transformer({
+          value: "#aaaaaaaa"
+        });
+        expect(value).toBe("#aaaaaa");
       });
-      assert.equal(value, "#ffaaaaaa");
-    });
 
-    it('should handle colors with alpha', () => {
-      var value = transforms["color/hex8android"].transformer({
-        value: "#aaaaaa99"
+      it('should handle rgb colors', () => {
+        var value = transforms["color/hex"].transformer({
+          value: "rgb(170,170,170)"
+        });
+        expect(value).toBe("#aaaaaa");
       });
-      assert.equal(value, "#99aaaaaa");
-    });
-  });
 
-  describe('color/rgb', () => {
-    it('should handle normal colors', () => {
-      var value = transforms["color/rgb"].transformer({
-        value: "#aaaaaa"
+      it('should handle rgb (object) colors', () => {
+        var value = transforms["color/hex"].transformer({
+          value: {
+            r: '170',
+            g: '170',
+            b: '170'
+          }
+        });
+        var value2 = transforms["color/hex"].transformer({
+          value: "rgb(170,170,170)"
+        });
+        expect(value).toBe("#aaaaaa");
+        expect(value2).toBe("#aaaaaa");
       });
-      assert.equal(value, "rgb(170, 170, 170)");
-    });
 
-    it('should handle colors with transparency', () => {
-      var value = transforms["color/rgb"].transformer({
-        value: "#aaaaaa99"
+      it('should handle hsl colors', () => {
+        var value = transforms["color/hex"].transformer({
+          value: {
+            h: '0',
+            s: '0',
+            l: '0.5'
+          }
+        });
+        var value2 = transforms["color/hex"].transformer({
+          value: "hsl(0,0,0.5)"
+        });
+        expect(value).toBe("#808080");
+        expect(value2).toBe("#808080");
       });
-      assert.equal(value, "rgba(170, 170, 170, 0.6)");
-    });
-  });
-
-  describe('color/UIColor', () => {
-    it('should handle normal colors', () => {
-      var value = transforms["color/UIColor"].transformer({
-        value: "#aaaaaa"
-      });
-      assert.equal(value, "[UIColor colorWithRed:0.67f green:0.67f blue:0.67f alpha:1.00f]");
-    });
-
-    it('should handle colors with transparency', () => {
-      var value = transforms["color/UIColor"].transformer({
-        value: "#aaaaaa99"
-      });
-      assert.equal(value, "[UIColor colorWithRed:0.67f green:0.67f blue:0.67f alpha:0.60f]");
-    });
-  });
-
-
-  describe('color/css', () => {
-    it('should handle normal colors', () => {
-      var value = transforms["color/css"].transformer({
-        value: "rgb(170, 170, 170)"
-      });
-      assert.equal(value, "#aaaaaa");
     });
 
-    it('should handle colors with transparency', () => {
-      var value = transforms["color/css"].transformer({
-        value: "#aaaaaa99"
-      });
-      assert.equal(value, "rgba(170, 170, 170, 0.6)");
-    });
-  });
 
-  describe('size/sp', () => {
-    it('should work', () => {
-      var value = transforms["size/sp"].transformer({
-        value: "12px"
+    describe('color/hex8', () => {
+      it('should handle hex colors', () => {
+        var value = transforms["color/hex8"].transformer({
+          value: "#aaaaaa"
+        });
+        expect(value).toBe("#aaaaaaff");
       });
-      var value2 = transforms["size/sp"].transformer({
-        value: "12"
-      });
-      assert.equal(value, "12.00sp");
-      assert.equal(value2, "12.00sp");
-    });
-  });
 
-  describe('size/dp', () => {
-    it('should work', () => {
-      var value = transforms["size/dp"].transformer({
-        value: "12px"
+      it('should handle rgb colors', () => {
+        var value = transforms["color/hex8"].transformer({
+          value: "rgb(170,170,170)"
+        });
+        expect(value).toBe("#aaaaaaff");
       });
-      var value2 = transforms["size/dp"].transformer({
-        value: "12"
-      });
-      assert.equal(value, "12.00dp");
-      assert.equal(value2, "12.00dp");
-    });
-  });
 
-  describe('size/remToSp', () => {
-    it('should work', () => {
-      var value = transforms["size/remToSp"].transformer({
-        value: "1"
+      it('should handle rgb colors', () => {
+        var value = transforms["color/hex8"].transformer({
+          value: "rgb(170,170,170)"
+        });
+        var value2 = transforms["color/hex8"].transformer({
+          value: "rgba(170,170,170,0.6)"
+        });
+        expect(value).toBe("#aaaaaaff");
+        expect(value2).toBe("#aaaaaa99");
       });
-      assert.equal(value, "16.00sp");
     });
-  });
 
-  describe('size/remToDp', () => {
-    it('should work', () => {
-      var value = transforms["size/remToDp"].transformer({
-        value: "1"
+    describe('color/hex8android', () => {
+      it('should handle colors without alpha', () => {
+        var value = transforms["color/hex8android"].transformer({
+          value: "#aaaaaa"
+        });
+        expect(value).toBe("#ffaaaaaa");
       });
-      assert.equal(value, "16.00dp");
-    });
-  });
 
-  describe('size/px', () => {
-    it('should work', () => {
-      var value = transforms["size/px"].transformer({
-        value: "10"
+      it('should handle colors with alpha', () => {
+        var value = transforms["color/hex8android"].transformer({
+          value: "#aaaaaa99"
+        });
+        expect(value).toBe("#99aaaaaa");
       });
-      assert.equal(value, "10px");
     });
-  });
 
-  describe('size/remToPt', () => {
-    it('should work', () => {
-      var value = transforms["size/remToPt"].transformer({
-        value: "1"
+    describe('color/rgb', () => {
+      it('should handle normal colors', () => {
+        var value = transforms["color/rgb"].transformer({
+          value: "#aaaaaa"
+        });
+        expect(value).toBe("rgb(170, 170, 170)");
       });
-      assert.equal(value, "16.00f");
-    });
-  });
 
-  describe('size/remToPx', () => {
-    it('should work', () => {
-      var value = transforms["size/remToPx"].transformer({
-        value: "1"
+      it('should handle colors with transparency', () => {
+        var value = transforms["color/rgb"].transformer({
+          value: "#aaaaaa99"
+        });
+        expect(value).toBe("rgba(170, 170, 170, 0.6)");
       });
-      assert.equal(value, "16px");
     });
-  });
 
-  describe('size/rem', () => {
-    it('should work', () => {
-      var value = transforms["size/rem"].transformer({
-        value: "1"
+    describe('color/UIColor', () => {
+      it('should handle normal colors', () => {
+        var value = transforms["color/UIColor"].transformer({
+          value: "#aaaaaa"
+        });
+        expect(value).toBe("[UIColor colorWithRed:0.67f green:0.67f blue:0.67f alpha:1.00f]");
       });
-      assert.equal(value, "1rem");
-    });
-  });
 
-  describe('content/quote', () => {
-    it('should work', () => {
-      var value = transforms["content/quote"].transformer({
-        value: "hello"
+      it('should handle colors with transparency', () => {
+        var value = transforms["color/UIColor"].transformer({
+          value: "#aaaaaa99"
+        });
+        expect(value).toBe("[UIColor colorWithRed:0.67f green:0.67f blue:0.67f alpha:0.60f]");
       });
-      assert.equal(value, "'hello'");
     });
-  });
 
-  describe('content/icon', () => {
-    it('should work', () => {
-      var value = transforms["content/icon"].transformer({
-        value: "&#xE001;"
-      });
-      assert.equal(value, "'\\E001'");
-    });
-  });
 
-  describe('content/objC/literal', () => {
-    it('should work', () => {
-      var value = transforms["content/objC/literal"].transformer({
-        value: "hello"
+    describe('color/css', () => {
+      it('should handle normal colors', () => {
+        var value = transforms["color/css"].transformer({
+          value: "rgb(170, 170, 170)"
+        });
+        expect(value).toBe("#aaaaaa");
       });
-      assert.equal(value, '@"hello"');
-    });
-  });
 
-  describe('asset/objC/literal', () => {
-    it('should work', () => {
-      var value = transforms["asset/objC/literal"].transformer({
-        value: "hello"
+      it('should handle colors with transparency', () => {
+        var value = transforms["color/css"].transformer({
+          value: "#aaaaaa99"
+        });
+        expect(value).toBe("rgba(170, 170, 170, 0.6)");
       });
-      assert.equal(value, '@"hello"');
     });
-  });
 
-  describe('font/objC/literal', () => {
-    it('should work', () => {
-      var value = transforms["font/objC/literal"].transformer({
-        value: "hello"
+    describe('size/sp', () => {
+      it('should work', () => {
+        var value = transforms["size/sp"].transformer({
+          value: "12px"
+        });
+        var value2 = transforms["size/sp"].transformer({
+          value: "12"
+        });
+        expect(value).toBe("12.00sp");
+        expect(value2).toBe("12.00sp");
       });
-      assert.equal(value, '@"hello"');
     });
-  });
 
-  describe('time/seconds', () => {
-    it('should work', () => {
-      var value = transforms["time/seconds"].transformer({
-        value: "1000"
+    describe('size/dp', () => {
+      it('should work', () => {
+        var value = transforms["size/dp"].transformer({
+          value: "12px"
+        });
+        var value2 = transforms["size/dp"].transformer({
+          value: "12"
+        });
+        expect(value).toBe("12.00dp");
+        expect(value2).toBe("12.00dp");
       });
-      assert.equal(value, "1.00s");
     });
-  });
 
-  describe('asset/path', () => {
-    it('should work', () => {
-      var value = transforms["asset/path"].transformer({
-        value: "foo.json"
+    describe('size/remToSp', () => {
+      it('should work', () => {
+        var value = transforms["size/remToSp"].transformer({
+          value: "1"
+        });
+        expect(value).toBe("16.00sp");
       });
-      assert.equal(value, path.join(process.cwd(), "foo.json"));
     });
+
+    describe('size/remToDp', () => {
+      it('should work', () => {
+        var value = transforms["size/remToDp"].transformer({
+          value: "1"
+        });
+        expect(value).toBe("16.00dp");
+      });
+    });
+
+    describe('size/px', () => {
+      it('should work', () => {
+        var value = transforms["size/px"].transformer({
+          value: "10"
+        });
+        expect(value).toBe("10px");
+      });
+    });
+
+    describe('size/remToPt', () => {
+      it('should work', () => {
+        var value = transforms["size/remToPt"].transformer({
+          value: "1"
+        });
+        expect(value).toBe("16.00f");
+      });
+    });
+
+    describe('size/remToPx', () => {
+      it('should work', () => {
+        var value = transforms["size/remToPx"].transformer({
+          value: "1"
+        });
+        expect(value).toBe("16px");
+      });
+    });
+
+    describe('size/rem', () => {
+      it('should work', () => {
+        var value = transforms["size/rem"].transformer({
+          value: "1"
+        });
+        expect(value).toBe("1rem");
+      });
+    });
+
+    describe('content/quote', () => {
+      it('should work', () => {
+        var value = transforms["content/quote"].transformer({
+          value: "hello"
+        });
+        expect(value).toBe("'hello'");
+      });
+    });
+
+    describe('content/icon', () => {
+      it('should work', () => {
+        var value = transforms["content/icon"].transformer({
+          value: "&#xE001;"
+        });
+        expect(value).toBe("'\\E001'");
+      });
+    });
+
+    describe('content/objC/literal', () => {
+      it('should work', () => {
+        var value = transforms["content/objC/literal"].transformer({
+          value: "hello"
+        });
+        expect(value).toBe('@"hello"');
+      });
+    });
+
+    describe('asset/objC/literal', () => {
+      it('should work', () => {
+        var value = transforms["asset/objC/literal"].transformer({
+          value: "hello"
+        });
+        expect(value).toBe('@"hello"');
+      });
+    });
+
+    describe('font/objC/literal', () => {
+      it('should work', () => {
+        var value = transforms["font/objC/literal"].transformer({
+          value: "hello"
+        });
+        expect(value).toBe('@"hello"');
+      });
+    });
+
+    describe('time/seconds', () => {
+      it('should work', () => {
+        var value = transforms["time/seconds"].transformer({
+          value: "1000"
+        });
+        expect(value).toBe("1.00s");
+      });
+    });
+
+    describe('asset/path', () => {
+      it('should work', () => {
+        var value = transforms["asset/path"].transformer({
+          value: "foo.json"
+        });
+        expect(value).toBe(path.join(process.cwd(), "foo.json"));
+      });
+    });
+
   });
 });
