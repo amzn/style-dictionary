@@ -1,0 +1,136 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot all should return css/variables as a string 1`] = `
+"/**
+ * Do not edit directly
+ * Generated on Sat Sep 15 2018 13:19:14 GMT+0100 (BST)
+ */
+
+:root {
+
+}
+"
+`;
+
+exports[`snapshot all should return javascript/es6 as a string 1`] = `
+"/**
+ * Do not edit directly
+ * Generated on Sat Sep 15 2018 13:19:14 GMT+0100 (BST)
+ */
+
+"
+`;
+
+exports[`snapshot all should return javascript/module as a string 1`] = `
+"/**
+ * Do not edit directly
+ * Generated on Sat Sep 15 2018 13:19:14 GMT+0100 (BST)
+ */
+
+module.exports = {
+  \\"color\\": {
+    \\"red\\": {
+      \\"value\\": \\"#FF0000\\"
+    }
+  }
+};"
+`;
+
+exports[`snapshot all should return javascript/object as a string 1`] = `
+"/**
+ * Do not edit directly
+ * Generated on Sat Sep 15 2018 13:19:14 GMT+0100 (BST)
+ */
+
+var _styleDictionary = {
+  \\"color\\": {
+    \\"red\\": {
+      \\"value\\": \\"#FF0000\\"
+    }
+  }
+};"
+`;
+
+exports[`snapshot all should return javascript/umd as a string 1`] = `
+"/**
+ * Do not edit directly
+ * Generated on Sat Sep 15 2018 13:19:14 GMT+0100 (BST)
+ */
+
+(function(root, factory) {
+  if (typeof module === \\"object\\" && module.exports) {
+    module.exports = factory();
+  } else if (typeof exports === \\"object\\") {
+    exports[\\"_styleDictionary\\"] = factory();
+  } else if (typeof define === \\"function\\" && define.amd) {
+    define([], factory);
+  } else {
+    root[\\"_styleDictionary\\"] = factory();
+  }
+}(this, function() {
+  return {
+  \\"color\\": {
+    \\"red\\": {
+      \\"value\\": \\"#FF0000\\"
+    }
+  }
+};
+}))
+"
+`;
+
+exports[`snapshot all should return json as a string 1`] = `
+"{
+  \\"color\\": {
+    \\"red\\": {
+      \\"value\\": \\"#FF0000\\"
+    }
+  }
+}"
+`;
+
+exports[`snapshot all should return json/asset as a string 1`] = `"{}"`;
+
+exports[`snapshot all should return less/icons as a string 1`] = `
+"/**
+ * Do not edit directly
+ * Generated on Sat Sep 15 2018 13:19:14 GMT+0100 (BST)
+ */
+
+"
+`;
+
+exports[`snapshot all should return less/variables as a string 1`] = `
+"/**
+ * Do not edit directly
+ * Generated on Sat Sep 15 2018 13:19:14 GMT+0100 (BST)
+ */
+
+"
+`;
+
+exports[`snapshot all should return scss/icons as a string 1`] = `
+"/**
+ * Do not edit directly
+ * Generated on Sat Sep 15 2018 13:19:14 GMT+0100 (BST)
+ */
+
+"
+`;
+
+exports[`snapshot all should return scss/variables as a string 1`] = `
+"/**
+ * Do not edit directly
+ * Generated on Sat Sep 15 2018 13:19:14 GMT+0100 (BST)
+ */
+
+"
+`;
+
+exports[`snapshot all should return sketch/palette as a string 1`] = `
+"{
+  \\"compatibleVersion\\": \\"1.0\\",
+  \\"pluginVersion\\": \\"1.1\\",
+  \\"colors\\": []
+}"
+`;

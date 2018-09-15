@@ -35,19 +35,13 @@ var dictionary = {
 
 describe('formats', () => {
 
-  beforeEach(() => {
-    helpers.clearOutput();
-  });
-
-  afterEach(() => {
-    helpers.clearOutput();
-  });
-
   describe('all', () => {
-      _.each(_.keys(formats), function(key) {
-      it(key + ' should return a string', () => {
+    _.each(_.keys(formats), function(key) {
+      it('should return ' + key + ' as a string', () => {
         var formatter = formats[key].bind(file);
-        expect(typeof formatter(dictionary, file)).toBe('string');
+        var output = formatter(dictionary, file);
+        expect(typeof output).toBe('string');
+        expect(output).toMatchSnapshot();
       });
     });
   });
