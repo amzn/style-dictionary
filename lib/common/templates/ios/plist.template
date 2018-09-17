@@ -23,8 +23,8 @@ var props = _.filter(allProperties, function(prop) {
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <%
     // for backward compatibility we need to have the user explicitly hide it
-    var showHeader = (this.options && this.options.hasOwnProperty('showHeader')) ? this.options.showHeader : true;
-    if(showHeader) {
+    var showFileHeader = (this.options && this.options.hasOwnProperty('showFileHeader')) ? this.options.showFileHeader : true;
+    if(showFileHeader) {
         print("<!--\n  Do not edit directly");
         print("\n  Generated on " + new Date());
         print("\n-->");
