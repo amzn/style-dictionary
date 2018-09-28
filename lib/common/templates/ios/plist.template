@@ -23,7 +23,7 @@ var props = _.filter(allProperties, function(prop) {
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <!--
   Do not edit directly
-  Generated on <%= new Date() %>
+  Generated on <%= new Date().toUTCString() %>
 -->
 <plist version="1.0">
   <dict>

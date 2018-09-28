@@ -16,7 +16,7 @@
 //
 // <%= this.destination %>
 //
-// Do not edit directly, generated on <%= new Date() %>
+// Do not edit directly, generated on <%= new Date().toUTCString() %>
 //
 
 #import <UIKit/UIKit.h>
