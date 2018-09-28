@@ -3,7 +3,7 @@
 exports[`formats all should return css/variables as a string 1`] = `
 "/**
  * Do not edit directly
- * Generated on Sat Jan 01 2000 00:00:00 GMT+0000 (GMT)
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
  */
 
 :root {
@@ -15,7 +15,7 @@ exports[`formats all should return css/variables as a string 1`] = `
 exports[`formats all should return javascript/es6 as a string 1`] = `
 "/**
  * Do not edit directly
- * Generated on Sat Jan 01 2000 00:00:00 GMT+0000 (GMT)
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
  */
 
 "
@@ -24,7 +24,7 @@ exports[`formats all should return javascript/es6 as a string 1`] = `
 exports[`formats all should return javascript/module as a string 1`] = `
 "/**
  * Do not edit directly
- * Generated on Sat Jan 01 2000 00:00:00 GMT+0000 (GMT)
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
  */
 
 module.exports = {
@@ -39,7 +39,7 @@ module.exports = {
 exports[`formats all should return javascript/object as a string 1`] = `
 "/**
  * Do not edit directly
- * Generated on Sat Jan 01 2000 00:00:00 GMT+0000 (GMT)
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
  */
 
 var _styleDictionary = {
@@ -54,7 +54,7 @@ var _styleDictionary = {
 exports[`formats all should return javascript/umd as a string 1`] = `
 "/**
  * Do not edit directly
- * Generated on Sat Jan 01 2000 00:00:00 GMT+0000 (GMT)
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
  */
 
 (function(root, factory) {
@@ -94,7 +94,7 @@ exports[`formats all should return json/asset as a string 1`] = `"{}"`;
 exports[`formats all should return less/icons as a string 1`] = `
 "/**
  * Do not edit directly
- * Generated on Sat Jan 01 2000 00:00:00 GMT+0000 (GMT)
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
  */
 
 "
@@ -103,7 +103,7 @@ exports[`formats all should return less/icons as a string 1`] = `
 exports[`formats all should return less/variables as a string 1`] = `
 "/**
  * Do not edit directly
- * Generated on Sat Jan 01 2000 00:00:00 GMT+0000 (GMT)
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
  */
 
 "
@@ -112,7 +112,7 @@ exports[`formats all should return less/variables as a string 1`] = `
 exports[`formats all should return scss/icons as a string 1`] = `
 "/**
  * Do not edit directly
- * Generated on Sat Jan 01 2000 00:00:00 GMT+0000 (GMT)
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
  */
 
 "
@@ -121,7 +121,7 @@ exports[`formats all should return scss/icons as a string 1`] = `
 exports[`formats all should return scss/variables as a string 1`] = `
 "/**
  * Do not edit directly
- * Generated on Sat Jan 01 2000 00:00:00 GMT+0000 (GMT)
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
  */
 
 "

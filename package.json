@@ -36,7 +36,7 @@
   ],
   "scripts": {
     "lint": "eslint index.js lib/**/*.js test/*.js test/**/*.js",
-    "test": "jest --runInBand",
+    "test": "TZ=UTC jest --runInBand",
     "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha -- test/*.js test/**/*.js",
     "preversion": "npm test",
     "version": "node ./scripts/version.js && npm run generate-docs",
