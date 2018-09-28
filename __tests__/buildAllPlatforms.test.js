@@ -12,27 +12,28 @@
  */
 
 var helpers = require('./__helpers');
-var config = helpers.fileToJSON(__dirname + '/__configs/test.json');
 var StyleDictionary = require('../index');
-var StyleDictionaryExtended = StyleDictionary.extend(config);
 
 describe('buildAllPlatforms', () => {
 
-  beforeAll(() => {
+  beforeEach(() => {
     helpers.clearOutput();
-    StyleDictionaryExtended.buildAllPlatforms();
   });
 
-  afterAll(() => {
+  afterEach(() => {
     helpers.clearOutput();
   });
 
   it('should work with json config', () => {
+    var StyleDictionaryExtended = StyleDictionary.extend(__dirname + '/__configs/test.json');
+    StyleDictionaryExtended.buildAllPlatforms();
     expect(helpers.fileExists('./__tests__/__output/web/_icons.css')).toBeTruthy();
     expect(helpers.fileExists('./__tests__/__output/android/colors.xml')).toBeTruthy();
   });
 
   it('should work with js config', () => {
+    var StyleDictionaryExtended = StyleDictionary.extend(__dirname + '/__configs/test.js');
+    StyleDictionaryExtended.buildAllPlatforms();
     expect(helpers.fileExists('./__tests__/__output/web/_icons.css')).toBeTruthy();
     expect(helpers.fileExists('./__tests__/__output/android/colors.xml')).toBeTruthy();
   });
