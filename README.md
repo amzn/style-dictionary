@@ -142,6 +142,8 @@ This tells the style dictionary build system how and what to build. The default 
 | platform.file.destination | String (optional) | Location to build the file, will be appended to the buildPath. |
 | platform.file.format | String (optional) | Format used to generate the file. Can be a built-in one or you can create your own. Must declare a format or a template. |
 | platform.file.template | String (optional) | Template used to generate the file. Can be a built-in one or you can create your own. [More on formats and templates](https://amzn.github.io/style-dictionary/formats_and_templates) |
+| platform.file.options | Object (optional) | A set of extra options associated with the file. |
+| platform.file.options.showFileHeader | Boolean | If the generated file should have a "Do not edit + Timestamp" header (where the format supports it). By default is "true". |
 
 ### Properties
 ```json
