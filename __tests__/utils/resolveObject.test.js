@@ -66,9 +66,7 @@ describe('utils', () => {
       expect(test).toHaveProperty('g', 1);
     });
 
-    it(
-      'should handle deep nested pointers with string interpolation',
-      () => {
+    it('should handle deep nested pointers with string interpolation', () => {
         var test = resolveObject( helpers.fileToJSON(__dirname + '/../__json_files/nested_pointers_3.json') );
         expect(test).toHaveProperty('a', 'foo bon bee bae boo bla baz bar');
         expect(test).toHaveProperty('b', 'foo bon bee bae boo bla baz');
