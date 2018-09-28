@@ -38,7 +38,7 @@ var dictionary = {
 describe('formats', () => {
 
   beforeAll(() => {
-    MockDate.set('1/1/2000');
+    MockDate.set('2000-01-01T00:00:00.000Z');
   });
 
   afterAll(() => {
