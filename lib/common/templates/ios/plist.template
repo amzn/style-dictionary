@@ -21,10 +21,15 @@ var props = _.filter(allProperties, function(prop) {
 }); %>
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<!--
-  Do not edit directly
-  Generated on <%= new Date().toUTCString() %>
--->
+<%
+    // for backward compatibility we need to have the user explicitly hide it
+    var showFileHeader = (this.options && this.options.hasOwnProperty('showFileHeader')) ? this.options.showFileHeader : true;
+    if(showFileHeader) {
+        print("<!--\n  Do not edit directly");
+        print("\n  Generated on " + new Date());
+        print("\n-->");
+    }
+%>
 <plist version="1.0">
   <dict>
     <% _.each(props, function(prop) {
