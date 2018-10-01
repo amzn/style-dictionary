@@ -36,13 +36,27 @@
   ],
   "scripts": {
     "lint": "eslint index.js lib/**/*.js test/*.js test/**/*.js",
-    "test": "npm run lint && mocha --recursive -c",
+    "test": "npm run lint && jest --runInBand",
     "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha -- test/*.js test/**/*.js",
     "preversion": "npm test",
     "version": "node ./scripts/version.js && npm run generate-docs",
     "generate-docs": "node ./scripts/generateDocs.js",
     "serve-docs": "docsify serve docs -p 3000 -P 12345",
     "install-cli": "npm install -g $(npm pack)"
+  },
+  "jest": {
+    "verbose": false,
+    "roots": [
+      "__tests__"
+    ],
+    "testPathIgnorePatterns": [
+      "/__tests__/__helpers.js",
+      "/__tests__/__assets/",
+      "/__tests__/__configs/",
+      "/__tests__/__json_files/",
+      "/__tests__/__properties/",
+      "/__tests__/__output/"
+    ]
   },
   "husky": {
     "hooks": {
@@ -66,13 +80,14 @@
   ],
   "homepage": "https://github.com/amzn/style-dictionary",
   "dependencies": {
+    "chalk": "^2.4.1",
     "commander": "^2.9.0",
     "fs-extra": "^6.0.1",
     "glob": "^7.1.1",
     "lodash": "^4.16.4",
+    "mockdate": "^2.0.2",
     "resolve-cwd": "^2.0.0",
-    "tinycolor2": "^1.4.1",
-    "chalk": "^2.4.1"
+    "tinycolor2": "^1.4.1"
   },
   "devDependencies": {
     "chai": "^4.1.2",
@@ -81,6 +96,7 @@
     "eslint": "^4.19.1",
     "husky": "^1.0.0-rc.8",
     "istanbul": "^0.4.5",
+    "jest": "^23.6.0",
     "jsdoc-to-markdown": "^4.0.1",
     "less": "^3.0.1",
     "mocha": "^5.2.0",
