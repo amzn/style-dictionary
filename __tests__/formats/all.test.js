@@ -15,8 +15,6 @@ var formats = require('../../lib/common/formats');
 var helpers = require('../__helpers');
 var _ = require('lodash');
 
-var MockDate = require('mockdate');
-
 var file = {
   "destination": "__output/",
   "format": "javascript/es6",
@@ -37,12 +35,19 @@ var dictionary = {
 
 describe('formats', () => {
 
+  const constantDate = new Date('2000-01-01')
+  const globalDate = global.Date;
+
   beforeAll(() => {
-    MockDate.set('1/1/2000');
+    global.Date = class extends Date {
+      constructor () {
+        super(constantDate.getTime())
+      }
+    }
   });
 
   afterAll(() => {
-    MockDate.reset();
+    global.Date = globalDate;
   });
 
   describe('all', () => {
