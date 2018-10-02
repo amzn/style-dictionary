@@ -89,6 +89,7 @@
     "tinycolor2": "^1.4.1"
   },
   "devDependencies": {
+    "babel-preset-env": "^1.7.0",
     "chai": "^4.1.2",
     "docsify": "^4.6.10",
     "docsify-cli": "^4.2.1",

@@ -10,7 +10,8 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
+var fs = require('fs-extra');
+var helpers = require('../__helpers');
 var formats = require('../../lib/common/formats');
 
 var file = {
@@ -25,7 +26,7 @@ var file = {
 
 var dictionary = {
   "allProperties": [{
-    "name": "TEST",
+    "name": "red",
     "value": "#EF5350",
     "original": {
       "value": "#EF5350"
@@ -48,20 +49,19 @@ var dictionary = {
 var formatter = formats['javascript/es6'].bind(file);
 
 describe('formats', () => {
+  describe('javascript/es6', () => {
+    beforeEach(() => {
+      helpers.clearOutput();
+    });
 
-  // beforeEach(() => {
-  //   helpers.clearOutput();
-  // });
+    afterEach(() => {
+      helpers.clearOutput();
+    });
 
-  // afterEach(() => {
-  //   helpers.clearOutput();
-  // });
-
-  describe('es6Constants', () => {
     it('should be a valid JS file', () => {
-      // TODO: add tests here,
-      // Because this is a normal JS module we can't
-      // test outputting an ES6 JS file by importing it.
+      fs.writeFileSync('./__tests__/__output/output.js', formatter(dictionary) );
+      var test = require('../__output/output.js');
+      expect(test.red).toEqual(dictionary.allProperties[0].value);
     });
   });
 
