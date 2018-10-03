@@ -1,11 +1,10 @@
 # Formats
 
-Formats are one of the ways to create files that act as interfaces for your style dictionary. For example, you want to be able to
-use your style dictionary in CSS. You can use the `css/variables` template which will create a CSS file with variables from
+Formats are define the output of your created files for your style dictionary. For example, you want to be able to
+use your style dictionary in CSS. You can use the `css/variables` format which will create a CSS file with variables from
 your style dictionary. You can define custom formats with the [`registerFormat`](api.md#registerformat).
 
-Templates and Formats serve the same purpose: use your style dictionary as data to build a file. You use formats in your config
-file under platforms > [platform] > files > [file]
+You use formats in your config file under platforms > [platform] > files > [file]
 
 ```json
 {
@@ -15,7 +14,7 @@ file under platforms > [platform] > files > [file]
       "transformGroup": "css",
       "files": [
         {
-          "template": "css/variables",
+          "format": "css/variables",
           "destination": "variables.css"
         }
       ]
@@ -24,12 +23,48 @@ file under platforms > [platform] > files > [file]
 }
 ```
 
+### Using a template / templating engine to create a format
 
->*__How are Templates different than Formats?__*
+While a formatter is just a simple function, they are created easily with most templating engines. You might want to use a template if you have a lot of boilerplate code around where the style dictionary will go (e.g. ObjectiveC files). Writing a formatter function directly may be easier if there is little to no boilerplate code (e.g. a flat SCSS variables file).
 
->Mainly syntactic sugar; anything you can do in a Template you can do in a Format. Use whichever is easier for you to write. We find
-that Templates are good if you have a lot of boilerplate code around where the style dictionary will go (like writing ObjectiveC files).
-Formats are better if there is little to no boilerplate code like a flat SCSS variables file.
+Any templating language can work as there is a node module for it.
+All you need to do is register a custom format which calls your template and returns a string. Here is a quick example for Lodash.
+
+```js
+const StyleDictionary = require('style-dictionary').extend('config.json');
+const _ = require('lodash');
+
+_.template( fs.readFileSync( options.template ) )
+const template = _.template( fs.readFileSync('templates/MyTemplate.template') );
+
+styleDictionary.registerFormat({
+  name: 'my/format',
+  formatter: template
+});
+
+styleDictionary.buildAllPlatforms();
+```
+
+And another quick example for Handlebars.
+
+```js
+const StyleDictionary = require('style-dictionary').extend('config.json');
+const Handlebars = require('handlebars');
+
+const template = Handlebars.compile( fs.readFileSync('templates/MyTemplate.hbs') );
+
+styleDictionary.registerFormat({
+  name: 'my/format',
+  formatter: function(dictionary, platform) {
+    return template({
+      properties: dictionary.properties,
+      options: platform
+    });
+  }
+});
+
+styleDictionary.buildAllPlatforms();
+```
 
 ----
 
@@ -37,12 +72,12 @@ Formats are better if there is little to no boilerplate code like a flat SCSS va
 
 [lib/common/formats.js](https://github.com/amzn/style-dictionary/blob/master/lib/common/formats.js)
 
-### css/variables
+### css/variables 
 
 
 Creates a CSS file with variable definitions based on the style dictionary
 
-**Example**
+**Example**  
 ```css
 :root {
   --color-background-base: #f0f0f0;
@@ -52,12 +87,12 @@ Creates a CSS file with variable definitions based on the style dictionary
 
 * * *
 
-### scss/variables
+### scss/variables 
 
 
 Creates a SCSS file with variable definitions based on the style dictionary
 
-**Example**
+**Example**  
 ```scss
 $color-background-base: #f0f0f0;
 $color-background-alt: #eeeeee;
@@ -65,12 +100,12 @@ $color-background-alt: #eeeeee;
 
 * * *
 
-### scss/icons
+### scss/icons 
 
 
 Creates a SCSS file with variable definitions and helper classes for icons
 
-**Example**
+**Example**  
 ```scss
 $content-icon-email: '\E001';
 .icon.email:before { content:$content-icon-email; }
@@ -78,38 +113,38 @@ $content-icon-email: '\E001';
 
 * * *
 
-### less/variables
+### less/variables 
 
 
 Creates a LESS file with variable definitions based on the style dictionary
 
-**Example**
+**Color-background-base:**: #f0f0f0;  
+**Color-background-alt:**: #eeeeee;
+```  
+**Example**  
 ```less
-@color-background-base: #f0f0f0;
-@color-background-alt: #eeeeee;
-```
 
 * * *
 
-### less/icons
+### less/icons 
 
 
 Creates a LESS file with variable definitions and helper classes for icons
 
-**Example**
-```less
-@content-icon-email: '\E001';
+**Content-icon-email:**: '\E001';
 .icon.email:before { content:@content-icon-email; }
-```
+```  
+**Example**  
+```less
 
 * * *
 
-### javascript/module
+### javascript/module 
 
 
 Creates a CommonJS module with the whole style dictionary
 
-**Example**
+**Example**  
 ```js
 module.exports = {
   color: {
@@ -124,13 +159,13 @@ module.exports = {
 
 * * *
 
-### javascript/object
+### javascript/object 
 
 
 Creates a JS file a global var that is a plain javascript object of the style dictionary.
 Name the variable by adding a 'name' attribute on the file object in your config.
 
-**Example**
+**Example**  
 ```js
 var StyleDictionary = {
   color: {
@@ -145,14 +180,14 @@ var StyleDictionary = {
 
 * * *
 
-### javascript/umd
+### javascript/umd 
 
 
 Creates a [UMD](https://github.com/umdjs/umd) module of the style
 dictionary. Name the module by adding a 'name' attribute on the file object
 in your config.
 
-**Example**
+**Example**  
 ```js
 (function(root, factory) {
   if (typeof module === "object" && module.exports) {
@@ -177,7 +212,7 @@ in your config.
 
 * * *
 
-### javascript/es6
+### javascript/es6 
 
 
 Creates a ES6 module of the style dictionary.
@@ -203,7 +238,7 @@ Creates a ES6 module of the style dictionary.
 }
 ```
 
-**Example**
+**Example**  
 ```js
 export const ColorBackgroundBase = '#ffffff';
 export const ColorBackgroundAlt = '#fcfcfcfc';
@@ -211,12 +246,246 @@ export const ColorBackgroundAlt = '#fcfcfcfc';
 
 * * *
 
-### json
+### android/colors 
+
+
+Creates a color resource xml file with all the colors in your style dictionary.
+
+**Example**  
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+ <color name="color_base_red_5">#fffaf3f2</color>
+ <color name="color_base_red_30">#fff0cccc</color>
+ <color name="color_base_red_60">#ffe19d9c</color>
+```
+
+* * *
+
+### android/dimens 
+
+
+Creates a dimen resource xml file with all the sizes in your style dictionary.
+
+**Example**  
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+ <dimen name="size_padding_tiny">5.00dp</dimen>
+ <dimen name="size_padding_small">10.00dp</dimen>
+ <dimen name="size_padding_medium">15.00dp</dimen>
+```
+
+* * *
+
+### android/fontDimens 
+
+
+Creates a dimen resource xml file with all the font sizes in your style dictionary.
+
+**Example**  
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+ <dimen name="size_font_tiny">10.00sp</dimen>
+ <dimen name="size_font_small">13.00sp</dimen>
+ <dimen name="size_font_medium">15.00sp</dimen>
+```
+
+* * *
+
+### android/integers 
+
+
+Creates a resource xml file with all the integers in your style dictionary. It filters your
+style properties by `prop.attributes.category === 'time'`
+
+**Todo**
+
+- Update the filter on this.
+
+**Example**  
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+  <integer name="time_duration_short">1000</string>
+  <integer name="time_duration_medium">2000</string>
+  <integer name="time_duration_long">4000</string>
+```
+
+* * *
+
+### android/strings 
+
+
+Creates a resource xml file with all the strings in your style dictionary. Filters your
+style properties by `prop.attributes.category === 'content'`
+
+**Example**  
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+  <string name="content_icon_email">&#xE001;</string>
+  <string name="content_icon_chevron_down">&#xE002;</string>
+  <string name="content_icon_chevron_up">&#xE003;</string>
+```
+
+* * *
+
+### ios/macros 
+
+
+Creates an Objective-C header file with macros for style properties
+
+**Example**  
+```objectivec
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
+#define ColorFontLink [UIColor colorWithRed:0.00f green:0.47f blue:0.80f alpha:1.00f]
+#define SizeFontTiny 176.00f
+```
+
+* * *
+
+### ios/plist 
+
+
+Creates an Objective-C plist file
+
+**Todo**
+
+- Fix this template and add example and usage
+
+
+* * *
+
+### ios/singleton.m 
+
+
+Creates an Objective-C implementation file of a style dictionary singleton class
+
+**Todo**
+
+- Add example and usage
+
+
+* * *
+
+### ios/singleton.h 
+
+
+Creates an Objective-C header file of a style dictionary singleton class
+
+**Todo**
+
+- Add example and usage
+
+
+* * *
+
+### ios/static.h 
+
+
+Creates an Objective-C header file of a static style dictionary class
+
+**Todo**
+
+- Add example and usage
+
+
+* * *
+
+### ios/static.m 
+
+
+Creates an Objective-C implementation file of a static style dictionary class
+
+**Todo**
+
+- Add example and usage
+
+
+* * *
+
+### ios/colors.h 
+
+
+Creates an Objective-C header file of a color class
+
+**Todo**
+
+- Add example and usage
+
+
+* * *
+
+### ios/colors.m 
+
+
+Creates an Objective-C implementation file of a color class
+
+**Todo**
+
+- Add example and usage
+
+
+* * *
+
+### ios/strings.h 
+
+
+Creates an Objective-C header file of strings
+
+**Todo**
+
+- Add example and usage
+
+
+* * *
+
+### ios/strings.m 
+
+
+Creates an Objective-C implementation file of strings
+
+**Todo**
+
+- Add example and usage
+
+
+* * *
+
+### css/fonts.css 
+
+
+Creates CSS file with @font-face declarations
+
+**Todo**
+
+- Add example and usage
+
+
+* * *
+
+### static-style-guide/index.html 
+
+
+Creates a generic static html page
+
+**Todo**
+
+- Add example and usage
+
+
+* * *
+
+### json 
 
 
 Creates a JSON file of the style dictionary.
 
-**Example**
+**Example**  
 ```json
 {
   "color": {
@@ -231,12 +500,12 @@ Creates a JSON file of the style dictionary.
 
 * * *
 
-### json/asset
+### json/asset 
 
 
 Creates a JSON file of just the assets defined in the style dictionary.
 
-**Example**
+**Example**  
 ```js
 {
   "asset": {
@@ -251,12 +520,12 @@ Creates a JSON file of just the assets defined in the style dictionary.
 
 * * *
 
-### sketch/palette
+### sketch/palette 
 
 
 Creates a sketchpalette file of all the base colors
 
-**Example**
+**Example**  
 ```json
 {
   "compatibleVersion": "1.0",

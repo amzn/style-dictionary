@@ -95,11 +95,11 @@ describe('buildFiles', function() {
     );
   });
 
-  it('should throw if template or formatter missing', function() {
+  it('should throw if formatter missing', function() {
     assert.throws(
       buildFiles.bind(null, dictionary, platformWithoutFormatter),
       Error,
-      'Please supply a template or formatter'
+      'Please supply a formatter'
     );
   });
 

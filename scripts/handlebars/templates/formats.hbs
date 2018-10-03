@@ -1,11 +1,10 @@
 # Formats
 
-Formats are one of the ways to create files that act as interfaces for your style dictionary. For example, you want to be able to
-use your style dictionary in CSS. You can use the `css/variables` template which will create a CSS file with variables from
+Formats are define the output of your created files for your style dictionary. For example, you want to be able to
+use your style dictionary in CSS. You can use the `css/variables` format which will create a CSS file with variables from
 your style dictionary. You can define custom formats with the [`registerFormat`](api.md#registerformat).
 
-Templates and Formats serve the same purpose: use your style dictionary as data to build a file. You use formats in your config
-file under platforms > [platform] > files > [file]
+You use formats in your config file under platforms > [platform] > files > [file]
 
 ```json
 {
@@ -15,7 +14,7 @@ file under platforms > [platform] > files > [file]
       "transformGroup": "css",
       "files": [
         {
-          "template": "css/variables",
+          "format": "css/variables",
           "destination": "variables.css"
         }
       ]
@@ -24,12 +23,48 @@ file under platforms > [platform] > files > [file]
 }
 ```
 
+### Using a template / templating engine to create a format
 
->*__How are Templates different than Formats?__*
+While a formatter is just a simple function, they are created easily with most templating engines. You might want to use a template if you have a lot of boilerplate code around where the style dictionary will go (e.g. ObjectiveC files). Writing a formatter function directly may be easier if there is little to no boilerplate code (e.g. a flat SCSS variables file).
 
->Mainly syntactic sugar; anything you can do in a Template you can do in a Format. Use whichever is easier for you to write. We find
-that Templates are good if you have a lot of boilerplate code around where the style dictionary will go (like writing ObjectiveC files).
-Formats are better if there is little to no boilerplate code like a flat SCSS variables file.
+Any templating language can work as there is a node module for it.
+All you need to do is register a custom format which calls your template and returns a string. Here is a quick example for Lodash.
+
+```js
+const StyleDictionary = require('style-dictionary').extend('config.json');
+const _ = require('lodash');
+
+_.template( fs.readFileSync( options.template ) )
+const template = _.template( fs.readFileSync('templates/MyTemplate.template') );
+
+styleDictionary.registerFormat({
+  name: 'my/format',
+  formatter: template
+});
+
+styleDictionary.buildAllPlatforms();
+```
+
+And another quick example for Handlebars.
+
+```js
+const StyleDictionary = require('style-dictionary').extend('config.json');
+const Handlebars = require('handlebars');
+
+const template = Handlebars.compile( fs.readFileSync('templates/MyTemplate.hbs') );
+
+styleDictionary.registerFormat({
+  name: 'my/format',
+  formatter: function(dictionary, platform) {
+    return template({
+      properties: dictionary.properties,
+      options: platform
+    });
+  }
+});
+
+styleDictionary.buildAllPlatforms();
+```
 
 ----
 

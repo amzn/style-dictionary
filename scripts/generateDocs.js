@@ -75,7 +75,7 @@ console.log(FORMATS_PATH + ' generated.');
 
 const TEMPLATES_PATH = './docs/templates.md'
 const templates = jsdoc2md.renderSync({
-  files: ['lib/common/templates.js'],
+  files: ['lib/common/formats.js'],
   template: fs.readFileSync('scripts/handlebars/templates/templates.hbs').toString(),
   'no-gfm': true,
   separators: true,

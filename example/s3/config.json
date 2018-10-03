@@ -8,14 +8,14 @@
       "buildPath": "build/ios/",
       "files": [{
         "destination": "StyleDictionaryMacros.h",
-        "template": "ios/macros"
+        "format": "ios/macros"
       },{
         "destination": "StyleDictionary.h",
-        "template": "ios/singleton.h",
+        "format": "ios/singleton.h",
         "className": "StyleDictionary"
       },{
         "destination": "StyleDictionary.m",
-        "template": "ios/singleton.m",
+        "format": "ios/singleton.m",
         "className": "StyleDictionary"
       }]
     },
@@ -25,19 +25,19 @@
       "buildPath": "build/android/",
       "files": [{
         "destination": "style_dictionary_colors.xml",
-        "template": "android/colors"
+        "format": "android/colors"
       },{
         "destination": "style_dictionary_font_dimens.xml",
-        "template": "android/fontDimens"
+        "format": "android/fontDimens"
       },{
         "destination": "style_dictionary_dimens.xml",
-        "template": "android/dimens"
+        "format": "android/dimens"
       },{
         "destination": "style_dictionary_integers.xml",
-        "template": "android/integers"
+        "format": "android/integers"
       },{
         "destination": "style_dictionary_strings.xml",
-        "template": "android/strings"
+        "format": "android/strings"
       }]
     },
 
