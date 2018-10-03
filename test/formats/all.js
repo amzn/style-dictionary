@@ -26,9 +26,34 @@ var file = {
 };
 
 var dictionary = {
+  "allProperties": [{
+      value: '#FF0000',
+      original: { value: '#FF0000' },
+      name: 'color_red',
+      attributes: {
+         category: 'color',
+         type: 'red',
+         item: undefined,
+         subitem: undefined,
+         state: undefined
+      },
+      path: ['color','red']
+  }],
   "properties": {
     "color": {
-      "red": {"value": "#FF0000"}
+      "red": {
+        value: '#FF0000',
+        original: { value: '#FF0000' },
+        name: 'color_red',
+        attributes: {
+           category: 'color',
+           type: 'red',
+           item: undefined,
+           subitem: undefined,
+           state: undefined
+        },
+        path: ['color','red']
+      }
     }
   }
 };
