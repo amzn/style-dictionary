@@ -37,13 +37,18 @@ describe('utils', () => {
         }
       };
       var expected_ret = [
-        { 'value': '#000000' },
-        { 'value': '#FFFFFF' }
+        properties.black,
+        properties.white
       ];
-      var sortedExpectedValues = expected_ret.map(v => v.value).sort();
+      var sortFn = function (a, b) {
+        if (a.value > b.value) return 1;
+        if (b.value > a.value) return -1;
+        return 0;
+      }
+      var sortedExpectedRet = expected_ret.sort(sortFn);
       var ret = flattenProperties(properties);
-      var sortedReturnedValues = ret.map(v => v.value).sort();
-      expect(sortedReturnedValues).toEqual(sortedExpectedValues);
+      var sortedRet = ret.sort(sortFn);
+      expect(sortedRet).toEqual(sortedExpectedRet);
     });
 
     it('should return nested leaf node values as an array', () => {
@@ -58,13 +63,18 @@ describe('utils', () => {
         }
       };
       var expected_ret = [
-        { 'value': '#000000' },
-        { 'value': '#FFFFFF' }
+        properties.color.black,
+        properties.color.white
       ];
-      var sortedExpectedValues = expected_ret.map(v => v.value).sort();
+      var sortFn = function (a, b) {
+        if (a.value > b.value) return 1;
+        if (b.value > a.value) return -1;
+        return 0;
+      }
+      var sortedExpectedRet = expected_ret.sort(sortFn);
       var ret = flattenProperties(properties);
-      var sortedReturnedValues = ret.map(v => v.value).sort();
-      expect(sortedReturnedValues).toEqual(sortedExpectedValues);
+      var sortedRet = ret.sort(sortFn);
+      expect(sortedRet).toEqual(sortedExpectedRet);
     });
   });
 });
