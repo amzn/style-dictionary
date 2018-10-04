@@ -1,8 +1,10 @@
 # Formats
 
-Formats are define the output of your created files for your style dictionary. For example, you want to be able to
-use your style dictionary in CSS. You can use the `css/variables` format which will create a CSS file with variables from
-your style dictionary. You can define custom formats with the [`registerFormat`](api.md#registerformat).
+Formats define the output of your created files. For example, to use your styles in CSS
+you use the `css/variables` format. This will create a CSS file containing the variables from
+your style dictionary.
+
+### Using formats
 
 You use formats in your config file under platforms > [platform] > files > [file]
 
@@ -23,18 +25,26 @@ You use formats in your config file under platforms > [platform] > files > [file
 }
 ```
 
+There is an extensive (but not exhaustive) list of [included formats](#pre-defined-formats) available in Style Dictionary.
+
+
+### Creating Formats
+
+You can create custom formats using the [`registerFormat`](api.md#registerformat) function.
+
+
 ### Using a template / templating engine to create a format
 
-While a formatter is just a simple function, they are created easily with most templating engines. You might want to use a template if you have a lot of boilerplate code around where the style dictionary will go (e.g. ObjectiveC files). Writing a formatter function directly may be easier if there is little to no boilerplate code (e.g. a flat SCSS variables file).
+A formatter is just a simple function and created easily with most templating engines. Templates are useful if there is a lot of boilerplate code to insert (e.g. ObjectiveC files). If the output consists of just the values (e.g. a flat SCSS variables file), writing a formatter function directly may be easier.
 
-Any templating language can work as there is a node module for it.
-All you need to do is register a custom format which calls your template and returns a string. Here is a quick example for Lodash.
+Any templating language can work as there is a node module for it. All you need to do is register a custom format which calls your template and returns a string.
+
+Here is a quick example for Lodash.
 
 ```js
 const StyleDictionary = require('style-dictionary').extend('config.json');
 const _ = require('lodash');
 
-_.template( fs.readFileSync( options.template ) )
 const template = _.template( fs.readFileSync('templates/MyTemplate.template') );
 
 styleDictionary.registerFormat({
@@ -70,7 +80,12 @@ styleDictionary.buildAllPlatforms();
 
 ## Pre-defined Formats
 
-[lib/common/formats.js](https://github.com/amzn/style-dictionary/blob/master/lib/common/formats.js)
+These are the formats inclded in Style Dictionary by default, pulled from [lib/common/formats.js](https://github.com/amzn/style-dictionary/blob/master/lib/common/formats.js)
+
+Want a format? [You can request it here](https://github.com/amzn/style-dictionary/issues).
+
+You created a format and think it should be included? [Send us a PR](https://github.com/amzn/style-dictionary/pulls).
+
 
 ### css/variables 
 
