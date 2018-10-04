@@ -18,33 +18,46 @@ describe('flattenProperties', () => {
     expect(flattenProperties()).toEqual([]);
   });
 
-  it('returns expected array for object', () => {
+  it('returns empty array for an object with one leaf without a value property', () => {
     const properties = {
-      "size": {
-        "font": {
-          "base": {
-            "value": "16",
-            "comment": "the base size of the font"
-          },
-          "large": {
-            "value": "20",
-            "comment": "the large size of the font"
-          }
-        }
-      },
-      "color": "#FFFF00"
+      "leaf": {
+        "color": "#FFFF00"
+      }
     };
 
-    const expected = [
-      {
-        "comment": "the base size of the font",
-        "value": "16"
-      },
-      {
-        "comment": "the large size of the font",
-        "value": "20"
+    const expected = [];
+
+    const actual = flattenProperties(properties);
+    expect(actual).toEqual(expected);
+  })
+
+  it('returns expected array for an object with one leaf with a value property', () => {
+    const properties = {
+      "leaf": {
+        "value": "#FFFF00"
       }
-    ];
+    };
+
+    const expected = [{"value": "#FFFF00"}];
+
+    const actual = flattenProperties(properties);
+    expect(actual).toEqual(expected);
+  })
+
+  it('returns expected array for an object with tree leafs with and with value property', () => {
+    const properties = {
+      "leaf1": {
+        "value": "#FFFF00"
+      },
+      "leaf2": {
+        "size": "20"
+      },
+      "leaf3": {
+        "value": "16"
+      }
+    };
+
+    const expected =   [{"value": "#FFFF00"}, {"value": "16"}];
 
     const actual = flattenProperties(properties);
     expect(actual).toEqual(expected);
