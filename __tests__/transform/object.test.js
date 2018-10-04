@@ -13,7 +13,7 @@
 
 var transformObject = require('../../lib/transform/object');
 
-var options = {
+const options = {
   transforms: [
     {
       type: 'attribute',
@@ -31,7 +31,7 @@ var options = {
         return prop.attributes.foo === 'bar';
       },
       transformer: function() {
-        return "hello";
+        return "transformer result";
       }
     }
   ]
@@ -43,86 +43,45 @@ describe('transform', () => {
       expect(transformObject()).toEqual({});
     })
 
-    it('returns expected object', () => {
+    it('returns expected result when called with an object without value property', () => {
       const objectToTransform = {
-        "size": {
-          "font": {
-            "base": {
-              "value": "16",
-              "comment": "the base size of the font"
-            },
-            "large": {
-              "value": "20",
-              "comment": "the large size of the font"
-            }
-          }
-        },
         "color": "#FFFF00"
       };
 
-      const options = {
-        transforms: [
-          {
-            type: 'attribute',
-            transformer: function() {
-              return {foo: 'bar'}
-            }
-          }, {
-            type: 'attribute',
-            transformer: function() {
-              return {bar: 'foo'}
-            }
-          }, {
-            type: 'name',
-            matcher: function(prop) {
-              return prop.attributes.foo === 'bar';
-            },
-            transformer: function() {
-              return "hello";
-            }
+      const expected = {
+        "color": "#FFFF00"
+      };
+
+      const actual = transformObject(objectToTransform, options);
+      expect(actual).toEqual(expected);
+    })
+
+    it('returns expected result when called with an with value leaf', () => {
+      const objectToTransform = {
+        "font": {
+          "base": {
+            "value": "16",
+            "comment": "the base size of the font"
           }
-        ]
+        }
       };
 
       const expected = {
-        "color": "#FFFF00",
-        "size": {
-          "font": {
-            "base": {
-              "attributes": {
-                "bar": "foo",
-                "foo": "bar"
-              },
+        "font": {
+          "base": {
+            "attributes": {"bar": "foo", "foo": "bar"},
+            "comment": "the base size of the font",
+            "name": "transformer result",
+            "original":
+            {
               "comment": "the base size of the font",
-              "name": "hello",
-              "original": {
-                "comment": "the base size of the font",
-                "value": "16"
-              },
-              "path": [
-                "size", "font", "base"
-              ],
               "value": "16"
             },
-            "large": {
-              "attributes": {
-                "bar": "foo",
-                "foo": "bar"
-              },
-              "comment": "the large size of the font",
-              "name": "hello",
-              "original": {
-                "comment": "the large size of the font",
-                "value": "20"
-              },
-              "path": [
-                "size", "font", "large"
-              ],
-              "value": "20"
-            }
+            "path": ["font", "base"],
+            "value": "16"
           }
         }
-      }
+      };
 
       const actual = transformObject(objectToTransform, options);
       expect(actual).toEqual(expected);
