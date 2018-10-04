@@ -107,37 +107,6 @@
         "format": "json"
       }],
       "actions": ["copy_assets"]
-    },
-
-    "staticStyleGuide-html":{
-      "buildPath": "static-style-guide/public/",
-      "files": [
-        {
-          "destination": "index.html",
-          "template": "static-style-guide/index.html"
-        }
-      ],
-      "actions": ["copy_assets"]
-    },
-    "staticStyleGuide-js": {
-      "transformGroup": "web",
-      "buildPath": "static-style-guide/public/js/",
-      "files": [{
-        "name": "__style_properties",
-        "destination": "style-dictionary-properties.js",
-        "format": "javascript/object"
-      }]
-    },
-    "staticStyleGuide-css": {
-      "transformGroup": "scss",
-      "buildPath": "static-style-guide/public/css/",
-      "files": [{
-        "destination": "fonts.css",
-        "template": "css/fonts.css"
-      },{
-        "destination": "variables.css",
-        "format": "css/variables"
-      }]
     }
   }
 }
