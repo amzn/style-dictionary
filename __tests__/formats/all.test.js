@@ -35,15 +35,11 @@ var dictionary = {
 
 describe('formats', () => {
 
-  const constantDate = new Date('2000-01-01')
+  const constantDate = new Date('2000-01-01');
   const globalDate = global.Date;
 
   beforeAll(() => {
-    global.Date = class extends Date {
-      constructor () {
-        super(constantDate.getTime())
-      }
-    }
+    global.Date = function() { return constantDate };
   });
 
   afterAll(() => {
