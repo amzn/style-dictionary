@@ -53,7 +53,7 @@ program
   });
 
 function displayErrors() {
-  handleErrors.show();
+  handleErrors.flush();
 }
 
 function styleDictionaryBuild(options) {

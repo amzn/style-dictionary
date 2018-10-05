@@ -120,6 +120,7 @@ describe('resolveObject', function() {
 
   it('should gracefully handle circular references', function() {
     var ERR_TYPE = 'Property Reference Errors';
+    handleErrors.clear(ERR_TYPE);
 
     resolveObject(helpers.fileToJSON(__dirname + '/../json_files/circular.json'));
     assert.equal(handleErrors.count(ERR_TYPE), 1);
@@ -159,6 +160,7 @@ describe('resolveObject', function() {
     resolveObject(helpers.fileToJSON(__dirname + '/../json_files/not_circular.json'));
     handleErrors.show(ERR_TYPE);
     assert.equal(handleErrors.count(ERR_TYPE), 0);
+    handleErrors.clear(ERR_TYPE);
   });
 
   describe('ignoreKeys', function() {
@@ -299,6 +301,7 @@ describe('resolveObject', function() {
   it('should collect multiple reference errors', function() {
     var ERR_TYPE = 'Property Reference Errors';
 
+    handleErrors.clear(ERR_TYPE);
     resolveObject(helpers.fileToJSON(__dirname + '/../json_files/multiple_reference_errors.json'));
     assert.equal(handleErrors.count(ERR_TYPE), 3);
     assert.equal(JSON.stringify(handleErrors.fetch(ERR_TYPE)), JSON.stringify([
