@@ -42,23 +42,23 @@ Any templating language can work as there is a node module for it. All you need 
 Here is a quick example where someone Lodash.
 
 ```js
-const StyleDictionary = require('style-dictionary').extend('config.json');
+const styleDictionary = require('style-dictionary').extend('config.json');
 const _ = require('lodash');
 
-const template = _.template( fs.readFileSync('templates/sassMap.template') );
+const template = _.template( fs.readFileSync('templates/myFormat.template') );
 
 styleDictionary.registerFormat({
-  name: 'sass/map',
+  name: 'my/format',
   formatter: template
 });
 
-styleDictionary.buildAllPlatforms();
+// format: 'my/format' is now available for use...
 ```
 
-And another quick example for Handlebars.
+And another example for Handlebars.
 
 ```js
-const StyleDictionary = require('style-dictionary').extend('config.json');
+const styleDictionary = require('style-dictionary').extend('config.json');
 const Handlebars = require('handlebars');
 
 const template = Handlebars.compile( fs.readFileSync('templates/MyTemplate.hbs') );
@@ -73,7 +73,7 @@ styleDictionary.registerFormat({
   }
 });
 
-styleDictionary.buildAllPlatforms();
+// format: 'my/format' is now available for use...
 ```
 
 ----
