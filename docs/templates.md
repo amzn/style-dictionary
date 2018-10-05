@@ -1,6 +1,6 @@
 # Templates
 
-Templates are deprecated in favor of [Formats](formats.md) and will be removed in Style Dictionary 3.0. If you want to create a custom template, create a [Format that uses templating](formats.md).
+Templates are deprecated in favor of [Formats](formats.md) and will be removed in the future. If you want to create a custom template, create a [Format that uses templating](formats.md#using-a-template-templating-engine-to-create-a-format).
 
 >*__Why are Templates being deprecated in favor of Formats?__*
 
