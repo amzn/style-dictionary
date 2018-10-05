@@ -52,6 +52,12 @@ program
     styleDictionaryBuild();
   });
 
+// error on unknown commands
+program.on('command:*', function () {
+  console.error('Invalid command: %s\nSee --help for a list of available commands.', args.join(' '));
+  process.exit(1);
+});
+
 function displayErrors() {
   handleErrors.flush();
 }
@@ -103,3 +109,8 @@ function styleDictionaryClean(options) {
 }
 
 program.parse(process.argv);
+
+// show help on no command
+if (!process.argv.slice(2).length) {
+  program.outputHelp();
+}
