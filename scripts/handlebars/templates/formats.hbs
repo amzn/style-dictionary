@@ -37,18 +37,18 @@ You can create custom formats using the [`registerFormat`](api.md#registerformat
 
 A formatter is just a simple function and created easily with most templating engines. Templates are useful if there is a lot of boilerplate code to insert (e.g. ObjectiveC files). If the output consists of just the values (e.g. a flat SCSS variables file), writing a formatter function directly may be easier.
 
-Any templating language can work as there is a node module for it. All you need to do is register a custom format which calls your template and returns a string.
+Any templating language can work as there is a node module for it. All you need to do is register a format that calls your template and returns a string.
 
-Here is a quick example for Lodash.
+Here is a quick example where someone Lodash.
 
 ```js
 const StyleDictionary = require('style-dictionary').extend('config.json');
 const _ = require('lodash');
 
-const template = _.template( fs.readFileSync('templates/MyTemplate.template') );
+const template = _.template( fs.readFileSync('templates/sassMap.template') );
 
 styleDictionary.registerFormat({
-  name: 'my/format',
+  name: 'sass/map',
   formatter: template
 });
 
