@@ -39,26 +39,26 @@ A formatter is just a simple function and created easily with most templating en
 
 Any templating language can work as there is a node module for it. All you need to do is register a format that calls your template and returns a string.
 
-Here is a quick example where someone Lodash.
+Here is a quick example for Lodash.
 
 ```js
-const StyleDictionary = require('style-dictionary').extend('config.json');
+const styleDictionary = require('style-dictionary').extend('config.json');
 const _ = require('lodash');
 
-const template = _.template( fs.readFileSync('templates/sassMap.template') );
+const template = _.template( fs.readFileSync('templates/myFormat.template') );
 
 styleDictionary.registerFormat({
-  name: 'sass/map',
+  name: 'my/format',
   formatter: template
 });
 
-styleDictionary.buildAllPlatforms();
+// format: 'my/format' is now available for use...
 ```
 
-And another quick example for Handlebars.
+And another example for Handlebars.
 
 ```js
-const StyleDictionary = require('style-dictionary').extend('config.json');
+const styleDictionary = require('style-dictionary').extend('config.json');
 const Handlebars = require('handlebars');
 
 const template = Handlebars.compile( fs.readFileSync('templates/MyTemplate.hbs') );
@@ -73,21 +73,21 @@ styleDictionary.registerFormat({
   }
 });
 
-styleDictionary.buildAllPlatforms();
+// format: 'my/format' is now available for use...
 ```
 
 ----
 
 ## Pre-defined Formats
 
-These are the formats inclded in Style Dictionary by default, pulled from [lib/common/formats.js](https://github.com/amzn/style-dictionary/blob/master/lib/common/formats.js)
+These are the formats included in Style Dictionary by default, pulled from [lib/common/formats.js](https://github.com/amzn/style-dictionary/blob/master/lib/common/formats.js)
 
 Want a format? [You can request it here](https://github.com/amzn/style-dictionary/issues).
 
 You created a format and think it should be included? [Send us a PR](https://github.com/amzn/style-dictionary/pulls).
 
 
-### css/variables 
+### css/variables
 
 
 Creates a CSS file with variable definitions based on the style dictionary
@@ -102,7 +102,7 @@ Creates a CSS file with variable definitions based on the style dictionary
 
 * * *
 
-### scss/variables 
+### scss/variables
 
 
 Creates a SCSS file with variable definitions based on the style dictionary
@@ -115,7 +115,7 @@ $color-background-alt: #eeeeee;
 
 * * *
 
-### scss/icons 
+### scss/icons
 
 
 Creates a SCSS file with variable definitions and helper classes for icons
@@ -128,7 +128,7 @@ $content-icon-email: '\E001';
 
 * * *
 
-### less/variables 
+### less/variables
 
 
 Creates a LESS file with variable definitions based on the style dictionary
@@ -141,7 +141,7 @@ Creates a LESS file with variable definitions based on the style dictionary
 
 * * *
 
-### less/icons 
+### less/icons
 
 
 Creates a LESS file with variable definitions and helper classes for icons
@@ -154,7 +154,7 @@ Creates a LESS file with variable definitions and helper classes for icons
 
 * * *
 
-### javascript/module 
+### javascript/module
 
 
 Creates a CommonJS module with the whole style dictionary
@@ -174,7 +174,7 @@ module.exports = {
 
 * * *
 
-### javascript/object 
+### javascript/object
 
 
 Creates a JS file a global var that is a plain javascript object of the style dictionary.
@@ -195,7 +195,7 @@ var StyleDictionary = {
 
 * * *
 
-### javascript/umd 
+### javascript/umd
 
 
 Creates a [UMD](https://github.com/umdjs/umd) module of the style
@@ -227,7 +227,7 @@ in your config.
 
 * * *
 
-### javascript/es6 
+### javascript/es6
 
 
 Creates a ES6 module of the style dictionary.
@@ -261,7 +261,7 @@ export const ColorBackgroundAlt = '#fcfcfcfc';
 
 * * *
 
-### android/colors 
+### android/colors
 
 
 Creates a color resource xml file with all the colors in your style dictionary.
@@ -277,7 +277,7 @@ Creates a color resource xml file with all the colors in your style dictionary.
 
 * * *
 
-### android/dimens 
+### android/dimens
 
 
 Creates a dimen resource xml file with all the sizes in your style dictionary.
@@ -293,7 +293,7 @@ Creates a dimen resource xml file with all the sizes in your style dictionary.
 
 * * *
 
-### android/fontDimens 
+### android/fontDimens
 
 
 Creates a dimen resource xml file with all the font sizes in your style dictionary.
@@ -309,7 +309,7 @@ Creates a dimen resource xml file with all the font sizes in your style dictiona
 
 * * *
 
-### android/integers 
+### android/integers
 
 
 Creates a resource xml file with all the integers in your style dictionary. It filters your
@@ -330,7 +330,7 @@ style properties by `prop.attributes.category === 'time'`
 
 * * *
 
-### android/strings 
+### android/strings
 
 
 Creates a resource xml file with all the strings in your style dictionary. Filters your
@@ -347,7 +347,7 @@ style properties by `prop.attributes.category === 'content'`
 
 * * *
 
-### ios/macros 
+### ios/macros
 
 
 Creates an Objective-C header file with macros for style properties
@@ -363,7 +363,7 @@ Creates an Objective-C header file with macros for style properties
 
 * * *
 
-### ios/plist 
+### ios/plist
 
 
 Creates an Objective-C plist file
@@ -375,7 +375,7 @@ Creates an Objective-C plist file
 
 * * *
 
-### ios/singleton.m 
+### ios/singleton.m
 
 
 Creates an Objective-C implementation file of a style dictionary singleton class
@@ -387,7 +387,7 @@ Creates an Objective-C implementation file of a style dictionary singleton class
 
 * * *
 
-### ios/singleton.h 
+### ios/singleton.h
 
 
 Creates an Objective-C header file of a style dictionary singleton class
@@ -399,7 +399,7 @@ Creates an Objective-C header file of a style dictionary singleton class
 
 * * *
 
-### ios/static.h 
+### ios/static.h
 
 
 Creates an Objective-C header file of a static style dictionary class
@@ -411,7 +411,7 @@ Creates an Objective-C header file of a static style dictionary class
 
 * * *
 
-### ios/static.m 
+### ios/static.m
 
 
 Creates an Objective-C implementation file of a static style dictionary class
@@ -423,7 +423,7 @@ Creates an Objective-C implementation file of a static style dictionary class
 
 * * *
 
-### ios/colors.h 
+### ios/colors.h
 
 
 Creates an Objective-C header file of a color class
@@ -435,7 +435,7 @@ Creates an Objective-C header file of a color class
 
 * * *
 
-### ios/colors.m 
+### ios/colors.m
 
 
 Creates an Objective-C implementation file of a color class
@@ -447,7 +447,7 @@ Creates an Objective-C implementation file of a color class
 
 * * *
 
-### ios/strings.h 
+### ios/strings.h
 
 
 Creates an Objective-C header file of strings
@@ -459,7 +459,7 @@ Creates an Objective-C header file of strings
 
 * * *
 
-### ios/strings.m 
+### ios/strings.m
 
 
 Creates an Objective-C implementation file of strings
@@ -471,7 +471,7 @@ Creates an Objective-C implementation file of strings
 
 * * *
 
-### css/fonts.css 
+### css/fonts.css
 
 
 Creates CSS file with @font-face declarations
@@ -483,7 +483,7 @@ Creates CSS file with @font-face declarations
 
 * * *
 
-### static-style-guide/index.html 
+### static-style-guide/index.html
 
 
 Creates a generic static html page
@@ -495,7 +495,7 @@ Creates a generic static html page
 
 * * *
 
-### json 
+### json
 
 
 Creates a JSON file of the style dictionary.
@@ -515,7 +515,7 @@ Creates a JSON file of the style dictionary.
 
 * * *
 
-### json/asset 
+### json/asset
 
 
 Creates a JSON file of just the assets defined in the style dictionary.
@@ -535,7 +535,7 @@ Creates a JSON file of just the assets defined in the style dictionary.
 
 * * *
 
-### sketch/palette 
+### sketch/palette
 
 
 Creates a sketchpalette file of all the base colors
@@ -554,4 +554,3 @@ Creates a sketchpalette file of all the base colors
 ```
 
 * * *
-

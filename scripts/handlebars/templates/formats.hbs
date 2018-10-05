@@ -39,7 +39,7 @@ A formatter is just a simple function and created easily with most templating en
 
 Any templating language can work as there is a node module for it. All you need to do is register a format that calls your template and returns a string.
 
-Here is a quick example where someone Lodash.
+Here is a quick example for Lodash.
 
 ```js
 const styleDictionary = require('style-dictionary').extend('config.json');
@@ -80,13 +80,11 @@ styleDictionary.registerFormat({
 
 ## Pre-defined Formats
 
-These are the formats inclded in Style Dictionary by default, pulled from [lib/common/formats.js](https://github.com/amzn/style-dictionary/blob/master/lib/common/formats.js)
+These are the formats included in Style Dictionary by default, pulled from [lib/common/formats.js](https://github.com/amzn/style-dictionary/blob/master/lib/common/formats.js)
 
 Want a format? [You can request it here](https://github.com/amzn/style-dictionary/issues).
 
 You created a format and think it should be included? [Send us a PR](https://github.com/amzn/style-dictionary/pulls).
 
 
-{{#namespace name="Formats"}}
-{{>members~}}
-{{/namespace}}
+{{#namespace name="Formats"}}{{>members~}}{{/namespace}}
