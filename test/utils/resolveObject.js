@@ -155,6 +155,10 @@ describe('resolveObject', function() {
       'Circular definition cycle:  l, m, l',
     ]));
     handleErrors.clear(ERR_TYPE);
+
+    resolveObject(helpers.fileToJSON(__dirname + '/../json_files/not_circular.json'));
+    handleErrors.show(ERR_TYPE);
+    assert.equal(handleErrors.count(ERR_TYPE), 0);
   });
 
   describe('ignoreKeys', function() {
