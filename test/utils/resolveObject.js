@@ -156,10 +156,22 @@ describe('resolveObject', function() {
       'Circular definition cycle:  l, m, l',
     ]));
     handleErrors.clear(ERR_TYPE);
+  });
 
-    resolveObject(helpers.fileToJSON(__dirname + '/../json_files/not_circular.json'));
-    handleErrors.show(ERR_TYPE);
+  it('should correctly replace multiple references without reference errors', function() {
+    var ERR_TYPE = 'Property Reference Errors';
+    handleErrors.clear(ERR_TYPE);
+
+    var obj = resolveObject(helpers.fileToJSON(__dirname + '/../json_files/not_circular.json'));
     assert.equal(handleErrors.count(ERR_TYPE), 0);
+    assert.equal(JSON.stringify(obj), JSON.stringify({
+      prop1: { value: 'test1 value' },
+      prop2: { value: 'test2 value' },
+      prop3: { value: 'test1 value' },
+      prop4: { value: 'test1 value' },
+      prop12: { value: 'test1 value, test2 value and some extra stuff' },
+      prop124: { value: 'test1 value, test2 value and test1 value' }
+    }));
     handleErrors.clear(ERR_TYPE);
   });
 
