@@ -13,8 +13,8 @@
 
 var assert        = require('chai').assert,
     helpers       = require('../helpers'),
-    resolveObject = require('../../lib/utils/resolveObject');
-
+    resolveObject = require('../../lib/utils/resolveObject'),
+    handleErrors  = require('../../lib/utils/handleErrors');
 
 describe('resolveObject', function() {
   it('should error on non-objects', function() {
@@ -119,34 +119,42 @@ describe('resolveObject', function() {
   });
 
   it('should gracefully handle circular references', function() {
-    assert.throws(
-      resolveObject.bind(null,
-        helpers.fileToJSON(__dirname + '/../json_files/circular.json')
-      ),
-      Error,
-      'Circular definition: a | d'
-    );
-    assert.throws(
-      resolveObject.bind(null,
-        helpers.fileToJSON(__dirname + '/../json_files/circular_2.json')
-      ),
-      Error,
-      'Circular definition: a.b.c | d'
-    );
-    assert.throws(
-      resolveObject.bind(null,
-        helpers.fileToJSON(__dirname + '/../json_files/circular_3.json')
-      ),
-      Error,
-      'Circular definition: a.b.c | d.e.f'
-    );
-    assert.throws(
-      resolveObject.bind(null,
-        helpers.fileToJSON(__dirname + '/../json_files/circular_4.json')
-      ),
-      Error,
-      'Circular definition: a.b.c | g.h'
-    );
+    var ERR_TYPE = 'Property Reference Errors';
+
+    resolveObject(helpers.fileToJSON(__dirname + '/../json_files/circular.json'));
+    assert.equal(handleErrors.count(ERR_TYPE), 1);
+    assert.equal(JSON.stringify(handleErrors.fetch(ERR_TYPE)), JSON.stringify([
+       'Circular definition cycle:  a, b, c, d, a'
+    ]));
+    handleErrors.clear(ERR_TYPE);
+
+    resolveObject(helpers.fileToJSON(__dirname + '/../json_files/circular_2.json'));
+    assert.equal(handleErrors.count(ERR_TYPE), 1);
+    assert.equal(JSON.stringify(handleErrors.fetch(ERR_TYPE)), JSON.stringify([
+      'Circular definition cycle:  a.b.c, j, a.b.c'
+    ]));
+    handleErrors.clear(ERR_TYPE);
+
+    resolveObject(helpers.fileToJSON(__dirname + '/../json_files/circular_3.json'));
+    assert.equal(handleErrors.count(ERR_TYPE), 1);
+    assert.equal(JSON.stringify(handleErrors.fetch(ERR_TYPE)), JSON.stringify([
+      'Circular definition cycle:  a.b, c.d.e, a.b'
+    ]));
+    handleErrors.clear(ERR_TYPE);
+
+    resolveObject(helpers.fileToJSON(__dirname + '/../json_files/circular_4.json'));
+    assert.equal(handleErrors.count(ERR_TYPE), 1);
+    assert.equal(JSON.stringify(handleErrors.fetch(ERR_TYPE)), JSON.stringify([
+      'Circular definition cycle:  a.b.c.d, e.f.g, h.i, a.b.c.d',
+    ]));
+    handleErrors.clear(ERR_TYPE);
+
+    resolveObject(helpers.fileToJSON(__dirname + '/../json_files/circular_5.json'));
+    assert.equal(handleErrors.count(ERR_TYPE), 1);
+    assert.equal(JSON.stringify(handleErrors.fetch(ERR_TYPE)), JSON.stringify([
+      'Circular definition cycle:  l, m, l',
+    ]));
+    handleErrors.clear(ERR_TYPE);
   });
 
   describe('ignoreKeys', function() {
@@ -285,12 +293,15 @@ describe('resolveObject', function() {
   });
 
   it('should collect multiple reference errors', function() {
-    assert.throws(
-      resolveObject.bind(null,
-        helpers.fileToJSON(__dirname + '/../json_files/multiple_reference_errors.json')
-      ),
-      Error,
-      'Failed due to 3 errors:'
-    );
+    var ERR_TYPE = 'Property Reference Errors';
+
+    resolveObject(helpers.fileToJSON(__dirname + '/../json_files/multiple_reference_errors.json'));
+    assert.equal(handleErrors.count(ERR_TYPE), 3);
+    assert.equal(JSON.stringify(handleErrors.fetch(ERR_TYPE)), JSON.stringify([
+       "Reference doesn't exist: a.b tries to reference b.a, which is not defined",
+       "Reference doesn't exist: a.c tries to reference b.c, which is not defined",
+       "Reference doesn't exist: a.d tries to reference d, which is not defined"
+    ]));
+    handleErrors.clear(ERR_TYPE);
   });
 });

@@ -150,7 +150,7 @@ describe('extend', function() {
         log: 'error'
       }),
       Error,
-      'Collision detected at:'
+      'Collisions detected'
     );
   });
 

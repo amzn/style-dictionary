@@ -7,7 +7,8 @@ var fs = require('fs-extra'),
     path = require('path'),
     StyleDictionary = require('..'),
     pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf8')),
-    chalk = require('chalk');
+    chalk = require('chalk'),
+    handleErrors = require('../lib/utils/handleErrors');
 
 function collect(val, arr) {
   arr.push(val);
@@ -51,6 +52,10 @@ program
     styleDictionaryBuild();
   });
 
+function displayErrors() {
+  handleErrors.show();
+}
+
 function styleDictionaryBuild(options) {
   options = options || {};
   var configPath = options.config ? options.config : './config.json';
@@ -58,12 +63,19 @@ function styleDictionaryBuild(options) {
   // Create a style dictionary object with the config
   var styleDictionary = StyleDictionary.extend( configPath );
 
-  if (options.platform && options.platform.length > 0) {
-    options.platform.forEach(function(platform) {
-      styleDictionary.buildPlatform( platform );
-    });
-  } else {
-    styleDictionary.buildAllPlatforms();
+  try {
+    if (options.platform && options.platform.length > 0) {
+      options.platform.forEach(function(platform) {
+        styleDictionary.buildPlatform( platform );
+      });
+    } else {
+      styleDictionary.buildAllPlatforms();
+    }
+    displayErrors();
+  }
+  catch (e) {
+    displayErrors();
+    throw e;
   }
 }
 
@@ -74,12 +86,19 @@ function styleDictionaryClean(options) {
   // Create a style dictionary object with the config
   var styleDictionary = StyleDictionary.extend( configPath );
 
-  if (options.platform && options.platform.length > 0) {
-    options.platform.forEach(function(platform) {
-      styleDictionary.cleanPlatform( platform );
-    });
-  } else {
-    styleDictionary.cleanAllPlatforms();
+  try {
+    if (options.platform && options.platform.length > 0) {
+      options.platform.forEach(function(platform) {
+        styleDictionary.cleanPlatform( platform );
+      });
+    } else {
+      styleDictionary.cleanAllPlatforms();
+    }
+    displayErrors();
+  }
+  catch (e) {
+    displayErrors();
+    throw e;
   }
 }
 
