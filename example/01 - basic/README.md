@@ -105,33 +105,6 @@ Pretty nifty! This shows a few things happening:
 1. The build system resolves references to other style properties. `{size.font.medium.value}` gets resolved properly
 1. The build system handles references to property values in other files as well as you can see in `properties/color/font.json`
 
-
-Different representations of style information:
-<table>
-  <thead>
-    <tr>
-      <th width="25%">&nbsp;</th>
-      <th width="25%">Android</th>
-      <th width="25%">SCSS</th>
-      <th width="25%">Objective-C</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Color</td>
-      <td>`<color name="color_base_gray_light">#CCCCCC</color>`</td>
-      <td>`$color-base-gray-light: #CCCCCC;`</td>
-      <td>`[UIColor colorWithRed:0.80f green:0.80f blue:0.80f alpha:1.0f]`</td>
-    </tr>
-    <tr>
-      <td>Font size</td>
-      <td>`<dimen name="size_font_small">12.00sp</dimen>`</td>
-      <td>`$size-font-small: 0.75rem;`</td>
-      <td>`const float SizeFontSmall = 12.0f;`</td>
-    </tr>
-  </tbody>
-</table>
-
 Now lets make a change and see how that affects things. Open up `properties/color/base.json` and change `"#111111"` to `"#000000"`. After you make that change, save the file and re-run the build command `style-dictionary build`. Open up the build files and take a look.
 
 **Huzzah!**
