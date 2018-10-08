@@ -1,4 +1,4 @@
-<img src="https://github.com/amzn/style-dictionary/raw/master/images/logo.png" alt="Style Dictionary logo" title="StyleDictionary" width="100" align="right" />
+<img src="https://github.com/amzn/style-dictionary/raw/master/docs/assets/logo.png" alt="Style Dictionary logo" title="StyleDictionary" width="100" align="right" />
 
 # Examples
 
