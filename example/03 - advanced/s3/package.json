@@ -4,7 +4,7 @@
   "description": "",
   "main": "build.js",
   "scripts": {
-    "build": "node_modules/.bin/style-dictionary",
+    "build": "node_modules/.bin/style-dictionary build",
     "upload": "node upload.js",
     "start": "npm run build && npm run upload",
     "test": "echo \"Error: no test specified\" && exit 1"

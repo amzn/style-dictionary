@@ -8,13 +8,13 @@
     "properties"
   ],
   "scripts": {
-    "build": "node_modules/.bin/style-dictionary",
+    "build": "node_modules/.bin/style-dictionary build",
     "clean": "rm -rf build",
     "prepublish": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "",
+  "license": "Apache-2.0",
   "devDependencies": {
     "style-dictionary": "2.4.0"
   }

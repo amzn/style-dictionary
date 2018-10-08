@@ -1,82 +1,82 @@
 {
-  "source": [
-    "properties/**/*.json"
-  ],
+  "source": ["properties/**/*.json"],
   "platforms": {
-    "ios": {
-      "transformGroup": "ios",
-      "buildPath": "build/ios/",
+    "scss": {
+      "transformGroup": "scss",
+      "buildPath": "build/scss/",
       "files": [{
-        "destination": "StyleDictionaryMacros.h",
-        "template": "ios/macros"
-      },{
-        "destination": "StyleDictionary.h",
-        "template": "ios/singleton.h",
-        "className": "StyleDictionary"
-      },{
-        "destination": "StyleDictionary.m",
-        "template": "ios/singleton.m",
-        "className": "StyleDictionary"
+        "destination": "_variables.scss",
+        "format": "scss/variables"
       }]
     },
-
     "android": {
       "transformGroup": "android",
       "buildPath": "build/android/",
       "files": [{
-        "destination": "style_dictionary_colors.xml",
-        "template": "android/colors"
-      },{
-        "destination": "style_dictionary_font_dimens.xml",
+        "destination": "font_dimens.xml",
         "template": "android/fontDimens"
       },{
-        "destination": "style_dictionary_dimens.xml",
-        "template": "android/dimens"
-      },{
-        "destination": "style_dictionary_integers.xml",
-        "template": "android/integers"
-      },{
-        "destination": "style_dictionary_strings.xml",
-        "template": "android/strings"
+        "destination": "colors.xml",
+        "template": "android/colors"
       }]
     },
-
-    "es6": {
-      "transforms": ["attribute/cti","name/ti/constant","size/px"],
-      "buildPath": "build/es6/",
+    "ios": {
+      "transformGroup": "ios",
+      "buildPath": "build/ios/",
       "files": [{
-        "destination": "colors.js",
-        "format": "javascript/es6",
+        "destination": "StyleDictionaryColor.h",
+        "template": "ios/colors.h",
+        "className": "StyleDictionaryColor",
+        "type": "StyleDictionaryColorName",
         "filter": {
           "attributes": {
             "category": "color"
           }
         }
+      },{
+        "destination": "StyleDictionaryColor.m",
+        "template": "ios/colors.m",
+        "className": "StyleDictionaryColor",
+        "type": "StyleDictionaryColorName",
+        "filter": {
+          "attributes": {
+            "category": "color"
+          }
+        }
+      },{
+        "destination": "StyleDictionarySize.h",
+        "template": "ios/static.h",
+        "className": "StyleDictionarySize",
+        "type": "float",
+        "filter": {
+          "attributes": {
+            "category": "size"
+          }
+        }
+      },{
+        "destination": "StyleDictionarySize.m",
+        "template": "ios/static.m",
+        "className": "StyleDictionarySize",
+        "type": "float",
+        "filter": {
+          "attributes": {
+            "category": "size"
+          }
+        }
       }]
     },
-
-    "es5": {
-      "transformGroup": "web",
-      "buildPath": "build/es5/",
-      "files": [{
-        "destination": "properties.js",
-        "format": "javascript/module"
-      }]
-    },
-
-    "scss": {
-      "transformGroup": "scss",
-      "buildPath": "build/sass/",
-      "files": [{
-        "destination": "variables.scss",
-        "format": "scss/variables"
-      }]
-    },
-
-    "assets": {
+    "assets/copy": {
       "transformGroup": "assets",
       "buildPath": "build/",
       "actions": ["copy_assets"]
+    },
+    "assets/embed": {
+      "transforms": ["attribute/cti", "asset/base64"],
+      "buildPath": "build/assets/",
+      "files": [{
+        "destination": "assets.scss",
+        "format": "scss/variables"
+      }]
     }
   }
 }
