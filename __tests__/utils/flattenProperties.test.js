@@ -15,6 +15,7 @@ var flattenProperties = require('../../lib/utils/flattenProperties');
 
 describe('utils', () => {
   describe('flattenProperties', () => {
+    var sortFn = _.sortBy('value');
 
     it('should return an empty array', () => {
       var ret = flattenProperties({});
@@ -36,15 +37,12 @@ describe('utils', () => {
           'value': '#FFFFFF'
         }
       };
+
       var expected_ret = [
         properties.black,
         properties.white
       ];
-      var sortFn = function (a, b) {
-        if (a.value > b.value) return 1;
-        if (b.value > a.value) return -1;
-        return 0;
-      }
+
       var sortedExpectedRet = expected_ret.sort(sortFn);
       var ret = flattenProperties(properties);
       var sortedRet = ret.sort(sortFn);
@@ -62,15 +60,12 @@ describe('utils', () => {
           }
         }
       };
+
       var expected_ret = [
         properties.color.black,
         properties.color.white
       ];
-      var sortFn = function (a, b) {
-        if (a.value > b.value) return 1;
-        if (b.value > a.value) return -1;
-        return 0;
-      }
+
       var sortedExpectedRet = expected_ret.sort(sortFn);
       var ret = flattenProperties(properties);
       var sortedRet = ret.sort(sortFn);
