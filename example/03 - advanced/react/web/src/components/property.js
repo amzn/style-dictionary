@@ -1,6 +1,6 @@
 import React from 'react';
 import keys from 'lodash/keys';
-import {content} from '../styleDictionary/properties';
+import {content} from '../style-dictionary/properties';
 
 function renderProp(props) {
   if (props.properties.original.value.indexOf('{') > -1) {

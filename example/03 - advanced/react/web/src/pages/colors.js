@@ -1,7 +1,7 @@
 import React from 'react';
 import keys from 'lodash/keys';
 import capitalize from 'lodash/capitalize';
-import styleDictionary from '../styleDictionary/properties';
+import styleDictionary from '../style-dictionary/properties';
 import ColorGroup from '../components/colorGroup';
 
 const colorGroups = keys(styleDictionary.color.base)

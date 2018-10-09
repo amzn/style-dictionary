@@ -1,7 +1,7 @@
 import React from 'react';
 import keys from 'lodash/keys';
 import capitalize from 'lodash/capitalize';
-import styleDictionary from '../styleDictionary/properties';
+import styleDictionary from '../style-dictionary/properties';
 import Icon from '../components/icon';
 
 const icons = keys(styleDictionary.content.icon)

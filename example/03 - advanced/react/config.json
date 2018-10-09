@@ -3,25 +3,9 @@
     "properties/**/*.json"
   ],
   "platforms": {
-    "reactNative": {
-      "transforms": ["attribute/cti","name/ti/constant","size/px"],
-      "buildPath": "react-native/StyleDictionaryExample/styleDictionary/",
-      "files": [
-        {
-          "destination": "colors.js",
-          "format": "javascript/es6",
-          "filter": {
-            "attributes": {
-              "category": "color"
-            }
-          }
-        }
-      ]
-    },
-
     "react": {
       "transforms": ["attribute/cti", "name/ti/constant", "color/hex"],
-      "buildPath": "style-guide/src/styleDictionary/",
+      "buildPath": "web/src/style-dictionary/",
       "files": [{
         "destination": "colors.js",
         "format": "javascript/es6",
@@ -36,10 +20,9 @@
         }
       }]
     },
-
     "scss": {
       "transformGroup": "scss",
-      "buildPath": "style-guide/src/styleDictionary/",
+      "buildPath": "web/src/style-dictionary/",
       "files": [{
         "destination": "variables.scss",
         "format": "scss/variables"

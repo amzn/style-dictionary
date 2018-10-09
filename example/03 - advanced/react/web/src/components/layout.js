@@ -1,6 +1,6 @@
 import React from 'react';
 import keys from 'lodash/keys';
-import styleDictionary from '../styleDictionary/properties';
+import styleDictionary from '../style-dictionary/properties';
 import Nav from './nav';
 import Header from './header';
 

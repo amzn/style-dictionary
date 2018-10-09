@@ -1,5 +1,5 @@
 import React from 'react';
-import styleDictionary from '../styleDictionary/properties';
+import styleDictionary from '../style-dictionary/properties';
 import Property from '../components/property';
 import keys from 'lodash/keys';
 

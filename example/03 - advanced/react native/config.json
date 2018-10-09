@@ -1,0 +1,23 @@
+{
+  "source": [
+    "properties/**/*.json"
+  ],
+  "platforms": {
+    "reactNative": {
+      "transforms": ["attribute/cti","name/ti/constant","size/px"],
+      "buildPath": "app/styleDictionary/",
+      "files": [
+        {
+          "destination": "colors.js",
+          "format": "javascript/es6",
+          "filter": {
+            "attributes": {
+              "category": "color"
+            }
+          }
+        }
+      ],
+      "actions": ["copy_assets"]
+    }
+  }
+}
