@@ -162,4 +162,9 @@ describe('extend', function() {
       })
     );
   });
+  
+  it('should accept a string as a path to a JSON5 file', function() {
+    var test = StyleDictionary.extend(__dirname + '/configs/test.json5');
+    assert.property(test.platforms, 'web');
+  });
 });
