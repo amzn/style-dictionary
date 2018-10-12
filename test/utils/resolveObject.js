@@ -14,7 +14,7 @@
 var assert        = require('chai').assert,
     helpers       = require('../helpers'),
     resolveObject = require('../../lib/utils/resolveObject'),
-    handleErrors  = require('../../lib/utils/handleErrors');
+    ErrorHandler  = require('../../lib/utils/ErrorHandler');
 
 describe('resolveObject', function() {
   it('should error on non-objects', function() {
@@ -119,51 +119,51 @@ describe('resolveObject', function() {
   });
 
   it('should gracefully handle circular references', function() {
-    var ERR_TYPE = 'Property Reference Errors';
-    handleErrors.clear(ERR_TYPE);
+    var ERR_GROUP = 'Property Reference Errors';
+    ErrorHandler.clear(ERR_GROUP);
 
     resolveObject(helpers.fileToJSON(__dirname + '/../json_files/circular.json'));
-    assert.equal(handleErrors.count(ERR_TYPE), 1);
-    assert.equal(JSON.stringify(handleErrors.fetch(ERR_TYPE)), JSON.stringify([
+    assert.equal(ErrorHandler.count(ERR_GROUP), 1);
+    assert.equal(JSON.stringify(ErrorHandler.fetchMessages(ERR_GROUP)), JSON.stringify([
        'Circular definition cycle:  a, b, c, d, a'
     ]));
-    handleErrors.clear(ERR_TYPE);
+    ErrorHandler.clear(ERR_GROUP);
 
     resolveObject(helpers.fileToJSON(__dirname + '/../json_files/circular_2.json'));
-    assert.equal(handleErrors.count(ERR_TYPE), 1);
-    assert.equal(JSON.stringify(handleErrors.fetch(ERR_TYPE)), JSON.stringify([
+    assert.equal(ErrorHandler.count(ERR_GROUP), 1);
+    assert.equal(JSON.stringify(ErrorHandler.fetchMessages(ERR_GROUP)), JSON.stringify([
       'Circular definition cycle:  a.b.c, j, a.b.c'
     ]));
-    handleErrors.clear(ERR_TYPE);
+    ErrorHandler.clear(ERR_GROUP);
 
     resolveObject(helpers.fileToJSON(__dirname + '/../json_files/circular_3.json'));
-    assert.equal(handleErrors.count(ERR_TYPE), 1);
-    assert.equal(JSON.stringify(handleErrors.fetch(ERR_TYPE)), JSON.stringify([
+    assert.equal(ErrorHandler.count(ERR_GROUP), 1);
+    assert.equal(JSON.stringify(ErrorHandler.fetchMessages(ERR_GROUP)), JSON.stringify([
       'Circular definition cycle:  a.b, c.d.e, a.b'
     ]));
-    handleErrors.clear(ERR_TYPE);
+    ErrorHandler.clear(ERR_GROUP);
 
     resolveObject(helpers.fileToJSON(__dirname + '/../json_files/circular_4.json'));
-    assert.equal(handleErrors.count(ERR_TYPE), 1);
-    assert.equal(JSON.stringify(handleErrors.fetch(ERR_TYPE)), JSON.stringify([
+    assert.equal(ErrorHandler.count(ERR_GROUP), 1);
+    assert.equal(JSON.stringify(ErrorHandler.fetchMessages(ERR_GROUP)), JSON.stringify([
       'Circular definition cycle:  a.b.c.d, e.f.g, h.i, a.b.c.d',
     ]));
-    handleErrors.clear(ERR_TYPE);
+    ErrorHandler.clear(ERR_GROUP);
 
     resolveObject(helpers.fileToJSON(__dirname + '/../json_files/circular_5.json'));
-    assert.equal(handleErrors.count(ERR_TYPE), 1);
-    assert.equal(JSON.stringify(handleErrors.fetch(ERR_TYPE)), JSON.stringify([
+    assert.equal(ErrorHandler.count(ERR_GROUP), 1);
+    assert.equal(JSON.stringify(ErrorHandler.fetchMessages(ERR_GROUP)), JSON.stringify([
       'Circular definition cycle:  l, m, l',
     ]));
-    handleErrors.clear(ERR_TYPE);
+    ErrorHandler.clear(ERR_GROUP);
   });
 
   it('should correctly replace multiple references without reference errors', function() {
-    var ERR_TYPE = 'Property Reference Errors';
-    handleErrors.clear(ERR_TYPE);
+    var ERR_GROUP = 'Property Reference Errors';
+    ErrorHandler.clear(ERR_GROUP);
 
     var obj = resolveObject(helpers.fileToJSON(__dirname + '/../json_files/not_circular.json'));
-    assert.equal(handleErrors.count(ERR_TYPE), 0);
+    assert.equal(ErrorHandler.count(ERR_GROUP), 0);
     assert.equal(JSON.stringify(obj), JSON.stringify({
       prop1: { value: 'test1 value' },
       prop2: { value: 'test2 value' },
@@ -172,7 +172,7 @@ describe('resolveObject', function() {
       prop12: { value: 'test1 value, test2 value and some extra stuff' },
       prop124: { value: 'test1 value, test2 value and test1 value' }
     }));
-    handleErrors.clear(ERR_TYPE);
+    ErrorHandler.clear(ERR_GROUP);
   });
 
   describe('ignoreKeys', function() {
@@ -311,16 +311,16 @@ describe('resolveObject', function() {
   });
 
   it('should collect multiple reference errors', function() {
-    var ERR_TYPE = 'Property Reference Errors';
+    var ERR_GROUP = 'Property Reference Errors';
 
-    handleErrors.clear(ERR_TYPE);
+    ErrorHandler.clear(ERR_GROUP);
     resolveObject(helpers.fileToJSON(__dirname + '/../json_files/multiple_reference_errors.json'));
-    assert.equal(handleErrors.count(ERR_TYPE), 3);
-    assert.equal(JSON.stringify(handleErrors.fetch(ERR_TYPE)), JSON.stringify([
+    assert.equal(ErrorHandler.count(ERR_GROUP), 3);
+    assert.equal(JSON.stringify(ErrorHandler.fetchMessages(ERR_GROUP)), JSON.stringify([
        "Reference doesn't exist: a.b tries to reference b.a, which is not defined",
        "Reference doesn't exist: a.c tries to reference b.c, which is not defined",
        "Reference doesn't exist: a.d tries to reference d, which is not defined"
     ]));
-    handleErrors.clear(ERR_TYPE);
+    ErrorHandler.clear(ERR_GROUP);
   });
 });

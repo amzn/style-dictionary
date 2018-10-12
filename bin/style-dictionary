@@ -8,7 +8,7 @@ var fs = require('fs-extra'),
     StyleDictionary = require('..'),
     pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf8')),
     chalk = require('chalk'),
-    handleErrors = require('../lib/utils/handleErrors');
+    ErrorHandler = require('../lib/utils/ErrorHandler');
 
 function collect(val, arr) {
   arr.push(val);
@@ -58,10 +58,6 @@ program.on('command:*', function () {
   process.exit(1);
 });
 
-function displayErrors() {
-  handleErrors.flush();
-}
-
 function styleDictionaryBuild(options) {
   options = options || {};
   var configPath = options.config ? options.config : './config.json';
@@ -77,10 +73,10 @@ function styleDictionaryBuild(options) {
     } else {
       styleDictionary.buildAllPlatforms();
     }
-    displayErrors();
+    ErrorHandler.flush();
   }
   catch (e) {
-    displayErrors();
+    ErrorHandler.flush();
     throw e;
   }
 }
@@ -100,10 +96,10 @@ function styleDictionaryClean(options) {
     } else {
       styleDictionary.cleanAllPlatforms();
     }
-    displayErrors();
+    ErrorHandler.flush();
   }
   catch (e) {
-    displayErrors();
+    ErrorHandler.flush();
     throw e;
   }
 }
