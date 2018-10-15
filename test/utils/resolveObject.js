@@ -14,7 +14,7 @@
 var assert        = require('chai').assert,
     helpers       = require('../helpers'),
     resolveObject = require('../../lib/utils/resolveObject'),
-    ErrorHandler  = require('../../lib/utils/ErrorHandler');
+    ErrorHandler  = require('../../lib/utils/errorHandler');
 
 describe('resolveObject', function() {
   it('should error on non-objects', function() {
