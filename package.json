@@ -36,7 +36,8 @@
   ],
   "scripts": {
     "lint": "eslint index.js lib/**/*.js test/*.js test/**/*.js",
-    "test": "npm run lint && mocha --recursive -c",
+    "test": "npm run prettier:check && npm run lint && mocha --recursive -c",
+    "prettier:check": "prettier --list-different index.js lib/**/*.js test/**/*.js",
     "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha -- test/*.js test/**/*.js",
     "precommit": "lint-staged",
     "preversion": "npm test",
