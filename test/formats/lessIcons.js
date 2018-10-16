@@ -11,14 +11,14 @@
  * and limitations under the License.
  */
 
-var assert  = require('chai').assert,
-    less    = require('less'),
-    formats = require('../../lib/common/formats');
+var assert = require("chai").assert,
+  less = require("less"),
+  formats = require("../../lib/common/formats");
 
 var file = {
-  "destination": "output/",
-  "format": "less/icons",
-  "name": "foo"
+  destination: "output/",
+  format: "less/icons",
+  name: "foo"
 };
 
 var propertyName = "content-icon-email";
@@ -26,37 +26,39 @@ var propertyValue = "'\\E001'";
 var itemClass = "3d_rotation";
 
 var dictionary = {
-  "allProperties": [{
-    "name": propertyName,
-    "value": propertyValue,
-    "original": {
-      "value": propertyValue
-    },
-    "attributes": {
-      "category": "content",
-      "type": "icon",
-      "item": itemClass
+  allProperties: [
+    {
+      name: propertyName,
+      value: propertyValue,
+      original: {
+        value: propertyValue
+      },
+      attributes: {
+        category: "content",
+        type: "icon",
+        item: itemClass
+      }
     }
-  }]
+  ]
 };
 
 var config = {
-  prefix: 'sd' // Style-Dictionary Prefix
+  prefix: "sd" // Style-Dictionary Prefix
 };
 
+var formatter = formats["less/icons"].bind(file);
 
-var formatter = formats['less/icons'].bind(file);
-
-describe('formats', function() {
-  describe('less/icons', function() {
-    it('should have a valid less syntax', function(done) {
-      less.render(formatter(dictionary, config))
+describe("formats", function() {
+  describe("less/icons", function() {
+    it("should have a valid less syntax", function(done) {
+      less
+        .render(formatter(dictionary, config))
         .then(function(output) {
           assert.isDefined(output);
           done();
         })
         .catch(function(err) {
-           done(new Error(err))
+          done(new Error(err));
         });
     });
   });

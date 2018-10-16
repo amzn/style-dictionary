@@ -11,41 +11,41 @@
  * and limitations under the License.
  */
 
-var assert  = require('chai').assert,
-    fs = require('fs-extra'),
-    helpers = require('../helpers'),
-    formats = require('../../lib/common/formats');
+var assert = require("chai").assert,
+  fs = require("fs-extra"),
+  helpers = require("../helpers"),
+  formats = require("../../lib/common/formats");
 
 var file = {
-  "destination": "output/",
-  "format": "javascript/umd",
-  "filter": {
-    "attributes": {
-      "category": "color"
+  destination: "output/",
+  format: "javascript/umd",
+  filter: {
+    attributes: {
+      category: "color"
     }
   }
 };
 
 var dictionary = {
-  "properties": {
-    "color": {
-      "red": {"value": "#FF0000"}
+  properties: {
+    color: {
+      red: { value: "#FF0000" }
     }
   }
 };
 
-var formatter = formats['javascript/umd'].bind(file);
+var formatter = formats["javascript/umd"].bind(file);
 
-describe('formats', function() {
-  describe('javascript/umd', function() {
+describe("formats", function() {
+  describe("javascript/umd", function() {
     beforeEach(function() {
       helpers.clearOutput();
     });
 
-    it('should be a valid JS file', function() {
-      fs.writeFileSync('./test/output/umd.js', formatter(dictionary) );
-      var test = require('../output/umd.js');
-      assert.equal( test.color.red.value, dictionary.properties.color.red.value );
+    it("should be a valid JS file", function() {
+      fs.writeFileSync("./test/output/umd.js", formatter(dictionary));
+      var test = require("../output/umd.js");
+      assert.equal(test.color.red.value, dictionary.properties.color.red.value);
     });
   });
 });
