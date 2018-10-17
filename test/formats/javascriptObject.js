@@ -11,28 +11,28 @@
  * and limitations under the License.
  */
 
-var vm = require("vm"),
-  formats = require("../../lib/common/formats");
+var vm = require('vm'),
+  formats = require('../../lib/common/formats');
 
 var file = {
-  destination: "output/",
-  format: "javascript/object",
-  name: "foo"
+  destination: 'output/',
+  format: 'javascript/object',
+  name: 'foo',
 };
 
 var dictionary = {
   properties: {
     color: {
-      red: { value: "#FF0000" }
-    }
-  }
+      red: { value: '#FF0000' },
+    },
+  },
 };
 
-var formatter = formats["javascript/object"].bind(file);
+var formatter = formats['javascript/object'].bind(file);
 
-describe("formats", function() {
-  describe("javascript/object", function() {
-    it("should be valid JS syntax", function(done) {
+describe('formats', function() {
+  describe('javascript/object', function() {
+    it('should be valid JS syntax', function(done) {
       try {
         vm.runInNewContext(formatter(dictionary));
         return done();

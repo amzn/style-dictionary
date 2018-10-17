@@ -11,37 +11,37 @@
  * and limitations under the License.
  */
 
-var assert = require("chai").assert,
-  convertToBase64 = require("../../lib/utils/convertToBase64.js");
+var assert = require('chai').assert,
+  convertToBase64 = require('../../lib/utils/convertToBase64.js');
 
-describe("base64", function() {
-  it("should error if filePath isnt a string", function() {
+describe('base64', function() {
+  it('should error if filePath isnt a string', function() {
     assert.throws(
       convertToBase64.bind(null),
       Error,
-      "filePath name must be a string"
+      'filePath name must be a string'
     );
     assert.throws(
       convertToBase64.bind(null, []),
       Error,
-      "filePath name must be a string"
+      'filePath name must be a string'
     );
     assert.throws(
       convertToBase64.bind(null, {}),
       Error,
-      "filePath name must be a string"
+      'filePath name must be a string'
     );
   });
 
-  it("should error if filePath isnt a file", function() {
+  it('should error if filePath isnt a file', function() {
     assert.throws(
-      convertToBase64.bind(null, "foo"),
+      convertToBase64.bind(null, 'foo'),
       Error,
       "ENOENT: no such file or directory, open 'foo'"
     );
   });
 
-  it("should return a string", function() {
-    assert.isString(convertToBase64("test/configs/test.json"));
+  it('should return a string', function() {
+    assert.isString(convertToBase64('test/configs/test.json'));
   });
 });
