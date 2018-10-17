@@ -71,4 +71,10 @@ describe('combineJSON', function() {
       'test'
     );
   });
+  
+  it('should support json5', function() {
+    var test = combineJSON(["test/json_files/shallow/*.json*"], true);
+    assert.equal(test.json5A, 5);
+    assert.equal(test.d.json5e, 1);
+  });
 });
