@@ -48,7 +48,7 @@ var StyleDictionary = {
   cleanPlatform: require('./lib/cleanPlatform'),
   cleanAllPlatforms: require('./lib/cleanAllPlatforms'),
 
-  extend: require('./lib/extend')
+  extend: require('./lib/extend'),
 };
 
 module.exports = StyleDictionary;

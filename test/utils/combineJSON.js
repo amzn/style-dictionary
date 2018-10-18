@@ -11,23 +11,22 @@
  * and limitations under the License.
  */
 
-var assert      = require('chai').assert,
-    combineJSON = require('../../lib/utils/combineJSON'),
-    path = require('path');
-
+var assert = require('chai').assert,
+  combineJSON = require('../../lib/utils/combineJSON'),
+  path = require('path');
 
 describe('combineJSON', function() {
-  it('should return an object', function () {
-    var test = combineJSON(["test/json_files/*.json"]);
+  it('should return an object', function() {
+    var test = combineJSON(['test/json_files/*.json']);
     assert.isObject(test);
   });
 
-  it('should handle wildcards', function () {
-    var test = combineJSON(["test/json_files/*.json"]);
+  it('should handle wildcards', function() {
+    var test = combineJSON(['test/json_files/*.json']);
     assert.isObject(test);
   });
 
-  it('should handle js modules that export objects', function () {
+  it('should handle js modules that export objects', function() {
     var absPath = path.join(process.cwd(), 'test', 'json_files', '*.js');
     var relativePath = 'test/json_files/*.js';
     var test = combineJSON([absPath, relativePath]);
@@ -35,33 +34,29 @@ describe('combineJSON', function() {
   });
 
   it('should do a deep merge', function() {
-    var test = combineJSON(["test/json_files/shallow/*.json"], true);
+    var test = combineJSON(['test/json_files/shallow/*.json'], true);
     assert.equal(test.a, 2);
-    assert.deepEqual(test.b, {"a":1, "c":2});
+    assert.deepEqual(test.b, { a: 1, c: 2 });
     assert.equal(test.d.e.f.g, 1);
     assert.equal(test.d.e.f.h, 2);
   });
 
   it('should do a shallow merge', function() {
-    var test = combineJSON(["test/json_files/shallow/*.json"]);
+    var test = combineJSON(['test/json_files/shallow/*.json']);
     assert.equal(test.a, 2);
-    assert.deepEqual(test.b, {"c":2});
-    assert.deepEqual(test.c, [3,4]);
+    assert.deepEqual(test.b, { c: 2 });
+    assert.deepEqual(test.c, [3, 4]);
     assert(!test.d.e.f.g);
     assert.equal(test.d.e.f.h, 2);
   });
 
   it('should fail on invalid JSON', function() {
-    assert.throws(
-      combineJSON.bind(null, ["test/json_files/broken/*.json"], true),
-      Error,
-      /Failed to load or parse/
-    );
+    assert.throws(combineJSON.bind(null, ['test/json_files/broken/*.json'], true), Error, /Failed to load or parse/);
   });
 
   it('should fail if there is a collision and it is passed a collision function', function() {
     assert.throws(
-      combineJSON.bind(null, ["test/json_files/shallow/*.json"], true, function Collision(opts) {
+      combineJSON.bind(null, ['test/json_files/shallow/*.json'], true, function Collision(opts) {
         assert.equal(opts.key, 'a');
         assert.equal(opts.target[opts.key], 1);
         assert.equal(opts.copy[opts.key], 2);

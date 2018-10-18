@@ -36,8 +36,10 @@
   ],
   "scripts": {
     "lint": "eslint index.js lib/**/*.js test/*.js test/**/*.js",
-    "test": "npm run lint && mocha --recursive -c",
+    "test": "npm run prettier:check && npm run lint && mocha --recursive -c",
+    "prettier:check": "prettier --list-different index.js lib/**/*.js test/**/*.js",
     "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha -- test/*.js test/**/*.js",
+    "precommit": "lint-staged",
     "preversion": "npm test",
     "version": "node ./scripts/version.js && npm run generate-docs",
     "generate-docs": "node ./scripts/generateDocs.js",
@@ -79,11 +81,22 @@
     "docsify": "^4.6.10",
     "docsify-cli": "^4.2.1",
     "eslint": "^4.19.1",
-    "husky": "^1.0.0-rc.8",
+    "eslint-config-prettier": "^3.1.0",
+    "eslint-plugin-prettier": "^3.0.0",
+    "husky": "^1.1.2",
     "istanbul": "^0.4.5",
     "jsdoc-to-markdown": "^4.0.1",
     "less": "^3.0.1",
+    "lint-staged": "^7.3.0",
     "mocha": "^5.2.0",
-    "node-sass": "^4.8.3"
+    "node-sass": "^4.8.3",
+    "prettier": "^1.14.3"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ]
   }
 }

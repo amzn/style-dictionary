@@ -12,29 +12,29 @@
  */
 
 var vm = require('vm'),
-    formats = require('../../lib/common/formats');
+  formats = require('../../lib/common/formats');
 
 var file = {
-  "destination": "output/",
-  "format": "javascript/object",
-  "name": "foo"
+  destination: 'output/',
+  format: 'javascript/object',
+  name: 'foo',
 };
 
 var dictionary = {
-  "properties": {
-    "color": {
-      "red": {"value": "#FF0000"}
-    }
-  }
+  properties: {
+    color: {
+      red: { value: '#FF0000' },
+    },
+  },
 };
 
 var formatter = formats['javascript/object'].bind(file);
 
 describe('formats', function() {
   describe('javascript/object', function() {
-    it('should be valid JS syntax', function(done){
+    it('should be valid JS syntax', function(done) {
       try {
-        vm.runInNewContext(formatter(dictionary))
+        vm.runInNewContext(formatter(dictionary));
         return done();
       } catch (err) {
         return done(new Error(err));

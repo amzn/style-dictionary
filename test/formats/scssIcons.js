@@ -11,54 +11,58 @@
  * and limitations under the License.
  */
 
-var assert  = require('chai').assert,
-    scss    = require('node-sass'),
-    formats = require('../../lib/common/formats');
+var assert = require('chai').assert,
+  scss = require('node-sass'),
+  formats = require('../../lib/common/formats');
 
 var file = {
-  "destination": "output/",
-  "format": "scss/icons",
-  "name": "foo"
+  destination: 'output/',
+  format: 'scss/icons',
+  name: 'foo',
 };
 
-var propertyName = "content-icon-email";
+var propertyName = 'content-icon-email';
 var propertyValue = "'\\E001'";
-var itemClass = "3d_rotation";
+var itemClass = '3d_rotation';
 
 var dictionary = {
-  "allProperties": [{
-    "name": propertyName,
-    "value": propertyValue,
-    "original": {
-      "value": propertyValue
+  allProperties: [
+    {
+      name: propertyName,
+      value: propertyValue,
+      original: {
+        value: propertyValue,
+      },
+      attributes: {
+        category: 'content',
+        type: 'icon',
+        item: itemClass,
+      },
     },
-    "attributes": {
-      "category": "content",
-      "type": "icon",
-      "item": itemClass
-    }
-  }]
+  ],
 };
 
 var config = {
-  prefix: 'sd' // Style-Dictionary Prefix
+  prefix: 'sd', // Style-Dictionary Prefix
 };
-
 
 var formatter = formats['scss/icons'].bind(file);
 
 describe('formats', function() {
   describe('scss/icons', function() {
     it('should have a valid scss syntax', function(done) {
-      scss.render({
-        data: formatter(dictionary, config),
-      }, function(err, result) {
-        if(err) {
-          return done(new Error(err));
+      scss.render(
+        {
+          data: formatter(dictionary, config),
+        },
+        function(err, result) {
+          if (err) {
+            return done(new Error(err));
+          }
+          assert.isDefined(result.css);
+          return done();
         }
-        assert.isDefined(result.css);
-        return done();
-      });
+      );
     });
   });
 });

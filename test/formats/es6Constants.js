@@ -11,39 +11,36 @@
  * and limitations under the License.
  */
 
-var assert  = require('chai').assert,
-    formats = require('../../lib/common/formats');
+var assert = require('chai').assert,
+  formats = require('../../lib/common/formats');
 
 var file = {
-  "destination": "output/",
-  "format": "javascript/es6",
-  "filter": {
-    "attributes": {
-      "category": "color"
-    }
-  }
+  destination: 'output/',
+  format: 'javascript/es6',
+  filter: {
+    attributes: {
+      category: 'color',
+    },
+  },
 };
 
 var dictionary = {
-  "allProperties": [{
-    "name": "TEST",
-    "value": "#EF5350",
-    "original": {
-      "value": "#EF5350"
+  allProperties: [
+    {
+      name: 'TEST',
+      value: '#EF5350',
+      original: {
+        value: '#EF5350',
+      },
+      attributes: {
+        category: 'color',
+        type: 'base',
+        item: 'red',
+        subitem: '400',
+      },
+      path: ['color', 'base', 'red', '400'],
     },
-    "attributes": {
-      "category": "color",
-      "type": "base",
-      "item": "red",
-      "subitem": "400"
-    },
-    "path": [
-      "color",
-      "base",
-      "red",
-      "400"
-    ]
-  }]
+  ],
 };
 
 var formatter = formats['javascript/es6'].bind(file);
