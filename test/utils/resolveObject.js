@@ -17,32 +17,20 @@ var assert = require('chai').assert,
 
 describe('resolveObject', function() {
   it('should error on non-objects', function() {
-    assert.throws(
-      resolveObject.bind(null, 'foo'),
-      Error,
-      'Please pass an object in'
-    );
+    assert.throws(resolveObject.bind(null, 'foo'), Error, 'Please pass an object in');
     assert.throws(resolveObject.bind(null), Error, 'Please pass an object in');
-    assert.throws(
-      resolveObject.bind(null, 0),
-      Error,
-      'Please pass an object in'
-    );
+    assert.throws(resolveObject.bind(null, 0), Error, 'Please pass an object in');
   });
 
   it('should not mutate the original object', function() {
-    var original = helpers.fileToJSON(
-      __dirname + '/../json_files/nested_references.json'
-    );
+    var original = helpers.fileToJSON(__dirname + '/../json_files/nested_references.json');
     var test = resolveObject(original);
     assert.equal(original.a.b.d, '{e.f.g}');
     assert.equal(test.a.b.d, 2);
   });
 
   it('should do simple references', function() {
-    var test = resolveObject(
-      helpers.fileToJSON(__dirname + '/../json_files/simple.json')
-    );
+    var test = resolveObject(helpers.fileToJSON(__dirname + '/../json_files/simple.json'));
     assert.equal(test.bar, 'bar');
   });
 
@@ -55,17 +43,13 @@ describe('resolveObject', function() {
   });
 
   it('should handle nested pointers', function() {
-    var test = resolveObject(
-      helpers.fileToJSON(__dirname + '/../json_files/nested_pointers.json')
-    );
+    var test = resolveObject(helpers.fileToJSON(__dirname + '/../json_files/nested_pointers.json'));
     assert.equal(test.b, 1);
     assert.equal(test.c, 1);
   });
 
   it('should handle deep nested pointers', function() {
-    var test = resolveObject(
-      helpers.fileToJSON(__dirname + '/../json_files/nested_pointers_2.json')
-    );
+    var test = resolveObject(helpers.fileToJSON(__dirname + '/../json_files/nested_pointers_2.json'));
     assert.equal(test.a, 1);
     assert.equal(test.b, 1);
     assert.equal(test.c, 1);
@@ -76,9 +60,7 @@ describe('resolveObject', function() {
   });
 
   it('should handle deep nested pointers with string interpolation', function() {
-    var test = resolveObject(
-      helpers.fileToJSON(__dirname + '/../json_files/nested_pointers_3.json')
-    );
+    var test = resolveObject(helpers.fileToJSON(__dirname + '/../json_files/nested_pointers_3.json'));
     assert.equal(test.a, 'foo bon bee bae boo bla baz bar');
     assert.equal(test.b, 'foo bon bee bae boo bla baz');
     assert.equal(test.c, 'foo bon bee bae boo bla');
@@ -89,9 +71,7 @@ describe('resolveObject', function() {
   });
 
   it('should handle deep nested pointers and nested references', function() {
-    var test = resolveObject(
-      helpers.fileToJSON(__dirname + '/../json_files/nested_pointers_4.json')
-    );
+    var test = resolveObject(helpers.fileToJSON(__dirname + '/../json_files/nested_pointers_4.json'));
     assert.equal(test.a.a.a, 1);
     assert.equal(test.b.b.b, 1);
     assert.equal(test.c.c.c, 1);
@@ -102,9 +82,7 @@ describe('resolveObject', function() {
   });
 
   it('should keep the type of the referenced property', function() {
-    var test = resolveObject(
-      helpers.fileToJSON(__dirname + '/../json_files/reference_type.json')
-    );
+    var test = resolveObject(helpers.fileToJSON(__dirname + '/../json_files/reference_type.json'));
     assert.equal(test.d, 1);
     assert.isNumber(test.d);
     assert.isObject(test.e);
@@ -113,9 +91,7 @@ describe('resolveObject', function() {
   });
 
   it('should handle and evaluate items in an array', function() {
-    var test = resolveObject(
-      helpers.fileToJSON(__dirname + '/../json_files/array.json')
-    );
+    var test = resolveObject(helpers.fileToJSON(__dirname + '/../json_files/array.json'));
     assert.equal(test.d[0], 2);
     assert.equal(test.d[1], 1);
     assert.equal(test.e[0].a, 1);
@@ -123,43 +99,27 @@ describe('resolveObject', function() {
   });
 
   it("should throw if pointers don't exist", function() {
-    assert.throws(
-      resolveObject.bind(
-        helpers.fileToJSON(__dirname + '/../json_files/non_existent.json')
-      )
-    );
+    assert.throws(resolveObject.bind(helpers.fileToJSON(__dirname + '/../json_files/non_existent.json')));
   });
 
   it('should gracefully handle circular references', function() {
     assert.throws(
-      resolveObject.bind(
-        null,
-        helpers.fileToJSON(__dirname + '/../json_files/circular.json')
-      ),
+      resolveObject.bind(null, helpers.fileToJSON(__dirname + '/../json_files/circular.json')),
       Error,
       'Circular definition: a | d'
     );
     assert.throws(
-      resolveObject.bind(
-        null,
-        helpers.fileToJSON(__dirname + '/../json_files/circular_2.json')
-      ),
+      resolveObject.bind(null, helpers.fileToJSON(__dirname + '/../json_files/circular_2.json')),
       Error,
       'Circular definition: a.b.c | d'
     );
     assert.throws(
-      resolveObject.bind(
-        null,
-        helpers.fileToJSON(__dirname + '/../json_files/circular_3.json')
-      ),
+      resolveObject.bind(null, helpers.fileToJSON(__dirname + '/../json_files/circular_3.json')),
       Error,
       'Circular definition: a.b.c | d.e.f'
     );
     assert.throws(
-      resolveObject.bind(
-        null,
-        helpers.fileToJSON(__dirname + '/../json_files/circular_4.json')
-      ),
+      resolveObject.bind(null, helpers.fileToJSON(__dirname + '/../json_files/circular_4.json')),
       Error,
       'Circular definition: a.b.c | g.h'
     );
@@ -290,12 +250,7 @@ describe('resolveObject', function() {
 
   it('should collect multiple reference errors', function() {
     assert.throws(
-      resolveObject.bind(
-        null,
-        helpers.fileToJSON(
-          __dirname + '/../json_files/multiple_reference_errors.json'
-        )
-      ),
+      resolveObject.bind(null, helpers.fileToJSON(__dirname + '/../json_files/multiple_reference_errors.json')),
       Error,
       'Failed due to 3 errors:'
     );

@@ -16,29 +16,13 @@ var assert = require('chai').assert,
 
 describe('base64', function() {
   it('should error if filePath isnt a string', function() {
-    assert.throws(
-      convertToBase64.bind(null),
-      Error,
-      'filePath name must be a string'
-    );
-    assert.throws(
-      convertToBase64.bind(null, []),
-      Error,
-      'filePath name must be a string'
-    );
-    assert.throws(
-      convertToBase64.bind(null, {}),
-      Error,
-      'filePath name must be a string'
-    );
+    assert.throws(convertToBase64.bind(null), Error, 'filePath name must be a string');
+    assert.throws(convertToBase64.bind(null, []), Error, 'filePath name must be a string');
+    assert.throws(convertToBase64.bind(null, {}), Error, 'filePath name must be a string');
   });
 
   it('should error if filePath isnt a file', function() {
-    assert.throws(
-      convertToBase64.bind(null, 'foo'),
-      Error,
-      "ENOENT: no such file or directory, open 'foo'"
-    );
+    assert.throws(convertToBase64.bind(null, 'foo'), Error, "ENOENT: no such file or directory, open 'foo'");
   });
 
   it('should return a string', function() {

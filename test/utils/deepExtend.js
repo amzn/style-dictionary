@@ -32,11 +32,7 @@ describe('deepExtend', function() {
     var test = deepExtend([{ foo: { foo: 'bar' } }, { foo: { foo: 'baz' } }]);
     assert.equal(test.foo.foo, 'baz');
 
-    var test2 = deepExtend([
-      { foo: { foo: 'bar' } },
-      { foo: { foo: 'baz' } },
-      { foo: { foo: 'blah' } },
-    ]);
+    var test2 = deepExtend([{ foo: { foo: 'bar' } }, { foo: { foo: 'baz' } }, { foo: { foo: 'blah' } }]);
     assert.equal(test2.foo.foo, 'blah');
   });
 
@@ -45,21 +41,14 @@ describe('deepExtend', function() {
     assert.equal(test.foo.baz, 'baz');
     assert.equal(test.foo.bar, 'bar');
 
-    var test2 = deepExtend([
-      { foo: { bar: 'bar' } },
-      { foo: { baz: 'baz' } },
-      { foo: { blah: 'blah' } },
-    ]);
+    var test2 = deepExtend([{ foo: { bar: 'bar' } }, { foo: { baz: 'baz' } }, { foo: { blah: 'blah' } }]);
     assert.equal(test2.foo.baz, 'baz');
     assert.equal(test2.foo.bar, 'bar');
     assert.equal(test2.foo.blah, 'blah');
   });
 
   it("shouldn't fail loudly if it is a normal deep extend", function() {
-    var test = deepExtend(
-      [{ foo: { bar: 'bar' } }, { foo: { baz: 'baz' } }],
-      function() {}
-    );
+    var test = deepExtend([{ foo: { bar: 'bar' } }, { foo: { baz: 'baz' } }], function() {});
     assert.equal(test.foo.bar, 'bar');
     assert.equal(test.foo.baz, 'baz');
   });
@@ -67,28 +56,21 @@ describe('deepExtend', function() {
   describe('collision detection', function() {
     it('should call the collision function if a collision happens', function() {
       assert.throws(
-        deepExtend.bind(
-          null,
-          [{ foo: { bar: 'bar' } }, { foo: { bar: 'baz' } }],
-          function() {
-            throw new Error('danger danger. high voltage.');
-          }
-        ),
+        deepExtend.bind(null, [{ foo: { bar: 'bar' } }, { foo: { bar: 'baz' } }], function() {
+          throw new Error('danger danger. high voltage.');
+        }),
         Error,
         'danger danger. high voltage.'
       );
     });
 
     it('the collision function should have the proper arguments', function() {
-      var test = deepExtend(
-        [{ foo: { bar: 'bar' } }, { foo: { bar: 'baz' } }],
-        function(opts) {
-          assert.equal(opts.target.bar, 'bar');
-          assert.equal(opts.copy.bar, 'baz');
-          assert.equal(opts.path[0], 'foo');
-          assert.equal(opts.key, 'bar');
-        }
-      );
+      var test = deepExtend([{ foo: { bar: 'bar' } }, { foo: { bar: 'baz' } }], function(opts) {
+        assert.equal(opts.target.bar, 'bar');
+        assert.equal(opts.copy.bar, 'baz');
+        assert.equal(opts.path[0], 'foo');
+        assert.equal(opts.key, 'bar');
+      });
       assert.equal(test.foo.bar, 'baz');
     });
   });

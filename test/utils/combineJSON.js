@@ -51,26 +51,17 @@ describe('combineJSON', function() {
   });
 
   it('should fail on invalid JSON', function() {
-    assert.throws(
-      combineJSON.bind(null, ['test/json_files/broken/*.json'], true),
-      Error,
-      /Failed to load or parse/
-    );
+    assert.throws(combineJSON.bind(null, ['test/json_files/broken/*.json'], true), Error, /Failed to load or parse/);
   });
 
   it('should fail if there is a collision and it is passed a collision function', function() {
     assert.throws(
-      combineJSON.bind(
-        null,
-        ['test/json_files/shallow/*.json'],
-        true,
-        function Collision(opts) {
-          assert.equal(opts.key, 'a');
-          assert.equal(opts.target[opts.key], 1);
-          assert.equal(opts.copy[opts.key], 2);
-          throw new Error('test');
-        }
-      ),
+      combineJSON.bind(null, ['test/json_files/shallow/*.json'], true, function Collision(opts) {
+        assert.equal(opts.key, 'a');
+        assert.equal(opts.target[opts.key], 1);
+        assert.equal(opts.copy[opts.key], 2);
+        throw new Error('test');
+      }),
       Error,
       'test'
     );
