@@ -68,5 +68,10 @@ describe('utils', () => {
       ).toThrow(/test/);
     });
 
+    it('should support json5', () => {
+      var test = combineJSON(["__tests__/__json_files/shallow/*.json5"]);
+      expect(test).toHaveProperty('json5A', 5);
+      expect(test.d).toHaveProperty('json5e', 1);
+    });
   });
 });

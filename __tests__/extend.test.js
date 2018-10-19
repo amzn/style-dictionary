@@ -143,4 +143,8 @@ describe('extend', () => {
     ).not.toThrow();
   });
 
+  it('should accept a string as a path to a JSON5 file', function() {
+    var StyleDictionaryExtended = StyleDictionary.extend(__dirname + '/__configs/test.json5');
+    expect(StyleDictionaryExtended).toHaveProperty('platforms.web');
+  });
 });

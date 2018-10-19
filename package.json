@@ -84,6 +84,7 @@
     "commander": "^2.9.0",
     "fs-extra": "^6.0.1",
     "glob": "^7.1.1",
+    "json5": "^2.1.0",
     "lodash": "^4.16.4",
     "resolve-cwd": "^2.0.0",
     "tinycolor2": "^1.4.1"
