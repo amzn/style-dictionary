@@ -7,8 +7,7 @@ var fs = require('fs-extra'),
     path = require('path'),
     StyleDictionary = require('..'),
     pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf8')),
-    chalk = require('chalk'),
-    ErrorHandler = require('../lib/utils/errorHandler');
+    chalk = require('chalk');
 
 function collect(val, arr) {
   arr.push(val);
@@ -65,19 +64,12 @@ function styleDictionaryBuild(options) {
   // Create a style dictionary object with the config
   var styleDictionary = StyleDictionary.extend( configPath );
 
-  try {
-    if (options.platform && options.platform.length > 0) {
-      options.platform.forEach(function(platform) {
-        styleDictionary.buildPlatform( platform );
-      });
-    } else {
-      styleDictionary.buildAllPlatforms();
-    }
-    ErrorHandler.flush();
-  }
-  catch (e) {
-    ErrorHandler.flush();
-    throw e;
+  if (options.platform && options.platform.length > 0) {
+    options.platform.forEach(function(platform) {
+      styleDictionary.buildPlatform( platform );
+    });
+  } else {
+    styleDictionary.buildAllPlatforms();
   }
 }
 
@@ -88,19 +80,12 @@ function styleDictionaryClean(options) {
   // Create a style dictionary object with the config
   var styleDictionary = StyleDictionary.extend( configPath );
 
-  try {
-    if (options.platform && options.platform.length > 0) {
-      options.platform.forEach(function(platform) {
-        styleDictionary.cleanPlatform( platform );
-      });
-    } else {
-      styleDictionary.cleanAllPlatforms();
-    }
-    ErrorHandler.flush();
-  }
-  catch (e) {
-    ErrorHandler.flush();
-    throw e;
+  if (options.platform && options.platform.length > 0) {
+    options.platform.forEach(function(platform) {
+      styleDictionary.cleanPlatform( platform );
+    });
+  } else {
+    styleDictionary.cleanAllPlatforms();
   }
 }
 

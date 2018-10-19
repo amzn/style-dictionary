@@ -11,6 +11,8 @@
  * and limitations under the License.
  */
 
+var ErrorHandler = require('./lib/utils/errorHandler');
+
 /**
  * Style Dictionary module
  *
@@ -50,5 +52,9 @@ var StyleDictionary = {
 
   extend: require('./lib/extend')
 };
+
+process.on('uncaughtException', function(err) {
+  ErrorHandler.flush();
+});
 
 module.exports = StyleDictionary;
