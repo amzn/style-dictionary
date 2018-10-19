@@ -120,7 +120,7 @@ describe('utils', () => {
 
       resolveObject(helpers.fileToJSON(__dirname + '/../__json_files/circular.json'));
       expect(ErrorHandler.count(ERR_GROUP)).toBe(1);
-      assert.equal(JSON.stringify(ErrorHandler.fetchMessages(ERR_GROUP)), JSON.stringify([
+      expect(JSON.stringify(ErrorHandler.fetchMessages(ERR_GROUP))).toBe(JSON.stringify([
          'Circular definition cycle:  a, b, c, d, a'
       ]));
       ErrorHandler.clear(ERR_GROUP);
