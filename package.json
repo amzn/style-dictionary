@@ -56,7 +56,11 @@
       "/__tests__/__json_files/",
       "/__tests__/__properties/",
       "/__tests__/__output/"
-    ]
+    ],
+    "transform": {
+      "^.+\\.json5?$": "json5-jest",
+      "^.+\\.jsx?$": "babel-jest"
+    }
   },
   "husky": {
     "hooks": {
@@ -90,6 +94,7 @@
     "tinycolor2": "^1.4.1"
   },
   "devDependencies": {
+    "babel-jest": "^23.6.0",
     "babel-preset-env": "^1.7.0",
     "chai": "^4.1.2",
     "docsify": "^4.6.10",
@@ -99,6 +104,7 @@
     "istanbul": "^0.4.5",
     "jest": "^23.6.0",
     "jsdoc-to-markdown": "^4.0.1",
+    "json5-jest": "^1.0.1",
     "less": "^3.0.1",
     "mocha": "^5.2.0",
     "node-sass": "^4.8.3"
