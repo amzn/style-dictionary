@@ -26,3 +26,6 @@ In this example, we have selected all the JSON files in the `props` folder (usin
 
 The command that we automatically run at every update is the `npm run build` command, passed as parameter to the watcher via `-c 'npm run build'`.
 
+#### What to look at
+
+Open the `package.json` file and see how in the "scripts" block there is an additional entry for "watch". This is the way the "watch" mode is invoked and run.
