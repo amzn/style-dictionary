@@ -13,7 +13,8 @@
 
 var resolveObject = require('../../lib/utils/resolveObject');
 var helpers = require('../__helpers');
-var ErrorHandler  = require('../../lib/utils/errorHandler');
+var ErrorHandler = require('../../lib/utils/errorHandler');
+var ErrorGroups = require('../../lib/utils/errorGroups');
 
 describe('utils', () => {
   describe('resolveObject', () => {
@@ -115,7 +116,7 @@ describe('utils', () => {
     });
 
     it('should gracefully handle circular references', () => {
-      var ERR_GROUP = 'Property Reference Errors';
+      var ERR_GROUP = ErrorGroups.PropertyReferenceErrors;
       ErrorHandler.clear(ERR_GROUP);
 
       resolveObject(helpers.fileToJSON(__dirname + '/../__json_files/circular.json'));
@@ -155,7 +156,7 @@ describe('utils', () => {
     });
 
     it('should correctly replace multiple references without reference errors', function() {
-      var ERR_GROUP = 'Property Reference Errors';
+      var ERR_GROUP = ErrorGroups.PropertyReferenceErrors;
       ErrorHandler.clear(ERR_GROUP);
 
       var obj = resolveObject(helpers.fileToJSON(__dirname + '/../__json_files/not_circular.json'));
@@ -273,7 +274,7 @@ describe('utils', () => {
     });
 
     it('should collect multiple reference errors', () => {
-      var ERR_GROUP = 'Property Reference Errors';
+      var ERR_GROUP = ErrorGroups.PropertyReferenceErrors;
 
       ErrorHandler.clear(ERR_GROUP);
       resolveObject(helpers.fileToJSON(__dirname + '/../__json_files/multiple_reference_errors.json'));
