@@ -313,11 +313,6 @@ section.cover .cover-main {
   color: #8dc891;
 }
 
-.markdown-section {
-  max-width: 75rem;
-  padding: 1rem 3rem;
-}
-
 .markdown-section ol, .markdown-section p, .markdown-section ul {
   line-height: inherit;
 }
@@ -378,6 +373,26 @@ section.cover .cover-main {
 
 .sidebar::-webkit-scrollbar {
   width:0;
+}
+
+@media screen and (max-width: 768px) {
+  section.cover {
+    height: auto;
+  }
+  section.cover .cover-main {
+    margin: 0 5vw;
+  }
+  .cover-main img {
+    max-width: 100px;
+    max-height: 100px;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .markdown-section {
+    max-width: 75rem;
+    padding: 1rem 3rem;
+  }
 }
 
 @media (min-width: 1200px) {
