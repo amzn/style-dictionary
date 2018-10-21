@@ -13,8 +13,8 @@
 
 var resolveObject = require('../../lib/utils/resolveObject');
 var helpers = require('../__helpers');
-var ErrorHandler = require('../../lib/utils/errorHandler');
-var ErrorGroups = require('../../lib/utils/errorGroups');
+var GroupErrors = require('../../lib/utils/groupErrors');
+var GroupErrors = require('../../lib/utils/groupErrors');
 
 describe('utils', () => {
   describe('resolveObject', () => {
@@ -116,51 +116,51 @@ describe('utils', () => {
     });
 
     it('should gracefully handle circular references', () => {
-      var ERR_GROUP = ErrorGroups.PropertyReferenceErrors;
-      ErrorHandler.clear(ERR_GROUP);
+      var ERR_GROUP = GroupErrors.GROUP.PropertyReferenceErrors;
+      GroupErrors.clear(ERR_GROUP);
 
       resolveObject(helpers.fileToJSON(__dirname + '/../__json_files/circular.json'));
-      expect(ErrorHandler.count(ERR_GROUP)).toBe(1);
-      expect(JSON.stringify(ErrorHandler.fetchMessages(ERR_GROUP))).toBe(JSON.stringify([
+      expect(GroupErrors.count(ERR_GROUP)).toBe(1);
+      expect(JSON.stringify(GroupErrors.fetchMessages(ERR_GROUP))).toBe(JSON.stringify([
          'Circular definition cycle:  a, b, c, d, a'
       ]));
-      ErrorHandler.clear(ERR_GROUP);
+      GroupErrors.clear(ERR_GROUP);
 
       resolveObject(helpers.fileToJSON(__dirname + '/../__json_files/circular_2.json'));
-      expect(ErrorHandler.count(ERR_GROUP)).toBe(1);
-      expect(JSON.stringify(ErrorHandler.fetchMessages(ERR_GROUP))).toBe(JSON.stringify([
+      expect(GroupErrors.count(ERR_GROUP)).toBe(1);
+      expect(JSON.stringify(GroupErrors.fetchMessages(ERR_GROUP))).toBe(JSON.stringify([
         'Circular definition cycle:  a.b.c, j, a.b.c'
       ]));
-      ErrorHandler.clear(ERR_GROUP);
+      GroupErrors.clear(ERR_GROUP);
 
       resolveObject(helpers.fileToJSON(__dirname + '/../__json_files/circular_3.json'));
-      expect(ErrorHandler.count(ERR_GROUP)).toBe(1);
-      expect(JSON.stringify(ErrorHandler.fetchMessages(ERR_GROUP))).toBe(JSON.stringify([
+      expect(GroupErrors.count(ERR_GROUP)).toBe(1);
+      expect(JSON.stringify(GroupErrors.fetchMessages(ERR_GROUP))).toBe(JSON.stringify([
         'Circular definition cycle:  a.b, c.d.e, a.b'
       ]));
-      ErrorHandler.clear(ERR_GROUP);
+      GroupErrors.clear(ERR_GROUP);
 
       resolveObject(helpers.fileToJSON(__dirname + '/../__json_files/circular_4.json'));
-      expect(ErrorHandler.count(ERR_GROUP)).toBe(1);
-      expect(JSON.stringify(ErrorHandler.fetchMessages(ERR_GROUP))).toBe(JSON.stringify([
+      expect(GroupErrors.count(ERR_GROUP)).toBe(1);
+      expect(JSON.stringify(GroupErrors.fetchMessages(ERR_GROUP))).toBe(JSON.stringify([
         'Circular definition cycle:  a.b.c.d, e.f.g, h.i, a.b.c.d',
       ]));
-      ErrorHandler.clear(ERR_GROUP);
+      GroupErrors.clear(ERR_GROUP);
 
       resolveObject(helpers.fileToJSON(__dirname + '/../__json_files/circular_5.json'));
-      expect(ErrorHandler.count(ERR_GROUP)).toBe(1);
-      expect(JSON.stringify(ErrorHandler.fetchMessages(ERR_GROUP))).toBe(JSON.stringify([
+      expect(GroupErrors.count(ERR_GROUP)).toBe(1);
+      expect(JSON.stringify(GroupErrors.fetchMessages(ERR_GROUP))).toBe(JSON.stringify([
         'Circular definition cycle:  l, m, l',
       ]));
-      ErrorHandler.clear(ERR_GROUP);
+      GroupErrors.clear(ERR_GROUP);
     });
 
     it('should correctly replace multiple references without reference errors', function() {
-      var ERR_GROUP = ErrorGroups.PropertyReferenceErrors;
-      ErrorHandler.clear(ERR_GROUP);
+      var ERR_GROUP = GroupErrors.GROUP.PropertyReferenceErrors;
+      GroupErrors.clear(ERR_GROUP);
 
       var obj = resolveObject(helpers.fileToJSON(__dirname + '/../__json_files/not_circular.json'));
-      expect(ErrorHandler.count(ERR_GROUP)).toBe(0);
+      expect(GroupErrors.count(ERR_GROUP)).toBe(0);
       expect(JSON.stringify(obj)).toBe(JSON.stringify({
         prop1: { value: 'test1 value' },
         prop2: { value: 'test2 value' },
@@ -169,7 +169,7 @@ describe('utils', () => {
         prop12: { value: 'test1 value, test2 value and some extra stuff' },
         prop124: { value: 'test1 value, test2 value and test1 value' }
       }));
-      ErrorHandler.clear(ERR_GROUP);
+      GroupErrors.clear(ERR_GROUP);
     });
 
     describe('ignoreKeys', () => {
@@ -274,17 +274,17 @@ describe('utils', () => {
     });
 
     it('should collect multiple reference errors', () => {
-      var ERR_GROUP = ErrorGroups.PropertyReferenceErrors;
+      var ERR_GROUP = GroupErrors.GROUP.PropertyReferenceErrors;
 
-      ErrorHandler.clear(ERR_GROUP);
+      GroupErrors.clear(ERR_GROUP);
       resolveObject(helpers.fileToJSON(__dirname + '/../__json_files/multiple_reference_errors.json'));
-      expect(ErrorHandler.count(ERR_GROUP)).toBe(3);
-      expect(JSON.stringify(ErrorHandler.fetchMessages(ERR_GROUP))).toBe(JSON.stringify([
+      expect(GroupErrors.count(ERR_GROUP)).toBe(3);
+      expect(JSON.stringify(GroupErrors.fetchMessages(ERR_GROUP))).toBe(JSON.stringify([
          "Reference doesn't exist: a.b tries to reference b.a, which is not defined",
          "Reference doesn't exist: a.c tries to reference b.c, which is not defined",
          "Reference doesn't exist: a.d tries to reference d, which is not defined"
       ]));
-      ErrorHandler.clear(ERR_GROUP);
+      GroupErrors.clear(ERR_GROUP);
     });
 
   });

@@ -11,7 +11,7 @@
  * and limitations under the License.
  */
 
-var ErrorHandler = require('./lib/utils/errorHandler');
+var GroupErrors = require('./lib/utils/groupErrors');
 
 /**
  * Style Dictionary module
@@ -54,7 +54,7 @@ var StyleDictionary = {
 };
 
 process.on('uncaughtException', function(err) {
-  ErrorHandler.flush();
+  GroupErrors.flush();
 });
 
 module.exports = StyleDictionary;
