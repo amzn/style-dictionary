@@ -53,8 +53,4 @@ var StyleDictionary = {
   extend: require('./lib/extend')
 };
 
-process.on('uncaughtException', function(err) {
-  GroupErrors.flush();
-});
-
 module.exports = StyleDictionary;
