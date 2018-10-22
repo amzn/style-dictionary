@@ -11,7 +11,7 @@
  * and limitations under the License.
  */
 
-var GroupErrors = require('./lib/utils/groupErrors');
+var GroupMessages = require('./lib/utils/groupMessages');
 
 /**
  * Style Dictionary module
