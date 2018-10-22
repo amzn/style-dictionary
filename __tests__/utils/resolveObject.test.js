@@ -15,7 +15,7 @@ var resolveObject = require('../../lib/utils/resolveObject');
 var helpers = require('../__helpers');
 var GroupMessages = require('../../lib/utils/groupMessages');
 
-var PROPERTY_REFERENCE_ERRORS = GroupMessages.GROUP.PropertyReferenceErrors;
+var PROPERTY_REFERENCE_WARNINGS = GroupMessages.GROUP.PropertyReferenceWarnings;
 
 describe('utils', () => {
   describe('resolveObject', () => {
@@ -117,50 +117,49 @@ describe('utils', () => {
     });
 
     it('should gracefully handle circular references', () => {
-      GroupMessages.clear(PROPERTY_REFERENCE_ERRORS);
+      GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
 
       resolveObject(helpers.fileToJSON(__dirname + '/../__json_files/circular.json'));
-      console.log('XXX', GroupMessages.count(PROPERTY_REFERENCE_ERRORS));
-      expect(GroupMessages.count(PROPERTY_REFERENCE_ERRORS)).toBe(1);
-      expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_ERRORS))).toBe(JSON.stringify([
+      expect(GroupMessages.count(PROPERTY_REFERENCE_WARNINGS)).toBe(1);
+      expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS))).toBe(JSON.stringify([
          'Circular definition cycle:  a, b, c, d, a'
       ]));
-      GroupMessages.clear(PROPERTY_REFERENCE_ERRORS);
+      GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
 
       resolveObject(helpers.fileToJSON(__dirname + '/../__json_files/circular_2.json'));
-      expect(GroupMessages.count(PROPERTY_REFERENCE_ERRORS)).toBe(1);
-      expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_ERRORS))).toBe(JSON.stringify([
+      expect(GroupMessages.count(PROPERTY_REFERENCE_WARNINGS)).toBe(1);
+      expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS))).toBe(JSON.stringify([
         'Circular definition cycle:  a.b.c, j, a.b.c'
       ]));
-      GroupMessages.clear(PROPERTY_REFERENCE_ERRORS);
+      GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
 
       resolveObject(helpers.fileToJSON(__dirname + '/../__json_files/circular_3.json'));
-      expect(GroupMessages.count(PROPERTY_REFERENCE_ERRORS)).toBe(1);
-      expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_ERRORS))).toBe(JSON.stringify([
+      expect(GroupMessages.count(PROPERTY_REFERENCE_WARNINGS)).toBe(1);
+      expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS))).toBe(JSON.stringify([
         'Circular definition cycle:  a.b, c.d.e, a.b'
       ]));
-      GroupMessages.clear(PROPERTY_REFERENCE_ERRORS);
+      GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
 
       resolveObject(helpers.fileToJSON(__dirname + '/../__json_files/circular_4.json'));
-      expect(GroupMessages.count(PROPERTY_REFERENCE_ERRORS)).toBe(1);
-      expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_ERRORS))).toBe(JSON.stringify([
+      expect(GroupMessages.count(PROPERTY_REFERENCE_WARNINGS)).toBe(1);
+      expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS))).toBe(JSON.stringify([
         'Circular definition cycle:  a.b.c.d, e.f.g, h.i, a.b.c.d',
       ]));
-      GroupMessages.clear(PROPERTY_REFERENCE_ERRORS);
+      GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
 
       resolveObject(helpers.fileToJSON(__dirname + '/../__json_files/circular_5.json'));
-      expect(GroupMessages.count(PROPERTY_REFERENCE_ERRORS)).toBe(1);
-      expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_ERRORS))).toBe(JSON.stringify([
+      expect(GroupMessages.count(PROPERTY_REFERENCE_WARNINGS)).toBe(1);
+      expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS))).toBe(JSON.stringify([
         'Circular definition cycle:  l, m, l',
       ]));
-      GroupMessages.clear(PROPERTY_REFERENCE_ERRORS);
+      GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
     });
 
     it('should correctly replace multiple references without reference errors', function() {
-      GroupMessages.clear(PROPERTY_REFERENCE_ERRORS);
+      GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
 
       var obj = resolveObject(helpers.fileToJSON(__dirname + '/../__json_files/not_circular.json'));
-      expect(GroupMessages.count(PROPERTY_REFERENCE_ERRORS)).toBe(0);
+      expect(GroupMessages.count(PROPERTY_REFERENCE_WARNINGS)).toBe(0);
       expect(JSON.stringify(obj)).toBe(JSON.stringify({
         prop1: { value: 'test1 value' },
         prop2: { value: 'test2 value' },
@@ -169,7 +168,7 @@ describe('utils', () => {
         prop12: { value: 'test1 value, test2 value and some extra stuff' },
         prop124: { value: 'test1 value, test2 value and test1 value' }
       }));
-      GroupMessages.clear(PROPERTY_REFERENCE_ERRORS);
+      GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
     });
 
     describe('ignoreKeys', () => {
@@ -274,11 +273,11 @@ describe('utils', () => {
     });
 
     it('should collect multiple reference errors', () => {
-      GroupMessages.clear(PROPERTY_REFERENCE_ERRORS);
+      GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
 
       resolveObject(helpers.fileToJSON(__dirname + '/../__json_files/multiple_reference_errors.json'));
-      expect(GroupMessages.count(PROPERTY_REFERENCE_ERRORS)).toBe(3);
-      expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_ERRORS))).toBe(JSON.stringify([
+      expect(GroupMessages.count(PROPERTY_REFERENCE_WARNINGS)).toBe(3);
+      expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS))).toBe(JSON.stringify([
          "Reference doesn't exist: a.b tries to reference b.a, which is not defined",
          "Reference doesn't exist: a.c tries to reference b.c, which is not defined",
          "Reference doesn't exist: a.d tries to reference d, which is not defined"

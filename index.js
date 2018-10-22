@@ -11,8 +11,6 @@
  * and limitations under the License.
  */
 
-var GroupMessages = require('./lib/utils/groupMessages');
-
 /**
  * Style Dictionary module
  *
