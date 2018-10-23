@@ -11,10 +11,10 @@
  * and limitations under the License.
  */
 
-var helpers = require('./__helpers');
-var config = helpers.fileToJSON(__dirname + '/__configs/test.json');
-var StyleDictionary = require('../index');
-var StyleDictionaryExtended = StyleDictionary.extend(config);
+const helpers = require('./__helpers');
+const config = helpers.fileToJSON(`${__dirname}/__configs/test.json`);
+const StyleDictionary = require('../index');
+const StyleDictionaryExtended = StyleDictionary.extend(config);
 
 describe('buildPlatform', () => {
 
@@ -28,7 +28,7 @@ describe('buildPlatform', () => {
     ).toThrow('Platform foobar doesn\'t exist');
 
     expect(
-      function() {
+      () => {
         StyleDictionaryExtended.buildPlatform('web');
       }
     ).not.toThrow();
@@ -69,7 +69,7 @@ describe('buildPlatform', () => {
   });
 
   it('should handle non-string values in properties', () => {
-    var StyleDictionaryExtended = StyleDictionary.extend({
+    const StyleDictionaryExtended = StyleDictionary.extend({
       source: ['__tests__/__properties/nonString.json'],
       platforms: {
         test: {
@@ -87,7 +87,7 @@ describe('buildPlatform', () => {
     StyleDictionaryExtended.buildPlatform('test');
     expect(helpers.fileExists('./__tests__/__output/output.json')).toBeTruthy();
     // var input = helpers.fileToJSON('./__tests__/__properties/nonString.json');
-    var output = helpers.fileToJSON('./__tests__/__output/output.json');
+    const output = helpers.fileToJSON('./__tests__/__output/output.json');
 
     // Make sure transforms run on non-string values as they normally would
     expect(output).toHaveProperty('color.red.value', output.color.otherRed.value);
@@ -104,7 +104,7 @@ describe('buildPlatform', () => {
   });
 
   it('should handle non-property nodes', () => {
-    var StyleDictionaryExtended = StyleDictionary.extend({
+    const StyleDictionaryExtended = StyleDictionary.extend({
       source: ['__tests__/__properties/nonPropertyNode.json'],
       platforms: {
         test: {
@@ -121,15 +121,15 @@ describe('buildPlatform', () => {
     });
     StyleDictionaryExtended.buildPlatform('test');
     expect(helpers.fileExists('./__tests__/__output/output.json')).toBeTruthy();
-    var input = helpers.fileToJSON('./__tests__/__properties/nonPropertyNode.json');
-    var output = helpers.fileToJSON('./__tests__/__output/output.json');
+    const input = helpers.fileToJSON('./__tests__/__properties/nonPropertyNode.json');
+    const output = helpers.fileToJSON('./__tests__/__output/output.json');
     expect(output.color.key1).toEqual(input.color.key1);
     expect(output.color.base.red.key2).toEqual(input.color.base.red.key2);
     expect(output.color.base.attributes.key3).toEqual(input.color.base.attributes.key3);
   });
 
   it('should handle comments', () => {
-    var StyleDictionaryExtended = StyleDictionary.extend({
+    const StyleDictionaryExtended = StyleDictionary.extend({
       source: ['__tests__/__properties/comment.json'],
       platforms: {
         test: {
@@ -146,13 +146,13 @@ describe('buildPlatform', () => {
     });
     StyleDictionaryExtended.buildPlatform('test');
     expect(helpers.fileExists('./__tests__/__output/output.json')).toBeTruthy();
-    var input = helpers.fileToJSON('./__tests__/__properties/comment.json');
-    var output = helpers.fileToJSON('./__tests__/__output/output.json');
+    const input = helpers.fileToJSON('./__tests__/__properties/comment.json');
+    const output = helpers.fileToJSON('./__tests__/__output/output.json');
     expect(output.size.large.comment).toEqual(input.size.large.comment);
   });
 
   it('should throw an error if given a transformGroup that doesn\'t exist', () => {
-    var StyleDictionaryExtended = StyleDictionary.extend({
+    const StyleDictionaryExtended = StyleDictionary.extend({
       source: ['__properties/**/*.json'],
       platforms: {
         foo: {

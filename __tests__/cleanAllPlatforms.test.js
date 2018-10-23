@@ -11,10 +11,10 @@
  * and limitations under the License.
  */
 
-var helpers = require('./__helpers');
-var config = helpers.fileToJSON(__dirname + '/__configs/test.json');
-var StyleDictionary = require('../index');
-var StyleDictionaryExtended = StyleDictionary.extend(config);
+const helpers = require('./__helpers');
+const config = helpers.fileToJSON(`${__dirname}/__configs/test.json`);
+const StyleDictionary = require('../index');
+const StyleDictionaryExtended = StyleDictionary.extend(config);
 
 describe('cleanAllPlatforms', () => {
 

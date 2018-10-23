@@ -11,20 +11,20 @@
  * and limitations under the License.
  */
 
-var formats = require('../../lib/common/formats');
-var scss = require('node-sass');
+const scss = require('node-sass');
+const formats = require('../../lib/common/formats');
 
-var file = {
-  "destination": "__output/",
-  "format": "scss/icons",
-  "name": "foo"
+const file = {
+  destination: '__output/',
+  format: 'scss/icons',
+  name: 'foo',
 };
 
-var propertyName = 'content-icon-email';
-var propertyValue = "'\\E001'";
-var itemClass = '3d_rotation';
+const propertyName = 'content-icon-email';
+const propertyValue = "'\\E001'";
+const itemClass = '3d_rotation';
 
-var dictionary = {
+const dictionary = {
   allProperties: [
     {
       name: propertyName,
@@ -41,26 +41,27 @@ var dictionary = {
   ],
 };
 
-var config = {
+const config = {
   prefix: 'sd', // Style-Dictionary Prefix
 };
 
-var formatter = formats['scss/icons'].bind(file);
+const formatter = formats['scss/icons'].bind(file);
 
 describe('formats', () => {
   describe('scss/icons', () => {
-
     it('should have a valid scss syntax', done => {
-      scss.render({
-        data: formatter(dictionary, config),
-      }, function(err, result) {
-        if(err) {
-          return done(new Error(err));
+      scss.render(
+        {
+          data: formatter(dictionary, config),
+        },
+        (err, result) => {
+          if (err) {
+            return done(new Error(err));
+          }
+          expect(result.css).toBeDefined();
+          return done();
         }
-        expect(result.css).toBeDefined();
-        return done();
-      });
+      );
     });
-
   });
 });

@@ -11,8 +11,8 @@
  * and limitations under the License.
  */
 
-var childProcess = require("child_process");
-var helpers = require('./__helpers');
+const childProcess = require("child_process");
+const helpers = require('./__helpers');
 
 describe('cliBuildWithJsConfig', () => {
 

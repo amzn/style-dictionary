@@ -11,8 +11,8 @@
  * and limitations under the License.
  */
 
-var buildFile = require('../lib/buildFile');
-var helpers   = require('./__helpers');
+const buildFile = require('../lib/buildFile');
+const helpers   = require('./__helpers');
 
 function format() {
   return "hi";

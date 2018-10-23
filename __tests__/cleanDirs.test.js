@@ -11,42 +11,41 @@
  * and limitations under the License.
  */
 
-var helpers    = require('./__helpers');
-var buildFiles = require('../lib/buildFiles');
-var cleanFiles = require('../lib/cleanFiles');
-var cleanDirs  = require('../lib/cleanDirs');
+const helpers = require('./__helpers');
+const buildFiles = require('../lib/buildFiles');
+const cleanFiles = require('../lib/cleanFiles');
+const cleanDirs = require('../lib/cleanDirs');
 
-var dictionary = {
+const dictionary = {
   properties: {
-    foo: 'bar'
-  }
+    foo: 'bar',
+  },
 };
 
-var platform = {
+const platform = {
   files: [
     {
       destination: '__tests__/__output/extradir1/extradir2/extradir1/extradir2/test.json',
-      format: function(dictionary) {
-        return JSON.stringify(dictionary.properties)
-      }
-    }
-  ]
+      format({ properties }) {
+        return JSON.stringify(properties);
+      },
+    },
+  ],
 };
 
-var platformWithBuildPath = {
+const platformWithBuildPath = {
   buildPath: '__tests__/__output/extradir1/extradir2/',
   files: [
     {
       destination: 'test.json',
-      format: function(dictionary) {
-        return JSON.stringify(dictionary.properties)
-      }
-    }
-  ]
+      format({ properties }) {
+        return JSON.stringify(properties);
+      },
+    },
+  ],
 };
 
 describe('cleanDirs', () => {
-
   beforeEach(() => {
     helpers.clearOutput();
   });
@@ -56,17 +55,17 @@ describe('cleanDirs', () => {
   });
 
   it('should delete without buildPath', () => {
-    buildFiles( dictionary, platform );
-    cleanFiles( dictionary, platform );
-    cleanDirs( dictionary, platform );
+    buildFiles(dictionary, platform);
+    cleanFiles(dictionary, platform);
+    cleanDirs(dictionary, platform);
     expect(helpers.dirDoesNotExist('./__tests__/__output/extradir1/extradir2')).toBeTruthy();
     expect(helpers.dirDoesNotExist('./__tests__/__output/extradir1')).toBeTruthy();
   });
 
   it('should delete with buildPath', () => {
-    buildFiles( dictionary, platformWithBuildPath );
-    cleanFiles( dictionary, platformWithBuildPath );
-    cleanDirs( dictionary, platformWithBuildPath );
+    buildFiles(dictionary, platformWithBuildPath);
+    cleanFiles(dictionary, platformWithBuildPath);
+    cleanDirs(dictionary, platformWithBuildPath);
     expect(helpers.dirDoesNotExist('./__tests__/__output/extradir1/extradir2')).toBeTruthy();
     expect(helpers.dirDoesNotExist('./__tests__/__output/extradir1')).toBeTruthy();
   });

@@ -11,13 +11,22 @@
   "plugins": ["prettier"],
   "rules": {
     "no-console": 0,
-    "no-unused-vars": 1
+    "no-unused-vars": 1,
+    "camelcase": "off",
+    "no-use-before-define": "off"
   },
   "overrides": [
     {
       "files": ["__tests__/**//*.js"],
       "globals": {
-        "expect": true
+        "expect": true,
+        "beforeAll": true,
+        "afterAll": true
+      },
+      "rules": {
+        "global-require": "off",
+        "camelcase": "off",
+        "import/no-unresolved": "off"
       }
     }
   ]

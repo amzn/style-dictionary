@@ -11,10 +11,10 @@
  * and limitations under the License.
  */
 
-var helpers   = require('./__helpers');
-var buildFile = require('../lib/buildFile');
-var cleanFile = require('../lib/cleanFile');
-var cleanDir = require('../lib/cleanDir');
+const helpers   = require('./__helpers');
+const buildFile = require('../lib/buildFile');
+const cleanFile = require('../lib/cleanFile');
+const cleanDir = require('../lib/cleanDir');
 
 function format() {
   return "hi";

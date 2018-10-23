@@ -11,12 +11,12 @@
  * and limitations under the License.
  */
 
-var filterProperties = require('../lib/filterProperties');
-var helpers = require('./__helpers');
-var flattenProperties = require("../lib/utils/flattenProperties");
-var _ = require('lodash');
+const filterProperties = require('../lib/filterProperties');
+const helpers = require('./__helpers');
+const flattenProperties = require("../lib/utils/flattenProperties");
+const _ = require('lodash');
 
-var colorRed = {
+const colorRed = {
   "value": "#FF0000",
   "original": {
     "value": "#FF0000",
@@ -27,9 +27,9 @@ var colorRed = {
     "color",
     "red"
   ]
-}
+};
 
-var colorBlue = {
+const colorBlue = {
   "value": "#0000FF",
   "original": {
     "value": "#0000FF",
@@ -40,9 +40,9 @@ var colorBlue = {
     "color",
     "blue"
   ]
-}
+};
 
-var sizeSmall = {
+const sizeSmall = {
   "value": "2px",
   "original": {
     "value": "2px",
@@ -53,9 +53,9 @@ var sizeSmall = {
     "size",
     "small"
   ]
-}
+};
 
-var sizeLarge = {
+const sizeLarge = {
   "value": "4px",
   "original": {
     "value": "4px",
@@ -66,9 +66,9 @@ var sizeLarge = {
     "size",
     "large"
   ]
-}
+};
 
-var properties = {
+const properties = {
   "color": {
     "red": colorRed,
     "blue": colorBlue,
@@ -79,10 +79,10 @@ var properties = {
   }
 };
 
-var dictionary = {
+const dictionary = {
   "properties": properties,
   "allProperties": flattenProperties(properties)
-}
+};
 
 describe('filterProperties', () => {
 
@@ -99,11 +99,9 @@ describe('filterProperties', () => {
   });
 
   it('should work with a filter function', () => {
-    var filter = function(property) {
-      return property.path.includes("size");
-    }
-    var filteredDictionary = filterProperties(dictionary, filter);
-    _.each(filteredDictionary.allProperties, function(property) {
+    const filter = ({path}) => path.includes("size");
+    const filteredDictionary = filterProperties(dictionary, filter);
+    _.each(filteredDictionary.allProperties, property => {
       expect(property).not.toBe(colorRed);
       expect(property).not.toBe(colorBlue);
     });
@@ -113,9 +111,9 @@ describe('filterProperties', () => {
   });
 
   it('should work with a filter object', () => {
-    var filter = { "attributes": { "category": "size" } };
-    var filteredDictionary = filterProperties(dictionary, filter);
-    _.each(filteredDictionary.allProperties, function(property) {
+    const filter = { "attributes": { "category": "size" } };
+    const filteredDictionary = filterProperties(dictionary, filter);
+    _.each(filteredDictionary.allProperties, property => {
       expect(property).not.toBe(colorRed);
       expect(property).not.toBe(colorBlue);
     });

@@ -23,7 +23,8 @@
  * StyleDictionary.buildAllPlatforms();
  * ```
  */
-var StyleDictionary = {
+/* eslint-disable global-require */
+const StyleDictionary = {
   VERSION: require('./package.json').version,
   properties: {},
   allProperties: [],

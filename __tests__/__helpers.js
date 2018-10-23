@@ -11,18 +11,18 @@
  * and limitations under the License.
  */
 
-var fs   = require('fs-extra');
+const fs = require('fs-extra');
 
 module.exports = {
-  clearOutput: function() {
+  clearOutput() {
     fs.emptyDirSync('__tests__/__output');
   },
 
-  fileToJSON: function(path) {
+  fileToJSON(path) {
     return fs.readJsonSync(path);
   },
 
-  fileExists: function(filePath) {
+  fileExists(filePath) {
     try {
       return fs.statSync(filePath).isFile();
     } catch (err) {
@@ -30,7 +30,7 @@ module.exports = {
     }
   },
 
-  pathDoesNotExist: function(path) {
+  pathDoesNotExist(path) {
     try {
       return !fs.existsSync(path);
     } catch (err) {
@@ -38,12 +38,11 @@ module.exports = {
     }
   },
 
-  dirDoesNotExist: function(dirPath) {
+  dirDoesNotExist(dirPath) {
     return this.pathDoesNotExist(dirPath);
   },
 
-  fileDoesNotExist: function(filePath) {
+  fileDoesNotExist(filePath) {
     return this.pathDoesNotExist(filePath);
-
-  }
+  },
 };

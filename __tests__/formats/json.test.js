@@ -11,16 +11,16 @@
  * and limitations under the License.
  */
 
-var formats = require('../../lib/common/formats');
-var fs = require('fs-extra');
-var helpers = require('../__helpers');
+const fs = require('fs-extra');
+const formats = require('../../lib/common/formats');
+const helpers = require('../__helpers');
 
-var file = {
-  "destination": "__output/",
-  "format": "json"
+const file = {
+  destination: '__output/',
+  format: 'json',
 };
 
-var dictionary = {
+const dictionary = {
   properties: {
     color: {
       red: { value: '#FF0000' },
@@ -28,11 +28,10 @@ var dictionary = {
   },
 };
 
-var formatter = formats['json'].bind(file);
+const formatter = formats.json.bind(file);
 
 describe('formats', () => {
   describe('json', () => {
-
     beforeEach(() => {
       helpers.clearOutput();
     });
@@ -42,10 +41,9 @@ describe('formats', () => {
     });
 
     it('should be a valid JSON file', () => {
-      fs.writeFileSync('./__tests__/__output/output.json', formatter(dictionary) );
-      var test = require('../__output/output.json');
+      fs.writeFileSync('./__tests__/__output/output.json', formatter(dictionary));
+      const test = require('../__output/output.json');
       expect(test.color.red.value).toEqual(dictionary.properties.color.red.value);
     });
   });
-
 });

@@ -11,26 +11,18 @@
  * and limitations under the License.
  */
 
-var convertToBase64 = require('../../lib/utils/convertToBase64.js');
+const convertToBase64 = require('../../lib/utils/convertToBase64.js');
 
 describe('utils', () => {
   describe('convertToBase64', () => {
     it('should error if filePath isnt a string', () => {
-      expect(
-        convertToBase64.bind(null)
-      ).toThrow('filePath name must be a string');
-      expect(
-        convertToBase64.bind(null, [])
-      ).toThrow('filePath name must be a string');
-      expect(
-        convertToBase64.bind(null, {})
-      ).toThrow('filePath name must be a string');
+      expect(convertToBase64.bind(null)).toThrow('filePath name must be a string');
+      expect(convertToBase64.bind(null, [])).toThrow('filePath name must be a string');
+      expect(convertToBase64.bind(null, {})).toThrow('filePath name must be a string');
     });
 
     it('should error if filePath isnt a file', () => {
-      expect(
-        convertToBase64.bind(null, 'foo')
-      ).toThrow("ENOENT: no such file or directory, open 'foo'");
+      expect(convertToBase64.bind(null, 'foo')).toThrow("ENOENT: no such file or directory, open 'foo'");
     });
 
     it('should return a string', () => {

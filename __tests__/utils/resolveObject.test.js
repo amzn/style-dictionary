@@ -11,52 +11,45 @@
  * and limitations under the License.
  */
 
-var resolveObject = require('../../lib/utils/resolveObject');
-var helpers = require('../__helpers');
+const resolveObject = require('../../lib/utils/resolveObject');
+const helpers = require('../__helpers');
 
 describe('utils', () => {
   describe('resolveObject', () => {
-
     it('should error on non-objects', () => {
-      expect(
-        resolveObject.bind(null),
-      ).toThrow('Please pass an object in');
-      expect(
-        resolveObject.bind(null, 'foo'),
-      ).toThrow('Please pass an object in');
-      expect(
-        resolveObject.bind(null, 0),
-      ).toThrow('Please pass an object in');
+      expect(resolveObject.bind(null)).toThrow('Please pass an object in');
+      expect(resolveObject.bind(null, 'foo')).toThrow('Please pass an object in');
+      expect(resolveObject.bind(null, 0)).toThrow('Please pass an object in');
     });
 
     it('should not mutate the original object', () => {
-      var original = helpers.fileToJSON(__dirname + '/../__json_files/nested_references.json');
-      var test = resolveObject( original );
+      const original = helpers.fileToJSON(`${__dirname}/../__json_files/nested_references.json`);
+      const test = resolveObject(original);
       expect(original).toHaveProperty('a.b.d', '{e.f.g}');
       expect(test).toHaveProperty('a.b.d', 2);
     });
 
     it('should do simple references', () => {
-      var test = resolveObject( helpers.fileToJSON(__dirname + '/../__json_files/simple.json') );
+      const test = resolveObject(helpers.fileToJSON(`${__dirname}/../__json_files/simple.json`));
       expect(test).toHaveProperty('bar', 'bar');
     });
 
     it('should do nested references', () => {
-      var obj = helpers.fileToJSON(__dirname + '/../__json_files/nested_references.json');
-      var test = resolveObject( obj );
+      const obj = helpers.fileToJSON(`${__dirname}/../__json_files/nested_references.json`);
+      const test = resolveObject(obj);
       expect(test).toHaveProperty('i', 2);
       expect(test).toHaveProperty('a.b.d', 2);
       expect(test).toHaveProperty('e.f.h', 1);
     });
 
     it('should handle nested pointers', () => {
-      var test = resolveObject( helpers.fileToJSON(__dirname + '/../__json_files/nested_pointers.json') );
+      const test = resolveObject(helpers.fileToJSON(`${__dirname}/../__json_files/nested_pointers.json`));
       expect(test).toHaveProperty('b', 1);
       expect(test).toHaveProperty('c', 1);
     });
 
     it('should handle deep nested pointers', () => {
-      var test = resolveObject( helpers.fileToJSON(__dirname + '/../__json_files/nested_pointers_2.json') );
+      const test = resolveObject(helpers.fileToJSON(`${__dirname}/../__json_files/nested_pointers_2.json`));
       expect(test).toHaveProperty('a', 1);
       expect(test).toHaveProperty('b', 1);
       expect(test).toHaveProperty('c', 1);
@@ -67,19 +60,18 @@ describe('utils', () => {
     });
 
     it('should handle deep nested pointers with string interpolation', () => {
-        var test = resolveObject( helpers.fileToJSON(__dirname + '/../__json_files/nested_pointers_3.json') );
-        expect(test).toHaveProperty('a', 'foo bon bee bae boo bla baz bar');
-        expect(test).toHaveProperty('b', 'foo bon bee bae boo bla baz');
-        expect(test).toHaveProperty('c', 'foo bon bee bae boo bla');
-        expect(test).toHaveProperty('d', 'foo bon bee bae boo');
-        expect(test).toHaveProperty('e', 'foo bon bee bae');
-        expect(test).toHaveProperty('f', 'foo bon bee');
-        expect(test).toHaveProperty('g', 'foo bon');
-      }
-    );
+      const test = resolveObject(helpers.fileToJSON(`${__dirname}/../__json_files/nested_pointers_3.json`));
+      expect(test).toHaveProperty('a', 'foo bon bee bae boo bla baz bar');
+      expect(test).toHaveProperty('b', 'foo bon bee bae boo bla baz');
+      expect(test).toHaveProperty('c', 'foo bon bee bae boo bla');
+      expect(test).toHaveProperty('d', 'foo bon bee bae boo');
+      expect(test).toHaveProperty('e', 'foo bon bee bae');
+      expect(test).toHaveProperty('f', 'foo bon bee');
+      expect(test).toHaveProperty('g', 'foo bon');
+    });
 
     it('should handle deep nested pointers and nested references', () => {
-      var test = resolveObject( helpers.fileToJSON(__dirname + '/../__json_files/nested_pointers_4.json') );
+      const test = resolveObject(helpers.fileToJSON(`${__dirname}/../__json_files/nested_pointers_4.json`));
       expect(test).toHaveProperty('a.a.a', 1);
       expect(test).toHaveProperty('b.b.b', 1);
       expect(test).toHaveProperty('c.c.c', 1);
@@ -89,9 +81,8 @@ describe('utils', () => {
       expect(test).toHaveProperty('g.g.g', 1);
     });
 
-
     it('should keep the type of the referenced property', () => {
-      var test = resolveObject( helpers.fileToJSON(__dirname + '/../__json_files/reference_type.json') );
+      const test = resolveObject(helpers.fileToJSON(`${__dirname}/../__json_files/reference_type.json`));
       expect(test).toHaveProperty('d', 1);
       expect(typeof test.d).toBe('number');
       expect(typeof test.e).toBe('object');
@@ -100,150 +91,152 @@ describe('utils', () => {
     });
 
     it('should handle and evaluate items in an array', () => {
-      var test = resolveObject( helpers.fileToJSON(__dirname + '/../__json_files/array.json') );
+      const test = resolveObject(helpers.fileToJSON(`${__dirname}/../__json_files/array.json`));
       expect(test.d[0]).toBe(2);
       expect(test.d[1]).toBe(1);
       expect(test.e[0].a).toBe(1);
       expect(test.e[1].a).toBe(2);
     });
 
-    it('should throw if pointers don\'t exist', () => {
-      expect(
-        resolveObject.bind( helpers.fileToJSON(__dirname + '/../__json_files/non_existent.json'))
-      ).toThrow();
+    it("should throw if pointers don't exist", () => {
+      expect(resolveObject.bind(helpers.fileToJSON(`${__dirname}/../__json_files/non_existent.json`))).toThrow();
     });
 
     it('should gracefully handle circular references', () => {
-      expect(
-        resolveObject.bind(null,
-          helpers.fileToJSON(__dirname + '/../__json_files/circular.json')
-        )
-      ).toThrow('Circular definition: a | d');
-      expect(
-        resolveObject.bind(null,
-          helpers.fileToJSON(__dirname + '/../__json_files/circular_2.json')
-        )
-      ).toThrow('Circular definition: a.b.c | d');
-      expect(
-        resolveObject.bind(null,
-          helpers.fileToJSON(__dirname + '/../__json_files/circular_3.json')
-        )
-      ).toThrow('Circular definition: a.b.c | d.e.f');
-      expect(
-        resolveObject.bind(null,
-          helpers.fileToJSON(__dirname + '/../__json_files/circular_4.json')
-        )
-      ).toThrow('Circular definition: a.b.c | g.h');
+      expect(resolveObject.bind(null, helpers.fileToJSON(`${__dirname}/../__json_files/circular.json`))).toThrow(
+        'Circular definition: a | d'
+      );
+      expect(resolveObject.bind(null, helpers.fileToJSON(`${__dirname}/../__json_files/circular_2.json`))).toThrow(
+        'Circular definition: a.b.c | d'
+      );
+      expect(resolveObject.bind(null, helpers.fileToJSON(`${__dirname}/../__json_files/circular_3.json`))).toThrow(
+        'Circular definition: a.b.c | d.e.f'
+      );
+      expect(resolveObject.bind(null, helpers.fileToJSON(`${__dirname}/../__json_files/circular_4.json`))).toThrow(
+        'Circular definition: a.b.c | g.h'
+      );
     });
 
     describe('ignoreKeys', () => {
       it('should handle default value of original', () => {
-        var test = resolveObject({
+        const test = resolveObject({
           foo: { value: 'bar' },
           bar: {
             value: '{foo.value}',
-            original: '{foo.value}'
-          }
+            original: '{foo.value}',
+          },
         });
-        expect(test).toHaveProperty ('bar.original', '{foo.value}');
+        expect(test).toHaveProperty('bar.original', '{foo.value}');
       });
 
       it('should handle any nested keys under the ignoreKey', () => {
-        var test = resolveObject({
+        const test = resolveObject({
           foo: { value: 'bar' },
           bar: {
             value: '{foo.value}',
             original: {
               value: '{foo.value}',
               foo: {
-                bar: '{foo.value}'
-              }
-            }
-          }
+                bar: '{foo.value}',
+              },
+            },
+          },
         });
-        expect(test).toHaveProperty ('bar.original.value', '{foo.value}');
-        expect(test).toHaveProperty ('bar.original.foo.bar', '{foo.value}');
+        expect(test).toHaveProperty('bar.original.value', '{foo.value}');
+        expect(test).toHaveProperty('bar.original.foo.bar', '{foo.value}');
       });
 
       it('should handle passing in custom ignoreKeys', () => {
-        var test = resolveObject({
-          foo: { value: 'bar' },
-          bar: {
-            value: '{foo.value}',
-            baz: '{foo.value}'
+        const test = resolveObject(
+          {
+            foo: { value: 'bar' },
+            bar: {
+              value: '{foo.value}',
+              baz: '{foo.value}',
+            },
+          },
+          {
+            ignoreKeys: ['baz'],
           }
-        }, {
-          ignoreKeys: ['baz']
-        });
-        expect(test).toHaveProperty ('bar.baz', '{foo.value}');
+        );
+        expect(test).toHaveProperty('bar.baz', '{foo.value}');
       });
 
       it('should handle multiple keys', () => {
-        var test = resolveObject({
-          foo: { value: 'bar' },
-          bar: {
-            value: '{foo.value}',
-            original: '{foo.value}',
-            baz: '{foo.value}'
+        const test = resolveObject(
+          {
+            foo: { value: 'bar' },
+            bar: {
+              value: '{foo.value}',
+              original: '{foo.value}',
+              baz: '{foo.value}',
+            },
+          },
+          {
+            ignoreKeys: ['baz', 'original'],
           }
-        },{
-          ignoreKeys: ['baz','original']
-        });
-        expect(test).toHaveProperty ('bar.original', '{foo.value}');
-        expect(test).toHaveProperty ('bar.baz', '{foo.value}');
+        );
+        expect(test).toHaveProperty('bar.original', '{foo.value}');
+        expect(test).toHaveProperty('bar.baz', '{foo.value}');
       });
 
       it('should not ignore anything if set to null or empty array', () => {
-        var test = resolveObject({
-          foo: { value: 'bar' },
-          bar: {
-            value: '{foo.value}',
-            original: '{foo.value}'
+        const test = resolveObject(
+          {
+            foo: { value: 'bar' },
+            bar: {
+              value: '{foo.value}',
+              original: '{foo.value}',
+            },
+          },
+          {
+            ignoreKeys: [],
           }
-        },{
-          ignoreKeys: []
-        });
-        expect(test).toHaveProperty ('bar.original', 'bar');
+        );
+        expect(test).toHaveProperty('bar.original', 'bar');
 
-        var test2 = resolveObject({
-          foo: { value: 'bar' },
-          bar: {
-            value: '{foo.value}',
-            original: '{foo.value}'
+        const test2 = resolveObject(
+          {
+            foo: { value: 'bar' },
+            bar: {
+              value: '{foo.value}',
+              original: '{foo.value}',
+            },
+          },
+          {
+            ignoreKeys: null,
           }
-        },{
-          ignoreKeys: null
-        });
-        expect(test2).toHaveProperty ('bar.original', 'bar');
+        );
+        expect(test2).toHaveProperty('bar.original', 'bar');
 
-        var test3 = resolveObject({
-          foo: { value: 'bar' },
-          bar: {
-            value: '{foo.value}',
-            original: '{foo.value}'
+        const test3 = resolveObject(
+          {
+            foo: { value: 'bar' },
+            bar: {
+              value: '{foo.value}',
+              original: '{foo.value}',
+            },
+          },
+          {
+            ignoreKeys: undefined,
           }
-        },{
-          ignoreKeys: undefined
-        });
-        expect(test3).toHaveProperty ('bar.original', 'bar');
+        );
+        expect(test3).toHaveProperty('bar.original', 'bar');
       });
     });
 
     it('should handle spaces', () => {
-      var test = resolveObject({
+      const test = resolveObject({
         foo: { value: 'bar' },
-        bar: { value: '{ foo.value }'}
+        bar: { value: '{ foo.value }' },
       });
-      expect(test).toHaveProperty ('foo.value', test.bar.value);
+      expect(test).toHaveProperty('foo.value', test.bar.value);
     });
 
     it('should collect multiple reference errors', () => {
       expect(
-        resolveObject.bind(null,
-          helpers.fileToJSON(__dirname + '/../__json_files/multiple_reference_errors.json')
-        )
+        resolveObject.bind(null, helpers.fileToJSON(`${__dirname}/../__json_files/multiple_reference_errors.json`))
       ).toThrow('Failed due to 3 errors:');
     });
-
   });
 });
