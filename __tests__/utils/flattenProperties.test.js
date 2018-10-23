@@ -22,8 +22,8 @@ describe('utils', () => {
     });
 
     it('should return the same array', () => {
-      const to_ret = [];
-      const ret = flattenProperties({}, to_ret);
+      const toRet = [];
+      const ret = flattenProperties({}, toRet);
       expect(ret).toBe(ret);
     });
 

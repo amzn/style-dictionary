@@ -12,7 +12,6 @@
   "rules": {
     "no-console": 0,
     "no-unused-vars": 1,
-    "camelcase": "off",
     "no-use-before-define": "off"
   },
   "overrides": [
