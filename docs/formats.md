@@ -251,6 +251,24 @@ Creates a JSON file of just the assets defined in the style dictionary.
 
 * * *
 
+### json/nested
+
+
+Creates a JSON that contains the original structure of the object without the value property.
+
+**Example**
+```json
+{
+  "color": {
+    "base": {
+       "red": "#ff000"
+    }
+  }
+}
+```
+
+* * *
+
 ### sketch/palette
 
 
