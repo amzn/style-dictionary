@@ -37,9 +37,9 @@ describe('utils', () => {
         },
       };
 
-      const expected_ret = [properties.black, properties.white];
+      const expectedRet = [properties.black, properties.white];
 
-      const sortedExpectedRet = _.sortBy(expected_ret, ['value']);
+      const sortedExpectedRet = _.sortBy(expectedRet, ['value']);
       const ret = flattenProperties(properties);
       const sortedRet = _.sortBy(ret, ['value']);
       expect(sortedRet).toEqual(sortedExpectedRet);
@@ -57,9 +57,9 @@ describe('utils', () => {
         },
       };
 
-      const expected_ret = [properties.color.black, properties.color.white];
+      const expectedRet = [properties.color.black, properties.color.white];
 
-      const sortedExpectedRet = _.sortBy(expected_ret, ['value']);
+      const sortedExpectedRet = _.sortBy(expectedRet, ['value']);
       const ret = flattenProperties(properties);
       const sortedRet = _.sortBy(ret, ['value']);
       expect(sortedRet).toEqual(sortedExpectedRet);

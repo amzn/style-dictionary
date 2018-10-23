@@ -22,7 +22,6 @@
       },
       "rules": {
         "global-require": "off",
-        "camelcase": "off",
         "import/no-unresolved": "off"
       }
     }
