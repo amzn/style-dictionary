@@ -36,7 +36,7 @@
   ],
   "scripts": {
     "lint": "eslint index.js lib/**/*.js test/*.js test/**/*.js",
-    "test": "npm run prettier:check && npm run lint && mocha --recursive -c",
+    "test": "npm run prettier:check && npm run lint && jest --runInBand",
     "prettier:check": "prettier --list-different index.js lib/**/*.js test/**/*.js",
     "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha -- test/*.js test/**/*.js",
     "precommit": "lint-staged",
@@ -45,6 +45,24 @@
     "generate-docs": "node ./scripts/generateDocs.js",
     "serve-docs": "docsify serve docs -p 3000 -P 12345",
     "install-cli": "npm install -g $(npm pack)"
+  },
+  "jest": {
+    "verbose": false,
+    "roots": [
+      "__tests__"
+    ],
+    "testPathIgnorePatterns": [
+      "/__tests__/__helpers.js",
+      "/__tests__/__assets/",
+      "/__tests__/__configs/",
+      "/__tests__/__json_files/",
+      "/__tests__/__properties/",
+      "/__tests__/__output/"
+    ],
+    "transform": {
+      "^.+\\.json5?$": "json5-jest",
+      "^.+\\.jsx?$": "babel-jest"
+    }
   },
   "husky": {
     "hooks": {
@@ -68,15 +86,18 @@
   ],
   "homepage": "https://github.com/amzn/style-dictionary",
   "dependencies": {
+    "chalk": "^2.4.1",
     "commander": "^2.9.0",
     "fs-extra": "^6.0.1",
     "glob": "^7.1.1",
+    "json5": "^2.1.0",
     "lodash": "^4.16.4",
     "resolve-cwd": "^2.0.0",
-    "tinycolor2": "^1.4.1",
-    "chalk": "^2.4.1"
+    "tinycolor2": "^1.4.1"
   },
   "devDependencies": {
+    "babel-jest": "^23.6.0",
+    "babel-preset-env": "^1.7.0",
     "chai": "^4.1.2",
     "docsify": "^4.6.10",
     "docsify-cli": "^4.2.1",
@@ -85,7 +106,9 @@
     "eslint-plugin-prettier": "^3.0.0",
     "husky": "^1.1.2",
     "istanbul": "^0.4.5",
+    "jest": "^23.6.0",
     "jsdoc-to-markdown": "^4.0.1",
+    "json5-jest": "^1.0.1",
     "less": "^3.0.1",
     "lint-staged": "^7.3.0",
     "mocha": "^5.2.0",
