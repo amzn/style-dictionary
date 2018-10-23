@@ -13,7 +13,6 @@
 
 const _ = require('lodash');
 const formats = require('../../lib/common/formats');
-const helpers = require('../__helpers');
 
 const file = {
   destination: '__output/',

@@ -10,8 +10,7 @@
   "extends": ["airbnb-base", "prettier"],
   "plugins": ["prettier"],
   "rules": {
-    "no-console": 0,
-    "no-unused-vars": 1
+    "no-console": 0
   },
   "overrides": [
     {
