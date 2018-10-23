@@ -53,11 +53,6 @@ aside.sidebar {
   border: none;
   background-color: var(--theme-color-secondary);
   color: #fff;
-  /* width: 20%; */
-}
-
-body.close .sidebar {
-  /* transform: translateX(-100%); */
 }
 
 .sidebar ul li a {
@@ -93,10 +88,6 @@ body.close .sidebar {
 
 .sidebar .search .matching-post:first-child {
   border-top: 0.2rem solid #E4E4E6;
-}
-
-.search .search-keyword {
-  /* color: #fff; */
 }
 
 .search a {
