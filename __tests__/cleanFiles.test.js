@@ -25,9 +25,7 @@ const platform = {
   files: [
     {
       destination: '__tests__/__output/test.json',
-      format({ properties }) {
-        return JSON.stringify(properties);
-      },
+      format: ({ properties }) => JSON.stringify(properties),
     },
   ],
 };
@@ -37,9 +35,7 @@ const platformWithBuildPath = {
   files: [
     {
       destination: 'test.json',
-      format({ properties }) {
-        return JSON.stringify(properties);
-      },
+      format: ({ properties }) => JSON.stringify(properties),
     },
   ],
 };

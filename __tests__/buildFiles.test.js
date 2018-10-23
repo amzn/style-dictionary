@@ -26,9 +26,7 @@ const platform = {
   files: [
     {
       destination: '__tests__/__output/test.json',
-      format({ properties }) {
-        return JSON.stringify(properties);
-      },
+      format: ({ properties }) => JSON.stringify(properties),
     },
   ],
 };
@@ -38,9 +36,7 @@ const platformWithBuildPath = {
   files: [
     {
       destination: 'test.json',
-      format({ properties }) {
-        return JSON.stringify(properties);
-      },
+      format: ({ properties }) => JSON.stringify(properties),
     },
   ],
 };
@@ -53,9 +49,7 @@ const platformWithFilter = {
       filter({ value }) {
         return value === 'bango';
       },
-      format({ properties }) {
-        return JSON.stringify(properties);
-      },
+      format: ({ properties }) => JSON.stringify(properties),
     },
   ],
 };
@@ -74,21 +68,15 @@ const platformWithBadBuildPath = {
   files: [
     {
       destination: 'test.json',
-      format({ properties }) {
-        return JSON.stringify(properties);
-      },
+      format: ({ properties }) => JSON.stringify(properties),
     },
   ],
 };
 
 describe('buildFiles', () => {
-  beforeEach(() => {
-    helpers.clearOutput();
-  });
+  beforeEach(() => helpers.clearOutput());
 
-  afterEach(() => {
-    helpers.clearOutput();
-  });
+  afterEach(() => helpers.clearOutput());
 
   it("should throw if build path doesn't have a trailing slash", () => {
     expect(buildFiles.bind(null, dictionary, platformWithBadBuildPath)).toThrow(
@@ -118,8 +106,6 @@ describe('buildFiles', () => {
     const output = require('./__output/test.json');
     expect(output).toHaveProperty('bingo');
     expect(output).not.toHaveProperty('foo');
-    _.each(output, ({ value }) => {
-      expect(value).toBe('bango');
-    });
+    _.each(output, ({ value }) => expect(value).toBe('bango'));
   });
 });

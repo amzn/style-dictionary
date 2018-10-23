@@ -14,13 +14,9 @@
 const fs = require('fs-extra');
 
 module.exports = {
-  clearOutput() {
-    fs.emptyDirSync('__tests__/__output');
-  },
+  clearOutput: () => fs.emptyDirSync('__tests__/__output'),
 
-  fileToJSON(path) {
-    return fs.readJsonSync(path);
-  },
+  fileToJSON: path => fs.readJsonSync(path),
 
   fileExists(filePath) {
     try {
