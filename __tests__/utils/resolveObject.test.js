@@ -116,7 +116,7 @@ describe('utils', () => {
       ).toThrow();
     });
 
-    it('should gracefully handle circular references', () => {
+    it('should gracefully handle basic circular references', () => {
       GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
 
       resolveObject(helpers.fileToJSON(__dirname + '/../__json_files/circular.json'));
@@ -124,6 +124,9 @@ describe('utils', () => {
       expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS))).toBe(JSON.stringify([
          'Circular definition cycle:  a, b, c, d, a'
       ]));
+    });
+
+    it('should gracefully handle basic and nested circular references', () => {
       GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
 
       resolveObject(helpers.fileToJSON(__dirname + '/../__json_files/circular_2.json'));
@@ -131,6 +134,9 @@ describe('utils', () => {
       expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS))).toBe(JSON.stringify([
         'Circular definition cycle:  a.b.c, j, a.b.c'
       ]));
+    });
+
+    it('should gracefully handle nested circular references', () => {
       GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
 
       resolveObject(helpers.fileToJSON(__dirname + '/../__json_files/circular_3.json'));
@@ -138,6 +144,9 @@ describe('utils', () => {
       expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS))).toBe(JSON.stringify([
         'Circular definition cycle:  a.b, c.d.e, a.b'
       ]));
+    });
+
+    it('should gracefully handle multiple nested circular references', () => {
       GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
 
       resolveObject(helpers.fileToJSON(__dirname + '/../__json_files/circular_4.json'));
@@ -145,6 +154,9 @@ describe('utils', () => {
       expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS))).toBe(JSON.stringify([
         'Circular definition cycle:  a.b.c.d, e.f.g, h.i, a.b.c.d',
       ]));
+    });
+
+    it('should gracefully handle down-chain circular references', () => {
       GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
 
       resolveObject(helpers.fileToJSON(__dirname + '/../__json_files/circular_5.json'));
@@ -152,7 +164,6 @@ describe('utils', () => {
       expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS))).toBe(JSON.stringify([
         'Circular definition cycle:  l, m, l',
       ]));
-      GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
     });
 
     it('should correctly replace multiple references without reference errors', function() {
@@ -168,7 +179,6 @@ describe('utils', () => {
         prop12: { value: 'test1 value, test2 value and some extra stuff' },
         prop124: { value: 'test1 value, test2 value and test1 value' }
       }));
-      GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
     });
 
     describe('ignoreKeys', () => {
