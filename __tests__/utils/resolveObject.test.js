@@ -13,6 +13,9 @@
 
 var resolveObject = require('../../lib/utils/resolveObject');
 var helpers = require('../__helpers');
+var GroupMessages = require('../../lib/utils/groupMessages');
+
+var PROPERTY_REFERENCE_WARNINGS = GroupMessages.GROUP.PropertyReferenceWarnings;
 
 describe('utils', () => {
   describe('resolveObject', () => {
@@ -113,27 +116,69 @@ describe('utils', () => {
       ).toThrow();
     });
 
-    it('should gracefully handle circular references', () => {
-      expect(
-        resolveObject.bind(null,
-          helpers.fileToJSON(__dirname + '/../__json_files/circular.json')
-        )
-      ).toThrow('Circular definition: a | d');
-      expect(
-        resolveObject.bind(null,
-          helpers.fileToJSON(__dirname + '/../__json_files/circular_2.json')
-        )
-      ).toThrow('Circular definition: a.b.c | d');
-      expect(
-        resolveObject.bind(null,
-          helpers.fileToJSON(__dirname + '/../__json_files/circular_3.json')
-        )
-      ).toThrow('Circular definition: a.b.c | d.e.f');
-      expect(
-        resolveObject.bind(null,
-          helpers.fileToJSON(__dirname + '/../__json_files/circular_4.json')
-        )
-      ).toThrow('Circular definition: a.b.c | g.h');
+    it('should gracefully handle basic circular references', () => {
+      GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
+
+      resolveObject(helpers.fileToJSON(__dirname + '/../__json_files/circular.json'));
+      expect(GroupMessages.count(PROPERTY_REFERENCE_WARNINGS)).toBe(1);
+      expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS))).toBe(JSON.stringify([
+         'Circular definition cycle:  a, b, c, d, a'
+      ]));
+    });
+
+    it('should gracefully handle basic and nested circular references', () => {
+      GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
+
+      resolveObject(helpers.fileToJSON(__dirname + '/../__json_files/circular_2.json'));
+      expect(GroupMessages.count(PROPERTY_REFERENCE_WARNINGS)).toBe(1);
+      expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS))).toBe(JSON.stringify([
+        'Circular definition cycle:  a.b.c, j, a.b.c'
+      ]));
+    });
+
+    it('should gracefully handle nested circular references', () => {
+      GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
+
+      resolveObject(helpers.fileToJSON(__dirname + '/../__json_files/circular_3.json'));
+      expect(GroupMessages.count(PROPERTY_REFERENCE_WARNINGS)).toBe(1);
+      expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS))).toBe(JSON.stringify([
+        'Circular definition cycle:  a.b, c.d.e, a.b'
+      ]));
+    });
+
+    it('should gracefully handle multiple nested circular references', () => {
+      GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
+
+      resolveObject(helpers.fileToJSON(__dirname + '/../__json_files/circular_4.json'));
+      expect(GroupMessages.count(PROPERTY_REFERENCE_WARNINGS)).toBe(1);
+      expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS))).toBe(JSON.stringify([
+        'Circular definition cycle:  a.b.c.d, e.f.g, h.i, a.b.c.d',
+      ]));
+    });
+
+    it('should gracefully handle down-chain circular references', () => {
+      GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
+
+      resolveObject(helpers.fileToJSON(__dirname + '/../__json_files/circular_5.json'));
+      expect(GroupMessages.count(PROPERTY_REFERENCE_WARNINGS)).toBe(1);
+      expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS))).toBe(JSON.stringify([
+        'Circular definition cycle:  l, m, l',
+      ]));
+    });
+
+    it('should correctly replace multiple references without reference errors', function() {
+      GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
+
+      var obj = resolveObject(helpers.fileToJSON(__dirname + '/../__json_files/not_circular.json'));
+      expect(GroupMessages.count(PROPERTY_REFERENCE_WARNINGS)).toBe(0);
+      expect(JSON.stringify(obj)).toBe(JSON.stringify({
+        prop1: { value: 'test1 value' },
+        prop2: { value: 'test2 value' },
+        prop3: { value: 'test1 value' },
+        prop4: { value: 'test1 value' },
+        prop12: { value: 'test1 value, test2 value and some extra stuff' },
+        prop124: { value: 'test1 value, test2 value and test1 value' }
+      }));
     });
 
     describe('ignoreKeys', () => {
@@ -238,11 +283,15 @@ describe('utils', () => {
     });
 
     it('should collect multiple reference errors', () => {
-      expect(
-        resolveObject.bind(null,
-          helpers.fileToJSON(__dirname + '/../__json_files/multiple_reference_errors.json')
-        )
-      ).toThrow('Failed due to 3 errors:');
+      GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
+
+      resolveObject(helpers.fileToJSON(__dirname + '/../__json_files/multiple_reference_errors.json'));
+      expect(GroupMessages.count(PROPERTY_REFERENCE_WARNINGS)).toBe(3);
+      expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS))).toBe(JSON.stringify([
+         "Reference doesn't exist: a.b tries to reference b.a, which is not defined",
+         "Reference doesn't exist: a.c tries to reference b.c, which is not defined",
+         "Reference doesn't exist: a.d tries to reference d, which is not defined"
+      ]));
     });
 
   });

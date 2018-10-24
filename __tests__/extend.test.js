@@ -131,7 +131,7 @@ describe('extend', () => {
         source: [__dirname + "/__properties/paddings.json", __dirname + "/__properties/paddings.json"],
         log: 'error'
       })
-    ).toThrow('Collision detected at:');
+    ).toThrow('Collisions detected');
   });
 
   it('should throw a warning if the collision is in source files and log is set to warn', () => {
