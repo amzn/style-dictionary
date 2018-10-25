@@ -1,5 +1,5 @@
 {
-  "name": "style-dictionary-auto-rebuild-watcher",
+  "name": "style-dictionary-custom-templates",
   "version": "1.0.0",
   "description": "",
   "main": "build/index.js",
@@ -16,5 +16,11 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "style-dictionary": "2.4.0"
+  },
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "handlebars": "^4.0.12",
+    "lodash": "^4.17.11",
+    "pug": "^2.0.3"
   }
 }

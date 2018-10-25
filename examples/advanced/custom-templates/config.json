@@ -1,0 +1,38 @@
+{
+  "source": ["properties/**/*.json"],
+  "platforms": {
+    "scss": {
+      "transformGroup": "web",
+      "buildPath": "build/web/",
+      "files": [{
+        "destination": "tokens_template.scss",
+        "template": "custom/template/scss"
+      },{
+        "destination": "tokens_format.scss",
+        "format": "custom/format/scss"
+      }]
+    },
+    "android": {
+      "transformGroup": "android",
+      "buildPath": "build/android/",
+      "files": [{
+        "destination": "tokens_template.xml",
+        "template": "custom/template/android-xml"
+      },{
+        "destination": "tokens_format.xml",
+        "format": "custom/format/android-xml"
+      }]
+    },
+    "ios": {
+      "transformGroup": "ios",
+      "buildPath": "build/ios/",
+      "files": [{
+        "destination": "tokens_template.plist",
+        "template": "custom/template/ios-plist"
+      },{
+        "destination": "tokens_format.plist",
+        "format": "custom/format/ios-plist"
+      }]
+    }
+  }
+}
