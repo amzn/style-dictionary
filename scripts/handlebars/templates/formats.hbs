@@ -61,7 +61,10 @@ And another example for Handlebars.
 const styleDictionary = require('style-dictionary').extend('config.json');
 const Handlebars = require('handlebars');
 
-const template = Handlebars.compile( fs.readFileSync('templates/MyTemplate.hbs') );
+const template = Handlebars.compile(
+  // fs returns a Buffer, but Handlebars expects a string
+  fs.readFileSync('templates/MyTemplate.hbs').toString()
+);
 
 styleDictionary.registerFormat({
   name: 'my/format',
