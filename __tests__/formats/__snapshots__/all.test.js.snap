@@ -78,7 +78,7 @@ exports[`formats all should return css/variables as a string 1`] = `
  */
 
 :root {
-
+ --color_red: #FF0000;
 }
 "
 `;
@@ -357,9 +357,7 @@ exports[`formats all should return javascript/es6 as a string 1`] = `
  * Generated on Sat, 01 Jan 2000 00:00:00 GMT
  */
 
-export const color_red = "#FF0000";
-
-"
+export const color_red = "#FF0000";"
 `;
 
 exports[`formats all should return javascript/module as a string 1`] = `
@@ -483,19 +481,7 @@ exports[`formats all should return json/asset as a string 1`] = `"{}"`;
 exports[`formats all should return json/nested as a string 1`] = `
 "{
   \\"color\\": {
-    \\"value\\": \\"#FF0000\\",
-    \\"original\\": {
-      \\"value\\": \\"#FF0000\\"
-    },
-    \\"name\\": \\"color_red\\",
-    \\"attributes\\": {
-      \\"category\\": \\"color\\",
-      \\"type\\": \\"red\\"
-    },
-    \\"path\\": [
-      \\"color\\",
-      \\"red\\"
-    ]
+    \\"red\\": \\"#FF0000\\"
   }
 }"
 `;
@@ -515,8 +501,7 @@ exports[`formats all should return less/variables as a string 1`] = `
  * Generated on Sat, 01 Jan 2000 00:00:00 GMT
  */
 
-@color_red: #FF0000;
-"
+@color_red: #FF0000;"
 `;
 
 exports[`formats all should return scss/icons as a string 1`] = `
@@ -534,8 +519,7 @@ exports[`formats all should return scss/variables as a string 1`] = `
  * Generated on Sat, 01 Jan 2000 00:00:00 GMT
  */
 
-$color_red: #FF0000;
-"
+$color_red: #FF0000;"
 `;
 
 exports[`formats all should return sketch/palette as a string 1`] = `
