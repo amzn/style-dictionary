@@ -11,16 +11,16 @@
  * and limitations under the License.
  */
 
-var StyleDictionary = require('../../index');
-var StyleDictionaryExtended = StyleDictionary.extend({});
+const StyleDictionary = require('../../index');
+
+const StyleDictionaryExtended = StyleDictionary.extend({});
 
 describe('register', () => {
   describe('transform', () => {
-
     it('should error if type is not a string', () => {
       expect(
         StyleDictionaryExtended.registerTransform.bind(null, {
-          type: 3
+          type: 3,
         })
       ).toThrow('type must be a string');
     });
@@ -28,7 +28,7 @@ describe('register', () => {
     it('should error if type is not a valid type', () => {
       expect(
         StyleDictionaryExtended.registerTransform.bind(null, {
-          type: 'foo'
+          type: 'foo',
         })
       ).toThrow('foo type is not one of: name, value, attribute');
     });
@@ -36,7 +36,7 @@ describe('register', () => {
     it('should error if name is not a string', () => {
       expect(
         StyleDictionaryExtended.registerTransform.bind(null, {
-          type: 'name'
+          type: 'name',
         })
       ).toThrow('name must be a string');
     });
@@ -46,7 +46,7 @@ describe('register', () => {
         StyleDictionaryExtended.registerTransform.bind(null, {
           type: 'name',
           name: 'name',
-          matcher: 'foo'
+          matcher: 'foo',
         })
       ).toThrow('matcher must be a function');
     });
@@ -56,8 +56,10 @@ describe('register', () => {
         StyleDictionaryExtended.registerTransform.bind(null, {
           type: 'name',
           name: 'name',
-          matcher: function() { return true; },
-          transformer: 'foo'
+          matcher() {
+            return true;
+          },
+          transformer: 'foo',
         })
       ).toThrow('transformer must be a function');
     });
@@ -66,8 +68,12 @@ describe('register', () => {
       StyleDictionaryExtended.registerTransform({
         type: 'name',
         name: 'foo',
-        matcher: function() { return true; },
-        transformer: function() { return true; }
+        matcher() {
+          return true;
+        },
+        transformer() {
+          return true;
+        },
       });
       expect(typeof StyleDictionaryExtended.transform.foo).toBe('object');
       expect(StyleDictionaryExtended).toHaveProperty('transform.foo.type', 'name');
@@ -75,14 +81,12 @@ describe('register', () => {
       expect(typeof StyleDictionaryExtended.transform.foo.transformer).toBe('function');
     });
 
-
     it('should properly pass the registered transform to instances', () => {
-      var SDE2 = StyleDictionaryExtended.extend({});
+      const SDE2 = StyleDictionaryExtended.extend({});
       expect(typeof SDE2.transform.foo).toBe('object');
       expect(SDE2).toHaveProperty('transform.foo.type', 'name');
       expect(typeof SDE2.transform.foo.matcher).toBe('function');
       expect(typeof SDE2.transform.foo.transformer).toBe('function');
     });
-
   });
 });

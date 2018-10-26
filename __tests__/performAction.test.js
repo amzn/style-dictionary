@@ -11,29 +11,29 @@
  * and limitations under the License.
  */
 
-var StyleDictionary = require('../index');
-var StyleDictionaryExtended = StyleDictionary.extend({
-  "platforms": {
-    "android": {
-      "actions": ["test"]
-    }
-  }
+const StyleDictionary = require('../index');
+
+const StyleDictionaryExtended = StyleDictionary.extend({
+  platforms: {
+    android: {
+      actions: ['test'],
+    },
+  },
 });
-var helpers = require('./__helpers');
-var fs = require('fs-extra');
+const helpers = require('./__helpers');
+const fs = require('fs-extra');
 
 StyleDictionaryExtended.registerAction({
   name: 'test',
-  do: function() {
-    fs.writeFileSync('./__tests__/__output/action.txt', 'hi')
+  do() {
+    fs.writeFileSync('./__tests__/__output/action.txt', 'hi');
   },
-  undo: function() {
-    fs.removeSync('./__tests__/__output/action.txt')
-  }
+  undo() {
+    fs.removeSync('./__tests__/__output/action.txt');
+  },
 });
 
 describe('performAction', () => {
-
   beforeEach(() => {
     helpers.clearOutput();
   });
@@ -48,5 +48,4 @@ describe('performAction', () => {
       expect(helpers.fileExists('./__tests__/__output/action.txt')).toBeTruthy();
     });
   });
-
 });

@@ -11,64 +11,57 @@
  * and limitations under the License.
  */
 
-var flattenProperties = require('../../lib/utils/flattenProperties');
-var _ = require('lodash');
+const _ = require('lodash');
+const flattenProperties = require('../../lib/utils/flattenProperties');
 
 describe('utils', () => {
   describe('flattenProperties', () => {
-
     it('should return an empty array', () => {
-      var ret = flattenProperties({});
+      const ret = flattenProperties({});
       expect(ret).toEqual([]);
     });
 
     it('should return the same array', () => {
-      var to_ret = [];
-      var ret = flattenProperties({}, to_ret);
+      const toRet = [];
+      const ret = flattenProperties({}, toRet);
       expect(ret).toBe(ret);
     });
 
     it('should return leaf node values as an array', () => {
-      var properties = {
-        'black': {
-          'value': '#000000'
+      const properties = {
+        black: {
+          value: '#000000',
         },
-        'white': {
-          'value': '#FFFFFF'
-        }
+        white: {
+          value: '#FFFFFF',
+        },
       };
 
-      var expected_ret = [
-        properties.black,
-        properties.white
-      ];
+      const expectedRet = [properties.black, properties.white];
 
-      var sortedExpectedRet = _.sortBy(expected_ret, ['value']);
-      var ret = flattenProperties(properties);
-      var sortedRet = _.sortBy(ret, ['value']);
+      const sortedExpectedRet = _.sortBy(expectedRet, ['value']);
+      const ret = flattenProperties(properties);
+      const sortedRet = _.sortBy(ret, ['value']);
       expect(sortedRet).toEqual(sortedExpectedRet);
     });
 
     it('should return nested leaf node values as an array', () => {
-      var properties = {
-        'color': {
-          'black': {
-            'value': '#000000'
+      const properties = {
+        color: {
+          black: {
+            value: '#000000',
           },
-          'white': {
-            'value': '#FFFFFF'
-          }
-        }
+          white: {
+            value: '#FFFFFF',
+          },
+        },
       };
 
-      var expected_ret = [
-        properties.color.black,
-        properties.color.white
-      ];
+      const expectedRet = [properties.color.black, properties.color.white];
 
-      var sortedExpectedRet = _.sortBy(expected_ret, ['value']);
-      var ret = flattenProperties(properties);
-      var sortedRet = _.sortBy(ret, ['value']);
+      const sortedExpectedRet = _.sortBy(expectedRet, ['value']);
+      const ret = flattenProperties(properties);
+      const sortedRet = _.sortBy(ret, ['value']);
       expect(sortedRet).toEqual(sortedExpectedRet);
     });
   });

@@ -12,54 +12,55 @@ const PATHS = {
   sass: path.join(__dirname, 'src/sass'),
   build: path.join(__dirname, 'build'),
   images: path.join(__dirname, 'src/images'),
-  assets: path.join(__dirname, 'src/assets')
+  assets: path.join(__dirname, 'src/assets'),
 };
 
 const common = {
   entry: {
     app: PATHS.app,
-    styles: PATHS.styles
+    styles: PATHS.styles,
   },
   output: {
     path: PATHS.build,
-    filename: '[name].[hash].js'
+    filename: '[name].[hash].js',
   },
-  devtool: "eval-source-map",
+  devtool: 'eval-source-map',
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx'],
   },
-  postcss: function (webpack) {
-    return [autoprefixer];
-  },
+  postcss: webpack => [autoprefixer],
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Style Dictionary',
-      template: 'index.ejs'
+      template: 'index.ejs',
     }),
     new webpack.HotModuleReplacementPlugin({
-      multiStep: true
+      multiStep: true,
     }),
   ],
   module: {
     loaders: [
       {
-        test : /\.(jsx|js)?$/,
-        loader : 'babel-loader',
-        exclude: /node_modules/
-      },{
+        test: /\.(jsx|js)?$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/,
+      },
+      {
         test: /\.(jpg|png)$/,
         loader: 'url?limit=25000',
-        include: PATHS.images
-      },{
+        include: PATHS.images,
+      },
+      {
         test: /\.scss$/,
         loaders: ['style', 'css', 'postcss', 'sass'],
-        include: PATHS.sass
-      },{
+        include: PATHS.sass,
+      },
+      {
         test: /\.ttf$|\.eot$|\.woff$|\.woff2$/,
         loader: 'file-loader',
-        include: PATHS.app
-      }
-    ]
+        include: PATHS.app,
+      },
+    ],
   },
   devServer: {
     historyApiFallback: true,
@@ -67,10 +68,10 @@ const common = {
     inline: true,
     stats: 'errors-only',
     host: 'localhost',
-    port: '8080'
-  }
+    port: '8080',
+  },
 };
 
 module.exports = validate(common, {
-  quiet: true
+  quiet: true,
 });

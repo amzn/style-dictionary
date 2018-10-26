@@ -11,117 +11,101 @@
  * and limitations under the License.
  */
 
-var buildFiles = require('../lib/buildFiles');
-var helpers = require('./__helpers');
-var _ = require('lodash');
+const _ = require('lodash');
+const buildFiles = require('../lib/buildFiles');
+const helpers = require('./__helpers');
 
-var dictionary = {
+const dictionary = {
   properties: {
     foo: { value: 'bar' },
-    bingo: { value: 'bango' }
-  }
+    bingo: { value: 'bango' },
+  },
 };
 
-var platform = {
+const platform = {
   files: [
     {
       destination: '__tests__/__output/test.json',
-      format: function(dictionary) {
-        return JSON.stringify(dictionary.properties)
-      }
-    }
-  ]
+      format: ({ properties }) => JSON.stringify(properties),
+    },
+  ],
 };
 
-var platformWithBuildPath = {
+const platformWithBuildPath = {
   buildPath: '__tests__/__output/',
   files: [
     {
       destination: 'test.json',
-      format: function(dictionary) {
-        return JSON.stringify(dictionary.properties)
-      }
-    }
-  ]
+      format: ({ properties }) => JSON.stringify(properties),
+    },
+  ],
 };
 
-var platformWithFilter = {
+const platformWithFilter = {
   buildPath: '__tests__/__output/',
   files: [
     {
       destination: 'test.json',
-      filter: function(property) {
-        return property.value === "bango"
+      filter({ value }) {
+        return value === 'bango';
       },
-      format: function(dictionary) {
-        return JSON.stringify(dictionary.properties)
-      },
-    }
-  ]
+      format: ({ properties }) => JSON.stringify(properties),
+    },
+  ],
 };
 
-var platformWithoutFormatter = {
+const platformWithoutFormatter = {
   buildPath: '__tests__/__output/',
   files: [
     {
       destination: 'test.json',
-    }
-  ]
+    },
+  ],
 };
 
-var platformWithBadBuildPath = {
+const platformWithBadBuildPath = {
   buildPath: '__tests__/__output',
   files: [
     {
       destination: 'test.json',
-      format: function(dictionary) {
-        return JSON.stringify(dictionary.properties)
-      }
-    }
-  ]
+      format: ({ properties }) => JSON.stringify(properties),
+    },
+  ],
 };
 
 describe('buildFiles', () => {
+  beforeEach(() => helpers.clearOutput());
 
-  beforeEach(() => {
-    helpers.clearOutput();
-  });
+  afterEach(() => helpers.clearOutput());
 
-  afterEach(() => {
-    helpers.clearOutput();
-  });
-
-  it('should throw if build path doesn\'t have a trailing slash', () => {
-    expect(
-      buildFiles.bind(null, dictionary, platformWithBadBuildPath),
-    ).toThrow('Build path must end in a trailing slash or you will get weird file names.');
+  it("should throw if build path doesn't have a trailing slash", () => {
+    expect(buildFiles.bind(null, dictionary, platformWithBadBuildPath)).toThrow(
+      'Build path must end in a trailing slash or you will get weird file names.'
+    );
   });
 
   it('should throw if template or formatter missing', () => {
-    expect(
-      buildFiles.bind(null, dictionary, platformWithoutFormatter),
-    ).toThrow('Please supply a template or formatter');
+    expect(buildFiles.bind(null, dictionary, platformWithoutFormatter)).toThrow(
+      'Please supply a template or formatter'
+    );
   });
 
   it('should work without buildPath', () => {
-    buildFiles( dictionary, platform );
+    buildFiles(dictionary, platform);
     expect(helpers.fileExists('./__tests__/__output/test.json')).toBeTruthy();
   });
 
   it('should work with buildPath', () => {
-    buildFiles( dictionary, platformWithBuildPath );
+    buildFiles(dictionary, platformWithBuildPath);
     expect(helpers.fileExists('./__tests__/__output/test.json')).toBeTruthy();
   });
 
   it('should work with a filter', () => {
     buildFiles(dictionary, platformWithFilter);
     expect(helpers.fileExists('./__tests__/__output/test.json')).toBeTruthy();
-    var output = require("./__output/test.json")
+    const output = require('./__output/test.json');
     expect(output).toHaveProperty('bingo');
     expect(output).not.toHaveProperty('foo');
-    _.each(output, function(property) {
-      expect(property.value).toBe('bango');
-    });
+    _.each(output, ({ value }) => expect(value).toBe('bango'));
   });
-
 });

@@ -35,7 +35,7 @@
     "NOTICE"
   ],
   "scripts": {
-    "lint": "eslint index.js lib/**/*.js test/*.js test/**/*.js",
+    "lint": "eslint index.js lib/**/*.js  __tests__/**/*.js",
     "test": "npm run prettier:check && npm run lint && jest --runInBand",
     "prettier:check": "prettier --list-different index.js lib/**/*.js test/**/*.js",
     "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha -- test/*.js test/**/*.js",
@@ -101,8 +101,10 @@
     "chai": "^4.1.2",
     "docsify": "^4.6.10",
     "docsify-cli": "^4.2.1",
-    "eslint": "^4.19.1",
+    "eslint": "^5.7.0",
+    "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-prettier": "^3.1.0",
+    "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-prettier": "^3.0.0",
     "husky": "^1.1.2",
     "istanbul": "^0.4.5",

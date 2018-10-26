@@ -7,10 +7,23 @@
     "Buffer": true,
     "escape": true
   },
-  "extends": ["eslint:recommended", "prettier"],
+  "extends": ["airbnb-base", "prettier"],
   "plugins": ["prettier"],
   "rules": {
-    "no-console": 0,
-    "no-unused-vars": 1
-  }
+    "no-console": 0
+  },
+  "overrides": [
+    {
+      "files": ["__tests__/**//*.js"],
+      "globals": {
+        "expect": true,
+        "beforeAll": true,
+        "afterAll": true
+      },
+      "rules": {
+        "global-require": "off",
+        "import/no-unresolved": "off"
+      }
+    }
+  ]
 }

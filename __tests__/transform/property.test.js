@@ -11,35 +11,40 @@
  * and limitations under the License.
  */
 
-var property = require('../../lib/transform/property');
+const property = require('../../lib/transform/property');
 
-var options = {
+const options = {
   transforms: [
     {
       type: 'attribute',
-      transformer: function() {
+      transformer() {
         return {
-          foo: 'bar'
-        }
-      }
-    },{
+          foo: 'bar',
+        };
+      },
+    },
+    {
       type: 'attribute',
-      transformer: function() {
-        return {bar: 'foo'}
-      }
-    },{
+      transformer() {
+        return { bar: 'foo' };
+      },
+    },
+    {
       type: 'name',
-      matcher: function(prop) { return prop.attributes.foo === 'bar'; },
-      transformer: function() { return "hello"; }
-    }
-  ]
+      matcher({ attributes }) {
+        return attributes.foo === 'bar';
+      },
+      transformer() {
+        return 'hello';
+      },
+    },
+  ],
 };
 
 describe('transform', () => {
   describe('property', () => {
-
     it('should work', () => {
-      var test = property({attributes:{baz:'blah'}}, options);
+      const test = property({ attributes: { baz: 'blah' } }, options);
       expect(test).toHaveProperty('attributes.bar', 'foo');
       expect(test).toHaveProperty('name', 'hello');
     });

@@ -11,20 +11,20 @@
  * and limitations under the License.
  */
 
-var formats = require('../../lib/common/formats');
-var less = require('less');
+const less = require('less');
+const formats = require('../../lib/common/formats');
 
-var file = {
-  "destination": "__output/",
-  "format": "less/icons",
-  "name": "foo"
+const file = {
+  destination: '__output/',
+  format: 'less/icons',
+  name: 'foo',
 };
 
-var propertyName = 'content-icon-email';
-var propertyValue = "'\\E001'";
-var itemClass = '3d_rotation';
+const propertyName = 'content-icon-email';
+const propertyValue = "'\\E001'";
+const itemClass = '3d_rotation';
 
-var dictionary = {
+const dictionary = {
   allProperties: [
     {
       name: propertyName,
@@ -41,25 +41,24 @@ var dictionary = {
   ],
 };
 
-var config = {
+const config = {
   prefix: 'sd', // Style-Dictionary Prefix
 };
 
-var formatter = formats['less/icons'].bind(file);
+const formatter = formats['less/icons'].bind(file);
 
 describe('formats', () => {
   describe('less/icons', () => {
-
     it('should have a valid less syntax', done => {
-      less.render(formatter(dictionary, config))
-        .then(function(output) {
+      less
+        .render(formatter(dictionary, config))
+        .then(output => {
           expect(output).toBeDefined();
           done();
         })
-        .catch(function(err) {
-          done(new Error(err))
+        .catch(err => {
+          done(new Error(err));
         });
     });
-
   });
 });

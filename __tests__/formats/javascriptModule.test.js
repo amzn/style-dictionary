@@ -11,21 +11,21 @@
  * and limitations under the License.
  */
 
-var fs = require('fs-extra');
-var helpers = require('../__helpers');
-var formats = require('../../lib/common/formats');
+const fs = require('fs-extra');
+const helpers = require('../__helpers');
+const formats = require('../../lib/common/formats');
 
-var file = {
-  "destination": "__output/",
-  "format": "javascript/module",
-  "filter": {
-    "attributes": {
-      "category": "color"
-    }
-  }
+const file = {
+  destination: '__output/',
+  format: 'javascript/module',
+  filter: {
+    attributes: {
+      category: 'color',
+    },
+  },
 };
 
-var dictionary = {
+const dictionary = {
   properties: {
     color: {
       red: { value: '#FF0000' },
@@ -33,11 +33,10 @@ var dictionary = {
   },
 };
 
-var formatter = formats['javascript/module'].bind(file);
+const formatter = formats['javascript/module'].bind(file);
 
 describe('formats', () => {
   describe('javascript/module', () => {
-
     beforeEach(() => {
       helpers.clearOutput();
     });
@@ -47,10 +46,9 @@ describe('formats', () => {
     });
 
     it('should be a valid JS file', () => {
-      fs.writeFileSync('./__tests__/__output/output.js', formatter(dictionary) );
-      var test = require('../__output/output.js');
+      fs.writeFileSync('./__tests__/__output/output.js', formatter(dictionary));
+      const test = require('../__output/output.js');
       expect(test.color.red.value).toEqual(dictionary.properties.color.red.value);
     });
-
   });
 });

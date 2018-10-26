@@ -11,17 +11,12 @@
  * and limitations under the License.
  */
 
-var assert = require('chai').assert;
-var StyleDictionary = require('../../index').extend({});
+const { assert } = require('chai');
+const StyleDictionary = require('../../index').extend({});
 
-
-describe('registerTemplate', function() {
-  it('should error if name is not a string', function() {
-    assert.throws(
-      StyleDictionary.registerTemplate.bind(null, {}),
-      Error,
-      /Template name must be a string:/
-    );
+describe('registerTemplate', () => {
+  it('should error if name is not a string', () => {
+    assert.throws(StyleDictionary.registerTemplate.bind(null, {}), Error, /Template name must be a string:/);
 
     assert.throws(
       StyleDictionary.registerTemplate.bind(null, {
@@ -48,7 +43,7 @@ describe('registerTemplate', function() {
     );
   });
 
-  it('should error if path is not a string', function() {
+  it('should error if path is not a string', () => {
     assert.throws(
       StyleDictionary.registerTemplate.bind(null, {
         name: 'data',
@@ -85,18 +80,18 @@ describe('registerTemplate', function() {
     );
   });
 
-  it('should error if path is not a file', function() {
+  it('should error if path is not a file', () => {
     assert.throws(
       StyleDictionary.registerTemplate.bind(null, {
         name: 'data',
         template: 'non_existent_file',
       }),
       Error,
-      /Can\'t find template: /
+      /Can't find template: /
     );
   });
 
-  it('should return StyleDictionary', function() {
+  it('should return StyleDictionary', () => {
     assert(
       StyleDictionary.registerTemplate.bind(null, {
         name: 'data',

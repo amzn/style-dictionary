@@ -11,8 +11,8 @@
  * and limitations under the License.
  */
 
-var helpers = require('./__helpers');
-var StyleDictionary = require('../index');
+const helpers = require('./__helpers');
+const StyleDictionary = require('../index');
 
 describe('buildAllPlatforms', () => {
 
@@ -25,14 +25,14 @@ describe('buildAllPlatforms', () => {
   });
 
   it('should work with json config', () => {
-    var StyleDictionaryExtended = StyleDictionary.extend(__dirname + '/__configs/test.json');
+    const StyleDictionaryExtended = StyleDictionary.extend(`${__dirname}/__configs/test.json`);
     StyleDictionaryExtended.buildAllPlatforms();
     expect(helpers.fileExists('./__tests__/__output/web/_icons.css')).toBeTruthy();
     expect(helpers.fileExists('./__tests__/__output/android/colors.xml')).toBeTruthy();
   });
 
   it('should work with js config', () => {
-    var StyleDictionaryExtended = StyleDictionary.extend(__dirname + '/__configs/test.js');
+    const StyleDictionaryExtended = StyleDictionary.extend(`${__dirname}/__configs/test.js`);
     StyleDictionaryExtended.buildAllPlatforms();
     expect(helpers.fileExists('./__tests__/__output/web/_icons.css')).toBeTruthy();
     expect(helpers.fileExists('./__tests__/__output/android/colors.xml')).toBeTruthy();

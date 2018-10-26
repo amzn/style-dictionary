@@ -11,19 +11,19 @@
  * and limitations under the License.
  */
 
-var formats = require('../../lib/common/formats');
-var scss = require('node-sass');
+const scss = require('node-sass');
+const formats = require('../../lib/common/formats');
 
-var file = {
-  "destination": "__output/",
-  "format": "scss/variables",
-  "name": "foo"
+const file = {
+  destination: '__output/',
+  format: 'scss/variables',
+  name: 'foo',
 };
 
-var propertyName = 'color-base-red-400';
-var propertyValue = '#EF5350';
+const propertyName = 'color-base-red-400';
+const propertyValue = '#EF5350';
 
-var dictionary = {
+const dictionary = {
   allProperties: [
     {
       name: propertyName,
@@ -42,22 +42,23 @@ var dictionary = {
   ],
 };
 
-var formatter = formats['scss/variables'].bind(file);
+const formatter = formats['scss/variables'].bind(file);
 
 describe('formats', () => {
   describe('scss/variables', () => {
-
     it('should have a valid scss syntax', done => {
-      scss.render({
-        data: formatter(dictionary),
-      }, function(err, result) {
-        if(err) {
-          return done(new Error(err));
+      scss.render(
+        {
+          data: formatter(dictionary),
+        },
+        (err, result) => {
+          if (err) {
+            return done(new Error(err));
+          }
+          expect(result.css).toBeDefined();
+          return done();
         }
-        expect(result.css).toBeDefined();
-        return done();
-      });
+      );
     });
-
   });
 });

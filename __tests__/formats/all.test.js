@@ -11,21 +11,20 @@
  * and limitations under the License.
  */
 
-var formats = require('../../lib/common/formats');
-var helpers = require('../__helpers');
-var _ = require('lodash');
+const _ = require('lodash');
+const formats = require('../../lib/common/formats');
 
-var file = {
-  "destination": "__output/",
-  "format": "javascript/es6",
-  "filter": {
-    "attributes": {
-      "category": "color"
-    }
-  }
+const file = {
+  destination: '__output/',
+  format: 'javascript/es6',
+  filter: {
+    attributes: {
+      category: 'color',
+    },
+  },
 };
 
-var dictionary = {
+const dictionary = {
   properties: {
     color: {
       red: { value: '#FF0000' },
@@ -34,12 +33,11 @@ var dictionary = {
 };
 
 describe('formats', () => {
-
   const constantDate = new Date('2000-01-01');
   const globalDate = global.Date;
 
   beforeAll(() => {
-    global.Date = function() { return constantDate };
+    global.Date = () => constantDate;
   });
 
   afterAll(() => {
@@ -47,14 +45,13 @@ describe('formats', () => {
   });
 
   describe('all', () => {
-    _.each(_.keys(formats), function(key) {
-      it('should return ' + key + ' as a string', () => {
-        var formatter = formats[key].bind(file);
-        var output = formatter(dictionary, file);
+    _.each(_.keys(formats), key => {
+      it(`should return ${key} as a string`, () => {
+        const formatter = formats[key].bind(file);
+        const output = formatter(dictionary, file);
         expect(typeof output).toBe('string');
         expect(output).toMatchSnapshot();
       });
     });
   });
-
 });

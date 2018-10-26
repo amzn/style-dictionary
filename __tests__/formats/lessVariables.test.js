@@ -11,19 +11,19 @@
  * and limitations under the License.
  */
 
-var formats = require('../../lib/common/formats');
-var less = require('less');
+const less = require('less');
+const formats = require('../../lib/common/formats');
 
-var file = {
-  "destination": "__output/",
-  "format": "less/variables",
-  "name": "foo"
+const file = {
+  destination: '__output/',
+  format: 'less/variables',
+  name: 'foo',
 };
 
-var propertyName = 'color-base-red-400';
-var propertyValue = '#EF5350';
+const propertyName = 'color-base-red-400';
+const propertyValue = '#EF5350';
 
-var dictionary = {
+const dictionary = {
   allProperties: [
     {
       name: propertyName,
@@ -42,21 +42,20 @@ var dictionary = {
   ],
 };
 
-var formatter = formats['less/variables'].bind(file);
+const formatter = formats['less/variables'].bind(file);
 
 describe('formats', () => {
   describe('less/variables', () => {
-
     it('should have a valid less syntax', done => {
-      less.render(formatter(dictionary))
-        .then(function(output) {
+      less
+        .render(formatter(dictionary))
+        .then(output => {
           expect(output).toBeDefined();
           done();
         })
-        .catch(function(err) {
-          done(new Error(err))
+        .catch(err => {
+          done(new Error(err));
         });
     });
-
   });
 });
