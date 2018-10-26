@@ -20,7 +20,7 @@ var props = _.filter(allProperties, function(prop) {
 %>
 <!--
   Do not edit directly
-  Generated on <%= new Date() %>
+  Generated on <%= new Date().toUTCString() %>
 -->
 <resources>
   <% _.each(props, function(prop) {

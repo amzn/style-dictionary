@@ -138,7 +138,8 @@ Creates a LESS file with variable definitions based on the style dictionary
 ```  
 **Example**  
 ```less
-
+@color-background-base: #f0f0f0;
+@color-background-alt: #eeeeee;
 * * *
 
 ### less/icons
@@ -528,6 +529,24 @@ Creates a JSON file of just the assets defined in the style dictionary.
        "logo": {
          "value": "assets/logo.png"
        }
+    }
+  }
+}
+```
+
+* * *
+
+### json/nested
+
+
+Creates a JSON that contains the original structure of the object without the value property.
+
+**Example**
+```json
+{
+  "color": {
+    "base": {
+       "red": "#ff000"
     }
   }
 }
