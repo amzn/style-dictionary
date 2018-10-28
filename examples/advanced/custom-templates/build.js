@@ -50,8 +50,12 @@ StyleDictionary.registerFormat({
   name: 'custom/format/android-xml',
   formatter: function(dictionary, platform) {
     return templateCustomXml({
+      // this is just to show that the formatter function takes a "dictionary" and "platform" parameters
+      // (and dictionary has a "properties" and "allProperties" attributes)
+      // and returns a string. for more details about the "formatter" function refer to the documentation
       allProperties: dictionary.allProperties,
-      options: platform // this is just to show how, if you need them, you can pass also the properties of the "platform" to the template
+      properties: dictionary.properties,
+      options: platform
     });
   }
 });
