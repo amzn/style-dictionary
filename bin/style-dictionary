@@ -38,7 +38,7 @@ program
   .command('init <type>')
   .description('Generates a starter style dictionary')
   .action(function(type){
-    var types = ['s3', 'npm', 'complete', 'basic'];
+    var types = ['basic', 'complete'];
     if (types.indexOf(type) < 0) {
       console.error('Please supply 1 type of project from: ' + types.join(', '));
       process.exit(1);
