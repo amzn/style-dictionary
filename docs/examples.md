@@ -34,3 +34,8 @@ If you want to look at more advanced examples of possible applications and custo
 * **react-native** - TODO
 * **s3** shows how to set up a style dictionary to build files for different platforms (web, iOS, Android) and upload those build artifacts, together with a group of assets, to an S3 bucket.
 
+---
+
+#### Do you think an example is missing?<br/>Do you want to see another example added to the project?<br/>Do you have a working example that we can add to the list?
+
+Fantastic! Let us know by [filing an issue](https://github.com/amzn/style-dictionary/issues) or sending us an email: style-dictionary@amazon.com.
