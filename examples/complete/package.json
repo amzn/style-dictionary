@@ -5,6 +5,7 @@
   "main": "build.js",
   "scripts": {
     "build": "node_modules/.bin/style-dictionary build",
+    "clean": "rm -rf build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
