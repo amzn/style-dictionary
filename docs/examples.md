@@ -3,12 +3,12 @@
 To get you started, there are some example packages included that you can use. You can [take a look at the code on Github](https://github.com/amzn/style-dictionary/tree/master/example/) or you can use the CLI included to generate a new package using some of these examples. Here is how you can do that:
 
 ```bash
-$ mkdir MyStyleD
-$ cd MyStyleD
+$ mkdir MyFolder
+$ cd MyFolder
 $ style-dictionary init [example]
 ```
 
-Where `[example]` is one of: `basic`, `complete`
+Where `[example]` is one of: `basic`, `complete`.
 
 ## Basic
 [View on Github](https://github.com/amzn/style-dictionary/tree/master/example/basic)

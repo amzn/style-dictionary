@@ -2,13 +2,51 @@
 
 # Examples
 
-Here you can find some sample projects to get started. You can start a new project from these examples using the CLI:
+Here you can find some sample projects to get started, or to find inspiration on how to customise and extend the Style Dictionary framework to create the files you need.
+
+## Setup
+
+To use one of these examples, clone (or [download](https://github.com/amzn/style-dictionary/archive/master.zip)) from GitHub the project and copy the folder of the example that you want to use. Inside the folder you will find a `README.md` file with the instructions on how to do the initial setup and run the `build` process.
+
+You can alternatively start a new project from one of the `basic` or `complete` examples using the CLI:
+
 ```bash
-$ mkdir MyStyleD
-$ cd MyStyleD
-$ style-dictionary init basic
+$ mkdir MyFolder
+$ cd MyFolder
+$ style-dictionary init [example]
 ```
 
-## Do you have another way to use a style dictionary?
+Where `[example]` is one of: `basic`, `complete`.
 
-Let us know by [filing an issue](https://github.com/amzn/style-dictionary/issues) or sending us an email: style-dictionary@amazon.com.
+This will create a copy of the example in `MyFolder` and start the build process, running `style-dictionary build` for the first time to generate the artifacts.
+
+## Basic
+[View the example](https://github.com/amzn/style-dictionary/tree/master/example/basic)
+
+This example code is bare-bones to show you what this framework can do. Use this if you want to play around with what the Style Dictionary can do.
+
+
+## Complete
+[View the example](https://github.com/amzn/style-dictionary/tree/master/example/complete)
+
+This is a more complete package and should have everything you need to get started. This package can be consumed as a Cocoapod on iOS, as a node module for web, and as a local library for Android.
+
+## Advanced
+[View the folder](https://github.com/amzn/style-dictionary/tree/master/example/advanced)
+
+If you want to look at more advanced examples of possible applications and customisations of Style Dictionary, the `examples/advanced` folder on GitHub contains these extra folders:
+
+* [**auto-rebuild-watcher**](https://github.com/amzn/style-dictionary/tree/master/example/advanced) shows how to setup a "watcher" that auto-rebuilds the tokens every time there is a change in the properties.
+* [**custom-templates**](https://github.com/amzn/style-dictionary/tree/master/example/advanced/custom-templates/auto-rebuild-watcher) shows how to use "custom" templates to generate design tokens files with custom formats, useful when you need to distribute your design tokens and integrate them with custom pipelines or scripts.
+* [**multi-brand-multi-platform**](https://github.com/amzn/style-dictionary/tree/master/example/advanced/multi-brand-multi-platform) shows how to set up Style Dictionary to support a multi-brand (for brand theming) and multi-platform (web, iOS, Android) solution, with property values depending on brand and plaforms.
+* [**npm-module**](https://github.com/amzn/style-dictionary/tree/master/example/advanced/npm-module) shows how to set up a style dictionary as an npm module, either to publish to a local npm service or to publish externally.
+* [**react**](https://github.com/amzn/style-dictionary/tree/master/example/advanced/react) - TODO
+* [**react-native**](https://github.com/amzn/style-dictionary/tree/master/example/advanced/react-native) - TODO
+* [**s3**](https://github.com/amzn/style-dictionary/tree/master/example/advanced/s3) shows how to set up a style dictionary to build files for different platforms (web, iOS, Android) and upload those build artifacts, together with a group of assets, to an S3 bucket.
+
+
+---
+
+#### Do you think an example is missing?<br/>Do you want to see another example added to the project?<br/>Do you have a working example that we can add to the list?
+
+Fantastic! Let us know by [filing an issue](https://github.com/amzn/style-dictionary/issues) or sending us an email: style-dictionary@amazon.com.

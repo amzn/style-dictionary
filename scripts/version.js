@@ -3,7 +3,7 @@ const glob = require('glob');
 const path = require('path');
 const execSync = require('child_process').execSync;
 const PACKAGE = require('../package.json');
-const dirs = glob.sync('./example/*', {});
+const dirs = glob.sync('./examples/*', {});
 
 function fileExists(filePath) {
   try {
