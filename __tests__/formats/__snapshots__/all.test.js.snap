@@ -89,7 +89,7 @@ exports[`formats all should return ios/colors.h as a string 1`] = `
 // __output/
 //
 // Do not edit directly
-// Generated on Fri Dec 31 1999 16:00:00 GMT-0800 (PST)
+// Generated on Sat, 01 Jan 2000 00:00:00 GMT
 //
 
 #import <UIKit/UIKit.h>
@@ -112,7 +112,7 @@ exports[`formats all should return ios/colors.m as a string 1`] = `
 // __output/
 //
 // Do not edit directly
-// Generated on Fri Dec 31 1999 16:00:00 GMT-0800 (PST)
+// Generated on Sat, 01 Jan 2000 00:00:00 GMT
 //
 
 #import \\".h\\"
@@ -147,7 +147,7 @@ exports[`formats all should return ios/macros as a string 1`] = `
 // __output/
 //
 // Do not edit directly
-// Generated on Fri Dec 31 1999 16:00:00 GMT-0800 (PST)
+// Generated on Sat, 01 Jan 2000 00:00:00 GMT
 //
 
 #import <Foundation/Foundation.h>
@@ -166,7 +166,7 @@ exports[`formats all should return ios/plist as a string 1`] = `
 <!DOCTYPE plist PUBLIC \\"-//Apple//DTD PLIST 1.0//EN\\" \\"http://www.apple.com/DTDs/PropertyList-1.0.dtd\\">
 <!--
   Do not edit directly
-  Generated on Fri Dec 31 1999 16:00:00 GMT-0800 (PST)
+  Generated on Sat, 01 Jan 2000 00:00:00 GMT
 -->
 <plist version=\\"1.0\\">
   <dict>
@@ -193,7 +193,7 @@ exports[`formats all should return ios/singleton.h as a string 1`] = `
 // __output/
 //
 // Do not edit directly
-// Generated on Fri Dec 31 1999 16:00:00 GMT-0800 (PST)
+// Generated on Sat, 01 Jan 2000 00:00:00 GMT
 //
 
 #import <Foundation/Foundation.h>
@@ -215,7 +215,7 @@ exports[`formats all should return ios/singleton.m as a string 1`] = `
 // __output/
 //
 // Do not edit directly
-// Generated on Fri Dec 31 1999 16:00:00 GMT-0800 (PST)
+// Generated on Sat, 01 Jan 2000 00:00:00 GMT
 //
 
 #import \\".h\\"
@@ -261,7 +261,7 @@ exports[`formats all should return ios/static.h as a string 1`] = `
 // __output/
 //
 // Do not edit directly
-// Generated on Fri Dec 31 1999 16:00:00 GMT-0800 (PST)
+// Generated on Sat, 01 Jan 2000 00:00:00 GMT
 //
 
 #import <Foundation/Foundation.h>
@@ -278,7 +278,7 @@ exports[`formats all should return ios/static.m as a string 1`] = `
 // __output/
 //
 // Do not edit directly
-// Generated on Fri Dec 31 1999 16:00:00 GMT-0800 (PST)
+// Generated on Sat, 01 Jan 2000 00:00:00 GMT
 //
 
 #import \\".h\\"
@@ -295,7 +295,7 @@ exports[`formats all should return ios/strings.h as a string 1`] = `
 // __output/
 //
 // Do not edit directly
-// Generated on Fri Dec 31 1999 16:00:00 GMT-0800 (PST)
+// Generated on Sat, 01 Jan 2000 00:00:00 GMT
 //
 
 #import <Foundation/Foundation.h>
@@ -316,7 +316,7 @@ exports[`formats all should return ios/strings.m as a string 1`] = `
 // __output/
 //
 // Do not edit directly
-// Generated on Fri Dec 31 1999 16:00:00 GMT-0800 (PST)
+// Generated on Sat, 01 Jan 2000 00:00:00 GMT
 //
 
 #import \\".h\\"

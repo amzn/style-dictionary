@@ -21,7 +21,7 @@
     var showFileHeader = (this.options && this.options.hasOwnProperty('showFileHeader')) ? this.options.showFileHeader : true;
     if(showFileHeader) {
         print("// Do not edit directly\n");
-        print("// Generated on " + new Date());
+        print("// Generated on " + new Date().toUTCString());
     }
 %>
 //
