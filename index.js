@@ -75,8 +75,8 @@ process.on('exit', function () {
           "format": "android/colors"
         }]
 
-      Your current build used the following templates:
-      ${template_warnings}
+      Your current config used the following templates:
+            ${template_warnings}
     `));
   }
 
@@ -103,7 +103,7 @@ process.on('exit', function () {
       There is a second argument available that contains the configuration being used to process the style dictionary.
 
       Calls to registerTemplate included the registration of the following custom templates:
-      ${register_template_warnings}
+            ${register_template_warnings}
     `));
   }
 
