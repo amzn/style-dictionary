@@ -58,53 +58,59 @@ module.exports = StyleDictionary;
 
 process.on('exit', function () {
   if(GroupMessages.count(TEMPLATE_DEPRECATION_WARNINGS) > 0) {
-    var template_warnings = GroupMessages.flush(TEMPLATE_DEPRECATION_WARNINGS).join('\n            ');
-    console.log(chalk.bold.red(`
-      Templates will be removed in the future, please change your config to use formats.
-      This is an example of how to update your config.json:
+    var template_warnings = GroupMessages.flush(TEMPLATE_DEPRECATION_WARNINGS).join('\n  ');
+    console.log(chalk.bold.yellow(`
+⚠️ DEPRECATION WARNING ️️️️️⚠️
+Templates will be removed in 3.0, please update your config to use formats.
+This is an example of how to update your config.json:
 
-      Before:
-        "files": [{
-          "destination": "colors.xml",
-          "template": "android/colors"
-        }]
+Before:
+  "files": [{
+    "destination": "colors.xml",
+    "template": "android/colors"
+  }]
 
-      After:
-        "files": [{
-          "destination": "colors.xml",
-          "format": "android/colors"
-        }]
+After:
+  "files": [{
+    "destination": "colors.xml",
+    "format": "android/colors"
+  }]
 
-      Your current config used the following templates:
-            ${template_warnings}
-    `));
+Your current config used the following templates:
+  ${template_warnings}
+`));
   }
 
   if(GroupMessages.count(REGISTER_TEMPLATE_DEPRECATION_WARNINGS) > 0) {
-    var register_template_warnings = GroupMessages.flush(REGISTER_TEMPLATE_DEPRECATION_WARNINGS).join('\n            ');
-    console.log(chalk.bold.red(`
-      registerTemplate will be removed in the future, please migrate to registerFormat.
-      You can use any templating engine you would like, you just need to require/import it.
-      This is an example of how to update your code using a lodash template (the tempalte engine previously used by registerTemplate):
+    var register_template_warnings = GroupMessages.flush(REGISTER_TEMPLATE_DEPRECATION_WARNINGS).join('\n  ');
+    console.log(chalk.bold.yellow(`
+⚠️ DEPRECATION WARNING ️️️️️⚠️
+The registerTemplate method will be removed in 3.0, please
+migrate to registerFormat. You can use any templating engine you would
+like, you just need to require/import it. This is an example of how to
+update your code using a lodash template (the template engine previously
+used by registerTemplate):
 
-      Before:
-        registerTemplate({
-          name: 'template/name',
-          template: templateFile,
-        });
+Before:
+  registerTemplate({
+    name: 'template/name',
+    template: templateFile,
+  });
 
-      After:
-        registerFormat({
-          name: 'template/name',
-          formatter: _.template( fs.readFileSync( templateFile ) ),
-        });
+After:
+  registerFormat({
+    name: 'template/name',
+    formatter: _.template( fs.readFileSync( templateFile ) ),
+  });
 
-      Note that formatter is a function that takes in a style dictionary and returns a string with the formatted output.
-      There is a second argument available that contains the configuration being used to process the style dictionary.
+Note that formatter is a function that takes in a style dictionary
+and returns a string with the formatted output. There is a second
+argument available that contains the configuration being used to
+process the style dictionary.
 
-      Calls to registerTemplate included the registration of the following custom templates:
-            ${register_template_warnings}
-    `));
+Calls to registerTemplate included the registration of the following
+custom templates:
+  ${register_template_warnings}`));
   }
 
 });
