@@ -61,7 +61,7 @@ process.on('exit', function () {
     var template_warnings = GroupMessages.flush(TEMPLATE_DEPRECATION_WARNINGS).join('\n  ');
     console.log(chalk.bold.yellow(`
 ⚠️ DEPRECATION WARNING ️️️️️⚠️
-Templates will be removed in 3.0, please update your config to use formats.
+Templates are deprecated and will be removed, please update your config to use formats.
 This is an example of how to update your config.json:
 
 Before:
@@ -85,7 +85,7 @@ Your current config used the following templates:
     var register_template_warnings = GroupMessages.flush(REGISTER_TEMPLATE_DEPRECATION_WARNINGS).join('\n  ');
     console.log(chalk.bold.yellow(`
 ⚠️ DEPRECATION WARNING ️️️️️⚠️
-The registerTemplate method will be removed in 3.0, please
+The registerTemplate method is deprecated and will be removed, please
 migrate to registerFormat. You can use any templating engine you would
 like, you just need to require/import it. This is an example of how to
 update your code using a lodash template (the template engine previously
