@@ -52,13 +52,13 @@
       "files": [
         {
           "destination": "android/colors.xml",
-          "template": "android/colors"
+          "format": "android/colors"
         },{
           "destination": "android/font_dimen.xml",
-          "template": "android/fontDimens"
+          "format": "android/fontDimens"
         },{
           "destination": "android/dimens.xml",
-          "template": "android/dimens"
+          "format": "android/dimens"
         }
       ],
       "actions": [
@@ -71,10 +71,10 @@
       "files": [
         {
           "destination": "style_dictionary.plist",
-          "template": "ios/plist"
+          "format": "ios/plist"
         },{
           "destination": "style_dictionary.h",
-          "template": "ios/macros"
+          "format": "ios/macros"
         }
       ]
     }

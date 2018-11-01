@@ -26,7 +26,7 @@ var props = _.filter(allProperties, function(prop) {
     var showFileHeader = (this.options && this.options.hasOwnProperty('showFileHeader')) ? this.options.showFileHeader : true;
     if(showFileHeader) {
         print("<!--\n  Do not edit directly");
-        print("\n  Generated on " + new Date());
+        print("\n  Generated on " + new Date().toUTCString());
         print("\n-->");
     }
 %>

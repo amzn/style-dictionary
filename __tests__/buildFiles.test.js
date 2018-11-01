@@ -97,10 +97,10 @@ describe('buildFiles', () => {
     ).toThrow('Build path must end in a trailing slash or you will get weird file names.');
   });
 
-  it('should throw if template or formatter missing', () => {
+  it('should throw if missing a format', () => {
     expect(
       buildFiles.bind(null, dictionary, platformWithoutFormatter),
-    ).toThrow('Please supply a template or formatter');
+    ).toThrow('Please supply a format');
   });
 
   it('should work without buildPath', () => {
