@@ -124,7 +124,7 @@ This tells the style dictionary build system how and what to build. The default 
       "buildPath": "build/android/",
       "files": [{
         "destination": "font_dimens.xml",
-        "template": "android/fontDimens"
+        "format": "android/fontDimens"
       }]
     }
   }
@@ -140,8 +140,9 @@ This tells the style dictionary build system how and what to build. The default 
 | platform.buildPath | String (optional) | Base path to build the files, must end with a trailing slash. |
 | platform.files | Array (optional) | Files to be generated for this platform. |
 | platform.file.destination | String (optional) | Location to build the file, will be appended to the buildPath. |
-| platform.file.format | String (optional) | Format used to generate the file. Can be a built-in one or you can create your own. Must declare a format or a template. |
-| platform.file.template | String (optional) | Template used to generate the file. Can be a built-in one or you can create your own. [More on formats and templates](https://amzn.github.io/style-dictionary/formats_and_templates) |
+| platform.file.format | String (optional) | Format used to generate the file. Can be a built-in one or you can create your own. [More on formats](https://amzn.github.io/style-dictionary/#/formats) |
+| platform.file.options | Object (optional) | A set of extra options associated with the file. |
+| platform.file.options.showFileHeader | Boolean | If the generated file should have a "Do not edit + Timestamp" header (where the format supports it). By default is "true". |
 
 ### Properties
 ```json
@@ -254,7 +255,7 @@ The comment  will appear in the output files, where relevant or the output forma
 
 ## Extending
 
-The style dictionary build system is made to be extended. We don't know exactly how everyone will want to use style dictionaries in their project, which is why it is easy to create custom transforms, templates, and formats.
+The style dictionary build system is made to be extended. We don't know exactly how everyone will want to use style dictionaries in their project, which is why it is easy to create custom transforms and formats.
 
 ```javascript
 const StyleDictionary = require('style-dictionary').extend('config.json');
@@ -273,7 +274,7 @@ StyleDictionary.registerTransform({
 StyleDictionary.buildAllPlatforms();
 ```
 
-For more information on creating your own transforms, templates, and formats, take a look at our [docs](https://amzn.github.io/style-dictionary/).
+For more information on creating your own transforms and formats, take a look at our [docs](https://amzn.github.io/style-dictionary/).
 
 ## Mascot
 

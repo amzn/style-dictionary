@@ -10,6 +10,10 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
+var chalk = require('chalk');
+var GroupMessages = require('./lib/utils/groupMessages');
+var TEMPLATE_DEPRECATION_WARNINGS = GroupMessages.GROUP.TemplateDeprecationWarnings;
+var REGISTER_TEMPLATE_DEPRECATION_WARNINGS = GroupMessages.GROUP.RegisterTemplateDeprecationWarnings;
 
 /**
  * Style Dictionary module
@@ -32,7 +36,6 @@ var StyleDictionary = {
   transform: require('./lib/common/transforms'),
   transformGroup: require('./lib/common/transformGroups'),
   format: require('./lib/common/formats'),
-  template: require('./lib/common/templates'),
   action: require('./lib/common/actions'),
 
   registerTransform: require('./lib/register/transform'),
@@ -52,3 +55,62 @@ var StyleDictionary = {
 };
 
 module.exports = StyleDictionary;
+
+process.on('exit', function () {
+  if(GroupMessages.count(TEMPLATE_DEPRECATION_WARNINGS) > 0) {
+    var template_warnings = GroupMessages.flush(TEMPLATE_DEPRECATION_WARNINGS).join('\n  ');
+    console.log(chalk.bold.yellow(`
+⚠️ DEPRECATION WARNING ️️️️️⚠️
+Templates are deprecated and will be removed, please update your config to use formats.
+This is an example of how to update your config.json:
+
+Before:
+  "files": [{
+    "destination": "colors.xml",
+    "template": "android/colors"
+  }]
+
+After:
+  "files": [{
+    "destination": "colors.xml",
+    "format": "android/colors"
+  }]
+
+Your current config used the following templates:
+  ${template_warnings}
+`));
+  }
+
+  if(GroupMessages.count(REGISTER_TEMPLATE_DEPRECATION_WARNINGS) > 0) {
+    var register_template_warnings = GroupMessages.flush(REGISTER_TEMPLATE_DEPRECATION_WARNINGS).join('\n  ');
+    console.log(chalk.bold.yellow(`
+⚠️ DEPRECATION WARNING ️️️️️⚠️
+The registerTemplate method is deprecated and will be removed, please
+migrate to registerFormat. You can use any templating engine you would
+like, you just need to require/import it. This is an example of how to
+update your code using a lodash template (the template engine previously
+used by registerTemplate):
+
+Before:
+  registerTemplate({
+    name: 'template/name',
+    template: templateFile,
+  });
+
+After:
+  registerFormat({
+    name: 'template/name',
+    formatter: _.template( fs.readFileSync( templateFile ) ),
+  });
+
+Note that formatter is a function that takes in a style dictionary
+and returns a string with the formatted output. There is a second
+argument available that contains the configuration being used to
+process the style dictionary.
+
+Calls to registerTemplate included the registration of the following
+custom templates:
+  ${register_template_warnings}`));
+  }
+
+});

@@ -1,0 +1,9 @@
+{
+  "asset": {
+    "font": {
+      "icon": {
+        "value": "./test/__assets/fonts/scapp_icons-regular.ttf"
+      }
+    }
+  }
+}
