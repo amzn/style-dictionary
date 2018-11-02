@@ -97,8 +97,8 @@
     "babel-jest": "^23.6.0",
     "babel-preset-env": "^1.7.0",
     "chai": "^4.1.2",
-    "docsify": "^4.6.10",
-    "docsify-cli": "^4.2.1",
+    "docsify": "^4.8.0",
+    "docsify-cli": "^4.3.0",
     "eslint": "^4.19.1",
     "husky": "^1.0.0-rc.8",
     "istanbul": "^0.4.5",
@@ -107,6 +107,6 @@
     "json5-jest": "^1.0.1",
     "less": "^3.0.1",
     "mocha": "^5.2.0",
-    "node-sass": "^4.8.3"
+    "node-sass": "^4.9.4"
   }
 }
