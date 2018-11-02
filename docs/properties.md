@@ -1,6 +1,6 @@
-# Definitions and Properties
+# Properties
 
-Properties are specific style information that you want to use in your deliverables. From a programmatic point of view, the property of size.font.small is an object containing multiple attributes, with each attribute providing specific information about size.font.small.
+Properties are specific style information that you want to use in your deliverables. A Design Token and associated metadata are often saved into a single property definition.
 
 Attributes are the key/object pairs in a definition. The most important (and only required) attribute is "value", which provides the data that will be used throughout the build process (and ultimately used for styling in your deliverables). You can include any custom attributes you would like (e.g. "comment" with a string or "metadata" as an object with its own attributes).
 
@@ -17,32 +17,6 @@ Here you can see a property of "size.font.small" with two attributes:
         "value": "10",
         "comment": "the smallest font allowed for readability"
       },
-    }
-  }
-}
-```
-
-Any property which is a string is a shorthand for that property having a value of that string.  E.g this
-
-# Shorthand
-```json
-{
-  "size": {
-    "font": {
-      "small" : "10"
-    }
-  }
-}
-```
-
-is equivalent to this:
-
-# Extended
-```json
-{
-  "size": {
-    "font": {
-      "small" : { "value": "10" },
     }
   }
 }
@@ -78,7 +52,7 @@ You can reference (alias) Attributes by wrapping the reference chain in brackets
 }
 ```
 
-You can reference (alias) Properties the same way
+You can reference (alias) any part of a style dictionary using the same syntax
 
 # Property reference / alias
 ```json
@@ -87,9 +61,9 @@ You can reference (alias) Properties the same way
     "font": {
       "small" : { "value": "10" },
       "medium": { "value": "16" },
-      "large" : { "value": "24" },
-      "base"  : "{size.font.medium}"
-    }
+      "large" : { "value": "24" }
+    },
+    "text": "{size.font}"
   }
 }
 ```

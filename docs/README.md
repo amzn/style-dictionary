@@ -17,9 +17,9 @@ When you are managing user experiences, it can be quite challenging to keep styl
 
 ## The basics
 __A style dictionary consists of:__
-1. [Style properties](#style-properties) organized in JSON files
-1. Static assets that can be used across platforms
-1. A configuration that defines how to modify and manipulate those properties and assets into deliverables
+1. [Style properties](#style-properties), which are organized in JSON files
+1. Static assets, which are delivered across platforms
+1. Configuration, which defines the transformation of the properties and assets into deliverables
 
 __What a style dictionary does:__
 1. Allows style properties and assets to be consumed in any platform or language for rendering styles
