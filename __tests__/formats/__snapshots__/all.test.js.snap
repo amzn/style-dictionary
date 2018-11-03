@@ -511,7 +511,6 @@ exports[`formats all should return sass/map-deep as a string 1`] = `
   Generated on Sat, 01 Jan 2000 00:00:00 GMT
 */
 
-
 $color_red: #FF0000 !default;
 
 $tokens: (
@@ -528,6 +527,7 @@ exports[`formats all should return sass/map-flat as a string 1`] = `
   Do not edit directly
   Generated on Sat, 01 Jan 2000 00:00:00 GMT
 */
+
 $tokens: (
   'color_red': #FF0000
 );

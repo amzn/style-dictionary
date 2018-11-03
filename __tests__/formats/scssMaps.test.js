@@ -169,8 +169,7 @@ describe('formats', () => {
 
       var file = {
         "destination": "__output/",
-        "format": key,
-        "showFileHeader": false
+        "format": key
       };
 
       // mock the Date.now() call to a fixed value

@@ -24,8 +24,7 @@
         header += "\n*/\n";
         print(header);
     }
-%>
-<%
+
     print("\n");
 
     // output the list of tokens as Sass variables
