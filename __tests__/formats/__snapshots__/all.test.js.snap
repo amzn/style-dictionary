@@ -478,6 +478,12 @@ exports[`formats all should return json as a string 1`] = `
 
 exports[`formats all should return json/asset as a string 1`] = `"{}"`;
 
+exports[`formats all should return json/flat as a string 1`] = `
+"{
+  \\"color_red\\": \\"#FF0000\\"
+}"
+`;
+
 exports[`formats all should return json/nested as a string 1`] = `
 "{
   \\"color\\": {
