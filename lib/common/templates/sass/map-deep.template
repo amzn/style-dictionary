@@ -44,25 +44,24 @@
     // output the list of tokens as a Sass nested map
     // (the values are pointing to the variables)
     //
-    print(processJsonNode(properties, 'tokens', 0));
+    print(`$tokens: ${processJsonNode(properties, 0)};\n`);
 
     // recursive function to process a properties JSON node
     //
-    function processJsonNode(prop, key, depth) {
+    function processJsonNode(obj, depth) {
         var output = '';
-        var indent = ' '.repeat(depth * 2);
-        if (prop.hasOwnProperty('value')) {
-            output += indent + getKeyString(key, depth) + ': $' + prop.name;
+        if (obj.hasOwnProperty('value')) {
+            // if we have found a leaf (a property with a value) append the value
+            output += `$${obj.name}`;
         } else {
-            output += indent + getKeyString(key, depth) + ': (\n';
-            output += Object.keys(prop).map(function(newKey){
-                var newProp = prop[newKey];
-                return processJsonNode(newProp, newKey, depth + 1);
+            // if we have found a group of properties, use the Sass group "(...)" syntax and loop -recursively- on the children
+            output += '(\n'
+            output += Object.keys(obj).map(function(newKey) {
+            var newProp = obj[newKey];
+            var indent = '  '.repeat(depth+1);
+            return `${indent}'${newKey}': ${processJsonNode(newProp, depth + 1)}`;
             }).join(',\n');
-            output += '\n' + indent + ')';
-        }
-        if (depth === 0) {
-            output += ';\n';
+            output += '\n' + '  '.repeat(depth) + ')';
         }
         return output;
     }
