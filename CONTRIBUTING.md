@@ -21,7 +21,12 @@ We are always happy to receive code and documentation contributions to the frame
 
 1. This framework is released under the [Apache license][license]. Any code you submit will be released under that license. For substantial contributions, we may ask you to sign a [Contributor License Agreement (CLA)][cla].
 2. For any significant features or API changes please reach out to us to avoid any duplicate effort.
-3. Adding to the included transforms, transformGroups, formats, and templates, please read [this section](#what-should-be-included).
+3. Adding to the included transforms, transformGroups, and formats, please read [this section](#what-should-be-included).
+
+
+## Package Manager and dependencies
+
+We use npm as our package manager. After downloading the repo, please use the command "npm ci" to ensure you use the package-lock dependency tree. Note that you need NPM 5.7.0 or higher to use this command.
 
 
 ## Code Style
@@ -29,8 +34,8 @@ We are always happy to receive code and documentation contributions to the frame
 We use ESLint on the code to ensure a consistent style. Any new code committed must pass our ESLint tests. Take a look at our [ESLint file][eslint].
 
 ### Code Rules
-1. **Do not mutate property names or values in a format or template.** Mutations like this should happen in a transformer.
-1. **Be as generic as possible.** Do not hard-code any values or configuration in formats or templates.
+1. **Do not mutate property names or values in a format.** Mutations like this should happen in a transformer.
+1. **Be as generic as possible.** Do not hard-code any values or configuration in formats.
 1. **Fail loudly.** Users should be aware if something is missing or configurations aren't correct. This will help debug any issues instead of failing silently.
 1. **Rely on few dependencies.** This framework is meant to be extended and allows for customization. We don't want to bring a slew of dependencies that most people don't need.
 
@@ -38,9 +43,9 @@ We use ESLint on the code to ensure a consistent style. Any new code committed m
 
 Anything that contributes to the idea of creating cross-platform styles.
 
-### What transforms/transform groups/formats/templates should be included?
+### What transforms/transform groups/formats should be included?
 
-If it has a generic and flexible enough use-case, it can be included. We would like to keep this type of code to a minimum because we don't want to be a swiss army knife that does everything out of the box. Instead, we want to focus on core tasks that are useful to the largest number of projects. The spirit of this framework is to allow flexibility and modularity so that anyone can fit it to their needs. This is why you can write your own transforms, formats, and templates with the register methods.
+If it has a generic and flexible enough use-case, it can be included. We would like to keep this type of code to a minimum because we don't want to be a swiss army knife that does everything out of the box. Instead, we want to focus on core tasks that are useful to the largest number of projects. The spirit of this framework is to allow flexibility and modularity so that anyone can fit it to their needs. This is why you can write your own transforms, and formats with the register methods.
 
 ### Where do things go?
 
@@ -49,9 +54,9 @@ We separate each function/method into its own file and group them into directori
 
 ## Testing
 
-Any new features should implement the proper unit tests. We use mocha and chai to test our framework.
+Any new features should implement the proper unit tests. We use Jest to test our framework.
 
-If you are adding a new transform, action, format, or template, please add new unit tests. You can see examples in test/formats.
+If you are adding a new transform, action, or format: please add new unit tests. You can see examples in test/formats.
 
 
 [issues]: https://github.com/amzn/style-dictionary/issues

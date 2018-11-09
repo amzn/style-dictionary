@@ -72,17 +72,3 @@ fs.ensureFileSync( FORMATS_PATH );
 fs.writeFileSync( FORMATS_PATH, formats );
 execSync(`git add ${FORMATS_PATH}`);
 console.log(FORMATS_PATH + ' generated.');
-
-const TEMPLATES_PATH = './docs/templates.md'
-const templates = jsdoc2md.renderSync({
-  files: ['lib/common/templates.js'],
-  template: fs.readFileSync('scripts/handlebars/templates/templates.hbs').toString(),
-  'no-gfm': true,
-  separators: true,
-  partial: ['scripts/handlebars/header.hbs','scripts/handlebars/body.hbs']
-});
-
-fs.ensureFileSync( TEMPLATES_PATH );
-fs.writeFileSync( TEMPLATES_PATH, templates );
-execSync(`git add ${TEMPLATES_PATH}`);
-console.log(TEMPLATES_PATH + ' generated.');

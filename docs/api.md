@@ -203,10 +203,12 @@ StyleDictionary.registerFormat({
 * * *
 
 ### registerTemplate 
-> StyleDictionary.registerTemplate(template) ⇒ [<code>style-dictionary</code>](#module_style-dictionary)
+> ~~StyleDictionary.registerTemplate(template) ⇒ [<code>style-dictionary</code>](#module_style-dictionary)~~
 
 
 
+
+***Deprecated***
 
 Add a custom template to the Style Dictionary
 

@@ -14,10 +14,10 @@
       "buildPath": "build/android/",
       "files": [{
         "destination": "font_dimens.xml",
-        "template": "android/fontDimens"
+        "format": "android/fontDimens"
       },{
         "destination": "colors.xml",
-        "template": "android/colors"
+        "format": "android/colors"
       }]
     },
     "ios": {
@@ -25,7 +25,7 @@
       "buildPath": "build/ios/",
       "files": [{
         "destination": "StyleDictionaryColor.h",
-        "template": "ios/colors.h",
+        "format": "ios/colors.h",
         "className": "StyleDictionaryColor",
         "type": "StyleDictionaryColorName",
         "filter": {
@@ -35,7 +35,7 @@
         }
       },{
         "destination": "StyleDictionaryColor.m",
-        "template": "ios/colors.m",
+        "format": "ios/colors.m",
         "className": "StyleDictionaryColor",
         "type": "StyleDictionaryColorName",
         "filter": {
@@ -45,7 +45,7 @@
         }
       },{
         "destination": "StyleDictionarySize.h",
-        "template": "ios/static.h",
+        "format": "ios/static.h",
         "className": "StyleDictionarySize",
         "type": "float",
         "filter": {
@@ -55,7 +55,7 @@
         }
       },{
         "destination": "StyleDictionarySize.m",
-        "template": "ios/static.m",
+        "format": "ios/static.m",
         "className": "StyleDictionarySize",
         "type": "float",
         "filter": {

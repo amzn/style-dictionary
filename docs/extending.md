@@ -1,6 +1,6 @@
 # Extending
 
-The style dictionary build system is made to be extended. We don't know exactly how everyone will want to use style dictionaries in their project, which is why it is easy to create custom transforms, templates, and formats.
+The style dictionary build system is made to be extended. We don't know exactly how everyone will want to use style dictionaries in their project, which is why it is easy to create custom transforms and formats.
 
 * [registerTransform](api.md#registertransform)
 * [registerTransformGroup](api.md#registertransformgroup)
