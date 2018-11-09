@@ -29,6 +29,7 @@ var dictionary = {
       value: '#FF0000',
       original: { value: '#FF0000' },
       name: 'color_red',
+      comment: 'comment',
       attributes: {
          category: 'color',
          type: 'red',
@@ -44,6 +45,7 @@ var dictionary = {
         value: '#FF0000',
         original: { value: '#FF0000' },
         name: 'color_red',
+        comment: 'comment',
         attributes: {
            category: 'color',
            type: 'red',

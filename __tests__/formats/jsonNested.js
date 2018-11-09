@@ -11,10 +11,9 @@
  * and limitations under the License.
  */
 
-var assert = require('chai').assert,
-  fs = require('fs-extra'),
-  helpers = require('../helpers'),
-  formats = require('../../lib/common/formats');
+var formats = require('../../lib/common/formats');
+var fs = require('fs-extra');
+var helpers = require('../__helpers');
 
 var file = {
   destination: 'output/',
@@ -45,16 +44,12 @@ describe('formats', function() {
     });
 
     it('should be a valid JSON file', function() {
-      fs.writeFileSync('./test/output/json-nested.json', formatter(dictionary));
-      var test = require('../output/json-nested.json');
-      assert.equal(
-        test.color.base.red.primary,
-        dictionary.properties.color.base.red.primary.value
-      );
-      assert.equal(
-        test.color.base.red.secondary.inverse,
-        dictionary.properties.color.base.red.secondary.inverse.value
-      );
+      fs.writeFileSync('./__tests__/__output/json-nested.json', formatter(dictionary));
+      var test = require('../__output/json-nested.json');
+      expect(test.color.base.red.primary)
+        .toEqual(dictionary.properties.color.base.red.primary.value);
+      expect(test.color.base.red.secondary.inverse)
+        .toEqual(dictionary.properties.color.base.red.secondary.inverse.value);
     });
   });
 });

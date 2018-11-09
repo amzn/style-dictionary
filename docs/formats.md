@@ -61,7 +61,7 @@ And another example for Handlebars.
 const styleDictionary = require('style-dictionary').extend('config.json');
 const Handlebars = require('handlebars');
 
-const template = Handlebars.compile( fs.readFileSync('templates/MyTemplate.hbs') );
+const template = Handlebars.compile( fs.readFileSync('templates/MyTemplate.hbs').toString() );
 
 styleDictionary.registerFormat({
   name: 'my/format',
@@ -483,18 +483,6 @@ Creates CSS file with @font-face declarations
 
 * * *
 
-### static-style-guide/index.html
-
-
-Creates a generic static html page
-
-**Todo**
-
-- Add example and usage
-
-
-* * *
-
 ### json
 
 
@@ -538,7 +526,7 @@ Creates a JSON file of just the assets defined in the style dictionary.
 ### json/nested
 
 
-Creates a JSON that contains the original structure of the object without the value property.
+Creates a JSON nested file of the style dictionary.
 
 **Example**
 ```json
@@ -572,3 +560,5 @@ Creates a sketchpalette file of all the base colors
 ```
 
 * * *
+
+
