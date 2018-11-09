@@ -59,8 +59,10 @@ var dictionary = {
       "base": {
         "red": {
           "value": "#ff0000",
+          "comment": "comment",
           "original": {
-            "value": "#FF0000"
+            "value": "#FF0000",
+            "comment": "comment"
           },
           "name": "color-base-red",
           "attributes": {
@@ -129,8 +131,10 @@ var dictionary = {
     },
     {
       "value": "#ff0000",
+      "comment": "comment",
       "original": {
-        "value": "#FF0000"
+        "value": "#FF0000",
+        "comment": "comment"
       },
       "name": "color-base-red",
       "attributes": {

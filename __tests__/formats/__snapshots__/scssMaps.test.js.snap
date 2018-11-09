@@ -9,7 +9,7 @@ exports[`formats sass/map-deep sass/map-deep snapshot 1`] = `
 
 $size-font-small: 12rem !default;
 $size-font-large: 18rem !default;
-$color-base-red: #ff0000 !default;
+$color-base-red: #ff0000 !default; // comment
 $color-white: #ffffff !default;
 
 $tokens: (
@@ -39,6 +39,7 @@ exports[`formats sass/map-flat sass/map-flat snapshot 1`] = `
 $tokens: (
   'size-font-small': 12rem,
   'size-font-large': 18rem,
+  // comment
   'color-base-red': #ff0000,
   'color-white': #ffffff
 );
