@@ -65,15 +65,4 @@
         }
         return output;
     }
-
-    // function to get the correct key format for the Sass map
-    // http://sass-lang.com/documentation/file.SASS_REFERENCE.html#maps
-    //
-    function getKeyString(key, depth) {
-        if (depth === 0) {
-            return '$' + key;
-        } else {
-            return '\'' + key + '\'';
-        }
-    }
 %>
