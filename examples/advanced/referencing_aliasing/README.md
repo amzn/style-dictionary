@@ -57,6 +57,23 @@ It is also possible to create **chains of references**, where a value references
         ...
 ```
 
+The value associated to a property can be an **object** (eg. an RGB color). In that case, the reference still works. If you open `color/font.json` you will see that the "faded" color of text is a reference to `color.base.gray.medium.value`, but if you look in `color/base.json` you will see that the value of the "medium gray" color is not a string, but an RGB oject:
+
+```
+{
+  "color": {
+    "base": {
+      ...
+      "gray": {
+        "medium": { "value": { "r": 146, "g": 153, "b": 162 } }
+
+```
+In that case Style Dictionary still resolves correctly the alias to the  corresponding value:
+
+```
+"color-base-gray-medium": "#9299a2"
+```
+
 You can also reference **other attributes of a property**, not only its value. For example in `button/button.json` the value of text size is composed as concatenation (remember, it's a string, think of it as template literals) of two properties of the "global" object, declared in the `globals.json` file: 
 
 ```

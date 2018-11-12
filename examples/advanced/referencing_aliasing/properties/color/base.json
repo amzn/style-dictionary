@@ -4,7 +4,7 @@
       "white": { "value": "#FFFFFF" },
       "gray": {
         "light" : { "value": "#CCCCCC" },
-        "medium": { "value": "#999999" },
+        "medium": { "value": { "r": 146, "g": 153, "b": 162 } },
         "dark"  : { "value": "#111111" }
       },
       "red": { "value": "#FF0000" },
