@@ -71,11 +71,26 @@
       "actions": ["copy_assets"]
     },
     "assets/embed": {
-      "transforms": ["attribute/cti", "asset/base64"],
+      "transforms": ["attribute/cti", "name/cti/kebab", "asset/base64"],
       "buildPath": "build/assets/",
       "files": [{
-        "destination": "assets.scss",
-        "format": "scss/variables"
+        "destination": "assets_icons.scss",
+        "format": "scss/variables",
+        "filter": {
+          "attributes": {
+            "category": "asset",
+            "type": "icon"
+          }
+        }
+      },{
+        "destination": "assets_fonts.scss",
+        "format": "scss/variables",
+        "filter": {
+          "attributes": {
+            "category": "asset",
+            "type": "font"
+          }
+        }
       }]
     }
   }
