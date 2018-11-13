@@ -1,0 +1,67 @@
+{
+  "source": ["properties/**/*.json"],
+  "platforms": {
+    "scss": {
+      "transformGroup": "scss",
+      "buildPath": "build/scss/",
+      "files": [{
+        "destination": "variables.scss",
+        "format": "scss/variables"
+      }]
+    },
+    "json/asset": {
+      "transformGroup": "web",
+      "buildPath": "build/json/",
+      "files": [{
+        "destination": "variables.json",
+        "format": "json/asset"
+      }]
+    },
+    "assets/embed/scss": {
+      "transforms": ["attribute/cti", "name/cti/kebab", "asset/base64"],
+      "buildPath": "build/scss/",
+      "files": [{
+        "destination": "assets_icons.scss",
+        "format": "scss/variables",
+        "filter": {
+          "attributes": {
+            "category": "asset",
+            "type": "icon"
+          }
+        }
+      },{
+        "destination": "assets_fonts.scss",
+        "format": "scss/variables",
+        "filter": {
+          "attributes": {
+            "category": "asset",
+            "type": "font"
+          }
+        }
+      }]
+    },
+    "assets/embed/json": {
+      "transforms": ["attribute/cti", "name/cti/kebab", "asset/base64"],
+      "buildPath": "build/json/",
+      "files": [{
+        "destination": "assets_icons.json",
+        "format": "json/flat",
+        "filter": {
+          "attributes": {
+            "category": "asset",
+            "type": "icon"
+          }
+        }
+      },{
+        "destination": "assets_fonts.json",
+        "format": "json/flat",
+        "filter": {
+          "attributes": {
+            "category": "asset",
+            "type": "font"
+          }
+        }
+      }]
+    }
+  }
+}

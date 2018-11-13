@@ -1,0 +1,34 @@
+{
+  "asset": {
+    "icon": {
+      "alert-circle": { "value": "assets/icons/alert-circle.svg" },
+      "alert-octagon": { "value": "assets/icons/alert-octagon.svg" },
+      "alert-triangle": { "value": "assets/icons/alert-triangle.svg" },
+      "archive": { "value": "assets/icons/archive.svg" },
+      "book-open": { "value": "assets/icons/book-open.svg" },
+      "book": { "value": "assets/icons/book.svg" },
+      "bookmark": { "value": "assets/icons/bookmark.svg" },
+      "briefcase": { "value": "assets/icons/briefcase.svg" },
+      "calendar": { "value": "assets/icons/calendar.svg" },
+      "camera": { "value": "assets/icons/camera.svg" },
+      "check-circle": { "value": "assets/icons/check-circle.svg" },
+      "check-square": { "value": "assets/icons/check-square.svg" },
+      "database": { "value": "assets/icons/database.svg" },
+      "delete": { "value": "assets/icons/delete.svg" },
+      "dollar-sign": { "value": "assets/icons/dollar-sign.svg" },
+      "download-cloud": { "value": "assets/icons/download-cloud.svg" },
+      "edit-1": { "value": "assets/icons/edit-1.svg" },
+      "edit-2": { "value": "assets/icons/edit-2.svg" },
+      "edit-3": { "value": "assets/icons/edit-3.svg" },
+      "external-link": { "value": "assets/icons/external-link.svg" },
+      "file-text": { "value": "assets/icons/file-text.svg" },
+      "file": { "value": "assets/icons/file.svg" },
+      "film": { "value": "assets/icons/film.svg" },
+      "folder": { "value": "assets/icons/folder.svg" },
+      "gift": { "value": "assets/icons/gift.svg" },
+      "github": { "value": "assets/icons/github.svg" },
+      "globe": { "value": "assets/icons/globe.svg" },
+      "grid": { "value": "assets/icons/grid.svg" }
+    }
+  }
+}
