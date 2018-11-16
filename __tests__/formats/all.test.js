@@ -12,7 +12,6 @@
  */
 
 var formats = require('../../lib/common/formats');
-var helpers = require('../__helpers');
 var _ = require('lodash');
 
 var file = {
