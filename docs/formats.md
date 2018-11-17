@@ -6,7 +6,7 @@ your style dictionary.
 
 ### Using formats
 
-You use formats in your config file under platforms > [platform] > files > [file]
+You use formats in your config file under platforms > [platform] > files > [file] > format
 
 ```json
 {
@@ -560,5 +560,3 @@ Creates a sketchpalette file of all the base colors
 ```
 
 * * *
-
-

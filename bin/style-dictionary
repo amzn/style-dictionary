@@ -29,7 +29,7 @@ program
 
 program
   .command('clean')
-  .description('Removes files specificed in the config of the style dictionary package of the current directory.')
+  .description('Removes files specified in the config of the style dictionary package of the current directory.')
   .option('-c, --config <path>', 'set config path. defaults to ./config.json')
   .option('-p, --platform [platform]', 'only clean specific platform(s). Must be defined in the config', collect, [])
   .action(styleDictionaryClean);

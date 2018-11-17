@@ -1,7 +1,7 @@
 # Quick Start
 
 ## Installation
-*Note that you must have node (and npm) installed.*
+*Note that you must have [node (and npm) installed](https://www.npmjs.com/get-npm) before you can follow this guide.*
 
 If you want to use the CLI, you can install it globally via npm:
 ```bash
@@ -13,10 +13,6 @@ Or you can install it like a normal npm dependency. This is a build tool so you 
 $ npm install -D style-dictionary
 ```
 
-If you want to install it with yarn:
-```bash
-$ yarn add style-dictionary --dev
-```
 
 ## Creating a New Project
 The CLI comes with some starter code to get a new project started easily.
@@ -174,18 +170,13 @@ That's it! There is a lot more you can do with your style dictionary than just g
 at some [examples](examples.md) or take a deeper dive into [package structure](package_structure.md), [extending](extending.md), or how the [build process](build_process.md) works.
 
 ## Basic Usage
-### CLI
+### Command Line Interface (CLI)
 ```bash
 $ style-dictionary build
 ```
-Call this in the root directory of your project. The only thing needed is a `config.json` file. There are also arguments:
+Call this in the root directory of your project, which must include a [configuration](config.md) file.
 
-| Flag | Short Flag | Description |
-| --- | --- | --- |
-| --config \[path\] | -h | Set the config file to use. Must be a .json file |
-| --platform \[platform\] | -p | Only build a specific platform defined in the config file. |
-| --help | -h | Display help content |
-| --version | -v | Display the version |
+More detailed information about using the CLI is available [here](using_the_cli.md).
 
 ### Node
 You can also use the style dictionary build system in node if you want to [extend](extending.md) the functionality or use it in another build system like Grunt or Gulp.
@@ -195,7 +186,7 @@ const StyleDictionary = require('style-dictionary').extend('config.json');
 StyleDictionary.buildAllPlatforms();
 ```
 
-The `.extend()` method is an overloaded method that can also take an object with the configuration in the same format as a config.json file.
+The `.extend()` method is an overloaded method that can also take a [configuration](config) object.
 ```javascript
 const StyleDictionary = require('style-dictionary').extend({
   source: ['properties/**/*.json'],
