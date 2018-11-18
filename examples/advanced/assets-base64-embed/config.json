@@ -5,16 +5,29 @@
       "transformGroup": "scss",
       "buildPath": "build/scss/",
       "files": [{
-        "destination": "variables.scss",
-        "format": "scss/variables"
+        "destination": "colors.scss",
+        "format": "scss/variables",
+        "filter": {
+          "attributes": {
+            "category": "color"
+          }
+        }
+      },{
+        "destination": "sizes.scss",
+        "format": "scss/variables",
+        "filter": {
+          "attributes": {
+            "category": "size"
+          }
+        }
       }]
     },
-    "json/asset": {
+    "json": {
       "transformGroup": "web",
       "buildPath": "build/json/",
       "files": [{
         "destination": "variables.json",
-        "format": "json/asset"
+        "format": "json/flat"
       }]
     },
     "assets/embed/scss": {
@@ -27,6 +40,15 @@
           "attributes": {
             "category": "asset",
             "type": "icon"
+          }
+        }
+      },{
+        "destination": "assets_images.scss",
+        "format": "scss/variables",
+        "filter": {
+          "attributes": {
+            "category": "asset",
+            "type": "image"
           }
         }
       },{
@@ -50,6 +72,15 @@
           "attributes": {
             "category": "asset",
             "type": "icon"
+          }
+        }
+      },{
+        "destination": "assets_images.json",
+        "format": "json/flat",
+        "filter": {
+          "attributes": {
+            "category": "asset",
+            "type": "image"
           }
         }
       },{
