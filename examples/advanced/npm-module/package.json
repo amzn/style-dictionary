@@ -10,7 +10,7 @@
   "scripts": {
     "build": "node_modules/.bin/style-dictionary build",
     "clean": "rm -rf build",
-    "prepublish": "npm run build",
+    "prepublishOnly": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
