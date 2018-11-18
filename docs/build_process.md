@@ -11,3 +11,6 @@ Here is what the build system is doing under the hood.
   1. Performs all transforms, in order, defined in the transforms attribute or transformGroup
   1. Builds all files defined in the files array
   1. Performs any actions defined in the actions attribute
+
+# How to Build
+You can build a style dictionary [using the cli](using_the_cli.md) or [using the npm module](using_the_npm_module.md).

@@ -1,18 +1,16 @@
 # Properties
 
-> Synonyms: design token, design variable, design constant, atom
+> Synonyms: design tokens, design variables, design constants, atoms
 
-Style properties are stored a collection of JSON or JS module files. We usually keep them in a `properties` directory, but you can put them wherever you like,
-they just need to be referenced in the `source` attribute on your `config.json` file.
+Style properties are stored in a collection of JSON or JS module files. We usually keep them in a `properties` directory, but you can put them wherever you like, they just need to be referenced in the `source` attribute on your `config.json` file.
 
 A property is a collection of attributes that describe any fundamental/atomic visual style. Each attribute is a `key:value` pair. A property name and its value are considered a design token (or design variable/constant/atom).
 
-![](assets/property-definitions.png)
+![Terminology for different parts of a JSON property](assets/property-definitions.png)
 
 A property is transformed for use in different platforms, languages, and contexts. A simple example is a color. A color can be represented in many ways, all of these are the same color: `#ffffff`, `rgb(255,255,255)`, `hsl(0,0,1)`.
 
-A property file organizes properties in a structured way for easy access. Property files are organized as a deep object
-with the leaf nodes being the style key:value pairs.
+A property file organizes properties in a structured way for easy access. Property files are organized as a deep object with the leaf nodes being the style key:value pairs.
 
 ## Examples
 
