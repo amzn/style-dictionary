@@ -5,7 +5,7 @@
 Style properties are stored a collection of JSON or JS module files. We usually keep them in a `properties` directory, but you can put them wherever you like,
 they just need to be referenced in the `source` attribute on your `config.json` file.
 
-A property is collection of attributes that describe any fundamental/atomic visual style. Each attribute is a key:value pair. A property name and its value are considered a design token (or design variable, design variable, design constant, design atom).
+A property is a collection of attributes that describe any fundamental/atomic visual style. Each attribute is a `key:value` pair. A property name and its value are considered a design token (or design variable/constant/atom).
 
 ![](assets/property-definitions.png)
 

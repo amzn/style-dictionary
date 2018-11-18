@@ -22,7 +22,7 @@ Here is a basic example of what a style dictionary package looks like.
 | :--- | :--- |
 | config.json | This is where the [configuration](config.md) for the style dictionary lives, where you define what happens when Style Dictionary runs |
 | properties | [Properties](properties.md) are saved as a collection of JSON or JS module files. We usually keep them in a `properties` directory, but you can put them wherever you like - the path to them should be in the `source` attribute on your `config.json` file. |
-| assets (optional) | Assets can be included in your style dictionary package, allowing you can keep them in your style dictionary as a single source of truth. |
+| assets (optional) | Assets can be included in your style dictionary package, allowing you to keep them in your style dictionary as a single source of truth. |
 
 
 ## Assets

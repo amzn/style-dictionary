@@ -1,6 +1,6 @@
 # Transform Groups
 
-Transform Groups are a way to easily use multiple transforms at once. They are an array of transforms. You can define a custom transform group with the [`registerTransformGroup`](api.md#registertransformgroup).
+Transform Groups are a way to easily use multiple transforms at once. They are an array of transforms. You can define a custom transform group with the [`registerTransformGroup`](api.md#registertransformgroup) method.
 
 You use transformGroups in your config file under platforms > [platform] > transformGroup
 
