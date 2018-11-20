@@ -186,7 +186,7 @@ const StyleDictionary = require('style-dictionary').extend('config.json');
 StyleDictionary.buildAllPlatforms();
 ```
 
-The `.extend()` method is an overloaded method that can also take a [configuration](config) object.
+The `.extend()` method is an overloaded method that can also take a [configuration](config.md) object.
 ```javascript
 const StyleDictionary = require('style-dictionary').extend({
   source: ['properties/**/*.json'],

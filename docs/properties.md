@@ -65,7 +65,7 @@ Multiple properties in a single file are simple to read and understand using the
 ```
 
 # Attribute reference / alias
-You can reference (alias) existing attributes by using the property name in brackets
+You can reference (alias) existing attributes by using the dot-notation object path (the fully articulated property name) in brackets
 ```json
 {
   "size": {
