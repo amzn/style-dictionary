@@ -87,12 +87,12 @@ Want a format? [You can request it here](https://github.com/amzn/style-dictionar
 You created a format and think it should be included? [Send us a PR](https://github.com/amzn/style-dictionary/pulls).
 
 
-### css/variables
+### css/variables 
 
 
 Creates a CSS file with variable definitions based on the style dictionary
 
-**Example**
+**Example**  
 ```css
 :root {
   --color-background-base: #f0f0f0;
@@ -102,12 +102,49 @@ Creates a CSS file with variable definitions based on the style dictionary
 
 * * *
 
-### scss/variables
+### sass/map-flat 
+
+
+Creates a Sass file with a flat map based on the style dictionary
+
+**Example**  
+```scss
+$tokens: (
+  $color-background-base: #f0f0f0;
+  $color-background-alt: #eeeeee;
+)
+```
+
+* * *
+
+### sass/map-deep 
+
+
+Creates a Sass file with a deep map based on the style dictionary
+
+**Example**  
+```scss
+$color-background-base: #f0f0f0 !default;
+$color-background-alt: #eeeeee !default;
+
+$tokens: {
+  'color': (
+    'background': (
+      'base': $color-background-base,
+      'alt': $color-background-alt
+    )
+  )
+)
+```
+
+* * *
+
+### scss/variables 
 
 
 Creates a SCSS file with variable definitions based on the style dictionary
 
-**Example**
+**Example**  
 ```scss
 $color-background-base: #f0f0f0;
 $color-background-alt: #eeeeee;
@@ -115,12 +152,12 @@ $color-background-alt: #eeeeee;
 
 * * *
 
-### scss/icons
+### scss/icons 
 
 
 Creates a SCSS file with variable definitions and helper classes for icons
 
-**Example**
+**Example**  
 ```scss
 $content-icon-email: '\E001';
 .icon.email:before { content:$content-icon-email; }
@@ -128,38 +165,38 @@ $content-icon-email: '\E001';
 
 * * *
 
-### less/variables
+### less/variables 
 
 
 Creates a LESS file with variable definitions based on the style dictionary
 
-**Example**
+**Color-background-base:**: #f0f0f0;  
+**Color-background-alt:**: #eeeeee;
+```  
+**Example**  
 ```less
-@color-background-base: #f0f0f0;
-@color-background-alt: #eeeeee;
-```
 
 * * *
 
-### less/icons
+### less/icons 
 
 
 Creates a LESS file with variable definitions and helper classes for icons
 
-**Example**
-```less
-@content-icon-email: '\E001';
+**Content-icon-email:**: '\E001';
 .icon.email:before { content:@content-icon-email; }
-```
+```  
+**Example**  
+```less
 
 * * *
 
-### javascript/module
+### javascript/module 
 
 
 Creates a CommonJS module with the whole style dictionary
 
-**Example**
+**Example**  
 ```js
 module.exports = {
   color: {
@@ -174,13 +211,13 @@ module.exports = {
 
 * * *
 
-### javascript/object
+### javascript/object 
 
 
 Creates a JS file a global var that is a plain javascript object of the style dictionary.
 Name the variable by adding a 'name' attribute on the file object in your config.
 
-**Example**
+**Example**  
 ```js
 var StyleDictionary = {
   color: {
@@ -195,14 +232,14 @@ var StyleDictionary = {
 
 * * *
 
-### javascript/umd
+### javascript/umd 
 
 
 Creates a [UMD](https://github.com/umdjs/umd) module of the style
 dictionary. Name the module by adding a 'name' attribute on the file object
 in your config.
 
-**Example**
+**Example**  
 ```js
 (function(root, factory) {
   if (typeof module === "object" && module.exports) {
@@ -227,7 +264,7 @@ in your config.
 
 * * *
 
-### javascript/es6
+### javascript/es6 
 
 
 Creates a ES6 module of the style dictionary.
@@ -253,7 +290,7 @@ Creates a ES6 module of the style dictionary.
 }
 ```
 
-**Example**
+**Example**  
 ```js
 export const ColorBackgroundBase = '#ffffff';
 export const ColorBackgroundAlt = '#fcfcfcfc';
@@ -261,12 +298,12 @@ export const ColorBackgroundAlt = '#fcfcfcfc';
 
 * * *
 
-### android/colors
+### android/colors 
 
 
 Creates a color resource xml file with all the colors in your style dictionary.
 
-**Example**
+**Example**  
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
@@ -277,12 +314,12 @@ Creates a color resource xml file with all the colors in your style dictionary.
 
 * * *
 
-### android/dimens
+### android/dimens 
 
 
 Creates a dimen resource xml file with all the sizes in your style dictionary.
 
-**Example**
+**Example**  
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
@@ -293,12 +330,12 @@ Creates a dimen resource xml file with all the sizes in your style dictionary.
 
 * * *
 
-### android/fontDimens
+### android/fontDimens 
 
 
 Creates a dimen resource xml file with all the font sizes in your style dictionary.
 
-**Example**
+**Example**  
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
@@ -309,7 +346,7 @@ Creates a dimen resource xml file with all the font sizes in your style dictiona
 
 * * *
 
-### android/integers
+### android/integers 
 
 
 Creates a resource xml file with all the integers in your style dictionary. It filters your
@@ -319,7 +356,7 @@ style properties by `prop.attributes.category === 'time'`
 
 - Update the filter on this.
 
-**Example**
+**Example**  
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
@@ -330,13 +367,13 @@ style properties by `prop.attributes.category === 'time'`
 
 * * *
 
-### android/strings
+### android/strings 
 
 
 Creates a resource xml file with all the strings in your style dictionary. Filters your
 style properties by `prop.attributes.category === 'content'`
 
-**Example**
+**Example**  
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
@@ -347,12 +384,12 @@ style properties by `prop.attributes.category === 'content'`
 
 * * *
 
-### ios/macros
+### ios/macros 
 
 
 Creates an Objective-C header file with macros for style properties
 
-**Example**
+**Example**  
 ```objectivec
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
@@ -363,7 +400,7 @@ Creates an Objective-C header file with macros for style properties
 
 * * *
 
-### ios/plist
+### ios/plist 
 
 
 Creates an Objective-C plist file
@@ -375,7 +412,7 @@ Creates an Objective-C plist file
 
 * * *
 
-### ios/singleton.m
+### ios/singleton.m 
 
 
 Creates an Objective-C implementation file of a style dictionary singleton class
@@ -387,7 +424,7 @@ Creates an Objective-C implementation file of a style dictionary singleton class
 
 * * *
 
-### ios/singleton.h
+### ios/singleton.h 
 
 
 Creates an Objective-C header file of a style dictionary singleton class
@@ -399,7 +436,7 @@ Creates an Objective-C header file of a style dictionary singleton class
 
 * * *
 
-### ios/static.h
+### ios/static.h 
 
 
 Creates an Objective-C header file of a static style dictionary class
@@ -411,7 +448,7 @@ Creates an Objective-C header file of a static style dictionary class
 
 * * *
 
-### ios/static.m
+### ios/static.m 
 
 
 Creates an Objective-C implementation file of a static style dictionary class
@@ -423,7 +460,7 @@ Creates an Objective-C implementation file of a static style dictionary class
 
 * * *
 
-### ios/colors.h
+### ios/colors.h 
 
 
 Creates an Objective-C header file of a color class
@@ -435,7 +472,7 @@ Creates an Objective-C header file of a color class
 
 * * *
 
-### ios/colors.m
+### ios/colors.m 
 
 
 Creates an Objective-C implementation file of a color class
@@ -447,7 +484,7 @@ Creates an Objective-C implementation file of a color class
 
 * * *
 
-### ios/strings.h
+### ios/strings.h 
 
 
 Creates an Objective-C header file of strings
@@ -459,7 +496,7 @@ Creates an Objective-C header file of strings
 
 * * *
 
-### ios/strings.m
+### ios/strings.m 
 
 
 Creates an Objective-C implementation file of strings
@@ -471,7 +508,7 @@ Creates an Objective-C implementation file of strings
 
 * * *
 
-### css/fonts.css
+### css/fonts.css 
 
 
 Creates CSS file with @font-face declarations
@@ -483,12 +520,12 @@ Creates CSS file with @font-face declarations
 
 * * *
 
-### json
+### json 
 
 
 Creates a JSON file of the style dictionary.
 
-**Example**
+**Example**  
 ```json
 {
   "color": {
@@ -503,12 +540,12 @@ Creates a JSON file of the style dictionary.
 
 * * *
 
-### json/asset
+### json/asset 
 
 
 Creates a JSON file of just the assets defined in the style dictionary.
 
-**Example**
+**Example**  
 ```js
 {
   "asset": {
@@ -523,12 +560,12 @@ Creates a JSON file of just the assets defined in the style dictionary.
 
 * * *
 
-### json/nested
+### json/nested 
 
 
 Creates a JSON nested file of the style dictionary.
 
-**Example**
+**Example**  
 ```json
 {
   "color": {
@@ -541,12 +578,26 @@ Creates a JSON nested file of the style dictionary.
 
 * * *
 
-### sketch/palette
+### json/flat 
+
+
+Creates a JSON flat file of the style dictionary.
+
+**Example**  
+```json
+{
+  "color-base-red": "#ff000"
+}
+```
+
+* * *
+
+### sketch/palette 
 
 
 Creates a sketchpalette file of all the base colors
 
-**Example**
+**Example**  
 ```json
 {
   "compatibleVersion": "1.0",
@@ -560,3 +611,5 @@ Creates a sketchpalette file of all the base colors
 ```
 
 * * *
+
+
