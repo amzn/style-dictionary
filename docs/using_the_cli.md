@@ -63,7 +63,11 @@ Generates a starter style dictionary, based on the supplied example type. Usage:
 ```bash
 $ style-dictionary init <example-type>
 ```
-Available examples can be found [here](https://github.com/amzn/style-dictionary/tree/master/examples/).
+Where example-type is one of:
+* `basic`
+* `complete`
+
+<!-- A full list of example-types can be found [here](https://github.com/amzn/style-dictionary/tree/master/examples/). -->
 
 
 # Version
