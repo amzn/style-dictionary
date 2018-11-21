@@ -24,9 +24,9 @@ $ style-dictionary build
 
 # Commands
 The CLI provides three basic commands:
-* (build [options])[#build]  Builds a style dictionary package from the current directory.
-* (clean [options])[#clean]  Removes files specified in the config of the style dictionary package of the current directory.
-* (init <type>)[#init]      Generates a starter style dictionary
+* [build](using_the_cli.md?id=build)  Builds a style dictionary package from the current directory.
+* [clean](using_the_cli.md?id=clean)  Removes files specified in the config of the style dictionary package of the current directory.
+* [init](using_the_cli.md?id=init)      Generates a starter style dictionary
 
 These commands can be run using:
 ```bash

@@ -16,14 +16,14 @@ To use the style dictionary build system in node, there are generally three step
 1. Extend the module with a configuration, creating the fully defined dictionary (importing all properties and intended outputs)
 1. Call one or more build calls for various platforms
 
-Using a JSON configuration file, that looks like this:
+Using a JSON [configuration](config.md) file, that looks like this:
 ```javascript
 const StyleDictionary = require('style-dictionary').extend('config.json');
 
 StyleDictionary.buildAllPlatforms();
 ```
 
-Alternatively, you can pass in a [configuration](config) object to the extend call. The BuildAllPlatforms call is the same.
+Alternatively, you can pass in a [configuration](config.md) object to the extend call. The buildAllPlatforms call is the same.
 ```javascript
 const StyleDictionary = require('style-dictionary').extend({
   source: ['properties/**/*.json'],

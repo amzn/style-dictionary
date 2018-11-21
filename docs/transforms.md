@@ -1,7 +1,8 @@
 # Transforms
 
-Transforms are functions that transform a property so that each platform can consume the property in different ways. A simple example is changing pixel values to point values for iOS and dp or sp for Android. Transforms are applied in a non-destructive way so each platform can transform the properties. Transforms are performed sequentially, so the order you use transforms matters. You can define custom transforms with the [`registerTransform`](api.md#registertransform).
+Transforms are functions that transform a property so that each platform can consume the property in different ways. A simple example is changing pixel values to point values for iOS and dp or sp for Android. Transforms are applied in a non-destructive way so each platform can transform the properties. Transforms are performed sequentially, so the order you use transforms matters. Transforms are used in your [configuration](config.md), and can be either [pre-defined transforms](transforms.md?id=defining-custom-transforms) supplied by Style Dictionary or [custom transforms](transforms.md?id=defining-custom-transforms).
 
+## Using Transforms
 You use transforms in your config file under platforms > [platform] > transforms
 
 ```json
@@ -17,7 +18,7 @@ You use transforms in your config file under platforms > [platform] > transforms
 
 A transform consists of 4 parts: type, name, matcher, and transformer. Transforms are run on all properties where the matcher returns true. *NOTE: if you don't provide a matcher function, it will match all properties.*
 
-### Transform Types
+## Transform Types
 There are 3 types of transforms: attribute, name, and value.
 
 **Attribute:** An attribute transform adds to the attributes object on a property. This is for including any meta-data about a property such as it's CTI or other information.
@@ -26,15 +27,18 @@ There are 3 types of transforms: attribute, name, and value.
 
 **Value:** The value transform is the most important as this is the one that changes the representation of the value. Colors can be turned into hex values, rgb, hsl, hsv, etc. Value transforms have a matcher function so that they only get run on certain properties. This allows us to only run a color transform on just the colors and not every property.
 
-----
+
+## Defining Custom Transforms
+You can define custom transforms with the [`registerTransform`](api.md#registertransform).
+
 
 ## Pre-defined Transforms
 
 [lib/common/transforms.js](https://github.com/amzn/style-dictionary/blob/master/lib/common/transforms.js)
 
-> All the pre-defined transforms included use the [CTI structure](package_structure.md#properties) for the match properties. If you structure your style properties differently you will need to write [custom transforms](#custom-transforms) or make sure the property CTIs are on the attributes of your properties.
+> All the pre-defined transforms included use the [CTI structure](properties.md?id=category-type-item) for the match properties. If you structure your style properties differently you will need to write [custom transforms](transforms.md?id=defining-custom-transforms) or make sure the property CTIs are on the attributes of your properties.
 
-### attribute/cti 
+### attribute/cti
 
 
 Adds: category, type, item, subitem, and state on the attributes object based on the location in the style dictionary.
@@ -54,7 +58,7 @@ Adds: category, type, item, subitem, and state on the attributes object based on
 
 * * *
 
-### attribute/color 
+### attribute/color
 
 
 Adds: hex, hsl, hsv, rgb, red, blue, green.
@@ -73,7 +77,7 @@ Adds: hex, hsl, hsv, rgb, red, blue, green.
 
 * * *
 
-### name/human 
+### name/human
 
 
 Creates a human-friendly name
@@ -87,7 +91,7 @@ Creates a human-friendly name
 
 * * *
 
-### name/cti/camel 
+### name/cti/camel
 
 
 Creates a camel case name. If you define a prefix on the platform in your config, it will prepend with your prefix
@@ -102,7 +106,7 @@ Creates a camel case name. If you define a prefix on the platform in your config
 
 * * *
 
-### name/cti/kebab 
+### name/cti/kebab
 
 
 Creates a kebab case name. If you define a prefix on the platform in your config, it will prepend with your prefix
@@ -117,7 +121,7 @@ Creates a kebab case name. If you define a prefix on the platform in your config
 
 * * *
 
-### name/cti/snake 
+### name/cti/snake
 
 
 Creates a snake case name. If you define a prefix on the platform in your config, it will prepend with your prefix
@@ -132,7 +136,7 @@ Creates a snake case name. If you define a prefix on the platform in your config
 
 * * *
 
-### name/cti/constant 
+### name/cti/constant
 
 
 Creates a constant-style name based on the full CTI of the property. If you define a prefix on the platform in your config, it will prepend with your prefix
@@ -147,7 +151,7 @@ Creates a constant-style name based on the full CTI of the property. If you defi
 
 * * *
 
-### name/ti/constant 
+### name/ti/constant
 
 
 Creates a constant-style name on just the type and item of the property. This is useful if you want to create different static classes/files for categories like `Color.BACKGROUND_BASE`. If you define a prefix on the platform in your config, it will prepend with your prefix.
@@ -162,7 +166,7 @@ Creates a constant-style name on just the type and item of the property. This is
 
 * * *
 
-### name/cti/pascal 
+### name/cti/pascal
 
 
 Creates a Pascal case name. If you define a prefix on the platform in your config, it will prepend with your prefix
@@ -177,7 +181,7 @@ Creates a Pascal case name. If you define a prefix on the platform in your confi
 
 * * *
 
-### color/rgb 
+### color/rgb
 
 
 Transforms the value into an RGB string
@@ -191,7 +195,7 @@ Transforms the value into an RGB string
 
 * * *
 
-### color/hex 
+### color/hex
 
 
 Transforms the value into an 6-digit hex string
@@ -205,7 +209,7 @@ Transforms the value into an 6-digit hex string
 
 * * *
 
-### color/hex8 
+### color/hex8
 
 
 Transforms the value into an 8-digit hex string
@@ -219,7 +223,7 @@ Transforms the value into an 8-digit hex string
 
 * * *
 
-### color/hex8android 
+### color/hex8android
 
 
 Transforms the value into an 8-digit hex string for Android because they put the alpha channel first
@@ -233,7 +237,7 @@ Transforms the value into an 8-digit hex string for Android because they put the
 
 * * *
 
-### color/UIColor 
+### color/UIColor
 
 
 Transforms the value into an UIColor class for iOS
@@ -247,7 +251,7 @@ Transforms the value into an UIColor class for iOS
 
 * * *
 
-### color/css 
+### color/css
 
 
 Transforms the value into a hex or rgb string depending on if it has transparency
@@ -262,7 +266,7 @@ rgba(0,0,0,0.5)
 
 * * *
 
-### size/sp 
+### size/sp
 
 
 Transforms the value into a scale-independent pixel (sp) value for font sizes on Android. It will not scale the number.
@@ -276,7 +280,7 @@ Transforms the value into a scale-independent pixel (sp) value for font sizes on
 
 * * *
 
-### size/dp 
+### size/dp
 
 
 Transforms the value into a density-independent pixel (dp) value for non-font sizes on Android. It will not scale the number.
@@ -290,7 +294,7 @@ Transforms the value into a density-independent pixel (dp) value for non-font si
 
 * * *
 
-### size/remToSp 
+### size/remToSp
 
 
 Transforms the value from a REM size on web into a scale-independent pixel (sp) value for font sizes on Android. It WILL scale the number by a factor of 16 (common base font size on web).
@@ -304,7 +308,7 @@ Transforms the value from a REM size on web into a scale-independent pixel (sp) 
 
 * * *
 
-### size/remToDp 
+### size/remToDp
 
 
 Transforms the value from a REM size on web into a density-independent pixel (dp) value for font sizes on Android. It WILL scale the number by a factor of 16 (common base font size on web).
@@ -318,7 +322,7 @@ Transforms the value from a REM size on web into a density-independent pixel (dp
 
 * * *
 
-### size/px 
+### size/px
 
 
 Adds 'px' to the end of the number. Does not scale the number
@@ -332,7 +336,7 @@ Adds 'px' to the end of the number. Does not scale the number
 
 * * *
 
-### size/rem 
+### size/rem
 
 
 Adds 'rem' to the end of the number. Does not scale the number
@@ -346,7 +350,7 @@ Adds 'rem' to the end of the number. Does not scale the number
 
 * * *
 
-### size/remToPt 
+### size/remToPt
 
 
 Scales the number by 16 (default web font size) and adds 'pt' to the end.
@@ -360,7 +364,7 @@ Scales the number by 16 (default web font size) and adds 'pt' to the end.
 
 * * *
 
-### size/remToPx 
+### size/remToPx
 
 
 Scales the number by 16 (default web font size) and adds 'px' to the end.
@@ -374,7 +378,7 @@ Scales the number by 16 (default web font size) and adds 'px' to the end.
 
 * * *
 
-### content/icon 
+### content/icon
 
 
 Takes a unicode point and transforms it into a form CSS can use.
@@ -388,7 +392,7 @@ Takes a unicode point and transforms it into a form CSS can use.
 
 * * *
 
-### content/quote 
+### content/quote
 
 
 Wraps the value in a single quoted string
@@ -402,7 +406,7 @@ Wraps the value in a single quoted string
 
 * * *
 
-### content/objC/literal 
+### content/objC/literal
 
 
 Wraps the value in a double-quoted string and prepends an '@' to make a string literal.
@@ -415,7 +419,7 @@ Wraps the value in a double-quoted string and prepends an '@' to make a string l
 
 * * *
 
-### font/objC/literal 
+### font/objC/literal
 
 
 Wraps the value in a double-quoted string and prepends an '@' to make a string literal.
@@ -428,7 +432,7 @@ Wraps the value in a double-quoted string and prepends an '@' to make a string l
 
 * * *
 
-### time/seconds 
+### time/seconds
 
 
 Assumes a time in miliseconds and transforms it into a decimal
@@ -442,7 +446,7 @@ Assumes a time in miliseconds and transforms it into a decimal
 
 * * *
 
-### asset/base64 
+### asset/base64
 
 
 Wraps the value in a double-quoted string and prepends an '@' to make a string literal.
@@ -456,7 +460,7 @@ Wraps the value in a double-quoted string and prepends an '@' to make a string l
 
 * * *
 
-### asset/path 
+### asset/path
 
 
 Prepends the local file path
@@ -470,7 +474,7 @@ Prepends the local file path
 
 * * *
 
-### asset/objC/literal 
+### asset/objC/literal
 
 
 Wraps the value in a double-quoted string and prepends an '@' to make a string literal.
@@ -482,4 +486,3 @@ Wraps the value in a double-quoted string and prepends an '@' to make a string l
 
 
 * * *
-

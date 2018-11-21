@@ -8,7 +8,7 @@ If you want to use the CLI, you can install it globally via npm:
 $ npm install -g style-dictionary
 ```
 
-Or you can install it like a normal npm dependency. This is a build tool so you are most likely going to want to save it as a dev dependency:
+Or you can install it like a normal npm dependency. Style Dictionary is a build tool, so you are most likely to use it as a dev dependency:
 ```bash
 $ npm install -D style-dictionary
 ```
@@ -22,7 +22,7 @@ $ cd MyStyleD
 $ style-dictionary init basic
 ```
 
-This command will copy over the example files found in example in this repo and then run the `style-dictionary build` command to generate the build artifacts. You should see something like this output:
+This command will copy over the example files found in the [basic example](https://github.com/amzn/style-dictionary/tree/master/examples/basic) in this repo and then run the `style-dictionary build` command to generate the build artifacts. You should see something like this output:
 ```
 Reading config file from ./config.json
 Building all platforms
@@ -176,7 +176,7 @@ $ style-dictionary build
 ```
 Call this in the root directory of your project, which must include a [configuration](config.md) file.
 
-More detailed information about using the CLI is available [here](using_the_cli.md).
+More detailed information about [using the Style Dictionary CLI is available here](using_the_cli.md).
 
 ### Node
 You can also use the style dictionary build system in node if you want to [extend](extending.md) the functionality or use it in another build system like Grunt or Gulp.
@@ -205,3 +205,5 @@ const StyleDictionary = require('style-dictionary').extend({
 
 StyleDictionary.buildAllPlatforms();
 ```
+
+More detailed information about [using the Style Dictionary npm module is available here](using_the_npm_module.md).

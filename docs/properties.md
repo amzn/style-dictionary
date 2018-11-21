@@ -33,7 +33,7 @@ Any object in the JSON that has a `value` attribute on it is a property, so in t
 
 For any properties you wish to output, the "value" attribute is required. This provides the data that will be used throughout the build process (and ultimately used for styling in your deliverables). You can optionally include any custom attributes you would like (e.g. "comment" with a string or "metadata" as an object with its own attributes).
 
-# Example Property
+### Example Property
 Here you can see a property of "size.font.small" with two attributes:
 1. the required "value" attribute, set to "10"
 1. the optional "comment" attribute (The "comment" attribute is treated in a special way - the comment will appear in output files when the output format supports comments.)
@@ -50,8 +50,8 @@ Here you can see a property of "size.font.small" with two attributes:
 }
 ```
 
-# Multiple Properties "size.font.\*"
-Multiple properties in a single file are simple to read and understand using the [`Category / Type / Item (CTI)`](#category-type-item-(cti)) method
+### Multiple Properties
+Multiple properties in a single file are simple to read and understand using the recommended [`Category / Type / Item (CTI)`](#category-type-item-(cti)) method
 ```json
 {
   "size": {
@@ -64,7 +64,7 @@ Multiple properties in a single file are simple to read and understand using the
 }
 ```
 
-# Attribute reference / alias
+### Attribute reference / alias
 You can reference (alias) existing attributes by using the dot-notation object path (the fully articulated property name) in brackets
 ```json
 {
@@ -79,7 +79,7 @@ You can reference (alias) existing attributes by using the dot-notation object p
 }
 ```
 
-# Property reference / alias
+### Property reference / alias
 You can reference (alias) any part of the Style Dictionary the same way
 ```json
 {
@@ -95,7 +95,7 @@ You can reference (alias) any part of the Style Dictionary the same way
 ```
 
 
-#### Category / Type / Item
+## Category / Type / Item
 
 This CTI structure is not required. However, we feel this classification structure makes the most sense semantically.
 
@@ -118,9 +118,9 @@ Now you can structure your property json files like simple objects:
 
 The CTI is implicit in the structure, the category is 'size' and the type is 'font', and there are 2 properties 'base' and 'large'.
 
-Structuring style properties in this manner gives us consistent naming and accessing of these properties. You don't need to remember if it is button_color_error or error_button_color, it is color_background_button_error!
+Structuring style properties in this manner gives us consistent naming and accessing of these properties. You don't need to remember if it is `button_color_error` or `error_button_color`, it is `color_background_button_error`!
 
-You can organize and name your style properties however you want, there are no restrictions. But there are a good amount of helpers if you do use this structure, like the 'attribute/cti' transform which adds attributes to the property of its CTI based on the path in the object. There are a lot of name transforms as well for when you want a flat structure like for sass variables.
+You can organize and name your style properties however you want, **there are no restrictions**. But there are a good amount of helpers if you do use this structure, like the 'attribute/cti' transform which adds attributes to the property of its CTI based on the path in the object. There are a lot of name transforms as well for when you want a flat structure like for sass variables.
 
 Also, the CTI structure provides a good mechanism to target transforms for specific kinds of properties. All of the transforms provided by the framework use the CTI structure to know if it should be applied. For instance, the 'color/hex' transform only applies to properties of the category 'color'.
 

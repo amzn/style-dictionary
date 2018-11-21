@@ -8,7 +8,7 @@
 # Style Dictionary
 > *Style once, use everywhere.*
 
-A Style Dictionary is a system that allows you to define styles once, in a way for any platform or language to consume. A single place to create and edit your styles, and a single command exports these rules to all the places you need them - iOS, Android, CSS, JS, HTML, sketch files, style documentation, etc. It is available as a CLI through npm, but can also be used like any normal node module if you want to [extend](extending.md) its functionality.
+A Style Dictionary is a system that allows you to define styles once, in a way for any platform or language to consume. A single place to create and edit your styles, and a single command exports these rules to all the places you need them - iOS, Android, CSS, JS, HTML, sketch files, style documentation, etc. It is available as a [CLI](using_the_cli.md) through npm, but can also be used like any normal [npm module](using_the_npm_module.md) if you want to [extend](extending.md) its functionality.
 
 When you are managing user experiences, it can be quite challenging to keep styles consistent and synchronized across multiple development platforms and devices.  At the same time, designers, developers, PMs and others must be able to have consistent and up-to-date style documentation to enable effective work and communication.  Even then, mistakes inevitably happen and the design may not be implemented accurately.  StyleDictionary solves this by automatically generating style definitions across all platforms from a single source - removing roadblocks, errors, and inefficiencies across your workflow.
 
@@ -18,27 +18,27 @@ When you are managing user experiences, it can be quite challenging to keep styl
 ## Examples
 [See examples of Style Dictionary here](examples.md)
 
-## The basics
+## The Basics
 __A style dictionary consists of:__
-1. [Style properties](properties.md), which are organized in JSON files
-1. Static assets, which are delivered across platforms
-1. [Configuration](config.md), which defines the transformation of the properties and assets into deliverables
+1. [Style properties](properties.md), organized in JSON files
+1. Static assets (e.g. fonts, icons, images, sounds, etc.), organized into folders
+1. [Configuration](config.md), defining the transformation of the properties and assets for each output platform
 
 __What a style dictionary does:__
-1. Allows style properties and assets to be consumed in any platform or language for rendering styles
-1. Allows the creation of digital media for use by humans (e.g. documentation, design libraries, etc)
+1. Transforms style properties and assets into platform specific deliverables
+1. Creates human readable artifacts (e.g. documentation, design libraries, etc)
 
 __Things you can build with a style dictionary:__
 1. Styling files for any platform
 1. Images and graphics
 1. Sketch files
-1. Documentation site
+1. Documentation website
 1. _Literally anything you want styles or style data in_
 
-The value of using Style Dictionary to build all of these is that they are all consistent and up to date.
+**The value of using Style Dictionary to build all of these is that they are all consistent and up to date.**
 
 The Style Dictionary framework is fully extensible and modular so you can create any type of file from a style dictionary.
-If there is a new language, platform, or file type you need, you can extend the style dictionary framework to create the necessary files.
+If there is a new language, platform, or file type you need, you can easily [extend](extending.md) the style dictionary framework to create the necessary files.
 
 
 ## Contributing
