@@ -65,7 +65,7 @@ Multiple properties in a single file are simple to read and understand using the
 ```
 
 ### Attribute reference / alias
-You can reference (alias) existing attributes by using the dot-notation object path (the fully articulated property name) in brackets
+You can reference (alias) existing values by using the dot-notation object path (the fully articulated property name) in brackets. Note that this only applies to values; referencing a non-value property will cause unexpected results in your output.
 ```json
 {
   "size": {
@@ -74,21 +74,6 @@ You can reference (alias) existing attributes by using the dot-notation object p
       "medium": { "value": "16" },
       "large" : { "value": "24" },
       "base"  : { "value": "{size.font.medium.value}" }
-    }
-  }
-}
-```
-
-### Property reference / alias
-You can reference (alias) any part of the Style Dictionary the same way
-```json
-{
-  "size": {
-    "font": {
-      "small" : { "value": "10" },
-      "medium": { "value": "16" },
-      "large" : { "value": "24" },
-      "base"  : "{size.font.medium}"
     }
   }
 }
