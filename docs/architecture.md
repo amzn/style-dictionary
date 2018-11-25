@@ -22,9 +22,9 @@ For each platform defined in your [config](config.md), Style Dictionary will do 
 
 Style Dictionary now traverses over the whole token object and looks for design tokens. It does this by looking for anything with a `value` key. When it comes across a design token, it then performs all the [transforms](transforms.md) defined in your [config](config.md) in order.
 
-## 5. Resolve aliases
+## 5. Resolve aliases / references to other values
 
-After all the tokens have been transformed, it then does another pass over the token object looking for aliases, which look like `"{size.font.base.value}"`. When it finds these, it then replaces it with the resolved value. You can have any levels of aliases and Style Dictionary will correctly get the final value. Also, because we have a single complete token object, aliases can be in any token file and still work.
+After all the tokens have been transformed, it then does another pass over the token object looking for aliases, which look like `"{size.font.base.value}"`. When it finds these, it then replaces the reference with the transformed value. As we have a single complete token object, aliases can be in any token file and still work.
 
 ## 6. Build files
 
