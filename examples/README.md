@@ -36,13 +36,14 @@ This is a more complete package and should have everything you need to get start
 
 If you want to look at more advanced examples of possible applications and customisations of Style Dictionary, the `examples/advanced` folder on GitHub contains these extra folders:
 
-* [**auto-rebuild-watcher**](https://github.com/amzn/style-dictionary/tree/master/example/advanced) shows how to setup a "watcher" that auto-rebuilds the tokens every time there is a change in the properties.
-* [**custom-templates**](https://github.com/amzn/style-dictionary/tree/master/example/advanced/custom-templates/auto-rebuild-watcher) shows how to use "custom" templates to generate design tokens files with custom formats, useful when you need to distribute your design tokens and integrate them with custom pipelines or scripts.
+* [**assets-base64-embed**](https://github.com/amzn/style-dictionary/tree/master/example/advanced/assets-base64-embed) shows how it's possible to embed and distribute assets – like images, icons and fonts – directly as design tokens.
+* [**auto-rebuild-watcher**](https://github.com/amzn/style-dictionary/tree/master/example/advanced/auto-rebuild-watcher) shows how to setup a "watcher" that auto-rebuilds the tokens every time there is a change in the properties.
+* [**custom-templates**](https://github.com/amzn/style-dictionary/tree/master/example/advanced/custom-templates/custom-templates) shows how to use "custom" templates to generate design tokens files with custom formats, useful when you need to distribute your design tokens and integrate them with custom pipelines or scripts.
+* [**custom-transforms**](https://github.com/amzn/style-dictionary/tree/master/example/advanced/custom-templates/custom-transforms) shows how to use custom tranforms (and transformGroups) to apply custom "tranformations" to the properties when converted to design tokens.
 * [**multi-brand-multi-platform**](https://github.com/amzn/style-dictionary/tree/master/example/advanced/multi-brand-multi-platform) shows how to set up Style Dictionary to support a multi-brand (for brand theming) and multi-platform (web, iOS, Android) solution, with property values depending on brand and plaforms.
 * [**npm-module**](https://github.com/amzn/style-dictionary/tree/master/example/advanced/npm-module) shows how to set up a style dictionary as an npm module, either to publish to a local npm service or to publish externally.
-* [**react**](https://github.com/amzn/style-dictionary/tree/master/example/advanced/react) - TODO
-* [**react-native**](https://github.com/amzn/style-dictionary/tree/master/example/advanced/react-native) - TODO
 * [**s3**](https://github.com/amzn/style-dictionary/tree/master/example/advanced/s3) shows how to set up a style dictionary to build files for different platforms (web, iOS, Android) and upload those build artifacts, together with a group of assets, to an S3 bucket.
+* [**referencing_aliasing**](https://github.com/amzn/style-dictionary/tree/master/example/advanced/referencing_aliasing) shows how to use referencing (or "aliasing") to reference a value -or an attribute– of a property and assign it to the value –or attribute– of another property.
 
 
 ---
