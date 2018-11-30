@@ -9,7 +9,7 @@ exports[`formats all should return android/colors as a string 1`] = `
 -->
 <resources>
   <color name=\\"color_red\\">#FF0000</color><!-- comment -->
-
+  
 </resources>
 "
 `;
@@ -22,7 +22,7 @@ exports[`formats all should return android/dimens as a string 1`] = `
   Generated on Sat, 01 Jan 2000 00:00:00 GMT
 -->
 <resources>
-
+  
 </resources>
 "
 `;
@@ -35,7 +35,7 @@ exports[`formats all should return android/fontDimens as a string 1`] = `
   Generated on Sat, 01 Jan 2000 00:00:00 GMT
 -->
 <resources>
-
+  
 </resources>
 "
 `;
@@ -48,7 +48,7 @@ exports[`formats all should return android/integers as a string 1`] = `
   Generated on Sat, 01 Jan 2000 00:00:00 GMT
 -->
 <resources>
-
+  
 </resources>
 "
 `;
@@ -61,7 +61,7 @@ exports[`formats all should return android/strings as a string 1`] = `
   Generated on Sat, 01 Jan 2000 00:00:00 GMT
 -->
 <resources>
-
+  
 </resources>
 "
 `;
@@ -118,7 +118,7 @@ exports[`formats all should return ios/colors.m as a string 1`] = `
 #import \\".h\\"
 
 
-@implementation
+@implementation 
 
 + (UIColor *)color:()colorEnum{
   return [[self values] objectAtIndex:colorEnum];
@@ -220,7 +220,7 @@ exports[`formats all should return ios/singleton.m as a string 1`] = `
 
 #import \\".h\\"
 
-@implementation
+@implementation 
 
 + (NSDictionary *)getProperty:(NSString *)keyPath {
   return [[self properties] valueForKeyPath:keyPath];
@@ -325,7 +325,7 @@ exports[`formats all should return ios/strings.m as a string 1`] = `
 
 NSString * const color_red = #FF0000;
 
-@implementation
+@implementation 
 
 + (NSArray *)values {
   static NSArray* array;
