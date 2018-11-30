@@ -6,9 +6,9 @@ This is how Style Dictionary works under the hood.
 
 Let's take a closer look into each of these steps.
 
-## 1. Parse the config
+## 1. Read the config
 
-Style Dictionary is a configuration based framework, you tell it what to do in a configuration file. Style Dictionary first parses this configuration to know what to do.
+Style Dictionary is a configuration based framework, you tell it what to do in a configuration file. Style Dictionary first reads this configuration to know what to do.
 
 ## 2. Find all token files
 
@@ -30,7 +30,7 @@ Style Dictionary now traverses over the whole token object and looks for design 
 
 After all the tokens have been transformed, it then does another pass over the token object looking for aliases, which look like `"{size.font.base.value}"`. When it finds these, it then replaces the reference with the transformed value. As we have a single complete token object, aliases can be in any token file and still work.
 
-## 4c. Format the tokens into files
+## 4c. Build files
 
 Now all the design tokens are ready to be written to a file. Style Dictionary takes the whole transformed and resolved token object and for each file defined in the platform it [formats](formats.md) the token object and write the output to a file. Internally, Style Dictionary creates a flat array of all the design tokens it finds in addition to the token object. This is how you can output a flat SCSS variables file.
 
