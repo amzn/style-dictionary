@@ -1,6 +1,14 @@
+<img src="https://github.com/amzn/style-dictionary/raw/master/docs/assets/logo.png" alt="Style Dictionary logo" title="StyleDictionary" width="100" align="right" />
+
 # Examples
 
-To get you started, there are some example packages included that you can use. You can [take a look at the code on Github](https://github.com/amzn/style-dictionary/tree/master/example/) or you can use the CLI included to generate a new package using some of these examples. Here is how you can do that:
+Here you can find some sample projects to get started, or to find inspiration on how to customise and extend the Style Dictionary framework to create the files you need.
+
+## Setup
+
+To use one of these examples, clone (or [download](https://github.com/amzn/style-dictionary/archive/master.zip)) from GitHub the project and copy the folder of the example that you want to use. Inside the folder you will find a `README.md` file with the instructions on how to do the initial setup and run the `build` process.
+
+You can alternatively start a new project from one of the `basic` or `complete` examples using the CLI:
 
 ```bash
 $ mkdir MyFolder
@@ -10,14 +18,16 @@ $ style-dictionary init [example]
 
 Where `[example]` is one of: `basic`, `complete`.
 
+This will create a copy of the example in `MyFolder` and start the build process, running `style-dictionary build` for the first time to generate the artifacts.
+
 ## Basic
-[View on Github](https://github.com/amzn/style-dictionary/tree/master/example/basic)
+[View the example](https://github.com/amzn/style-dictionary/tree/master/example/basic)
 
 This example code is bare-bones to show you what this framework can do. Use this if you want to play around with what the Style Dictionary can do.
 
 
 ## Complete
-[View on Github](https://github.com/amzn/style-dictionary/tree/master/example/complete)
+[View the example](https://github.com/amzn/style-dictionary/tree/master/example/complete)
 
 This is a more complete package and should have everything you need to get started. This package can be consumed as a Cocoapod on iOS, as a node module for web, and as a local library for Android.
 

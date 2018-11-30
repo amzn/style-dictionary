@@ -1,0 +1,13 @@
+{
+  "button": {
+    "border" : {
+      "width": {
+        "value": "1"
+      },
+      "radius": {
+        "value": "0.01",
+        "group": "ratio"
+      }
+    }
+  }
+}

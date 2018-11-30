@@ -1,0 +1,28 @@
+{
+  "color": {
+    "base": {
+      "gray": {
+        "light" : {
+          "value": "#CCCCCC",
+          "group": "color"
+        },
+        "medium": {
+          "value": "#999999",
+          "group": "color"
+        },
+        "dark"  : {
+          "value": "#111111",
+          "group": "color"
+        }
+      },
+      "red": {
+        "value": "#FF0000",
+        "group": "color"
+      },
+      "green": {
+        "value": "#00FF00",
+        "group": "color"
+      }
+    }
+  }
+}

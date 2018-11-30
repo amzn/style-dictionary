@@ -1,0 +1,16 @@
+{
+  "margin": {
+    "small" : {
+      "value": "0.15",
+      "group": "spacing"
+    },
+    "medium": {
+      "value": "0.25",
+      "group": "spacing"
+    },
+    "large" : {
+      "value": "0.4",
+      "group": "spacing"
+    }
+  }
+}
