@@ -92,7 +92,7 @@ You created a format and think it should be included? [Send us a PR](https://git
 
 Creates a CSS file with variable definitions based on the style dictionary
 
-**Example**  
+**Example**
 ```css
 :root {
   --color-background-base: #f0f0f0;
@@ -107,7 +107,7 @@ Creates a CSS file with variable definitions based on the style dictionary
 
 Creates a Sass file with a flat map based on the style dictionary
 
-**Example**  
+**Example**
 ```scss
 $tokens: (
   $color-background-base: #f0f0f0;
@@ -122,7 +122,7 @@ $tokens: (
 
 Creates a Sass file with a deep map based on the style dictionary
 
-**Example**  
+**Example**
 ```scss
 $color-background-base: #f0f0f0 !default;
 $color-background-alt: #eeeeee !default;
@@ -144,7 +144,7 @@ $tokens: {
 
 Creates a SCSS file with variable definitions based on the style dictionary
 
-**Example**  
+**Example**
 ```scss
 $color-background-base: #f0f0f0;
 $color-background-alt: #eeeeee;
@@ -157,7 +157,7 @@ $color-background-alt: #eeeeee;
 
 Creates a SCSS file with variable definitions and helper classes for icons
 
-**Example**  
+**Example**
 ```scss
 $content-icon-email: '\E001';
 .icon.email:before { content:$content-icon-email; }
@@ -170,11 +170,11 @@ $content-icon-email: '\E001';
 
 Creates a LESS file with variable definitions based on the style dictionary
 
-**Color-background-base:**: #f0f0f0;  
-**Color-background-alt:**: #eeeeee;
-```  
-**Example**  
+**Example**
 ```less
+@color-background-base: #f0f0f0;
+@color-background-alt: #eeeeee;
+```
 
 * * *
 
@@ -183,11 +183,11 @@ Creates a LESS file with variable definitions based on the style dictionary
 
 Creates a LESS file with variable definitions and helper classes for icons
 
-**Content-icon-email:**: '\E001';
-.icon.email:before { content:@content-icon-email; }
-```  
-**Example**  
+**Example**
 ```less
+@content-icon-email: '\E001';
+.icon.email:before { content:@content-icon-email; }
+```
 
 * * *
 
@@ -196,7 +196,7 @@ Creates a LESS file with variable definitions and helper classes for icons
 
 Creates a CommonJS module with the whole style dictionary
 
-**Example**  
+**Example**
 ```js
 module.exports = {
   color: {
@@ -217,7 +217,7 @@ module.exports = {
 Creates a JS file a global var that is a plain javascript object of the style dictionary.
 Name the variable by adding a 'name' attribute on the file object in your config.
 
-**Example**  
+**Example**
 ```js
 var StyleDictionary = {
   color: {
@@ -239,7 +239,7 @@ Creates a [UMD](https://github.com/umdjs/umd) module of the style
 dictionary. Name the module by adding a 'name' attribute on the file object
 in your config.
 
-**Example**  
+**Example**
 ```js
 (function(root, factory) {
   if (typeof module === "object" && module.exports) {
@@ -290,7 +290,7 @@ Creates a ES6 module of the style dictionary.
 }
 ```
 
-**Example**  
+**Example**
 ```js
 export const ColorBackgroundBase = '#ffffff';
 export const ColorBackgroundAlt = '#fcfcfcfc';
@@ -303,7 +303,7 @@ export const ColorBackgroundAlt = '#fcfcfcfc';
 
 Creates a color resource xml file with all the colors in your style dictionary.
 
-**Example**  
+**Example**
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
@@ -319,7 +319,7 @@ Creates a color resource xml file with all the colors in your style dictionary.
 
 Creates a dimen resource xml file with all the sizes in your style dictionary.
 
-**Example**  
+**Example**
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
@@ -335,7 +335,7 @@ Creates a dimen resource xml file with all the sizes in your style dictionary.
 
 Creates a dimen resource xml file with all the font sizes in your style dictionary.
 
-**Example**  
+**Example**
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
@@ -356,7 +356,7 @@ style properties by `prop.attributes.category === 'time'`
 
 - Update the filter on this.
 
-**Example**  
+**Example**
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
@@ -373,7 +373,7 @@ style properties by `prop.attributes.category === 'time'`
 Creates a resource xml file with all the strings in your style dictionary. Filters your
 style properties by `prop.attributes.category === 'content'`
 
-**Example**  
+**Example**
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
@@ -389,7 +389,7 @@ style properties by `prop.attributes.category === 'content'`
 
 Creates an Objective-C header file with macros for style properties
 
-**Example**  
+**Example**
 ```objectivec
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
@@ -525,7 +525,7 @@ Creates CSS file with @font-face declarations
 
 Creates a JSON file of the style dictionary.
 
-**Example**  
+**Example**
 ```json
 {
   "color": {
@@ -545,7 +545,7 @@ Creates a JSON file of the style dictionary.
 
 Creates a JSON file of just the assets defined in the style dictionary.
 
-**Example**  
+**Example**
 ```js
 {
   "asset": {
@@ -565,7 +565,7 @@ Creates a JSON file of just the assets defined in the style dictionary.
 
 Creates a JSON nested file of the style dictionary.
 
-**Example**  
+**Example**
 ```json
 {
   "color": {
@@ -583,7 +583,7 @@ Creates a JSON nested file of the style dictionary.
 
 Creates a JSON flat file of the style dictionary.
 
-**Example**  
+**Example**
 ```json
 {
   "color-base-red": "#ff000"
@@ -597,7 +597,7 @@ Creates a JSON flat file of the style dictionary.
 
 Creates a sketchpalette file of all the base colors
 
-**Example**  
+**Example**
 ```json
 {
   "compatibleVersion": "1.0",
