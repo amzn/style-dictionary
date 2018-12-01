@@ -1,12 +1,16 @@
 # Extending
 
-The style dictionary build system is made to be extended. We don't know exactly how everyone will want to use style dictionaries in their project, which is why it is easy to create custom transforms and formats.
+The style dictionary build system is easily extended. We don't know exactly how everyone will want to use style dictionaries in their project, which is why we made it easy to create custom transforms and formats.
 
+## Extension Functions in the API
 * [registerTransform](api.md#registertransform)
 * [registerTransformGroup](api.md#registertransformgroup)
 * [registerFormat](api.md#registerformat)
 * [registerTemplate](api.md#registertemplate)
 * [registerAction](api.md#registeraction)
+
+## Extension Examples
+Importing a configuration, defining a new `time/seconds` transform, and building the style dictionary.
 
 ```javascript
 const StyleDictionary = require('style-dictionary').extend('config.json');
@@ -25,7 +29,8 @@ StyleDictionary.registerTransform({
 StyleDictionary.buildAllPlatforms();
 ```
 
-You can also export your extended style dictionary as a node module if you need other projects to depend on it.
+
+Export your extended style dictionary as a node module (without building) if you need other projects to depend on it.
 
 ```javascript
 // package a

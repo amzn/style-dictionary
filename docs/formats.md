@@ -6,7 +6,7 @@ your style dictionary.
 
 ### Using formats
 
-You use formats in your config file under platforms > [platform] > files > [file]
+You use formats in your config file under platforms > [platform] > files > [file] > format
 
 ```json
 {
@@ -28,7 +28,7 @@ You use formats in your config file under platforms > [platform] > files > [file
 There is an extensive (but not exhaustive) list of [included formats](#pre-defined-formats) available in Style Dictionary.
 
 
-### Creating Formats
+### Creating formats
 
 You can create custom formats using the [`registerFormat`](api.md#registerformat) function.
 
@@ -98,6 +98,43 @@ Creates a CSS file with variable definitions based on the style dictionary
   --color-background-base: #f0f0f0;
   --color-background-alt: #eeeeee;
 }
+```
+
+* * *
+
+### sass/map-flat
+
+
+Creates a Sass file with a flat map based on the style dictionary
+
+**Example**
+```scss
+$tokens: (
+  $color-background-base: #f0f0f0;
+  $color-background-alt: #eeeeee;
+)
+```
+
+* * *
+
+### sass/map-deep
+
+
+Creates a Sass file with a deep map based on the style dictionary
+
+**Example**
+```scss
+$color-background-base: #f0f0f0 !default;
+$color-background-alt: #eeeeee !default;
+
+$tokens: {
+  'color': (
+    'background': (
+      'base': $color-background-base,
+      'alt': $color-background-alt
+    )
+  )
+)
 ```
 
 * * *
@@ -541,6 +578,20 @@ Creates a JSON nested file of the style dictionary.
 
 * * *
 
+### json/flat
+
+
+Creates a JSON flat file of the style dictionary.
+
+**Example**
+```json
+{
+  "color-base-red": "#ff000"
+}
+```
+
+* * *
+
 ### sketch/palette
 
 
@@ -560,5 +611,3 @@ Creates a sketchpalette file of all the base colors
 ```
 
 * * *
-
-

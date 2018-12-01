@@ -1,0 +1,17 @@
+{
+  "color": {
+    "base": {
+      "white": { "value": "#FFFFFF" },
+      "gray": {
+        "light" : { "value": "#CCCCCC" },
+        "medium": { "value": { "r": 146, "g": 153, "b": 162 } },
+        "dark"  : { "value": "#111111" }
+      },
+      "red": { "value": "#FF0000" },
+      "green": { "value": "#00FF00" },
+      "blue": { "value": "#0000FF" }
+    },
+    "primary": { "value": "{color.base.green.value}" },
+    "secondary": { "value": "{color.base.blue.value}" }
+  }
+}

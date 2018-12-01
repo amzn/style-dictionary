@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`formats sass/map-deep sass/map-deep snapshot 1`] = `
+"
+/*
+  Do not edit directly
+  Generated on Sat, 01 Jan 2000 00:00:00 GMT
+*/
+
+$size-font-small: 12rem !default;
+$size-font-large: 18rem !default;
+$color-base-red: #ff0000 !default; // comment
+$color-white: #ffffff !default;
+
+$tokens: (
+  'size': (
+    'font': (
+      'small': $size-font-small,
+      'large': $size-font-large
+    )
+  ),
+  'color': (
+    'base': (
+      'red': $color-base-red
+    ),
+    'white': $color-white
+  )
+);
+"
+`;
+
+exports[`formats sass/map-flat sass/map-flat snapshot 1`] = `
+"
+/*
+  Do not edit directly
+  Generated on Sat, 01 Jan 2000 00:00:00 GMT
+*/
+
+$tokens: (
+  'size-font-small': 12rem,
+  'size-font-large': 18rem,
+  // comment
+  'color-base-red': #ff0000,
+  'color-white': #ffffff
+);
+"
+`;

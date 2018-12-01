@@ -1,0 +1,29 @@
+{
+  "source": ["properties/**/*.json"],
+  "platforms": {
+    "web": {
+      "transformGroup": "custom/web",
+      "buildPath": "build/web/",
+      "files": [{
+        "destination": "tokens.js",
+        "format": "javascript/es6"
+      }]
+    },
+    "scss": {
+      "transformGroup": "custom/scss",
+      "buildPath": "build/web/",
+      "files": [{
+        "destination": "tokens.scss",
+        "format": "scss/variables"
+      }]
+    },
+    "android": {
+      "transformGroup": "custom/android",
+      "buildPath": "build/android/",
+      "files": [{
+        "destination": "tokens.xml",
+        "format": "custom/android/xml"
+      }]
+    }
+  }
+}

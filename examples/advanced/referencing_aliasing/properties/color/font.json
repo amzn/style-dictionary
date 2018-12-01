@@ -1,0 +1,9 @@
+{
+  "color": {
+    "font": {
+      "base"     : { "value": "{color.base.gray.dark.value}" },
+      "faded": { "value": "{color.base.gray.medium.value}" },
+      "error": { "value": "{color.base.red.value}" }
+    }
+  }
+}

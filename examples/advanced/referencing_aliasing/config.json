@@ -1,0 +1,13 @@
+{
+  "source": ["properties/**/*.json"],
+  "platforms": {
+    "example": {
+      "transformGroup": "web",
+      "buildPath": "build/json/",
+      "files": [{
+        "destination": "variables.json",
+        "format": "json/flat"
+      }]
+    }
+  }
+}

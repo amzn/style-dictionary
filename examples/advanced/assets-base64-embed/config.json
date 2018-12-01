@@ -1,0 +1,98 @@
+{
+  "source": ["properties/**/*.json"],
+  "platforms": {
+    "scss": {
+      "transformGroup": "scss",
+      "buildPath": "build/scss/",
+      "files": [{
+        "destination": "colors.scss",
+        "format": "scss/variables",
+        "filter": {
+          "attributes": {
+            "category": "color"
+          }
+        }
+      },{
+        "destination": "sizes.scss",
+        "format": "scss/variables",
+        "filter": {
+          "attributes": {
+            "category": "size"
+          }
+        }
+      }]
+    },
+    "json": {
+      "transformGroup": "web",
+      "buildPath": "build/json/",
+      "files": [{
+        "destination": "variables.json",
+        "format": "json/flat"
+      }]
+    },
+    "assets/embed/scss": {
+      "transforms": ["attribute/cti", "name/cti/kebab", "asset/base64"],
+      "buildPath": "build/scss/",
+      "files": [{
+        "destination": "assets_icons.scss",
+        "format": "scss/variables",
+        "filter": {
+          "attributes": {
+            "category": "asset",
+            "type": "icon"
+          }
+        }
+      },{
+        "destination": "assets_images.scss",
+        "format": "scss/variables",
+        "filter": {
+          "attributes": {
+            "category": "asset",
+            "type": "image"
+          }
+        }
+      },{
+        "destination": "assets_fonts.scss",
+        "format": "scss/variables",
+        "filter": {
+          "attributes": {
+            "category": "asset",
+            "type": "font"
+          }
+        }
+      }]
+    },
+    "assets/embed/json": {
+      "transforms": ["attribute/cti", "name/cti/kebab", "asset/base64"],
+      "buildPath": "build/json/",
+      "files": [{
+        "destination": "assets_icons.json",
+        "format": "json/flat",
+        "filter": {
+          "attributes": {
+            "category": "asset",
+            "type": "icon"
+          }
+        }
+      },{
+        "destination": "assets_images.json",
+        "format": "json/flat",
+        "filter": {
+          "attributes": {
+            "category": "asset",
+            "type": "image"
+          }
+        }
+      },{
+        "destination": "assets_fonts.json",
+        "format": "json/flat",
+        "filter": {
+          "attributes": {
+            "category": "asset",
+            "type": "font"
+          }
+        }
+      }]
+    }
+  }
+}

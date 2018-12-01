@@ -24,6 +24,11 @@ We are always happy to receive code and documentation contributions to the frame
 3. Adding to the included transforms, transformGroups, and formats, please read [this section](#what-should-be-included).
 
 
+## Package Manager and dependencies
+
+We use npm as our package manager. After downloading the repo, please use the command "npm ci" to ensure you use the package-lock dependency tree. Note that you need NPM 5.7.0 or higher to use this command.
+
+
 ## Code Style
 
 We use ESLint on the code to ensure a consistent style. Any new code committed must pass our ESLint tests. Take a look at our [ESLint file][eslint].
@@ -49,7 +54,7 @@ We separate each function/method into its own file and group them into directori
 
 ## Testing
 
-Any new features should implement the proper unit tests. We use mocha and chai to test our framework.
+Any new features should implement the proper unit tests. We use Jest to test our framework.
 
 If you are adding a new transform, action, or format: please add new unit tests. You can see examples in test/formats.
 

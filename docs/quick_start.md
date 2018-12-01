@@ -1,22 +1,18 @@
 # Quick Start
 
 ## Installation
-*Note that you must have node (and npm) installed.*
+*Note that you must have [node (and npm) installed](https://www.npmjs.com/get-npm) before you can follow this guide.*
 
 If you want to use the CLI, you can install it globally via npm:
 ```bash
 $ npm install -g style-dictionary
 ```
 
-Or you can install it like a normal npm dependency. This is a build tool so you are most likely going to want to save it as a dev dependency:
+Or you can install it like a normal npm dependency. Style Dictionary is a build tool, so you are most likely to use it as a dev dependency:
 ```bash
 $ npm install -D style-dictionary
 ```
 
-If you want to install it with yarn:
-```bash
-$ yarn add style-dictionary --dev
-```
 
 ## Creating a New Project
 The CLI comes with some starter code to get a new project started easily.
@@ -26,7 +22,7 @@ $ cd MyStyleD
 $ style-dictionary init basic
 ```
 
-This command will copy over the example files found in example in this repo and then run the `style-dictionary build` command to generate the build artifacts. You should see something like this output:
+This command will copy over the example files found in the [basic example](https://github.com/amzn/style-dictionary/tree/master/examples/basic) in this repo and then run the `style-dictionary build` command to generate the build artifacts. You should see something like this output:
 ```
 Reading config file from ./config.json
 Building all platforms
@@ -132,9 +128,9 @@ $size-font-base: 1rem;
 
 Pretty nifty! This shows a few things happening:
 1. The build system does a deep merge of all the property JSON files defined in the `source` attribute of `config.json`. This allows you to split up the property JSON files however you want. There are 2 JSON files with `color` as the top level key, but they get merged properly.
-1. The build system resolves references to other style properties. `{size.font.medium.value}` gets resolved properly
-1. The build system handles references to property values in other files as well as you can see in `properties/color/font.json`
-1. Values get transformed differently depending on the platform they are built to
+1. The build system resolves references to other style property values. `{size.font.medium.value}` is resolved properly
+1. The build system handles references to property values in other files as well (as you can see in `properties/color/font.json`)
+1. Values are transformed specifically for each platform
 
 
 ## Making a change
@@ -174,18 +170,13 @@ That's it! There is a lot more you can do with your style dictionary than just g
 at some [examples](examples.md) or take a deeper dive into [package structure](package_structure.md), [extending](extending.md), or how the [build process](build_process.md) works.
 
 ## Basic Usage
-### CLI
+### Command Line Interface (CLI)
 ```bash
 $ style-dictionary build
 ```
-Call this in the root directory of your project. The only thing needed is a `config.json` file. There are also arguments:
+Call this in the root directory of your project, which must include a [configuration](config.md) file.
 
-| Flag | Short Flag | Description |
-| --- | --- | --- |
-| --config \[path\] | -h | Set the config file to use. Must be a .json file |
-| --platform \[platform\] | -p | Only build a specific platform defined in the config file. |
-| --help | -h | Display help content |
-| --version | -v | Display the version |
+More detailed information about [using the Style Dictionary CLI is available here](using_the_cli.md).
 
 ### Node
 You can also use the style dictionary build system in node if you want to [extend](extending.md) the functionality or use it in another build system like Grunt or Gulp.
@@ -195,7 +186,7 @@ const StyleDictionary = require('style-dictionary').extend('config.json');
 StyleDictionary.buildAllPlatforms();
 ```
 
-The `.extend()` method is an overloaded method that can also take an object with the configuration in the same format as a config.json file.
+The `.extend()` method is an overloaded method that can also take a [configuration](config.md) object.
 ```javascript
 const StyleDictionary = require('style-dictionary').extend({
   source: ['properties/**/*.json'],
@@ -214,3 +205,5 @@ const StyleDictionary = require('style-dictionary').extend({
 
 StyleDictionary.buildAllPlatforms();
 ```
+
+More detailed information about [using the Style Dictionary npm module is available here](using_the_npm_module.md).
