@@ -4,6 +4,8 @@ import './App.scss';
 
 // custom components for demo
 import ComponentWithSass from './components/with-sass/ComponentWithSass';
+import ComponentWithStyledComponents from './components/with-styled-components/ComponentWithStyledComponents';
+import ComponentWithCssModules from './components/with-css-modules/ComponentWithCssModules';
 
 class App extends Component {
   render() {
@@ -11,7 +13,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <a href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-            <img className="App-logo" src={logo} alt="logo React" />
+            <img className="App-logo" src={logo} alt="React logo" />
           </a>
           <div>
             <h3 className="App-description">
@@ -22,6 +24,8 @@ class App extends Component {
         </header>
         <main>
           <ComponentWithSass />
+          <ComponentWithStyledComponents />
+          <ComponentWithCssModules />
         </main>
       </div>
     );

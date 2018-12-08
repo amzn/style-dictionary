@@ -1,7 +1,13 @@
-## Consume Style Dictionary properties in React as Sass variables
+## Consume Style Dictionary properties in React 
+
+### as Sass variables
 
 Reference: https://blog.bitsrc.io/how-to-use-sass-and-css-modules-with-create-react-app-83fa8b805e5e
 
+
+### as CSS Modules
+https://github.com/css-modules/css-modules/blob/master/docs/values-variables.md
+https://www.robinwieruch.de/create-react-app-css-modules/ 
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

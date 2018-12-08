@@ -3,11 +3,19 @@
   "platforms": {
     "scss": {
       "transformGroup": "scss",
-      "buildPath": "./style-dictionary/build/",
+      "buildPath": "./src/style-dictionary-dist/",
       "prefix": "token",
       "files": [{
         "destination": "variables.scss",
         "format": "scss/variables"
+      }]
+    },
+    "js": {
+      "transformGroup": "js",
+      "buildPath": "./src/style-dictionary-dist/",
+      "files": [{
+        "destination": "variables.js",
+        "format": "javascript/es6"
       }]
     }
   }
