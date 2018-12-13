@@ -29,7 +29,7 @@
   "files": [
     "bin",
     "lib",
-    "example",
+    "examples",
     "index.js",
     "LICENSE",
     "NOTICE"
