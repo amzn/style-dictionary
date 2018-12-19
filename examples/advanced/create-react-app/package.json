@@ -13,9 +13,9 @@
     "style-dictionary": "2.4.0"
   },
   "scripts": {
-    "build-dictionary": "node_modules/.bin/style-dictionary build --config ./style-dictionary/config.json",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build-dictionary": "style-dictionary build --config ./style-dictionary/config.json",
+    "start": "npm run build-dictionary && react-scripts start",
+    "build": "npm run build-dictionary && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
