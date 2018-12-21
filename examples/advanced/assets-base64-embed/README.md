@@ -6,7 +6,7 @@ This means that you can centralise all your "core" design values in one single p
 
 #### Running the example
 
-First of all, set up the required dependencies running the command `npm install` in your local CLI environment (if you prefer to use *yarn* update the commands accordingly).
+First of all, set up the required dependencies running the command `npm install` in your local CLI environment (if you prefer to use *yarn*, update the commands accordingly).
 
 At this point, run `npm run build`. This command will generate the files in the `build` folder.
 
@@ -64,12 +64,12 @@ If you take for example the file `assets/icons.json` you will see this declarati
       "alert-circle": { "value": "assets/icons/alert-circle.svg" }
 
 ```
-where the value of the `alert-circle` property is a path that points to the `alert-circle.svg` file in the `assets/icons/` folder. 
+where the value of the `alert-circle` property is a path that points to the `alert-circle.svg` file in the `assets/icons/` folder.
 
 Now, `build` the dictionary and open the generated file `build/scss/assets_icons.scss`, and you will see this result:
 
 ```
 $asset-icon-alert-circle: "PHN2ZyB4bWxucz0iaHR0...
-``` 
+```
 
 As you can see, the asset has been converted to a base64 string and its value associated to a design token.

@@ -6,7 +6,7 @@ This example shows how to use "custom" templates to generate design tokens files
 
 #### Running the example
 
-First of all, set up the required dependencies running the command `npm install` in your local CLI environment (if you prefer to use *yarn* update the commands accordingly).
+First of all, set up the required dependencies running the command `npm install` in your local CLI environment (if you prefer to use *yarn*, update the commands accordingly).
 
 At this point, if you want to build the tokens you can run `npm run build`. This command will generate the files in the `build` folder.
 
@@ -21,7 +21,7 @@ StyleDictionary.registerTemplate({
 });
 ```
 
-As you can see, the `registerTemplate` [API method](https://amzn.github.io/style-dictionary/#/api?id=registertemplate) is invoked, passing a custom name for the template (you can choose whatever you like, it's just a string) and a path to a templating file (these templates expect the Lodash ["template"](https://lodash.com/docs/4.17.10#template) syntax). 
+As you can see, the `registerTemplate` [API method](https://amzn.github.io/style-dictionary/#/api?id=registertemplate) is invoked, passing a custom name for the template (you can choose whatever you like, it's just a string) and a path to a templating file (these templates expect the Lodash ["template"](https://lodash.com/docs/4.17.10#template) syntax).
 
 The template is then used in the `config.js` file and passed to a `file` declaration for a platform (look at the `config.js` file in the example to see how it is used).
 

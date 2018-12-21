@@ -11,6 +11,9 @@
 # production
 /build
 
+# style dictionary
+/src/style-dictionary-dist
+
 # misc
 .DS_Store
 .env.local
