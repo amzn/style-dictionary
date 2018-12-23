@@ -514,7 +514,16 @@ exports[`formats all should return less/variables as a string 1`] = `
 @color_red: #FF0000; /* comment */"
 `;
 
-exports[`formats all should return sass/map-deep as a string 1`] = `
+exports[`formats all should return scss/icons as a string 1`] = `
+"/**
+ * Do not edit directly
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ */
+
+"
+`;
+
+exports[`formats all should return scss/map-deep as a string 1`] = `
 "
 /*
   Do not edit directly
@@ -531,7 +540,7 @@ $tokens: (
 "
 `;
 
-exports[`formats all should return sass/map-flat as a string 1`] = `
+exports[`formats all should return scss/map-flat as a string 1`] = `
 "
 /*
   Do not edit directly
@@ -542,15 +551,6 @@ $tokens: (
   // comment
   'color_red': #FF0000
 );
-"
-`;
-
-exports[`formats all should return scss/icons as a string 1`] = `
-"/**
- * Do not edit directly
- * Generated on Sat, 01 Jan 2000 00:00:00 GMT
- */
-
 "
 `;
 
