@@ -14,6 +14,7 @@ var chalk = require('chalk');
 var GroupMessages = require('./lib/utils/groupMessages');
 var TEMPLATE_DEPRECATION_WARNINGS = GroupMessages.GROUP.TemplateDeprecationWarnings;
 var REGISTER_TEMPLATE_DEPRECATION_WARNINGS = GroupMessages.GROUP.RegisterTemplateDeprecationWarnings;
+var SASS_MAP_FORMAT_DEPRECATION_WARNINGS = GroupMessages.GROUP.SassMapFormatDeprecationWarnings;
 
 /**
  * Style Dictionary module
@@ -76,7 +77,7 @@ After:
     "format": "android/colors"
   }]
 
-Your current config used the following templates:
+Your current config uses the following templates:
   ${template_warnings}
 `));
   }
@@ -111,6 +112,30 @@ process the style dictionary.
 Calls to registerTemplate included the registration of the following
 custom templates:
   ${register_template_warnings}`));
+  }
+
+  if(GroupMessages.count(SASS_MAP_FORMAT_DEPRECATION_WARNINGS) > 0) {
+    var sass_map_format_warnings = GroupMessages.flush(SASS_MAP_FORMAT_DEPRECATION_WARNINGS).join('\n  ');
+    console.log(chalk.bold.yellow(`
+⚠️ DEPRECATION WARNING ️️️️️⚠️
+The formats 'sass/map-***' have been renamed to 'scss/map-***', please update your config accordingly (will be soon removed).
+This is an example of how to update your config.json:
+
+Before:
+  "files": [{
+    "destination": "tokens_map-flat.scss",
+    "format": "sass/map-flat"
+  }]
+
+After:
+  "files": [{
+    "destination": "tokens_map-flat.scss",
+    "format": "scss/map-flat"
+  }]
+
+Your current config uses the following formats:
+  ${sass_map_format_warnings}
+`));
   }
 
 });
