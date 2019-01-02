@@ -89,7 +89,7 @@ StyleDictionary.buildAllPlatforms();
 ```
 
 ## Example
-[Take a look at some of our examples](example/)
+[Take a look at some of our examples](examples/)
 
 A style dictionary is a collection of style properties, key/value pairs that describe stylistic attributes like colors, sizes, icons, motion, etc. A style dictionary defines these style properties in JSON files, and can also include static assets like images and fonts. Here is a basic example of what the package structure can look like:
 ```
@@ -195,7 +195,7 @@ Now run:
 ```
 $ style-dictionary init basic
 ```
-This command will copy over the example files found in [example](example/) in this repo. Now you have an example project set up. You can make changes to the style dictionary and rebuild the project by running:
+This command will copy over the example files found in [example](examples/) in this repo. Now you have an example project set up. You can make changes to the style dictionary and rebuild the project by running:
 
 ```
 $ style-dictionary build
