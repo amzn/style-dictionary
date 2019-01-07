@@ -35,15 +35,19 @@
     "NOTICE"
   ],
   "scripts": {
-    "lint": "eslint index.js lib/**/*.js test/*.js test/**/*.js",
+    "lint": "eslint --fix index.js lib/**/*.js test/*.js test/**/*.js",
     "test": "npm run lint && jest --runInBand",
     "test-watch": "npm run lint && jest --runInBand --watch",
     "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha -- test/*.js test/**/*.js",
-    "preversion": "npm test",
-    "version": "node ./scripts/version.js && npm run generate-docs",
     "generate-docs": "node ./scripts/generateDocs.js",
     "serve-docs": "docsify serve docs -p 3000 -P 12345",
-    "install-cli": "npm install -g $(npm pack)"
+    "install-cli": "npm install -g $(npm pack)",
+    "release": "git add . && standard-version -a"
+  },
+  "standard-version": {
+    "scripts": {
+      "postbump": "node ./scripts/version.js && npm run generate-docs"
+    }
   },
   "jest": {
     "verbose": false,
@@ -65,8 +69,20 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm test"
+      "pre-commit": "npm test && lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run lint",
+      "git add"
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   },
   "repository": {
     "type": "git",
@@ -95,6 +111,8 @@
     "tinycolor2": "^1.4.1"
   },
   "devDependencies": {
+    "@commitlint/cli": "^7.2.1",
+    "@commitlint/config-conventional": "^7.1.2",
     "babel-jest": "^23.6.0",
     "babel-preset-env": "^1.7.0",
     "chai": "^4.1.2",
@@ -108,7 +126,9 @@
     "jsdoc-to-markdown": "^4.0.1",
     "json5-jest": "^1.0.1",
     "less": "^3.0.1",
+    "lint-staged": "^8.1.0",
     "mocha": "^5.2.0",
-    "node-sass": "^4.9.4"
+    "node-sass": "^4.9.4",
+    "standard-version": "^4.4.0"
   }
 }
