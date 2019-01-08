@@ -43,6 +43,7 @@ var StyleDictionary = {
   registerFormat: require('./lib/register/format'),
   registerTemplate: require('./lib/register/template'),
   registerAction: require('./lib/register/action'),
+  registerFilter: require('./lib/register/filter'),
 
   exportPlatform: require('./lib/exportPlatform'),
   buildPlatform: require('./lib/buildPlatform'),
