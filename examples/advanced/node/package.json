@@ -1,0 +1,25 @@
+{
+  "name": "style-dictionary-example-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rm -rf build",
+    "build": "style-dictionary build --config ./config.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/amzn/style-dictionary.git"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/dbanksdesign/style-dictionary-node/issues"
+  },
+  "homepage": "https://github.com/dbanksdesign/style-dictionary-node#readme",
+  "devDependencies": {
+    "style-dictionary": "2.6.0",
+    "tinycolor2": "^1.4.1"
+  }
+}
