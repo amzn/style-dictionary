@@ -6,7 +6,7 @@ This is very handy when there are continuous changes to the token values (e.g. d
 
 #### Running the example
 
-First of all, set up the required dependencies running the command `npm install` in your local CLI environment (if you prefer to use *yarn* update the commands accordingly).
+First of all, set up the required dependencies running the command `npm install` in your local CLI environment (if you prefer to use *yarn*, update the commands accordingly).
 
 At this point, if you want to build once the tokens you can run `npm run build`. This command will generate the files in the `build` folder.
 
