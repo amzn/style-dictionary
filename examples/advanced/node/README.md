@@ -21,6 +21,6 @@ The `config.js` file is the main thing to look at. It has a lot of comments how 
 If you take a look at any of the `index.js` files in `properties/` or `components/` you can see how using node module exports can simplify the object structure. Now you don't have to copy the same top-level object paths in the JSON object. Some specific files to look at:
 
 * components/index.js Uses node module export/require to merge the property files together without Style Dictionary
-* components/button/primary.js Extends a default set of properties
+* `components/button/primary.js` Extends a default set of properties
 * `properties/color/core.js` Creates a color ramp programmatically based on base colors
 * properties/color/background.js Shows different ways to reference other style dictionary values
