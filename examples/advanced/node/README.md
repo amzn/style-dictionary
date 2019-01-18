@@ -22,5 +22,5 @@ If you take a look at any of the `index.js` files in `properties/` or `component
 
 * components/index.js Uses node module export/require to merge the property files together without Style Dictionary
 * components/button/primary.js Extends a default set of properties
-* properties/color/core.js Creates a color ramp programmatically based on base colors
+* `properties/color/core.js` Creates a color ramp programmatically based on base colors
 * properties/color/background.js Shows different ways to reference other style dictionary values
