@@ -10,15 +10,14 @@ const buildPath = 'build/';
 // You can still add custom transforms and formats like you
 // normally would and reference them in the config below.
 StyleDictionary.registerTransform({
-  name: 'test',
-  type: 'name',
-  transformer: function(prop) {
-    return prop.path.splice(2).join(' ')
-  }
+  name: 'myRegisteredTransform',
+  type: 'value',
+  matcher: (prop) => prop.attributes.category === 'size',
+  transformer: (prop) => `${parseInt(prop.value) * 16}px`
 });
 
 StyleDictionary.registerFormat({
-  name: "testing",
+  name: 'myRegisteredFormat',
   formatter: (dictionary) => {
     return dictionary.allProperties.map((prop) => prop.value).join('\n');
   }
@@ -38,10 +37,10 @@ module.exports = {
   // so you don't have to worry about using Object.assign to not accidentally
   // null out things.
   transform: {
-    // Now we can use the transform 'customTransform' below
-    'customTransform': {
-      type: 'value',
-      transformer: (prop) => 'hello'
+    // Now we can use the transform 'myTransform' below
+    myTransform: {
+      type: 'name',
+      transformer: (prop) => prop.path.join('_').toUpperCase()
     }
   },
   // Same with formats, you can now just write them directly to this config
@@ -51,18 +50,17 @@ module.exports = {
       return dictionary.allProperties.map(prop => `${prop.name}: ${prop.value}`).join('\n');
     }
   },
-  // You can also bypass the
-  // merging of files Style Dictionary does by adding a 'properties' object
-  // directly like this:
+  // You can also bypass the merging of files Style Dictionary does
+  // by adding a 'properties' object directly like this:
   //
   // properties: properties,
   platforms: {
     custom: {
       // Using the custom transforms we defined above
-      transforms: ['customTransform', 'test'],
+      transforms: ['attribute/cti', 'myTransform', 'myRegisteredTransform', 'color/hex'],
       buildPath: buildPath,
       files: [{
-        destination: 'variables.txt',
+        destination: 'variables.yml',
         // Using the custom format defined above
         format: 'myFormat'
       }]
@@ -73,13 +71,6 @@ module.exports = {
       files: [{
         destination: 'variables.css',
         format: 'css/variables'
-      // },{
-        // Inline format functions don't work yet:
-        //
-        // destination: 'test.json',
-        // format: function(dictionary) {
-        //   return JSON.stringify( dictionary.properties, null, 2 );
-        // }
       }]
     },
 
@@ -94,7 +85,7 @@ module.exports = {
     },
 
     js: {
-      transforms: StyleDictionary.transformGroup.js.concat('test'),
+      transforms: StyleDictionary.transformGroup.js.concat('myRegisteredTransform'),
       buildPath: buildPath,
       // If you want to get super fancy, you can use node modules
       // to create a properties object first, and then you can
