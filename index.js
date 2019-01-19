@@ -116,9 +116,10 @@ custom templates:
 
   if(GroupMessages.count(SASS_MAP_FORMAT_DEPRECATION_WARNINGS) > 0) {
     var sass_map_format_warnings = GroupMessages.flush(SASS_MAP_FORMAT_DEPRECATION_WARNINGS).join('\n  ');
-    console.log(chalk.bold.yellow(`
-⚠️ DEPRECATION WARNING ️️️️️⚠️
-The formats 'sass/map-***' have been renamed to 'scss/map-***', please update your config accordingly (will be soon removed).
+    console.log(chalk.bold.cyan(`
+🔔 NOTICE 🔔
+The formats 'sass/map-***' have been renamed to 'scss/map-***', please update your config.
+In the future 'sass/map-***' formats may output actual Sass instead of SCSS, which may break your current configuration.
 This is an example of how to update your config.json:
 
 Before:
