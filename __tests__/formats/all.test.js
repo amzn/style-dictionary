@@ -12,7 +12,6 @@
  */
 
 var formats = require('../../lib/common/formats');
-var helpers = require('../__helpers');
 var _ = require('lodash');
 
 var file = {
@@ -61,27 +60,28 @@ var dictionary = {
 };
 
 describe('formats', () => {
+  _.each(_.keys(formats), function(key) {
 
-  const constantDate = new Date('2000-01-01');
-  const globalDate = global.Date;
-
-  beforeAll(() => {
+    const constantDate = new Date('2000-01-01');
+    const globalDate = global.Date;
     global.Date = function() { return constantDate };
-  });
 
-  afterAll(() => {
+    var formatter = formats[key].bind(file);
+    var output = formatter(dictionary, file);
+
+    // reset the global Date object
     global.Date = globalDate;
-  });
 
-  describe('all', () => {
-    _.each(_.keys(formats), function(key) {
-      it('should return ' + key + ' as a string', () => {
-        var formatter = formats[key].bind(file);
-        var output = formatter(dictionary, file);
-        expect(typeof output).toBe('string');
+    describe('all', () => {
+
+      it('should match ' + key + ' snapshot', () => {
         expect(output).toMatchSnapshot();
       });
-    });
-  });
 
+      it('should return ' + key + ' as a string', () => {
+        expect(typeof output).toBe('string');
+      });
+    });
+
+  });
 });

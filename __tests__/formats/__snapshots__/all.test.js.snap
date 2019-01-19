@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`formats all should return android/colors as a string 1`] = `
+exports[`formats all should match android/colors snapshot 1`] = `
 "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
 
 <!--
@@ -14,7 +14,7 @@ exports[`formats all should return android/colors as a string 1`] = `
 "
 `;
 
-exports[`formats all should return android/dimens as a string 1`] = `
+exports[`formats all should match android/dimens snapshot 1`] = `
 "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
 
 <!--
@@ -27,7 +27,7 @@ exports[`formats all should return android/dimens as a string 1`] = `
 "
 `;
 
-exports[`formats all should return android/fontDimens as a string 1`] = `
+exports[`formats all should match android/fontDimens snapshot 1`] = `
 "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
 
 <!--
@@ -40,7 +40,7 @@ exports[`formats all should return android/fontDimens as a string 1`] = `
 "
 `;
 
-exports[`formats all should return android/integers as a string 1`] = `
+exports[`formats all should match android/integers snapshot 1`] = `
 "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
 
 <!--
@@ -53,7 +53,7 @@ exports[`formats all should return android/integers as a string 1`] = `
 "
 `;
 
-exports[`formats all should return android/strings as a string 1`] = `
+exports[`formats all should match android/strings snapshot 1`] = `
 "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
 
 <!--
@@ -66,12 +66,12 @@ exports[`formats all should return android/strings as a string 1`] = `
 "
 `;
 
-exports[`formats all should return css/fonts.css as a string 1`] = `
+exports[`formats all should match css/fonts.css snapshot 1`] = `
 "
 "
 `;
 
-exports[`formats all should return css/variables as a string 1`] = `
+exports[`formats all should match css/variables snapshot 1`] = `
 "/**
  * Do not edit directly
  * Generated on Sat, 01 Jan 2000 00:00:00 GMT
@@ -83,7 +83,7 @@ exports[`formats all should return css/variables as a string 1`] = `
 "
 `;
 
-exports[`formats all should return ios/colors.h as a string 1`] = `
+exports[`formats all should match ios/colors.h snapshot 1`] = `
 "
 //
 // __output/
@@ -106,7 +106,7 @@ color_red
 "
 `;
 
-exports[`formats all should return ios/colors.m as a string 1`] = `
+exports[`formats all should match ios/colors.m snapshot 1`] = `
 "
 //
 // __output/
@@ -141,7 +141,7 @@ exports[`formats all should return ios/colors.m as a string 1`] = `
 "
 `;
 
-exports[`formats all should return ios/macros as a string 1`] = `
+exports[`formats all should match ios/macros snapshot 1`] = `
 "
 //
 // __output/
@@ -160,7 +160,7 @@ exports[`formats all should return ios/macros as a string 1`] = `
 "
 `;
 
-exports[`formats all should return ios/plist as a string 1`] = `
+exports[`formats all should match ios/plist snapshot 1`] = `
 "
 <?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
 <!DOCTYPE plist PUBLIC \\"-//Apple//DTD PLIST 1.0//EN\\" \\"http://www.apple.com/DTDs/PropertyList-1.0.dtd\\">
@@ -187,7 +187,7 @@ exports[`formats all should return ios/plist as a string 1`] = `
 "
 `;
 
-exports[`formats all should return ios/singleton.h as a string 1`] = `
+exports[`formats all should match ios/singleton.h snapshot 1`] = `
 "
 //
 // __output/
@@ -209,7 +209,7 @@ exports[`formats all should return ios/singleton.h as a string 1`] = `
 "
 `;
 
-exports[`formats all should return ios/singleton.m as a string 1`] = `
+exports[`formats all should match ios/singleton.m snapshot 1`] = `
 "
 //
 // __output/
@@ -256,7 +256,7 @@ exports[`formats all should return ios/singleton.m as a string 1`] = `
 "
 `;
 
-exports[`formats all should return ios/static.h as a string 1`] = `
+exports[`formats all should match ios/static.h snapshot 1`] = `
 "
 // __output/
 //
@@ -272,7 +272,7 @@ extern  const color_red;
 "
 `;
 
-exports[`formats all should return ios/static.m as a string 1`] = `
+exports[`formats all should match ios/static.m snapshot 1`] = `
 "
 //
 // __output/
@@ -289,7 +289,7 @@ exports[`formats all should return ios/static.m as a string 1`] = `
 "
 `;
 
-exports[`formats all should return ios/strings.h as a string 1`] = `
+exports[`formats all should match ios/strings.h snapshot 1`] = `
 "
 //
 // __output/
@@ -310,7 +310,7 @@ extern NSString * const color_red;
 "
 `;
 
-exports[`formats all should return ios/strings.m as a string 1`] = `
+exports[`formats all should match ios/strings.m snapshot 1`] = `
 "
 //
 // __output/
@@ -351,7 +351,7 @@ NSString * const color_red = #FF0000;
 "
 `;
 
-exports[`formats all should return javascript/es6 as a string 1`] = `
+exports[`formats all should match javascript/es6 snapshot 1`] = `
 "/**
  * Do not edit directly
  * Generated on Sat, 01 Jan 2000 00:00:00 GMT
@@ -360,7 +360,7 @@ exports[`formats all should return javascript/es6 as a string 1`] = `
 export const color_red = \\"#FF0000\\"; // comment"
 `;
 
-exports[`formats all should return javascript/module as a string 1`] = `
+exports[`formats all should match javascript/module snapshot 1`] = `
 "/**
  * Do not edit directly
  * Generated on Sat, 01 Jan 2000 00:00:00 GMT
@@ -388,7 +388,7 @@ module.exports = {
 };"
 `;
 
-exports[`formats all should return javascript/object as a string 1`] = `
+exports[`formats all should match javascript/object snapshot 1`] = `
 "/**
  * Do not edit directly
  * Generated on Sat, 01 Jan 2000 00:00:00 GMT
@@ -416,7 +416,7 @@ var _styleDictionary = {
 };"
 `;
 
-exports[`formats all should return javascript/umd as a string 1`] = `
+exports[`formats all should match javascript/umd snapshot 1`] = `
 "/**
  * Do not edit directly
  * Generated on Sat, 01 Jan 2000 00:00:00 GMT
@@ -457,7 +457,7 @@ exports[`formats all should return javascript/umd as a string 1`] = `
 "
 `;
 
-exports[`formats all should return json as a string 1`] = `
+exports[`formats all should match json snapshot 1`] = `
 "{
   \\"color\\": {
     \\"red\\": {
@@ -480,15 +480,15 @@ exports[`formats all should return json as a string 1`] = `
 }"
 `;
 
-exports[`formats all should return json/asset as a string 1`] = `"{}"`;
+exports[`formats all should match json/asset snapshot 1`] = `"{}"`;
 
-exports[`formats all should return json/flat as a string 1`] = `
+exports[`formats all should match json/flat snapshot 1`] = `
 "{
   \\"color_red\\": \\"#FF0000\\"
 }"
 `;
 
-exports[`formats all should return json/nested as a string 1`] = `
+exports[`formats all should match json/nested snapshot 1`] = `
 "{
   \\"color\\": {
     \\"red\\": \\"#FF0000\\"
@@ -496,7 +496,7 @@ exports[`formats all should return json/nested as a string 1`] = `
 }"
 `;
 
-exports[`formats all should return less/icons as a string 1`] = `
+exports[`formats all should match less/icons snapshot 1`] = `
 "/**
  * Do not edit directly
  * Generated on Sat, 01 Jan 2000 00:00:00 GMT
@@ -505,7 +505,7 @@ exports[`formats all should return less/icons as a string 1`] = `
 "
 `;
 
-exports[`formats all should return less/variables as a string 1`] = `
+exports[`formats all should match less/variables snapshot 1`] = `
 "/**
  * Do not edit directly
  * Generated on Sat, 01 Jan 2000 00:00:00 GMT
@@ -514,7 +514,7 @@ exports[`formats all should return less/variables as a string 1`] = `
 @color_red: #FF0000; /* comment */"
 `;
 
-exports[`formats all should return sass/map-deep as a string 1`] = `
+exports[`formats all should match sass/map-deep snapshot 1`] = `
 "
 /*
   Do not edit directly
@@ -531,7 +531,7 @@ $tokens: (
 "
 `;
 
-exports[`formats all should return sass/map-flat as a string 1`] = `
+exports[`formats all should match sass/map-flat snapshot 1`] = `
 "
 /*
   Do not edit directly
@@ -545,7 +545,7 @@ $tokens: (
 "
 `;
 
-exports[`formats all should return scss/icons as a string 1`] = `
+exports[`formats all should match scss/icons snapshot 1`] = `
 "/**
  * Do not edit directly
  * Generated on Sat, 01 Jan 2000 00:00:00 GMT
@@ -554,7 +554,7 @@ exports[`formats all should return scss/icons as a string 1`] = `
 "
 `;
 
-exports[`formats all should return scss/variables as a string 1`] = `
+exports[`formats all should match scss/variables snapshot 1`] = `
 "/**
  * Do not edit directly
  * Generated on Sat, 01 Jan 2000 00:00:00 GMT
@@ -563,7 +563,7 @@ exports[`formats all should return scss/variables as a string 1`] = `
 $color_red: #FF0000; /* comment */"
 `;
 
-exports[`formats all should return sketch/palette as a string 1`] = `
+exports[`formats all should match sketch/palette snapshot 1`] = `
 "{
   \\"compatibleVersion\\": \\"1.0\\",
   \\"pluginVersion\\": \\"1.1\\",
