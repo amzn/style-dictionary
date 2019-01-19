@@ -1,15 +1,15 @@
 ## Custom tranforms (and transformGroups)
 
-This example shows how to use custom tranforms (and transformGroups) to apply custom "tranformations" to the properties when converted to design tokens. 
+This example shows how to use custom tranforms (and transformGroups) to apply custom "tranformations" to the properties when converted to design tokens.
 
 Transforms are functions that transform a property (in a non-destructive way). The reason for *transforms* is that in this way each platform can consume the property in different ways (eg. changing *pixel* values to *pt* values for iOS, and *dp* or *sp* for Android).
 
 **Remember**: transforms are performed sequentially, so the order you use transforms matters.
 
-The need for custom transforms is that Style Dictionary expects the properties to be declared according to certain criteria, in order to use the pre-defined transforms and formats/templates. For example, the *web* transformGroup consists of the *attribute/cti*, *name/cti/kebab*, *size/px* and *color/css* transforms. 
+The need for custom transforms is that Style Dictionary expects the properties to be declared according to certain criteria, in order to use the pre-defined transforms and formats/templates. For example, the *web* transformGroup consists of the *attribute/cti*, *name/cti/kebab*, *size/px* and *color/css* transforms.
 The *size/px* adds 'px' to the end of the number, and is applied only if `prop.attributes.category === 'size'`. This means that your property needs to be expressed without units, and be under the *'size'* "category. If you need a different logic or you want to organise your properties differently, probably you can't use the out-of-the-box transformation groups, but you have to declare your custom ones.
 
-If [custom templates](../custom-templates/) are the way to allow users to customise the format of the *output* of Style Dictionary, custom transforms are the way to allow them to customise both the *input* (the property names/values/attributes) and the *output* (the actual values expressed in the design tokens). For this reasons, custom transforms are probably one of the **most powerful features** of Style Dictionary: they make it extremely versatile, allowing limitless possibilities of extension and customisation of the entire pipeline from properties to design tokens.
+If [custom formats](../custom-formats-with-templates/) are the way to allow users to customise the format of the *output* of Style Dictionary, custom transforms are the way to allow them to customise both the *input* (the property names/values/attributes) and the *output* (the actual values expressed in the design tokens). For this reasons, custom transforms are probably one of the **most powerful features** of Style Dictionary: they make it extremely versatile, allowing limitless possibilities of extension and customisation of the entire pipeline from properties to design tokens.
 
 #### Running the example
 
