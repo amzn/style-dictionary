@@ -37,6 +37,7 @@ var StyleDictionary = {
   transformGroup: require('./lib/common/transformGroups'),
   format: require('./lib/common/formats'),
   action: require('./lib/common/actions'),
+  filter: {}, // we need to initialise the object, since we don't have built-in filters
 
   registerTransform: require('./lib/register/transform'),
   registerTransformGroup: require('./lib/register/transformGroup'),
