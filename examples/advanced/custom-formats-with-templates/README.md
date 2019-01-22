@@ -29,7 +29,7 @@ For the formatting function, it's possible to use any templating language (Lodas
 
 #### What to look at
 
-Open the `config.js` file and see how for each platform there are two kinds of `files` declarations, one that uses a custom template and one that uses a custom format.
+Open the `config.js` file and see how for each platform the `files` declarations use custom formats:
 
 ```
 "android": {
@@ -37,7 +37,7 @@ Open the `config.js` file and see how for each platform there are two kinds of `
     "buildPath": "build/android/",
     "files": [{
         "destination": "tokens.xml",
-        "template": "custom/format/android-xml"
+        "format": "custom/format/android-xml"
     },{
         "destination": "tokens_alt.xml",
         "format": "custom/format/android-xml-alt"
@@ -45,7 +45,7 @@ Open the `config.js` file and see how for each platform there are two kinds of `
 }
 ```
 
-Now open the `build.js` script and look at how these custom formats are declared, using **different templating files/engines**. 
+Now open the `build.js` script and look at how these custom formats are declared, using **different templating files/engines**.
 
 Finally, look at the different template files in the `templates` folder and see how they are built to generate custom file formats in output:
 
