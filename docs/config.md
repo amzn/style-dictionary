@@ -34,8 +34,8 @@ By default, Style Dictionary looks for a `config.json` file in the root of your 
 
 | Attribute | Type | Description |
 | :--- | :--- | :--- |
-| includes | Array[String] (optional) | An array of paths to Style Dictionary property files that contain default styles. The Style Dictionary uses this as a base collection of properties. The properties found using the "source" attribute will overwrite properties found using includes. |
-| source | Array[String] | An array of paths to JSON files that contain style properties. The Style Dictionary will do a deep merge of all of the JSON files so you can separate your properties into multiple files. |
+| include | Array[String] (optional) | An array of path [globs](https://github.com/isaacs/node-glob) to Style Dictionary property files that contain default styles. The Style Dictionary uses this as a base collection of properties. The properties found using the "source" attribute will overwrite properties found using include. |
+| source | Array[String] | An array of path [globs](https://github.com/isaacs/node-glob) to JSON files that contain style properties. The Style Dictionary will do a deep merge of all of the JSON files so you can separate your properties into multiple files. |
 | platforms | Object | An object containing platform config objects that describe how the Style Dictionary should build for that platform. You can add any arbitrary attributes on this object that will get passed to formats and actions (more on these in a bit). This is useful for things like build paths, name prefixes, variable names, etc.  |
 | platform.transforms | Array[String] (optional) | An array of [transforms](transforms.md) to be performed on the style properties object. These will transform the properties in a non-destructive way so each platform can transform the properties. Transforms to apply sequentially to all properties. Can be a built-in one or you can create your own. |
 | platform.transformGroup | String (optional) | A string that maps to an array of transforms. This makes it easier to reference transforms by grouping them together. You must either define this or [transforms](transforms.md). |
