@@ -82,7 +82,7 @@ describe('extend', () => {
       expect(StyleDictionaryExtended.properties).toEqual(helpers.fileToJSON(__dirname + "/__properties/paddings.json"));
     });
 
-    it('should override existing properties include is given', () => {
+    it('should override existing properties if include is given', () => {
       var StyleDictionaryExtended = StyleDictionary.extend({
         properties: test_props,
         include: [__dirname + "/__properties/paddings.json"]
@@ -114,7 +114,7 @@ describe('extend', () => {
       ).toThrow('source must be an array');
     });
 
-    it('should not update properties if sourche glob paths dont resolve to anything', () => {
+    it('should not update properties if source glob paths don\'t resolve to anything', () => {
       var StyleDictionaryExtended = StyleDictionary.extend({
         source: ['foo']
       });
