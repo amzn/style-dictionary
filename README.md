@@ -55,7 +55,7 @@ Call this in the root directory of your project. The only thing needed is a `con
 
 | Flag | Short Flag | Description |
 | --- | --- | --- |
-| --config \[path\] | -h | Set the config file to use. Must be a .json file |
+| --config \[path\] | -c | Set the config file to use. Must be a .json file |
 | --platform \[platform\] | -p | Only build a specific platform defined in the config file. |
 | --help | -h | Display help content |
 | --version | -v | Display the version |
