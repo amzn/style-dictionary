@@ -61,10 +61,33 @@ describe('extend', () => {
       ).toThrow('include must be an array');
     });
 
-    it('should throw if a path in the includes array doesnt resolve', () => {
-      expect(
-        StyleDictionary.extend.bind(null, {include: ['foo']})
-      ).toThrow("Cannot find module 'foo'");
+    it('should not update properties if include glob paths dont resolve to anything', () => {
+      var StyleDictionaryExtended = StyleDictionary.extend({
+        include: ['foo']
+      });
+      expect(typeof StyleDictionaryExtended.properties.size).toBe('undefined');
+    });
+
+    it('should properly glob paths', () => {
+      var StyleDictionaryExtended = StyleDictionary.extend({
+        include: [__dirname + '/__properties/*.json']
+      });
+      expect(typeof StyleDictionaryExtended.properties.size.padding.tiny).toBe('object');
+    });
+
+    it('should build the properties object if an include is given', () => {
+      var StyleDictionaryExtended = StyleDictionary.extend({
+        "include": [__dirname + "/__properties/paddings.json"]
+      });
+      expect(StyleDictionaryExtended.properties).toEqual(helpers.fileToJSON(__dirname + "/__properties/paddings.json"));
+    });
+
+    it('should override existing properties if include is given', () => {
+      var StyleDictionaryExtended = StyleDictionary.extend({
+        properties: test_props,
+        include: [__dirname + "/__properties/paddings.json"]
+      });
+      expect(StyleDictionaryExtended.properties).toEqual(helpers.fileToJSON(__dirname + "/__properties/paddings.json"));
     });
 
     it('should update properties if there are includes', () => {
@@ -91,10 +114,11 @@ describe('extend', () => {
       ).toThrow('source must be an array');
     });
 
-    it('should throw if a path in the source array doesnt resolve', () => {
-      expect(
-        StyleDictionary.extend.bind(null, {include: ['foo']})
-      ).toThrow("Cannot find module 'foo'");
+    it('should not update properties if source glob paths don\'t resolve to anything', () => {
+      var StyleDictionaryExtended = StyleDictionary.extend({
+        source: ['foo']
+      });
+      expect(typeof StyleDictionaryExtended.properties.size).toBe('undefined');
     });
 
     it('should build the properties object if a source is given', () => {

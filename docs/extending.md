@@ -5,8 +5,9 @@ The style dictionary build system is easily extended. We don't know exactly how 
 ## Extension Functions in the API
 * [registerTransform](api.md#registertransform)
 * [registerTransformGroup](api.md#registertransformgroup)
+* [registerFilter](api.md#registerfilter)
 * [registerFormat](api.md#registerformat)
-* [registerTemplate](api.md#registertemplate)
+* [registerTemplate](api.md#registertemplate) (deprecated)
 * [registerAction](api.md#registeraction)
 
 ## Extension Examples
