@@ -102,10 +102,10 @@ Creates a CSS file with variable definitions based on the style dictionary
 
 * * *
 
-### sass/map-flat
+### scss/map-flat
 
 
-Creates a Sass file with a flat map based on the style dictionary
+Creates a SCSS file with a flat map based on the style dictionary
 
 **Example**
 ```scss
@@ -117,10 +117,10 @@ $tokens: (
 
 * * *
 
-### sass/map-deep
+### scss/map-deep
 
 
-Creates a Sass file with a deep map based on the style dictionary
+Creates a SCSS file with a deep map based on the style dictionary
 
 **Example**
 ```scss

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`formats sass/map-deep sass/map-deep snapshot 1`] = `
+exports[`formats scss/map-deep scss/map-deep snapshot 1`] = `
 "
 /*
   Do not edit directly
@@ -29,7 +29,7 @@ $tokens: (
 "
 `;
 
-exports[`formats sass/map-flat sass/map-flat snapshot 1`] = `
+exports[`formats scss/map-flat scss/map-flat snapshot 1`] = `
 "
 /*
   Do not edit directly

@@ -167,7 +167,7 @@ var dictionary = {
 };
 
 describe('formats', () => {
-  _.each(['sass/map-flat', 'sass/map-deep'], function(key) {
+  _.each(['scss/map-flat', 'scss/map-deep'], function(key) {
 
     describe(key, () => {
 

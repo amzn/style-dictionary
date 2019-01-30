@@ -554,6 +554,37 @@ exports[`formats all should match scss/icons snapshot 1`] = `
 "
 `;
 
+exports[`formats all should match scss/map-deep snapshot 1`] = `
+"
+/*
+  Do not edit directly
+  Generated on Sat, 01 Jan 2000 00:00:00 GMT
+*/
+
+$color_red: #FF0000 !default; // comment
+
+$tokens: (
+  'color': (
+    'red': $color_red
+  )
+);
+"
+`;
+
+exports[`formats all should match scss/map-flat snapshot 1`] = `
+"
+/*
+  Do not edit directly
+  Generated on Sat, 01 Jan 2000 00:00:00 GMT
+*/
+
+$tokens: (
+  // comment
+  'color_red': #FF0000
+);
+"
+`;
+
 exports[`formats all should match scss/variables snapshot 1`] = `
 "/**
  * Do not edit directly
