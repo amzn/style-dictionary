@@ -175,7 +175,34 @@ StyleDictionary.registerAction({
 
 * * *
 
-### registerFormat 
+### registerFilter
+> StyleDictionary.registerFilter(filter) ⇒ [<code>style-dictionary</code>](#module_style-dictionary)
+
+
+
+
+Add a custom filter to the style dictionary
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| filter | <code>Object</code> |  |
+| filter.name | <code>String</code> | Name of the filter to be referenced in your config.json |
+| filter.matcher | <code>function</code> | Matcher function, return boolean if filter should be applied. |
+
+**Example**
+```js
+StyleDictionary.registerFilter({
+  name: 'isColor',
+  matcher: function(prop) {
+    return return prop.attributes.category === 'color';
+  }
+})
+```
+
+* * *
+
+### registerFormat
 > StyleDictionary.registerFormat(format) ⇒ [<code>style-dictionary</code>](#module_style-dictionary)
 
 

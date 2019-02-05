@@ -1,5 +1,5 @@
 {
-  "name": "style-dictionary-custom-templates",
+  "name": "style-dictionary-custom-formats-with-templates",
   "version": "1.0.0",
   "description": "",
   "main": "build/index.js",
@@ -19,6 +19,6 @@
     "handlebars": "^4.0.12",
     "lodash": "^4.17.11",
     "pug": "^2.0.3",
-    "style-dictionary": "2.6.2"
+    "style-dictionary": "2.6.0"
   }
 }

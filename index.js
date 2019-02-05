@@ -14,6 +14,7 @@ var chalk = require('chalk');
 var GroupMessages = require('./lib/utils/groupMessages');
 var TEMPLATE_DEPRECATION_WARNINGS = GroupMessages.GROUP.TemplateDeprecationWarnings;
 var REGISTER_TEMPLATE_DEPRECATION_WARNINGS = GroupMessages.GROUP.RegisterTemplateDeprecationWarnings;
+var SASS_MAP_FORMAT_DEPRECATION_WARNINGS = GroupMessages.GROUP.SassMapFormatDeprecationWarnings;
 
 /**
  * Style Dictionary module
@@ -37,12 +38,14 @@ var StyleDictionary = {
   transformGroup: require('./lib/common/transformGroups'),
   format: require('./lib/common/formats'),
   action: require('./lib/common/actions'),
+  filter: {}, // we need to initialise the object, since we don't have built-in filters
 
   registerTransform: require('./lib/register/transform'),
   registerTransformGroup: require('./lib/register/transformGroup'),
   registerFormat: require('./lib/register/format'),
   registerTemplate: require('./lib/register/template'),
   registerAction: require('./lib/register/action'),
+  registerFilter: require('./lib/register/filter'),
 
   exportPlatform: require('./lib/exportPlatform'),
   buildPlatform: require('./lib/buildPlatform'),
@@ -76,7 +79,7 @@ After:
     "format": "android/colors"
   }]
 
-Your current config used the following templates:
+Your current config uses the following templates:
   ${template_warnings}
 `));
   }
@@ -111,6 +114,31 @@ process the style dictionary.
 Calls to registerTemplate included the registration of the following
 custom templates:
   ${register_template_warnings}`));
+  }
+
+  if(GroupMessages.count(SASS_MAP_FORMAT_DEPRECATION_WARNINGS) > 0) {
+    var sass_map_format_warnings = GroupMessages.flush(SASS_MAP_FORMAT_DEPRECATION_WARNINGS).join('\n  ');
+    console.log(chalk.bold.cyan(`
+🔔 NOTICE 🔔
+The formats 'sass/map-***' have been renamed to 'scss/map-***', please update your config.
+In the future 'sass/map-***' formats may output actual Sass instead of SCSS, which may break your current configuration.
+This is an example of how to update your config.json:
+
+Before:
+  "files": [{
+    "destination": "tokens_map-flat.scss",
+    "format": "sass/map-flat"
+  }]
+
+After:
+  "files": [{
+    "destination": "tokens_map-flat.scss",
+    "format": "scss/map-flat"
+  }]
+
+Your current config uses the following formats:
+  ${sass_map_format_warnings}
+`));
   }
 
 });

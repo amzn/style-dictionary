@@ -9,11 +9,11 @@ Transforms are functions that transform a property (in a non-destructive way). T
 The need for custom transforms is that Style Dictionary expects the properties to be declared according to certain criteria, in order to use the pre-defined transforms and formats/templates. For example, the *web* transformGroup consists of the *attribute/cti*, *name/cti/kebab*, *size/px* and *color/css* transforms.
 The *size/px* adds 'px' to the end of the number, and is applied only if `prop.attributes.category === 'size'`. This means that your property needs to be expressed without units, and be under the *'size'* "category. If you need a different logic or you want to organise your properties differently, probably you can't use the out-of-the-box transformation groups, but you have to declare your custom ones.
 
-If [custom templates](../custom-templates/) are the way to allow users to customise the format of the *output* of Style Dictionary, custom transforms are the way to allow them to customise both the *input* (the property names/values/attributes) and the *output* (the actual values expressed in the design tokens). For this reasons, custom transforms are probably one of the **most powerful features** of Style Dictionary: they make it extremely versatile, allowing limitless possibilities of extension and customisation of the entire pipeline from properties to design tokens.
+If [custom formats](../custom-formats-with-templates/) are the way to allow users to customise the format of the *output* of Style Dictionary, custom transforms are the way to allow them to customise both the *input* (the property names/values/attributes) and the *output* (the actual values expressed in the design tokens). For this reasons, custom transforms are probably one of the **most powerful features** of Style Dictionary: they make it extremely versatile, allowing limitless possibilities of extension and customisation of the entire pipeline from properties to design tokens.
 
 #### Running the example
 
-First of all, set up the required dependencies running the command `npm install` in your local CLI environment (if you prefer to use *yarn*, update the commands accordingly).
+First of all, set up the required dependencies running the command `npm install` in your local CLI environment (if you prefer to use *yarn* update the commands accordingly).
 
 At this point, if you want to build the tokens you can run `npm run build`. This command will generate the files in the `build` folder.
 

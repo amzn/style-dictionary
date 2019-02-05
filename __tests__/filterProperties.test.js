@@ -112,16 +112,21 @@ describe('filterProperties', () => {
     expect(filteredDictionary.properties).not.toHaveProperty('color');
   });
 
-  it('should work with a filter object', () => {
-    var filter = { "attributes": { "category": "size" } };
-    var filteredDictionary = filterProperties(dictionary, filter);
-    _.each(filteredDictionary.allProperties, function(property) {
-      expect(property).not.toBe(colorRed);
-      expect(property).not.toBe(colorBlue);
+  describe('should throw if', () => {
+    it('filter is a string', () => {
+      expect(
+        function(){
+          filterProperties(dictionary, 'my_filter')
+        }
+      ).toThrow(/filter is not a function/);
     });
-    expect(filteredDictionary.allProperties).toEqual([sizeSmall, sizeLarge]);
-    expect(filteredDictionary.properties).toHaveProperty('size');
-    expect(filteredDictionary.properties).not.toHaveProperty('color');
-
+    it('filter is an object', () => {
+      expect(
+        function(){
+          filterProperties(dictionary, { "attributes": { "category": "size" } })
+        }
+      ).toThrow(/filter is not a function/);
+    });
   });
+
 });
