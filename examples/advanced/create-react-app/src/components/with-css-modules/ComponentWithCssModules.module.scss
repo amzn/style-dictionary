@@ -1,0 +1,42 @@
+@import '../../style-dictionary-dist/variables.scss';
+
+.component {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  margin: $token-spacing-medium auto 0;
+  padding: $token-spacing-large;
+  background-color: $token-color-background;
+  border-radius: 10px;
+}
+
+.component-media {
+  flex: 0 0 auto;
+  display: block;
+  width: 100px;
+  height: 100px;
+}
+
+.component-text {
+  margin-left: $token-spacing-large;
+  font-family: $token-font-family-base;
+  font-size: $token-size-text-base;
+  text-align: left;
+  color: $token-color-text;
+}
+
+.component-text__description {
+  margin: 0 0 $token-spacing-small 0;
+  font-size: $token-size-text-large;
+}
+
+.component-text__reference {
+  margin: 0;
+  font-family: $token-font-family-code;
+}
+
+.component-link {
+  color: $token-color-base-primary;
+}
+

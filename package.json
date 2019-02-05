@@ -1,6 +1,6 @@
 {
   "name": "style-dictionary",
-  "version": "2.6.0",
+  "version": "2.6.2",
   "description": "Style once, use everywhere. A build system for creating cross-platform styles.",
   "keywords": [
     "style dictionary",
@@ -29,7 +29,7 @@
   "files": [
     "bin",
     "lib",
-    "example",
+    "examples",
     "index.js",
     "LICENSE",
     "NOTICE"

@@ -8,7 +8,7 @@
 # Style Dictionary
 > *Style once, use everywhere.*
 
-A Style Dictionary is a system that allows you to define styles once, in a way for any platform or language to consume. A single place to create and edit your styles, and a single command exports these rules to all the places you need them - iOS, Android, CSS, JS, HTML, sketch files, style documentation, etc. It is available as a CLI through npm, but can also be used like any normal node module if you want to extend its functionality.
+A Style Dictionary uses design tokens to define styles once and use those styles on any platform or language. It provides a single place to create and edit your styles, and exports these properties to all the places you need - iOS, Android, CSS, JS, HTML, sketch files, style documentation, etc. It is available as a CLI through npm, but can also be used like any normal node module if you want to extend its functionality.
 
 When you are managing user experiences, it can be quite challenging to keep styles consistent and synchronized across multiple development platforms and devices.  At the same time, designers, developers, PMs and others must be able to have consistent and up-to-date style documentation to enable effective work and communication.  Even then, mistakes inevitably happen and the design may not be implemented accurately.  StyleDictionary solves this by automatically generating style definitions across all platforms from a single source - removing roadblocks, errors, and inefficiencies across your workflow.
 
@@ -55,7 +55,7 @@ Call this in the root directory of your project. The only thing needed is a `con
 
 | Flag | Short Flag | Description |
 | --- | --- | --- |
-| --config \[path\] | -h | Set the config file to use. Must be a .json file |
+| --config \[path\] | -c | Set the config file to use. Must be a .json file |
 | --platform \[platform\] | -p | Only build a specific platform defined in the config file. |
 | --help | -h | Display help content |
 | --version | -v | Display the version |
@@ -89,7 +89,7 @@ StyleDictionary.buildAllPlatforms();
 ```
 
 ## Example
-[Take a look at some of our examples](example/)
+[Take a look at some of our examples](examples/)
 
 A style dictionary is a collection of style properties, key/value pairs that describe stylistic attributes like colors, sizes, icons, motion, etc. A style dictionary defines these style properties in JSON files, and can also include static assets like images and fonts. Here is a basic example of what the package structure can look like:
 ```
@@ -195,7 +195,7 @@ Now run:
 ```
 $ style-dictionary init basic
 ```
-This command will copy over the example files found in [example](example/) in this repo. Now you have an example project set up. You can make changes to the style dictionary and rebuild the project by running:
+This command will copy over the example files found in [example](examples/) in this repo. Now you have an example project set up. You can make changes to the style dictionary and rebuild the project by running:
 
 ```
 $ style-dictionary build

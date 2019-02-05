@@ -1,0 +1,32 @@
+{
+  "name": "style-dictionary-create-react-app",
+  "description": "",
+  "version": "1.0.0",
+  "dependencies": {
+    "node-sass": "^4.10.0",
+    "react": "^16.6.1",
+    "react-dom": "^16.6.1",
+    "react-scripts": "2.1.1",
+    "styled-components": "^4.1.2"
+  },
+  "devDependencies": {
+    "style-dictionary": "2.4.0"
+  },
+  "scripts": {
+    "build-dictionary": "style-dictionary build --config ./style-dictionary/config.json",
+    "start": "npm run build-dictionary && react-scripts start",
+    "build": "npm run build-dictionary && react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "license": "Apache-2.0"
+}

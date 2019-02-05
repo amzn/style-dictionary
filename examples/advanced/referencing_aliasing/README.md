@@ -2,11 +2,11 @@
 
 This example shows how to use referencing (or "aliasing") to reference a value -or an attribute– of a property and assign it to the value –or attribute– of another property.
 
-This is very handy when you want to create a system that uses some basic design definitions (base colors, base font sizes, base scales, etc) but then exposes them in a more complex and detailed set of design tokens, typically to describe a complete UI pattern library. 
+This is very handy when you want to create a system that uses some basic design definitions (base colors, base font sizes, base scales, etc) but then exposes them in a more complex and detailed set of design tokens, typically to describe a complete UI pattern library.
 
 #### Running the example
 
-First of all, set up the required dependencies running the command `npm install` in your local CLI environment (if you prefer to use *yarn* update the commands accordingly).
+First of all, set up the required dependencies running the command `npm install` in your local CLI environment (if you prefer to use *yarn*, update the commands accordingly).
 
 At this point, you can run `npm run build`. This command will generate the output file in the `build` folder.
 
@@ -25,7 +25,7 @@ the build process resolves the reference using the declared path (`ref.to.object
 
 #### What to look at
 
-Open the JSON files in the `properties` folder and see how certain properties are referencing the values of other properties via "aliases". 
+Open the JSON files in the `properties` folder and see how certain properties are referencing the values of other properties via "aliases".
 
 For example, open `color/base.json` and see how the value of the "primary" color is a **reference** to the value of the "green" color, declared as:
 
@@ -74,7 +74,7 @@ In that case Style Dictionary still resolves correctly the alias to the  corresp
 "color-base-gray-medium": "#9299a2"
 ```
 
-You can also reference **other attributes of a property**, not only its value. For example in `button/button.json` the value of text size is composed as concatenation (remember, it's a string, think of it as template literals) of two properties of the "global" object, declared in the `globals.json` file: 
+You can also reference **other attributes of a property**, not only its value. For example in `button/button.json` the value of text size is composed as concatenation (remember, it's a string, think of it as template literals) of two properties of the "global" object, declared in the `globals.json` file:
 
 ```
     "text": {
