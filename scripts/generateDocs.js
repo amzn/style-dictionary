@@ -73,7 +73,7 @@ const actions = jsdoc2md.renderSync({
   'no-gfm': true,
   separators: true,
   partial: ['scripts/handlebars/header.hbs','scripts/handlebars/body.hbs'],
-  configure: '.jsdocfoo.json'
+  configure: '.jsdoc.json'
 });
 
 fs.ensureFileSync( ACTIONS_PATH );
