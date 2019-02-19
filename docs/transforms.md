@@ -6,6 +6,7 @@ EDIT scripts/handlebars/templates/api.hbs OR JSDOC COMMENT INSTEAD!
 
 Transforms are functions that transform a property so that each platform can consume the property in different ways. A simple example is changing pixel values to point values for iOS and dp or sp for Android. Transforms are applied in a non-destructive way so each platform can transform the properties. Transforms are performed sequentially, so the order you use transforms matters. Transforms are used in your [configuration](config.md), and can be either [pre-defined transforms](transforms.md?id=pre-defined-transforms) supplied by Style Dictionary or [custom transforms](transforms.md?id=defining-custom-transforms).
 
+## Using Transforms
 You use transforms in your config file under platforms > [platform] > transforms
 
 ```json
@@ -21,7 +22,7 @@ You use transforms in your config file under platforms > [platform] > transforms
 
 A transform consists of 4 parts: type, name, matcher, and transformer. Transforms are run on all properties where the matcher returns true. *NOTE: if you don't provide a matcher function, it will match all properties.*
 
-### Transform Types
+## Transform Types
 There are 3 types of transforms: attribute, name, and value.
 
 **Attribute:** An attribute transform adds to the attributes object on a property. This is for including any meta-data about a property such as it's CTI or other information.
@@ -37,7 +38,7 @@ You can define custom transforms with the [`registerTransform`](api.md#registert
 
 [lib/common/transforms.js](https://github.com/amzn/style-dictionary/blob/master/lib/common/transforms.js)
 
-> All the pre-defined transforms included use the [CTI structure](package_structure.md#properties) for the match properties. If you structure your style properties differently you will need to write [custom transforms](#custom-transforms) or make sure the property CTIs are on the attributes of your properties.
+> All the pre-defined transforms included use the [CTI structure](properties.md?id=category-type-item) for the match properties. If you structure your style properties differently you will need to write [custom transforms](transforms.md?id=defining-custom-transforms) or make sure the property CTIs are on the attributes of your properties.
 
 ### attribute/cti 
 
@@ -247,20 +248,6 @@ Transforms the value into an UIColor class for iOS
 // Matches: prop.attributes.category === 'color'
 // Returns:
 [UIColor colorWithRed:0.00f green:0.59f blue:0.53f alpha:1.0f]
-```
-
-
-* * *
-
-### color/UIColorSwift 
-
-
-Transforms the value into an UIColor swift class for iOS
-
-```swift
-// Matches: prop.attributes.category === 'color'
-// Returns:
-UIColor(red: 0.67, green: 0.67, blue: 0.67, alpha:0.6)
 ```
 
 
