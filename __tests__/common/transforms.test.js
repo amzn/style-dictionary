@@ -277,6 +277,22 @@ describe('common', () => {
       });
     });
 
+    describe('color/UIColorSwift', () => {
+      it('should handle normal colors', () => {
+        var value = transforms["color/UIColorSwift"].transformer({
+          value: "#aaaaaa"
+        });
+        expect(value).toBe("UIColor(red: 0.67, green: 0.67, blue: 0.67, alpha:1)");
+      });
+
+      it('should handle colors with transparency', () => {
+        var value = transforms["color/UIColorSwift"].transformer({
+          value: "#aaaaaa99"
+        });
+        expect(value).toBe("UIColor(red: 0.67, green: 0.67, blue: 0.67, alpha:0.6)");
+      });
+    });
+
 
     describe('color/css', () => {
       it('should handle normal colors', () => {
