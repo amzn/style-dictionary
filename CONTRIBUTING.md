@@ -39,6 +39,11 @@ We use ESLint on the code to ensure a consistent style. Any new code committed m
 1. **Fail loudly.** Users should be aware if something is missing or configurations aren't correct. This will help debug any issues instead of failing silently.
 1. **Rely on few dependencies.** This framework is meant to be extended and allows for customization. We don't want to bring a slew of dependencies that most people don't need.
 
+### Commit Rules
+We follow [conventional commits'](https://www.conventionalcommits.org/en/v1.0.0-beta.2/#specification) specification.
+
+Please follow the spec in order to have a successful commit.
+
 ## What should be included?
 
 Anything that contributes to the idea of creating cross-platform styles.
