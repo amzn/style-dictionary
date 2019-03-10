@@ -64,6 +64,21 @@
           }
         }
       }]
+    },
+    "ios-swift": {
+      "transformGroup": "ios-swift",
+      "buildPath": "build/ios-swift/",
+      "files": [{
+        "destination": "StyleDictionary-Colors.swift",
+        "format": "ios-swift/colors.swift",
+        "className": "StyleDictionary",
+        "type": "StyleDictionaryColorName",
+        "filter": {
+          "attributes": {
+            "category": "color"
+          }
+        }
+      }]
     }
   }
 }
