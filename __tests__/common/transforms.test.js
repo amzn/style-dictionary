@@ -38,6 +38,26 @@ describe('common', () => {
       });
     });
 
+    describe('name/ti/camel', () => {
+      it('should handle prefix', () => {
+        expect(transforms["name/ti/camel"].transformer(
+          {
+            path: ['one','two','three']
+          },{
+            prefix: 'prefix'
+          }
+        )).toBe('prefixTwoThree');
+      });
+
+      it('should handle no prefix', () => {
+        expect(transforms["name/ti/camel"].transformer(
+          {
+            path: ['one','two','three']
+          },{
+          }
+        )).toBe('twoThree');
+      });
+    });
 
     describe('name/cti/kebab', () => {
       it('should handle prefix', () => {
