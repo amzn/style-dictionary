@@ -69,13 +69,23 @@
       "transformGroup": "ios-swift",
       "buildPath": "build/ios-swift/",
       "files": [{
-        "destination": "StyleDictionary-Colors.swift",
-        "format": "ios-swift/colors.swift",
-        "className": "StyleDictionary",
+        "destination": "StyleDictionaryColor.swift",
+        "format": "ios-swift/static.swift",
+        "className": "StyleDictionaryColor",
         "type": "StyleDictionaryColorName",
         "filter": {
           "attributes": {
             "category": "color"
+          }
+        }
+      },{
+        "destination": "StyleDictionarySize.swift",
+        "format": "ios-swift/size.swift",
+        "className": "StyleDictionarySize",
+        "type": "float",
+        "filter": {
+          "attributes": {
+            "category": "size"
           }
         }
       }]

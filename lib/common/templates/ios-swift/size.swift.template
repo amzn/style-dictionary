@@ -26,9 +26,10 @@
 %>
 //
 
-<% var props = _.filter(allProperties, this.filter); %>
+<%  var props = _.filter(allProperties, this.filter);
+    var type = this.type; %>
+import UIKit
 
-public enum <%= this.className %>Colors {
-    <%= _.map(props, function(prop) { return 'static let ' + prop.name + ' = ' + prop.value; }).join('\n    ') %>
+public enum <%= this.className %> {
+    <%= _.map(props, function(prop) { return 'static let ' + prop.name + ': CGFloat = ' + prop.value; }).join('\n    ') %>
 }
-
