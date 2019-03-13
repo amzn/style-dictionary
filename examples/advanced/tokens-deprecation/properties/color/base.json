@@ -1,0 +1,22 @@
+{
+  "color": {
+    "base": {
+      "gray": {
+        "light" : { "value": "#CCCCCC" },
+        "medium": { "value": "#999999" },
+        "dark"  : { "value": "#111111" }
+      },
+      "red": {
+        "value": "#FF0000",
+        "deprecated": true,
+        "deprecated_comment": "replace with the \"blue\" color"
+      },
+      "green": {
+        "value": "#00FF00"
+      },
+      "blue": {
+        "value": "#0000FF"
+      }
+    }
+  }
+}
