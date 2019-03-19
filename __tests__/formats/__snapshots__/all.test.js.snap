@@ -351,7 +351,7 @@ NSString * const color_red = #FF0000;
 "
 `;
 
-exports[`formats all should match ios-swift/size.swift snapshot 1`] = `
+exports[`formats all should match ios-swift/class.swift snapshot 1`] = `
 "
 //
 // __output/
@@ -363,13 +363,13 @@ exports[`formats all should match ios-swift/size.swift snapshot 1`] = `
 
 import UIKit
 
-public enum  {
-    static let color_red: CGFloat = #FF0000
+public class  {
+    static let color_red = #FF0000
 }
 "
 `;
 
-exports[`formats all should match ios-swift/static.swift snapshot 1`] = `
+exports[`formats all should match ios-swift/enum.swift snapshot 1`] = `
 "
 //
 // __output/
@@ -377,7 +377,6 @@ exports[`formats all should match ios-swift/static.swift snapshot 1`] = `
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
 //
-
 
 import UIKit
 

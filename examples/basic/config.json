@@ -69,8 +69,19 @@
       "transformGroup": "ios-swift",
       "buildPath": "build/ios-swift/",
       "files": [{
+        "destination": "StyleDictionary.swift",
+        "format": "ios-swift/class.swift",
+        "className": "StyleDictionary",
+        "type": "StyleDictionaryColorName",
+        "filter": {}
+      }]
+    },
+    "ios-swift-separate-enums": {
+      "transformGroup": "ios-swift-separate",
+      "buildPath": "build/ios-swift/",
+      "files": [{
         "destination": "StyleDictionaryColor.swift",
-        "format": "ios-swift/static.swift",
+        "format": "ios-swift/enum.swift",
         "className": "StyleDictionaryColor",
         "type": "StyleDictionaryColorName",
         "filter": {
@@ -80,7 +91,7 @@
         }
       },{
         "destination": "StyleDictionarySize.swift",
-        "format": "ios-swift/size.swift",
+        "format": "ios-swift/enum.swift",
         "className": "StyleDictionarySize",
         "type": "float",
         "filter": {

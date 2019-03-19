@@ -4,7 +4,7 @@ EDIT scripts/handlebars/templates/api.hbs OR JSDOC COMMENT INSTEAD!
 -->
 # Transforms
 
-Transforms are functions that transform a property so that each platform can consume the property in different ways. A simple example is changing pixel values to point values for iOS and dp or sp for Android. Transforms are applied in a non-destructive way so each platform can transform the properties. Transforms are performed sequentially, so the order you use transforms matters. Transforms are used in your [configuration](config.md), and can be either [pre-defined transforms](transforms.md?id=pre-defined-transforms) supplied by Style Dictionary or [custom transforms](transforms.md?id=defining-custom-transforms).
+Transforms are functions that transform a property so that each platform can consume the property in different ways. A simple example is changing pixel values to point values for iOS and dp or sp for Android. Transforms are applied in a non-destructive way so each platform can transform the properties. Transforms are performed sequentially, so the order you use transforms matters. Transforms are used in your [configuration](config.md), and can be either [pre-defined transforms](transforms.md?id=defining-custom-transforms) supplied by Style Dictionary or [custom transforms](transforms.md?id=defining-custom-transforms).
 
 ## Using Transforms
 You use transforms in your config file under platforms > [platform] > transforms
@@ -40,7 +40,7 @@ You can define custom transforms with the [`registerTransform`](api.md#registert
 
 > All the pre-defined transforms included use the [CTI structure](properties.md?id=category-type-item) for the match properties. If you structure your style properties differently you will need to write [custom transforms](transforms.md?id=defining-custom-transforms) or make sure the property CTIs are on the attributes of your properties.
 
-### attribute/cti
+### attribute/cti 
 
 
 Adds: category, type, item, subitem, and state on the attributes object based on the location in the style dictionary.
@@ -60,7 +60,7 @@ Adds: category, type, item, subitem, and state on the attributes object based on
 
 * * *
 
-### attribute/color
+### attribute/color 
 
 
 Adds: hex, hsl, hsv, rgb, red, blue, green.
@@ -79,10 +79,10 @@ Adds: hex, hsl, hsv, rgb, red, blue, green.
 
 * * *
 
-### name/human
+### name/human 
 
 
-Creates a human-friendly name.
+Creates a human-friendly name
 
 ```js
 // Matches: All
@@ -93,10 +93,10 @@ Creates a human-friendly name.
 
 * * *
 
-### name/cti/camel
+### name/cti/camel 
 
 
-Creates a camel case name. If you define a prefix on the platform in your config, it will prepend with your prefix.
+Creates a camel case name. If you define a prefix on the platform in your config, it will prepend with your prefix
 
 ```js
 // Matches: all
@@ -108,10 +108,12 @@ Creates a camel case name. If you define a prefix on the platform in your config
 
 * * *
 
-### name/ti/camel
+### name/ti/camel 
 
 
-Creates a camel case name but leaves out the category, which can be redundant with the className. If you define a prefix on the platform in your config, it will prepend with your prefix.
+Creates a camel case name without the category at the front.  This is most useful when there is a class, struct, enum, etc.
+that already has the category in it (e.g., StyleDictionaryColors.baseDarkRed instad of StyleDictionaryColors.colorBaseDarkRed).
+If you define a prefix on the platform in your config, it will prepend with your prefix
 
 ```js
 // Matches: all
@@ -123,10 +125,10 @@ Creates a camel case name but leaves out the category, which can be redundant wi
 
 * * *
 
-### name/cti/kebab
+### name/cti/kebab 
 
 
-Creates a kebab case name. If you define a prefix on the platform in your config, it will prepend with your prefix.
+Creates a kebab case name. If you define a prefix on the platform in your config, it will prepend with your prefix
 
 ```js
 // Matches: all
@@ -138,10 +140,10 @@ Creates a kebab case name. If you define a prefix on the platform in your config
 
 * * *
 
-### name/cti/snake
+### name/cti/snake 
 
 
-Creates a snake case name. If you define a prefix on the platform in your config, it will prepend with your prefix.
+Creates a snake case name. If you define a prefix on the platform in your config, it will prepend with your prefix
 
 ```js
 // Matches: all
@@ -153,10 +155,10 @@ Creates a snake case name. If you define a prefix on the platform in your config
 
 * * *
 
-### name/cti/constant
+### name/cti/constant 
 
 
-Creates a constant-style name based on the full CTI of the property. If you define a prefix on the platform in your config, it will prepend with your prefix.
+Creates a constant-style name based on the full CTI of the property. If you define a prefix on the platform in your config, it will prepend with your prefix
 
 ```js
 // Matches: all
@@ -168,7 +170,7 @@ Creates a constant-style name based on the full CTI of the property. If you defi
 
 * * *
 
-### name/ti/constant
+### name/ti/constant 
 
 
 Creates a constant-style name on just the type and item of the property. This is useful if you want to create different static classes/files for categories like `Color.BACKGROUND_BASE`. If you define a prefix on the platform in your config, it will prepend with your prefix.
@@ -183,10 +185,10 @@ Creates a constant-style name on just the type and item of the property. This is
 
 * * *
 
-### name/cti/pascal
+### name/cti/pascal 
 
 
-Creates a Pascal case name. If you define a prefix on the platform in your config, it will prepend with your prefix.
+Creates a Pascal case name. If you define a prefix on the platform in your config, it will prepend with your prefix
 
 ```js
 // Matches: all
@@ -198,10 +200,10 @@ Creates a Pascal case name. If you define a prefix on the platform in your confi
 
 * * *
 
-### color/rgb
+### color/rgb 
 
 
-Transforms the value into an RGB string.
+Transforms the value into an RGB string
 
 ```js
 // Matches: prop.attributes.category === 'color'
@@ -212,10 +214,10 @@ Transforms the value into an RGB string.
 
 * * *
 
-### color/hex
+### color/hex 
 
 
-Transforms the value into an 6-digit hex string.
+Transforms the value into an 6-digit hex string
 
 ```js
 // Matches: prop.attributes.category === 'color'
@@ -226,10 +228,10 @@ Transforms the value into an 6-digit hex string.
 
 * * *
 
-### color/hex8
+### color/hex8 
 
 
-Transforms the value into an 8-digit hex string.
+Transforms the value into an 8-digit hex string
 
 ```js
 // Matches: prop.attributes.category === 'color'
@@ -240,10 +242,10 @@ Transforms the value into an 8-digit hex string.
 
 * * *
 
-### color/hex8android
+### color/hex8android 
 
 
-Transforms the value into an 8-digit hex string for Android because they put the alpha channel first.
+Transforms the value into an 8-digit hex string for Android because they put the alpha channel first
 
 ```js
 // Matches: prop.attributes.category === 'color'
@@ -254,10 +256,10 @@ Transforms the value into an 8-digit hex string for Android because they put the
 
 * * *
 
-### color/UIColor
+### color/UIColor 
 
 
-Transforms the value into an UIColor class for iOS in Objective-C.
+Transforms the value into an UIColor class for iOS
 
 ```objectivec
 // Matches: prop.attributes.category === 'color'
@@ -268,24 +270,24 @@ Transforms the value into an UIColor class for iOS in Objective-C.
 
 * * *
 
-### color/UIColorSwift
+### color/UIColorSwift 
 
 
-Transforms the value into an UIColor class for iOS in Swift.
+Transforms the value into an UIColor swift class for iOS
 
 ```swift
 // Matches: prop.attributes.category === 'color'
 // Returns:
-UIColor(red: 0.00, green:0.59, blue:0.53, alpha:1.0)
+UIColor(red: 0.67, green: 0.67, blue: 0.67, alpha:0.6)
 ```
 
 
 * * *
 
-### color/css
+### color/css 
 
 
-Transforms the value into a hex or rgb string depending on if it has transparency.
+Transforms the value into a hex or rgb string depending on if it has transparency
 
 ```css
 // Matches: prop.attributes.category === 'color'
@@ -297,7 +299,7 @@ rgba(0,0,0,0.5)
 
 * * *
 
-### size/sp
+### size/sp 
 
 
 Transforms the value into a scale-independent pixel (sp) value for font sizes on Android. It will not scale the number.
@@ -311,7 +313,7 @@ Transforms the value into a scale-independent pixel (sp) value for font sizes on
 
 * * *
 
-### size/dp
+### size/dp 
 
 
 Transforms the value into a density-independent pixel (dp) value for non-font sizes on Android. It will not scale the number.
@@ -325,7 +327,7 @@ Transforms the value into a density-independent pixel (dp) value for non-font si
 
 * * *
 
-### size/remToSp
+### size/remToSp 
 
 
 Transforms the value from a REM size on web into a scale-independent pixel (sp) value for font sizes on Android. It WILL scale the number by a factor of 16 (common base font size on web).
@@ -339,7 +341,7 @@ Transforms the value from a REM size on web into a scale-independent pixel (sp) 
 
 * * *
 
-### size/remToDp
+### size/remToDp 
 
 
 Transforms the value from a REM size on web into a density-independent pixel (dp) value for font sizes on Android. It WILL scale the number by a factor of 16 (common base font size on web).
@@ -353,10 +355,10 @@ Transforms the value from a REM size on web into a density-independent pixel (dp
 
 * * *
 
-### size/px
+### size/px 
 
 
-Adds 'px' to the end of the number. Does not scale the number.
+Adds 'px' to the end of the number. Does not scale the number
 
 ```js
 // Matches: prop.attributes.category === 'size'
@@ -367,10 +369,10 @@ Adds 'px' to the end of the number. Does not scale the number.
 
 * * *
 
-### size/rem
+### size/rem 
 
 
-Adds 'rem' to the end of the number. Does not scale the number.
+Adds 'rem' to the end of the number. Does not scale the number
 
 ```js
 // Matches: prop.attributes.category === 'size'
@@ -381,7 +383,7 @@ Adds 'rem' to the end of the number. Does not scale the number.
 
 * * *
 
-### size/remToPt
+### size/remToPt 
 
 
 Scales the number by 16 (default web font size) and adds 'pt' to the end.
@@ -395,21 +397,20 @@ Scales the number by 16 (default web font size) and adds 'pt' to the end.
 
 * * *
 
-### size/swift/remToPt
+### size/swift/remToCGFloat 
 
 
-Scales the number by 16 (default web font size) to two decimal places.
+Scales the number by 16 to get to points for Swift and initializes a CGFloat
 
 ```js
 // Matches: prop.attributes.category === 'size'
-// Returns:
-"16.00"
+// Returns: "CGFloat(16.00)""
 ```
 
 
 * * *
 
-### size/remToPx
+### size/remToPx 
 
 
 Scales the number by 16 (default web font size) and adds 'px' to the end.
@@ -423,7 +424,7 @@ Scales the number by 16 (default web font size) and adds 'px' to the end.
 
 * * *
 
-### content/icon
+### content/icon 
 
 
 Takes a unicode point and transforms it into a form CSS can use.
@@ -437,7 +438,7 @@ Takes a unicode point and transforms it into a form CSS can use.
 
 * * *
 
-### content/quote
+### content/quote 
 
 
 Wraps the value in a single quoted string
@@ -451,31 +452,34 @@ Wraps the value in a single quoted string
 
 * * *
 
-### content/objC/literal
+### content/objC/literal 
 
 
 Wraps the value in a double-quoted string and prepends an '@' to make a string literal.
 
 ```objectivec
 // Matches: prop.attributes.category === 'content'
-// Returns: @"string"
-```
+// Returns:
+
+**&quot;string&quot;**: ```  
 
 * * *
 
-### content/swift/literal
+### content/swift/literal 
 
 
 Wraps the value in a double-quoted string to make a string literal.
 
 ```swift
 // Matches: prop.attributes.category === 'content'
-// Returns: "string"
+// Returns:
+"string"
 ```
+
 
 * * *
 
-### font/objC/literal
+### font/objC/literal 
 
 
 Wraps the value in a double-quoted string and prepends an '@' to make a string literal.
@@ -488,7 +492,7 @@ Wraps the value in a double-quoted string and prepends an '@' to make a string l
 
 * * *
 
-### font/swift/literal
+### font/swift/literal 
 
 
 Wraps the value in a double-quoted string to make a string literal.
@@ -501,10 +505,10 @@ Wraps the value in a double-quoted string to make a string literal.
 
 * * *
 
-### time/seconds
+### time/seconds 
 
 
-Assumes a time in miliseconds and transforms it into a decimal.
+Assumes a time in miliseconds and transforms it into a decimal
 
 ```js
 // Matches: prop.attributes.category === 'time'
@@ -515,7 +519,7 @@ Assumes a time in miliseconds and transforms it into a decimal.
 
 * * *
 
-### asset/base64
+### asset/base64 
 
 
 Wraps the value in a double-quoted string and prepends an '@' to make a string literal.
@@ -529,10 +533,10 @@ Wraps the value in a double-quoted string and prepends an '@' to make a string l
 
 * * *
 
-### asset/path
+### asset/path 
 
 
-Prepends the local file path.
+Prepends the local file path
 
 ```js
 // Matches: prop.attributes.category === 'asset'
@@ -543,7 +547,7 @@ Prepends the local file path.
 
 * * *
 
-### asset/objC/literal
+### asset/objC/literal 
 
 
 Wraps the value in a double-quoted string and prepends an '@' to make a string literal.
@@ -556,7 +560,7 @@ Wraps the value in a double-quoted string and prepends an '@' to make a string l
 
 * * *
 
-### asset/swift/literal
+### asset/swift/literal 
 
 
 Wraps the value in a double-quoted string to make a string literal.

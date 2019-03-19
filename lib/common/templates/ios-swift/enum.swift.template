@@ -25,8 +25,13 @@
     }
 %>
 //
-
-<% var props = _.filter(allProperties, this.filter); %>
+<%
+  // Filter to only those props wanted based on the filter, then sort
+  // them by category so we keep like props together, then by name
+  // so they are easier to find alphabetically.
+  var filteredProps = _.filter(allProperties, this.filter); 
+  var props = _.sortBy(filteredProps, item => item.attributes.category + item.name);
+%>
 import UIKit
 
 public enum <%= this.className %> {
