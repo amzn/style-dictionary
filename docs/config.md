@@ -2,7 +2,10 @@
 
 Style dictionaries are configuration driven. Your config file defines what executes and what to output when the style dictionary builds.
 
-By default, Style Dictionary looks for a `config.json` file in the root of your package. You can also specify a custom location when you use the [CLI](using_the_cli.md). If you want a custom build system using the [npm module](using_the_npm_module.md), you can specify a custom location for a configuration file or use a plain Javascript object.
+By default, Style Dictionary looks for a `config.json` file in the root of your package. If not found, it looks for a `config.js` file in the root of your package. You can also specify a custom location when you use the [CLI](using_the_cli.md). If you want a custom build system using the [npm module](using_the_npm_module.md), you can specify a custom location for a configuration file or use a plain Javascript object.
+
+## config.js
+You can find out more about creating configurations in JS in our documentation about using the [npm module](using_the_npm_module.md).
 
 ## config.json
  Here is a quick example:
