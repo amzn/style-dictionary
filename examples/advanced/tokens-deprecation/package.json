@@ -1,0 +1,21 @@
+{
+  "name": "style-dictionary-tokens-deprecation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build/index.js",
+  "files": [
+    "build",
+    "properties"
+  ],
+  "scripts": {
+    "build": "node ./build.js",
+    "clean": "rm -rf build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "lodash": "^4.17.11",
+    "style-dictionary": "2.6.2"
+  }
+}

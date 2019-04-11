@@ -1,0 +1,21 @@
+{
+  "source": ["properties/**/*.json"],
+  "platforms": {
+    "scss": {
+      "transformGroup": "scss",
+      "buildPath": "build/scss/",
+      "files": [{
+        "destination": "_variables.scss",
+        "format": "custom/format/scss"
+      }]
+    },
+    "ios": {
+      "transformGroup": "ios",
+      "buildPath": "build/ios/",
+      "files": [{
+        "destination": "tokens.plist",
+        "format": "custom/format/ios-plist"
+      }]
+    }
+  }
+}
