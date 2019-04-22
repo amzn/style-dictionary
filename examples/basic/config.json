@@ -72,7 +72,6 @@
         "destination": "StyleDictionary.swift",
         "format": "ios-swift/class.swift",
         "className": "StyleDictionary",
-        "type": "StyleDictionaryColorName",
         "filter": {}
       }]
     },
@@ -83,7 +82,6 @@
         "destination": "StyleDictionaryColor.swift",
         "format": "ios-swift/enum.swift",
         "className": "StyleDictionaryColor",
-        "type": "StyleDictionaryColorName",
         "filter": {
           "attributes": {
             "category": "color"
