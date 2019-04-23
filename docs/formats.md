@@ -512,6 +512,30 @@ Creates an Objective-C implementation file of strings
 
 * * *
 
+### ios-swift/class.swift 
+
+
+Creates a Swift implementation file of a class with values
+
+**Todo**
+
+- Add example and usage
+
+
+* * *
+
+### ios-swift/enum.swift 
+
+
+Creates a Swift implementation file of an enum with values
+
+**Todo**
+
+- Add example and usage
+
+
+* * *
+
 ### css/fonts.css 
 
 

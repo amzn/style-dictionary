@@ -4,7 +4,7 @@ EDIT scripts/handlebars/templates/api.hbs OR JSDOC COMMENT INSTEAD!
 -->
 # Transforms
 
-Transforms are functions that transform a property so that each platform can consume the property in different ways. A simple example is changing pixel values to point values for iOS and dp or sp for Android. Transforms are applied in a non-destructive way so each platform can transform the properties. Transforms are performed sequentially, so the order you use transforms matters. Transforms are used in your [configuration](config.md), and can be either [pre-defined transforms](transforms.md?id=pre-defined-transforms) supplied by Style Dictionary or [custom transforms](transforms.md?id=defining-custom-transforms).
+Transforms are functions that transform a property so that each platform can consume the property in different ways. A simple example is changing pixel values to point values for iOS and dp or sp for Android. Transforms are applied in a non-destructive way so each platform can transform the properties. Transforms are performed sequentially, so the order you use transforms matters. Transforms are used in your [configuration](config.md), and can be either [pre-defined transforms](transforms.md?id=defining-custom-transforms) supplied by Style Dictionary or [custom transforms](transforms.md?id=defining-custom-transforms).
 
 ## Using Transforms
 You use transforms in your config file under platforms > [platform] > transforms
@@ -103,6 +103,23 @@ Creates a camel case name. If you define a prefix on the platform in your config
 // Returns:
 "colorBackgroundButtonPrimaryActive"
 "prefixColorBackgroundButtonPrimaryActive"
+```
+
+
+* * *
+
+### name/ti/camel 
+
+
+Creates a camel case name without the category at the front.  This is most useful when there is a class, struct, enum, etc.
+that already has the category in it (e.g., StyleDictionaryColors.baseDarkRed instad of StyleDictionaryColors.colorBaseDarkRed).
+If you define a prefix on the platform in your config, it will prepend with your prefix
+
+```js
+// Matches: all
+// Returns:
+"backgroundButtonPrimaryActive"
+"prefixBackgroundButtonPrimaryActive"
 ```
 
 
@@ -253,6 +270,20 @@ Transforms the value into an UIColor class for iOS
 
 * * *
 
+### color/UIColorSwift 
+
+
+Transforms the value into an UIColor swift class for iOS
+
+```swift
+// Matches: prop.attributes.category === 'color'
+// Returns:
+UIColor(red: 0.67, green: 0.67, blue: 0.67, alpha:0.6)
+```
+
+
+* * *
+
 ### color/css 
 
 
@@ -366,6 +397,19 @@ Scales the number by 16 (default web font size) and adds 'pt' to the end.
 
 * * *
 
+### size/swift/remToCGFloat 
+
+
+Scales the number by 16 to get to points for Swift and initializes a CGFloat
+
+```js
+// Matches: prop.attributes.category === 'size'
+// Returns: "CGFloat(16.00)""
+```
+
+
+* * *
+
 ### size/remToPx 
 
 
@@ -421,6 +465,20 @@ Wraps the value in a double-quoted string and prepends an '@' to make a string l
 
 * * *
 
+### content/swift/literal 
+
+
+Wraps the value in a double-quoted string to make a string literal.
+
+```swift
+// Matches: prop.attributes.category === 'content'
+// Returns:
+"string"
+```
+
+
+* * *
+
 ### font/objC/literal 
 
 
@@ -429,6 +487,19 @@ Wraps the value in a double-quoted string and prepends an '@' to make a string l
 ```objectivec
 // Matches: prop.attributes.category === 'font'
 // Returns: @"string"
+```
+
+
+* * *
+
+### font/swift/literal 
+
+
+Wraps the value in a double-quoted string to make a string literal.
+
+```swift
+// Matches: prop.attributes.category === 'font'
+// Returns: "string"
 ```
 
 
@@ -484,6 +555,19 @@ Wraps the value in a double-quoted string and prepends an '@' to make a string l
 ```objectivec
 // Matches: prop.attributes.category === 'asset'
 // Returns: @"string"
+```
+
+
+* * *
+
+### asset/swift/literal 
+
+
+Wraps the value in a double-quoted string to make a string literal.
+
+```swift
+// Matches: prop.attributes.category === 'asset'
+// Returns: "string"
 ```
 
 

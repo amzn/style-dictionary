@@ -64,6 +64,40 @@
           }
         }
       }]
+    },
+    "ios-swift": {
+      "transformGroup": "ios-swift",
+      "buildPath": "build/ios-swift/",
+      "files": [{
+        "destination": "StyleDictionary.swift",
+        "format": "ios-swift/class.swift",
+        "className": "StyleDictionary",
+        "filter": {}
+      }]
+    },
+    "ios-swift-separate-enums": {
+      "transformGroup": "ios-swift-separate",
+      "buildPath": "build/ios-swift/",
+      "files": [{
+        "destination": "StyleDictionaryColor.swift",
+        "format": "ios-swift/enum.swift",
+        "className": "StyleDictionaryColor",
+        "filter": {
+          "attributes": {
+            "category": "color"
+          }
+        }
+      },{
+        "destination": "StyleDictionarySize.swift",
+        "format": "ios-swift/enum.swift",
+        "className": "StyleDictionarySize",
+        "type": "float",
+        "filter": {
+          "attributes": {
+            "category": "size"
+          }
+        }
+      }]
     }
   }
 }
