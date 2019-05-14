@@ -51,7 +51,7 @@ Here you can see a property of "size.font.small" with two attributes:
 ```
 
 ### Multiple Properties
-Multiple properties in a single file are simple to read and understand using the recommended [`Category / Type / Item (CTI)`](#category-type-item-(cti)) method
+Multiple properties in a single file are simple to read and understand using the recommended [`Category / Type / Item (CTI)`](#category-type-item) method
 ```json
 {
   "size": {
@@ -78,7 +78,7 @@ You can reference (alias) existing values by using the dot-notation object path 
   }
 }
 ```
-
+See more in the advanced [referencing-aliasing example](https://github.com/amzn/style-dictionary/tree/master/examples/advanced/referencing_aliasing).
 
 ## Category / Type / Item
 
