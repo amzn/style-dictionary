@@ -138,6 +138,40 @@ Transforms:
 
 * * *
 
+### ios-swift 
+
+
+Transforms:
+
+[attribute/cti](transforms.md#attributecti)
+[name/cti/camel](transforms.md#namecticamel)
+[color/UIColorSwift](transforms.md#coloruicolorswift)
+[content/swift/literal](transforms.md#contentswiftliteral)
+[asset/swift/literal](transforms.md#assetswiftliteral)
+[size/swift/remToCGFloat](transforms.md#sizeswiftremtocgfloat)
+[font/swift/literal](transforms.md#fontswiftliteral)
+
+
+* * *
+
+### ios-swift-separate 
+
+
+Transforms:
+
+[attribute/cti](transforms.md#attributecti)
+[name/ti/camel](transforms.md#nameticamel)
+[color/UIColorSwift](transforms.md#coloruicolorswift)
+[content/swift/literal](transforms.md#contentswiftliteral)
+[asset/swift/literal](transforms.md#assetswiftliteral)
+[size/swift/remToCGFloat](transforms.md#sizeswiftremtocgfloat)
+[font/swift/literal](transforms.md#fontswiftliteral)
+
+This is to be used if you want to have separate files per category and you don't want the category (e.g., color) as the lead value in the name of the property (e.g., StyleDictionaryColor.baseText instead of StyleDictionary.colorBaseText).
+
+
+* * *
+
 ### assets 
 
 

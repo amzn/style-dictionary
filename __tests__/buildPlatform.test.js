@@ -25,7 +25,7 @@ describe('buildPlatform', () => {
   it('should throw if passed a platform that doesn\'t exist', () => {
     expect(
       StyleDictionaryExtended.buildPlatform.bind(test, 'foobar'),
-    ).toThrow('Platform foobar doesn\'t exist');
+    ).toThrow('Platform "foobar" does not exist');
 
     expect(
       function() {
@@ -164,9 +164,15 @@ describe('buildPlatform', () => {
         }
       }
     });
+
+    let err = `
+Unknown transformGroup "bar" found in platform "foo":
+"bar" does not match the name of a registered transformGroup.
+`;
+
     expect(
       StyleDictionaryExtended.buildPlatform.bind(StyleDictionaryExtended, 'foo'),
-    ).toThrow('transformGroup bar doesn\'t exist');
+    ).toThrow(err);
   });
 
 });
