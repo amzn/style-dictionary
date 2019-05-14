@@ -34,7 +34,7 @@ If you want to look at more advanced examples of possible applications and custo
 * [**npm-module**](https://github.com/amzn/style-dictionary/tree/master/examples/advanced/npm-module) shows how to set up a style dictionary as an npm module, either to publish to a local npm service or to publish externally.
 * [**s3**](https://github.com/amzn/style-dictionary/tree/master/examples/advanced/s3) shows how to set up a style dictionary to build files for different platforms (web, iOS, Android) and upload those build artifacts, together with a group of assets, to an S3 bucket.
 * [**referencing_aliasing**](https://github.com/amzn/style-dictionary/tree/master/examples/advanced/referencing_aliasing) shows how to use referencing (or "aliasing") to reference a value -or an attribute– of a property and assign it to the value –or attribute– of another property.
-
+* [**component-cti**](https://github.com/amzn/style-dictionary/tree/master/examples/advanced/component-cti) shows how to write component tokens and still use the CTI structure.
 
 ---
 
