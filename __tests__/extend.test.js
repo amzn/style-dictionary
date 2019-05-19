@@ -171,4 +171,22 @@ describe('extend', () => {
     var StyleDictionaryExtended = StyleDictionary.extend(__dirname + '/__configs/test.json5');
     expect(StyleDictionaryExtended).toHaveProperty('platforms.web');
   });
+  
+  it('should allow for chained extends and not mutate the original', function() {
+    var StyleDictionary1 = StyleDictionary.extend({
+      foo: 'bar'
+    });
+    var StyleDictionary2 = StyleDictionary1.extend({
+      foo: 'baz'
+    });
+    var StyleDictionary3 = StyleDictionary.extend({
+      foo: 'bar'
+    }).extend({
+      foo: 'boo'
+    });
+    expect(StyleDictionary1.foo).toBe('bar');
+    expect(StyleDictionary2.foo).toBe('baz');
+    expect(StyleDictionary3.foo).toBe('boo');
+    expect(StyleDictionary).not.toHaveProperty('foo');
+  });
 });
