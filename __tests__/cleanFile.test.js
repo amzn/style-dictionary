@@ -10,7 +10,6 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
 var helpers   = require('./__helpers');
 var buildFile = require('../lib/buildFile');
 var cleanFile = require('../lib/cleanFile');
@@ -34,5 +33,15 @@ describe('cleanFile', () => {
     cleanFile('test.txt', format, {buildPath: '__tests__/__output/'}, {});
     expect(helpers.fileDoesNotExist('./__tests__/__output/test.txt')).toBeTruthy();
   });
+
+  describe('if a file does not exist', () => {
+    it('should not throw', () => {
+      try {
+        cleanFile('test.txt', format, {buildPath: '__tests__/__output/'}, {});
+      } catch (e) {
+        throw new Error(e);
+      }
+    })
+  })
 
 });
