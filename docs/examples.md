@@ -35,6 +35,7 @@ If you want to look at more advanced examples of possible applications and custo
 * [**s3**](https://github.com/amzn/style-dictionary/tree/master/examples/advanced/s3) shows how to set up a style dictionary to build files for different platforms (web, iOS, Android) and upload those build artifacts, together with a group of assets, to an S3 bucket.
 * [**referencing_aliasing**](https://github.com/amzn/style-dictionary/tree/master/examples/advanced/referencing_aliasing) shows how to use referencing (or "aliasing") to reference a value -or an attribute– of a property and assign it to the value –or attribute– of another property.
 * [**tokens-deprecation**](https://github.com/amzn/style-dictionary/tree/master/examples/advanced/tokens-deprecation) shows one way to deprecate tokens by adding metadata to tokens and using custom formats to output comments in the generated files.
+* [**component-cti**](https://github.com/amzn/style-dictionary/tree/master/examples/advanced/component-cti) shows how to write component tokens and still use the CTI structure.
 
 ---
 
