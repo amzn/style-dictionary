@@ -35,4 +35,10 @@ describe('cleanFile', () => {
     expect(helpers.fileDoesNotExist('./__tests__/__output/test.txt')).toBeTruthy();
   });
 
+  describe('if a file does not exist', () => {
+    it('should not throw', () => {
+      expect(() => cleanFile('non-existent.txt', format, { buildPath: '__tests__/__output/' }, {})).not.toThrow();
+    })
+  })
+
 });
