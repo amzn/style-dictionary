@@ -54,7 +54,7 @@ describe('buildFile', () => {
     ).toThrow('Please enter a valid destination');
   });
 
-  let dest = 'test.collisions';
+  let dest = './__tests__/__output/test.collisions';
   var PROPERTY_NAME_COLLISION_WARNINGS = GroupMessages.GROUP.PropertyNameCollisionWarnings + ":" + dest;
   it('should generate warning messages for output name collisions', () => {
     let name = 'someName';
