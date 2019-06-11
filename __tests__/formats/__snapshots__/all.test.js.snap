@@ -633,8 +633,25 @@ exports[`formats all should match sketch/palette snapshot 1`] = `
 "{
   \\"compatibleVersion\\": \\"1.0\\",
   \\"pluginVersion\\": \\"1.1\\",
+  \\"colors\\": []
+}"
+`;
+
+exports[`formats all should match sketch/palette/v2 snapshot 1`] = `
+"{
+  \\"compatibleVersion\\": \\"2.0\\",
+  \\"pluginVersion\\": \\"2.2\\",
   \\"colors\\": [
-    \\"#FF0000\\"
+    {
+      \\"0\\": \\"#\\",
+      \\"1\\": \\"F\\",
+      \\"2\\": \\"F\\",
+      \\"3\\": \\"0\\",
+      \\"4\\": \\"0\\",
+      \\"5\\": \\"0\\",
+      \\"6\\": \\"0\\",
+      \\"name\\": \\"color_red\\"
+    }
   ]
 }"
 `;
