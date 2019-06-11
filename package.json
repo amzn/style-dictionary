@@ -35,7 +35,7 @@
     "NOTICE"
   ],
   "scripts": {
-    "lint": "eslint --fix index.js lib/**/*.js test/*.js test/**/*.js",
+    "lint": "eslint --fix index.js lib/**/*.js __tests__/**/*.js",
     "test": "npm run lint && jest --runInBand",
     "test-watch": "npm run lint && jest --runInBand --watch",
     "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha -- test/*.js test/**/*.js",
