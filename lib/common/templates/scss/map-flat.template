@@ -28,7 +28,7 @@
     print('\n');
 
     var output = '';
-    output += '$tokens: (\n';
+    output += `$${this.mapName||'tokens'}: (\n`;
     output += allProperties.map(function(prop){
         var line = '';
         if(prop.comment) {
