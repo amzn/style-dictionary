@@ -47,7 +47,7 @@ Pat yourself on the back, you just built your first style dictionary! Take a loo
 │       ├── base.json
 │       ├── font.json
 │   ├── size/
-│       ├── font.json
+│       ├── base.json
 │       ├── font.json
 ├── build/
 │   ├── android/
