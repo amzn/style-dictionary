@@ -115,7 +115,7 @@
     "@commitlint/config-conventional": "^7.1.2",
     "babel-jest": "^23.6.0",
     "babel-preset-env": "^1.7.0",
-    "docsify": "^4.8.0",
+    "docsify": "^4.9.4",
     "docsify-cli": "^4.3.0",
     "eslint": "^4.19.1",
     "husky": "^1.0.0-rc.8",
@@ -126,7 +126,7 @@
     "json5-jest": "^1.0.1",
     "less": "^3.0.1",
     "lint-staged": "^8.1.0",
-    "node-sass": "^4.9.4",
+    "node-sass": "^4.12.0",
     "standard-version": "^4.4.0"
   }
 }
