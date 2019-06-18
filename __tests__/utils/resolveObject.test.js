@@ -22,13 +22,13 @@ describe('utils', () => {
 
     it('should error on non-objects', () => {
       expect(
-        resolveObject.bind(null),
+        resolveObject.bind(null)
       ).toThrow('Please pass an object in');
       expect(
-        resolveObject.bind(null, 'foo'),
+        resolveObject.bind(null, 'foo')
       ).toThrow('Please pass an object in');
       expect(
-        resolveObject.bind(null, 0),
+        resolveObject.bind(null, 0)
       ).toThrow('Please pass an object in');
     });
 
