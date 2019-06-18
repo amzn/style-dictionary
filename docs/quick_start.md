@@ -48,7 +48,6 @@ Pat yourself on the back, you just built your first style dictionary! Take a loo
 │       ├── font.json
 │   ├── size/
 │       ├── font.json
-│       ├── font.json
 ├── build/
 │   ├── android/
 │      ├── font_dimens.xml
