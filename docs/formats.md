@@ -111,6 +111,8 @@ Creates a CSS file with variable definitions based on the style dictionary
 
 Creates a SCSS file with a flat map based on the style dictionary
 
+Name the map by adding a 'mapName' attribute on the file object in your config.
+
 **Example**  
 ```scss
 $tokens: (
@@ -124,7 +126,9 @@ $tokens: (
 ### scss/map-deep 
 
 
-Creates a SCSS file with a deep map based on the style dictionary
+Creates a SCSS file with a deep map based on the style dictionary.
+
+Name the map by adding a 'mapName' attribute on the file object in your config.
 
 **Example**  
 ```scss
@@ -634,6 +638,28 @@ Creates a sketchpalette file of all the base colors
     "#ffffff",
     "#ff0000",
     "#fcfcfc"
+  ]
+}
+```
+
+* * *
+
+### sketch/palette/v2 
+
+
+Creates a sketchpalette file compatible with version 2 of
+the sketchpalette plugin. To use this you should use the 
+'color/sketch' transform to get the correct value for the colors.
+
+**Example**  
+```json
+{
+  "compatibleVersion": "2.0",
+  "pluginVersion": "2.2",
+  "colors": [
+    {name: "red", r: 1.0, g: 0.0, b: 0.0, a: 1.0},
+    {name: "green", r: 0.0, g: 1.0, b: 0.0, a: 1.0},
+    {name: "blue", r: 0.0, g: 0.0, b: 1.0, a: 1.0}
   ]
 }
 ```

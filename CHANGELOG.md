@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.8.1"></a>
+## [2.8.1](https://github.com/amzn/style-dictionary/compare/v2.8.0...v2.8.1) (2019-07-02)
+
+
+### Bug Fixes
+
+* **format:** adding configurable name to sass map name ([#291](https://github.com/amzn/style-dictionary/issues/291)) ([cfa2422](https://github.com/amzn/style-dictionary/commit/cfa2422)), closes [#290](https://github.com/amzn/style-dictionary/issues/290)
+* **sketch:** fix sketch palette format to use new filters ([#287](https://github.com/amzn/style-dictionary/issues/287)) ([374012c](https://github.com/amzn/style-dictionary/commit/374012c)), closes [#285](https://github.com/amzn/style-dictionary/issues/285)
+
+
+
 <a name="2.8.0"></a>
 # [2.8.0](https://github.com/amzn/style-dictionary/compare/v2.7.0...v2.8.0) (2019-05-28)
 

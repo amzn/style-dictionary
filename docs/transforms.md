@@ -299,6 +299,27 @@ rgba(0,0,0,0.5)
 
 * * *
 
+### color/sketch 
+
+
+Transforms a color into an object with red, green, blue, and alpha
+attributes that are floats from 0 - 1. This object is how Sketch stores
+colors.
+
+```js
+// Matches: prop.attributes.category === 'color'
+// Returns:
+{
+  red: 0.5,
+  green: 0.5,
+  blue: 0.5,
+  alpha: 1
+}
+```
+
+
+* * *
+
 ### size/sp 
 
 
