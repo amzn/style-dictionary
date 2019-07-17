@@ -532,21 +532,19 @@ exports[`formats all should match json/nested snapshot 1`] = `
 `;
 
 exports[`formats all should match less/icons snapshot 1`] = `
-"/**
- * Do not edit directly
- * Generated on Sat, 01 Jan 2000 00:00:00 GMT
- */
+"
+// Do not edit directly
+// Generated on Sat, 01 Jan 2000 00:00:00 GMT
 
 "
 `;
 
 exports[`formats all should match less/variables snapshot 1`] = `
-"/**
- * Do not edit directly
- * Generated on Sat, 01 Jan 2000 00:00:00 GMT
- */
+"
+// Do not edit directly
+// Generated on Sat, 01 Jan 2000 00:00:00 GMT
 
-@color_red: #FF0000; /* comment */"
+@color_red: #FF0000; // comment"
 `;
 
 exports[`formats all should match sass/map-deep snapshot 1`] = `
@@ -581,10 +579,9 @@ $tokens: (
 `;
 
 exports[`formats all should match scss/icons snapshot 1`] = `
-"/**
- * Do not edit directly
- * Generated on Sat, 01 Jan 2000 00:00:00 GMT
- */
+"
+// Do not edit directly
+// Generated on Sat, 01 Jan 2000 00:00:00 GMT
 
 "
 `;
@@ -621,12 +618,11 @@ $tokens: (
 `;
 
 exports[`formats all should match scss/variables snapshot 1`] = `
-"/**
- * Do not edit directly
- * Generated on Sat, 01 Jan 2000 00:00:00 GMT
- */
+"
+// Do not edit directly
+// Generated on Sat, 01 Jan 2000 00:00:00 GMT
 
-$color_red: #FF0000; /* comment */"
+$color_red: #FF0000; // comment"
 `;
 
 exports[`formats all should match sketch/palette snapshot 1`] = `
