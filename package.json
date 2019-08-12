@@ -65,7 +65,10 @@
     "transform": {
       "^.+\\.json5?$": "json5-jest",
       "^.+\\.jsx?$": "babel-jest"
-    }
+    },
+    "transformIgnorePatterns": [
+      "^.+\\.json?$"
+    ]
   },
   "husky": {
     "hooks": {
@@ -106,12 +109,13 @@
     "fs-extra": "^6.0.1",
     "glob": "^7.1.1",
     "json5": "^2.1.0",
-    "lodash": "^4.16.4",
+    "lodash": "^4.17.15",
     "resolve-cwd": "^2.0.0",
     "tinycolor2": "^1.4.1"
   },
   "devDependencies": {
-    "@commitlint/cli": "^7.2.1",
+    "@babel/preset-env": "^7.5.5",
+    "@commitlint/cli": "^8.1.0",
     "@commitlint/config-conventional": "^7.1.2",
     "babel-jest": "^24.8.0",
     "babel-preset-env": "^1.7.0",
