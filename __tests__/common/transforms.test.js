@@ -286,14 +286,21 @@ describe('common', () => {
         var value = transforms["color/UIColor"].transformer({
           value: "#aaaaaa"
         });
-        expect(value).toBe("[UIColor colorWithRed:0.67f green:0.67f blue:0.67f alpha:1.00f]");
+        expect(value).toBe("[UIColor colorWithRed:0.667f green:0.667f blue:0.667f alpha:1.000f]");
+      });
+
+      it('should retain enough precision when converting to decimal', () => {
+        var value = transforms["color/UIColor"].transformer({
+          value: "#1d1d1d"
+        });
+        expect(value).toBe("[UIColor colorWithRed:0.114f green:0.114f blue:0.114f alpha:1.000f]");
       });
 
       it('should handle colors with transparency', () => {
         var value = transforms["color/UIColor"].transformer({
           value: "#aaaaaa99"
         });
-        expect(value).toBe("[UIColor colorWithRed:0.67f green:0.67f blue:0.67f alpha:0.60f]");
+        expect(value).toBe("[UIColor colorWithRed:0.667f green:0.667f blue:0.667f alpha:0.600f]");
       });
     });
 
@@ -302,14 +309,21 @@ describe('common', () => {
         var value = transforms["color/UIColorSwift"].transformer({
           value: "#aaaaaa"
         });
-        expect(value).toBe("UIColor(red: 0.67, green: 0.67, blue: 0.67, alpha:1)");
+        expect(value).toBe("UIColor(red: 0.667, green: 0.667, blue: 0.667, alpha:1)");
+      });
+
+      it('should retain enough precision when converting to decimal', () => {
+        var value = transforms["color/UIColorSwift"].transformer({
+          value: "#1d1d1d"
+        });
+        expect(value).toBe("UIColor(red: 0.114, green: 0.114, blue: 0.114, alpha:1)");
       });
 
       it('should handle colors with transparency', () => {
         var value = transforms["color/UIColorSwift"].transformer({
           value: "#aaaaaa99"
         });
-        expect(value).toBe("UIColor(red: 0.67, green: 0.67, blue: 0.67, alpha:0.6)");
+        expect(value).toBe("UIColor(red: 0.667, green: 0.667, blue: 0.667, alpha:0.6)");
       });
     });
 
