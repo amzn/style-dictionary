@@ -63,7 +63,7 @@
       "/__tests__/__output/"
     ],
     "transform": {
-      "^.+\\.json5?$": "json5-jest",
+      "^.+\\.json5$": "json5-jest",
       "^.+\\.jsx?$": "babel-jest"
     }
   },
@@ -106,23 +106,24 @@
     "fs-extra": "^6.0.1",
     "glob": "^7.1.1",
     "json5": "^2.1.0",
-    "lodash": "^4.16.4",
+    "lodash": "^4.17.15",
     "resolve-cwd": "^2.0.0",
     "tinycolor2": "^1.4.1"
   },
   "devDependencies": {
-    "@commitlint/cli": "^7.2.1",
+    "@babel/preset-env": "^7.5.5",
+    "@commitlint/cli": "^8.1.0",
     "@commitlint/config-conventional": "^7.1.2",
-    "babel-jest": "^23.6.0",
+    "babel-jest": "^24.8.0",
     "babel-preset-env": "^1.7.0",
     "docsify": "^4.9.4",
     "docsify-cli": "^4.3.0",
     "eslint": "^4.19.1",
     "husky": "^1.0.0-rc.8",
     "istanbul": "^0.4.5",
-    "jest": "^23.6.0",
+    "jest": "^24.8.0",
     "jsdoc-escape-at": "^1.0.1",
-    "jsdoc-to-markdown": "^4.0.1",
+    "jsdoc-to-markdown": "^5.0.0",
     "json5-jest": "^1.0.1",
     "less": "^3.0.1",
     "lint-staged": "^8.1.0",
