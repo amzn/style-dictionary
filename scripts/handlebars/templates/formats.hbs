@@ -27,10 +27,57 @@ You use formats in your config file under platforms > [platform] > files > [file
 
 There is an extensive (but not exhaustive) list of [included formats](#pre-defined-formats) available in Style Dictionary.
 
+### Format configuration
+
+Formats can take configuration to make them more flexible. This allows you to re-use the same format multiple times with different configuration or to allow the format to use data not defined in the tokens themselves. To configure a format add extra attributes on the file object in your configuration like so:
+
+```json
+{
+  "source": ["propperties/**/*.json"],
+  "platforms": {
+    "scss": {
+      "transformGroup": "scss",
+      "files": [{
+        "destination": "map.scss",
+        "format": "scss/map-deep",
+        "mapName": "my-tokens"
+      }]
+    }
+  }
+}
+```
+
+In this example we are adding the `mapName` configuration to the `scss/map-deep` format. This will change the name of the SCSS map in the output. Not all formats have the configuration options; format configuration is defined by the format itself. To see the configurtion options of a format, take a look at the documentation of the [specific format](#pre-defined-formats)
+
+### Filtering tokens
+
+A special file configuration is `filter`, which will filter the tokens before they get to the format. This allows you to re-use the same format to generate multiple files with different sets of tokens. Filtering tokens works by adding a `filter` attribute on the file object, where `filter` is:
+
+* An object which gets passed to [Lodash's filter method](https://lodash.com/docs/4.17.14#filter).
+* A string that references the name of a registered filter, using the [`registerFilter`](api.md#registerfilter) method
+* A function if you are defining your configuration in Javascript rather than JSON. The filter function takes a token as the property and should return a boolean if the token should be included (true) or excluded (false).
+
+```javascript
+{
+  "destination": "destination",
+  "format": "myCustomFormat",
+  "filter": "myCustomFilter", // a named filter defined with .registerFilter
+  "filter": function(token) {}, // an inline function
+  "filter": {} // an object pass to lodash's filter method
+}
+```
 
 ### Creating formats
 
-You can create custom formats using the [`registerFormat`](api.md#registerformat) function.
+You can create custom formats using the [`registerFormat`](api.md#registerformat) function. If you want to add configuration to your custom format, `this` is bound to the file object so you can access attributes on the file object with `this.myCustomAttribute` if the file object looks like:
+
+```json
+{
+  "destination": "destination",
+  "format": "myCustomFormat",
+  "myCustomAttribute": "Hello world"
+}
+``` 
 
 
 ### Using a template / templating engine to create a format
