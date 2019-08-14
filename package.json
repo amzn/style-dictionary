@@ -63,12 +63,9 @@
       "/__tests__/__output/"
     ],
     "transform": {
-      "^.+\\.json5?$": "json5-jest",
+      "^.+\\.json5$": "json5-jest",
       "^.+\\.jsx?$": "babel-jest"
-    },
-    "transformIgnorePatterns": [
-      "^.+\\.json?$"
-    ]
+    }
   },
   "husky": {
     "hooks": {
