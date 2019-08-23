@@ -364,7 +364,7 @@ exports[`formats all should match ios-swift/class.swift snapshot 1`] = `
 import UIKit
 
 public class  {
-    static let color_red = #FF0000
+    public static let color_red = #FF0000
 }
 "
 `;
@@ -381,7 +381,7 @@ exports[`formats all should match ios-swift/enum.swift snapshot 1`] = `
 import UIKit
 
 public enum  {
-    static let color_red = #FF0000
+    public static let color_red = #FF0000
 }
 "
 `;
