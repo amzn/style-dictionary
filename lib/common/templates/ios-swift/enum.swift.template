@@ -34,5 +34,5 @@
 import UIKit
 
 public enum <%= this.className %> {
-    <%= _.map(props, function(prop) { return 'static let ' + prop.name + ' = ' + prop.value; }).join('\n    ') %>
+    <%= _.map(props, function(prop) { return 'public static let ' + prop.name + ' = ' + prop.value; }).join('\n    ') %>
 }
