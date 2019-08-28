@@ -37,7 +37,7 @@ Formats can take configuration to make them more flexible. This allows you to re
 
 ```json
 {
-  "source": ["propperties/**/*.json"],
+  "source": ["properties/**/*.json"],
   "platforms": {
     "scss": {
       "transformGroup": "scss",
