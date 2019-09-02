@@ -327,6 +327,21 @@ describe('common', () => {
       });
     });
 
+    describe('color/hex8flutter', () => {
+      it('should handle colors without alpha', () => {
+        var value = transforms["color/hex8flutter"].transformer({
+          value: "#aaaaaa"
+        });
+        expect(value).toBe("Color(0xaaaaaaff)");
+      });
+
+      it('should handle colors with alpha', () => {
+        var value = transforms["color/hex8flutter"].transformer({
+          value: "#aaaaaa99"
+        });
+        expect(value).toBe("Color(0xaaaaaa99)");
+      });
+    });
 
     describe('color/css', () => {
       it('should handle normal colors', () => {
@@ -421,6 +436,15 @@ describe('common', () => {
           value: "1"
         });
         expect(value).toBe("1rem");
+      });
+    });
+
+    describe('size/flutter/remToDouble', () => {
+      it('should work', () => {
+        var value = transforms["size/flutter/remToDouble"].transformer({
+          value: "1"
+        });
+        expect(value).toBe("16.00");
       });
     });
 
