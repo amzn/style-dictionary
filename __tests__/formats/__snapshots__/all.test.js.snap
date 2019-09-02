@@ -83,6 +83,25 @@ exports[`formats all should match css/variables snapshot 1`] = `
 "
 `;
 
+exports[`formats all should match flutter/class.dart snapshot 1`] = `
+"
+//
+// __output/
+//
+// Do not edit directly
+// Generated on Sat, 01 Jan 2000 00:00:00 GMT
+//
+
+
+import 'package:flutter/material.dart';
+
+class  {
+  ._();
+  
+    static const color_red = #FF0000;
+}"
+`;
+
 exports[`formats all should match ios/colors.h snapshot 1`] = `
 "
 //
