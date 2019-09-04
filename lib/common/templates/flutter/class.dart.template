@@ -32,7 +32,7 @@
   var props = _.sortBy(allProperties, item => item.attributes.category + item.name);
 %>
 
-import 'package:flutter/material.dart';
+import 'dart:ui';
 
 class <%= this.className %> {
   <%= this.className %>._();

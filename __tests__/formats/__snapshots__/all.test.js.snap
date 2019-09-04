@@ -93,7 +93,7 @@ exports[`formats all should match flutter/class.dart snapshot 1`] = `
 //
 
 
-import 'package:flutter/material.dart';
+import 'dart:ui';
 
 class  {
   ._();
