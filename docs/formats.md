@@ -81,7 +81,7 @@ You can create custom formats using the [`registerFormat`](api.md#registerformat
   "format": "myCustomFormat",
   "myCustomAttribute": "Hello world"
 }
-``` 
+```
 
 
 ### Using a template / templating engine to create a format

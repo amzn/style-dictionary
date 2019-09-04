@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.8.2"></a>
+## [2.8.2](https://github.com/amzn/style-dictionary/compare/v2.8.1...v2.8.2) (2019-09-04)
+
+
+### Bug Fixes
+
+* **format:** issue [#295](https://github.com/amzn/style-dictionary/issues/295) ([c654648](https://github.com/amzn/style-dictionary/commit/c654648))
+* **format:** issue [#295](https://github.com/amzn/style-dictionary/issues/295) ([#316](https://github.com/amzn/style-dictionary/issues/316)) ([030175e](https://github.com/amzn/style-dictionary/commit/030175e))
+* **formats:** change less and scss comments to short version ([#306](https://github.com/amzn/style-dictionary/issues/306)) ([4f13f57](https://github.com/amzn/style-dictionary/commit/4f13f57)), closes [#305](https://github.com/amzn/style-dictionary/issues/305)
+* **transform:** increase uicolor to 3 decimals to retain 8bit precision ([#314](https://github.com/amzn/style-dictionary/issues/314)) ([a3bde96](https://github.com/amzn/style-dictionary/commit/a3bde96))
+
+
+
 <a name="2.8.1"></a>
 ## [2.8.1](https://github.com/amzn/style-dictionary/compare/v2.8.0...v2.8.1) (2019-07-02)
 

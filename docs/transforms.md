@@ -264,7 +264,7 @@ Transforms the value into an UIColor class for iOS
 ```objectivec
 // Matches: prop.attributes.category === 'color'
 // Returns:
-[UIColor colorWithRed:0.00f green:0.59f blue:0.53f alpha:1.0f]
+[UIColor colorWithRed:0.114f green:0.114f blue:0.114f alpha:1.000f]
 ```
 
 
@@ -278,7 +278,7 @@ Transforms the value into an UIColor swift class for iOS
 ```swift
 // Matches: prop.attributes.category === 'color'
 // Returns:
-UIColor(red: 0.67, green: 0.67, blue: 0.67, alpha:0.6)
+UIColor(red: 0.667, green: 0.667, blue: 0.667, alpha:0.6)
 ```
 
 
