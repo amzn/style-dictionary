@@ -332,14 +332,14 @@ describe('common', () => {
         var value = transforms["color/hex8flutter"].transformer({
           value: "#aaaaaa"
         });
-        expect(value).toBe("Color(0xaaaaaaff)");
+        expect(value).toBe("Color(0xFFAAAAAA)");
       });
 
       it('should handle colors with alpha', () => {
         var value = transforms["color/hex8flutter"].transformer({
           value: "#aaaaaa99"
         });
-        expect(value).toBe("Color(0xaaaaaa99)");
+        expect(value).toBe("Color(0x99AAAAAA)");
       });
     });
 
