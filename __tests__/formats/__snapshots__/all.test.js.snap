@@ -78,7 +78,7 @@ exports[`formats all should match css/variables snapshot 1`] = `
  */
 
 :root {
- --color_red: #FF0000; /* comment */
+  --color_red: #FF0000; /* comment */
 }
 "
 `;
