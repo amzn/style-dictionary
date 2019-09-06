@@ -294,5 +294,15 @@ describe('utils', () => {
       ]));
     });
 
+    it('should handle 0', () => {
+      GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
+      var test = resolveObject({
+        "test": { "value": "{zero.value}" },
+        "zero": { "value": 0}
+      });
+      expect(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS).length).toBe(0);
+      expect(test.test.value).toBe(0);
+    });
+
   });
 });
