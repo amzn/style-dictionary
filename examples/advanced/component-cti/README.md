@@ -1,6 +1,6 @@
 ## Component CTI Structure
 
-This example will show you one way to define component tokens in an easy way while still using the CTI attributes for transforming the tokens. The CTI structure for Style Dictionary tokens makes defining component-level tokens really cumbersome and not user-friendly. This is because the CTI of tokens are based on the object path of the token. So if you wanted to write tokens for a button component it would have to look something like this:
+This example will show you one way to define component tokens in a simple way while still using the CTI attributes for transforming the tokens. The CTI structure for Style Dictionary tokens makes defining component-level tokens cumbersome and not user-friendly. This is because the CTI of tokens is based on the object path of the token. Now, if you wanted to write tokens for a button component it would have to look something like this:
 
 ```json
 {
@@ -65,7 +65,7 @@ At this point, if you want to build the tokens run `npm run build`. This command
 
 All of the built-in transforms target tokens using the CTI attributes. The built-in [`attribute/cti`](https://amzn.github.io/style-dictionary/#/transforms?id=attributecti) transform adds the CTI attributes to each token based on the object path of the token. In this example we override the default behavior of the [`attribute/cti`](https://amzn.github.io/style-dictionary/#/transforms?id=attributecti) transform to apply CTI attributes based on token's key, or last part of the object path to generate the equivalent category and type. This way we can correctly map a token with an object path of `component.button.background-color` to a category of `color` and type of `background`. 
 
-Style Dictionary allows for extensibility through [monkey patching](https://en.wikipedia.org/wiki/Monkey_patch). This allows you to override default behavior of the Style Dictionary library, and any built-in transforms and formats. You can override built-in transforms and formats by adding ones with the same name. Also, all of the built-in transforms, transformGroups, and formats are available by accessing them in the Style Dictionary library under the attributes `transform`, `transformGroup`, and `format` respectively. For example:
+Style Dictionary allows for extensibility through [monkey patching](https://en.wikipedia.org/wiki/Monkey_patch). This allows you to override the default behavior of the Style Dictionary library, and any built-in transforms and formats. You can override built-in transforms and formats by adding ones with the same name. Also, all of the built-in transforms, transformGroups, and formats are available by accessing them in the Style Dictionary library under the attributes `transform`, `transformGroup`, and `format` respectively. For example:
 
 ```javascript
 const StyleDictionary = require('style-dictionary');
@@ -86,4 +86,4 @@ For example, if the key of the token (the last part of the object path) is "back
 * `config.js`:
   * `propertiesToCTI`: A plain object where we map the CSS property name to the proper category and type.
   * `CTITransform`: A transform object that defines a transformer method, which will override the default `attribute/cti` transform. This is similar to creating a child class with some custom logic and then calling `super`. In the transformer function it first looks at the top-level namespace, the first item in the object path, and if it is 'component' we run our custom logic using the `propertiesToCTI` map. If it is not 'component', use the built-in `attribute/cti`.
-* `tokens/component/button.json`: Take a look at how it defines the component tokens and uses the last part of the object path as the CSS property. Notice how we can define token values in here that are not references, but they still get transformed properly: font-size uses 'rem' and background-color uses hex in the output.
+* `tokens/component/button.json`: Take a look at how it defines the component tokens and uses the last part of the object path as the CSS property. Notice how we can define token values in here that are not referenced, but they still get transformed properly: font-size uses 'rem' and background-color uses hex in the output.
