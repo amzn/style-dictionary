@@ -81,7 +81,7 @@ Now open the `build.js` script and look at how these custom transforms/transform
 
 A few things to notice in the file:
 
-- the name of a custom "transform" can be the same as an existing pre-defined method; in that case the pre-defined method is simply overwritten
+- the name of a custom "transform" can be the same as an existing pre-defined method; in that case the pre-defined method is overwritten
 - beyond the existing attributes, you can use custom attributes to create  **matcher** functions, used to filter the properties and apply the transform only to those that match the filter condition.
 - if you don't specify a **matcher**, the transformation will be applied to all the properties
 - the transformation can be applied not only to the **value** of a property, but also to its **name** (and also to its attributes)
