@@ -1,6 +1,6 @@
 ## Component CTI Structure
 
-This example will show you one way to define component tokens in an easy way while still using the CTI attributes for transforming the tokens. The CTI structure for Style Dictionary tokens makes defining component-level tokens really cumbersome and not user-friendly. This is because the CTI of tokens are based on the object path of the token. So if you wanted to write tokens for a button component it would have to look something like this:
+This example will show you one way to define component tokens in an easy way while still using the CTI attributes for transforming the tokens. The CTI structure for Style Dictionary tokens makes defining component-level tokens really cumbersome and not user-friendly. This is because the CTI of tokens are based on the object path of the token. If you wanted to write tokens for a button component it would have to look something like this:
 
 ```json
 {

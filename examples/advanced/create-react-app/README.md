@@ -14,7 +14,7 @@ This is what you should see:
 
 <img alt="screenshot of the React application" src="README.media/react-app-screenshot.png" />
 
-If instead you want to build just the tokens you can run `npm run build-dictionary`. This command will generate the files in the `src/style-dictionary-dist` folder, inside the CRA source folder.
+If instead you want to build the tokens you can run `npm run build-dictionary`. This command will generate the files in the `src/style-dictionary-dist` folder, inside the CRA source folder.
 
 **Important**: the file `.env` in this folder is to have CRA run inside another project; if want to use this example as standalone codebase please remove it.
 

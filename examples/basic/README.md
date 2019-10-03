@@ -21,7 +21,7 @@ ios
 ✔︎ build/ios/StyleDictionaryColor.m
 ```
 
-Pat yourself on the back, you just built your first style dictionary! Moving on, take a look at what we have built. This should have created a build directory and it should look like this:
+Pat yourself on the back, you built your first style dictionary! Moving on, take a look at what we have built. This should have created a build directory and it should look like this:
 ```
 ├── android/
 │   ├── font_dimens.xml

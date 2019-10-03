@@ -229,7 +229,7 @@ While not exactly necessary, we feel this classification structure of style prop
 
  Structuring style properties in this manner gives us consistent naming and accessing of these properties. You don't need to remember if it is button_color_error or error_button_color, it is color_background_button_error!
 
- Technically, you can organize and name your style properties however you want, there are no restrictions. But we have a good amount of helpers if you do use this structure, like the 'attribute/cti' transform which adds attributes to the property of its CTI based on the path in the object. There are a lot of name transforms as well for when you want a flat structure like for Sass variables.
+ You can organize and name your style properties however you want, there are no restrictions. But we have a good amount of helpers if you do use this structure, like the 'attribute/cti' transform which adds attributes to the property of its CTI based on the path in the object. There are a lot of name transforms as well for when you want a flat structure like for Sass variables.
 
  Also, the CTI structure provides a good mechanism to target transforms for specific kinds of properties. All of the transforms provided by the framework use the CTI of a property to know if it should be applied. For instance, the 'color/hex' transform only applies to properties of the category 'color'.
 
