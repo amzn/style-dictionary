@@ -72,7 +72,7 @@ A special file configuration is `filter`, which will filter the tokens before th
 
 ### Creating formats
 
-You can create custom formats using the [`registerFormat`](api.md#registerformat) function. If you want to add configuration to your custom format, `this` is bound to the file object from which you can access attributes on the file object with `this.myCustomAttribute` if the file object looks like:
+You can create custom formats using the [`registerFormat`](api.md#registerformat) function. If you want to add configuration to your custom format, `this` is bound to the file object. You can access custom attributes on the file object via `this`. e.g. `this.myCustomAttribute`, using this example:
 
 ```json
 {
@@ -85,7 +85,7 @@ You can create custom formats using the [`registerFormat`](api.md#registerformat
 
 ### Using a template / templating engine to create a format
 
-A formatter is a simple function and created easily with most templating engines. Templates are useful if there is a lot of boilerplate code to insert (e.g. ObjectiveC files). If the output consists of the values (e.g. a flat SCSS variables file), writing a formatter function directly may be easier.
+Formatters are functions and created easily with most templating engines. Formats can be built using templates if there is a lot of boilerplate code to insert (e.g. ObjectiveC files). If the output consists of only the values (e.g. a flat SCSS variables file), writing a formatter function directly may be easier.
 
 Any templating language can work as there is a node module for it. All you need to do is register a format that calls your template and returns a string.
 

@@ -55,7 +55,7 @@ StyleDictionary.registerTransform({
   }
 });
 
-StyleDictionary.registerTransform({ // this is a silly example, to show how you can apply transform to
+StyleDictionary.registerTransform({ // this is a silly example, to show how you can apply transform to names
   name: 'name/squiggle',
   type: 'name',
   // notice: if you don't specify a matcher, the transformation will be applied to all the properties
@@ -78,8 +78,8 @@ StyleDictionary.registerTransformGroup({
 
 StyleDictionary.registerTransformGroup({
   name: 'custom/scss',
-  // this is to show a possibility, if you want to add a few transforms to a pre-defined group
-  // (even though, we suggest to use the previous approach, which is more explicit and clear)
+  // this is to show one possibility, for adding a few transforms to a pre-defined group
+  // (however, we suggest to use the previous approach, which is more explicit and clear)
   transforms: StyleDictionary.transformGroup['scss'].concat(['size/px', 'ratio/%'])
 });
 

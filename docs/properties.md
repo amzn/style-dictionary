@@ -29,7 +29,7 @@ A property file organizes properties in a structured way for quick access. Prope
 }
 ```
 
-Any object in the JSON that has a `value` attribute on it is a property, that is why in this example there are 4 style properties: `color.font.base`, `color.font.secondary`, `color.font.tertiary`, and `color.font.inverse.base`.
+Any object in the JSON that has a `value` attribute on it is a property; in this example there are 4 style properties: `color.font.base`, `color.font.secondary`, `color.font.tertiary`, and `color.font.inverse.base`.
 
 For any properties you wish to output, the "value" attribute is required. This provides the data that will be used throughout the build process (and ultimately used for styling in your deliverables). You can optionally include any custom attributes you would like (e.g. "comment" with a string or "metadata" as an object with its own attributes).
 

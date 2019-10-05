@@ -165,7 +165,7 @@ $color-font-tertiary: rgb(204, 204, 204);
 [UIColor colorWithRed:0.80f green:0.80f blue:0.80f alpha:1.00f]
 ```
 
-That's it! There is a lot more you can do with your style dictionary than will generate some files with color values. Take a look
+That's it! There is a lot more you can do with your style dictionary than generating files with color values. Take a look
 at some [examples](examples.md) or take a deeper dive into [package structure](package_structure.md), [extending](extending.md), or how the [build process](build_process.md) works.
 
 ## Basic Usage

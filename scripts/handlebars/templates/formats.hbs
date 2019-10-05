@@ -69,7 +69,7 @@ A special file configuration is `filter`, which will filter the tokens before th
 
 ### Creating formats
 
-You can create custom formats using the [`registerFormat`](api.md#registerformat) function. If you want to add configuration to your custom format, `this` is bound to the file object by which you can access attributes on the file object with `this.myCustomAttribute` if the file object looks like:
+You can create custom formats using the [`registerFormat`](api.md#registerformat) function. If you want to add configuration to your custom format, `this` is bound to the file object. Using this, you can access attributes on the file object with `this.myCustomAttribute` if the file object looks like:
 
 ```json
 {

@@ -37,7 +37,7 @@ The file **`App.js`** is the main app file. You can see the three component in t
 
 The folder `components` contains the code for the three components used in the app:
 
-- The **`components/with-sass`** folder contains the example React component, styled using CSS/Sass. Look at how the design tokens are consumed inside the Sass file as Sass variables. The Sass file is then imported in the component which can be compiled to CSS at build time and included in the resulting web app page.
+- The **`components/with-sass`** folder contains the example React component, styled using CSS/Sass. Look at how the design tokens are consumed inside the Sass file as Sass variables. The Sass file is then imported in the component which will be compiled to CSS at build time and included in the resulting web app page.
 
 - The **`components/with-css-modules`** folder contains the example React component, styled using CSS Modules. Look at how the styles are imported in the component, and the class names are applied to the HTML elements. The CSS styles are declared in Sass by which the design tokens can be consumed directly as Sass variables.<br>*If you want to know more about how CSS Modules works with React, and how it applies CSS styles to the JSX elements, [please refer to the documentation](https://github.com/css-modules/css-modules/blob/master/docs/css-modules-with-react.md).*
 

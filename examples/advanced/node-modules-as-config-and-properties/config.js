@@ -27,11 +27,11 @@ StyleDictionary.registerFormat({
 // similar to webpack.
 module.exports = {
   // We are relying on node modules to merge all the objects together
-  // and we only want to reference top level node modules that export
+  // thus we only want to reference top level node modules that export
   // the whole objects.
   source: ['properties/index.js', 'components/index.js'],
   // If you don't want to call the registerTransform method a bunch of times
-  // you can override the whole transform object only. This works because
+  // you can override the whole transform object directly. This works because
   // the .extend method copies everything in the config
   // to itself, thus you can override things. It's also doing a deep merge
   // therfore you don't have to worry about using Object.assign to not
@@ -44,7 +44,7 @@ module.exports = {
     }
   },
   // Same with formats, you can now write them directly to this config
-  // object only. The name of the format is the key.
+  // object. The name of the format is the key.
   format: {
     myFormat: (dictionary, platform) => {
       return dictionary.allProperties.map(prop => `${prop.name}: ${prop.value}`).join('\n');

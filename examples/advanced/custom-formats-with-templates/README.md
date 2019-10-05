@@ -21,7 +21,7 @@ StyleDictionary.registerFormat({
 });
 ```
 
-As you can see, the `registerFormat` [API method](https://amzn.github.io/style-dictionary/#/api?id=registerformat) is invoked, passing a custom name for the format (you can choose whatever you like, it's a string only) and a formatting function that returns the content to be saved to file.
+As you can see, the `registerFormat` [API method](https://amzn.github.io/style-dictionary/#/api?id=registerformat) is invoked, passing a custom name for the format (you can choose whatever string you like) and a formatting function that returns the content to be saved to file.
 
 The format is then used in the `config.js` file and passed to a `file` declaration for a platform (look at the `config.js` file in the example to see how it is used).
 
