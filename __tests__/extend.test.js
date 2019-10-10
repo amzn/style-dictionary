@@ -48,7 +48,7 @@ describe('extend', () => {
 
     it('should have all same properties', () => {
       var StyleDictionaryExtended = StyleDictionary.extend({});
-      _.each(_.keys(StyleDictionaryExtended), function(property) {
+      _.keys(StyleDictionaryExtended).forEach(function(property) {
         expect(StyleDictionaryExtended).toHaveProperty(property);
       });
     });

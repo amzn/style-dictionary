@@ -29,7 +29,7 @@ var props = _.filter(allProperties, function(prop) {
   }
 %>
 <resources>
-  <% _.each(props, function(prop) {
+  <% props.forEach(function(prop) {
   %><color name="<%= prop.name %>"><%= prop.value %></color><% if (prop.comment) { %><!-- <%= prop.comment %> --><% } %>
   <% }); %>
 </resources>

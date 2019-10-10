@@ -167,7 +167,7 @@ var dictionary = {
 };
 
 describe('formats', () => {
-  _.each(['scss/map-flat', 'scss/map-deep'], function(key) {
+  ['scss/map-flat', 'scss/map-deep'].forEach(function(key) {
 
     describe(key, () => {
 

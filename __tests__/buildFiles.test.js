@@ -93,13 +93,13 @@ describe('buildFiles', () => {
 
   it('should throw if build path doesn\'t have a trailing slash', () => {
     expect(
-      buildFiles.bind(null, dictionary, platformWithBadBuildPath),
+      buildFiles.bind(null, dictionary, platformWithBadBuildPath)
     ).toThrow('Build path must end in a trailing slash or you will get weird file names.');
   });
 
   it('should throw if missing a format', () => {
     expect(
-      buildFiles.bind(null, dictionary, platformWithoutFormatter),
+      buildFiles.bind(null, dictionary, platformWithoutFormatter)
     ).toThrow('Please supply a format');
   });
 
@@ -119,7 +119,7 @@ describe('buildFiles', () => {
     var output = require("./__output/test.json")
     expect(output).toHaveProperty('bingo');
     expect(output).not.toHaveProperty('foo');
-    _.each(output, function(property) {
+    Object.values(output).forEach(function(property) {
       expect(property.value).toBe('bango');
     });
   });

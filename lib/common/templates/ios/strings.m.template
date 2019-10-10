@@ -29,7 +29,7 @@
 #import "<%= this.className %>.h"
 <%  var props = _.filter(allProperties, this.filter); %>
 
-<% _.each(props, function(prop) {  %>
+<% props.forEach(function(prop) {  %>
 NSString * const <%= prop.name %> = <%= prop.value %>;<% }); %>
 
 @implementation <%= this.className %>

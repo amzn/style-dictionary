@@ -31,6 +31,6 @@
 
 <% var props = _.filter(allProperties, this.filter); %>
 
-<% _.each(props, function(prop) {
+<% props.forEach(function(prop) {
   %>#define <%= prop.name %> <%= prop.value %>
 <% }); %>

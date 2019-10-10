@@ -29,7 +29,7 @@
 
     // output the list of tokens as Sass variables
     //
-    _.each(allProperties, function(prop) {
+    allProperties.forEach(function(prop) {
         var output = '';
         output += '$' + prop.name + ': ' + prop.value + ' !default;'
         if(prop.comment) {

@@ -30,5 +30,5 @@
 <% var props = _.filter(allProperties, this.filter);
    var type = this.type; %>
 
-<% _.each(props, function(prop) {  %>
+<% props.forEach(function(prop) {  %>
 extern <%= type %> const <%= prop.name %>;<% }); %>

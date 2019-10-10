@@ -32,7 +32,7 @@ var props = _.filter(allProperties, function(prop) {
 %>
 <plist version="1.0">
   <dict>
-    <% _.each(props, function(prop) {
+    <% props.forEach(function(prop) {
     %><key><%= prop.name %></key>
     <% if (prop.attributes.category === 'color') { %><dict>
       <key>r</key>
