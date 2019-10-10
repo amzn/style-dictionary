@@ -29,7 +29,7 @@
   // Filter to only those props wanted based on the filter, then sort
   // them by category so we keep like props together, then by name
   // so they are easier to find alphabetically.
-  var props = _.sortBy(allProperties, item => item.attributes.category + item.name);
+  var props = allProperties.concat().sort(item => item.attributes.category + item.name);
 %>
 import UIKit
 
