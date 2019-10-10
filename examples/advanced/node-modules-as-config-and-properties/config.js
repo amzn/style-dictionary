@@ -33,9 +33,8 @@ module.exports = {
   // If you don't want to call the registerTransform method a bunch of times
   // you can override the whole transform object directly. This works because
   // the .extend method copies everything in the config
-  // to itself, thus you can override things. It's also doing a deep merge
-  // therfore you don't have to worry about using Object.assign to not
-  // accidentally null out things.
+  // to itself, allowing you to override things. It's also doing a deep merge
+  // to protect from accidentally overriding nested attributes.
   transform: {
     // Now we can use the transform 'myTransform' below
     myTransform: {

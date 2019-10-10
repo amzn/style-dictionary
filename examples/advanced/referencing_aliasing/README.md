@@ -46,7 +46,7 @@ The reference can point to another property in a **different JSON file**. For ex
       ...
 ```
 
-It is also possible to create **chains of references**, where a value references an alias that is, in turn, another alias of a value. If you open `button/button.json` you can see that the value of the primary color for the button is an alias of `color.primary.value`, that we saw above is an alias of `color.base.green.value`:
+It is also possible to create **chains of references**, where a value references an alias that is also an alias of a value. If you open `button/button.json`, the value of the primary color for the button is an alias of `color.primary.value`, that is an alias of `color.base.green.value`:
 
 ```
 {

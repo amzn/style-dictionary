@@ -36,7 +36,7 @@ StyleDictionary.registerTransform({
 
 More information can be found on the [documentation](https://amzn.github.io/style-dictionary/#/api?id=registertransform).
 
-Since the transformGroups provided by Style Dictionary are pre-defined lists of transform, this means that to be used, this transform needs to be included in a new list of transforms.
+To use this new custom transform, we need to create a new custom transformGroup that references it.
 
 To register this custom **transformGroup** , you have to call the `registerTransformGroup` method:
 

@@ -50,7 +50,7 @@ Now open the `build.js` script and look at how these custom formats are declared
 Finally, look at the different template files in the `templates` folder and see how they are built to generate custom file formats in output:
 
 * **web-scss.template**: this is a template that uses [Lodash](https://lodash.com/docs/4.17.10#template), and shows how you can create a custom format for Sass ".scss" files. The same approach can be used if you need other custom formats for the web (or other platforms too).
-* **android-xml.template**: this template too uses Lodash, and shows how to create a custom XML format for Android, that can be read as "resource file". If you need to create one speak with your developers to agree on the format they want then this is one of the many possible formats for Android. 
+* **android-xml.template**: this template uses Lodash as well, and shows how to create a custom XML format for Android, that can be read as "resource file". This is one of the many possible formats for Android that you could create.
 * **android-xml_alt.hbs**: this is an alternative example of custom XML format for Android, that uses [Handlebar](https://handlebarsjs.com) as templating language.
-* **ios-plist.template**: this template too uses Lodash, and shows how to create a custom PLIST format for iOS, that can be read as "resource file". If you need to create one speak with your developers to agree on the format they want then this is one of the many possible formats for iOS.
+* **ios-plist.template**: this template uses Lodash as well, and shows how to create a custom PLIST format for iOS, that can be read as "resource file". This is one of the many possible formats for iOS that you could create.
 * **ios-plist_alt.pug**: this is an alternative example of custom XML format for Android, that uses [Pug](https://pugjs.org/api/getting-started.html) as templating language.

@@ -257,7 +257,7 @@ The comment  will appear in the output files, where relevant or the output forma
 
 ## Extending
 
-The style dictionary build system is made to be extended. We don't know exactly how everyone will want to use style dictionaries in their project, which is why it is simple to create custom transforms and formats.
+The style dictionary build system is made to be extended. We don't know exactly how everyone will want to use style dictionaries in their project, which is why you can create custom transforms and formats.
 
 ```javascript
 const StyleDictionary = require('style-dictionary').extend('config.json');
