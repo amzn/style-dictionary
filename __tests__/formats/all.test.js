@@ -60,7 +60,7 @@ var dictionary = {
 };
 
 describe('formats', () => {
-  _.keys(formats).forEach(function(key) {
+  Object.keys(formats).forEach(function(key) {
 
     const constantDate = new Date('2000-01-01');
     const globalDate = global.Date;
