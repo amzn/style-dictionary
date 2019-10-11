@@ -20,7 +20,7 @@ Style Dictionary takes all the files it found and performs a deep merge. This al
 
 ## 4. Iterate over the platforms
 
-For each platform defined in your [config](config.md), Style Dictionary will do a few steps to get it ready to be consumed on that platform. Everything that happens in a platform is non-destructive so you don't need to worry about one platform affecting another.
+For each platform defined in your [config](config.md), Style Dictionary will do a few steps to get it ready to be consumed on that platform. You don't need to worry about one platform affecting another because everything that happens in a platform is non-destructive
 
 ## 4a. Transform the tokens
 
