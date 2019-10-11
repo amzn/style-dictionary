@@ -4,7 +4,7 @@ The Style Dictionary npm module exposes an [API](api.md) to interact with style 
 
 
 # Installation
-To use the npm module, install it like a normal npm dependency. This is a build tool so you are most likely going to want to save it as a dev dependency (The -D option):
+To use the npm module, install it like a normal npm dependency. You are most likely going to want to save it as a dev dependency (The -D option) because it's a build tool:
 ```bash
 $ npm install -D style-dictionary
 ```
