@@ -2,11 +2,11 @@
 
 This example shows how to use a "watcher" to rebuild automatically the files every time a property file is updated.
 
-This is very handy when there are continuous changes to the token values (e.g. during development) and we want to avoid to run the "build" command at every update.
+This is useful when there are continuous changes to the token values (e.g. during development) and we want to avoid to run the "build" command at every update.
 
 #### Running the example
 
-First of all, set up the required dependencies running the command `npm install` in your local CLI environment (if you prefer to use *yarn*, update the commands accordingly).
+First of all, set up the required dependencies running the command `npm install` in your local CLI environment (if you prefer to use _yarn_, update the commands accordingly).
 
 At this point, if you want to build once the tokens you can run `npm run build`. This command will generate the files in the `build` folder.
 

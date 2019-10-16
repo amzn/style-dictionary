@@ -2,11 +2,11 @@
 
 This example shows how to use referencing (or "aliasing") to reference a value -or an attribute– of a property and assign it to the value –or attribute– of another property.
 
-This is very handy when you want to create a system that uses some basic design definitions (base colors, base font sizes, base scales, etc) but then exposes them in a more complex and detailed set of design tokens, typically to describe a complete UI pattern library.
+This is useful when you want to create a system that uses some basic design definitions (base colors, base font sizes, base scales, etc) but then exposes them in a more complex and detailed set of design tokens, typically to describe a complete UI pattern library.
 
 #### Running the example
 
-First of all, set up the required dependencies running the command `npm install` in your local CLI environment (if you prefer to use *yarn*, update the commands accordingly).
+First of all, set up the required dependencies running the command `npm install` in your local CLI environment (if you prefer to use _yarn_, update the commands accordingly).
 
 At this point, you can run `npm run build`. This command will generate the output file in the `build` folder.
 
@@ -19,6 +19,7 @@ The "build" command processes the JSON files in the `properties` folder. Wheneve
        "value": "{ref.to.object.value}"
    }
 ```
+
 the build process resolves the reference using the declared path (`ref.to.object`) to retrieve the actual value of the referenced property inside the Style Dictionary object.
 
 **Notice**: if the path is not valid, doesn't exist or is a circular reference, Style Dictionary generates an error in the console.
@@ -33,6 +34,7 @@ For example, open `color/base.json` and see how the value of the "primary" color
    "primary": { "value": "{color.base.green.value}" }
 
 ```
+
 In this case, the string `"{color.base.green.value}"` is resolved at build time, and gets its value from the value of the "green" base color, `"#00FF00"`.
 
 The reference can point to another property in a **different JSON file**. For example open `color/font.json` and see how the value for the base/secondary font colors are references to the properties declared in `color/base.json`:
@@ -68,7 +70,8 @@ The value associated to a property can be an **object** (eg. an RGB color). In t
         "medium": { "value": { "r": 146, "g": 153, "b": 162 } }
 
 ```
-In that case Style Dictionary still resolves correctly the alias to the  corresponding value:
+
+In that case Style Dictionary still resolves correctly the alias to the corresponding value:
 
 ```
 "color-base-gray-medium": "#9299a2"
@@ -84,6 +87,7 @@ You can also reference **other attributes of a property**, not only its value. F
     }
 
 ```
+
 this at build time gets resolved to:
 
 ```
