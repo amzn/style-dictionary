@@ -90,4 +90,4 @@ this at build time gets resolved to:
 "button-text-size": "16px"
 ```
 
-Of course this is just an example: the real applications can be the most different depending on the context and the needs. For example, look at the [multi-brand-multi-platform](../multi-brand-multi-platform) demo, to see how the aliasing is used to create a powerful theming system.
+This is just an example: the real applications can be the most different depending on the context and the needs. For example, look at the [multi-brand-multi-platform](../multi-brand-multi-platform) demo, to see how the aliasing is used to create a powerful theming system.
