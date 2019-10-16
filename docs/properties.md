@@ -10,7 +10,7 @@ A property is a collection of attributes that describe any fundamental/atomic vi
 
 A property is transformed for use in different platforms, languages, and contexts. A simple example is a color. A color can be represented in many ways, all of these are the same color: `#ffffff`, `rgb(255,255,255)`, `hsl(0,0,1)`.
 
-A property file organizes properties in a structured way for easy access. Property files are organized as a deep object with the leaf nodes being the style key:value pairs.
+A property file organizes properties in a structured way for convenient access. Property files are organized as a deep object with the leaf nodes being the style key:value pairs.
 
 ## Examples
 
@@ -34,50 +34,58 @@ Any object in the JSON that has a `value` attribute on it is a property, so in t
 For any properties you wish to output, the "value" attribute is required. This provides the data that will be used throughout the build process (and ultimately used for styling in your deliverables). You can optionally include any custom attributes you would like (e.g. "comment" with a string or "metadata" as an object with its own attributes).
 
 ### Example Property
+
 Here you can see a property of "size.font.small" with two attributes:
+
 1. the required "value" attribute, set to "10"
 1. the optional "comment" attribute (The "comment" attribute is treated in a special way - the comment will appear in output files when the output format supports comments.)
+
 ```json
 {
   "size": {
     "font": {
-      "small" : {
+      "small": {
         "value": "10",
         "comment": "the smallest font allowed for readability"
-      },
+      }
     }
   }
 }
 ```
 
 ### Multiple Properties
+
 Multiple properties in a single file are simple to read and understand using the recommended [`Category / Type / Item (CTI)`](#category-type-item) method
+
 ```json
 {
   "size": {
     "font": {
-      "small" : { "value": "10" },
+      "small": { "value": "10" },
       "medium": { "value": "16" },
-      "large" : { "value": "24" },
+      "large": { "value": "24" }
     }
   }
 }
 ```
 
 ### Attribute reference / alias
+
 You can reference (alias) existing values by using the dot-notation object path (the fully articulated property name) in brackets. Note that this only applies to values; referencing a non-value property will cause unexpected results in your output.
+
 ```json
 {
   "size": {
     "font": {
-      "small" : { "value": "10" },
+      "small": { "value": "10" },
       "medium": { "value": "16" },
-      "large" : { "value": "24" },
-      "base"  : { "value": "{size.font.medium.value}" }
+      "large": { "value": "24" },
+      "base": { "value": "{size.font.medium.value}" }
     }
   }
 }
 ```
+
 See more in the advanced [referencing-aliasing example](https://github.com/amzn/style-dictionary/tree/master/examples/advanced/referencing_aliasing).
 
 ## Category / Type / Item
@@ -94,7 +102,7 @@ Now you can structure your property json files like simple objects:
 {
   "size": {
     "font": {
-      "base":  { "value": "16" },
+      "base": { "value": "16" },
       "large": { "value": "20" }
     }
   }
@@ -109,4 +117,4 @@ You can organize and name your style properties however you want, **there are no
 
 Also, the CTI structure provides a good mechanism to target transforms for specific kinds of properties. All of the transforms provided by the framework use the CTI structure to know if it should be applied. For instance, the 'color/hex' transform only applies to properties of the category 'color'.
 
-----
+---

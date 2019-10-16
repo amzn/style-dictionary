@@ -4,11 +4,11 @@ While it's pretty standard to use a common set of properties to generate the sam
 
 In this specific case it's necessary to use a **custom build script** to process the properties for each one of the possible brand/platform combinations. In the script the configuration used by Style Dictionary becomes parametric, with "brand" and "platform" used as arguments of a function that returns the "config" object used to extend Style Dictionary.
 
-The properties are organised in **specific folders**, depending if they are "platform" dependent, "brand" dependent or "global" (independent of platform or brand). The organisation of the files used in this example is not strictly required, but has the advantage that it's easier to see what the properties depend on, and it's easy to use global paths  to include the correct files for a specific combination of "brand" and "platform" (see the "source" declaration block in the `getStyleDictionaryConfig` function of the build script).
+The properties are organised in **specific folders**, depending if they are "platform" dependent, "brand" dependent or "global" (independent of platform or brand). The organisation of the files used in this example is not strictly required, but has the advantage that it's easier to see what the properties depend on, and it's convenient to use global paths to include the correct files for a specific combination of "brand" and "platform" (see the "source" declaration block in the `getStyleDictionaryConfig` function of the build script).
 
 #### Running the example
 
-First of all, set up the required dependencies running the command `npm install` in your local CLI environment (if you prefer to use *yarn*, update the commands accordingly).
+First of all, set up the required dependencies running the command `npm install` in your local CLI environment (if you prefer to use _yarn_, update the commands accordingly).
 
 At this point, if you want to build the tokens you can run `npm run build`. This command will generate the files in the `build` folder. Unlike other examples, the files are organised not only by "platform", but also organised in "brand" sub-folders.
 
@@ -50,11 +50,12 @@ function getStyleDictionaryConfig(brand, platform) {
   };
 }
 ```
+
 The properties are stored in three different folders:
 
-* **brands**: this folder contain properties that depend on the "brand", eg. the "primary" and "secondary" colors (generally these are called "brand colors", think of the blue of Facebook, the orange of Amazon, or the red of Gmail).
-* **platforms**: this folder contain properties that depend on the "platform", eg. the font family used in the application or website (eg. a font stack like "Tahoma, Arial, 'Helvetica Neue', sans" on web, "San Francisco" in iOS, "Roboto" in Android).
-* **global**: this folder contain properties that are common, that don't depend on the specific "platform" or "brand", eg. the base grayscale colors, the font sizes, etc.
+- **brands**: this folder contain properties that depend on the "brand", eg. the "primary" and "secondary" colors (generally these are called "brand colors", think of the blue of Facebook, the orange of Amazon, or the red of Gmail).
+- **platforms**: this folder contain properties that depend on the "platform", eg. the font family used in the application or website (eg. a font stack like "Tahoma, Arial, 'Helvetica Neue', sans" on web, "San Francisco" in iOS, "Roboto" in Android).
+- **global**: this folder contain properties that are common, that don't depend on the specific "platform" or "brand", eg. the base grayscale colors, the font sizes, etc.
 
 Leveraging the ability of Style Dictionary to reference other properties values as "aliases", we can have generic properties like `font.family.base` or `color.primary` whose values actually depend on the "platform" and "brand" and whose values are computed dynamically at build time depending on the specific "platform/brand" files, included dynamically by the `getStyleDictionaryConfig` function.
 
@@ -103,6 +104,7 @@ In the same way, now open `properties/platforms/android/font.json` and you will 
   }
 }
 ```
+
 the value `font.platform.system` is consumed by the `properties/globals/font/index.json` file:
 
 ```
@@ -115,6 +117,7 @@ the value `font.platform.system` is consumed by the `properties/globals/font/ind
   }
 }
 ```
+
 In this way the design tokens for the different platforms will be:
 
 ```
