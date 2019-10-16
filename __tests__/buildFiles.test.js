@@ -11,78 +11,77 @@
  * and limitations under the License.
  */
 
-var buildFiles = require('../lib/buildFiles');
-var helpers = require('./__helpers');
-var _ = require('lodash');
+var buildFiles = require("../lib/buildFiles");
+var helpers = require("./__helpers");
+var _ = require("lodash");
 
 var dictionary = {
   properties: {
-    foo: { value: 'bar' },
-    bingo: { value: 'bango' }
+    foo: { value: "bar" },
+    bingo: { value: "bango" }
   }
 };
 
 var platform = {
   files: [
     {
-      destination: '__tests__/__output/test.json',
+      destination: "__tests__/__output/test.json",
       format: function(dictionary) {
-        return JSON.stringify(dictionary.properties)
+        return JSON.stringify(dictionary.properties);
       }
     }
   ]
 };
 
 var platformWithBuildPath = {
-  buildPath: '__tests__/__output/',
+  buildPath: "__tests__/__output/",
   files: [
     {
-      destination: 'test.json',
+      destination: "test.json",
       format: function(dictionary) {
-        return JSON.stringify(dictionary.properties)
+        return JSON.stringify(dictionary.properties);
       }
     }
   ]
 };
 
 var platformWithFilter = {
-  buildPath: '__tests__/__output/',
+  buildPath: "__tests__/__output/",
   files: [
     {
-      destination: 'test.json',
+      destination: "test.json",
       filter: function(property) {
-        return property.value === "bango"
+        return property.value === "bango";
       },
       format: function(dictionary) {
-        return JSON.stringify(dictionary.properties)
-      },
-    }
-  ]
-};
-
-var platformWithoutFormatter = {
-  buildPath: '__tests__/__output/',
-  files: [
-    {
-      destination: 'test.json',
-    }
-  ]
-};
-
-var platformWithBadBuildPath = {
-  buildPath: '__tests__/__output',
-  files: [
-    {
-      destination: 'test.json',
-      format: function(dictionary) {
-        return JSON.stringify(dictionary.properties)
+        return JSON.stringify(dictionary.properties);
       }
     }
   ]
 };
 
-describe('buildFiles', () => {
+var platformWithoutFormatter = {
+  buildPath: "__tests__/__output/",
+  files: [
+    {
+      destination: "test.json"
+    }
+  ]
+};
 
+var platformWithBadBuildPath = {
+  buildPath: "__tests__/__output",
+  files: [
+    {
+      destination: "test.json",
+      format: function(dictionary) {
+        return JSON.stringify(dictionary.properties);
+      }
+    }
+  ]
+};
+
+describe("buildFiles", () => {
   beforeEach(() => {
     helpers.clearOutput();
   });
@@ -91,37 +90,36 @@ describe('buildFiles', () => {
     helpers.clearOutput();
   });
 
-  it('should throw if build path doesn\'t have a trailing slash', () => {
-    expect(
-      buildFiles.bind(null, dictionary, platformWithBadBuildPath),
-    ).toThrow('Build path must end in a trailing slash or you will get weird file names.');
+  it("should throw if build path doesn't have a trailing slash", () => {
+    expect(buildFiles.bind(null, dictionary, platformWithBadBuildPath)).toThrow(
+      "Build path must end in a trailing slash or you will get weird file names."
+    );
   });
 
-  it('should throw if missing a format', () => {
-    expect(
-      buildFiles.bind(null, dictionary, platformWithoutFormatter),
-    ).toThrow('Please supply a format');
+  it("should throw if missing a format", () => {
+    expect(buildFiles.bind(null, dictionary, platformWithoutFormatter)).toThrow(
+      "Please supply a format"
+    );
   });
 
-  it('should work without buildPath', () => {
-    buildFiles( dictionary, platform );
-    expect(helpers.fileExists('./__tests__/__output/test.json')).toBeTruthy();
+  it("should work without buildPath", () => {
+    buildFiles(dictionary, platform);
+    expect(helpers.fileExists("./__tests__/__output/test.json")).toBeTruthy();
   });
 
-  it('should work with buildPath', () => {
-    buildFiles( dictionary, platformWithBuildPath );
-    expect(helpers.fileExists('./__tests__/__output/test.json')).toBeTruthy();
+  it("should work with buildPath", () => {
+    buildFiles(dictionary, platformWithBuildPath);
+    expect(helpers.fileExists("./__tests__/__output/test.json")).toBeTruthy();
   });
 
-  it('should work with a filter', () => {
+  it("should work with a filter", () => {
     buildFiles(dictionary, platformWithFilter);
-    expect(helpers.fileExists('./__tests__/__output/test.json')).toBeTruthy();
-    var output = require("./__output/test.json")
-    expect(output).toHaveProperty('bingo');
-    expect(output).not.toHaveProperty('foo');
+    expect(helpers.fileExists("./__tests__/__output/test.json")).toBeTruthy();
+    var output = require("./__output/test.json");
+    expect(output).toHaveProperty("bingo");
+    expect(output).not.toHaveProperty("foo");
     _.each(output, function(property) {
-      expect(property.value).toBe('bango');
+      expect(property.value).toBe("bango");
     });
   });
-
 });
