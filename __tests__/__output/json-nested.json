@@ -1,0 +1,12 @@
+{
+  "color": {
+    "base": {
+      "red": {
+        "primary": "#611D1C",
+        "secondary": {
+          "inverse": "#000000"
+        }
+      }
+    }
+  }
+}
