@@ -78,7 +78,7 @@ StyleDictionary.registerTransformGroup({
 
 StyleDictionary.registerTransformGroup({
   name: 'custom/scss',
-  // this is to show one possibility, for adding a few transforms to a pre-defined group
+  // this is to show one possibility for adding a few transforms to a pre-defined group
   // (however, we suggest to use the previous approach, which is more explicit and clear)
   transforms: StyleDictionary.transformGroup['scss'].concat(['size/px', 'ratio/%'])
 });

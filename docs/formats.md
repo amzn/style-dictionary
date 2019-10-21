@@ -34,6 +34,7 @@ There is an extensive (but not exhaustive) list of [included formats](#pre-defin
 ### Format configuration
 
 Formats can take configuration to make them more flexible. This allows you to re-use the same format multiple times with different configurations or to allow the format to use data not defined in the tokens themselves. To configure a format, add extra attributes on the file object in your configuration like the following:
+
 ```json
 {
   "source": ["properties/**/*.json"],
@@ -72,7 +73,7 @@ A special file configuration is `filter`, which will filter the tokens before th
 
 ### Creating formats
 
-You can create custom formats using the [`registerFormat`](api.md#registerformat) function. If you want to add configuration to your custom format, `this` is bound to the file object. You can access custom attributes on the file object via `this`. e.g. `this.myCustomAttribute`, using this example:
+You can create custom formats using the [`registerFormat`](api.md#registerformat) function. If you want to add configuration to your custom format, `this` is bound to the file object. Using this, you can access attributes on the file object with `this.myCustomAttribute` if the file object looks like:
 
 ```json
 {
@@ -694,7 +695,7 @@ Creates a sketchpalette file of all the base colors
 
 
 Creates a sketchpalette file compatible with version 2 of
-the sketchpalette plugin. To use this you should use the 
+the sketchpalette plugin. To use this you should use the
 'color/sketch' transform to get the correct value for the colors.
 
 **Example**  

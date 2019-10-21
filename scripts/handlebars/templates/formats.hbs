@@ -29,7 +29,7 @@ There is an extensive (but not exhaustive) list of [included formats](#pre-defin
 
 ### Format configuration
 
-Formats can take configuration to make them more flexible. This allows you to re-use the same format multiple times with different configuration or to allow the format to use data not defined in the tokens themselves. To configure a format add extra attributes on the file object in your configuration as follow:
+Formats can take configuration to make them more flexible. This allows you to re-use the same format multiple times with different configurations or to allow the format to use data not defined in the tokens themselves. To configure a format, add extra attributes on the file object in your configuration like the following:
 
 ```json
 {
@@ -82,7 +82,7 @@ You can create custom formats using the [`registerFormat`](api.md#registerformat
 
 ### Using a template / templating engine to create a format
 
-A formatter is a simple function and created easily with most templating engines. Templates are useful if there is a lot of boilerplate code to insert (e.g. ObjectiveC files). If the output consists of the values only (e.g. a flat SCSS variables file), writing a formatter function directly may be easier.
+Formatters are functions and created easily with most templating engines. Formats can be built using templates if there is a lot of boilerplate code to insert (e.g. ObjectiveC files). If the output consists of only the values (e.g. a flat SCSS variables file), writing a formatter function directly may be easier.
 
 Any templating language can work as there is a node module for it. All you need to do is register a format that calls your template and returns a string.
 

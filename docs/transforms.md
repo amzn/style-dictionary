@@ -173,7 +173,7 @@ Creates a constant-style name based on the full CTI of the property. If you defi
 ### name/ti/constant 
 
 
-Creates a constant-style name on the type and item of the property only. This is useful if you want to create different static classes/files for categories like `Color.BACKGROUND_BASE`. If you define a prefix on the platform in your config, it will prepend with your prefix.
+Creates a constant-style name on the type and item of the property. This is useful if you want to create different static classes/files for categories like `Color.BACKGROUND_BASE`. If you define a prefix on the platform in your config, it will prepend with your prefix.
 
 ```js
 // Matches: all
