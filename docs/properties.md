@@ -2,15 +2,15 @@
 
 > Synonyms: design tokens, design variables, design constants, atoms
 
-Style properties are stored in a collection of JSON or JS module files. We usually keep them in a `properties` directory, but you can put them wherever you like, they just need to be referenced in the `source` attribute on your `config.json` file.
+Style properties are stored in a collection of JSON or JS module files. We usually keep them in a `properties` directory, but you can put them wherever you like, they need to be referenced in the `source` attribute on your `config.json` file.
 
 A property is a collection of attributes that describe any fundamental/atomic visual style. Each attribute is a `key:value` pair. A property name and its value are considered a design token (or design variable/constant/atom).
 
 ![Terminology for different parts of a JSON property](assets/property-definitions.png)
 
-A property is transformed for use in different platforms, languages, and contexts. A simple example is a color. A color can be represented in many ways, all of these are the same color: `#ffffff`, `rgb(255,255,255)`, `hsl(0,0,1)`.
+A property is transformed for use in different platforms, languages, and contexts. A simple example is color. A color can be represented in many ways, all of these are the same color: `#ffffff`, `rgb(255,255,255)`, `hsl(0,0,1)`.
 
-A property file organizes properties in a structured way for easy access. Property files are organized as a deep object with the leaf nodes being the style key:value pairs.
+A property file organizes properties in a structured way for quick access. Property files are organized as a deep object with the leaf nodes being the style key:value pairs.
 
 ## Examples
 
@@ -29,7 +29,7 @@ A property file organizes properties in a structured way for easy access. Proper
 }
 ```
 
-Any object in the JSON that has a `value` attribute on it is a property, so in this example there are 4 style properties: `color.font.base`, `color.font.secondary`, `color.font.tertiary`, and `color.font.inverse.base`.
+Any object in the JSON that has a `value` attribute on it is a property; in this example there are 4 style properties: `color.font.base`, `color.font.secondary`, `color.font.tertiary`, and `color.font.inverse.base`.
 
 For any properties you wish to output, the "value" attribute is required. This provides the data that will be used throughout the build process (and ultimately used for styling in your deliverables). You can optionally include any custom attributes you would like (e.g. "comment" with a string or "metadata" as an object with its own attributes).
 
@@ -88,7 +88,7 @@ Style properties are organized into a hierarchical tree structure with 'category
 
 ![](assets/cti.png)
 
-Now you can structure your property json files like simple objects:
+Now you can structure your property JSON files like simple objects:
 
 ```json
 {
@@ -105,7 +105,7 @@ The CTI is implicit in the structure, the category is 'size' and the type is 'fo
 
 Structuring style properties in this manner gives us consistent naming and accessing of these properties. You don't need to remember if it is `button_color_error` or `error_button_color`, it is `color_background_button_error`!
 
-You can organize and name your style properties however you want, **there are no restrictions**. But there are a good amount of helpers if you do use this structure, like the 'attribute/cti' transform which adds attributes to the property of its CTI based on the path in the object. There are a lot of name transforms as well for when you want a flat structure like for Sass variables.
+You can organize and name your style properties however you want, **there are no restrictions**. But there are a good amount of helpers if you do use this structure, like the 'attribute/cti' transform which adds attributes to the property of its CTI based on the path in the object. There are a lot of names transforms as well for when you want a flat structure like for Sass variables.
 
 Also, the CTI structure provides a good mechanism to target transforms for specific kinds of properties. All of the transforms provided by the framework use the CTI structure to know if it should be applied. For instance, the 'color/hex' transform only applies to properties of the category 'color'.
 

@@ -39,7 +39,7 @@ __Things you can build with a style dictionary:__
 
 **The value of using Style Dictionary to build all of these is that they are all consistent and up to date.**
 
-The Style Dictionary framework is fully extensible and modular so you can create any type of file from a style dictionary.
+The Style Dictionary framework is fully extensible and modular. You can create any type of file from a style dictionary.
 If there is a new language, platform, or file type you need, you can easily [extend](extending.md) the style dictionary framework to create the necessary files.
 
 

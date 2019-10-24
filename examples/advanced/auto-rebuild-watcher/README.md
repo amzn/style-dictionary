@@ -2,7 +2,7 @@
 
 This example shows how to use a "watcher" to rebuild automatically the files every time a property file is updated.
 
-This is very handy when there are continuous changes to the token values (e.g. during development) and we want to avoid to run the "build" command at every update.
+This is quite handy when there are continuous changes to the token values (e.g. during development) and we want to avoid to run the "build" command at every update.
 
 #### Running the example
 

@@ -2,7 +2,7 @@
 
 This example shows how to use referencing (or "aliasing") to reference a value -or an attribute– of a property and assign it to the value –or attribute– of another property.
 
-This is very handy when you want to create a system that uses some basic design definitions (base colors, base font sizes, base scales, etc) but then exposes them in a more complex and detailed set of design tokens, typically to describe a complete UI pattern library.
+This is quite handy when you want to create a system that uses some basic design definitions (base colors, base font sizes, base scales, etc) but then exposes them in a more complex and detailed set of design tokens, typically to describe a complete UI pattern library.
 
 #### Running the example
 
@@ -46,7 +46,7 @@ The reference can point to another property in a **different JSON file**. For ex
       ...
 ```
 
-It is also possible to create **chains of references**, where a value references an alias that is, in turn, another alias of a value, and so on. If you open `button/button.json` you can see that the value of the primary color for the button is an alias of `color.primary.value`, that we just saw above is an alias of `color.base.green.value`:
+It is also possible to create **chains of references**, where a value references an alias that is also an alias of a value. If you open `button/button.json`, the value of the primary color for the button is an alias of `color.primary.value`, that is an alias of `color.base.green.value`:
 
 ```
 {
@@ -90,4 +90,4 @@ this at build time gets resolved to:
 "button-text-size": "16px"
 ```
 
-Of course this is just an example: the real applications can be the most different depending on the context and the needs. For example, look at the [multi-brand-multi-platform](../multi-brand-multi-platform) demo, to see how the aliasing is used to create a powerful theming system.
+This is an example: the real applications can be the most different depending on the context and the needs. For example, look at the [multi-brand-multi-platform](../multi-brand-multi-platform) demo, to see how the aliasing is used to create a powerful theming system.
