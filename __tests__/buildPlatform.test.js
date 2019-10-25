@@ -24,7 +24,7 @@ describe('buildPlatform', () => {
 
   it('should throw if passed a platform that doesn\'t exist', () => {
     expect(
-      StyleDictionaryExtended.buildPlatform.bind(test, 'foobar')
+      StyleDictionaryExtended.buildPlatform.bind(test, 'foobar'),
     ).toThrow('Platform "foobar" does not exist');
 
     expect(
@@ -171,7 +171,7 @@ Unknown transformGroup "bar" found in platform "foo":
 `;
 
     expect(
-      StyleDictionaryExtended.buildPlatform.bind(StyleDictionaryExtended, 'foo')
+      StyleDictionaryExtended.buildPlatform.bind(StyleDictionaryExtended, 'foo'),
     ).toThrow(err);
   });
 
