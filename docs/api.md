@@ -276,7 +276,7 @@ Transforms can manipulate a property's name, value, or attributes
 | transform.type | <code>String</code> | Type of transform, can be: name, attribute, or value |
 | transform.name | <code>String</code> | Name of the transformer (used by transformGroup to call a list of transforms). |
 | [transform.matcher] | <code>function</code> | Matcher function, return boolean if transform should be applied. If you omit the matcher function, it will match all properties. |
-| transform.transformer | <code>function</code> | Performs a transform on a property object, should return a string or object depending on the type. Will only update certain properties to avoid accidentally messing up property objects. |
+| transform.transformer | <code>function</code> | Performs a transform on a property object, should return a string or object depending on the type. Will only update certain properties by which you can't mess up property objects on accident. |
 
 **Example**  
 ```js
