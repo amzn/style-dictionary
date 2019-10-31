@@ -35,7 +35,7 @@ ios-swift-separate-enums
 ✔︎  build/ios-swift/StyleDictionarySize.swift
 ```
 
-Pat yourself on the back, you have now built your first style dictionary! Moving on, take a look at what we have built. This should have created a build directory and it should look like this:
+Good for you! You have now built your first style dictionary! Moving on, take a look at what we have built. This should have created a build directory and it should look like this:
 ```
 ├── README.md
 ├── config.json
