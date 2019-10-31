@@ -66,7 +66,7 @@ public class ColorAdapter extends BaseAdapter {
 
         ViewHolder holder;
 
-        // check if the view already exists if so, no need to inflate and findViewById again!
+        // no need to inflate and findViewById again, if the view already exists
         if (convertView == null) {
 
             // Inflate the custom row layout from your XML.
@@ -82,7 +82,7 @@ public class ColorAdapter extends BaseAdapter {
         }
         else {
 
-            // skip all the expensive inflation/findViewById and just get the holder you already made
+            // skip all the expensive inflation/findViewById and get the holder you already made
             holder = (ViewHolder) convertView.getTag();
         }
 

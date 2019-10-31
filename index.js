@@ -90,7 +90,7 @@ Your current config uses the following templates:
 ⚠️ DEPRECATION WARNING ️️️️️⚠️
 The registerTemplate method is deprecated and will be removed, please
 migrate to registerFormat. You can use any templating engine you would
-like, you just need to require/import it. This is an example of how to
+like, you only need to require/import it. This is an example of how to
 update your code using a lodash template (the template engine previously
 used by registerTemplate):
 

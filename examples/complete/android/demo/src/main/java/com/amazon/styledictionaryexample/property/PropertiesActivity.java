@@ -50,7 +50,7 @@ public class PropertiesActivity extends BaseActivity implements PropertyFragment
     public void onListFragmentInteraction(StyleDictionaryNode item) {
         if (item.isLeaf) {
             // Clone the path list because we don't want to
-            // add the properties key to the path so when the user goes back
+            // add the properties key to the path - when the user goes back
             // we don't need to try to pop off the last item
             ArrayList<String> _path = new ArrayList<>(path);
             _path.add(item.name);

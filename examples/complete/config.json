@@ -83,7 +83,7 @@
       "buildPath": "android/styledictionary/src/main/res/values/",
       "files": [{
         "destination": "style_dictionary_colors.xml",
-        "template": "android/colors"
+        "format": "android/colors"
       },{
         "destination": "style_dictionary_font_dimens.xml",
         "format": "android/fontDimens"

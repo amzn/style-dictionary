@@ -42,7 +42,7 @@ We use ESLint on the code to ensure a consistent style. Any new code committed m
 ### Commit Rules
 We follow [conventional commits'](https://www.conventionalcommits.org/en/v1.0.0-beta.2/#specification) specification.
 
-Please follow the spec in order to have a successful commit.
+Please follow the spec to have a successful commit.
 
 ## What should be included?
 
@@ -50,7 +50,7 @@ Anything that contributes to the idea of creating cross-platform styles.
 
 ### What transforms/transform groups/formats should be included?
 
-If it has a generic and flexible enough use-case, it can be included. We would like to keep this type of code to a minimum because we don't want to be a swiss army knife that does everything out of the box. Instead, we want to focus on core tasks that are useful to the largest number of projects. The spirit of this framework is to allow flexibility and modularity so that anyone can fit it to their needs. This is why you can write your own transforms, and formats with the register methods.
+If it has a generic and flexible enough use-case, it can be included. We would like to keep this type of code to a minimum because we don't want to be a swiss army knife that does everything out of the box. Instead, we want to focus on core tasks that are useful to the largest number of projects. The spirit of this framework is to allow flexibility and modularity which helps anyone fit it to their needs. This is why you can write your own transforms, and formats with the register methods.
 
 ### Where do things go?
 

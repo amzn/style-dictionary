@@ -86,7 +86,7 @@ You can create custom formats using the [`registerFormat`](api.md#registerformat
 
 ### Using a template / templating engine to create a format
 
-A formatter is just a simple function and created easily with most templating engines. Templates are useful if there is a lot of boilerplate code to insert (e.g. ObjectiveC files). If the output consists of just the values (e.g. a flat SCSS variables file), writing a formatter function directly may be easier.
+Formatters are functions and created easily with most templating engines. Formats can be built using templates if there is a lot of boilerplate code to insert (e.g. ObjectiveC files). If the output consists of only the values (e.g. a flat SCSS variables file), writing a formatter function directly may be easier.
 
 Any templating language can work as there is a node module for it. All you need to do is register a format that calls your template and returns a string.
 
@@ -622,7 +622,7 @@ Creates a JSON file of the style dictionary.
 ### json/asset 
 
 
-Creates a JSON file of just the assets defined in the style dictionary.
+Creates a JSON file of the assets defined in the style dictionary.
 
 **Example**  
 ```js
@@ -695,7 +695,7 @@ Creates a sketchpalette file of all the base colors
 
 
 Creates a sketchpalette file compatible with version 2 of
-the sketchpalette plugin. To use this you should use the 
+the sketchpalette plugin. To use this you should use the
 'color/sketch' transform to get the correct value for the colors.
 
 **Example**  

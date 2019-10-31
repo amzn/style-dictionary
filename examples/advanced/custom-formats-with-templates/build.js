@@ -37,7 +37,7 @@ StyleDictionary.registerFormat({
   name: 'custom/format/android-xml-alt',
   formatter: function(dictionary, platform) {
     return templateCustomXml({
-      // this is just to show that the formatter function takes a "dictionary" and "platform" parameters
+      // this is to show that the formatter function only takes a "dictionary" and "platform" parameters
       // (and dictionary has a "properties" and "allProperties" attributes)
       // and returns a string. for more details about the "formatter" function refer to the documentation
       allProperties: dictionary.allProperties,
