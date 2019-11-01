@@ -10,7 +10,7 @@ StyleDictionary.registerTransform({
   name: 'size/px', // notice: the name is an override of an existing predefined method (yes, you can do it)
   type: 'value',
   matcher: function(prop) {
-      // this is just an example of a possible filter (based on the "cti" values) to show how a "matcher" works
+      // this is an example of a possible filter (based on the "cti" values) to show how a "matcher" works
       return prop.attributes.category === 'font' || prop.attributes.category === 'margin';
   },
   transformer: function(prop) {
@@ -55,7 +55,7 @@ StyleDictionary.registerTransform({
   }
 });
 
-StyleDictionary.registerTransform({ // this is just a silly example, to show how you can apply transform to
+StyleDictionary.registerTransform({ // this is a silly example, to show how you can apply transform to names
   name: 'name/squiggle',
   type: 'name',
   // notice: if you don't specify a matcher, the transformation will be applied to all the properties
@@ -78,8 +78,8 @@ StyleDictionary.registerTransformGroup({
 
 StyleDictionary.registerTransformGroup({
   name: 'custom/scss',
-  // this is just to show a possibility, if you want to add a few transforms to a pre-defined group
-  // (even so, we suggest to use the previous approach, which is more explicit and clear)
+  // this is to show one possibility for adding a few transforms to a pre-defined group
+  // (however, we suggest to use the previous approach, which is more explicit and clear)
   transforms: StyleDictionary.transformGroup['scss'].concat(['size/px', 'ratio/%'])
 });
 
@@ -104,7 +104,7 @@ StyleDictionary.registerFormat({
 
 
 // APPLY THE CONFIGURATION
-// Very important: the registration of custom transforms
+// IMPORTANT: the registration of custom transforms
 // needs to be done _before_ applying the configuration
 StyleDictionaryExtended = StyleDictionary.extend(__dirname + '/config.json');
 

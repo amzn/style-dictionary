@@ -13,8 +13,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Installation
 
-StyleDictionary is available through [CocoaPods](http://cocoapods.org). To install
-it, add the following line to your Podfile:
+StyleDictionary is available through [CocoaPods](http://cocoapods.org). To install it, you can add the following line to your Podfile:
 
 ```ruby
 pod "StyleDictionary"

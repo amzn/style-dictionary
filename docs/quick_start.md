@@ -8,7 +8,7 @@ If you want to use the CLI, you can install it globally via npm:
 $ npm install -g style-dictionary
 ```
 
-Or you can install it like a normal npm dependency. Style Dictionary is a build tool, so you are most likely to use it as a dev dependency:
+Or you can install it like a normal npm dependency. Style Dictionary is a build tool, and you are most likely to use it as a dev dependency:
 ```bash
 $ npm install -D style-dictionary
 ```
@@ -24,21 +24,35 @@ $ style-dictionary init basic
 
 This command will copy over the example files found in the [basic example](https://github.com/amzn/style-dictionary/tree/master/examples/basic) in this repo and then run the `style-dictionary build` command to generate the build artifacts. You should see something like this output:
 ```
-Reading config file from ./config.json
-Building all platforms
+Copying starter files...
+
+Source style dictionary starter files created!
+
+Running `style-dictionary build` for the first time to generate build artifacts.
+
 
 scss
-✔︎ build/scss/_variables.scss
+✔︎  build/scss/_variables.scss
 
 android
-✔︎ build/android/font_dimens.xml
+✔︎  build/android/font_dimens.xml
+✔︎  build/android/colors.xml
 
 ios
-✔︎ build/ios/StyleDictionaryColor.h
-✔︎ build/ios/StyleDictionaryColor.m
+✔︎  build/ios/StyleDictionaryColor.h
+✔︎  build/ios/StyleDictionaryColor.m
+✔︎  build/ios/StyleDictionarySize.h
+✔︎  build/ios/StyleDictionarySize.m
+
+ios-swift
+✔︎  build/ios-swift/StyleDictionary.swift
+
+ios-swift-separate-enums
+✔︎  build/ios-swift/StyleDictionaryColor.swift
+✔︎  build/ios-swift/StyleDictionarySize.swift
 ```
 
-Pat yourself on the back, you just built your first style dictionary! Take a look at what you built. This should have created a build directory and it should look like this:
+Pat yourself on the back, you built your first style dictionary! Take a look at what you built. This should have created a build directory and it should look like this:
 ```
 ├── README.md
 ├── config.json
@@ -57,6 +71,12 @@ Pat yourself on the back, you just built your first style dictionary! Take a loo
 │   ├── ios/
 │      ├── StyleDictionaryColor.h
 │      ├── StyleDictionaryColor.m
+│      ├── StyleDictionarySize.h
+│      ├── StyleDictionarySize.m
+│   ├── ios-swift/
+│      ├── StyleDictionary.swift
+│      ├── StyleDictionaryColor.swift
+│      ├── StyleDictionarySize.swift
 ```
 
 If you open `config.json` you will see there are 3 platforms defined: scss, android, ios. Each platform has a transformGroup, buildPath, and files defined. The buildPath and files of the platform should match up to the files what were built. Those files should look like these:
@@ -76,6 +96,8 @@ If you open `config.json` you will see there are 3 platforms defined: scss, andr
   <color name="color_base_gray_light">#ffcccccc</color>
   <color name="color_base_gray_medium">#ff999999</color>
   <color name="color_base_gray_dark">#ff111111</color>
+  <color name="color_base_red">#ffff0000</color>
+  <color name="color_base_green">#ff00ff00</color>
   <color name="color_font_base">#ff111111</color>
   <color name="color_font_secondary">#ff999999</color>
   <color name="color_font_tertiary">#ffcccccc</color>
@@ -84,12 +106,14 @@ If you open `config.json` you will see there are 3 platforms defined: scss, andr
 
 **SCSS**
 ```scss
-$color-base-gray-light: rgb(204, 204, 204);
-$color-base-gray-medium: rgb(153, 153, 153);
-$color-base-gray-dark: rgb(17, 17, 17);
-$color-font-base: rgb(17, 17, 17);
-$color-font-secondary: rgb(153, 153, 153);
-$color-font-tertiary: rgb(204, 204, 204);
+$color-base-gray-light: #cccccc;
+$color-base-gray-medium: #999999;
+$color-base-gray-dark: #111111;
+$color-base-red: #ff0000;
+$color-base-green: #00ff00;
+$color-font-base: #ff0000;
+$color-font-secondary: #00ff00;
+$color-font-tertiary: #cccccc;
 $size-font-small: 0.75rem;
 $size-font-medium: 1rem;
 $size-font-large: 2rem;
@@ -98,6 +122,8 @@ $size-font-base: 1rem;
 
 **iOS**
 ```objectivec
+#import "StyleDictionaryColor.h"
+
 @implementation StyleDictionaryColor
 
 + (UIColor *)color:(StyleDictionaryColorName)colorEnum{
@@ -110,12 +136,14 @@ $size-font-base: 1rem;
 
   dispatch_once(&onceToken, ^{
     colorArray = @[
-[UIColor colorWithRed:0.80f green:0.80f blue:0.80f alpha:1.0f],
-[UIColor colorWithRed:0.60f green:0.60f blue:0.60f alpha:1.0f],
-[UIColor colorWithRed:0.07f green:0.07f blue:0.07f alpha:1.0f],
-[UIColor colorWithRed:0.07f green:0.07f blue:0.07f alpha:1.0f],
-[UIColor colorWithRed:0.60f green:0.60f blue:0.60f alpha:1.0f],
-[UIColor colorWithRed:0.80f green:0.80f blue:0.80f alpha:1.0f]
+[UIColor colorWithRed:0.800f green:0.800f blue:0.800f alpha:1.000f],
+[UIColor colorWithRed:0.600f green:0.600f blue:0.600f alpha:1.000f],
+[UIColor colorWithRed:0.067f green:0.067f blue:0.067f alpha:1.000f],
+[UIColor colorWithRed:1.000f green:0.000f blue:0.000f alpha:1.000f],
+[UIColor colorWithRed:0.000f green:1.000f blue:0.000f alpha:1.000f],
+[UIColor colorWithRed:1.000f green:0.000f blue:0.000f alpha:1.000f],
+[UIColor colorWithRed:0.000f green:1.000f blue:0.000f alpha:1.000f],
+[UIColor colorWithRed:0.800f green:0.800f blue:0.800f alpha:1.000f]
     ];
   });
 
@@ -127,14 +155,14 @@ $size-font-base: 1rem;
 
 Pretty nifty! This shows a few things happening:
 1. The build system does a deep merge of all the property JSON files defined in the `source` attribute of `config.json`. This allows you to split up the property JSON files however you want. There are 2 JSON files with `color` as the top level key, but they get merged properly.
-1. The build system resolves references to other style property values. `{size.font.medium.value}` is resolved properly
-1. The build system handles references to property values in other files as well (as you can see in `properties/color/font.json`)
-1. Values are transformed specifically for each platform
+1. The build system resolves references to other style property values. `{size.font.medium.value}` is resolved properly.
+1. The build system handles references to property values in other files as well (as you can see in `properties/color/font.json`).
+1. Values are transformed specifically for each platform.
 
 
 ## Making a change
 
-Now lets make a change and see how that affects things. Open up `properties/color/base.json` and change `"#111111"` to `"#000000"`. After you make that change, save the file and re-run the build command `style-dictionary build`. Open up the build files and take a look. Now
+Now let's make a change and see how that affects things. Open up `properties/color/base.json` and change `"#111111"` to `"#000000"`. After you make that change, save the file and re-run the build command `style-dictionary build`. Open up the build files and take a look. Now:
 
 **Android**
 ```xml
@@ -143,29 +171,35 @@ Now lets make a change and see how that affects things. Open up `properties/colo
   <color name="color_base_gray_light">#ffcccccc</color>
   <color name="color_base_gray_medium">#ff999999</color>
   <color name="color_base_gray_dark">#ff000000</color>
-  <color name="color_font_base">#ff111111</color>
-  <color name="color_font_secondary">#ff999999</color>
+  <color name="color_base_red">#ffff0000</color>
+  <color name="color_base_green">#ff00ff00</color>
+  <color name="color_font_base">#ffff0000</color>
+  <color name="color_font_secondary">#ff00ff00</color>
   <color name="color_font_tertiary">#ffcccccc</color>
 </resources>
 ```
 ```scss
-$color-base-gray-light: rgb(204, 204, 204);
-$color-base-gray-medium: rgb(153, 153, 153);
-$color-base-gray-dark: rgb(0, 0, 0);
-$color-font-base: rgb(0, 0, 0);
-$color-font-secondary: rgb(153, 153, 153);
-$color-font-tertiary: rgb(204, 204, 204);
+$color-base-gray-light: #cccccc;
+$color-base-gray-medium: #999999;
+$color-base-gray-dark: #000000;
+$color-base-red: #ff0000;
+$color-base-green: #00ff00;
+$color-font-base: #ff0000;
+$color-font-secondary: #00ff00;
+$color-font-tertiary: #cccccc;
 ```
 ```objectivec
-[UIColor colorWithRed:0.80f green:0.80f blue:0.80f alpha:1.00f],
-[UIColor colorWithRed:0.60f green:0.60f blue:0.60f alpha:1.00f],
-[UIColor colorWithRed:0.00f green:0.00f blue:0.00f alpha:1.00f],
-[UIColor colorWithRed:0.00f green:0.00f blue:0.00f alpha:1.00f],
-[UIColor colorWithRed:0.60f green:0.60f blue:0.60f alpha:1.00f],
-[UIColor colorWithRed:0.80f green:0.80f blue:0.80f alpha:1.00f]
+[UIColor colorWithRed:0.800f green:0.800f blue:0.800f alpha:1.000f],
+[UIColor colorWithRed:0.600f green:0.600f blue:0.600f alpha:1.000f],
+[UIColor colorWithRed:0.000f green:0.000f blue:0.000f alpha:1.000f],
+[UIColor colorWithRed:1.000f green:0.000f blue:0.000f alpha:1.000f],
+[UIColor colorWithRed:0.000f green:1.000f blue:0.000f alpha:1.000f],
+[UIColor colorWithRed:1.000f green:0.000f blue:0.000f alpha:1.000f],
+[UIColor colorWithRed:0.000f green:1.000f blue:0.000f alpha:1.000f],
+[UIColor colorWithRed:0.800f green:0.800f blue:0.800f alpha:1.000f]
 ```
 
-That's it! There is a lot more you can do with your style dictionary than just generate some files with color values. Take a look
+That's it! There is a lot more you can do with your style dictionary than generating files with color values. Take a look
 at some [examples](examples.md) or take a deeper dive into [package structure](package_structure.md), [extending](extending.md), or how the [build process](build_process.md) works.
 
 ## Basic Usage
