@@ -30,7 +30,7 @@
 <% var props = _.filter(allProperties, this.filter); %>
 
 typedef NS_ENUM(NSInteger, <%= this.type %>) {
-<%= _.map(props, function(prop) { return prop.name; }).join(',\n') %>
+<%= props.map(function(prop) { return prop.name; }).join(',\n') %>
 };
 
 @interface <%= this.className %> : NSObject

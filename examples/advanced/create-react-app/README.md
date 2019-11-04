@@ -14,7 +14,7 @@ This is what you should see:
 
 <img alt="screenshot of the React application" src="README.media/react-app-screenshot.png" />
 
-If instead you want to build just the tokens you can run `npm run build-dictionary`. This command will generate the files in the `src/style-dictionary-dist` folder, inside the CRA source folder.
+If instead you want to build the tokens only, you can run `npm run build-dictionary`. This command will generate the files in the `src/style-dictionary-dist` folder, inside the CRA source folder.
 
 **Important**: the file `.env` in this folder is to have CRA run inside another project; if want to use this example as standalone codebase please remove it.
 
@@ -37,9 +37,9 @@ The file **`App.js`** is the main app file. You can see the three component in t
 
 The folder `components` contains the code for the three components used in the app:
 
-- The **`components/with-sass`** folder contains the example React component, styled using CSS/Sass. Look at how the design tokens are consumed inside the Sass file as Sass variables. The Sass file is then imported in the component, so that can be compiled to CSS at build time and included in the resulting web app page.
+- The **`components/with-sass`** folder contains the example React component, styled using CSS/Sass. Look at how the design tokens are consumed inside the Sass file as Sass variables. The Sass file is then imported in the component which will be compiled to CSS at build time and included in the resulting web app page.
 
-- The **`components/with-css-modules`** folder contains the example React component, styled using CSS Modules. Look at how the styles are imported in the component, and the class names are applied to the HTML elements. The CSS styles are declared in Sass, so that the design tokens can be consumed directly as Sass variables.<br>*If you want to know more about how CSS Modules works with React, and how it applies CSS styles to the JSX elements, [please refer to the documentation](https://github.com/css-modules/css-modules/blob/master/docs/css-modules-with-react.md).*
+- The **`components/with-css-modules`** folder contains the example React component, styled using CSS Modules. Look at how the styles are imported in the component, and the class names are applied to the HTML elements. The CSS styles are declared in Sass by which the design tokens can be consumed directly as Sass variables.<br>*If you want to know more about how CSS Modules works with React, and how it applies CSS styles to the JSX elements, [please refer to the documentation](https://github.com/css-modules/css-modules/blob/master/docs/css-modules-with-react.md).*
 
 * The **`components/with-styled-components`** folder contains the example React component, styled using Styled Components. Look at how in this case the styles are declared directly in the component, as template literal "objects", and how the design tokens are consumed as JavaScript variables.<br>*If you want to know more about how Styled Components works, and how it applies CSS styles to the HTML elements, [please refer to the documentation](https://www.styled-components.com/docs/basics#getting-started).*
 
