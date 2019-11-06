@@ -4,7 +4,7 @@ EDIT scripts/handlebars/templates/api.hbs OR JSDOC COMMENT INSTEAD!
 -->
 # Transforms
 
-Transforms are functions that transform a property so that each platform can consume the property in different ways. A simple example is changing pixel values to point values for iOS and dp or sp for Android. Transforms are applied in a non-destructive way so each platform can transform the properties. Transforms are performed sequentially, so the order you use transforms matters. Transforms are used in your [configuration](config.md), and can be either [pre-defined transforms](transforms.md?id=defining-custom-transforms) supplied by Style Dictionary or [custom transforms](transforms.md?id=defining-custom-transforms).
+Transforms are functions that transform a property - this enables each platform to consume the property in different ways. A simple example is changing pixel values to point values for iOS and dp or sp for Android. Transforms are applied in a non-destructive way thus each platform can transform the properties. Transforms are performed sequentially, therfore the order you use transforms matters. Transforms are used in your [configuration](config.md), and can be either [pre-defined transforms](transforms.md?id=defining-custom-transforms) supplied by Style Dictionary or [custom transforms](transforms.md?id=defining-custom-transforms).
 
 ## Using Transforms
 You use transforms in your config file under platforms > [platform] > transforms
@@ -29,7 +29,7 @@ There are 3 types of transforms: attribute, name, and value.
 
 **Name:** A name transform transform the name of a property. You should really only be apply one name transformer because they will override each other if you use more than one.
 
-**Value:** The value transform is the most important as this is the one that changes the representation of the value. Colors can be turned into hex values, rgb, hsl, hsv, etc. Value transforms have a matcher function so that they only get run on certain properties. This allows us to only run a color transform on just the colors and not every property.
+**Value:** The value transform is the most important as this is the one that changes the representation of the value. Colors can be turned into hex values, rgb, hsl, hsv, etc. Value transforms have a matcher function that filter which properties that transform runs on. This allows us to only run a color transform on only the colors and not every property.
 
 ## Defining Custom Transforms
 You can define custom transforms with the [`registerTransform`](api.md#registertransform).
@@ -173,7 +173,7 @@ Creates a constant-style name based on the full CTI of the property. If you defi
 ### name/ti/constant 
 
 
-Creates a constant-style name on just the type and item of the property. This is useful if you want to create different static classes/files for categories like `Color.BACKGROUND_BASE`. If you define a prefix on the platform in your config, it will prepend with your prefix.
+Creates a constant-style name on the type and item of the property. This is useful if you want to create different static classes/files for categories like `Color.BACKGROUND_BASE`. If you define a prefix on the platform in your config, it will prepend with your prefix.
 
 ```js
 // Matches: all

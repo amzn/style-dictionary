@@ -23,7 +23,7 @@ install_framework()
       source="$(readlink "${source}")"
   fi
 
-  # use filter instead of exclude so missing patterns dont' throw errors
+  # For missing patterns to not throw errors, use filter instead of exclude
   echo "rsync -av --filter \"- CVS/\" --filter \"- .svn/\" --filter \"- .git/\" --filter \"- .hg/\" --filter \"- Headers\" --filter \"- PrivateHeaders\" --filter \"- Modules\" \"${source}\" \"${destination}\""
   rsync -av --filter "- CVS/" --filter "- .svn/" --filter "- .git/" --filter "- .hg/" --filter "- Headers" --filter "- PrivateHeaders" --filter "- Modules" "${source}" "${destination}"
 
@@ -34,7 +34,7 @@ install_framework()
     binary="${destination}/${basename}"
   fi
 
-  # Strip invalid architectures so "fat" simulator / device frameworks work on device
+  # Strip invalid architectures therefore "fat" simulator / device frameworks work on device
   if [[ "$(file "$binary")" == *"dynamically linked shared library"* ]]; then
     strip_invalid_archs "$binary"
   fi
