@@ -1,159 +1,103 @@
 {
-  "source": [
-    "properties/**/*.json"
-  ],
+  "source": ["properties/**/*.json"],
   "platforms": {
     "scss": {
       "transformGroup": "scss",
       "buildPath": "build/scss/",
-      "files": [
-        {
-          "destination": "_variables.scss",
-          "format": "scss/variables"
-        }
-      ]
+      "files": [{
+        "destination": "_variables.scss",
+        "format": "scss/variables"
+      }]
     },
     "android": {
       "transformGroup": "android",
       "buildPath": "build/android/",
-      "files": [
-        {
-          "destination": "font_dimens.xml",
-          "format": "android/fontDimens"
-        },
-        {
-          "destination": "colors.xml",
-          "format": "android/colors"
-        }
-      ]
+      "files": [{
+        "destination": "font_dimens.xml",
+        "format": "android/fontDimens"
+      },{
+        "destination": "colors.xml",
+        "format": "android/colors"
+      }]
     },
     "ios": {
       "transformGroup": "ios",
       "buildPath": "build/ios/",
-      "files": [
-        {
-          "destination": "StyleDictionaryColor.h",
-          "format": "ios/colors.h",
-          "className": "StyleDictionaryColor",
-          "type": "StyleDictionaryColorName",
-          "filter": {
-            "attributes": {
-              "category": "color"
-            }
-          }
-        },
-        {
-          "destination": "StyleDictionaryColor.m",
-          "format": "ios/colors.m",
-          "className": "StyleDictionaryColor",
-          "type": "StyleDictionaryColorName",
-          "filter": {
-            "attributes": {
-              "category": "color"
-            }
-          }
-        },
-        {
-          "destination": "StyleDictionarySize.h",
-          "format": "ios/static.h",
-          "className": "StyleDictionarySize",
-          "type": "float",
-          "filter": {
-            "attributes": {
-              "category": "size"
-            }
-          }
-        },
-        {
-          "destination": "StyleDictionarySize.m",
-          "format": "ios/static.m",
-          "className": "StyleDictionarySize",
-          "type": "float",
-          "filter": {
-            "attributes": {
-              "category": "size"
-            }
+      "files": [{
+        "destination": "StyleDictionaryColor.h",
+        "format": "ios/colors.h",
+        "className": "StyleDictionaryColor",
+        "type": "StyleDictionaryColorName",
+        "filter": {
+          "attributes": {
+            "category": "color"
           }
         }
-      ]
+      },{
+        "destination": "StyleDictionaryColor.m",
+        "format": "ios/colors.m",
+        "className": "StyleDictionaryColor",
+        "type": "StyleDictionaryColorName",
+        "filter": {
+          "attributes": {
+            "category": "color"
+          }
+        }
+      },{
+        "destination": "StyleDictionarySize.h",
+        "format": "ios/static.h",
+        "className": "StyleDictionarySize",
+        "type": "float",
+        "filter": {
+          "attributes": {
+            "category": "size"
+          }
+        }
+      },{
+        "destination": "StyleDictionarySize.m",
+        "format": "ios/static.m",
+        "className": "StyleDictionarySize",
+        "type": "float",
+        "filter": {
+          "attributes": {
+            "category": "size"
+          }
+        }
+      }]
     },
     "ios-swift": {
       "transformGroup": "ios-swift",
       "buildPath": "build/ios-swift/",
-      "files": [
-        {
-          "destination": "StyleDictionary.swift",
-          "format": "ios-swift/class.swift",
-          "className": "StyleDictionary",
-          "filter": {}
-        }
-      ]
+      "files": [{
+        "destination": "StyleDictionary.swift",
+        "format": "ios-swift/class.swift",
+        "className": "StyleDictionary",
+        "filter": {}
+      }]
     },
     "ios-swift-separate-enums": {
       "transformGroup": "ios-swift-separate",
       "buildPath": "build/ios-swift/",
-      "files": [
-        {
-          "destination": "StyleDictionaryColor.swift",
-          "format": "ios-swift/enum.swift",
-          "className": "StyleDictionaryColor",
-          "filter": {
-            "attributes": {
-              "category": "color"
-            }
-          }
-        },
-        {
-          "destination": "StyleDictionarySize.swift",
-          "format": "ios-swift/enum.swift",
-          "className": "StyleDictionarySize",
-          "type": "float",
-          "filter": {
-            "attributes": {
-              "category": "size"
-            }
+      "files": [{
+        "destination": "StyleDictionaryColor.swift",
+        "format": "ios-swift/enum.swift",
+        "className": "StyleDictionaryColor",
+        "filter": {
+          "attributes": {
+            "category": "color"
           }
         }
-      ]
-    },
-    "flutter": {
-      "transformGroup": "flutter",
-      "buildPath": "build/flutter/",
-      "files": [
-        {
-          "destination": "StyleDictionary.dart",
-          "format": "flutter/class.dart",
-          "className": "StyleDictionary"
-        }
-      ]
-    },
-    "flutter-separate": {
-      "transformGroup": "flutter-separate",
-      "buildPath": "build/flutter/",
-      "files": [
-        {
-          "destination": "StyleDictionaryColor.dart",
-          "format": "flutter/class.dart",
-          "className": "StyleDictionaryColor",
-          "type": "color",
-          "filter": {
-            "attributes": {
-              "category": "color"
-            }
-          }
-        },
-        {
-          "destination": "StyleDictionarySize.dart",
-          "format": "flutter/class.dart",
-          "className": "StyleDictionarySize",
-          "type": "float",
-          "filter": {
-            "attributes": {
-              "category": "size"
-            }
+      },{
+        "destination": "StyleDictionarySize.swift",
+        "format": "ios-swift/enum.swift",
+        "className": "StyleDictionarySize",
+        "type": "float",
+        "filter": {
+          "attributes": {
+            "category": "size"
           }
         }
-      ]
+      }]
     }
   }
 }
