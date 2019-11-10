@@ -33,7 +33,7 @@ There is an extensive (but not exhaustive) list of [included formats](#pre-defin
 
 ### Format configuration
 
-Formats can take configuration to make them more flexible. This allows you to re-use the same format multiple times with different configuration or to allow the format to use data not defined in the tokens themselves. To configure a format add extra attributes on the file object in your configuration as written below:
+Formats are flexible and may accept configuration options. This allows you to re-use the same format multiple times with different configurations or to allow the format to use data not defined in the tokens themselves. To configure a format, add extra attributes on the file object in your configuration as written below:
 
 ```json
 {
