@@ -163,8 +163,8 @@ Name the map by adding a 'mapName' attribute on the file object in your config.
 **Example**  
 ```scss
 $tokens: (
-  $color-background-base: #f0f0f0;
-  $color-background-alt: #eeeeee;
+  'color-background-base': #f0f0f0;
+  'color-background-alt': #eeeeee;
 )
 ```
 
