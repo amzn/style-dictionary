@@ -15,6 +15,15 @@ var helpers = require('./__helpers');
 var StyleDictionary = require('../index');
 var _ = require('lodash');
 
+function traverseObj(obj, fn) {
+  for (let key in obj) {
+    fn.apply(this, [obj, key, obj[key]]);
+    if (obj[key] && typeof obj[key] === 'object') {
+      traverseObj(obj[key], fn);
+    }
+  }
+}
+
 var test_props = {
   size: {
     padding: {
@@ -24,7 +33,6 @@ var test_props = {
 };
 
 describe('extend', () => {
-
   describe('method signature', () => {
     it('should accept a string as a path to a JSON file', () => {
       var StyleDictionaryExtended = StyleDictionary.extend(__dirname + '/__configs/test.json');
@@ -77,17 +85,31 @@ describe('extend', () => {
 
     it('should build the properties object if an include is given', () => {
       var StyleDictionaryExtended = StyleDictionary.extend({
-        "include": [__dirname + "/__properties/paddings.json"]
+        include: [__dirname + "/__properties/paddings.json"]
       });
-      expect(StyleDictionaryExtended.properties).toEqual(helpers.fileToJSON(__dirname + "/__properties/paddings.json"));
+      var output = helpers.fileToJSON(__dirname + "/__properties/paddings.json");
+      traverseObj(output, (obj) => {
+        if (obj.value && !obj.filePath) {
+          obj.filePath = __dirname + "/__properties/paddings.json";
+          obj.isSource = false;
+        }
+      });
+      expect(StyleDictionaryExtended.properties).toEqual(output);
     });
 
     it('should override existing properties if include is given', () => {
       var StyleDictionaryExtended = StyleDictionary.extend({
         properties: test_props,
-        include: [__dirname + "/__properties/paddings.json"]
+        "include": [__dirname + "/__properties/paddings.json"]
       });
-      expect(StyleDictionaryExtended.properties).toEqual(helpers.fileToJSON(__dirname + "/__properties/paddings.json"));
+      var output = helpers.fileToJSON(__dirname + "/__properties/paddings.json");
+      traverseObj(output, (obj) => {
+        if (obj.value && !obj.filePath) {
+          obj.filePath = __dirname + "/__properties/paddings.json";
+          obj.isSource = false;
+        }
+      });
+      expect(StyleDictionaryExtended.properties).toEqual(output);
     });
 
     it('should update properties if there are includes', () => {
@@ -105,7 +127,6 @@ describe('extend', () => {
       expect(StyleDictionaryExtended).toHaveProperty('properties.size.padding.tiny.value', '3');
     });
   });
-
 
   describe('source', () => {
     it('should throw if source isnt an array', () => {
@@ -125,7 +146,14 @@ describe('extend', () => {
       var StyleDictionaryExtended = StyleDictionary.extend({
         "source": [__dirname + "/__properties/paddings.json"]
       });
-      expect(StyleDictionaryExtended.properties).toEqual(helpers.fileToJSON(__dirname + "/__properties/paddings.json"));
+      var output = helpers.fileToJSON(__dirname + "/__properties/paddings.json");
+      traverseObj(output, (obj) => {
+        if (obj.value && !obj.filePath) {
+          obj.filePath = __dirname + "/__properties/paddings.json";
+          obj.isSource = true;
+        }
+      });
+      expect(StyleDictionaryExtended.properties).toEqual(output);
     });
 
     it('should override existing properties source is given', () => {
@@ -133,26 +161,39 @@ describe('extend', () => {
         properties: test_props,
         source: [__dirname + "/__properties/paddings.json"]
       });
-      expect(StyleDictionaryExtended.properties).toEqual(helpers.fileToJSON(__dirname + "/__properties/paddings.json"));
+      var output = helpers.fileToJSON(__dirname + "/__properties/paddings.json");
+      traverseObj(output, (obj) => {
+        if (obj.value && !obj.filePath) {
+          obj.filePath = __dirname + "/__properties/paddings.json";
+          obj.isSource = true;
+        }
+      });
+      expect(StyleDictionaryExtended.properties).toEqual(output);
     });
   });
-
 
   // This is to allow style dictionaries to depend on other style dictionaries and
   // override properties. Useful for skinning
   it('should not throw a collision error if a source file collides with an include', () => {
     var StyleDictionaryExtended = StyleDictionary.extend({
-      include: [__dirname + "/__properties/paddings.json"],
+      include: [__dirname + "/__properties/paddings.1.json"],
       source: [__dirname + "/__properties/paddings.json"],
       log: 'error'
     });
-    expect(StyleDictionaryExtended.properties).toEqual(helpers.fileToJSON(__dirname + "/__properties/paddings.json"));
+    var output = helpers.fileToJSON(__dirname + "/__properties/paddings.json");
+    traverseObj(output, (obj) => {
+      if (obj.value && !obj.filePath) {
+        obj.filePath = __dirname + "/__properties/paddings.json";
+        obj.isSource = true;
+      }
+    });
+    expect(StyleDictionaryExtended.properties).toEqual(output);
   });
 
   it('should throw a error if the collision is in source files and log is set to error', () => {
     expect(
       StyleDictionary.extend.bind(null, {
-        source: [__dirname + "/__properties/paddings.json", __dirname + "/__properties/paddings.json"],
+        source: [__dirname + "/__properties/paddings.1.json", __dirname + "/__properties/paddings.json"],
         log: 'error'
       })
     ).toThrow('Collisions detected');
@@ -171,7 +212,7 @@ describe('extend', () => {
     var StyleDictionaryExtended = StyleDictionary.extend(__dirname + '/__configs/test.json5');
     expect(StyleDictionaryExtended).toHaveProperty('platforms.web');
   });
-  
+
   it('should allow for chained extends and not mutate the original', function() {
     var StyleDictionary1 = StyleDictionary.extend({
       foo: 'bar'
