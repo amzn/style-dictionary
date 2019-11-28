@@ -3,7 +3,7 @@
 // style_dictionary_sizes.dart
 //
 // Do not edit directly
-// Generated on Fri, 08 Nov 2019 19:55:46 GMT
+// Generated on Thu, 28 Nov 2019 14:32:02 GMT
 //
 
 

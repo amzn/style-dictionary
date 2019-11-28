@@ -5,7 +5,7 @@
     "platforms": {
         "flutter": {
             "transformGroup": "flutter",
-            "buildPath": "lib/unique_file/",
+            "buildPath": "../lib/unique_file/",
             "files": [
                 {
                     "destination": "style_dictionary.dart",
@@ -16,7 +16,7 @@
         },
         "flutter-separate": {
             "transformGroup": "flutter-separate",
-            "buildPath": "lib/",
+            "buildPath": "../lib/",
             "files": [
                 {
                     "destination": "style_dictionary_color.dart",
@@ -37,28 +37,6 @@
                     "filter": {
                         "attributes": {
                             "category": "size"
-                        }
-                    }
-                },
-                {
-                    "destination": "style_dictionary_content.dart",
-                    "format": "flutter/class.dart",
-                    "className": "StyleDictionaryContent",
-                    "type": "string",
-                    "filter": {
-                        "attributes": {
-                            "category": "content"
-                        }
-                    }
-                },
-                {
-                    "destination": "style_dictionary_asset.dart",
-                    "format": "flutter/class.dart",
-                    "className": "StyleDictionaryContent",
-                    "type": "string",
-                    "filter": {
-                        "attributes": {
-                            "category": "asset"
                         }
                     }
                 }
