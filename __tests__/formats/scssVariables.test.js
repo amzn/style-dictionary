@@ -63,7 +63,7 @@ describe('formats', () => {
       });
     });
 
-    it('should optionally use !default', done => {
+    it('should optionally use !default', () => {
       var themeableDictionary = _.cloneDeep(dictionary),
         formattedScss = formatter(dictionary),
         themeableScss = "";
@@ -74,7 +74,6 @@ describe('formats', () => {
       themeableScss = formatter(themeableDictionary);
 
       expect(themeableScss).toMatch("#EF5350 !default;");
-      return done();
     });
   });
 });
