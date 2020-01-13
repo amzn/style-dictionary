@@ -40,7 +40,7 @@ NSString * const <%= prop.name %> = <%= prop.value %>;<% }); %>
 
   dispatch_once(&onceToken, ^{
     array = @[
-      <%= _.map(props, buildProperty).join(',\n') %>
+      <%= props.map(buildProperty).join(',\n') %>
     ];
   });
 

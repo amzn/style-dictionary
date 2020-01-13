@@ -4,9 +4,9 @@ This example shows how to use custom transforms (and transformGroups) to apply c
 
 Transforms are functions that transform a property (in a non-destructive way). The reason for *transforms* is that in this way each platform can consume the property in different ways (eg. changing *pixel* values to *pt* values for iOS, and *dp* or *sp* for Android).
 
-**Remember**: transforms are performed sequentially, so the order you use transforms matters.
+**Remember**: transforms are performed sequentially, hence the order you use transforms matters.
 
-The need for custom transforms is that Style Dictionary expects the properties to be declared according to certain criteria, in order to use the pre-defined transforms and formats/templates. For example, the *web* transformGroup consists of the *attribute/cti*, *name/cti/kebab*, *size/px* and *color/css* transforms.
+The need for custom transforms is that Style Dictionary expects the properties to be declared according to certain criteria, to use the pre-defined transforms and formats/templates. For example, the *web* transformGroup consists of the *attribute/cti*, *name/cti/kebab*, *size/px* and *color/css* transforms.
 The *size/px* adds 'px' to the end of the number, and is applied only if `prop.attributes.category === 'size'`. This means that your property needs to be expressed without units, and be under the *'size'* "category. If you need a different logic or you want to organise your properties differently, probably you can't use the out-of-the-box transformation groups, but you have to declare your custom ones.
 
 If [custom formats](../custom-formats-with-templates/) are the way to allow users to customise the format of the *output* of Style Dictionary, custom transforms are the way to allow them to customise both the *input* (the property names/values/attributes) and the *output* (the actual values expressed in the design tokens). For this reasons, custom transforms are probably one of the **most powerful features** of Style Dictionary: they make it extremely versatile, allowing limitless possibilities of extension and customisation of the entire pipeline from properties to design tokens.
@@ -36,7 +36,7 @@ StyleDictionary.registerTransform({
 
 More information can be found on the [documentation](https://amzn.github.io/style-dictionary/#/api?id=registertransform).
 
-Since the transformGroups provided by Style Dictionary are pre-defined lists of transform, this means that in order to be used, this transform needs to be included in a new list of transforms.
+To use this new custom transform, we need to create a new custom transformGroup that references it.
 
 To register this custom **transformGroup** , you have to call the `registerTransformGroup` method:
 
@@ -81,7 +81,7 @@ Now open the `build.js` script and look at how these custom transforms/transform
 
 A few things to notice in the file:
 
-- the name of a custom "transform" can be the same as an existing pre-defined method; in that case the pre-defined method is simply overwritten
+- the name of a custom "transform" can be the same as an existing pre-defined method; in that case, the pre-defined method is overwritten
 - beyond the existing attributes, you can use custom attributes to create  **matcher** functions, used to filter the properties and apply the transform only to those that match the filter condition.
 - if you don't specify a **matcher**, the transformation will be applied to all the properties
 - the transformation can be applied not only to the **value** of a property, but also to its **name** (and also to its attributes)

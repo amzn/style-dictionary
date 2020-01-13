@@ -4,7 +4,7 @@ While it's pretty standard to use a common set of properties to generate the sam
 
 In this specific case it's necessary to use a **custom build script** to process the properties for each one of the possible brand/platform combinations. In the script the configuration used by Style Dictionary becomes parametric, with "brand" and "platform" used as arguments of a function that returns the "config" object used to extend Style Dictionary.
 
-The properties are organised in **specific folders**, depending if they are "platform" dependent, "brand" dependent or "global" (independent of platform or brand). The organisation of the files used in this example is not strictly required, but has the advantage that it's easier to see what the properties depend on, and it's easy to use global paths  to include the correct files for a specific combination of "brand" and "platform" (see the "source" declaration block in the `getStyleDictionaryConfig` function of the build script).
+The properties are organised in **specific folders**, depending if they are "platform" dependent, "brand" dependent or "global" (independent of platform or brand). The organisation of the files used in this example is not strictly required, but has the advantage that it's easier to see what the properties depend on, and it's easier to use global paths  to include the correct files for a specific combination of "brand" and "platform" (see the "source" declaration block in the `getStyleDictionaryConfig` function of the build script).
 
 #### Running the example
 

@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.8.3"></a>
+## [2.8.3](https://github.com/amzn/style-dictionary/compare/v2.8.2...v2.8.3) (2019-10-30)
+
+
+### Bug Fixes
+
+* **format:** minor css format output fix ([#323](https://github.com/amzn/style-dictionary/issues/323)) ([adb94e1](https://github.com/amzn/style-dictionary/commit/adb94e1)), closes [#322](https://github.com/amzn/style-dictionary/issues/322)
+* **utils:** handle 0 values ([#325](https://github.com/amzn/style-dictionary/issues/325)) ([189d61b](https://github.com/amzn/style-dictionary/commit/189d61b)), closes [#324](https://github.com/amzn/style-dictionary/issues/324)
+
+
+
 <a name="2.8.2"></a>
 ## [2.8.2](https://github.com/amzn/style-dictionary/compare/v2.8.1...v2.8.2) (2019-09-04)
 

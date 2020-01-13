@@ -8,7 +8,7 @@ If you want to use the CLI, you can install it globally via npm:
 $ npm install -g style-dictionary
 ```
 
-Or you can install it like a normal npm dependency. Style Dictionary is a build tool, so you are most likely to use it as a dev dependency:
+Or you can install it like a normal npm dependency. Style Dictionary is a build tool, and you are most likely to use it as a dev dependency:
 ```bash
 $ npm install -D style-dictionary
 ```
@@ -52,7 +52,7 @@ ios-swift-separate-enums
 ✔︎  build/ios-swift/StyleDictionarySize.swift
 ```
 
-Pat yourself on the back, you just built your first style dictionary! Take a look at what you built. This should have created a build directory and it should look like this:
+Pat yourself on the back, you built your first style dictionary! Take a look at what you built. This should have created a build directory and it should look like this:
 ```
 ├── README.md
 ├── config.json
@@ -199,7 +199,7 @@ $color-font-tertiary: #cccccc;
 [UIColor colorWithRed:0.800f green:0.800f blue:0.800f alpha:1.000f]
 ```
 
-That's it! There is a lot more you can do with your style dictionary than just generate some files with color values. Take a look
+That's it! There is a lot more you can do with your style dictionary than generating files with color values. Take a look
 at some [examples](examples.md) or take a deeper dive into [package structure](package_structure.md), [extending](extending.md), or how the [build process](build_process.md) works.
 
 ## Basic Usage

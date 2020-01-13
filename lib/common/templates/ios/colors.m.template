@@ -41,7 +41,7 @@
 
   dispatch_once(&onceToken, ^{
     colorArray = @[
-<%= _.map(props, function(prop){ return prop.value; }).join(',\n') %>
+<%= props.map(function(prop){ return prop.value; }).join(',\n') %>
     ];
   });
 

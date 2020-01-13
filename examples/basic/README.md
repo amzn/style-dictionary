@@ -1,6 +1,6 @@
 # Basic Style Dictionary
 
-This example code is bare-bones to show you what this framework can do. If you have the style-dictionary module installed globally, just cd into this directory and run:
+This example code is bare-bones to show you what this framework can do. If you have the style-dictionary module installed globally, you can `cd` into this directory and run:
 ```bash
 style-dictionary build
 ```
@@ -35,7 +35,7 @@ ios-swift-separate-enums
 ✔︎  build/ios-swift/StyleDictionarySize.swift
 ```
 
-Pat yourself on the back, you just built your first style dictionary! Moving on, take a look at what we have built. This should have created a build directory and it should look like this:
+Good for you! You have now built your first style dictionary! Moving on, take a look at what we have built. This should have created a build directory and it should look like this:
 ```
 ├── README.md
 ├── config.json

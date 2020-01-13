@@ -1,6 +1,6 @@
 # Extending
 
-The style dictionary build system is easily extended. We don't know exactly how everyone will want to use style dictionaries in their project, which is why we made it easy to create custom transforms and formats.
+There is a straightforward way to extend Style Dictionary to meet your needs - since we don't know exactly how everyone will want to use style dictionaries in their project, we created custom transforms and formats as a manner to add your desired functionality.
 
 ## Extension Functions in the API
 * [registerTransform](api.md#registertransform)

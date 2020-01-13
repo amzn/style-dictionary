@@ -38,7 +38,7 @@ If you want to use the CLI, you can install it globally via npm:
 $ npm install -g style-dictionary
 ```
 
-Or you can install it like a normal npm dependency. This is a build tool so you are most likely going to want to save it as a dev dependency:
+Or you can install it like a normal npm dependency. This is a build tool and you are most likely going to want to save it as a dev dependency:
 ```bash
 $ npm install -D style-dictionary
 ```
@@ -108,7 +108,7 @@ A style dictionary is a collection of style properties, key/value pairs that des
 ```
 
 ### config.json
-This tells the style dictionary build system how and what to build. The default file path is config.json in the root of the project, but you can name it whatever you want, just pass in the `--config` flag.
+This tells the style dictionary build system how and what to build. The default file path is config.json in the root of the project, but you can name it whatever you want, you can pass in the `--config` flag.
 ```json
 {
   "source": ["properties/**/*.json"],
@@ -160,9 +160,9 @@ This tells the style dictionary build system how and what to build. The default 
 }
 ```
 
-Here we are creating some basic font size properties. The style definition size.font.small.value is "10px" for example.  The style definition size.font.base.value is automatically aliased to the value found in size.font.medium.value, so both of those resolve to "16px".
+Here we are creating some basic font size properties. The style definition size.font.small.value is "10px" for example. The style definition size.font.base.value is automatically aliased to the value found in size.font.medium.value and both of those resolve to "16px".
 
-Now what the style dictionary build system will do with this information is convert it to different formats so that you can use these values in any type of codebase. From this one file you can generate any number of files like:
+Now what the style dictionary build system will do with this information is convert it to different formats, enabling these values to be used in any type of codebase. From this one file you can generate any number of files like:
 
 ```scss
 $size-font-small: 10px;
@@ -229,7 +229,7 @@ While not exactly necessary, we feel this classification structure of style prop
 
  Structuring style properties in this manner gives us consistent naming and accessing of these properties. You don't need to remember if it is button_color_error or error_button_color, it is color_background_button_error!
 
- Technically, you can organize and name your style properties however you want, there are no restrictions. But we have a good amount of helpers if you do use this structure, like the 'attribute/cti' transform which adds attributes to the property of its CTI based on the path in the object. There are a lot of name transforms as well for when you want a flat structure like for Sass variables.
+ You can organize and name your style properties however you want, there are no restrictions. But we have a good amount of helpers if you do use this structure, like the 'attribute/cti' transform which adds attributes to the property of its CTI based on the path in the object. There are a lot of name transforms as well for when you want a flat structure like for Sass variables.
 
  Also, the CTI structure provides a good mechanism to target transforms for specific kinds of properties. All of the transforms provided by the framework use the CTI of a property to know if it should be applied. For instance, the 'color/hex' transform only applies to properties of the category 'color'.
 
@@ -257,7 +257,7 @@ The comment  will appear in the output files, where relevant or the output forma
 
 ## Extending
 
-The style dictionary build system is made to be extended. We don't know exactly how everyone will want to use style dictionaries in their project, which is why it is easy to create custom transforms and formats.
+The style dictionary build system is made to be extended. We don't know exactly how everyone will want to use style dictionaries in their project, which is why you can create custom transforms and formats.
 
 ```javascript
 const StyleDictionary = require('style-dictionary').extend('config.json');

@@ -90,8 +90,8 @@
         "For example, a floating action button (FAB) can disappear or move off screen before a "
         "user picks up a card, or it can move if a snackbar appears.\n"
         "On the layout level, design your app layout to minimize opportunities for interference. "
-        "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
-        "when a user tries to pick up one of cards.\n\n"
+        "For example, position the FAB to one side of the stream of cards which makes the FAB won’t interfere "
+        "when a user tries to pick up one of the cards.\n\n"
     </string>
     <string name="action_settings">Settings</string>
     <string name="title_icon_list">Icons</string>
