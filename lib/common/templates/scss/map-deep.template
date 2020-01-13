@@ -27,11 +27,14 @@
 
     print("\n");
 
+    // resolve prefix value
+    var _prefix = this.prefix ? this.prefix + '-' : '';
+
     // output the list of tokens as Sass variables
     //
     _.each(allProperties, function(prop) {
         var output = '';
-        output += '$' + prop.name + ': ' + prop.value + ' !default;'
+        output += '$' + _prefix + prop.name + ': ' + prop.value + ' !default;'
         if(prop.comment) {
         output += ' // ' + prop.comment;
         }
@@ -52,7 +55,7 @@
         var output = '';
         if (obj.hasOwnProperty('value')) {
             // if we have found a leaf (a property with a value) append the value
-            output += `$${obj.name}`;
+            output += `$${_prefix+obj.name}`;
         } else {
             // if we have found a group of properties, use the Sass group "(...)" syntax and loop -recursively- on the children
             output += '(\n'
