@@ -33,7 +33,8 @@
     "examples",
     "index.js",
     "LICENSE",
-    "NOTICE"
+    "NOTICE",
+    "types/index.d.ts"
   ],
   "scripts": {
     "dtslint": "dtslint types",
