@@ -13,6 +13,7 @@
 
 var transforms = require('../../lib/common/transforms');
 var path = require('path');
+var Color = require('tinycolor2');
 
 describe('common', () => {
   describe('transforms', () => {
@@ -341,6 +342,23 @@ describe('common', () => {
           value: "#aaaaaa99"
         });
         expect(value).toBe("rgba(170, 170, 170, 0.6)");
+      });
+    });
+
+    describe('color/sketch', () => {
+      it('should retain hex specificity', () => {
+        var originalHex = "#0b7dbb";
+        var value = transforms["color/sketch"].transformer({
+          original: {
+            value: originalHex
+          }
+        });
+        var newHex = Color({
+          r: value.red * 255,
+          g: value.green * 255,
+          b: value.blue * 255
+        });
+        expect(originalHex).toEqual(newHex.toHexString());
       });
     });
 
