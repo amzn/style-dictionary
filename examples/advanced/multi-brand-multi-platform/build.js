@@ -23,13 +23,13 @@ function getStyleDictionaryConfig(brand, platform) {
         "buildPath": `build/android/${brand}/`,
         "files": [{
           "destination": "tokens.colors.xml",
-          "template": "android/colors"
+          "format": "android/colors"
         },{
           "destination": "tokens.dimens.xml",
-          "template": "android/dimens"
+          "format": "android/dimens"
         },{
           "destination": "tokens.font_dimens.xml",
-          "template": "android/fontDimens"
+          "format": "android/fontDimens"
         }]
       },
       "ios": {
@@ -37,7 +37,7 @@ function getStyleDictionaryConfig(brand, platform) {
         "buildPath": `build/ios/${brand}/`,
         "files": [{
           "destination": "tokens.h",
-          "template": "ios/macros"
+          "format": "ios/macros"
         }]
       }
     }

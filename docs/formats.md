@@ -163,8 +163,8 @@ Name the map by adding a 'mapName' attribute on the file object in your config.
 **Example**  
 ```scss
 $tokens: (
-  $color-background-base: #f0f0f0;
-  $color-background-alt: #eeeeee;
+  'color-background-base': #f0f0f0;
+  'color-background-alt': #eeeeee;
 )
 ```
 
@@ -674,7 +674,7 @@ Creates a JSON flat file of the style dictionary.
 ### sketch/palette 
 
 
-Creates a sketchpalette file of all the base colors
+Creates a [sketchpalette](https://github.com/andrewfiorillo/sketch-palettes/releases/tag/1.5) file of all the base colors
 
 **Example**  
 ```json
@@ -694,7 +694,7 @@ Creates a sketchpalette file of all the base colors
 ### sketch/palette/v2 
 
 
-Creates a sketchpalette file compatible with version 2 of
+Creates a [sketchpalette](https://github.com/andrewfiorillo/sketch-palettes) file compatible with version 2 of
 the sketchpalette plugin. To use this you should use the
 'color/sketch' transform to get the correct value for the colors.
 
