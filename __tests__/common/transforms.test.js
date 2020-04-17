@@ -355,6 +355,9 @@ describe('common', () => {
         expect(value).toBe("12.00sp");
         expect(value2).toBe("12.00sp");
       });
+      it('should throw an error if prop value is Nan', () => {
+        expect( () => transforms["size/sp"].transformer({value: "a"})).toThrow();
+      });
     });
 
     describe('size/dp', () => {
@@ -368,6 +371,9 @@ describe('common', () => {
         expect(value).toBe("12.00dp");
         expect(value2).toBe("12.00dp");
       });
+      it('should throw an error if prop value is Nan', () => {
+        expect( () => transforms["size/dp"].transformer({value: "a"})).toThrow();
+      });
     });
 
     describe('size/remToSp', () => {
@@ -376,6 +382,9 @@ describe('common', () => {
           value: "1"
         });
         expect(value).toBe("16.00sp");
+      });
+      it('should throw an error if prop value is Nan', () => {
+        expect( () => transforms["size/dp"].transformer({value: "a"})).toThrow();
       });
     });
 
@@ -386,6 +395,9 @@ describe('common', () => {
         });
         expect(value).toBe("16.00dp");
       });
+      it('should throw an error if prop value is Nan', () => {
+        expect( () => transforms["size/dp"].transformer({value: "a"})).toThrow();
+      });
     });
 
     describe('size/px', () => {
@@ -394,6 +406,9 @@ describe('common', () => {
           value: "10"
         });
         expect(value).toBe("10px");
+      });
+      it('should throw an error if prop value is Nan', () => {
+        expect( () => transforms["size/dp"].transformer({value: "a"})).toThrow();
       });
     });
 
@@ -404,6 +419,9 @@ describe('common', () => {
         });
         expect(value).toBe("16.00f");
       });
+      it('should throw an error if prop value is Nan', () => {
+        expect( () => transforms["size/dp"].transformer({value: "a"})).toThrow();
+      });
     });
 
     describe('size/remToPx', () => {
@@ -413,6 +431,9 @@ describe('common', () => {
         });
         expect(value).toBe("16px");
       });
+      it('should throw an error if prop value is Nan', () => {
+        expect( () => transforms["size/dp"].transformer({value: "a"})).toThrow();
+      });
     });
 
     describe('size/rem', () => {
@@ -421,6 +442,9 @@ describe('common', () => {
           value: "1"
         });
         expect(value).toBe("1rem");
+      });
+      it('should throw an error if prop value is Nan', () => {
+        expect( () => transforms["size/dp"].transformer({value: "a"})).toThrow();
       });
     });
 
