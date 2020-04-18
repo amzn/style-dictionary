@@ -172,7 +172,7 @@ describe('common', () => {
       describe('attribute/cti', () => {
 
         const prop = {
-          "path": ["color", "background", "button", "primary", "active"],
+          "path": ["color", "background", "button", "primary", "active", "extra"],
         };
         const propShort = { "path": ["color", "primary"] };
         const propOverride = {
