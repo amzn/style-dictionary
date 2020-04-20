@@ -16,7 +16,7 @@
 declare namespace StyleDictionary {
   interface Property {
     value: string;
-    [attribute: string]: any;
+    [key: string]: any;
   }
 
   interface Properties {
@@ -71,7 +71,7 @@ declare namespace StyleDictionary {
     attributes: Attributes;
     path: string[];
     value: string;
-    comment?: string;
+    [key: string]: any;
   }
 
   interface NameTransform {
@@ -107,7 +107,7 @@ declare namespace StyleDictionary {
     [name: string]: string[];
   }
 
-  type Formatter = (dictionary: Core, config: Platform) => string;
+  type Formatter = (this: File, dictionary: Core, config: Platform) => string;
 
   interface Format {
     name: string;
