@@ -169,6 +169,49 @@ describe('common', () => {
       });
     });
 
+    describe('transform', () => {
+      describe('attribute/cti', () => {
+
+        const prop = {
+          "path": ["color", "background", "button", "primary", "active", "extra"],
+        };
+        const propShort = { "path": ["color", "primary"] };
+        const propOverride = {
+          "path": ["button", "primary", "border", "width"],
+          "attributes": { "category": "size", "component": "button" }
+        };
+
+        const attrs = transforms["attribute/cti"].transformer(prop);
+        const attrsShort = transforms["attribute/cti"].transformer(propShort);
+        const attrsOverride = transforms["attribute/cti"].transformer(propOverride);
+
+        it('should assign attributes correctly', () => {
+          expect(attrs).toEqual({
+            "category": "color",
+            "type": "background",
+            "item": "button",
+            "subitem": "primary",
+            "state": "active"
+          });
+        });
+
+        it('should not assign path props when path is short' , () => {
+          expect(attrsShort).toEqual({
+            "category": "color",
+            "type": "primary"
+          });
+        });
+
+        it('should leave other attributes alone', () => {
+          expect(attrsOverride).toHaveProperty('component', 'button');
+        });
+
+        it('should not override previously assigned path attributes', () => {
+          expect(attrsOverride).toHaveProperty('category', 'size');
+        });
+      });
+    });
+
     describe('color/hex', () => {
       it('should handle hex colors', () => {
         var value = transforms["color/hex"].transformer({
