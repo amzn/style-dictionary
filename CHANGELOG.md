@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.9.0"></a>
+# [2.9.0](https://github.com/amzn/style-dictionary/compare/v2.8.3...v2.9.0) (2020-04-21)
+
+
+### Bug Fixes
+
+* **transforms:** add NaN check to all size transforms ([#413](https://github.com/amzn/style-dictionary/issues/413)) ([d353795](https://github.com/amzn/style-dictionary/commit/d353795))
+* **transforms:** add specificity so color for hex values is correct ([#412](https://github.com/amzn/style-dictionary/issues/412)) ([01cc11c](https://github.com/amzn/style-dictionary/commit/01cc11c)), closes [#407](https://github.com/amzn/style-dictionary/issues/407)
+* clean require cache before loading file content ([#405](https://github.com/amzn/style-dictionary/issues/405)) ([18a50d0](https://github.com/amzn/style-dictionary/commit/18a50d0)), closes [#404](https://github.com/amzn/style-dictionary/issues/404)
+* parseFloat() has only one argument ([#417](https://github.com/amzn/style-dictionary/issues/417)) ([16c3040](https://github.com/amzn/style-dictionary/commit/16c3040)), closes [#416](https://github.com/amzn/style-dictionary/issues/416)
+
+
+### Features
+
+* **attribute/cti:** attribute/cti should respect manually set attributes ([#415](https://github.com/amzn/style-dictionary/issues/415)) ([fb3e393](https://github.com/amzn/style-dictionary/commit/fb3e393)), closes [#414](https://github.com/amzn/style-dictionary/issues/414)
+
+
+
 <a name="2.8.3"></a>
 ## [2.8.3](https://github.com/amzn/style-dictionary/compare/v2.8.2...v2.8.3) (2019-10-30)
 
