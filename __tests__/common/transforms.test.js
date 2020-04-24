@@ -371,6 +371,21 @@ describe('common', () => {
       });
     });
 
+    describe('color/hex8flutter', () => {
+      it('should handle colors without alpha', () => {
+        var value = transforms["color/hex8flutter"].transformer({
+          value: "#aaaaaa"
+        });
+        expect(value).toBe("Color(0xFFAAAAAA)");
+      });
+
+      it('should handle colors with alpha', () => {
+        var value = transforms["color/hex8flutter"].transformer({
+          value: "#aaaaaa99"
+        });
+        expect(value).toBe("Color(0x99AAAAAA)");
+      });
+    });
 
     describe('color/css', () => {
       it('should handle normal colors', () => {
@@ -506,6 +521,15 @@ describe('common', () => {
       });
       it('should throw an error if prop value is Nan', () => {
         expect( () => transforms["size/dp"].transformer({value: "a"})).toThrow();
+      });
+    });
+
+    describe('size/flutter/remToDouble', () => {
+      it('should work', () => {
+        var value = transforms["size/flutter/remToDouble"].transformer({
+          value: "1"
+        });
+        expect(value).toBe("16.00");
       });
     });
 
