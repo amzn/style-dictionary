@@ -325,6 +325,38 @@ describe('common', () => {
       });
     });
 
+    describe('color/hsl-4', () => {
+      it('should handle normal colors', () => {
+        var value = transforms["color/hsl-4"].transformer({
+          value: "#009688"
+        });
+        expect(value).toBe("hsl(174 100% 29%)");
+      });
+
+      it('should handle colors with transparency', () => {
+        var value = transforms["color/hsl-4"].transformer({
+          value: "#00968899"
+        });
+        expect(value).toBe("hsl(174 100% 29% / 0.6)");
+      });
+    });
+
+    describe('color/hsl', () => {
+      it('should handle normal colors', () => {
+        var value = transforms["color/hsl"].transformer({
+          value: "#009688"
+        });
+        expect(value).toBe("hsl(174, 100%, 29%)");
+      });
+
+      it('should handle colors with transparency', () => {
+        var value = transforms["color/hsl"].transformer({
+          value: "#00968899"
+        });
+        expect(value).toBe("hsla(174, 100%, 29%, 0.6)");
+      });
+    });
+
     describe('color/UIColor', () => {
       it('should handle normal colors', () => {
         var value = transforms["color/UIColor"].transformer({
