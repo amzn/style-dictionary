@@ -219,7 +219,7 @@ Add a custom format to the style dictionary
 | --- | --- | --- |
 | format | <code>Object</code> |  |
 | format.name | <code>String</code> | Name of the format to be referenced in your config.json |
-| format.formatter | <code>function</code> | Function to perform the format. Takes 2 arguments, `dictionary` and `config` Must return a string. |
+| format.formatter | <code>function</code> | Function to perform the format. Takes 2 arguments, `dictionary` and `config` Must return a string. Function is bound to its file object in the `platform.files` array. |
 
 **Example**  
 ```js
