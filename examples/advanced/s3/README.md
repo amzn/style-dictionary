@@ -1,4 +1,4 @@
-##Connect Style Dictionary with an Amazon S3 bucket
+## Connect Style Dictionary with an Amazon S3 bucket
 
 This example shows how to set up a style dictionary to build files for different platforms (web, iOS, Android) and upload those build artifacts, together with a group of assets, to an S3 bucket. 
 
