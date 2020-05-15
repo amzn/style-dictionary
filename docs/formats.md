@@ -33,7 +33,7 @@ There is an extensive (but not exhaustive) list of [included formats](#pre-defin
 
 ### Format configuration
 
-Formats can take configuration to make them more flexible. This allows you to re-use the same format multiple times with different configurations or to allow the format to use data not defined in the tokens themselves. To configure a format, add extra attributes on the file object in your configuration like the following:
+Formats are flexible and may accept configuration options. This allows you to re-use the same format multiple times with different configurations or to allow the format to use data not defined in the tokens themselves. To configure a format, add extra attributes on the file object in your configuration as written below:
 
 ```json
 {
@@ -73,7 +73,7 @@ A special file configuration is `filter`, which will filter the tokens before th
 
 ### Creating formats
 
-You can create custom formats using the [`registerFormat`](api.md#registerformat) function. If you want to add configuration to your custom format, `this` is bound to the file object. Using this, you can access attributes on the file object with `this.myCustomAttribute` if the file object looks like:
+You can create custom formats using the [`registerFormat`](api.md#registerformat) function. If you want to add configuration to your custom format, `this` is bound to the file object allowing you access to the attributes on the file object with `this.myCustomAttribute` if the file object looks like:
 
 ```json
 {
