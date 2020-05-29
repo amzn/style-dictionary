@@ -68,6 +68,32 @@ var sizeLarge = {
   ]
 }
 
+var not_kept = {
+  "value": 0,
+  "original": {
+    "value": 0,
+  },
+  "name": "falsy_values-not_kept",
+  "attributes": { category: "falsy_values" },
+  "path": [
+    "falsy_values",
+    "not_kept"
+  ]
+}
+
+var kept = {
+  "value": 0,
+  "original": {
+    "value": 0,
+  },
+  "name": "falsy_values-kept",
+  "attributes": { category: "falsy_values" },
+  "path": [
+    "falsy_values",
+    "kept"
+  ]
+}
+
 var properties = {
   "color": {
     "red": colorRed,
@@ -79,9 +105,19 @@ var properties = {
   }
 };
 
+var falsy_values = {
+  "kept": kept,
+  "not_kept": not_kept,
+};
+
 var dictionary = {
   "properties": properties,
   "allProperties": flattenProperties(properties)
+}
+
+var falsy_dictionary = {
+  "properties": falsy_values,
+  "allProperties": flattenProperties(falsy_values)
 }
 
 describe('filterProperties', () => {
@@ -110,6 +146,20 @@ describe('filterProperties', () => {
     expect(filteredDictionary.allProperties).toEqual([sizeSmall, sizeLarge]);
     expect(filteredDictionary.properties).toHaveProperty('size');
     expect(filteredDictionary.properties).not.toHaveProperty('color');
+  });
+
+  it('should work with falsy values and a filter function', () => {
+    var filter = function(property) {
+      return property.path.includes("kept");
+    }
+
+    var filteredDictionary = filterProperties(falsy_dictionary, filter);
+    _.each(filteredDictionary.allProperties, function(property) {
+      expect(property).not.toBe(not_kept);
+    });
+    expect(filteredDictionary.allProperties).toEqual([kept]);
+    expect(filteredDictionary.properties).toHaveProperty('kept');
+    expect(filteredDictionary.properties).not.toHaveProperty('not_kept');
   });
 
   describe('should throw if', () => {
