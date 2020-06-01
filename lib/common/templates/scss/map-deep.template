@@ -31,7 +31,7 @@
     //
     _.each(allProperties, function(prop) {
         var output = '';
-        output += '$' + prop.name + ': ' + prop.value + ' !default;'
+        output += '$' + prop.name + ': ' + (prop.attributes.category==='asset' ? '"'+prop.value+'"' : prop.value) + ' !default;'
         if(prop.comment) {
         output += ' // ' + prop.comment;
         }
