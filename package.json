@@ -118,7 +118,7 @@
     "babel-preset-env": "^1.7.0",
     "docsify": "^4.11.3",
     "docsify-cli": "^4.4.0",
-    "eslint": "^7.1.0",
+    "eslint": "^6.8.0",
     "husky": "^4.2.5",
     "istanbul": "^0.4.5",
     "jest": "^26.0.1",
