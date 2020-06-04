@@ -13,6 +13,7 @@
 
 var combineJSON = require('../../lib/utils/combineJSON');
 var path = require('path');
+const yaml = require('yaml');
 
 describe('utils', () => {
   describe('combineJSON', () => {
@@ -36,6 +37,7 @@ describe('utils', () => {
 
     it('should do a deep merge', () => {
       var test = combineJSON(["__tests__/__json_files/shallow/*.json"], true);
+      console.log(test);
       expect(test).toHaveProperty('a', 2);
       expect(test.b).toMatchObject({"a":1, "c":2})
       expect(test).toHaveProperty('d.e.f.g', 1);
@@ -44,6 +46,7 @@ describe('utils', () => {
 
     it('should do a shallow merge', () => {
       var test = combineJSON(["__tests__/__json_files/shallow/*.json"]);
+      console.log(test);
       expect(test).toHaveProperty('a', 2);
       expect(test.b).toMatchObject({"c":2});
       expect(test).toHaveProperty('c', [3,4]);
@@ -64,7 +67,7 @@ describe('utils', () => {
           expect(opts.target[opts.key]).toBe(1);
           expect(opts.copy[opts.key]).toBe(2);
           throw new Error('test');
-        })
+        }, true)
       ).toThrow(/test/);
     });
 
@@ -72,6 +75,36 @@ describe('utils', () => {
       var test = combineJSON(["__tests__/__json_files/shallow/*.json5"]);
       expect(test).toHaveProperty('json5A', 5);
       expect(test.d).toHaveProperty('json5e', 1);
+    });
+
+    describe('custom parsers', () => {
+      it('should support yaml.parse', () => {
+        const parsers = [{
+          pattern: /\.yaml$/,
+          // yaml.parse function matches the intended function signature
+          parse: ({contents}) => yaml.parse(contents)
+        }];
+        const output = combineJSON([`__tests__/__json_files/yaml.yaml`], false, null, false, parsers);
+        expect(output).toHaveProperty('foo', 'bar');
+        expect(output).toHaveProperty('bar', '{foo}');
+      });
+
+      it('should multiple parsers on the same file', () => {
+        const testOutput = { test: 'test' };
+        const parsers = [{
+          pattern: /.json$/,
+          parse: (content) => {
+            return { test: 'foo' }
+          }
+        },{
+          pattern: /.json$/,
+          parse: (content) => {
+            return testOutput
+          }
+        }];
+        const output = combineJSON([`__tests__/__json_files/simple.json`], false, null, false, parsers);
+        expect(output).toHaveProperty('test', 'test');
+      });
     });
   });
 });
