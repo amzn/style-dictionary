@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`formats css/variables-deep should generate a css variables file with alias references 1`] = `
+"/**
+ * Do not edit directly
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ */
+
+:root {
+	--color-blue-20: #0000ff;
+	--primary: var(--color-blue-20);
+	--icon: \\"acme-icon\\";
+	--width: 100px
+}
+"
+`;
+
+exports[`formats css/variables-deep should work with a prefix 1`] = `
+"/**
+ * Do not edit directly
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ */
+
+:root {
+	--color-blue-20: #0000ff;
+	--primary: var(--acme-color-blue-20);
+	--icon: \\"acme-icon\\";
+	--width: 100px
+}
+"
+`;
