@@ -13,7 +13,7 @@
 
 var combineJSON = require('../../lib/utils/combineJSON');
 var path = require('path');
-const yaml = require('yaml');
+var yaml = require('yaml');
 
 describe('utils', () => {
   describe('combineJSON', () => {
