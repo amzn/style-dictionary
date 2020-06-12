@@ -17,6 +17,6 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "chokidar-cli": "^1.2.0",
-    "style-dictionary": "2.8.3"
+    "style-dictionary": "2.10.0"
   }
 }

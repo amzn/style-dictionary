@@ -39,7 +39,11 @@ var formatter = formats['json/nested'].bind(file);
 
 describe('formats', function() {
   describe('json/nested', function() {
-    beforeEach(function() {
+    beforeEach(() => {
+      helpers.clearOutput();
+    });
+
+    afterEach(() => {
       helpers.clearOutput();
     });
 

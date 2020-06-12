@@ -214,6 +214,36 @@ Transforms the value into an RGB string
 
 * * *
 
+### color/hsl 
+
+
+Transforms the value into an HSL string or HSLA if alpha is present. Better browser support than color/hsl-4
+
+```js
+// Matches: prop.attributes.category === 'color'
+// Returns:
+"hsl(174, 100%, 29%)"
+"hsl(174, 100%, 29%, .5)"
+```
+
+
+* * *
+
+### color/hsl-4 
+
+
+Transforms the value into an HSL string, using fourth argument if alpha is present.
+
+```js
+// Matches: prop.attributes.category === 'color'
+// Returns:
+"hsl(174 100% 29%)"
+"hsl(174 100% 29% / .5)"
+```
+
+
+* * *
+
 ### color/hex 
 
 
@@ -589,6 +619,71 @@ Wraps the value in a double-quoted string to make a string literal.
 ```swift
 // Matches: prop.attributes.category === 'asset'
 // Returns: "string"
+```
+
+
+* * *
+
+### color/hex8flutter 
+
+
+Transforms the value into a Flutter Color object using 8-digit hex with the alpha chanel on start
+ ```js
+ // Matches: prop.attributes.category === 'color'
+ // Returns:
+ Color(0xFF00FF5F)
+ ```
+
+
+* * *
+
+### content/flutter/literal 
+
+
+Wraps the value in a double-quoted string to make a string literal.
+
+```dart
+// Matches: prop.attributes.category === 'content'
+// Returns: "string"
+```
+
+
+* * *
+
+### asset/flutter/literal 
+
+
+Wraps the value in a double-quoted string to make a string literal.
+
+```dart
+// Matches: prop.attributes.category === 'asset'
+// Returns: "string"
+```
+
+
+* * *
+
+### font/flutter/literal 
+
+
+Wraps the value in a double-quoted string to make a string literal.
+
+```dart
+// Matches: prop.attributes.category === 'font'
+// Returns: "string"
+```
+
+
+* * *
+
+### size/flutter/remToDouble 
+
+
+Scales the number by 16 to get to points for Flutter
+
+```dart
+// Matches: prop.attributes.category === 'size'
+// Returns: 16.00
 ```
 
 

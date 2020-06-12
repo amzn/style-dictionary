@@ -3,7 +3,7 @@ const glob = require('glob');
 const path = require('path');
 const execSync = require('child_process').execSync;
 const PACKAGE = require('../package.json');
-const packageJSONs = glob.sync('./examples/**/package.json', {});
+const packageJSONs = glob.sync('./examples/*/*/package.json', {});
 
 packageJSONs.forEach(function(filePath) {
   let pkg = fs.readJsonSync(filePath);
