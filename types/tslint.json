@@ -1,8 +1,0 @@
-{
-  "extends": "dtslint/dtslint.json",
-  "rules": {
-    "only-arrow-functions": false,
-    "object-literal-shorthand": false,
-    "radix": false
-  }
-}
