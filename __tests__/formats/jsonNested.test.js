@@ -48,7 +48,7 @@ describe('formats', function() {
     });
 
     it('should be a valid JSON file', function() {
-      fs.writeFileSync('./__tests__/__output/json-nested.json', formatter(dictionary));
+      fs.writeFileSync('./__tests__/__output/json-nested.json', formatter(dictionary, {}, file));
       var test = require('../__output/json-nested.json');
       expect(test.color.base.red.primary)
         .toEqual(dictionary.properties.color.base.red.primary.value);

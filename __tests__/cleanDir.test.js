@@ -31,9 +31,9 @@ describe('cleanDir', () => {
   });
 
   it('should delete a dir properly', () => {
-    buildFile('test.txt', format, {buildPath: '__tests__/__output/extradir1/extradir2/'}, {});
-    cleanFile('test.txt', format, {buildPath: '__tests__/__output/extradir1/extradir2/'}, {});
-    cleanDir('test.txt', format, {buildPath: '__tests__/__output/extradir1/extradir2/'}, {});
+    buildFile({destination:'test.txt', format}, {buildPath: '__tests__/__output/extradir1/extradir2/'}, {});
+    cleanFile({destination:'test.txt', format}, {buildPath: '__tests__/__output/extradir1/extradir2/'}, {});
+    cleanDir({destination:'test.txt', format}, {buildPath: '__tests__/__output/extradir1/extradir2/'}, {});
     expect(helpers.dirDoesNotExist('./__tests__/__output/extradir1/extradir2')).toBeTruthy();
     expect(helpers.dirDoesNotExist('./__tests__/__output/extradir1')).toBeTruthy();
   });

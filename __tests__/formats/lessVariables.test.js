@@ -51,7 +51,7 @@ describe('formats', () => {
   describe('less/variables', () => {
 
     it('should have a valid less syntax', done => {
-      less.render(formatter(dictionary))
+      less.render(formatter(dictionary, {}, file))
         .then(function(output) {
           expect(output).toBeDefined();
           done();

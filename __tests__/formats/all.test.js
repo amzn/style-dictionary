@@ -67,7 +67,7 @@ describe('formats', () => {
     global.Date = function() { return constantDate };
 
     var formatter = formats[key].bind(file);
-    var output = formatter(dictionary, file);
+    var output = formatter(dictionary, {}, file);
 
     // reset the global Date object
     global.Date = globalDate;
