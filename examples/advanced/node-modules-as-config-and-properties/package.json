@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/dbanksdesign/style-dictionary-node#readme",
   "devDependencies": {
-    "style-dictionary": "2.10.0",
+    "style-dictionary": "2.10.1",
     "tinycolor2": "^1.4.1"
   }
 }
