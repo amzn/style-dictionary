@@ -414,6 +414,15 @@ exports[`formats all should match javascript/es6 snapshot 1`] = `
 export const color_red = \\"#FF0000\\"; // comment"
 `;
 
+exports[`formats all should match javascript/es6-ts-declarations snapshot 1`] = `
+"/**
+ * Do not edit directly
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ */
+
+export const color_red : string; // comment"
+`;
+
 exports[`formats all should match javascript/module snapshot 1`] = `
 "/**
  * Do not edit directly
