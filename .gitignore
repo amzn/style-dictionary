@@ -76,3 +76,6 @@ xcuserdata/
 
 # Mac directory hidden files
 *.DS_Store
+
+# Temporary build output directory for unit tests
+__tests__/__output

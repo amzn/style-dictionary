@@ -163,8 +163,8 @@ Name the map by adding a 'mapName' attribute on the file object in your config.
 **Example**  
 ```scss
 $tokens: (
-  $color-background-base: #f0f0f0;
-  $color-background-alt: #eeeeee;
+  'color-background-base': #f0f0f0;
+  'color-background-alt': #eeeeee;
 )
 ```
 
@@ -710,6 +710,25 @@ the sketchpalette plugin. To use this you should use the
   ]
 }
 ```
+
+* * *
+
+### flutter/class.dart 
+
+
+Creates a Dart implementation file of a class with values
+
+**Example**  
+```dart
+import 'package:flutter/material.dart';
+
+class StyleDictionary {
+  StyleDictionary._();
+  
+    static const colorBrandPrimary = Color(0x00ff5fff);
+    static const sizeFontSizeMedium = 16.00;
+    static const contentFontFamily1 = "NewJune";
+```   
 
 * * *
 
