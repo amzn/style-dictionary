@@ -37,7 +37,6 @@ describe('utils', () => {
 
     it('should do a deep merge', () => {
       var test = combineJSON(["__tests__/__json_files/shallow/*.json"], true);
-      console.log(test);
       expect(test).toHaveProperty('a', 2);
       expect(test.b).toMatchObject({"a":1, "c":2})
       expect(test).toHaveProperty('d.e.f.g', 1);
@@ -46,7 +45,6 @@ describe('utils', () => {
 
     it('should do a shallow merge', () => {
       var test = combineJSON(["__tests__/__json_files/shallow/*.json"]);
-      console.log(test);
       expect(test).toHaveProperty('a', 2);
       expect(test.b).toMatchObject({"c":2});
       expect(test).toHaveProperty('c', [3,4]);
