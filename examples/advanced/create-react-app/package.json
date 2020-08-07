@@ -3,14 +3,14 @@
   "description": "",
   "version": "1.0.0",
   "dependencies": {
-    "node-sass": "^4.13.1",
-    "react": "^16.6.1",
-    "react-dom": "^16.6.1",
-    "react-scripts": "^3.4.0",
-    "styled-components": "^4.1.2"
+    "node-sass": "^4.14.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-scripts": "^3.4.1",
+    "styled-components": "^5.1.1"
   },
   "devDependencies": {
-    "style-dictionary": "2.9.0"
+    "style-dictionary": "2.10.1"
   },
   "scripts": {
     "build-dictionary": "style-dictionary build --config ./style-dictionary/config.json",

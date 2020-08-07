@@ -34,7 +34,7 @@
         if(prop.comment) {
         line += '  // ' + prop.comment + '\n';
         }
-        line += '  \'' + prop.name + '\': ' + prop.value
+        line += '  \'' + prop.name + '\': ' + (prop.attributes.category==='asset' ? '"'+prop.value+'"' : prop.value)
         return line;
     }).join(',\n');
     output += '\n);';

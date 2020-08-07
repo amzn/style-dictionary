@@ -182,3 +182,37 @@ Transforms:
 
 * * *
 
+### flutter 
+
+
+Transforms:
+
+[attribute/cti](transforms.md#attributecti)
+[name/cti/camel](transforms.md#namecticamel)
+[color/hex8flutter](transforms.md#colorhex8flutter)
+[size/flutter/remToDouble](transforms.md#sizeflutterremToDouble)
+[content/flutter/literal](transforms.md#contentflutterliteral)
+[asset/flutter/literal](transforms.md#assetflutterliteral)
+[font/flutter/literal](transforms.md#fontflutterliteral)
+
+
+* * *
+
+### flutter-separate 
+
+
+Transforms:
+
+[attribute/cti](transforms.md#attributecti)
+[name/ti/camel](transforms.md#nameticamel)
+[color/hex8flutter](transforms.md#colorhex8flutter)
+[size/flutter/remToDouble](transforms.md#sizeflutterremToDouble)
+[content/flutter/literal](transforms.md#contentflutterliteral)
+[asset/flutter/literal](transforms.md#assetflutterliteral)
+[font/flutter/literal](transforms.md#fontflutterliteral)
+
+This is to be used if you want to have separate files per category and you don't want the category (e.g., color) as the lead value in the name of the property (e.g., StyleDictionaryColor.baseText instead of StyleDictionary.colorBaseText).
+
+
+* * *
+

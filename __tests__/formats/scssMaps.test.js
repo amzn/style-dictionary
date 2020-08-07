@@ -92,6 +92,27 @@ var dictionary = {
           "white"
         ]
       }
+    },
+    "asset": {
+      "icon": {
+        "book": {
+          "value": "PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItYm9vayI+PHBhdGggZD0iTTQgMTkuNUEyLjUgMi41IDAgMCAxIDYuNSAxN0gyMCI+PC9wYXRoPjxwYXRoIGQ9Ik02LjUgMkgyMHYyMEg2LjVBMi41IDIuNSAwIDAgMSA0IDE5LjV2LTE1QTIuNSAyLjUgMCAwIDEgNi41IDJ6Ij48L3BhdGg+PC9zdmc+",
+          "original": {
+            "value": "./test/__assets/icons/book.svg"
+          },
+          "name": "asset-icon-book",
+          "attributes": {
+            "category": "asset",
+            "type": "icon",
+            "item": "book"
+          },
+          "path": [
+            "asset",
+            "icon",
+            "book"
+          ]
+        }
+      }
     }
   },
   "allProperties": [
@@ -161,6 +182,23 @@ var dictionary = {
       "path": [
         "color",
         "white"
+      ]
+    },
+    {
+      "value": "PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItYm9vayI+PHBhdGggZD0iTTQgMTkuNUEyLjUgMi41IDAgMCAxIDYuNSAxN0gyMCI+PC9wYXRoPjxwYXRoIGQ9Ik02LjUgMkgyMHYyMEg2LjVBMi41IDIuNSAwIDAgMSA0IDE5LjV2LTE1QTIuNSAyLjUgMCAwIDEgNi41IDJ6Ij48L3BhdGg+PC9zdmc+",
+      "original": {
+        "value": "./test/__assets/icons/book.svg"
+      },
+      "name": "asset-icon-book",
+      "attributes": {
+        "category": "asset",
+        "type": "icon",
+        "item": "book"
+      },
+      "path": [
+        "asset",
+        "icon",
+        "book"
       ]
     }
   ]
