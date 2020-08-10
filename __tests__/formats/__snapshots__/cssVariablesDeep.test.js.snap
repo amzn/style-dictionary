@@ -7,10 +7,10 @@ exports[`formats css/variables-deep should generate a css variables file with al
  */
 
 :root {
-	--color-blue-20: #0000ff;
-	--primary: var(--color-blue-20);
-	--icon: \\"acme-icon\\";
-	--width: 100px
+ --color-blue-20: #0000ff;
+ --primary: var(--color-blue-20);
+ --icon: \\"acme-icon\\";
+ --width: 100px;
 }
 "
 `;
@@ -22,10 +22,10 @@ exports[`formats css/variables-deep should work with a prefix 1`] = `
  */
 
 :root {
-	--color-blue-20: #0000ff;
-	--primary: var(--acme-color-blue-20);
-	--icon: \\"acme-icon\\";
-	--width: 100px
+ --color-blue-20: #0000ff;
+ --primary: var(--acme-color-blue-20);
+ --icon: \\"acme-icon\\";
+ --width: 100px;
 }
 "
 `;
