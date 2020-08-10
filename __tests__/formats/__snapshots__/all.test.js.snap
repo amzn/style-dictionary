@@ -83,6 +83,7 @@ exports[`formats all should match css/variables snapshot 1`] = `
 "
 `;
 
+<<<<<<< HEAD
 exports[`formats all should match flutter/class.dart snapshot 1`] = `
 "
 //
@@ -100,6 +101,8 @@ class  {
 
     static const color_red = #FF0000;
 }"
+=======
+>>>>>>> 8a28ab479f08f6a78177f3fa8a51023704986375
 exports[`formats all should match css/variables-deep snapshot 1`] = `
 "/**
  * Do not edit directly
