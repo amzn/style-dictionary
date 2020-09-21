@@ -37,6 +37,9 @@ You can find out more about creating configurations in JS in our documentation a
 
 | Attribute | Type | Description |
 | :--- | :--- | :--- |
+| parsers | Array[Object] (optional) | Custom token parsers to run on token files |
+| parsers[].pattern | Regex | A file regular expression to match files the parser should run on. |
+| parsers[].parser | Function | Parser function that takes the string content of the file and returns a plain Javascript object. |
 | include | Array[String] (optional) | An array of path [globs](https://github.com/isaacs/node-glob) to Style Dictionary property files that contain default styles. The Style Dictionary uses this as a base collection of properties. The properties found using the "source" attribute will overwrite properties found using include. |
 | source | Array[String] | An array of path [globs](https://github.com/isaacs/node-glob) to JSON files that contain style properties. The Style Dictionary will do a deep merge of all of the JSON files, allowing you to separate your properties into multiple files. |
 | platforms | Object | An object containing platform config objects that describe how the Style Dictionary should build for that platform. You can add any arbitrary attributes on this object that will get passed to formats and actions (more on these in a bit). This is useful for things like build paths, name prefixes, variable names, etc.  |

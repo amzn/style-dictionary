@@ -1,0 +1,13 @@
+color:
+  base:
+    white:
+      value: "#fff"
+    red:
+      value:
+        r: 255
+        g: 0
+        b: 0
+    green:
+      value: "rgb(0,255,0)"
+    success:
+      value: "{color.base.green.value}"
