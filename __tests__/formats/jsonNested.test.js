@@ -24,6 +24,8 @@ var dictionary = {
   properties: {
     color: {
       base: {
+        comment: 'This is a comment',
+        metadata: [1,2,3],
         red: {
           primary: { value: '#611D1C' },
           secondary: {
@@ -55,5 +57,17 @@ describe('formats', function() {
       expect(test.color.base.red.secondary.inverse)
         .toEqual(dictionary.properties.color.base.red.secondary.inverse.value);
     });
+
+    it('should handle non-token data', function() {
+      // non-token data is anything in the dictionary object that is not a token object
+      // i.e. anything in the rest of the object that doesn't have a 'value'
+
+      fs.writeFileSync('./__tests__/__output/json-nested.json', formatter(dictionary));
+      var test = require('../__output/json-nested.json');
+      expect(test.color.base.comment)
+        .toEqual(dictionary.properties.color.base.comment);
+      expect(test.color.base.metadata)
+        .toEqual(dictionary.properties.color.base.metadata);
+    })
   });
 });
