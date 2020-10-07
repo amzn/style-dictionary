@@ -665,7 +665,7 @@ Creates a JSON flat file of the style dictionary.
 **Example**  
 ```json
 {
-  "color-base-red": "#ff000"
+  "color-base-red": "#ff0000"
 }
 ```
 
