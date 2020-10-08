@@ -724,11 +724,11 @@ import 'package:flutter/material.dart';
 
 class StyleDictionary {
   StyleDictionary._();
-  
+
     static const colorBrandPrimary = Color(0x00ff5fff);
     static const sizeFontSizeMedium = 16.00;
     static const contentFontFamily1 = "NewJune";
-```   
+```
 
 * * *
 

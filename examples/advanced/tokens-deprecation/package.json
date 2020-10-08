@@ -16,6 +16,6 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "lodash": "^4.17.11",
-    "style-dictionary": "2.10.1"
+    "style-dictionary": "2.10.2"
   }
 }
