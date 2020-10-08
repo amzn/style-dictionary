@@ -14,6 +14,25 @@ function collect(val, arr) {
   return arr;
 }
 
+function getConfigPath(options) {
+  var configPath = options.config;
+
+  if(!configPath) {
+    if(fs.existsSync('./config.json')) {
+      configPath = './config.json';
+    }
+    else if(fs.existsSync('./config.js')) {
+      configPath = './config.js';
+    }
+    else {
+      console.error('Build failed; unable to find config file.');
+      process.exit(1);
+    }
+  }
+  
+  return configPath;
+}
+
 program
   .version(pkg.version)
   .description(pkg.description)
@@ -59,20 +78,7 @@ program.on('command:*', function () {
 
 function styleDictionaryBuild(options) {
   options = options || {};
-  var configPath = options.config;
-
-  if(!configPath) {
-    if(fs.existsSync('./config.json')) {
-      configPath = './config.json';
-    }
-    else if(fs.existsSync('./config.js')) {
-      configPath = './config.js';
-    }
-    else {
-      console.error('Build failed; unable to find config file.');
-      process.exit(1);
-    }
-  }
+  var configPath = getConfigPath(options);
 
   // Create a style dictionary object with the config
   var styleDictionary = StyleDictionary.extend( configPath );
@@ -88,7 +94,7 @@ function styleDictionaryBuild(options) {
 
 function styleDictionaryClean(options) {
   options = options || {};
-  var configPath = options.config ? options.config : './config.json';
+  var configPath = getConfigPath(options);
 
   // Create a style dictionary object with the config
   var styleDictionary = StyleDictionary.extend( configPath );
