@@ -74,6 +74,7 @@ describe('exportPlatform', () => {
     StyleDictionaryExtended.registerTransform({
       type: 'value',
       name: 'color/darken',
+      transitive: true,
       matcher: function(prop) { return !!prop.original.transformColor; },
       transformer: function(prop) { return prop.value + '-darker'; }
     });
