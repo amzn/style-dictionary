@@ -13,6 +13,7 @@
 
 var formats = require('../../lib/common/formats');
 var scss = require('node-sass');
+var _ = require('lodash');
 
 var file = {
   "destination": "__output/",
@@ -62,5 +63,17 @@ describe('formats', () => {
       });
     });
 
+    it('should optionally use !default', () => {
+      var themeableDictionary = _.cloneDeep(dictionary),
+        formattedScss = formatter(dictionary),
+        themeableScss = "";
+
+      expect(formattedScss).not.toMatch("!default");
+
+      themeableDictionary.allProperties[0].themeable = true;
+      themeableScss = formatter(themeableDictionary);
+
+      expect(themeableScss).toMatch("#EF5350 !default;");
+    });
   });
 });

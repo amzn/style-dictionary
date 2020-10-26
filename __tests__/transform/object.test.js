@@ -33,6 +33,14 @@ const options = {
       transformer: function() {
         return "transformer result";
       }
+    }, {
+      type: 'value',
+      matcher: function(prop) {
+        return prop.path[0] === 'spacing';
+      },
+      transformer: function(val) {
+        return val + 'px';
+      }
     }
   ]
 };
@@ -85,7 +93,31 @@ describe('transform', () => {
 
       const actual = transformObject(objectToTransform, options);
       expect(actual).toEqual(expected);
-    })
+    });
 
+    it('fills the transformationContext with transformed and deferred transforms', () => {
+      const transformedPropRefs = [];
+      const deferredPropValueTransforms = [];
+      const transformationContext = {
+        transformedPropRefs,
+        deferredPropValueTransforms
+      };
+
+      const objectToTransform = {
+        "spacing": {
+          "base": {
+            "value": "16"
+          },
+          "medium": {
+            "value": "{spacing.base.value}"
+          }
+        }
+      };
+
+      transformObject(objectToTransform, options, transformationContext);
+
+      expect(transformedPropRefs).toEqual(['spacing.base']);
+      expect(deferredPropValueTransforms).toEqual(['spacing.medium']);
+    })
   });
 });

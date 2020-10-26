@@ -181,6 +181,19 @@ describe('utils', () => {
       }));
     });
 
+    describe('ignorePaths', () => {
+      it('should not resolve values containing variables in ignored paths', () => {
+        const test = resolveObject({
+          foo: { value: 'bar' },
+          bar: {
+            value: '{foo.value}'
+          }
+        }, {ignorePaths: ['foo.value']});
+
+        expect(test).toHaveProperty ('bar.value', '{foo.value}');
+      });
+    });
+
     describe('ignoreKeys', () => {
       it('should handle default value of original', () => {
         var test = resolveObject({

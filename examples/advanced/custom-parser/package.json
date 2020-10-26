@@ -1,0 +1,14 @@
+{
+  "name": "style-dictionary-example-custom-parser",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "style-dictionary build --config ./sd.config.js"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "style-dictionary": "^2.10.0"
+  }
+}

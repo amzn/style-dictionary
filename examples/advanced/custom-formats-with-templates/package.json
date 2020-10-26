@@ -19,6 +19,6 @@
     "handlebars": "^4.0.12",
     "lodash": "^4.17.11",
     "pug": "^2.0.3",
-    "style-dictionary": "2.10.0"
+    "style-dictionary": "2.10.2"
   }
 }
