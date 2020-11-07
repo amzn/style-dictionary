@@ -32,30 +32,30 @@ describe('buildFile', () => {
 
   it('should error if format doesnt exist or isnt a function', () => {
     expect(
-      buildFile.bind(null, '__tests__/__output/test.txt', {}, {}, {})
+      buildFile.bind(null, {destination: '__tests__/__output/test.txt'}, {}, {})
     ).toThrow('Please enter a valid file format');
     expect(
-      buildFile.bind(null, '__tests__/__output/test.txt', [], {}, {})
+      buildFile.bind(null, {destination: '__tests__/__output/test.txt', format: {}}, {}, {})
     ).toThrow('Please enter a valid file format');
     expect(
-      buildFile.bind(null, '__tests__/__output/test.txt', null, {}, {})
+      buildFile.bind(null, {destination: '__tests__/__output/test.txt', format: []}, {}, {})
     ).toThrow('Please enter a valid file format');
   });
 
   it('should error if destination doesnt exist or isnt a string', () => {
     expect(
-      buildFile.bind(null, {}, format, {}, {})
+      buildFile.bind(null, {format}, {}, {})
     ).toThrow('Please enter a valid destination');
     expect(
-      buildFile.bind(null, [], format, {}, {})
+      buildFile.bind(null, {format, destination: []}, {}, {})
     ).toThrow('Please enter a valid destination');
     expect(
-      buildFile.bind(null, null, format, {}, {})
+      buildFile.bind(null, {format, destination: {}}, {}, {})
     ).toThrow('Please enter a valid destination');
   });
 
-  let dest = './__tests__/__output/test.collisions';
-  var PROPERTY_NAME_COLLISION_WARNINGS = GroupMessages.GROUP.PropertyNameCollisionWarnings + ":" + dest;
+  let destination = './__tests__/__output/test.collisions';
+  var PROPERTY_NAME_COLLISION_WARNINGS = GroupMessages.GROUP.PropertyNameCollisionWarnings + ":" + destination;
   it('should generate warning messages for output name collisions', () => {
     let name = 'someName';
     let properties = {
@@ -71,7 +71,7 @@ describe('buildFile', () => {
     };
 
     GroupMessages.clear(PROPERTY_NAME_COLLISION_WARNINGS);
-    buildFile(dest, format, {}, properties);
+    buildFile({destination, format}, {}, properties);
 
     let collisions = properties.allProperties.map((properties) => {
       let propertyPathText = chalk.keyword('orangered')(properties.path.join('.'));
@@ -86,7 +86,13 @@ describe('buildFile', () => {
   });
 
   it('should write to a file properly', () => {
-    buildFile('test.txt', format, {buildPath: '__tests__/__output/'}, {});
+    buildFile({
+        destination: 'test.txt',
+        format
+      },{
+        buildPath: '__tests__/__output/'
+      },{}
+    );
     expect(helpers.fileExists('./__tests__/__output/test.txt')).toBeTruthy();
   });
 });

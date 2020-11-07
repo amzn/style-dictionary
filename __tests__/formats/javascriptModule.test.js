@@ -47,7 +47,7 @@ describe('formats', () => {
     });
 
     it('should be a valid JS file', () => {
-      fs.writeFileSync('./__tests__/__output/output.js', formatter(dictionary) );
+      fs.writeFileSync('./__tests__/__output/output.js', formatter(dictionary, {}, file) );
       var test = require('../__output/output.js');
       expect(test.color.red.value).toEqual(dictionary.properties.color.red.value);
     });

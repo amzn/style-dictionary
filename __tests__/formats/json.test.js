@@ -42,7 +42,7 @@ describe('formats', () => {
     });
 
     it('should be a valid JSON file', () => {
-      fs.writeFileSync('./__tests__/__output/output.json', formatter(dictionary) );
+      fs.writeFileSync('./__tests__/__output/output.json', formatter(dictionary, {}, file) );
       var test = require('../__output/output.json');
       expect(test.color.red.value).toEqual(dictionary.properties.color.red.value);
     });
