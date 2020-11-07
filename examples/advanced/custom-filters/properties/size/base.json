@@ -1,0 +1,13 @@
+{
+    "size": {
+        "small": {
+            "value": "2px"
+        },
+        "medium": {
+            "value": "8px"
+        },
+        "large": {
+            "value": "16px"
+        }
+    }
+}
