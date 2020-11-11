@@ -1,7 +1,7 @@
 {
   "name": "style-dictionary-matching-build-files",
   "version": "1.0.0",
-  "description": "An example to show custom filters",
+  "description": "An example to show how to automate build files that match folders",
   "main": "build/js/cjs/index.js",
   "module": "build/js/esm/index.js",
   "files": [
