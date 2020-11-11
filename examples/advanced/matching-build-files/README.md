@@ -1,6 +1,6 @@
-## Customize token output using filters
+## Automatically generate separate build files that match your folder structure
 
-This example shows how you can manage what tokens are generated and how they are organized. This is useful when you want to generate a 1:1 relationship between files and token categories.
+This example shows how you can manage what tokens are generated and how they are organized. This is useful when you want to generate a 1:1 relationship between build files and token categories.
 
 Common use cases include:
 
@@ -44,7 +44,7 @@ Because the folder name matches the category, the output would automatically gen
 
 #### What to look at
 
-Open the `config.json` file and see how the script first looks within the `properties` directory to map through each folder. The destination then outputs a file that would match the name, and fill that file with the tokens that match the filter criteria.
+Open the `config.js` file and see how the script first looks within the `properties` directory to map through each folder. The destination then outputs a file that would match the name, and fill that file with the tokens that match the filter criteria.
 
 ```sh
  files: properties.map(tokenCategory => ({
