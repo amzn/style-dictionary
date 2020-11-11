@@ -5,7 +5,6 @@ module.exports = {
   source: ["properties/**/*.json"],
   platforms: {
     "esm/category": {
-      transformGroup: "js",
       buildPath: "build/js/esm/",
       transforms: ["attribute/cti", "name/cti/camel", "size/px", "color/hex"],
       files: tokens.map((tokenCategory) => ({
@@ -19,7 +18,6 @@ module.exports = {
       })),
     },
     "esm/index": {
-      transformGroup: "js",
       buildPath: "build/js/esm/",
       transforms: ["attribute/cti", "name/cti/camel", "size/px", "color/hex"],
       files: [
@@ -30,7 +28,6 @@ module.exports = {
       ],
     },
     "cjs/category": {
-      transformGroup: "js",
       buildPath: "build/js/cjs/",
       transforms: ["attribute/cti", "name/cti/camel", "size/px", "color/hex"],
       files: tokens.map((tokenCategory) => ({
@@ -44,7 +41,6 @@ module.exports = {
       })),
     },
     "cjs/index": {
-      transformGroup: "js",
       buildPath: "build/js/cjs/",
       transforms: ["attribute/cti", "name/cti/camel", "size/px", "color/hex"],
       files: [
@@ -82,28 +78,6 @@ module.exports = {
     },
   },
 };
-
-StyleDictionary.registerTransform({
-  name: "size/pxToPt",
-  type: "value",
-  matcher: function (prop) {
-    return prop.value.match(/[\d.]+px/g);
-  },
-  transformer: function (prop) {
-    return prop.value.replace(/px/g, "pt");
-  },
-});
-
-StyleDictionary.registerTransform({
-  name: "size/pxToDp",
-  type: "value",
-  matcher: function (prop) {
-    return prop.value.match(/[\d.]+px/g);
-  },
-  transformer: function (prop) {
-    return prop.value.replace(/px/g, "dp");
-  },
-});
 
 StyleDictionary.registerFormat({
   name: "custom/cjsmodule",

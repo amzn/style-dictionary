@@ -1,9 +1,9 @@
 {
-  "name": "style-dictionary-custom-filters",
+  "name": "style-dictionary-matching-build-files",
   "version": "1.0.0",
   "description": "An example to show custom filters",
-  "main": "dist/js/cjs/index.js",
-  "module": "dist/js/esm/index.js",
+  "main": "build/js/cjs/index.js",
+  "module": "build/js/esm/index.js",
   "files": [
     "build",
     "properties"
