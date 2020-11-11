@@ -54,7 +54,7 @@ describe('formats', () => {
     });
 
     it('should be a valid JSON file', () => {
-      fs.writeFileSync('./__tests__/__output/output.flat.json', formatter(dictionary) );
+      fs.writeFileSync('./__tests__/__output/output.flat.json', formatter(dictionary, {}, file) );
       var test = require('../__output/output.flat.json');
       expect(test['color-base-red']).toEqual(dictionary.allProperties[0].value);
     });

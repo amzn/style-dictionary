@@ -85,6 +85,16 @@
 
     "font": {
       "link": { "value": "{color.base.blue.100.value}" }
+    },
+
+    "button": {
+      "base": { "value": "{color.base.blue.100.value}" },
+      "active": { "value": "{color.button.base.value}", "transformColor": {
+        "darken": 0.5
+      } },
+      "hover": { "value": "{color.button.active.value}", "transformColor": {
+        "darken": 0.2
+      } }
     }
   }
 }

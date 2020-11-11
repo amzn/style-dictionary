@@ -1,6 +1,6 @@
 {
   "name": "style-dictionary",
-  "version": "2.10.0",
+  "version": "2.10.2",
   "description": "Style once, use everywhere. A build system for creating cross-platform styles.",
   "keywords": [
     "style dictionary",
@@ -25,7 +25,7 @@
     "style-dictionary": "./bin/style-dictionary"
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=12.0.0"
   },
   "files": [
     "bin",
@@ -132,6 +132,7 @@
     "lint-staged": "^10.2.7",
     "node-sass": "^4.14.1",
     "standard-version": "^8.0.0",
-    "tsd": "^0.11.0"
+    "tsd": "^0.11.0",
+    "yaml": "^1.10.0"
   }
 }

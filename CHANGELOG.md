@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.10.2](https://github.com/amzn/style-dictionary/compare/v2.10.1...v2.10.2) (2020-10-08)
+
+
+### Bug Fixes
+
+* **cli:** update clean config path logic ([#454](https://github.com/amzn/style-dictionary/issues/454)) ([3cc3d4e](https://github.com/amzn/style-dictionary/commit/3cc3d4e04f2ee4d0ac8b1f90b725e80f6b53beb4))
+* **formats:** fix max call stack issue on json/nested format ([#465](https://github.com/amzn/style-dictionary/issues/465)) ([4064e6a](https://github.com/amzn/style-dictionary/commit/4064e6add00ca3380d9a2c9ef9862f73ef051de9))
+
+### [2.10.1](https://github.com/amzn/style-dictionary/compare/v2.10.0...v2.10.1) (2020-07-09)
+
+
+### Bug Fixes
+
+* **filter:** fix conditional to ensure we catch properties with a falsy value ([#423](https://github.com/amzn/style-dictionary/issues/423)) ([1ec4e74](https://github.com/amzn/style-dictionary/commit/1ec4e74b9b717208f7d64aa33d43774ae8023a23)), closes [#406](https://github.com/amzn/style-dictionary/issues/406)
+* **formats:** align scss/map-* with scss/variables on asset category ([9d867ef](https://github.com/amzn/style-dictionary/commit/9d867ef3ad72cf68557434ce1a28ba996a5ac467))
+
 ## [2.10.0](https://github.com/amzn/style-dictionary/compare/v2.9.0...v2.10.0) (2020-05-05)
 
 

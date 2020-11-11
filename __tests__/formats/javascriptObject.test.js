@@ -35,7 +35,7 @@ describe('formats', () => {
 
     it('should be valid JS syntax', done => {
       try {
-        vm.runInNewContext(formatter(dictionary))
+        vm.runInNewContext(formatter(dictionary, {}, file))
         return done();
       } catch (err) {
         return done(new Error(err));

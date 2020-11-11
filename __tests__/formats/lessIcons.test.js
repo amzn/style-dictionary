@@ -49,7 +49,7 @@ describe('formats', () => {
   describe('less/icons', () => {
 
     it('should have a valid less syntax', done => {
-      less.render(formatter(dictionary, config))
+      less.render(formatter(dictionary, config, file))
         .then(function(output) {
           expect(output).toBeDefined();
           done();
