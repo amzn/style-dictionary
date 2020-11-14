@@ -115,8 +115,8 @@
   },
   "devDependencies": {
     "@babel/preset-env": "^7.10.2",
-    "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-conventional": "^8.3.4",
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
     "babel-jest": "^26.0.1",
     "babel-preset-env": "^1.7.0",
     "docsify": "^4.11.3",
@@ -131,7 +131,7 @@
     "less": "^3.11.2",
     "lint-staged": "^10.2.7",
     "node-sass": "^4.14.1",
-    "standard-version": "^8.0.0",
+    "standard-version": "^9.0.0",
     "tsd": "^0.11.0",
     "yaml": "^1.10.0"
   }
