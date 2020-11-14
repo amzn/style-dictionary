@@ -50,7 +50,7 @@ describe('formats', () => {
 
     it('should have a valid scss syntax', done => {
       scss.render({
-        data: formatter(dictionary, config),
+        data: formatter(dictionary, config, file),
       }, function(err, result) {
         if(err) {
           return done(new Error(err));

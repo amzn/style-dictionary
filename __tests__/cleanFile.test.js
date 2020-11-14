@@ -30,14 +30,14 @@ describe('cleanFile', () => {
   });
 
   it('should delete a file properly', () => {
-    buildFile('test.txt', format, {buildPath: '__tests__/__output/'}, {});
-    cleanFile('test.txt', format, {buildPath: '__tests__/__output/'}, {});
+    buildFile({destination:'test.txt', format}, {buildPath: '__tests__/__output/'}, {});
+    cleanFile({destination:'test.txt', format}, {buildPath: '__tests__/__output/'}, {});
     expect(helpers.fileDoesNotExist('./__tests__/__output/test.txt')).toBeTruthy();
   });
 
   describe('if a file does not exist', () => {
     it('should not throw', () => {
-      expect(() => cleanFile('non-existent.txt', format, { buildPath: '__tests__/__output/' }, {})).not.toThrow();
+      expect(() => cleanFile({destination: 'non-existent.txt', format}, { buildPath: '__tests__/__output/' }, {})).not.toThrow();
     })
   })
 

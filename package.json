@@ -20,11 +20,12 @@
     "style guide"
   ],
   "main": "index.js",
+  "types": "types/index.d.ts",
   "bin": {
     "style-dictionary": "./bin/style-dictionary"
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=12.0.0"
   },
   "files": [
     "bin",
@@ -32,12 +33,14 @@
     "examples",
     "index.js",
     "LICENSE",
-    "NOTICE"
+    "NOTICE",
+    "types/index.d.ts"
   ],
   "scripts": {
     "lint": "eslint --fix index.js lib/**/*.js __tests__/**/*.js",
-    "test": "npm run lint && jest --runInBand",
-    "test-watch": "npm run lint && jest --runInBand --watch",
+    "test": "npm run test-types && npm run lint && jest --runInBand",
+    "test-types": "tsd",
+    "test-watch": "npm run test-types && npm run lint && jest --runInBand --watch",
     "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha -- test/*.js test/**/*.js",
     "generate-docs": "node ./scripts/generateDocs.js",
     "serve-docs": "docsify serve docs -p 3000 -P 12345",
@@ -128,6 +131,8 @@
     "less": "^3.11.2",
     "lint-staged": "^10.2.7",
     "node-sass": "^4.14.1",
-    "standard-version": "^9.0.0"
+    "standard-version": "^9.0.0",
+    "tsd": "^0.11.0",
+    "yaml": "^1.10.0"
   }
 }

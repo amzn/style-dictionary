@@ -62,6 +62,29 @@ describe('exportPlatform', () => {
     expect(dictionary.size.padding.base.value.indexOf('px')).toBeGreaterThan(0);
   });
 
+  it('should have applied transforms for props with refs in it', () => {
+    const StyleDictionaryExtended = StyleDictionary.extend({
+      platforms: {
+        test: {
+          transforms: ['color/css','color/darken']
+        }
+      }
+    });
+
+    StyleDictionaryExtended.registerTransform({
+      type: 'value',
+      name: 'color/darken',
+      transitive: true,
+      matcher: function(prop) { return !!prop.original.transformColor; },
+      transformer: function(prop) { return prop.value + '-darker'; }
+    });
+
+    const dictionary = StyleDictionaryExtended.exportPlatform('test');
+
+    expect(dictionary.color.button.active.value).toEqual('#0077CC-darker');
+    expect(dictionary.color.button.hover.value).toEqual('#0077CC-darker-darker');
+  });
+
   it('should not have mutated the original properties', () => {
     var dictionary = StyleDictionary.exportPlatform('web');
     expect(dictionary.color.font.link.value).not.toEqual(StyleDictionary.properties.color.font.link.value);

@@ -220,7 +220,7 @@ describe('formats', () => {
       global.Date = function() { return constantDate };
 
       var formatter = formats[key].bind(file);
-      var output = formatter(dictionary, file);
+      var output = formatter(dictionary, {}, file);
 
       // reset the global Date object (or node-sass will complain!)
       global.Date = globalDate;
