@@ -31,6 +31,20 @@ a {
   transition: all 0.3s linear;
 }
 
+.version_3_banner {
+  position: fixed;
+  bottom: 0.5rem;
+  left: 25%;
+  width: 50%;
+  padding: 0.5rem 1rem;
+  background-color: hsla(0, 0%, 100%, 0.75);
+  border: 0.25rem solid var(--theme-color-dark);
+  border-radius: 0.25rem;
+  text-align: center;
+  /* color: white; */
+  z-index: 9999;
+}
+
 div.search {
   border-bottom: 2px solid #787881;
   border: none;
@@ -197,24 +211,36 @@ section.cover .cover-main blockquote {
   color: #868C91;
 }
 
-section.cover .cover-main>p:last-child a:first-child {
+section.cover.show div.cover-main > p a {
+  border-style: solid;
+  border-radius: 2rem;
+  box-sizing: border-box;
+  display: inline-block;
+  font-size: 1.05rem;
+  letter-spacing: .1rem;
+  margin: .5rem 1rem;
+  padding: .75em 2rem;
+  text-decoration: none;
+  transition: all .15s ease;
+
   border-width: 0.2rem;
   color: var(--theme-color-secondary);
   border-color: var(--theme-color-secondary);
 }
 
-section.cover .cover-main>p:last-child a:last-child {
+section.cover.show div.cover-main>p a:last-child {
   background-color: var(--theme-color-secondary);
   border-color: var(--theme-color-secondary);
+  color: #fff;
 }
 
-section.cover .cover-main>p:last-child a:hover {
+section.cover.show div.cover-main>p a:hover {
   color: var(--theme-color-secondary-dark);
   border-color: var(--theme-color-secondary-dark);
   opacity: 1;
 }
 
-section.cover .cover-main>p:last-child a:last-child:hover {
+section.cover.show div.cover-main>p a:last-child:hover {
   background-color: var(--theme-color-secondary-dark);
   border-color: var(--theme-color-secondary-dark);
   color: #fff;
