@@ -91,12 +91,12 @@ describe('utils', () => {
         const testOutput = { test: 'test' };
         const parsers = [{
           pattern: /.json$/,
-          parse: (content) => {
+          parse: () => {
             return { test: 'foo' }
           }
         },{
           pattern: /.json$/,
-          parse: (content) => {
+          parse: () => {
             return testOutput
           }
         }];

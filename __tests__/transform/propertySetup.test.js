@@ -42,7 +42,6 @@ describe('transform', () => {
         ["color","base"]
       );
       expect(typeof test).toBe('object');
-      expect(test);
       expect(test).toHaveProperty('value');
       expect(test).toHaveProperty('original');
       expect(test).toHaveProperty('attributes');

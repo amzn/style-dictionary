@@ -281,15 +281,11 @@ describe('common', () => {
         expect(value).toBe("#aaaaaaff");
       });
 
-      it('should handle rgb colors', () => {
+      it('should handle rgba colors', () => {
         var value = transforms["color/hex8"].transformer({
-          value: "rgb(170,170,170)"
-        });
-        var value2 = transforms["color/hex8"].transformer({
           value: "rgba(170,170,170,0.6)"
         });
-        expect(value).toBe("#aaaaaaff");
-        expect(value2).toBe("#aaaaaa99");
+        expect(value).toBe("#aaaaaa99");
       });
     });
 

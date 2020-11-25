@@ -33,13 +33,11 @@ var formatter = formats['javascript/object'].bind(file);
 describe('formats', () => {
   describe('javascript/object', () => {
 
-    it('should be valid JS syntax', done => {
-      try {
-        vm.runInNewContext(formatter(dictionary, {}, file))
-        return done();
-      } catch (err) {
-        return done(new Error(err));
-      }
+    it('should be valid JS syntax', () => {
+      const script = new vm.Script(formatter(dictionary, {}, file));
+      const context = {};
+      script.runInNewContext(context);
+      expect(context.foo.color.red.value).toEqual(dictionary.properties.color.red.value);
     });
 
   });

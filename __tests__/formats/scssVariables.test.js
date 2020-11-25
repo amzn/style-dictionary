@@ -51,16 +51,11 @@ var formatter = formats['scss/variables'].bind(file);
 describe('formats', () => {
   describe('scss/variables', () => {
 
-    it('should have a valid scss syntax', done => {
-      scss.render({
+    it('should have a valid scss syntax', () => {
+      const result = scss.renderSync({
         data: formatter(dictionary, {}, file),
-      }, function(err, result) {
-        if(err) {
-          return done(new Error(err));
-        }
-        expect(result.css).toBeDefined();
-        return done();
       });
+      expect(result.css).toBeDefined();
     });
 
     it('should optionally use !default', () => {

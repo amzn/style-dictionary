@@ -18,68 +18,70 @@ describe('register', () => {
   describe('format', () => {
 
     it('should error if name is not a string', () => {
+      const errorMessage = `Can't register format; format.name must be a string`
       expect(
         StyleDictionaryExtended.registerFormat.bind(null, {
           formatter: function() {}
         })
-      ).toThrow('Can\'t register format; format.name must be a string');
+      ).toThrow(errorMessage);
 
       expect(
         StyleDictionaryExtended.registerFormat.bind(null, {
           name: 1,
           formatter: function() {}
         })
-      ).toThrow('Can\'t register format; format.name must be a string');
+      ).toThrow(errorMessage);
 
       expect(
         StyleDictionaryExtended.registerFormat.bind(null, {
           name: [],
           formatter: function() {}
         })
-      );
+      ).toThrow(errorMessage);
 
       expect(
         StyleDictionaryExtended.registerFormat.bind(null, {
           name: {},
           formatter: function() {}
         })
-      ).toThrow('Can\'t register format; format.name must be a string');
+      ).toThrow(errorMessage);
     });
 
     it('should error if format is not a function', () => {
+      const errorMessage = `Can't register format; format.formatter must be a function`
       expect(
         StyleDictionaryExtended.registerFormat.bind(null, {
           name: 'test'
         })
-      ).toThrow('Can\'t register format; format.formatter must be a function');
+      ).toThrow(errorMessage);
 
       expect(
         StyleDictionaryExtended.registerFormat.bind(null, {
           name: 'test',
           formatter: 1
         })
-      ).toThrow('Can\'t register format; format.formatter must be a function');
+      ).toThrow(errorMessage);
 
       expect(
         StyleDictionaryExtended.registerFormat.bind(null, {
           name: 'test',
           formatter: 'name'
         })
-      ).toThrow('Can\'t register format; format.formatter must be a function');
+      ).toThrow(errorMessage);
 
       expect(
         StyleDictionaryExtended.registerFormat.bind(null, {
           name: 'test',
           formatter: []
         })
-      ).toThrow('Can\'t register format; format.formatter must be a function');
+      ).toThrow(errorMessage);
 
       expect(
         StyleDictionaryExtended.registerFormat.bind(null, {
           name: 'test',
           formatter: {}
         })
-      ).toThrow('Can\'t register format; format.formatter must be a function');
+      ).toThrow(errorMessage);
     });
 
     it('should work if name and format are good', () => {

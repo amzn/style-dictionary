@@ -29,7 +29,7 @@ describe('utils', () => {
       expect(test2).toHaveProperty('foo', 'blah');
     });
 
-    it('should override nested properties', () => {
+    it('overrides nested properties', () => {
       var test = deepExtend([{foo: {foo:'bar'}}, {foo: {foo:'baz'}}]);
       expect(test).toHaveProperty('foo.foo', 'baz');
 
@@ -37,7 +37,7 @@ describe('utils', () => {
       expect(test2).toHaveProperty('foo.foo', 'blah');
     });
 
-    it('should override nested properties', () => {
+    it('properly merges nested properties', () => {
       var test = deepExtend([{foo: {bar:'bar'}}, {foo: {baz:'baz'}}]);
       expect(test).toHaveProperty('foo.baz', 'baz');
       expect(test).toHaveProperty('foo.bar', 'bar');
