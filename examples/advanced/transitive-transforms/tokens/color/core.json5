@@ -1,0 +1,255 @@
+{
+  "color": {
+    "core": {
+      "white": { "value": "#ffffff" },
+      "black": { "value": "#000000" },
+
+      red: {
+        "100": {
+          // hue, saturation, and lightness are defined in
+          // tokens/hue.json5, tokens/saturation.json5, and tokens/lightness.json5
+          // The {h, s, l} object structure conforms to the input structure for
+          // chromajs: https://gka.github.io/chroma.js/#chroma
+          value: { h: "{hue.red}", s: "{saturation.7}", l: "{lightness.7}" }
+        },
+        "80": {
+          value: { h: "{hue.red}", s: "{saturation.6}", l: "{lightness.6}" }
+        },
+        "60": {
+          value: { h: "{hue.red}", s: "{saturation.5}", l: "{lightness.5}" }
+        },
+        "40": {
+          value: { h: "{hue.red}", s: "{saturation.4}", l: "{lightness.4}" }
+        },
+        "20": {
+          value: { h: "{hue.red}", s: "{saturation.3}", l: "{lightness.3}" }
+        },
+        "10": {
+          value: { h: "{hue.red}", s: "{saturation.2}", l: "{lightness.2}" }
+        },
+        "5": {
+          value: { h: "{hue.red}", s: "{saturation.1}", l: "{lightness.1}" }
+        },
+        "0": {
+          value: { h: "{hue.red}", s: "{saturation.0}", l: "{lightness.0}" }
+        },
+      },
+
+      orange: {
+        "100": {
+          value: { h: "{hue.orange}", s: "{saturation.7}", l: "{lightness.7}" }
+        },
+        "80": {
+          value: { h: "{hue.orange}", s: "{saturation.6}", l: "{lightness.6}" }
+        },
+        "60": {
+          value: { h: "{hue.orange}", s: "{saturation.5}", l: "{lightness.5}" }
+        },
+        "40": {
+          value: { h: "{hue.orange}", s: "{saturation.4}", l: "{lightness.4}" }
+        },
+        "20": {
+          value: { h: "{hue.orange}", s: "{saturation.3}", l: "{lightness.3}" }
+        },
+        "10": {
+          value: { h: "{hue.orange}", s: "{saturation.2}", l: "{lightness.2}" }
+        },
+        "5": {
+          value: { h: "{hue.orange}", s: "{saturation.1}", l: "{lightness.1}" }
+        },
+        "0": {
+          value: { h: "{hue.orange}", s: "{saturation.0}", l: "{lightness.0}" }
+        },
+      },
+
+      yellow: {
+        "100": {
+          value: { h: "{hue.yellow}", s: "{saturation.7}", l: "{lightness.7}" }
+        },
+        "80": {
+          value: { h: "{hue.yellow}", s: "{saturation.6}", l: "{lightness.6}" }
+        },
+        "60": {
+          value: { h: "{hue.yellow}", s: "{saturation.5}", l: "{lightness.5}" }
+        },
+        "40": {
+          value: { h: "{hue.yellow}", s: "{saturation.4}", l: "{lightness.4}" }
+        },
+        "20": {
+          value: { h: "{hue.yellow}", s: "{saturation.3}", l: "{lightness.3}" }
+        },
+        "10": {
+          value: { h: "{hue.yellow}", s: "{saturation.2}", l: "{lightness.2}" }
+        },
+        "5": {
+          value: { h: "{hue.yellow}", s: "{saturation.1}", l: "{lightness.1}" }
+        },
+        "0": {
+          value: { h: "{hue.yellow}", s: "{saturation.0}", l: "{lightness.0}" }
+        },
+      },
+
+      lime: {
+        "100": {
+          value: { h: "{hue.lime}", s: "{saturation.7}", l: "{lightness.7}" }
+        },
+        "80": {
+          value: { h: "{hue.lime}", s: "{saturation.6}", l: "{lightness.6}" }
+        },
+        "60": {
+          value: { h: "{hue.lime}", s: "{saturation.5}", l: "{lightness.5}" }
+        },
+        "40": {
+          value: { h: "{hue.lime}", s: "{saturation.4}", l: "{lightness.4}" }
+        },
+        "20": {
+          value: { h: "{hue.lime}", s: "{saturation.3}", l: "{lightness.3}" }
+        },
+        "10": {
+          value: { h: "{hue.lime}", s: "{saturation.2}", l: "{lightness.2}" }
+        },
+        "5": {
+          value: { h: "{hue.lime}", s: "{saturation.1}", l: "{lightness.1}" }
+        },
+        "0": {
+          value: { h: "{hue.lime}", s: "{saturation.0}", l: "{lightness.0}" }
+        },
+      },
+
+      green: {
+        "100": {
+          value: { h: "{hue.green}", s: "{saturation.7}", l: "{lightness.7}" }
+        },
+        "80": {
+          value: { h: "{hue.green}", s: "{saturation.6}", l: "{lightness.6}" }
+        },
+        "60": {
+          value: { h: "{hue.green}", s: "{saturation.5}", l: "{lightness.5}" }
+        },
+        "40": {
+          value: { h: "{hue.green}", s: "{saturation.4}", l: "{lightness.4}" }
+        },
+        "20": {
+          value: { h: "{hue.green}", s: "{saturation.3}", l: "{lightness.3}" }
+        },
+        "10": {
+          value: { h: "{hue.green}", s: "{saturation.2}", l: "{lightness.2}" }
+        },
+        "5": {
+          value: { h: "{hue.green}", s: "{saturation.1}", l: "{lightness.1}" }
+        },
+        "0": {
+          value: { h: "{hue.green}", s: "{saturation.0}", l: "{lightness.0}" }
+        },
+      },
+
+      teal: {
+        "100": {
+          value: { h: "{hue.teal}", s: "{saturation.7}", l: "{lightness.7}" }
+        },
+        "80": {
+          value: { h: "{hue.teal}", s: "{saturation.6}", l: "{lightness.6}" }
+        },
+        "60": {
+          value: { h: "{hue.teal}", s: "{saturation.5}", l: "{lightness.5}" }
+        },
+        "40": {
+          value: { h: "{hue.teal}", s: "{saturation.4}", l: "{lightness.4}" }
+        },
+        "20": {
+          value: { h: "{hue.teal}", s: "{saturation.3}", l: "{lightness.3}" }
+        },
+        "10": {
+          value: { h: "{hue.teal}", s: "{saturation.2}", l: "{lightness.2}" }
+        },
+        "5": {
+          value: { h: "{hue.teal}", s: "{saturation.1}", l: "{lightness.1}" }
+        },
+        "0": {
+          value: { h: "{hue.teal}", s: "{saturation.0}", l: "{lightness.0}" }
+        },
+      },
+
+      blue: {
+        "100": {
+          value: { h: "{hue.blue}", s: "{saturation.7}", l: "{lightness.7}" }
+        },
+        "80": {
+          value: { h: "{hue.blue}", s: "{saturation.6}", l: "{lightness.6}" }
+        },
+        "60": {
+          value: { h: "{hue.blue}", s: "{saturation.5}", l: "{lightness.5}" }
+        },
+        "40": {
+          value: { h: "{hue.blue}", s: "{saturation.4}", l: "{lightness.4}" }
+        },
+        "20": {
+          value: { h: "{hue.blue}", s: "{saturation.3}", l: "{lightness.3}" }
+        },
+        "10": {
+          value: { h: "{hue.blue}", s: "{saturation.2}", l: "{lightness.2}" }
+        },
+        "5": {
+          value: { h: "{hue.blue}", s: "{saturation.1}", l: "{lightness.1}" }
+        },
+        "0": {
+          value: { h: "{hue.blue}", s: "{saturation.0}", l: "{lightness.0}" }
+        },
+      },
+
+      purple: {
+        "100": {
+          value: { h: "{hue.purple}", s: "{saturation.7}", l: "{lightness.7}" }
+        },
+        "80": {
+          value: { h: "{hue.purple}", s: "{saturation.6}", l: "{lightness.6}" }
+        },
+        "60": {
+          value: { h: "{hue.purple}", s: "{saturation.5}", l: "{lightness.5}" }
+        },
+        "40": {
+          value: { h: "{hue.purple}", s: "{saturation.4}", l: "{lightness.4}" }
+        },
+        "20": {
+          value: { h: "{hue.purple}", s: "{saturation.3}", l: "{lightness.3}" }
+        },
+        "10": {
+          value: { h: "{hue.purple}", s: "{saturation.2}", l: "{lightness.2}" }
+        },
+        "5": {
+          value: { h: "{hue.purple}", s: "{saturation.1}", l: "{lightness.1}" }
+        },
+        "0": {
+          value: { h: "{hue.purple}", s: "{saturation.0}", l: "{lightness.0}" }
+        },
+      },
+
+      pink: {
+        "100": {
+          value: { h: "{hue.pink}", s: "{saturation.7}", l: "{lightness.7}" }
+        },
+        "80": {
+          value: { h: "{hue.pink}", s: "{saturation.6}", l: "{lightness.6}" }
+        },
+        "60": {
+          value: { h: "{hue.pink}", s: "{saturation.5}", l: "{lightness.5}" }
+        },
+        "40": {
+          value: { h: "{hue.pink}", s: "{saturation.4}", l: "{lightness.4}" }
+        },
+        "20": {
+          value: { h: "{hue.pink}", s: "{saturation.3}", l: "{lightness.3}" }
+        },
+        "10": {
+          value: { h: "{hue.pink}", s: "{saturation.2}", l: "{lightness.2}" }
+        },
+        "5": {
+          value: { h: "{hue.pink}", s: "{saturation.1}", l: "{lightness.1}" }
+        },
+        "0": {
+          value: { h: "{hue.pink}", s: "{saturation.0}", l: "{lightness.0}" }
+        },
+      }
+    }
+  }
+}
