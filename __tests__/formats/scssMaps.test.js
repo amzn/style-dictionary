@@ -207,7 +207,7 @@ var dictionary = {
 describe('formats', () => {
   _.each(['scss/map-flat', 'scss/map-deep'], function(key) {
 
-    describe(`${key}`, () => {
+    describe(key, () => {
 
       var file = {
         "destination": "__output/",
