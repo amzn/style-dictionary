@@ -31,20 +31,6 @@ a {
   transition: all 0.3s linear;
 }
 
-.version_3_banner {
-  position: fixed;
-  bottom: 0.5rem;
-  left: 25%;
-  width: 50%;
-  padding: 0.5rem 1rem;
-  background-color: hsla(0, 0%, 100%, 0.75);
-  border: 0.25rem solid var(--theme-color-dark);
-  border-radius: 0.25rem;
-  text-align: center;
-  /* color: white; */
-  z-index: 9999;
-}
-
 div.search {
   border-bottom: 2px solid #787881;
   border: none;
