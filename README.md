@@ -1,4 +1,6 @@
-<a style="display:block; padding:1rem; background:#3F1C77; color:#fff; margin-bottom:1rem;" href="https://amzn.github.io/style-dictionary/#/version_3">Get ready for the next release of Style Dictionary! 🚀</a>
+<pre>
+<a href="https://amzn.github.io/style-dictionary/#/version_3">Get ready for the next release of Style Dictionary! 🚀</a>
+</pre>
 
 <img src="docs/assets/logo.png" alt="Style Dictionary logo and mascot" title="&quot;Pascal&quot;" width="100" align="right" />
 
