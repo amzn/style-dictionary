@@ -48,16 +48,11 @@ var formatter = formats['scss/icons'].bind(file);
 describe('formats', () => {
   describe('scss/icons', () => {
 
-    it('should have a valid scss syntax', done => {
-      scss.render({
+    it('should have a valid scss syntax', () => {
+      const result = scss.renderSync({
         data: formatter(dictionary, config, file),
-      }, function(err, result) {
-        if(err) {
-          return done(new Error(err));
-        }
-        expect(result.css).toBeDefined();
-        return done();
       });
+      expect(result.css).toBeDefined();
     });
 
   });

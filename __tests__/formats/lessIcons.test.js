@@ -48,14 +48,13 @@ var formatter = formats['less/icons'].bind(file);
 describe('formats', () => {
   describe('less/icons', () => {
 
-    it('should have a valid less syntax', done => {
-      less.render(formatter(dictionary, config, file))
+    it('should have a valid less syntax', () => {
+      return less.render(formatter(dictionary, config, file))
         .then(function(output) {
           expect(output).toBeDefined();
-          done();
         })
         .catch(function(err) {
-          done(new Error(err))
+          throw new Error(err);
         });
     });
 

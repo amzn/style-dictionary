@@ -50,14 +50,13 @@ var formatter = formats['less/variables'].bind(file);
 describe('formats', () => {
   describe('less/variables', () => {
 
-    it('should have a valid less syntax', done => {
-      less.render(formatter(dictionary, {}, file))
+    it('should have a valid less syntax', () => {
+      return less.render(formatter(dictionary, {}, file))
         .then(function(output) {
           expect(output).toBeDefined();
-          done();
         })
         .catch(function(err) {
-          done(new Error(err))
+          throw new Error(err);
         });
     });
 
