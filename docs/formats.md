@@ -353,6 +353,40 @@ export const ColorBackgroundAlt = '#fcfcfcfc';
 
 * * *
 
+### javascript/cjs 
+
+
+Creates a CommonJS module of the style dictionary.
+
+```json
+{
+  "platforms": {
+    "cjs": {
+      "transformGroup": "js",
+      "files": [
+        {
+          "format": "javascript/cjs",
+          "destination": "colors.js",
+          "filter": {
+            "attributes": {
+              "category": "color"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+```
+
+**Example**  
+```js
+module.exports.ColorBackgroundBase = '#ffffff';
+module.exports.ColorBackgroundAlt = '#fcfcfcfc';
+```
+
+* * *
+
 ### android/colors 
 
 
