@@ -475,20 +475,6 @@ Scales the number by 16 (default web font size) and adds 'px' to the end.
 
 * * *
 
-### size/pxToRem
-
-Scales the pixel value to rem, and adds 'rem' to the end of non-zero values. If you define a "basePxFontSize" on the platform in your config, it will be used to scale the pixel value, otherwise 16 (default web font size) will be used.
-
-```js
-// Matches: prop.attributes.category === 'size'
-// Returns:
-"0"
-"1rem"
-```
-
-
-* * *
-
 ### content/icon 
 
 
