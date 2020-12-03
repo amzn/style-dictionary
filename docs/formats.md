@@ -197,12 +197,14 @@ $tokens: {
 ### scss/variables 
 
 
-Creates a SCSS file with variable definitions based on the style dictionary
+Creates a SCSS file with variable definitions based on the style dictionary.
+
+Add `!default` to any variable by setting a `themeable: true` property in the token's definition.
 
 **Example**  
 ```scss
 $color-background-base: #f0f0f0;
-$color-background-alt: #eeeeee;
+$color-background-alt: #eeeeee !default;
 ```
 
 * * *
@@ -257,10 +259,24 @@ module.exports = {
   color: {
     base: {
        red: {
-         value: '#ff000'
+         value: '#ff0000'
        }
     }
   }
+}
+```
+
+* * *
+
+### javascript/module-flat 
+
+
+Creates a CommonJS module with the whole style dictionary flattened to a single level.
+
+**Example**  
+```js
+module.exports = {
+ "ColorBaseRed": "#ff0000"
 }
 ```
 
@@ -278,7 +294,7 @@ var StyleDictionary = {
   color: {
     base: {
        red: {
-         value: '#ff000'
+         value: '#ff0000'
        }
     }
   }
@@ -610,7 +626,7 @@ Creates a JSON file of the style dictionary.
   "color": {
     "base": {
        "red": {
-         "value": "#ff000"
+         "value": "#ff0000"
        }
     }
   }
@@ -649,7 +665,7 @@ Creates a JSON nested file of the style dictionary.
 {
   "color": {
     "base": {
-       "red": "#ff000"
+       "red": "#ff0000"
     }
   }
 }
@@ -665,7 +681,7 @@ Creates a JSON flat file of the style dictionary.
 **Example**  
 ```json
 {
-  "color-base-red": "#ff000"
+  "color-base-red": "#ff0000"
 }
 ```
 

@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0-rc.0](https://github.com/amzn/style-dictionary/compare/v2.10.2...v3.0.0-rc.0) (2020-12-03)
+
+
+### Features
+
+* **examples:** add custom filters example ([c9bfcbc](https://github.com/amzn/style-dictionary/commit/c9bfcbcb07fec4435f2368c66d0db793d676a06e))
+* **examples:** add custom filters example ([f95c420](https://github.com/amzn/style-dictionary/commit/f95c4202e93dcc00b47e595c4910f435a57d1987))
+* **examples:** add matching build files example ([#481](https://github.com/amzn/style-dictionary/issues/481)) ([5a80ef6](https://github.com/amzn/style-dictionary/commit/5a80ef626bacb6b487f2543793e7ed6451e81498)), closes [#251](https://github.com/amzn/style-dictionary/issues/251)
+* add support for !default in SCSS variables format ([#359](https://github.com/amzn/style-dictionary/issues/359)) ([fa82002](https://github.com/amzn/style-dictionary/commit/fa8200221477a7bf0d9fcb031a54dc61ba2e3f72)), closes [#307](https://github.com/amzn/style-dictionary/issues/307)
+* add TypeScript typings ([#410](https://github.com/amzn/style-dictionary/issues/410)) ([a8bb832](https://github.com/amzn/style-dictionary/commit/a8bb83278fa5bf7b1796d7f466f21a7beef0da84))
+* **core:** add new entries on property object ([#356](https://github.com/amzn/style-dictionary/issues/356)) ([fd254a5](https://github.com/amzn/style-dictionary/commit/fd254a5e9f78b9888cf59770e61800357421d934))
+* **formats:** add file object to formatter method ([#439](https://github.com/amzn/style-dictionary/issues/439)) ([1481c46](https://github.com/amzn/style-dictionary/commit/1481c46647808d95dc26ff6c08a0906df09d0316))
+* **formats:** javascript/module-flat format ([#457](https://github.com/amzn/style-dictionary/issues/457)) ([37b06e8](https://github.com/amzn/style-dictionary/commit/37b06e86ba77576fb0619372fd73e16673c6440d))
+* **parser:** adding custom parser support ([#429](https://github.com/amzn/style-dictionary/issues/429)) ([887a837](https://github.com/amzn/style-dictionary/commit/887a837a72f15cb4e2550f883e6d4479e1fa9d42))
+* **transforms:** Make transitive transforms & resolves possible ([#371](https://github.com/amzn/style-dictionary/issues/371)) ([3edbb17](https://github.com/amzn/style-dictionary/commit/3edbb178d53f9e5af2328b7c26271fe436af86d3)), closes [#208](https://github.com/amzn/style-dictionary/issues/208)
+
+
+### Bug Fixes
+
+* addressing code review ([9690547](https://github.com/amzn/style-dictionary/commit/96905470ebf3ffbdd83c55c70235b3361c0c7400))
+* addressing code review ([881a57c](https://github.com/amzn/style-dictionary/commit/881a57cb7dcffd46776832ad65dd8ddffd7933b9))
+* better description for package.json ([ba6fae7](https://github.com/amzn/style-dictionary/commit/ba6fae7047c2312e312b2b64d2b93da2946277d8))
+* better description for package.json ([4bfd31e](https://github.com/amzn/style-dictionary/commit/4bfd31e66fed6e551fb02051d730acb0b3d19097))
+* package-lock.json ([#482](https://github.com/amzn/style-dictionary/issues/482)) ([7584f48](https://github.com/amzn/style-dictionary/commit/7584f483c95f9830155b82edb8e02d9c5d440239))
+* **cli:** update clean config path logic ([#454](https://github.com/amzn/style-dictionary/issues/454)) ([dc3cfa5](https://github.com/amzn/style-dictionary/commit/dc3cfa58aa7cc78a6359a8bb269e6f32ba50b110))
+* **formats:** fix max call stack issue on json/nested format ([#465](https://github.com/amzn/style-dictionary/issues/465)) ([67fb361](https://github.com/amzn/style-dictionary/commit/67fb361fb2448f9b91a1a125ee61d6bbe2f77732))
+* **transforms:** fix transitive transforms ([#476](https://github.com/amzn/style-dictionary/issues/476)) ([ac0c515](https://github.com/amzn/style-dictionary/commit/ac0c515c8b4593b91eb352b1f744895796e3ab49))
+
 ### [2.10.2](https://github.com/amzn/style-dictionary/compare/v2.10.1...v2.10.2) (2020-10-08)
 
 

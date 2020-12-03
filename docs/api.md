@@ -233,6 +233,32 @@ StyleDictionary.registerFormat({
 
 * * *
 
+### registerParser 
+> StyleDictionary.registerParser(pattern, parse) ⇒ [<code>style-dictionary</code>](#module_style-dictionary)
+
+
+
+
+Adds a custom parser to parse style dictionary files
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| pattern | <code>Regex</code> | - |
+| parse | <code>function</code> | Function to parse the file contents. Takes 1 argument, which is an object with 2 attributes: contents wich is the string of the file contents and filePath. The function should return a plain Javascript object. |
+
+**Example**  
+```js
+StyleDictionary.registerParser({
+  pattern: /\.json$/,
+  parse: ({contents, filePath}) => {
+    return JSON.parse(contents);
+  }
+})
+```
+
+* * *
+
 ### registerTemplate 
 > ~~StyleDictionary.registerTemplate(template) ⇒ [<code>style-dictionary</code>](#module_style-dictionary)~~
 
@@ -275,6 +301,7 @@ Transforms can manipulate a property's name, value, or attributes
 | transform | <code>Object</code> | Transform object |
 | transform.type | <code>String</code> | Type of transform, can be: name, attribute, or value |
 | transform.name | <code>String</code> | Name of the transformer (used by transformGroup to call a list of transforms). |
+| transform.transitive | <code>Boolean</code> | If the value transform should be applied transitively, i.e. should be applied to referenced values as well as absolute values. |
 | [transform.matcher] | <code>function</code> | Matcher function, return boolean if transform should be applied. If you omit the matcher function, it will match all properties. |
 | transform.transformer | <code>function</code> | Performs a transform on a property object, should return a string or object depending on the type. Will only update certain properties by which you can't mess up property objects on accident. |
 

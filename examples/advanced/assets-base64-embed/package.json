@@ -11,6 +11,6 @@
   "author": "",
   "license": "Apache-2.0",
   "devDependencies": {
-    "style-dictionary": "2.10.2"
+    "style-dictionary": "3.0.0-rc.0"
   }
 }
