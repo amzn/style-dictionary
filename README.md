@@ -1,3 +1,7 @@
+<pre>
+<a href="https://amzn.github.io/style-dictionary/#/version_3">Get ready for the next release of Style Dictionary! 🚀</a>
+</pre>
+
 <img src="docs/assets/logo.png" alt="Style Dictionary logo and mascot" title="&quot;Pascal&quot;" width="100" align="right" />
 
 [![npm version](https://img.shields.io/npm/v/style-dictionary.svg?style=flat-square)](https://badge.fury.io/js/style-dictionary)
