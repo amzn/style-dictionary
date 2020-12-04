@@ -1,0 +1,23 @@
+{
+  color: {
+    overlay: {
+      primary: {
+        value: "{color.core.white.value}",
+        modify: [{
+          type: "alpha",
+          // You can access other parts of your style dictionary in here too:
+          amount: "{alpha.1}"
+        }]
+      },
+
+      secondary: {
+        value: "{color.core.white.value}",
+        modify: [{
+          type: "alpha",
+          // You can access other parts of your style dictionary in here too:
+          amount: "{alpha.2}"
+        }]
+      }
+    }
+  }
+}

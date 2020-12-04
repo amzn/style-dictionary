@@ -14,24 +14,44 @@
 const usesReference = require('../../../lib/utils/references/usesReference');
 
 describe('usesReference()', () => {
-  test('returns false for non-strings', () => {
+  it(`returns false for non-strings`, () => {
     expect(usesReference(42)).toBe(false);
   });
 
-  test('returns false if value uses no reference', () => {
+  it(`returns false if value uses no reference`, () => {
     expect(usesReference('foo.bar')).toBe(false);
   });
 
-  test('returns true if value is a reference', () => {
+  it(`returns true if value is a reference`, () => {
     expect(usesReference('{foo.bar}')).toBe(true);
   });
 
-  test('returns true if value uses a reference', () => {
+  it(`should return true if value uses a reference`, () => {
     expect(usesReference('baz {foo.bar}')).toBe(true);
   });
 
-  describe('with custom options', () => {
-    test('returns true if value is reference', () => {
+  it(`returns true if an object uses a reference`, () => {
+    expect(usesReference({foo: '{bar}'})).toBe(true);
+  });
+
+  it(`returns false if an object doesn't have a reference`, () => {
+    expect(usesReference({foo: 'bar'})).toBe(false);
+  });
+
+  it(`returns true if a nested object has a reference`, () => {
+    expect(usesReference({foo: {bar: '{bar}'}})).toBe(true);
+  });
+
+  it(`returns true if an array uses a reference`, () => {
+    expect(usesReference(["foo", "{bar}"])).toBe(true);
+  });
+
+  it(`returns false if an array doesn't use a reference`, () => {
+    expect(usesReference(["foo", "bar"])).toBe(false);
+  });
+
+  describe(`with custom options`, () => {
+    test(`returns true if value is reference`, () => {
       const customOpts = {
         opening_character: '(',
         closing_character: ')',
