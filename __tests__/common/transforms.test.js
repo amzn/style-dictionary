@@ -547,16 +547,15 @@ describe('common', () => {
     describe('size/pxToRem', () => {
       const pxToRemTransformer = transforms["size/pxToRem"].transformer;
 
-      it('converts pixel to rem', () => {
-          expect(pxToRemTransformer({value: '12px'})).toBe('0.75rem');
+      ['12', '12px', '12rem'].forEach((value) => {
+        it(`ignoring unit, scales "${value}" to rem`, () => {
+          expect(pxToRemTransformer({value})).toBe('0.75rem');
+        });
       });
       it('converts pixel to rem using custom base font', () => {
         expect(pxToRemTransformer({value: '14px'}, {basePxFontSize: 14})).toBe('1rem');
       });
-      it('nonzero rem value not changed', () => {
-          expect(pxToRemTransformer({value: '2rem'})).toBe('2rem');
-      });
-      ['0px', '0', '0rem'].forEach((value) => {
+      ['0', '0px', '0rem'].forEach((value) => {
           it(`zero value "${value}" is returned without a unit`, () => {
               expect(pxToRemTransformer({value})).toBe('0');
           });
