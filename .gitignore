@@ -79,3 +79,6 @@ xcuserdata/
 
 # Temporary build output directory for unit tests
 __tests__/__output
+
+# Disposable test file ( user: @Meiuca )
+meiuca-test.js
