@@ -71,6 +71,10 @@ declare namespace StyleDictionary {
     attributes: Attributes;
     path: string[];
     value: string;
+    /** A string representing the absolute path of the file that defines the token. */
+    filePath: string;
+    /** Represents if this file was defined as ‘source’ in the configuration as opposed to ‘include’ (or directly setting the ‘properties’ object). */
+    isSource: boolean;
     [key: string]: any;
   }
 
