@@ -13,7 +13,7 @@
 
 var buildFiles = require('../lib/buildFiles');
 var helpers = require('./__helpers');
-var _ = require('lodash');
+var _ = require('../lib/utils/es6_');
 
 var dictionary = {
   properties: {
