@@ -13,7 +13,7 @@
 
 var helpers = require('./__helpers');
 var StyleDictionary = require('../index');
-var _ = require('lodash');
+var _ = require('../lib/utils/es6_');
 
 function traverseObj(obj, fn) {
   for (let key in obj) {
