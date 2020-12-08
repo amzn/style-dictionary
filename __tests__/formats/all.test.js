@@ -12,7 +12,7 @@
  */
 
 var formats = require('../../lib/common/formats');
-var _ = require('lodash');
+var _ = require('../../lib/utils/es6_');
 
 var file = {
   "destination": "__output/",
