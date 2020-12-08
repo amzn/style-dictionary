@@ -21,7 +21,7 @@ However, we heard from the community there were a number of reasons why someone 
 * https://github.com/amzn/style-dictionary/issues/452
 * https://github.com/amzn/style-dictionary/issues/208
 
-he new build process is similar, except that it recursively transforms and resolves aliases, only deferring a transform to the next cycle if the token has an unresolved alias. Each pass might reveal tokens that are ready to be transformed in the next pass. Take this example:
+The new build process is similar, except that it recursively transforms and resolves aliases, only deferring a transform to the next cycle if the token has an unresolved alias. Each pass might reveal tokens that are ready to be transformed in the next pass. Take this example:
 
 ```json
 {
