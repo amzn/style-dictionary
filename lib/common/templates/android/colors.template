@@ -13,10 +13,6 @@
 // on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
 // express or implied. See the License for the specific language governing
 // permissions and limitations under the License.
-
-var props = _.filter(allProperties, function(prop) {
- return prop.attributes.category === 'color';
-});
 %>
 <%
   // for backward compatibility we need to have the user explicitly hide it
@@ -29,7 +25,7 @@ var props = _.filter(allProperties, function(prop) {
   }
 %>
 <resources>
-  <% _.each(props, function(prop) {
+  <% _.each(allProperties, function(prop) {
   %><color name="<%= prop.name %>"><%= prop.value %></color><% if (prop.comment) { %><!-- <%= prop.comment %> --><% } %>
   <% }); %>
 </resources>

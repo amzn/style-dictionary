@@ -22,6 +22,7 @@ exports[`formats all should match android/dimens snapshot 1`] = `
   Generated on Sat, 01 Jan 2000 00:00:00 GMT
 -->
 <resources>
+  <dimen name=\\"color_red\\">#FF0000</dimen><!-- comment -->
   
 </resources>
 "
@@ -35,6 +36,7 @@ exports[`formats all should match android/fontDimens snapshot 1`] = `
   Generated on Sat, 01 Jan 2000 00:00:00 GMT
 -->
 <resources>
+  <dimen name=\\"color_red\\">#FF0000</dimen><!-- comment -->
   
 </resources>
 "
@@ -48,6 +50,7 @@ exports[`formats all should match android/integers snapshot 1`] = `
   Generated on Sat, 01 Jan 2000 00:00:00 GMT
 -->
 <resources>
+  <integer name=\\"color_red\\">#FF0000</integer><!-- comment -->
   
 </resources>
 "
@@ -61,6 +64,7 @@ exports[`formats all should match android/strings snapshot 1`] = `
   Generated on Sat, 01 Jan 2000 00:00:00 GMT
 -->
 <resources>
+  <string name=\\"color_red\\">#FF0000</string><!-- comment -->
   
 </resources>
 "

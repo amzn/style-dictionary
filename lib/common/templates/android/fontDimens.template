@@ -13,10 +13,7 @@
 // on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
 // express or implied. See the License for the specific language governing
 // permissions and limitations under the License.
-
-var props = _.filter(allProperties, function(prop) {
-  return prop.attributes.category === 'size' && prop.attributes.type === 'font';
-}); %>
+%>
 <%
   // for backward compatibility we need to have the user explicitly hide it
   var showFileHeader = (this.options && this.options.hasOwnProperty('showFileHeader')) ? this.options.showFileHeader : true;
@@ -28,7 +25,7 @@ var props = _.filter(allProperties, function(prop) {
   }
 %>
 <resources>
-  <% _.each(props, function(prop) {
+  <% _.each(allProperties, function(prop) {
   %><dimen name="<%= prop.name %>"><%= prop.value %></dimen><% if (prop.comment) { %><!-- <%= prop.comment %> --><% } %>
   <% }); %>
 </resources>
