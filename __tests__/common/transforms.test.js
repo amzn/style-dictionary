@@ -540,6 +540,27 @@ describe('common', () => {
       });
     });
 
+    describe('size/pxToRem', () => {
+      const pxToRemTransformer = transforms["size/pxToRem"].transformer;
+
+      ['12', '12px', '12rem'].forEach((value) => {
+        it(`ignoring unit, scales "${value}" to rem`, () => {
+          expect(pxToRemTransformer({value})).toBe('0.75rem');
+        });
+      });
+      it('converts pixel to rem using custom base font', () => {
+        expect(pxToRemTransformer({value: '14px'}, {basePxFontSize: 14})).toBe('1rem');
+      });
+      ['0', '0px', '0rem'].forEach((value) => {
+          it(`zero value "${value}" is returned without a unit`, () => {
+              expect(pxToRemTransformer({value})).toBe('0');
+          });
+      });
+      it('should throw an error if prop value is Nan', () => {
+        expect( () => pxToRemTransformer({value: "a"})).toThrow();
+      });
+    });
+
     describe('size/rem', () => {
       it('should work', () => {
         var value = transforms["size/rem"].transformer({
