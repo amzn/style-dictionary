@@ -369,10 +369,45 @@ export const ColorBackgroundAlt = '#fcfcfcfc';
 
 * * *
 
+### android/resources 
+
+
+Creates a [resource](https://developer.android.com/guide/topics/resources/providing-resources) xml file. It is recommended to use a filter with this format
+as it is generally best practice in Android development to have resource files
+organized by type (color, dimension, string, etc.). However, a resource file
+with mixed resources will still work.
+
+This format will try to use the proper resource type for each token based on
+the category (color => color, size => dimen, etc.). However if you want to
+force a particular resource type you can provide a 'resourceType' attribute
+on the file configuration. You can also provide a 'resourceMap' if you
+don't use Style Dictionary's built-in CTI structure.
+
+**Example**  
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+ <color name="color_base_red_5">#fffaf3f2</color>
+ <color name="color_base_red_30">#fff0cccc</color>
+ <dimen name="size_font_base">14sp</color>
+```
+
+* * *
+
 ### android/colors 
 
 
 Creates a color resource xml file with all the colors in your style dictionary.
+
+It is recommended to use the 'android/resources' format with a custom filter
+instead of this format:
+
+```javascript
+format: 'android/resources',
+filter: {
+  attributes: { category: 'color' }
+}
+```
 
 **Example**  
 ```xml
@@ -390,6 +425,16 @@ Creates a color resource xml file with all the colors in your style dictionary.
 
 Creates a dimen resource xml file with all the sizes in your style dictionary.
 
+It is recommended to use the 'android/resources' format with a custom filter
+instead of this format:
+
+```javascript
+format: 'android/resources',
+filter: {
+  attributes: { category: 'size' }
+}
+```
+
 **Example**  
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -405,6 +450,16 @@ Creates a dimen resource xml file with all the sizes in your style dictionary.
 
 
 Creates a dimen resource xml file with all the font sizes in your style dictionary.
+
+It is recommended to use the 'android/resources' format with a custom filter
+instead of this format:
+
+```javascript
+format: 'android/resources',
+filter: {
+  attributes: { category: 'size' }
+}
+```
 
 **Example**  
 ```xml
@@ -422,6 +477,16 @@ Creates a dimen resource xml file with all the font sizes in your style dictiona
 
 Creates a resource xml file with all the integers in your style dictionary. It filters your
 style properties by `prop.attributes.category === 'time'`
+
+It is recommended to use the 'android/resources' format with a custom filter
+instead of this format:
+
+```javascript
+format: 'android/resources',
+filter: {
+  attributes: { category: 'time' }
+}
+```
 
 **Todo**
 
@@ -443,6 +508,16 @@ style properties by `prop.attributes.category === 'time'`
 
 Creates a resource xml file with all the strings in your style dictionary. Filters your
 style properties by `prop.attributes.category === 'content'`
+
+It is recommended to use the 'android/resources' format with a custom filter
+instead of this format:
+
+```javascript
+format: 'android/resources',
+filter: {
+  attributes: { category: 'content' }
+}
+```
 
 **Example**  
 ```xml
