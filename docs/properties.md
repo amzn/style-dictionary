@@ -109,4 +109,48 @@ You can organize and name your style properties however you want, **there are no
 
 Also, the CTI structure provides a good mechanism to target transforms for specific kinds of properties. All of the transforms provided by the framework use the CTI structure to know if it should be applied. For instance, the 'color/hex' transform only applies to properties of the category 'color'.
 
+## Default property metadata
+
+Style Dictionary adds some metadata on each property that helps with transforms and formats. Here is what Style Dictionary adds onto each property:
+
+| Attribute | Type | Description |
+| :--- | :--- | :--- |
+| name | String | A default name of the property that is set to the key of the property.
+| path | Array[String] | The object path of the property. `color: { background: primary: {value: "#fff"}}` will have a path of `['color','background', 'primary']`.
+| original | Object | A pristine copy of the original property object.
+| filePath | String | The relative file path of the file the token is defined in. 
+| isSource | Boolean | If the token is from a file in the `source` array as opposed to `include`.
+
+This:
+
+```json5
+{
+  "color": {
+    "background": {
+      "primary": { "value": "#fff" }
+    }
+  }
+}
+```
+
+becomes:
+
+```json5
+{
+  "color": {
+    "background": {
+      "primary": {
+        "name": "primary",
+        "path": ["color","background","primary"],
+        "original": {
+          "value": "#fff"
+        },
+        "filePath": "tokens/color/background.json",
+        "isSource": true
+      }
+    }
+  }
+}
+```
+
 ----
