@@ -123,7 +123,7 @@ Style Dictionary adds some metadata on each property that helps with transforms 
 
 This:
 
-```json5
+```json
 {
   "color": {
     "background": {
@@ -135,7 +135,7 @@ This:
 
 becomes:
 
-```json5
+```json
 {
   "color": {
     "background": {
