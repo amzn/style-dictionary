@@ -117,13 +117,23 @@ Style Dictionary adds some metadata on each property that helps with transforms 
 | :--- | :--- | :--- |
 | name | String | A default name of the property that is set to the key of the property.
 | path | Array[String] | The object path of the property. `color: { background: primary: {value: "#fff"}}` will have a path of `['color','background', 'primary']`.
-| original | Object | A pristine copy of the original property object.
-| filePath | String | The relative file path of the file the token is defined in. 
-| isSource | Boolean | If the token is from a file in the `source` array as opposed to `include`.
+| original | Object | A pristine copy of the original property object. This is to make sure transforms and formats always have the unmodified version of the original property.
+| filePath | String | The file path of the file the token is defined in. This file path is derived from the `source` or `include` file path arrays defined in the [configuration](config.md).
+| isSource | Boolean | If the token is from a file defined in the `source` array as opposed to `include` in the [configuration](config.md).
 
-This:
+Given this configuration:
 
 ```json
+{
+  "source": ["tokens/**/*.json"]
+  //...
+}
+```
+
+This source file:
+
+```json
+// tokens/color/background.json
 {
   "color": {
     "background": {
@@ -141,6 +151,7 @@ becomes:
     "background": {
       "primary": {
         "name": "primary",
+        "value": "#fff",
         "path": ["color","background","primary"],
         "original": {
           "value": "#fff"
