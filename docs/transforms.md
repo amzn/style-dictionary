@@ -375,6 +375,22 @@ Transforms the value into a density-independent pixel (dp) value for non-font si
 "10.0dp"
 ```
 
+* * *
+
+### size/object 
+
+Transforms the value into a usefull object ( for React Native support )
+
+```js
+// Matches: prop.attributes.category === 'size'
+// Returns:
+{
+  original: "10px",
+  number: 10,
+  decimal: 0.1, // 10 divided by 100
+  scale: 160, // 10 times 16
+}
+```
 
 * * *
 
