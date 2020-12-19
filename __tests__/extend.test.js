@@ -156,6 +156,21 @@ describe('extend', () => {
       expect(StyleDictionaryExtended.properties).toEqual(output);
     });
 
+    it('should use relative filePaths for the filePath property', () => {
+      var filePath = "__tests__/__properties/paddings.json";
+      var StyleDictionaryExtended = StyleDictionary.extend({
+        "source": [filePath]
+      });
+      var output = helpers.fileToJSON(__dirname + "/__properties/paddings.json");
+      traverseObj(output, (obj) => {
+        if (obj.value && !obj.filePath) {
+          obj.filePath = filePath;
+          obj.isSource = true;
+        }
+      });
+      expect(StyleDictionaryExtended.properties).toEqual(output);
+    });
+
     it('should override existing properties source is given', () => {
       var StyleDictionaryExtended = StyleDictionary.extend({
         properties: test_props,

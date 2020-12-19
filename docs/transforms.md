@@ -32,7 +32,7 @@ There are 3 types of transforms: attribute, name, and value.
 **Value:** The value transform is the most important as this is the one that changes the representation of the value. Colors can be turned into hex values, rgb, hsl, hsv, etc. Value transforms have a matcher function that filter which properties that transform runs on. This allows us to only run a color transform on only the colors and not every property.
 
 ## Defining Custom Transforms
-You can define custom transforms with the [`registerTransform`](api.md#registertransform).
+You can define custom transforms with the [`registerTransform`](api.md#registertransform). Style Dictionary adds some [default metadata](properties.md?id=default-property-metadata) to each property/token to provide context that may be useful for some transforms.
 
 ## Pre-defined Transforms
 
