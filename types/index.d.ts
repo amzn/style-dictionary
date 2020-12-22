@@ -77,19 +77,19 @@ declare namespace StyleDictionary {
   interface NameTransform {
     type: "name";
     matcher?: (prop: Prop) => boolean;
-    transformer: (prop: Prop, options: Options) => string;
+    transformer: (prop: Prop, options: Platform) => string;
   }
 
   interface ValueTransform {
     type: "value";
     matcher?: (prop: Prop) => boolean;
-    transformer: (prop: Prop, options: Options) => string;
+    transformer: (prop: Prop, options: Platform) => string;
   }
 
   interface AttributeTransform {
     type: "attribute";
     matcher?: (prop: Prop) => boolean;
-    transformer: (prop: Prop, options: Options) => { [key: string]: any };
+    transformer: (prop: Prop, options: Platform) => { [key: string]: any };
   }
 
   type Transform = NameTransform | ValueTransform | AttributeTransform;
