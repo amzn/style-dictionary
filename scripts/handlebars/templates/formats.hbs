@@ -67,6 +67,8 @@ A special file configuration is `filter`, which will filter the tokens before th
 }
 ```
 
+The token/property that is passed to the filter function has already been [transformed](transforms.md) and has [default metadata](properties.md?id=default-property-metadata) added by Style Dictionary.
+
 ### Creating formats
 
 You can create custom formats using the [`registerFormat`](api.md#registerformat) function. If you want to add configuration to your custom format, `this` is bound to the file object. Using this, you can access attributes on the file object with `this.myCustomAttribute` if the file object looks like:

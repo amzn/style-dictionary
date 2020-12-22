@@ -487,6 +487,10 @@ describe('common', () => {
         });
         expect(value).toBe("16.00sp");
       });
+      it('converts rem to sp using custom base font', () => {
+        var value = transforms["size/remToSp"].transformer({value: "1"}, {basePxFontSize: 14});
+        expect(value).toBe("14.00sp");
+      });
       it('should throw an error if prop value is Nan', () => {
         expect( () => transforms["size/dp"].transformer({value: "a"})).toThrow();
       });
@@ -498,6 +502,10 @@ describe('common', () => {
           value: "1"
         });
         expect(value).toBe("16.00dp");
+      });
+      it('converts rem to dp using custom base font', () => {
+        var value = transforms["size/remToDp"].transformer({value: "1"}, {basePxFontSize: 14});
+        expect(value).toBe("14.00dp");
       });
       it('should throw an error if prop value is Nan', () => {
         expect( () => transforms["size/dp"].transformer({value: "a"})).toThrow();
@@ -523,8 +531,28 @@ describe('common', () => {
         });
         expect(value).toBe("16.00f");
       });
+      it('converts rem to pt using custom base font', () => {
+        var value = transforms["size/remToPt"].transformer({value: "1"}, {basePxFontSize: 14});
+        expect(value).toBe("14.00f");
+      });
       it('should throw an error if prop value is Nan', () => {
         expect( () => transforms["size/dp"].transformer({value: "a"})).toThrow();
+      });
+    });
+
+    describe('size/swift/remToCGFloat', () => {
+      it('should work', () => {
+        var value = transforms["size/swift/remToCGFloat"].transformer({
+          value: "1"
+        });
+        expect(value).toBe("CGFloat(16.00)");
+      });
+      it('converts rem to CGFloat using custom base font', () => {
+        var value = transforms["size/swift/remToCGFloat"].transformer({value: "1"}, {basePxFontSize: 14});
+        expect(value).toBe("CGFloat(14.00)");
+      });
+      it('should throw an error if prop value is Nan', () => {
+        expect( () => transforms["size/rem/remToCGFloat"].transformer({value: "a"})).toThrow();
       });
     });
 
@@ -535,8 +563,33 @@ describe('common', () => {
         });
         expect(value).toBe("16px");
       });
+      it('converts rem to px using custom base font', () => {
+        var value = transforms["size/remToPx"].transformer({value: "1"}, {basePxFontSize: 14});
+        expect(value).toBe("14px");
+      });
       it('should throw an error if prop value is Nan', () => {
         expect( () => transforms["size/dp"].transformer({value: "a"})).toThrow();
+      });
+    });
+
+    describe('size/pxToRem', () => {
+      const pxToRemTransformer = transforms["size/pxToRem"].transformer;
+
+      ['12', '12px', '12rem'].forEach((value) => {
+        it(`ignoring unit, scales "${value}" to rem`, () => {
+          expect(pxToRemTransformer({value})).toBe('0.75rem');
+        });
+      });
+      it('converts pixel to rem using custom base font', () => {
+        expect(pxToRemTransformer({value: '14px'}, {basePxFontSize: 14})).toBe('1rem');
+      });
+      ['0', '0px', '0rem'].forEach((value) => {
+          it(`zero value "${value}" is returned without a unit`, () => {
+              expect(pxToRemTransformer({value})).toBe('0');
+          });
+      });
+      it('should throw an error if prop value is Nan', () => {
+        expect( () => pxToRemTransformer({value: "a"})).toThrow();
       });
     });
 
@@ -558,6 +611,10 @@ describe('common', () => {
           value: "1"
         });
         expect(value).toBe("16.00");
+      });
+      it('converts rem to double using custom base font', () => {
+        var value = transforms["size/flutter/remToDouble"].transformer({value: "1"}, {basePxFontSize: 14});
+        expect(value).toBe("14.00");
       });
     });
 
