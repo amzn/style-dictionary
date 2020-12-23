@@ -66,15 +66,31 @@ declare namespace StyleDictionary {
   }
 
   interface Prop {
-    original: Property;
+    /** A default name of the property that is set to the key of the property. */
     name: string;
-    attributes: Attributes;
-    path: string[];
     value: string;
-    /** A string representing the absolute path of the file that defines the token. */
+    /** The object path of the property.
+     *
+     * `color: { background: { primary: { value: "#fff" } } }` will have a path of `['color', 'background', 'primary']`.
+     */
+    path: string[];
+    /**
+     * A pristine copy of the original property object.
+     *
+     * This is to make sure transforms and formats always have the unmodified version of the original property.
+     */
+    original: Property;
+    /**
+     * The file path of the file the token is defined in.
+     *
+     * This file path is derived from the source or include file path arrays defined in the configuration.
+     */
     filePath: string;
-    /** Represents if this file was defined as ‘source’ in the configuration as opposed to ‘include’ (or directly setting the ‘properties’ object). */
+    /**
+     * If the token is from a file defined in the source array as opposed to include in the [configuration](https://amzn.github.io/style-dictionary/#/config).
+     */
     isSource: boolean;
+    attributes: Attributes;
     [key: string]: any;
   }
 
