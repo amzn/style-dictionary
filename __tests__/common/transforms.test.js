@@ -480,6 +480,28 @@ describe('common', () => {
       });
     });
 
+    describe("size/object", () => {
+      it("should work", () => {
+        var value = transforms["size/object"].transformer({
+          value: "1px"
+        });
+        expect(value.original).toBe("1px");
+        expect(value.number).toBe(1);
+        expect(value.decimal).toEqual(0.01);
+        expect(value.scale).toBe(16);
+      });
+      it('should work with custom base font', () => {
+        var value = transforms["size/object"].transformer({value: "1"}, {basePxFontSize: 14});
+        expect(value.original).toBe("1");
+        expect(value.number).toBe(1);
+        expect(value.decimal).toEqual(0.01);
+        expect(value.scale).toBe(14);
+      })
+      it('should throw an error if prop value is NaN', () => {
+        expect( () => transforms["size/object"].transformer({value: "a"})).toThrow();
+      })
+    });
+
     describe('size/remToSp', () => {
       it('should work', () => {
         var value = transforms["size/remToSp"].transformer({
