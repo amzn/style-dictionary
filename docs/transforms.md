@@ -397,7 +397,7 @@ Transforms the value into a usefull object ( for React Native support )
 ### size/remToSp 
 
 
-Transforms the value from a REM size on web into a scale-independent pixel (sp) value for font sizes on Android. It WILL scale the number by a factor of 16 (common base font size on web).
+Transforms the value from a REM size on web into a scale-independent pixel (sp) value for font sizes on Android. It WILL scale the number by a factor of 16 (or the value of 'basePxFontSize' on the platform in your config).
 
 ```js
 // Matches: prop.attributes.category === 'size' && prop.attributes.type === 'font'
@@ -411,7 +411,7 @@ Transforms the value from a REM size on web into a scale-independent pixel (sp) 
 ### size/remToDp 
 
 
-Transforms the value from a REM size on web into a density-independent pixel (dp) value for font sizes on Android. It WILL scale the number by a factor of 16 (common base font size on web).
+Transforms the value from a REM size on web into a density-independent pixel (dp) value for font sizes on Android. It WILL scale the number by a factor of 16 (or the value of 'basePxFontSize' on the platform in your config).
 
 ```js
 // Matches: prop.attributes.category === 'size' && prop.attributes.type !== 'font'
@@ -453,7 +453,7 @@ Adds 'rem' to the end of the number. Does not scale the number
 ### size/remToPt 
 
 
-Scales the number by 16 (default web font size) and adds 'pt' to the end.
+Scales the number by 16 (or the value of 'basePxFontSize' on the platform in your config) and adds 'pt' to the end.
 
 ```js
 // Matches: prop.attributes.category === 'size'
@@ -467,7 +467,7 @@ Scales the number by 16 (default web font size) and adds 'pt' to the end.
 ### size/swift/remToCGFloat 
 
 
-Scales the number by 16 to get to points for Swift and initializes a CGFloat
+Scales the number by 16 (or the value of 'basePxFontSize' on the platform in your config) to get to points for Swift and initializes a CGFloat
 
 ```js
 // Matches: prop.attributes.category === 'size'
@@ -480,7 +480,7 @@ Scales the number by 16 to get to points for Swift and initializes a CGFloat
 ### size/remToPx 
 
 
-Scales the number by 16 (default web font size) and adds 'px' to the end.
+Scales the number by 16 (or the value of 'basePxFontSize' on the platform in your config) and adds 'px' to the end.
 
 ```js
 // Matches: prop.attributes.category === 'size'
@@ -695,7 +695,7 @@ Wraps the value in a double-quoted string to make a string literal.
 ### size/flutter/remToDouble 
 
 
-Scales the number by 16 to get to points for Flutter
+Scales the number by 16 (or the value of 'basePxFontSize' on the platform in your config) to get to points for Flutter
 
 ```dart
 // Matches: prop.attributes.category === 'size'
