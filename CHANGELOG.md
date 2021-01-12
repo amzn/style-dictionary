@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0-rc.2](https://github.com/amzn/style-dictionary/compare/v3.0.0-rc.1...v3.0.0-rc.2) (2021-01-12)
+
+
+### Features
+
+* **format:** adding android/resources format ([e43aafd](https://github.com/amzn/style-dictionary/commit/e43aafd0e4c5f34158ea0cdc222833b79b35ab16))
+* **transforms:** add 'px to rem' transform ([#491](https://github.com/amzn/style-dictionary/issues/491)) ([75f0ba3](https://github.com/amzn/style-dictionary/commit/75f0ba36e1211edf955c7b6bd6c58cbd9fc6524c))
+
+
+### Bug Fixes
+
+* **extend:** use given file path for token data ([#499](https://github.com/amzn/style-dictionary/issues/499)) ([0b23c9d](https://github.com/amzn/style-dictionary/commit/0b23c9d77e367b2080e4b624fcb294773b2aefcb))
+* **parsers:** fixed an error where parsers weren't running ([#511](https://github.com/amzn/style-dictionary/issues/511)) ([b0077c3](https://github.com/amzn/style-dictionary/commit/b0077c3d06caf5b7fcacd7378aab7827cdaa3961))
+* **types:** fix transform options type [#502](https://github.com/amzn/style-dictionary/issues/502) ([32787f8](https://github.com/amzn/style-dictionary/commit/32787f8a133a61f6132cef4bb88922f72951b804))
+
 ## [3.0.0-rc.1](https://github.com/amzn/style-dictionary/compare/v3.0.0-rc.0...v3.0.0-rc.1) (2020-12-04)
 
 ## [3.0.0-rc.0](https://github.com/amzn/style-dictionary/compare/v2.10.2...v3.0.0-rc.0) (2020-12-03)
