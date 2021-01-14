@@ -1,0 +1,15 @@
+{
+  "source": ["./style-dictionary/properties/**/*.json"],
+  "platforms": {
+    "rn": {
+      "transformGroup": "react-native",
+      "buildPath": "./src/style-dictionary-dist/",
+      "files": [
+        {
+          "destination": "variables.js",
+          "format": "javascript/es6"
+        }
+      ]
+    }
+  }
+}
