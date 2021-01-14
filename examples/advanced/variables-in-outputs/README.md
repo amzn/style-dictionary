@@ -21,6 +21,7 @@ The "build" command uses the `sd.config.js` file as the Style Dictionary configu
 
 The `sd.config.js` file has everything you need to see. The tokens included in this example are just enough to show these new techniques.
 
+Here is an example that shows how to get an alias's name within a custom format:
 ```javascript
 //...
 function(dictionary) {
