@@ -67,7 +67,7 @@ Call this in the root directory of your project. The only thing needed is a `con
 | --version | -v | Display the version |
 
 ### Node
-You can also use the style dictionary build system in node if you want to [extend](#extend) the functionality or use it in another build system like Grunt or Gulp.
+You can also use the style dictionary build system in node if you want to [extend](#extending) the functionality or use it in another build system like Grunt or Gulp.
 ```javascript
 const StyleDictionary = require('style-dictionary').extend('config.json');
 
