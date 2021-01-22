@@ -36,5 +36,10 @@ describe('utils', () => {
     it('should return a string', () => {
       expect(typeof convertToBase64('__tests__/__configs/test.json')).toBe('string');
     });
+
+    it('should be a valid base64 string', () => {
+      expect(convertToBase64('__tests__/__json_files/simple.json'))
+        .toEqual('ewogICJmb28iOiAiYmFyIiwKICAiYmFyIjogIntmb299Igp9');
+    });
   });
 });
