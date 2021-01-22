@@ -85,6 +85,26 @@ describe('buildFile', () => {
     expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_NAME_COLLISION_WARNINGS))).toBe(expectJSON);
   });
 
+  let destEmptyProperties = './__tests__/__output/test.emptyProperties';
+  it('should warn when a file is not created because of empty properties', () => {
+    let properties = {
+      allProperties: [{
+        name: 'someName',
+        attributes: { category: 'category1' },
+        path: ['some', 'name', 'path1'],
+        value: 'value1'
+      }]
+    };
+
+    let filter = function(prop) {
+      let { attributes } = prop;
+      return attributes.category === 'category2';
+    }
+
+    buildFile(destEmptyProperties, format, {}, properties, filter);
+    expect(helpers.fileExists('./__tests__/__output/test.emptyProperties')).toBeFalsy();
+  });
+
   it('should write to a file properly', () => {
     buildFile('test.txt', format, {buildPath: '__tests__/__output/'}, {});
     expect(helpers.fileExists('./__tests__/__output/test.txt')).toBeTruthy();
