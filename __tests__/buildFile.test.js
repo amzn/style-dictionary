@@ -97,8 +97,7 @@ describe('buildFile', () => {
     };
 
     let filter = function(prop) {
-      let { attributes } = prop;
-      return attributes.category === 'category2';
+      return prop.attributes.category === 'category2';
     }
 
     buildFile(destEmptyProperties, format, {}, properties, filter);
