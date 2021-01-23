@@ -15,7 +15,7 @@ const propertiesToCTI = {
   'text-color': { category: 'color', type: 'font' },
   'padding': {category: 'size', type: 'padding'},
   'padding-vertical': {category: 'size', type: 'padding'},
-  'padding-horziontal': {category: 'size', type: 'padding'},
+  'padding-horizontal': {category: 'size', type: 'padding'},
   'icon': {category: 'content', type: 'icon'},
   'font-size': {category: 'size', type: 'font'},
   'line-height': { category: 'size', type: 'line-height' },
