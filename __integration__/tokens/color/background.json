@@ -1,0 +1,14 @@
+{
+  "color": {
+    "background": {
+      "primary": { "value": "{color.core.neutral.0.value}", "themeable": true },
+      "secondary": { "value": "{color.core.neutral.100.value}" },
+      "tertiary": { "value": "{color.core.neutral.200.value}" },
+      "danger": { "value": "{color.core.red.0.value}" },
+      "warning": { "value": "{color.core.orange.0.value}" },
+      "success": { "value": "{color.core.green.0.value}" },
+      "info": { "value": "{color.core.blue.0.value}" },
+      "disabled": { "value": "{color.background.tertiary.value}" }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "size": {
+    "border": {
+      "radius": {
+        "large": { "value": 30 }
+      }
+    }
+  }
+}

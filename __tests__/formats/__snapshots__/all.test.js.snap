@@ -55,7 +55,6 @@ exports[`formats all should match android/integers snapshot 1`] = `
 
 exports[`formats all should match android/resources snapshot 1`] = `
 "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
-
 <!--
   Do not edit directly
   Generated on Sat, 01 Jan 2000 00:00:00 GMT

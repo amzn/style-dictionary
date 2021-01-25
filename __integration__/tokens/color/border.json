@@ -1,0 +1,9 @@
+{
+  "color": {
+    "border": {
+      "primary": { "value": "{color.core.neutral.300.value}" },
+      "secondary": {},
+      "tertiary": {}
+    }
+  }
+}

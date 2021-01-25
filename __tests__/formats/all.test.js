@@ -62,15 +62,8 @@ var dictionary = {
 describe('formats', () => {
   _.each(_.keys(formats), function(key) {
 
-    const constantDate = new Date('2000-01-01');
-    const globalDate = global.Date;
-    global.Date = function() { return constantDate };
-
     var formatter = formats[key].bind(file);
     var output = formatter(dictionary, {}, file);
-
-    // reset the global Date object
-    global.Date = globalDate;
 
     describe('all', () => {
 

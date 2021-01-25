@@ -38,7 +38,7 @@
   ],
   "scripts": {
     "lint": "eslint --fix index.js lib/**/*.js __tests__/**/*.js",
-    "test": "npm run test-types && npm run lint && jest --runInBand",
+    "test": "npm run test-types && npm run lint && jest --runInBand --silent",
     "test-types": "tsd",
     "test-watch": "npm run test-types && npm run lint && jest --runInBand --watch",
     "generate-docs": "node ./scripts/generateDocs.js",
@@ -54,9 +54,12 @@
   "jest": {
     "verbose": false,
     "roots": [
-      "__tests__"
+      "__tests__",
+      "__integration__"
     ],
+    "setupFilesAfterEnv": ["<rootDir>/__tests__/__setup.js"],
     "testPathIgnorePatterns": [
+      "/__tests__/__setup.js",
       "/__tests__/__helpers.js",
       "/__tests__/__assets/",
       "/__tests__/__configs/",

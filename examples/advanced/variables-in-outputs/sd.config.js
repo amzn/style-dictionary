@@ -40,12 +40,16 @@ module.exports = {
       buildPath: 'build/',
       files: [{
         destination: 'tokens.css',
-        useVariables: true, // new setting, if true will use variable references
-        format: 'css/variables'
+        format: 'css/variables',
+        options: {
+          keepReferences: true, // new setting, if true will use variable references
+        }
       },{
         destination: 'tokens.scss',
-        useVariables: true, // new setting, if true will use variable references
-        format: 'scss/variables'
+        format: 'scss/variables',
+        options: {
+          keepReferences: true, // new setting, if true will use variable references
+        }
       }]
     }
   }
