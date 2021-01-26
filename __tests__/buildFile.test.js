@@ -87,7 +87,7 @@ describe('buildFile', () => {
 
   let destEmptyProperties = './__tests__/__output/test.emptyProperties';
   it('should warn when a file is not created because of empty properties', () => {
-    let properties = {
+    let dictionary = {
       allProperties: [{
         name: 'someName',
         attributes: { category: 'category1' },
@@ -100,7 +100,11 @@ describe('buildFile', () => {
       return prop.attributes.category === 'category2';
     }
 
-    buildFile(destEmptyProperties, format, {}, properties, filter);
+    buildFile({
+      destination: destEmptyProperties,
+      format,
+      filter
+    }, {}, dictionary);
     expect(helpers.fileExists('./__tests__/__output/test.emptyProperties')).toBeFalsy();
   });
 
