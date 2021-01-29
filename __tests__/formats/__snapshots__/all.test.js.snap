@@ -110,7 +110,7 @@ import 'dart:ui';
 
 class  {
   ._();
-  
+
     static const color_red = #FF0000;
 }"
 `;

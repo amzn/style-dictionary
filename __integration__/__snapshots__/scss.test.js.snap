@@ -732,7 +732,7 @@ $size-padding-large: 1rem;
 $size-padding-xl: 1rem;"
 `;
 
-exports[`integration scss scss/variables with keepReferences should match snapshot 1`] = `
+exports[`integration scss scss/variables with outputReferences should match snapshot 1`] = `
 "
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT

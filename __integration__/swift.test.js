@@ -16,41 +16,51 @@ const StyleDictionary = require('../index');
 const {buildPath} = require('./_constants');
 
 describe('integration', () => {
-  describe('css', () => {
+  describe('swift', () => {
     StyleDictionary.extend({
       source: [`__integration__/tokens/**/*.json`],
       platforms: {
-        css: {
-          transformGroup: 'css',
+        flutter: {
+          transformGroup: `ios-swift`,
           buildPath,
           files: [{
-            destination: 'variables.css',
-            format: 'css/variables'
+            destination: "style_dictionary.swift",
+            format: "ios-swift/class.swift",
+            className: "StyleDictionary"
           },{
-            destination: 'variablesWithReferences.css',
-            format: 'css/variables',
+            destination: "style_dictionary_with_references.swift",
+            format: "ios-swift/class.swift",
+            className: "StyleDictionary",
             options: {
               outputReferences: true
             }
           }]
-        }
+        },
       }
     }).buildAllPlatforms();
 
-    describe('css/variables', () => {
-      const output = fs.readFileSync(`${buildPath}variables.css`, {encoding:'UTF-8'});
+    describe(`ios-swift/class.swift`, () => {
+      const output = fs.readFileSync(`${buildPath}style_dictionary.swift`, {encoding:`UTF-8`});
+
       it(`should match snapshot`, () => {
         expect(output).toMatchSnapshot();
       });
 
       describe(`with references`, () => {
-        const output = fs.readFileSync(`${buildPath}variablesWithReferences.css`, {encoding:'UTF-8'});
+        const output = fs.readFileSync(`${buildPath}style_dictionary_with_references.swift`, {encoding:`UTF-8`});
+
         it(`should match snapshot`, () => {
           expect(output).toMatchSnapshot();
         });
+
       });
 
-      // TODO: add css validator
+      // describe(`separate`, () => {
+      //   const output = fs.readFileSync(`${buildPath}style_dictionary_color.dart`);
+      //   it(`should match snapshot`, () => {
+      //     expect(output).toMatchSnapshot();
+      //   });
+      // });
     });
   });
 });

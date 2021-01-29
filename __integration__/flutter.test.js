@@ -16,42 +16,63 @@ const StyleDictionary = require('../index');
 const {buildPath} = require('./_constants');
 
 describe('integration', () => {
-  describe('android', () => {
+  describe('flutter', () => {
     StyleDictionary.extend({
       source: [`__integration__/tokens/**/*.json`],
       platforms: {
-        android: {
-          transformGroup: `android`,
+        flutter: {
+          transformGroup: `flutter`,
           buildPath,
           files: [{
-            destination: `resources.xml`,
-            format: `android/resources`
+            destination: "style_dictionary.dart",
+            format: "flutter/class.dart",
+            className: "StyleDictionary"
           },{
-            destination: `resourcesWithReferences.xml`,
-            format: `android/resources`,
+            destination: "style_dictionary_with_references.dart",
+            format: "flutter/class.dart",
+            className: "StyleDictionary",
             options: {
               outputReferences: true
             }
-          },{
-            destination: `colors.xml`,
-            format: `android/resources`,
+          }]
+        },
+        flutter_separate: {
+          transformGroup: `flutter-separate`,
+          buildPath,
+          files: [{
+            destination: "style_dictionary_color.dart",
+            format: "flutter/class.dart",
+            className: "StyleDictionaryColor",
+            type: "color",
             filter: {
-              attributes: { category: `color` }
+              attributes: {
+                category: "color"
+              }
+            }
+          },{
+            destination: "style_dictionary_sizes.dart",
+            format: "flutter/class.dart",
+            className: "StyleDictionarySize",
+            type: "float",
+            filter: {
+              attributes: {
+                category: "size"
+              }
             }
           }]
         }
       }
     }).buildAllPlatforms();
 
-    describe(`android/resources`, () => {
-      const output = fs.readFileSync(`${buildPath}resources.xml`, {encoding:'UTF-8'});
+    describe(`flutter/class.dart`, () => {
+      const output = fs.readFileSync(`${buildPath}style_dictionary.dart`, {encoding:`UTF-8`});
 
       it(`should match snapshot`, () => {
         expect(output).toMatchSnapshot();
       });
 
       describe(`with references`, () => {
-        const output = fs.readFileSync(`${buildPath}resourcesWithReferences.xml`, {encoding:'UTF-8'});
+        const output = fs.readFileSync(`${buildPath}style_dictionary_with_references.dart`, {encoding:`UTF-8`});
 
         it(`should match snapshot`, () => {
           expect(output).toMatchSnapshot();
@@ -59,13 +80,12 @@ describe('integration', () => {
 
       });
 
-      describe(`with filter`, () => {
-        const output = fs.readFileSync(`${buildPath}colors.xml`, {encoding:'UTF-8'});
-
+      describe(`separate`, () => {
+        const output = fs.readFileSync(`${buildPath}style_dictionary_color.dart`);
         it(`should match snapshot`, () => {
           expect(output).toMatchSnapshot();
         });
-      });
+      })
     });
   });
 });

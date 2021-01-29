@@ -14,7 +14,7 @@
 const fs = require('fs-extra');
 const scss = require('node-sass');
 const StyleDictionary = require('../index');
-
+const {buildPath} = require('./_constants');
 
 describe(`integration`, () => {
   describe(`scss`, () => {
@@ -23,7 +23,7 @@ describe(`integration`, () => {
       platforms: {
         css: {
           transformGroup: `scss`,
-          buildPath: `__integration__/build/`,
+          buildPath,
           files: [{
             destination: `variables.scss`,
             format: `scss/variables`
@@ -31,7 +31,7 @@ describe(`integration`, () => {
             destination: `variablesWithReferences.scss`,
             format: `scss/variables`,
             options: {
-              keepReferences: true
+              outputReferences: true
             }
           },{
             destination: `map-flat.scss`,
@@ -45,9 +45,9 @@ describe(`integration`, () => {
     }).buildAllPlatforms();
 
     describe(`scss/variables`, () => {
-      const output = fs.readFileSync('__integration__/build/variables.scss', {encoding:'UTF-8'});
+      const output = fs.readFileSync(`${buildPath}variables.scss`, {encoding:'UTF-8'});
 
-      it('should have a valid scss syntax', () => {
+      it(`should have a valid scss syntax`, () => {
         const result = scss.renderSync({
           data: output,
         });
@@ -58,9 +58,9 @@ describe(`integration`, () => {
         expect(output).toMatchSnapshot();
       });
 
-      describe('with keepReferences', () => {
-        const output = fs.readFileSync('__integration__/build/variablesWithReferences.scss', {encoding:'UTF-8'});
-        it('should have a valid scss syntax', () => {
+      describe(`with outputReferences`, () => {
+        const output = fs.readFileSync(`${buildPath}variablesWithReferences.scss`, {encoding:'UTF-8'});
+        it(`should have a valid scss syntax`, () => {
           const result = scss.renderSync({
             data: output,
           });
@@ -74,9 +74,9 @@ describe(`integration`, () => {
     });
 
     describe(`scss/map-flat`, () => {
-      const output = fs.readFileSync('__integration__/build/map-flat.scss', {encoding:'UTF-8'});
+      const output = fs.readFileSync(`${buildPath}map-flat.scss`, {encoding:'UTF-8'});
 
-      it('should have a valid scss syntax', () => {
+      it(`should have a valid scss syntax`, () => {
         const result = scss.renderSync({
           data: output,
         });
@@ -89,9 +89,9 @@ describe(`integration`, () => {
     });
 
     describe(`scss/map-deep`, () => {
-      const output = fs.readFileSync('__integration__/build/map-deep.scss', {encoding:'UTF-8'});
+      const output = fs.readFileSync(`${buildPath}map-deep.scss`, {encoding:'UTF-8'});
 
-      it('should have a valid scss syntax', () => {
+      it(`should have a valid scss syntax`, () => {
         const result = scss.renderSync({
           data: output,
         });
@@ -106,5 +106,5 @@ describe(`integration`, () => {
 });
 
 afterAll(() => {
-  fs.emptyDirSync(`__integration__/build`);
+  fs.emptyDirSync(buildPath);
 });

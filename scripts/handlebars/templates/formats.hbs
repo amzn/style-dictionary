@@ -69,6 +69,54 @@ A special file configuration is `filter`, which will filter the tokens before th
 
 The token/property that is passed to the filter function has already been [transformed](transforms.md) and has [default metadata](properties.md?id=default-property-metadata) added by Style Dictionary.
 
+### References in output files
+
+Starting with version 3.0, some formats can keep the references in the output.
+
+This is a bit hard to explain, so let's look at an example. Say you have this very basic set of design tokens:
+
+```json5
+// tokens.json
+{
+  "color": {
+    "red": { "value": "#ff0000" },
+    "danger": { "value": "{color.red.value}" },
+    "error": { "value": "{color.danger.value}" }
+  }
+}
+```
+
+```json5
+// config.json
+{
+  "source": ["tokens.json"]
+  "platforms": {
+    "css": {
+      "transformGroup": "css",
+      "files": [{
+        "destination": "variables.css",
+        "format": "css/variables",
+        "options": {
+          "outputReferences": true
+        }
+      }]
+    }
+  }
+}
+```
+
+This would be the output:
+
+```css
+:root {
+  --color-red: #ff0000;
+  --color-danger: var(--color-red);
+  --color-error: var(--color-danger);
+}
+```
+
+The css variables file keeps the references you have in your Style Dictionary! This is useful for outputting themeable and dynamic code.
+
 ### Creating formats
 
 You can create custom formats using the [`registerFormat`](api.md#registerformat) function. If you want to add configuration to your custom format, `this` is bound to the file object. Using this, you can access attributes on the file object with `this.myCustomAttribute` if the file object looks like:

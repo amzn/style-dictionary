@@ -375,9 +375,11 @@ Transforms the value into a density-independent pixel (dp) value for non-font si
 "10.0dp"
 ```
 
+
 * * *
 
 ### size/object 
+
 
 Transforms the value into a usefull object ( for React Native support )
 
@@ -385,19 +387,20 @@ Transforms the value into a usefull object ( for React Native support )
 // Matches: prop.attributes.category === 'size'
 // Returns:
 {
-  original: "10px",
-  number: 10,
-  decimal: 0.1, // 10 divided by 100
-  scale: 160, // 10 times 16
+ original: "10px",
+ number: 10,
+ decimal: 0.1, // 10 divided by 100
+ scale: 160, // 10 times 16
 }
 ```
+
 
 * * *
 
 ### size/remToSp 
 
 
-Transforms the value from a REM size on web into a scale-independent pixel (sp) value for font sizes on Android. It WILL scale the number by a factor of 16 (or the value of 'basePxFontSize' on the platform in your config).
+Transforms the value from a REM size on web into a scale-independent pixel (sp) value for font sizes on Android. It WILL scale the number by a factor of 16 (common base font size on web).
 
 ```js
 // Matches: prop.attributes.category === 'size' && prop.attributes.type === 'font'

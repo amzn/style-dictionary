@@ -42,13 +42,13 @@ module.exports = {
         destination: 'tokens.css',
         format: 'css/variables',
         options: {
-          keepReferences: true, // new setting, if true will use variable references
+          outputReferences: true, // new setting, if true will use variable references
         }
       },{
         destination: 'tokens.scss',
         format: 'scss/variables',
         options: {
-          keepReferences: true, // new setting, if true will use variable references
+          outputReferences: true, // new setting, if true will use variable references
         }
       }]
     }

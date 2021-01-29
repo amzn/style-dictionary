@@ -36,7 +36,7 @@ function propToType(prop) {
 }
 
 function propToValue(prop) {
-  if (file.options && file.options.keepReferences && dictionary.usesReference(prop.original.value)) {
+  if (file.options && file.options.outputReferences && dictionary.usesReference(prop.original.value)) {
     return `@${propToType(prop)}/${dictionary.getReference(prop.original.value).name}`;
   } else {
     return prop.value;
