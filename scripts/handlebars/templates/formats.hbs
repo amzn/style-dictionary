@@ -71,9 +71,7 @@ The token/property that is passed to the filter function has already been [trans
 
 ### References in output files
 
-Starting with version 3.0, some formats can keep the references in the output.
-
-This is a bit hard to explain, so let's look at an example. Say you have this very basic set of design tokens:
+Starting with version 3.0, some formats can keep the references in the output. This is a bit hard to explain, so let's look at an example. Say you have this very basic set of design tokens:
 
 ```json5
 // tokens.json
@@ -86,6 +84,8 @@ This is a bit hard to explain, so let's look at an example. Say you have this ve
 }
 ```
 
+With this configuration:
+
 ```json5
 // config.json
 {
@@ -97,6 +97,7 @@ This is a bit hard to explain, so let's look at an example. Say you have this ve
         "destination": "variables.css",
         "format": "css/variables",
         "options": {
+          // Look here 👇
           "outputReferences": true
         }
       }]
@@ -115,7 +116,26 @@ This would be the output:
 }
 ```
 
-The css variables file keeps the references you have in your Style Dictionary! This is useful for outputting themeable and dynamic code.
+The css variables file now keeps the references you have in your Style Dictionary! This is useful for outputting themeable and dynamic code.
+
+Without `outputReferences: true` Style Dictionary would resolve all references and the output would be:
+
+```css
+:root {
+  --color-red: #ff0000;
+  --color-danger: #ff0000;
+  --color-error: #ff0000;
+}
+```
+
+Not all formats use the `outputReferences` option because that file format might not support it (like JSON for example). The current list of formats that handle `outputReferences`:
+
+* [css/variables](#cssvariables)
+* [scss/variables](#scssvariables)
+* [less/variables](#lessvariables)
+* [android/resources](#androidresources)
+* [ios-swift/class.swift](#ios-swiftclassswift)
+* [flutter/class.dart](#flutterclassdart)
 
 ### Creating formats
 

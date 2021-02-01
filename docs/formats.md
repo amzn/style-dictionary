@@ -119,7 +119,26 @@ This would be the output:
 }
 ```
 
-The css variables file keeps the references you have in your Style Dictionary! This is useful for outputting themeable and dynamic code.
+The css variables file now keeps the references you have in your Style Dictionary! This is useful for outputting themeable and dynamic code.
+
+Without `outputReferences: true` Style Dictionary would resolve all references and the output would be:
+
+```css
+:root {
+  --color-red: #ff0000;
+  --color-danger: #ff0000;
+  --color-error: #ff0000;
+}
+```
+
+Not all formats use the `outputReferences` option because that file format might not support it (like JSON for example). The current list of formats that handle `outputReferences`:
+
+* [css/variables](#cssvariables)
+* [scss/variables](#scssvariables)
+* [less/variables](#lessvariables)
+* [android/resources](#androidresources)
+* [ios-swift/class.swift](#ios-swiftclassswift)
+* [flutter/class.dart](#flutterclassdart)
 
 ### Creating formats
 
@@ -206,7 +225,7 @@ Creates a CSS file with variable definitions based on the style dictionary
     <td>[options.showFileHeader]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not to include a comment that has the build date</p>
 </td>
     </tr><tr>
-    <td>[options.outputReferences]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to keep references (a -&gt; b -&gt; c) in the output.</p>
+    <td>[options.outputReferences]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to keep <a href="/#/formats?id=references-in-output-files">references</a> (a -&gt; b -&gt; c) in the output.</p>
 </td>
     </tr>  </tbody>
 </table>
@@ -282,7 +301,7 @@ Add `!default` to any variable by setting a `themeable: true` property in the to
     <td>[options.showFileHeader]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not to include a comment that has the build date</p>
 </td>
     </tr><tr>
-    <td>[options.outputReferences]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to keep references (a -&gt; b -&gt; c) in the output.</p>
+    <td>[options.outputReferences]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to keep <a href="/#/formats?id=references-in-output-files">references</a> (a -&gt; b -&gt; c) in the output.</p>
 </td>
     </tr>  </tbody>
 </table>
@@ -326,7 +345,7 @@ Creates a LESS file with variable definitions based on the style dictionary
     <td>[options.showFileHeader]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not to include a comment that has the build date</p>
 </td>
     </tr><tr>
-    <td>[options.outputReferences]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to keep references (a -&gt; b -&gt; c) in the output.</p>
+    <td>[options.outputReferences]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to keep <a href="/#/formats?id=references-in-output-files">references</a> (a -&gt; b -&gt; c) in the output.</p>
 </td>
     </tr>  </tbody>
 </table>
@@ -500,7 +519,7 @@ don't use Style Dictionary's built-in CTI structure.
     <td>[options.showFileHeader]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not to include a comment that has the build date</p>
 </td>
     </tr><tr>
-    <td>[options.outputReferences]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to keep references (a -&gt; b -&gt; c) in the output.</p>
+    <td>[options.outputReferences]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to keep <a href="/#/formats?id=references-in-output-files">references</a> (a -&gt; b -&gt; c) in the output.</p>
 </td>
     </tr>  </tbody>
 </table>
@@ -794,7 +813,7 @@ Creates a Swift implementation file of a class with values
     <td>[options.showFileHeader]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not to include a comment that has the build date</p>
 </td>
     </tr><tr>
-    <td>[options.outputReferences]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to keep references (a -&gt; b -&gt; c) in the output.</p>
+    <td>[options.outputReferences]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to keep <a href="/#/formats?id=references-in-output-files">references</a> (a -&gt; b -&gt; c) in the output.</p>
 </td>
     </tr>  </tbody>
 </table>
@@ -964,7 +983,7 @@ Creates a Dart implementation file of a class with values
     <td>[options.showFileHeader]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not to include a comment that has the build date</p>
 </td>
     </tr><tr>
-    <td>[options.outputReferences]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to keep references (a -&gt; b -&gt; c) in the output.</p>
+    <td>[options.outputReferences]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to keep <a href="/#/formats?id=references-in-output-files">references</a> (a -&gt; b -&gt; c) in the output.</p>
 </td>
     </tr>  </tbody>
 </table>
