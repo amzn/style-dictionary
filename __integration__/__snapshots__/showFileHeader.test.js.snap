@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`integration showFileHeader with platform options set to false should not show file header if no file options set 1`] = `
+":root {
+  --size-padding-small: 0.5rem;
+  --size-padding-medium: 1rem;
+  --size-padding-large: 1rem;
+  --size-padding-xl: 1rem;
+}
+"
+`;
+
+exports[`integration showFileHeader with platform options set to false should show file header if file options set to true 1`] = `
+"/**
+ * Do not edit directly
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ */
+
+:root {
+  --size-padding-small: 0.5rem;
+  --size-padding-medium: 1rem;
+  --size-padding-large: 1rem;
+  --size-padding-xl: 1rem;
+}
+"
+`;
+
+exports[`integration showFileHeader without platform options should not show file header if file options set to false 1`] = `
+":root {
+  --size-padding-small: 0.5rem;
+  --size-padding-medium: 1rem;
+  --size-padding-large: 1rem;
+  --size-padding-xl: 1rem;
+}
+"
+`;
+
+exports[`integration showFileHeader without platform options should show file header if no file options set 1`] = `
+"/**
+ * Do not edit directly
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ */
+
+:root {
+  --size-padding-small: 0.5rem;
+  --size-padding-medium: 1rem;
+  --size-padding-large: 1rem;
+  --size-padding-xl: 1rem;
+}
+"
+`;
