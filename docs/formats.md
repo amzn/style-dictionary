@@ -73,6 +73,73 @@ A special file configuration is `filter`, which will filter the tokens before th
 
 The token/property that is passed to the filter function has already been [transformed](transforms.md) and has [default metadata](properties.md?id=default-property-metadata) added by Style Dictionary.
 
+### References in output files
+
+Starting with version 3.0, some formats can keep the references in the output.
+
+This is a bit hard to explain, so let's look at an example. Say you have this very basic set of design tokens:
+
+```json5
+// tokens.json
+{
+  "color": {
+    "red": { "value": "#ff0000" },
+    "danger": { "value": "{color.red.value}" },
+    "error": { "value": "{color.danger.value}" }
+  }
+}
+```
+
+```json5
+// config.json
+{
+  "source": ["tokens.json"]
+  "platforms": {
+    "css": {
+      "transformGroup": "css",
+      "files": [{
+        "destination": "variables.css",
+        "format": "css/variables",
+        "options": {
+          "outputReferences": true
+        }
+      }]
+    }
+  }
+}
+```
+
+This would be the output:
+
+```css
+:root {
+  --color-red: #ff0000;
+  --color-danger: var(--color-red);
+  --color-error: var(--color-danger);
+}
+```
+
+The css variables file now keeps the references you have in your Style Dictionary! This is useful for outputting themeable and dynamic code.
+
+Without `outputReferences: true` Style Dictionary would resolve all references and the output would be:
+
+```css
+:root {
+  --color-red: #ff0000;
+  --color-danger: #ff0000;
+  --color-error: #ff0000;
+}
+```
+
+Not all formats use the `outputReferences` option because that file format might not support it (like JSON for example). The current list of formats that handle `outputReferences`:
+
+* [css/variables](#cssvariables)
+* [scss/variables](#scssvariables)
+* [less/variables](#lessvariables)
+* [android/resources](#androidresources)
+* [ios-swift/class.swift](#ios-swiftclassswift)
+* [flutter/class.dart](#flutterclassdart)
+
 ### Creating formats
 
 You can create custom formats using the [`registerFormat`](api.md#registerformat) function. If you want to add configuration to your custom format, `this` is bound to the file object. Using this, you can access attributes on the file object with `this.myCustomAttribute` if the file object looks like:
@@ -145,6 +212,24 @@ You created a format and think it should be included? [Send us a PR](https://git
 
 Creates a CSS file with variable definitions based on the style dictionary
 
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Default</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>options</td><td><code>Object</code></td><td></td><td></td>
+    </tr><tr>
+    <td>[options.showFileHeader]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not to include a comment that has the build date</p>
+</td>
+    </tr><tr>
+    <td>[options.outputReferences]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to keep <a href="/#/formats?id=references-in-output-files">references</a> (a -&gt; b -&gt; c) in the output.</p>
+</td>
+    </tr>  </tbody>
+</table>
+
 **Example**  
 ```css
 :root {
@@ -203,6 +288,24 @@ Creates a SCSS file with variable definitions based on the style dictionary.
 
 Add `!default` to any variable by setting a `themeable: true` property in the token's definition.
 
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Default</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>options</td><td><code>Object</code></td><td></td><td></td>
+    </tr><tr>
+    <td>[options.showFileHeader]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not to include a comment that has the build date</p>
+</td>
+    </tr><tr>
+    <td>[options.outputReferences]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to keep <a href="/#/formats?id=references-in-output-files">references</a> (a -&gt; b -&gt; c) in the output.</p>
+</td>
+    </tr>  </tbody>
+</table>
+
 **Example**  
 ```scss
 $color-background-base: #f0f0f0;
@@ -228,6 +331,24 @@ $content-icon-email: '\E001';
 
 
 Creates a LESS file with variable definitions based on the style dictionary
+
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Default</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>options</td><td><code>Object</code></td><td></td><td></td>
+    </tr><tr>
+    <td>[options.showFileHeader]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not to include a comment that has the build date</p>
+</td>
+    </tr><tr>
+    <td>[options.outputReferences]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to keep <a href="/#/formats?id=references-in-output-files">references</a> (a -&gt; b -&gt; c) in the output.</p>
+</td>
+    </tr>  </tbody>
+</table>
 
 **Example**  
 ```less
@@ -384,6 +505,24 @@ the category (color => color, size => dimen, etc.). However if you want to
 force a particular resource type you can provide a 'resourceType' attribute
 on the file configuration. You can also provide a 'resourceMap' if you
 don't use Style Dictionary's built-in CTI structure.
+
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Default</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>options</td><td><code>Object</code></td><td></td><td></td>
+    </tr><tr>
+    <td>[options.showFileHeader]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not to include a comment that has the build date</p>
+</td>
+    </tr><tr>
+    <td>[options.outputReferences]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to keep <a href="/#/formats?id=references-in-output-files">references</a> (a -&gt; b -&gt; c) in the output.</p>
+</td>
+    </tr>  </tbody>
+</table>
 
 **Example**  
 ```xml
@@ -661,10 +800,30 @@ Creates an Objective-C implementation file of strings
 
 Creates a Swift implementation file of a class with values
 
-**Todo**
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Default</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>options</td><td><code>Object</code></td><td></td><td></td>
+    </tr><tr>
+    <td>[options.showFileHeader]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not to include a comment that has the build date</p>
+</td>
+    </tr><tr>
+    <td>[options.outputReferences]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to keep <a href="/#/formats?id=references-in-output-files">references</a> (a -&gt; b -&gt; c) in the output.</p>
+</td>
+    </tr>  </tbody>
+</table>
 
-- Add example and usage
-
+**Example**  
+```swift
+public class StyleDictionary {
+  public static let colorBackgroundDanger = UIColor(red: 1.000, green: 0.918, blue: 0.914, alpha:1)
+}
+```
 
 * * *
 
@@ -810,6 +969,24 @@ the sketchpalette plugin. To use this you should use the
 
 
 Creates a Dart implementation file of a class with values
+
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Default</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>options</td><td><code>Object</code></td><td></td><td></td>
+    </tr><tr>
+    <td>[options.showFileHeader]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not to include a comment that has the build date</p>
+</td>
+    </tr><tr>
+    <td>[options.outputReferences]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to keep <a href="/#/formats?id=references-in-output-files">references</a> (a -&gt; b -&gt; c) in the output.</p>
+</td>
+    </tr>  </tbody>
+</table>
 
 **Example**  
 ```dart

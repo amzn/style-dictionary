@@ -14,9 +14,9 @@
 // express or implied. See the License for the specific language governing
 // permissions and limitations under the License.
 
-var resourceType = resourceType || null;
+var resourceType = file.resourceType || null;
 
-var resourceMap = resourceMap || {
+var resourceMap = file.resourceMap || {
   size: 'dimen',
   color: 'color',
   string: 'string',
@@ -33,10 +33,18 @@ function propToType(prop) {
     return resourceMap[prop.attributes.category];
   }
   return 'string';
-}%>
-<%
+}
+
+function propToValue(prop) {
+  if (file.options && file.options.outputReferences && dictionary.usesReference(prop.original.value)) {
+    return `@${propToType(prop)}/${dictionary.getReference(prop.original.value).name}`;
+  } else {
+    return prop.value;
+  }
+}
+
   // for backward compatibility we need to have the user explicitly hide it
-  var showFileHeader = (this.options && this.options.hasOwnProperty('showFileHeader')) ? this.options.showFileHeader : true;
+  var showFileHeader = (file.options && file.options.hasOwnProperty('showFileHeader')) ? file.options.showFileHeader : true;
   if(showFileHeader) {
     print("<!--\n");
     print("  Do not edit directly\n");
@@ -45,7 +53,7 @@ function propToType(prop) {
   }
 %>
 <resources>
-  <% allProperties.forEach(function(prop) {
-  %><<%= propToType(prop) %> name="<%= prop.name %>"><%= prop.value %></<%= propToType(prop) %>><% if (prop.comment) { %><!-- <%= prop.comment %> --><% } %>
+  <% dictionary.allProperties.forEach(function(prop) {
+  %><<%= propToType(prop) %> name="<%= prop.name %>"><%= propToValue(prop) %></<%= propToType(prop) %>><% if (prop.comment) { %><!-- <%= prop.comment %> --><% } %>
   <% }); %>
 </resources>

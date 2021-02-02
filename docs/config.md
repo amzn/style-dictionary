@@ -46,12 +46,14 @@ You can find out more about creating configurations in JS in our documentation a
 | platform.transforms | Array[String] (optional) | An array of [transforms](transforms.md) to be performed on the style properties object. These will transform the properties in a non-destructive way, allowing each platform to transform the properties. Transforms to apply sequentially to all properties. Can be a built-in one or you can create your own. |
 | platform.transformGroup | String (optional) | A string that maps to an array of transforms. This makes it easier to reference transforms by grouping them together. You must either define this or [transforms](transforms.md). |
 | platform.buildPath | String (optional) | Base path to build the files, must end with a trailing slash. |
+| platform.options | Object (optional) | Options that apply to all files in the platform, for example `outputReferences` and `showFileHeader`
 | platform.files | Array (optional) | Files to be generated for this platform. |
 | platform.file.destination | String (optional) | Location to build the file, will be appended to the buildPath. |
 | platform.file.format | String (optional) | [Format](formats.md) used to generate the file. Can be a built-in one or you can create your own via [registerFormat](api.md#registerformat). |
 | platform.file.filter | String/Function/Object (optional) | A function, string or object used to filter the properties that will be included in the file. If a function is provided, each property will be passed to the function and the result (true or false) will determine whether the property is included. If an object is provided, each property will be matched against the object using a partial deep comparison. If a match is found, the property is included. If a string is passed, is considered a custom filter registered via [registerFilter](api.md#registerfilter) |
-| platform.file.options | Object (optional) | A set of extra options associated with the file. Only includes 'showFileHeader' at this time. |
+| platform.file.options | Object (optional) | A set of extra options associated with the file. Includes `showFileHeader` and `outputReferences`. |
 | platform.file.options.showFileHeader | Boolean | If the generated file should have a "Do not edit + Timestamp" header (where the format supports it). By default is "true". |
+| platform.file.options.outputReferences | Boolean | If the file should keep token [references](formts.md#references-in-output-files). By default this is "false".
 | platform.actions | Array[String] (optional) | [Actions](actions.md) to be performed after the files are built for that platform. Actions can be any arbitrary code you want to run like copying files, generating assets, etc. You can use pre-defined actions or create custom actions. |
 
 ----

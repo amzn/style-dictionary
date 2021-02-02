@@ -216,12 +216,15 @@ This is to be used if you want to have separate files per category and you don't
 
 * * *
 
-### react-native
+### react-native 
+
 
 Transforms:
 
 [name/cti/camel](transforms.md#namecticamel)
-[color/css](transforms.md#colorcss)
 [size/object](transforms.md#sizeobject)
+[color/css](transforms.md#colorcss)
+
 
 * * *
+

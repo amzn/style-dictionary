@@ -209,10 +209,6 @@ const file = {
 describe('formats', () => {
 
   describe(`android/resources`, () => {
-    // mock the Date.now() call to a fixed value
-    const constantDate = new Date('2000-01-01');
-    const globalDate = global.Date;
-    global.Date = function() { return constantDate };
 
     it('should match default snapshot', () => {
       expect(format(dictionary, {}, file)).toMatchSnapshot();

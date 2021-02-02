@@ -14,14 +14,22 @@
 // permissions and limitations under the License.
 %>
 //
-// <%= this.destination %>
+// <%= file.destination %>
 //
 <%
     // for backward compatibility we need to have the user explicitly hide it
-    var showFileHeader = (this.options && this.options.hasOwnProperty('showFileHeader')) ? this.options.showFileHeader : true;
+    var showFileHeader = (file.options && file.options.hasOwnProperty('showFileHeader')) ? file.options.showFileHeader : true;
     if(showFileHeader) {
         print("// Do not edit directly\n");
         print("// Generated on " + new Date().toUTCString());
+    }
+
+    function propToValue(prop) {
+      if (file.options && file.options.outputReferences && dictionary.usesReference(prop.original.value)) {
+        return dictionary.getReference(prop.original.value).name;
+      } else {
+        return prop.value;
+      }
     }
 %>
 //
@@ -29,11 +37,11 @@
   // Filter to only those props wanted based on the filter, then sort
   // them by category to keep like props together, then by name
   // to make them easier to find alphabetically.
-  var props = _.sortBy(allProperties, item => item.attributes.category + item.name);
+  var props = _.sortBy(dictionary.allProperties, item => item.attributes.category + item.name);
 %>
 
 import UIKit
 
-public class <%= this.className %> {
-    <%= props.map(function(prop) { return 'public static let ' + prop.name + ' = ' + prop.value; }).join('\n    ') %>
+public class <%= file.className %> {
+    <%= props.map(function(prop) { return 'public static let ' + prop.name + ' = ' + propToValue(prop); }).join('\n    ') %>
 }
