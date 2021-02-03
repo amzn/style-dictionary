@@ -18,7 +18,12 @@
   ],
   "rules": {
     "no-console": 0,
-    "no-unused-vars": 1,
+    "no-unused-vars": [
+      "warn",
+      {
+        "args": "none"
+      }
+    ],
     "comma-dangle": 0,
     "no-prototype-builtins": 0,
     "jest/valid-title": 0
