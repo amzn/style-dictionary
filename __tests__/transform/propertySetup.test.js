@@ -88,5 +88,15 @@ describe('transform', () => {
       expect(test).toHaveProperty('name', 'white');
     });
 
+    it('should handle objects', () => {
+      const test = propertySetup({
+        value: {
+          h: 20, s: 50, l: 50
+        }
+      }, 'red', ['color','red']);
+      expect(test).toHaveProperty('value.h', 20);
+      expect(test).toHaveProperty('original.value.h', 20);
+    })
+
   });
 });

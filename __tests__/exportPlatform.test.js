@@ -100,6 +100,32 @@ describe('exportPlatform', () => {
     expect(dictionary.color.font.link.original.value).toEqual(properties.color.font.link.value);
   });
 
+  it('should not mutate original value if value is an object', () => {
+    const dictionary = StyleDictionary.extend({
+      properties: {
+        color: {
+          red: {
+            value: {
+              h: "{hue.red}",
+              s: 50,
+              l: 50
+            }
+          }
+        },
+        hue: {
+          red: 20
+        }
+      },
+      platforms: {
+        web: {
+          transformGroup: 'web'
+        }
+      }
+    }).exportPlatform('web');
+    expect(dictionary.color.red.original.value.h).toEqual("{hue.red}");
+    expect(dictionary.color.red.value.h).toEqual(20);
+  });
+
   describe('reference warnings', () => {
     const errorMessage = `Problems were found when trying to resolve property references`;
     const platforms = {
