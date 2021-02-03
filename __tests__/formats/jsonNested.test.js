@@ -11,33 +11,34 @@
  * and limitations under the License.
  */
 
-var formats = require('../../lib/common/formats');
-var fs = require('fs-extra');
-var helpers = require('../__helpers');
+const formats = require('../../lib/common/formats');
+const fs = require('fs-extra');
+const helpers = require('../__helpers');
+const createDictionary = require('../../lib/utils/createDictionary');
+const createFormatArgs = require('../../lib/utils/createFormatArgs');
 
-var file = {
+const file = {
   destination: 'output/',
   format: 'json/nested',
 };
 
-var dictionary = {
-  properties: {
-    color: {
-      base: {
-        comment: 'This is a comment',
-        metadata: [1,2,3],
-        red: {
-          primary: { value: '#611D1C' },
-          secondary: {
-            inverse: { value: '#000000' },
-          },
+const properties = {
+  color: {
+    base: {
+      comment: 'This is a comment',
+      metadata: [1,2,3],
+      red: {
+        primary: { value: '#611D1C' },
+        secondary: {
+          inverse: { value: '#000000' },
         },
       },
     },
   },
 };
 
-var formatter = formats['json/nested'].bind(file);
+const formatter = formats['json/nested'].bind(file);
+const dictionary = createDictionary({ properties });
 
 describe('formats', function() {
   describe('json/nested', function() {
@@ -50,8 +51,12 @@ describe('formats', function() {
     });
 
     it('should be a valid JSON file', function() {
-      fs.writeFileSync('./__tests__/__output/json-nested.json', formatter(dictionary, {}, file));
-      var test = require('../__output/json-nested.json');
+      fs.writeFileSync('./__tests__/__output/json-nested.json', formatter(createFormatArgs({
+        dictionary,
+        file,
+        platform: {}
+      }), {}, file));
+      const test = require('../__output/json-nested.json');
       expect(test.color.base.red.primary)
         .toEqual(dictionary.properties.color.base.red.primary.value);
       expect(test.color.base.red.secondary.inverse)
@@ -62,8 +67,12 @@ describe('formats', function() {
       // non-token data is anything in the dictionary object that is not a token object
       // i.e. anything in the rest of the object that doesn't have a 'value'
 
-      fs.writeFileSync('./__tests__/__output/json-nested.json', formatter(dictionary));
-      var test = require('../__output/json-nested.json');
+      fs.writeFileSync('./__tests__/__output/json-nested.json', formatter(createFormatArgs({
+        dictionary,
+        file,
+        platform: {}
+      }), {}, file));
+      const test = require('../__output/json-nested.json');
       expect(test.color.base.comment)
         .toEqual(dictionary.properties.color.base.comment);
       expect(test.color.base.metadata)

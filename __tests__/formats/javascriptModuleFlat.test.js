@@ -11,36 +11,38 @@
  * and limitations under the License.
  */
 
-var fs = require('fs-extra');
-var helpers = require('../__helpers');
-var formats = require('../../lib/common/formats');
+const fs = require('fs-extra');
+const helpers = require('../__helpers');
+const formats = require('../../lib/common/formats');
+const createDictionary = require('../../lib/utils/createDictionary');
+const createFormatArgs = require('../../lib/utils/createFormatArgs');
 
-var file = {
+const file = {
   "destination": "__output/",
   "format": "javascript/module-flat",
 };
-
-var dictionary = {
-  "allProperties": [{
-    "name": "ColorRed",
-    "value": "#EF5350",
-    "original": {
-      "value": "#EF5350"
-    },
-    "attributes": {
-      "category": "color",
-      "type": "base",
-      "item": "red"
-    },
-    "path": [
-      "color",
-      "base",
-      "red"
-    ]
-  }]
+const properties = {
+  color: {
+    red: {
+      value: "#EF5350",
+      name: "ColorRed",
+      original: {
+        value: "#EF5350"
+      },
+      attributes: {
+        category: "color",
+        type: "red"
+      },
+      path: [
+        "color",
+        "red"
+      ]
+    }
+  }
 };
 
-var formatter = formats['javascript/module-flat'].bind(file);
+const formatter = formats['javascript/module-flat'].bind(file);
+const dictionary = createDictionary({ properties });
 
 describe('formats', () => {
   describe('javascript/module-flat', () => {
@@ -54,8 +56,12 @@ describe('formats', () => {
     });
 
     it('should be a valid JS file', () => {
-      fs.writeFileSync('./__tests__/__output/output.js', formatter(dictionary) );
-      var test = require('../__output/output.js');
+      fs.writeFileSync('./__tests__/__output/output.js', formatter(createFormatArgs({
+        dictionary,
+        file: {},
+        platform: {}
+      }), {}, {}) );
+      const test = require('../__output/output.js');
       expect(test.ColorRed).toEqual(dictionary.allProperties[0].value);
     });
 

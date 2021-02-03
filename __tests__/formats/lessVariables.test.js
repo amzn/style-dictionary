@@ -13,6 +13,8 @@
 
 var formats = require('../../lib/common/formats');
 var less = require('less');
+const createDictionary = require('../../lib/utils/createDictionary');
+const createFormatArgs = require('../../lib/utils/createFormatArgs');
 
 var file = {
   "destination": "__output/",
@@ -20,38 +22,49 @@ var file = {
   "name": "foo"
 };
 
-var propertyName = "color-base-red-400";
-var propertyValue = "#EF5350";
+const propertyName = "color-base-red-400";
+const propertyValue = "#EF5350";
 
-var dictionary = {
-  "allProperties": [{
-    "name": propertyName,
-    "value": propertyValue,
-    "original": {
-      "value": propertyValue
-    },
-    "attributes": {
-      "category": "color",
-      "type": "base",
-      "item": "red",
-      "subitem": "400"
-    },
-    "path": [
-      "color",
-      "base",
-      "red",
-      "400"
-    ]
-  }]
+const properties = {
+  color: {
+    base: {
+      red: {
+        400: {
+          "name": propertyName,
+          "value": propertyValue,
+          "original": {
+            "value": propertyValue
+          },
+          "attributes": {
+            "category": "color",
+            "type": "base",
+            "item": "red",
+            "subitem": "400"
+          },
+          "path": [
+            "color",
+            "base",
+            "red",
+            "400"
+          ]
+        }
+      }
+    }
+  }
 };
 
-var formatter = formats['less/variables'].bind(file);
+const formatter = formats['less/variables'].bind(file);
+const dictionary = createDictionary({ properties });
 
 describe('formats', () => {
   describe('less/variables', () => {
 
     it('should have a valid less syntax', () => {
-      return less.render(formatter(dictionary, {}, file))
+      return less.render(formatter(createFormatArgs({
+        dictionary,
+        file,
+        platform: {}
+      }), {}, file))
         .then(function(output) {
           expect(output).toBeDefined();
         })

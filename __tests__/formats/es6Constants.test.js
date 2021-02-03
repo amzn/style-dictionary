@@ -10,11 +10,13 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-var fs = require('fs-extra');
-var helpers = require('../__helpers');
-var formats = require('../../lib/common/formats');
+const fs = require('fs-extra');
+const helpers = require('../__helpers');
+const formats = require('../../lib/common/formats');
+const createDictionary = require('../../lib/utils/createDictionary');
+const createFormatArgs = require('../../lib/utils/createFormatArgs');
 
-var file = {
+const file = {
   "destination": "__output/",
   "format": "javascript/es6",
   "filter": {
@@ -24,29 +26,32 @@ var file = {
   }
 };
 
-var dictionary = {
-  "allProperties": [{
-    "name": "red",
-    "value": "#EF5350",
-    "original": {
-      "value": "#EF5350"
-    },
-    "attributes": {
-      "category": "color",
-      "type": "base",
-      "item": "red",
-      "subitem": "400"
-    },
-    "path": [
-      "color",
-      "base",
-      "red",
-      "400"
-    ]
-  }]
+const properties = {
+  color: {
+    red: {
+      "name": "red",
+      "value": "#EF5350",
+      "original": {
+        "value": "#EF5350"
+      },
+      "attributes": {
+        "category": "color",
+        "type": "base",
+        "item": "red",
+        "subitem": "400"
+      },
+      "path": [
+        "color",
+        "base",
+        "red",
+        "400"
+      ]
+    }
+  }
 };
 
-var formatter = formats['javascript/es6'].bind(file);
+const formatter = formats['javascript/es6'].bind(file);
+const dictionary = createDictionary({ properties });
 
 describe('formats', () => {
   describe('javascript/es6', () => {
@@ -59,8 +64,12 @@ describe('formats', () => {
     });
 
     it('should be a valid JS file', () => {
-      fs.writeFileSync('./__tests__/__output/output.js', formatter(dictionary, {}, file) );
-      var test = require('../__output/output.js');
+      fs.writeFileSync('./__tests__/__output/output.js', formatter(createFormatArgs({
+        dictionary,
+        file,
+        platform: {}
+      }), {}, file) );
+      const test = require('../__output/output.js');
       expect(test.red).toEqual(dictionary.allProperties[0].value);
     });
   });
