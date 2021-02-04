@@ -167,7 +167,7 @@ declare namespace StyleDictionary {
     allProperties: Prop[];
     options: Config;
 
-    transforms: Transforms;
+    transform: Transforms;
     transformGroup: TransformGroups;
     format: Formats;
     action: Actions;
