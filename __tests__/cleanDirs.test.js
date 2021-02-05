@@ -70,4 +70,14 @@ describe('cleanDirs', () => {
     expect(helpers.dirDoesNotExist('./__tests__/__output/extradir1/extradir2')).toBeTruthy();
     expect(helpers.dirDoesNotExist('./__tests__/__output/extradir1')).toBeTruthy();
   });
+
+  it('should throw if buildPath does not end in a trailing slash', () => {
+    expect(
+      function() {
+        cleanDirs( {}, {
+          buildPath: "foo"
+        })
+      }
+    ).toThrow('Build path must end in a trailing slash or you will get weird file names.')
+  })
 });
