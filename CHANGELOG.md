@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0-rc.3](https://github.com/amzn/style-dictionary/compare/v3.0.0-rc.2...v3.0.0-rc.3) (2021-02-06)
+
+
+### Features
+
+* **build-file:** do not generate file if properties is empty ([#494](https://github.com/amzn/style-dictionary/issues/494)) ([8945c46](https://github.com/amzn/style-dictionary/commit/8945c46f26a08ff6ffac3a5aa0e84a0f330efdb4))
+* **format:** output references ([#504](https://github.com/amzn/style-dictionary/issues/504)) ([7e7889a](https://github.com/amzn/style-dictionary/commit/7e7889a41c79c58a04297762a31550c9bd7c2ee0))
+* **format:** use named parameters in formatter functions ([#533](https://github.com/amzn/style-dictionary/issues/533)) ([32bd40d](https://github.com/amzn/style-dictionary/commit/32bd40d3a94dd3be49ea795e3dbcc70e149bd6eb))
+* react-native support ([#512](https://github.com/amzn/style-dictionary/issues/512)) ([bd61cd2](https://github.com/amzn/style-dictionary/commit/bd61cd294afccd5299a7103fd2ea6177203e9994))
+
+
+### Bug Fixes
+
+* **examples:** little typo ([#518](https://github.com/amzn/style-dictionary/issues/518)) ([33271b6](https://github.com/amzn/style-dictionary/commit/33271b62b2a0c100a2be8c08f7cd89815e287327))
+* **export platform:** fixing infinite loop when there are reference errors ([#531](https://github.com/amzn/style-dictionary/issues/531)) ([6078c80](https://github.com/amzn/style-dictionary/commit/6078c8041286589eef7515945f771240bf73c8ef))
+* **property setup:** original property being mutated if the value is an object ([#534](https://github.com/amzn/style-dictionary/issues/534)) ([0b13ae2](https://github.com/amzn/style-dictionary/commit/0b13ae212023ba003ab71cc30eadb20ad10ebc0c))
+* **types:** add transitive to value transform type ([#536](https://github.com/amzn/style-dictionary/issues/536)) ([695eed6](https://github.com/amzn/style-dictionary/commit/695eed60f9f56c30542bbec8d0c1622a6a6959df))
+* **types:** Change transforms to transform in Core ([#530](https://github.com/amzn/style-dictionary/issues/530)) ([40a2601](https://github.com/amzn/style-dictionary/commit/40a2601724ed947aa141ff53e874c14c317992df))
+
 ## [3.0.0-rc.2](https://github.com/amzn/style-dictionary/compare/v3.0.0-rc.1...v3.0.0-rc.2) (2021-01-12)
 
 

@@ -202,8 +202,6 @@ StyleDictionary.registerFormat({
 * * *
 
 
-It is recommended for any configuration needed for your custom format to use the `options` object. Style Dictionary will merge platform and file options so that in your Style Dictionary configuration you can specify options at a platform or file level.
-
 To use your custom format, you call it by name in the file configuration object:
 
 ```json
@@ -226,6 +224,8 @@ To use your custom format, you call it by name in the file configuration object:
   }
 }
 ```
+
+It is recommended for any configuration needed for your custom format to use the `options` object. Style Dictionary will merge platform and file options so that in your Style Dictionary configuration you can specify options at a platform or file level. In the configuration above, the `options` object passed to the formatter would have `showFileHeader: false`.
 
 <div class="alert">
 Note: to support legacy ways of defining custom formats, <code>this</code> in the formatter function is bound to the file object and when Style Dictionary calls the formatter function it passes 3 arguments: dictionary, platform, and file. Starting in 3.0 all data the formatter needs is in the first argument as shown above to make it easier to grab the arguments by name rather than by position. We recommend not using <code>this</code> or the positional arguments in your custom format.

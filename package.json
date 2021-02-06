@@ -1,6 +1,6 @@
 {
   "name": "style-dictionary",
-  "version": "3.0.0-rc.2",
+  "version": "3.0.0-rc.3",
   "description": "Style once, use everywhere. A build system for creating cross-platform styles.",
   "keywords": [
     "style dictionary",
@@ -64,7 +64,9 @@
       "__tests__",
       "__integration__"
     ],
-    "setupFilesAfterEnv": ["<rootDir>/__tests__/__setup.js"],
+    "setupFilesAfterEnv": [
+      "<rootDir>/__tests__/__setup.js"
+    ],
     "testPathIgnorePatterns": [
       "/__tests__/__setup.js",
       "/__tests__/__helpers.js",
