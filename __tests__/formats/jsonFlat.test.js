@@ -11,36 +11,18 @@
  * and limitations under the License.
  */
 
-var formats = require('../../lib/common/formats');
-var fs = require('fs-extra');
-var helpers = require('../__helpers');
+const formats = require('../../lib/common/formats');
+const fs = require('fs-extra');
+const helpers = require('../__helpers');
+const { colorDictionary } = require('./__constants');
+const createFormatArgs = require('../../lib/utils/createFormatArgs');
 
-var file = {
+const file = {
   "destination": "__output/",
   "format": "json/flat"
 };
 
-var dictionary = {
-  "allProperties": [{
-    "name": "color-base-red",
-    "value": "#EF5350",
-    "original": {
-      "value": "#EF5350"
-    },
-    "attributes": {
-      "category": "color",
-      "type": "base",
-      "item": "red"
-    },
-    "path": [
-      "color",
-      "base",
-      "red"
-    ]
-  }]
-};
-
-var formatter = formats['json/flat'].bind(file);
+const formatter = formats['json/flat'].bind(file);
 
 describe('formats', () => {
   describe('json/flat', () => {
@@ -54,9 +36,13 @@ describe('formats', () => {
     });
 
     it('should be a valid JSON file', () => {
-      fs.writeFileSync('./__tests__/__output/output.flat.json', formatter(dictionary, {}, file) );
-      var test = require('../__output/output.flat.json');
-      expect(test['color-base-red']).toEqual(dictionary.allProperties[0].value);
+      fs.writeFileSync('./__tests__/__output/output.flat.json', formatter(createFormatArgs({
+        dictionary: colorDictionary,
+        file,
+        platform: {}
+      }), {}, file) );
+      const test = require('../__output/output.flat.json');
+      expect(test['color-base-red-400']).toEqual(colorDictionary.allProperties[0].value);
     });
   });
 

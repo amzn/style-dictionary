@@ -72,7 +72,8 @@
       "/__tests__/__configs/",
       "/__tests__/__json_files/",
       "/__tests__/__properties/",
-      "/__tests__/__output/"
+      "/__tests__/__output/",
+      "/__tests__/formats/__constants.js"
     ],
     "transform": {
       "^.+\\.json5$": "json5-jest",

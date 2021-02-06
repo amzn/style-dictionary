@@ -219,13 +219,13 @@ Add a custom format to the style dictionary
 | --- | --- | --- |
 | format | <code>Object</code> |  |
 | format.name | <code>String</code> | Name of the format to be referenced in your config.json |
-| format.formatter | <code>function</code> | Function to perform the format. Takes 2 arguments, `dictionary` and `config` Must return a string. Function is bound to its file object in the `platform.files` array. |
+| format.formatter | <code>function</code> | Function to perform the format. Takes a single argument. See [creating custom formats](formats.md#creating-formats) Must return a string, which is then written to a file. |
 
 **Example**  
 ```js
 StyleDictionary.registerFormat({
   name: 'json',
-  formatter: function(dictionary, config) {
+  formatter: function({dictionary, platform, options, file}) {
     return JSON.stringify(dictionary.properties, null, 2);
   }
 })

@@ -75,9 +75,7 @@ The token/property that is passed to the filter function has already been [trans
 
 ### References in output files
 
-Starting with version 3.0, some formats can keep the references in the output.
-
-This is a bit hard to explain, so let's look at an example. Say you have this very basic set of design tokens:
+Starting with version 3.0, some formats can keep the references in the output. This is a bit hard to explain, so let's look at an example. Say you have this very basic set of design tokens:
 
 ```json5
 // tokens.json
@@ -90,6 +88,8 @@ This is a bit hard to explain, so let's look at an example. Say you have this ve
 }
 ```
 
+With this configuration:
+
 ```json5
 // config.json
 {
@@ -101,6 +101,7 @@ This is a bit hard to explain, so let's look at an example. Say you have this ve
         "destination": "variables.css",
         "format": "css/variables",
         "options": {
+          // Look here 👇
           "outputReferences": true
         }
       }]
@@ -140,18 +141,122 @@ Not all formats use the `outputReferences` option because that file format might
 * [ios-swift/class.swift](#ios-swiftclassswift)
 * [flutter/class.dart](#flutterclassdart)
 
+You can create custom formats that output references as well. See the [Custom format with output references](#custom-format-with-output-references) section.
+
 ### Creating formats
 
-You can create custom formats using the [`registerFormat`](api.md#registerformat) function. If you want to add configuration to your custom format, `this` is bound to the file object. Using this, you can access attributes on the file object with `this.myCustomAttribute` if the file object looks like:
+You can create custom formats using the [`registerFormat`](api.md#registerformat) function or by directly including them in your [configuration](config.md). A format has a name and a formatter function, which takes an object as the argument and should return a string which is then written to a file.
+
+### formatter 
+> format.formatter(args) ⇒ <code>String</code>
+
+The formatter function that is called when Style Dictionary builds files.
+
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>args</td><td><code>Object</code></td><td><p>A single argument to support named parameters and destructuring.</p>
+</td>
+    </tr><tr>
+    <td>args.dictionary</td><td><code>Object</code></td><td><p>The transformed and resolved dictionary object</p>
+</td>
+    </tr><tr>
+    <td>args.dictionary.properties</td><td><code>Object</code></td><td><p>Object structure of the tokens/properties that has been transformed and references resolved.</p>
+</td>
+    </tr><tr>
+    <td>args.dictionary.allProperties</td><td><code>Array</code></td><td><p>Flattened array of all the tokens/properties. This makes it easy to output a list, like a list of SCSS variables.</p>
+</td>
+    </tr><tr>
+    <td>args.dictionary.usesReference</td><td><code>function</code></td><td><p>Use this function to see if a token&#39;s value uses a reference. This is the same function style dictionary uses internally to detect a reference.</p>
+</td>
+    </tr><tr>
+    <td>args.dictionary.getReference</td><td><code>function</code></td><td><p>Use this function to get the token/property that it references. You can use this to output a reference in your custom format. For example: <code>dictionary.getReference(token.original.value) // returns the referenced token object</code></p>
+</td>
+    </tr><tr>
+    <td>args.platform</td><td><code>Object</code></td><td><p>The platform configuration this format is being called in.</p>
+</td>
+    </tr><tr>
+    <td>args.file</td><td><code>Object</code></td><td><p>The file configuration this format is being called in.</p>
+</td>
+    </tr><tr>
+    <td>args.options</td><td><code>Object</code></td><td><p>Merged options object that combines platform level configuration and file level configuration. File options take precedence.</p>
+</td>
+    </tr>  </tbody>
+</table>
+
+**Example**  
+```js
+StyleDictionary.registerFormat({
+  name: 'myCustomFormat',
+  formatter: function({dictionary, platform, options, file}) {
+    return JSON.stringify(dictionary.properties, null, 2);
+  }
+})
+```
+
+* * *
+
+
+It is recommended for any configuration needed for your custom format to use the `options` object. Style Dictionary will merge platform and file options so that in your Style Dictionary configuration you can specify options at a platform or file level.
+
+To use your custom format, you call it by name in the file configuration object:
 
 ```json
 {
-  "destination": "destination",
-  "format": "myCustomFormat",
-  "myCustomAttribute": "Hello world"
+  "source": ["tokens/**/*.json"],
+  "platforms": {
+    "css": {
+      "options": {
+        "showFileHeader": true
+      },
+      "transformGroup": "css",
+      "files": [{
+        "destination": "destination",
+        "format": "myCustomFormat",
+        "options": {
+          "showFileHeader": false
+        }
+      }]
+    }
+  }
 }
 ```
 
+<div class="alert">
+Note: to support legacy ways of defining custom formats, <code>this</code> in the formatter function is bound to the file object and when Style Dictionary calls the formatter function it passes 3 arguments: dictionary, platform, and file. Starting in 3.0 all data the formatter needs is in the first argument as shown above to make it easier to grab the arguments by name rather than by position. We recommend not using <code>this</code> or the positional arguments in your custom format.
+</div>
+
+#### Custom format with output references
+
+To take advantage of outputting references in your custom formats there are 2 helper methods in the `dictionary` argument passed to your formatter function: `usesReference(value)` and `getReference(value)`. Here is an example using those:
+
+```javascript
+StyleDictionary.registerFormat({
+  name: `es6WithReferences`,
+  formatter: function({dictionary}) {
+    return dictionary.allProperties.map(token => {
+      let value = JSON.stringify(token.value);
+      // the `dictionary` object now has `usesReference()` and
+      // `getReference()` methods. `usesReference()` will return true if
+      // the value has a reference in it. `getReference()` will return
+      // the reference to the whole token so that you can access its
+      // name or any other attributes.
+      if (dictionary.usesReference(token.original.value)) {
+        // Note: make sure to use `token.original.value` because
+        // `token.value` is already resolved at this point.
+        const reference = dictionary.getReference(token.original.value);
+        value = reference.name;
+      }
+      return `export const ${token.name} = ${value};`
+    }).join(`\n`)
+  }
+});
+```
 
 ### Using a template / templating engine to create a format
 
@@ -185,7 +290,7 @@ const template = Handlebars.compile( fs.readFileSync('templates/MyTemplate.hbs')
 
 styleDictionary.registerFormat({
   name: 'my/format',
-  formatter: function(dictionary, platform) {
+  formatter: function({dictionary, platform}) {
     return template({
       properties: dictionary.properties,
       options: platform

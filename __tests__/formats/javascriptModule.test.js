@@ -11,11 +11,13 @@
  * and limitations under the License.
  */
 
-var fs = require('fs-extra');
-var helpers = require('../__helpers');
-var formats = require('../../lib/common/formats');
+const fs = require('fs-extra');
+const helpers = require('../__helpers');
+const formats = require('../../lib/common/formats');
+const createDictionary = require('../../lib/utils/createDictionary');
+const createFormatArgs = require('../../lib/utils/createFormatArgs');
 
-var file = {
+const file = {
   "destination": "__output/",
   "format": "javascript/module",
   "filter": {
@@ -25,15 +27,14 @@ var file = {
   }
 };
 
-var dictionary = {
-  "properties": {
-    "color": {
-      "red": {"value": "#FF0000"}
-    }
+const properties = {
+  "color": {
+    "red": {"value": "#FF0000"}
   }
 };
 
-var formatter = formats['javascript/module'].bind(file);
+const formatter = formats['javascript/module'].bind(file);
+const dictionary = createDictionary({ properties });
 
 describe('formats', () => {
   describe('javascript/module', () => {
@@ -47,8 +48,12 @@ describe('formats', () => {
     });
 
     it('should be a valid JS file', () => {
-      fs.writeFileSync('./__tests__/__output/output.js', formatter(dictionary, {}, file) );
-      var test = require('../__output/output.js');
+      fs.writeFileSync('./__tests__/__output/output.js', formatter(createFormatArgs({
+        dictionary,
+        file,
+        platform: {}
+      }), {}, file) );
+      const test = require('../__output/output.js');
       expect(test.color.red.value).toEqual(dictionary.properties.color.red.value);
     });
 
