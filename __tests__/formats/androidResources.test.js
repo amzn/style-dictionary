@@ -12,141 +12,71 @@
  */
 
 const formats = require('../../lib/common/formats');
+const createDictionary = require('../../lib/utils/createDictionary');
+const createFormatArgs = require('../../lib/utils/createFormatArgs');
 
-const dictionary = {
-  "properties": {
-    "size": {
-      "font": {
-        "small": {
-          "value": "12rem",
-          "original": {
-            "value": "12px"
-          },
-          "name": "size-font-small",
-          "attributes": {
-            "category": "size",
-            "type": "font",
-            "item": "small"
-          },
-          "path": [
-            "size",
-            "font",
-            "small"
-          ]
-        },
-        "large": {
-          "value": "18rem",
-          "original": {
-            "value": "18px"
-          },
-          "name": "size-font-large",
-          "attributes": {
-            "category": "size",
-            "type": "font",
-            "item": "large"
-          },
-          "path": [
-            "size",
-            "font",
-            "large"
-          ]
-        }
-      }
-    },
-    "color": {
-      "base": {
-        "red": {
-          "value": "#ff0000",
-          "comment": "comment",
-          "original": {
-            "value": "#FF0000",
-            "comment": "comment"
-          },
-          "name": "color-base-red",
-          "attributes": {
-            "category": "color",
-            "type": "base",
-            "item": "red"
-          },
-          "path": [
-            "color",
-            "base",
-            "red"
-          ]
-        }
-      },
-      "white": {
-        "value": "#ffffff",
+const properties = {
+  "size": {
+    "font": {
+      "small": {
+        "value": "12rem",
         "original": {
-          "value": "#ffffff"
+          "value": "12px"
         },
-        "name": "color-white",
+        "name": "size-font-small",
+        "attributes": {
+          "category": "size",
+          "type": "font",
+          "item": "small"
+        },
+        "path": [
+          "size",
+          "font",
+          "small"
+        ]
+      },
+      "large": {
+        "value": "18rem",
+        "original": {
+          "value": "18px"
+        },
+        "name": "size-font-large",
+        "attributes": {
+          "category": "size",
+          "type": "font",
+          "item": "large"
+        },
+        "path": [
+          "size",
+          "font",
+          "large"
+        ]
+      }
+    }
+  },
+  "color": {
+    "base": {
+      "red": {
+        "value": "#ff0000",
+        "comment": "comment",
+        "original": {
+          "value": "#FF0000",
+          "comment": "comment"
+        },
+        "name": "color-base-red",
         "attributes": {
           "category": "color",
-          "type": "white"
+          "type": "base",
+          "item": "red"
         },
         "path": [
           "color",
-          "white"
+          "base",
+          "red"
         ]
       }
     },
-  },
-  "allProperties": [
-    {
-      "value": "12rem",
-      "original": {
-        "value": "12px"
-      },
-      "name": "size-font-small",
-      "attributes": {
-        "category": "size",
-        "type": "font",
-        "item": "small"
-      },
-      "path": [
-        "size",
-        "font",
-        "small"
-      ]
-    },
-    {
-      "value": "18rem",
-      "original": {
-        "value": "18px"
-      },
-      "name": "size-font-large",
-      "attributes": {
-        "category": "size",
-        "type": "font",
-        "item": "large"
-      },
-      "path": [
-        "size",
-        "font",
-        "large"
-      ]
-    },
-    {
-      "value": "#ff0000",
-      "comment": "comment",
-      "original": {
-        "value": "#FF0000",
-        "comment": "comment"
-      },
-      "name": "color-base-red",
-      "attributes": {
-        "category": "color",
-        "type": "base",
-        "item": "red"
-      },
-      "path": [
-        "color",
-        "base",
-        "red"
-      ]
-    },
-    {
+    "white": {
       "value": "#ffffff",
       "original": {
         "value": "#ffffff"
@@ -160,45 +90,30 @@ const dictionary = {
         "color",
         "white"
       ]
-    },
-  ]
+    }
+  },
 };
 
-const customDictionary = {
-  properties: {
-    fontColor: {
-      primary: {
-        name: "fontColorPrimary",
-        value: "#000000",
-        attributes: {
-          category: "fontColor"
-        }
-      }
-    },
-    backgroundColor: {
-      secondary: {
-        name: "backgroundColorSecondary",
-        value: "#F2F3F4",
-        attributes: {
-          category: "backgroundColor"
-        }
+const customProperties = {
+  backgroundColor: {
+    secondary: {
+      name: "backgroundColorSecondary",
+      value: "#F2F3F4",
+      attributes: {
+        category: "backgroundColor"
       }
     }
   },
-  allProperties: [{
-    name: "backgroundColorSecondary",
-    value: "#F2F3F4",
-    attributes: {
-      category: "backgroundColor"
+  fontColor: {
+    primary: {
+      name: "fontColorPrimary",
+      value: "#000000",
+      attributes: {
+        category: "fontColor"
+      }
     }
-  },{
-    name: "fontColorPrimary",
-    value: "#000000",
-    attributes: {
-      category: "fontColor"
-    }
-  }]
-}
+  },
+};
 
 const format = formats['android/resources'];
 const file = {
@@ -206,27 +121,44 @@ const file = {
   "format": 'android/resources'
 };
 
+const dictionary = createDictionary({ properties });
+const customDictionary = createDictionary({ properties: customProperties });
+
 describe('formats', () => {
 
   describe(`android/resources`, () => {
 
     it('should match default snapshot', () => {
-      expect(format(dictionary, {}, file)).toMatchSnapshot();
+      expect(format(createFormatArgs({
+        dictionary,
+        file,
+        platform: {}
+      }), {}, file)).toMatchSnapshot();
     });
 
     it('with resourceType override should match snapshot', () => {
-      expect(format(dictionary, {}, {resourceType: "dimen"})).toMatchSnapshot();
+      const file = {resourceType: "dimen"}
+      expect(format(createFormatArgs({
+        dictionary,
+        file,
+        platform: {}
+      }), {}, file)).toMatchSnapshot();
     });
 
     it('with resourceMap override should match snapshot', () => {
+      const file = {
+        resourceMap: {
+          color: 'color',
+          fontColor: 'color',
+          backgroundColor: 'color'
+        }
+      };
       expect(
-        format(customDictionary, {}, {
-          resourceMap: {
-            color: 'color',
-            fontColor: 'color',
-            backgroundColor: 'color'
-          }
-        })
+        format(createFormatArgs({
+          dictionary: customDictionary,
+          file,
+          platform: {}
+        }), {}, file)
       ).toMatchSnapshot();
     });
 

@@ -11,11 +11,13 @@
  * and limitations under the License.
  */
 
-var formats = require('../../lib/common/formats');
-var fs = require('fs-extra');
-var helpers = require('../__helpers');
+const formats = require('../../lib/common/formats');
+const fs = require('fs-extra');
+const helpers = require('../__helpers');
+const createDictionary = require('../../lib/utils/createDictionary');
+const createFormatArgs = require('../../lib/utils/createFormatArgs');
 
-var file = {
+const file = {
   "destination": "__output/",
   "format": "javascript/umd",
   "filter": {
@@ -25,15 +27,14 @@ var file = {
   }
 };
 
-var dictionary = {
-  "properties": {
-    "color": {
-      "red": {"value": "#FF0000"}
-    }
+const properties = {
+  "color": {
+    "red": {"value": "#FF0000"}
   }
 };
 
-var formatter = formats['javascript/umd'].bind(file);
+const formatter = formats['javascript/umd'].bind(file);
+const dictionary = createDictionary({ properties });
 
 describe('formats', () => {
   describe('javascript/umd', () => {
@@ -47,8 +48,12 @@ describe('formats', () => {
     });
 
     it('should be a valid JS file', () => {
-      fs.writeFileSync('./__tests__/__output/umd.js', formatter(dictionary, {}, file) );
-      var test = require('../__output/umd.js');
+      fs.writeFileSync('./__tests__/__output/umd.js', formatter(createFormatArgs({
+        dictionary,
+        file,
+        platform: {}
+      }), {}, file) );
+      const test = require('../__output/umd.js');
       expect(test.color.red.value).toEqual(dictionary.properties.color.red.value);
     });
 

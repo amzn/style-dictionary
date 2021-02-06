@@ -5,7 +5,43 @@ Style dictionaries are configuration driven. Your config file defines what execu
 By default, Style Dictionary looks for a `config.json` file in the root of your package. If not found, it looks for a `config.js` file in the root of your package. You can also specify a custom location when you use the [CLI](using_the_cli.md). If you want a custom build system using the [npm module](using_the_npm_module.md), you can specify a custom location for a configuration file or use a plain Javascript object.
 
 ## config.js
-You can find out more about creating configurations in JS in our documentation about using the [npm module](using_the_npm_module.md).
+You can find out more about creating configurations in JS in our documentation about using the [npm module](using_the_npm_module.md). Additionally you can create your configuration as a Node module and export it:
+
+```javascript
+// config.js
+module.exports = {
+  source: [`tokens/**/*.json`],
+    // If you don't want to call the registerTransform method a bunch of times
+  // you can override the whole transform object directly. This works because
+  // the .extend method copies everything in the config
+  // to itself, allowing you to override things. It's also doing a deep merge
+  // to protect from accidentally overriding nested attributes.
+  transform: {
+    // Now we can use the transform 'myTransform' below
+    myTransform: {
+      type: 'name',
+      transformer: (prop) => prop.path.join('_').toUpperCase()
+    }
+  },
+  // Same with formats, you can now write them directly to this config
+  // object. The name of the format is the key.
+  format: {
+    myFormat: ({dictionary, platform}) => {
+      return dictionary.allProperties.map(prop => `${prop.name}: ${prop.value}`).join('\n');
+    }
+  },
+  platforms: {
+    // ...
+  }
+}
+```
+
+```json5
+// package.json
+  "scripts": {
+    "build": "style-dictionary build"
+  }
+```
 
 ## config.json
  Here is a quick example:

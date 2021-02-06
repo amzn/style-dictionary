@@ -351,6 +351,11 @@ section.cover .cover-main {
   color: var(--theme-color-dark);
 }
 
+.alert {
+  padding: 2rem;
+  border: 0.1rem solid var(--theme-color-secondary-light);
+}
+
 
 /* Badges */
 .markdown-section > p:first-child > a {
