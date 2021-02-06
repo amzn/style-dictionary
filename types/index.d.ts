@@ -102,6 +102,7 @@ declare namespace StyleDictionary {
 
   interface ValueTransform {
     type: "value";
+    transitive?: boolean;
     matcher?: (prop: Prop) => boolean;
     transformer: (prop: Prop, options: Platform) => string;
   }
