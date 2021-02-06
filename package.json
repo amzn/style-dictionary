@@ -38,7 +38,7 @@
   ],
   "scripts": {
     "lint": "eslint --fix index.js \"lib/**/*.js\" \"__tests__/**/*.js\"",
-    "test": "npm run test-types && npm run lint && jest --runInBand --silent",
+    "test": "npm run test-types && npm run lint && jest --runInBand --silent --coverage",
     "test-types": "tsd",
     "test-watch": "npm run test-types && npm run lint && jest --runInBand --watch",
     "generate-docs": "node ./scripts/generateDocs.js",
@@ -53,6 +53,13 @@
   },
   "jest": {
     "verbose": false,
+    "collectCoverageFrom": [
+      "lib/**/*.js"
+    ],
+    "coverageReporters": [
+      "html"
+    ],
+    "coverageDirectory": "docs/coverage",
     "roots": [
       "__tests__",
       "__integration__"
