@@ -16,19 +16,12 @@
 declare namespace StyleDictionary {
   interface Property {
     value: string;
+    comment?: string;
     [key: string]: any;
   }
 
   interface Properties {
-    [category: string]: {
-      [type: string]:
-        | Property
-        | {
-            [item: string]:
-              | Property
-              | { [subItem: string]: Property | { [state: string]: Property } };
-          };
-    };
+    [key: string]: Properties | Property;
   }
 
   interface Options {
