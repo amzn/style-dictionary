@@ -9,7 +9,7 @@ exports[`formats all should match android/colors snapshot 1`] = `
 -->
 <resources>
   <color name=\\"color_red\\">#FF0000</color><!-- comment -->
-  
+
 </resources>
 "
 `;
@@ -22,7 +22,7 @@ exports[`formats all should match android/dimens snapshot 1`] = `
   Generated on Sat, 01 Jan 2000 00:00:00 GMT
 -->
 <resources>
-  
+
 </resources>
 "
 `;
@@ -35,7 +35,7 @@ exports[`formats all should match android/fontDimens snapshot 1`] = `
   Generated on Sat, 01 Jan 2000 00:00:00 GMT
 -->
 <resources>
-  
+
 </resources>
 "
 `;
@@ -48,7 +48,7 @@ exports[`formats all should match android/integers snapshot 1`] = `
   Generated on Sat, 01 Jan 2000 00:00:00 GMT
 -->
 <resources>
-  
+
 </resources>
 "
 `;
@@ -61,7 +61,7 @@ exports[`formats all should match android/resources snapshot 1`] = `
 -->
 <resources>
   <color name=\\"color_red\\">#FF0000</color><!-- comment -->
-  
+
 </resources>
 "
 `;
@@ -74,7 +74,7 @@ exports[`formats all should match android/strings snapshot 1`] = `
   Generated on Sat, 01 Jan 2000 00:00:00 GMT
 -->
 <resources>
-  
+
 </resources>
 "
 `;
@@ -150,7 +150,7 @@ exports[`formats all should match ios/colors.m snapshot 1`] = `
 #import \\".h\\"
 
 
-@implementation 
+@implementation
 
 + (UIColor *)color:()colorEnum{
   return [[self values] objectAtIndex:colorEnum];
@@ -252,7 +252,7 @@ exports[`formats all should match ios/singleton.m snapshot 1`] = `
 
 #import \\".h\\"
 
-@implementation 
+@implementation
 
 + (NSDictionary *)getProperty:(NSString *)keyPath {
   return [[self properties] valueForKeyPath:keyPath];
@@ -357,7 +357,7 @@ exports[`formats all should match ios/strings.m snapshot 1`] = `
 
 NSString * const color_red = #FF0000;
 
-@implementation 
+@implementation
 
 + (NSArray *)values {
   static NSArray* array;
@@ -701,4 +701,28 @@ exports[`formats all should match stylus/variables snapshot 1`] = `
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
 
 $color_red= #FF0000; // comment"
+`;
+
+exports[`formats all should match typescript/es6-declarations snapshot 1`] = `
+"/**
+ * Do not edit directly
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ */
+
+export const color_red : string; // comment"
+`;
+
+exports[`formats all should match typescript/module-declarations snapshot 1`] = `
+"/**
+ * Do not edit directly
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ */
+
+export default tokens;
+declare interface DesignToken { value: string; name?: string; path?: string[]; comment?: string; attributes?: any; original?: any; }
+declare const tokens: {
+  \\"color\\": {
+    \\"red\\": DesignToken
+  }
+}"
 `;
