@@ -476,6 +476,19 @@ Creates a LESS file with variable definitions and helper classes for icons
 
 * * *
 
+### stylus/variables 
+
+
+Creates a Stylus file with variable definitions based on the style dictionary
+
+**Example**  
+```stylus
+$color-background-base= #f0f0f0;
+$color-background-alt= #eeeeee;
+```
+
+* * *
+
 ### javascript/module 
 
 

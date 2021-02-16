@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0-rc.4](https://github.com/amzn/style-dictionary/compare/v3.0.0-rc.3...v3.0.0-rc.4) (2021-02-16)
+
+
+### Features
+
+* **formats:** add stylus/variables format ([#527](https://github.com/amzn/style-dictionary/issues/527)) ([8c56752](https://github.com/amzn/style-dictionary/commit/8c56752d43616884fe6b1f4f7a77994396ce2c3f)), closes [#526](https://github.com/amzn/style-dictionary/issues/526)
+
 ## [3.0.0-rc.3](https://github.com/amzn/style-dictionary/compare/v3.0.0-rc.2...v3.0.0-rc.3) (2021-02-06)
 
 
