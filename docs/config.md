@@ -89,7 +89,7 @@ module.exports = {
 | platform.file.filter | String/Function/Object (optional) | A function, string or object used to filter the properties that will be included in the file. If a function is provided, each property will be passed to the function and the result (true or false) will determine whether the property is included. If an object is provided, each property will be matched against the object using a partial deep comparison. If a match is found, the property is included. If a string is passed, is considered a custom filter registered via [registerFilter](api.md#registerfilter) |
 | platform.file.options | Object (optional) | A set of extra options associated with the file. Includes `showFileHeader` and `outputReferences`. |
 | platform.file.options.showFileHeader | Boolean | If the generated file should have a "Do not edit + Timestamp" header (where the format supports it). By default is "true". |
-| platform.file.options.outputReferences | Boolean | If the file should keep token [references](formts.md#references-in-output-files). By default this is "false".
+| platform.file.options.outputReferences | Boolean | If the file should keep token [references](formats.md#references-in-output-files). By default this is "false".
 | platform.actions | Array[String] (optional) | [Actions](actions.md) to be performed after the files are built for that platform. Actions can be any arbitrary code you want to run like copying files, generating assets, etc. You can use pre-defined actions or create custom actions. |
 
 ----
