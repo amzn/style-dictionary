@@ -4,7 +4,7 @@ Formats define the output of your created files. For example, to use your styles
 you use the `css/variables` format. This will create a CSS file containing the variables from
 your style dictionary.
 
-### Using formats
+## Using formats
 
 You use formats in your config file under platforms > [platform] > files > [file] > format
 
@@ -27,7 +27,7 @@ You use formats in your config file under platforms > [platform] > files > [file
 
 There is an extensive (but not exhaustive) list of [included formats](#pre-defined-formats) available in Style Dictionary.
 
-### Format configuration
+## Format configuration
 
 Formats can take configuration to make them more flexible. This allows you to re-use the same format multiple times with different configurations or to allow the format to use data not defined in the tokens themselves. To configure a format, add extra attributes on the file object in your configuration like the following:
 
@@ -49,7 +49,7 @@ Formats can take configuration to make them more flexible. This allows you to re
 
 In this example we are adding the `mapName` configuration to the `scss/map-deep` format. This will change the name of the SCSS map in the output. Not all formats have the configuration options; format configuration is defined by the format itself. To see the configurtion options of a format, take a look at the documentation of the [specific format](#pre-defined-formats)
 
-### Filtering tokens
+## Filtering tokens
 
 A special file configuration is `filter`, which will filter the tokens before they get to the format. This allows you to re-use the same format to generate multiple files with different sets of tokens. Filtering tokens works by adding a `filter` attribute on the file object, where `filter` is:
 
@@ -69,7 +69,7 @@ A special file configuration is `filter`, which will filter the tokens before th
 
 The token/property that is passed to the filter function has already been [transformed](transforms.md) and has [default metadata](properties.md?id=default-property-metadata) added by Style Dictionary.
 
-### References in output files
+## References in output files
 
 Starting with version 3.0, some formats can keep the references in the output. This is a bit hard to explain, so let's look at an example. Say you have this very basic set of design tokens:
 
@@ -139,7 +139,7 @@ Not all formats use the `outputReferences` option because that file format might
 
 You can create custom formats that output references as well. See the [Custom format with output references](#custom-format-with-output-references) section.
 
-### Creating formats
+## Custom formats
 
 You can create custom formats using the [`registerFormat`](api.md#registerformat) function or by directly including them in your [configuration](config.md). A format has a name and a formatter function, which takes an object as the argument and should return a string which is then written to a file.
 
@@ -176,7 +176,7 @@ It is recommended for any configuration needed for your custom format to use the
 Note: to support legacy ways of defining custom formats, <code>this</code> in the formatter function is bound to the file object and when Style Dictionary calls the formatter function it passes 3 arguments: dictionary, platform, and file. Starting in 3.0 all data the formatter needs is in the first argument as shown above to make it easier to grab the arguments by name rather than by position. We recommend not using <code>this</code> or the positional arguments in your custom format.
 </div>
 
-#### Custom format with output references
+## Custom format with output references
 
 To take advantage of outputting references in your custom formats there are 2 helper methods in the `dictionary` argument passed to your formatter function: `usesReference(value)` and `getReference(value)`. Here is an example using those:
 
@@ -203,7 +203,33 @@ StyleDictionary.registerFormat({
 });
 ```
 
-### Using a template / templating engine to create a format
+## Custom format helpers
+
+We provide some helper methods we use internally in some of the built-in formats to make building custom formats a bit easier. They are accessible at `StyleDictionary.formatHelpers`.
+
+```javascript
+const StyleDictionary = require('style-dictionary');
+
+const { fileHeader, formattedVariables } = StyleDictionary.formatHelpers;
+
+StyleDictionary.registerFormat({
+  name: 'myCustomFormat',
+  formatter: function({dictionary, options}) {
+    return fileHeader(options.showFileHeader) +
+      ':root {\n' +
+      formattedVariables('css', dictionary, options.outputReferences) +
+      '\n}\n';
+  }
+});
+```
+
+Here are the available format helper methods:
+
+{{#module name="formatHelpers"}}
+{{>members}}
+{{/module}}
+
+## Using a template / templating engine to create a format
 
 Formatters are functions and created easily with most templating engines. Formats can be built using templates if there is a lot of boilerplate code to insert (e.g. ObjectiveC files). If the output consists of only the values (e.g. a flat SCSS variables file), writing a formatter function directly may be easier.
 
