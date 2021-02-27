@@ -10,7 +10,7 @@
     "styled-components": "^5.1.1"
   },
   "devDependencies": {
-    "style-dictionary": "3.0.0-rc.4"
+    "style-dictionary": "3.0.0-rc.5"
   },
   "scripts": {
     "build-dictionary": "style-dictionary build --config ./style-dictionary/config.json",

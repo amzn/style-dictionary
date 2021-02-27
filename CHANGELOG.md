@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0-rc.5](https://github.com/amzn/style-dictionary/compare/v3.0.0-rc.4...v3.0.0-rc.5) (2021-02-27)
+
+
+### Bug Fixes
+
+* **types:** introduce parser, update config, optional transform options ([#546](https://github.com/amzn/style-dictionary/issues/546)) ([0042354](https://github.com/amzn/style-dictionary/commit/0042354b4ccb43ef26ddb13adab82b73f25dbf4f)), closes [#545](https://github.com/amzn/style-dictionary/issues/545)
+
 ## [3.0.0-rc.4](https://github.com/amzn/style-dictionary/compare/v3.0.0-rc.3...v3.0.0-rc.4) (2021-02-16)
 
 

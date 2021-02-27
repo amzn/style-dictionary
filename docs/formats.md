@@ -351,7 +351,7 @@ StyleDictionary.registerFormat({
 * * *
 
 ### iconsWithPrefix 
-> formatHelpers.iconsWithPrefix(prefix, properties, platform) ⇒ <code>String</code>
+> formatHelpers.iconsWithPrefix(prefix, properties, options) ⇒ <code>String</code>
 
 This is used to create CSS (and CSS pre-processor) lists of icons. It assumes you are
 using an icon font and creates helper classes with the :before psuedo-selector to add
@@ -372,7 +372,7 @@ __You probably don't need this.__
     <td>properties</td><td><code>Array.&lt;Property&gt;</code></td><td><p>allProperties array on the dictionary object passed to the formatter function.</p>
 </td>
     </tr><tr>
-    <td>platform</td><td><code>Platform</code></td><td><p>options object passed to the formatter function.</p>
+    <td>options</td><td><code>Object</code></td><td><p>options object passed to the formatter function.</p>
 </td>
     </tr>  </tbody>
 </table>
@@ -411,7 +411,7 @@ Outputs an object stripping out everything except values
 ```js
 StyleDictionary.registerFormat({
   name: 'myCustomFormat',
-  formatter: function({ dictionary, options }) {
+  formatter: function({ dictionary }) {
     return JSON.stringify(minifyDictionary(dictionary.properties));
   }
 });
