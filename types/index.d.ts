@@ -45,6 +45,8 @@ declare namespace StyleDictionary {
   }
 
   interface Config {
+    parsers?: Parser[];
+    transform?: Transforms;
     include?: string[];
     source: string[];
     platforms: { [platform: string]: Platform };
@@ -90,20 +92,20 @@ declare namespace StyleDictionary {
   interface NameTransform {
     type: "name";
     matcher?: (prop: Prop) => boolean;
-    transformer: (prop: Prop, options: Platform) => string;
+    transformer: (prop: Prop, options?: Platform) => string;
   }
 
   interface ValueTransform {
     type: "value";
     transitive?: boolean;
     matcher?: (prop: Prop) => boolean;
-    transformer: (prop: Prop, options: Platform) => string;
+    transformer: (prop: Prop, options?: Platform) => string;
   }
 
   interface AttributeTransform {
     type: "attribute";
     matcher?: (prop: Prop) => boolean;
-    transformer: (prop: Prop, options: Platform) => { [key: string]: any };
+    transformer: (prop: Prop, options?: Platform) => { [key: string]: any };
   }
 
   type Transform = NameTransform | ValueTransform | AttributeTransform;
@@ -151,6 +153,17 @@ declare namespace StyleDictionary {
   interface Filters {
     [name: string]: Matcher;
   }
+
+  interface ParserOptions {
+    contents: string;
+    filePath: string;
+  }
+
+  interface Parser {
+    pattern: RegExp;
+    parse: (props: ParserOptions) => Properties;
+  }
+
   type Named<T> = T & {
     name: string;
   };
@@ -173,6 +186,7 @@ declare namespace StyleDictionary {
     registerTemplate(this: Core, template: Named<{ template: string }>): this;
     registerAction(this: Core, action: Named<Action>): this;
     registerFilter(this: Core, filter: Filter): this;
+    registerParser(this: Core, parser: Parser): this;
 
     exportPlatform(this: Core, platform: string): Properties;
     buildPlatform(this: Core, platform: string): this;
