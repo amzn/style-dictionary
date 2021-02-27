@@ -38,6 +38,7 @@ var StyleDictionary = {
   transformGroup: require('./lib/common/transformGroups'),
   format: require('./lib/common/formats'),
   action: require('./lib/common/actions'),
+  formatHelpers: require('./lib/common/formatHelpers'),
   filter: {}, // we need to initialise the object, since we don't have built-in filters
   parsers: [], // ditto ^
 
