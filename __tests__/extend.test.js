@@ -245,4 +245,13 @@ describe('extend', () => {
     expect(StyleDictionary3.foo).toBe('boo');
     expect(StyleDictionary).not.toHaveProperty('foo');
   });
+
+  it(`should not pollute the prototype`, () => {
+    const obj = {};
+    let opts = JSON.parse('{"__proto__":{"polluted":"yes"}}');
+    console.log("Before : " + obj.polluted);
+    StyleDictionary.extend(opts);
+    console.log("After : " + obj.polluted);
+    expect(obj.polluted).toBeUndefined();
+  });
 });
