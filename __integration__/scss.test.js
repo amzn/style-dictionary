@@ -34,6 +34,13 @@ describe(`integration`, () => {
               outputReferences: true
             }
           },{
+            destination: `filteredVariablesWithReferences.scss`,
+            format: `scss/variables`,
+            filter: (token) => token.path[1] === 'background',
+            options: {
+              outputReferences: true
+            }
+          },{
             destination: `map-flat.scss`,
             format: `scss/map-flat`
           },{
@@ -67,6 +74,13 @@ describe(`integration`, () => {
           expect(result.css).toBeDefined();
         });
 
+        it(`should match snapshot`, () => {
+          expect(output).toMatchSnapshot();
+        });
+      });
+
+      describe(`with filter and output references`, () => {
+        const output = fs.readFileSync(`${buildPath}filteredVariablesWithReferences.scss`, {encoding:'UTF-8'});
         it(`should match snapshot`, () => {
           expect(output).toMatchSnapshot();
         });

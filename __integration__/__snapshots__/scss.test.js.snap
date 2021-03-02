@@ -732,6 +732,21 @@ $size-padding-large: 1rem;
 $size-padding-xl: 1rem;"
 `;
 
+exports[`integration scss scss/variables with filter and output references should match snapshot 1`] = `
+"
+// Do not edit directly
+// Generated on Sat, 01 Jan 2000 00:00:00 GMT
+
+$color-background-primary: $color-core-neutral-0 !default;
+$color-background-secondary: $color-core-neutral-100;
+$color-background-tertiary: $color-core-neutral-200;
+$color-background-danger: $color-core-red-0;
+$color-background-warning: $color-core-orange-0;
+$color-background-success: $color-core-green-0;
+$color-background-info: $color-core-blue-0;
+$color-background-disabled: $color-background-tertiary;"
+`;
+
 exports[`integration scss scss/variables with outputReferences should match snapshot 1`] = `
 "
 // Do not edit directly
