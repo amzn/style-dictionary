@@ -772,6 +772,77 @@ export const ColorBackgroundAlt = '#fcfcfcfc';
 
 * * *
 
+### typescript/es6-declarations 
+
+
+Creates TypeScript declarations for ES6 modules
+
+```json
+{
+  "platforms": {
+    "ts": {
+      "transformGroup": "js",
+      "files": [
+        {
+          "format": "javascript/es6",
+          "destination": "colors.js"
+        },
+        {
+          "format": "typescript/es6-declarations",
+          "destination": "colors.d.ts"
+        }
+      ]
+    }
+  }
+}
+```
+
+**Example**  
+```typescript
+export const ColorBackgroundBase : string;
+export const ColorBackgroundAlt : string;
+```
+
+* * *
+
+### typescript/module-declarations 
+
+
+Creates TypeScript declarations for CommonJS module
+
+```json
+{
+  "platforms": {
+    "ts": {
+      "transformGroup": "js",
+      "files": [
+        {
+          "format": "javascript/module",
+          "destination": "colors.js"
+        },
+        {
+          "format": "typescript/module-declarations",
+          "destination": "colors.d.ts"
+        }
+      ]
+    }
+  }
+}
+```
+
+**Example**  
+```typescript
+export default tokens;
+declare interface DesignToken { value: string; name?: string; path?: string[]; comment?: string; attributes?: any; original?: any; }
+declare const tokens: {
+ "color": {
+   "red": DesignToken
+ }
+}
+```
+
+* * *
+
 ### android/resources 
 
 
