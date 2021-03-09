@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0-rc.6](https://github.com/amzn/style-dictionary/compare/v3.0.0-rc.5...v3.0.0-rc.6) (2021-03-09)
+
+
+### Bug Fixes
+
+* **extend:** remove prototype pollution ([#554](https://github.com/amzn/style-dictionary/issues/554)) ([b99710a](https://github.com/amzn/style-dictionary/commit/b99710a23abf7d49be28f4ce33dbe99a8af5923f))
+
 ## [3.0.0-rc.5](https://github.com/amzn/style-dictionary/compare/v3.0.0-rc.4...v3.0.0-rc.5) (2021-02-27)
 
 
