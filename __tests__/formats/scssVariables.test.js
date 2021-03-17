@@ -13,9 +13,9 @@
 
 var formats = require('../../lib/common/formats');
 var scss = require('node-sass');
-var _ = require('lodash');
 const createDictionary = require('../../lib/utils/createDictionary');
 const createFormatArgs = require('../../lib/utils/createFormatArgs');
+var _ = require('../../lib/utils/es6_');
 
 var file = {
   "destination": "__output/",

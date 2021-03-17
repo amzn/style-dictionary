@@ -12,9 +12,9 @@
  */
 
 var formats = require('../../lib/common/formats');
-var _ = require('lodash');
 var createDictionary = require('../../lib/utils/createDictionary');
 var createFormatArgs = require('../../lib/utils/createFormatArgs');
+var _ = require('../../lib/utils/es6_');
 
 var file = {
   "destination": "__output/",
