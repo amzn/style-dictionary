@@ -64,7 +64,9 @@
       "__tests__",
       "__integration__"
     ],
-    "setupFilesAfterEnv": ["<rootDir>/__tests__/__setup.js"],
+    "setupFilesAfterEnv": [
+      "<rootDir>/__tests__/__setup.js"
+    ],
     "testPathIgnorePatterns": [
       "/__tests__/__setup.js",
       "/__tests__/__helpers.js",
@@ -115,6 +117,7 @@
   "homepage": "https://github.com/amzn/style-dictionary",
   "dependencies": {
     "chalk": "^4.0.0",
+    "change-case": "^4.1.2",
     "commander": "^5.1.0",
     "fs-extra": "^8.1.0",
     "glob": "^7.1.6",
