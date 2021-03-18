@@ -143,6 +143,71 @@ Not all formats use the `outputReferences` option because that file format might
 
 You can create custom formats that output references as well. See the [Custom format with output references](#custom-format-with-output-references) section.
 
+## File headers
+
+By default Style Dictionary adds a file header comment in the top of files built using built-in formats like this:
+
+```js
+// Do not edit directly
+// Generated on Sat, 01 Jan 2000 00:00:00 GMT
+```
+
+You can remove these comments with the option: `showFileHeader: false` if you do not want them in your generated files. You can also create your own file header or extend the default one. This could be useful if you want to put a version number or hash of the source files rather than a timestamp.
+
+Custom file headers can be added the same way you would add a custom format, either by using the [`registerFileHeader`](api.md#registerfileheader) function or adding the fileHeader object directly in the Style Dictionary [configuration](config.md). Your custom file header can be used in built-in formats as well as custom formats. To use a custom file header in a custom format see the [`fileHeader`](formats.md#fileheader) format helper method.
+
+```js
+const StyleDictionary = require('style-dictionary');
+StyleDictionary.registerFileHeader({
+  name: 'myCustomHeader',
+  fileHeader: (defaultMessage) => {
+    // defaultMessage are the 2 lines above that appear in the default file header
+    // you can use this to add a message before or after the default message 👇
+
+    // the fileHeader function should return an array of strings
+    // which will be formatted in the proper comment style for a given format
+    return [
+      ...defaultMessage,
+      `hello?`,
+      `is it me you're looking for?`,
+    ]
+  }
+});
+```
+
+Then you can use your custom file header in a file similar to a custom format:
+
+```json5
+{
+  source: ['tokens/**/*.json'],
+  platforms: {
+    css: {
+      transformGroup: 'css',
+      files: [{
+        destination: 'variables.css',
+        format: 'css/variables',
+        options: {
+          fileHeader: 'myCustomHeader'
+        }
+      }]
+    }
+  }
+}
+```
+
+Which should output a file that will start like this:
+
+```css
+/**
+ * Do not edit directly
+ * Generated on Thu, 18 Mar 2021 21:30:47 GMT
+ * hello?
+ * is it me you're looking for?
+ */
+```
+
+For an in-depth example see the [custom-file-header](https://github.com/amzn/style-dictionary/examples/advanced/custom-file-header) example.
+
 ## Custom formats
 
 You can create custom formats using the [`registerFormat`](api.md#registerformat) function or by directly including them in your [configuration](config.md). A format has a name and a formatter function, which takes an object as the argument and should return a string which is then written to a file.
@@ -269,8 +334,8 @@ const { fileHeader, formattedVariables } = StyleDictionary.formatHelpers;
 
 StyleDictionary.registerFormat({
   name: 'myCustomFormat',
-  formatter: function({dictionary, options}) {
-    return fileHeader(options.showFileHeader) +
+  formatter: function({dictionary, file, options}) {
+    return fileHeader(file) +
       ':root {\n' +
       formattedVariables('css', dictionary, options.outputReferences) +
       '\n}\n';
@@ -281,22 +346,24 @@ StyleDictionary.registerFormat({
 Here are the available format helper methods:
 
 ### fileHeader 
-> formatHelpers.fileHeader(showFileHeader, commentStyle) ⇒ <code>String</code>
+> formatHelpers.fileHeader(file, commentStyle) ⇒ <code>String</code>
 
 This is for creating the comment at the top of generated files with the generated at date.
+It will use the custom file header if defined on the configuration, or use the
+default file header.
 
 <table>
   <thead>
     <tr>
-      <th>Param</th><th>Type</th><th>Default</th><th>Description</th>
+      <th>Param</th><th>Type</th><th>Description</th>
     </tr>
   </thead>
   <tbody>
 <tr>
-    <td>showFileHeader</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not to show the file header. If false will return an empty string.</p>
+    <td>file</td><td><code>File</code></td><td><p>The file object that is passed to the formatter.</p>
 </td>
     </tr><tr>
-    <td>commentStyle</td><td><code>String</code></td><td></td><td><p>The only option is &#39;short&#39;, which will use the // style comments. Anything else will use /* style comments.</p>
+    <td>commentStyle</td><td><code>String</code></td><td><p>The only options are &#39;short&#39; and &#39;xml&#39;, which will use the // or &lt;!-- --&gt; style comments respectively. Anything else will use /* style comments.</p>
 </td>
     </tr>  </tbody>
 </table>
