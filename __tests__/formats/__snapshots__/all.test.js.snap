@@ -13,41 +13,35 @@ exports[`formats all should match android/colors snapshot 1`] = `
 
 exports[`formats all should match android/dimens snapshot 1`] = `
 "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
-
 <!--
   Do not edit directly
   Generated on Sat, 01 Jan 2000 00:00:00 GMT
 -->
 <resources>
-  
-</resources>
-"
+
+</resources>"
 `;
 
 exports[`formats all should match android/fontDimens snapshot 1`] = `
 "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
-
 <!--
   Do not edit directly
   Generated on Sat, 01 Jan 2000 00:00:00 GMT
 -->
 <resources>
-  
-</resources>
-"
+
+</resources>"
 `;
 
 exports[`formats all should match android/integers snapshot 1`] = `
 "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
-
 <!--
   Do not edit directly
   Generated on Sat, 01 Jan 2000 00:00:00 GMT
 -->
 <resources>
-  
-</resources>
-"
+
+</resources>"
 `;
 
 exports[`formats all should match android/resources snapshot 1`] = `
@@ -63,15 +57,13 @@ exports[`formats all should match android/resources snapshot 1`] = `
 
 exports[`formats all should match android/strings snapshot 1`] = `
 "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
-
 <!--
   Do not edit directly
   Generated on Sat, 01 Jan 2000 00:00:00 GMT
 -->
 <resources>
-  
-</resources>
-"
+
+</resources>"
 `;
 
 exports[`formats all should match css/fonts.css snapshot 1`] = `
