@@ -12,7 +12,9 @@
  */
 
 var flattenProperties = require('../../lib/utils/flattenProperties');
-var _ = require('lodash');
+const sortBy = (key) => {
+  return (a, b) => (a[key] > b[key]) ? 1 : ((b[key] > a[key]) ? -1 : 0);
+};
 
 describe('utils', () => {
   describe('flattenProperties', () => {
@@ -43,9 +45,9 @@ describe('utils', () => {
         properties.white
       ];
 
-      var sortedExpectedRet = _.sortBy(expected_ret, ['value']);
+      var sortedExpectedRet = expected_ret.sort(sortBy('value'));
       var ret = flattenProperties(properties);
-      var sortedRet = _.sortBy(ret, ['value']);
+      var sortedRet = ret.sort(sortBy('value'));
       expect(sortedRet).toEqual(sortedExpectedRet);
     });
 
@@ -66,9 +68,9 @@ describe('utils', () => {
         properties.color.white
       ];
 
-      var sortedExpectedRet = _.sortBy(expected_ret, ['value']);
+      var sortedExpectedRet = expected_ret.sort(sortBy('value'));
       var ret = flattenProperties(properties);
-      var sortedRet = _.sortBy(ret, ['value']);
+      var sortedRet = ret.sort(sortBy('value'));
       expect(sortedRet).toEqual(sortedExpectedRet);
     });
   });

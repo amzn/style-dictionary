@@ -12,7 +12,6 @@
  */
 
 const helpers = require('./__helpers');
-const keys = require('lodash/keys');
 const config = helpers.fileToJSON(__dirname + '/__configs/test.json');
 const StyleDictionary = require('../index');
 const styleDictionary = StyleDictionary.extend(config);
@@ -50,7 +49,7 @@ describe('exportPlatform', () => {
 
   it('should have the same structure as the original properties', () => {
     var dictionary = styleDictionary.exportPlatform('web');
-    expect(keys(dictionary)).toEqual(keys(styleDictionary.properties));
+    expect(Object.keys(dictionary)).toEqual(Object.keys(styleDictionary.properties));
   });
 
   it('should have resolved references', () => {

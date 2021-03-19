@@ -14,7 +14,7 @@
 var filterProperties = require('../lib/filterProperties');
 var helpers = require('./__helpers');
 var flattenProperties = require("../lib/utils/flattenProperties");
-var _ = require('lodash');
+var _ = require('../lib/utils/es6_');
 
 var colorRed = {
   "value": "#FF0000",
