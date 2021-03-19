@@ -4,7 +4,7 @@ exports[`integration valid custom file headers file options config file header s
 "/**
  * Do not edit directly
  * Generated on Sat, 01 Jan 2000 00:00:00 GMT
- * built by Danny
+ * hello, world!
  */
 
 :root {
@@ -67,7 +67,7 @@ exports[`integration valid custom file headers platform options no file options 
 "/**
  * Do not edit directly
  * Generated on Sat, 01 Jan 2000 00:00:00 GMT
- * built by Danny
+ * hello, world!
  */
 
 module.exports = {

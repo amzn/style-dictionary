@@ -193,7 +193,7 @@ formats to display some information about how the file was built in a comment.
 | --- | --- | --- |
 | options | <code>Object</code> |  |
 | options.name | <code>String</code> | Name of the format to be referenced in your config.json |
-| options.fileHeader | <code>function</code> | Function that returns an array of strings, which will be mapped to comment lines. Takes a single which is the default message array. See [file headers](formats.md#file-headers) for more information. |
+| options.fileHeader | <code>function</code> | Function that returns an array of strings, which will be mapped to comment lines. It takes a single argument which is the default message array. See [file headers](formats.md#file-headers) for more information. |
 
 **Example**  
 ```js
@@ -202,7 +202,7 @@ StyleDictionary.registerFileHeader({
   fileHeader: function(defaultMessage) {
     return [
       ...defaultMessage,
-      `built by Charles`
+      `hello, world!`
     ];
   }
 })

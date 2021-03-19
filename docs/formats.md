@@ -372,8 +372,8 @@ default file header.
 ```js
 StyleDictionary.registerFormat({
   name: 'myCustomFormat',
-  formatter: function({ dictionary, options }) {
-    return fileHeader(true, 'short') +
+  formatter: function({ dictionary, file }) {
+    return fileHeader(file, 'short') +
       dictionary.allProperties.map(token => `${token.name} = ${token.value}`);
   }
 });

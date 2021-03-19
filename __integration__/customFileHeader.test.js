@@ -33,7 +33,7 @@ describe(`integration`, () => {
         configFileHeader: (defaultMessage) => {
           return [
             ...defaultMessage,
-            'built by Danny'
+            'hello, world!'
           ];
         }
       },

@@ -9,7 +9,7 @@ const {fileHeader} = StyleDictionary.formatHelpers;
 
 const myCustomFormat = ({ dictionary, file }) => {
   return `${fileHeader(file, 'short')}${dictionary.allProperties.map(token => {
-    return `$${token.name}: ${token.value};`
+    return `--${token.name}: ${token.value};`
   }).join(`\n`)}`
 }
 
@@ -28,7 +28,7 @@ const styleDictionary = StyleDictionary.extend({
       // whereas other languages have short and long style comments, // and /* */
       return [
         ...defaultMessage,
-        'built by Danny'
+        'hello, world!'
       ];
     }
   },
@@ -51,7 +51,7 @@ const styleDictionary = StyleDictionary.extend({
           fileHeader: `myFileHeader`
         }
       },{
-        destination: `variables.scss`,
+        destination: `variables1.css`,
         format: `myCustomFormat`,
         options: {
           fileHeader: `myFileHeader`
