@@ -58,9 +58,7 @@ exports[`formats all should match android/resources snapshot 1`] = `
 -->
 <resources>
   <color name=\\"color_red\\">#FF0000</color><!-- comment -->
-  
-</resources>
-"
+</resources>"
 `;
 
 exports[`formats all should match android/strings snapshot 1`] = `
