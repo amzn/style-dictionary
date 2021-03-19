@@ -179,6 +179,37 @@ StyleDictionary.registerAction({
 
 * * *
 
+### registerFileHeader 
+> StyleDictionary.registerFileHeader(options) ⇒ [<code>style-dictionary</code>](#module_style-dictionary)
+
+
+
+
+Add a custom file header to the style dictionary. File headers are used in
+formats to display some information about how the file was built in a comment.
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| options | <code>Object</code> |  |
+| options.name | <code>String</code> | Name of the format to be referenced in your config.json |
+| options.fileHeader | <code>function</code> | Function that returns an array of strings, which will be mapped to comment lines. It takes a single argument which is the default message array. See [file headers](formats.md#file-headers) for more information. |
+
+**Example**  
+```js
+StyleDictionary.registerFileHeader({
+  name: 'myCustomHeader',
+  fileHeader: function(defaultMessage) {
+    return [
+      ...defaultMessage,
+      `hello, world!`
+    ];
+  }
+})
+```
+
+* * *
+
 ### registerFilter 
 > StyleDictionary.registerFilter(filter) ⇒ [<code>style-dictionary</code>](#module_style-dictionary)
 

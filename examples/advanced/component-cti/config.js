@@ -1,4 +1,5 @@
 const StyleDictionary = require('style-dictionary');
+const transformer = StyleDictionary.transform['attribute/cti'].transformer;
 
 const propertiesToCTI = {
   'width': {category: 'size', type: 'dimension'},
@@ -23,6 +24,7 @@ const propertiesToCTI = {
 }
 
 const CTITransform = {
+  type: `attribute`,
   transformer: (prop) => {
     // Only do this custom functionality in the 'component' top-level namespace.
     if (prop.path[0] === 'component') {
@@ -31,15 +33,24 @@ const CTITransform = {
       return propertiesToCTI[prop.path[prop.path.length - 1]];
     } else {
       // Fallback to the original 'attribute/cti' transformer
-      return StyleDictionary.transform['attribute/cti'].transformer(prop);
+      return transformer(prop);
     }
   }
 }
 
+// We can call .registerTransform here
+// or apply the custom transform directly in the configuration below
+//
+// StyleDictionary.registerTransform({
+//   name: 'attribute/cti',
+//   type: 'attribute',
+//   transformer: CTITransform.transformer
+// });
+
 module.exports = {
   // Rather than calling .registerTransform() we can apply the new transform
   // directly in our configuration. Using .registerTransform() with the same
-  // transform name, 'attribute/cti', would work as well. 
+  // transform name, 'attribute/cti', would work as well.
   transform: {
     // Override the attribute/cti transform
     'attribute/cti': CTITransform
