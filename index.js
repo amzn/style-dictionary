@@ -41,6 +41,7 @@ var StyleDictionary = {
   formatHelpers: require('./lib/common/formatHelpers'),
   filter: {}, // we need to initialise the object, since we don't have built-in filters
   parsers: [], // ditto ^
+  fileHeader: {},
 
   registerTransform: require('./lib/register/transform'),
   registerTransformGroup: require('./lib/register/transformGroup'),
@@ -49,6 +50,7 @@ var StyleDictionary = {
   registerAction: require('./lib/register/action'),
   registerFilter: require('./lib/register/filter'),
   registerParser: require('./lib/register/parser'),
+  registerFileHeader: require('./lib/register/fileHeader'),
 
   exportPlatform: require('./lib/exportPlatform'),
   buildPlatform: require('./lib/buildPlatform'),
