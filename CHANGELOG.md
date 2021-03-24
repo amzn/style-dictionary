@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0-rc.7](https://github.com/amzn/style-dictionary/compare/v3.0.0-rc.6...v3.0.0-rc.7) (2021-03-24)
+
+
+### Features
+
+* **formats:** adding custom file headers ([#572](https://github.com/amzn/style-dictionary/issues/572)) ([2a29502](https://github.com/amzn/style-dictionary/commit/2a29502f762c8694dd541dc9c0a0e0aa32e4dec9)), closes [#566](https://github.com/amzn/style-dictionary/issues/566)
+
+
+### Bug Fixes
+
+* **references:** use unfiltered dictionary for reference resolution in formats ([#553](https://github.com/amzn/style-dictionary/issues/553)) ([62c8fb8](https://github.com/amzn/style-dictionary/commit/62c8fb8ddaccb94dc2eee3b4504f38c264689b77))
+
 ## [3.0.0-rc.6](https://github.com/amzn/style-dictionary/compare/v3.0.0-rc.5...v3.0.0-rc.6) (2021-03-09)
 
 

@@ -11,6 +11,6 @@
   "license": "ISC",
   "devDependencies": {
     "chroma-js": "^2.1.0",
-    "style-dictionary": "3.0.0-rc.6"
+    "style-dictionary": "3.0.0-rc.7"
   }
 }
