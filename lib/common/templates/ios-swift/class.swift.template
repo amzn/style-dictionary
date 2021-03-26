@@ -43,5 +43,5 @@
 import UIKit
 
 public class <%= file.className %> {
-    <%= props.map(function(prop) { return 'public static let ' + prop.name + ' = ' + propToValue(prop); }).join('\n    ') %>
+    <%= props.sort(sortAllProperties(dictionary)).map(function(prop) { return 'public static let ' + prop.name + ' = ' + propToValue(prop); }).join('\n    ') %>
 }
