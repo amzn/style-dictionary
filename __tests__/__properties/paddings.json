@@ -1,6 +1,9 @@
 {
   "size": {
     "padding": {
+      "zero": {
+        "value": 0
+      },
       "tiny": {
         "value": "3"
       },
