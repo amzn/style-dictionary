@@ -148,27 +148,30 @@ $color-core-green-300: #98e58e !default;
 $color-core-green-200: #c2f2bd !default;
 $color-core-green-100: #d7f4d7 !default;
 $color-core-green-0: #ebf9eb !default;
-$color-background-primary: #ffffff !default;
-$color-background-secondary: #f3f4f4 !default;
-$color-background-tertiary: #dee1e1 !default;
-$color-background-danger: #ffeae9 !default;
-$color-background-warning: #ffede3 !default;
-$color-background-success: #ebf9eb !default;
-$color-background-info: #e9f8ff !default;
-$color-background-disabled: #dee1e1 !default;
-$color-border-primary: #c8cccc !default;
-$color-brand-primary: #0b8599 !default;
-$color-brand-secondary: #6f5ed3 !default;
-$color-font-primary: #040404 !default;
-$color-font-secondary: #273333 !default;
+$color-font-success: #08422f !default;
+$color-font-warning: #601700 !default;
+$color-font-danger: #6d1313 !default;
 $color-font-tertiary: #364141 !default;
+$color-font-secondary: #273333 !default;
+$color-font-primary: #040404 !default;
+$color-brand-secondary: #6f5ed3 !default;
+$color-brand-primary: #0b8599 !default;
+$color-border-primary: #c8cccc !default;
+$color-background-info: #e9f8ff !default;
+$color-background-success: #ebf9eb !default;
+$color-background-warning: #ffede3 !default;
+$color-background-danger: #ffeae9 !default;
+$color-background-tertiary: #dee1e1 !default;
+$color-background-secondary: #f3f4f4 !default;
+$color-background-primary: #ffffff !default;
+$color-background-disabled: #dee1e1 !default;
+$color-font-disabled: #364141 !default;
+$color-font-ghost: #364141 !default;
 $color-font-interactive: #0b8599 !default;
 $color-font-interactive-hover: #0b8599 !default;
 $color-font-interactive-active: #6f5ed3 !default;
+$color-font-interactive-focus: #6f5ed3 !default;
 $color-font-interactive-disabled: #364141 !default;
-$color-font-danger: #6d1313 !default;
-$color-font-warning: #601700 !default;
-$color-font-success: #08422f !default;
 
 $tokens: (
   'color': (
@@ -352,6 +355,8 @@ $tokens: (
       )
     ),
     'font': (
+      'ghost': $color-font-ghost,
+      'disabled': $color-font-disabled,
       'primary': $color-font-primary,
       'secondary': $color-font-secondary,
       'tertiary': $color-font-tertiary,
@@ -359,6 +364,7 @@ $tokens: (
         '_': $color-font-interactive,
         'hover': $color-font-interactive-hover,
         'active': $color-font-interactive-active,
+        'focus': $color-font-interactive-focus,
         'disabled': $color-font-interactive-disabled
       ),
       'danger': $color-font-danger,
@@ -538,27 +544,30 @@ $tokens: (
   'color-core-green-200': #c2f2bd,
   'color-core-green-100': #d7f4d7,
   'color-core-green-0': #ebf9eb,
-  'color-background-primary': #ffffff,
-  'color-background-secondary': #f3f4f4,
-  'color-background-tertiary': #dee1e1,
-  'color-background-danger': #ffeae9,
-  'color-background-warning': #ffede3,
-  'color-background-success': #ebf9eb,
-  'color-background-info': #e9f8ff,
-  'color-background-disabled': #dee1e1,
-  'color-border-primary': #c8cccc,
-  'color-brand-primary': #0b8599,
-  'color-brand-secondary': #6f5ed3,
-  'color-font-primary': #040404,
-  'color-font-secondary': #273333,
+  'color-font-success': #08422f,
+  'color-font-warning': #601700,
+  'color-font-danger': #6d1313,
   'color-font-tertiary': #364141,
+  'color-font-secondary': #273333,
+  'color-font-primary': #040404,
+  'color-brand-secondary': #6f5ed3,
+  'color-brand-primary': #0b8599,
+  'color-border-primary': #c8cccc,
+  'color-background-info': #e9f8ff,
+  'color-background-success': #ebf9eb,
+  'color-background-warning': #ffede3,
+  'color-background-danger': #ffeae9,
+  'color-background-tertiary': #dee1e1,
+  'color-background-secondary': #f3f4f4,
+  'color-background-primary': #ffffff,
+  'color-background-disabled': #dee1e1,
+  'color-font-disabled': #364141,
+  'color-font-ghost': #364141,
   'color-font-interactive': #0b8599,
   'color-font-interactive-hover': #0b8599,
   'color-font-interactive-active': #6f5ed3,
-  'color-font-interactive-disabled': #364141,
-  'color-font-danger': #6d1313,
-  'color-font-warning': #601700,
-  'color-font-success': #08422f
+  'color-font-interactive-focus': #6f5ed3,
+  'color-font-interactive-disabled': #364141
 );
 "
 `;
@@ -711,12 +720,15 @@ $color-core-yellow-800: #ba7506;
 $color-core-yellow-900: #944c0c;
 $color-core-yellow-1000: #542a00;
 $color-core-yellow-1100: #2d1a05;
+$color-font-ghost: #364141;
+$color-font-disabled: #364141;
 $color-font-primary: #040404;
 $color-font-secondary: #273333;
 $color-font-tertiary: #364141;
 $color-font-interactive: #0b8599;
 $color-font-interactive-hover: #0b8599;
 $color-font-interactive-active: #6f5ed3;
+$color-font-interactive-focus: #6f5ed3;
 $color-font-interactive-disabled: #364141;
 $color-font-danger: #6d1313;
 $color-font-warning: #601700;
@@ -893,25 +905,28 @@ $color-core-green-300: #98e58e;
 $color-core-green-200: #c2f2bd;
 $color-core-green-100: #d7f4d7;
 $color-core-green-0: #ebf9eb;
-$color-background-primary: $color-core-neutral-0 !default;
-$color-background-secondary: $color-core-neutral-100;
-$color-background-tertiary: $color-core-neutral-200;
-$color-background-danger: $color-core-red-0;
-$color-background-warning: $color-core-orange-0;
-$color-background-success: $color-core-green-0;
-$color-background-info: $color-core-blue-0;
-$color-background-disabled: $color-background-tertiary;
-$color-border-primary: $color-core-neutral-300;
-$color-brand-primary: $color-core-aqua-700;
-$color-brand-secondary: $color-core-purple-700;
-$color-font-primary: $color-core-neutral-1100;
-$color-font-secondary: $color-core-neutral-900;
+$color-font-success: $color-core-green-1000;
+$color-font-warning: $color-core-orange-1000;
+$color-font-danger: $color-core-red-1000;
 $color-font-tertiary: $color-core-neutral-800;
+$color-font-secondary: $color-core-neutral-900;
+$color-font-primary: $color-core-neutral-1100;
+$color-brand-secondary: $color-core-purple-700;
+$color-brand-primary: $color-core-aqua-700;
+$color-border-primary: $color-core-neutral-300;
+$color-background-info: $color-core-blue-0;
+$color-background-success: $color-core-green-0;
+$color-background-warning: $color-core-orange-0;
+$color-background-danger: $color-core-red-0;
+$color-background-tertiary: $color-core-neutral-200;
+$color-background-secondary: $color-core-neutral-100;
+$color-background-primary: $color-core-neutral-0 !default;
+$color-background-disabled: $color-background-tertiary;
+$color-font-disabled: $color-font-tertiary;
+$color-font-ghost: $color-font-disabled;
 $color-font-interactive: $color-brand-primary;
 $color-font-interactive-hover: $color-brand-primary;
 $color-font-interactive-active: $color-brand-secondary;
-$color-font-interactive-disabled: $color-font-tertiary;
-$color-font-danger: $color-core-red-1000;
-$color-font-warning: $color-core-orange-1000;
-$color-font-success: $color-core-green-1000;"
+$color-font-interactive-focus: $color-font-interactive-active;
+$color-font-interactive-disabled: $color-font-disabled;"
 `;

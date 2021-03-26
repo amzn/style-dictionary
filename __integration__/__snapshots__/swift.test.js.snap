@@ -157,9 +157,12 @@ public class StyleDictionary {
     public static let colorCoreYellow800 = UIColor(red: 0.729, green: 0.459, blue: 0.024, alpha:1)
     public static let colorCoreYellow900 = UIColor(red: 0.580, green: 0.298, blue: 0.047, alpha:1)
     public static let colorFontDanger = UIColor(red: 0.427, green: 0.075, blue: 0.075, alpha:1)
+    public static let colorFontDisabled = UIColor(red: 0.212, green: 0.255, blue: 0.255, alpha:1)
+    public static let colorFontGhost = UIColor(red: 0.212, green: 0.255, blue: 0.255, alpha:1)
     public static let colorFontInteractive = UIColor(red: 0.043, green: 0.522, blue: 0.600, alpha:1)
     public static let colorFontInteractiveActive = UIColor(red: 0.435, green: 0.369, blue: 0.827, alpha:1)
     public static let colorFontInteractiveDisabled = UIColor(red: 0.212, green: 0.255, blue: 0.255, alpha:1)
+    public static let colorFontInteractiveFocus = UIColor(red: 0.435, green: 0.369, blue: 0.827, alpha:1)
     public static let colorFontInteractiveHover = UIColor(red: 0.043, green: 0.522, blue: 0.600, alpha:1)
     public static let colorFontPrimary = UIColor(red: 0.016, green: 0.016, blue: 0.016, alpha:1)
     public static let colorFontSecondary = UIColor(red: 0.153, green: 0.200, blue: 0.200, alpha:1)
@@ -336,9 +339,12 @@ public class StyleDictionary {
     public static let colorCoreYellow800 = UIColor(red: 0.729, green: 0.459, blue: 0.024, alpha:1)
     public static let colorCoreYellow900 = UIColor(red: 0.580, green: 0.298, blue: 0.047, alpha:1)
     public static let colorFontDanger = colorCoreRed1000
+    public static let colorFontDisabled = colorFontTertiary
+    public static let colorFontGhost = colorFontDisabled
     public static let colorFontInteractive = colorBrandPrimary
     public static let colorFontInteractiveActive = colorBrandSecondary
-    public static let colorFontInteractiveDisabled = colorFontTertiary
+    public static let colorFontInteractiveDisabled = colorFontDisabled
+    public static let colorFontInteractiveFocus = colorFontInteractiveActive
     public static let colorFontInteractiveHover = colorBrandPrimary
     public static let colorFontPrimary = colorCoreNeutral1100
     public static let colorFontSecondary = colorCoreNeutral900
