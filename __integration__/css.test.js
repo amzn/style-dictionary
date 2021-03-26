@@ -32,6 +32,12 @@ describe('integration', () => {
             options: {
               outputReferences: true
             }
+          },{
+            destination: 'variablesWithSelector.css',
+            format: 'css/variables',
+            options: {
+              selector: '.test'
+            }
           }]
         }
       }
@@ -45,6 +51,13 @@ describe('integration', () => {
 
       describe(`with references`, () => {
         const output = fs.readFileSync(`${buildPath}variablesWithReferences.css`, {encoding:'UTF-8'});
+        it(`should match snapshot`, () => {
+          expect(output).toMatchSnapshot();
+        });
+      });
+
+      describe(`with selector`, () => {
+        const output = fs.readFileSync(`${buildPath}variablesWithSelector.css`, {encoding:'UTF-8'});
         it(`should match snapshot`, () => {
           expect(output).toMatchSnapshot();
         });
