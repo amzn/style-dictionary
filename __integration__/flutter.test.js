@@ -81,7 +81,7 @@ describe('integration', () => {
       });
 
       describe(`separate`, () => {
-        const output = fs.readFileSync(`${buildPath}style_dictionary_color.dart`);
+        const output = fs.readFileSync(`${buildPath}style_dictionary_color.dart`, {encoding:`UTF-8`});
         it(`should match snapshot`, () => {
           expect(output).toMatchSnapshot();
         });
