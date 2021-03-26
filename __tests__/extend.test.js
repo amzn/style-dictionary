@@ -89,7 +89,7 @@ describe('extend', () => {
       });
       var output = helpers.fileToJSON(__dirname + "/__properties/paddings.json");
       traverseObj(output, (obj) => {
-        if (obj.value && !obj.filePath) {
+        if (obj.hasOwnProperty('value') && !obj.filePath) {
           obj.filePath = __dirname + "/__properties/paddings.json";
           obj.isSource = false;
         }
@@ -104,7 +104,7 @@ describe('extend', () => {
       });
       var output = helpers.fileToJSON(__dirname + "/__properties/paddings.json");
       traverseObj(output, (obj) => {
-        if (obj.value && !obj.filePath) {
+        if (obj.hasOwnProperty('value') && !obj.filePath) {
           obj.filePath = __dirname + "/__properties/paddings.json";
           obj.isSource = false;
         }
@@ -148,7 +148,7 @@ describe('extend', () => {
       });
       var output = helpers.fileToJSON(__dirname + "/__properties/paddings.json");
       traverseObj(output, (obj) => {
-        if (obj.value && !obj.filePath) {
+        if (obj.hasOwnProperty('value') && !obj.filePath) {
           obj.filePath = __dirname + "/__properties/paddings.json";
           obj.isSource = true;
         }
@@ -163,7 +163,7 @@ describe('extend', () => {
       });
       var output = helpers.fileToJSON(__dirname + "/__properties/paddings.json");
       traverseObj(output, (obj) => {
-        if (obj.value && !obj.filePath) {
+        if (obj.hasOwnProperty('value') && !obj.filePath) {
           obj.filePath = filePath;
           obj.isSource = true;
         }
@@ -178,7 +178,7 @@ describe('extend', () => {
       });
       var output = helpers.fileToJSON(__dirname + "/__properties/paddings.json");
       traverseObj(output, (obj) => {
-        if (obj.value && !obj.filePath) {
+        if (obj.hasOwnProperty('value') && !obj.filePath) {
           obj.filePath = __dirname + "/__properties/paddings.json";
           obj.isSource = true;
         }
@@ -197,7 +197,7 @@ describe('extend', () => {
     });
     var output = helpers.fileToJSON(__dirname + "/__properties/paddings.json");
     traverseObj(output, (obj) => {
-      if (obj.value && !obj.filePath) {
+      if (obj.hasOwnProperty('value') && !obj.filePath) {
         obj.filePath = __dirname + "/__properties/paddings.json";
         obj.isSource = true;
       }
