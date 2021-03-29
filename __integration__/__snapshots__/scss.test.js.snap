@@ -164,14 +164,14 @@ $color-background-danger: #ffeae9 !default;
 $color-background-tertiary: #dee1e1 !default;
 $color-background-secondary: #f3f4f4 !default;
 $color-background-primary: #ffffff !default;
-$color-background-disabled: #dee1e1 !default;
-$color-font-disabled: #364141 !default;
-$color-font-ghost: #364141 !default;
-$color-font-interactive: #0b8599 !default;
-$color-font-interactive-hover: #0b8599 !default;
 $color-font-interactive-active: #6f5ed3 !default;
-$color-font-interactive-focus: #6f5ed3 !default;
+$color-font-interactive-hover: #0b8599 !default;
+$color-font-interactive: #0b8599 !default;
+$color-font-disabled: #364141 !default;
+$color-background-disabled: #dee1e1 !default;
 $color-font-interactive-disabled: #364141 !default;
+$color-font-interactive-focus: #6f5ed3 !default;
+$color-font-ghost: #364141 !default;
 
 $tokens: (
   'color': (
@@ -560,14 +560,14 @@ $tokens: (
   'color-background-tertiary': #dee1e1,
   'color-background-secondary': #f3f4f4,
   'color-background-primary': #ffffff,
-  'color-background-disabled': #dee1e1,
-  'color-font-disabled': #364141,
-  'color-font-ghost': #364141,
-  'color-font-interactive': #0b8599,
-  'color-font-interactive-hover': #0b8599,
   'color-font-interactive-active': #6f5ed3,
+  'color-font-interactive-hover': #0b8599,
+  'color-font-interactive': #0b8599,
+  'color-font-disabled': #364141,
+  'color-background-disabled': #dee1e1,
+  'color-font-interactive-disabled': #364141,
   'color-font-interactive-focus': #6f5ed3,
-  'color-font-interactive-disabled': #364141
+  'color-font-ghost': #364141
 );
 "
 `;
@@ -921,12 +921,12 @@ $color-background-danger: $color-core-red-0;
 $color-background-tertiary: $color-core-neutral-200;
 $color-background-secondary: $color-core-neutral-100;
 $color-background-primary: $color-core-neutral-0 !default;
-$color-background-disabled: $color-background-tertiary;
-$color-font-disabled: $color-font-tertiary;
-$color-font-ghost: $color-font-disabled;
-$color-font-interactive: $color-brand-primary;
-$color-font-interactive-hover: $color-brand-primary;
 $color-font-interactive-active: $color-brand-secondary;
+$color-font-interactive-hover: $color-brand-primary;
+$color-font-interactive: $color-brand-primary;
+$color-font-disabled: $color-font-tertiary;
+$color-background-disabled: $color-background-tertiary;
+$color-font-interactive-disabled: $color-font-disabled;
 $color-font-interactive-focus: $color-font-interactive-active;
-$color-font-interactive-disabled: $color-font-disabled;"
+$color-font-ghost: $color-font-disabled;"
 `;

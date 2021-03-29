@@ -34,6 +34,17 @@ describe('integration', () => {
             options: {
               outputReferences: true
             }
+          },{
+            destination: "style_dictionary_enum.swift",
+            format: "ios-swift/enum.swift",
+            className: "StyleDictionary"
+          },{
+            destination: "style_dictionary_with_references_enum.swift",
+            format: "ios-swift/enum.swift",
+            className: "StyleDictionary",
+            options: {
+              outputReferences: true
+            }
           }]
         },
       }
@@ -52,15 +63,23 @@ describe('integration', () => {
         it(`should match snapshot`, () => {
           expect(output).toMatchSnapshot();
         });
+      });
+    });
 
+    describe(`ios-swift/enum.swift`, () => {
+      const output = fs.readFileSync(`${buildPath}style_dictionary_enum.swift`, {encoding:`UTF-8`});
+
+      it(`should match snapshot`, () => {
+        expect(output).toMatchSnapshot();
       });
 
-      // describe(`separate`, () => {
-      //   const output = fs.readFileSync(`${buildPath}style_dictionary_color.dart`);
-      //   it(`should match snapshot`, () => {
-      //     expect(output).toMatchSnapshot();
-      //   });
-      // });
+      describe(`with references`, () => {
+        const output = fs.readFileSync(`${buildPath}style_dictionary_with_references_enum.swift`, {encoding:`UTF-8`});
+
+        it(`should match snapshot`, () => {
+          expect(output).toMatchSnapshot();
+        });
+      });
     });
   });
 });

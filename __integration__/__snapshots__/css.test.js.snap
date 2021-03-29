@@ -340,14 +340,14 @@ exports[`integration css css/variables with references should match snapshot 1`]
   --color-background-tertiary: var(--color-core-neutral-200);
   --color-background-secondary: var(--color-core-neutral-100);
   --color-background-primary: var(--color-core-neutral-0);
-  --color-background-disabled: var(--color-background-tertiary);
-  --color-font-disabled: var(--color-font-tertiary);
-  --color-font-ghost: var(--color-font-disabled);
-  --color-font-interactive: var(--color-brand-primary);
-  --color-font-interactive-hover: var(--color-brand-primary);
   --color-font-interactive-active: var(--color-brand-secondary);
-  --color-font-interactive-focus: var(--color-font-interactive-active);
+  --color-font-interactive-hover: var(--color-brand-primary);
+  --color-font-interactive: var(--color-brand-primary);
+  --color-font-disabled: var(--color-font-tertiary);
+  --color-background-disabled: var(--color-background-tertiary);
   --color-font-interactive-disabled: var(--color-font-disabled);
+  --color-font-interactive-focus: var(--color-font-interactive-active);
+  --color-font-ghost: var(--color-font-disabled);
 }
 "
 `;
