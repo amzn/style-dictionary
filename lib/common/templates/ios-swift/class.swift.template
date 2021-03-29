@@ -33,15 +33,10 @@
     }
 %>
 //
-<%
-  // Filter to only those props wanted based on the filter, then sort
-  // them by category to keep like props together, then by name
-  // to make them easier to find alphabetically.
-  var props = _.sortBy(dictionary.allProperties, item => item.attributes.category + item.name);
-%>
+
 
 import UIKit
 
 public class <%= file.className %> {
-    <%= props.map(function(prop) { return 'public static let ' + prop.name + ' = ' + propToValue(prop); }).join('\n    ') %>
+    <%= dictionary.allProperties.sort(sortAllProperties(dictionary)).map(function(prop) { return 'public static let ' + prop.name + ' = ' + propToValue(prop); }).join('\n    ') %>
 }
