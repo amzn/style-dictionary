@@ -19,6 +19,16 @@ describe('integration', () => {
   describe('css', () => {
     StyleDictionary.extend({
       source: [`__integration__/tokens/**/*.json`],
+      // Testing proper string interpolation with multiple references here.
+      // This is a CSS/web-specific thing so only including them in this
+      // integration test.
+      properties: {
+        breakpoint: {
+          xs: { value: "304px" },
+          sm: { value: "768px" },
+          md: { value: "calc({breakpoint.xs.value} / {breakpoint.sm.value})"}
+        }
+      },
       platforms: {
         css: {
           transformGroup: 'css',

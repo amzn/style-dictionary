@@ -55,6 +55,7 @@ exports[`formats all should match android/integers snapshot 1`] = `
 
 exports[`formats all should match android/resources snapshot 1`] = `
 "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
+
 <!--
   Do not edit directly
   Generated on Sat, 01 Jan 2000 00:00:00 GMT
@@ -101,9 +102,10 @@ exports[`formats all should match flutter/class.dart snapshot 1`] = `
 //
 // __output/
 //
+
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
-//
+
 
 
 import 'dart:ui';
@@ -111,7 +113,7 @@ import 'dart:ui';
 class  {
   ._();
 
-    static const color_red = #FF0000;
+    static const color_red = #FF0000; /* comment */
 }"
 `;
 
@@ -388,15 +390,16 @@ exports[`formats all should match ios-swift/class.swift snapshot 1`] = `
 //
 // __output/
 //
+
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
-//
+
 
 
 import UIKit
 
 public class  {
-    public static let color_red = #FF0000
+    public static let color_red = #FF0000 /* comment */
 }
 "
 `;
@@ -406,14 +409,16 @@ exports[`formats all should match ios-swift/enum.swift snapshot 1`] = `
 //
 // __output/
 //
+
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
-//
+
+
 
 import UIKit
 
 public enum  {
-    public static let color_red = #FF0000
+    public static let color_red = #FF0000 /* comment */
 }
 "
 `;

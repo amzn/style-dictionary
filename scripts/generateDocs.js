@@ -86,7 +86,7 @@ console.log(ACTIONS_PATH + ' generated.');
 
 const FORMATS_PATH = './docs/formats.md'
 const formats = jsdoc2md.renderSync({
-  files: ['lib/common/formats.js', 'lib/register/format.js', 'lib/common/formatHelpers.js'],
+  files: ['lib/common/formats.js', 'lib/register/format.js', 'lib/common/formatHelpers/*.js'],
   template: fs.readFileSync('scripts/handlebars/templates/formats.hbs').toString(),
   'no-gfm': true,
   separators: true,
