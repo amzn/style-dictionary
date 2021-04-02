@@ -30,7 +30,7 @@ function(dictionary) {
     // the `dictionary` object now has `usesReference()` and
     // `getReferences()` methods. `usesReference()` will return true if
     // the value has a reference in it. `getReferences()` will return 
-    // the reference to the whole token so that you can access its 
+    // an array of references to the whole tokens so that you can access its 
     // name or any other attributes.
     if (dictionary.usesReference(token.original.value)) {
       const reference = dictionary.getReferences(token.original.value);

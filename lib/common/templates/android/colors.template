@@ -18,7 +18,7 @@ var props = dictionary.allProperties.filter(function(prop) {
  return prop.attributes.category === 'color';
 });
 %>
-<%= fileHeader(file, 'xml') %>
+<%= fileHeader({file, commentStyle: 'xml'}) %>
 <resources>
   <% props.forEach(function(prop) {
   %><color name="<%= prop.name %>"><%= prop.value %></color><% if (prop.comment) { %><!-- <%= prop.comment %> --><% } %>

@@ -13,7 +13,7 @@
 //
 // <%= file.destination %>
 //
-<%= fileHeader(file, 'short') %>
+<%= fileHeader({file, commentStyle: 'short'}) %>
 
 import 'dart:ui';
 

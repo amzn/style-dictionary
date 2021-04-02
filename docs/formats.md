@@ -240,7 +240,7 @@ The formatter function that is called when Style Dictionary builds files.
     <td>args.dictionary.usesReference</td><td><code>function</code></td><td><p>Use this function to see if a token&#39;s value uses a reference. This is the same function style dictionary uses internally to detect a reference.</p>
 </td>
     </tr><tr>
-    <td>args.dictionary.getReferences</td><td><code>function</code></td><td><p>Use this function to get the token/property that it references. You can use this to output a reference in your custom format. For example: <code>dictionary.getReferences(token.original.value) // returns an array of the referenced token objects</code></p>
+    <td>args.dictionary.getReferences</td><td><code>function</code></td><td><p>Use this function to get the tokens/properties that it references. You can use this to output a reference in your custom format. For example: <code>dictionary.getReferences(token.original.value) // returns an array of the referenced token objects</code></p>
 </td>
     </tr><tr>
     <td>args.platform</td><td><code>Object</code></td><td><p>The platform configuration this format is being called in.</p>
@@ -309,7 +309,7 @@ StyleDictionary.registerFormat({
       // the `dictionary` object now has `usesReference()` and
       // `getReferences()` methods. `usesReference()` will return true if
       // the value has a reference in it. `getReferences()` will return
-      // the reference to the whole token so that you can access its
+      // an array of references to the whole tokens so that you can access its
       // name or any other attributes.
       if (dictionary.usesReference(token.original.value)) {
         // Note: make sure to use `token.original.value` because
@@ -335,9 +335,10 @@ const { fileHeader, formattedVariables } = StyleDictionary.formatHelpers;
 StyleDictionary.registerFormat({
   name: 'myCustomFormat',
   formatter: function({dictionary, file, options}) {
-    return fileHeader(file) +
+    const { outputReferences } = options;
+    return fileHeader({file}) +
       ':root {\n' +
-      formattedVariables('css', dictionary, options.outputReferences) +
+      formattedVariables({format: 'css', dictionary, outputReferences}) +
       '\n}\n';
   }
 });
@@ -396,7 +397,7 @@ StyleDictionary.registerFormat({
 * * *
 
 ### fileHeader 
-> formatHelpers.fileHeader(file, commentStyle) ⇒ <code>String</code>
+> formatHelpers.fileHeader(options) ⇒ <code>String</code>
 
 This is for creating the comment at the top of generated files with the generated at date.
 It will use the custom file header if defined on the configuration, or use the
@@ -410,10 +411,15 @@ default file header.
   </thead>
   <tbody>
 <tr>
-    <td>file</td><td><code>File</code></td><td><p>The file object that is passed to the formatter.</p>
+    <td>options</td><td><code>Object</code></td><td></td>
+    </tr><tr>
+    <td>options.file</td><td><code>File</code></td><td><p>The file object that is passed to the formatter.</p>
 </td>
     </tr><tr>
-    <td>commentStyle</td><td><code>String</code></td><td><p>The only options are &#39;short&#39; and &#39;xml&#39;, which will use the // or &lt;!-- --&gt; style comments respectively. Anything else will use /* style comments.</p>
+    <td>options.commentStyle</td><td><code>String</code></td><td><p>The only options are &#39;short&#39; and &#39;xml&#39;, which will use the // or &lt;!-- --&gt; style comments respectively. Anything else will use /* style comments.</p>
+</td>
+    </tr><tr>
+    <td>options.formatting</td><td><code>Object</code></td><td><p>Custom formatting properties that define parts of a comment in code. The configurable strings are: prefix, lineSeparator, header, and footer.</p>
 </td>
     </tr>  </tbody>
 </table>
@@ -423,7 +429,7 @@ default file header.
 StyleDictionary.registerFormat({
   name: 'myCustomFormat',
   formatter: function({ dictionary, file }) {
-    return fileHeader(file, 'short') +
+    return fileHeader({file, 'short') +
       dictionary.allProperties.map(token => `${token.name} = ${token.value}`)
         .join('\n');
   }
@@ -433,25 +439,30 @@ StyleDictionary.registerFormat({
 * * *
 
 ### formattedVariables 
-> formatHelpers.formattedVariables(format, dictionary, outputReferences) ⇒ <code>String</code>
+> formatHelpers.formattedVariables(options) ⇒ <code>String</code>
 
 This is used to create lists of variables like Sass variables or CSS custom properties
 
 <table>
   <thead>
     <tr>
-      <th>Param</th><th>Type</th><th>Default</th><th>Description</th>
+      <th>Param</th><th>Type</th><th>Description</th>
     </tr>
   </thead>
   <tbody>
 <tr>
-    <td>format</td><td><code>String</code></td><td></td><td><p>What type of variables to output. Options are: css, sass, less, and stylus</p>
+    <td>options</td><td><code>Object</code></td><td></td>
+    </tr><tr>
+    <td>options.format</td><td><code>String</code></td><td><p>What type of variables to output. Options are: css, sass, less, and stylus</p>
 </td>
     </tr><tr>
-    <td>dictionary</td><td><code>Object</code></td><td></td><td><p>The dictionary object that gets passed to the formatter method.</p>
+    <td>options.dictionary</td><td><code>Object</code></td><td><p>The dictionary object that gets passed to the formatter method.</p>
 </td>
     </tr><tr>
-    <td>outputReferences</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to output references</p>
+    <td>options.outputReferences</td><td><code>Boolean</code></td><td><p>Whether or not to output references</p>
+</td>
+    </tr><tr>
+    <td>options.formatting</td><td><code>Object</code></td><td><p>Custom formatting properties that define parts of a declaration line in code. This will get passed to <code>formatHelpers.createPropertyFormatter</code> and used for the <code>lineSeparator</code> between lines of code.</p>
 </td>
     </tr>  </tbody>
 </table>

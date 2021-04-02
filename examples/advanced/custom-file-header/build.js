@@ -8,7 +8,7 @@ const version = require('./package.json').version;
 const {fileHeader} = StyleDictionary.formatHelpers;
 
 const myCustomFormat = ({ dictionary, file }) => {
-  return `${fileHeader(file, 'short')}${dictionary.allProperties.map(token => {
+  return `${fileHeader({file, commentStyle: 'short'})}${dictionary.allProperties.map(token => {
     return `--${token.name}: ${token.value};`
   }).join(`\n`)}`
 }

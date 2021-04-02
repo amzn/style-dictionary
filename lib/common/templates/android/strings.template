@@ -17,7 +17,7 @@
 var props = dictionary.allProperties.filter(function(prop) {
   return prop.attributes.category === 'content';
 }); %>
-<%= fileHeader(file, 'xml') %>
+<%= fileHeader({file, commentStyle: 'xml'}) %>
 <resources>
   <% props.forEach(function(prop) {
   %><string name="<%= prop.name %>"><%= prop.value %></string><% if (prop.comment) { %><!-- <%= prop.comment %> --><% } %>
