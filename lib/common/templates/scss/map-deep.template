@@ -12,24 +12,11 @@
 // on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
 // express or implied. See the License for the specific language governing
 // permissions and limitations under the License.
-
 %>
-<%
-    // for backward compatibility we need to have the user explicitly hide it
-    var showFileHeader = (this.options && this.options.hasOwnProperty('showFileHeader')) ? this.options.showFileHeader : true;
-    if(showFileHeader) {
-        var header = '';
-        header += "/*\n  Do not edit directly";
-        header += "\n  Generated on " + new Date().toUTCString();
-        header += "\n*/\n";
-        print(header);
-    }
-
-    print("\n");
-
+<%= fileHeader({file, commentStyle: 'long'}) %><%
     // output the list of tokens as Sass variables
     //
-    _.each(allProperties, function(prop) {
+    _.each(dictionary.allProperties, function(prop) {
         var output = '';
         output += '$' + prop.name + ': ' + (prop.attributes.category==='asset' ? '"'+prop.value+'"' : prop.value) + ' !default;'
         if(prop.comment) {
@@ -44,7 +31,7 @@
     // output the list of tokens as a Sass nested map
     // (the values are pointing to the variables)
     //
-    print(`$${this.mapName||'tokens'}: ${processJsonNode(properties, 0)};\n`);
+    print(`$${this.mapName||'tokens'}: ${processJsonNode(dictionary.properties, 0)};\n`);
 
     // recursive function to process a properties JSON node
     //

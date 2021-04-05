@@ -2,6 +2,7 @@
 
 exports[`formats android/resources should match default snapshot 1`] = `
 "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
+
 <!--
   Do not edit directly
   Generated on Sat, 01 Jan 2000 00:00:00 GMT
@@ -18,6 +19,7 @@ exports[`formats android/resources should match default snapshot 1`] = `
 
 exports[`formats android/resources with resourceMap override should match snapshot 1`] = `
 "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
+
 <!--
   Do not edit directly
   Generated on Sat, 01 Jan 2000 00:00:00 GMT
@@ -32,6 +34,7 @@ exports[`formats android/resources with resourceMap override should match snapsh
 
 exports[`formats android/resources with resourceType override should match snapshot 1`] = `
 "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
+
 <!--
   Do not edit directly
   Generated on Sat, 01 Jan 2000 00:00:00 GMT

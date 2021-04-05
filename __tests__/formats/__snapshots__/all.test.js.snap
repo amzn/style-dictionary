@@ -55,6 +55,7 @@ exports[`formats all should match android/integers snapshot 1`] = `
 
 exports[`formats all should match android/resources snapshot 1`] = `
 "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
+
 <!--
   Do not edit directly
   Generated on Sat, 01 Jan 2000 00:00:00 GMT
@@ -101,9 +102,10 @@ exports[`formats all should match flutter/class.dart snapshot 1`] = `
 //
 // __output/
 //
+
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
-//
+
 
 
 import 'dart:ui';
@@ -111,7 +113,7 @@ import 'dart:ui';
 class  {
   ._();
 
-    static const color_red = #FF0000;
+    static const color_red = #FF0000; /* comment */
 }"
 `;
 
@@ -120,12 +122,12 @@ exports[`formats all should match ios/colors.h snapshot 1`] = `
 //
 // __output/
 //
+
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
-//
+
 
 #import <UIKit/UIKit.h>
-
 
 typedef NS_ENUM(NSInteger, ) {
 color_red
@@ -143,12 +145,12 @@ exports[`formats all should match ios/colors.m snapshot 1`] = `
 //
 // __output/
 //
+
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
-//
+
 
 #import \\".h\\"
-
 
 @implementation 
 
@@ -178,14 +180,13 @@ exports[`formats all should match ios/macros snapshot 1`] = `
 //
 // __output/
 //
+
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
-//
+
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-
-
 
 #define color_red #FF0000
 
@@ -224,9 +225,10 @@ exports[`formats all should match ios/singleton.h snapshot 1`] = `
 //
 // __output/
 //
+
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
-//
+
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
@@ -246,9 +248,10 @@ exports[`formats all should match ios/singleton.m snapshot 1`] = `
 //
 // __output/
 //
+
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
-//
+
 
 #import \\".h\\"
 
@@ -292,12 +295,12 @@ exports[`formats all should match ios/static.h snapshot 1`] = `
 "
 // __output/
 //
+
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
-//
+
 
 #import <Foundation/Foundation.h>
-
 
 
 extern  const color_red;
@@ -309,12 +312,12 @@ exports[`formats all should match ios/static.m snapshot 1`] = `
 //
 // __output/
 //
+
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
-//
+
 
 #import \\".h\\"
-
 
 
  const color_red = #FF0000;
@@ -326,12 +329,12 @@ exports[`formats all should match ios/strings.h snapshot 1`] = `
 //
 // __output/
 //
+
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
-//
+
 
 #import <Foundation/Foundation.h>
-
 
 
 extern NSString * const color_red;
@@ -347,12 +350,12 @@ exports[`formats all should match ios/strings.m snapshot 1`] = `
 //
 // __output/
 //
+
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
-//
+
 
 #import \\".h\\"
-
 
 
 NSString * const color_red = #FF0000;
@@ -388,15 +391,15 @@ exports[`formats all should match ios-swift/class.swift snapshot 1`] = `
 //
 // __output/
 //
+
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
-//
 
 
 import UIKit
 
 public class  {
-    public static let color_red = #FF0000
+    public static let color_red = #FF0000 /* comment */
 }
 "
 `;
@@ -406,14 +409,15 @@ exports[`formats all should match ios-swift/enum.swift snapshot 1`] = `
 //
 // __output/
 //
+
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
-//
+
 
 import UIKit
 
 public enum  {
-    public static let color_red = #FF0000
+    public static let color_red = #FF0000 /* comment */
 }
 "
 `;
@@ -592,10 +596,10 @@ exports[`formats all should match less/variables snapshot 1`] = `
 
 exports[`formats all should match sass/map-deep snapshot 1`] = `
 "
-/*
-  Do not edit directly
-  Generated on Sat, 01 Jan 2000 00:00:00 GMT
-*/
+/**
+ * Do not edit directly
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ */
 
 $color_red: #FF0000 !default; // comment
 
@@ -609,10 +613,10 @@ $tokens: (
 
 exports[`formats all should match sass/map-flat snapshot 1`] = `
 "
-/*
-  Do not edit directly
-  Generated on Sat, 01 Jan 2000 00:00:00 GMT
-*/
+/**
+ * Do not edit directly
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ */
 
 $tokens: (
   // comment
@@ -631,10 +635,10 @@ exports[`formats all should match scss/icons snapshot 1`] = `
 
 exports[`formats all should match scss/map-deep snapshot 1`] = `
 "
-/*
-  Do not edit directly
-  Generated on Sat, 01 Jan 2000 00:00:00 GMT
-*/
+/**
+ * Do not edit directly
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ */
 
 $color_red: #FF0000 !default; // comment
 
@@ -648,10 +652,10 @@ $tokens: (
 
 exports[`formats all should match scss/map-flat snapshot 1`] = `
 "
-/*
-  Do not edit directly
-  Generated on Sat, 01 Jan 2000 00:00:00 GMT
-*/
+/**
+ * Do not edit directly
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ */
 
 $tokens: (
   // comment

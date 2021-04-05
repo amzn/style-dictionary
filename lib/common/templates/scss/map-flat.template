@@ -14,19 +14,7 @@
 // permissions and limitations under the License.
 
 %>
-<%
-    // for backward compatibility we need to have the user explicitly hide it
-    var showFileHeader = (this.options && this.options.hasOwnProperty('showFileHeader')) ? this.options.showFileHeader : true;
-    if(showFileHeader) {
-        var header = '';
-        header += "/*\n  Do not edit directly";
-        header += "\n  Generated on " + new Date().toUTCString();
-        header += "\n*/\n";
-        print(header);
-    }
-
-    print('\n');
-
+<%= fileHeader({file, commentStyle: 'long'}) %><%
     var output = '';
     output += `$${this.mapName||'tokens'}: (\n`;
     output += allProperties.map(function(prop){

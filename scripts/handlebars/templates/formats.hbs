@@ -243,7 +243,7 @@ Note: to support legacy ways of defining custom formats, <code>this</code> in th
 
 ## Custom format with output references
 
-To take advantage of outputting references in your custom formats there are 2 helper methods in the `dictionary` argument passed to your formatter function: `usesReference(value)` and `getReference(value)`. Here is an example using those:
+To take advantage of outputting references in your custom formats there are 2 helper methods in the `dictionary` argument passed to your formatter function: `usesReference(value)` and `getReferences(value)`. Here is an example using those:
 
 ```javascript
 StyleDictionary.registerFormat({
@@ -252,14 +252,14 @@ StyleDictionary.registerFormat({
     return dictionary.allProperties.map(token => {
       let value = JSON.stringify(token.value);
       // the `dictionary` object now has `usesReference()` and
-      // `getReference()` methods. `usesReference()` will return true if
-      // the value has a reference in it. `getReference()` will return
-      // the reference to the whole token so that you can access its
+      // `getReferences()` methods. `usesReference()` will return true if
+      // the value has a reference in it. `getReferences()` will return
+      // an array of references to the whole tokens so that you can access its
       // name or any other attributes.
       if (dictionary.usesReference(token.original.value)) {
         // Note: make sure to use `token.original.value` because
         // `token.value` is already resolved at this point.
-        const reference = dictionary.getReference(token.original.value);
+        const reference = dictionary.getReferences(token.original.value);
         value = reference.name;
       }
       return `export const ${token.name} = ${value};`
@@ -280,9 +280,10 @@ const { fileHeader, formattedVariables } = StyleDictionary.formatHelpers;
 StyleDictionary.registerFormat({
   name: 'myCustomFormat',
   formatter: function({dictionary, file, options}) {
-    return fileHeader(file) +
+    const { outputReferences } = options;
+    return fileHeader({file}) +
       ':root {\n' +
-      formattedVariables('css', dictionary, options.outputReferences) +
+      formattedVariables({format: 'css', dictionary, outputReferences}) +
       '\n}\n';
   }
 });

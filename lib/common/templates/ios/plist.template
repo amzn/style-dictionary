@@ -13,7 +13,7 @@
 // express or implied. See the License for the specific language governing
 // permissions and limitations under the License.
 
-var props = _.filter(allProperties, function(prop) {
+var props = dictionary.allProperties.filter(function(prop) {
   return prop.attributes.category !== 'asset' &&
          prop.attributes.category !== 'border' &&
          prop.attributes.category !== 'shadow' &&
@@ -21,18 +21,10 @@ var props = _.filter(allProperties, function(prop) {
 }); %>
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<%
-    // for backward compatibility we need to have the user explicitly hide it
-    var showFileHeader = (this.options && this.options.hasOwnProperty('showFileHeader')) ? this.options.showFileHeader : true;
-    if(showFileHeader) {
-        print("<!--\n  Do not edit directly");
-        print("\n  Generated on " + new Date().toUTCString());
-        print("\n-->");
-    }
-%>
+<%= fileHeader({ file, commentStyle: 'xml' }) %>
 <plist version="1.0">
   <dict>
-    <% _.each(props, function(prop) {
+    <% props.forEach(function(prop) {
     %><key><%= prop.name %></key>
     <% if (prop.attributes.category === 'color') { %><dict>
       <key>r</key>
