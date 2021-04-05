@@ -14,21 +14,12 @@
 // permissions and limitations under the License.
 %>
 //
-// <%= this.destination %>
+// <%= file.destination %>
 //
-<%
-    // for backward compatibility we need to have the user explicitly hide it
-    var showFileHeader = (this.options && this.options.hasOwnProperty('showFileHeader')) ? this.options.showFileHeader : true;
-    if(showFileHeader) {
-        print("// Do not edit directly\n");
-        print("// Generated on " + new Date().toUTCString());
-    }
-%>
-//
+<%= fileHeader({ file, commentStyle: 'short' })%>
+#import "<%= file.className %>.h"
 
-#import "<%= this.className %>.h"
-
-@implementation <%= this.className %>
+@implementation <%= file.className %>
 
 + (NSDictionary *)getProperty:(NSString *)keyPath {
   return [[self properties] valueForKeyPath:keyPath];
@@ -43,7 +34,7 @@
   static dispatch_once_t onceToken;
 
   dispatch_once(&onceToken, ^{
-    dictionary = <%= buildDictionary(properties) %>;
+    dictionary = <%= buildDictionary(dictionary.properties) %>;
   });
 
   return dictionary;

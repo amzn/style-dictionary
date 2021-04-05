@@ -14,25 +14,15 @@
 // permissions and limitations under the License.
 %>
 //
-// <%= this.destination %>
+// <%= file.destination %>
 //
-<%
-    // for backward compatibility we need to have the user explicitly hide it
-    var showFileHeader = (this.options && this.options.hasOwnProperty('showFileHeader')) ? this.options.showFileHeader : true;
-    if(showFileHeader) {
-        print("// Do not edit directly\n");
-        print("// Generated on " + new Date().toUTCString());
-    }
-%>
-//
+<%= fileHeader({ file, commentStyle: 'short' }) %>
+#import "<%= file.className %>.h"
 
-#import "<%= this.className %>.h"
-<%  var props = _.filter(allProperties, this.filter); %>
-
-<% _.each(props, function(prop) {  %>
+<% dictionary.allProperties.forEach(function(prop) {  %>
 NSString * const <%= prop.name %> = <%= prop.value %>;<% }); %>
 
-@implementation <%= this.className %>
+@implementation <%= file.className %>
 
 + (NSArray *)values {
   static NSArray* array;
@@ -40,7 +30,7 @@ NSString * const <%= prop.name %> = <%= prop.value %>;<% }); %>
 
   dispatch_once(&onceToken, ^{
     array = @[
-      <%= props.map(buildProperty).join(',\n') %>
+      <%= dictionary.allProperties.map(buildProperty).join(',\n') %>
     ];
   });
 
