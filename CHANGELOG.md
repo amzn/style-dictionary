@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0-rc.8](https://github.com/amzn/style-dictionary/compare/v3.0.0-rc.7...v3.0.0-rc.8) (2021-04-05)
+
+
+### Features
+
+* **formats:** add an optional selector to css/variables format ([#582](https://github.com/amzn/style-dictionary/issues/582)) ([34922a8](https://github.com/amzn/style-dictionary/commit/34922a8572b7cefc6ca579cca9f73b16bfc4efc0))
+* **formats:** output references handles interpoloated references ([#590](https://github.com/amzn/style-dictionary/issues/590)) ([cc595ca](https://github.com/amzn/style-dictionary/commit/cc595ca0683cc757dfae562a8688eb0b8d121cbe)), closes [#589](https://github.com/amzn/style-dictionary/issues/589)
+
+
+### Bug Fixes
+
+* **combine:** filePath was missing for falsey values ([#583](https://github.com/amzn/style-dictionary/issues/583)) ([8c405e6](https://github.com/amzn/style-dictionary/commit/8c405e6765367aff7eb94fda1a0a235f1c422c9c))
+* **formats:** update output references in formats to handle nested references ([#587](https://github.com/amzn/style-dictionary/issues/587)) ([9ce0311](https://github.com/amzn/style-dictionary/commit/9ce031108979493c7f5d0df34e3546322694feb6))
+
 ## [3.0.0-rc.7](https://github.com/amzn/style-dictionary/compare/v3.0.0-rc.6...v3.0.0-rc.7) (2021-03-24)
 
 

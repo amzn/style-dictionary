@@ -9,7 +9,7 @@
   "author": "",
   "license": "Apache-2.0",
   "devDependencies": {
-    "style-dictionary": "3.0.0-rc.7",
+    "style-dictionary": "3.0.0-rc.8",
     "yaml": "^1.10.0"
   }
 }
