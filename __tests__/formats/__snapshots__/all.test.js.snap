@@ -396,7 +396,6 @@ exports[`formats all should match ios-swift/class.swift snapshot 1`] = `
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
 
 
-
 import UIKit
 
 public class  {
@@ -413,7 +412,6 @@ exports[`formats all should match ios-swift/enum.swift snapshot 1`] = `
 
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
-
 
 
 import UIKit
@@ -603,7 +601,6 @@ exports[`formats all should match sass/map-deep snapshot 1`] = `
  * Generated on Sat, 01 Jan 2000 00:00:00 GMT
  */
 
-
 $color_red: #FF0000 !default; // comment
 
 $tokens: (
@@ -620,7 +617,6 @@ exports[`formats all should match sass/map-flat snapshot 1`] = `
  * Do not edit directly
  * Generated on Sat, 01 Jan 2000 00:00:00 GMT
  */
-
 
 $tokens: (
   // comment
@@ -644,7 +640,6 @@ exports[`formats all should match scss/map-deep snapshot 1`] = `
  * Generated on Sat, 01 Jan 2000 00:00:00 GMT
  */
 
-
 $color_red: #FF0000 !default; // comment
 
 $tokens: (
@@ -661,7 +656,6 @@ exports[`formats all should match scss/map-flat snapshot 1`] = `
  * Do not edit directly
  * Generated on Sat, 01 Jan 2000 00:00:00 GMT
  */
-
 
 $tokens: (
   // comment

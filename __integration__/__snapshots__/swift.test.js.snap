@@ -10,7 +10,6 @@ exports[`integration swift ios-swift/class.swift should match snapshot 1`] = `
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
 
 
-
 import UIKit
 
 public class StyleDictionary {
@@ -188,7 +187,6 @@ exports[`integration swift ios-swift/class.swift with references should match sn
 
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
-
 
 
 import UIKit

@@ -7,7 +7,6 @@ exports[`integration scss scss/map-deep should match snapshot 1`] = `
  * Generated on Sat, 01 Jan 2000 00:00:00 GMT
  */
 
-
 $color-background-primary: #ffffff !default;
 $color-background-secondary: #f3f4f4 !default;
 $color-background-tertiary: #dee1e1 !default;
@@ -396,7 +395,6 @@ exports[`integration scss scss/map-flat should match snapshot 1`] = `
  * Do not edit directly
  * Generated on Sat, 01 Jan 2000 00:00:00 GMT
  */
-
 
 $tokens: (
   'color-background-primary': #ffffff,

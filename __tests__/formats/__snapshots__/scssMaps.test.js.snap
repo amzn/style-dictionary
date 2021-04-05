@@ -7,7 +7,6 @@ exports[`formats scss/map-deep scss/map-deep snapshot 1`] = `
  * Generated on Sat, 01 Jan 2000 00:00:00 GMT
  */
 
-
 $size-font-small: 12rem !default;
 $size-font-large: 18rem !default;
 $color-base-red: #ff0000 !default; // comment
@@ -42,7 +41,6 @@ exports[`formats scss/map-flat scss/map-flat snapshot 1`] = `
  * Do not edit directly
  * Generated on Sat, 01 Jan 2000 00:00:00 GMT
  */
-
 
 $tokens: (
   'size-font-small': 12rem,

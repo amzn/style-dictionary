@@ -17,7 +17,6 @@
 // <%= file.destination %>
 //
 <%= fileHeader({file, commentStyle: 'short'}) %>
-
 import UIKit
 
 public class <%= file.className %> {

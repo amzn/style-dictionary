@@ -14,8 +14,7 @@
 // permissions and limitations under the License.
 
 %>
-<%= fileHeader({file, commentStyle: 'long'}) %>
-<%
+<%= fileHeader({file, commentStyle: 'long'}) %><%
     var output = '';
     output += `$${this.mapName||'tokens'}: (\n`;
     output += allProperties.map(function(prop){

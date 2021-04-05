@@ -13,8 +13,7 @@
 // express or implied. See the License for the specific language governing
 // permissions and limitations under the License.
 %>
-<%= fileHeader({file, commentStyle: 'long'}) %>
-<%
+<%= fileHeader({file, commentStyle: 'long'}) %><%
     // output the list of tokens as Sass variables
     //
     _.each(dictionary.allProperties, function(prop) {
