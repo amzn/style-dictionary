@@ -16,7 +16,7 @@
 <%= fileHeader({file, commentStyle: 'long'}) %><%
     // output the list of tokens as Sass variables
     //
-    _.each(dictionary.allProperties, function(prop) {
+    dictionary.allProperties.forEach(function(prop) {
         var output = '';
         output += '$' + prop.name + ': ' + (prop.attributes.category==='asset' ? '"'+prop.value+'"' : prop.value) + ' !default;'
         if(prop.comment) {
