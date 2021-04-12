@@ -26,11 +26,13 @@ describe('integration', () => {
           files: [{
             destination: "StyleDictionary.kt",
             format: "compose/object",
-            className: "StyleDictionary"
+            className: "StyleDictionary",
+            packageName: "com.example.tokens"
           },{
             destination: "StyleDictionaryWithReferences.kt",
             format: "compose/object",
             className: "StyleDictionary",
+            packageName: "com.example.tokens",
             options: {
               outputReferences: true
             }

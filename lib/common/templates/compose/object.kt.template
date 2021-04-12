@@ -15,7 +15,11 @@
 %>
 <%= fileHeader({file, commentStyle: 'short'}) %>
 
-// TODO proper imports per type
+package <%= file.packageName %>;
+
+<%  // Ideally we would selectively import the correct classes & functions based on whether the applied transforms actually need them. %>
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.*
 
 object <%= file.className %> {
     <%= allProperties.map(function(prop) {
