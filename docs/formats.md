@@ -138,6 +138,7 @@ Not all formats use the `outputReferences` option because that file format might
 * [scss/variables](#scssvariables)
 * [less/variables](#lessvariables)
 * [android/resources](#androidresources)
+* [compose/object](#composeobject)
 * [ios-swift/class.swift](#ios-swiftclassswift)
 * [flutter/class.dart](#flutterclassdart)
 
@@ -1147,7 +1148,7 @@ filter: {
 ### compose/object 
 
 
-Creates a Compose (Kotlin) implementation file of an object with values
+Creates a Kotlin file for Compose containing an object with a `val` for each property.
 
 <table>
   <thead>
@@ -1157,6 +1158,12 @@ Creates a Compose (Kotlin) implementation file of an object with values
   </thead>
   <tbody>
 <tr>
+    <td>className</td><td><code>String</code></td><td></td><td><p>The name of the generated Kotlin object</p>
+</td>
+    </tr><tr>
+    <td>packageName</td><td><code>String</code></td><td></td><td><p>The package for the generated Kotlin object</p>
+</td>
+    </tr><tr>
     <td>options</td><td><code>Object</code></td><td></td><td></td>
     </tr><tr>
     <td>[options.showFileHeader]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not to include a comment that has the build date</p>
@@ -1169,6 +1176,10 @@ Creates a Compose (Kotlin) implementation file of an object with values
 
 **Example**  
 ```kotlin
+package com.example.tokens;
+
+import androidx.compose.ui.graphics.Color
+
 object StyleDictionary {
  val colorBaseRed5 = Color(0xFFFAF3F2)
 }
