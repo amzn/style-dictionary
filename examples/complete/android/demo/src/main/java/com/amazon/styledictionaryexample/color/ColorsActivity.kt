@@ -10,44 +10,39 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
+package com.amazon.styledictionaryexample.color
 
-package com.amazon.styledictionaryexample.color;
+import android.content.Intent
+import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import com.amazon.styledictionaryexample.BaseActivity
+import com.amazon.styledictionaryexample.R
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+class ColorsActivity : BaseActivity() {
+  var baseButton: Button? = null
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_colors)
+    baseButton = findViewById(R.id.activity_colors_base_button)
+  }
 
-import com.amazon.styledictionaryexample.BaseActivity;
-import com.amazon.styledictionaryexample.R;
+  fun baseButton(view: View?) {
+    val baseColorIntent = Intent(this, BaseColorActivity::class.java)
+    startActivity(baseColorIntent)
+  }
 
+  fun backgroundButton(view: View?) {
+    val backgroundColorIntent = Intent(this, BackgroundColorActivity::class.java)
+    startActivity(backgroundColorIntent)
+  }
 
-public class ColorsActivity extends BaseActivity {
+  fun fontButton(view: View?) {
+    val fontColorIntent = Intent(this, FontColorActivity::class.java)
+    startActivity(fontColorIntent)
+  }
 
-    private static final String TAG = ColorsActivity.class.getSimpleName();
-
-    Button baseButton;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_colors);
-        baseButton = findViewById(R.id.activity_colors_base_button);
-    }
-
-    public void baseButton(View view) {
-        Intent baseColorIntent = new Intent(this, BaseColorActivity.class);
-        startActivity(baseColorIntent);
-    }
-
-    public void backgroundButton(View view) {
-        Intent backgroundColorIntent = new Intent(this, BackgroundColorActivity.class);
-        startActivity(backgroundColorIntent);
-    }
-
-    public void fontButton(View view) {
-        Intent fontColorIntent = new Intent(this, FontColorActivity.class);
-        startActivity(fontColorIntent);
-    }
-
+  companion object {
+    private val TAG = ColorsActivity::class.java.simpleName
+  }
 }

@@ -12,61 +12,55 @@
  * express or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
+package com.amazon.styledictionaryexample.color
 
-package com.amazon.styledictionaryexample.color;
+import com.amazon.styledictionaryexample.models.Property
 
-import com.amazon.styledictionaryexample.models.Property;
+interface BaseColorListItem {
+  val isHeader: Boolean
+  val title: String?
+  val subtitle: String
+  val property: Property?
 
-public interface BaseColorListItem {
-    boolean isHeader();
-    String getTitle();
-    String getSubtitle();
-    Property getProperty();
+  class BaseColorItem : BaseColorListItem {
+    override val title: String?
+    override val subtitle: String
+    override var property: Property? = null
 
-
-    class BaseColorItem implements BaseColorListItem {
-        private final String title;
-        private final String subtitle;
-        public Property property;
-
-        public BaseColorItem(String t, String s) {
-            title = t;
-            subtitle = s;
-        }
-
-        public BaseColorItem(Property p) {
-            property = p;
-            title = p.attributes.get("subitem");
-            subtitle = p.value;
-        }
-
-        public Property getProperty() { return property; }
-        public String getTitle() { return title; }
-        public String getSubtitle() { return subtitle; }
-        public boolean isHeader() { return false; }
+    constructor(t: String?, s: String) {
+      title = t
+      subtitle = s
     }
 
-    class BaseColorHeaderItem implements BaseColorListItem {
-        private final String title;
-        private final String subtitle;
-        public Property property;
-
-        public BaseColorHeaderItem(String t, String s) {
-            title = t;
-            subtitle = s;
-        }
-
-        public BaseColorHeaderItem(Property p) {
-            property = p;
-            title = p.attributes.get("item");
-            subtitle = p.name;
-        }
-
-        public Property getProperty() { return property; }
-        public String getTitle() { return title; }
-        public String getSubtitle() { return subtitle; }
-        public boolean isHeader() { return true; }
+    constructor(p: Property) {
+      property = p
+      title = p.attributes["subitem"]
+      subtitle = p.value
     }
+
+    override fun isHeader(): Boolean {
+      return false
+    }
+  }
+
+  class BaseColorHeaderItem : BaseColorListItem {
+    override val title: String?
+    override val subtitle: String
+    override var property: Property? = null
+
+    constructor(t: String?, s: String) {
+      title = t
+      subtitle = s
+    }
+
+    constructor(p: Property) {
+      property = p
+      title = p.attributes["item"]
+      subtitle = p.name
+    }
+
+    override fun isHeader(): Boolean {
+      return true
+    }
+  }
 }
-
-

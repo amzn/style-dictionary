@@ -10,77 +10,64 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
+package com.amazon.styledictionaryexample.color
 
-package com.amazon.styledictionaryexample.color;
+import android.app.Fragment
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import com.amazon.styledictionaryexample.R
+import com.amazon.styledictionaryexample.models.Property
+import com.amazon.styledictionaryexample.property.PropertyDetailActivity
+import com.amazon.styledictionaryexample.util.StringHelper
+import com.amazon.styledictionaryexample.util.StyleDictionaryHelper
+import java.util.*
 
-import android.app.Fragment;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+class ColorDetailFragment : Fragment() {
+  private var property: Property? = null
+  var swatch: View? = null
+  var title: TextView? = null
+  var body: TextView? = null
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+  }
 
-import com.amazon.styledictionaryexample.R;
-import com.amazon.styledictionaryexample.models.Property;
-import com.amazon.styledictionaryexample.property.PropertyDetailActivity;
-import com.amazon.styledictionaryexample.util.StringHelper;
-import com.amazon.styledictionaryexample.util.StyleDictionaryHelper;
-
-import java.util.ArrayList;
-
-
-public class ColorDetailFragment extends Fragment {
-
-    private Property property;
-    View swatch;
-    TextView title;
-    TextView body;
-
-    public ColorDetailFragment() {
-        // Required empty public constructor
+  override fun onCreateView(
+    inflater: LayoutInflater, container: ViewGroup?,
+    savedInstanceState: Bundle
+  ): View? {
+    // Inflate the layout for this fragment
+    val view = inflater.inflate(R.layout.fragment_color_detail, container, false)
+    swatch = view.findViewById(R.id.color_swatch)
+    title = view.findViewById(R.id.color_title)
+    body = view.findViewById(R.id.color_detail_body)
+    val path = activity.intent.getStringArrayListExtra(PropertyDetailActivity.ARG_PATH)
+    if (path != null) {
+      property = StyleDictionaryHelper.getProperty(path)
+      val id = resources.getIdentifier(property.name, "color", activity.packageName)
+      swatch.setBackgroundColor(resources.getColor(id, null))
+      title.setText(getTitle())
+      body.setText("@color/" + property.name)
     }
+    return view
+  }
 
-    public static ColorDetailFragment newInstance(ArrayList<String> path) {
-        ColorDetailFragment fragment = new ColorDetailFragment();
-        Bundle args = new Bundle();
-        args.putStringArrayList(PropertyDetailActivity.ARG_PATH, path);
-        fragment.setArguments(args);
-        return fragment;
+  private fun getTitle(): String {
+    return when (property!!.attributes["type"]) {
+      "base" -> StringHelper.nameToDisplay(property!!.attributes["item"]) + " " + property!!.attributes["subitem"]
+      else -> StringHelper.nameToDisplay(property!!.attributes["item"]) + " " + property!!.attributes["subitem"]
     }
+  }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+  companion object {
+    fun newInstance(path: ArrayList<String?>?): ColorDetailFragment {
+      val fragment = ColorDetailFragment()
+      val args = Bundle()
+      args.putStringArrayList(PropertyDetailActivity.ARG_PATH, path)
+      fragment.arguments = args
+      return fragment
     }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_color_detail, container, false);
-        swatch = view.findViewById(R.id.color_swatch);
-        title = view.findViewById(R.id.color_title);
-        body = view.findViewById(R.id.color_detail_body);
-
-        ArrayList<String> path = getActivity().getIntent().getStringArrayListExtra(PropertyDetailActivity.ARG_PATH);
-
-        if (path != null) {
-            property = StyleDictionaryHelper.getProperty(path);
-            int id = getResources().getIdentifier(property.name, "color", getActivity().getPackageName());
-            swatch.setBackgroundColor(getResources().getColor(id, null));
-            title.setText(getTitle());
-            body.setText("@color/".concat(property.name));
-        }
-        return view;
-    }
-
-
-    private String getTitle() {
-        switch (property.attributes.get("type")) {
-            case "base":
-                return StringHelper.nameToDisplay(property.attributes.get("item")) + " " + property.attributes.get("subitem");
-            default:
-                return StringHelper.nameToDisplay(property.attributes.get("item")) + " " + property.attributes.get("subitem");
-        }
-    }
+  }
 }

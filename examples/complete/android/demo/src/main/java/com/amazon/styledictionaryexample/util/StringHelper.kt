@@ -12,12 +12,10 @@
  * express or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
+package com.amazon.styledictionaryexample.util
 
-package com.amazon.styledictionaryexample.util;
-
-public class StringHelper {
-
-    public static String nameToDisplay(String str) {
-        return str.replaceAll("_", " ");
-    }
+object StringHelper {
+  fun nameToDisplay(str: String): String {
+    return str.replace("_".toRegex(), " ")
+  }
 }
