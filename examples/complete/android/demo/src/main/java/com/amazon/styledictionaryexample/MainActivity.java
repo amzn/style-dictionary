@@ -16,6 +16,7 @@ package com.amazon.styledictionaryexample;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import com.amazon.styledictionaryexample.color.ColorsActivity;
@@ -23,40 +24,33 @@ import com.amazon.styledictionaryexample.icon.IconListActivity;
 import com.amazon.styledictionaryexample.property.PropertiesActivity;
 import com.amazon.styledictionaryexample.util.StyleDictionaryHelper;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class MainActivity extends BaseActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
     private Typeface iconFont;
 
-    @BindView(R.id.activity_main_properties_button) Button propertiesButton;
-    @BindView(R.id.activity_main_colors_button) Button colorsButton;
+    Button propertiesButton;
+    Button colorsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         StyleDictionaryHelper.loadJSON(this);
-        ButterKnife.bind(this);
+        propertiesButton = findViewById(R.id.activity_main_properties_button);
+        colorsButton = findViewById(R.id.activity_main_colors_button);
     }
 
-    @OnClick(R.id.activity_main_colors_button)
-    public void colorsButton() {
+    public void colorsButton(View view) {
         Intent colorsIntent = new Intent(this, ColorsActivity.class);
         startActivity(colorsIntent);
     }
 
-
-    @OnClick(R.id.activity_main_properties_button)
-    public void propertiesButton() {
+    public void propertiesButton(View view) {
         Intent propertiesIntent = new Intent(this, PropertiesActivity.class);
         startActivity(propertiesIntent);
     }
 
-    @OnClick(R.id.activity_main_icons_button)
-    public void iconsButton() {
+    public void iconsButton(View view) {
         Intent iconsIntent = new Intent(this, IconListActivity.class);
         startActivity(iconsIntent);
     }

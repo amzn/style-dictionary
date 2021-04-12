@@ -18,7 +18,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,9 +32,6 @@ import com.amazon.styledictionaryexample.util.StyleDictionaryHelper;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * An activity representing a list of Icons.
@@ -111,14 +108,15 @@ public class IconListActivity extends BaseActivity {
 
         public class ViewHolder extends RecyclerView.ViewHolder {
             public final View mView;
-            @BindView(R.id.icon) TextView mIconView;
-            @BindView(R.id.title) TextView mTitleView;
+            TextView mIconView;
+            TextView mTitleView;
             public Property mItem;
 
             public ViewHolder(View view) {
                 super(view);
                 mView = view;
-                ButterKnife.bind(this, view);
+                mIconView = view.findViewById(R.id.icon);
+                mTitleView = view.findViewById(R.id.title);
                 mIconView.setTypeface(iconFont);
             }
 

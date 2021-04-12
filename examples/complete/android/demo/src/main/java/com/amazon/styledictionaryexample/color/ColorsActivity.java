@@ -15,43 +15,37 @@ package com.amazon.styledictionaryexample.color;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import com.amazon.styledictionaryexample.BaseActivity;
 import com.amazon.styledictionaryexample.R;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class ColorsActivity extends BaseActivity {
 
     private static final String TAG = ColorsActivity.class.getSimpleName();
 
-    @BindView(R.id.activity_colors_base_button)
     Button baseButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_colors);
-        ButterKnife.bind(this);
+        baseButton = findViewById(R.id.activity_colors_base_button);
     }
 
-    @OnClick(R.id.activity_colors_base_button)
-    public void baseButton() {
+    public void baseButton(View view) {
         Intent baseColorIntent = new Intent(this, BaseColorActivity.class);
         startActivity(baseColorIntent);
     }
 
-    @OnClick(R.id.activity_colors_background_button)
-    public void backgroundButton() {
+    public void backgroundButton(View view) {
         Intent backgroundColorIntent = new Intent(this, BackgroundColorActivity.class);
         startActivity(backgroundColorIntent);
     }
 
-    @OnClick(R.id.activity_colors_font_button)
-    public void fontButton() {
+    public void fontButton(View view) {
         Intent fontColorIntent = new Intent(this, FontColorActivity.class);
         startActivity(fontColorIntent);
     }

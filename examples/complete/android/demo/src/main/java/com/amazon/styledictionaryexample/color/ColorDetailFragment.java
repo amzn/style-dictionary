@@ -28,16 +28,13 @@ import com.amazon.styledictionaryexample.util.StyleDictionaryHelper;
 
 import java.util.ArrayList;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 
 public class ColorDetailFragment extends Fragment {
 
     private Property property;
-    @BindView(R.id.color_swatch) View swatch;
-    @BindView(R.id.color_title) TextView title;
-    @BindView(R.id.color_detail_body) TextView body;
+    View swatch;
+    TextView title;
+    TextView body;
 
     public ColorDetailFragment() {
         // Required empty public constructor
@@ -61,22 +58,25 @@ public class ColorDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_color_detail, container, false);
-        ButterKnife.bind(this, view);
+        swatch = view.findViewById(R.id.color_swatch);
+        title = view.findViewById(R.id.color_title);
+        body = view.findViewById(R.id.color_detail_body);
+
         ArrayList<String> path = getActivity().getIntent().getStringArrayListExtra(PropertyDetailActivity.ARG_PATH);
 
         if (path != null) {
-            property = StyleDictionaryHelper.getProperty( path );
+            property = StyleDictionaryHelper.getProperty(path);
             int id = getResources().getIdentifier(property.name, "color", getActivity().getPackageName());
             swatch.setBackgroundColor(getResources().getColor(id, null));
-            title.setText( getTitle() );
-            body.setText( "@color/".concat(property.name) );
+            title.setText(getTitle());
+            body.setText("@color/".concat(property.name));
         }
         return view;
     }
 
 
     private String getTitle() {
-        switch(property.attributes.get("type")) {
+        switch (property.attributes.get("type")) {
             case "base":
                 return StringHelper.nameToDisplay(property.attributes.get("item")) + " " + property.attributes.get("subitem");
             default:

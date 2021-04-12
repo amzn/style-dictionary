@@ -28,9 +28,6 @@ import com.amazon.styledictionaryexample.util.StyleDictionaryHelper;
 
 import java.util.ArrayList;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 /**
  * A fragment representing a single Icon detail screen.
  * This fragment is either contained in a {@link IconListActivity}
@@ -42,9 +39,9 @@ public class IconDetailFragment extends Fragment {
     private Typeface iconFont;
     public static final String ARG_ITEM_PATH = "path";
     private Property mItem;
-    @BindView(R.id.icon_detail_title) TextView title;
-    @BindView(R.id.icon_display) TextView icon;
-    @BindView(R.id.icon_detail_body) TextView body;
+    TextView title;
+    TextView icon;
+    TextView body;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -62,7 +59,9 @@ public class IconDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.icon_detail, container, false);
-        ButterKnife.bind(this, view);
+        icon = view.findViewById(R.id.icon_display);
+        title = view.findViewById(R.id.icon_detail_title);
+        body = view.findViewById(R.id.icon_detail_body);
 
         ArrayList<String> path = getActivity().getIntent().getStringArrayListExtra(ARG_ITEM_PATH);
         iconFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/MaterialIcons-Regular.ttf");

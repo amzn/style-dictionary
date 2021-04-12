@@ -21,6 +21,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/activity_colors_base_button"
             android:layout_marginBottom="@dimen/size_padding_base"
+            android:onClick="baseButton"
             android:text="Base Colors"/>
 
 
@@ -29,11 +30,13 @@
             android:layout_height="wrap_content"
             android:id="@+id/activity_colors_background_button"
             android:layout_marginBottom="@dimen/size_padding_base"
+            android:onClick="backgroundButton"
             android:text="Background Colors"/>
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="fontButton"
             android:id="@+id/activity_colors_font_button"
             android:text="Font Colors"/>
 

@@ -1,11 +1,12 @@
 package com.amazon.styledictionaryexample.color;
 
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.amazon.styledictionaryexample.BaseActivity;
 import com.amazon.styledictionaryexample.R;
@@ -14,9 +15,6 @@ import com.amazon.styledictionaryexample.util.StyleDictionaryHelper;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class BackgroundColorActivity extends BaseActivity {
 
@@ -81,15 +79,15 @@ public class BackgroundColorActivity extends BaseActivity {
 
         public class ViewHolder extends RecyclerView.ViewHolder {
             public final View mView;
-            @BindView(R.id.swatch)
             View mSwatchView;
-            @BindView(R.id.title) TextView mTitleView;
+            TextView mTitleView;
             public Property mItem;
 
             public ViewHolder(View view) {
                 super(view);
                 mView = view;
-                ButterKnife.bind(this, view);
+                mSwatchView = view.findViewById(R.id.swatch);
+                mTitleView = view.findViewById(R.id.title);
             }
 
             @Override
