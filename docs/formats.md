@@ -1144,6 +1144,38 @@ filter: {
 
 * * *
 
+### compose/object 
+
+
+Creates a Compose (Kotlin) implementation file of an object with values
+
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Default</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>options</td><td><code>Object</code></td><td></td><td></td>
+    </tr><tr>
+    <td>[options.showFileHeader]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not to include a comment that has the build date</p>
+</td>
+    </tr><tr>
+    <td>[options.outputReferences]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to keep <a href="/#/formats?id=references-in-output-files">references</a> (a -&gt; b -&gt; c) in the output.</p>
+</td>
+    </tr>  </tbody>
+</table>
+
+**Example**  
+```kotlin
+object StyleDictionary {
+ val colorBaseRed5 = Color(0xFFFAF3F2)
+}
+```
+
+* * *
+
 ### ios/macros 
 
 

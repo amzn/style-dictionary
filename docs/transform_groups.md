@@ -122,6 +122,21 @@ Transforms:
 
 * * *
 
+### compose 
+
+
+Transforms:
+
+[attribute/cti](transforms.md#attributecti)
+[name/cti/camel](transforms.md#namecticamel)
+[color/composeColor](transforms.md#colorcomposecolor)
+[size/compose/em](transforms.md#sizecomposeem)
+[size/compose/remToSp](transforms.md#sizecomposeremtosp)
+[size/compose/remToDp](transforms.md#sizecomposeremtodp)
+
+
+* * *
+
 ### ios 
 
 
