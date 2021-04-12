@@ -22,7 +22,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.*
 
 object <%= file.className %> {
-    <%= allProperties.map(function(prop) {
-      return 'val ' + formatProperty(prop);
-    }).join('\n    ') %>
+  <%= allProperties.map(function(prop) {
+    let comment = "";
+    if (prop.comment) {
+      comment = `/** ${prop.comment} */\n  `
+    }
+    return `${comment}val ${prop.name} = ${prop.value}`;
+  }).join('\n  ' ) %>
 }
