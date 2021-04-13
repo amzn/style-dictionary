@@ -14,8 +14,8 @@ import com.amazon.styledictionaryexample.property.PropertyFragment.OnListFragmen
  * specified [OnListFragmentInteractionListener].
  */
 class PropertyRecyclerViewAdapter(
-  private val mValues: List<StyleDictionaryNode>,
-  private val mListener: OnListFragmentInteractionListener?
+  private val values: List<StyleDictionaryNode>,
+  private val listener: OnListFragmentInteractionListener?
 ) : RecyclerView.Adapter<PropertyRecyclerViewAdapter.ViewHolder>() {
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
     val view = LayoutInflater.from(parent.context)
@@ -24,35 +24,28 @@ class PropertyRecyclerViewAdapter(
   }
 
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-    holder.mItem = mValues[position]
-    holder.mIdView.text = mValues[position].name
-    if (mValues[position].isLeaf) {
-    } else {
-      holder.mContentView.text = java.lang.String.valueOf(mValues[position].count)
+    holder.item = values[position]
+    holder.idView.text = values[position].name
+    if (!values[position].isLeaf) {
+      holder.contentView.text = java.lang.String.valueOf(values[position].count)
     }
-    holder.mView.setOnClickListener { mListener?.onListFragmentInteraction(holder.mItem) }
+    holder.view.setOnClickListener { listener?.onListFragmentInteraction(holder.item) }
   }
 
   override fun getItemCount(): Int {
-    return mValues.size
+    return values.size
   }
 
-  inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(
-    mView) {
-    val mIdView: TextView
-    val mContentView: TextView
-    var mItem: StyleDictionaryNode? = null
+  inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(
+    view) {
+    val idView: TextView = view.findViewById<View>(R.id.id) as TextView
+    val contentView: TextView = view.findViewById<View>(R.id.content) as TextView
+
+    var item: StyleDictionaryNode? = null
+
     override fun toString(): String {
-      return super.toString() + " '" + mContentView.text + "'"
+      return super.toString() + " '" + contentView.text + "'"
     }
 
-    init {
-      mIdView = mView.findViewById<View>(R.id.id) as TextView
-      mContentView = mView.findViewById<View>(R.id.content) as TextView
-    }
-  }
-
-  companion object {
-    private val TAG = PropertyRecyclerViewAdapter::class.java.simpleName
   }
 }

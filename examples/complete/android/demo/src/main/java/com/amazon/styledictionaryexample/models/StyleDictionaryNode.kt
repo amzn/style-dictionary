@@ -17,11 +17,8 @@ package com.amazon.styledictionaryexample.models
  * express or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-class StyleDictionaryNode {
-  @JvmField
-  var name: String? = null
-  @JvmField
-  var count = 0
-  @JvmField
-  var isLeaf = false
-}
+data class StyleDictionaryNode(
+  val name: String,
+  val count: Int = 0,
+  val isLeaf: Boolean = false
+)

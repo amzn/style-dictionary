@@ -10,6 +10,8 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
+@file:Suppress("UNUSED_PARAMETER")
+
 package com.amazon.styledictionaryexample.color
 
 import android.content.Intent
@@ -20,7 +22,8 @@ import com.amazon.styledictionaryexample.BaseActivity
 import com.amazon.styledictionaryexample.R
 
 class ColorsActivity : BaseActivity() {
-  var baseButton: Button? = null
+  private var baseButton: Button? = null
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_colors)

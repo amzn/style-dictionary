@@ -45,8 +45,8 @@ class IconListActivity : BaseActivity() {
         iconList)
   }
 
-  protected val iconList: ArrayList<Property>
-    protected get() {
+  private val iconList: ArrayList<Property>
+    get() {
       val path = ArrayList<String>()
       path.add("content")
       path.add("icon")
@@ -62,41 +62,36 @@ class IconListActivity : BaseActivity() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-      holder.mItem = mValues[position]
-      holder.mIconView.text = holder.mItem!!.value
-      holder.mTitleView.text = StringHelper.nameToDisplay(holder.mItem!!.attributes["item"])
-      holder.mView.setOnClickListener { v ->
-        val context = v.context
-        val intent = Intent(context, IconDetailActivity::class.java)
-        intent.putStringArrayListExtra(
-          IconDetailFragment.Companion.ARG_ITEM_PATH,
-          holder.mItem!!.path)
-        context.startActivity(intent)
-      }
+      holder.item = mValues[position]
+        .apply {
+          holder.iconView.text = value
+          holder.titleView.text = StringHelper.nameToDisplay(attributes["item"]!!)
+          holder.view.setOnClickListener { v ->
+            val context = v.context
+            val intent = Intent(context, IconDetailActivity::class.java)
+            intent.putStringArrayListExtra(
+              IconDetailFragment.ARG_ITEM_PATH,
+              ArrayList(this.path))
+            context.startActivity(intent)
+          }
+        }
     }
 
     override fun getItemCount(): Int {
       return mValues.size
     }
 
-    inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(
-      mView) {
-      var mIconView: TextView
-      var mTitleView: TextView
-      var mItem: Property? = null
+    inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+      var iconView: TextView = view.findViewById(R.id.icon)
+      var titleView: TextView = view.findViewById(R.id.title)
+      var item: Property? = null
       override fun toString(): String {
-        return super.toString() + " '" + mTitleView.text + "'"
+        return super.toString() + " '" + titleView.text + "'"
       }
 
       init {
-        mIconView = mView.findViewById(R.id.icon)
-        mTitleView = mView.findViewById(R.id.title)
-        mIconView.typeface = iconFont
+        iconView.typeface = iconFont
       }
     }
-  }
-
-  companion object {
-    private val TAG = IconListActivity::class.java.simpleName
   }
 }

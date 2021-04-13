@@ -34,7 +34,7 @@ class IconDetailActivity : BaseActivity() {
       // Create the detail fragment and add it to the activity
       // using a fragment transaction.
       val fragment = IconDetailFragment()
-      fragmentManager
+      supportFragmentManager
         .beginTransaction()
         .add(R.id.icon_detail_container, fragment)
         .commit()

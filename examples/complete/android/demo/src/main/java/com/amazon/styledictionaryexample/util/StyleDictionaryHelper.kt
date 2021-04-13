@@ -24,13 +24,14 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.datatype.jsonorg.JsonOrgModule
 import org.json.JSONException
 import org.json.JSONObject
-import java.io.IOException
+import java.nio.charset.Charset
 import java.util.*
 
 object StyleDictionaryHelper {
-  var MAPPER: ObjectMapper? = null
-  var DICTIONARY_JSON_STRING: String? = null
+  private var MAPPER: ObjectMapper? = null
+  private var DICTIONARY_JSON_STRING: String = ""
   var DICTIONARY_JSON: JSONObject? = null
+
   fun loadJSON(context: Context) {
     DICTIONARY_JSON_STRING = loadJsonFromAsset("data/properties.json", context)
     try {
@@ -45,24 +46,24 @@ object StyleDictionaryHelper {
     val keys = json!!.keys()
     while (keys.hasNext()) {
       val key = keys.next()
-      val node = StyleDictionaryNode()
-      node.name = key
+      var isLeaf = false
+      var count = 0
       try {
         val jsonNode = json.getJSONObject(key)
         if (jsonNode.has("value")) {
-          node.isLeaf = true
+          isLeaf = true
         } else {
-          node.count = jsonNode.length()
+          count = jsonNode.length()
         }
       } catch (e: JSONException) {
         e.printStackTrace()
       }
-      nodeList.add(node)
+      nodeList.add(StyleDictionaryNode(key, count, isLeaf))
     }
     return nodeList
   }
 
-  fun getArrayAtPath(path: ArrayList<String?>): ArrayList<StyleDictionaryNode> {
+  fun getArrayAtPath(path: List<String>): ArrayList<StyleDictionaryNode> {
     val nodeList = ArrayList<StyleDictionaryNode>()
     var json = DICTIONARY_JSON
     try {
@@ -76,32 +77,8 @@ object StyleDictionaryHelper {
     return nodeList
   }
 
-  fun getObjectAtPath(path: ArrayList<String?>): JSONObject? {
-    var json = DICTIONARY_JSON
-    try {
-      for (pathPart in path) {
-        json = json!!.getJSONObject(pathPart)
-      }
-    } catch (e: JSONException) {
-      e.printStackTrace()
-    }
-    return json
-  }
-
-  fun getObjectAtPath(path: ArrayList<String?>, json: JSONObject): JSONObject {
-    var json = json
-    try {
-      for (pathPart in path) {
-        json = json.getJSONObject(pathPart)
-      }
-    } catch (e: JSONException) {
-      e.printStackTrace()
-    }
-    return json
-  }
-
-  fun getProperty(path: ArrayList<String?>, json: JSONObject?): Property {
-    var json = json
+  private fun getProperty(path: ArrayList<String>, jsonObject: JSONObject?): Property {
+    var json = jsonObject
     val property: Property
     try {
       for (pathPart in path) {
@@ -115,15 +92,15 @@ object StyleDictionaryHelper {
       }
     } catch (e: JSONException) {
       e.printStackTrace()
+      throw e
     }
-    return Property()
   }
 
-  fun getProperty(path: ArrayList<String?>): Property {
+  fun getProperty(path: ArrayList<String>): Property {
     return getProperty(path, DICTIONARY_JSON)
   }
 
-  fun getArrayOfProps(path: ArrayList<String?>): ArrayList<Property> {
+  fun getArrayOfProps(path: ArrayList<String>): ArrayList<Property> {
     val propertyList = ArrayList<Property>()
     var json = DICTIONARY_JSON
     try {
@@ -145,20 +122,14 @@ object StyleDictionaryHelper {
     return propertyList
   }
 
-  fun loadJsonFromAsset(filename: String?, context: Context): String? {
-    var json: String? = null
-    json = try {
-      val `is` = context.assets.open(filename!!)
-      val size = `is`.available()
-      val buffer = ByteArray(size)
-      `is`.read(buffer)
-      `is`.close()
-      String(buffer, "UTF-8")
-    } catch (ex: IOException) {
-      ex.printStackTrace()
-      return null
-    }
-    return json
+  @Suppress("SameParameterValue")
+  private fun loadJsonFromAsset(filename: String, context: Context): String {
+    val inputStream = context.assets.open(filename)
+    val size = inputStream.available()
+    val buffer = ByteArray(size)
+    inputStream.read(buffer)
+    inputStream.close()
+    return String(buffer, Charset.forName("UTF-8"))
   }
 
   init {

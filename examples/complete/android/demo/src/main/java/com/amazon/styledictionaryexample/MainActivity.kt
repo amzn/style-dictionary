@@ -22,10 +22,11 @@ import com.amazon.styledictionaryexample.icon.IconListActivity
 import com.amazon.styledictionaryexample.property.PropertiesActivity
 import com.amazon.styledictionaryexample.util.StyleDictionaryHelper
 
+@Suppress("UNUSED_PARAMETER")
 class MainActivity : BaseActivity() {
-  private val iconFont: Typeface? = null
-  var propertiesButton: Button? = null
-  var colorsButton: Button? = null
+  private var propertiesButton: Button? = null
+  private var colorsButton: Button? = null
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
@@ -34,22 +35,18 @@ class MainActivity : BaseActivity() {
     colorsButton = findViewById(R.id.activity_main_colors_button)
   }
 
-  fun colorsButton(view: View?) {
+  fun colorsButton(view: View) {
     val colorsIntent = Intent(this, ColorsActivity::class.java)
     startActivity(colorsIntent)
   }
 
-  fun propertiesButton(view: View?) {
+  fun propertiesButton(view: View) {
     val propertiesIntent = Intent(this, PropertiesActivity::class.java)
     startActivity(propertiesIntent)
   }
 
-  fun iconsButton(view: View?) {
+  fun iconsButton(view: View) {
     val iconsIntent = Intent(this, IconListActivity::class.java)
     startActivity(iconsIntent)
-  }
-
-  companion object {
-    private val TAG = MainActivity::class.java.simpleName
   }
 }

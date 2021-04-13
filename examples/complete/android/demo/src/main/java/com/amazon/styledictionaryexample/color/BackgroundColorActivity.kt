@@ -17,13 +17,11 @@ class BackgroundColorActivity : BaseActivity() {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_background_color)
     val recyclerView = findViewById<View>(R.id.background_color_list)!!
-    (recyclerView as RecyclerView).adapter =
-      SimpleItemRecyclerViewAdapter(
-        backgroundColors)
+    (recyclerView as RecyclerView).adapter = SimpleItemRecyclerViewAdapter(backgroundColors)
   }
 
-  protected val backgroundColors: ArrayList<Property>
-    protected get() {
+  private val backgroundColors: ArrayList<Property>
+    get() {
       val path = ArrayList<String>()
       path.add("color")
       path.add("background")
@@ -39,35 +37,33 @@ class BackgroundColorActivity : BaseActivity() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-      holder.mItem = mValues[position]
-      val id = resources.getIdentifier(holder.mItem!!.name, "color", packageName)
-      holder.mSwatchView.setBackgroundColor(resources.getColor(id, null))
-      holder.mTitleView.text = holder.mItem!!.attributes["item"]
-      holder.mView.setOnClickListener {
-        //                    Context context = v.getContext();
+      holder.item = mValues[position]
+        .apply {
+          val id = resources.getIdentifier(name, "color", packageName)
+          holder.swatchView.setBackgroundColor(resources.getColor(id, null))
+          holder.titleView.text = attributes["item"]
+          holder.view.setOnClickListener {
+            //                    Context context = v.getContext();
 //                    Intent intent = new Intent(context, IconDetailActivity.class);
 //                    intent.putStringArrayListExtra(IconDetailFragment.ARG_ITEM_PATH, holder.mItem.path);
 //                    context.startActivity(intent);
-      }
+          }
+        }
     }
 
     override fun getItemCount(): Int {
       return mValues.size
     }
 
-    inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(
-      mView) {
-      var mSwatchView: View
-      var mTitleView: TextView
-      var mItem: Property? = null
+    inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(
+      view) {
+      val swatchView: View = view.findViewById(R.id.swatch)
+      val titleView: TextView = view.findViewById(R.id.title)
+      var item: Property? = null
       override fun toString(): String {
-        return super.toString() + " '" + mTitleView.text + "'"
+        return super.toString() + " '" + titleView.text + "'"
       }
 
-      init {
-        mSwatchView = mView.findViewById(R.id.swatch)
-        mTitleView = mView.findViewById(R.id.title)
-      }
     }
   }
 }

@@ -33,20 +33,19 @@ class BaseColorActivity : BaseActivity() {
     val ab = actionBar
     ab?.setDisplayHomeAsUpEnabled(true)
     val recyclerView = findViewById<View>(R.id.base_color_list)!!
-    (recyclerView as RecyclerView).adapter =
-      SimpleItemRecyclerViewAdapter(
-        allBaseColors)
+    (recyclerView as RecyclerView).adapter = SimpleItemRecyclerViewAdapter(allBaseColors)
   }
 
-  protected val baseColorList: ArrayList<StyleDictionaryNode>
-    protected get() {
+  private val baseColorList: ArrayList<StyleDictionaryNode>
+    get() {
       val path = ArrayList<String>()
       path.add("color")
       path.add("base")
       return StyleDictionaryHelper.getArrayAtPath(path)
     }
-  protected val allBaseColors: ArrayList<BaseColorListItem>
-    protected get() {
+
+  private val allBaseColors: ArrayList<BaseColorListItem>
+    get() {
       val baseColors = baseColorList
       val allColors = ArrayList<BaseColorListItem>()
       val path = ArrayList<String>()
@@ -69,10 +68,10 @@ class BaseColorActivity : BaseActivity() {
       return allColors
     }
 
-  inner class SimpleItemRecyclerViewAdapter(private val mValues: List<BaseColorListItem>) :
+  inner class SimpleItemRecyclerViewAdapter(private val values: List<BaseColorListItem>) :
     RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
     override fun getItemViewType(position: Int): Int {
-      return if (mValues[position].isHeader) {
+      return if (values[position].isHeader) {
         1
       } else {
         0
@@ -80,8 +79,7 @@ class BaseColorActivity : BaseActivity() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-      val view: View
-      view = when (viewType) {
+      val view = when (viewType) {
         0 -> LayoutInflater.from(parent.context)
           .inflate(R.layout.base_color_list_content, parent, false)
         1 -> LayoutInflater.from(parent.context)
@@ -93,22 +91,27 @@ class BaseColorActivity : BaseActivity() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-      holder.mItem = mValues[position]
-      val id = resources.getIdentifier(holder.mItem.getProperty().name, "color", packageName)
-      val fontColor: Int
-      fontColor = if (holder.mItem.getProperty().attributes["font"] == "inverse") {
-        resources.getColor(R.color.color_font_inverse_base, null)
-      } else {
-        resources.getColor(R.color.color_font_base, null)
-      }
-      holder.mTitleView.text = holder.mItem.getTitle()
-      holder.mTitleView.setTextColor(fontColor)
-      if (holder.mValueView != null) {
-        holder.mValueView.setText(holder.mItem.getSubtitle())
-        holder.mValueView!!.setTextColor(fontColor)
-      }
-      holder.mView.setBackgroundColor(resources.getColor(id, null))
-      holder.mView.setOnClickListener {
+      holder.item = values[position]
+      with(values[position]) {
+
+        val id = resources.getIdentifier(property.name, "color", packageName)
+        val fontColor: Int = if (property.attributes["font"] == "inverse") {
+          resources.getColor(R.color.color_font_inverse_base, null)
+        } else {
+          resources.getColor(R.color.color_font_base, null)
+        }
+
+        holder.titleView.text = title
+        holder.titleView.setTextColor(fontColor)
+
+        if (holder.valueView != null) {
+          holder.valueView.text = subtitle
+          holder.valueView.setTextColor(fontColor)
+        }
+
+        holder.view.setBackgroundColor(resources.getColor(id, null))
+        holder.view.setOnClickListener {
+        }
         //                    Context context = v.getContext();
 //                    Intent intent = new Intent(context, IconDetailActivity.class);
 //                    intent.putStringArrayListExtra(IconDetailFragment.ARG_ITEM_PATH, holder.mItem.path);
@@ -117,26 +120,20 @@ class BaseColorActivity : BaseActivity() {
     }
 
     override fun getItemCount(): Int {
-      return mValues.size
+      return values.size
     }
 
-    inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(
-      mView) {
-      var mTitleView: TextView
-      var mValueView: TextView?
-      var mItem: BaseColorListItem? = null
+    inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+
+      val titleView: TextView = view.findViewById(R.id.title)
+      val valueView: TextView? = view.findViewById(R.id.value)
+
+      var item: BaseColorListItem? = null
+
       override fun toString(): String {
-        return super.toString() + " '" + mTitleView.text + "'"
+        return super.toString() + " '${titleView.text} '"
       }
 
-      init {
-        mTitleView = mView.findViewById(R.id.title)
-        mValueView = mView.findViewById(R.id.value)
-      }
     }
-  }
-
-  companion object {
-    private val TAG = BaseColorActivity::class.java.simpleName
   }
 }

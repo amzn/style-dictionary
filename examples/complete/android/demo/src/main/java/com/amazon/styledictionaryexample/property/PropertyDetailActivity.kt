@@ -12,8 +12,8 @@
  */
 package com.amazon.styledictionaryexample.property
 
-import android.app.Fragment
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import com.amazon.styledictionaryexample.BaseActivity
 import com.amazon.styledictionaryexample.R
 import com.amazon.styledictionaryexample.color.ColorDetailFragment
@@ -31,14 +31,12 @@ class PropertyDetailActivity : BaseActivity() {
       // Create the detail fragment and add it to the activity
       // using a fragment transaction.
       val path = intent.getStringArrayListExtra(ARG_PATH)
-      val category = path!![0]
-      val fragment: Fragment
-      fragment = when (category) {
+      val fragment: Fragment = when (path!![0]) {
         "color" -> ColorDetailFragment()
         "content" -> IconDetailFragment()
         else -> ColorDetailFragment()
       }
-      fragmentManager
+      supportFragmentManager
         .beginTransaction()
         .add(R.id.property_detail_container, fragment)
         .commit()

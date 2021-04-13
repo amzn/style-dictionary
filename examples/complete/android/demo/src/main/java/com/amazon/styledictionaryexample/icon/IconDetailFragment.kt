@@ -12,13 +12,14 @@
  */
 package com.amazon.styledictionaryexample.icon
 
-import android.app.Fragment
+import android.annotation.SuppressLint
 import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import com.amazon.styledictionaryexample.R
 import com.amazon.styledictionaryexample.models.Property
 import com.amazon.styledictionaryexample.util.StringHelper
@@ -37,36 +38,35 @@ class IconDetailFragment
  */
   : Fragment() {
   private var iconFont: Typeface? = null
-  private var mItem: Property? = null
-  var title: TextView? = null
-  var icon: TextView? = null
-  var body: TextView? = null
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-  }
+  private var item: Property? = null
+  private var title: TextView? = null
+  private var icon: TextView? = null
+  private var body: TextView? = null
 
+  @SuppressLint("SetTextI18n")
   override fun onCreateView(
-    inflater: LayoutInflater, container: ViewGroup?,
-    savedInstanceState: Bundle
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
   ): View? {
     val view = inflater.inflate(R.layout.icon_detail, container, false)
     icon = view.findViewById(R.id.icon_display)
     title = view.findViewById(R.id.icon_detail_title)
     body = view.findViewById(R.id.icon_detail_body)
-    val path = activity.intent.getStringArrayListExtra(ARG_ITEM_PATH)
-    iconFont = Typeface.createFromAsset(activity.assets, "fonts/MaterialIcons-Regular.ttf")
+    val path = activity!!.intent.getStringArrayListExtra(ARG_ITEM_PATH)
+    iconFont = Typeface.createFromAsset(activity!!.assets, "fonts/MaterialIcons-Regular.ttf")
     if (path != null) {
-      mItem = StyleDictionaryHelper.getProperty(path)
-      title.setText(StringHelper.nameToDisplay(mItem.attributes["item"]))
-      icon.setTypeface(iconFont)
-      icon.setText(mItem.value)
-      body.setText("@string/" + mItem.name)
+      item = StyleDictionaryHelper.getProperty(path).apply {
+        title?.text = StringHelper.nameToDisplay(attributes["item"]!!)
+        icon?.typeface = iconFont
+        icon?.text = value
+        body?.text = "@string/$name"
+      }
     }
     return view
   }
 
   companion object {
-    private val TAG = IconDetailFragment::class.java.simpleName
     const val ARG_ITEM_PATH = "path"
   }
 }

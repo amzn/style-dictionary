@@ -20,47 +20,21 @@ interface BaseColorListItem {
   val isHeader: Boolean
   val title: String?
   val subtitle: String
-  val property: Property?
+  val property: Property
 
-  class BaseColorItem : BaseColorListItem {
-    override val title: String?
-    override val subtitle: String
-    override var property: Property? = null
+  class BaseColorItem(override val property: Property) : BaseColorListItem {
+    override val title: String? = property.attributes["subitem"]
+    override val subtitle: String = property.value
 
-    constructor(t: String?, s: String) {
-      title = t
-      subtitle = s
-    }
-
-    constructor(p: Property) {
-      property = p
-      title = p.attributes["subitem"]
-      subtitle = p.value
-    }
-
-    override fun isHeader(): Boolean {
-      return false
-    }
+    override val isHeader: Boolean
+      get() = false
   }
 
-  class BaseColorHeaderItem : BaseColorListItem {
-    override val title: String?
-    override val subtitle: String
-    override var property: Property? = null
+  class BaseColorHeaderItem(override var property: Property) : BaseColorListItem {
+    override val title: String? = property.attributes["item"]
+    override val subtitle: String = property.name
 
-    constructor(t: String?, s: String) {
-      title = t
-      subtitle = s
-    }
-
-    constructor(p: Property) {
-      property = p
-      title = p.attributes["item"]
-      subtitle = p.name
-    }
-
-    override fun isHeader(): Boolean {
-      return true
-    }
+    override val isHeader: Boolean
+      get() = true
   }
 }

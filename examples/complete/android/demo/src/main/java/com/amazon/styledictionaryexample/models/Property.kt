@@ -18,18 +18,11 @@
 package com.amazon.styledictionaryexample.models
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
-import java.util.*
 
-@JsonIgnoreProperties("original")
-class Property {
-  var name: String? = null
-  var value: String? = null
-  var attributes: Map<String, String>? = null
-  var path: ArrayList<String>? = null
-  var filePath: String? = null
-  var isSource = false
-
-  companion object {
-    private val TAG = Property::class.java.simpleName
-  }
-}
+@JsonIgnoreProperties("original", "filePath", "isSource")
+data class Property(
+  var name: String = "",
+  var value: String ="",
+  var attributes: Map<String, String> = mutableMapOf(),
+  var path: List<String> = emptyList()
+)

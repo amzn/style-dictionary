@@ -1,11 +1,11 @@
 package com.amazon.styledictionaryexample.property
 
-import android.app.Fragment
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.amazon.styledictionaryexample.R
 import com.amazon.styledictionaryexample.models.StyleDictionaryNode
@@ -22,14 +22,13 @@ import java.util.*
  */
 class PropertyFragment : Fragment() {
   private var mListener: OnListFragmentInteractionListener? = null
-  private var nodeList: ArrayList<StyleDictionaryNode>
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-  }
+  private var nodeList: ArrayList<StyleDictionaryNode> =
+    StyleDictionaryHelper.getNodeArrayForObject(StyleDictionaryHelper.DICTIONARY_JSON)
 
   override fun onCreateView(
-    inflater: LayoutInflater, container: ViewGroup?,
-    savedInstanceState: Bundle
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
   ): View? {
     val view = inflater.inflate(R.layout.fragment_property_list, container, false)
 
@@ -70,7 +69,6 @@ class PropertyFragment : Fragment() {
   }
 
   companion object {
-    private val TAG = PropertyFragment::class.java.simpleName
     fun newInstance(nodeList: ArrayList<StyleDictionaryNode>): PropertyFragment {
       val fragment = PropertyFragment()
       fragment.nodeList = nodeList
@@ -78,11 +76,4 @@ class PropertyFragment : Fragment() {
     }
   }
 
-  /**
-   * Mandatory empty constructor for the fragment manager to instantiate the
-   * fragment (e.g. upon screen orientation changes).
-   */
-  init {
-    nodeList = StyleDictionaryHelper.getNodeArrayForObject(StyleDictionaryHelper.DICTIONARY_JSON)
-  }
 }

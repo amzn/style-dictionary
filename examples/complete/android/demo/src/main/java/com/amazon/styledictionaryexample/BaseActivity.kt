@@ -12,11 +12,11 @@
  */
 package com.amazon.styledictionaryexample
 
-import android.app.Activity
 import android.content.Intent
 import android.view.MenuItem
+import androidx.fragment.app.FragmentActivity
 
-open class BaseActivity : Activity() {
+open class BaseActivity : FragmentActivity() {
   override fun finish() {
     super.finish()
     overridePendingTransitionExit()
@@ -43,14 +43,14 @@ open class BaseActivity : Activity() {
   /**
    * Overrides the pending Activity transition by performing the "Enter" animation.
    */
-  protected fun overridePendingTransitionEnter() {
+  private fun overridePendingTransitionEnter() {
     overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
   }
 
   /**
    * Overrides the pending Activity transition by performing the "Exit" animation.
    */
-  protected fun overridePendingTransitionExit() {
+  private fun overridePendingTransitionExit() {
     overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right)
   }
 }

@@ -12,11 +12,11 @@
  */
 package com.amazon.styledictionaryexample.property
 
-import android.app.Fragment
 import android.content.Intent
 import android.os.Bundle
 import android.transition.Slide
 import android.view.Gravity
+import androidx.fragment.app.Fragment
 import com.amazon.styledictionaryexample.BaseActivity
 import com.amazon.styledictionaryexample.R
 import com.amazon.styledictionaryexample.models.StyleDictionaryNode
@@ -25,10 +25,10 @@ import com.amazon.styledictionaryexample.util.StyleDictionaryHelper
 import java.util.*
 
 class PropertiesActivity : BaseActivity(), OnListFragmentInteractionListener {
-  var path: ArrayList<String?>? = null
+  val path: MutableList<String> = mutableListOf()
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    path = ArrayList()
     setContentView(R.layout.activity_properties)
     val ab = actionBar
     ab?.setDisplayHomeAsUpEnabled(true)
@@ -42,17 +42,17 @@ class PropertiesActivity : BaseActivity(), OnListFragmentInteractionListener {
       val _path = ArrayList(path)
       _path.add(item.name)
       val intent = Intent(this, PropertyDetailActivity::class.java)
-      intent.putStringArrayListExtra(PropertyDetailActivity.Companion.ARG_PATH, _path)
+      intent.putStringArrayListExtra(PropertyDetailActivity.ARG_PATH, _path)
       startActivity(intent)
     } else {
-      path!!.add(item.name)
+      path.add(item.name)
       val nodeList = StyleDictionaryHelper.getArrayAtPath(path)
 
       // Create new fragment and transaction
-      val newFragment: Fragment = PropertyFragment.Companion.newInstance(nodeList)
-      newFragment.exitTransition = Slide(Gravity.LEFT)
-      newFragment.enterTransition = Slide(Gravity.RIGHT)
-      val transaction = fragmentManager.beginTransaction()
+      val newFragment: Fragment = PropertyFragment.newInstance(nodeList)
+      newFragment.exitTransition = Slide(Gravity.START)
+      newFragment.enterTransition = Slide(Gravity.END)
+      val transaction = supportFragmentManager.beginTransaction()
       transaction.add(R.id.activity_properties, newFragment, item.name)
       transaction.addToBackStack(item.name)
 
@@ -62,17 +62,13 @@ class PropertiesActivity : BaseActivity(), OnListFragmentInteractionListener {
   }
 
   override fun onBackPressed() {
-    if (fragmentManager.backStackEntryCount > 0) {
-      fragmentManager.popBackStack()
-      if (path!!.size >= 1) {
-        path!!.removeAt(path!!.size - 1)
+    if (supportFragmentManager.backStackEntryCount > 0) {
+      supportFragmentManager.popBackStack()
+      if (path.size >= 1) {
+        path.removeAt(path.size - 1)
       }
     } else {
       super.onBackPressed()
     }
-  }
-
-  companion object {
-    private val TAG = PropertiesActivity::class.java.simpleName
   }
 }
