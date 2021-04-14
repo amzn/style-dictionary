@@ -27,6 +27,6 @@ object <%= file.className %> {
     if (prop.comment) {
       comment = `/** ${prop.comment} */\n  `
     }
-    return `${comment}val ${prop.name} = ${prop.value}`;
+    return comment + 'val ' + formatProperty(prop)
   }).join('\n  ' ) %>
 }
