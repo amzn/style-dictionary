@@ -11,11 +11,13 @@
  * and limitations under the License.
  */
 
-var resolveObject = require('../../lib/utils/resolveObject');
-var helpers = require('../__helpers');
-var GroupMessages = require('../../lib/utils/groupMessages');
+const resolveObject = require('../../lib/utils/resolveObject');
+const helpers = require('../__helpers');
+const Logger = require('../../lib/utils/logger');
 
-var PROPERTY_REFERENCE_WARNINGS = GroupMessages.GROUP.PropertyReferenceWarnings;
+beforeEach(() => {
+  Logger.clear();
+});
 
 describe('utils', () => {
   describe('resolveObject', () => {
@@ -117,60 +119,48 @@ describe('utils', () => {
     });
 
     it('should gracefully handle basic circular references', () => {
-      GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
-
       resolveObject(helpers.fileToJSON(__dirname + '/../__json_files/circular.json'));
-      expect(GroupMessages.count(PROPERTY_REFERENCE_WARNINGS)).toBe(1);
-      expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS))).toBe(JSON.stringify([
-         'Circular definition cycle:  a, b, c, d, a'
-      ]));
+      expect(Logger.platform.circularReferences.length).toBe(1);
+      expect(Logger.platform.circularReferencesMessages()).toEqual(
+        expect.stringContaining(`a → b → c → d → a`)
+      );
     });
 
     it('should gracefully handle basic and nested circular references', () => {
-      GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
-
       resolveObject(helpers.fileToJSON(__dirname + '/../__json_files/circular_2.json'));
-      expect(GroupMessages.count(PROPERTY_REFERENCE_WARNINGS)).toBe(1);
-      expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS))).toBe(JSON.stringify([
-        'Circular definition cycle:  a.b.c, j, a.b.c'
-      ]));
+      expect(Logger.platform.circularReferences.length).toBe(1);
+      expect(Logger.platform.circularReferencesMessages()).toEqual(
+        expect.stringContaining(`a.b.c → j → a.b.c`)
+      );
     });
 
     it('should gracefully handle nested circular references', () => {
-      GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
-
       resolveObject(helpers.fileToJSON(__dirname + '/../__json_files/circular_3.json'));
-      expect(GroupMessages.count(PROPERTY_REFERENCE_WARNINGS)).toBe(1);
-      expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS))).toBe(JSON.stringify([
-        'Circular definition cycle:  a.b, c.d.e, a.b'
-      ]));
+      expect(Logger.platform.circularReferences.length).toBe(1);
+      expect(Logger.platform.circularReferencesMessages()).toEqual(
+        expect.stringContaining(`a.b → c.d.e → a.b`)
+      );
     });
 
     it('should gracefully handle multiple nested circular references', () => {
-      GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
-
       resolveObject(helpers.fileToJSON(__dirname + '/../__json_files/circular_4.json'));
-      expect(GroupMessages.count(PROPERTY_REFERENCE_WARNINGS)).toBe(1);
-      expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS))).toBe(JSON.stringify([
-        'Circular definition cycle:  a.b.c.d, e.f.g, h.i, a.b.c.d',
-      ]));
+      expect(Logger.platform.circularReferences.length).toBe(1);
+      expect(Logger.platform.circularReferencesMessages()).toEqual(
+        expect.stringContaining(`a.b.c.d → e.f.g → h.i → a.b.c.d`)
+      );
     });
 
     it('should gracefully handle down-chain circular references', () => {
-      GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
-
       resolveObject(helpers.fileToJSON(__dirname + '/../__json_files/circular_5.json'));
-      expect(GroupMessages.count(PROPERTY_REFERENCE_WARNINGS)).toBe(1);
-      expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS))).toBe(JSON.stringify([
-        'Circular definition cycle:  l, m, l',
-      ]));
+      expect(Logger.platform.circularReferences.length).toBe(1);
+      expect(Logger.platform.circularReferencesMessages()).toEqual(
+        expect.stringContaining(`l → m → l`)
+      );
     });
 
     it('should correctly replace multiple references without reference errors', function() {
-      GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
-
       var obj = resolveObject(helpers.fileToJSON(__dirname + '/../__json_files/not_circular.json'));
-      expect(GroupMessages.count(PROPERTY_REFERENCE_WARNINGS)).toBe(0);
+      expect(Logger.platform.undefinedReferences.length).toBe(0);
       expect(JSON.stringify(obj)).toBe(JSON.stringify({
         prop1: { value: 'test1 value' },
         prop2: { value: 'test2 value' },
@@ -296,24 +286,19 @@ describe('utils', () => {
     });
 
     it('should collect multiple reference errors', () => {
-      GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
-
       resolveObject(helpers.fileToJSON(__dirname + '/../__json_files/multiple_reference_errors.json'));
-      expect(GroupMessages.count(PROPERTY_REFERENCE_WARNINGS)).toBe(3);
-      expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS))).toBe(JSON.stringify([
-         "Reference doesn't exist: a.b tries to reference b.a, which is not defined",
-         "Reference doesn't exist: a.c tries to reference b.c, which is not defined",
-         "Reference doesn't exist: a.d tries to reference d, which is not defined"
-      ]));
+      expect(Logger.platform.undefinedReferences.length).toBe(3);
+      expect(Logger.platform.undefinedReferencesMessages()).toEqual(
+        expect.stringContaining(`* Undefined reference errors:`)
+      );
     });
 
     it('should handle 0', () => {
-      GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
       var test = resolveObject({
         "test": { "value": "{zero.value}" },
-        "zero": { "value": 0}
+        "zero": { "value": 0 }
       });
-      expect(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS).length).toBe(0);
+      expect(Logger.platform.undefinedReferences.length).toBe(0);
       expect(test.test.value).toBe(0);
     });
 

@@ -205,15 +205,6 @@ describe('extend', () => {
     expect(StyleDictionaryExtended.properties).toEqual(output);
   });
 
-  it('should throw a error if the collision is in source files and log is set to error', () => {
-    expect(
-      StyleDictionary.extend.bind(null, {
-        source: [__dirname + "/__properties/paddings.1.json", __dirname + "/__properties/paddings.json"],
-        log: 'error'
-      })
-    ).toThrow('Collisions detected');
-  });
-
   it('should throw a warning if the collision is in source files and log is set to warn', () => {
     expect(
       StyleDictionary.extend.bind(null, {

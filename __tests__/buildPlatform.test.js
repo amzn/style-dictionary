@@ -150,29 +150,4 @@ describe('buildPlatform', () => {
     var output = helpers.fileToJSON('./__tests__/__output/output.json');
     expect(output.size.large.comment).toEqual(input.size.large.comment);
   });
-
-  it('should throw an error if given a transformGroup that doesn\'t exist', () => {
-    var StyleDictionaryExtended = StyleDictionary.extend({
-      source: ['__properties/**/*.json'],
-      platforms: {
-        foo: {
-          transformGroup: 'bar',
-          files: [{
-            destination: '__tests__/__output/test.css',
-            format: 'css/variables'
-          }]
-        }
-      }
-    });
-
-    let err = `
-Unknown transformGroup "bar" found in platform "foo":
-"bar" does not match the name of a registered transformGroup.
-`;
-
-    expect(
-      StyleDictionaryExtended.buildPlatform.bind(StyleDictionaryExtended, 'foo')
-    ).toThrow(err);
-  });
-
 });

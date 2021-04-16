@@ -43,7 +43,9 @@ describe('integration', () => {
           },
         }
       }).buildAllPlatforms();
-      expect(console.log).toHaveBeenCalledWith(`⚠️ ${buildPath}variables.css`);
+      expect(console.log).toHaveBeenCalledWith(
+        expect.stringContaining(`⚠︎ ${buildPath}variables.css`)
+      );
     });
 
     it(`should not warn users of name collisions for nested files`, () => {
@@ -62,7 +64,9 @@ describe('integration', () => {
           },
         }
       }).buildAllPlatforms();
-      expect(console.log).toHaveBeenCalledWith(chalk.bold.green(`✔︎ ${buildPath}tokens.json`));
+      expect(console.log).toHaveBeenCalledWith(
+        expect.stringContaining(`✔︎ ${buildPath}tokens.json`)
+      );
     });
 
 

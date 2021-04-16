@@ -14,13 +14,14 @@
 var buildFiles = require('../lib/buildFiles');
 var helpers = require('./__helpers');
 var _ = require('../lib/utils/es6_');
+const createDictionary = require('../lib/utils/createDictionary');
 
-var dictionary = {
+var dictionary = createDictionary({
   properties: {
     foo: { value: 'bar' },
     bingo: { value: 'bango' }
   }
-};
+});
 
 var platform = {
   files: [

@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`integration logging platform property reference errors circular references should throw notify users 1`] = `
+"✘ css
+* Circular reference errors:
+  * color.foo.value → color.foo.value → color.foo.value
+  * color.teal.value → color.blue.value → color.green.value → color.teal.value"
+`;
+
+exports[`integration logging platform property reference errors should throw and notify users of unknown references 1`] = `
+"✘ css
+* Undefined reference errors:
+  * color.danger.value → color.red.value"
+`;
+
+exports[`integration logging platform should throw and notify users of unknown actions 1`] = `
+"✘ css
+* Unknown actions:
+  * foo
+  Available actions: android/copyImages, copy_assets"
+`;
+
+exports[`integration logging platform should throw and notify users of unknown transformGroups 1`] = `
+"✘ css
+* Unknown transformGroups:
+  * foo
+  Available transformGroups: web, js, scss, css, less, html, android, ios, ios-swift, ios-swift-separate, assets, flutter, flutter-separate, react-native"
+`;
+
+exports[`integration logging platform should throw and notify users of unknown transforms 1`] = `
+"✘ css
+* Unknown transforms:
+  * foo
+  * bar
+  Available transforms: attribute/cti, attribute/color, name/human, name/cti/camel, name/ti/camel, name/cti/kebab, name/cti/snake, name/cti/constant, name/ti/constant, name/cti/pascal, color/rgb, color/hsl, color/hsl-4, color/hex, color/hex8, color/hex8android, color/UIColor, color/UIColorSwift, color/css, color/sketch, size/sp, size/dp, size/object, size/remToSp, size/remToDp, size/px, size/rem, size/remToPt, size/swift/remToCGFloat, size/remToPx, size/pxToRem, content/icon, content/quote, content/objC/literal, content/swift/literal, font/objC/literal, font/swift/literal, time/seconds, asset/base64, asset/path, asset/objC/literal, asset/swift/literal, color/hex8flutter, content/flutter/literal, asset/flutter/literal, font/flutter/literal, size/flutter/remToDouble"
+`;

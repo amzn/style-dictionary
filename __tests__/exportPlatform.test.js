@@ -126,7 +126,7 @@ describe('exportPlatform', () => {
   });
 
   describe('reference warnings', () => {
-    const errorMessage = `Problems were found when trying to resolve property references`;
+    const errorMessage = `Errors were found when building platform: css`;
     const platforms = {
       css: {
         transformGroup: `css`

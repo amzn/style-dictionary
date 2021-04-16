@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`integration > logging > config > property value collisions should not show warnings if given higher log level 1`] = `""`;
+
+exports[`integration > logging > config > property value collisions should not throw, but notify users by default 1`] = `
+"4 property value collisions found when parsing source files:
+* size.padding.small.value, Original: 0.5 -> New: 0.5
+* size.padding.medium.value, Original: 1 -> New: 1
+* size.padding.large.value, Original: 1 -> New: 1
+* size.padding.xl.value, Original: 1 -> New: 1"
+`;

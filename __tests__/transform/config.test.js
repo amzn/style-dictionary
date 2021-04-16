@@ -11,7 +11,8 @@
  * and limitations under the License.
  */
 
-var transformConfig = require('../../lib/transform/config');
+const transformConfig = require('../../lib/transform/config');
+const Logger = require('../../lib/utils/logger');
 
 const dictionary = {
   transformGroup: {
@@ -27,6 +28,10 @@ const dictionary = {
   }
 };
 
+beforeEach(() => {
+  Logger.clear();
+});
+
 describe('transform', () => {
   describe('config', () => {
     it('Emits error when called with a transformGroup that does not exist in the dictionary', () => {
@@ -34,14 +39,11 @@ describe('transform', () => {
         transformGroup: 'barTransformGroup'
       };
 
-      let err = `
-Unknown transformGroup "barTransformGroup" found in platform "test":
-"barTransformGroup" does not match the name of a registered transformGroup.
-`;
-
-      expect(
-        transformConfig.bind(null, noTransformGroupCfg, dictionary, 'test')
-      ).toThrow(err);
+      transformConfig(noTransformGroupCfg, dictionary, 'test');
+      expect(Logger.platform.missingTransformGroups.length).toBe(1);
+      expect(Logger.platform.messages()).toEqual(
+        expect.stringContaining(`barTransformGroup`)
+      );
     });
 
     it('Emits errors when called with a transform that does not exist', () => {
@@ -49,14 +51,11 @@ Unknown transformGroup "barTransformGroup" found in platform "test":
         transforms: ['fooTransform', 'barTransform', 'bazTransform']
       };
 
-      let err = `
-Unknown transforms "barTransform", "bazTransform" found in platform "test":
-None of "barTransform", "bazTransform" match the name of a registered transform.
-`;
-
-      expect(
-        transformConfig.bind(null, noTransformCfg, dictionary, 'test')
-      ).toThrow(err);
+      transformConfig(noTransformCfg, dictionary, 'test');
+      expect(Logger.platform.missingTransforms.length).toBe(2);
+      expect(Logger.platform.messages()).toEqual(
+        expect.stringContaining(`barTransform`)
+      );
     });
   });
 });

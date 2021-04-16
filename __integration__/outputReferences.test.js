@@ -42,7 +42,9 @@ describe('integration', () => {
         }
       }).buildAllPlatforms();
 
-      expect(console.log).toHaveBeenCalledWith(`⚠️ ${buildPath}filteredVariables.css`);
+      expect(console.log).toHaveBeenCalledWith(
+        expect.stringContaining(`⚠︎ ${buildPath}filteredVariables.css`)
+      );
     });
   });
 });
