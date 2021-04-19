@@ -12,7 +12,6 @@
  */
 
 const fs = require('fs-extra');
-const chalk = require('chalk');
 const StyleDictionary = require('../index');
 const {buildPath} = require('./_constants');
 

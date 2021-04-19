@@ -13,16 +13,12 @@
 
 const fs = require('fs-extra');
 const StyleDictionary = require('../../index');
-const {buildPath} = require('../_constants');
+const {buildPath, cleanConsoleOutput} = require('../_constants');
 
 // Spy on console.log and add all messages to an array
 let consoleOutput = [];
 const log = jest.spyOn(console, "log")
   .mockImplementation(message => consoleOutput.push(message))
-
-// this will remove the terminal character modifiers chalk adds for colors and styles
-// to make the snapshot easier to read
-const cleanConsoleOutput = (str='') => str.replace(/\[\d+m/gi,'')
 
 /**
  * This is the 2nd phase of logging: the platform configuration. This happens

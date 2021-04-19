@@ -13,16 +13,13 @@
 
 const fs = require('fs-extra');
 const StyleDictionary = require('../../index');
-const {buildPath} = require('../_constants');
+const {buildPath, cleanConsoleOutput} = require('../_constants');
 
 // Spy on console.log and add all messages to an array
 let consoleOutput = [];
 const log = jest.spyOn(console, "log")
   .mockImplementation(message => consoleOutput.push(message))
 
-// this will remove the terminal character modifiers chalk adds for colors and styles
-// to make the snapshot easier to read
-const cleanConsoleOutput = (str) => str.replace(/\[\d+m/gi,'')
 
 /**
  * The last and final level of logging: file.
@@ -83,6 +80,7 @@ describe(`integration`, () => {
             css: {
               // no name transform means there will be name collisions
               transforms: [`attribute/cti`],
+              buildPath,
               files: [{
                 destination: `nameCollisions.css`,
                 format: `css/variables`,
@@ -102,6 +100,7 @@ describe(`integration`, () => {
             css: {
               // no name transform means there will be name collisions
               transforms: [`attribute/cti`],
+              buildPath,
               files: [{
                 destination: `nameCollisions.css`,
                 format: `css/variables`,
@@ -119,6 +118,7 @@ describe(`integration`, () => {
           platforms: {
             css: {
               transformGroup: `css`,
+              buildPath,
               files: [{
                 destination: `filteredReferences.css`,
                 format: `css/variables`,
@@ -142,6 +142,7 @@ describe(`integration`, () => {
           platforms: {
             css: {
               transformGroup: `css`,
+              buildPath,
               files: [{
                 destination: `filteredReferences.css`,
                 format: `css/variables`,
