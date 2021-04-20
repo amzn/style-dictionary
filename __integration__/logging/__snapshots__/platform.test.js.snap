@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`integration logging platform property reference errors circular references should throw notify users 1`] = `
+"
+css
+
+Property Reference Errors:
+Circular definition cycle:  color.foo.value, color.foo.value, color.foo.value
+Circular definition cycle:  color.teal.value, color.blue.value, color.green.value, color.teal.value
+
+"
+`;
+
+exports[`integration logging platform property reference errors should throw and notify users of unknown references 1`] = `
+"
+css
+
+Property Reference Errors:
+Reference doesn't exist: color.danger.value tries to reference color.red.value, which is not defined
+
+"
+`;
+
+exports[`integration logging platform should throw and notify users of unknown actions 1`] = `
+"
+css"
+`;
+
+exports[`integration logging platform should throw and notify users of unknown transformGroups 1`] = `
+"
+css"
+`;
+
+exports[`integration logging platform should throw and notify users of unknown transforms 1`] = `
+"
+css"
+`;
