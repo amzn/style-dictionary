@@ -12,7 +12,7 @@ exports[`integration ios objective-c ios/color.h should match snapshot 1`] = `
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSInteger, ) {
+typedef NS_ENUM(NSInteger, StyleDictionaryColorName) {
 ColorBackgroundPrimary,
 ColorBackgroundSecondary,
 ColorBackgroundTertiary,
@@ -170,7 +170,7 @@ ColorFontSuccess
 
 @interface StyleDictionaryColor : NSObject
 + (NSArray *)values;
-+ (UIColor *)color:()color;
++ (UIColor *)color:(StyleDictionaryColorName)color;
 @end
 "
 `;
@@ -189,7 +189,7 @@ exports[`integration ios objective-c ios/color.m should match snapshot 1`] = `
 
 @implementation StyleDictionaryColor
 
-+ (UIColor *)color:()colorEnum{
++ (UIColor *)color:(StyleDictionaryColorName)colorEnum{
   return [[self values] objectAtIndex:colorEnum];
 }
 
