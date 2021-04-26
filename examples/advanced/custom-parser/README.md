@@ -2,7 +2,7 @@
 
 Style Dictionary 3.0 added the ability to define custom parsers for source files. Before 3.0, the source files for Style Dictionary had to be JSON, JSON5, or Node modules (unless you wanted to read and merge the data yourself outside of Style Dictionary). Now you can define custom parsers that run on certain files based on a file path pattern regular expression (similar to how Webpack loaders work). 
 
-Common use cases include:
+Use cases include:
 
 - Using YAML instead of JSON, JSON5, or Node modules as the source language for Style Dictionary files
 - Adding custom metadata when source files are parsed
