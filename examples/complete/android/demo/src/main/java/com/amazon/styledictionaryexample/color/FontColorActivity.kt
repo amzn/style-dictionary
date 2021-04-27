@@ -45,12 +45,6 @@ class FontColorActivity : BaseActivity() {
           val id = resources.getIdentifier(name, "color", packageName)
           holder.swatchView.setBackgroundColor(resources.getColor(id, null))
           holder.titleView.text = attributes["item"]
-          holder.view.setOnClickListener {
-        //                    Context context = v.getContext();
-//                    Intent intent = new Intent(context, IconDetailActivity.class);
-//                    intent.putStringArrayListExtra(IconDetailFragment.ARG_ITEM_PATH, holder.mItem.path);
-//                    context.startActivity(intent);
-        }
       }
     }
 

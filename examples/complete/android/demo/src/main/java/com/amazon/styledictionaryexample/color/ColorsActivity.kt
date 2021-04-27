@@ -44,8 +44,4 @@ class ColorsActivity : BaseActivity() {
     val fontColorIntent = Intent(this, FontColorActivity::class.java)
     startActivity(fontColorIntent)
   }
-
-  companion object {
-    private val TAG = ColorsActivity::class.java.simpleName
-  }
 }

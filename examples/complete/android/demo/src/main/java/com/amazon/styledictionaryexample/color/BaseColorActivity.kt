@@ -112,10 +112,6 @@ class BaseColorActivity : BaseActivity() {
         holder.view.setBackgroundColor(resources.getColor(id, null))
         holder.view.setOnClickListener {
         }
-        //                    Context context = v.getContext();
-//                    Intent intent = new Intent(context, IconDetailActivity.class);
-//                    intent.putStringArrayListExtra(IconDetailFragment.ARG_ITEM_PATH, holder.mItem.path);
-//                    context.startActivity(intent);
       }
     }
 
