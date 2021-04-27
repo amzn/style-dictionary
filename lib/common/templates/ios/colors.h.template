@@ -19,7 +19,7 @@
 <%= fileHeader({file, commentStyle: 'short'}) %>
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSInteger, <%= this.type %>) {
+typedef NS_ENUM(NSInteger, <%= file.type %>) {
 <%= dictionary.allProperties.map(function(prop) { return prop.name; }).join(',\n') %>
 };
 

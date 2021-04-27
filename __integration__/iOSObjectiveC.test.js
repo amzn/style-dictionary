@@ -35,11 +35,13 @@ describe('integration', () => {
             destination: "color.h",
             format: "ios/colors.h",
             className: "StyleDictionaryColor",
+            type: "StyleDictionaryColorName",
             filter: (token) => token.attributes.category === 'color'
           },{
             destination: "color.m",
             format: "ios/colors.m",
             className: "StyleDictionaryColor",
+            type: "StyleDictionaryColorName",
             filter: (token) => token.attributes.category === 'color'
           },{
             destination: "macros.h",

@@ -170,7 +170,7 @@ $size-padding-medium: 1rem !default;
 $size-padding-large: 1rem !default;
 $size-padding-xl: 1rem !default;
 
-$tokens: (
+$design-system-tokens: (
   'color': (
     'background': (
       'primary': $color-background-primary,
@@ -396,7 +396,7 @@ exports[`integration scss scss/map-flat should match snapshot 1`] = `
  * Generated on Sat, 01 Jan 2000 00:00:00 GMT
  */
 
-$tokens: (
+$design-system-tokens: (
   'color-background-primary': #ffffff,
   'color-background-secondary': #f3f4f4,
   'color-background-tertiary': #dee1e1,

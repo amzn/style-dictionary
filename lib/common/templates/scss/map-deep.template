@@ -31,7 +31,7 @@
     // output the list of tokens as a Sass nested map
     // (the values are pointing to the variables)
     //
-    print(`$${this.mapName||'tokens'}: ${processJsonNode(dictionary.properties, 0)};\n`);
+    print(`$${file.mapName||'tokens'}: ${processJsonNode(dictionary.properties, 0)};\n`);
 
     // recursive function to process a properties JSON node
     //
