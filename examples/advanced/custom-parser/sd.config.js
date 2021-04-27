@@ -1,6 +1,6 @@
-// You can use the .registerParser() method like this
 const StyleDictionary = require('style-dictionary');
 
+// You can use the .registerParser() method like this
 StyleDictionary.registerParser({
   pattern: /\.json$/,
   parse: ({contents, filePath}) => {
@@ -34,12 +34,12 @@ StyleDictionary.registerParser({
   }
 });
 
+// Or you can add parsers directly on the configuration object here like this:
 // StyleDictionary.extend({
-//   // Or you can add parsers directly on the configuration object here like this:
-//   // parsers: [{
-//   //   pattern: /\.json$/,
-//   //   parse: ({contents, filePath}) => {}
-//   // }],
+//   parsers: [{
+//     pattern: /\.json$/,
+//     parse: ({contents, filePath}) => {}
+//   }],
 //   source: [`tokens/**/*.json`],
 //   platforms: {
 //     css: {
