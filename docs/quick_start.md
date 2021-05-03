@@ -38,6 +38,10 @@ android
 ✔︎  build/android/font_dimens.xml
 ✔︎  build/android/colors.xml
 
+compose
+✔︎ build/compose/StyleDictionaryColor.kt
+✔︎ build/compose/StyleDictionarySize.kt
+
 ios
 ✔︎  build/ios/StyleDictionaryColor.h
 ✔︎  build/ios/StyleDictionaryColor.m
@@ -66,6 +70,9 @@ Pat yourself on the back, you built your first style dictionary! Take a look at 
 │   ├── android/
 │      ├── font_dimens.xml
 │      ├── colors.xml
+│   ├── compose/
+│      ├── StyleDictionaryColor.kt
+│      ├── StyleDictionarySize.kt
 │   ├── scss/
 │      ├── _variables.scss
 │   ├── ios/
@@ -102,6 +109,31 @@ If you open `config.json` you will see there are 3 platforms defined: scss, andr
   <color name="color_font_secondary">#ff999999</color>
   <color name="color_font_tertiary">#ffcccccc</color>
 </resources>
+```
+
+**Compose**
+```kotlin
+object StyleDictionaryColor {
+  val colorBaseGrayDark = Color(0xff111111)
+  val colorBaseGrayLight = Color(0xffcccccc)
+  val colorBaseGrayMedium = Color(0xff999999)
+  val colorBaseGreen = Color(0xff00ff00)
+  val colorBaseRed = Color(0xffff0000)
+  val colorFontBase = Color(0xffff0000)
+  val colorFontSecondary = Color(0xff00ff00)
+  val colorFontTertiary = Color(0xffcccccc)
+}
+
+object StyleDictionarySize {
+  /** the base size of the font */
+  val sizeFontBase = 16.00.sp
+  /** the large size of the font */
+  val sizeFontLarge = 32.00.sp
+  /** the medium size of the font */
+  val sizeFontMedium = 16.00.sp
+  /** the small size of the font */
+  val sizeFontSmall = 12.00.sp
+}
 ```
 
 **SCSS**
@@ -177,6 +209,18 @@ Now let's make a change and see how that affects things. Open up `properties/col
   <color name="color_font_secondary">#ff00ff00</color>
   <color name="color_font_tertiary">#ffcccccc</color>
 </resources>
+```
+```kotlin
+object StyleDictionaryColor {
+  val colorBaseGrayDark = Color(0xff000000)
+  val colorBaseGrayLight = Color(0xffcccccc)
+  val colorBaseGrayMedium = Color(0xff999999)
+  val colorBaseGreen = Color(0xff00ff00)
+  val colorBaseRed = Color(0xffff0000)
+  val colorFontBase = Color(0xffff0000)
+  val colorFontSecondary = Color(0xff00ff00)
+  val colorFontTertiary = Color(0xffcccccc)
+}
 ```
 ```scss
 $color-base-gray-light: #cccccc;

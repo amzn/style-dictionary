@@ -138,6 +138,7 @@ Not all formats use the `outputReferences` option because that file format might
 * [scss/variables](#scssvariables)
 * [less/variables](#lessvariables)
 * [android/resources](#androidresources)
+* [compose/object](#composeobject)
 * [ios-swift/class.swift](#ios-swiftclassswift)
 * [flutter/class.dart](#flutterclassdart)
 
@@ -1140,6 +1141,48 @@ filter: {
   <string name="content_icon_email">&#xE001;</string>
   <string name="content_icon_chevron_down">&#xE002;</string>
   <string name="content_icon_chevron_up">&#xE003;</string>
+```
+
+* * *
+
+### compose/object 
+
+
+Creates a Kotlin file for Compose containing an object with a `val` for each property.
+
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Default</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>className</td><td><code>String</code></td><td></td><td><p>The name of the generated Kotlin object</p>
+</td>
+    </tr><tr>
+    <td>packageName</td><td><code>String</code></td><td></td><td><p>The package for the generated Kotlin object</p>
+</td>
+    </tr><tr>
+    <td>options</td><td><code>Object</code></td><td></td><td></td>
+    </tr><tr>
+    <td>[options.showFileHeader]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not to include a comment that has the build date</p>
+</td>
+    </tr><tr>
+    <td>[options.outputReferences]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to keep <a href="/#/formats?id=references-in-output-files">references</a> (a -&gt; b -&gt; c) in the output.</p>
+</td>
+    </tr>  </tbody>
+</table>
+
+**Example**  
+```kotlin
+package com.example.tokens;
+
+import androidx.compose.ui.graphics.Color
+
+object StyleDictionary {
+ val colorBaseRed5 = Color(0xFFFAF3F2)
+}
 ```
 
 * * *

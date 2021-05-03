@@ -80,6 +80,27 @@ exports[`formats all should match android/strings snapshot 1`] = `
 "
 `;
 
+exports[`formats all should match compose/object snapshot 1`] = `
+"
+
+// Do not edit directly
+// Generated on Sat, 01 Jan 2000 00:00:00 GMT
+
+
+
+package ;
+
+
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.*
+
+object  {
+  /** comment */
+  val color_red = #FF0000
+}
+"
+`;
+
 exports[`formats all should match css/fonts.css snapshot 1`] = `
 "
 "

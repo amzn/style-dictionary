@@ -353,6 +353,23 @@ describe('common', () => {
       });
     });
 
+    describe('color/composeColor', () => {
+      it('should handle color without alpha', () => {
+        var value = transforms["color/composeColor"].transformer({
+          value: "#aaaaaa"
+        });
+        expect(value).toBe("Color(0xffaaaaaa)");
+      });
+
+      it('should handle color with alpha', () => {
+        var value = transforms["color/composeColor"].transformer({
+          value: "#aaaaaaff"
+        });
+        expect(value).toBe("Color(0xffaaaaaa)");
+      });
+
+    });
+
     describe('color/UIColor', () => {
       it('should handle normal colors', () => {
         var value = transforms["color/UIColor"].transformer({
@@ -559,6 +576,50 @@ describe('common', () => {
       });
       it('should throw an error if prop value is Nan', () => {
         expect( () => transforms["size/dp"].transformer({value: "a"})).toThrow();
+      });
+    });
+
+    describe('size/compose/remToSp', () => {
+      it('should work', () => {
+        var value = transforms["size/compose/remToSp"].transformer({
+          value: "1"
+        });
+        expect(value).toBe("16.00.sp");
+      });
+      it('converts rem to sp using custom base font', () => {
+        var value = transforms["size/compose/remToSp"].transformer({value: "1"}, {basePxFontSize: 14});
+        expect(value).toBe("14.00.sp");
+      });
+      it('should throw an error if prop value is Nan', () => {
+        expect( () => transforms["size/compose/remToSp"].transformer({value: "a"})).toThrow();
+      });
+    });
+
+    describe('size/compose/em', () => {
+      it('should work', () => {
+        var value = transforms["size/compose/em"].transformer({
+          value: "10"
+        });
+        expect(value).toBe("10.em");
+      });
+      it('should throw an error if prop value is Nan', () => {
+        expect( () => transforms["size/compose/em"].transformer({value: "a"})).toThrow();
+      });
+    });
+
+    describe('size/compose/remToDp', () => {
+      it('should work', () => {
+        var value = transforms["size/compose/remToDp"].transformer({
+          value: "1"
+        });
+        expect(value).toBe("16.00.dp");
+      });
+      it('converts rem to dp using custom base font', () => {
+        var value = transforms["size/compose/remToDp"].transformer({value: "1"}, {basePxFontSize: 14});
+        expect(value).toBe("14.00.dp");
+      });
+      it('should throw an error if prop value is Nan', () => {
+        expect( () => transforms["size/compose/remToDp"].transformer({value: "a"})).toThrow();
       });
     });
 

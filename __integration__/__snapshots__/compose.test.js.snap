@@ -1,0 +1,363 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`integration compose compose/object should match snapshot 1`] = `
+"
+
+// Do not edit directly
+// Generated on Sat, 01 Jan 2000 00:00:00 GMT
+
+
+
+package com.example.tokens;
+
+
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.*
+
+object StyleDictionary {
+  val colorBackgroundDanger = Color(0xffffeae9)
+  val colorBackgroundDisabled = Color(0xffdee1e1)
+  val colorBackgroundInfo = Color(0xffe9f8ff)
+  val colorBackgroundPrimary = Color(0xffffffff)
+  val colorBackgroundSecondary = Color(0xfff3f4f4)
+  val colorBackgroundSuccess = Color(0xffebf9eb)
+  val colorBackgroundTertiary = Color(0xffdee1e1)
+  val colorBackgroundWarning = Color(0xffffede3)
+  val colorBorderPrimary = Color(0xffc8cccc)
+  val colorBrandPrimary = Color(0xff0b8599)
+  val colorBrandSecondary = Color(0xff6f5ed3)
+  val colorCoreAqua0 = Color(0xffd9fcfb)
+  val colorCoreAqua100 = Color(0xffc5f9f9)
+  val colorCoreAqua1000 = Color(0xff083d4f)
+  val colorCoreAqua1100 = Color(0xff002838)
+  val colorCoreAqua200 = Color(0xffa5f2f2)
+  val colorCoreAqua300 = Color(0xff76e5e2)
+  val colorCoreAqua400 = Color(0xff33d6e2)
+  val colorCoreAqua500 = Color(0xff17b8ce)
+  val colorCoreAqua600 = Color(0xff0797ae)
+  val colorCoreAqua700 = Color(0xff0b8599)
+  val colorCoreAqua800 = Color(0xff0f6e84)
+  val colorCoreAqua900 = Color(0xff035e73)
+  val colorCoreBlue0 = Color(0xffe9f8ff)
+  val colorCoreBlue100 = Color(0xffdcf2ff)
+  val colorCoreBlue1000 = Color(0xff0a3960)
+  val colorCoreBlue1100 = Color(0xff002138)
+  val colorCoreBlue200 = Color(0xffc7e4f9)
+  val colorCoreBlue300 = Color(0xffa1d2f8)
+  val colorCoreBlue400 = Color(0xff56adf5)
+  val colorCoreBlue500 = Color(0xff3896e3)
+  val colorCoreBlue600 = Color(0xff2b87d3)
+  val colorCoreBlue700 = Color(0xff2079c3)
+  val colorCoreBlue800 = Color(0xff116daa)
+  val colorCoreBlue900 = Color(0xff0c5689)
+  val colorCoreGreen0 = Color(0xffebf9eb)
+  val colorCoreGreen100 = Color(0xffd7f4d7)
+  val colorCoreGreen1000 = Color(0xff08422f)
+  val colorCoreGreen1100 = Color(0xff002b20)
+  val colorCoreGreen200 = Color(0xffc2f2bd)
+  val colorCoreGreen300 = Color(0xff98e58e)
+  val colorCoreGreen400 = Color(0xff75dd66)
+  val colorCoreGreen500 = Color(0xff59cb59)
+  val colorCoreGreen600 = Color(0xff2bb656)
+  val colorCoreGreen700 = Color(0xff0ca750)
+  val colorCoreGreen800 = Color(0xff008b46)
+  val colorCoreGreen900 = Color(0xff006b40)
+  val colorCoreMagenta0 = Color(0xfffef0ff)
+  val colorCoreMagenta100 = Color(0xfff9e3fc)
+  val colorCoreMagenta1000 = Color(0xff451551)
+  val colorCoreMagenta1100 = Color(0xff29192d)
+  val colorCoreMagenta200 = Color(0xfff4c4f7)
+  val colorCoreMagenta300 = Color(0xffedadf2)
+  val colorCoreMagenta400 = Color(0xfff282f5)
+  val colorCoreMagenta500 = Color(0xffdb61db)
+  val colorCoreMagenta600 = Color(0xffc44eb9)
+  val colorCoreMagenta700 = Color(0xffac44a8)
+  val colorCoreMagenta800 = Color(0xff8f3896)
+  val colorCoreMagenta900 = Color(0xff6c2277)
+  val colorCoreNeutral0 = Color(0xffffffff)
+  val colorCoreNeutral100 = Color(0xfff3f4f4)
+  val colorCoreNeutral1000 = Color(0xff162020)
+  val colorCoreNeutral1100 = Color(0xff040404)
+  val colorCoreNeutral200 = Color(0xffdee1e1)
+  val colorCoreNeutral300 = Color(0xffc8cccc)
+  val colorCoreNeutral400 = Color(0xffb0b6b7)
+  val colorCoreNeutral500 = Color(0xff929a9b)
+  val colorCoreNeutral600 = Color(0xff6e797a)
+  val colorCoreNeutral700 = Color(0xff515e5f)
+  val colorCoreNeutral800 = Color(0xff364141)
+  val colorCoreNeutral900 = Color(0xff273333)
+  val colorCoreOrange0 = Color(0xffffede3)
+  val colorCoreOrange100 = Color(0xfffcdccc)
+  val colorCoreOrange1000 = Color(0xff601700)
+  val colorCoreOrange1100 = Color(0xff2d130e)
+  val colorCoreOrange200 = Color(0xffffc6a4)
+  val colorCoreOrange300 = Color(0xffffb180)
+  val colorCoreOrange400 = Color(0xffff9c5d)
+  val colorCoreOrange500 = Color(0xfffc8943)
+  val colorCoreOrange600 = Color(0xfff57d33)
+  val colorCoreOrange700 = Color(0xffed7024)
+  val colorCoreOrange800 = Color(0xffce5511)
+  val colorCoreOrange900 = Color(0xff962c0b)
+  val colorCorePink0 = Color(0xffffe9f3)
+  val colorCorePink100 = Color(0xfffcdbeb)
+  val colorCorePink1000 = Color(0xff561231)
+  val colorCorePink1100 = Color(0xff2b1721)
+  val colorCorePink200 = Color(0xffffb5d5)
+  val colorCorePink300 = Color(0xffff95c1)
+  val colorCorePink400 = Color(0xffff76ae)
+  val colorCorePink500 = Color(0xffef588b)
+  val colorCorePink600 = Color(0xffe0447c)
+  val colorCorePink700 = Color(0xffce3665)
+  val colorCorePink800 = Color(0xffb22f5b)
+  val colorCorePink900 = Color(0xff931847)
+  val colorCorePurple0 = Color(0xfff2f2f9)
+  val colorCorePurple100 = Color(0xffeaeaf9)
+  val colorCorePurple1000 = Color(0xff2d246b)
+  val colorCorePurple1100 = Color(0xff1d1d38)
+  val colorCorePurple200 = Color(0xffd8d7f9)
+  val colorCorePurple300 = Color(0xffc1c1f7)
+  val colorCorePurple400 = Color(0xffa193f2)
+  val colorCorePurple500 = Color(0xff9180f4)
+  val colorCorePurple600 = Color(0xff816fea)
+  val colorCorePurple700 = Color(0xff6f5ed3)
+  val colorCorePurple800 = Color(0xff5e4eba)
+  val colorCorePurple900 = Color(0xff483a9c)
+  val colorCoreRed0 = Color(0xffffeae9)
+  val colorCoreRed100 = Color(0xffffd5d2)
+  val colorCoreRed1000 = Color(0xff6d1313)
+  val colorCoreRed1100 = Color(0xff2b1111)
+  val colorCoreRed200 = Color(0xffffb8b1)
+  val colorCoreRed300 = Color(0xffff9c8f)
+  val colorCoreRed400 = Color(0xffff7f6e)
+  val colorCoreRed500 = Color(0xfff76054)
+  val colorCoreRed600 = Color(0xffed4c42)
+  val colorCoreRed700 = Color(0xffdb3e3e)
+  val colorCoreRed800 = Color(0xffc63434)
+  val colorCoreRed900 = Color(0xff992222)
+  val colorCoreTeal0 = Color(0xffe5f9f5)
+  val colorCoreTeal100 = Color(0xffcdf7ef)
+  val colorCoreTeal1000 = Color(0xff083f3f)
+  val colorCoreTeal1100 = Color(0xff002528)
+  val colorCoreTeal200 = Color(0xffb3f2e6)
+  val colorCoreTeal300 = Color(0xff7dead5)
+  val colorCoreTeal400 = Color(0xff24e0c5)
+  val colorCoreTeal500 = Color(0xff08c4b2)
+  val colorCoreTeal600 = Color(0xff00a99c)
+  val colorCoreTeal700 = Color(0xff0b968f)
+  val colorCoreTeal800 = Color(0xff067c7c)
+  val colorCoreTeal900 = Color(0xff026661)
+  val colorCoreYellow0 = Color(0xfffff8e2)
+  val colorCoreYellow100 = Color(0xfffdefcd)
+  val colorCoreYellow1000 = Color(0xff542a00)
+  val colorCoreYellow1100 = Color(0xff2d1a05)
+  val colorCoreYellow200 = Color(0xffffe99a)
+  val colorCoreYellow300 = Color(0xffffe16e)
+  val colorCoreYellow400 = Color(0xffffd943)
+  val colorCoreYellow500 = Color(0xffffcd1c)
+  val colorCoreYellow600 = Color(0xffffbc00)
+  val colorCoreYellow700 = Color(0xffdd9903)
+  val colorCoreYellow800 = Color(0xffba7506)
+  val colorCoreYellow900 = Color(0xff944c0c)
+  val colorFontDanger = Color(0xff6d1313)
+  val colorFontInteractive = Color(0xff0b8599)
+  val colorFontInteractiveActive = Color(0xff6f5ed3)
+  val colorFontInteractiveDisabled = Color(0xff364141)
+  val colorFontInteractiveHover = Color(0xff0b8599)
+  val colorFontPrimary = Color(0xff040404)
+  val colorFontSecondary = Color(0xff273333)
+  val colorFontSuccess = Color(0xff08422f)
+  val colorFontTertiary = Color(0xff364141)
+  val colorFontWarning = Color(0xff601700)
+  val sizeBorderRadiusLarge = 480.00.dp
+  val sizeFontLarge = 24.00.sp
+  val sizeFontMedium = 16.00.sp
+  val sizeFontSmall = 12.00.sp
+  val sizeFontXl = 36.00.sp
+  val sizePaddingLarge = 16.00.dp
+  val sizePaddingMedium = 16.00.dp
+  val sizePaddingSmall = 8.00.dp
+  val sizePaddingXl = 16.00.dp
+}
+"
+`;
+
+exports[`integration compose compose/object with references should match snapshot 1`] = `
+"
+
+// Do not edit directly
+// Generated on Sat, 01 Jan 2000 00:00:00 GMT
+
+
+
+package com.example.tokens;
+
+
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.*
+
+object StyleDictionary {
+  val sizePaddingXl = 16.00.dp
+  val sizePaddingLarge = 16.00.dp
+  val sizePaddingMedium = 16.00.dp
+  val sizePaddingSmall = 8.00.dp
+  val sizeFontXl = 36.00.sp
+  val sizeFontLarge = 24.00.sp
+  val sizeFontMedium = 16.00.sp
+  val sizeFontSmall = 12.00.sp
+  val sizeBorderRadiusLarge = 480.00.dp
+  val colorCoreYellow1100 = Color(0xff2d1a05)
+  val colorCoreYellow1000 = Color(0xff542a00)
+  val colorCoreYellow900 = Color(0xff944c0c)
+  val colorCoreYellow800 = Color(0xffba7506)
+  val colorCoreYellow700 = Color(0xffdd9903)
+  val colorCoreYellow600 = Color(0xffffbc00)
+  val colorCoreYellow500 = Color(0xffffcd1c)
+  val colorCoreYellow400 = Color(0xffffd943)
+  val colorCoreYellow300 = Color(0xffffe16e)
+  val colorCoreYellow200 = Color(0xffffe99a)
+  val colorCoreYellow100 = Color(0xfffdefcd)
+  val colorCoreYellow0 = Color(0xfffff8e2)
+  val colorCoreNeutral1100 = Color(0xff040404)
+  val colorCoreNeutral1000 = Color(0xff162020)
+  val colorCoreNeutral900 = Color(0xff273333)
+  val colorCoreNeutral800 = Color(0xff364141)
+  val colorCoreNeutral700 = Color(0xff515e5f)
+  val colorCoreNeutral600 = Color(0xff6e797a)
+  val colorCoreNeutral500 = Color(0xff929a9b)
+  val colorCoreNeutral400 = Color(0xffb0b6b7)
+  val colorCoreNeutral300 = Color(0xffc8cccc)
+  val colorCoreNeutral200 = Color(0xffdee1e1)
+  val colorCoreNeutral100 = Color(0xfff3f4f4)
+  val colorCoreNeutral0 = Color(0xffffffff)
+  val colorCoreOrange1100 = Color(0xff2d130e)
+  val colorCoreOrange1000 = Color(0xff601700)
+  val colorCoreOrange900 = Color(0xff962c0b)
+  val colorCoreOrange800 = Color(0xffce5511)
+  val colorCoreOrange700 = Color(0xffed7024)
+  val colorCoreOrange600 = Color(0xfff57d33)
+  val colorCoreOrange500 = Color(0xfffc8943)
+  val colorCoreOrange400 = Color(0xffff9c5d)
+  val colorCoreOrange300 = Color(0xffffb180)
+  val colorCoreOrange200 = Color(0xffffc6a4)
+  val colorCoreOrange100 = Color(0xfffcdccc)
+  val colorCoreOrange0 = Color(0xffffede3)
+  val colorCoreRed1100 = Color(0xff2b1111)
+  val colorCoreRed1000 = Color(0xff6d1313)
+  val colorCoreRed900 = Color(0xff992222)
+  val colorCoreRed800 = Color(0xffc63434)
+  val colorCoreRed700 = Color(0xffdb3e3e)
+  val colorCoreRed600 = Color(0xffed4c42)
+  val colorCoreRed500 = Color(0xfff76054)
+  val colorCoreRed400 = Color(0xffff7f6e)
+  val colorCoreRed300 = Color(0xffff9c8f)
+  val colorCoreRed200 = Color(0xffffb8b1)
+  val colorCoreRed100 = Color(0xffffd5d2)
+  val colorCoreRed0 = Color(0xffffeae9)
+  val colorCorePink1100 = Color(0xff2b1721)
+  val colorCorePink1000 = Color(0xff561231)
+  val colorCorePink900 = Color(0xff931847)
+  val colorCorePink800 = Color(0xffb22f5b)
+  val colorCorePink700 = Color(0xffce3665)
+  val colorCorePink600 = Color(0xffe0447c)
+  val colorCorePink500 = Color(0xffef588b)
+  val colorCorePink400 = Color(0xffff76ae)
+  val colorCorePink300 = Color(0xffff95c1)
+  val colorCorePink200 = Color(0xffffb5d5)
+  val colorCorePink100 = Color(0xfffcdbeb)
+  val colorCorePink0 = Color(0xffffe9f3)
+  val colorCoreMagenta1100 = Color(0xff29192d)
+  val colorCoreMagenta1000 = Color(0xff451551)
+  val colorCoreMagenta900 = Color(0xff6c2277)
+  val colorCoreMagenta800 = Color(0xff8f3896)
+  val colorCoreMagenta700 = Color(0xffac44a8)
+  val colorCoreMagenta600 = Color(0xffc44eb9)
+  val colorCoreMagenta500 = Color(0xffdb61db)
+  val colorCoreMagenta400 = Color(0xfff282f5)
+  val colorCoreMagenta300 = Color(0xffedadf2)
+  val colorCoreMagenta200 = Color(0xfff4c4f7)
+  val colorCoreMagenta100 = Color(0xfff9e3fc)
+  val colorCoreMagenta0 = Color(0xfffef0ff)
+  val colorCorePurple1100 = Color(0xff1d1d38)
+  val colorCorePurple1000 = Color(0xff2d246b)
+  val colorCorePurple900 = Color(0xff483a9c)
+  val colorCorePurple800 = Color(0xff5e4eba)
+  val colorCorePurple700 = Color(0xff6f5ed3)
+  val colorCorePurple600 = Color(0xff816fea)
+  val colorCorePurple500 = Color(0xff9180f4)
+  val colorCorePurple400 = Color(0xffa193f2)
+  val colorCorePurple300 = Color(0xffc1c1f7)
+  val colorCorePurple200 = Color(0xffd8d7f9)
+  val colorCorePurple100 = Color(0xffeaeaf9)
+  val colorCorePurple0 = Color(0xfff2f2f9)
+  val colorCoreBlue1100 = Color(0xff002138)
+  val colorCoreBlue1000 = Color(0xff0a3960)
+  val colorCoreBlue900 = Color(0xff0c5689)
+  val colorCoreBlue800 = Color(0xff116daa)
+  val colorCoreBlue700 = Color(0xff2079c3)
+  val colorCoreBlue600 = Color(0xff2b87d3)
+  val colorCoreBlue500 = Color(0xff3896e3)
+  val colorCoreBlue400 = Color(0xff56adf5)
+  val colorCoreBlue300 = Color(0xffa1d2f8)
+  val colorCoreBlue200 = Color(0xffc7e4f9)
+  val colorCoreBlue100 = Color(0xffdcf2ff)
+  val colorCoreBlue0 = Color(0xffe9f8ff)
+  val colorCoreAqua1100 = Color(0xff002838)
+  val colorCoreAqua1000 = Color(0xff083d4f)
+  val colorCoreAqua900 = Color(0xff035e73)
+  val colorCoreAqua800 = Color(0xff0f6e84)
+  val colorCoreAqua700 = Color(0xff0b8599)
+  val colorCoreAqua600 = Color(0xff0797ae)
+  val colorCoreAqua500 = Color(0xff17b8ce)
+  val colorCoreAqua400 = Color(0xff33d6e2)
+  val colorCoreAqua300 = Color(0xff76e5e2)
+  val colorCoreAqua200 = Color(0xffa5f2f2)
+  val colorCoreAqua100 = Color(0xffc5f9f9)
+  val colorCoreAqua0 = Color(0xffd9fcfb)
+  val colorCoreTeal1100 = Color(0xff002528)
+  val colorCoreTeal1000 = Color(0xff083f3f)
+  val colorCoreTeal900 = Color(0xff026661)
+  val colorCoreTeal800 = Color(0xff067c7c)
+  val colorCoreTeal700 = Color(0xff0b968f)
+  val colorCoreTeal600 = Color(0xff00a99c)
+  val colorCoreTeal500 = Color(0xff08c4b2)
+  val colorCoreTeal400 = Color(0xff24e0c5)
+  val colorCoreTeal300 = Color(0xff7dead5)
+  val colorCoreTeal200 = Color(0xffb3f2e6)
+  val colorCoreTeal100 = Color(0xffcdf7ef)
+  val colorCoreTeal0 = Color(0xffe5f9f5)
+  val colorCoreGreen1100 = Color(0xff002b20)
+  val colorCoreGreen1000 = Color(0xff08422f)
+  val colorCoreGreen900 = Color(0xff006b40)
+  val colorCoreGreen800 = Color(0xff008b46)
+  val colorCoreGreen700 = Color(0xff0ca750)
+  val colorCoreGreen600 = Color(0xff2bb656)
+  val colorCoreGreen500 = Color(0xff59cb59)
+  val colorCoreGreen400 = Color(0xff75dd66)
+  val colorCoreGreen300 = Color(0xff98e58e)
+  val colorCoreGreen200 = Color(0xffc2f2bd)
+  val colorCoreGreen100 = Color(0xffd7f4d7)
+  val colorCoreGreen0 = Color(0xffebf9eb)
+  val colorFontSuccess = colorCoreGreen1000
+  val colorFontWarning = colorCoreOrange1000
+  val colorFontDanger = colorCoreRed1000
+  val colorFontTertiary = colorCoreNeutral800
+  val colorFontSecondary = colorCoreNeutral900
+  val colorFontPrimary = colorCoreNeutral1100
+  val colorBrandSecondary = colorCorePurple700
+  val colorBrandPrimary = colorCoreAqua700
+  val colorBorderPrimary = colorCoreNeutral300
+  val colorBackgroundInfo = colorCoreBlue0
+  val colorBackgroundSuccess = colorCoreGreen0
+  val colorBackgroundWarning = colorCoreOrange0
+  val colorBackgroundDanger = colorCoreRed0
+  val colorBackgroundTertiary = colorCoreNeutral200
+  val colorBackgroundSecondary = colorCoreNeutral100
+  val colorBackgroundPrimary = colorCoreNeutral0
+  val colorFontInteractiveDisabled = colorFontTertiary
+  val colorFontInteractiveActive = colorBrandSecondary
+  val colorFontInteractiveHover = colorBrandPrimary
+  val colorFontInteractive = colorBrandPrimary
+  val colorBackgroundDisabled = colorBackgroundTertiary
+}
+"
+`;
