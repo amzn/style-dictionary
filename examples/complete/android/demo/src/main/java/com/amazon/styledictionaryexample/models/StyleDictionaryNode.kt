@@ -12,12 +12,10 @@
  * express or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
+package com.amazon.styledictionaryexample.models
 
-package com.amazon.styledictionaryexample.util;
-
-public class StringHelper {
-
-    public static String nameToDisplay(String str) {
-        return str.replaceAll("_", " ");
-    }
-}
+data class StyleDictionaryNode(
+  val name: String,
+  val count: Int = 0,
+  val isLeaf: Boolean = false
+)

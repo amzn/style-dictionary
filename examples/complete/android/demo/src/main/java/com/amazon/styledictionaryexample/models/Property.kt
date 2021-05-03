@@ -12,24 +12,14 @@
  * express or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
+package com.amazon.styledictionaryexample.models
 
-package com.amazon.styledictionaryexample.models;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import java.util.ArrayList;
-import java.util.Map;
-
-@JsonIgnoreProperties({"original"})
-public class Property {
-
-    private static final String TAG = Property.class.getSimpleName();
-
-    public String name;
-    public String value;
-    public Map<String, String> attributes;
-    public ArrayList<String> path;
-
-    public Property() {}
-}
-
+@JsonIgnoreProperties("original", "filePath", "isSource")
+data class Property(
+  var name: String = "",
+  var value: String ="",
+  var attributes: Map<String, String> = mutableMapOf(),
+  var path: List<String> = emptyList()
+)
