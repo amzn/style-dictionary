@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0-rc.9](https://github.com/amzn/style-dictionary/compare/v3.0.0-rc.8...v3.0.0-rc.9) (2021-05-04)
+
+
+### Features
+
+* **compose:** Add Jetpack Compose format ([#599](https://github.com/amzn/style-dictionary/issues/599)) ([8a53858](https://github.com/amzn/style-dictionary/commit/8a53858dc35f4b4565abe9a6500c78814e3e6eae)), closes [#478](https://github.com/amzn/style-dictionary/issues/478)
+
+
+### Bug Fixes
+
+* **formats:** bringing mapName back to scss formats ([#611](https://github.com/amzn/style-dictionary/issues/611)) ([7a28f40](https://github.com/amzn/style-dictionary/commit/7a28f40b7f44b37e565b1360683b60268d044e9e))
+* **formats:** fixing formatting options in fileHeader ([#614](https://github.com/amzn/style-dictionary/issues/614)) ([3f7fe96](https://github.com/amzn/style-dictionary/commit/3f7fe9674c0cb1f228e0415ce468d18a48e4a7f0)), closes [#612](https://github.com/amzn/style-dictionary/issues/612)
+* **references:** fixing circular reference errors ([#607](https://github.com/amzn/style-dictionary/issues/607)) ([9af17f4](https://github.com/amzn/style-dictionary/commit/9af17f420c2a11c64f77041f5c2439c093f9c035)), closes [#608](https://github.com/amzn/style-dictionary/issues/608)
+* **references:** flushing the filtered reference warnings ([#598](https://github.com/amzn/style-dictionary/issues/598)) ([d3b5135](https://github.com/amzn/style-dictionary/commit/d3b51352f33cb15765cb152605acd3c44e6fbf69))
+
 ## [3.0.0-rc.8](https://github.com/amzn/style-dictionary/compare/v3.0.0-rc.7...v3.0.0-rc.8) (2021-04-05)
 
 

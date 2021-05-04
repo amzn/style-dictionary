@@ -27,7 +27,7 @@
     "babel-jest": "~25.2.6",
     "jest": "~25.2.6",
     "react-test-renderer": "~16.13.1",
-    "style-dictionary": "3.0.0-rc.8"
+    "style-dictionary": "3.0.0-rc.9"
   },
   "jest": {
     "preset": "react-native"
