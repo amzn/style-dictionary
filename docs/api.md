@@ -275,7 +275,7 @@ Adds a custom parser to parse style dictionary files
 
 | Param | Type | Description |
 | --- | --- | --- |
-| pattern | <code>Regex</code> | - |
+| pattern | <code>Regex</code> | A file path regular expression to match which files this parser should be be used on. This is similar to how webpack loaders work. `/\.json$/` will match any file ending in '.json', for example. |
 | parse | <code>function</code> | Function to parse the file contents. Takes 1 argument, which is an object with 2 attributes: contents wich is the string of the file contents and filePath. The function should return a plain Javascript object. |
 
 **Example**  

@@ -3,8 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/style-dictionary.svg?style=flat-square)](https://badge.fury.io/js/style-dictionary)
 ![license](https://img.shields.io/npm/l/style-dictionary.svg?style=flat-square)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/amzn/style-dictionary/blob/master/CONTRIBUTING.md#submitting-pull-requests)
-<br/>
-[![Build Status](https://img.shields.io/travis/amzn/style-dictionary.svg?style=flat-square)](https://travis-ci.org/amzn/style-dictionary)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/amzn/style-dictionary/Test?style=flat-square)](https://github.com/amzn/style-dictionary/actions/workflows/test.yml)
 [![downloads](https://img.shields.io/npm/dm/style-dictionary.svg?style=flat-square)](https://www.npmjs.com/package/style-dictionary)
 
 # Style Dictionary
@@ -147,6 +146,7 @@ This tells the style dictionary build system how and what to build. The default 
 | platform.file.options.showFileHeader | Boolean | If the generated file should have a "Do not edit + Timestamp" header (where the format supports it). By default is "true". |
 
 ### Properties
+
 ```json
 {
   "size": {
@@ -187,16 +187,21 @@ float const SizeFontBase = 16.00f;
 
 
 ## Quick Start
+
 The style dictionary framework comes with some example code to get you stared. Install the node module globally, create a directory and `cd` into it.
+
 ```
 $ npm i -g style-dictionary
 $ mkdir MyStyleDictionary
 $ cd MyStyleDictionary
 ```
+
 Now run:
+
 ```
 $ style-dictionary init basic
 ```
+
 This command will copy over the example files found in [example](examples/) in this repo. Now you have an example project set up. You can make changes to the style dictionary and rebuild the project by running:
 
 ```
@@ -225,13 +230,13 @@ While not exactly necessary, we feel this classification structure of style prop
 }
 ```
 
- The CTI is implicit in the structure, the category and type is 'size' and 'font', and there are 2 properties 'base' and 'large'.
+The CTI is implicit in the structure, the category and type is 'size' and 'font', and there are 2 properties 'base' and 'large'.
 
- Structuring style properties in this manner gives us consistent naming and accessing of these properties. You don't need to remember if it is button_color_error or error_button_color, it is color_background_button_error!
+Structuring style properties in this manner gives us consistent naming and accessing of these properties. You don't need to remember if it is button_color_error or error_button_color, it is color_background_button_error!
 
- You can organize and name your style properties however you want, there are no restrictions. But we have a good amount of helpers if you do use this structure, like the 'attribute/cti' transform which adds attributes to the property of its CTI based on the path in the object. There are a lot of name transforms as well for when you want a flat structure like for Sass variables.
+You can organize and name your style properties however you want, there are no restrictions. But we have a good amount of helpers if you do use this structure, like the 'attribute/cti' transform which adds attributes to the property of its CTI based on the path in the object. There are a lot of name transforms as well for when you want a flat structure like for Sass variables.
 
- Also, the CTI structure provides a good mechanism to target transforms for specific kinds of properties. All of the transforms provided by the framework use the CTI of a property to know if it should be applied. For instance, the 'color/hex' transform only applies to properties of the category 'color'.
+Also, the CTI structure provides a good mechanism to target transforms for specific kinds of properties. All of the transforms provided by the framework use the CTI of a property to know if it should be applied. For instance, the 'color/hex' transform only applies to properties of the category 'color'.
 
 You can also add a _comment_ to a style property:
 

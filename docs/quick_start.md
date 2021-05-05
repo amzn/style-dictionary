@@ -1,21 +1,25 @@
 # Quick Start
 
 ## Installation
+
 *Note that you must have [node (and npm) installed](https://www.npmjs.com/get-npm) before you can follow this guide.*
 
 If you want to use the CLI, you can install it globally via npm:
+
 ```bash
 $ npm install -g style-dictionary
 ```
 
 Or you can install it like a normal npm dependency. Style Dictionary is a build tool, and you are most likely to use it as a dev dependency:
+
 ```bash
 $ npm install -D style-dictionary
 ```
 
-
 ## Creating a New Project
+
 The CLI comes with some starter code to get a new project started easily.
+
 ```bash
 $ mkdir MyStyleD
 $ cd MyStyleD
@@ -23,6 +27,7 @@ $ style-dictionary init basic
 ```
 
 This command will copy over the example files found in the [basic example](https://github.com/amzn/style-dictionary/tree/master/examples/basic) in this repo and then run the `style-dictionary build` command to generate the build artifacts. You should see something like this output:
+
 ```
 Copying starter files...
 
@@ -212,7 +217,9 @@ Call this in the root directory of your project, which must include a [configura
 More detailed information about [using the Style Dictionary CLI is available here](using_the_cli.md).
 
 ### Node
+
 You can also use the style dictionary build system in node if you want to [extend](extending.md) the functionality or use it in another build system like Grunt or Gulp.
+
 ```javascript
 const StyleDictionary = require('style-dictionary').extend('config.json');
 
@@ -220,6 +227,7 @@ StyleDictionary.buildAllPlatforms();
 ```
 
 The `.extend()` method is an overloaded method that can also take a [configuration](config.md) object.
+
 ```javascript
 const StyleDictionary = require('style-dictionary').extend({
   source: ['properties/**/*.json'],

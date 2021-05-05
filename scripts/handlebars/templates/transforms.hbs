@@ -30,6 +30,27 @@ There are 3 types of transforms: attribute, name, and value.
 ## Defining Custom Transforms
 You can define custom transforms with the [`registerTransform`](api.md#registertransform). Style Dictionary adds some [default metadata](properties.md?id=default-property-metadata) to each property/token to provide context that may be useful for some transforms.
 
+## Transitive Transforms
+Starting in version 3.0, you can define transitive transforms which allow you to transform a referenced value. Normally, value transforms only transform non-referenced values and because transforms happen before references are resolved, the transformed value is then used to resolve references.
+
+```javascript
+const StyleDictionary = require('style-dictionary');
+
+StyleDictionary.registerTransform({
+  type: `value`,
+  transitive: true,
+  name: `myTransitiveTransform`,
+  matcher: (token) => {},
+  transformer: (token) => {
+    // token.value will be resolved and transformed at this point
+  }
+})
+```
+
+If you want to learn more about transitive transforms, take a look at the [transitive transforms example](https://github.com/amzn/style-dictionary/tree/main/examples/advanced/transitive-transforms).
+
+The pre-defined transforms are *not transitive* to be backwards compatible.
+
 ## Pre-defined Transforms
 
 [lib/common/transforms.js](https://github.com/amzn/style-dictionary/blob/master/lib/common/transforms.js)

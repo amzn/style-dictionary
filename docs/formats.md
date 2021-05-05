@@ -154,6 +154,8 @@ By default Style Dictionary adds a file header comment in the top of files built
 
 You can remove these comments with the option: `showFileHeader: false` if you do not want them in your generated files. You can also create your own file header or extend the default one. This could be useful if you want to put a version number or hash of the source files rather than a timestamp.
 
+### Custom file header
+
 Custom file headers can be added the same way you would add a custom format, either by using the [`registerFileHeader`](api.md#registerfileheader) function or adding the fileHeader object directly in the Style Dictionary [configuration](config.md). Your custom file header can be used in built-in formats as well as custom formats. To use a custom file header in a custom format see the [`fileHeader`](formats.md#fileheader) format helper method.
 
 ```js
@@ -617,7 +619,7 @@ dictionary.allProperties.sort(sortByReference(dictionary))
 
 Formatters are functions and created easily with most templating engines. Formats can be built using templates if there is a lot of boilerplate code to insert (e.g. ObjectiveC files). If the output consists of only the values (e.g. a flat SCSS variables file), writing a formatter function directly may be easier.
 
-Any templating language can work as there is a node module for it. All you need to do is register a format that calls your template and returns a string.
+Any templating language can work as long as there is a node module for it. All you need to do is register a format that calls your template and returns a string.
 
 Here is a quick example for Lodash.
 
@@ -1474,5 +1476,3 @@ class StyleDictionary {
 ```
 
 * * *
-
-
