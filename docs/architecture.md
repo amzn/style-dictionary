@@ -1,4 +1,4 @@
-# Architecture Overview
+# Architecture
 
 This is how Style Dictionary works under the hood.
 
@@ -8,19 +8,20 @@ Let's take a closer look into each of these steps.
 
 ## 1. Parse the config
 
-Style Dictionary is a configuration based framework, you tell it what to do in a configuration file. Style Dictionary first parses this configuration to know what to do.
+Style Dictionary is a configuration based framework, you tell it what to do in a configuration file. Style Dictionary first parses this [configuration](config.md) to know what to do.
 
 ## 2. Find all token files
 
-In your [config](config.md) file you define a `source`, which is an array of file paths. This tells Style Dictionary where to find your token files. You can have them anywhere and in any folder structure as long as you tell Style Dictionary where to find them.
+In your [config](config.md) file can define `include` and `source`, which are arrays of file paths. This tells Style Dictionary where to find your token files. You can have them anywhere and in any folder structure as long as you tell Style Dictionary where to find them.
 
+If there are [custom parsers](parsers.md) defined, Style Dictionary will run those on files the parsers match.
 ## 3. Deep merge token files
 
 Style Dictionary takes all the files it found and performs a deep merge. This allows you to split your token files in any way you like, without worrying about accidentally overriding groups of tokens. This gives Style Dictionary a single, complete token object to work from.
 
 ## 4. Iterate over the platforms
 
-For each platform defined in your [config](config.md), Style Dictionary will do a few steps to get it ready to be consumed on that platform. You don't need to worry about one platform affecting another because everything that happens in a platform is non-destructive
+For each platform defined in your [config](config.md), Style Dictionary will do a few steps to get it ready to be consumed on that platform. You don't need to worry about one platform affecting another because everything that happens in a platform is non-destructive.
 
 ## 4a. Transform the tokens
 
@@ -33,5 +34,9 @@ After all the tokens have been transformed, it then does another pass over the t
 ## 4c. Format the tokens into files
 
 Now all the design tokens are ready to be written to a file. Style Dictionary takes the whole transformed and resolved token object and for each file defined in the platform it [formats](formats.md) the token object and write the output to a file. Internally, Style Dictionary creates a flat array of all the design tokens it finds in addition to the token object. This is how you can output a flat SCSS variables file.
+
+## 4d. Run actions
+
+[Actions](actions.md) are custom code
 
 After Style Dictionary does steps 4-6 for each platform, now you have all your output files that are ready to consume in each platform and codebase.

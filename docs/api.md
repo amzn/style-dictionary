@@ -142,7 +142,7 @@ const StyleDictionary = require('style-dictionary').extend({
 
 
 
-Adds a custom action to the style property builder. Custom
+Adds a custom action to Style Dictionary. Custom
 actions can do whatever you need, such as: copying files,
 base64'ing files, running other build scripts, etc.
 After you register a custom action, you then use that

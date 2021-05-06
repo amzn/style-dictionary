@@ -2,7 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/style-dictionary.svg?style=flat-square)](https://badge.fury.io/js/style-dictionary)
 ![license](https://img.shields.io/npm/l/style-dictionary.svg?style=flat-square)
-[![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/amzn/style-dictionary/blob/master/CONTRIBUTING.md#submitting-pull-requests)
+[![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/amzn/style-dictionary/blob/main/CONTRIBUTING.md#submitting-pull-requests)
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/amzn/style-dictionary/Test?style=flat-square)](https://github.com/amzn/style-dictionary/actions/workflows/test.yml)
 [![downloads](https://img.shields.io/npm/dm/style-dictionary.svg?style=flat-square)](https://www.npmjs.com/package/style-dictionary)
 
@@ -11,7 +11,7 @@
 
 A Style Dictionary uses design tokens to define styles once and use those styles on any platform or language. It provides a single place to create and edit your styles, and exports these properties to all the places you need - iOS, Android, CSS, JS, HTML, sketch files, style documentation, etc. It is available as a CLI through npm, but can also be used like any normal node module if you want to extend its functionality.
 
-When you are managing user experiences, it can be quite challenging to keep styles consistent and synchronized across multiple development platforms and devices.  At the same time, designers, developers, PMs and others must be able to have consistent and up-to-date style documentation to enable effective work and communication.  Even then, mistakes inevitably happen and the design may not be implemented accurately.  StyleDictionary solves this by automatically generating style definitions across all platforms from a single source - removing roadblocks, errors, and inefficiencies across your workflow.
+When you are managing user experiences, it can be quite challenging to keep styles consistent and synchronized across multiple development platforms and devices. At the same time, designers, developers, PMs and others must be able to have consistent and up-to-date style documentation to enable effective work and communication. Even then, mistakes inevitably happen and the design may not be implemented accurately. Style Dictionary solves this by automatically generating style definitions across all platforms from a single source - removing roadblocks, errors, and inefficiencies across your workflow.
 
 For detailed usage head to https://amzn.github.io/style-dictionary
 
@@ -23,7 +23,7 @@ For detailed usage head to https://amzn.github.io/style-dictionary
 * [Usage](#usage)
 * [Example](#example)
 * [Quick Start](#quick-start)
-* [Style Properties](#style-properties)
+* [Design tokens](#design-tokens)
 * [Extending](#extending)
 * [Contributing](#contributing)
 * [License](#license)
@@ -92,10 +92,11 @@ StyleDictionary.buildAllPlatforms();
 ## Example
 [Take a look at some of our examples](examples/)
 
-A style dictionary is a collection of style properties, key/value pairs that describe stylistic attributes like colors, sizes, icons, motion, etc. A style dictionary defines these style properties in JSON files, and can also include static assets like images and fonts. Here is a basic example of what the package structure can look like:
+A style dictionary is a collection of design tokens, key/value pairs that describe stylistic attributes like colors, sizes, icons, motion, etc. A style dictionary defines these design tokens in JSON or Javascript files, and can also include static assets like images and fonts. Here is a basic example of what the package structure can look like:
+
 ```
 ├── config.json
-├── properties/
+├── tokens/
 │   ├── size/
 │       ├── font.json
 │   ├── color/
@@ -107,10 +108,11 @@ A style dictionary is a collection of style properties, key/value pairs that des
 ```
 
 ### config.json
-This tells the style dictionary build system how and what to build. The default file path is config.json in the root of the project, but you can name it whatever you want, you can pass in the `--config` flag.
+This tells the style dictionary build system how and what to build. The default file path is `config.json` or `config.js` in the root of the project, but you can name it whatever you want by passing in the `--config` flag to the [CLI](https://amzn.github.io/style-dictionary/#/using_the_cli).
+
 ```json
 {
-  "source": ["properties/**/*.json"],
+  "source": ["tokens/**/*.json"],
   "platforms": {
     "scss": {
       "transformGroup": "scss",
@@ -131,9 +133,11 @@ This tells the style dictionary build system how and what to build. The default 
   }
 }
 ```
+
 | Attribute | Type | Description |
 | :--- | :--- | :--- |
-| source | Array | Paths to the property json files. Can have globs. |
+| source | Array | An array of file path [globs](https://github.com/isaacs/node-glob) to design token files. Style Dictionary will do a deep merge of all of the token files, allowing you to organize your files files however you want. |
+| include | Array | An array of file path [globs](https://github.com/isaacs/node-glob) to design token files that contain default styles. The Style Dictionary uses this as a base collection of properties. The properties found using the "source" attribute will overwrite properties found using include. |
 | platforms | Object | Sets of platform files to be built. |
 | platforms | Array | Paths to the property json files. Can have globs. |
 | platform.transformGroup | String (optional) | Apply a group of transforms to the properties, must either define this or `transforms`. |
@@ -211,13 +215,13 @@ $ style-dictionary build
 Take a look at the documentation for the example code.
 
 
-## Style Properties
+## Design tokens
 
-A style property is an attribute to describe something visually. It is atomic (it cannot be broken down further). Style properties have a name, a value, and optional attributes or metadata. The name of a property can be anything, but we have a proposed naming structure that works really well in the next section.
+A design token is an attribute to describe something visually. It is atomic (it cannot be broken down further). Style properties have a name, a value, and optional attributes or metadata. The name of a token can be anything, but we have a proposed naming structure that works really well in the next section.
 
 ### Category/Type/Item Structure
 
-While not exactly necessary, we feel this classification structure of style properties makes the most sense semantically. Style properties can be organized into a hierarchical tree structure with the top level, category, defining the primitive nature of the property. For example, we have the color category and every property underneath is always a color. As you proceed down the tree to type, item, sub-item, and state, you get more specific about what that color is. Is it a background color, a text color, or a border color? What kind of text color is it? You get the point. Now you can structure your property json files like simple objects:
+While not exactly necessary, we feel this classification structure of style properties makes the most sense semantically. Style properties can be organized into a hierarchical tree structure with the top level, category, defining the primitive nature of the token. For example, we have the color category and every token underneath is always a color. As you proceed down the tree to type, item, sub-item, and state, you get more specific about what that color is. Is it a background color, a text color, or a border color? What kind of text color is it? You get the point. Now you can structure your token json files like simple objects:
 
 ```
 {
@@ -234,11 +238,11 @@ The CTI is implicit in the structure, the category and type is 'size' and 'font'
 
 Structuring style properties in this manner gives us consistent naming and accessing of these properties. You don't need to remember if it is button_color_error or error_button_color, it is color_background_button_error!
 
-You can organize and name your style properties however you want, there are no restrictions. But we have a good amount of helpers if you do use this structure, like the 'attribute/cti' transform which adds attributes to the property of its CTI based on the path in the object. There are a lot of name transforms as well for when you want a flat structure like for Sass variables.
+You can organize and name your style properties however you want, there are no restrictions. But we have a good amount of helpers if you do use this structure, like the 'attribute/cti' transform which adds attributes to the token of its CTI based on the path in the object. There are a lot of name transforms as well for when you want a flat structure like for Sass variables.
 
-Also, the CTI structure provides a good mechanism to target transforms for specific kinds of properties. All of the transforms provided by the framework use the CTI of a property to know if it should be applied. For instance, the 'color/hex' transform only applies to properties of the category 'color'.
+Also, the CTI structure provides a good mechanism to target transforms for specific kinds of properties. All of the transforms provided by the framework use the CTI of a token to know if it should be applied. For instance, the 'color/hex' transform only applies to properties of the category 'color'.
 
-You can also add a _comment_ to a style property:
+You can also add a _comment_ to a design token:
 
 ```
 {

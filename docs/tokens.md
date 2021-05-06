@@ -1,14 +1,14 @@
-# Properties
+# Design Tokens
 
-> Synonyms: design tokens, design variables, design constants, atoms
+> Synonyms: style properties, design variables, design constants, atoms
 
-Style properties, aka design tokens, are the platform-agnostic way to define the input for Style Dictionary. A property is a collection of attributes that describe any fundamental/atomic visual style. Each attribute is a key-value pair. A property name and its value are considered a design token (or design variable/constant/atom).
+Design tokens are the platform-agnostic way to define the input for Style Dictionary. A design token is a collection of attributes that describe any fundamental/atomic visual style. Each attribute is a key-value pair.
 
 ![Terminology for different parts of a JSON property](assets/property-definitions.png)
 
-A property is transformed for use in different platforms, languages, and contexts. A simple example is color. A color can be represented in many ways, all of these are the same color: `#ffffff`, `rgb(255,255,255)`, `hsl(0,0,1)`.
+A design token is transformed for use in different platforms, languages, and contexts. A simple example is color. A color can be represented in many ways, all of these are the same color: `#ffffff`, `rgb(255,255,255)`, `hsl(0,0,1)`.
 
-A collection of style properties which are organized in a nested object make the Style Dictionary. Here is an example of style properties:
+A collection of design tokens which are organized in a nested object make the Style Dictionary. Here is an example of design tokens written for Style Dictionary:
 
 ```json
 {
@@ -25,31 +25,31 @@ A collection of style properties which are organized in a nested object make the
 }
 ```
 
-Any node in the object that has a `value` attribute on it is a property. In this example there are 4 style properties: `color.font.base`, `color.font.secondary`, `color.font.tertiary`, and `color.font.inverse.base`.
+Any node in the object that has a `value` attribute on it is a design token. In this example there are 4 style design tokens: `color.font.base`, `color.font.secondary`, `color.font.tertiary`, and `color.font.inverse.base`.
 
-## Property attributes
+## Design token attributes
 
-For any properties you wish to output, the "value" attribute is required. This provides the data that will be used throughout the build process (and ultimately used for styling in your deliverables). You can optionally include any custom attributes you would like (e.g. "comment" with a string or "metadata" as an object with its own attributes).
+For any design tokens you wish to output, the "value" attribute is required. This provides the data that will be used throughout the build process (and ultimately used for styling in your deliverables). You can optionally include any custom attributes you would like (e.g. "comment" with a string or "metadata" as an object with its own attributes).
 
 | Attribute | Type | Description |
 | :--- | :--- | :--- |
-| value | Any | The value of the style property. This can be any type of data, a hex string, an integer, a file path to a file, even an object or array.
+| value | Any | The value of the design token. This can be any type of data, a hex string, an integer, a file path to a file, even an object or array.
 | comment | String (optional) | The comment attribute will show up in a code comment in output files if the format supports it.
 | themeable | Boolean (optional) | This is used in formats that support override-able or themable values like the `!default` flag in Sass.
-| name | String (optional) | Usually the name for a style property is generated with a [name transform](transforms.md#transform-types), but you can write your own if you choose. By default Style Dictionary will add a default name which is the key of the style property object.
-| attributes | Object (optional) | Extra information about the style property you want to include. [Attribute transforms](transforms.md#transform-types) will modify this object so be careful 
+| name | String (optional) | Usually the name for a design token is generated with a [name transform](transforms.md#transform-types), but you can write your own if you choose. By default Style Dictionary will add a default name which is the key of the design token object.
+| attributes | Object (optional) | Extra information about the design token you want to include. [Attribute transforms](transforms.md#transform-types) will modify this object so be careful 
 
-You can add any attributes or data you want in a property and Style Dictionary will pass it along to transforms and formats. For example, you could add a `deprecated` flag like in [this example](https://github.com/amzn/style-dictionary/tree/main/examples/advanced/tokens-deprecation). Other things you can do is add documentation information about each property or information about color contrast.
+You can add any attributes or data you want in a design token and Style Dictionary will pass it along to transforms and formats. For example, you could add a `deprecated` flag like in [this example](https://github.com/amzn/style-dictionary/tree/main/examples/advanced/tokens-deprecation). Other things you can do is add documentation information about each design token or information about color contrast.
 
-### Default property metadata
+### Default design token metadata
 
-Style Dictionary adds some default metadata on each property that helps with transforms and formats. Here is what Style Dictionary adds onto each property:
+Style Dictionary adds some default metadata on each design token that helps with transforms and formats. Here is what Style Dictionary adds onto each design token:
 
 | Attribute | Type | Description |
 | :--- | :--- | :--- |
-| name | String | A default name of the property that is set to the key of the property. This is only added if you do not provide one.
-| path | Array[String] | The object path of the property. `color: { background: { primary: { value: "#fff" } } }` will have a path of `['color','background', 'primary']`.
-| original | Object | A pristine copy of the original property object. This is to make sure transforms and formats always have the unmodified version of the original property.
+| name | String | A default name of the design token that is set to the key of the design token. This is only added if you do not provide one.
+| path | Array[String] | The object path of the design token. `color: { background: { primary: { value: "#fff" } } }` will have a path of `['color','background', 'primary']`.
+| original | Object | A pristine copy of the original design token object. This is to make sure transforms and formats always have the unmodified version of the original design token.
 | filePath | String | The file path of the file the token is defined in. This file path is derived from the `source` or `include` file path arrays defined in the [configuration](config.md).
 | isSource | Boolean | If the token is from a file defined in the `source` array as opposed to `include` in the [configuration](config.md).
 
@@ -62,7 +62,7 @@ Given this configuration:
 }
 ```
 
-This property:
+This design token:
 
 ```json5
 // tokens/color/background.json
@@ -102,7 +102,7 @@ becomes:
 
 ## Referencing / Aliasing
 
-You can reference (alias) existing values by using the dot-notation object path (the fully articulated property name) in curly brackets. Note that this only applies to values; referencing a non-value property will cause unexpected results in your output.
+You can reference (alias) existing values by using the dot-notation object path (the fully articulated design token name) in curly brackets. Note that this only applies to values; referencing a non-value design token will cause unexpected results in your output.
 
 ```json
 {
@@ -117,14 +117,15 @@ You can reference (alias) existing values by using the dot-notation object path 
 }
 ```
 
-See more in the advanced [referencing-aliasing example](https://github.com/amzn/style-dictionary/tree/master/examples/advanced/referencing_aliasing).
+See more in the advanced [referencing-aliasing example](https://github.com/amzn/style-dictionary/tree/main/examples/advanced/referencing_aliasing).
 
 
 ----
 
-## Defining Style Properties
 
-Style properties files can included inline in the configuration, or be written in separate files. Style Dictionary supports these languages for property files:
+## Defining design tokens
+
+Style properties files can included inline in the configuration, or be written in separate files. Style Dictionary supports these languages for design token files:
 
 * JSON
 * [JSON5](https://json5.org)
@@ -149,7 +150,7 @@ module.exports = {
 }
 ```
 
-Generally you will have too many style properties to include them all inline, so you can separate them out into their own files. You can tell Style Dictionary where to find your property files with the `source` and `include` attributes in the configuration like this:
+Generally you will have too many style properties to include them all inline, so you can separate them out into their own files. You can tell Style Dictionary where to find your design token files with the `source` and `include` attributes in the configuration like this:
 
 ```javascript
 module.exports = {
@@ -166,9 +167,9 @@ module.exports = {
 }
 ```
 
-**You can organize your property files in any way as long as you can tell Style Dictionary where to find them.** The directory and file structure of property files does not have any effect on the object structure of the properties because Style Dictionary does a deep merge on all property files. Separating properties into files and folders is to make the authoring experience cleaner and more flexible.
+**You can organize your design token files in any way as long as you can tell Style Dictionary where to find them.** The directory and file structure of design token files does not have any effect on the object structure of the properties because Style Dictionary does a deep merge on all design token files. Separating properties into files and folders is to make the authoring experience cleaner and more flexible.
 
-### Property collision warnings
+### Collision warnings
 
 Style Dictionary takes all the files it finds in the include and source arrays and performs a deep merge on them. It will first add files in the include array, in order, and then the source array in order. Later files will take precedence. For example if you defined 2 source files like this:
 
@@ -219,11 +220,11 @@ The resulting merged dictionary would be:
 }
 ```
 
-This example would show a warning in the console that you have a collision at `color.background.primary` because 2 source files defined the same property. A file in source overriding a file in include will not show a warning because the intent is that you include files you want to potentially override. For example, if you had multiple brands and you wanted to share a default theme, you could include the default theme and then override certain parts.
+This example would show a warning in the console that you have a collision at `color.background.primary` because 2 source files defined the same design token. A file in source overriding a file in include will not show a warning because the intent is that you include files you want to potentially override. For example, if you had multiple brands and you wanted to share a default theme, you could include the default theme and then override certain parts.
 
 ### CommonJS modules
 
-One way to write your design token/property files is to write them in Javascript rather than JSON. The only requirement for writing your source files in Javascript is to use a CommonJS module to export a plain object. For example:
+One way to write your design token files is to write them in Javascript rather than JSON. The only requirement for writing your source files in Javascript is to use a CommonJS module to export a plain object. For example:
 
 ```javascript
 module.exports = {
@@ -247,7 +248,7 @@ is equivalent to this JSON file:
 }
 ```
 
-You might prefer authoring your property files in Javascript because it can be a bit more friendly to read and write (don't have to quote keys, can leave dangling commas, etc.). Writing your property files as Javascript gives you more freedom to do complex things like generating many properties based on code:
+You might prefer authoring your design token files in Javascript because it can be a bit more friendly to read and write (don't have to quote keys, can leave dangling commas, etc.). Writing your design token files as Javascript gives you more freedom to do complex things like generating many properties based on code:
 
 ```javascript
 const Color = require('tinycolor2');
@@ -285,7 +286,7 @@ Take a look at the [this example](https://github.com/amzn/style-dictionary/tree/
 
 ### Custom file parsers
 
-Starting in 3.0, you can define custom parsers to parse your source files. This allows you to author your property files in other languages like [YAML](https://yaml.org/). Custom parsers run on certain input files based on a file path pattern regular expression (similar to how Webpack loaders work). The parser function gets the contents of the file and is expected to return an object of the data of that file for Style Dictionary to merge with the other input file data.
+Starting in 3.0, you can define custom parsers to parse your source files. This allows you to author your design token files in other languages like [YAML](https://yaml.org/). Custom parsers run on certain input files based on a file path pattern regular expression (similar to how Webpack loaders work). The parser function gets the contents of the file and is expected to return an object of the data of that file for Style Dictionary to merge with the other input file data.
 
 ```javascript
 const StyleDictionary = require('style-dictionary');
@@ -306,7 +307,7 @@ StyleDictionary.registerParser({
 ----
 
 
-## Property structure
+## Design token structure
 
 You can structure your properties any way you want. You could have a flat object rather than a nested one:
 
@@ -319,9 +320,9 @@ You can structure your properties any way you want. You could have a flat object
 
 ### Category / Type / Item
 
-**This structure is not required.** This is just one example of how to structure your style properties.
+**This structure is not required.** This is just one example of how to structure your design tokens.
 
-Style properties are organized into a hierarchical tree structure with 'category' defining the primitive nature of the property. For example, we have the color category and every property underneath is always a color. As you proceed down the tree, you get more specific about what that color is. Is it a background color, a text color, or a border color? What kind of text color is it? You get the point. It's like the animal kingdom classification:
+Design tokens are organized into a hierarchical tree structure with 'category' defining the primitive nature of the design token. For example, we have the color category and every design token underneath is always a color. As you proceed down the tree, you get more specific about what that color is. Is it a background color, a text color, or a border color? What kind of text color is it? You get the point. It's like the animal kingdom classification:
 
 ![](assets/cti.png)
 
@@ -342,7 +343,7 @@ The CTI is implicit in the structure, the category is 'size' and the type is 'fo
 
 Structuring style properties in this manner gives us consistent naming and accessing of these properties. You don't need to remember if it is `button_color_error` or `error_button_color`, it is `color_background_button_error`!
 
-You can organize and name your style properties however you want, **there are no restrictions**. But there are a good amount of helpers if you do use this structure, like the 'attribute/cti' transform which adds attributes to the property of its CTI based on the path in the object. There are a lot of names transforms as well for when you want a flat structure like for Sass variables.
+You can organize and name your style properties however you want, **there are no restrictions**. But there are a good amount of helpers if you do use this structure, like the 'attribute/cti' transform which adds attributes to the design token of its CTI based on the path in the object. There are a lot of names transforms as well for when you want a flat structure like for Sass variables.
 
 Also, the CTI structure provides a good mechanism to target transforms for specific kinds of properties. All of the transforms provided by the framework use the CTI structure to know if it should be applied. For instance, the 'color/hex' transform only applies to properties of the category 'color'.
 

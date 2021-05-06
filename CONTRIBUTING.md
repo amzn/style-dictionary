@@ -82,6 +82,6 @@ We use [docsify](https://docsify.js.org/#/) to transform the markdown files into
 
 [issues]: https://github.com/amzn/style-dictionary/issues
 [pr]: https://github.com/amzn/style-dictionary/pulls
-[license]: https://github.com/amzn/style-dictionary/blob/master/LICENSE
+[license]: https://github.com/amzn/style-dictionary/blob/main/LICENSE
 [cla]: http://en.wikipedia.org/wiki/Contributor_License_Agreement
-[eslint]: https://github.com/amzn/style-dictionary/blob/master/.eslintrc.json
+[eslint]: https://github.com/amzn/style-dictionary/blob/main/.eslintrc.json

@@ -2,7 +2,7 @@
 
 Style dictionaries are configuration driven. Your configuration lets Style Dictionary know:
 
-1. Where to find your [style properties](properties.md)
+1. Where to find your [design tokens](tokens.md)
 1. How to transform and format them to generate output files
 
 Here is an example configuration: 
@@ -32,6 +32,7 @@ Here is an example configuration:
   }
 }
 ```
+
 ## Configuration file formats
 
 Style Dictionary supports configuration files in these file formats:
@@ -76,7 +77,10 @@ Some interesting things you can do in a CommonJS file that you cannot do in a JS
 * Add custom transforms, formats, filters, actions, and parsers
 * Programmatically generate your configuration
 
+
 ----
+
+
 ## Using configuration files
 
 By default, the Style Dictionary [CLI](using_the_cli.md) looks for a `config.json` or `config.js` file in the root of your package.
@@ -110,16 +114,15 @@ You can also use Style Dictionary as an [npm module](using_the_npm_module.md) an
 | transform | Object (optional) | Custom [transforms](transforms.md) you can include inline rather than using `.registerTransform`. The keys in this object will be the transform's name, the value should be an object with `type`
 | format | Object (optional) | Custom [formats](formats.md) you can include inline in the configuration rather than using `.registerFormat`. The keys in this object will be for format's name and value should be the formatter function.
 | action | Object (optional) | Custom inline [actions](actions.md). The keys in this object will be the action's name and the value should be an object containing `do` and `undo` methods.
-| parsers | Array[Parser] (optional) | Custom [file parsers](properties.md#customfileparsers) to run on input files |
-| include | Array[String] (optional) | An array of path [globs](https://github.com/isaacs/node-glob) to Style Dictionary property files that contain default styles. The Style Dictionary uses this as a base collection of properties. The properties found using the "source" attribute will overwrite properties found using include. |
-| source | Array[String] | An array of path [globs](https://github.com/isaacs/node-glob) to JSON files that contain style properties. The Style Dictionary will do a deep merge of all of the JSON files, allowing you to separate your properties into multiple files. |
+| parsers | Array[Parser] (optional) | Custom [file parsers](parsers.md) to run on input files |
+| include | Array[String] (optional) | An array of file path [globs](https://github.com/isaacs/node-glob) to design token files that contain default styles. Style Dictionary uses this as a base collection of properties. The properties found using the "source" attribute will overwrite properties found using include. |
+| source | Array[String] | An array of file path [globs](https://github.com/isaacs/node-glob) to design token files. Style Dictionary will do a deep merge of all of the token files, allowing you to organize your files files however you want. |
 | properties | Object | The properties object is a way to include inline style properties as opposed to using the `source` and `include` arrays. 
-| platforms | Object | An object containing [platform](#platform) config objects that describe how the Style Dictionary should build for that platform. You can add any arbitrary attributes on this object that will get passed to formats and actions (more on these in a bit). This is useful for things like build paths, name prefixes, variable names, etc.  |
+| platforms | Object[Platform] | An object containing [platform](#platform) config objects that describe how the Style Dictionary should build for that platform. You can add any arbitrary attributes on this object that will get passed to formats and actions (more on these in a bit). This is useful for things like build paths, name prefixes, variable names, etc.
 
 ### Platform
 
 A platform is a collection of configuration that tells Style Dictionary how to transform and format your style properties. You can have as many platforms as you need and you can name them anything, there are no restrictions.
-
 
 | Attribute | Type | Description |
 | :--- | :--- | :--- |
@@ -138,7 +141,7 @@ A File configuration object represents a single output file. The `options` objec
 | :--- | :--- | :--- |
 | destination | String (optional) | Location to build the file, will be appended to the buildPath. |
 | format | String (optional) | [Format](formats.md) used to generate the file. Can be a built-in one or you can create your own via [registerFormat](api.md#registerformat). |
-| filter | String/Function/Object (optional) | A function, string or object used to filter the properties that will be included in the file. If a function is provided, each property will be passed to the function and the result (true or false) will determine whether the property is included. If an object is provided, each property will be matched against the object using a partial deep comparison. If a match is found, the property is included. If a string is passed, is considered a custom filter registered via [registerFilter](api.md#registerfilter) |
+| filter | String/Function/Object (optional) | A function, string or object used to filter the properties that will be included in the file. If a function is provided, each design token will be passed to the function and the result (true or false) will determine whether the design token is included. If an object is provided, each design token will be matched against the object using a partial deep comparison. If a match is found, the design token is included. If a string is passed, is considered a custom filter registered via [registerFilter](api.md#registerfilter) |
 | options | Object (optional) | A set of extra options associated with the file. Includes `showFileHeader` and `outputReferences`. |
 | options.showFileHeader | Boolean | If the generated file should have a comment at the top about being generated. The default fileHeader comment has "Do not edit + Timestamp". By default is "true". |
 | options.fileHeader | String/Function (optional) | A custom fileHeader that can be either a name of a registered file header (string) or an inline [fileHeader](formats.md#customfileheader) function.

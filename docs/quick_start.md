@@ -26,7 +26,7 @@ $ cd MyStyleD
 $ style-dictionary init basic
 ```
 
-This command will copy over the example files found in the [basic example](https://github.com/amzn/style-dictionary/tree/master/examples/basic) in this repo and then run the `style-dictionary build` command to generate the build artifacts. You should see something like this output:
+This command will copy over the example files found in the [basic example](https://github.com/amzn/style-dictionary/tree/main/examples/basic) in this repo and then run the `style-dictionary build` command to generate the build artifacts. You should see something like this output:
 
 ```
 Copying starter files...
@@ -159,9 +159,9 @@ $size-font-base: 1rem;
 ```
 
 Pretty nifty! This shows a few things happening:
-1. The build system does a deep merge of all the property JSON files defined in the `source` attribute of `config.json`. This allows you to split up the property JSON files however you want. There are 2 JSON files with `color` as the top level key, but they get merged properly.
-1. The build system resolves references to other style property values. `{size.font.medium.value}` is resolved properly.
-1. The build system handles references to property values in other files as well (as you can see in `properties/color/font.json`).
+1. The build system does a deep merge of all the design token files defined in the `source` attribute of `config.json`. This allows you to split up the design token files however you want. There are 2 JSON files with `color` as the top level key, but they get merged properly.
+1. The build system resolves references to other design tokens. `{size.font.medium.value}` is resolved properly.
+1. The build system handles references to design token values in other files as well (as you can see in `properties/color/font.json`).
 1. Values are transformed specifically for each platform.
 
 

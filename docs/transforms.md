@@ -4,7 +4,7 @@ EDIT scripts/handlebars/templates/api.hbs OR JSDOC COMMENT INSTEAD!
 -->
 # Transforms
 
-Transforms are functions that transform a property - this enables each platform to consume the property in different ways. A simple example is changing pixel values to point values for iOS and dp or sp for Android. Transforms are applied in a non-destructive way thus each platform can transform the properties. Transforms are performed sequentially, therfore the order you use transforms matters. Transforms are used in your [configuration](config.md), and can be either [pre-defined transforms](transforms.md?id=defining-custom-transforms) supplied by Style Dictionary or [custom transforms](transforms.md?id=defining-custom-transforms).
+Transforms are functions that transform a [design token](tokens.md) - this enables each platform to consume the design tokens in different ways. A simple example is changing pixel values to point values for iOS and dp or sp for Android. Transforms are applied in a non-destructive way thus each platform can transform the properties. The order you use transforms matters because transforms are performed sequentially. Transforms are used in your [configuration](config.md), and can be either [pre-defined transforms](transforms.md?id=defining-custom-transforms) supplied by Style Dictionary or [custom transforms](transforms.md?id=defining-custom-transforms).
 
 ## Using Transforms
 You use transforms in your config file under platforms > [platform] > transforms
@@ -25,14 +25,14 @@ A transform consists of 4 parts: type, name, matcher, and transformer. Transform
 ## Transform Types
 There are 3 types of transforms: attribute, name, and value.
 
-**Attribute:** An attribute transform adds to the attributes object on a property. This is for including any meta-data about a property such as it's CTI or other information.
+**Attribute:** An attribute transform adds to the attributes object on a design token. This is for including any meta-data about a design token such as it's CTI or other information.
 
-**Name:** A name transform transform the name of a property. You should really only be apply one name transformer because they will override each other if you use more than one.
+**Name:** A name transform transform the name of a design token. You should really only be apply one name transformer because they will override each other if you use more than one.
 
-**Value:** The value transform is the most important as this is the one that changes the representation of the value. Colors can be turned into hex values, rgb, hsl, hsv, etc. Value transforms have a matcher function that filter which properties that transform runs on. This allows us to only run a color transform on only the colors and not every property.
+**Value:** The value transform is the most important as this is the one that changes the representation of the value. Colors can be turned into hex values, rgb, hsl, hsv, etc. Value transforms have a matcher function that filter which properties that transform runs on. This allows us to only run a color transform on only the colors and not every design token.
 
 ## Defining Custom Transforms
-You can define custom transforms with the [`registerTransform`](api.md#registertransform). Style Dictionary adds some [default metadata](properties.md?id=default-property-metadata) to each property/token to provide context that may be useful for some transforms.
+You can define custom transforms with the [`registerTransform`](api.md#registertransform). Style Dictionary adds some [default metadata](tokens.md?id=default-design-token-metadata) to each design token to provide context that may be useful for some transforms.
 
 ## Transitive Transforms
 Starting in version 3.0, you can define transitive transforms which allow you to transform a referenced value. Normally, value transforms only transform non-referenced values and because transforms happen before references are resolved, the transformed value is then used to resolve references.
@@ -46,21 +46,20 @@ StyleDictionary.registerTransform({
   name: `myTransitiveTransform`,
   matcher: (token) => {},
   transformer: (token) => {
-    // token.value will be resolved at this point
-
+    // token.value will be resolved and transformed at this point
   }
 })
 ```
 
-If you want to learn more about transitive transforms, take a look at the [transitive transforms example]().
+If you want to learn more about transitive transforms, take a look at the [transitive transforms example](https://github.com/amzn/style-dictionary/tree/main/examples/advanced/transitive-transforms).
 
 The pre-defined transforms are *not transitive* to be backwards compatible.
 
 ## Pre-defined Transforms
 
-[lib/common/transforms.js](https://github.com/amzn/style-dictionary/blob/master/lib/common/transforms.js)
+[lib/common/transforms.js](https://github.com/amzn/style-dictionary/blob/main/lib/common/transforms.js)
 
-> All the pre-defined transforms included use the [CTI structure](properties.md?id=category-type-item) for the match properties. If you structure your style properties differently you will need to write [custom transforms](transforms.md?id=defining-custom-transforms) or make sure the property CTIs are on the attributes of your properties.
+> All the pre-defined transforms included use the [CTI structure](tokens.md?id=category-type-item) for the match properties. If you structure your style properties differently you will need to write [custom transforms](transforms.md?id=defining-custom-transforms) or make sure the design token CTIs are on the attributes of your properties.
 
 ### attribute/cti 
 

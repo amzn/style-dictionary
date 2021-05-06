@@ -59,7 +59,7 @@ A special file configuration is `filter`, which will filter the tokens before th
 
 * An object which gets passed to [Lodash's filter method](https://lodash.com/docs/4.17.14#filter).
 * A string that references the name of a registered filter, using the [`registerFilter`](api.md#registerfilter) method
-* A function if you are defining your configuration in Javascript rather than JSON. The filter function takes a token as the property and should return a boolean if the token should be included (true) or excluded (false).
+* A function if you are defining your configuration in Javascript rather than JSON. The filter function takes a token and should return a boolean if the token should be included (true) or excluded (false).
 
 ```javascript
 {
@@ -71,7 +71,7 @@ A special file configuration is `filter`, which will filter the tokens before th
 }
 ```
 
-The token/property that is passed to the filter function has already been [transformed](transforms.md) and has [default metadata](properties.md?id=default-property-metadata) added by Style Dictionary.
+The design token that is passed to the filter function has already been [transformed](transforms.md) and has [default metadata](tokens.md?id=default-design-token-metadata) added by Style Dictionary.
 
 ## References in output files
 
@@ -153,8 +153,6 @@ By default Style Dictionary adds a file header comment in the top of files built
 ```
 
 You can remove these comments with the option: `showFileHeader: false` if you do not want them in your generated files. You can also create your own file header or extend the default one. This could be useful if you want to put a version number or hash of the source files rather than a timestamp.
-
-### Custom file header
 
 Custom file headers can be added the same way you would add a custom format, either by using the [`registerFileHeader`](api.md#registerfileheader) function or adding the fileHeader object directly in the Style Dictionary [configuration](config.md). Your custom file header can be used in built-in formats as well as custom formats. To use a custom file header in a custom format see the [`fileHeader`](formats.md#fileheader) format helper method.
 
@@ -662,7 +660,7 @@ styleDictionary.registerFormat({
 
 ## Pre-defined Formats
 
-These are the formats included in Style Dictionary by default, pulled from [lib/common/formats.js](https://github.com/amzn/style-dictionary/blob/master/lib/common/formats.js)
+These are the formats included in Style Dictionary by default, pulled from [lib/common/formats.js](https://github.com/amzn/style-dictionary/blob/main/lib/common/formats.js)
 
 Want a format? [You can request it here](https://github.com/amzn/style-dictionary/issues).
 
@@ -1476,3 +1474,5 @@ class StyleDictionary {
 ```
 
 * * *
+
+

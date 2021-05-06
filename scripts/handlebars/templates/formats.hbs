@@ -55,7 +55,7 @@ A special file configuration is `filter`, which will filter the tokens before th
 
 * An object which gets passed to [Lodash's filter method](https://lodash.com/docs/4.17.14#filter).
 * A string that references the name of a registered filter, using the [`registerFilter`](api.md#registerfilter) method
-* A function if you are defining your configuration in Javascript rather than JSON. The filter function takes a token as the property and should return a boolean if the token should be included (true) or excluded (false).
+* A function if you are defining your configuration in Javascript rather than JSON. The filter function takes a token and should return a boolean if the token should be included (true) or excluded (false).
 
 ```javascript
 {
@@ -67,7 +67,7 @@ A special file configuration is `filter`, which will filter the tokens before th
 }
 ```
 
-The token/property that is passed to the filter function has already been [transformed](transforms.md) and has [default metadata](properties.md?id=default-property-metadata) added by Style Dictionary.
+The design token that is passed to the filter function has already been [transformed](transforms.md) and has [default metadata](tokens.md?id=default-design-token-metadata) added by Style Dictionary.
 
 ## References in output files
 
@@ -342,7 +342,7 @@ styleDictionary.registerFormat({
 
 ## Pre-defined Formats
 
-These are the formats included in Style Dictionary by default, pulled from [lib/common/formats.js](https://github.com/amzn/style-dictionary/blob/master/lib/common/formats.js)
+These are the formats included in Style Dictionary by default, pulled from [lib/common/formats.js](https://github.com/amzn/style-dictionary/blob/main/lib/common/formats.js)
 
 Want a format? [You can request it here](https://github.com/amzn/style-dictionary/issues).
 
