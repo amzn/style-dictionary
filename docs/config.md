@@ -101,8 +101,36 @@ You can also specify a custom location when you use the [CLI](using_the_cli.md) 
 }
 ```
 
-You can also use Style Dictionary as an [npm module](using_the_npm_module.md) and further customize how Style Dictionary is run, for example running Style Dictionary multiple times with different configurations.
+## Using in Node
 
+You can also use Style Dictionary as an [npm module](using_the_npm_module.md) and further customize how Style Dictionary is run, for example running Style Dictionary multiple times with different configurations. To do this you would create a Javascript file that imports the Style Dictionary npm module and calls the [`.extend`](api.md#extend) and [`.buildAllPlatforms`](api.md#buildallplatforms) functions.
+
+```javascript
+// build.js
+const StyleDictionary = require('style-dictionary');
+
+const myStyleDictionary = StyleDictionary.extend({
+  // configuration
+});
+
+myStyleDictionary.buildAllPlatforms();
+
+// You can also extend Style Dictionary multiple times:
+const myOtherStyleDictionary = myStyleDictionary.extend({
+  // new configuration
+});
+
+myOtherStyleDictionary.buildAllPlatforms();
+```
+
+You would then change your npm script or CLI command to run that file with Node:
+
+```json5
+// package.json
+"scripts": {
+  "build": "node build.js"
+}
+```
 
 ----
 
