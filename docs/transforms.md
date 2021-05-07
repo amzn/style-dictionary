@@ -51,9 +51,36 @@ StyleDictionary.registerTransform({
 })
 ```
 
+There is one thing to be mindful of with transitive transforms. The token's value will be resolved and *transformed* already at the time the transitive transform. What happens is Style Dictionary will transform and resolve values iteratively. First it will transform any non-referenced values, then it will resolve any references to non-referenced values, then it will try to transform any non-referenced values, and so on. Let's take a look at an example:
+
+```json
+{
+  "color": {
+    "red": { "value": "#f00" },
+    "danger": { "value": "{color.red}" },
+    "error": { "value": "{color.danger}" }
+  }
+}
+```
+
+Style dictionary will first transform the value of `color.red`, then resolve `color.danger` to the transformed `color.red` value. Then it will transform `color.danger` and resolve `color.error` to the transformed `color.danger`. Finally, it will transform `color.error` and see that there is nothing left to transform or resolve.
+
+This allows you to modify a reference that modifies another reference. For example:
+
+```json
+{
+  "color": {
+    "red": { "value": "#f00" },
+    "danger": { "value": "{color.red}", "darken": 0.75 },
+    "error": { "value": "{color.danger}", "darken": 0.5 }
+  }
+}
+```
+
+Using a custom transitive transform you could have `color.danger` darken `color.red` and `color.error` darken `color.danger`. The pre-defined transforms are *not transitive* to be backwards compatible and not break anything.
+
 If you want to learn more about transitive transforms, take a look at the [transitive transforms example](https://github.com/amzn/style-dictionary/tree/main/examples/advanced/transitive-transforms).
 
-The pre-defined transforms are *not transitive* to be backwards compatible.
 
 ## Pre-defined Transforms
 

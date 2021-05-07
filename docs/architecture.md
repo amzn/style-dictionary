@@ -12,9 +12,10 @@ Style Dictionary is a configuration based framework, you tell it what to do in a
 
 ## 2. Find all token files
 
-In your [config](config.md) file can define `include` and `source`, which are arrays of file paths. This tells Style Dictionary where to find your token files. You can have them anywhere and in any folder structure as long as you tell Style Dictionary where to find them.
+In your [config](config.md) file can define `include` and `source`, which are arrays of file path globs. These tell Style Dictionary where to find your token files. You can have them anywhere and in any folder structure as long as you tell Style Dictionary where to find them.
 
 If there are [custom parsers](parsers.md) defined, Style Dictionary will run those on files the parsers match.
+
 ## 3. Deep merge token files
 
 Style Dictionary takes all the files it found and performs a deep merge. This allows you to split your token files in any way you like, without worrying about accidentally overriding groups of tokens. This gives Style Dictionary a single, complete token object to work from.
@@ -27,9 +28,11 @@ For each platform defined in your [config](config.md), Style Dictionary will do 
 
 Style Dictionary now traverses over the whole token object and looks for design tokens. It does this by looking for anything with a `value` key. When it comes across a design token, it then performs all the [transforms](transforms.md) defined in your [config](config.md) in order.
 
+Value transforms, transforms that modify a token's value, are skipped if the token references another token. Starting in 3.0, you can define a [transitive transform](transforms.md#transitive-transforms) that will transform a value that references another token after that reference has been resolved. 
+
 ## 4b. Resolve aliases / references to other values
 
-After all the tokens have been transformed, it then does another pass over the token object looking for aliases, which look like `"{size.font.base.value}"`. When it finds these, it then replaces the reference with the transformed value. As we have a single complete token object, aliases can be in any token file and still work.
+After all the tokens have been transformed, it then does another pass over the token object looking for aliases, which look like `"{size.font.base.value}"`. When it finds these, it then replaces the reference with the transformed value. Because Style Dictionary merges all token files into a single object, aliases can be in any token file and still work.
 
 ## 4c. Format the tokens into files
 
@@ -37,6 +40,6 @@ Now all the design tokens are ready to be written to a file. Style Dictionary ta
 
 ## 4d. Run actions
 
-[Actions](actions.md) are custom code
+[Actions](actions.md) are custom code that run in a platform after the files are generated. They are useful for things like copying assets to specific build directories or generating images. 
 
-After Style Dictionary does steps 4-6 for each platform, now you have all your output files that are ready to consume in each platform and codebase.
+After Style Dictionary does steps 4a-4d for each platform, you will have all your output files that are ready to consume in each platform and codebase.
