@@ -746,7 +746,7 @@ $tokens: {
 
 Creates a SCSS file with variable definitions based on the style dictionary.
 
-Add `!default` to any variable by setting a `themeable: true` property in the token's definition.
+Add `!default` to any variable by setting a `themeable: true` attribute in the token's definition.
 
 <table>
   <thead>
@@ -1090,7 +1090,7 @@ filter: {
 
 
 Creates a resource xml file with all the integers in your style dictionary. It filters your
-style properties by `prop.attributes.category === 'time'`
+design tokens by `token.attributes.category === 'time'`
 
 It is recommended to use the 'android/resources' format with a custom filter
 instead of this format:
@@ -1121,7 +1121,7 @@ filter: {
 
 
 Creates a resource xml file with all the strings in your style dictionary. Filters your
-style properties by `prop.attributes.category === 'content'`
+design tokens by `token.attributes.category === 'content'`
 
 It is recommended to use the 'android/resources' format with a custom filter
 instead of this format:
@@ -1147,7 +1147,7 @@ filter: {
 ### ios/macros 
 
 
-Creates an Objective-C header file with macros for style properties
+Creates an Objective-C header file with macros for design tokens
 
 **Example**  
 ```objectivec
@@ -1474,3 +1474,5 @@ class StyleDictionary {
 ```
 
 * * *
+
+

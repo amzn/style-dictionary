@@ -23,7 +23,7 @@ For detailed usage head to https://amzn.github.io/style-dictionary
 * [Usage](#usage)
 * [Example](#example)
 * [Quick Start](#quick-start)
-* [Design tokens](#design-tokens)
+* [Design Tokens](#design-tokens)
 * [Extending](#extending)
 * [Contributing](#contributing)
 * [License](#license)
@@ -148,7 +148,7 @@ This tells the style dictionary build system how and what to build. The default 
 | platform.file.options | Object (optional) | A set of extra options associated with the file. |
 | platform.file.options.showFileHeader | Boolean | If the generated file should have a "Do not edit + Timestamp" header (where the format supports it). By default is "true". |
 
-### Design tokens
+### Design Tokens
 
 ```json
 {
@@ -214,7 +214,7 @@ $ style-dictionary build
 Take a look at the documentation for the example code.
 
 
-## Design tokens
+## Design Tokens
 
 A design token is an attribute to describe something visually. It is atomic (it cannot be broken down further). Design tokens have a name, a value, and optional attributes or metadata. The name of a token can be anything, but we have a proposed naming structure that we find works really well in the next section.
 

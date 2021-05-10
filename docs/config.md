@@ -151,7 +151,7 @@ You would then change your npm script or CLI command to run that file with Node:
 
 ### Platform
 
-A platform is a group of configuration settings that tells Style Dictionary how to properly transform and format your design tokens for output to a specific platform. You can have as many platforms as you need and you can name them anything, there are no restrictions.
+A platform is a build target that tells Style Dictionary how to properly transform and format your design tokens for output to a specific platform. You can have as many platforms as you need and you can name them anything, there are no restrictions.
 
 | Attribute | Type | Description |
 | :--- | :--- | :--- |
