@@ -56,14 +56,14 @@ module.exports = {
     // Now we can use the transform 'myTransform' below
     myTransform: {
       type: 'name',
-      transformer: (prop) => prop.path.join('_').toUpperCase()
+      transformer: (token) => token.path.join('_').toUpperCase()
     }
   },
   // Same with formats, you can now write them directly to this config
   // object. The name of the format is the key.
   format: {
     myFormat: ({dictionary, platform}) => {
-      return dictionary.allProperties.map(prop => `${prop.name}: ${prop.value}`).join('\n');
+      return dictionary.allTokens.map(token => `${token.name}: ${token.value}`).join('\n');
     }
   },
   platforms: {
@@ -146,6 +146,7 @@ You would then change your npm script or CLI command to run that file with Node:
 | include | Array[String] (optional) | An array of file path [globs](https://github.com/isaacs/node-glob) to design token files that contain default styles. Style Dictionary uses this as a base collection of design tokens. The tokens found using the "source" attribute will overwrite tokens found using include. |
 | source | Array[String] | An array of file path [globs](https://github.com/isaacs/node-glob) to design token files. Style Dictionary will do a deep merge of all of the token files, allowing you to organize your files files however you want. |
 | tokens | Object | The tokens object is a way to include inline design tokens as opposed to using the `source` and `include` arrays. 
+| properties | Object | **DEPRECATED** The properties object has been renamed to `tokens`. Using the `properties` object will still work for backwards compatibility. 
 | platforms | Object[Platform] | An object containing [platform](#platform) config objects that describe how the Style Dictionary should build for that platform. You can add any arbitrary attributes on this object that will get passed to formats and actions (more on these in a bit). This is useful for things like build paths, name prefixes, variable names, etc.
 
 ### Platform

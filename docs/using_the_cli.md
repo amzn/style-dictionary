@@ -35,7 +35,7 @@ $ mkdir quick-start && cd quick-start
 $ style-dictionary init basic
 ```
 
-You can then modify the design tokens in the properties directory and run the build command below. See the changes in the output generated in the build folder.
+You can then modify the design tokens in the tokens directory and run the build command below. See the changes in the output generated in the build folder.
 
 ```bash
 $ style-dictionary build

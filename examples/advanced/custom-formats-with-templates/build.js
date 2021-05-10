@@ -35,13 +35,13 @@ const templateCustomXml = handlebars.compile(fs.readFileSync(__dirname + '/templ
 
 StyleDictionary.registerFormat({
   name: 'custom/format/android-xml-alt',
-  formatter: function(dictionary, platform) {
+  formatter: function({dictionary, platform}) {
     return templateCustomXml({
       // this is to show that the formatter function only takes a "dictionary" and "platform" parameters
-      // (and dictionary has a "properties" and "allProperties" attributes)
+      // (and dictionary has "tokens" and "allTokens" attributes)
       // and returns a string. for more details about the "formatter" function refer to the documentation
-      allProperties: dictionary.allProperties,
-      properties: dictionary.properties,
+      allTokens: dictionary.allTokens,
+      tokens: dictionary.tokens,
       options: platform
     });
   }
@@ -53,9 +53,9 @@ const templateCustomPlist = pug.compileFile(__dirname + '/templates/ios-plist_al
 
 StyleDictionary.registerFormat({
   name: 'custom/format/ios-plist-alt',
-  formatter: function(dictionary) {
+  formatter: function({dictionary}) {
     return templateCustomPlist({
-      allProperties: dictionary.allProperties
+      allTokens: dictionary.allTokens
     });
   }
 });

@@ -2,7 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <%
-var allProperties = _.each(allProperties, function(prop) {
+var allTokens = _.each(allTokens, function(prop) {
     if(prop.type === 'color') {
         prop.tag = 'string';
     } else if(prop.type === 'size') {
@@ -17,7 +17,7 @@ var allProperties = _.each(allProperties, function(prop) {
 });
 %>
 <dict>
-    <% _.each(allProperties, function(prop) {
+    <% _.each(allTokens, function(prop) {
     %><key><%= prop.name %></key><<%= prop.tag %>><%= prop.value %></<%= prop.tag %>><% if (prop.comment) { %><!-- <%= prop.comment %> --><% } %>
     <% }); %>
 </dict>

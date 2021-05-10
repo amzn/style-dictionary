@@ -231,16 +231,16 @@ The formatter function that is called when Style Dictionary builds files.
     <td>args.dictionary</td><td><code>Object</code></td><td><p>The transformed and resolved dictionary object</p>
 </td>
     </tr><tr>
-    <td>args.dictionary.properties</td><td><code>Object</code></td><td><p>Object structure of the tokens/properties that has been transformed and references resolved.</p>
+    <td>args.dictionary.tokens</td><td><code>Object</code></td><td><p>Object structure of the tokens that has been transformed and references resolved.</p>
 </td>
     </tr><tr>
-    <td>args.dictionary.allProperties</td><td><code>Array</code></td><td><p>Flattened array of all the tokens/properties. This makes it easy to output a list, like a list of SCSS variables.</p>
+    <td>args.dictionary.allTokens</td><td><code>Array</code></td><td><p>Flattened array of all the tokens. This makes it easy to output a list, like a list of SCSS variables.</p>
 </td>
     </tr><tr>
     <td>args.dictionary.usesReference</td><td><code>function</code></td><td><p>Use this function to see if a token&#39;s value uses a reference. This is the same function style dictionary uses internally to detect a reference.</p>
 </td>
     </tr><tr>
-    <td>args.dictionary.getReferences</td><td><code>function</code></td><td><p>Use this function to get the tokens/properties that it references. You can use this to output a reference in your custom format. For example: <code>dictionary.getReferences(token.original.value) // returns an array of the referenced token objects</code></p>
+    <td>args.dictionary.getReferences</td><td><code>function</code></td><td><p>Use this function to get the tokens that it references. You can use this to output a reference in your custom format. For example: <code>dictionary.getReferences(token.original.value) // returns an array of the referenced token objects</code></p>
 </td>
     </tr><tr>
     <td>args.platform</td><td><code>Object</code></td><td><p>The platform configuration this format is being called in.</p>
@@ -259,7 +259,7 @@ The formatter function that is called when Style Dictionary builds files.
 StyleDictionary.registerFormat({
   name: 'myCustomFormat',
   formatter: function({dictionary, platform, options, file}) {
-    return JSON.stringify(dictionary.properties, null, 2);
+    return JSON.stringify(dictionary.tokens, null, 2);
   }
 })
 ```
@@ -304,7 +304,7 @@ To take advantage of outputting references in your custom formats there are 2 he
 StyleDictionary.registerFormat({
   name: `es6WithReferences`,
   formatter: function({dictionary}) {
-    return dictionary.allProperties.map(token => {
+    return dictionary.allTokens.map(token => {
       let value = JSON.stringify(token.value);
       // the `dictionary` object now has `usesReference()` and
       // `getReferences()` methods. `usesReference()` will return true if
@@ -350,7 +350,7 @@ Here are the available format helper methods:
 > formatHelpers.createPropertyFormatter(options) ⇒ <code>function</code>
 
 Creates a function that can be used to format a property. This can be useful
-to use as the function on `dictionary.allProperties.map`. The formatting
+to use as the function on `dictionary.allTokens.map`. The formatting
 is configurable either by supplying a `format` option or a `formatting` object
 which uses: prefix, indentation, separator, suffix, and commentStyle.
 
@@ -389,7 +389,7 @@ StyleDictionary.registerFormat({
       dictionary,
       format: 'css'
     });
-    return dictionary.allProperties.map(formatProperty).join('\n');
+    return dictionary.allTokens.map(formatProperty).join('\n');
   }
 });
 ```
@@ -430,7 +430,7 @@ StyleDictionary.registerFormat({
   name: 'myCustomFormat',
   formatter: function({ dictionary, file }) {
     return fileHeader({file, 'short') +
-      dictionary.allProperties.map(token => `${token.name} = ${token.value}`)
+      dictionary.allTokens.map(token => `${token.name} = ${token.value}`)
         .join('\n');
   }
 });
@@ -480,10 +480,10 @@ StyleDictionary.registerFormat({
 * * *
 
 ### iconsWithPrefix 
-> formatHelpers.iconsWithPrefix(prefix, properties, options) ⇒ <code>String</code>
+> formatHelpers.iconsWithPrefix(prefix, allTokens, options) ⇒ <code>String</code>
 
 This is used to create CSS (and CSS pre-processor) lists of icons. It assumes you are
-using an icon font and creates helper classes with the :before psuedo-selector to add
+using an icon font and creates helper classes with the :before pseudo-selector to add
 a unicode character.
 __You probably don't need this.__
 
@@ -498,7 +498,7 @@ __You probably don't need this.__
     <td>prefix</td><td><code>String</code></td><td><p>Character to prefix variable names, like &#39;$&#39; for Sass</p>
 </td>
     </tr><tr>
-    <td>properties</td><td><code>Array.&lt;Property&gt;</code></td><td><p>allProperties array on the dictionary object passed to the formatter function.</p>
+    <td>allTokens</td><td><code>Array.&lt;Token&gt;</code></td><td><p>allTokens array on the dictionary object passed to the formatter function.</p>
 </td>
     </tr><tr>
     <td>options</td><td><code>Object</code></td><td><p>options object passed to the formatter function.</p>
@@ -511,7 +511,7 @@ __You probably don't need this.__
 StyleDictionary.registerFormat({
   name: 'myCustomFormat',
   formatter: function({ dictionary, options }) {
-    return iconsWithPrefix('$', dictionary.allProperties, options);
+    return iconsWithPrefix('$', dictionary.allTokens, options);
   }
 });
 ```
@@ -531,7 +531,7 @@ Outputs an object stripping out everything except values
   </thead>
   <tbody>
 <tr>
-    <td>obj</td><td><code>Object</code></td><td><p>The object to minify. You will most likely pass <code>dictionary.properties</code> to it.</p>
+    <td>obj</td><td><code>Object</code></td><td><p>The object to minify. You will most likely pass <code>dictionary.tokens</code> to it.</p>
 </td>
     </tr>  </tbody>
 </table>
@@ -541,7 +541,7 @@ Outputs an object stripping out everything except values
 StyleDictionary.registerFormat({
   name: 'myCustomFormat',
   formatter: function({ dictionary }) {
-    return JSON.stringify(minifyDictionary(dictionary.properties));
+    return JSON.stringify(minifyDictionary(dictionary.tokens));
   }
 });
 ```
@@ -551,7 +551,7 @@ StyleDictionary.registerFormat({
 ### sortByName 
 > formatHelpers.sortByName(a, b) ⇒ <code>Integer</code>
 
-A sorting function to be used when iterating over `dictionary.allProperties` in
+A sorting function to be used when iterating over `dictionary.allTokens` in
 a format.
 
 **Returns**: <code>Integer</code> - -1 or 1 depending on which element should come first based on https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort  
@@ -576,7 +576,7 @@ a format.
 StyleDictionary.registerFormat({
   name: 'myCustomFormat',
   formatter: function({ dictionary, options }) {
-    return dictionary.allProperties.sort(sortByName)
+    return dictionary.allTokens.sort(sortByName)
       .map(token => `${token.name} = ${token.value}`)
       .join('\n');
   }
@@ -589,7 +589,7 @@ StyleDictionary.registerFormat({
 > formatHelpers.sortByReference(dictionary) ⇒ <code>function</code>
 
 A function that returns a sorting function to be used with Array.sort that
-will sort the allProperties array based on references. This is to make sure
+will sort the allTokens array based on references. This is to make sure
 if you use output references that you never use a reference before it is
 defined.
 
@@ -607,7 +607,7 @@ defined.
 
 **Example**  
 ```javascript
-dictionary.allProperties.sort(sortByReference(dictionary))
+dictionary.allTokens.sort(sortByReference(dictionary))
 ```
 
 * * *
@@ -647,7 +647,7 @@ styleDictionary.registerFormat({
   name: 'my/format',
   formatter: function({dictionary, platform}) {
     return template({
-      properties: dictionary.properties,
+      tokens: dictionary.tokens,
       options: platform
     });
   }
@@ -1474,5 +1474,3 @@ class StyleDictionary {
 ```
 
 * * *
-
-

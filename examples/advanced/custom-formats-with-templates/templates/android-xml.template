@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><%
-var allProperties = _.each(allProperties, function(prop) {
+var allTokens = _.each(allTokens, function(prop) {
     if(prop.attributes.category === 'color') {
         prop.tag = 'color';
     } else if(prop.attributes.category === 'size') {
@@ -13,7 +13,7 @@ var allProperties = _.each(allProperties, function(prop) {
     }
 }); %>
 <resources>
-<% _.each(allProperties, function(prop) {
+<% _.each(allTokens, function(prop) {
     // Notice: this is an alternative way to use Lodash templating syntax,
     // that uses string concatenation and the print() function to have
     // more control over the indentation, whitespace, newlines, etc.

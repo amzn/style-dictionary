@@ -17,7 +17,7 @@
 <%= fileHeader({file, commentStyle: 'long'}) %><%
     var output = '';
     output += `$${file.mapName||'tokens'}: (\n`;
-    output += allProperties.map(function(prop){
+    output += allTokens.map(function(prop){
         var line = '';
         if(prop.comment) {
         line += '  // ' + prop.comment + '\n';

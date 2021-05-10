@@ -33,7 +33,7 @@ You can reference the file header in a custom format as well by using the `fileH
 const {fileHeader} = StyleDictionary.formatHelpers;
 
 const myCustomFormat = ({ dictionary, file }) => {
-  return `${fileHeader({file, commentStyle: 'short'})}${dictionary.allProperties.map(token => {
+  return `${fileHeader({file, commentStyle: 'short'})}${dictionary.allTokens.map(token => {
     return `--${token.name}: ${token.value};`
   }).join(`\n`)}`
 }

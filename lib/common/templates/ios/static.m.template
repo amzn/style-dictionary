@@ -19,5 +19,5 @@
 <%= fileHeader({ file, commentStyle: 'short' }) %>
 #import "<%= file.className %>.h"
 
-<% dictionary.allProperties.forEach(function(prop) {  %>
+<% dictionary.allTokens.forEach(function(prop) {  %>
 <%= file.type %> const <%= prop.name %> = <%= prop.value %>;<% }); %>

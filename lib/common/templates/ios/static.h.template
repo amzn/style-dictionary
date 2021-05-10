@@ -19,5 +19,5 @@
 <%= fileHeader({ file, commentStyle: 'short' })%>
 #import <Foundation/Foundation.h>
 
-<% dictionary.allProperties.forEach(function(prop) {  %>
+<% dictionary.allTokens.forEach(function(prop) {  %>
 extern <%= file.type %> const <%= prop.name %>;<% }); %>

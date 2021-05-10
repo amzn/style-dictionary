@@ -31,7 +31,7 @@
 
   dispatch_once(&onceToken, ^{
     colorArray = @[
-<%= dictionary.allProperties.map(function(prop){ return prop.value; }).join(',\n') %>
+<%= dictionary.allTokens.map(function(prop){ return prop.value; }).join(',\n') %>
     ];
   });
 

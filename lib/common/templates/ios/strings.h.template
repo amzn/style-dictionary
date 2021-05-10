@@ -19,7 +19,7 @@
 <%= fileHeader({ file, commentStyle: 'short' })%>
 #import <Foundation/Foundation.h>
 
-<% dictionary.allProperties.forEach(function(prop) {  %>
+<% dictionary.allTokens.forEach(function(prop) {  %>
 extern NSString * const <%= prop.name %>;<% }); %>
 
 @interface <%= file.className %> : NSObject

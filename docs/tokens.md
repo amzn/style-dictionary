@@ -132,12 +132,12 @@ Design token files can included inline in the configuration, or be written in se
 * CommonJS modules
 * Potentially any language with [custom parsers](#customfileparsers)
 
-Tokens can be defined *inline* in the Style Dictionary configuration, or in files. You can add a `properties` object to your Style Dictionary configuration like this:
+Tokens can be defined *inline* in the Style Dictionary configuration, or in files. You can add a `tokens` object to your Style Dictionary configuration like this:
 
 ```javascript
 // config.js
 module.exports = {
-  properties: {
+  tokens: {
     color: {
       background: {
         primary: { value: "#fff" }
@@ -156,7 +156,7 @@ Generally you will have too many design tokens to include them all inline, so yo
 module.exports = {
   include: [
     // you can list singular files:
-    `node_modules/my-other-style-dictionary/properties.json`
+    `node_modules/my-other-style-dictionary/tokens.json`
   ],
   source: [
     // or use file path [globs](https://www.npmjs.com/package/glob)
@@ -167,7 +167,7 @@ module.exports = {
 }
 ```
 
-**You can organize your design token files in any way as long as you can tell Style Dictionary where to find them.** The directory and file structure of design token files does not have any effect on the object structure of the properties because Style Dictionary does a deep merge on all design token files. Separating properties into files and folders is to make the authoring experience cleaner and more flexible.
+**You can organize your design token files in any way as long as you can tell Style Dictionary where to find them.** The directory and file structure of design token files does not have any effect on the object structure of the tokens because Style Dictionary does a deep merge on all design token files. Separating tokens into files and folders is to make the authoring experience cleaner and more flexible.
 
 ### Collision warnings
 
@@ -248,7 +248,7 @@ is equivalent to this JSON file:
 }
 ```
 
-You might prefer authoring your design token files in Javascript because it can be a bit more friendly to read and write (don't have to quote keys, can leave dangling commas, etc.). Writing your design token files as Javascript gives you more freedom to do complex things like generating many properties based on code:
+You might prefer authoring your design token files in Javascript because it can be a bit more friendly to read and write (don't have to quote keys, can leave dangling commas, etc.). Writing your design token files as Javascript gives you more freedom to do complex things like generating many tokens based on code:
 
 ```javascript
 const Color = require('tinycolor2');
@@ -309,7 +309,7 @@ StyleDictionary.registerParser({
 
 ## Design token structure
 
-You can structure your properties any way you want. You could have a flat object rather than a nested one:
+You can structure your tokens any way you want. You could have a flat object rather than a nested one:
 
 ```json
 {
@@ -326,7 +326,7 @@ Design tokens are organized into a hierarchical tree structure with 'category' d
 
 ![](assets/cti.png)
 
-Now you can structure your properties in a nested object like this:
+Now you can structure your tokens in a nested object like this:
 
 ```json
 {
@@ -339,13 +339,13 @@ Now you can structure your properties in a nested object like this:
 }
 ```
 
-The CTI is implicit in the structure, the category is 'size' and the type is 'font', and there are 2 properties 'base' and 'large'.
+The CTI is implicit in the structure, the category is 'size' and the type is 'font', and there are 2 tokens 'base' and 'large'.
 
-Structuring style properties in this manner gives us consistent naming and accessing of these properties. You don't need to remember if it is `button_color_error` or `error_button_color`, it is `color_background_button_error`!
+Structuring design tokens in this manner gives us consistent naming and accessing of these tokens. You don't need to remember if it is `button_color_error` or `error_button_color`, it is `color_background_button_error`!
 
-You can organize and name your style properties however you want, **there are no restrictions**. But there are a good amount of helpers if you do use this structure, like the 'attribute/cti' transform which adds attributes to the design token of its CTI based on the path in the object. There are a lot of names transforms as well for when you want a flat structure like for Sass variables.
+You can organize and name your design tokens however you want, **there are no restrictions**. But there are a good amount of helpers if you do use this structure, like the 'attribute/cti' transform which adds attributes to the design token of its CTI based on the path in the object. There are a lot of names transforms as well for when you want a flat structure like for Sass variables.
 
-Also, the CTI structure provides a good mechanism to target transforms for specific kinds of properties. All of the transforms provided by the framework use the CTI structure to know if it should be applied. For instance, the 'color/hex' transform only applies to properties of the category 'color'.
+Also, the CTI structure provides a good mechanism to target transforms for specific kinds of tokens. All of the transforms provided by the framework use the CTI structure to know if it should be applied. For instance, the 'color/hex' transform only applies to tokens of the category 'color'.
 
 Here are the categories and types the built-in transforms and formats use:
 

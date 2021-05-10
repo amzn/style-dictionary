@@ -20,7 +20,7 @@ import 'dart:ui';
 class <%= file.className %> {
   <%= file.className %>._();
 
-    <%= allProperties.map(function(prop) {
+    <%= allTokens.map(function(prop) {
       return 'static const ' + formatProperty(prop);
     }).join('\n    ') %>
 }

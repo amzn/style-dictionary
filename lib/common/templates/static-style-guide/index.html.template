@@ -58,7 +58,7 @@
   </div>
 
   <div class="style-guide">
-    <% _.each(allProperties, function(property) { %>
+    <% _.each(allTokens, function(property) { %>
       <div class="style-guide-property <%= checkPropGetInverse(property) %>" data-path="<%= property.path.join("-") %>" style="<%= checkForStyle(property) %>">
         <div class="style-guide-property-path"><%= property.path.join(".") %></div>
         <div class="style-guide-property-name"><%= property.name %></div>

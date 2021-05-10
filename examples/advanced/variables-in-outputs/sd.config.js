@@ -2,7 +2,7 @@ module.exports = {
   format: {
     // Adding a custom format to show how to get an alias's name.
     customFormat: function({dictionary, options}) {
-      return dictionary.allProperties.map(token => {
+      return dictionary.allTokens.map(token => {
         let value = JSON.stringify(token.value);
         // new option added to decide whether or not to output references
         if (options.outputReferences) {

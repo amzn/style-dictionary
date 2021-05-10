@@ -5,9 +5,9 @@ const StyleDictionaryPackage = require('style-dictionary');
 function getStyleDictionaryConfig(brand, platform) {
   return {
     "source": [
-      `properties/brands/${brand}/*.json`,
-      "properties/globals/**/*.json",
-      `properties/platforms/${platform}/*.json`
+      `tokens/brands/${brand}/*.json`,
+      "tokens/globals/**/*.json",
+      `tokens/platforms/${platform}/*.json`
     ],
     "platforms": {
       "web": {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-each prop in allProperties
-    case prop.attributes.category
+each token in allTokens
+    case token.attributes.category
         when 'color'
             - var tag = 'string'
         when 'size'
@@ -13,12 +13,12 @@ each prop in allProperties
             - var tag = 'string'
         default
             - var tag = 'string'
-    key #{prop.name}
+    key #{token.name}
     dict
-        if prop.comment
-            // #{prop.comment}
-        if prop.type
+        if token.comment
+            // #{token.comment}
+        if token.type
             key type
-            string #{prop.type}
+            string #{token.type}
         key value
-        #{tag}(name=prop.name) #{prop.value}
+        #{tag}(name=token.name) #{token.value}

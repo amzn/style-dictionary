@@ -12,7 +12,7 @@ At this point, if you want to build once the tokens you can run `npm run build`.
 
 If instead you want to automatically build the tokens every time a property file is updated, run the command `npm run watch` in your CLI.
 
-This will start to watch the files in the "properties" folder, and whenever a file is updated and saved, the files in `build` are re-generated with the new/updated values.
+This will start to watch the files in the "tokens" folder, and whenever a file is updated and saved, the files in `build` are re-generated with the new/updated values.
 
 If you want to see it in action, open one of the files generated in "build", open a property file and update one of the values: you will see immediately updated also the generated file.
 
@@ -22,7 +22,7 @@ If you want to see it in action, open one of the files generated in "build", ope
 
 The "watch" runner will start a process (using a special filesystem watcher called [Chokidar](https://github.com/paulmillr/chokidar)) that will listen to changes to a list of "watched" files. Whenever one of this file is changed/updated (more precisely, is saved to disk) the watch process will trigger a command specified by the user (as an argument passed to the watcher).
 
-In this example, we have selected all the JSON files in the `props` folder (using the glob pattern `properties/**/*.json`) but you can specify your own path of watched files.
+In this example, we have selected all the JSON files in the `props` folder (using the glob pattern `tokens/**/*.json`) but you can specify your own path of watched files.
 
 The command that we automatically run at every update is the `npm run build` command, passed as parameter to the watcher via `-c 'npm run build'`.
 

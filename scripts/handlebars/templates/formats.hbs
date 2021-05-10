@@ -249,7 +249,7 @@ To take advantage of outputting references in your custom formats there are 2 he
 StyleDictionary.registerFormat({
   name: `es6WithReferences`,
   formatter: function({dictionary}) {
-    return dictionary.allProperties.map(token => {
+    return dictionary.allTokens.map(token => {
       let value = JSON.stringify(token.value);
       // the `dictionary` object now has `usesReference()` and
       // `getReferences()` methods. `usesReference()` will return true if
@@ -329,7 +329,7 @@ styleDictionary.registerFormat({
   name: 'my/format',
   formatter: function({dictionary, platform}) {
     return template({
-      properties: dictionary.properties,
+      tokens: dictionary.tokens,
       options: platform
     });
   }

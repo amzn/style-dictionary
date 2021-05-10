@@ -87,7 +87,7 @@ cleans all the files and performs the undo method of any [actions](actions.md).
 
 
 
-Exports a properties object with applied
+Exports a tokens object with applied
 platform transforms.
 
 This is useful if you want to use a style
@@ -119,7 +119,7 @@ Create a Style Dictionary
 const StyleDictionary = require('style-dictionary').extend('config.json');
 
 const StyleDictionary = require('style-dictionary').extend({
-  source: ['properties/*.json'],
+  source: ['tokens/*.json'],
   platforms: {
     scss: {
       transformGroup: 'scss',
@@ -257,7 +257,7 @@ Add a custom format to the style dictionary
 StyleDictionary.registerFormat({
   name: 'json',
   formatter: function({dictionary, platform, options, file}) {
-    return JSON.stringify(dictionary.properties, null, 2);
+    return JSON.stringify(dictionary.tokens, null, 2);
   }
 })
 ```
@@ -333,22 +333,22 @@ Transforms can manipulate a property's name, value, or attributes
 | transform.type | <code>String</code> | Type of transform, can be: name, attribute, or value |
 | transform.name | <code>String</code> | Name of the transformer (used by transformGroup to call a list of transforms). |
 | transform.transitive | <code>Boolean</code> | If the value transform should be applied transitively, i.e. should be applied to referenced values as well as absolute values. |
-| [transform.matcher] | <code>function</code> | Matcher function, return boolean if transform should be applied. If you omit the matcher function, it will match all properties. |
-| transform.transformer | <code>function</code> | Performs a transform on a property object, should return a string or object depending on the type. Will only update certain properties by which you can't mess up property objects on accident. |
+| [transform.matcher] | <code>function</code> | Matcher function, return boolean if transform should be applied. If you omit the matcher function, it will match all tokens. |
+| transform.transformer | <code>function</code> | Performs a transform on a property object, should return a string or object depending on the type. Will only update certain tokens by which you can't mess up property objects on accident. |
 
 **Example**  
 ```js
 StyleDictionary.registerTransform({
   name: 'time/seconds',
   type: 'value',
-  matcher: function(prop) {
-    return prop.attributes.category === 'time';
+  matcher: function(token) {
+    return token.attributes.category === 'time';
   },
-  transformer: function(prop) {
+  transformer: function(token) {
     // Note the use of prop.original.value,
     // before any transforms are performed, the build system
     // clones the original property to the 'original' attribute.
-    return (parseInt(prop.original.value) / 1000).toString() + 's';
+    return (parseInt(token.original.value) / 1000).toString() + 's';
   }
 });
 ```

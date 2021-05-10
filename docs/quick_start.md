@@ -161,13 +161,13 @@ $size-font-base: 1rem;
 Pretty nifty! This shows a few things happening:
 1. The build system does a deep merge of all the design token files defined in the `source` attribute of `config.json`. This allows you to split up the design token files however you want. There are 2 JSON files with `color` as the top level key, but they get merged properly.
 1. The build system resolves references to other design tokens. `{size.font.medium.value}` is resolved properly.
-1. The build system handles references to design token values in other files as well (as you can see in `properties/color/font.json`).
+1. The build system handles references to design token values in other files as well (as you can see in `tokens/color/font.json`).
 1. Values are transformed specifically for each platform.
 
 
 ## Making a change
 
-Now let's make a change and see how that affects things. Open up `properties/color/base.json` and change `"#111111"` to `"#000000"`. After you make that change, save the file and re-run the build command `style-dictionary build`. Open up the build files and take a look. Now:
+Now let's make a change and see how that affects things. Open up `tokens/color/base.json` and change `"#111111"` to `"#000000"`. After you make that change, save the file and re-run the build command `style-dictionary build`. Open up the build files and take a look. Now:
 
 **Android**
 ```xml
@@ -230,7 +230,7 @@ The `.extend()` method is an overloaded method that can also take a [configurati
 
 ```javascript
 const StyleDictionary = require('style-dictionary').extend({
-  source: ['properties/**/*.json'],
+  source: ['tokens/**/*.json'],
   platforms: {
     scss: {
       transformGroup: 'scss',
