@@ -59,7 +59,7 @@ A special file configuration is `filter`, which will filter the tokens before th
 
 * An object which gets passed to [Lodash's filter method](https://lodash.com/docs/4.17.14#filter).
 * A string that references the name of a registered filter, using the [`registerFilter`](api.md#registerfilter) method
-* A function that takes a token and returns a boolean if the token should be included (true) or excluded (false). ***This is only available if you are defining your configuration in Javascript.
+* A function that takes a token and returns a boolean if the token should be included (true) or excluded (false). **This is only available if you are defining your configuration in Javascript.**
 
 ```javascript
 {
