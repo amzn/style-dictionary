@@ -61,7 +61,7 @@ Pat yourself on the back, you built your first style dictionary! Take a look at 
 ```
 ├── README.md
 ├── config.json
-├── properties/
+├── tokens/
 │   ├── color/
 │       ├── base.json
 │       ├── font.json

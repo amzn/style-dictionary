@@ -4,7 +4,7 @@ Starting in version 3.0, you can define custom parsers to parse design token fil
 
 A custom parser matches design token files based on a file path regular expression. It will get the contents of a file as a string and should return an object of the data. 
 
-Custom parsers can be used to keep design token files in YAML, but they can also be used to add extra metadata onto all properties before transforms are run or anything else you can think of modifying on the design tokens before transforms are run.
+Custom parsers can be used to keep design token files in YAML, but they can also be used to add extra metadata onto all tokens before transforms are run or anything else you can think of modifying on the design tokens before transforms are run.
 
 
 ----

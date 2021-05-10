@@ -10,7 +10,7 @@ You use formats in your config file under platforms > [platform] > files > [file
 
 ```json
 {
-  "source": ["properties/**/*.json"],
+  "source": ["tokens/**/*.json"],
   "platforms": {
     "css": {
       "transformGroup": "css",
@@ -33,7 +33,7 @@ Formats can take configuration to make them more flexible. This allows you to re
 
 ```json
 {
-  "source": ["properties/**/*.json"],
+  "source": ["tokens/**/*.json"],
   "platforms": {
     "scss": {
       "transformGroup": "scss",
@@ -55,7 +55,7 @@ A special file configuration is `filter`, which will filter the tokens before th
 
 * An object which gets passed to [Lodash's filter method](https://lodash.com/docs/4.17.14#filter).
 * A string that references the name of a registered filter, using the [`registerFilter`](api.md#registerfilter) method
-* A function if you are defining your configuration in Javascript rather than JSON. The filter function takes a token and should return a boolean if the token should be included (true) or excluded (false).
+* A function that takes a token and returns a boolean if the token should be included (true) or excluded (false). ***This is only available if you are defining your configuration in Javascript.
 
 ```javascript
 {

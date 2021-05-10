@@ -39,7 +39,7 @@ Good for you! You have now built your first style dictionary! Moving on, take a 
 ```
 ├── README.md
 ├── config.json
-├── properties/
+├── tokens/
 │   ├── color/
 │       ├── base.json
 │       ├── font.json
@@ -139,10 +139,10 @@ $size-font-base: 1rem;
 
 Pretty nifty! This shows a few things happening:
 1. The build system does a deep merge of all the property JSON files defined in the `source` attribute of `config.json`. This allows you to split up the property JSON files however you want. There are 2 JSON files with `color` as the top level key, but they get merged properly.
-1. The build system resolves references to other style properties. `{size.font.medium.value}` gets resolved properly.
-1. The build system handles references to property values in other files as well as you can see in `properties/color/font.json`.
+1. The build system resolves references to other design tokens. `{size.font.medium.value}` gets resolved properly.
+1. The build system handles references to property values in other files as well as you can see in `tokens/color/font.json`.
 
-Now let's make a change and see how that affects things. Open up `properties/color/base.json` and change `"#111111"` to `"#000000"`. After you make that change, save the file and re-run the build command `style-dictionary build`. Open up the build files and take a look.
+Now let's make a change and see how that affects things. Open up `tokens/color/base.json` and change `"#111111"` to `"#000000"`. After you make that change, save the file and re-run the build command `style-dictionary build`. Open up the build files and take a look.
 
 **Huzzah!**
 

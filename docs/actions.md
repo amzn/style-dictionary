@@ -12,7 +12,7 @@ You use actions in your config file under platforms > [platform] > actions
 
 ```json
 {
-  "source": ["properties/**/*.json"],
+  "source": ["tokens/**/*.json"],
   "platforms": {
     "android": {
       "transformGroup": "android",

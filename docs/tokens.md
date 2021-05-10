@@ -125,14 +125,14 @@ See more in the advanced [referencing-aliasing example](https://github.com/amzn/
 
 ## Defining design tokens
 
-Style properties files can included inline in the configuration, or be written in separate files. Style Dictionary supports these languages for design token files:
+Design token files can included inline in the configuration, or be written in separate files. Style Dictionary supports these languages for design token files:
 
 * JSON
 * [JSON5](https://json5.org)
 * CommonJS modules
 * Potentially any language with [custom parsers](#customfileparsers)
 
-Properties can be defined *inline* in the Style Dictionary configuration, or in files. You can add a `properties` object to your Style Dictionary configuration like this:
+Tokens can be defined *inline* in the Style Dictionary configuration, or in files. You can add a `properties` object to your Style Dictionary configuration like this:
 
 ```javascript
 // config.js
@@ -150,7 +150,7 @@ module.exports = {
 }
 ```
 
-Generally you will have too many style properties to include them all inline, so you can separate them out into their own files. You can tell Style Dictionary where to find your design token files with the `source` and `include` attributes in the configuration like this:
+Generally you will have too many design tokens to include them all inline, so you can separate them out into their own files. You can tell Style Dictionary where to find your design token files with the `source` and `include` attributes in the configuration like this:
 
 ```javascript
 module.exports = {

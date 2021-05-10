@@ -82,7 +82,7 @@ describe('formats', () => {
 
       expect(formattedScss).not.toMatch("!default");
 
-      themeableDictionary.allProperties[0].themeable = true;
+      themeableDictionary.allTokens[0].themeable = true;
       themeableScss = formatter(createFormatArgs({
         dictionary: themeableDictionary,
         file,

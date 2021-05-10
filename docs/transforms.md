@@ -4,14 +4,14 @@ EDIT scripts/handlebars/templates/api.hbs OR JSDOC COMMENT INSTEAD!
 -->
 # Transforms
 
-Transforms are functions that transform a [design token](tokens.md) - this enables each platform to consume the design tokens in different ways. A simple example is changing pixel values to point values for iOS and dp or sp for Android. Transforms are applied in a non-destructive way thus each platform can transform the properties. The order you use transforms matters because transforms are performed sequentially. Transforms are used in your [configuration](config.md), and can be either [pre-defined transforms](transforms.md?id=defining-custom-transforms) supplied by Style Dictionary or [custom transforms](transforms.md?id=defining-custom-transforms).
+Transforms are functions that modify a token so that it can be understood by a specific platform. It can modify the name, value, or attributes of a token - enabling each platform to use the design token in different ways. A simple example is changing pixel values to point values for iOS and dp or sp for Android. Transforms are isolated per platform; each platform begins with the same design token and makes the modifications it needs without affecting other platforms. The order you use transforms matters because transforms are performed sequentially. Transforms are used in your [configuration](config.md), and can be either [pre-defined transforms](transforms.md?id=defining-custom-transforms) supplied by Style Dictionary or [custom transforms](transforms.md?id=defining-custom-transforms).
 
 ## Using Transforms
 You use transforms in your config file under platforms > [platform] > transforms
 
 ```json
 {
-  "source": ["properties/**/*.json"],
+  "source": ["tokens/**/*.json"],
   "platforms": {
     "android": {
       "transforms": ["attribute/cti", "name/cti/kebab", "color/hex", "size/rem"]
@@ -20,7 +20,7 @@ You use transforms in your config file under platforms > [platform] > transforms
 }
 ```
 
-A transform consists of 4 parts: type, name, matcher, and transformer. Transforms are run on all properties where the matcher returns true. *NOTE: if you don't provide a matcher function, it will match all properties.*
+A transform consists of 4 parts: type, name, matcher, and transformer. Transforms are run on all design tokens where the matcher returns true. *NOTE: if you don't provide a matcher function, it will match all tokens.*
 
 ## Transform Types
 There are 3 types of transforms: attribute, name, and value.
@@ -29,7 +29,7 @@ There are 3 types of transforms: attribute, name, and value.
 
 **Name:** A name transform transform the name of a design token. You should really only be apply one name transformer because they will override each other if you use more than one.
 
-**Value:** The value transform is the most important as this is the one that changes the representation of the value. Colors can be turned into hex values, rgb, hsl, hsv, etc. Value transforms have a matcher function that filter which properties that transform runs on. This allows us to only run a color transform on only the colors and not every design token.
+**Value:** The value transform is the most important as this is the one that changes the representation of the value. Colors can be turned into hex values, rgb, hsl, hsv, etc. Value transforms have a matcher function that filter which tokens that transform runs on. This allows us to only run a color transform on only the colors and not every design token.
 
 ## Defining Custom Transforms
 You can define custom transforms with the [`registerTransform`](api.md#registertransform). Style Dictionary adds some [default metadata](tokens.md?id=default-design-token-metadata) to each design token to provide context that may be useful for some transforms.
@@ -77,7 +77,7 @@ This allows you to modify a reference that modifies another reference. For examp
 }
 ```
 
-Using a custom transitive transform you could have `color.danger` darken `color.red` and `color.error` darken `color.danger`. The pre-defined transforms are *not transitive* to be backwards compatible and not break anything.
+Using a custom transitive transform you could have `color.danger` darken `color.red` and `color.error` darken `color.danger`. The pre-defined transforms are not transitive to be backwards compatible with Style Dictionary v2 - an upgrade should not cause breaking changes.
 
 If you want to learn more about transitive transforms, take a look at the [transitive transforms example](https://github.com/amzn/style-dictionary/tree/main/examples/advanced/transitive-transforms).
 
@@ -86,7 +86,7 @@ If you want to learn more about transitive transforms, take a look at the [trans
 
 [lib/common/transforms.js](https://github.com/amzn/style-dictionary/blob/main/lib/common/transforms.js)
 
-> All the pre-defined transforms included use the [CTI structure](tokens.md?id=category-type-item) for the match properties. If you structure your style properties differently you will need to write [custom transforms](transforms.md?id=defining-custom-transforms) or make sure the design token CTIs are on the attributes of your properties.
+> All the pre-defined transforms included use the [CTI structure](tokens.md?id=category-type-item) for matching tokens. If you structure your design tokens differently you will need to write [custom transforms](transforms.md?id=defining-custom-transforms) or make sure the proper CTIs are on the attributes of your design tokens.
 
 ### attribute/cti 
 

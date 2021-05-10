@@ -10,7 +10,7 @@ You use transformGroups in your config file under platforms > [platform] > trans
 
 ```json
 {
-  "source": ["properties/**/*.json"],
+  "source": ["tokens/**/*.json"],
   "platforms": {
     "android": {
       "transformGroup": "android"

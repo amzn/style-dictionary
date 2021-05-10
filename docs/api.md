@@ -28,7 +28,7 @@ StyleDictionary.buildAllPlatforms();
 
 
 Takes a platform and performs all transforms to
-the properties object (non-mutative) then
+the tokens object (non-mutative) then
 builds all the files and performs any actions. This is useful if you only want to
 build the artifacts of one platform to speed up the build process.
 
@@ -70,8 +70,8 @@ defined in the platform and calls the undo method on any actions.
 
 
 Takes a platform and performs all transforms to
-the properties object (non-mutative) then
-cleans all the files and perfoms the undo method of any [actions](actions.md).
+the tokens object (non-mutative) then
+cleans all the files and performs the undo method of any [actions](actions.md).
 
 
 | Param | Type |

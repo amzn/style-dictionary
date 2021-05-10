@@ -28,14 +28,14 @@ In your `package.json` file you can add an NPM script that runs Style Dictionary
 
 # CLI Quick Start
 
-This will create a new folder called 'quick-start' and populate it with a Style Dictionary configuration and properties.
+This will create a new folder called 'quick-start' and populate it with a Style Dictionary configuration and tokens.
 
 ```bash
 $ mkdir quick-start && cd quick-start
 $ style-dictionary init basic
 ```
 
-You can then modify the properties in the properties directory and run the build command below. See the changes in the output generated in the build folder.
+You can then modify the design tokens in the properties directory and run the build command below. See the changes in the output generated in the build folder.
 
 ```bash
 $ style-dictionary build

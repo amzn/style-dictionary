@@ -9,7 +9,7 @@
 # Style Dictionary
 > *Style once, use everywhere.*
 
-A Style Dictionary uses design tokens to define styles once and use those styles on any platform or language. It provides a single place to create and edit your styles, and exports these properties to all the places you need - iOS, Android, CSS, JS, HTML, sketch files, style documentation, etc. It is available as a CLI through npm, but can also be used like any normal node module if you want to extend its functionality.
+A Style Dictionary uses design tokens to define styles once and use those styles on any platform or language. It provides a single place to create and edit your styles, and exports these tokens to all the places you need - iOS, Android, CSS, JS, HTML, sketch files, style documentation, etc. It is available as a CLI through npm, but can also be used like any normal node module if you want to extend its functionality.
 
 When you are managing user experiences, it can be quite challenging to keep styles consistent and synchronized across multiple development platforms and devices. At the same time, designers, developers, PMs and others must be able to have consistent and up-to-date style documentation to enable effective work and communication. Even then, mistakes inevitably happen and the design may not be implemented accurately. Style Dictionary solves this by automatically generating style definitions across all platforms from a single source - removing roadblocks, errors, and inefficiencies across your workflow.
 
@@ -72,7 +72,7 @@ StyleDictionary.buildAllPlatforms();
 The `.extend()` method is an overloaded method that can also take an object with the configuration in the same format as a config.json file.
 ```javascript
 const StyleDictionary = require('style-dictionary').extend({
-  source: ['properties/**/*.json'],
+  source: ['tokens/**/*.json'],
   platforms: {
     scss: {
       transformGroup: 'scss',
@@ -137,11 +137,10 @@ This tells the style dictionary build system how and what to build. The default 
 | Attribute | Type | Description |
 | :--- | :--- | :--- |
 | source | Array | An array of file path [globs](https://github.com/isaacs/node-glob) to design token files. Style Dictionary will do a deep merge of all of the token files, allowing you to organize your files files however you want. |
-| include | Array | An array of file path [globs](https://github.com/isaacs/node-glob) to design token files that contain default styles. The Style Dictionary uses this as a base collection of properties. The properties found using the "source" attribute will overwrite properties found using include. |
+| include | Array | An array of file path [globs](https://github.com/isaacs/node-glob) to design token files that contain default styles. The Style Dictionary uses this as a base collection of tokens. The tokens found using the "source" attribute will overwrite tokens found using include. |
 | platforms | Object | Sets of platform files to be built. |
-| platforms | Array | Paths to the property json files. Can have globs. |
-| platform.transformGroup | String (optional) | Apply a group of transforms to the properties, must either define this or `transforms`. |
-| platform.transforms | Array (optional) | Transforms to apply sequentially to all properties. Can be a built-in one or you can create your own. |
+| platform.transformGroup | String (optional) | Apply a group of transforms to the tokens, must either define this or `transforms`. |
+| platform.transforms | Array (optional) | Transforms to apply sequentially to all tokens. Can be a built-in one or you can create your own. |
 | platform.buildPath | String (optional) | Base path to build the files, must end with a trailing slash. |
 | platform.files | Array (optional) | Files to be generated for this platform. |
 | platform.file.destination | String (optional) | Location to build the file, will be appended to the buildPath. |
@@ -149,7 +148,7 @@ This tells the style dictionary build system how and what to build. The default 
 | platform.file.options | Object (optional) | A set of extra options associated with the file. |
 | platform.file.options.showFileHeader | Boolean | If the generated file should have a "Do not edit + Timestamp" header (where the format supports it). By default is "true". |
 
-### Properties
+### Design tokens
 
 ```json
 {
@@ -164,7 +163,7 @@ This tells the style dictionary build system how and what to build. The default 
 }
 ```
 
-Here we are creating some basic font size properties. The style definition size.font.small.value is "10px" for example. The style definition size.font.base.value is automatically aliased to the value found in size.font.medium.value and both of those resolve to "16px".
+Here we are creating some basic font size design tokens. The style definition size.font.small.value is "10px" for example. The style definition size.font.base.value is automatically aliased to the value found in size.font.medium.value and both of those resolve to "16px".
 
 Now what the style dictionary build system will do with this information is convert it to different formats, enabling these values to be used in any type of codebase. From this one file you can generate any number of files like:
 
@@ -217,11 +216,11 @@ Take a look at the documentation for the example code.
 
 ## Design tokens
 
-A design token is an attribute to describe something visually. It is atomic (it cannot be broken down further). Style properties have a name, a value, and optional attributes or metadata. The name of a token can be anything, but we have a proposed naming structure that works really well in the next section.
+A design token is an attribute to describe something visually. It is atomic (it cannot be broken down further). Design tokens have a name, a value, and optional attributes or metadata. The name of a token can be anything, but we have a proposed naming structure that we find works really well in the next section.
 
 ### Category/Type/Item Structure
 
-While not exactly necessary, we feel this classification structure of style properties makes the most sense semantically. Style properties can be organized into a hierarchical tree structure with the top level, category, defining the primitive nature of the token. For example, we have the color category and every token underneath is always a color. As you proceed down the tree to type, item, sub-item, and state, you get more specific about what that color is. Is it a background color, a text color, or a border color? What kind of text color is it? You get the point. Now you can structure your token json files like simple objects:
+While not exactly necessary, we feel this classification structure of design tokens makes the most sense semantically. Design tokens can be organized into a hierarchical tree structure with the top level, category, defining the primitive nature of the token. For example, we have the color category and every token underneath is always a color. As you proceed down the tree to type, item, sub-item, and state, you get more specific about what that color is. Is it a background color, a text color, or a border color? What kind of text color is it? You get the point. Now you can structure your token json files like simple objects:
 
 ```
 {
@@ -234,13 +233,13 @@ While not exactly necessary, we feel this classification structure of style prop
 }
 ```
 
-The CTI is implicit in the structure, the category and type is 'size' and 'font', and there are 2 properties 'base' and 'large'.
+The CTI is implicit in the structure, the category and type is 'size' and 'font', and there are 2 tokens 'base' and 'large'.
 
-Structuring style properties in this manner gives us consistent naming and accessing of these properties. You don't need to remember if it is button_color_error or error_button_color, it is color_background_button_error!
+Structuring design tokens in this manner gives us consistent naming and accessing of these tokens. You don't need to remember if it is button_color_error or error_button_color, it is color_background_button_error!
 
-You can organize and name your style properties however you want, there are no restrictions. But we have a good amount of helpers if you do use this structure, like the 'attribute/cti' transform which adds attributes to the token of its CTI based on the path in the object. There are a lot of name transforms as well for when you want a flat structure like for Sass variables.
+You can organize and name your design tokens however you want, there are no restrictions. But we have a good amount of helpers if you do use this structure, like the 'attribute/cti' transform which adds attributes to the token of its CTI based on the path in the object. There are a lot of name transforms as well for when you want a flat structure like for Sass variables.
 
-Also, the CTI structure provides a good mechanism to target transforms for specific kinds of properties. All of the transforms provided by the framework use the CTI of a token to know if it should be applied. For instance, the 'color/hex' transform only applies to properties of the category 'color'.
+Also, the CTI structure provides a good mechanism to target transforms for specific kinds of tokens. All of the transforms provided by the framework use the CTI of a token to know if it should be applied. For instance, the 'color/hex' transform only applies to tokens of the category 'color'.
 
 You can also add a _comment_ to a design token:
 

@@ -32,6 +32,10 @@ var StyleDictionary = {
   VERSION: require('./package.json').version,
   properties: {},
   allProperties: [],
+  // Starting in v3 we are moving towards "tokens" rather than "properties"
+  // keeping both for backwards compatibility
+  tokens: {},
+  allTokens: [],
   options: {},
 
   transform: require('./lib/common/transforms'),
