@@ -114,7 +114,7 @@ Adds: category, type, item, subitem, and state on the attributes object based on
 Adds: hex, hsl, hsv, rgb, red, blue, green.
 
 ```js
-// Matches: prop.attributes.category === 'color'
+// Matches: token.attributes.category === 'color'
 // Returns
 {
   "hex": "009688",
@@ -206,7 +206,7 @@ Creates a snake case name. If you define a prefix on the platform in your config
 ### name/cti/constant 
 
 
-Creates a constant-style name based on the full CTI of the property. If you define a prefix on the platform in your config, it will prepend with your prefix
+Creates a constant-style name based on the full CTI of the token. If you define a prefix on the platform in your config, it will prepend with your prefix
 
 ```js
 // Matches: all
@@ -221,7 +221,7 @@ Creates a constant-style name based on the full CTI of the property. If you defi
 ### name/ti/constant 
 
 
-Creates a constant-style name on the type and item of the property. This is useful if you want to create different static classes/files for categories like `Color.BACKGROUND_BASE`. If you define a prefix on the platform in your config, it will prepend with your prefix.
+Creates a constant-style name on the type and item of the token. This is useful if you want to create different static classes/files for categories like `Color.BACKGROUND_BASE`. If you define a prefix on the platform in your config, it will prepend with your prefix.
 
 ```js
 // Matches: all
@@ -254,7 +254,7 @@ Creates a Pascal case name. If you define a prefix on the platform in your confi
 Transforms the value into an RGB string
 
 ```js
-// Matches: prop.attributes.category === 'color'
+// Matches: token.attributes.category === 'color'
 // Returns:
 "rgb(0, 150, 136)"
 ```
@@ -268,7 +268,7 @@ Transforms the value into an RGB string
 Transforms the value into an HSL string or HSLA if alpha is present. Better browser support than color/hsl-4
 
 ```js
-// Matches: prop.attributes.category === 'color'
+// Matches: token.attributes.category === 'color'
 // Returns:
 "hsl(174, 100%, 29%)"
 "hsl(174, 100%, 29%, .5)"
@@ -283,7 +283,7 @@ Transforms the value into an HSL string or HSLA if alpha is present. Better brow
 Transforms the value into an HSL string, using fourth argument if alpha is present.
 
 ```js
-// Matches: prop.attributes.category === 'color'
+// Matches: token.attributes.category === 'color'
 // Returns:
 "hsl(174 100% 29%)"
 "hsl(174 100% 29% / .5)"
@@ -298,7 +298,7 @@ Transforms the value into an HSL string, using fourth argument if alpha is prese
 Transforms the value into an 6-digit hex string
 
 ```js
-// Matches: prop.attributes.category === 'color'
+// Matches: token.attributes.category === 'color'
 // Returns:
 "#009688"
 ```
@@ -312,7 +312,7 @@ Transforms the value into an 6-digit hex string
 Transforms the value into an 8-digit hex string
 
 ```js
-// Matches: prop.attributes.category === 'color'
+// Matches: token.attributes.category === 'color'
 // Returns:
 "#009688ff"
 ```
@@ -326,7 +326,7 @@ Transforms the value into an 8-digit hex string
 Transforms the value into an 8-digit hex string for Android because they put the alpha channel first
 
 ```js
-// Matches: prop.attributes.category === 'color'
+// Matches: token.attributes.category === 'color'
 // Returns:
 "#ff009688"
 ```
@@ -340,7 +340,7 @@ Transforms the value into an 8-digit hex string for Android because they put the
 Transforms the value into an UIColor class for iOS
 
 ```objectivec
-// Matches: prop.attributes.category === 'color'
+// Matches: token.attributes.category === 'color'
 // Returns:
 [UIColor colorWithRed:0.114f green:0.114f blue:0.114f alpha:1.000f]
 ```
@@ -354,7 +354,7 @@ Transforms the value into an UIColor class for iOS
 Transforms the value into an UIColor swift class for iOS
 
 ```swift
-// Matches: prop.attributes.category === 'color'
+// Matches: token.attributes.category === 'color'
 // Returns:
 UIColor(red: 0.667, green: 0.667, blue: 0.667, alpha:0.6)
 ```
@@ -368,7 +368,7 @@ UIColor(red: 0.667, green: 0.667, blue: 0.667, alpha:0.6)
 Transforms the value into a hex or rgb string depending on if it has transparency
 
 ```css
-// Matches: prop.attributes.category === 'color'
+// Matches: token.attributes.category === 'color'
 // Returns:
 #000000
 rgba(0,0,0,0.5)
@@ -385,7 +385,7 @@ attributes that are floats from 0 - 1. This object is how Sketch stores
 colors.
 
 ```js
-// Matches: prop.attributes.category === 'color'
+// Matches: token.attributes.category === 'color'
 // Returns:
 {
   red: 0.5,
@@ -404,7 +404,7 @@ colors.
 Transforms the value into a scale-independent pixel (sp) value for font sizes on Android. It will not scale the number.
 
 ```js
-// Matches: prop.attributes.category === 'size' && prop.attributes.type === 'font'
+// Matches: token.attributes.category === 'size' && token.attributes.type === 'font'
 // Returns:
 "10.0sp"
 ```
@@ -418,7 +418,7 @@ Transforms the value into a scale-independent pixel (sp) value for font sizes on
 Transforms the value into a density-independent pixel (dp) value for non-font sizes on Android. It will not scale the number.
 
 ```js
-// Matches: prop.attributes.category === 'size' && prop.attributes.type !== 'font'
+// Matches: token.attributes.category === 'size' && token.attributes.type !== 'font'
 // Returns:
 "10.0dp"
 ```
@@ -432,7 +432,7 @@ Transforms the value into a density-independent pixel (dp) value for non-font si
 Transforms the value into a usefull object ( for React Native support )
 
 ```js
-// Matches: prop.attributes.category === 'size'
+// Matches: token.attributes.category === 'size'
 // Returns:
 {
  original: "10px",
@@ -451,7 +451,7 @@ Transforms the value into a usefull object ( for React Native support )
 Transforms the value from a REM size on web into a scale-independent pixel (sp) value for font sizes on Android. It WILL scale the number by a factor of 16 (common base font size on web).
 
 ```js
-// Matches: prop.attributes.category === 'size' && prop.attributes.type === 'font'
+// Matches: token.attributes.category === 'size' && token.attributes.type === 'font'
 // Returns:
 "16.0sp"
 ```
@@ -465,7 +465,7 @@ Transforms the value from a REM size on web into a scale-independent pixel (sp) 
 Transforms the value from a REM size on web into a density-independent pixel (dp) value for font sizes on Android. It WILL scale the number by a factor of 16 (or the value of 'basePxFontSize' on the platform in your config).
 
 ```js
-// Matches: prop.attributes.category === 'size' && prop.attributes.type !== 'font'
+// Matches: token.attributes.category === 'size' && token.attributes.type !== 'font'
 // Returns:
 "16.0dp"
 ```
@@ -479,7 +479,7 @@ Transforms the value from a REM size on web into a density-independent pixel (dp
 Adds 'px' to the end of the number. Does not scale the number
 
 ```js
-// Matches: prop.attributes.category === 'size'
+// Matches: token.attributes.category === 'size'
 // Returns:
 "10px"
 ```
@@ -493,7 +493,7 @@ Adds 'px' to the end of the number. Does not scale the number
 Adds 'rem' to the end of the number. Does not scale the number
 
 ```js
-// Matches: prop.attributes.category === 'size'
+// Matches: token.attributes.category === 'size'
 // Returns:
 "10rem"
 ```
@@ -507,7 +507,7 @@ Adds 'rem' to the end of the number. Does not scale the number
 Scales the number by 16 (or the value of 'basePxFontSize' on the platform in your config) and adds 'pt' to the end.
 
 ```js
-// Matches: prop.attributes.category === 'size'
+// Matches: token.attributes.category === 'size'
 // Returns:
 "16pt"
 ```
@@ -521,7 +521,7 @@ Scales the number by 16 (or the value of 'basePxFontSize' on the platform in you
 Scales the number by 16 (or the value of 'basePxFontSize' on the platform in your config) to get to points for Swift and initializes a CGFloat
 
 ```js
-// Matches: prop.attributes.category === 'size'
+// Matches: token.attributes.category === 'size'
 // Returns: "CGFloat(16.00)""
 ```
 
@@ -534,7 +534,7 @@ Scales the number by 16 (or the value of 'basePxFontSize' on the platform in you
 Scales the number by 16 (or the value of 'basePxFontSize' on the platform in your config) and adds 'px' to the end.
 
 ```js
-// Matches: prop.attributes.category === 'size'
+// Matches: token.attributes.category === 'size'
 // Returns:
 "16px"
 ```
@@ -548,7 +548,7 @@ Scales the number by 16 (or the value of 'basePxFontSize' on the platform in you
 Takes a unicode point and transforms it into a form CSS can use.
 
 ```js
-// Matches: prop.attributes.category === 'content' && prop.attributes.type === 'icon'
+// Matches: token.attributes.category === 'content' && token.attributes.type === 'icon'
 // Returns:
 "'\\E001'"
 ```
@@ -562,7 +562,7 @@ Takes a unicode point and transforms it into a form CSS can use.
 Wraps the value in a single quoted string
 
 ```js
-// Matches: prop.attributes.category === 'content'
+// Matches: token.attributes.category === 'content'
 // Returns:
 "'string'"
 ```
@@ -576,7 +576,7 @@ Wraps the value in a single quoted string
 Wraps the value in a double-quoted string and prepends an '@' to make a string literal.
 
 ```objectivec
-// Matches: prop.attributes.category === 'content'
+// Matches: token.attributes.category === 'content'
 // Returns:
 
 **&quot;string&quot;**: ```  
@@ -589,7 +589,7 @@ Wraps the value in a double-quoted string and prepends an '@' to make a string l
 Wraps the value in a double-quoted string to make a string literal.
 
 ```swift
-// Matches: prop.attributes.category === 'content'
+// Matches: token.attributes.category === 'content'
 // Returns:
 "string"
 ```
@@ -603,7 +603,7 @@ Wraps the value in a double-quoted string to make a string literal.
 Wraps the value in a double-quoted string and prepends an '@' to make a string literal.
 
 ```objectivec
-// Matches: prop.attributes.category === 'font'
+// Matches: token.attributes.category === 'font'
 // Returns: @"string"
 ```
 
@@ -616,7 +616,7 @@ Wraps the value in a double-quoted string and prepends an '@' to make a string l
 Wraps the value in a double-quoted string to make a string literal.
 
 ```swift
-// Matches: prop.attributes.category === 'font'
+// Matches: token.attributes.category === 'font'
 // Returns: "string"
 ```
 
@@ -629,7 +629,7 @@ Wraps the value in a double-quoted string to make a string literal.
 Assumes a time in miliseconds and transforms it into a decimal
 
 ```js
-// Matches: prop.attributes.category === 'time'
+// Matches: token.attributes.category === 'time'
 // Returns:
 "0.5s"
 ```
@@ -643,7 +643,7 @@ Assumes a time in miliseconds and transforms it into a decimal
 Wraps the value in a double-quoted string and prepends an '@' to make a string literal.
 
 ```js
-// Matches: prop.attributes.category === 'asset'
+// Matches: token.attributes.category === 'asset'
 // Returns:
 'IyBlZGl0b3Jjb25maWcub3JnCnJvb3QgPSB0cnVlCgpbKl0KaW5kZW50X3N0eWxlID0gc3BhY2UKaW5kZW50X3NpemUgPSAyCmVuZF9vZl9saW5lID0gbGYKY2hhcnNldCA9IHV0Zi04CnRyaW1fdHJhaWxpbmdfd2hpdGVzcGFjZSA9IHRydWUKaW5zZXJ0X2ZpbmFsX25ld2xpbmUgPSB0cnVlCgpbKi5tZF0KdHJpbV90cmFpbGluZ193aGl0ZXNwYWNlID0gZmFsc2U='
 ```
@@ -657,7 +657,7 @@ Wraps the value in a double-quoted string and prepends an '@' to make a string l
 Prepends the local file path
 
 ```js
-// Matches: prop.attributes.category === 'asset'
+// Matches: token.attributes.category === 'asset'
 // Returns:
 "path/to/file/asset.png"
 ```
@@ -671,7 +671,7 @@ Prepends the local file path
 Wraps the value in a double-quoted string and prepends an '@' to make a string literal.
 
 ```objectivec
-// Matches: prop.attributes.category === 'asset'
+// Matches: token.attributes.category === 'asset'
 // Returns: @"string"
 ```
 
@@ -684,7 +684,7 @@ Wraps the value in a double-quoted string and prepends an '@' to make a string l
 Wraps the value in a double-quoted string to make a string literal.
 
 ```swift
-// Matches: prop.attributes.category === 'asset'
+// Matches: token.attributes.category === 'asset'
 // Returns: "string"
 ```
 
@@ -696,7 +696,7 @@ Wraps the value in a double-quoted string to make a string literal.
 
 Transforms the value into a Flutter Color object using 8-digit hex with the alpha chanel on start
  ```js
- // Matches: prop.attributes.category === 'color'
+ // Matches: token.attributes.category === 'color'
  // Returns:
  Color(0xFF00FF5F)
  ```
@@ -710,7 +710,7 @@ Transforms the value into a Flutter Color object using 8-digit hex with the alph
 Wraps the value in a double-quoted string to make a string literal.
 
 ```dart
-// Matches: prop.attributes.category === 'content'
+// Matches: token.attributes.category === 'content'
 // Returns: "string"
 ```
 
@@ -723,7 +723,7 @@ Wraps the value in a double-quoted string to make a string literal.
 Wraps the value in a double-quoted string to make a string literal.
 
 ```dart
-// Matches: prop.attributes.category === 'asset'
+// Matches: token.attributes.category === 'asset'
 // Returns: "string"
 ```
 
@@ -736,7 +736,7 @@ Wraps the value in a double-quoted string to make a string literal.
 Wraps the value in a double-quoted string to make a string literal.
 
 ```dart
-// Matches: prop.attributes.category === 'font'
+// Matches: token.attributes.category === 'font'
 // Returns: "string"
 ```
 
@@ -749,7 +749,7 @@ Wraps the value in a double-quoted string to make a string literal.
 Scales the number by 16 (or the value of 'basePxFontSize' on the platform in your config) to get to points for Flutter
 
 ```dart
-// Matches: prop.attributes.category === 'size'
+// Matches: token.attributes.category === 'size'
 // Returns: 16.00
 ```
 

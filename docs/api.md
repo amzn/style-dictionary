@@ -223,14 +223,14 @@ Add a custom filter to the style dictionary
 | --- | --- | --- |
 | filter | <code>Object</code> |  |
 | filter.name | <code>String</code> | Name of the filter to be referenced in your config.json |
-| filter.matcher | <code>function</code> | Matcher function, return boolean if the property should be included. |
+| filter.matcher | <code>function</code> | Matcher function, return boolean if the token should be included. |
 
 **Example**  
 ```js
 StyleDictionary.registerFilter({
   name: 'isColor',
-  matcher: function(prop) {
-    return prop.attributes.category === 'color';
+  matcher: function(token) {
+    return token.attributes.category === 'color';
   }
 })
 ```
@@ -324,7 +324,7 @@ StyleDictionary.registerTemplate({
 
 
 Add a custom transform to the Style Dictionary
-Transforms can manipulate a property's name, value, or attributes
+Transforms can manipulate a token's name, value, or attributes
 
 
 | Param | Type | Description |
@@ -334,7 +334,7 @@ Transforms can manipulate a property's name, value, or attributes
 | transform.name | <code>String</code> | Name of the transformer (used by transformGroup to call a list of transforms). |
 | transform.transitive | <code>Boolean</code> | If the value transform should be applied transitively, i.e. should be applied to referenced values as well as absolute values. |
 | [transform.matcher] | <code>function</code> | Matcher function, return boolean if transform should be applied. If you omit the matcher function, it will match all tokens. |
-| transform.transformer | <code>function</code> | Performs a transform on a property object, should return a string or object depending on the type. Will only update certain tokens by which you can't mess up property objects on accident. |
+| transform.transformer | <code>function</code> | Modifies a design token object. The transformer function will receive the token and the platform configuration as its arguments. The transformer function should return a string for name transforms, an object for attribute transforms, and same type of value for a value transform. |
 
 **Example**  
 ```js
@@ -347,7 +347,7 @@ StyleDictionary.registerTransform({
   transformer: function(token) {
     // Note the use of prop.original.value,
     // before any transforms are performed, the build system
-    // clones the original property to the 'original' attribute.
+    // clones the original token to the 'original' attribute.
     return (parseInt(token.original.value) / 1000).toString() + 's';
   }
 });
