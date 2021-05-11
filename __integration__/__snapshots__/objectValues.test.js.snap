@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`integration object values css/variables border should match snapshot 1`] = `
+"/**
+ * Do not edit directly
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ */
+
+:root {
+  --border-primary: 0.125rem solid #ff0000;
+}
+"
+`;
+
+exports[`integration object values css/variables border with references should match snapshot 1`] = `
+"/**
+ * Do not edit directly
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ */
+
+:root {
+  --border-primary: var(--size-border) solid var(--color-red);
+}
+"
+`;
+
+exports[`integration object values css/variables hex syntax should match snapshot 1`] = `
+"/**
+ * Do not edit directly
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ */
+
+:root {
+  --color-red: #ff0000;
+  --color-green: #40bf40;
+}
+"
+`;
+
+exports[`integration object values css/variables hex syntax with references should match snapshot 1`] = `
+"/**
+ * Do not edit directly
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ */
+
+:root {
+  --color-red: #ff0000;
+  --color-green: #40bf40;
+}
+"
+`;
+
+exports[`integration object values css/variables hsl syntax should match snapshot 1`] = `
+"/**
+ * Do not edit directly
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ */
+
+:root {
+  --color-red: #ff0000;
+  --color-green: hsl(120, 50%, 50%);
+}
+"
+`;
+
+exports[`integration object values css/variables hsl syntax with references should match snapshot 1`] = `
+"/**
+ * Do not edit directly
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ */
+
+:root {
+  --color-red: #ff0000;
+  --color-green: hsl(120, 50%, 50%);
+}
+"
+`;
+
+exports[`integration object values scss/variables should match snapshot 1`] = `
+"
+// Do not edit directly
+// Generated on Sat, 01 Jan 2000 00:00:00 GMT
+
+$border-primary: 0.125rem solid #ff0000;"
+`;
+
+exports[`integration object values scss/variables with references should match snapshot 1`] = `
+"
+// Do not edit directly
+// Generated on Sat, 01 Jan 2000 00:00:00 GMT
+
+$border-primary: $size-border solid $color-red;"
+`;
