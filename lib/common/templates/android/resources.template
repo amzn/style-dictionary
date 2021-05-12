@@ -44,7 +44,7 @@ function propToValue(prop) {
 } %>
 <%= fileHeader({file, commentStyle: 'xml'}) %>
 <resources>
-  <% dictionary.allProperties.forEach(function(prop) {
+  <% dictionary.allTokens.forEach(function(prop) {
   %><<%= propToType(prop) %> name="<%= prop.name %>"><%= propToValue(prop) %></<%= propToType(prop) %>><% if (prop.comment) { %><!-- <%= prop.comment %> --><% } %>
   <% }); %>
 </resources>

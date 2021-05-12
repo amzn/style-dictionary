@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 
-<% _.each(allProperties, function(prop) {
+<% _.each(allTokens, function(prop) {
     // NOTICE: this is a simplified version of a PLIST file for iOS
     // please refer to the documentation for a proper format
     // or speak with one of your iOS developers to agree on a format that works for them

@@ -20,7 +20,7 @@
 import UIKit
 
 public class <%= file.className %> {
-    <%= allProperties.map(function(prop) {
+    <%= allTokens.map(function(prop) {
       return 'public static let ' + formatProperty(prop);
     }).join('\n    ') %>
 }

@@ -10,7 +10,7 @@ You use formats in your config file under platforms > [platform] > files > [file
 
 ```json
 {
-  "source": ["properties/**/*.json"],
+  "source": ["tokens/**/*.json"],
   "platforms": {
     "css": {
       "transformGroup": "css",
@@ -33,7 +33,7 @@ Formats can take configuration to make them more flexible. This allows you to re
 
 ```json
 {
-  "source": ["properties/**/*.json"],
+  "source": ["tokens/**/*.json"],
   "platforms": {
     "scss": {
       "transformGroup": "scss",
@@ -55,7 +55,7 @@ A special file configuration is `filter`, which will filter the tokens before th
 
 * An object which gets passed to [Lodash's filter method](https://lodash.com/docs/4.17.14#filter).
 * A string that references the name of a registered filter, using the [`registerFilter`](api.md#registerfilter) method
-* A function if you are defining your configuration in Javascript rather than JSON. The filter function takes a token as the property and should return a boolean if the token should be included (true) or excluded (false).
+* A function that takes a token and returns a boolean if the token should be included (true) or excluded (false). **This is only available if you are defining your configuration in Javascript.**
 
 ```javascript
 {
@@ -67,7 +67,7 @@ A special file configuration is `filter`, which will filter the tokens before th
 }
 ```
 
-The token/property that is passed to the filter function has already been [transformed](transforms.md) and has [default metadata](properties.md?id=default-property-metadata) added by Style Dictionary.
+The design token that is passed to the filter function has already been [transformed](transforms.md) and has [default metadata](tokens.md?id=default-design-token-metadata) added by Style Dictionary.
 
 ## References in output files
 
@@ -250,7 +250,7 @@ To take advantage of outputting references in your custom formats there are 2 he
 StyleDictionary.registerFormat({
   name: `es6WithReferences`,
   formatter: function({dictionary}) {
-    return dictionary.allProperties.map(token => {
+    return dictionary.allTokens.map(token => {
       let value = JSON.stringify(token.value);
       // the `dictionary` object now has `usesReference()` and
       // `getReferences()` methods. `usesReference()` will return true if
@@ -300,7 +300,7 @@ Here are the available format helper methods:
 
 Formatters are functions and created easily with most templating engines. Formats can be built using templates if there is a lot of boilerplate code to insert (e.g. ObjectiveC files). If the output consists of only the values (e.g. a flat SCSS variables file), writing a formatter function directly may be easier.
 
-Any templating language can work as there is a node module for it. All you need to do is register a format that calls your template and returns a string.
+Any templating language can work as long as there is a node module for it. All you need to do is register a format that calls your template and returns a string.
 
 Here is a quick example for Lodash.
 
@@ -330,7 +330,7 @@ styleDictionary.registerFormat({
   name: 'my/format',
   formatter: function({dictionary, platform}) {
     return template({
-      properties: dictionary.properties,
+      tokens: dictionary.tokens,
       options: platform
     });
   }
@@ -343,7 +343,7 @@ styleDictionary.registerFormat({
 
 ## Pre-defined Formats
 
-These are the formats included in Style Dictionary by default, pulled from [lib/common/formats.js](https://github.com/amzn/style-dictionary/blob/master/lib/common/formats.js)
+These are the formats included in Style Dictionary by default, pulled from [lib/common/formats.js](https://github.com/amzn/style-dictionary/blob/main/lib/common/formats.js)
 
 Want a format? [You can request it here](https://github.com/amzn/style-dictionary/issues).
 

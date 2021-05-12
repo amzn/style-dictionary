@@ -16,8 +16,8 @@ Using extra attributes associated to a design token, is possible (at build time)
 
 #### What to look at
 
-Open the `properties/color/base.json` and `properties/size/font.json` files and see how some of the properties have a custom `deprecated` attribute (and an additional `deprecated_comment` attribute).
+Open the `tokens/color/base.json` and `tokens/size/font.json` files and see how some of the tokens have a custom `deprecated` attribute (and an additional `deprecated_comment` attribute).
 
-Now open the custom template files in `templates` and see how this attributes are used to - conditionally, when a property is deprecated - add extra comments to the output files.
+Now open the custom template files in `templates` and see how this attributes are used to - conditionally, when a token is deprecated - add extra comments to the output files.
 
-Finally, once generated the output files, open the `build/scss/_variables.scss` and `build/ios/tokens.plist` files and see how the `deprecated` attributes have been converted to comments (and extra properties in the plist) in the output files.
+Finally, once generated the output files, open the `build/scss/_variables.scss` and `build/ios/tokens.plist` files and see how the `deprecated` attributes have been converted to comments (and extra tokens in the plist) in the output files.

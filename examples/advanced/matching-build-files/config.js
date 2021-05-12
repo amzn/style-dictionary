@@ -1,8 +1,8 @@
 const StyleDictionary = require("style-dictionary");
-const tokens = require("./properties");
+const tokens = require("./tokens");
 
 module.exports = {
-  source: ["properties/**/*.json"],
+  source: ["tokens/**/*.json"],
   platforms: {
     "esm/category": {
       buildPath: "build/js/esm/",
@@ -82,8 +82,8 @@ module.exports = {
 StyleDictionary.registerFormat({
   name: "custom/cjsmodule",
   formatter: function (dictionary) {
-    return `module.exports = {${dictionary.allProperties.map(
-      (prop) => `\n\t${prop.name}: "${prop.value}"`
+    return `module.exports = {${dictionary.allTokens.map(
+      (token) => `\n\t${token.name}: "${token.value}"`
     )}\n};`;
   },
 });

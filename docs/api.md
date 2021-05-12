@@ -28,7 +28,7 @@ StyleDictionary.buildAllPlatforms();
 
 
 Takes a platform and performs all transforms to
-the properties object (non-mutative) then
+the tokens object (non-mutative) then
 builds all the files and performs any actions. This is useful if you only want to
 build the artifacts of one platform to speed up the build process.
 
@@ -70,8 +70,8 @@ defined in the platform and calls the undo method on any actions.
 
 
 Takes a platform and performs all transforms to
-the properties object (non-mutative) then
-cleans all the files and perfoms the undo method of any [actions](actions.md).
+the tokens object (non-mutative) then
+cleans all the files and performs the undo method of any [actions](actions.md).
 
 
 | Param | Type |
@@ -87,7 +87,7 @@ cleans all the files and perfoms the undo method of any [actions](actions.md).
 
 
 
-Exports a properties object with applied
+Exports a tokens object with applied
 platform transforms.
 
 This is useful if you want to use a style
@@ -119,7 +119,7 @@ Create a Style Dictionary
 const StyleDictionary = require('style-dictionary').extend('config.json');
 
 const StyleDictionary = require('style-dictionary').extend({
-  source: ['properties/*.json'],
+  source: ['tokens/*.json'],
   platforms: {
     scss: {
       transformGroup: 'scss',
@@ -142,7 +142,7 @@ const StyleDictionary = require('style-dictionary').extend({
 
 
 
-Adds a custom action to the style property builder. Custom
+Adds a custom action to Style Dictionary. Custom
 actions can do whatever you need, such as: copying files,
 base64'ing files, running other build scripts, etc.
 After you register a custom action, you then use that
@@ -223,14 +223,14 @@ Add a custom filter to the style dictionary
 | --- | --- | --- |
 | filter | <code>Object</code> |  |
 | filter.name | <code>String</code> | Name of the filter to be referenced in your config.json |
-| filter.matcher | <code>function</code> | Matcher function, return boolean if the property should be included. |
+| filter.matcher | <code>function</code> | Matcher function, return boolean if the token should be included. |
 
 **Example**  
 ```js
 StyleDictionary.registerFilter({
   name: 'isColor',
-  matcher: function(prop) {
-    return prop.attributes.category === 'color';
+  matcher: function(token) {
+    return token.attributes.category === 'color';
   }
 })
 ```
@@ -257,7 +257,7 @@ Add a custom format to the style dictionary
 StyleDictionary.registerFormat({
   name: 'json',
   formatter: function({dictionary, platform, options, file}) {
-    return JSON.stringify(dictionary.properties, null, 2);
+    return JSON.stringify(dictionary.tokens, null, 2);
   }
 })
 ```
@@ -275,7 +275,7 @@ Adds a custom parser to parse style dictionary files
 
 | Param | Type | Description |
 | --- | --- | --- |
-| pattern | <code>Regex</code> | - |
+| pattern | <code>Regex</code> | A file path regular expression to match which files this parser should be be used on. This is similar to how webpack loaders work. `/\.json$/` will match any file ending in '.json', for example. |
 | parse | <code>function</code> | Function to parse the file contents. Takes 1 argument, which is an object with 2 attributes: contents wich is the string of the file contents and filePath. The function should return a plain Javascript object. |
 
 **Example**  
@@ -324,7 +324,7 @@ StyleDictionary.registerTemplate({
 
 
 Add a custom transform to the Style Dictionary
-Transforms can manipulate a property's name, value, or attributes
+Transforms can manipulate a token's name, value, or attributes
 
 
 | Param | Type | Description |
@@ -333,22 +333,22 @@ Transforms can manipulate a property's name, value, or attributes
 | transform.type | <code>String</code> | Type of transform, can be: name, attribute, or value |
 | transform.name | <code>String</code> | Name of the transformer (used by transformGroup to call a list of transforms). |
 | transform.transitive | <code>Boolean</code> | If the value transform should be applied transitively, i.e. should be applied to referenced values as well as absolute values. |
-| [transform.matcher] | <code>function</code> | Matcher function, return boolean if transform should be applied. If you omit the matcher function, it will match all properties. |
-| transform.transformer | <code>function</code> | Performs a transform on a property object, should return a string or object depending on the type. Will only update certain properties by which you can't mess up property objects on accident. |
+| [transform.matcher] | <code>function</code> | Matcher function, return boolean if transform should be applied. If you omit the matcher function, it will match all tokens. |
+| transform.transformer | <code>function</code> | Modifies a design token object. The transformer function will receive the token and the platform configuration as its arguments. The transformer function should return a string for name transforms, an object for attribute transforms, and same type of value for a value transform. |
 
 **Example**  
 ```js
 StyleDictionary.registerTransform({
   name: 'time/seconds',
   type: 'value',
-  matcher: function(prop) {
-    return prop.attributes.category === 'time';
+  matcher: function(token) {
+    return token.attributes.category === 'time';
   },
-  transformer: function(prop) {
+  transformer: function(token) {
     // Note the use of prop.original.value,
     // before any transforms are performed, the build system
-    // clones the original property to the 'original' attribute.
-    return (parseInt(prop.original.value) / 1000).toString() + 's';
+    // clones the original token to the 'original' attribute.
+    return (parseInt(token.original.value) / 1000).toString() + 's';
   }
 });
 ```

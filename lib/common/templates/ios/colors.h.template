@@ -20,7 +20,7 @@
 #import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSInteger, <%= file.type %>) {
-<%= dictionary.allProperties.map(function(prop) { return prop.name; }).join(',\n') %>
+<%= dictionary.allTokens.map(function(prop) { return prop.name; }).join(',\n') %>
 };
 
 @interface <%= file.className %> : NSObject

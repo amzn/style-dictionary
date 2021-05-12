@@ -163,6 +163,166 @@ exports[`integration custom formats inline custom with new args should match sna
         ]
       }
     ],
+    \\"tokens\\": {
+      \\"size\\": {
+        \\"padding\\": {
+          \\"small\\": {
+            \\"value\\": \\"0.5rem\\",
+            \\"filePath\\": \\"__integration__/tokens/size/padding.json\\",
+            \\"isSource\\": true,
+            \\"original\\": {
+              \\"value\\": 0.5
+            },
+            \\"name\\": \\"SizePaddingSmall\\",
+            \\"attributes\\": {
+              \\"category\\": \\"size\\",
+              \\"type\\": \\"padding\\",
+              \\"item\\": \\"small\\"
+            },
+            \\"path\\": [
+              \\"size\\",
+              \\"padding\\",
+              \\"small\\"
+            ]
+          },
+          \\"medium\\": {
+            \\"value\\": \\"1rem\\",
+            \\"filePath\\": \\"__integration__/tokens/size/padding.json\\",
+            \\"isSource\\": true,
+            \\"original\\": {
+              \\"value\\": 1
+            },
+            \\"name\\": \\"SizePaddingMedium\\",
+            \\"attributes\\": {
+              \\"category\\": \\"size\\",
+              \\"type\\": \\"padding\\",
+              \\"item\\": \\"medium\\"
+            },
+            \\"path\\": [
+              \\"size\\",
+              \\"padding\\",
+              \\"medium\\"
+            ]
+          },
+          \\"large\\": {
+            \\"value\\": \\"1rem\\",
+            \\"filePath\\": \\"__integration__/tokens/size/padding.json\\",
+            \\"isSource\\": true,
+            \\"original\\": {
+              \\"value\\": 1
+            },
+            \\"name\\": \\"SizePaddingLarge\\",
+            \\"attributes\\": {
+              \\"category\\": \\"size\\",
+              \\"type\\": \\"padding\\",
+              \\"item\\": \\"large\\"
+            },
+            \\"path\\": [
+              \\"size\\",
+              \\"padding\\",
+              \\"large\\"
+            ]
+          },
+          \\"xl\\": {
+            \\"value\\": \\"1rem\\",
+            \\"filePath\\": \\"__integration__/tokens/size/padding.json\\",
+            \\"isSource\\": true,
+            \\"original\\": {
+              \\"value\\": 1
+            },
+            \\"name\\": \\"SizePaddingXl\\",
+            \\"attributes\\": {
+              \\"category\\": \\"size\\",
+              \\"type\\": \\"padding\\",
+              \\"item\\": \\"xl\\"
+            },
+            \\"path\\": [
+              \\"size\\",
+              \\"padding\\",
+              \\"xl\\"
+            ]
+          }
+        }
+      }
+    },
+    \\"allTokens\\": [
+      {
+        \\"value\\": \\"0.5rem\\",
+        \\"filePath\\": \\"__integration__/tokens/size/padding.json\\",
+        \\"isSource\\": true,
+        \\"original\\": {
+          \\"value\\": 0.5
+        },
+        \\"name\\": \\"SizePaddingSmall\\",
+        \\"attributes\\": {
+          \\"category\\": \\"size\\",
+          \\"type\\": \\"padding\\",
+          \\"item\\": \\"small\\"
+        },
+        \\"path\\": [
+          \\"size\\",
+          \\"padding\\",
+          \\"small\\"
+        ]
+      },
+      {
+        \\"value\\": \\"1rem\\",
+        \\"filePath\\": \\"__integration__/tokens/size/padding.json\\",
+        \\"isSource\\": true,
+        \\"original\\": {
+          \\"value\\": 1
+        },
+        \\"name\\": \\"SizePaddingMedium\\",
+        \\"attributes\\": {
+          \\"category\\": \\"size\\",
+          \\"type\\": \\"padding\\",
+          \\"item\\": \\"medium\\"
+        },
+        \\"path\\": [
+          \\"size\\",
+          \\"padding\\",
+          \\"medium\\"
+        ]
+      },
+      {
+        \\"value\\": \\"1rem\\",
+        \\"filePath\\": \\"__integration__/tokens/size/padding.json\\",
+        \\"isSource\\": true,
+        \\"original\\": {
+          \\"value\\": 1
+        },
+        \\"name\\": \\"SizePaddingLarge\\",
+        \\"attributes\\": {
+          \\"category\\": \\"size\\",
+          \\"type\\": \\"padding\\",
+          \\"item\\": \\"large\\"
+        },
+        \\"path\\": [
+          \\"size\\",
+          \\"padding\\",
+          \\"large\\"
+        ]
+      },
+      {
+        \\"value\\": \\"1rem\\",
+        \\"filePath\\": \\"__integration__/tokens/size/padding.json\\",
+        \\"isSource\\": true,
+        \\"original\\": {
+          \\"value\\": 1
+        },
+        \\"name\\": \\"SizePaddingXl\\",
+        \\"attributes\\": {
+          \\"category\\": \\"size\\",
+          \\"type\\": \\"padding\\",
+          \\"item\\": \\"xl\\"
+        },
+        \\"path\\": [
+          \\"size\\",
+          \\"padding\\",
+          \\"xl\\"
+        ]
+      }
+    ],
     \\"_properties\\": {
       \\"size\\": {
         \\"padding\\": {
@@ -545,6 +705,166 @@ exports[`integration custom formats inline custom with old args should match sna
         }
       },
       \\"allProperties\\": [
+        {
+          \\"value\\": \\"0.5rem\\",
+          \\"filePath\\": \\"__integration__/tokens/size/padding.json\\",
+          \\"isSource\\": true,
+          \\"original\\": {
+            \\"value\\": 0.5
+          },
+          \\"name\\": \\"SizePaddingSmall\\",
+          \\"attributes\\": {
+            \\"category\\": \\"size\\",
+            \\"type\\": \\"padding\\",
+            \\"item\\": \\"small\\"
+          },
+          \\"path\\": [
+            \\"size\\",
+            \\"padding\\",
+            \\"small\\"
+          ]
+        },
+        {
+          \\"value\\": \\"1rem\\",
+          \\"filePath\\": \\"__integration__/tokens/size/padding.json\\",
+          \\"isSource\\": true,
+          \\"original\\": {
+            \\"value\\": 1
+          },
+          \\"name\\": \\"SizePaddingMedium\\",
+          \\"attributes\\": {
+            \\"category\\": \\"size\\",
+            \\"type\\": \\"padding\\",
+            \\"item\\": \\"medium\\"
+          },
+          \\"path\\": [
+            \\"size\\",
+            \\"padding\\",
+            \\"medium\\"
+          ]
+        },
+        {
+          \\"value\\": \\"1rem\\",
+          \\"filePath\\": \\"__integration__/tokens/size/padding.json\\",
+          \\"isSource\\": true,
+          \\"original\\": {
+            \\"value\\": 1
+          },
+          \\"name\\": \\"SizePaddingLarge\\",
+          \\"attributes\\": {
+            \\"category\\": \\"size\\",
+            \\"type\\": \\"padding\\",
+            \\"item\\": \\"large\\"
+          },
+          \\"path\\": [
+            \\"size\\",
+            \\"padding\\",
+            \\"large\\"
+          ]
+        },
+        {
+          \\"value\\": \\"1rem\\",
+          \\"filePath\\": \\"__integration__/tokens/size/padding.json\\",
+          \\"isSource\\": true,
+          \\"original\\": {
+            \\"value\\": 1
+          },
+          \\"name\\": \\"SizePaddingXl\\",
+          \\"attributes\\": {
+            \\"category\\": \\"size\\",
+            \\"type\\": \\"padding\\",
+            \\"item\\": \\"xl\\"
+          },
+          \\"path\\": [
+            \\"size\\",
+            \\"padding\\",
+            \\"xl\\"
+          ]
+        }
+      ],
+      \\"tokens\\": {
+        \\"size\\": {
+          \\"padding\\": {
+            \\"small\\": {
+              \\"value\\": \\"0.5rem\\",
+              \\"filePath\\": \\"__integration__/tokens/size/padding.json\\",
+              \\"isSource\\": true,
+              \\"original\\": {
+                \\"value\\": 0.5
+              },
+              \\"name\\": \\"SizePaddingSmall\\",
+              \\"attributes\\": {
+                \\"category\\": \\"size\\",
+                \\"type\\": \\"padding\\",
+                \\"item\\": \\"small\\"
+              },
+              \\"path\\": [
+                \\"size\\",
+                \\"padding\\",
+                \\"small\\"
+              ]
+            },
+            \\"medium\\": {
+              \\"value\\": \\"1rem\\",
+              \\"filePath\\": \\"__integration__/tokens/size/padding.json\\",
+              \\"isSource\\": true,
+              \\"original\\": {
+                \\"value\\": 1
+              },
+              \\"name\\": \\"SizePaddingMedium\\",
+              \\"attributes\\": {
+                \\"category\\": \\"size\\",
+                \\"type\\": \\"padding\\",
+                \\"item\\": \\"medium\\"
+              },
+              \\"path\\": [
+                \\"size\\",
+                \\"padding\\",
+                \\"medium\\"
+              ]
+            },
+            \\"large\\": {
+              \\"value\\": \\"1rem\\",
+              \\"filePath\\": \\"__integration__/tokens/size/padding.json\\",
+              \\"isSource\\": true,
+              \\"original\\": {
+                \\"value\\": 1
+              },
+              \\"name\\": \\"SizePaddingLarge\\",
+              \\"attributes\\": {
+                \\"category\\": \\"size\\",
+                \\"type\\": \\"padding\\",
+                \\"item\\": \\"large\\"
+              },
+              \\"path\\": [
+                \\"size\\",
+                \\"padding\\",
+                \\"large\\"
+              ]
+            },
+            \\"xl\\": {
+              \\"value\\": \\"1rem\\",
+              \\"filePath\\": \\"__integration__/tokens/size/padding.json\\",
+              \\"isSource\\": true,
+              \\"original\\": {
+                \\"value\\": 1
+              },
+              \\"name\\": \\"SizePaddingXl\\",
+              \\"attributes\\": {
+                \\"category\\": \\"size\\",
+                \\"type\\": \\"padding\\",
+                \\"item\\": \\"xl\\"
+              },
+              \\"path\\": [
+                \\"size\\",
+                \\"padding\\",
+                \\"xl\\"
+              ]
+            }
+          }
+        }
+      },
+      \\"allTokens\\": [
         {
           \\"value\\": \\"0.5rem\\",
           \\"filePath\\": \\"__integration__/tokens/size/padding.json\\",
@@ -1126,6 +1446,166 @@ exports[`integration custom formats register custom format with new args should 
         ]
       }
     ],
+    \\"tokens\\": {
+      \\"size\\": {
+        \\"padding\\": {
+          \\"small\\": {
+            \\"value\\": \\"0.5rem\\",
+            \\"filePath\\": \\"__integration__/tokens/size/padding.json\\",
+            \\"isSource\\": true,
+            \\"original\\": {
+              \\"value\\": 0.5
+            },
+            \\"name\\": \\"SizePaddingSmall\\",
+            \\"attributes\\": {
+              \\"category\\": \\"size\\",
+              \\"type\\": \\"padding\\",
+              \\"item\\": \\"small\\"
+            },
+            \\"path\\": [
+              \\"size\\",
+              \\"padding\\",
+              \\"small\\"
+            ]
+          },
+          \\"medium\\": {
+            \\"value\\": \\"1rem\\",
+            \\"filePath\\": \\"__integration__/tokens/size/padding.json\\",
+            \\"isSource\\": true,
+            \\"original\\": {
+              \\"value\\": 1
+            },
+            \\"name\\": \\"SizePaddingMedium\\",
+            \\"attributes\\": {
+              \\"category\\": \\"size\\",
+              \\"type\\": \\"padding\\",
+              \\"item\\": \\"medium\\"
+            },
+            \\"path\\": [
+              \\"size\\",
+              \\"padding\\",
+              \\"medium\\"
+            ]
+          },
+          \\"large\\": {
+            \\"value\\": \\"1rem\\",
+            \\"filePath\\": \\"__integration__/tokens/size/padding.json\\",
+            \\"isSource\\": true,
+            \\"original\\": {
+              \\"value\\": 1
+            },
+            \\"name\\": \\"SizePaddingLarge\\",
+            \\"attributes\\": {
+              \\"category\\": \\"size\\",
+              \\"type\\": \\"padding\\",
+              \\"item\\": \\"large\\"
+            },
+            \\"path\\": [
+              \\"size\\",
+              \\"padding\\",
+              \\"large\\"
+            ]
+          },
+          \\"xl\\": {
+            \\"value\\": \\"1rem\\",
+            \\"filePath\\": \\"__integration__/tokens/size/padding.json\\",
+            \\"isSource\\": true,
+            \\"original\\": {
+              \\"value\\": 1
+            },
+            \\"name\\": \\"SizePaddingXl\\",
+            \\"attributes\\": {
+              \\"category\\": \\"size\\",
+              \\"type\\": \\"padding\\",
+              \\"item\\": \\"xl\\"
+            },
+            \\"path\\": [
+              \\"size\\",
+              \\"padding\\",
+              \\"xl\\"
+            ]
+          }
+        }
+      }
+    },
+    \\"allTokens\\": [
+      {
+        \\"value\\": \\"0.5rem\\",
+        \\"filePath\\": \\"__integration__/tokens/size/padding.json\\",
+        \\"isSource\\": true,
+        \\"original\\": {
+          \\"value\\": 0.5
+        },
+        \\"name\\": \\"SizePaddingSmall\\",
+        \\"attributes\\": {
+          \\"category\\": \\"size\\",
+          \\"type\\": \\"padding\\",
+          \\"item\\": \\"small\\"
+        },
+        \\"path\\": [
+          \\"size\\",
+          \\"padding\\",
+          \\"small\\"
+        ]
+      },
+      {
+        \\"value\\": \\"1rem\\",
+        \\"filePath\\": \\"__integration__/tokens/size/padding.json\\",
+        \\"isSource\\": true,
+        \\"original\\": {
+          \\"value\\": 1
+        },
+        \\"name\\": \\"SizePaddingMedium\\",
+        \\"attributes\\": {
+          \\"category\\": \\"size\\",
+          \\"type\\": \\"padding\\",
+          \\"item\\": \\"medium\\"
+        },
+        \\"path\\": [
+          \\"size\\",
+          \\"padding\\",
+          \\"medium\\"
+        ]
+      },
+      {
+        \\"value\\": \\"1rem\\",
+        \\"filePath\\": \\"__integration__/tokens/size/padding.json\\",
+        \\"isSource\\": true,
+        \\"original\\": {
+          \\"value\\": 1
+        },
+        \\"name\\": \\"SizePaddingLarge\\",
+        \\"attributes\\": {
+          \\"category\\": \\"size\\",
+          \\"type\\": \\"padding\\",
+          \\"item\\": \\"large\\"
+        },
+        \\"path\\": [
+          \\"size\\",
+          \\"padding\\",
+          \\"large\\"
+        ]
+      },
+      {
+        \\"value\\": \\"1rem\\",
+        \\"filePath\\": \\"__integration__/tokens/size/padding.json\\",
+        \\"isSource\\": true,
+        \\"original\\": {
+          \\"value\\": 1
+        },
+        \\"name\\": \\"SizePaddingXl\\",
+        \\"attributes\\": {
+          \\"category\\": \\"size\\",
+          \\"type\\": \\"padding\\",
+          \\"item\\": \\"xl\\"
+        },
+        \\"path\\": [
+          \\"size\\",
+          \\"padding\\",
+          \\"xl\\"
+        ]
+      }
+    ],
     \\"_properties\\": {
       \\"size\\": {
         \\"padding\\": {
@@ -1508,6 +1988,166 @@ exports[`integration custom formats register custom format with old args should 
         }
       },
       \\"allProperties\\": [
+        {
+          \\"value\\": \\"0.5rem\\",
+          \\"filePath\\": \\"__integration__/tokens/size/padding.json\\",
+          \\"isSource\\": true,
+          \\"original\\": {
+            \\"value\\": 0.5
+          },
+          \\"name\\": \\"SizePaddingSmall\\",
+          \\"attributes\\": {
+            \\"category\\": \\"size\\",
+            \\"type\\": \\"padding\\",
+            \\"item\\": \\"small\\"
+          },
+          \\"path\\": [
+            \\"size\\",
+            \\"padding\\",
+            \\"small\\"
+          ]
+        },
+        {
+          \\"value\\": \\"1rem\\",
+          \\"filePath\\": \\"__integration__/tokens/size/padding.json\\",
+          \\"isSource\\": true,
+          \\"original\\": {
+            \\"value\\": 1
+          },
+          \\"name\\": \\"SizePaddingMedium\\",
+          \\"attributes\\": {
+            \\"category\\": \\"size\\",
+            \\"type\\": \\"padding\\",
+            \\"item\\": \\"medium\\"
+          },
+          \\"path\\": [
+            \\"size\\",
+            \\"padding\\",
+            \\"medium\\"
+          ]
+        },
+        {
+          \\"value\\": \\"1rem\\",
+          \\"filePath\\": \\"__integration__/tokens/size/padding.json\\",
+          \\"isSource\\": true,
+          \\"original\\": {
+            \\"value\\": 1
+          },
+          \\"name\\": \\"SizePaddingLarge\\",
+          \\"attributes\\": {
+            \\"category\\": \\"size\\",
+            \\"type\\": \\"padding\\",
+            \\"item\\": \\"large\\"
+          },
+          \\"path\\": [
+            \\"size\\",
+            \\"padding\\",
+            \\"large\\"
+          ]
+        },
+        {
+          \\"value\\": \\"1rem\\",
+          \\"filePath\\": \\"__integration__/tokens/size/padding.json\\",
+          \\"isSource\\": true,
+          \\"original\\": {
+            \\"value\\": 1
+          },
+          \\"name\\": \\"SizePaddingXl\\",
+          \\"attributes\\": {
+            \\"category\\": \\"size\\",
+            \\"type\\": \\"padding\\",
+            \\"item\\": \\"xl\\"
+          },
+          \\"path\\": [
+            \\"size\\",
+            \\"padding\\",
+            \\"xl\\"
+          ]
+        }
+      ],
+      \\"tokens\\": {
+        \\"size\\": {
+          \\"padding\\": {
+            \\"small\\": {
+              \\"value\\": \\"0.5rem\\",
+              \\"filePath\\": \\"__integration__/tokens/size/padding.json\\",
+              \\"isSource\\": true,
+              \\"original\\": {
+                \\"value\\": 0.5
+              },
+              \\"name\\": \\"SizePaddingSmall\\",
+              \\"attributes\\": {
+                \\"category\\": \\"size\\",
+                \\"type\\": \\"padding\\",
+                \\"item\\": \\"small\\"
+              },
+              \\"path\\": [
+                \\"size\\",
+                \\"padding\\",
+                \\"small\\"
+              ]
+            },
+            \\"medium\\": {
+              \\"value\\": \\"1rem\\",
+              \\"filePath\\": \\"__integration__/tokens/size/padding.json\\",
+              \\"isSource\\": true,
+              \\"original\\": {
+                \\"value\\": 1
+              },
+              \\"name\\": \\"SizePaddingMedium\\",
+              \\"attributes\\": {
+                \\"category\\": \\"size\\",
+                \\"type\\": \\"padding\\",
+                \\"item\\": \\"medium\\"
+              },
+              \\"path\\": [
+                \\"size\\",
+                \\"padding\\",
+                \\"medium\\"
+              ]
+            },
+            \\"large\\": {
+              \\"value\\": \\"1rem\\",
+              \\"filePath\\": \\"__integration__/tokens/size/padding.json\\",
+              \\"isSource\\": true,
+              \\"original\\": {
+                \\"value\\": 1
+              },
+              \\"name\\": \\"SizePaddingLarge\\",
+              \\"attributes\\": {
+                \\"category\\": \\"size\\",
+                \\"type\\": \\"padding\\",
+                \\"item\\": \\"large\\"
+              },
+              \\"path\\": [
+                \\"size\\",
+                \\"padding\\",
+                \\"large\\"
+              ]
+            },
+            \\"xl\\": {
+              \\"value\\": \\"1rem\\",
+              \\"filePath\\": \\"__integration__/tokens/size/padding.json\\",
+              \\"isSource\\": true,
+              \\"original\\": {
+                \\"value\\": 1
+              },
+              \\"name\\": \\"SizePaddingXl\\",
+              \\"attributes\\": {
+                \\"category\\": \\"size\\",
+                \\"type\\": \\"padding\\",
+                \\"item\\": \\"xl\\"
+              },
+              \\"path\\": [
+                \\"size\\",
+                \\"padding\\",
+                \\"xl\\"
+              ]
+            }
+          }
+        }
+      },
+      \\"allTokens\\": [
         {
           \\"value\\": \\"0.5rem\\",
           \\"filePath\\": \\"__integration__/tokens/size/padding.json\\",

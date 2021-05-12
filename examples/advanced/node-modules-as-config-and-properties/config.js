@@ -1,9 +1,9 @@
 const StyleDictionary = require('style-dictionary');
-// Rather than have Style Dictionary handle the merging of property files,
+// Rather than have Style Dictionary handle the merging of token files,
 // you could use node module export/require to do it yourself. This will
 // allow you to not have to copy object namespaces like you normally would.
-// Take a look at any of the .js files in components/ or properties/
-const properties = require('./properties');
+// Take a look at any of the .js files in components/ or tokens/
+const tokens = require('./tokens');
 
 const buildPath = 'build/';
 
@@ -12,14 +12,14 @@ const buildPath = 'build/';
 StyleDictionary.registerTransform({
   name: 'myRegisteredTransform',
   type: 'value',
-  matcher: (prop) => prop.attributes.category === 'size',
-  transformer: (prop) => `${parseInt(prop.value) * 16}px`
+  matcher: (token) => token.attributes.category === 'size',
+  transformer: (token) => `${parseInt(token.value) * 16}px`
 });
 
 StyleDictionary.registerFormat({
   name: 'myRegisteredFormat',
   formatter: (dictionary) => {
-    return dictionary.allProperties.map((prop) => prop.value).join('\n');
+    return dictionary.allTokens.map((token) => token.value).join('\n');
   }
 })
 
@@ -29,7 +29,7 @@ module.exports = {
   // We are relying on node modules to merge all the objects together
   // thus we only want to reference top level node modules that export
   // the whole objects.
-  source: ['properties/index.js', 'components/index.js'],
+  source: ['tokens/index.js', 'components/index.js'],
   // If you don't want to call the registerTransform method a bunch of times
   // you can override the whole transform object directly. This works because
   // the .extend method copies everything in the config
@@ -39,20 +39,20 @@ module.exports = {
     // Now we can use the transform 'myTransform' below
     myTransform: {
       type: 'name',
-      transformer: (prop) => prop.path.join('_').toUpperCase()
+      transformer: (token) => token.path.join('_').toUpperCase()
     }
   },
   // Same with formats, you can now write them directly to this config
   // object. The name of the format is the key.
   format: {
-    myFormat: (dictionary, platform) => {
-      return dictionary.allProperties.map(prop => `${prop.name}: ${prop.value}`).join('\n');
+    myFormat: ({dictionary}) => {
+      return dictionary.allTokens.map(token => `${token.name}: ${token.value}`).join('\n');
     }
   },
   // You can also bypass the merging of files Style Dictionary does
-  // by adding a 'properties' object directly like this:
+  // by adding a 'tokens' object directly like this:
   //
-  // properties: properties,
+  // tokens: tokens,
   platforms: {
     custom: {
       // Using the custom transforms we defined above
@@ -87,14 +87,14 @@ module.exports = {
       transforms: StyleDictionary.transformGroup.js.concat('myRegisteredTransform'),
       buildPath: buildPath,
       // If you want to get super fancy, you can use node modules
-      // to create a properties object first, and then you can
+      // to create a tokens object first, and then you can
       // reference attributes of that object. This allows you to
       // output 1 file per color namespace.
-      files: Object.keys(properties.color).map((colorType) => ({
+      files: Object.keys(tokens.color).map((colorType) => ({
         destination: `${colorType}.js`,
         format: 'javascript/es6',
         // Filters can be functions that return a boolean
-        filter: (prop) => prop.attributes.type === colorType
+        filter: (token) => token.attributes.type === colorType
       }))
     },
 
@@ -103,7 +103,7 @@ module.exports = {
       transformGroup: 'js',
       buildPath: buildPath,
       files: [{
-        destination: 'properties.json',
+        destination: 'tokens.json',
         format: 'json'
       }]
     }

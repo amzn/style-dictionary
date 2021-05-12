@@ -14,7 +14,7 @@
 // express or implied. See the License for the specific language governing
 // permissions and limitations under the License.
 
-var props = dictionary.allProperties.filter(function(prop) {
+var props = dictionary.allTokens.filter(function(prop) {
   return prop.attributes.category === 'time';
 }); %>
 <%= fileHeader({file, commentStyle: 'xml'}) %>

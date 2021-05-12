@@ -8,7 +8,7 @@ const version = require('./package.json').version;
 const {fileHeader} = StyleDictionary.formatHelpers;
 
 const myCustomFormat = ({ dictionary, file }) => {
-  return `${fileHeader({file, commentStyle: 'short'})}${dictionary.allProperties.map(token => {
+  return `${fileHeader({file, commentStyle: 'short'})}${dictionary.allTokens.map(token => {
     return `--${token.name}: ${token.value};`
   }).join(`\n`)}`
 }
@@ -101,9 +101,9 @@ const styleDictionary = StyleDictionary.extend({
   }
 });
 
-// Create a hash of style dictionary properties object to use in a file header
+// Create a hash of style dictionary tokens object to use in a file header
 const hash = crypto.createHash('md5')
-  .update(JSON.stringify(styleDictionary.properties))
+  .update(JSON.stringify(styleDictionary.tokens))
   .digest('hex');
 
 // Adding a custom file header with the `.registerFileHeader`

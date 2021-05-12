@@ -5,7 +5,7 @@
   "main": "build/index.js",
   "files": [
     "build",
-    "properties"
+    "tokens"
   ],
   "scripts": {
     "build": "node ./build.js",

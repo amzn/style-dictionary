@@ -20,6 +20,6 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-<% dictionary.allProperties.forEach(function(prop) {
+<% dictionary.allTokens.forEach(function(prop) {
   %>#define <%= prop.name %> <%= prop.value %>
 <% }); %>

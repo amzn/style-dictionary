@@ -25,7 +25,7 @@ Here is an example that shows how to get an alias's name within a custom format:
 ```javascript
 //...
 function(dictionary) {
-  return dictionary.allProperties.map(token => {
+  return dictionary.allTokens.map(token => {
     let value = JSON.stringify(token.value);
     // the `dictionary` object now has `usesReference()` and
     // `getReferences()` methods. `usesReference()` will return true if

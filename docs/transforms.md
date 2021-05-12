@@ -4,14 +4,14 @@ EDIT scripts/handlebars/templates/api.hbs OR JSDOC COMMENT INSTEAD!
 -->
 # Transforms
 
-Transforms are functions that transform a property - this enables each platform to consume the property in different ways. A simple example is changing pixel values to point values for iOS and dp or sp for Android. Transforms are applied in a non-destructive way thus each platform can transform the properties. Transforms are performed sequentially, therfore the order you use transforms matters. Transforms are used in your [configuration](config.md), and can be either [pre-defined transforms](transforms.md?id=defining-custom-transforms) supplied by Style Dictionary or [custom transforms](transforms.md?id=defining-custom-transforms).
+Transforms are functions that modify a [token](tokens.md) so that it can be understood by a specific platform. It can modify the name, value, or attributes of a token - enabling each platform to use the design token in different ways. A simple example is changing pixel values to point values for iOS and dp or sp for Android. Transforms are isolated per platform; each platform begins with the same design token and makes the modifications it needs without affecting other platforms. The order you use transforms matters because transforms are performed sequentially. Transforms are used in your [configuration](config.md), and can be either [pre-defined transforms](transforms.md?id=defining-custom-transforms) supplied by Style Dictionary or [custom transforms](transforms.md?id=defining-custom-transforms).
 
 ## Using Transforms
 You use transforms in your config file under platforms > [platform] > transforms
 
 ```json
 {
-  "source": ["properties/**/*.json"],
+  "source": ["tokens/**/*.json"],
   "platforms": {
     "android": {
       "transforms": ["attribute/cti", "name/cti/kebab", "color/hex", "size/rem"]
@@ -20,25 +20,73 @@ You use transforms in your config file under platforms > [platform] > transforms
 }
 ```
 
-A transform consists of 4 parts: type, name, matcher, and transformer. Transforms are run on all properties where the matcher returns true. *NOTE: if you don't provide a matcher function, it will match all properties.*
+A transform consists of 4 parts: type, name, matcher, and transformer. Transforms are run on all design tokens where the matcher returns true. *NOTE: if you don't provide a matcher function, it will match all tokens.*
 
 ## Transform Types
 There are 3 types of transforms: attribute, name, and value.
 
-**Attribute:** An attribute transform adds to the attributes object on a property. This is for including any meta-data about a property such as it's CTI or other information.
+**Attribute:** An attribute transform adds to the attributes object on a design token. This is for including any meta-data about a design token such as it's CTI or other information.
 
-**Name:** A name transform transform the name of a property. You should really only be apply one name transformer because they will override each other if you use more than one.
+**Name:** A name transform transform the name of a design token. You should really only be apply one name transformer because they will override each other if you use more than one.
 
-**Value:** The value transform is the most important as this is the one that changes the representation of the value. Colors can be turned into hex values, rgb, hsl, hsv, etc. Value transforms have a matcher function that filter which properties that transform runs on. This allows us to only run a color transform on only the colors and not every property.
+**Value:** The value transform is the most important as this is the one that changes the representation of the value. Colors can be turned into hex values, rgb, hsl, hsv, etc. Value transforms have a matcher function that filter which tokens that transform runs on. This allows us to only run a color transform on only the colors and not every design token.
 
 ## Defining Custom Transforms
-You can define custom transforms with the [`registerTransform`](api.md#registertransform). Style Dictionary adds some [default metadata](properties.md?id=default-property-metadata) to each property/token to provide context that may be useful for some transforms.
+You can define custom transforms with the [`registerTransform`](api.md#registertransform). Style Dictionary adds some [default metadata](tokens.md?id=default-design-token-metadata) to each design token to provide context that may be useful for some transforms.
+
+## Transitive Transforms
+Starting in version 3.0, you can define transitive transforms which allow you to transform a referenced value. Normally, value transforms only transform non-referenced values and because transforms happen before references are resolved, the transformed value is then used to resolve references.
+
+```javascript
+const StyleDictionary = require('style-dictionary');
+
+StyleDictionary.registerTransform({
+  type: `value`,
+  transitive: true,
+  name: `myTransitiveTransform`,
+  matcher: (token) => {},
+  transformer: (token) => {
+    // token.value will be resolved and transformed at this point
+  }
+})
+```
+
+There is one thing to be mindful of with transitive transforms. The token's value will be resolved and *transformed* already at the time the transitive transform. What happens is Style Dictionary will transform and resolve values iteratively. First it will transform any non-referenced values, then it will resolve any references to non-referenced values, then it will try to transform any non-referenced values, and so on. Let's take a look at an example:
+
+```json
+{
+  "color": {
+    "red": { "value": "#f00" },
+    "danger": { "value": "{color.red}" },
+    "error": { "value": "{color.danger}" }
+  }
+}
+```
+
+Style dictionary will first transform the value of `color.red`, then resolve `color.danger` to the transformed `color.red` value. Then it will transform `color.danger` and resolve `color.error` to the transformed `color.danger`. Finally, it will transform `color.error` and see that there is nothing left to transform or resolve.
+
+This allows you to modify a reference that modifies another reference. For example:
+
+```json
+{
+  "color": {
+    "red": { "value": "#f00" },
+    "danger": { "value": "{color.red}", "darken": 0.75 },
+    "error": { "value": "{color.danger}", "darken": 0.5 }
+  }
+}
+```
+
+Using a custom transitive transform you could have `color.danger` darken `color.red` and `color.error` darken `color.danger`. The pre-defined transforms are *not transitive* to be backwards compatible with Style Dictionary v2 - an upgrade should not cause breaking changes.
+
+If you want to learn more about transitive transforms, take a look at the [transitive transforms example](https://github.com/amzn/style-dictionary/tree/main/examples/advanced/transitive-transforms).
+
 
 ## Pre-defined Transforms
 
-[lib/common/transforms.js](https://github.com/amzn/style-dictionary/blob/master/lib/common/transforms.js)
+[lib/common/transforms.js](https://github.com/amzn/style-dictionary/blob/main/lib/common/transforms.js)
 
-> All the pre-defined transforms included use the [CTI structure](properties.md?id=category-type-item) for the match properties. If you structure your style properties differently you will need to write [custom transforms](transforms.md?id=defining-custom-transforms) or make sure the property CTIs are on the attributes of your properties.
+> All the pre-defined transforms included use the [CTI structure](tokens.md?id=category-type-item) for matching tokens. If you structure your design tokens differently you will need to write [custom transforms](transforms.md?id=defining-custom-transforms) or make sure the proper CTIs are on the attributes of your design tokens.
 
 ### attribute/cti 
 
@@ -66,7 +114,7 @@ Adds: category, type, item, subitem, and state on the attributes object based on
 Adds: hex, hsl, hsv, rgb, red, blue, green.
 
 ```js
-// Matches: prop.attributes.category === 'color'
+// Matches: token.attributes.category === 'color'
 // Returns
 {
   "hex": "009688",
@@ -158,7 +206,7 @@ Creates a snake case name. If you define a prefix on the platform in your config
 ### name/cti/constant 
 
 
-Creates a constant-style name based on the full CTI of the property. If you define a prefix on the platform in your config, it will prepend with your prefix
+Creates a constant-style name based on the full CTI of the token. If you define a prefix on the platform in your config, it will prepend with your prefix
 
 ```js
 // Matches: all
@@ -173,7 +221,7 @@ Creates a constant-style name based on the full CTI of the property. If you defi
 ### name/ti/constant 
 
 
-Creates a constant-style name on the type and item of the property. This is useful if you want to create different static classes/files for categories like `Color.BACKGROUND_BASE`. If you define a prefix on the platform in your config, it will prepend with your prefix.
+Creates a constant-style name on the type and item of the token. This is useful if you want to create different static classes/files for categories like `Color.BACKGROUND_BASE`. If you define a prefix on the platform in your config, it will prepend with your prefix.
 
 ```js
 // Matches: all
@@ -206,7 +254,7 @@ Creates a Pascal case name. If you define a prefix on the platform in your confi
 Transforms the value into an RGB string
 
 ```js
-// Matches: prop.attributes.category === 'color'
+// Matches: token.attributes.category === 'color'
 // Returns:
 "rgb(0, 150, 136)"
 ```
@@ -220,7 +268,7 @@ Transforms the value into an RGB string
 Transforms the value into an HSL string or HSLA if alpha is present. Better browser support than color/hsl-4
 
 ```js
-// Matches: prop.attributes.category === 'color'
+// Matches: token.attributes.category === 'color'
 // Returns:
 "hsl(174, 100%, 29%)"
 "hsl(174, 100%, 29%, .5)"
@@ -235,7 +283,7 @@ Transforms the value into an HSL string or HSLA if alpha is present. Better brow
 Transforms the value into an HSL string, using fourth argument if alpha is present.
 
 ```js
-// Matches: prop.attributes.category === 'color'
+// Matches: token.attributes.category === 'color'
 // Returns:
 "hsl(174 100% 29%)"
 "hsl(174 100% 29% / .5)"
@@ -250,7 +298,7 @@ Transforms the value into an HSL string, using fourth argument if alpha is prese
 Transforms the value into an 6-digit hex string
 
 ```js
-// Matches: prop.attributes.category === 'color'
+// Matches: token.attributes.category === 'color'
 // Returns:
 "#009688"
 ```
@@ -264,7 +312,7 @@ Transforms the value into an 6-digit hex string
 Transforms the value into an 8-digit hex string
 
 ```js
-// Matches: prop.attributes.category === 'color'
+// Matches: token.attributes.category === 'color'
 // Returns:
 "#009688ff"
 ```
@@ -278,7 +326,7 @@ Transforms the value into an 8-digit hex string
 Transforms the value into an 8-digit hex string for Android because they put the alpha channel first
 
 ```js
-// Matches: prop.attributes.category === 'color'
+// Matches: token.attributes.category === 'color'
 // Returns:
 "#ff009688"
 ```
@@ -306,7 +354,7 @@ Color(0xFF009688)
 Transforms the value into an UIColor class for iOS
 
 ```objectivec
-// Matches: prop.attributes.category === 'color'
+// Matches: token.attributes.category === 'color'
 // Returns:
 [UIColor colorWithRed:0.114f green:0.114f blue:0.114f alpha:1.000f]
 ```
@@ -320,7 +368,7 @@ Transforms the value into an UIColor class for iOS
 Transforms the value into an UIColor swift class for iOS
 
 ```swift
-// Matches: prop.attributes.category === 'color'
+// Matches: token.attributes.category === 'color'
 // Returns:
 UIColor(red: 0.667, green: 0.667, blue: 0.667, alpha:0.6)
 ```
@@ -334,7 +382,7 @@ UIColor(red: 0.667, green: 0.667, blue: 0.667, alpha:0.6)
 Transforms the value into a hex or rgb string depending on if it has transparency
 
 ```css
-// Matches: prop.attributes.category === 'color'
+// Matches: token.attributes.category === 'color'
 // Returns:
 #000000
 rgba(0,0,0,0.5)
@@ -351,7 +399,7 @@ attributes that are floats from 0 - 1. This object is how Sketch stores
 colors.
 
 ```js
-// Matches: prop.attributes.category === 'color'
+// Matches: token.attributes.category === 'color'
 // Returns:
 {
   red: 0.5,
@@ -370,7 +418,7 @@ colors.
 Transforms the value into a scale-independent pixel (sp) value for font sizes on Android. It will not scale the number.
 
 ```js
-// Matches: prop.attributes.category === 'size' && prop.attributes.type === 'font'
+// Matches: token.attributes.category === 'size' && token.attributes.type === 'font'
 // Returns:
 "10.0sp"
 ```
@@ -384,7 +432,7 @@ Transforms the value into a scale-independent pixel (sp) value for font sizes on
 Transforms the value into a density-independent pixel (dp) value for non-font sizes on Android. It will not scale the number.
 
 ```js
-// Matches: prop.attributes.category === 'size' && prop.attributes.type !== 'font'
+// Matches: token.attributes.category === 'size' && token.attributes.type !== 'font'
 // Returns:
 "10.0dp"
 ```
@@ -398,7 +446,7 @@ Transforms the value into a density-independent pixel (dp) value for non-font si
 Transforms the value into a usefull object ( for React Native support )
 
 ```js
-// Matches: prop.attributes.category === 'size'
+// Matches: token.attributes.category === 'size'
 // Returns:
 {
  original: "10px",
@@ -417,7 +465,7 @@ Transforms the value into a usefull object ( for React Native support )
 Transforms the value from a REM size on web into a scale-independent pixel (sp) value for font sizes on Android. It WILL scale the number by a factor of 16 (common base font size on web).
 
 ```js
-// Matches: prop.attributes.category === 'size' && prop.attributes.type === 'font'
+// Matches: token.attributes.category === 'size' && token.attributes.type === 'font'
 // Returns:
 "16.0sp"
 ```
@@ -431,7 +479,7 @@ Transforms the value from a REM size on web into a scale-independent pixel (sp) 
 Transforms the value from a REM size on web into a density-independent pixel (dp) value for font sizes on Android. It WILL scale the number by a factor of 16 (or the value of 'basePxFontSize' on the platform in your config).
 
 ```js
-// Matches: prop.attributes.category === 'size' && prop.attributes.type !== 'font'
+// Matches: token.attributes.category === 'size' && token.attributes.type !== 'font'
 // Returns:
 "16.0dp"
 ```
@@ -445,7 +493,7 @@ Transforms the value from a REM size on web into a density-independent pixel (dp
 Adds 'px' to the end of the number. Does not scale the number
 
 ```js
-// Matches: prop.attributes.category === 'size'
+// Matches: token.attributes.category === 'size'
 // Returns:
 "10px"
 ```
@@ -459,7 +507,7 @@ Adds 'px' to the end of the number. Does not scale the number
 Adds 'rem' to the end of the number. Does not scale the number
 
 ```js
-// Matches: prop.attributes.category === 'size'
+// Matches: token.attributes.category === 'size'
 // Returns:
 "10rem"
 ```
@@ -473,7 +521,7 @@ Adds 'rem' to the end of the number. Does not scale the number
 Scales the number by 16 (or the value of 'basePxFontSize' on the platform in your config) and adds 'pt' to the end.
 
 ```js
-// Matches: prop.attributes.category === 'size'
+// Matches: token.attributes.category === 'size'
 // Returns:
 "16pt"
 ```
@@ -529,7 +577,7 @@ Adds the .em Compose extension to the end of a number. Does not scale the value
 Scales the number by 16 (or the value of 'basePxFontSize' on the platform in your config) to get to points for Swift and initializes a CGFloat
 
 ```js
-// Matches: prop.attributes.category === 'size'
+// Matches: token.attributes.category === 'size'
 // Returns: "CGFloat(16.00)""
 ```
 
@@ -542,7 +590,7 @@ Scales the number by 16 (or the value of 'basePxFontSize' on the platform in you
 Scales the number by 16 (or the value of 'basePxFontSize' on the platform in your config) and adds 'px' to the end.
 
 ```js
-// Matches: prop.attributes.category === 'size'
+// Matches: token.attributes.category === 'size'
 // Returns:
 "16px"
 ```
@@ -556,7 +604,7 @@ Scales the number by 16 (or the value of 'basePxFontSize' on the platform in you
 Takes a unicode point and transforms it into a form CSS can use.
 
 ```js
-// Matches: prop.attributes.category === 'content' && prop.attributes.type === 'icon'
+// Matches: token.attributes.category === 'content' && token.attributes.type === 'icon'
 // Returns:
 "'\\E001'"
 ```
@@ -570,7 +618,7 @@ Takes a unicode point and transforms it into a form CSS can use.
 Wraps the value in a single quoted string
 
 ```js
-// Matches: prop.attributes.category === 'content'
+// Matches: token.attributes.category === 'content'
 // Returns:
 "'string'"
 ```
@@ -584,7 +632,7 @@ Wraps the value in a single quoted string
 Wraps the value in a double-quoted string and prepends an '@' to make a string literal.
 
 ```objectivec
-// Matches: prop.attributes.category === 'content'
+// Matches: token.attributes.category === 'content'
 // Returns:
 
 **&quot;string&quot;**: ```  
@@ -597,7 +645,7 @@ Wraps the value in a double-quoted string and prepends an '@' to make a string l
 Wraps the value in a double-quoted string to make a string literal.
 
 ```swift
-// Matches: prop.attributes.category === 'content'
+// Matches: token.attributes.category === 'content'
 // Returns:
 "string"
 ```
@@ -611,7 +659,7 @@ Wraps the value in a double-quoted string to make a string literal.
 Wraps the value in a double-quoted string and prepends an '@' to make a string literal.
 
 ```objectivec
-// Matches: prop.attributes.category === 'font'
+// Matches: token.attributes.category === 'font'
 // Returns: @"string"
 ```
 
@@ -624,7 +672,7 @@ Wraps the value in a double-quoted string and prepends an '@' to make a string l
 Wraps the value in a double-quoted string to make a string literal.
 
 ```swift
-// Matches: prop.attributes.category === 'font'
+// Matches: token.attributes.category === 'font'
 // Returns: "string"
 ```
 
@@ -637,7 +685,7 @@ Wraps the value in a double-quoted string to make a string literal.
 Assumes a time in miliseconds and transforms it into a decimal
 
 ```js
-// Matches: prop.attributes.category === 'time'
+// Matches: token.attributes.category === 'time'
 // Returns:
 "0.5s"
 ```
@@ -651,7 +699,7 @@ Assumes a time in miliseconds and transforms it into a decimal
 Wraps the value in a double-quoted string and prepends an '@' to make a string literal.
 
 ```js
-// Matches: prop.attributes.category === 'asset'
+// Matches: token.attributes.category === 'asset'
 // Returns:
 'IyBlZGl0b3Jjb25maWcub3JnCnJvb3QgPSB0cnVlCgpbKl0KaW5kZW50X3N0eWxlID0gc3BhY2UKaW5kZW50X3NpemUgPSAyCmVuZF9vZl9saW5lID0gbGYKY2hhcnNldCA9IHV0Zi04CnRyaW1fdHJhaWxpbmdfd2hpdGVzcGFjZSA9IHRydWUKaW5zZXJ0X2ZpbmFsX25ld2xpbmUgPSB0cnVlCgpbKi5tZF0KdHJpbV90cmFpbGluZ193aGl0ZXNwYWNlID0gZmFsc2U='
 ```
@@ -665,7 +713,7 @@ Wraps the value in a double-quoted string and prepends an '@' to make a string l
 Prepends the local file path
 
 ```js
-// Matches: prop.attributes.category === 'asset'
+// Matches: token.attributes.category === 'asset'
 // Returns:
 "path/to/file/asset.png"
 ```
@@ -679,7 +727,7 @@ Prepends the local file path
 Wraps the value in a double-quoted string and prepends an '@' to make a string literal.
 
 ```objectivec
-// Matches: prop.attributes.category === 'asset'
+// Matches: token.attributes.category === 'asset'
 // Returns: @"string"
 ```
 
@@ -692,7 +740,7 @@ Wraps the value in a double-quoted string and prepends an '@' to make a string l
 Wraps the value in a double-quoted string to make a string literal.
 
 ```swift
-// Matches: prop.attributes.category === 'asset'
+// Matches: token.attributes.category === 'asset'
 // Returns: "string"
 ```
 
@@ -704,7 +752,7 @@ Wraps the value in a double-quoted string to make a string literal.
 
 Transforms the value into a Flutter Color object using 8-digit hex with the alpha chanel on start
  ```js
- // Matches: prop.attributes.category === 'color'
+ // Matches: token.attributes.category === 'color'
  // Returns:
  Color(0xFF00FF5F)
  ```
@@ -718,7 +766,7 @@ Transforms the value into a Flutter Color object using 8-digit hex with the alph
 Wraps the value in a double-quoted string to make a string literal.
 
 ```dart
-// Matches: prop.attributes.category === 'content'
+// Matches: token.attributes.category === 'content'
 // Returns: "string"
 ```
 
@@ -731,7 +779,7 @@ Wraps the value in a double-quoted string to make a string literal.
 Wraps the value in a double-quoted string to make a string literal.
 
 ```dart
-// Matches: prop.attributes.category === 'asset'
+// Matches: token.attributes.category === 'asset'
 // Returns: "string"
 ```
 
@@ -744,7 +792,7 @@ Wraps the value in a double-quoted string to make a string literal.
 Wraps the value in a double-quoted string to make a string literal.
 
 ```dart
-// Matches: prop.attributes.category === 'font'
+// Matches: token.attributes.category === 'font'
 // Returns: "string"
 ```
 
@@ -757,7 +805,7 @@ Wraps the value in a double-quoted string to make a string literal.
 Scales the number by 16 (or the value of 'basePxFontSize' on the platform in your config) to get to points for Flutter
 
 ```dart
-// Matches: prop.attributes.category === 'size'
+// Matches: token.attributes.category === 'size'
 // Returns: 16.00
 ```
 

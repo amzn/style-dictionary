@@ -9,58 +9,58 @@ console.log('\n==============================================');
 StyleDictionary.registerTransform({
   name: 'size/px', // notice: the name is an override of an existing predefined method (yes, you can do it)
   type: 'value',
-  matcher: function(prop) {
+  matcher: function(token) {
       // this is an example of a possible filter (based on the "cti" values) to show how a "matcher" works
-      return prop.attributes.category === 'font' || prop.attributes.category === 'margin';
+      return token.attributes.category === 'font' || token.attributes.category === 'margin';
   },
-  transformer: function(prop) {
-      return `${prop.value}px`;
+  transformer: function(token) {
+      return `${token.value}px`;
   }
 });
 
 StyleDictionary.registerTransform({
   name: 'ratio/%',
   type: 'value',
-  matcher: function(prop) {
-      // here we are using a custom attribute, declared in the property, to match the values where apply the transform
-      return prop.group === 'ratio';
+  matcher: function(token) {
+      // here we are using a custom attribute, declared in the token, to match the values where apply the transform
+      return token.group === 'ratio';
   },
-  transformer: function(prop) {
-      return `${Math.floor(100 * prop.value)}%`;
+  transformer: function(token) {
+      return `${Math.floor(100 * token.value)}%`;
   }
 });
 
 StyleDictionary.registerTransform({
   name: 'hexRGB/hexARGB',
   type: 'value',
-  matcher: function(prop) {
-      return prop.group === 'color';
+  matcher: function(token) {
+      return token.group === 'color';
   },
-  transformer: function(prop) {
+  transformer: function(token) {
       // for sake of simplicity, in this example we assume colors are always in the format #xxxxxx
-      return prop.value.replace(/^#/,'#FF');
+      return token.value.replace(/^#/,'#FF');
   }
 });
 
 StyleDictionary.registerTransform({
   name: 'unitless/dp-sp',
   type: 'value',
-  matcher: function(prop) {
-      return prop.group === 'typography' || prop.group === 'spacing';
+  matcher: function(token) {
+      return token.group === 'typography' || token.group === 'spacing';
   },
-  transformer: function(prop) {
+  transformer: function(token) {
       // in Android font sizes are expressed in "sp" units
-      let unit = (prop.group === 'typography') ? 'sp' : 'dp';
-      return `${prop.value}${unit}`;
+      let unit = (token.group === 'typography') ? 'sp' : 'dp';
+      return `${token.value}${unit}`;
   }
 });
 
 StyleDictionary.registerTransform({ // this is a silly example, to show how you can apply transform to names
   name: 'name/squiggle',
   type: 'name',
-  // notice: if you don't specify a matcher, the transformation will be applied to all the properties
-  transformer: function(prop) {
-      return prop.path.join('~');
+  // notice: if you don't specify a matcher, the transformation will be applied to all the tokens
+  transformer: function(token) {
+      return token.path.join('~');
   }
 });
 
@@ -96,8 +96,8 @@ StyleDictionary.registerTransformGroup({
 StyleDictionary.registerFormat({
   name: 'custom/android/xml',
   formatter: function(dictionary) {
-    return dictionary.allProperties.map(function(prop) {
-      return `<item name="${prop.name}">${prop.value}</item>`;
+    return dictionary.allTokens.map(function(token) {
+      return `<item name="${token.name}">${token.value}</item>`;
     }).join('\n');
   }
 });
@@ -106,7 +106,7 @@ StyleDictionary.registerFormat({
 // APPLY THE CONFIGURATION
 // IMPORTANT: the registration of custom transforms
 // needs to be done _before_ applying the configuration
-StyleDictionaryExtended = StyleDictionary.extend(__dirname + '/config.json');
+const StyleDictionaryExtended = StyleDictionary.extend(__dirname + '/config.json');
 
 
 // FINALLY, BUILD ALL THE PLATFORMS
