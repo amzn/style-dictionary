@@ -151,6 +151,19 @@ Creates a CSS file with variable definitions based on the style dictionary
 }
 ```
 
+You can pass `selector` option to change the default `:root` selector:
+```json
+{
+  "files": [
+    {
+      "format": "css/variables",
+      "destination": "variables.css",
+      "selector": ".my-theme"
+    }
+  ]
+}
+```
+
 * * *
 
 ### scss/map-flat 

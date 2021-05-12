@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`formats css/variables supports the "selector" option 1`] = `
+".my-theme {
+  --color-base-red-400: #EF5350;
+}
+"
+`;
