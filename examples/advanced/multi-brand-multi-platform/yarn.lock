@@ -127,9 +127,9 @@ jsonfile@^4.0.0:
     graceful-fs "^4.1.6"
 
 lodash@^4.17.15:
-  version "4.17.19"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.19.tgz#e48ddedbe30b3321783c5b4301fbd353bc1e4a4b"
-  integrity sha512-JNvd8XER9GQX0v2qJgsaN/mzFCNA5BRe/j8JN9d+tWyGLSodKQHKFicdwNYzWwI3wjRnaKPsGj1XkBjx/F96DQ==
+  version "4.17.21"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
+  integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
 
 minimatch@^3.0.4:
   version "3.0.4"
@@ -167,10 +167,10 @@ resolve-from@^5.0.0:
   resolved "https://registry.yarnpkg.com/resolve-from/-/resolve-from-5.0.0.tgz#c35225843df8f776df21c57557bc087e9dfdfc69"
   integrity sha512-qYg9KP24dD5qka9J47d0aVky0N+b4fTU89LN9iDnjB5waksiC49rvMB0PrUJQGoTmH50XPiqOvAjDfaijGxYZw==
 
-style-dictionary@2.10.1:
-  version "2.10.1"
-  resolved "https://registry.yarnpkg.com/style-dictionary/-/style-dictionary-2.10.1.tgz#7c8bd31c265d5169ef40fc47fada97d21a249927"
-  integrity sha512-AsAeRIpA82zHRql1mg6yvBsLmi+seymwYcShdmnyhbwjBRmOlJ0pj9QlBWH5MWAUBwzR4IndS1aSzgxeqmH5Kg==
+style-dictionary@2.10.3:
+  version "2.10.3"
+  resolved "https://registry.yarnpkg.com/style-dictionary/-/style-dictionary-2.10.3.tgz#7c89f8020524172df6e534ab4217f6923e1daf7b"
+  integrity sha512-iSDb8T2tMSB5JcTQ7uquB+W3oO7kuJbb+QrSQMiQjBCOa7AGYtWzYo/O7rl3f9Hj956w41WVw9HpTpYfFWwU+g==
   dependencies:
     chalk "^4.0.0"
     commander "^5.1.0"
