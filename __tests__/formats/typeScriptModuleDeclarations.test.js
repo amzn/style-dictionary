@@ -10,11 +10,11 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-var fs = require('fs-extra');
-var helpers = require('../__helpers');
-var formats = require('../../lib/common/formats');
+const formats = require('../../lib/common/formats');
+const createDictionary = require('../../lib/utils/createDictionary');
+const createFormatArgs = require('../../lib/utils/createFormatArgs');
 
-var file = {
+const file = {
   "destination": "__output/",
   "format": "typescript/module-declarations",
   "filter": {
@@ -24,11 +24,9 @@ var file = {
   }
 };
 
-var dictionary = {
-  "properties": {
-    "color": {
-      "red": {"value": "#FF0000"}
-    }
+const properties = {
+  "color": {
+    "red": {"value": "#FF0000"}
   }
 };
 
@@ -37,20 +35,16 @@ var formatter = formats['typescript/module-declarations'].bind(file);
 
 describe('formats', () => {
   describe('typescript/module-declarations', () => {
-    beforeEach(() => {
-      helpers.clearOutput();
-    });
-
-    afterEach(() => {
-      helpers.clearOutput();
-    });
-
     it('should be a valid TS file', () => {
-      const declarations = './__tests__/__output/output-module.d.ts';
-      fs.writeFileSync(declarations, formatter(dictionary) );
+      const dictionary = createDictionary({ properties });
+      const output = formatter(createFormatArgs({
+        dictionary,
+        file,
+        platform: {},
+      }), {}, file);
 
       // get all lines that have DesignToken
-      const lines = fs.readFileSync(declarations, 'utf-8')
+      const lines = output
         .split('\n')
         .filter(l => l.indexOf(': DesignToken') >= 0);
 
@@ -60,5 +54,4 @@ describe('formats', () => {
       });
     });
   });
-
 });

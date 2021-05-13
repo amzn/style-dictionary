@@ -11,7 +11,7 @@
  * and limitations under the License.
  */
 
-import { expectType } from "tsd";
+import { expectType, expectError } from "tsd";
 import StyleDictionary = require(".");
 
 expectType<StyleDictionary.Core>(StyleDictionary.buildAllPlatforms());
@@ -20,13 +20,13 @@ expectType<StyleDictionary.Core>(StyleDictionary.buildPlatform("web"));
 expectType<StyleDictionary.Core>(StyleDictionary.cleanAllPlatforms());
 
 expectType<StyleDictionary.Core>(StyleDictionary.cleanPlatform("web"));
-expectType<StyleDictionary.Properties>(StyleDictionary.exportPlatform("web"));
+expectType<StyleDictionary.TransformedTokens>(StyleDictionary.exportPlatform("web"));
 
 expectType<StyleDictionary.Core>(StyleDictionary.extend("config.json"));
 
 expectType<StyleDictionary.Core>(
   StyleDictionary.extend({
-    source: ["properties/**/*.json"],
+    source: ["tokens/**/*.json"],
     platforms: {
       scss: {
         transformGroup: "scss",
@@ -61,8 +61,8 @@ expectType<StyleDictionary.Core>(
 expectType<StyleDictionary.Core>(
   StyleDictionary.registerFilter({
     name: "isColor",
-    matcher: function (prop) {
-      return prop.attributes.category === "color";
+    matcher: function (token) {
+      return token.attributes?.category === "color";
     },
   })
 );
@@ -70,8 +70,12 @@ expectType<StyleDictionary.Core>(
 expectType<StyleDictionary.Core>(
   StyleDictionary.registerFormat({
     name: "json",
-    formatter: function (dictionary, config) {
-      return JSON.stringify(dictionary.properties, null, 2);
+    formatter: function ({dictionary, file, options, platform}) {
+      expectType<StyleDictionary.Dictionary>(dictionary);
+      expectType<StyleDictionary.File>(file);
+      expectType<StyleDictionary.Options>(options);
+      expectType<StyleDictionary.Platform>(platform);
+      return JSON.stringify(dictionary.tokens, null, 2);
     },
   })
 );
@@ -87,11 +91,12 @@ expectType<StyleDictionary.Core>(
   StyleDictionary.registerTransform({
     name: "time/seconds",
     type: "value",
-    matcher: function (prop) {
-      return prop.attributes.category === "time";
+    matcher: function (token) {
+      return token.attributes?.category === "time";
     },
-    transformer: function (prop) {
-      return (parseInt(prop.original.value) / 1000).toString() + "s";
+    transformer: function (token) {
+      expectType<StyleDictionary.TransformedToken>(token);
+      return (parseInt(token.original.value) / 1000).toString() + "s";
     },
   })
 );
@@ -102,3 +107,72 @@ expectType<StyleDictionary.Core>(
     transforms: ["attribute/cti", "size/pt", "name/cti"],
   })
 );
+
+expectType<StyleDictionary.Core>(
+  StyleDictionary.registerParser({
+    pattern: /\.json$/,
+    parse: ({ contents, filePath }) => {
+      return {}
+    }
+  })
+);
+
+const file: StyleDictionary.File = {
+  destination: `somePath.json`,
+  format: `css/variables`,
+  filter: (token) => {
+    expectType<StyleDictionary.TransformedToken>(token);
+    return false;
+  },
+  options: {
+    showFileHeader: true,
+  }
+}
+
+expectType<StyleDictionary.Options | undefined>(file.options);
+
+// Files need a destination
+expectError<StyleDictionary.File>({
+  format: `css/variables`,
+});
+
+expectType<StyleDictionary.File>({
+  format: `css/variables`,
+  destination: `variables.css`
+} as StyleDictionary.File);
+
+
+expectType<StyleDictionary.Platform>({
+  transformGroup: `css`,
+} as StyleDictionary.Platform);
+
+expectType<StyleDictionary.Platform>({
+  transforms: [`attribute/cti`],
+} as StyleDictionary.Platform);
+
+expectType<StyleDictionary.Platform>({
+  transforms: [`attribute/cti`],
+  files: [{
+
+  }]
+} as StyleDictionary.Platform);
+
+expectError<StyleDictionary.Platform>({
+  transforms: `css`,
+});
+
+expectError<StyleDictionary.Platform>({
+  transformGroup: [`attribute/cti`],
+});
+
+
+/**
+ * Testing Options type.
+ * fileHeader needs to be a string or a function that returns a string[]
+ * showFileHeader must be a boolean
+ */
+expectError<StyleDictionary.Options>({ fileHeader: false });
+expectType<StyleDictionary.Options>({ fileHeader: 'fileHeader' } as StyleDictionary.Options);
+expectError<StyleDictionary.Options>({ fileHeader: () => 42 });
+expectType<StyleDictionary.Options>({ fileHeader: () => [`hello`] } as StyleDictionary.Options);
+expectError<StyleDictionary.Options>({ showFileHeader: 'false' });

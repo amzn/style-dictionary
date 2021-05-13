@@ -13,182 +13,75 @@
 
 // Minimum TypeScript Version: 3.0
 
+import _DesignToken, {DesignTokens as _DesignTokens} from './DesignToken';
+import _File from './File';
+import _Options from './Options';
+import _FileHeader from './FileHeader';
+import _TransformedToken, {TransformedTokens as _TransformedTokens} from './TransformedToken';
+import _Platform from './Platform';
+import _Transform from './Transform';
+import _Filter from './Filter';
+import _Format from './Format';
+import _Dictionary from './Dictionary';
+import _TransformGroup from './TransformGroup';
+import _Action from './Action';
+import _Parser from './Parser';
+import _Config from './Config';
+import FormatHelpers from './FormatHelpers';
+
+import { Named, Keyed } from './_helpers';
+
 declare namespace StyleDictionary {
-  interface Property {
-    value: string;
-    comment?: string;
-    [key: string]: any;
-  }
 
-  interface Properties {
-    [key: string]: Properties | Property;
-  }
+  type DesignToken = _DesignToken;
+  type DesignTokens = _DesignTokens;
+  type File = _File;
+  type Options = _Options;
+  type FileHeader = _FileHeader;
+  type TransformedToken = _TransformedToken;
+  type TransformedTokens = _TransformedTokens;
+  type Platform = _Platform;
+  type Transform = _Transform;
+  type Filter = _Filter;
+  type Format = _Format;
+  type Dictionary = _Dictionary;
+  type TransformGroup = _TransformGroup;
+  type Action = _Action;
+  type Parser = _Parser;
+  type Config = _Config;
 
-  interface Options {
-    showFileHeader: boolean;
-  }
-
-  interface File {
-    destination?: string;
-    format?: string;
-    filter?: string | Partial<Prop> | ((property: Prop) => boolean);
-    options?: Options;
-  }
-
-  interface Platform {
-    transformGroup?: string;
-    transforms?: string[];
-    prefix?: string;
-    buildPath?: string;
-    files?: File[];
-    actions?: string[];
-  }
-
-  interface Config {
-    parsers?: Parser[];
-    transform?: Transforms;
-    include?: string[];
-    source: string[];
-    platforms: { [platform: string]: Platform };
-  }
-
-  interface Attributes {
-    category: string;
-    type: string;
-    item?: string;
-    subitem?: string;
-    state?: string;
-  }
-
-  interface Prop {
-    /** A default name of the property that is set to the key of the property. */
-    name: string;
-    value: string;
-    /** The object path of the property.
-     *
-     * `color: { background: { primary: { value: "#fff" } } }` will have a path of `['color', 'background', 'primary']`.
-     */
-    path: string[];
-    /**
-     * A pristine copy of the original property object.
-     *
-     * This is to make sure transforms and formats always have the unmodified version of the original property.
-     */
-    original: Property;
-    /**
-     * The file path of the file the token is defined in.
-     *
-     * This file path is derived from the source or include file path arrays defined in the configuration.
-     */
-    filePath: string;
-    /**
-     * If the token is from a file defined in the source array as opposed to include in the [configuration](https://amzn.github.io/style-dictionary/#/config).
-     */
-    isSource: boolean;
-    attributes: Attributes;
-    [key: string]: any;
-  }
-
-  interface NameTransform {
-    type: "name";
-    matcher?: (prop: Prop) => boolean;
-    transformer: (prop: Prop, options?: Platform) => string;
-  }
-
-  interface ValueTransform {
-    type: "value";
-    transitive?: boolean;
-    matcher?: (prop: Prop) => boolean;
-    transformer: (prop: Prop, options?: Platform) => string;
-  }
-
-  interface AttributeTransform {
-    type: "attribute";
-    matcher?: (prop: Prop) => boolean;
-    transformer: (prop: Prop, options?: Platform) => { [key: string]: any };
-  }
-
-  type Transform = NameTransform | ValueTransform | AttributeTransform;
-
-  interface Transforms {
-    [name: string]: Transform;
-  }
-
-  interface TransformGroup {
-    name: string;
-    transforms: string[];
-  }
-
-  interface TransformGroups {
-    [name: string]: string[];
-  }
-
-  type Formatter = (this: File, dictionary: Core, config: Platform) => string;
-
-  interface Format {
-    name: string;
-    formatter: Formatter;
-  }
-
-  interface Formats {
-    [name: string]: Formatter;
-  }
-
-  interface Action {
-    do(dictionary: Core, config: Platform): void;
-    undo?(dictionary: Core, config: Platform): void;
-  }
-
-  interface Actions {
-    [name: string]: Action;
-  }
-
-  type Matcher = (prop: Prop) => boolean;
-
-  interface Filter {
-    name: string;
-    matcher: Matcher;
-  }
-
-  interface Filters {
-    [name: string]: Matcher;
-  }
-
-  interface ParserOptions {
-    contents: string;
-    filePath: string;
-  }
-
-  interface Parser {
-    pattern: RegExp;
-    parse: (props: ParserOptions) => Properties;
-  }
-
-  type Named<T> = T & {
-    name: string;
-  };
+  // aliased for backwards compatibility
+  type Property = DesignToken;
+  type Properties = DesignTokens;
+  type Prop = TransformedToken;
 
   interface Core {
     VERSION: string;
+    tokens: DesignTokens | TransformedTokens;
+    allTokens: TransformedTokens[];
     properties: Properties;
     allProperties: Prop[];
     options: Config;
 
-    transform: Transforms;
-    transformGroup: TransformGroups;
-    format: Formats;
-    action: Actions;
-    filter: Filters;
+    transform: Keyed<Transform>;
+    transformGroup: Keyed<TransformGroup>;
+    format: Keyed<Format>;
+    action: Keyed<Action>;
+    filter: Keyed<Filter>;
+    fileHeader: Keyed<FileHeader>;
+    parsers: Parser[];
 
-    registerTransform(this: Core, options: Named<Transform>): this;
-    registerTransformGroup(this: Core, options: TransformGroup): this;
-    registerFormat(this: Core, format: Format): this;
+    formatHelpers: FormatHelpers;
+
+    registerTransform(this: Core, transform: Named<Transform>): this;
+    registerTransformGroup(this: Core, transformGroup: Named<TransformGroup>): this;
+    registerFormat(this: Core, format: Named<Format>): this;
     registerTemplate(this: Core, template: Named<{ template: string }>): this;
     registerAction(this: Core, action: Named<Action>): this;
-    registerFilter(this: Core, filter: Filter): this;
+    registerFilter(this: Core, filter: Named<Filter>): this;
     registerParser(this: Core, parser: Parser): this;
 
-    exportPlatform(this: Core, platform: string): Properties;
+    exportPlatform(this: Core, platform: string): TransformedTokens;
     buildPlatform(this: Core, platform: string): this;
     buildAllPlatforms(this: Core): this;
 
