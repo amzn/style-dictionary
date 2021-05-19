@@ -34,7 +34,7 @@
     "index.js",
     "LICENSE",
     "NOTICE",
-    "types"
+    "types/index.d.ts"
   ],
   "scripts": {
     "lint": "eslint --fix index.js \"lib/**/*.js\" \"__tests__/**/*.js\"",

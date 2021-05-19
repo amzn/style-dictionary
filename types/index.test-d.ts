@@ -12,26 +12,19 @@
  */
 
 import { expectType, expectError, expectAssignable } from "tsd";
-import StyleDictionary, {
-  TransformedTokens,
-  TransformedToken,
-  Dictionary,
-  File,
-  Options,
-  Platform
-} from ".";
+import StyleDictionary = require(".");
 
-expectType<StyleDictionary>(StyleDictionary.buildAllPlatforms());
-expectType<StyleDictionary>(StyleDictionary.buildPlatform("web"));
+expectType<StyleDictionary.Core>(StyleDictionary.buildAllPlatforms());
+expectType<StyleDictionary.Core>(StyleDictionary.buildPlatform("web"));
 
-expectType<StyleDictionary>(StyleDictionary.cleanAllPlatforms());
+expectType<StyleDictionary.Core>(StyleDictionary.cleanAllPlatforms());
 
-expectType<StyleDictionary>(StyleDictionary.cleanPlatform("web"));
-expectType<TransformedTokens>(StyleDictionary.exportPlatform("web"));
+expectType<StyleDictionary.Core>(StyleDictionary.cleanPlatform("web"));
+expectType<StyleDictionary.TransformedTokens>(StyleDictionary.exportPlatform("web"));
 
-expectType<StyleDictionary>(StyleDictionary.extend("config.json"));
+expectType<StyleDictionary.Core>(StyleDictionary.extend("config.json"));
 
-expectType<StyleDictionary>(
+expectType<StyleDictionary.Core>(
   StyleDictionary.extend({
     source: ["tokens/**/*.json"],
     platforms: {
@@ -49,7 +42,7 @@ expectType<StyleDictionary>(
   })
 );
 
-expectType<StyleDictionary>(
+expectType<StyleDictionary.Core>(
   StyleDictionary.registerAction({
     name: "copy_assets",
     do: function (dictionary, config) {
@@ -65,7 +58,7 @@ expectType<StyleDictionary>(
   })
 );
 
-expectType<StyleDictionary>(
+expectType<StyleDictionary.Core>(
   StyleDictionary.registerFilter({
     name: "isColor",
     matcher: function (token) {
@@ -74,27 +67,27 @@ expectType<StyleDictionary>(
   })
 );
 
-expectType<StyleDictionary>(
+expectType<StyleDictionary.Core>(
   StyleDictionary.registerFormat({
     name: "json",
     formatter: function ({dictionary, file, options, platform}) {
-      expectType<Dictionary>(dictionary);
-      expectType<File>(file);
-      expectType<Options>(options);
-      expectType<Platform>(platform);
+      expectType<StyleDictionary.Dictionary>(dictionary);
+      expectType<StyleDictionary.File>(file);
+      expectType<StyleDictionary.Options>(options);
+      expectType<StyleDictionary.Platform>(platform);
       return JSON.stringify(dictionary.tokens, null, 2);
     },
   })
 );
 
-expectType<StyleDictionary>(
+expectType<StyleDictionary.Core>(
   StyleDictionary.registerTemplate({
     name: "Swift/colors",
     template: __dirname + "/templates/swift/colors.template",
   })
 );
 
-expectType<StyleDictionary>(
+expectType<StyleDictionary.Core>(
   StyleDictionary.registerTransform({
     name: "time/seconds",
     type: "value",
@@ -102,20 +95,20 @@ expectType<StyleDictionary>(
       return token.attributes?.category === "time";
     },
     transformer: function (token) {
-      expectType<TransformedToken>(token);
+      expectType<StyleDictionary.TransformedToken>(token);
       return (parseInt(token.original.value) / 1000).toString() + "s";
     },
   })
 );
 
-expectType<StyleDictionary>(
+expectType<StyleDictionary.Core>(
   StyleDictionary.registerTransformGroup({
     name: "Swift",
     transforms: ["attribute/cti", "size/pt", "name/cti"],
   })
 );
 
-expectType<StyleDictionary>(
+expectType<StyleDictionary.Core>(
   StyleDictionary.registerParser({
     pattern: /\.json$/,
     parse: ({ contents, filePath }) => {
@@ -124,11 +117,11 @@ expectType<StyleDictionary>(
   })
 );
 
-const file: File = {
+const file: StyleDictionary.File = {
   destination: `somePath.json`,
   format: `css/variables`,
   filter: (token) => {
-    expectType<TransformedToken>(token);
+    expectType<StyleDictionary.TransformedToken>(token);
     return false;
   },
   options: {
@@ -136,39 +129,39 @@ const file: File = {
   }
 }
 
-expectType<Options | undefined>(file.options);
+expectType<StyleDictionary.Options | undefined>(file.options);
 
 // Files need a destination
-expectError<File>({
+expectError<StyleDictionary.File>({
   format: `css/variables`,
 });
 
-expectAssignable<File>({
+expectAssignable<StyleDictionary.File>({
   format: `css/variables`,
   destination: `variables.css`
 });
 
 
-expectAssignable<Platform>({
+expectAssignable<StyleDictionary.Platform>({
   transformGroup: `css`,
 });
 
-expectAssignable<Platform>({
+expectAssignable<StyleDictionary.Platform>({
   transforms: [`attribute/cti`],
 });
 
-expectAssignable<Platform>({
+expectAssignable<StyleDictionary.Platform>({
   transforms: [`attribute/cti`],
   files: [{
     destination: `destination`
   }]
 });
 
-expectError<Platform>({
+expectError<StyleDictionary.Platform>({
   transforms: `css`,
 });
 
-expectError<Platform>({
+expectError<StyleDictionary.Platform>({
   transformGroup: [`attribute/cti`],
 });
 
@@ -178,8 +171,8 @@ expectError<Platform>({
  * fileHeader needs to be a string or a function that returns a string[]
  * showFileHeader must be a boolean
  */
-expectError<Options>({ fileHeader: false });
-expectAssignable<Options>({ fileHeader: 'fileHeader' });
-expectError<Options>({ fileHeader: () => 42 });
-expectAssignable<Options>({ fileHeader: () => [`hello`] });
-expectError<Options>({ showFileHeader: 'false' });
+expectError<StyleDictionary.Options>({ fileHeader: false });
+expectAssignable<StyleDictionary.Options>({ fileHeader: 'fileHeader' });
+expectError<StyleDictionary.Options>({ fileHeader: () => 42 });
+expectAssignable<StyleDictionary.Options>({ fileHeader: () => [`hello`] });
+expectError<StyleDictionary.Options>({ showFileHeader: 'false' });
