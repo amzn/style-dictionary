@@ -11,16 +11,10 @@
  * and limitations under the License.
  */
 
-import Dictionary from './Dictionary';
-import Platform from './Platform';
+import { Dictionary } from './Dictionary';
+import { Platform } from './Platform';
 
-/**
- * @property {Function} do - The do function
- * @property {Function} undo - The undo function
- */
 export interface Action {
   do(dictionary: Dictionary, config: Platform): void;
   undo?(dictionary: Dictionary, config: Platform): void;
 }
-
-export default Action;

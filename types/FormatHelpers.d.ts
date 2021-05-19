@@ -11,9 +11,9 @@
  * and limitations under the License.
  */
 
-import Dictionary from './Dictionary';
-import TransformedToken from './TransformedToken';
-import File from './File';
+import { Dictionary } from './Dictionary';
+import { TransformedToken } from './TransformedToken';
+import { File } from './File';
 
 export interface LineFormatting {
   prefix?: string;
@@ -51,8 +51,9 @@ export interface FormattedVariablesArgs {
 }
 
 export interface FormatHelpers {
-  createPropertyFormatter: (args: TokenFormatterArgs) =>
-    (token: TransformedToken) => string;
+  createPropertyFormatter: (
+    args: TokenFormatterArgs
+  ) => (token: TransformedToken) => string;
   fileHeader: (args: FileHeaderArgs) => string;
   formattedVariables: (args: FormattedVariablesArgs) => string;
 }

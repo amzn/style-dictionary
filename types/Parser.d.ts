@@ -13,7 +13,7 @@
 
 import { DesignTokens } from './DesignToken';
 
-interface ParserOptions {
+export interface ParserOptions {
   contents: string;
   filePath: string;
 }
@@ -22,5 +22,3 @@ export interface Parser {
   pattern: RegExp;
   parse: (options: ParserOptions) => DesignTokens;
 }
-
-export default Parser;

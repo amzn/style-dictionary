@@ -11,7 +11,7 @@
  * and limitations under the License.
  */
 
-import TransformedToken, {TransformedTokens} from './TransformedToken';
+import { TransformedToken, TransformedTokens } from './TransformedToken';
 
 export interface Dictionary {
   allTokens: TransformedToken[];
@@ -21,5 +21,3 @@ export interface Dictionary {
   usesReference: (value: any) => boolean;
   getReferences: (value: any) => TransformedToken[];
 }
-
-export default Dictionary;

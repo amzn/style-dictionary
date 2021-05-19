@@ -11,7 +11,7 @@
  * and limitations under the License.
  */
 
-import DesignToken from './DesignToken';
+import { DesignToken } from './DesignToken';
 
 export type TransformedToken = DesignToken & {
   name: string;
@@ -41,5 +41,3 @@ export type TransformedToken = DesignToken & {
 export interface TransformedTokens {
   [key: string]: TransformedTokens | TransformedToken;
 }
-
-export default TransformedToken;

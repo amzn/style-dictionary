@@ -11,8 +11,8 @@
  * and limitations under the License.
  */
 
-import Options from './Options';
-import File from './File';
+import { Options } from './Options';
+import { File } from './File';
 
 export interface Platform {
   transformGroup?: string;
@@ -23,5 +23,3 @@ export interface Platform {
   actions?: string[];
   options?: Options;
 }
-
-export default Platform;

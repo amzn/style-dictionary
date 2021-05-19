@@ -21,8 +21,6 @@ import StyleDictionary, {
   Platform
 } from ".";
 
-// declare var styleDictionary: StyleDictionary;
-
 expectType<StyleDictionary>(StyleDictionary.buildAllPlatforms());
 expectType<StyleDictionary>(StyleDictionary.buildPlatform("web"));
 

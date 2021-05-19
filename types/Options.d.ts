@@ -11,7 +11,7 @@
  * and limitations under the License.
  */
 
-import FileHeader from './FileHeader';
+import { FileHeader } from './FileHeader';
 
 export interface Options {
   showFileHeader?: boolean;
@@ -19,5 +19,3 @@ export interface Options {
   outputReferences?: boolean;
   [key: string]: any;
 }
-
-export default Options;

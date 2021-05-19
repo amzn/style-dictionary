@@ -12,5 +12,3 @@
  */
 
 export type FileHeader = (defaultMessage: string) => string[];
-
-export default FileHeader;

@@ -11,14 +11,14 @@
  * and limitations under the License.
  */
 
-import Parser from './Parser';
-import Transform from './Transform';
-import TransformGroup from './TransformGroup';
-import Filter from './Filter';
-import FileHeader from './FileHeader';
-import Format from './Format';
-import Action from './Action';
-import Platform from './Platform';
+import { Parser } from './Parser';
+import { Transform } from './Transform';
+import { TransformGroup } from './TransformGroup';
+import { Filter } from './Filter';
+import { FileHeader } from './FileHeader';
+import { Format } from './Format';
+import { Action } from './Action';
+import { Platform } from './Platform';
 import { DesignTokens } from './DesignToken';
 
 export interface Config {
@@ -35,5 +35,3 @@ export interface Config {
   properties?: DesignTokens;
   platforms: Record<string, Platform>;
 }
-
-export default Config;

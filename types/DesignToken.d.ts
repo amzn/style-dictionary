@@ -11,8 +11,15 @@
  * and limitations under the License.
  */
 
+/**
+ * This type is also used in the `typescript/module-declarations` format,
+ * but we only want to include the lines of the DesignToken interface.
+ * The comments surrounding the definition are used to trim the lines of
+ * this file in that format.
+ */
+
 //start
-declare interface DesignToken {
+interface DesignToken {
   value: any;
   name?: string;
   comment?: string;
@@ -29,9 +36,7 @@ declare interface DesignToken {
 }
 //end
 
-export {DesignToken};
+export { DesignToken };
 export interface DesignTokens {
   [key: string]: DesignTokens | DesignToken;
 }
-
-export default DesignToken;

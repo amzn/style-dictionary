@@ -11,8 +11,8 @@
  * and limitations under the License.
  */
 
-import Options from './Options';
-import TransformedToken from './TransformedToken';
+import { Options } from './Options';
+import { TransformedToken } from './TransformedToken';
 
 export interface File {
   destination: string;
@@ -20,5 +20,3 @@ export interface File {
   filter?: string | Partial<TransformedToken> | ((token: TransformedToken) => boolean);
   options?: Options;
 }
-
-export default File;

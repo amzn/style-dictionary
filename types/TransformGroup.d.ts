@@ -15,5 +15,3 @@ export interface TransformGroup {
   name: string;
   transforms: string[];
 }
-
-export default TransformGroup;

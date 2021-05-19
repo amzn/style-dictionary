@@ -11,10 +11,10 @@
  * and limitations under the License.
  */
 
-import Dictionary from './Dictionary';
-import File from './File';
-import Options from './Options';
-import Platform from './Platform';
+import { Dictionary } from './Dictionary';
+import { File } from './File';
+import { Options } from './Options';
+import { Platform } from './Platform';
 
 export interface FormatterArguments {
   /**
@@ -44,5 +44,3 @@ export type Formatter = (arguments: FormatterArguments) => string;
 export interface Format {
   formatter: Formatter;
 }
-
-export default Format;
