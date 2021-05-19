@@ -14,7 +14,7 @@
 import Options from './Options';
 import TransformedToken from './TransformedToken';
 
-interface File {
+export interface File {
   destination: string;
   format?: string;
   filter?: string | Partial<TransformedToken> | ((token: TransformedToken) => boolean);

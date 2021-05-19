@@ -15,7 +15,7 @@ import Dictionary from './Dictionary';
 import TransformedToken from './TransformedToken';
 import File from './File';
 
-interface LineFormatting {
+export interface LineFormatting {
   prefix?: string;
   commentStyle?: "short" | "long" | "none";
   indentation?: string;
@@ -23,38 +23,36 @@ interface LineFormatting {
   suffix?: string;
 }
 
-type TokenFormatterArguments = {
+export type TokenFormatterArgs = {
   outputReferences?: boolean;
   dictionary: Dictionary;
   format?: "css" | "sass" | "less" | "stylus";
   formatting?: LineFormatting;
 }
 
-interface CommentFormatting {
+export interface CommentFormatting {
   prefix: string;
   lineSeparator: string;
   header: string;
   footer: string;
 }
 
-interface FileHeaderParameters {
+export interface FileHeaderArgs {
   file: File;
   commentStyle: string;
   formatting?: CommentFormatting;
 }
 
-interface FormattedVariablesOptions {
+export interface FormattedVariablesArgs {
   format: "css" | "sass";
   dictionary: Dictionary
   outputReferences?: boolean;
   formatting?: LineFormatting;
 }
 
-interface FormatHelpers {
-  createPropertyFormatter: (options: TokenFormatterArguments) =>
+export interface FormatHelpers {
+  createPropertyFormatter: (args: TokenFormatterArgs) =>
     (token: TransformedToken) => string;
-  fileHeader: (options: FileHeaderParameters) => string;
-  formattedVariables: (options: FormattedVariablesOptions) => string;
+  fileHeader: (args: FileHeaderArgs) => string;
+  formattedVariables: (args: FormattedVariablesArgs) => string;
 }
-
-export default FormatHelpers;

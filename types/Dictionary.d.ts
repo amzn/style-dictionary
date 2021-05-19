@@ -13,7 +13,7 @@
 
 import TransformedToken, {TransformedTokens} from './TransformedToken';
 
-interface Dictionary {
+export interface Dictionary {
   allTokens: TransformedToken[];
   tokens: TransformedTokens;
   allProperties: TransformedToken[];

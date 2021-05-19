@@ -13,6 +13,6 @@
 
 import TransformedToken from './TransformedToken';
 
-type Matcher = (token: TransformedToken) => boolean;
+export type Matcher = (token: TransformedToken) => boolean;
 
 export default Matcher;

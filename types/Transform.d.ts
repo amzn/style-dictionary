@@ -15,25 +15,25 @@ import Matcher from './Matcher';
 import TransformedToken from './TransformedToken';
 import Platform from './Platform';
 
-interface NameTransform {
+export interface NameTransform {
   type: "name";
   matcher?: Matcher;
   transformer: (token: TransformedToken, options?: Platform) => string;
 }
 
-interface ValueTransform {
+export interface ValueTransform {
   type: "value";
   transitive?: boolean;
   matcher?: Matcher;
   transformer: (token: TransformedToken, options?: Platform) => any;
 }
 
-interface AttributeTransform {
+export interface AttributeTransform {
   type: "attribute";
   matcher?: Matcher;
   transformer: (token: TransformedToken, options?: Platform) => { [key: string]: any };
 }
 
-type Transform = NameTransform | ValueTransform | AttributeTransform;
+export type Transform = NameTransform | ValueTransform | AttributeTransform;
 
 export default Transform;

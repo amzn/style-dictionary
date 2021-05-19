@@ -18,7 +18,7 @@ interface ParserOptions {
   filePath: string;
 }
 
-interface Parser {
+export interface Parser {
   pattern: RegExp;
   parse: (options: ParserOptions) => DesignTokens;
 }

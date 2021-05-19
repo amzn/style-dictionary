@@ -14,7 +14,11 @@
 import Dictionary from './Dictionary';
 import Platform from './Platform';
 
-interface Action {
+/**
+ * @property {Function} do - The do function
+ * @property {Function} undo - The undo function
+ */
+export interface Action {
   do(dictionary: Dictionary, config: Platform): void;
   undo?(dictionary: Dictionary, config: Platform): void;
 }

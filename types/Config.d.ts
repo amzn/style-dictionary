@@ -11,8 +11,6 @@
  * and limitations under the License.
  */
 
-import { Keyed } from './_helpers';
-
 import Parser from './Parser';
 import Transform from './Transform';
 import TransformGroup from './TransformGroup';
@@ -23,19 +21,19 @@ import Action from './Action';
 import Platform from './Platform';
 import { DesignTokens } from './DesignToken';
 
-interface Config {
+export interface Config {
   parsers?: Parser[];
-  transform?: Keyed<Transform>;
-  transformGroup?: Keyed<TransformGroup>;
-  format?: Keyed<Format>;
-  filter?: Keyed<Filter>;
-  fileHeader?: Keyed<FileHeader>;
-  action?: Keyed<Action>;
+  transform?: Record<string, Transform>;
+  transformGroup?: Record<string, TransformGroup>;
+  format?: Record<string, Format>;
+  filter?: Record<string, Filter>;
+  fileHeader?: Record<string, FileHeader>;
+  action?: Record<string, Action>;
   include?: string[];
   source?: string[];
   tokens?: DesignTokens;
   properties?: DesignTokens;
-  platforms: Keyed<Platform>;
+  platforms: Record<string, Platform>;
 }
 
 export default Config;

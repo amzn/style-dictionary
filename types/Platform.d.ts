@@ -14,7 +14,7 @@
 import Options from './Options';
 import File from './File';
 
-interface Platform {
+export interface Platform {
   transformGroup?: string;
   transforms?: string[];
   prefix?: string;

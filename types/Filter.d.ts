@@ -13,7 +13,7 @@
 
 import Matcher from './Matcher';
 
-interface Filter {
+export interface Filter {
   name: string;
   matcher: Matcher;
 }

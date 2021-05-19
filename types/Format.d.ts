@@ -16,17 +16,32 @@ import File from './File';
 import Options from './Options';
 import Platform from './Platform';
 
-interface FormatterArguments {
+export interface FormatterArguments {
+  /**
+   * The transformed and resolved dictionary object
+   */
   dictionary: Dictionary;
+  /**
+   * The file configuration the format is called in
+   */
   file: File;
+  /**
+   * The options object,
+   */
   options: Options;
+  /**
+   * The platform configuration the format is called in
+   */
   platform: Platform;
 }
 
-type Formatter = (this: File, arguments: FormatterArguments) => string;
+/**
+ * The formatter function receives an overloaded object as its arguments and
+ * it should return a string, which will be written to a file.
+ */
+export type Formatter = (arguments: FormatterArguments) => string;
 
-interface Format {
-  name: string;
+export interface Format {
   formatter: Formatter;
 }
 

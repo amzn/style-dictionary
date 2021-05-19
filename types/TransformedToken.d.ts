@@ -13,7 +13,7 @@
 
 import DesignToken from './DesignToken';
 
-type TransformedToken = DesignToken & {
+export type TransformedToken = DesignToken & {
   name: string;
   /** The object path of the property.
    *

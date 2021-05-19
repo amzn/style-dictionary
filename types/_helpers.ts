@@ -12,6 +12,5 @@
  */
 
 type Named<T> = T & { name: string; };
-type Keyed<T> = { [name: string]: T };
 
-export { Named, Keyed }
+export { Named }
