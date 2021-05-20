@@ -304,6 +304,5 @@ declare namespace StyleDictionary {
   }
 }
 
-
 declare var StyleDictionary: StyleDictionary.Core;
 export = StyleDictionary;
