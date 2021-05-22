@@ -34,7 +34,7 @@
     "index.js",
     "LICENSE",
     "NOTICE",
-    "types/index.d.ts"
+    "types"
   ],
   "scripts": {
     "lint": "eslint --fix index.js \"lib/**/*.js\" \"__tests__/**/*.js\"",
@@ -146,7 +146,7 @@
     "node-sass": "^4.14.1",
     "standard-version": "^9.0.0",
     "stylus": "^0.54.8",
-    "tsd": "^0.11.0",
+    "tsd": "^0.15.1",
     "yaml": "^1.10.0"
   }
 }

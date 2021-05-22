@@ -10,11 +10,11 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-var fs = require('fs-extra');
-var helpers = require('../__helpers');
-var formats = require('../../lib/common/formats');
+const formats = require('../../lib/common/formats');
+const createDictionary = require('../../lib/utils/createDictionary');
+const createFormatArgs = require('../../lib/utils/createFormatArgs');
 
-var file = {
+const file = {
   "destination": "__output/",
   "format": "typescript/es6-declarations",
   "filter": {
@@ -24,46 +24,26 @@ var file = {
   }
 };
 
-var dictionary = {
-  "allProperties": [{
-    "name": "red",
-    "value": "#EF5350",
-    "original": {
-      "value": "#EF5350"
-    },
-    "attributes": {
-      "category": "color",
-      "type": "base",
-      "item": "red",
-      "subitem": "400"
-    },
-    "path": [
-      "color",
-      "base",
-      "red",
-      "400"
-    ]
-  }]
+const properties = {
+  "color": {
+    "red": {"value": "#FF0000"}
+  }
 };
 
-var formatter = formats['typescript/es6-declarations'].bind(file);
+const formatter = formats['typescript/es6-declarations'].bind(file);
 
 describe('formats', () => {
   describe('typescript/es6-declarations', () => {
-    beforeEach(() => {
-      helpers.clearOutput();
-    });
-
-    afterEach(() => {
-      helpers.clearOutput();
-    });
-
     it('should be a valid TS file', () => {
-      const declarations = './__tests__/__output/output.d.ts';
-      fs.writeFileSync(declarations, formatter(dictionary) );
+      const dictionary = createDictionary({ properties });
+      const output = formatter(createFormatArgs({
+        dictionary,
+        file,
+        platform: {},
+      }), {}, file);
 
       // get all lines that begin with export
-      const lines = fs.readFileSync(declarations, 'utf-8')
+      const lines = output
         .split('\n')
         .filter(l => l.indexOf('export') >= 0);
 

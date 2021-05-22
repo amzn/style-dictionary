@@ -744,7 +744,23 @@ exports[`formats all should match typescript/module-declarations snapshot 1`] = 
  */
 
 export default tokens;
-declare interface DesignToken { value: string; name?: string; path?: string[]; comment?: string; attributes?: any; original?: any; }
+
+declare interface DesignToken {
+  value: any;
+  name?: string;
+  comment?: string;
+  themeable?: boolean;
+  attributes?: {
+    category?: string;
+    type?: string;
+    item?: string;
+    subitem?: string;
+    state?: string;
+    [key: string]: any;
+  };
+  [key: string]: any;
+}
+
 declare const tokens: {
   \\"color\\": {
     \\"red\\": DesignToken
