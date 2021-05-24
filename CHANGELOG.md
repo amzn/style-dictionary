@@ -116,17 +116,19 @@ All notable changes to this project will be documented in this file. See [standa
 * **parser:** adding custom parser support ([#429](https://github.com/amzn/style-dictionary/issues/429)) ([887a837](https://github.com/amzn/style-dictionary/commit/887a837a72f15cb4e2550f883e6d4479e1fa9d42))
 * **transforms:** Make transitive transforms & resolves possible ([#371](https://github.com/amzn/style-dictionary/issues/371)) ([3edbb17](https://github.com/amzn/style-dictionary/commit/3edbb178d53f9e5af2328b7c26271fe436af86d3)), closes [#208](https://github.com/amzn/style-dictionary/issues/208)
 
-
 ### Bug Fixes
 
-* addressing code review ([9690547](https://github.com/amzn/style-dictionary/commit/96905470ebf3ffbdd83c55c70235b3361c0c7400))
-* addressing code review ([881a57c](https://github.com/amzn/style-dictionary/commit/881a57cb7dcffd46776832ad65dd8ddffd7933b9))
-* better description for package.json ([ba6fae7](https://github.com/amzn/style-dictionary/commit/ba6fae7047c2312e312b2b64d2b93da2946277d8))
-* better description for package.json ([4bfd31e](https://github.com/amzn/style-dictionary/commit/4bfd31e66fed6e551fb02051d730acb0b3d19097))
-* package-lock.json ([#482](https://github.com/amzn/style-dictionary/issues/482)) ([7584f48](https://github.com/amzn/style-dictionary/commit/7584f483c95f9830155b82edb8e02d9c5d440239))
 * **cli:** update clean config path logic ([#454](https://github.com/amzn/style-dictionary/issues/454)) ([dc3cfa5](https://github.com/amzn/style-dictionary/commit/dc3cfa58aa7cc78a6359a8bb269e6f32ba50b110))
 * **formats:** fix max call stack issue on json/nested format ([#465](https://github.com/amzn/style-dictionary/issues/465)) ([67fb361](https://github.com/amzn/style-dictionary/commit/67fb361fb2448f9b91a1a125ee61d6bbe2f77732))
 * **transforms:** fix transitive transforms ([#476](https://github.com/amzn/style-dictionary/issues/476)) ([ac0c515](https://github.com/amzn/style-dictionary/commit/ac0c515c8b4593b91eb352b1f744895796e3ab49))
+
+### [2.10.3](https://github.com/amzn/style-dictionary/compare/v2.10.2...v2.10.3) (2021-03-09)
+
+
+### Bug Fixes
+
+* **extend:** remove prototype pollution ([#560](https://github.com/amzn/style-dictionary/issues/560)) ([89ee39a](https://github.com/amzn/style-dictionary/commit/89ee39a7953c1825ea4578d43f129e23b4ed5da8))
+
 
 ### [2.10.2](https://github.com/amzn/style-dictionary/compare/v2.10.1...v2.10.2) (2020-10-08)
 

@@ -2,7 +2,7 @@ name: Test
 
 on:
   pull_request:
-    branches: [ $default-branch, "3.0" ]
+    branches: [ "main", "3.0" ]
 
 jobs:
   build:

@@ -3,16 +3,22 @@
   "description": "",
   "version": "1.0.0",
   "dependencies": {
-    "node-sass": "^4.14.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-scripts": "^4.0.0",
-    "styled-components": "^5.1.1"
+    "node-sass": "^5.0.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-scripts": "^4.0.3",
+    "styled-components": "^5.2.1"
   },
   "devDependencies": {
     "style-dictionary": "3.0.0-rc.9"
   },
+  "resolutions": {
+    "immer": "8.0.1",
+    "is-svg": ">=4.2.2",
+    "ssri": ">=8.0.1"
+  },
   "scripts": {
+    "preinstall": "npx npm-force-resolutions",
     "build-dictionary": "style-dictionary build --config ./style-dictionary/config.json",
     "start": "npm run build-dictionary && react-scripts start",
     "build": "npm run build-dictionary && react-scripts build",

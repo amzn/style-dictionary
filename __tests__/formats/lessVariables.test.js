@@ -60,17 +60,12 @@ describe('formats', () => {
   describe('less/variables', () => {
 
     it('should have a valid less syntax', () => {
-      return less.render(formatter(createFormatArgs({
+      expect.assertions(1);
+      return expect(less.render(formatter(createFormatArgs({
         dictionary,
         file,
         platform: {}
-      }), {}, file))
-        .then(function(output) {
-          expect(output).toBeDefined();
-        })
-        .catch(function(err) {
-          throw new Error(err);
-        });
+      }), {}, file))).resolves.toBeDefined();
     });
 
   });

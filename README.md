@@ -1,3 +1,7 @@
+<pre>
+<a href="https://amzn.github.io/style-dictionary/#/version_3">What's new in Style Dictionary 3.0!</a>
+</pre>
+
 <img src="docs/assets/logo.png" alt="Style Dictionary logo and mascot" title="&quot;Pascal&quot;" width="100" align="right" />
 
 [![npm version](https://img.shields.io/npm/v/style-dictionary.svg?style=flat-square)](https://badge.fury.io/js/style-dictionary)
@@ -62,7 +66,7 @@ Call this in the root directory of your project. The only thing needed is a `con
 | --version | -v | Display the version |
 
 ### Node
-You can also use the style dictionary build system in node if you want to [extend](#extend) the functionality or use it in another build system like Grunt or Gulp.
+You can also use the style dictionary build system in node if you want to [extend](#extending) the functionality or use it in another build system like Grunt or Gulp.
 ```javascript
 const StyleDictionary = require('style-dictionary').extend('config.json');
 

@@ -9,4 +9,6 @@
 [GitHub](https://github.com/amzn/style-dictionary)
 [Get Started](README.md)
 
+[See what's new in 3.0!](version_3.md)
+
 ![color](#D9F8F5)
