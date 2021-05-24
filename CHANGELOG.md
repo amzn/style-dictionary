@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0-rc.10](https://github.com/amzn/style-dictionary/compare/v3.0.0-rc.9...v3.0.0-rc.10) (2021-05-24)
+
+
+### Features
+
+* **formats:** add typescript declarations formats ([#557](https://github.com/amzn/style-dictionary/issues/557)) ([f517bcf](https://github.com/amzn/style-dictionary/commit/f517bcfa219bddc5a10b5443ccb85c4869711064)), closes [#425](https://github.com/amzn/style-dictionary/issues/425)
+* **types:** cleaning up our type definitions ([#632](https://github.com/amzn/style-dictionary/issues/632)) ([db6269b](https://github.com/amzn/style-dictionary/commit/db6269b636264cc0849f595c0f15a34c977c1398))
+
+
+### Bug Fixes
+
+* **references:** value object references now work ([#623](https://github.com/amzn/style-dictionary/issues/623)) ([23de306](https://github.com/amzn/style-dictionary/commit/23de3062c464a70d9e6492a380e1052e9500ea2d)), closes [#615](https://github.com/amzn/style-dictionary/issues/615)
+* **template:** remove blank lines in scss/map-deep and scss/map-flat templates ([#588](https://github.com/amzn/style-dictionary/issues/588)) ([a88e622](https://github.com/amzn/style-dictionary/commit/a88e622bcc06a98972dddb2b11903828ba3dab2b))
+
+### [2.10.3](https://github.com/amzn/style-dictionary/compare/v3.0.0-rc.5...v2.10.3) (2021-03-09)
+
+
+### Bug Fixes
+
+* **extend:** remove prototype pollution ([#560](https://github.com/amzn/style-dictionary/issues/560)) ([89ee39a](https://github.com/amzn/style-dictionary/commit/89ee39a7953c1825ea4578d43f129e23b4ed5da8))
+
 ## [3.0.0-rc.9](https://github.com/amzn/style-dictionary/compare/v3.0.0-rc.8...v3.0.0-rc.9) (2021-05-04)
 
 
