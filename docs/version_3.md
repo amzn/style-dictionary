@@ -10,7 +10,7 @@ If you have an existing project, you can upgrade to 3.0 by updating the version 
 
 `npm install --save-dev style-dictionary@latest`
 
-If you find any bugs or issues, please file tickets so we can get things fixed. We have tested and reviewed 3.0 extensively, but there may be things we missed. Thanks!
+[If you find any bugs or issues, please file a ticket](https://github.com/amzn/style-dictionary/issues/new) so we can get things fixed. We have tested and reviewed 3.0 extensively, but there may be things we missed. Thanks!
 
 
 ## What's new in 3.0:
