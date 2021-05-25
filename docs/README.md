@@ -1,3 +1,5 @@
+[What's new in Style Dictionary 3.0!](version_3.md)
+
 <img src="assets/logo.png" alt="Style Dictionary logo" title="StyleDictionary" width="150" align="right" />
 
 [![npm version](https://img.shields.io/npm/v/style-dictionary.svg?style=flat-square)](https://badge.fury.io/js/style-dictionary)

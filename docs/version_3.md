@@ -1,12 +1,40 @@
 # Version 3.0!
 
-We have been working hard the past few months on a number of features and improvements we wanted to combine into a major release. Though we intend that 3.0 to be backwards compatible, we thought it was a good idea to move to a new major version because we are changing a core part of how Style Dictionary works. 
+Version 3.0 is now publicly released! We have been working hard the past few months on a number of features and improvements we wanted to combine into a major release. Though we intend that 3.0 to be backwards compatible, we thought it was a good idea to move to a new major version because we are changing a core part of how Style Dictionary works. 
 
-If you would like to get a pre-release of 3.0, use the `next` tag to install Style Dictionary:
+If you are starting a new project, you can install Style Dictionary and it will give you the latest version:
 
-`npm install --save-dev style-dictionary@next`
+`npm install --save-dev style-dictionary`
 
-If you find any bugs or issues, please file tickets so we can get things fixed before we release it to the wider community. Thanks!
+If you have an existing project, you can upgrade to 3.0 by updating the version in your `package.json` file to `"style-dictionary": "^3.0.0"` and then run `npm install` or you can use the `latest` tag to update both your `package.json` and `package-lock.json` files:
+
+`npm install --save-dev style-dictionary@latest`
+
+[If you find any bugs or issues, please file a ticket](https://github.com/amzn/style-dictionary/issues/new) so we can get things fixed. We have tested and reviewed 3.0 extensively, but there may be things we missed. Thanks!
+
+
+## What's new in 3.0:
+
+* [Style Properties → Design Tokens](#style-properties-→-design-tokens)
+* [Transitive transforms](#transitive-transforms)
+* [Output references](#output-references)
+* [Custom parser support](#custom-parser-support)
+* [Adding filePath and isSource entries on tokens](#adding-filepath-and-issource-entries-on-tokens)
+* [Format helpers](#format-helpers)
+* [Updated format method arguments](#updated-format-method-arguments)
+* [Custom file headers](#custom-file-headers)
+* [Typescript support](#typescript-support)
+* [More built-ins](#more-built-ins)
+* [Bug fixes](#bug-fixes)
+* [Other features](#other-features)
+* [Better testing](#better-testing)
+* [Dropping support for older versions of node](#dropping-support-for-older-versions-of-node)
+
+### Style Properties → Design Tokens
+
+Style Dictionary is moving to the term "design tokens", both in documentation and in code. This has become the industry standard term for a while and it is time we respect that. Until now, Style Dictionary had called these "style properties" or just "properties", with some parts of the documentation also mentioning "design tokens". We want to be consistent with the direction of the community as well as in our documentation and code. We use the terms `properties` and `allProperties` in different APIs in Style Dictionary. To be consistent in documentation as well as code, we will be moving to using `tokens` and `allTokens`.
+
+Don't worry! This change is backwards-compatible; you will still be able to use `properties` and `allProperties` wherever you currently do in your code. If you want, you can update those to tokens and allTokens and everything will work as expected. Moving forward, all examples and documentation will use the term "design tokens" and "tokens" rather than "style properties" and "properties". We do recommend using `tokens` and `allTokens` in new code from here on out!
 
 ### Transitive transforms
 
@@ -47,7 +75,7 @@ Use cases this change opens up:
 * Combining values like using HSL for colors
 * Modifying aliases like making a color lighter or darker
 
-Example: https://github.com/amzn/style-dictionary/tree/3.0/examples/advanced/transitive-transforms
+Example: https://github.com/amzn/style-dictionary/tree/main/examples/advanced/transitive-transforms
 
 Thanks [@mfal](https://github.com/mfal)!
 
@@ -146,7 +174,7 @@ StyleDictionary.registerFormat({
 })
 ```
 
-Example: https://github.com/amzn/style-dictionary/tree/3.0/examples/advanced/variables-in-outputs
+Example: https://github.com/amzn/style-dictionary/tree/main/examples/advanced/variables-in-outputs
 
 ### Custom parser support
 
@@ -154,8 +182,8 @@ https://github.com/amzn/style-dictionary/pull/429
 
 We are pretty excited about this. Until now you could only define your design tokens in either JSON, JSON5, or plain Node modules. The addition of custom parser support allows you to define your tokens in any language you like! The most obvious use-case is to use YAML which has a cleaner and less verbose syntax than JSON. Now, the sky is the limit. Your source of truth can be in any file format you like as long as you can parse it into an object that Style Dictionary can understand. You register a custom parser the same way as you register a custom transform or format. A parser consists of a pattern to match against files, similar to the test attribute in a loader in Webpack, and a parse function which gets the file path and its contents and is expected to return an object.
 
-* Example: https://github.com/amzn/style-dictionary/tree/3.0/examples/advanced/custom-parser
-* YAML example: https://github.com/amzn/style-dictionary/tree/3.0/examples/advanced/yaml-tokens
+* Example: https://github.com/amzn/style-dictionary/tree/main/examples/advanced/custom-parser
+* YAML example: https://github.com/amzn/style-dictionary/tree/main/examples/advanced/yaml-tokens
 
 
 ### Adding filePath and isSource entries on tokens
@@ -225,7 +253,7 @@ module.exports = {
 }
 ```
 
-Example: https://github.com/amzn/style-dictionary/tree/3.0/examples/advanced/format-helpers
+Example: https://github.com/amzn/style-dictionary/tree/main/examples/advanced/format-helpers
 
 ### Updated format method arguments
 
@@ -321,9 +349,9 @@ module.exports = {
 }
 ```
 
-Example: https://github.com/amzn/style-dictionary/tree/3.0/examples/advanced/custom-file-header
+Example: https://github.com/amzn/style-dictionary/tree/main/examples/advanced/custom-file-header
 
-### Typescript typings
+### Typescript support
 
 https://github.com/amzn/style-dictionary/pull/410
 
@@ -385,9 +413,3 @@ We have also added more unit tests as well for some features we have added and b
 https://github.com/amzn/style-dictionary/pull/441
 
 To be honest, we should have done this way sooner. Those versions of Node are no longer even in long-term support or maintenance. Hopefully this change should not affect anyone as you should all be on more recent versions of Node anyways. 
-
-Style Properties → Design Tokens
-
-One last change is Style Dictionary is moving to the term "design tokens", both in documentation and in code. This has become the industry standard term for a while and it is time we respect that. Until now, Style Dictionary had called these "style properties" or just "properties", with some parts of the documentation also mentioning "design tokens". We want to be consistent with the direction of the community as well as in our documentation and code. We use the terms `properties` and `allProperties` in different APIs in Style Dictionary. To be consistent in documentation as well as code, we will be moving to using `tokens` and `allTokens`.
-
-Don't worry! This change is backwards-compatible; you will still be able to use `properties` and `allProperties` wherever you currently do in your code. If you want, you can update those to tokens and allTokens and everything will work as expected. Moving forward, all examples and documentation will use the term "design tokens" and "tokens" rather than "style properties" and "properties". We do recommend using `tokens` and `allTokens` in new code from here on out!
