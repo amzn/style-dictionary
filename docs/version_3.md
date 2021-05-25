@@ -40,8 +40,7 @@ Don't worry! This change is backwards-compatible; you will still be able to use 
 
 This is the big one that required a big re-architecture of how the Style Dictionary build process works. 
 
-Up until now the build process looked like this: https://amzn.github.io/style-dictionary/#/build_process
-After merging all of the token files, it would iterate through the merged object and transform tokens it found, but only do value transforms on tokens that did not reference another token. The original intent here was that a value of any reference should be the same for all references of it, so we only need to do a value transform once. Then after all tokens are transformed, resolve all aliases/references. 
+Up until now the build process would merge all token files, then iterate through the merged object and transform tokens it found, but only do value transforms on tokens that did not reference another token. The original intent here was that a value of any reference should be the same for all references of it, so we only need to do a value transform once. Then after all tokens are transformed, Style Dictionary would resolve all aliases/references. 
 
 However, we heard from the community there were a number of reasons why someone might want to transform the value of an aliased token. 
 
