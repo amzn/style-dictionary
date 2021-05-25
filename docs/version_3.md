@@ -75,7 +75,7 @@ Use cases this change opens up:
 * Combining values like using HSL for colors
 * Modifying aliases like making a color lighter or darker
 
-Example: https://github.com/amzn/style-dictionary/tree/3.0/examples/advanced/transitive-transforms
+Example: https://github.com/amzn/style-dictionary/tree/main/examples/advanced/transitive-transforms
 
 Thanks [@mfal](https://github.com/mfal)!
 
@@ -174,7 +174,7 @@ StyleDictionary.registerFormat({
 })
 ```
 
-Example: https://github.com/amzn/style-dictionary/tree/3.0/examples/advanced/variables-in-outputs
+Example: https://github.com/amzn/style-dictionary/tree/main/examples/advanced/variables-in-outputs
 
 ### Custom parser support
 
@@ -182,8 +182,8 @@ https://github.com/amzn/style-dictionary/pull/429
 
 We are pretty excited about this. Until now you could only define your design tokens in either JSON, JSON5, or plain Node modules. The addition of custom parser support allows you to define your tokens in any language you like! The most obvious use-case is to use YAML which has a cleaner and less verbose syntax than JSON. Now, the sky is the limit. Your source of truth can be in any file format you like as long as you can parse it into an object that Style Dictionary can understand. You register a custom parser the same way as you register a custom transform or format. A parser consists of a pattern to match against files, similar to the test attribute in a loader in Webpack, and a parse function which gets the file path and its contents and is expected to return an object.
 
-* Example: https://github.com/amzn/style-dictionary/tree/3.0/examples/advanced/custom-parser
-* YAML example: https://github.com/amzn/style-dictionary/tree/3.0/examples/advanced/yaml-tokens
+* Example: https://github.com/amzn/style-dictionary/tree/main/examples/advanced/custom-parser
+* YAML example: https://github.com/amzn/style-dictionary/tree/main/examples/advanced/yaml-tokens
 
 
 ### Adding filePath and isSource entries on tokens
@@ -253,7 +253,7 @@ module.exports = {
 }
 ```
 
-Example: https://github.com/amzn/style-dictionary/tree/3.0/examples/advanced/format-helpers
+Example: https://github.com/amzn/style-dictionary/tree/main/examples/advanced/format-helpers
 
 ### Updated format method arguments
 
@@ -349,7 +349,7 @@ module.exports = {
 }
 ```
 
-Example: https://github.com/amzn/style-dictionary/tree/3.0/examples/advanced/custom-file-header
+Example: https://github.com/amzn/style-dictionary/tree/main/examples/advanced/custom-file-header
 
 ### Typescript support
 
