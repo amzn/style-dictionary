@@ -1,12 +1,39 @@
 # Version 3.0!
 
-We have been working hard the past few months on a number of features and improvements we wanted to combine into a major release. Though we intend that 3.0 to be backwards compatible, we thought it was a good idea to move to a new major version because we are changing a core part of how Style Dictionary works. 
+Version 3.0 is now publicly released! We have been working hard the past few months on a number of features and improvements we wanted to combine into a major release. Though we intend that 3.0 to be backwards compatible, we thought it was a good idea to move to a new major version because we are changing a core part of how Style Dictionary works. 
 
-If you would like to get a pre-release of 3.0, use the `next` tag to install Style Dictionary:
+If you are starting a new project, you can install Style Dictionary and it will give you the latest version:
 
-`npm install --save-dev style-dictionary@next`
+`npm install --save-dev style-dictionary`
+
+If you have an existing project, you can upgrade to 3.0 by updating the version in your `package.json` file to `"style-dictionary": "^3.0.0"` and then run `npm install` or you can use the `latest` tag to update both your `package.json` and `package-lock.json` files:
+
+`npm install --save-dev style-dictionary@latest`
 
 If you find any bugs or issues, please file tickets so we can get things fixed before we release it to the wider community. Thanks!
+
+## What's new in 3.0:
+
+* [Style Properties → Design Tokens](#style-properties-→-design-tokens)
+* [Transitive transforms](#transitive-transforms)
+* [Output references](#output-references)
+* [Custom parser support](#custom-parser-support)
+* [Adding filePath and isSource entries on tokens](#adding-filepath-and-issource-entries-on-tokens)
+* [Format helpers](#format-helpers)
+* [Updated format method arguments](#updated-format-method-arguments)
+* [Custom file headers](#custom-file-headers)
+* [Typescript support](#typescript-support)
+* [More built-ins](#more-built-ins)
+* [Bug fixes](#bug-fixes)
+* [Other features](#other-features)
+* [Better testing](#better-testing)
+* [Dropping support for older versions of node](#dropping-support-for-older-versions-of-node)
+
+### Style Properties → Design Tokens
+
+One last change is Style Dictionary is moving to the term "design tokens", both in documentation and in code. This has become the industry standard term for a while and it is time we respect that. Until now, Style Dictionary had called these "style properties" or just "properties", with some parts of the documentation also mentioning "design tokens". We want to be consistent with the direction of the community as well as in our documentation and code. We use the terms `properties` and `allProperties` in different APIs in Style Dictionary. To be consistent in documentation as well as code, we will be moving to using `tokens` and `allTokens`.
+
+Don't worry! This change is backwards-compatible; you will still be able to use `properties` and `allProperties` wherever you currently do in your code. If you want, you can update those to tokens and allTokens and everything will work as expected. Moving forward, all examples and documentation will use the term "design tokens" and "tokens" rather than "style properties" and "properties". We do recommend using `tokens` and `allTokens` in new code from here on out!
 
 ### Transitive transforms
 
@@ -323,7 +350,7 @@ module.exports = {
 
 Example: https://github.com/amzn/style-dictionary/tree/3.0/examples/advanced/custom-file-header
 
-### Typescript typings
+### Typescript support
 
 https://github.com/amzn/style-dictionary/pull/410
 
@@ -385,9 +412,3 @@ We have also added more unit tests as well for some features we have added and b
 https://github.com/amzn/style-dictionary/pull/441
 
 To be honest, we should have done this way sooner. Those versions of Node are no longer even in long-term support or maintenance. Hopefully this change should not affect anyone as you should all be on more recent versions of Node anyways. 
-
-Style Properties → Design Tokens
-
-One last change is Style Dictionary is moving to the term "design tokens", both in documentation and in code. This has become the industry standard term for a while and it is time we respect that. Until now, Style Dictionary had called these "style properties" or just "properties", with some parts of the documentation also mentioning "design tokens". We want to be consistent with the direction of the community as well as in our documentation and code. We use the terms `properties` and `allProperties` in different APIs in Style Dictionary. To be consistent in documentation as well as code, we will be moving to using `tokens` and `allTokens`.
-
-Don't worry! This change is backwards-compatible; you will still be able to use `properties` and `allProperties` wherever you currently do in your code. If you want, you can update those to tokens and allTokens and everything will work as expected. Moving forward, all examples and documentation will use the term "design tokens" and "tokens" rather than "style properties" and "properties". We do recommend using `tokens` and `allTokens` in new code from here on out!

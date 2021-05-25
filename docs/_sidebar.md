@@ -1,5 +1,6 @@
 - Getting started
   - [Overview](README.md)
+  - [What's new in 3.0](version_3.md)
   - [Quick Start](quick_start.md)
   - [Examples](examples.md)
   - [Config](config.md)
