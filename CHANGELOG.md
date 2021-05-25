@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/amzn/style-dictionary/compare/v3.0.0-rc.10...v3.0.0) (2021-05-25)
+
 ## [3.0.0-rc.10](https://github.com/amzn/style-dictionary/compare/v3.0.0-rc.9...v3.0.0-rc.10) (2021-05-24)
 
 
