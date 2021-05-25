@@ -1,0 +1,16 @@
+{
+  "name": "transitive-transforms",
+  "version": "1.0.0",
+  "description": "",
+  "main": "sd.config.js",
+  "scripts": {
+    "build": "style-dictionary build --config ./sd.config.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chroma-js": "^2.1.0",
+    "style-dictionary": "3.0.0-rc.10"
+  }
+}

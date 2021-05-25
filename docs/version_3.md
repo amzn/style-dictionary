@@ -47,7 +47,7 @@ Use cases this change opens up:
 * Combining values like using HSL for colors
 * Modifying aliases like making a color lighter or darker
 
-Example (WIP): https://github.com/amzn/style-dictionary/pull/487
+Example: https://github.com/amzn/style-dictionary/tree/3.0/examples/advanced/transitive-transforms
 
 Thanks [@mfal](https://github.com/mfal)!
 
@@ -117,8 +117,10 @@ Not all formats use the `outputReferences` option because that file format might
 * css/variables
 * scss/variables
 * less/variables
+* compose/object
 * android/resources
 * ios-swift/class.swift
+* ios-swift/enum.swift
 * flutter/class.dart
 
 If you have custom formats you can make use of this feature too! The `dictionary` object that is passed as an argument to the formatter function has 2 new methods on it: `usesReference()` and `getReference()` which you can use to get the reference name. Here is an example of that:
@@ -143,6 +145,9 @@ StyleDictionary.registerFormat({
   }
 })
 ```
+
+Example: https://github.com/amzn/style-dictionary/tree/3.0/examples/advanced/variables-in-outputs
+
 ### Custom parser support
 
 https://github.com/amzn/style-dictionary/pull/429
@@ -151,8 +156,6 @@ We are pretty excited about this. Until now you could only define your design to
 
 * Example: https://github.com/amzn/style-dictionary/tree/3.0/examples/advanced/custom-parser
 * YAML example: https://github.com/amzn/style-dictionary/tree/3.0/examples/advanced/yaml-tokens
-
-TODO: Fix README in example
 
 
 ### Adding filePath and isSource entries on tokens
@@ -193,7 +196,36 @@ We are adding 2 new pieces of metadata to each token:
 
 Thanks [@7studio](https://github.com/7studio)!
 
-TODO: use filePath in error messages to help with debugging.
+### Format helpers
+
+Style Dictionary comes with built-in formats to generate basic files like CSS, Sass, and Less variables. We know that we can't build formats to fit everyone's exact needs, so you can write your own formats to output exactly what you want. However, one common ask was to use 90% of a built-in format, but tweak small parts of it. Before 3.0, the only way to do that would be to copy and paste the format source code from Style Dictionary into your own custom format and then make your tweaks.
+
+In 3.0, we have added format helpers. Format helpers are functions that the built-in formats use for things like formatting each token definition line, sorting the tokens, and displaying a file header comment. These functions are now part of the public API, which you can access with StyleDictionary.formatHelpers. Format helpers should make it simple to build custom formats.
+
+```javascript
+const StyleDictionary = require('style-dictionary');
+
+const { formattedVariables } = StyleDictionary.formatHelpers;
+
+module.exports = {
+  format: {
+    myFormat: ({ dictionary, options, file }) => {
+      const { outputReferences } = options;
+      return formattedVariables({
+        dictionary,
+        outputReferences,
+        formatting: {
+          prefix: '$',
+          separator: ':',
+          suffix: ';'
+        }
+      });
+    }
+  }
+}
+```
+
+Example: https://github.com/amzn/style-dictionary/tree/3.0/examples/advanced/format-helpers
 
 ### Updated format method arguments
 
@@ -258,23 +290,74 @@ You might also notice a new part of the information sent to the formatter method
 
 Previously, there wasn't much convention around adding extra configuration at the platform and file-level for transforms, formats, and actions. We want to start correcting that a bit by using an `options` object at the file and platform level. 
 
+### Custom file headers
+
+When we started Style Dictionary, our intention was that the code it generates would not be checked into version control. To make that very apparent we added a code comment at the top of every built-in format that says it is a generated file with a timestamp of when it was generated. Over the years we have seen many different use-cases and patterns emerge from using Style Dictionary. One of those is actually checking in generated files to version control and using a pull request to review and verify the results. Having a time-stamped comment in generated files now becomes a bit of an obstacle. In the principle of extensibility and customization, you can now define your own file header comments for output files! This allows you to remove the timestamp if you want, write a custom message, use the version number of the package, or even use a hash of the source so that it only changes when the source changes.
+
+You can use the custom file headers on any built-in format, or even use them in a custom format with the formatHelper.fileHeader function.
+
+```javascript
+module.exports = {
+  //...
+  fileHeader: {
+    myFileHeader: (defaultMessage) => {
+      return [
+        ...defaultMessage,
+        'hello, world!'
+      ]
+    }
+  },
+
+  platforms: {
+    css: {
+      transformGroup: `css`,
+      files: [{
+        destination: `variables.css`,
+        format: `css/variables`,
+        fileHeader: `myFileHeader`
+      }]
+    }
+  }
+}
+```
+
+Example: https://github.com/amzn/style-dictionary/tree/3.0/examples/advanced/custom-file-header
+
 ### Typescript typings
 
 https://github.com/amzn/style-dictionary/pull/410
 
-Added typings for Style Dictionary so you can use it in a TypeScript environment now!
+Style Dictionary has Typescript types now! We have added support both for generating typescript files with the typescript/es6-declarations and typescript/module-declarations formats, as well as type definitions for using the Style Dictionary module in a Typescript environment. The source code of Style Dictionary remains in plain Javascript for now, but many people have been wanting to use Style Dictionary in Typescript so as an interim solution we added just the type definitions. As an added bonus, the type definitions also help Javascript Intellisense in VSCode even if you aren't using Typescript in your project!
 
 Thanks [@AndrewLeedham](https://github.com/AndrewLeedham)!
 
-### Formats
+### More built-ins
 
-* [Added 'javascript/module-flat' format](https://github.com/amzn/style-dictionary/pull/457), thanks [@noslouch](https://github.com/noslouch)!
-* [Added 'android/resources' format](https://github.com/amzn/style-dictionary/pull/509)
+We added support for: Jetpack Compose, React Native, and Stylus with built-in transforms, transform groups, and formats. Style Dictionary is built to be customized and extended, so any language or platform can be supported with customization. We do want to offer a core set of generic transforms and formats to get you started so that you don't have to write custom code for everything. If you think we are missing something, please let us know! Here are the formats, transforms, and transformGroups we added in 3.0:
 
-### Transforms
+#### Formats
 
-* [Added 'size/pxToRem' transform](https://github.com/amzn/style-dictionary/pull/491), thanks [@jbarreiros](https://github.com/jbarreiros)!
+* [`javascript/module-flat`](https://github.com/amzn/style-dictionary/pull/457), thanks [@noslouch](https://github.com/noslouch)!
+* [`android/resources`](https://github.com/amzn/style-dictionary/pull/509)
+* [`stylus/variables`](https://github.com/amzn/style-dictionary/pull/527), thanks [@klausbayrhammer](https://github.com/klausbayrhammer)
+* [`compose/object`](https://github.com/amzn/style-dictionary/pull/599), thanks [@bherbst](https://github.com/bherbst)
+* [`typescript/es6-declarations`](https://github.com/amzn/style-dictionary/pull/557), thanks [@Tiamanti](https://github.com/Tiamanti)
+* [`typescript/module-declarations`](https://github.com/amzn/style-dictionary/pull/557), thanks [@Tiamanti](https://github.com/Tiamanti)
+
+#### Transforms
+
+* [`size/pxToRem`](https://github.com/amzn/style-dictionary/pull/491), thanks [@jbarreiros](https://github.com/jbarreiros)!
+* [`size/object`](https://github.com/amzn/style-dictionary/pull/512), thanks [@levi-pires](https://github.com/levi-pires)
+* [`size/compose/remToSP`](https://github.com/amzn/style-dictionary/pull/599), thanks [@bherbst](https://github.com/bherbst)
+* [`size/compose/remToDP`](https://github.com/amzn/style-dictionary/pull/599), thanks [@bherbst](https://github.com/bherbst)
+* [`size/compose/em`](https://github.com/amzn/style-dictionary/pull/599), thanks [@bherbst](https://github.com/bherbst)
+* [`color/composeColor`](https://github.com/amzn/style-dictionary/pull/599), thanks [@bherbst](https://github.com/bherbst)
 * [Made base pixel size configurable](https://github.com/amzn/style-dictionary/pull/505), thanks [@jbarreiros](https://github.com/jbarreiros)!
+
+#### Transform Groups
+
+* [`react-native`](https://github.com/amzn/style-dictionary/pull/512), thanks [@levi-pires](https://github.com/levi-pires)
+* [`compose`](https://github.com/amzn/style-dictionary/pull/599), thanks [@bherbst](https://github.com/bherbst)
 
 ### Bug fixes
 
@@ -291,19 +374,20 @@ Thanks [@AndrewLeedham](https://github.com/AndrewLeedham)!
 
 To have higher confidence in the end-to-end experience of Style Dictionary we have added integration tests that run Style Dictionary as real users would. Integration tests are in **__integration__** and use snapshot testing to ensure the output of Style Dictionary from input, transforms, and formats remains the same and valid output. 
 
-We have also added more unit tests as well for some features we have added and bugs we have found. So far we have added:
-* 11 test suites
-* 84 tests
-* 27 snapshots
+We have also added more unit tests as well for some features we have added and bugs we have found. We added:
+
+* 28 test suites
+* 174 tests
+* 69 snapshots
+
 ### Dropping support for older versions of node
 
 https://github.com/amzn/style-dictionary/pull/441
 
 To be honest, we should have done this way sooner. Those versions of Node are no longer even in long-term support or maintenance. Hopefully this change should not affect anyone as you should all be on more recent versions of Node anyways. 
 
+Style Properties → Design Tokens
 
-### To do
+One last change is Style Dictionary is moving to the term "design tokens", both in documentation and in code. This has become the industry standard term for a while and it is time we respect that. Until now, Style Dictionary had called these "style properties" or just "properties", with some parts of the documentation also mentioning "design tokens". We want to be consistent with the direction of the community as well as in our documentation and code. We use the terms `properties` and `allProperties` in different APIs in Style Dictionary. To be consistent in documentation as well as code, we will be moving to using `tokens` and `allTokens`.
 
-* Use ES6 where possible
-* Better log levels
-* Update documentation
+Don't worry! This change is backwards-compatible; you will still be able to use `properties` and `allProperties` wherever you currently do in your code. If you want, you can update those to tokens and allTokens and everything will work as expected. Moving forward, all examples and documentation will use the term "design tokens" and "tokens" rather than "style properties" and "properties". We do recommend using `tokens` and `allTokens` in new code from here on out!

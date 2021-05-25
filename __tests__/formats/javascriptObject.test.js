@@ -11,35 +11,38 @@
  * and limitations under the License.
  */
 
-var formats = require('../../lib/common/formats');
-var vm = require('vm');
+const formats = require('../../lib/common/formats');
+const vm = require('vm');
+const createDictionary = require('../../lib/utils/createDictionary');
+const createFormatArgs = require('../../lib/utils/createFormatArgs');
 
-var file = {
+const file = {
   "destination": "__output/",
   "format": "javascript/object",
   "name": "foo"
 };
 
-var dictionary = {
-  "properties": {
-    "color": {
-      "red": {"value": "#FF0000"}
-    }
+const properties = {
+  "color": {
+    "red": {"value": "#FF0000"}
   }
 };
 
-var formatter = formats['javascript/object'].bind(file);
+const formatter = formats['javascript/object'].bind(file);
+const dictionary = createDictionary({ properties });
 
 describe('formats', () => {
   describe('javascript/object', () => {
 
-    it('should be valid JS syntax', done => {
-      try {
-        vm.runInNewContext(formatter(dictionary))
-        return done();
-      } catch (err) {
-        return done(new Error(err));
-      }
+    it('should be valid JS syntax', () => {
+      const script = new vm.Script(formatter(createFormatArgs({
+        dictionary,
+        file,
+        platform: {}
+      }), {}, file));
+      const context = {};
+      script.runInNewContext(context);
+      expect(context.foo.color.red.value).toEqual(dictionary.properties.color.red.value);
     });
 
   });

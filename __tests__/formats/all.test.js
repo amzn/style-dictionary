@@ -12,7 +12,9 @@
  */
 
 var formats = require('../../lib/common/formats');
-var _ = require('lodash');
+var createDictionary = require('../../lib/utils/createDictionary');
+var createFormatArgs = require('../../lib/utils/createFormatArgs');
+var _ = require('../../lib/utils/es6_');
 
 var file = {
   "destination": "__output/",
@@ -24,37 +26,21 @@ var file = {
   }
 };
 
-var dictionary = {
-  "allProperties": [{
+var properties = {
+  "color": {
+    "red": {
       value: '#FF0000',
       original: { value: '#FF0000' },
       name: 'color_red',
       comment: 'comment',
       attributes: {
-         category: 'color',
-         type: 'red',
-         item: undefined,
-         subitem: undefined,
-         state: undefined
+          category: 'color',
+          type: 'red',
+          item: undefined,
+          subitem: undefined,
+          state: undefined
       },
       path: ['color','red']
-  }],
-  "properties": {
-    "color": {
-      "red": {
-        value: '#FF0000',
-        original: { value: '#FF0000' },
-        name: 'color_red',
-        comment: 'comment',
-        attributes: {
-           category: 'color',
-           type: 'red',
-           item: undefined,
-           subitem: undefined,
-           state: undefined
-        },
-        path: ['color','red']
-      }
     }
   }
 };
@@ -62,15 +48,13 @@ var dictionary = {
 describe('formats', () => {
   _.each(_.keys(formats), function(key) {
 
-    const constantDate = new Date('2000-01-01');
-    const globalDate = global.Date;
-    global.Date = function() { return constantDate };
-
     var formatter = formats[key].bind(file);
-    var output = formatter(dictionary, file);
-
-    // reset the global Date object
-    global.Date = globalDate;
+    const dictionary = createDictionary({ properties });
+    var output = formatter(createFormatArgs({
+      dictionary,
+      file,
+      platform: {},
+    }), {}, file);
 
     describe('all', () => {
 

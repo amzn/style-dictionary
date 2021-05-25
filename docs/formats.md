@@ -8,13 +8,13 @@ Formats define the output of your created files. For example, to use your styles
 you use the `css/variables` format. This will create a CSS file containing the variables from
 your style dictionary.
 
-### Using formats
+## Using formats
 
 You use formats in your config file under platforms > [platform] > files > [file] > format
 
 ```json
 {
-  "source": ["properties/**/*.json"],
+  "source": ["tokens/**/*.json"],
   "platforms": {
     "css": {
       "transformGroup": "css",
@@ -31,13 +31,13 @@ You use formats in your config file under platforms > [platform] > files > [file
 
 There is an extensive (but not exhaustive) list of [included formats](#pre-defined-formats) available in Style Dictionary.
 
-### Format configuration
+## Format configuration
 
 Formats can take configuration to make them more flexible. This allows you to re-use the same format multiple times with different configurations or to allow the format to use data not defined in the tokens themselves. To configure a format, add extra attributes on the file object in your configuration like the following:
 
 ```json
 {
-  "source": ["properties/**/*.json"],
+  "source": ["tokens/**/*.json"],
   "platforms": {
     "scss": {
       "transformGroup": "scss",
@@ -53,13 +53,13 @@ Formats can take configuration to make them more flexible. This allows you to re
 
 In this example we are adding the `mapName` configuration to the `scss/map-deep` format. This will change the name of the SCSS map in the output. Not all formats have the configuration options; format configuration is defined by the format itself. To see the configurtion options of a format, take a look at the documentation of the [specific format](#pre-defined-formats)
 
-### Filtering tokens
+## Filtering tokens
 
 A special file configuration is `filter`, which will filter the tokens before they get to the format. This allows you to re-use the same format to generate multiple files with different sets of tokens. Filtering tokens works by adding a `filter` attribute on the file object, where `filter` is:
 
 * An object which gets passed to [Lodash's filter method](https://lodash.com/docs/4.17.14#filter).
 * A string that references the name of a registered filter, using the [`registerFilter`](api.md#registerfilter) method
-* A function if you are defining your configuration in Javascript rather than JSON. The filter function takes a token as the property and should return a boolean if the token should be included (true) or excluded (false).
+* A function that takes a token and returns a boolean if the token should be included (true) or excluded (false). **This is only available if you are defining your configuration in Javascript.**
 
 ```javascript
 {
@@ -71,24 +71,554 @@ A special file configuration is `filter`, which will filter the tokens before th
 }
 ```
 
-### Creating formats
+The design token that is passed to the filter function has already been [transformed](transforms.md) and has [default metadata](tokens.md?id=default-design-token-metadata) added by Style Dictionary.
 
-You can create custom formats using the [`registerFormat`](api.md#registerformat) function. If you want to add configuration to your custom format, `this` is bound to the file object. Using this, you can access attributes on the file object with `this.myCustomAttribute` if the file object looks like:
+## References in output files
 
-```json
+Starting with version 3.0, some formats can keep the references in the output. This is a bit hard to explain, so let's look at an example. Say you have this very basic set of design tokens:
+
+```json5
+// tokens.json
 {
-  "destination": "destination",
-  "format": "myCustomFormat",
-  "myCustomAttribute": "Hello world"
+  "color": {
+    "red": { "value": "#ff0000" },
+    "danger": { "value": "{color.red.value}" },
+    "error": { "value": "{color.danger.value}" }
+  }
 }
 ```
 
+With this configuration:
 
-### Using a template / templating engine to create a format
+```json5
+// config.json
+{
+  "source": ["tokens.json"]
+  "platforms": {
+    "css": {
+      "transformGroup": "css",
+      "files": [{
+        "destination": "variables.css",
+        "format": "css/variables",
+        "options": {
+          // Look here 👇
+          "outputReferences": true
+        }
+      }]
+    }
+  }
+}
+```
+
+This would be the output:
+
+```css
+:root {
+  --color-red: #ff0000;
+  --color-danger: var(--color-red);
+  --color-error: var(--color-danger);
+}
+```
+
+The css variables file now keeps the references you have in your Style Dictionary! This is useful for outputting themeable and dynamic code.
+
+Without `outputReferences: true` Style Dictionary would resolve all references and the output would be:
+
+```css
+:root {
+  --color-red: #ff0000;
+  --color-danger: #ff0000;
+  --color-error: #ff0000;
+}
+```
+
+Not all formats use the `outputReferences` option because that file format might not support it (like JSON for example). The current list of formats that handle `outputReferences`:
+
+* [css/variables](#cssvariables)
+* [scss/variables](#scssvariables)
+* [less/variables](#lessvariables)
+* [android/resources](#androidresources)
+* [compose/object](#composeobject)
+* [ios-swift/class.swift](#ios-swiftclassswift)
+* [flutter/class.dart](#flutterclassdart)
+
+You can create custom formats that output references as well. See the [Custom format with output references](#custom-format-with-output-references) section.
+
+## File headers
+
+By default Style Dictionary adds a file header comment in the top of files built using built-in formats like this:
+
+```js
+// Do not edit directly
+// Generated on Sat, 01 Jan 2000 00:00:00 GMT
+```
+
+You can remove these comments with the option: `showFileHeader: false` if you do not want them in your generated files. You can also create your own file header or extend the default one. This could be useful if you want to put a version number or hash of the source files rather than a timestamp.
+
+Custom file headers can be added the same way you would add a custom format, either by using the [`registerFileHeader`](api.md#registerfileheader) function or adding the fileHeader object directly in the Style Dictionary [configuration](config.md). Your custom file header can be used in built-in formats as well as custom formats. To use a custom file header in a custom format see the [`fileHeader`](formats.md#fileheader) format helper method.
+
+```js
+const StyleDictionary = require('style-dictionary');
+StyleDictionary.registerFileHeader({
+  name: 'myCustomHeader',
+  fileHeader: (defaultMessage) => {
+    // defaultMessage are the 2 lines above that appear in the default file header
+    // you can use this to add a message before or after the default message 👇
+
+    // the fileHeader function should return an array of strings
+    // which will be formatted in the proper comment style for a given format
+    return [
+      ...defaultMessage,
+      `hello?`,
+      `is it me you're looking for?`,
+    ]
+  }
+});
+```
+
+Then you can use your custom file header in a file similar to a custom format:
+
+```json5
+{
+  source: ['tokens/**/*.json'],
+  platforms: {
+    css: {
+      transformGroup: 'css',
+      files: [{
+        destination: 'variables.css',
+        format: 'css/variables',
+        options: {
+          fileHeader: 'myCustomHeader'
+        }
+      }]
+    }
+  }
+}
+```
+
+Which should output a file that will start like this:
+
+```css
+/**
+ * Do not edit directly
+ * Generated on Thu, 18 Mar 2021 21:30:47 GMT
+ * hello?
+ * is it me you're looking for?
+ */
+```
+
+For an in-depth example see the [custom-file-header](https://github.com/amzn/style-dictionary/examples/advanced/custom-file-header) example.
+
+## Custom formats
+
+You can create custom formats using the [`registerFormat`](api.md#registerformat) function or by directly including them in your [configuration](config.md). A format has a name and a formatter function, which takes an object as the argument and should return a string which is then written to a file.
+
+### formatter 
+> format.formatter(args) ⇒ <code>String</code>
+
+The formatter function that is called when Style Dictionary builds files.
+
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>args</td><td><code>Object</code></td><td><p>A single argument to support named parameters and destructuring.</p>
+</td>
+    </tr><tr>
+    <td>args.dictionary</td><td><code>Object</code></td><td><p>The transformed and resolved dictionary object</p>
+</td>
+    </tr><tr>
+    <td>args.dictionary.tokens</td><td><code>Object</code></td><td><p>Object structure of the tokens that has been transformed and references resolved.</p>
+</td>
+    </tr><tr>
+    <td>args.dictionary.allTokens</td><td><code>Array</code></td><td><p>Flattened array of all the tokens. This makes it easy to output a list, like a list of SCSS variables.</p>
+</td>
+    </tr><tr>
+    <td>args.dictionary.usesReference</td><td><code>function</code></td><td><p>Use this function to see if a token&#39;s value uses a reference. This is the same function style dictionary uses internally to detect a reference.</p>
+</td>
+    </tr><tr>
+    <td>args.dictionary.getReferences</td><td><code>function</code></td><td><p>Use this function to get the tokens that it references. You can use this to output a reference in your custom format. For example: <code>dictionary.getReferences(token.original.value) // returns an array of the referenced token objects</code></p>
+</td>
+    </tr><tr>
+    <td>args.platform</td><td><code>Object</code></td><td><p>The platform configuration this format is being called in.</p>
+</td>
+    </tr><tr>
+    <td>args.file</td><td><code>Object</code></td><td><p>The file configuration this format is being called in.</p>
+</td>
+    </tr><tr>
+    <td>args.options</td><td><code>Object</code></td><td><p>Merged options object that combines platform level configuration and file level configuration. File options take precedence.</p>
+</td>
+    </tr>  </tbody>
+</table>
+
+**Example**  
+```js
+StyleDictionary.registerFormat({
+  name: 'myCustomFormat',
+  formatter: function({dictionary, platform, options, file}) {
+    return JSON.stringify(dictionary.tokens, null, 2);
+  }
+})
+```
+
+* * *
+
+
+To use your custom format, you call it by name in the file configuration object:
+
+```json
+{
+  "source": ["tokens/**/*.json"],
+  "platforms": {
+    "css": {
+      "options": {
+        "showFileHeader": true
+      },
+      "transformGroup": "css",
+      "files": [{
+        "destination": "destination",
+        "format": "myCustomFormat",
+        "options": {
+          "showFileHeader": false
+        }
+      }]
+    }
+  }
+}
+```
+
+It is recommended for any configuration needed for your custom format to use the `options` object. Style Dictionary will merge platform and file options so that in your Style Dictionary configuration you can specify options at a platform or file level. In the configuration above, the `options` object passed to the formatter would have `showFileHeader: false`.
+
+<div class="alert">
+Note: to support legacy ways of defining custom formats, <code>this</code> in the formatter function is bound to the file object and when Style Dictionary calls the formatter function it passes 3 arguments: dictionary, platform, and file. Starting in 3.0 all data the formatter needs is in the first argument as shown above to make it easier to grab the arguments by name rather than by position. We recommend not using <code>this</code> or the positional arguments in your custom format.
+</div>
+
+## Custom format with output references
+
+To take advantage of outputting references in your custom formats there are 2 helper methods in the `dictionary` argument passed to your formatter function: `usesReference(value)` and `getReferences(value)`. Here is an example using those:
+
+```javascript
+StyleDictionary.registerFormat({
+  name: `es6WithReferences`,
+  formatter: function({dictionary}) {
+    return dictionary.allTokens.map(token => {
+      let value = JSON.stringify(token.value);
+      // the `dictionary` object now has `usesReference()` and
+      // `getReferences()` methods. `usesReference()` will return true if
+      // the value has a reference in it. `getReferences()` will return
+      // an array of references to the whole tokens so that you can access its
+      // name or any other attributes.
+      if (dictionary.usesReference(token.original.value)) {
+        // Note: make sure to use `token.original.value` because
+        // `token.value` is already resolved at this point.
+        const reference = dictionary.getReferences(token.original.value);
+        value = reference.name;
+      }
+      return `export const ${token.name} = ${value};`
+    }).join(`\n`)
+  }
+});
+```
+
+## Custom format helpers
+
+We provide some helper methods we use internally in some of the built-in formats to make building custom formats a bit easier. They are accessible at `StyleDictionary.formatHelpers`.
+
+```javascript
+const StyleDictionary = require('style-dictionary');
+
+const { fileHeader, formattedVariables } = StyleDictionary.formatHelpers;
+
+StyleDictionary.registerFormat({
+  name: 'myCustomFormat',
+  formatter: function({dictionary, file, options}) {
+    const { outputReferences } = options;
+    return fileHeader({file}) +
+      ':root {\n' +
+      formattedVariables({format: 'css', dictionary, outputReferences}) +
+      '\n}\n';
+  }
+});
+```
+
+Here are the available format helper methods:
+
+### createPropertyFormatter 
+> formatHelpers.createPropertyFormatter(options) ⇒ <code>function</code>
+
+Creates a function that can be used to format a property. This can be useful
+to use as the function on `dictionary.allTokens.map`. The formatting
+is configurable either by supplying a `format` option or a `formatting` object
+which uses: prefix, indentation, separator, suffix, and commentStyle.
+
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>options</td><td><code>Object</code></td><td></td>
+    </tr><tr>
+    <td>options.outputReferences</td><td><code>Boolean</code></td><td><p>Whether or not to output references. You will want to pass this from the <code>options</code> object sent to the formatter function.</p>
+</td>
+    </tr><tr>
+    <td>options.dictionary</td><td><code>Dictionary</code></td><td><p>The dictionary object sent to the formatter function</p>
+</td>
+    </tr><tr>
+    <td>options.format</td><td><code>String</code></td><td><p>Available formats are: &#39;css&#39;, &#39;sass&#39;, &#39;less&#39;, and &#39;stylus&#39;. If you want to customize the format and can&#39;t use one of those predefined formats, use the <code>formatting</code> option</p>
+</td>
+    </tr><tr>
+    <td>options.formatting</td><td><code>Object</code></td><td><p>Custom formatting properties that define parts of a declaration line in code. The configurable strings are: prefix, indentation, separator, suffix, and commentStyle. Those are used to generate a line like this: <code>${indentation}${prefix}${prop.name}${separator} ${prop.value}${suffix}</code></p>
+</td>
+    </tr>  </tbody>
+</table>
+
+**Example**  
+```javascript
+StyleDictionary.registerFormat({
+  name: 'myCustomFormat',
+  formatter: function({ dictionary, options }) {
+    const { outputReferences } = options;
+    const formatProperty = createPropertyFormatter({
+      outputReferences,
+      dictionary,
+      format: 'css'
+    });
+    return dictionary.allTokens.map(formatProperty).join('\n');
+  }
+});
+```
+
+* * *
+
+### fileHeader 
+> formatHelpers.fileHeader(options) ⇒ <code>String</code>
+
+This is for creating the comment at the top of generated files with the generated at date.
+It will use the custom file header if defined on the configuration, or use the
+default file header.
+
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>options</td><td><code>Object</code></td><td></td>
+    </tr><tr>
+    <td>options.file</td><td><code>File</code></td><td><p>The file object that is passed to the formatter.</p>
+</td>
+    </tr><tr>
+    <td>options.commentStyle</td><td><code>String</code></td><td><p>The only options are &#39;short&#39; and &#39;xml&#39;, which will use the // or &lt;!-- --&gt; style comments respectively. Anything else will use /* style comments.</p>
+</td>
+    </tr><tr>
+    <td>options.formatting</td><td><code>Object</code></td><td><p>Custom formatting properties that define parts of a comment in code. The configurable strings are: prefix, lineSeparator, header, and footer.</p>
+</td>
+    </tr>  </tbody>
+</table>
+
+**Example**  
+```js
+StyleDictionary.registerFormat({
+  name: 'myCustomFormat',
+  formatter: function({ dictionary, file }) {
+    return fileHeader({file, 'short') +
+      dictionary.allTokens.map(token => `${token.name} = ${token.value}`)
+        .join('\n');
+  }
+});
+```
+
+* * *
+
+### formattedVariables 
+> formatHelpers.formattedVariables(options) ⇒ <code>String</code>
+
+This is used to create lists of variables like Sass variables or CSS custom properties
+
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>options</td><td><code>Object</code></td><td></td>
+    </tr><tr>
+    <td>options.format</td><td><code>String</code></td><td><p>What type of variables to output. Options are: css, sass, less, and stylus</p>
+</td>
+    </tr><tr>
+    <td>options.dictionary</td><td><code>Object</code></td><td><p>The dictionary object that gets passed to the formatter method.</p>
+</td>
+    </tr><tr>
+    <td>options.outputReferences</td><td><code>Boolean</code></td><td><p>Whether or not to output references</p>
+</td>
+    </tr><tr>
+    <td>options.formatting</td><td><code>Object</code></td><td><p>Custom formatting properties that define parts of a declaration line in code. This will get passed to <code>formatHelpers.createPropertyFormatter</code> and used for the <code>lineSeparator</code> between lines of code.</p>
+</td>
+    </tr>  </tbody>
+</table>
+
+**Example**  
+```js
+StyleDictionary.registerFormat({
+  name: 'myCustomFormat',
+  formatter: function({ dictionary, options }) {
+    return formattedVariables('less', dictionary, options.outputReferences);
+  }
+});
+```
+
+* * *
+
+### iconsWithPrefix 
+> formatHelpers.iconsWithPrefix(prefix, allTokens, options) ⇒ <code>String</code>
+
+This is used to create CSS (and CSS pre-processor) lists of icons. It assumes you are
+using an icon font and creates helper classes with the :before pseudo-selector to add
+a unicode character.
+__You probably don't need this.__
+
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>prefix</td><td><code>String</code></td><td><p>Character to prefix variable names, like &#39;$&#39; for Sass</p>
+</td>
+    </tr><tr>
+    <td>allTokens</td><td><code>Array.&lt;Token&gt;</code></td><td><p>allTokens array on the dictionary object passed to the formatter function.</p>
+</td>
+    </tr><tr>
+    <td>options</td><td><code>Object</code></td><td><p>options object passed to the formatter function.</p>
+</td>
+    </tr>  </tbody>
+</table>
+
+**Example**  
+```js
+StyleDictionary.registerFormat({
+  name: 'myCustomFormat',
+  formatter: function({ dictionary, options }) {
+    return iconsWithPrefix('$', dictionary.allTokens, options);
+  }
+});
+```
+
+* * *
+
+### minifyDictionary 
+> formatHelpers.minifyDictionary(obj) ⇒ <code>Object</code>
+
+Outputs an object stripping out everything except values
+
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>obj</td><td><code>Object</code></td><td><p>The object to minify. You will most likely pass <code>dictionary.tokens</code> to it.</p>
+</td>
+    </tr>  </tbody>
+</table>
+
+**Example**  
+```js
+StyleDictionary.registerFormat({
+  name: 'myCustomFormat',
+  formatter: function({ dictionary }) {
+    return JSON.stringify(minifyDictionary(dictionary.tokens));
+  }
+});
+```
+
+* * *
+
+### sortByName 
+> formatHelpers.sortByName(a, b) ⇒ <code>Integer</code>
+
+A sorting function to be used when iterating over `dictionary.allTokens` in
+a format.
+
+**Returns**: <code>Integer</code> - -1 or 1 depending on which element should come first based on https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort  
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>a</td><td><code>*</code></td><td><p>first element for comparison</p>
+</td>
+    </tr><tr>
+    <td>b</td><td><code>*</code></td><td><p>second element for comparison</p>
+</td>
+    </tr>  </tbody>
+</table>
+
+**Example**  
+```javascript
+StyleDictionary.registerFormat({
+  name: 'myCustomFormat',
+  formatter: function({ dictionary, options }) {
+    return dictionary.allTokens.sort(sortByName)
+      .map(token => `${token.name} = ${token.value}`)
+      .join('\n');
+  }
+});
+```
+
+* * *
+
+### sortByReference 
+> formatHelpers.sortByReference(dictionary) ⇒ <code>function</code>
+
+A function that returns a sorting function to be used with Array.sort that
+will sort the allTokens array based on references. This is to make sure
+if you use output references that you never use a reference before it is
+defined.
+
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>dictionary</td><td><code>Dictionary</code></td>
+    </tr>  </tbody>
+</table>
+
+**Example**  
+```javascript
+dictionary.allTokens.sort(sortByReference(dictionary))
+```
+
+* * *
+
+
+## Using a template / templating engine to create a format
 
 Formatters are functions and created easily with most templating engines. Formats can be built using templates if there is a lot of boilerplate code to insert (e.g. ObjectiveC files). If the output consists of only the values (e.g. a flat SCSS variables file), writing a formatter function directly may be easier.
 
-Any templating language can work as there is a node module for it. All you need to do is register a format that calls your template and returns a string.
+Any templating language can work as long as there is a node module for it. All you need to do is register a format that calls your template and returns a string.
 
 Here is a quick example for Lodash.
 
@@ -116,9 +646,9 @@ const template = Handlebars.compile( fs.readFileSync('templates/MyTemplate.hbs')
 
 styleDictionary.registerFormat({
   name: 'my/format',
-  formatter: function(dictionary, platform) {
+  formatter: function({dictionary, platform}) {
     return template({
-      properties: dictionary.properties,
+      tokens: dictionary.tokens,
       options: platform
     });
   }
@@ -131,7 +661,7 @@ styleDictionary.registerFormat({
 
 ## Pre-defined Formats
 
-These are the formats included in Style Dictionary by default, pulled from [lib/common/formats.js](https://github.com/amzn/style-dictionary/blob/master/lib/common/formats.js)
+These are the formats included in Style Dictionary by default, pulled from [lib/common/formats.js](https://github.com/amzn/style-dictionary/blob/main/lib/common/formats.js)
 
 Want a format? [You can request it here](https://github.com/amzn/style-dictionary/issues).
 
@@ -142,6 +672,24 @@ You created a format and think it should be included? [Send us a PR](https://git
 
 
 Creates a CSS file with variable definitions based on the style dictionary
+
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Default</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>options</td><td><code>Object</code></td><td></td><td></td>
+    </tr><tr>
+    <td>[options.showFileHeader]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not to include a comment that has the build date</p>
+</td>
+    </tr><tr>
+    <td>[options.outputReferences]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to keep <a href="/#/formats?id=references-in-output-files">references</a> (a -&gt; b -&gt; c) in the output.</p>
+</td>
+    </tr>  </tbody>
+</table>
 
 **Example**  
 ```css
@@ -197,12 +745,32 @@ $tokens: {
 ### scss/variables 
 
 
-Creates a SCSS file with variable definitions based on the style dictionary
+Creates a SCSS file with variable definitions based on the style dictionary.
+
+Add `!default` to any variable by setting a `themeable: true` attribute in the token's definition.
+
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Default</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>options</td><td><code>Object</code></td><td></td><td></td>
+    </tr><tr>
+    <td>[options.showFileHeader]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not to include a comment that has the build date</p>
+</td>
+    </tr><tr>
+    <td>[options.outputReferences]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to keep <a href="/#/formats?id=references-in-output-files">references</a> (a -&gt; b -&gt; c) in the output.</p>
+</td>
+    </tr>  </tbody>
+</table>
 
 **Example**  
 ```scss
 $color-background-base: #f0f0f0;
-$color-background-alt: #eeeeee;
+$color-background-alt: #eeeeee !default;
 ```
 
 * * *
@@ -225,6 +793,24 @@ $content-icon-email: '\E001';
 
 Creates a LESS file with variable definitions based on the style dictionary
 
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Default</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>options</td><td><code>Object</code></td><td></td><td></td>
+    </tr><tr>
+    <td>[options.showFileHeader]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not to include a comment that has the build date</p>
+</td>
+    </tr><tr>
+    <td>[options.outputReferences]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to keep <a href="/#/formats?id=references-in-output-files">references</a> (a -&gt; b -&gt; c) in the output.</p>
+</td>
+    </tr>  </tbody>
+</table>
+
 **Example**  
 ```less
 @color-background-base: #f0f0f0;
@@ -246,6 +832,19 @@ Creates a LESS file with variable definitions and helper classes for icons
 
 * * *
 
+### stylus/variables 
+
+
+Creates a Stylus file with variable definitions based on the style dictionary
+
+**Example**  
+```stylus
+$color-background-base= #f0f0f0;
+$color-background-alt= #eeeeee;
+```
+
+* * *
+
 ### javascript/module 
 
 
@@ -257,10 +856,24 @@ module.exports = {
   color: {
     base: {
        red: {
-         value: '#ff000'
+         value: '#ff0000'
        }
     }
   }
+}
+```
+
+* * *
+
+### javascript/module-flat 
+
+
+Creates a CommonJS module with the whole style dictionary flattened to a single level.
+
+**Example**  
+```js
+module.exports = {
+ "ColorBaseRed": "#ff0000"
 }
 ```
 
@@ -278,7 +891,7 @@ var StyleDictionary = {
   color: {
     base: {
        red: {
-         value: '#ff000'
+         value: '#ff0000'
        }
     }
   }
@@ -353,10 +966,151 @@ export const ColorBackgroundAlt = '#fcfcfcfc';
 
 * * *
 
+### typescript/es6-declarations 
+
+
+Creates TypeScript declarations for ES6 modules
+
+```json
+{
+  "platforms": {
+    "ts": {
+      "transformGroup": "js",
+      "files": [
+        {
+          "format": "javascript/es6",
+          "destination": "colors.js"
+        },
+        {
+          "format": "typescript/es6-declarations",
+          "destination": "colors.d.ts"
+        }
+      ]
+    }
+  }
+}
+```
+
+**Example**  
+```typescript
+export const ColorBackgroundBase : string;
+export const ColorBackgroundAlt : string;
+```
+
+* * *
+
+### typescript/module-declarations 
+
+
+Creates TypeScript declarations for CommonJS module
+
+```json
+{
+  "platforms": {
+    "ts": {
+      "transformGroup": "js",
+      "files": [
+        {
+          "format": "javascript/module",
+          "destination": "colors.js"
+        },
+        {
+          "format": "typescript/module-declarations",
+          "destination": "colors.d.ts"
+        }
+      ]
+    }
+  }
+}
+```
+
+**Example**  
+```typescript
+export default tokens;
+declare interface DesignToken { value: string; name?: string; path?: string[]; comment?: string; attributes?: any; original?: any; }
+declare const tokens: {
+ "color": {
+   "red": DesignToken
+ }
+}
+```
+
+As you can see above example output this does not generate 100% accurate d.ts.
+This is a compromise between of what style-dictionary can do to help and not bloating the library with rarely used dependencies.
+
+Thankfully you can extend style-dictionary very easily:
+
+```js
+const JsonToTS = require('json-to-ts');
+StyleDictionaryPackage.registerFormat({
+  name: 'typescript/accurate-module-declarations',
+  formatter: function(dictionary) {
+    return 'declare const root: RootObject\n' +
+    'export default root\n' +
+    JsonToTS(dictionary.properties).join('\n');
+  },
+});
+```
+
+* * *
+
+### android/resources 
+
+
+Creates a [resource](https://developer.android.com/guide/topics/resources/providing-resources) xml file. It is recommended to use a filter with this format
+as it is generally best practice in Android development to have resource files
+organized by type (color, dimension, string, etc.). However, a resource file
+with mixed resources will still work.
+
+This format will try to use the proper resource type for each token based on
+the category (color => color, size => dimen, etc.). However if you want to
+force a particular resource type you can provide a 'resourceType' attribute
+on the file configuration. You can also provide a 'resourceMap' if you
+don't use Style Dictionary's built-in CTI structure.
+
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Default</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>options</td><td><code>Object</code></td><td></td><td></td>
+    </tr><tr>
+    <td>[options.showFileHeader]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not to include a comment that has the build date</p>
+</td>
+    </tr><tr>
+    <td>[options.outputReferences]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to keep <a href="/#/formats?id=references-in-output-files">references</a> (a -&gt; b -&gt; c) in the output.</p>
+</td>
+    </tr>  </tbody>
+</table>
+
+**Example**  
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+ <color name="color_base_red_5">#fffaf3f2</color>
+ <color name="color_base_red_30">#fff0cccc</color>
+ <dimen name="size_font_base">14sp</color>
+```
+
+* * *
+
 ### android/colors 
 
 
 Creates a color resource xml file with all the colors in your style dictionary.
+
+It is recommended to use the 'android/resources' format with a custom filter
+instead of this format:
+
+```javascript
+format: 'android/resources',
+filter: {
+  attributes: { category: 'color' }
+}
+```
 
 **Example**  
 ```xml
@@ -374,6 +1128,16 @@ Creates a color resource xml file with all the colors in your style dictionary.
 
 Creates a dimen resource xml file with all the sizes in your style dictionary.
 
+It is recommended to use the 'android/resources' format with a custom filter
+instead of this format:
+
+```javascript
+format: 'android/resources',
+filter: {
+  attributes: { category: 'size' }
+}
+```
+
 **Example**  
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -390,6 +1154,16 @@ Creates a dimen resource xml file with all the sizes in your style dictionary.
 
 Creates a dimen resource xml file with all the font sizes in your style dictionary.
 
+It is recommended to use the 'android/resources' format with a custom filter
+instead of this format:
+
+```javascript
+format: 'android/resources',
+filter: {
+  attributes: { category: 'size' }
+}
+```
+
 **Example**  
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -405,7 +1179,17 @@ Creates a dimen resource xml file with all the font sizes in your style dictiona
 
 
 Creates a resource xml file with all the integers in your style dictionary. It filters your
-style properties by `prop.attributes.category === 'time'`
+design tokens by `token.attributes.category === 'time'`
+
+It is recommended to use the 'android/resources' format with a custom filter
+instead of this format:
+
+```javascript
+format: 'android/resources',
+filter: {
+  attributes: { category: 'time' }
+}
+```
 
 **Todo**
 
@@ -426,7 +1210,17 @@ style properties by `prop.attributes.category === 'time'`
 
 
 Creates a resource xml file with all the strings in your style dictionary. Filters your
-style properties by `prop.attributes.category === 'content'`
+design tokens by `token.attributes.category === 'content'`
+
+It is recommended to use the 'android/resources' format with a custom filter
+instead of this format:
+
+```javascript
+format: 'android/resources',
+filter: {
+  attributes: { category: 'content' }
+}
+```
 
 **Example**  
 ```xml
@@ -439,10 +1233,52 @@ style properties by `prop.attributes.category === 'content'`
 
 * * *
 
+### compose/object 
+
+
+Creates a Kotlin file for Compose containing an object with a `val` for each property.
+
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Default</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>className</td><td><code>String</code></td><td></td><td><p>The name of the generated Kotlin object</p>
+</td>
+    </tr><tr>
+    <td>packageName</td><td><code>String</code></td><td></td><td><p>The package for the generated Kotlin object</p>
+</td>
+    </tr><tr>
+    <td>options</td><td><code>Object</code></td><td></td><td></td>
+    </tr><tr>
+    <td>[options.showFileHeader]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not to include a comment that has the build date</p>
+</td>
+    </tr><tr>
+    <td>[options.outputReferences]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to keep <a href="/#/formats?id=references-in-output-files">references</a> (a -&gt; b -&gt; c) in the output.</p>
+</td>
+    </tr>  </tbody>
+</table>
+
+**Example**  
+```kotlin
+package com.example.tokens;
+
+import androidx.compose.ui.graphics.Color
+
+object StyleDictionary {
+ val colorBaseRed5 = Color(0xFFFAF3F2)
+}
+```
+
+* * *
+
 ### ios/macros 
 
 
-Creates an Objective-C header file with macros for style properties
+Creates an Objective-C header file with macros for design tokens
 
 **Example**  
 ```objectivec
@@ -568,10 +1404,30 @@ Creates an Objective-C implementation file of strings
 
 Creates a Swift implementation file of a class with values
 
-**Todo**
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Default</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>options</td><td><code>Object</code></td><td></td><td></td>
+    </tr><tr>
+    <td>[options.showFileHeader]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not to include a comment that has the build date</p>
+</td>
+    </tr><tr>
+    <td>[options.outputReferences]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to keep <a href="/#/formats?id=references-in-output-files">references</a> (a -&gt; b -&gt; c) in the output.</p>
+</td>
+    </tr>  </tbody>
+</table>
 
-- Add example and usage
-
+**Example**  
+```swift
+public class StyleDictionary {
+  public static let colorBackgroundDanger = UIColor(red: 1.000, green: 0.918, blue: 0.914, alpha:1)
+}
+```
 
 * * *
 
@@ -610,7 +1466,7 @@ Creates a JSON file of the style dictionary.
   "color": {
     "base": {
        "red": {
-         "value": "#ff000"
+         "value": "#ff0000"
        }
     }
   }
@@ -649,7 +1505,7 @@ Creates a JSON nested file of the style dictionary.
 {
   "color": {
     "base": {
-       "red": "#ff000"
+       "red": "#ff0000"
     }
   }
 }
@@ -665,7 +1521,7 @@ Creates a JSON flat file of the style dictionary.
 **Example**  
 ```json
 {
-  "color-base-red": "#ff000"
+  "color-base-red": "#ff0000"
 }
 ```
 
@@ -717,6 +1573,24 @@ the sketchpalette plugin. To use this you should use the
 
 
 Creates a Dart implementation file of a class with values
+
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Default</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>options</td><td><code>Object</code></td><td></td><td></td>
+    </tr><tr>
+    <td>[options.showFileHeader]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not to include a comment that has the build date</p>
+</td>
+    </tr><tr>
+    <td>[options.outputReferences]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to keep <a href="/#/formats?id=references-in-output-files">references</a> (a -&gt; b -&gt; c) in the output.</p>
+</td>
+    </tr>  </tbody>
+</table>
 
 **Example**  
 ```dart

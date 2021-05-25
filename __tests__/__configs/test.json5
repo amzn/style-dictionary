@@ -84,5 +84,15 @@
         },
       ],
     },
+    'react-native': {
+      transformGroup: 'react-native',
+      buildPath: '__tests__/__output/react-native/',
+      files: [
+        {
+          destination: 'style_dictionary.js',
+          format: 'javascript/es6'
+        }
+      ]
+    }
   },
 }

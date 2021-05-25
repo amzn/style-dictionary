@@ -13,6 +13,9 @@
 
 var formats = require('../../lib/common/formats');
 var scss = require('node-sass');
+const createDictionary = require('../../lib/utils/createDictionary');
+const createFormatArgs = require('../../lib/utils/createFormatArgs');
+var _ = require('../../lib/utils/es6_');
 
 var file = {
   "destination": "__output/",
@@ -20,47 +23,73 @@ var file = {
   "name": "foo"
 };
 
-var propertyName = "color-base-red-400";
-var propertyValue = "#EF5350";
+const propertyName = "color-base-red-400";
+const propertyValue = "#EF5350";
 
-var dictionary = {
-  "allProperties": [{
-    "name": propertyName,
-    "value": propertyValue,
-    "original": {
-      "value": propertyValue
-    },
-    "attributes": {
-      "category": "color",
-      "type": "base",
-      "item": "red",
-      "subitem": "400"
-    },
-    "path": [
-      "color",
-      "base",
-      "red",
-      "400"
-    ]
-  }]
+const properties = {
+  color: {
+    base: {
+      red: {
+        400: {
+          "name": propertyName,
+          "value": propertyValue,
+          "original": {
+            "value": propertyValue
+          },
+          "attributes": {
+            "category": "color",
+            "type": "base",
+            "item": "red",
+            "subitem": "400"
+          },
+          "path": [
+            "color",
+            "base",
+            "red",
+            "400"
+          ]
+        }
+      }
+    }
+  }
 };
 
 var formatter = formats['scss/variables'].bind(file);
+const dictionary = createDictionary({properties});
 
 describe('formats', () => {
   describe('scss/variables', () => {
 
-    it('should have a valid scss syntax', done => {
-      scss.render({
-        data: formatter(dictionary),
-      }, function(err, result) {
-        if(err) {
-          return done(new Error(err));
-        }
-        expect(result.css).toBeDefined();
-        return done();
+    it('should have a valid scss syntax', () => {
+      const result = scss.renderSync({
+        data: formatter(createFormatArgs({
+          dictionary,
+          file,
+          platform: {}
+        }), {}, file),
       });
+      expect(result.css).toBeDefined();
     });
 
+    it('should optionally use !default', () => {
+      var themeableDictionary = _.cloneDeep(dictionary),
+        formattedScss = formatter(createFormatArgs({
+          dictionary,
+          file,
+          platform: {}
+        }), {}, file),
+        themeableScss = "";
+
+      expect(formattedScss).not.toMatch("!default");
+
+      themeableDictionary.allTokens[0].themeable = true;
+      themeableScss = formatter(createFormatArgs({
+        dictionary: themeableDictionary,
+        file,
+        platform: {}
+      }), {}, file);
+
+      expect(themeableScss).toMatch("#EF5350 !default;");
+    });
   });
 });

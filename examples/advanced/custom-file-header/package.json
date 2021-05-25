@@ -1,0 +1,15 @@
+{
+  "name": "custom-file-header",
+  "version": "1.0.0",
+  "description": "",
+  "main": "sd.config.js",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "style-dictionary": "3.0.0-rc.10"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  hue: {
+    red: 0,
+    orange: 25,
+    yellow: 50,
+    lime: 75,
+    green: 125,
+    teal: 175,
+    blue: 225,
+    purple: 275,
+    pink: 325
+  }
+}

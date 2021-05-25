@@ -1,0 +1,18 @@
+{
+  "size": {
+    "font": {
+      "sm": {
+        "value": "16px",
+        "attributes": {
+          "category": "size"
+        }
+      },
+      "md": {
+        "value": "2rem",
+        "attributes": {
+          "category": "size"
+        }
+      }
+    }
+  }
+}

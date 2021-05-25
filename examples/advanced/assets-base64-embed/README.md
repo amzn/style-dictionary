@@ -2,7 +2,7 @@
 
 This example shows how it's possible to embed and distribute assets – like **images, icons and fonts** – directly as design tokens.
 
-This means that you can centralise all your "core" design values in one single place and one single format, and make their distribution (and consumption) much easier.
+This means that you can centralize all your "core" design values in one single place and one single format, and make their distribution (and consumption) much easier.
 
 #### Running the example
 
@@ -12,7 +12,7 @@ At this point, run `npm run build`. This command will generate the files in the 
 
 #### How does it work
 
-In Style Dictionary it is possible to associate to the `value` of a property the path of a file. During the build process, the property is processed and the asset converted to a **base64 string**. In this way the asset can be distributed **embedded** in an output file that has a pre-defined format of your choice (JSON, JS, Sass, XML, PLIST, etc), and this can be then later consumed directly in your application or website.
+In Style Dictionary it is possible to associate to the `value` of a token the path of a file. During the build process, the token is processed and the asset converted to a **base64 string**. In this way the asset can be distributed **embedded** in an output file that has a pre-defined format of your choice (JSON, JS, Sass, XML, PLIST, etc), and this can be then later consumed directly in your application or website.
 
 For example, in **JavaScript** this code:
 
@@ -54,7 +54,7 @@ Open the `config.json` file and see how all the "assets/embed/*" platform blocks
       ...
 ```
 
-Here there are **three specific transforms**: *attribute/cti* to assign the Category/Type/Item attributes to the tokens, *name/cti/kebab* to assign them the correct name, and finally *asset/base64* to take the path declared in the "value" of the properties, convert the file at that path in base64 format, and assign the output of the base64 conversion to the "value" of the property.
+Here there are **three specific transforms**: *attribute/cti* to assign the Category/Type/Item attributes to the tokens, *name/cti/kebab* to assign them the correct name, and finally *asset/base64* to take the path declared in the "value" of the tokens, convert the file at that path in base64 format, and assign the output of the base64 conversion to the "value" of the token.
 
 If you take for example the file `assets/icons.json` you will see this declaration:
 
@@ -64,7 +64,7 @@ If you take for example the file `assets/icons.json` you will see this declarati
       "alert-circle": { "value": "assets/icons/alert-circle.svg" }
 
 ```
-where the value of the `alert-circle` property is a path that points to the `alert-circle.svg` file in the `assets/icons/` folder.
+where the value of the `alert-circle` token is a path that points to the `alert-circle.svg` file in the `assets/icons/` folder.
 
 Now, `build` the dictionary and open the generated file `build/scss/assets_icons.scss`, and you will see this result:
 

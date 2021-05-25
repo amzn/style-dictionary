@@ -1,6 +1,6 @@
 {
   "source": [
-    "properties/**/*.json"
+    "tokens/**/*.json"
   ],
   "platforms": {
     "ios": {

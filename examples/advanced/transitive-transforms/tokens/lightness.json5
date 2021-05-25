@@ -1,0 +1,18 @@
+{
+  // Because these are not like a token object with a 'value' attribute,
+  // Style Dictionary won't consider them tokens and therefore won't output them.
+  // But, you can still access/reference them in tokens using the same reference
+  // syntax: "value": "{lightness.0}"
+  // This can be used when defining colors as HSL:
+  // "value": {"h": "{hue.red}", "l": "{lightness.0}", "s": "{saturation.0}"}
+  lightness: [
+    96,
+    90,
+    77,
+    67,
+    63,
+    58,
+    55,
+    50
+  ]
+}

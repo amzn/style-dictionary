@@ -1,4 +1,4 @@
-<% _.each(allProperties, function(prop) {
+<% _.each(allTokens, function(prop) {
     var output = "";
     if(prop.deprecated) {
     output += "// Notice: the following value is deprecated";

@@ -53,6 +53,20 @@ exports[`formats all should match android/integers snapshot 1`] = `
 "
 `;
 
+exports[`formats all should match android/resources snapshot 1`] = `
+"<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
+
+<!--
+  Do not edit directly
+  Generated on Sat, 01 Jan 2000 00:00:00 GMT
+-->
+<resources>
+  <color name=\\"color_red\\">#FF0000</color><!-- comment -->
+  
+</resources>
+"
+`;
+
 exports[`formats all should match android/strings snapshot 1`] = `
 "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
 
@@ -63,6 +77,27 @@ exports[`formats all should match android/strings snapshot 1`] = `
 <resources>
   
 </resources>
+"
+`;
+
+exports[`formats all should match compose/object snapshot 1`] = `
+"
+
+// Do not edit directly
+// Generated on Sat, 01 Jan 2000 00:00:00 GMT
+
+
+
+package ;
+
+
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.*
+
+object  {
+  /** comment */
+  val color_red = #FF0000
+}
 "
 `;
 
@@ -88,17 +123,18 @@ exports[`formats all should match flutter/class.dart snapshot 1`] = `
 //
 // __output/
 //
+
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
-//
+
 
 
 import 'dart:ui';
 
 class  {
   ._();
-  
-    static const color_red = #FF0000;
+
+    static const color_red = #FF0000; /* comment */
 }"
 `;
 
@@ -107,12 +143,12 @@ exports[`formats all should match ios/colors.h snapshot 1`] = `
 //
 // __output/
 //
+
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
-//
+
 
 #import <UIKit/UIKit.h>
-
 
 typedef NS_ENUM(NSInteger, ) {
 color_red
@@ -130,12 +166,12 @@ exports[`formats all should match ios/colors.m snapshot 1`] = `
 //
 // __output/
 //
+
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
-//
+
 
 #import \\".h\\"
-
 
 @implementation 
 
@@ -165,14 +201,13 @@ exports[`formats all should match ios/macros snapshot 1`] = `
 //
 // __output/
 //
+
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
-//
+
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-
-
 
 #define color_red #FF0000
 
@@ -211,9 +246,10 @@ exports[`formats all should match ios/singleton.h snapshot 1`] = `
 //
 // __output/
 //
+
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
-//
+
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
@@ -233,9 +269,10 @@ exports[`formats all should match ios/singleton.m snapshot 1`] = `
 //
 // __output/
 //
+
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
-//
+
 
 #import \\".h\\"
 
@@ -279,12 +316,12 @@ exports[`formats all should match ios/static.h snapshot 1`] = `
 "
 // __output/
 //
+
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
-//
+
 
 #import <Foundation/Foundation.h>
-
 
 
 extern  const color_red;
@@ -296,12 +333,12 @@ exports[`formats all should match ios/static.m snapshot 1`] = `
 //
 // __output/
 //
+
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
-//
+
 
 #import \\".h\\"
-
 
 
  const color_red = #FF0000;
@@ -313,12 +350,12 @@ exports[`formats all should match ios/strings.h snapshot 1`] = `
 //
 // __output/
 //
+
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
-//
+
 
 #import <Foundation/Foundation.h>
-
 
 
 extern NSString * const color_red;
@@ -334,12 +371,12 @@ exports[`formats all should match ios/strings.m snapshot 1`] = `
 //
 // __output/
 //
+
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
-//
+
 
 #import \\".h\\"
-
 
 
 NSString * const color_red = #FF0000;
@@ -375,15 +412,15 @@ exports[`formats all should match ios-swift/class.swift snapshot 1`] = `
 //
 // __output/
 //
+
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
-//
 
 
 import UIKit
 
 public class  {
-    public static let color_red = #FF0000
+    public static let color_red = #FF0000 /* comment */
 }
 "
 `;
@@ -393,14 +430,15 @@ exports[`formats all should match ios-swift/enum.swift snapshot 1`] = `
 //
 // __output/
 //
+
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
-//
+
 
 import UIKit
 
 public enum  {
-    public static let color_red = #FF0000
+    public static let color_red = #FF0000 /* comment */
 }
 "
 `;
@@ -439,6 +477,17 @@ module.exports = {
       ]
     }
   }
+};"
+`;
+
+exports[`formats all should match javascript/module-flat snapshot 1`] = `
+"/**
+ * Do not edit directly
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ */
+
+module.exports = {
+  \\"color_red\\": \\"#FF0000\\"
 };"
 `;
 
@@ -568,10 +617,10 @@ exports[`formats all should match less/variables snapshot 1`] = `
 
 exports[`formats all should match sass/map-deep snapshot 1`] = `
 "
-/*
-  Do not edit directly
-  Generated on Sat, 01 Jan 2000 00:00:00 GMT
-*/
+/**
+ * Do not edit directly
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ */
 
 $color_red: #FF0000 !default; // comment
 
@@ -585,10 +634,10 @@ $tokens: (
 
 exports[`formats all should match sass/map-flat snapshot 1`] = `
 "
-/*
-  Do not edit directly
-  Generated on Sat, 01 Jan 2000 00:00:00 GMT
-*/
+/**
+ * Do not edit directly
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ */
 
 $tokens: (
   // comment
@@ -607,10 +656,10 @@ exports[`formats all should match scss/icons snapshot 1`] = `
 
 exports[`formats all should match scss/map-deep snapshot 1`] = `
 "
-/*
-  Do not edit directly
-  Generated on Sat, 01 Jan 2000 00:00:00 GMT
-*/
+/**
+ * Do not edit directly
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ */
 
 $color_red: #FF0000 !default; // comment
 
@@ -624,10 +673,10 @@ $tokens: (
 
 exports[`formats all should match scss/map-flat snapshot 1`] = `
 "
-/*
-  Do not edit directly
-  Generated on Sat, 01 Jan 2000 00:00:00 GMT
-*/
+/**
+ * Do not edit directly
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ */
 
 $tokens: (
   // comment
@@ -668,5 +717,53 @@ exports[`formats all should match sketch/palette/v2 snapshot 1`] = `
       \\"name\\": \\"color_red\\"
     }
   ]
+}"
+`;
+
+exports[`formats all should match stylus/variables snapshot 1`] = `
+"
+// Do not edit directly
+// Generated on Sat, 01 Jan 2000 00:00:00 GMT
+
+$color_red= #FF0000; // comment"
+`;
+
+exports[`formats all should match typescript/es6-declarations snapshot 1`] = `
+"/**
+ * Do not edit directly
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ */
+
+export const color_red : string; // comment"
+`;
+
+exports[`formats all should match typescript/module-declarations snapshot 1`] = `
+"/**
+ * Do not edit directly
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ */
+
+export default tokens;
+
+declare interface DesignToken {
+  value: any;
+  name?: string;
+  comment?: string;
+  themeable?: boolean;
+  attributes?: {
+    category?: string;
+    type?: string;
+    item?: string;
+    subitem?: string;
+    state?: string;
+    [key: string]: any;
+  };
+  [key: string]: any;
+}
+
+declare const tokens: {
+  \\"color\\": {
+    \\"red\\": DesignToken
+  }
 }"
 `;

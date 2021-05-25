@@ -10,7 +10,7 @@ You use transformGroups in your config file under platforms > [platform] > trans
 
 ```json
 {
-  "source": ["properties/**/*.json"],
+  "source": ["tokens/**/*.json"],
   "platforms": {
     "android": {
       "transformGroup": "android"
@@ -23,7 +23,7 @@ You use transformGroups in your config file under platforms > [platform] > trans
 
 ## Pre-defined Transform groups
 
-[lib/common/transformGroups.js](https://github.com/amzn/style-dictionary/blob/master/lib/common/transformGroups.js)
+[lib/common/transformGroups.js](https://github.com/amzn/style-dictionary/blob/main/lib/common/transformGroups.js)
 
 ### web 
 
@@ -122,6 +122,21 @@ Transforms:
 
 * * *
 
+### compose 
+
+
+Transforms:
+
+[attribute/cti](transforms.md#attributecti)
+[name/cti/camel](transforms.md#namecticamel)
+[color/composeColor](transforms.md#colorcomposecolor)
+[size/compose/em](transforms.md#sizecomposeem)
+[size/compose/remToSp](transforms.md#sizecomposeremtosp)
+[size/compose/remToDp](transforms.md#sizecomposeremtodp)
+
+
+* * *
+
 ### ios 
 
 
@@ -167,7 +182,7 @@ Transforms:
 [size/swift/remToCGFloat](transforms.md#sizeswiftremtocgfloat)
 [font/swift/literal](transforms.md#fontswiftliteral)
 
-This is to be used if you want to have separate files per category and you don't want the category (e.g., color) as the lead value in the name of the property (e.g., StyleDictionaryColor.baseText instead of StyleDictionary.colorBaseText).
+This is to be used if you want to have separate files per category and you don't want the category (e.g., color) as the lead value in the name of the token (e.g., StyleDictionaryColor.baseText instead of StyleDictionary.colorBaseText).
 
 
 * * *
@@ -211,7 +226,19 @@ Transforms:
 [asset/flutter/literal](transforms.md#assetflutterliteral)
 [font/flutter/literal](transforms.md#fontflutterliteral)
 
-This is to be used if you want to have separate files per category and you don't want the category (e.g., color) as the lead value in the name of the property (e.g., StyleDictionaryColor.baseText instead of StyleDictionary.colorBaseText).
+This is to be used if you want to have separate files per category and you don't want the category (e.g., color) as the lead value in the name of the token (e.g., StyleDictionaryColor.baseText instead of StyleDictionary.colorBaseText).
+
+
+* * *
+
+### react-native 
+
+
+Transforms:
+
+[name/cti/camel](transforms.md#namecticamel)
+[size/object](transforms.md#sizeobject)
+[color/css](transforms.md#colorcss)
 
 
 * * *

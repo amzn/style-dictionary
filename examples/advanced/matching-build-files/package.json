@@ -1,0 +1,21 @@
+{
+  "name": "style-dictionary-matching-build-files",
+  "version": "1.0.0",
+  "description": "An example to show how to automate build files that match folders",
+  "main": "build/js/cjs/index.js",
+  "module": "build/js/esm/index.js",
+  "files": [
+    "build",
+    "properties"
+  ],
+  "scripts": {
+    "build": "style-dictionary build --config ./config.js",
+    "clean": "rm -rf build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kelly Harrop <kn.harrop@gmail.com>",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "style-dictionary": "3.0.0-rc.10"
+  }
+}

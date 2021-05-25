@@ -11,53 +11,60 @@
  * and limitations under the License.
  */
 
-var formats = require('../../lib/common/formats');
-var scss = require('node-sass');
+const formats = require('../../lib/common/formats');
+const scss = require('node-sass');
+const createDictionary = require('../../lib/utils/createDictionary');
+const createFormatArgs = require('../../lib/utils/createFormatArgs');
 
-var file = {
+const file = {
   "destination": "__output/",
   "format": "scss/icons",
   "name": "foo"
 };
 
-var propertyName = "content-icon-email";
-var propertyValue = "'\\E001'";
-var itemClass = "3d_rotation";
+const propertyName = "content-icon-email";
+const propertyValue = "'\\E001'";
+const itemClass = "3d_rotation";
 
-var dictionary = {
-  "allProperties": [{
-    "name": propertyName,
-    "value": propertyValue,
-    "original": {
-      "value": propertyValue
-    },
-    "attributes": {
-      "category": "content",
-      "type": "icon",
-      "item": itemClass
+const properties = {
+  content: {
+    icon: {
+      email: {
+        "name": propertyName,
+        "value": propertyValue,
+        "original": {
+          "value": propertyValue
+        },
+        "attributes": {
+          "category": "content",
+          "type": "icon",
+          "item": itemClass
+        },
+        path: ['content','icon','email']
+      }
     }
-  }]
+  }
 };
 
-var config = {
+const platform = {
   prefix: 'sd' // Style-Dictionary Prefix
 };
 
-var formatter = formats['scss/icons'].bind(file);
+const formatter = formats['scss/icons'].bind(file);
+const dictionary = createDictionary({ properties });
 
 describe('formats', () => {
   describe('scss/icons', () => {
 
-    it('should have a valid scss syntax', done => {
-      scss.render({
-        data: formatter(dictionary, config),
-      }, function(err, result) {
-        if(err) {
-          return done(new Error(err));
-        }
-        expect(result.css).toBeDefined();
-        return done();
+    it('should have a valid scss syntax', () => {
+      const result = scss.renderSync({
+        data: formatter(createFormatArgs({
+          dictionary,
+          file,
+          platform
+        }), platform, file),
       });
+      expect(result.css).toBeDefined();
     });
 
   });

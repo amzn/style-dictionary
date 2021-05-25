@@ -21,12 +21,14 @@
             android:layout_height="wrap_content"
             android:id="@+id/activity_main_colors_button"
             android:layout_marginBottom="@dimen/size_padding_base"
+            android:onClick="colorsButton"
             android:text="@string/title_all_colors" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/activity_main_icons_button"
+            android:onClick="iconsButton"
             android:layout_marginBottom="@dimen/size_padding_base"
             android:text="@string/title_icon_list" />
 
@@ -41,6 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/activity_main_properties_button"
+            android:onClick="propertiesButton"
             android:layout_marginBottom="@dimen/size_padding_base"
             android:text="@string/title_all_properties" />
 

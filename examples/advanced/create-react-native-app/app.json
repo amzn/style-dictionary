@@ -1,0 +1,12 @@
+{
+  "name": "create-react-native-app",
+  "displayName": "create-react-native-app",
+  "expo": {
+    "name": "create-react-native-app",
+    "slug": "create-react-native-app",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}

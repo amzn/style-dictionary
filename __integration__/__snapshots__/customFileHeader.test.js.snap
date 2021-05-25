@@ -1,0 +1,114 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`integration valid custom file headers file options config file header should match snapshot 1`] = `
+"/**
+ * Do not edit directly
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ * hello, world!
+ */
+
+:root {
+  --color-red: #ff0000;
+}
+"
+`;
+
+exports[`integration valid custom file headers file options inline file header should match snapshot 1`] = `
+"/**
+ * build version 1.0.0
+ */
+
+:root {
+  --color-red: #ff0000;
+}
+"
+`;
+
+exports[`integration valid custom file headers file options registered file header should match snapshot 1`] = `
+"/**
+ * hello
+ * Do not edit directly
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ */
+
+:root {
+  --color-red: #ff0000;
+}
+"
+`;
+
+exports[`integration valid custom file headers platform options file header override should match snapshot 1`] = `
+"/**
+ * Header overridden
+ */
+
+module.exports = {
+  \\"color\\": {
+    \\"red\\": {
+      \\"value\\": \\"#ff0000\\",
+      \\"original\\": {
+        \\"value\\": \\"#ff0000\\"
+      },
+      \\"name\\": \\"ColorRed\\",
+      \\"attributes\\": {
+        \\"category\\": \\"color\\",
+        \\"type\\": \\"red\\"
+      },
+      \\"path\\": [
+        \\"color\\",
+        \\"red\\"
+      ]
+    }
+  }
+};"
+`;
+
+exports[`integration valid custom file headers platform options no file options should match snapshot 1`] = `
+"/**
+ * Do not edit directly
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ * hello, world!
+ */
+
+module.exports = {
+  \\"color\\": {
+    \\"red\\": {
+      \\"value\\": \\"#ff0000\\",
+      \\"original\\": {
+        \\"value\\": \\"#ff0000\\"
+      },
+      \\"name\\": \\"ColorRed\\",
+      \\"attributes\\": {
+        \\"category\\": \\"color\\",
+        \\"type\\": \\"red\\"
+      },
+      \\"path\\": [
+        \\"color\\",
+        \\"red\\"
+      ]
+    }
+  }
+};"
+`;
+
+exports[`integration valid custom file headers platform options showFileHeader should match snapshot 1`] = `
+"module.exports = {
+  \\"color\\": {
+    \\"red\\": {
+      \\"value\\": \\"#ff0000\\",
+      \\"original\\": {
+        \\"value\\": \\"#ff0000\\"
+      },
+      \\"name\\": \\"ColorRed\\",
+      \\"attributes\\": {
+        \\"category\\": \\"color\\",
+        \\"type\\": \\"red\\"
+      },
+      \\"path\\": [
+        \\"color\\",
+        \\"red\\"
+      ]
+    }
+  }
+};"
+`;

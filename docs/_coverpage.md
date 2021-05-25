@@ -9,6 +9,6 @@
 [GitHub](https://github.com/amzn/style-dictionary)
 [Get Started](README.md)
 
-[Get ready for the next version of Style Dictionary!](version_3.md)
+[See what's new in 3.0!](version_3.md)
 
 ![color](#D9F8F5)

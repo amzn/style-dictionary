@@ -1,0 +1,10 @@
+{
+  "color": {
+    "background": {
+      "primary": { "value": "{color.palette.neutral.0.value}" },
+      "secondary": { "value": "{color.palette.neutral.5.value}" },
+      "tertiary": { "value": "{color.palette.neutral.10.value}" },
+      "base": { "value": "{color.background.primary.value}" }
+    }
+  }
+}

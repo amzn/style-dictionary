@@ -13,20 +13,11 @@
 // express or implied. See the License for the specific language governing
 // permissions and limitations under the License.
 
-%><%
-    // for backward compatibility we need to have the user explicitly hide it
-    var showFileHeader = (this.options && this.options.hasOwnProperty('showFileHeader')) ? this.options.showFileHeader : true;
-    if(showFileHeader) {
-        var header = '';
-        header += "\n/*\n  Do not edit directly";
-        header += "\n  Generated on " + new Date().toUTCString();
-        header += "\n*/\n\n";
-        print(header);
-    }
-
+%>
+<%= fileHeader({file, commentStyle: 'long'}) %><%
     var output = '';
-    output += `$${this.mapName||'tokens'}: (\n`;
-    output += allProperties.map(function(prop){
+    output += `$${file.mapName||'tokens'}: (\n`;
+    output += allTokens.map(function(prop){
         var line = '';
         if(prop.comment) {
         line += '  // ' + prop.comment + '\n';

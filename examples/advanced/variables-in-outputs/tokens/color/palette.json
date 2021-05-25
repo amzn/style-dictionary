@@ -1,0 +1,17 @@
+{
+  "color" : {
+    "palette" : {
+      "neutral": {
+        "140" : { "value" : "#192026" },
+        "100" : { "value" : "#303942" },
+        "80"  : { "value" : "#63676B" },
+        "60"  : { "value" : "#8C8F92" },
+        "40"  : { "value" : "#ADB0B3" },
+        "20"  : { "value" : "#D1D2D3" },
+        "10"  : { "value" : "#EAEBEC" },
+        "5"   : { "value" : "#F2F4F5" },
+        "0"   : { "value" : "#FFFFFF" }
+      }
+    }
+  }
+}

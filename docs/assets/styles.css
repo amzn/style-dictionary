@@ -284,7 +284,8 @@ section.cover .cover-main {
 }
 
 .markdown-section hr {
-  border-bottom: 5px solid transparent;
+  width: 25%;
+  border-bottom: 5px solid #F1F1F2;
 }
 
 .token.punctuation {
@@ -361,6 +362,11 @@ section.cover .cover-main {
 .markdown-section a:hover {
   border-color: var(--theme-color);
   color: var(--theme-color-dark);
+}
+
+.alert {
+  padding: 2rem;
+  border: 0.1rem solid var(--theme-color-secondary-light);
 }
 
 

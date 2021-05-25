@@ -21,6 +21,10 @@ android
 ✔︎  build/android/font_dimens.xml
 ✔︎  build/android/colors.xml
 
+compose
+✔︎ build/compose/StyleDictionaryColor.kt
+✔︎ build/compose/StyleDictionarySize.kt
+
 ios
 ✔︎  build/ios/StyleDictionaryColor.h
 ✔︎  build/ios/StyleDictionaryColor.m
@@ -39,7 +43,7 @@ Good for you! You have now built your first style dictionary! Moving on, take a 
 ```
 ├── README.md
 ├── config.json
-├── properties/
+├── tokens/
 │   ├── color/
 │       ├── base.json
 │       ├── font.json
@@ -49,6 +53,9 @@ Good for you! You have now built your first style dictionary! Moving on, take a 
 │   ├── android/
 │      ├── font_dimens.xml
 │      ├── colors.xml
+│   ├── compose/
+│      ├── StyleDictionaryColor.kt
+│      ├── StyleDictionarySize.kt
 │   ├── scss/
 │      ├── _variables.scss
 │   ├── ios/
@@ -62,7 +69,7 @@ Good for you! You have now built your first style dictionary! Moving on, take a 
 │      ├── StyleDictionarySize.swift
 ```
 
-If you open `config.json` you will see there are 3 platforms defined: scss, android, ios. Each platform has a transformGroup, buildPath, and files. The buildPath and files of the platform should match up to the files what were built. The files built should look like these:
+If you open `config.json` you will see there are 5 platforms defined: scss, android, compose, ios, and ios-swift. Each platform has a transformGroup, buildPath, and files. The buildPath and files of the platform should match up to the files what were built. The files built should look like these:
 
 **Android**
 ```xml
@@ -85,6 +92,31 @@ If you open `config.json` you will see there are 3 platforms defined: scss, andr
   <color name="color_font_secondary">#ff00ff00</color>
   <color name="color_font_tertiary">#ffcccccc</color>
 </resources>
+```
+
+**Compose**
+```kotlin
+object StyleDictionaryColor {
+  val colorBaseGrayDark = Color(0xff111111)
+  val colorBaseGrayLight = Color(0xffcccccc)
+  val colorBaseGrayMedium = Color(0xff999999)
+  val colorBaseGreen = Color(0xff00ff00)
+  val colorBaseRed = Color(0xffff0000)
+  val colorFontBase = Color(0xffff0000)
+  val colorFontSecondary = Color(0xff00ff00)
+  val colorFontTertiary = Color(0xffcccccc)
+}
+
+object StyleDictionarySize {
+  /** the base size of the font */
+  val sizeFontBase = 16.00.sp
+  /** the large size of the font */
+  val sizeFontLarge = 32.00.sp
+  /** the medium size of the font */
+  val sizeFontMedium = 16.00.sp
+  /** the small size of the font */
+  val sizeFontSmall = 12.00.sp
+}
 ```
 
 **SCSS**
@@ -138,11 +170,11 @@ $size-font-base: 1rem;
 ```
 
 Pretty nifty! This shows a few things happening:
-1. The build system does a deep merge of all the property JSON files defined in the `source` attribute of `config.json`. This allows you to split up the property JSON files however you want. There are 2 JSON files with `color` as the top level key, but they get merged properly.
-1. The build system resolves references to other style properties. `{size.font.medium.value}` gets resolved properly.
-1. The build system handles references to property values in other files as well as you can see in `properties/color/font.json`.
+1. The build system does a deep merge of all the token JSON files defined in the `source` attribute of `config.json`. This allows you to split up the token JSON files however you want. There are 2 JSON files with `color` as the top level key, but they get merged properly.
+1. The build system resolves references to other design tokens. `{size.font.medium.value}` gets resolved properly.
+1. The build system handles references to token values in other files as well as you can see in `tokens/color/font.json`.
 
-Now let's make a change and see how that affects things. Open up `properties/color/base.json` and change `"#111111"` to `"#000000"`. After you make that change, save the file and re-run the build command `style-dictionary build`. Open up the build files and take a look.
+Now let's make a change and see how that affects things. Open up `tokens/color/base.json` and change `"#111111"` to `"#000000"`. After you make that change, save the file and re-run the build command `style-dictionary build`. Open up the build files and take a look.
 
 **Huzzah!**
 

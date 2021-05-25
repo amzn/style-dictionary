@@ -11,52 +11,58 @@
  * and limitations under the License.
  */
 
-var formats = require('../../lib/common/formats');
-var less = require('less');
+const formats = require('../../lib/common/formats');
+const less = require('less');
+const createDictionary = require('../../lib/utils/createDictionary');
+const createFormatArgs = require('../../lib/utils/createFormatArgs');
 
-var file = {
+const file = {
   "destination": "__output/",
   "format": "less/icons",
   "name": "foo"
 };
 
-var propertyName = "content-icon-email";
-var propertyValue = "'\\E001'";
-var itemClass = "3d_rotation";
+const propertyName = "content-icon-email";
+const propertyValue = "'\\E001'";
+const itemClass = "3d_rotation";
 
-var dictionary = {
-  "allProperties": [{
-    "name": propertyName,
-    "value": propertyValue,
-    "original": {
-      "value": propertyValue
-    },
-    "attributes": {
-      "category": "content",
-      "type": "icon",
-      "item": itemClass
+const properties = {
+  content: {
+    icon: {
+      email: {
+        "name": propertyName,
+        "value": propertyValue,
+        "original": {
+          "value": propertyValue
+        },
+        "attributes": {
+          "category": "content",
+          "type": "icon",
+          "item": itemClass
+        },
+        path: ['content','icon','email']
+      }
     }
-  }]
+  }
 };
 
-var config = {
+const platform = {
   prefix: 'sd' // Style-Dictionary Prefix
 };
 
-var formatter = formats['less/icons'].bind(file);
+const formatter = formats['less/icons'].bind(file);
+const dictionary = createDictionary({ properties });
 
 describe('formats', () => {
   describe('less/icons', () => {
 
-    it('should have a valid less syntax', done => {
-      less.render(formatter(dictionary, config))
-        .then(function(output) {
-          expect(output).toBeDefined();
-          done();
-        })
-        .catch(function(err) {
-          done(new Error(err))
-        });
+    it('should have a valid less syntax', () => {
+      expect.assertions(1);
+      return expect(less.render(formatter(createFormatArgs({
+        dictionary,
+        file,
+        platform
+      }), platform, file))).resolves.toBeDefined();
     });
 
   });

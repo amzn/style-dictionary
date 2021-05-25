@@ -1,4 +1,4 @@
-<% _.forIn(properties && properties.asset && properties.asset.font, function(font) {
+<% Object.values(properties && properties.asset && properties.asset.font || {}).forEach(function(font) {
   var fileFormatArr = [];
   if (font.eot) {
   	fileFormatArr.push("url('../" + font.eot.value + "');\n\tsrc: url('../" + font.eot.value + "?#iefix') format('embedded-opentype')");

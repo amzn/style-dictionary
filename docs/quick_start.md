@@ -1,28 +1,33 @@
 # Quick Start
 
 ## Installation
+
 *Note that you must have [node (and npm) installed](https://www.npmjs.com/get-npm) before you can follow this guide.*
 
 If you want to use the CLI, you can install it globally via npm:
+
 ```bash
 $ npm install -g style-dictionary
 ```
 
 Or you can install it like a normal npm dependency. Style Dictionary is a build tool, and you are most likely to use it as a dev dependency:
+
 ```bash
 $ npm install -D style-dictionary
 ```
 
-
 ## Creating a New Project
+
 The CLI comes with some starter code to get a new project started easily.
+
 ```bash
 $ mkdir MyStyleD
 $ cd MyStyleD
 $ style-dictionary init basic
 ```
 
-This command will copy over the example files found in the [basic example](https://github.com/amzn/style-dictionary/tree/master/examples/basic) in this repo and then run the `style-dictionary build` command to generate the build artifacts. You should see something like this output:
+This command will copy over the example files found in the [basic example](https://github.com/amzn/style-dictionary/tree/main/examples/basic) in this repo and then run the `style-dictionary build` command to generate the build artifacts. You should see something like this output:
+
 ```
 Copying starter files...
 
@@ -37,6 +42,10 @@ scss
 android
 ✔︎  build/android/font_dimens.xml
 ✔︎  build/android/colors.xml
+
+compose
+✔︎ build/compose/StyleDictionaryColor.kt
+✔︎ build/compose/StyleDictionarySize.kt
 
 ios
 ✔︎  build/ios/StyleDictionaryColor.h
@@ -56,7 +65,7 @@ Pat yourself on the back, you built your first style dictionary! Take a look at 
 ```
 ├── README.md
 ├── config.json
-├── properties/
+├── tokens/
 │   ├── color/
 │       ├── base.json
 │       ├── font.json
@@ -66,6 +75,9 @@ Pat yourself on the back, you built your first style dictionary! Take a look at 
 │   ├── android/
 │      ├── font_dimens.xml
 │      ├── colors.xml
+│   ├── compose/
+│      ├── StyleDictionaryColor.kt
+│      ├── StyleDictionarySize.kt
 │   ├── scss/
 │      ├── _variables.scss
 │   ├── ios/
@@ -102,6 +114,31 @@ If you open `config.json` you will see there are 3 platforms defined: scss, andr
   <color name="color_font_secondary">#ff999999</color>
   <color name="color_font_tertiary">#ffcccccc</color>
 </resources>
+```
+
+**Compose**
+```kotlin
+object StyleDictionaryColor {
+  val colorBaseGrayDark = Color(0xff111111)
+  val colorBaseGrayLight = Color(0xffcccccc)
+  val colorBaseGrayMedium = Color(0xff999999)
+  val colorBaseGreen = Color(0xff00ff00)
+  val colorBaseRed = Color(0xffff0000)
+  val colorFontBase = Color(0xffff0000)
+  val colorFontSecondary = Color(0xff00ff00)
+  val colorFontTertiary = Color(0xffcccccc)
+}
+
+object StyleDictionarySize {
+  /** the base size of the font */
+  val sizeFontBase = 16.00.sp
+  /** the large size of the font */
+  val sizeFontLarge = 32.00.sp
+  /** the medium size of the font */
+  val sizeFontMedium = 16.00.sp
+  /** the small size of the font */
+  val sizeFontSmall = 12.00.sp
+}
 ```
 
 **SCSS**
@@ -154,15 +191,15 @@ $size-font-base: 1rem;
 ```
 
 Pretty nifty! This shows a few things happening:
-1. The build system does a deep merge of all the property JSON files defined in the `source` attribute of `config.json`. This allows you to split up the property JSON files however you want. There are 2 JSON files with `color` as the top level key, but they get merged properly.
-1. The build system resolves references to other style property values. `{size.font.medium.value}` is resolved properly.
-1. The build system handles references to property values in other files as well (as you can see in `properties/color/font.json`).
+1. The build system does a deep merge of all the design token files defined in the `source` attribute of `config.json`. This allows you to split up the design token files however you want. There are 2 JSON files with `color` as the top level key, but they get merged properly.
+1. The build system resolves references to other design tokens. `{size.font.medium.value}` is resolved properly.
+1. The build system handles references to design token values in other files as well (as you can see in `tokens/color/font.json`).
 1. Values are transformed specifically for each platform.
 
 
 ## Making a change
 
-Now let's make a change and see how that affects things. Open up `properties/color/base.json` and change `"#111111"` to `"#000000"`. After you make that change, save the file and re-run the build command `style-dictionary build`. Open up the build files and take a look. Now:
+Now let's make a change and see how that affects things. Open up `tokens/color/base.json` and change `"#111111"` to `"#000000"`. After you make that change, save the file and re-run the build command `style-dictionary build`. Open up the build files and take a look. Now:
 
 **Android**
 ```xml
@@ -177,6 +214,18 @@ Now let's make a change and see how that affects things. Open up `properties/col
   <color name="color_font_secondary">#ff00ff00</color>
   <color name="color_font_tertiary">#ffcccccc</color>
 </resources>
+```
+```kotlin
+object StyleDictionaryColor {
+  val colorBaseGrayDark = Color(0xff000000)
+  val colorBaseGrayLight = Color(0xffcccccc)
+  val colorBaseGrayMedium = Color(0xff999999)
+  val colorBaseGreen = Color(0xff00ff00)
+  val colorBaseRed = Color(0xffff0000)
+  val colorFontBase = Color(0xffff0000)
+  val colorFontSecondary = Color(0xff00ff00)
+  val colorFontTertiary = Color(0xffcccccc)
+}
 ```
 ```scss
 $color-base-gray-light: #cccccc;
@@ -212,7 +261,9 @@ Call this in the root directory of your project, which must include a [configura
 More detailed information about [using the Style Dictionary CLI is available here](using_the_cli.md).
 
 ### Node
+
 You can also use the style dictionary build system in node if you want to [extend](extending.md) the functionality or use it in another build system like Grunt or Gulp.
+
 ```javascript
 const StyleDictionary = require('style-dictionary').extend('config.json');
 
@@ -220,9 +271,10 @@ StyleDictionary.buildAllPlatforms();
 ```
 
 The `.extend()` method is an overloaded method that can also take a [configuration](config.md) object.
+
 ```javascript
 const StyleDictionary = require('style-dictionary').extend({
-  source: ['properties/**/*.json'],
+  source: ['tokens/**/*.json'],
   platforms: {
     scss: {
       transformGroup: 'scss',

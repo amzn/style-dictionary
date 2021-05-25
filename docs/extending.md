@@ -9,6 +9,7 @@ There is a straightforward way to extend Style Dictionary to meet your needs - s
 * [registerFormat](api.md#registerformat)
 * [registerTemplate](api.md#registertemplate) (deprecated)
 * [registerAction](api.md#registeraction)
+* [registerParser](api.md#registerparser)
 
 ## Extension Examples
 Importing a configuration, defining a new `time/seconds` transform, and building the style dictionary.

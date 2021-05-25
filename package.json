@@ -1,6 +1,6 @@
 {
   "name": "style-dictionary",
-  "version": "2.10.3",
+  "version": "3.0.0-rc.10",
   "description": "Style once, use everywhere. A build system for creating cross-platform styles.",
   "keywords": [
     "style dictionary",
@@ -20,11 +20,12 @@
     "style guide"
   ],
   "main": "index.js",
+  "types": "types/index.d.ts",
   "bin": {
     "style-dictionary": "./bin/style-dictionary"
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=12.0.0"
   },
   "files": [
     "bin",
@@ -32,13 +33,14 @@
     "examples",
     "index.js",
     "LICENSE",
-    "NOTICE"
+    "NOTICE",
+    "types"
   ],
   "scripts": {
-    "lint": "eslint --fix index.js lib/**/*.js __tests__/**/*.js",
-    "test": "npm run lint && jest --runInBand",
-    "test-watch": "npm run lint && jest --runInBand --watch",
-    "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha -- test/*.js test/**/*.js",
+    "lint": "eslint --fix index.js \"lib/**/*.js\" \"__tests__/**/*.js\"",
+    "test": "npm run test-types && npm run lint && jest --runInBand --silent --coverage",
+    "test-types": "tsd",
+    "test-watch": "npm run test-types && npm run lint && jest --runInBand --watch",
     "generate-docs": "node ./scripts/generateDocs.js",
     "serve-docs": "docsify serve docs -p 3000 -P 12345",
     "install-cli": "npm install -g $(npm pack)",
@@ -51,16 +53,29 @@
   },
   "jest": {
     "verbose": false,
+    "collectCoverageFrom": [
+      "lib/**/*.js"
+    ],
+    "coverageReporters": [
+      "html"
+    ],
+    "coverageDirectory": "docs/coverage",
     "roots": [
-      "__tests__"
+      "__tests__",
+      "__integration__"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/__tests__/__setup.js"
     ],
     "testPathIgnorePatterns": [
+      "/__tests__/__setup.js",
       "/__tests__/__helpers.js",
       "/__tests__/__assets/",
       "/__tests__/__configs/",
       "/__tests__/__json_files/",
       "/__tests__/__properties/",
-      "/__tests__/__output/"
+      "/__tests__/__output/",
+      "/__tests__/formats/__constants.js"
     ],
     "transform": {
       "^.+\\.json5$": "json5-jest",
@@ -102,12 +117,12 @@
   "homepage": "https://github.com/amzn/style-dictionary",
   "dependencies": {
     "chalk": "^4.0.0",
+    "change-case": "^4.1.2",
     "commander": "^5.1.0",
     "fs-extra": "^8.1.0",
     "glob": "^7.1.6",
     "json5": "^2.1.3",
     "lodash": "^4.17.15",
-    "resolve-cwd": "^3.0.0",
     "tinycolor2": "^1.4.1"
   },
   "devDependencies": {
@@ -119,6 +134,7 @@
     "docsify": "^4.12.1",
     "docsify-cli": "^4.4.3",
     "eslint": "^6.8.0",
+    "eslint-plugin-jest": "^24.1.3",
     "husky": "^4.2.5",
     "istanbul": "^0.4.5",
     "jest": "^26.6.3",
@@ -128,6 +144,9 @@
     "less": "^3.11.2",
     "lint-staged": "^10.2.7",
     "node-sass": "^4.14.1",
-    "standard-version": "^9.0.0"
+    "standard-version": "^9.0.0",
+    "stylus": "^0.54.8",
+    "tsd": "^0.15.1",
+    "yaml": "^1.10.0"
   }
 }
