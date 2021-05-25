@@ -386,7 +386,7 @@ https://github.com/amzn/style-dictionary/pull/441
 
 To be honest, we should have done this way sooner. Those versions of Node are no longer even in long-term support or maintenance. Hopefully this change should not affect anyone as you should all be on more recent versions of Node anyways. 
 
-Style Properties → Design Tokens
+### Style Properties → Design Tokens
 
 One last change is Style Dictionary is moving to the term "design tokens", both in documentation and in code. This has become the industry standard term for a while and it is time we respect that. Until now, Style Dictionary had called these "style properties" or just "properties", with some parts of the documentation also mentioning "design tokens". We want to be consistent with the direction of the community as well as in our documentation and code. We use the terms `properties` and `allProperties` in different APIs in Style Dictionary. To be consistent in documentation as well as code, we will be moving to using `tokens` and `allTokens`.
 
