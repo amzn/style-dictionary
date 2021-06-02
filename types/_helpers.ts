@@ -13,4 +13,4 @@
 
 type Named<T> = T & { name: string; };
 
-export { Named }
+export type { Named }
