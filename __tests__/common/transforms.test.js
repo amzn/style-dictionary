@@ -398,21 +398,21 @@ describe('common', () => {
         var value = transforms["color/UIColorSwift"].transformer({
           value: "#aaaaaa"
         });
-        expect(value).toBe("UIColor(red: 0.667, green: 0.667, blue: 0.667, alpha:1)");
+        expect(value).toBe("UIColor(red: 0.667, green: 0.667, blue: 0.667, alpha: 1)");
       });
 
       it('should retain enough precision when converting to decimal', () => {
         var value = transforms["color/UIColorSwift"].transformer({
           value: "#1d1d1d"
         });
-        expect(value).toBe("UIColor(red: 0.114, green: 0.114, blue: 0.114, alpha:1)");
+        expect(value).toBe("UIColor(red: 0.114, green: 0.114, blue: 0.114, alpha: 1)");
       });
 
       it('should handle colors with transparency', () => {
         var value = transforms["color/UIColorSwift"].transformer({
           value: "#aaaaaa99"
         });
-        expect(value).toBe("UIColor(red: 0.667, green: 0.667, blue: 0.667, alpha:0.6)");
+        expect(value).toBe("UIColor(red: 0.667, green: 0.667, blue: 0.667, alpha: 0.6)");
       });
     });
 
