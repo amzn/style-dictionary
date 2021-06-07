@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.1](https://github.com/amzn/style-dictionary/compare/v3.0.0...v3.0.1) (2021-06-07)
+
+
+### Bug Fixes
+
+* **swift:** add missing space after UIColor's alpha property ([#648](https://github.com/amzn/style-dictionary/issues/648)) ([7c65733](https://github.com/amzn/style-dictionary/commit/7c65733c05a82b99960e6dca25124fce91fbda32))
+* **types:** directly export Named type to avoid ambiguity with TS --isolatedModules option ([8295b0d](https://github.com/amzn/style-dictionary/commit/8295b0dffc28a5dda934fb32a26f32ffcc241ffb))
+* **types:** directly export Named type to avoid ambiguity with TS --isolatedModules option ([3ed31be](https://github.com/amzn/style-dictionary/commit/3ed31be5b09312df88c66e9274672303a8609acc))
+
 ## [3.0.0](https://github.com/amzn/style-dictionary/compare/v3.0.0-rc.10...v3.0.0) (2021-05-25)
 
 ## [3.0.0-rc.10](https://github.com/amzn/style-dictionary/compare/v3.0.0-rc.9...v3.0.0-rc.10) (2021-05-24)
