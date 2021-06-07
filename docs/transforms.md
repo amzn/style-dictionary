@@ -370,7 +370,7 @@ Transforms the value into an UIColor swift class for iOS
 ```swift
 // Matches: token.attributes.category === 'color'
 // Returns:
-UIColor(red: 0.667, green: 0.667, blue: 0.667, alpha:0.6)
+UIColor(red: 0.667, green: 0.667, blue: 0.667, alpha: 0.6)
 ```
 
 

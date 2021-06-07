@@ -1425,7 +1425,7 @@ Creates a Swift implementation file of a class with values
 **Example**  
 ```swift
 public class StyleDictionary {
-  public static let colorBackgroundDanger = UIColor(red: 1.000, green: 0.918, blue: 0.914, alpha:1)
+  public static let colorBackgroundDanger = UIColor(red: 1.000, green: 0.918, blue: 0.914, alpha: 1)
 }
 ```
 
