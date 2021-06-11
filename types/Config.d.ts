@@ -16,7 +16,7 @@ import { Transform } from './Transform';
 import { TransformGroup } from './TransformGroup';
 import { Filter } from './Filter';
 import { FileHeader } from './FileHeader';
-import { Format } from './Format';
+import { Formatter } from './Format';
 import { Action } from './Action';
 import { Platform } from './Platform';
 import { DesignTokens } from './DesignToken';
@@ -25,7 +25,7 @@ export interface Config {
   parsers?: Parser[];
   transform?: Record<string, Transform>;
   transformGroup?: Record<string, TransformGroup>;
-  format?: Record<string, Format>;
+  format?: Record<string, Formatter>;
   filter?: Record<string, Filter>;
   fileHeader?: Record<string, FileHeader>;
   action?: Record<string, Action>;
