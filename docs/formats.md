@@ -1044,7 +1044,7 @@ Thankfully you can extend style-dictionary very easily:
 const JsonToTS = require('json-to-ts');
 StyleDictionaryPackage.registerFormat({
   name: 'typescript/accurate-module-declarations',
-  formatter: function(dictionary) {
+  formatter: function({ dictionary }) {
     return 'declare const root: RootObject\n' +
     'export default root\n' +
     JsonToTS(dictionary.properties).join('\n');
