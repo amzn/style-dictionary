@@ -260,8 +260,12 @@ StyleDictionary.registerFormat({
       if (dictionary.usesReference(token.original.value)) {
         // Note: make sure to use `token.original.value` because
         // `token.value` is already resolved at this point.
-        const references = dictionary.getReferences(token.original.value);
-        value = references[0].name;
+        const refs = dictionary.getReferences(token.original.value);
+        refs.forEach(ref => {
+          value = value.replace(ref.value, function() {
+            return `${ref.name}`;
+          });
+        });
       }
       return `export const ${token.name} = ${value};`
     }).join(`\n`)
