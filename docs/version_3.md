@@ -150,7 +150,7 @@ Not all formats use the `outputReferences` option because that file format might
 * ios-swift/enum.swift
 * flutter/class.dart
 
-If you have custom formats you can make use of this feature too! The `dictionary` object that is passed as an argument to the formatter function has 2 new methods on it: `usesReference()` and `getReference()` which you can use to get the reference name. Here is an example of that:
+If you have custom formats you can make use of this feature too! The `dictionary` object that is passed as an argument to the formatter function has 2 new methods on it: `usesReference()` and `getReferences()` which you can use to get the reference name. Here is an example of that:
 
 ```javascript
 StyleDictionary.registerFormat({
@@ -159,13 +159,17 @@ StyleDictionary.registerFormat({
     return dictionary.allProperties.map(token => {
       let value = JSON.stringify(token.value);
       // the `dictionary` object now has `usesReference()` and
-      // `getReference()` methods. `usesReference()` will return true if
-      // the value has a reference in it. `getReference()` will return
-      // the reference to the whole token so that you can access its
-      // name or any other attributes.
+      // `getReferences()` methods. `usesReference()` will return true if
+      // the value has a reference in it. `getReferences()` will return
+      // an array of references to the whole tokens so that you can access
+      // their names or any other attributes.
       if (dictionary.usesReference(token.original.value)) {
-        const reference = dictionary.getReference(token.original.value);
-        value = reference.name;
+        const refs = dictionary.getReferences(token.original.value);
+        refs.forEach(ref => {
+          value = value.replace(ref.value, function() {
+            return `${ref.name}`;
+          });
+        });
       }
       return `export const ${token.name} = ${value};`
     }).join(`\n`)
