@@ -30,7 +30,7 @@ module.exports = {
       // proper style. If the file has a custom file header defined, or
       // showFileHeader option, it will honor those.
       return fileHeader({file, commentStyle: 'short'}) +
-        dictionary.allProperties
+        dictionary.allTokens
           // sortByReference returns a function that can be used as to sort
           // an array. This will sort the array so that references always
           // come after their instantiation so that there are no errors
