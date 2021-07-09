@@ -24,7 +24,7 @@ The `sd.config.js` file has everything you need to see. The tokens included in t
 Here is an example that shows how to get an alias's name within a custom format:
 ```javascript
 //...
-function(dictionary) {
+function({ dictionary }) {
   return dictionary.allTokens.map(token => {
     let value = JSON.stringify(token.value);
     // the `dictionary` object now has `usesReference()` and

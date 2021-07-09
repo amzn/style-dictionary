@@ -155,8 +155,8 @@ If you have custom formats you can make use of this feature too! The `dictionary
 ```javascript
 StyleDictionary.registerFormat({
   name: `myCustomFormat`,
-  formatter: function(dictionary) {
-    return dictionary.allProperties.map(token => {
+  formatter: function({ dictionary }) {
+    return dictionary.allTokens.map(token => {
       let value = JSON.stringify(token.value);
       // the `dictionary` object now has `usesReference()` and
       // `getReferences()` methods. `usesReference()` will return true if

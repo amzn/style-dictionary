@@ -81,7 +81,7 @@ module.exports = {
 
 StyleDictionary.registerFormat({
   name: "custom/cjsmodule",
-  formatter: function (dictionary) {
+  formatter: function({ dictionary }) {
     return `module.exports = {${dictionary.allTokens.map(
       (token) => `\n\t${token.name}: "${token.value}"`
     )}\n};`;

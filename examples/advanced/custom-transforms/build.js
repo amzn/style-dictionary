@@ -95,7 +95,7 @@ StyleDictionary.registerTransformGroup({
 
 StyleDictionary.registerFormat({
   name: 'custom/android/xml',
-  formatter: function(dictionary) {
+  formatter: function({ dictionary }) {
     return dictionary.allTokens.map(function(token) {
       return `<item name="${token.name}">${token.value}</item>`;
     }).join('\n');
