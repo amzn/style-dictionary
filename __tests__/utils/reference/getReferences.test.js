@@ -30,9 +30,17 @@ const properties = {
         color: "{color.red.value}",
         width: "{size.border.value}",
         style: "solid"
-      }
+      },
     },
     secondary: {
+      // and objects that have a non-string
+      value: {
+        color: "{color.red.value}",
+        width: 2,
+        style: "solid"
+      }
+    },
+    tertiary: {
       // getReferences should work on interpolated values like this:
       value: "{size.border.value} solid {color.red.value}"
     }
@@ -65,8 +73,16 @@ describe('utils', () => {
         );
       });
 
-      it(`should work with interpolated values`, () => {
+      it(`should work with objects that have numbers`, () => {
         expect(dictionary.getReferences(properties.border.secondary.value)).toEqual(
+          expect.arrayContaining([
+            {value: "#f00"}
+          ])
+        );
+      });
+
+      it(`should work with interpolated values`, () => {
+        expect(dictionary.getReferences(properties.border.tertiary.value)).toEqual(
           expect.arrayContaining([
             {value: "2px"},
             {value: "#f00"}
