@@ -310,13 +310,17 @@ StyleDictionary.registerFormat({
       // the `dictionary` object now has `usesReference()` and
       // `getReferences()` methods. `usesReference()` will return true if
       // the value has a reference in it. `getReferences()` will return
-      // an array of references to the whole tokens so that you can access its
-      // name or any other attributes.
+      // an array of references to the whole tokens so that you can access their
+      // names or any other attributes.
       if (dictionary.usesReference(token.original.value)) {
         // Note: make sure to use `token.original.value` because
         // `token.value` is already resolved at this point.
-        const reference = dictionary.getReferences(token.original.value);
-        value = reference.name;
+        const refs = dictionary.getReferences(token.original.value);
+        refs.forEach(ref => {
+          value = value.replace(ref.value, function() {
+            return `${ref.name}`;
+          });
+        });
       }
       return `export const ${token.name} = ${value};`
     }).join(`\n`)
@@ -477,6 +481,43 @@ StyleDictionary.registerFormat({
   }
 });
 ```
+
+* * *
+
+### getTypeScriptType 
+> formatHelpers.getTypeScriptType(value) ⇒ <code>String</code>
+
+Given some value, returns a basic valid TypeScript type for that value.
+Supports numbers, strings, booleans, and arrays of any of those types.
+
+**Returns**: <code>String</code> - A valid name for a TypeScript type.
+```  
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>value</td><td><code>*</code></td><td><p>A value to check the type of.</p>
+</td>
+    </tr>  </tbody>
+</table>
+
+**Example**  
+```javascript
+StyleDictionary.registerFormat({
+  name: 'myCustomFormat',
+  formatter: function({ dictionary, options }) {
+   return dictionary.allProperties.map(function(prop) {
+     var to_ret_prop = 'export const ' + prop.name + ' : ' + getTypeScriptType(prop.value) + ';';
+     if (prop.comment)
+       to_ret_prop = to_ret_prop.concat(' // ' + prop.comment);
+     return to_ret_prop;
+   }).join('\n');
+  }
+});
 
 * * *
 

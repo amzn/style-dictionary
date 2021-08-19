@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.2](https://github.com/amzn/style-dictionary/compare/v3.0.1...v3.0.2) (2021-08-19)
+
+
+### Bug Fixes
+
+* **format:** 'typescript/es6-declarations' return type ([#681](https://github.com/amzn/style-dictionary/issues/681)) ([0cf6c52](https://github.com/amzn/style-dictionary/commit/0cf6c52a3f85a91e5763dc31e0fb6efe2a531e25))
+* **lib:** fix `createFormatArgs` positional args ([#655](https://github.com/amzn/style-dictionary/issues/655)) ([29e511d](https://github.com/amzn/style-dictionary/commit/29e511d07e7991430f6f892879aeb0ade0c6a289)), closes [#652](https://github.com/amzn/style-dictionary/issues/652)
+* **references:** check if object value is a string before replacement ([#682](https://github.com/amzn/style-dictionary/issues/682)) ([bfc204c](https://github.com/amzn/style-dictionary/commit/bfc204c50e7addde2b98dc5703b9be31b5b44823))
+* **types:** format config expects formatter function ([#650](https://github.com/amzn/style-dictionary/issues/650)) ([b12c4b1](https://github.com/amzn/style-dictionary/commit/b12c4b1c6a94c62c757cd1675d216d9638f8d6e0))
+
 ### [3.0.1](https://github.com/amzn/style-dictionary/compare/v3.0.0...v3.0.1) (2021-06-07)
 
 
