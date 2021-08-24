@@ -15,6 +15,7 @@ import { Options } from './Options';
 import { TransformedToken } from './TransformedToken';
 
 export interface File {
+  className?: string;
   destination: string;
   format?: string;
   filter?: string | Partial<TransformedToken> | ((token: TransformedToken) => boolean);
