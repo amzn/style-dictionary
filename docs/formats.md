@@ -1240,9 +1240,9 @@ filter: {
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
-  <integer name="time_duration_short">1000</string>
-  <integer name="time_duration_medium">2000</string>
-  <integer name="time_duration_long">4000</string>
+  <integer name="time_duration_short">1000</integer>
+  <integer name="time_duration_medium">2000</integer>
+  <integer name="time_duration_long">4000</integer>
 ```
 
 * * *
