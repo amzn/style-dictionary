@@ -1,7 +1,8 @@
 {
-  "name": "style-dictionary",
-  "version": "3.0.2",
+  "name": "@divriots/style-dictionary",
+  "version": "3.0.2-0",
   "description": "Style once, use everywhere. A build system for creating cross-platform styles.",
+  "main": "dist/index.js",
   "keywords": [
     "style dictionary",
     "style",
@@ -19,19 +20,11 @@
     "react native",
     "style guide"
   ],
-  "main": "index.js",
   "types": "types/index.d.ts",
-  "bin": {
-    "style-dictionary": "./bin/style-dictionary"
-  },
   "engines": {
     "node": ">=12.0.0"
   },
   "files": [
-    "bin",
-    "lib",
-    "examples",
-    "index.js",
     "LICENSE",
     "NOTICE",
     "types"
@@ -101,12 +94,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/amzn/style-dictionary.git"
+    "url": "git://github.com/divriots/style-dictionary.git"
   },
   "author": "Amazon",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/amzn/style-dictionary/issues"
+    "url": "https://github.com/divriots/style-dictionary/issues"
   },
   "contributors": [
     "Yuliya Baran <baranyu@amazon.com>",
@@ -114,7 +107,7 @@
     "Dustin Boudreau <boudrd@amazon.com>",
     "Danny Banks <djb@amazon.com>"
   ],
-  "homepage": "https://github.com/amzn/style-dictionary",
+  "homepage": "https://github.com/divriots/style-dictionary",
   "dependencies": {
     "chalk": "^4.0.0",
     "change-case": "^4.1.2",
@@ -129,8 +122,14 @@
     "@babel/preset-env": "^7.10.2",
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
+    "@rollup/plugin-commonjs": "^18.0.0",
+    "@rollup/plugin-inject": "^4.0.2",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^11.2.1",
+    "@rollup/plugin-replace": "^2.4.2",
     "babel-jest": "^26.0.1",
     "babel-preset-env": "^1.7.0",
+    "browserify": "^17.0.0",
     "docsify": "^4.12.1",
     "docsify-cli": "^4.4.3",
     "eslint": "^6.8.0",
@@ -144,6 +143,7 @@
     "less": "^3.11.2",
     "lint-staged": "^10.2.7",
     "node-sass": "^6.0.1",
+    "rollup-plugin-visualizer": "^5.4.1",
     "standard-version": "^9.0.0",
     "stylus": "^0.54.8",
     "tsd": "^0.15.1",
