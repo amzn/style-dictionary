@@ -36,6 +36,7 @@ For any design tokens you wish to output, the "value" attribute is required. Thi
 | value | Any | The value of the design token. This can be any type of data, a hex string, an integer, a file path to a file, even an object or array.
 | comment | String (optional) | The comment attribute will show up in a code comment in output files if the format supports it.
 | themeable | Boolean (optional) | This is used in formats that support override-able or themable values like the `!default` flag in Sass.
+| private | Boolean (optional) | This is used to prevent to expose the current design token into the otuput dist folders.
 | name | String (optional) | Usually the name for a design token is generated with a [name transform](transforms.md#transform-types), but you can write your own if you choose. By default Style Dictionary will add a default name which is the key of the design token object.
 | attributes | Object (optional) | Extra information about the design token you want to include. [Attribute transforms](transforms.md#transform-types) will modify this object so be careful
 

@@ -24,7 +24,11 @@ const file = {
 
 const properties = {
   "color": {
-    "red": {"value": "#FF0000"}
+    "group": {
+      "red": {"value": "#FF0000", "private": false},
+      "green": {"value": "#00FF00"},
+      "blue": {"value": "#0000FF", "private": true}
+    }
   }
 };
 
@@ -49,7 +53,9 @@ describe('formats', () => {
         platform: {}
       }), {}, file) );
       const test = require('../__output/output.json');
-      expect(test.color.red.value).toEqual(dictionary.properties.color.red.value);
+      expect(test.color.group.red.value).toEqual(dictionary.properties.color.group.red.value);
+      expect(test.color.group.green.value).toEqual(dictionary.properties.color.group.green.value);
+      expect(test.color.group.blue).toBeFalsy();
     });
   });
 

@@ -24,6 +24,7 @@ interface DesignToken {
   name?: string;
   comment?: string;
   themeable?: boolean;
+  private?: boolean;
   attributes?: {
     category?: string;
     type?: string;
