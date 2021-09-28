@@ -1,6 +1,16 @@
 {
   "size": {
     "font": {
+      "unit_web" : {
+        "value": "px",
+        "comment": "web applications unit",
+        "private": true
+      },
+      "unit_mobile" : {
+        "value": "rem",
+        "comment": "mobile applications unit",
+        "private": true
+      },
       "small" : {
         "value": "0.75",
         "comment": "the small size of the font"
