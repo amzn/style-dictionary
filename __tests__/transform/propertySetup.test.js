@@ -96,7 +96,14 @@ describe('transform', () => {
       }, 'red', ['color','red']);
       expect(test).toHaveProperty('value.h', 20);
       expect(test).toHaveProperty('original.value.h', 20);
-    })
+    });
 
+    it('should set .toString', () => {
+      const test = propertySetup({
+        value: '#ff0000'
+      }, 'red', ['color','red']);
+
+      expect(`${test}`).toEqual('#ff0000');
+    });
   });
 });

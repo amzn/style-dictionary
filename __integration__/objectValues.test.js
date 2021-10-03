@@ -29,13 +29,15 @@ describe('integration', () => {
         lightness: `50%`,
         color: {
           red: { value: "#f00" },
+          redder: { value: "{color.red.value}" },
           green: {
             value: {
               h: "{hue}",
               s: "{saturation}",
               l: "{lightness}"
             }
-          }
+          },
+          greener: { value: "{color.green.value}" }
         },
         size: {
           border: { value: 0.125 }
@@ -49,6 +51,13 @@ describe('integration', () => {
               style: "solid"
             }
           },
+          secondary: {
+            value: {
+              color: "{color.red}",
+              width: "{size.border}",
+              style: "solid"
+            }
+          }
         }
       },
       transform: {

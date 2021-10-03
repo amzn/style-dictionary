@@ -92,7 +92,7 @@ describe('transform', () => {
       };
 
       const actual = transformObject(objectToTransform, options);
-      expect(actual).toEqual(expected);
+      expect(actual).toMatchObject(expected);
     });
 
     it('fills the transformationContext with transformed and deferred transforms', () => {

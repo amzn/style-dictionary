@@ -8,6 +8,7 @@ exports[`integration object values css/variables border should match snapshot 1`
 
 :root {
   --border-primary: 0.125rem solid #ff0000;
+  --border-secondary: 0.125rem solid #ff0000;
 }
 "
 `;
@@ -19,6 +20,7 @@ exports[`integration object values css/variables border with references should m
  */
 
 :root {
+  --border-secondary: var(--size-border) solid var(--color-red);
   --border-primary: var(--size-border) solid var(--color-red);
 }
 "
@@ -32,7 +34,9 @@ exports[`integration object values css/variables hex syntax should match snapsho
 
 :root {
   --color-red: #ff0000;
+  --color-redder: #ff0000;
   --color-green: #40bf40;
+  --color-greener: #40bf40;
 }
 "
 `;
@@ -46,6 +50,8 @@ exports[`integration object values css/variables hex syntax with references shou
 :root {
   --color-red: #ff0000;
   --color-green: #40bf40;
+  --color-redder: var(--color-red);
+  --color-greener: var(--color-green);
 }
 "
 `;
@@ -58,7 +64,9 @@ exports[`integration object values css/variables hsl syntax should match snapsho
 
 :root {
   --color-red: #ff0000;
+  --color-redder: #ff0000;
   --color-green: hsl(120, 50%, 50%);
+  --color-greener: hsl(120, 50%, 50%);
 }
 "
 `;
@@ -72,6 +80,8 @@ exports[`integration object values css/variables hsl syntax with references shou
 :root {
   --color-red: #ff0000;
   --color-green: hsl(120, 50%, 50%);
+  --color-redder: var(--color-red);
+  --color-greener: var(--color-green);
 }
 "
 `;
@@ -81,7 +91,8 @@ exports[`integration object values scss/variables should match snapshot 1`] = `
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
 
-$border-primary: 0.125rem solid #ff0000;"
+$border-primary: 0.125rem solid #ff0000;
+$border-secondary: 0.125rem solid #ff0000;"
 `;
 
 exports[`integration object values scss/variables with references should match snapshot 1`] = `
@@ -89,5 +100,6 @@ exports[`integration object values scss/variables with references should match s
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
 
+$border-secondary: $size-border solid $color-red;
 $border-primary: $size-border solid $color-red;"
 `;
