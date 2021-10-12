@@ -729,6 +729,9 @@ Creates a CSS file with variable definitions based on the style dictionary
     </tr><tr>
     <td>[options.outputReferences]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to keep <a href="/#/formats?id=references-in-output-files">references</a> (a -&gt; b -&gt; c) in the output.</p>
 </td>
+    </tr><tr>
+    <td>[options.selector]</td><td><code>string</code></td><td></td><td><p>Override the root css selector</p>
+</td>
     </tr>  </tbody>
 </table>
 
