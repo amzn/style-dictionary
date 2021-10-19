@@ -1,8 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`formats scss/map-deep scss/map-deep snapshot 1`] = `
-"
-/**
+"/**
  * Do not edit directly
  * Generated on Sat, 01 Jan 2000 00:00:00 GMT
  */
@@ -32,6 +31,7 @@ $tokens: (
     )
   )
 );
+
 "
 `;
 

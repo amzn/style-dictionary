@@ -13,21 +13,7 @@
 // express or implied. See the License for the specific language governing
 // permissions and limitations under the License.
 %>
-<%= fileHeader({file, commentStyle: 'long'}) %><%
-    // output the list of tokens as Sass variables
-    //
-    dictionary.allTokens.forEach(function(prop) {
-        var output = '';
-        output += '$' + prop.name + ': ' + (prop.attributes.category==='asset' ? '"'+prop.value+'"' : prop.value) + ' !default;'
-        if(prop.comment) {
-        output += ' // ' + prop.comment;
-        }
-        output += '\n';
-        print(output);
-    });
-
-    print('\n');
-
+<%
     // output the list of tokens as a Sass nested map
     // (the values are pointing to the variables)
     //
