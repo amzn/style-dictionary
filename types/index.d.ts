@@ -163,6 +163,26 @@ declare namespace StyleDictionary {
     registerFilter(filter: Named<Filter>): this;
 
     /**
+     * Add a custom file header to Style Dictionary. File headers are used to write a
+     * custom messasge on top of the generated files.
+     * @param {String} fileHeader.name The name of the file header to be added
+     * @param {Function} fileHeader.fileHeader The file header function
+     * @example
+     * ```js
+     * StyleDictionary.registerFileHeader({
+     *   name: 'custmoHeader',
+     *   fileHeader: function(defaultMessage) {
+     *      return return [
+     *        `hello`,
+     *        ...defaultMessage
+     *      ]
+     *   }
+     * })
+     * ```
+     */
+     registerFileHeader(fileHeader: Named<{ fileHeader: FileHeader }>): this;
+
+    /**
      * Adds a custom parser to parse style dictionary files. This allows you to modify
      * the design token data before it gets to Style Dictionary or write your
      * token files in a language other than JSON, JSON5, or CommonJS modules.
