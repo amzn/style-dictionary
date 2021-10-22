@@ -42,8 +42,8 @@ describe('common', () => {
       });
 
       it ('should handle complex object types', () => {
-        const complexObject = { property1: 'foo', property2: ['foo', 'bar'], property3: { subProperty1: 'foo', subProperty2: ['foo', 'bar'], } }
-        expect(getTypeScriptType(complexObject)).toEqual('{ property1: string, property2: string[], property3: { subProperty1: string, subProperty2: string[] } }');
+        const complexObject = { property1: 'foo', property2: ['foo', 'bar'], property3: { subProperty1: 'foo', subProperty2: ['foo', 'bar', 1], } }
+        expect(getTypeScriptType(complexObject)).toEqual('{ property1: string, property2: string[], property3: { subProperty1: string, subProperty2: (string | number)[] } }');
       });
     });
   });
