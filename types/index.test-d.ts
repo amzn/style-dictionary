@@ -143,6 +143,10 @@ expectAssignable<StyleDictionary.File>({
 
 
 expectAssignable<StyleDictionary.Platform>({
+  basePxFontSize: 16,
+});
+
+expectAssignable<StyleDictionary.Platform>({
   transformGroup: `css`,
 });
 

@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.3](https://github.com/amzn/style-dictionary/compare/v3.0.2...v3.0.3) (2021-10-15)
+
+
+### Bug Fixes
+
+* **types:** `className` optional parameter ([#683](https://github.com/amzn/style-dictionary/issues/683)) ([639d7da](https://github.com/amzn/style-dictionary/commit/639d7daa49fccdf569ec39a14953e366df1d7908)), closes [/github.com/amzn/style-dictionary/blob/main/examples/basic/config.json#L100](https://github.com/amzn//github.com/amzn/style-dictionary/blob/main/examples/basic/config.json/issues/L100)
+* **types:** added `name` to format, and export `Named` ([#714](https://github.com/amzn/style-dictionary/issues/714)) ([9ca0f6f](https://github.com/amzn/style-dictionary/commit/9ca0f6fc5d01706bf6864a2ea0fababb191f30f4))
+
 ### [3.0.2](https://github.com/amzn/style-dictionary/compare/v3.0.1...v3.0.2) (2021-08-19)
 
 

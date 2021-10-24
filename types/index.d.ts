@@ -28,7 +28,7 @@ import {Platform as _Platform} from './Platform';
 import {Transform as _Transform} from './Transform';
 import {TransformedToken as _TransformedToken, TransformedTokens as _TransformedTokens} from './TransformedToken';
 import {TransformGroup as _TransformGroup} from './TransformGroup';
-import {Named} from './_helpers';
+import {Named as _Named} from './_helpers';
 
 // Because this library is used in Node and needs to be accessible
 // as a CommonJS module, we are declaring it as a namespace so that
@@ -51,6 +51,7 @@ declare namespace StyleDictionary {
   type TransformedToken = _TransformedToken;
   type TransformedTokens = _TransformedTokens;
   type TransformGroup = _TransformGroup;
+  type Named<T> = _Named<T>
 
   interface Core {
     VERSION: string;

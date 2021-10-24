@@ -17,6 +17,7 @@ import { File } from './File';
 export interface Platform {
   transformGroup?: string;
   transforms?: string[];
+  basePxFontSize?: number;
   prefix?: string;
   buildPath?: string;
   files?: File[];
