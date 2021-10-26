@@ -35,13 +35,13 @@ describe(`integration`, () => {
               themeable: true
             }
           }, {
-            destination: `variablesWithReferences.scss`,
+            destination: `variables-with-references.scss`,
             format: `scss/variables`,
             options: {
               outputReferences: true
             }
           },{
-            destination: `filteredVariablesWithReferences.scss`,
+            destination: `filtered-variables-with-references.scss`,
             format: `scss/variables`,
             filter: (token) => token.path[1] === 'background',
             options: {
@@ -103,7 +103,7 @@ describe(`integration`, () => {
       });
 
       describe(`with outputReferences`, () => {
-        const output = fs.readFileSync(`${buildPath}variablesWithReferences.scss`, {encoding:'UTF-8'});
+        const output = fs.readFileSync(`${buildPath}variables-with-references.scss`, {encoding:'UTF-8'});
         it(`should have a valid scss syntax`, () => {
           const result = scss.renderSync({
             data: output,
@@ -117,7 +117,7 @@ describe(`integration`, () => {
       });
 
       describe(`with filter and output references`, () => {
-        const output = fs.readFileSync(`${buildPath}filteredVariablesWithReferences.scss`, {encoding:'UTF-8'});
+        const output = fs.readFileSync(`${buildPath}filtered-variables-with-references.scss`, {encoding:'UTF-8'});
         it(`should match snapshot`, () => {
           expect(output).toMatchSnapshot();
         });
