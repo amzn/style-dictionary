@@ -55,6 +55,13 @@ describe(`integration`, () => {
             options: {
               outputReferences: true
             }
+          },{
+            destination: `map-deep-not-themeable.scss`,
+            format: `scss/map-deep`,
+            mapName: 'design-system-tokens',
+            options: {
+              themeable: false
+            }
           }]
         }
       }
@@ -127,6 +134,20 @@ describe(`integration`, () => {
 
       describe(`with outputReferences`, () => {
         const output = fs.readFileSync(`${buildPath}map-deep-with-references.scss`, { encoding: 'UTF-8' });
+        it(`should have a valid scss syntax`, () => {
+          const result = scss.renderSync({
+            data: output,
+          });
+          expect(result.css).toBeDefined();
+        });
+
+        it(`should match snapshot`, () => {
+          expect(output).toMatchSnapshot();
+        });
+      });
+
+      describe(`without themeable`, () => {
+        const output = fs.readFileSync(`${buildPath}map-deep-not-themeable.scss`, { encoding: 'UTF-8' });
         it(`should have a valid scss syntax`, () => {
           const result = scss.renderSync({
             data: output,
