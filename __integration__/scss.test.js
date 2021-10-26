@@ -27,7 +27,14 @@ describe(`integration`, () => {
           files: [{
             destination: `variables.scss`,
             format: `scss/variables`
-          },{
+          },
+          {
+            destination: `variables-themeable.scss`,
+            format: `scss/variables`,
+            options: {
+              themeable: true
+            }
+          }, {
             destination: `variablesWithReferences.scss`,
             format: `scss/variables`,
             options: {
@@ -79,6 +86,20 @@ describe(`integration`, () => {
 
       it(`should match snapshot`, () => {
         expect(output).toMatchSnapshot();
+      });
+
+      describe(`with themeable`, () => {
+        const output = fs.readFileSync(`${buildPath}variables-themeable.scss`, {encoding:'UTF-8'});
+        it(`should have a valid scss syntax`, () => {
+          const result = scss.renderSync({
+            data: output,
+          });
+          expect(result.css).toBeDefined();
+        });
+
+        it(`should match snapshot`, () => {
+          expect(output).toMatchSnapshot();
+        });
       });
 
       describe(`with outputReferences`, () => {
