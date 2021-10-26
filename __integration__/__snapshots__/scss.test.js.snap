@@ -1,7 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`integration scss scss/map-deep should match snapshot 1`] = `
-"/**
+"
+/**
  * Do not edit directly
  * Generated on Sat, 01 Jan 2000 00:00:00 GMT
  */
@@ -385,12 +386,12 @@ $design-system-tokens: (
     )
   )
 );
-
 "
 `;
 
 exports[`integration scss scss/map-deep with outputReferences should match snapshot 1`] = `
-"/**
+"
+/**
  * Do not edit directly
  * Generated on Sat, 01 Jan 2000 00:00:00 GMT
  */
@@ -774,12 +775,12 @@ $design-system-tokens: (
     )
   )
 );
-
 "
 `;
 
 exports[`integration scss scss/map-deep without themeable should match snapshot 1`] = `
-"/**
+"
+/**
  * Do not edit directly
  * Generated on Sat, 01 Jan 2000 00:00:00 GMT
  */
@@ -1163,7 +1164,6 @@ $design-system-tokens: (
     )
   )
 );
-
 "
 `;
 
