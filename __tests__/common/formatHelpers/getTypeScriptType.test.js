@@ -22,21 +22,29 @@ describe('common', () => {
         expect(getTypeScriptType(true)).toEqual('boolean');
       });
 
-      it('should recognize arrays of basic types', () => {
+      it('should recognize arrays consisting out of same-type primitives', () => {
         expect(getTypeScriptType(['an', 'array', 'of', 'strings'])).toEqual('string[]');
         expect(getTypeScriptType([3.14159])).toEqual('number[]');
         expect(getTypeScriptType([true, false, true, true])).toEqual('boolean[]');
       });
 
-      it('should default to any, if no type is determined', () => {
-        expect(getTypeScriptType({})).toEqual('any');
-        expect(getTypeScriptType([{}])).toEqual('any[]');
-        expect(getTypeScriptType(['string', 3.14, false])).toEqual('any[]');
+      it('should recognize arrays consisting out of different primitives', () => {
+        expect(getTypeScriptType(['string', 3.14, false])).toEqual('(string | number | boolean)[]');
       });
 
       it('should support nested arrays', () => {
         expect(getTypeScriptType([[100, 200], [300, 400]])).toEqual('number[][]');
-      })
+      });
+
+      it ('should handle simple object types', () => {
+        expect(getTypeScriptType({})).toEqual('{  }');
+        expect(getTypeScriptType({ property1: '', property2: false })).toEqual('{ property1: string, property2: boolean }');
+      });
+
+      it ('should handle complex object types', () => {
+        const complexObject = { property1: 'foo', property2: ['foo', 'bar'], property3: { subProperty1: 'foo', subProperty2: ['foo', 'bar', 1], } }
+        expect(getTypeScriptType(complexObject)).toEqual('{ property1: string, property2: string[], property3: { subProperty1: string, subProperty2: (string | number)[] } }');
+      });
     });
   });
 });
