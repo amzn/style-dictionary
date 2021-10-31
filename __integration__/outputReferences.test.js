@@ -11,12 +11,60 @@
  * and limitations under the License.
  */
 
-const fs = require('fs-extra');
-const StyleDictionary = require('../index');
-const {buildPath} = require('./_constants');
+const fs = require("fs-extra");
+const StyleDictionary = require("../index");
+const { buildPath } = require("./_constants");
 
-describe('integration', () => {
-  describe('output references', () => {
+describe("integration", () => {
+  describe("output references", () => {
+    StyleDictionary.extend({
+      // we are only testing showFileHeader options so we don't need
+      // the full source.
+      source: [`__integration__/tokens/**/*.json`],
+      platforms: {
+        css: {
+          transformGroup: "css",
+          buildPath,
+          files: [
+            {
+              destination: "withOutputReferences.css",
+              format: "css/variables",
+              options: {
+                outputReferences: true,
+              },
+            },
+            {
+              destination: "withoutOutputReferences.css",
+              format: "css/variables",
+              options: {
+                outputReferences: false,
+              },
+            },
+          ],
+        },
+      },
+    }).buildAllPlatforms();
+
+    describe('output references with .value', () => {
+      const output = fs.readFileSync(`${buildPath}withOutputReferences.css`, {
+        encoding: `UTF-8`,
+      });
+
+      it(`should match snapshot`, () => {
+        expect(output).toMatchSnapshot();
+      });
+    })
+
+    describe('without output references and .value', () => {
+      const output = fs.readFileSync(`${buildPath}withoutOutputReferences.css`, {
+        encoding: `UTF-8`,
+      });
+
+      it(`should match snapshot`, () => {
+        expect(output).toMatchSnapshot();
+      });
+    })
+
     it('should warn the user if filters out references', () => {
       console.log = jest.fn();
       StyleDictionary.extend({
