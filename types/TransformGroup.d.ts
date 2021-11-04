@@ -12,6 +12,5 @@
  */
 
 export interface TransformGroup {
-  name: string;
-  transforms: string[];
+  transforms: Array<string>;
 }
