@@ -228,6 +228,11 @@ describe('extend', () => {
     expect(StyleDictionaryExtended).toHaveProperty('platforms.web');
   });
 
+  it('should accept a string as a path to a JSONC file', function() {
+    var StyleDictionaryExtended = StyleDictionary.extend(__dirname + '/__configs/test.jsonc');
+    expect(StyleDictionaryExtended).toHaveProperty('platforms.web');
+  });
+
   it('should allow for chained extends and not mutate the original', function() {
     var StyleDictionary1 = StyleDictionary.extend({
       foo: 'bar'

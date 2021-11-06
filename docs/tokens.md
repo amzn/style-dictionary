@@ -128,6 +128,7 @@ See more in the advanced [referencing-aliasing example](https://github.com/amzn/
 Design token files can included inline in the configuration, or be written in separate files. Style Dictionary supports these languages for design token files:
 
 * JSON
+* [JSONC](https://code.visualstudio.com/docs/languages/json#_json-with-comments)
 * [JSON5](https://json5.org)
 * CommonJS modules
 * Potentially any language with [custom parsers](#customfileparsers)
