@@ -79,6 +79,7 @@
     ],
     "transform": {
       "^.+\\.json5$": "json5-jest",
+      "^.+\\.jsonc$": "json5-jest",
       "^.+\\.jsx?$": "babel-jest"
     }
   },
@@ -141,6 +142,7 @@
     "jsdoc-escape-at": "^1.0.1",
     "jsdoc-to-markdown": "^7.0.1",
     "json5-jest": "^1.0.1",
+    "jsonc-parser": "^3.0.0",
     "less": "^3.11.2",
     "lint-staged": "^10.2.7",
     "node-sass": "^6.0.1",

@@ -38,6 +38,7 @@ Here is an example configuration:
 Style Dictionary supports configuration files in these file formats:
 
 * JSON
+* JSONC
 * JSON5
 * Javascript (CommonJS)
 

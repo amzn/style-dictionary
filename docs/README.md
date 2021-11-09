@@ -23,7 +23,7 @@ When you are managing user experiences, it can be quite challenging to keep styl
 
 ## The Basics
 __A style dictionary consists of:__
-1. [Design tokens](tokens.md), organized in JSON, JSON5, or JS files
+1. [Design tokens](tokens.md), organized in JSON, JSONC, JSON5, or JS files
 1. Static assets (e.g. fonts, icons, images, sounds, etc.), organized into folders
 1. [Configuration](config.md), defining the [transformation](transforms.md) and [formatting](formats.md) of the tokens and assets for each output platform
 

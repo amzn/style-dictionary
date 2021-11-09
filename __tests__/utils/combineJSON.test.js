@@ -75,6 +75,12 @@ describe('utils', () => {
       expect(test.d).toHaveProperty('json5e', 1);
     });
 
+    it('should support jsonc', () => {
+      var test = combineJSON(["__tests__/__json_files/shallow/*.jsonc"]);
+      expect(test).toHaveProperty('jsonCA', 5);
+      expect(test.d).toHaveProperty('jsonCe', 1);
+    });
+
     describe('custom parsers', () => {
       it('should support yaml.parse', () => {
         const parsers = [{

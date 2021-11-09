@@ -186,7 +186,7 @@ declare namespace StyleDictionary {
     /**
      * Adds a custom parser to parse style dictionary files. This allows you to modify
      * the design token data before it gets to Style Dictionary or write your
-     * token files in a language other than JSON, JSON5, or CommonJS modules.
+     * token files in a language other than JSON, JSONC, JSON5, or CommonJS modules.
      *
      * @param {Regex} parser.pattern - A file path regular expression to match which files this parser should be be used on. This is similar to how webpack loaders work. `/\.json$/` will match any file ending in '.json', for example.
      * @param {Function} parser.parse - Function to parse the file contents. Takes 1 argument, which is an object with 2 attributes: contents which is the string of the file contents and filePath. The function should return a plain Javascript object.
