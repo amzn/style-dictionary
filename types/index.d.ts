@@ -62,7 +62,7 @@ declare namespace StyleDictionary {
     options: Config;
 
     transform: Record<string, Transform>;
-    transformGroup: Record<string, TransformGroup>;
+    transformGroup: Record<string, TransformGroup['transforms']>;
     format: Record<string, Format>;
     action: Record<string, Action>;
     filter: Record<string, Filter>;
