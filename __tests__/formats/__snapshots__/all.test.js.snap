@@ -443,6 +443,25 @@ public enum  {
 "
 `;
 
+exports[`formats all should match ios-swift/extension.swift snapshot 1`] = `
+"
+//
+// __output/
+//
+
+// Do not edit directly
+// Generated on Sat, 01 Jan 2000 00:00:00 GMT
+
+
+import UIKit
+import SwiftUI
+
+   {
+    static let color_red = #FF0000 /* comment */
+}
+"
+`;
+
 exports[`formats all should match javascript/es6 snapshot 1`] = `
 "/**
  * Do not edit directly

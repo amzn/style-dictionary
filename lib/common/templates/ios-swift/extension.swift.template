@@ -18,9 +18,10 @@
 //
 <%= fileHeader({file, commentStyle: 'short'}) %>
 import UIKit
+import SwiftUI
 
-public enum <%= file.className %> {
+<%= file. prefix ? 'public' : file.prefix %> <%= file.type %> <%= file.className %> {
     <%= allTokens.map(function(prop) {
-      return 'public static let ' + formatProperty(prop);
+      return 'static let ' + formatProperty(prop);
     }).join('\n    ') %>
 }
