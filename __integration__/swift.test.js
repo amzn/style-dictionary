@@ -24,7 +24,7 @@ describe('integration', () => {
           transformGroup: `ios-swift`,
           buildPath,
           files: [{
-            destination: "style_dictionary.swift",
+            destination: "style_dictionary.class.swift",
             format: "ios-swift/class.swift",
             className: "StyleDictionary"
           },{
@@ -34,13 +34,21 @@ describe('integration', () => {
             options: {
               outputReferences: true
             }
+          }, {
+            destination: "style_dictionary.enum.swift",
+            format: "ios-swift/enum.swift",
+            className: "StyleDictionary"
+          }, {
+            destination: "style_dictionary.extension.swift",
+            format: "ios-swift/extension.swift",
+            className: "StyleDictionary"
           }]
         },
       }
     }).buildAllPlatforms();
 
     describe(`ios-swift/class.swift`, () => {
-      const output = fs.readFileSync(`${buildPath}style_dictionary.swift`, {encoding:`UTF-8`});
+      const output = fs.readFileSync(`${buildPath}style_dictionary.class.swift`, {encoding:`UTF-8`});
 
       it(`should match snapshot`, () => {
         expect(output).toMatchSnapshot();
@@ -61,7 +69,25 @@ describe('integration', () => {
       //     expect(output).toMatchSnapshot();
       //   });
       // });
+
     });
+
+    describe(`ios-swift/enum.swift`, () => {
+      const output = fs.readFileSync(`${buildPath}style_dictionary.enum.swift`, {encoding:`UTF-8`});
+
+      it(`should match snapshot`, () => {
+        expect(output).toMatchSnapshot();
+      });
+    });
+
+    describe(`ios-swift/extension.swift`, () => {
+      const output = fs.readFileSync(`${buildPath}style_dictionary.extension.swift`, {encoding:`UTF-8`});
+
+      it(`should match snapshot`, () => {
+        expect(output).toMatchSnapshot();
+      });
+    });
+
   });
 });
 

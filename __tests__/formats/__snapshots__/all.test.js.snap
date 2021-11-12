@@ -418,9 +418,10 @@ exports[`formats all should match ios-swift/class.swift snapshot 1`] = `
 
 
 import UIKit
+import SwiftUI
 
-public class  {
-    public static let color_red = #FF0000 /* comment */
+ extension  {
+    static let color_red = #FF0000 /* comment */
 }
 "
 `;
@@ -436,9 +437,10 @@ exports[`formats all should match ios-swift/enum.swift snapshot 1`] = `
 
 
 import UIKit
+import SwiftUI
 
-public enum  {
-    public static let color_red = #FF0000 /* comment */
+ extension  {
+    static let color_red = #FF0000 /* comment */
 }
 "
 `;
@@ -456,7 +458,7 @@ exports[`formats all should match ios-swift/extension.swift snapshot 1`] = `
 import UIKit
 import SwiftUI
 
-   {
+ extension  {
     static let color_red = #FF0000 /* comment */
 }
 "
