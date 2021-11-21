@@ -599,6 +599,16 @@ exports[`formats all should match json/nested snapshot 1`] = `
 }"
 `;
 
+exports[`formats all should match json/original snapshot 1`] = `
+"{
+  \\"color\\": {
+    \\"red\\": {
+      \\"value\\": \\"#FF0000\\"
+    }
+  }
+}"
+`;
+
 exports[`formats all should match less/icons snapshot 1`] = `
 "
 // Do not edit directly
