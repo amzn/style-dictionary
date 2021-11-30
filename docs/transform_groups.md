@@ -25,7 +25,7 @@ You use transformGroups in your config file under platforms > [platform] > trans
 
 [lib/common/transformGroups.js](https://github.com/amzn/style-dictionary/blob/main/lib/common/transformGroups.js)
 
-### web 
+### web
 
 
 Transforms:
@@ -38,7 +38,7 @@ Transforms:
 
 * * *
 
-### js 
+### js
 
 
 Transforms:
@@ -51,7 +51,7 @@ Transforms:
 
 * * *
 
-### scss 
+### scss
 
 
 Transforms:
@@ -66,7 +66,7 @@ Transforms:
 
 * * *
 
-### css 
+### css
 
 
 Transforms:
@@ -81,7 +81,7 @@ Transforms:
 
 * * *
 
-### less 
+### less
 
 
 Transforms:
@@ -96,7 +96,7 @@ Transforms:
 
 * * *
 
-### html 
+### html
 
 
 Transforms:
@@ -108,7 +108,7 @@ Transforms:
 
 * * *
 
-### android 
+### android
 
 
 Transforms:
@@ -122,7 +122,7 @@ Transforms:
 
 * * *
 
-### compose 
+### compose
 
 
 Transforms:
@@ -137,7 +137,7 @@ Transforms:
 
 * * *
 
-### ios 
+### ios
 
 
 Transforms:
@@ -153,7 +153,7 @@ Transforms:
 
 * * *
 
-### ios-swift 
+### ios-swift
 
 
 Transforms:
@@ -161,6 +161,7 @@ Transforms:
 [attribute/cti](transforms.md#attributecti)
 [name/cti/camel](transforms.md#namecticamel)
 [color/UIColorSwift](transforms.md#coloruicolorswift)
+[`color/ColorSwiftUI`](transforms.md#colorcolorswiftui)
 [content/swift/literal](transforms.md#contentswiftliteral)
 [asset/swift/literal](transforms.md#assetswiftliteral)
 [size/swift/remToCGFloat](transforms.md#sizeswiftremtocgfloat)
@@ -169,7 +170,7 @@ Transforms:
 
 * * *
 
-### ios-swift-separate 
+### ios-swift-separate
 
 
 Transforms:
@@ -177,6 +178,7 @@ Transforms:
 [attribute/cti](transforms.md#attributecti)
 [name/ti/camel](transforms.md#nameticamel)
 [color/UIColorSwift](transforms.md#coloruicolorswift)
+[color/ColorSwiftUI](transforms.md#colorcolorswiftui)
 [content/swift/literal](transforms.md#contentswiftliteral)
 [asset/swift/literal](transforms.md#assetswiftliteral)
 [size/swift/remToCGFloat](transforms.md#sizeswiftremtocgfloat)
@@ -187,7 +189,7 @@ This is to be used if you want to have separate files per category and you don't
 
 * * *
 
-### assets 
+### assets
 
 
 Transforms:
@@ -197,7 +199,7 @@ Transforms:
 
 * * *
 
-### flutter 
+### flutter
 
 
 Transforms:
@@ -213,7 +215,7 @@ Transforms:
 
 * * *
 
-### flutter-separate 
+### flutter-separate
 
 
 Transforms:
@@ -231,7 +233,7 @@ This is to be used if you want to have separate files per category and you don't
 
 * * *
 
-### react-native 
+### react-native
 
 
 Transforms:
