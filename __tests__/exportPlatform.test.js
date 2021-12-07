@@ -187,4 +187,77 @@ describe('exportPlatform', () => {
     });
   });
 
+  it('should handle .value and non .value references per the W3C spec', () => {
+    const tokens = {
+      colors: {
+        red: { value: '#f00' },
+        error: { value: '{colors.red}' },
+        danger: { value: '{colors.error}' },
+        alert: { value: '{colors.error.value}' },
+      }
+    }
+
+    const expected = {
+      colors: {
+        red: {
+          value: '#f00',
+          name: 'colors-red',
+          path: ['colors','red'],
+          attributes: {
+            category: 'colors',
+            type: 'red'
+          },
+          original: {
+            value: '#f00'
+          }
+        },
+        error: {
+          value: '#f00',
+          name: 'colors-error',
+          path: ['colors','error'],
+          attributes: {
+            category: 'colors',
+            type: 'error'
+          },
+          original: {
+            value: '{colors.red}'
+          }
+        },
+        danger: {
+          value: '#f00',
+          name: 'colors-danger',
+          path: ['colors','danger'],
+          attributes: {
+            category: 'colors',
+            type: 'danger'
+          },
+          original: {
+            value: '{colors.error}'
+          }
+        },
+        alert: {
+          value: '#f00',
+          name: 'colors-alert',
+          path: ['colors','alert'],
+          attributes: {
+            category: 'colors',
+            type: 'alert'
+          },
+          original: {
+            value: '{colors.error.value}'
+          }
+        },
+      }
+    }
+
+    const actual = StyleDictionary.extend({
+      tokens,
+      platforms: {
+        css: {
+          transformGroup: `css`
+        }
+      }
+    }).exportPlatform('css');
+    expect(actual).toEqual(expected);
+  });
 });

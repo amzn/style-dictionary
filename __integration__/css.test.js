@@ -18,7 +18,7 @@ const {buildPath} = require('./_constants');
 describe('integration', () => {
   describe('css', () => {
     StyleDictionary.extend({
-      source: [`__integration__/tokens/**/*.json`],
+      source: [`__integration__/tokens/**/*.json?(c)`],
       // Testing proper string interpolation with multiple references here.
       // This is a CSS/web-specific thing so only including them in this
       // integration test.

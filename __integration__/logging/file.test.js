@@ -39,7 +39,7 @@ describe(`integration`, () => {
     describe(`file`, () => {
       it(`should warn user empty properties`, () => {
         StyleDictionary.extend({
-          source: [`__integration__/tokens/**/*.json`],
+          source: [`__integration__/tokens/**/*.json?(c)`],
           platforms: {
             css: {
               transformGroup: `css`,
@@ -58,7 +58,7 @@ describe(`integration`, () => {
       it(`should not warn user of empty properties with log level set to error`, () => {
         StyleDictionary.extend({
           logLevel: `error`,
-          source: [`__integration__/tokens/**/*.json`],
+          source: [`__integration__/tokens/**/*.json?(c)`],
           platforms: {
             css: {
               transformGroup: `css`,
@@ -75,7 +75,7 @@ describe(`integration`, () => {
 
       it(`should warn user of name collisions`, () => {
         StyleDictionary.extend({
-          source: [`__integration__/tokens/**/*.json`],
+          source: [`__integration__/tokens/**/*.json?(c)`],
           platforms: {
             css: {
               // no name transform means there will be name collisions
@@ -95,7 +95,7 @@ describe(`integration`, () => {
       it(`should not warn user of name collisions with log level set to error`, () => {
         StyleDictionary.extend({
           logLevel: `error`,
-          source: [`__integration__/tokens/**/*.json`],
+          source: [`__integration__/tokens/**/*.json?(c)`],
           platforms: {
             css: {
               // no name transform means there will be name collisions
@@ -114,7 +114,7 @@ describe(`integration`, () => {
 
       it(`should warn user of filtered references`, () => {
         StyleDictionary.extend({
-          source: [`__integration__/tokens/**/*.json`],
+          source: [`__integration__/tokens/**/*.json?(c)`],
           platforms: {
             css: {
               transformGroup: `css`,
@@ -138,7 +138,7 @@ describe(`integration`, () => {
       it(`should not warn user of filtered references with log level set to error`, () => {
         StyleDictionary.extend({
           logLevel: `error`,
-          source: [`__integration__/tokens/**/*.json`],
+          source: [`__integration__/tokens/**/*.json?(c)`],
           platforms: {
             css: {
               transformGroup: `css`,
