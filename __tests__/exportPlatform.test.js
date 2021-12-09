@@ -260,4 +260,106 @@ describe('exportPlatform', () => {
     }).exportPlatform('css');
     expect(actual).toEqual(expected);
   });
+
+  describe('token references without .value', () => {
+    const tokens = {
+      color: {
+        red: { value: '#f00' },
+        error: { value: '{color.red}' },
+        errorWithValue: { value: '{color.red.value}' },
+        danger: { value: '{color.error}' },
+        dangerWithValue: { value: '{color.error.value}' },
+        dangerErrorValue: { value: '{color.errorWithValue}' }
+      }
+    }
+
+    const actual = StyleDictionary.extend({
+      tokens,
+      platforms: {
+        css: {
+          transformGroup: 'css'
+        }
+      }
+    }).exportPlatform('css');
+
+    it('should work if referenced directly', () => {
+      expect(actual.color.error.value).toEqual('#ff0000');
+    });
+    it('should work if there is a transitive reference', () => {
+      expect(actual.color.danger.value).toEqual('#ff0000');
+    });
+    it('should work if there is a transitive reference with .value', () => {
+      expect(actual.color.errorWithValue.value).toEqual('#ff0000');
+      expect(actual.color.dangerWithValue.value).toEqual('#ff0000');
+      expect(actual.color.dangerErrorValue.value).toEqual('#ff0000');
+    });
+  });
+
+  describe('non-token references', () => {
+    const tokens = {
+      nonTokenColor: 'hsl(10,20%,20%)',
+      hue: {
+        red: '10',
+        green: '120',
+        blue: '220'
+      },
+      comment: 'hello',
+      color: {
+        red: {
+          // Note having references as part of the value,
+          // either in an object like this, or in an interpolated
+          // string like below, requires the use of transitive
+          // transforms if you want it to be transformed.
+          value: {
+            h: '{hue.red}',
+            s: '100%',
+            l: '50%'
+          }
+        },
+        blue: {
+          value: '{nonTokenColor}',
+          comment: '{comment}'
+        },
+        green: {
+          value: 'hsl({hue.green}, 50%, 50%)'
+        }
+      }
+    }
+
+    // making the css/color transform transitive so we can be sure the references
+    // get resolved properly and transformed.
+    const transitiveTransform = Object.assign({},
+      StyleDictionary.transform['color/css'],
+      {transitive: true}
+    );
+
+    const actual = StyleDictionary.extend({
+      tokens,
+      transform: {
+        transitiveTransform
+      },
+      platforms: {
+        css: {
+          transforms: [
+            'attribute/cti',
+            'name/cti/kebab',
+            'transitiveTransform'
+          ]
+        }
+      }
+    }).exportPlatform('css');
+
+    it('should work if referenced directly', () => {
+      expect(actual.color.blue.value).toEqual('#3d2c29');
+    });
+    it('should work if referenced from a non-value', () => {
+      expect(actual.color.blue.comment).toEqual(tokens.comment);
+    });
+    it('should work if interpolated', () => {
+      expect(actual.color.green.value).toEqual('#40bf40');
+    });
+    it('should work if part of an object value', () => {
+      expect(actual.color.red.value).toEqual('#ff2b00');
+    });
+  });
 });
