@@ -13,7 +13,7 @@
 const formats = require('../../lib/common/formats');
 const createDictionary = require('../../lib/utils/createDictionary');
 const createFormatArgs = require('../../lib/utils/createFormatArgs');
-var _ = require('../../lib/utils/es6_');
+const _ = require('../../lib/utils/es6_');
 
 const originalFile = {
   "destination": "__output/",
