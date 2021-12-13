@@ -420,7 +420,7 @@ exports[`formats all should match ios-swift/class.swift snapshot 1`] = `
 import UIKit
 import SwiftUI
 
- extension  {
+ class  {
     static let color_red = #FF0000 /* comment */
 }
 "
@@ -439,7 +439,7 @@ exports[`formats all should match ios-swift/enum.swift snapshot 1`] = `
 import UIKit
 import SwiftUI
 
- extension  {
+ enum  {
     static let color_red = #FF0000 /* comment */
 }
 "

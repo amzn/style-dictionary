@@ -13,7 +13,7 @@ exports[`integration swift ios-swift/class.swift should match snapshot 1`] = `
 import UIKit
 import SwiftUI
 
- extension StyleDictionary {
+ class StyleDictionary {
     static let colorBackgroundDanger = UIColor(red: 1.000, green: 0.918, blue: 0.914, alpha: 1)
     static let colorBackgroundDisabled = UIColor(red: 0.871, green: 0.882, blue: 0.882, alpha: 1)
     static let colorBackgroundInfo = UIColor(red: 0.914, green: 0.973, blue: 1.000, alpha: 1)
@@ -193,7 +193,7 @@ exports[`integration swift ios-swift/class.swift with references should match sn
 import UIKit
 import SwiftUI
 
- extension StyleDictionary {
+ class StyleDictionary {
     static let sizePaddingXl = CGFloat(16.00)
     static let sizePaddingLarge = CGFloat(16.00)
     static let sizePaddingMedium = CGFloat(16.00)
@@ -373,7 +373,7 @@ exports[`integration swift ios-swift/enum.swift should match snapshot 1`] = `
 import UIKit
 import SwiftUI
 
- extension StyleDictionary {
+ enum StyleDictionary {
     static let colorBackgroundDanger = UIColor(red: 1.000, green: 0.918, blue: 0.914, alpha: 1)
     static let colorBackgroundDisabled = UIColor(red: 0.871, green: 0.882, blue: 0.882, alpha: 1)
     static let colorBackgroundInfo = UIColor(red: 0.914, green: 0.973, blue: 1.000, alpha: 1)
