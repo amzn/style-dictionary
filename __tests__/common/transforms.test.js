@@ -416,6 +416,29 @@ describe('common', () => {
       });
     });
 
+    describe('color/ColorSwiftUI', () => {
+      it('should handle normal colors', () => {
+        var value = transforms["color/ColorSwiftUI"].transformer({
+          value: "#aaaaaa"
+        });
+        expect(value).toBe("Color(red: 0.667, green: 0.667, blue: 0.667, opacity: 1)");
+      });
+
+      it('should retain enough precision when converting to decimal', () => {
+        var value = transforms["color/ColorSwiftUI"].transformer({
+          value: "#1d1d1d"
+        });
+        expect(value).toBe("Color(red: 0.114, green: 0.114, blue: 0.114, opacity: 1)");
+      });
+
+      it('should handle colors with transparency', () => {
+        var value = transforms["color/ColorSwiftUI"].transformer({
+          value: "#aaaaaa99"
+        });
+        expect(value).toBe("Color(red: 0.667, green: 0.667, blue: 0.667, opacity: 0.6)");
+      });
+    });
+
     describe('color/hex8flutter', () => {
       it('should handle colors without alpha', () => {
         var value = transforms["color/hex8flutter"].transformer({
