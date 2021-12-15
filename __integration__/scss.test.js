@@ -19,7 +19,7 @@ const {buildPath} = require('./_constants');
 describe(`integration`, () => {
   describe(`scss`, () => {
     StyleDictionary.extend({
-      source: [`__integration__/tokens/**/*.json`],
+      source: [`__integration__/tokens/**/*.json?(c)`],
       platforms: {
         css: {
           transformGroup: `scss`,

@@ -22,7 +22,7 @@ describe('integration', () => {
       StyleDictionary.extend({
         // we are only testing showFileHeader options so we don't need
         // the full source.
-        source: [`__integration__/tokens/**/*.json`],
+        source: [`__integration__/tokens/**/*.json?(c)`],
         platforms: {
           css: {
             transformGroup: 'css',
