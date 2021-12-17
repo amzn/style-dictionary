@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.1.1](https://github.com/amzn/style-dictionary/compare/v3.1.0...v3.1.1) (2021-12-17)
+
+
+### Bug Fixes
+
+* **deps:** adding jsonc-parser to regular dependencies ([#750](https://github.com/amzn/style-dictionary/issues/750)) ([43ff607](https://github.com/amzn/style-dictionary/commit/43ff607c74de7d796fe9e68ca7e26d9bd434498e))
+
 ## [3.1.0](https://github.com/amzn/style-dictionary/compare/v3.0.3...v3.1.0) (2021-12-16)
 
 
