@@ -19,7 +19,7 @@ When you are managing user experiences, it can be quite challenging to keep styl
 [![Watch the video](assets/fake_player.png)](http://youtu.be/1HREvonfqhY)
 
 ## Experiment in the playground
-Try the browser-based Style Dictionary playground: [https://www.style-dictionary-play.dev/](https://www.style-dictionary-play.dev/), built by the folks at [\<div\>RIOTS](https://divriots.com/).
+Try the browser-based Style Dictionary playground: [https://www.style-dictionary-play.dev/](https://www.style-dictionary-play.dev/), built by the folks at [RIOTS](https://divriots.com/).
 
 ## Examples
 [See examples of Style Dictionary here](examples.md)
