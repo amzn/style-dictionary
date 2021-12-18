@@ -380,6 +380,9 @@ which uses: prefix, indentation, separator, suffix, and commentStyle.
     </tr><tr>
     <td>options.formatting</td><td><code>Object</code></td><td><p>Custom formatting properties that define parts of a declaration line in code. The configurable strings are: prefix, indentation, separator, suffix, and commentStyle. Those are used to generate a line like this: <code>${indentation}${prefix}${prop.name}${separator} ${prop.value}${suffix}</code></p>
 </td>
+    </tr><tr>
+    <td>options.themeable</td><td><code>Boolean</code></td><td><p>[false] - Whether tokens should default to being themeable.</p>
+</td>
     </tr>  </tbody>
 </table>
 
@@ -434,7 +437,7 @@ default file header.
 StyleDictionary.registerFormat({
   name: 'myCustomFormat',
   formatter: function({ dictionary, file }) {
-    return fileHeader({file, 'short') +
+    return fileHeader({file, commentStyle: 'short'}) +
       dictionary.allTokens.map(token => `${token.name} = ${token.value}`)
         .join('\n');
   }
@@ -469,6 +472,9 @@ This is used to create lists of variables like Sass variables or CSS custom prop
     </tr><tr>
     <td>options.formatting</td><td><code>Object</code></td><td><p>Custom formatting properties that define parts of a declaration line in code. This will get passed to <code>formatHelpers.createPropertyFormatter</code> and used for the <code>lineSeparator</code> between lines of code.</p>
 </td>
+    </tr><tr>
+    <td>options.themeable</td><td><code>Boolean</code></td><td><p>[false] - Whether tokens should default to being themeable.</p>
+</td>
     </tr>  </tbody>
 </table>
 
@@ -488,7 +494,7 @@ StyleDictionary.registerFormat({
 > formatHelpers.getTypeScriptType(value) ⇒ <code>String</code>
 
 Given some value, returns a basic valid TypeScript type for that value.
-Supports numbers, strings, booleans, and arrays of any of those types.
+Supports numbers, strings, booleans, arrays and objects of any of those types.
 
 **Returns**: <code>String</code> - A valid name for a TypeScript type.
 ```  
@@ -767,7 +773,7 @@ $tokens: (
 
 Creates a SCSS file with a deep map based on the style dictionary.
 
-Note that `options.themeable` defaults to `true` by default, unlike the [scss/variables](scss/variables) format, for backwards compatibility.
+Name the map by adding a 'mapName' attribute on the file object in your config.
 
 <table>
   <thead>
@@ -779,16 +785,10 @@ Note that `options.themeable` defaults to `true` by default, unlike the [scss/va
 <tr>
     <td>options</td><td><code>Object</code></td><td></td><td></td>
     </tr><tr>
-    <td>[options.mapName]</td><td><code>String</code></td><td><code>tokens</code></td><td><p>Name the Sass map</p>
-</td>
-    </tr><tr>
-    <td>[options.showFileHeader]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not to include a comment that has the build date</p>
-</td>
-    </tr><tr>
-    <td>[options.themeable]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not to add the `!default` flag on Sass variables by default. This may be overridden by setting a `themeable` attribute in a <a href="/#/tokens?id=design-token-attributes">token's definition</a>.</p>
-</td>
-    </tr><tr>
     <td>[options.outputReferences]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to keep <a href="/#/formats?id=references-in-output-files">references</a> (a -&gt; b -&gt; c) in the output.</p>
+</td>
+    </tr><tr>
+    <td>[options.themeable]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not tokens should default to being themeable, if not otherwise specified per token.</p>
 </td>
     </tr>  </tbody>
 </table>
@@ -815,6 +815,8 @@ $tokens: {
 
 Creates a SCSS file with variable definitions based on the style dictionary.
 
+Add `!default` to any variable by setting a `themeable: true` attribute in the token's definition.
+
 <table>
   <thead>
     <tr>
@@ -828,10 +830,10 @@ Creates a SCSS file with variable definitions based on the style dictionary.
     <td>[options.showFileHeader]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not to include a comment that has the build date</p>
 </td>
     </tr><tr>
-    <td>[options.themeable]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to add the `!default` flag on Sass variables by default. This may be overridden by setting a `themeable` attribute in a <a href="/#/tokens?id=design-token-attributes">token's definition</a>.</p>
+    <td>[options.outputReferences]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to keep <a href="/#/formats?id=references-in-output-files">references</a> (a -&gt; b -&gt; c) in the output.</p>
 </td>
     </tr><tr>
-    <td>[options.outputReferences]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to keep <a href="/#/formats?id=references-in-output-files">references</a> (a -&gt; b -&gt; c) in the output.</p>
+    <td>[options.themeable]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not tokens should default to being themeable, if not otherwise specified per token.</p>
 </td>
     </tr>  </tbody>
 </table>

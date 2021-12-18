@@ -18,7 +18,7 @@ const {buildPath} = require('./_constants');
 describe('integration', () => {
   describe('compose', () => {
     StyleDictionary.extend({
-      source: [`__integration__/tokens/**/*.json`],
+      source: [`__integration__/tokens/**/*.json?(c)`],
       platforms: {
         compose: {
           transformGroup: `compose`,
