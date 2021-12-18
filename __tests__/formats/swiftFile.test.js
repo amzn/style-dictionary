@@ -23,7 +23,8 @@ const originalFile = {
     "attributes": {
       "category": "color"
     }
-  }
+  },
+  "options": {}
 };
 
 var file = {}
@@ -62,7 +63,7 @@ describe('formats', () => {
     });
 
     it('with import override should match snapshot', () => {
-      file.import = ["UIKit", "AnotherModule"];
+      file.options.import = ["UIKit", "AnotherModule"];
       expect(format(createFormatArgs({
         dictionary,
         file,
@@ -71,7 +72,7 @@ describe('formats', () => {
     });
 
     it('with objectType override should match snapshot', () => {
-      file.objectType = "struct"
+      file.options.objectType = "struct"
       expect(format(createFormatArgs({
         dictionary,
         file,
@@ -80,7 +81,7 @@ describe('formats', () => {
     });
 
     it('with access control override should match snapshot', () => {
-      file.accessControl = "internal"
+      file.options.accessControl = "internal"
       expect(format(createFormatArgs({
         dictionary,
         file,
