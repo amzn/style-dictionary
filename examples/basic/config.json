@@ -107,10 +107,13 @@
       },{
         "destination": "StyleDictionary+Struct.swift",
         "format": "ios-swift/any.swift",
-        "objectType": "struct",
-        "accessControl": "internal",
         "className": "StyleDictionaryStruct",
-        "filter": {}
+        "filter": {},
+        "options": {
+          "imports": "SwiftUI",
+          "objectType": "struct",
+          "accessControl": "internal"
+        }
       }]
     },
     "ios-swift-separate-enums": {
