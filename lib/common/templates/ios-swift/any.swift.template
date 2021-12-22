@@ -17,10 +17,13 @@
 // <%= file.destination %>
 //
 <%= fileHeader({file, commentStyle: 'short'}) %>
-import UIKit
+<%= options.import.map(function(item) {
+    return 'import ' + item
+  }).join('\n')
+%>
 
-public class <%= file.className %> {
+<%= options.accessControl %><%= options.objectType %> <%= file.className %> {
     <%= allTokens.map(function(prop) {
-      return 'public static let ' + formatProperty(prop);
+      return options.accessControl + 'static let ' + formatProperty(prop);
     }).join('\n    ') %>
 }
