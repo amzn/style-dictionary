@@ -9,7 +9,9 @@ describe('integration', () => {
         color: {
           red: { value: '#f00' },
           error: { value: '🐈color/red/value🐈‍⬛' }
-        }
+        },
+        // this should NOT resolve
+        test: { value: '{color.red.value}' }
       },
       separator: '/',
       opening_character: '🐈',
