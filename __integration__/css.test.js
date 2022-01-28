@@ -40,7 +40,8 @@ describe('integration', () => {
             destination: 'variablesWithReferences.css',
             format: 'css/variables',
             options: {
-              outputReferences: true
+              outputReferences: true,
+              outputReferenceFallbacks: true
             }
           },{
             destination: 'variablesWithSelector.css',
