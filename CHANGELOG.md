@@ -2,6 +2,41 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.1.1](https://github.com/amzn/style-dictionary/compare/v3.1.0...v3.1.1) (2021-12-17)
+
+
+### Bug Fixes
+
+* **deps:** adding jsonc-parser to regular dependencies ([#750](https://github.com/amzn/style-dictionary/issues/750)) ([43ff607](https://github.com/amzn/style-dictionary/commit/43ff607c74de7d796fe9e68ca7e26d9bd434498e))
+
+## [3.1.0](https://github.com/amzn/style-dictionary/compare/v3.0.3...v3.1.0) (2021-12-16)
+
+
+### Features
+
+* **formats:** Add `outputReferences` support to `scss/map-deep` ([#720](https://github.com/amzn/style-dictionary/issues/720)) ([65453e0](https://github.com/amzn/style-dictionary/commit/65453e0d980273aeeb1a201a1996c4ad3a5719a5)), closes [#712](https://github.com/amzn/style-dictionary/issues/712)
+* **formats:** add support for Microsoft's JSONC format ([#732](https://github.com/amzn/style-dictionary/issues/732)) ([cfa83cb](https://github.com/amzn/style-dictionary/commit/cfa83cb65b7ec7b3e5a9def7f0ceb6ac3b2898df)), closes [#698](https://github.com/amzn/style-dictionary/issues/698)
+* **formats:** object handling for typescript/es6-declarations ([#718](https://github.com/amzn/style-dictionary/issues/718)) ([4e3905a](https://github.com/amzn/style-dictionary/commit/4e3905a7a3525f872615adaf0cae0b5553309bb6))
+* **references:** ability to reference other tokens without 'value' ([#746](https://github.com/amzn/style-dictionary/issues/746)) ([c6f482e](https://github.com/amzn/style-dictionary/commit/c6f482e2845f8e13e579ffc858b0e53b9155a47e))
+* **transforms:** add transformer for Color class from SwiftUI ([#733](https://github.com/amzn/style-dictionary/issues/733)) ([439e474](https://github.com/amzn/style-dictionary/commit/439e474aee9da8390f447f31d412e496c45b4605))
+
+
+### Bug Fixes
+
+* **cli:** fixing unknown commands message ([#747](https://github.com/amzn/style-dictionary/issues/747)) ([8a5f047](https://github.com/amzn/style-dictionary/commit/8a5f047af4a97a51894d4dfe4c917bf91686db8e))
+* **examples:** Watch correct directory ([#739](https://github.com/amzn/style-dictionary/issues/739)) ([56574a4](https://github.com/amzn/style-dictionary/commit/56574a4247eafc79a843e80f433feaf025142ff8)), closes [#705](https://github.com/amzn/style-dictionary/issues/705)
+* **types:** adding registerFileHeader type ([#722](https://github.com/amzn/style-dictionary/issues/722)) ([54332b3](https://github.com/amzn/style-dictionary/commit/54332b3e4ee77a0b0e8f84836413949f8e64ccd5)), closes [#665](https://github.com/amzn/style-dictionary/issues/665)
+* **types:** fixing transform group types ([#729](https://github.com/amzn/style-dictionary/issues/729)) ([ad7f6ea](https://github.com/amzn/style-dictionary/commit/ad7f6ea555ec77defd264c9ade9628aefd108959))
+* **types:** make FileHeaderArgs.commentStyle optional ([#743](https://github.com/amzn/style-dictionary/issues/743)) ([401d93b](https://github.com/amzn/style-dictionary/commit/401d93b72caf02cec34fba3c214edfdd5d52b362))
+
+### [3.0.3](https://github.com/amzn/style-dictionary/compare/v3.0.2...v3.0.3) (2021-10-15)
+
+
+### Bug Fixes
+
+* **types:** `className` optional parameter ([#683](https://github.com/amzn/style-dictionary/issues/683)) ([639d7da](https://github.com/amzn/style-dictionary/commit/639d7daa49fccdf569ec39a14953e366df1d7908)), closes [/github.com/amzn/style-dictionary/blob/main/examples/basic/config.json#L100](https://github.com/amzn//github.com/amzn/style-dictionary/blob/main/examples/basic/config.json/issues/L100)
+* **types:** added `name` to format, and export `Named` ([#714](https://github.com/amzn/style-dictionary/issues/714)) ([9ca0f6f](https://github.com/amzn/style-dictionary/commit/9ca0f6fc5d01706bf6864a2ea0fababb191f30f4))
+
 ### [3.0.2](https://github.com/amzn/style-dictionary/compare/v3.0.1...v3.0.2) (2021-08-19)
 
 

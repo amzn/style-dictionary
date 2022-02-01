@@ -1,0 +1,98 @@
+{
+  // some comment
+  "source": ["test/properties/**/*.json"],
+  "platforms": {
+    "web": {
+      "transformGroup": "web",
+      "prefix": "smop",
+      "buildPath": "test/output/web/",
+      "files": [
+        {
+          "destination": "_icons.css",
+          "format": "scss/icons"
+        },
+        {
+          "destination": "_variables.css",
+          "format": "scss/variables"
+        },
+        {
+          "destination": "_styles.js",
+          "format": "javascript/module"
+        }
+      ]
+    },
+    "scss": {
+      "transformGroup": "scss",
+      "prefix": "smop",
+      "buildPath": "test/output/scss/",
+      "files": [
+        {
+          "destination": "_icons.scss",
+          "format": "scss/icons"
+        },
+        {
+          "destination": "_variables.scss",
+          "format": "scss/variables"
+        }
+      ]
+    },
+    "less": {
+      "transformGroup": "less",
+      "prefix": "smop",
+      "buildPath": "test/output/less/",
+      "files": [
+        {
+          "destination": "_icons.less",
+          "format": "less/icons"
+        },
+        {
+          "destination": "_variables.less",
+          "format": "less/variables"
+        }
+      ]
+    },
+    "android": {
+      "transformGroup": "android",
+      "buildPath": "test/output/",
+      "files": [
+        {
+          "destination": "android/colors.xml",
+          "template": "android/colors"
+        },
+        {
+          "destination": "android/font_dimen.xml",
+          "template": "android/fontDimens"
+        },
+        {
+          "destination": "android/dimens.xml",
+          "template": "android/dimens"
+        }
+      ],
+      "actions": ["android/copyImages"]
+    },
+    "ios": {
+      "transformGroup": "ios",
+      "buildPath": "test/output/ios/",
+      "files": [
+        {
+          "destination": "style_dictionary.plist",
+          "template": "ios/plist"
+        },
+        {
+          "destination": "style_dictionary.h",
+          "template": "ios/macros"
+        }
+      ]
+    },
+    "react-native": {
+      "transformGroup": "react-native",
+      "buildPath": "__tests__/__output/react-native/",
+      "files": [
+        {
+          "destination": "style_dictionary.js",
+          "format": "javascript/es6"
+        }
+      ]
+    }
+  }
+}

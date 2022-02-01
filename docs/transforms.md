@@ -4,7 +4,7 @@ EDIT scripts/handlebars/templates/api.hbs OR JSDOC COMMENT INSTEAD!
 -->
 # Transforms
 
-Transforms are functions that modify a [token](tokens.md) so that it can be understood by a specific platform. It can modify the name, value, or attributes of a token - enabling each platform to use the design token in different ways. A simple example is changing pixel values to point values for iOS and dp or sp for Android. Transforms are isolated per platform; each platform begins with the same design token and makes the modifications it needs without affecting other platforms. The order you use transforms matters because transforms are performed sequentially. Transforms are used in your [configuration](config.md), and can be either [pre-defined transforms](transforms.md?id=defining-custom-transforms) supplied by Style Dictionary or [custom transforms](transforms.md?id=defining-custom-transforms).
+Transforms are functions that modify a [token](tokens.md) so that it can be understood by a specific platform. It can modify the name, value, or attributes of a token - enabling each platform to use the design token in different ways. A simple example is changing pixel values to point values for iOS and dp or sp for Android. Transforms are isolated per platform; each platform begins with the same design token and makes the modifications it needs without affecting other platforms. The order you use transforms matters because transforms are performed sequentially. Transforms are used in your [configuration](config.md), and can be either [pre-defined transforms](transforms.md?id=pre-defined-transforms) supplied by Style Dictionary or [custom transforms](transforms.md?id=defining-custom-transforms).
 
 ## Using Transforms
 You use transforms in your config file under platforms > [platform] > transforms
@@ -371,6 +371,20 @@ Transforms the value into an UIColor swift class for iOS
 // Matches: token.attributes.category === 'color'
 // Returns:
 UIColor(red: 0.667, green: 0.667, blue: 0.667, alpha: 0.6)
+```
+
+
+* * *
+
+### color/ColorSwiftUI 
+
+
+Transforms the value into an UIColor swift class for iOS
+
+```swift
+// Matches: token.attributes.category === 'color'
+// Returns:
+Color(red: 0.667, green: 0.667, blue: 0.667, opacity: 0.6)
 ```
 
 

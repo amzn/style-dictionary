@@ -28,7 +28,7 @@ import {Platform as _Platform} from './Platform';
 import {Transform as _Transform} from './Transform';
 import {TransformedToken as _TransformedToken, TransformedTokens as _TransformedTokens} from './TransformedToken';
 import {TransformGroup as _TransformGroup} from './TransformGroup';
-import {Named} from './_helpers';
+import {Named as _Named} from './_helpers';
 
 // Because this library is used in Node and needs to be accessible
 // as a CommonJS module, we are declaring it as a namespace so that
@@ -51,6 +51,7 @@ declare namespace StyleDictionary {
   type TransformedToken = _TransformedToken;
   type TransformedTokens = _TransformedTokens;
   type TransformGroup = _TransformGroup;
+  type Named<T> = _Named<T>
 
   interface Core {
     VERSION: string;
@@ -61,7 +62,7 @@ declare namespace StyleDictionary {
     options: Config;
 
     transform: Record<string, Transform>;
-    transformGroup: Record<string, TransformGroup>;
+    transformGroup: Record<string, TransformGroup['transforms']>;
     format: Record<string, Format>;
     action: Record<string, Action>;
     filter: Record<string, Filter>;
@@ -163,9 +164,29 @@ declare namespace StyleDictionary {
     registerFilter(filter: Named<Filter>): this;
 
     /**
+     * Add a custom file header to Style Dictionary. File headers are used to write a
+     * custom messasge on top of the generated files.
+     * @param {String} fileHeader.name The name of the file header to be added
+     * @param {Function} fileHeader.fileHeader The file header function
+     * @example
+     * ```js
+     * StyleDictionary.registerFileHeader({
+     *   name: 'custmoHeader',
+     *   fileHeader: function(defaultMessage) {
+     *      return return [
+     *        `hello`,
+     *        ...defaultMessage
+     *      ]
+     *   }
+     * })
+     * ```
+     */
+     registerFileHeader(fileHeader: Named<{ fileHeader: FileHeader }>): this;
+
+    /**
      * Adds a custom parser to parse style dictionary files. This allows you to modify
      * the design token data before it gets to Style Dictionary or write your
-     * token files in a language other than JSON, JSON5, or CommonJS modules.
+     * token files in a language other than JSON, JSONC, JSON5, or CommonJS modules.
      *
      * @param {Regex} parser.pattern - A file path regular expression to match which files this parser should be be used on. This is similar to how webpack loaders work. `/\.json$/` will match any file ending in '.json', for example.
      * @param {Function} parser.parse - Function to parse the file contents. Takes 1 argument, which is an object with 2 attributes: contents which is the string of the file contents and filePath. The function should return a plain Javascript object.

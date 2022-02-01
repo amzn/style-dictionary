@@ -42,5 +42,6 @@ export interface FormatterArguments {
 export type Formatter = (arguments: FormatterArguments) => string;
 
 export interface Format {
+  name: string;
   formatter: Formatter;
 }

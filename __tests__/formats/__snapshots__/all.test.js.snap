@@ -407,6 +407,24 @@ NSString * const color_red = #FF0000;
 "
 `;
 
+exports[`formats all should match ios-swift/any.swift snapshot 1`] = `
+"
+//
+// __output/
+//
+
+// Do not edit directly
+// Generated on Sat, 01 Jan 2000 00:00:00 GMT
+
+
+import UIKit
+
+public class  {
+    public static let color_red = #FF0000 /* comment */
+}
+"
+`;
+
 exports[`formats all should match ios-swift/class.swift snapshot 1`] = `
 "
 //

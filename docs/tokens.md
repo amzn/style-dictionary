@@ -37,7 +37,7 @@ For any design tokens you wish to output, the "value" attribute is required. Thi
 | comment | String (optional) | The comment attribute will show up in a code comment in output files if the format supports it.
 | themeable | Boolean (optional) | This is used in formats that support override-able or themable values like the `!default` flag in Sass.
 | name | String (optional) | Usually the name for a design token is generated with a [name transform](transforms.md#transform-types), but you can write your own if you choose. By default Style Dictionary will add a default name which is the key of the design token object.
-| attributes | Object (optional) | Extra information about the design token you want to include. [Attribute transforms](transforms.md#transform-types) will modify this object so be careful 
+| attributes | Object (optional) | Extra information about the design token you want to include. [Attribute transforms](transforms.md#transform-types) will modify this object so be careful
 
 You can add any attributes or data you want in a design token and Style Dictionary will pass it along to transforms and formats. For example, you could add a `deprecated` flag like in [this example](https://github.com/amzn/style-dictionary/tree/main/examples/advanced/tokens-deprecation). Other things you can do is add documentation information about each design token or information about color contrast.
 
@@ -128,6 +128,7 @@ See more in the advanced [referencing-aliasing example](https://github.com/amzn/
 Design token files can included inline in the configuration, or be written in separate files. Style Dictionary supports these languages for design token files:
 
 * JSON
+* [JSONC](https://code.visualstudio.com/docs/languages/json#_json-with-comments)
 * [JSON5](https://json5.org)
 * CommonJS modules
 * Potentially any language with [custom parsers](#customfileparsers)
@@ -359,12 +360,13 @@ Everything under this category is a color. You can further organize by backgroun
 * [`color/hex8android`](transforms.md#colorhex8android)
 * [`color/UIColor`](transforms.md#coloruicolor)
 * [`color/UIColorSwift`](transforms.md#coloruicolorswift)
+* [`color/ColorSwiftUI`](transforms.md#colorcolorswiftui)
 * [`color/css`](transforms.md#colorcss)
 * [`color/sketch`](transforms.md#colorsketch)
 * [`color/hex8flutter`](transforms.md#colorhex8flutter)
 
 #### Category: size
-Most platforms any type of size is treated the same. On Android it is common to use SP for font sizes and DP for paddings and dimensions. 
+Most platforms any type of size is treated the same. On Android it is common to use SP for font sizes and DP for paddings and dimensions.
 * [`size/sp`](transforms.md#sizesp)
 * [`size/dp`](transforms.md#sizedp)
 * [`size/object`](transforms.md#sizeobject)

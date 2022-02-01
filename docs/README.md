@@ -18,12 +18,15 @@ When you are managing user experiences, it can be quite challenging to keep styl
 ## Watch the Demo on Youtube
 [![Watch the video](assets/fake_player.png)](http://youtu.be/1HREvonfqhY)
 
+## Experiment in the playground
+Try the browser-based Style Dictionary playground: [https://www.style-dictionary-play.dev/](https://www.style-dictionary-play.dev/), built by the folks at [\<div\>RIOTS](https://divriots.com/).
+
 ## Examples
 [See examples of Style Dictionary here](examples.md)
 
 ## The Basics
 __A style dictionary consists of:__
-1. [Design tokens](tokens.md), organized in JSON, JSON5, or JS files
+1. [Design tokens](tokens.md), organized in JSON, JSONC, JSON5, or JS files
 1. Static assets (e.g. fonts, icons, images, sounds, etc.), organized into folders
 1. [Configuration](config.md), defining the [transformation](transforms.md) and [formatting](formats.md) of the tokens and assets for each output platform
 
