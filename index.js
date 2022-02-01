@@ -43,7 +43,7 @@ var StyleDictionary = {
   format: require('./lib/common/formats'),
   action: require('./lib/common/actions'),
   formatHelpers: require('./lib/common/formatHelpers'),
-  filter: {}, // we need to initialise the object, since we don't have built-in filters
+  filter: require('./lib/common/filters'),
   parsers: [], // ditto ^
   fileHeader: {},
 
