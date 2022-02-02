@@ -1,6 +1,5 @@
 const fs = require('fs-extra');
 const glob = require('glob');
-const path = require('path');
 const execSync = require('child_process').execSync;
 const PACKAGE = require('../package.json');
 const packageJSONs = glob.sync('./examples/*/*/package.json', {});
