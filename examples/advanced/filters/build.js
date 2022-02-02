@@ -1,4 +1,4 @@
-const StyleDictionary = require('style-dictionary');
+const StyleDictionary = require('../../../index');
 
 console.log('Build started...');
 console.log('\n==============================================');
