@@ -10,11 +10,11 @@ StyleDictionary.registerTransform({
   name: 'hexRGB/hexARGB',
   type: 'value',
   matcher: function(token) {
-      return token.group === 'color';
+    return token.group === 'color';
   },
   transformer: function(token) {
-      // for sake of simplicity, in this example we assume colors are always in the format #xxxxxx
-      return token.value.replace(/^#/,'#FF');
+    // for sake of simplicity, in this example we assume colors are always in the format #xxxxxx
+    return token.value.replace(/^#/,'#FF');
   }
 });
 
