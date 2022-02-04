@@ -4,17 +4,12 @@ console.log('Build started...');
 console.log('\n==============================================');
 
 
-// REGISTER THE CUSTOM TRANFORMS
+// REGISTER THE CUSTOM FILTERS
 
-StyleDictionary.registerTransform({
-  name: 'hexRGB/hexARGB',
-  type: 'value',
+StyleDictionary.registerFilter({
+  name: 'removeBigSpacing',
   matcher: function(token) {
-    return token.group === 'color';
-  },
-  transformer: function(token) {
-    // for sake of simplicity, in this example we assume colors are always in the format #xxxxxx
-    return token.value.replace(/^#/,'#FF');
+    return token.group === 'spacing' && token.value < 0.5
   }
 });
 

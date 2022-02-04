@@ -5,7 +5,7 @@
       "buildPath": "build/web/",
       "files": [{
         "destination": "tokens.js",
-        "filter": "removePrivate",
+        "filter": "removeBigSpacing",
         "format": "javascript/es6"
       }]
     },
@@ -13,7 +13,7 @@
       "buildPath": "build/web/",
       "files": [{
         "destination": "tokens.scss",
-        "filter": "removePrivate",
+        "filter": "removeBigSpacing",
         "format": "scss/variables"
       }]
     }
