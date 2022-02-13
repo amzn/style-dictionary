@@ -19,9 +19,15 @@ StyleDictionary.registerFormat({
   name: 'font-face',
   formatter: ({ dictionary: { allTokens }, options }) => {
     const fontPathPrefix = options.fontPathPrefix || '../';
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/src
     const formatsMap = {
       'woff2': 'woff2',
       'woff': 'woff',
+      'ttf': 'truetype',
+      'otf': 'opentype',
+      'svg': 'svg',
+      'eot': 'embedded-opentype'
     };
 
     return allTokens.reduce((fontList, prop) => {
