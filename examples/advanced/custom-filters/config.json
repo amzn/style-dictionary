@@ -1,0 +1,21 @@
+{
+  "source": ["tokens/**/*.json"],
+  "platforms": {
+    "web": {
+      "buildPath": "build/web/",
+      "files": [{
+        "destination": "tokens.js",
+        "filter": "removeBigSpacing",
+        "format": "javascript/es6"
+      }]
+    },
+    "scss": {
+      "buildPath": "build/web/",
+      "files": [{
+        "destination": "tokens.scss",
+        "filter": "removeBigSpacing",
+        "format": "scss/variables"
+      }]
+    }
+  }
+}
