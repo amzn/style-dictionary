@@ -20,7 +20,7 @@ import {Dictionary as _Dictionary} from './Dictionary';
 import {File as _File} from './File';
 import {FileHeader as _FileHeader} from './FileHeader';
 import {Filter as _Filter} from './Filter';
-import {Format as _Format} from './Format';
+import {Format as _Format, Formatter as _Formatter } from './Format';
 import {FormatHelpers as _FormatHelpers} from './FormatHelpers';
 import {Options as _Options} from './Options';
 import {Parser as _Parser} from './Parser';
@@ -44,6 +44,7 @@ declare namespace StyleDictionary {
   type Filter = _Filter;
   type Format = _Format;
   type FormatHelpers = _FormatHelpers;
+  type Formatter = _Formatter;
   type Options = _Options;
   type Parser = _Parser;
   type Platform = _Platform;
@@ -63,7 +64,7 @@ declare namespace StyleDictionary {
 
     transform: Record<string, Transform>;
     transformGroup: Record<string, TransformGroup['transforms']>;
-    format: Record<string, Format>;
+    format: Record<string, Formatter>;
     action: Record<string, Action>;
     filter: Record<string, Filter>;
     fileHeader: Record<string, FileHeader>;
