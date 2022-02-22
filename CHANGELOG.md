@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.7.0](https://github.com/amzn/style-dictionary/compare/v3.1.1...v3.7.0) (2022-02-22)
+
+
+### Features
+
+* **filter:** Added new filter `removePrivate` ([#770](https://github.com/amzn/style-dictionary/issues/770)) ([3217ba3](https://github.com/amzn/style-dictionary/commit/3217ba365770ea18b9bdf6e5abfcb205268ac936)), closes [#704](https://github.com/amzn/style-dictionary/issues/704)
+* **formats:** any swift format ([#734](https://github.com/amzn/style-dictionary/issues/734)) ([9859a8d](https://github.com/amzn/style-dictionary/commit/9859a8dc852a4db1e217880d778c7bed29dd5e40))
+
+
+### Bug Fixes
+
+* **examples:** complete example style dictionary version to latest ([#755](https://github.com/amzn/style-dictionary/issues/755)) ([c3aae93](https://github.com/amzn/style-dictionary/commit/c3aae93c2dc35eeafdd8dbc2072daebb9c37fb86))
+* **types:** Correct type of  `Core.format` ([#780](https://github.com/amzn/style-dictionary/issues/780)) ([9868b7e](https://github.com/amzn/style-dictionary/commit/9868b7e1ff4768c84a0f632db500dba6e18a6f44)), closes [#779](https://github.com/amzn/style-dictionary/issues/779)
+
 ### [3.1.1](https://github.com/amzn/style-dictionary/compare/v3.1.0...v3.1.1) (2021-12-17)
 
 
