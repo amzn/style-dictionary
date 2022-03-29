@@ -4,7 +4,13 @@ EDIT scripts/handlebars/templates/api.hbs OR JSDOC COMMENT INSTEAD!
 -->
 # Transforms
 
-Transforms are functions that modify a [token](tokens.md) so that it can be understood by a specific platform. It can modify the name, value, or attributes of a token - enabling each platform to use the design token in different ways. A simple example is changing pixel values to point values for iOS and dp or sp for Android. Transforms are isolated per platform; each platform begins with the same design token and makes the modifications it needs without affecting other platforms. The order you use transforms matters because transforms are performed sequentially. Transforms are used in your [configuration](config.md), and can be either [pre-defined transforms](transforms.md?id=pre-defined-transforms) supplied by Style Dictionary or [custom transforms](transforms.md?id=defining-custom-transforms).
+Transforms are functions that modify a [token](tokens.md) so that it can be understood by a specific platform. It can modify the name, value, or attributes of a token - enabling each platform to use the design token in different ways. A simple example is changing pixel values to point values for iOS and dp or sp for Android.  
+
+Transforms are isolated per platform; each platform begins with the same design token and makes the modifications it needs without affecting other platforms. The order you use transforms matters because transforms are performed sequentially. Transforms are used in your [configuration](config.md), and can be either [pre-defined transforms](transforms.md?id=pre-defined-transforms) supplied by Style Dictionary or [custom transforms](transforms.md?id=defining-custom-transforms).  
+
+Some platform configuration attributes apply a broader effect over the transforms applied. For example, the `size/remToDp` transform will scale a number by 16, or by the value of `options.basePxFontSize` if it is present. Check individual transform documentation to see where this is applicable.
+
+
 
 ## Using Transforms
 You use transforms in your config file under platforms > [platform] > transforms
@@ -476,7 +482,7 @@ Transforms the value into a usefull object ( for React Native support )
 ### size/remToSp 
 
 
-Transforms the value from a REM size on web into a scale-independent pixel (sp) value for font sizes on Android. It WILL scale the number by a factor of 16 (common base font size on web).
+Transforms the value from a REM size on web into a scale-independent pixel (sp) value for font sizes on Android. It WILL scale the number by a factor of 16 (or the value of 'basePxFontSize' on the platform in your config).
 
 ```js
 // Matches: token.attributes.category === 'size' && token.attributes.type === 'font'
@@ -546,7 +552,7 @@ Scales the number by 16 (or the value of 'basePxFontSize' on the platform in you
 ### size/compose/remToSp 
 
 
-Transforms the value from a REM size on web into a scale-independent pixel (sp) value for font sizes in Compose. It WILL scale the number by a factor of 16 (common base font size on web).
+Transforms the value from a REM size on web into a scale-independent pixel (sp) value for font sizes in Compose. It WILL scale the number by a factor of 16 (or the value of 'basePxFontSize' on the platform in your config).
 
 ```kotlin
 // Matches: prop.attributes.category === 'size' && prop.attributes.type === 'font'
