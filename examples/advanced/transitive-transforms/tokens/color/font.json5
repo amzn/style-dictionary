@@ -3,7 +3,7 @@
     font: {
       primary: { value: "{color.core.black.value}" },
       secondary: {
-        value: "{color.font.primary.value}",
+        value: "{color.font.primary}",
         modify: [{
           type: "brighten",
           // See https://gka.github.io/chroma.js/#color-brighten
@@ -13,7 +13,7 @@
       },
       tertiary: {
         // transitive transforms allow you to modify a modified reference
-        value: "{color.font.secondary.value}",
+        value: "{color.font.secondary}",
         modify: [{
           // this will brighten the secondary value, which is a brightened version
           // of primary

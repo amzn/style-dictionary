@@ -85,6 +85,32 @@ describe('exportPlatform', () => {
     expect(dictionary.color.button.hover.value).toEqual('#0077CC-darker-darker');
   });
 
+  it('should have transitive transforms applied without .value in references', () => {
+    const dictionary = StyleDictionary.extend({
+      tokens: {
+        one: { value: 'foo' },
+        two: { value: '{one}' },
+        three: { value: '{two}' }
+      },
+      transform: {
+        transitive: {
+          type: 'value',
+          transitive: true,
+          transformer: (token) => `${token.value}-bar`
+        }
+      },
+      platforms: {
+        test: {
+          transforms: ['transitive']
+        }
+      }
+    }).exportPlatform('test');
+
+    expect(dictionary.one.value).toEqual('foo-bar');
+    expect(dictionary.two.value).toEqual('foo-bar-bar');
+    expect(dictionary.three.value).toEqual('foo-bar-bar-bar');
+  });
+
   it('should not have mutated the original properties', () => {
     var dictionary = styleDictionary.exportPlatform('web');
     expect(dictionary.color.font.link.value).not.toEqual(styleDictionary.properties.color.font.link.value);
