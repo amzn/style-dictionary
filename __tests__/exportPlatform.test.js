@@ -85,6 +85,44 @@ describe('exportPlatform', () => {
     expect(dictionary.color.button.hover.value).toEqual('#0077CC-darker-darker');
   });
 
+  it('should have transitive transforms applied without .value in references', () => {
+    const dictionary = StyleDictionary.extend({
+      tokens: {
+        one: { value: 'foo' },
+        two: { value: '{one.value}' },
+        three: { value: '{two}' },
+        four: { value: '{one}' },
+        five: { value: '{four.value}' },
+        six: { value: '{one}' },
+        seven: { value: '{six}'},
+        eight: { value: '{one.value}' },
+        nine: { value: '{eight.value}' }
+      },
+      transform: {
+        transitive: {
+          type: 'value',
+          transitive: true,
+          transformer: (token) => `${token.value}-bar`
+        }
+      },
+      platforms: {
+        test: {
+          transforms: ['transitive']
+        }
+      }
+    }).exportPlatform('test');
+
+    expect(dictionary.one.value).toEqual('foo-bar');
+    expect(dictionary.two.value).toEqual('foo-bar-bar');
+    expect(dictionary.three.value).toEqual('foo-bar-bar-bar');
+    expect(dictionary.four.value).toEqual('foo-bar-bar');
+    expect(dictionary.five.value).toEqual('foo-bar-bar-bar');
+    expect(dictionary.six.value).toEqual('foo-bar-bar');
+    expect(dictionary.seven.value).toEqual('foo-bar-bar-bar');
+    expect(dictionary.eight.value).toEqual('foo-bar-bar');
+    expect(dictionary.nine.value).toEqual('foo-bar-bar-bar');
+  });
+
   it('should not have mutated the original properties', () => {
     var dictionary = styleDictionary.exportPlatform('web');
     expect(dictionary.color.font.link.value).not.toEqual(styleDictionary.properties.color.font.link.value);
