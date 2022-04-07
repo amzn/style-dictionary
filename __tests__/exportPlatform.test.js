@@ -89,8 +89,14 @@ describe('exportPlatform', () => {
     const dictionary = StyleDictionary.extend({
       tokens: {
         one: { value: 'foo' },
-        two: { value: '{one}' },
-        three: { value: '{two}' }
+        two: { value: '{one.value}' },
+        three: { value: '{two}' },
+        four: { value: '{one}' },
+        five: { value: '{four.value}' },
+        six: { value: '{one}' },
+        seven: { value: '{six}'},
+        eight: { value: '{one.value}' },
+        nine: { value: '{eight.value}' }
       },
       transform: {
         transitive: {
@@ -109,6 +115,12 @@ describe('exportPlatform', () => {
     expect(dictionary.one.value).toEqual('foo-bar');
     expect(dictionary.two.value).toEqual('foo-bar-bar');
     expect(dictionary.three.value).toEqual('foo-bar-bar-bar');
+    expect(dictionary.four.value).toEqual('foo-bar-bar');
+    expect(dictionary.five.value).toEqual('foo-bar-bar-bar');
+    expect(dictionary.six.value).toEqual('foo-bar-bar');
+    expect(dictionary.seven.value).toEqual('foo-bar-bar-bar');
+    expect(dictionary.eight.value).toEqual('foo-bar-bar');
+    expect(dictionary.nine.value).toEqual('foo-bar-bar-bar');
   });
 
   it('should not have mutated the original properties', () => {
