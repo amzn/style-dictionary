@@ -2,22 +2,6 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [3.1.0](https://github.com/amzn/style-dictionary/compare/v3.0.3...v3.1.0) (2021-11-21)
-
-
-### Features
-
-* dictionary filtering and json/original format ([c14c437](https://github.com/amzn/style-dictionary/commit/c14c437de648c00a010cf71627f813d4177a24dd))
-* **formats:** Add `outputReferences` support to `scss/map-deep` ([#720](https://github.com/amzn/style-dictionary/issues/720)) ([65453e0](https://github.com/amzn/style-dictionary/commit/65453e0d980273aeeb1a201a1996c4ad3a5719a5)), closes [#712](https://github.com/amzn/style-dictionary/issues/712)
-* **formats:** add support for Microsoft's JSONC format ([#732](https://github.com/amzn/style-dictionary/issues/732)) ([cfa83cb](https://github.com/amzn/style-dictionary/commit/cfa83cb65b7ec7b3e5a9def7f0ceb6ac3b2898df)), closes [#698](https://github.com/amzn/style-dictionary/issues/698)
-* **formats:** object handling for typescript/es6-declarations ([#718](https://github.com/amzn/style-dictionary/issues/718)) ([4e3905a](https://github.com/amzn/style-dictionary/commit/4e3905a7a3525f872615adaf0cae0b5553309bb6))
-
-
-### Bug Fixes
-
-* **types:** adding registerFileHeader type ([#722](https://github.com/amzn/style-dictionary/issues/722)) ([54332b3](https://github.com/amzn/style-dictionary/commit/54332b3e4ee77a0b0e8f84836413949f8e64ccd5)), closes [#665](https://github.com/amzn/style-dictionary/issues/665)
-* **types:** fixing transform group types ([#729](https://github.com/amzn/style-dictionary/issues/729)) ([ad7f6ea](https://github.com/amzn/style-dictionary/commit/ad7f6ea555ec77defd264c9ade9628aefd108959))
-
 ### [3.0.3](https://github.com/amzn/style-dictionary/compare/v3.0.2...v3.0.3) (2021-10-15)
 
 
