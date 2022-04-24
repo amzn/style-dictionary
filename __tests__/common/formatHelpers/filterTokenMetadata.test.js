@@ -11,7 +11,7 @@
  * and limitations under the License.
  */
 
-const filterDictionary = require('../../../lib/common/formatHelpers/filterDictionary');
+const filterDictionary = require('../../../lib/common/formatHelpers/filterTokenMetadata');
 
 const simpleData = {
   empty: {},
@@ -163,16 +163,31 @@ const complexData = {
           "description": null,
           "type": "color",
           "value": "#2196F3",
+          "original": {
+            "description": null,
+            "type": "color",
+            "value": "#2196F3ff"
+          },
         },
         "secondary": {
           "description": null,
           "type": "color",
           "value": "#3F51B5",
+          "original": {
+            "description": null,
+            "type": "color",
+            "value": "#3F51B5ff"
+          },
         },
         "tertiary": {
           "description": null,
           "type": "color",
           "value": "#673AB7",
+          "original": {
+            "description": null,
+            "type": "color",
+            "value": "#673AB7ff"
+          },
         }
       }
     }
@@ -187,7 +202,7 @@ const complexData = {
 describe('common', function () {
   describe('formatHelpers', function () {
     it('should return empty object when it gets null object', function () {
-      const result = filterDictionary(null, null, simpleData.target);
+      const result = filterDictionary(null, false, simpleData.target);
       const expectVal = {};
       expect(result).toEqual(expectVal);
     });
@@ -199,37 +214,37 @@ describe('common', function () {
     });
 
     it('should return empty object when it gets empty object', function () {
-      const result = filterDictionary(simpleData.empty, null,  simpleDataResultForFilter.target);
+      const result = filterDictionary(simpleData.empty, false,  simpleDataResultForFilter.target);
       const expectVal = {};
       expect(result).toEqual(expectVal);
     });
 
     it('should return empty object when nothing is found', function () {
-      const result = filterDictionary(simpleData.noTarget, 'original', simpleDataResultForFilter.target);
+      const result = filterDictionary(simpleData.noTarget, false, simpleDataResultForFilter.target);
       const expectVal = {};
       expect(result).toEqual(expectVal);
     });
 
     it('should return valid json when it gets target on root level', function () {
-      const result = filterDictionary(simpleData.rootLevel, 'original', simpleDataResultForFilter.target);
+      const result = filterDictionary(simpleData.rootLevel, false, simpleDataResultForFilter.target);
       const expectVal = simpleDataResultForFilter.rootLevelResult;
       expect(result).toEqual(expectVal);
     });
 
     it('should return valid json when it gets target on first level', function () {
-      const result = filterDictionary(simpleData.firstLevel, 'original', ...simpleDataResultForFilter.targetArray);
+      const result = filterDictionary(simpleData.firstLevel, false, ...simpleDataResultForFilter.targetArray);
       const expectVal = simpleDataResultForFilter.firstLevelResult;
       expect(result).toEqual(expectVal);
     });
 
     it('should return valid json when it gets target on fourth level', function () {
-      const result = filterDictionary(simpleData.fourthLevel, 'original', simpleDataResultForFilter.targetArray);
+      const result = filterDictionary(simpleData.fourthLevel, false, simpleDataResultForFilter.targetArray);
       const expectVal = simpleDataResultForFilter.fourthLevelResult;
       expect(result).toEqual(expectVal);
     });
 
     it('should return valid json when it gets complex json', function () {
-      const result = filterDictionary(complexData.validJSONTokens, 'original', complexData.targets);
+      const result = filterDictionary(complexData.validJSONTokens, false, complexData.targets);
       const expectVal = complexData.result;
       expect(result).toEqual(expectVal);
     });
