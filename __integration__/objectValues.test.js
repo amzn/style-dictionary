@@ -49,6 +49,22 @@ describe('integration', () => {
               style: "solid"
             }
           },
+        },
+        shadow: {
+          light: {
+            value: [{
+              color: "{color.red.value}"
+            },{
+              color: "{color.green.value}"
+            }]
+          },
+          dark: {
+            value: [{
+              color: "{color.green.value}"
+            },{
+              color: "{color.red.value}"
+            }]
+          }
         }
       },
       transform: {
@@ -74,6 +90,14 @@ describe('integration', () => {
           matcher: (token) => token.path[0] === `border`,
           transformer: (token) => {
             return `${token.value.width} ${token.value.style} ${token.value.color}`
+          }
+        },
+        shadow: {
+          type: 'value',
+          transitive: true,
+          matcher: (token) => token.attributes.category === 'shadow',
+          transformer: (token) => {
+            return token.value.map(obj => obj.color).join(', ')
           }
         }
       },
@@ -125,6 +149,21 @@ describe('integration', () => {
             destination: 'borderWithReferences.css',
             format: 'css/variables',
             filter: (token) => token.attributes.category === `border`,
+            options
+          }]
+        },
+
+        cssShadow: {
+          buildPath,
+          transforms: StyleDictionary.transformGroup.css.concat([`shadow`,`hslToHex`]),
+          files: [{
+            destination: 'shadow.css',
+            format: 'css/variables',
+            filter: (token) => token.attributes.category === `shadow`,
+          },{
+            destination: 'shadowWithReferences.css',
+            format: 'css/variables',
+            filter: (token) => token.attributes.category === `shadow`,
             options
           }]
         },
@@ -188,6 +227,18 @@ describe('integration', () => {
           });
         });
       });
+
+      describe('shadow', () => {
+        it(`should match snapshot`, () => {
+          const output = fs.readFileSync(`${buildPath}shadow.css`, {encoding:'UTF-8'});
+          expect(output).toMatchSnapshot();
+        });
+
+        it(`should match snapshot with references`, () => {
+          const output = fs.readFileSync(`${buildPath}shadowWithReferences.css`, {encoding:'UTF-8'});
+          expect(output).toMatchSnapshot();
+        });
+      })
     });
 
     describe('scss/variables', () => {
