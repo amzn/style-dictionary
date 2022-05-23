@@ -13,7 +13,8 @@
       },
       tertiary: {
         // transitive transforms allow you to modify a modified reference
-        value: "{color.font.secondary.value}",
+        // You can use references with or without `.value`
+        value: "{color.font.secondary}",
         modify: [{
           // this will brighten the secondary value, which is a brightened version
           // of primary

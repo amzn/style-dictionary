@@ -76,6 +76,32 @@ exports[`integration object values css/variables hsl syntax with references shou
 "
 `;
 
+exports[`integration object values css/variables shadow should match snapshot 1`] = `
+"/**
+ * Do not edit directly
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ */
+
+:root {
+  --shadow-light: #ff0000, #40bf40;
+  --shadow-dark: #40bf40, #ff0000;
+}
+"
+`;
+
+exports[`integration object values css/variables shadow should match snapshot with references 1`] = `
+"/**
+ * Do not edit directly
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ */
+
+:root {
+  --shadow-light: var(--color-red), var(--color-green);
+  --shadow-dark: var(--color-green), var(--color-red);
+}
+"
+`;
+
 exports[`integration object values scss/variables should match snapshot 1`] = `
 "
 // Do not edit directly

@@ -1,15 +1,13 @@
 {
-  "name": "format-helpers",
+  "name": "font-face-rules",
   "version": "1.0.0",
-  "description": "",
+  "description": "Example showing one way to generate @font-face rules",
   "main": "sd.config.js",
   "scripts": {
     "build": "style-dictionary build --config ./sd.config.js"
   },
-  "keywords": [],
-  "author": "",
   "license": "Apache-2.0",
-  "devDependencies": {
-    "style-dictionary": "3.7.0"
+  "dependencies": {
+    "style-dictionary": "^3.1.1"
   }
 }
