@@ -3,6 +3,8 @@
   "prop2" : { "value": "test2 value" },
   "prop3" : { "value": "{prop1.value}" },
   "prop4" : { "value": "{prop3.value}" },
+  "prop5" : { "value": 5 },
   "prop12" : { "value": "{prop1.value}, {prop2.value} and some extra stuff" },
-  "prop124" : { "value": "{prop1.value}, {prop2.value} and {prop4.value}" }
+  "prop124" : { "value": "{prop1.value}, {prop2.value} and {prop4.value}" },
+  "prop125" : { "value": "{prop1.value}, {prop2.value} and {prop5.value}" }
 }
