@@ -4,7 +4,12 @@
   "prop3" : { "value": "{prop1.value}" },
   "prop4" : { "value": "{prop3.value}" },
   "prop5" : { "value": 5 },
+  "prop6" : { "value": 6 },
+  "prop7" : { "value": "{prop5.value}" },
+  "prop8" : { "value": "{prop7.value}" },
   "prop12" : { "value": "{prop1.value}, {prop2.value} and some extra stuff" },
   "prop124" : { "value": "{prop1.value}, {prop2.value} and {prop4.value}" },
-  "prop125" : { "value": "{prop1.value}, {prop2.value} and {prop5.value}" }
+  "prop15" : { "value": "{prop1.value}, {prop5.value} and some extra stuff" },
+  "prop156" : { "value": "{prop1.value}, {prop5.value} and {prop6.value}" },
+  "prop1568" : { "value": "{prop1.value}, {prop5.value}, {prop6.value} and {prop8.value}" }
 }

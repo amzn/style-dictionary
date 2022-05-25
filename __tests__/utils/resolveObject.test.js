@@ -177,9 +177,14 @@ describe('utils', () => {
         prop3: { value: 'test1 value' },
         prop4: { value: 'test1 value' },
         prop5: { value: 5 },
+        prop6: { value: 6 },
+        prop7: { value: 5 },
+        prop8: { value: 5 },
         prop12: { value: 'test1 value, test2 value and some extra stuff' },
         prop124: { value: 'test1 value, test2 value and test1 value' },
-        prop125: { value: 'test1 value, test2 value and 5' }
+        prop15 : { value: 'test1 value, 5 and some extra stuff' },
+        prop156 : { value: 'test1 value, 5 and 6' },
+        prop1568 : { value: 'test1 value, 5, 6 and 5' }
       }));
     });
 
