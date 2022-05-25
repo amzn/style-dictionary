@@ -1,0 +1,10 @@
+{
+  "a" : "test1 value",
+  "b" : 123,
+  "c": "{a} text after",
+  "d": "text before {a}",
+  "e": "text before {a} text after",
+  "f": "{b} text after",
+  "g": "text before {b}",
+  "h": "text before {b} text after"
+}

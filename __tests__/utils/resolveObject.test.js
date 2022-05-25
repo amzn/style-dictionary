@@ -43,6 +43,16 @@ describe('utils', () => {
       var test = resolveObject( helpers.fileToJSON(__dirname + '/../__json_files/simple.json') );
       expect(test).toHaveProperty('bar', 'bar');
     });
+    
+    it('should do simple interpolation for both strings and numbers', () => {
+      var test = resolveObject( helpers.fileToJSON(__dirname + '/../__json_files/interpolation.json') );
+      expect(test).toHaveProperty('c', 'test1 value text after');
+      expect(test).toHaveProperty('d', 'text before test1 value');
+      expect(test).toHaveProperty('e', 'text before test1 value text after');
+      expect(test).toHaveProperty('f', '123 text after');
+      expect(test).toHaveProperty('g', 'text before 123');
+      expect(test).toHaveProperty('h', 'text before 123 text after');
+    });
 
     it('should do nested references', () => {
       var obj = helpers.fileToJSON(__dirname + '/../__json_files/nested_references.json');
