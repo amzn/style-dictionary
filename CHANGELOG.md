@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.7.1](https://github.com/amzn/style-dictionary/compare/v3.7.0...v3.7.1) (2022-06-07)
+
+
+### Bug Fixes
+
+* **references:** getReferences now searches the entire object ([#812](https://github.com/amzn/style-dictionary/issues/812)) ([884b1b8](https://github.com/amzn/style-dictionary/commit/884b1b896852d9e0b75066207d06619d500d1d3f))
+* **references:** tokens with a number value should be interpolated correctly ([#825](https://github.com/amzn/style-dictionary/issues/825)) ([a2f7784](https://github.com/amzn/style-dictionary/commit/a2f7784d719f3f416f32a8346cb33f83266f288a))
+* **transforms:** transitive transforms now work without .value in refs ([#808](https://github.com/amzn/style-dictionary/issues/808)) ([41bc893](https://github.com/amzn/style-dictionary/commit/41bc893ffb49ed241c8affe9098672d558966472))
+
 ## [3.7.0](https://github.com/amzn/style-dictionary/compare/v3.1.1...v3.7.0) (2022-02-22)
 
 

@@ -51,7 +51,7 @@ Formats can take configuration to make them more flexible. This allows you to re
 }
 ```
 
-In this example we are adding the `mapName` configuration to the `scss/map-deep` format. This will change the name of the SCSS map in the output. Not all formats have the configuration options; format configuration is defined by the format itself. To see the configurtion options of a format, take a look at the documentation of the [specific format](#pre-defined-formats)
+In this example we are adding the `mapName` configuration to the `scss/map-deep` format. This will change the name of the SCSS map in the output. Not all formats have the configuration options; format configuration is defined by the format itself. To see the configuration options of a format, take a look at the documentation of the [specific format](#pre-defined-formats)
 
 ## Filtering tokens
 
@@ -486,7 +486,11 @@ This is used to create lists of variables like Sass variables or CSS custom prop
 StyleDictionary.registerFormat({
   name: 'myCustomFormat',
   formatter: function({ dictionary, options }) {
-    return formattedVariables('less', dictionary, options.outputReferences);
+    return formattedVariables({
+      format: 'less',
+      dictionary,
+      outputReferences: options.outputReferences
+    });
   }
 });
 ```
@@ -499,8 +503,7 @@ StyleDictionary.registerFormat({
 Given some value, returns a basic valid TypeScript type for that value.
 Supports numbers, strings, booleans, arrays and objects of any of those types.
 
-**Returns**: <code>String</code> - A valid name for a TypeScript type.
-```  
+**Returns**: <code>String</code> - A valid name for a TypeScript type.  
 <table>
   <thead>
     <tr>
@@ -527,6 +530,7 @@ StyleDictionary.registerFormat({
    }).join('\n');
   }
 });
+``` 
 
 * * *
 
