@@ -24,7 +24,7 @@ import { DesignTokens } from './DesignToken';
 export interface Config {
   parsers?: Parser[];
   transform?: Record<string, Transform>;
-  transformGroup?: Record<string, TransformGroup>;
+  transformGroup?: Record<string, TransformGroup['transforms']>;
   format?: Record<string, Formatter>;
   filter?: Record<string, Filter>;
   fileHeader?: Record<string, FileHeader>;
