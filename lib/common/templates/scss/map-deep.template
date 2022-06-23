@@ -23,7 +23,11 @@
     //
     function processJsonNode(obj, depth) {
         var output = '';
-        if (obj.hasOwnProperty('value')) {
+        if (obj === null) {
+            output += `''`
+        } else if (typeof obj === "string") {
+            output += `'${obj}'`
+        } else if (obj.hasOwnProperty('value')) {
             // if we have found a leaf (a property with a value) append the value
             output += `$${obj.name}`;
         } else {
