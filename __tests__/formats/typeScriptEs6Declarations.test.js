@@ -16,17 +16,15 @@ const createFormatArgs = require('../../lib/utils/createFormatArgs');
 
 const file = {
   "destination": "__output/",
-  "format": "typescript/es6-declarations",
-  "filter": {
-    "attributes": {
-      "category": "color"
-    }
-  }
+  "format": "typescript/es6-declarations"
 };
 
 const properties = {
   "color": {
-    "red": {"value": "#FF0000"}
+    "red": {
+      "name": "colorRed",
+      "value": "#FF0000"
+    }
   }
 };
 
@@ -40,7 +38,7 @@ describe('formats', () => {
         dictionary,
         file,
         platform: {},
-      }), {}, file);
+      }));
 
       // get all lines that begin with export
       const lines = output
@@ -52,6 +50,22 @@ describe('formats', () => {
         expect(l.match(/^export.* : string;$/g).length).toEqual(1);
       });
     });
-  });
 
+    it('with outputStringLiterals should match snapshot', () => {
+      const customFile = Object.assign({}, file, {
+        options: {
+          outputStringLiterals: true
+        }
+      });
+
+      const dictionary = createDictionary({ properties });
+      const output = formatter(createFormatArgs({
+        dictionary,
+        file: customFile,
+        platform: {},
+      }));
+
+      expect(output).toMatchSnapshot();
+    });
+  });
 });

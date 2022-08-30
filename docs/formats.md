@@ -498,7 +498,7 @@ StyleDictionary.registerFormat({
 * * *
 
 ### getTypeScriptType 
-> formatHelpers.getTypeScriptType(value) ⇒ <code>String</code>
+> formatHelpers.getTypeScriptType(value, options) ⇒ <code>String</code>
 
 Given some value, returns a basic valid TypeScript type for that value.
 Supports numbers, strings, booleans, arrays and objects of any of those types.
@@ -513,6 +513,11 @@ Supports numbers, strings, booleans, arrays and objects of any of those types.
   <tbody>
 <tr>
     <td>value</td><td><code>*</code></td><td><p>A value to check the type of.</p>
+</td>
+    </tr><tr>
+    <td>options</td><td><code>Object</code></td><td></td>
+    </tr><tr>
+    <td>options.outputStringLiterals</td><td><code>Boolean</code></td><td><p>Whether or not to output literal types for string values</p>
 </td>
     </tr>  </tbody>
 </table>
@@ -1095,6 +1100,21 @@ Creates TypeScript declarations for ES6 modules
   }
 }
 ```
+
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Default</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>options</td><td><code>Object</code></td><td></td><td></td>
+    </tr><tr>
+    <td>[options.outputStringLiterals]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to output literal types for string values</p>
+</td>
+    </tr>  </tbody>
+</table>
 
 **Example**  
 ```typescript
