@@ -22,7 +22,7 @@ import {FileHeader as _FileHeader} from './FileHeader';
 import {Filter as _Filter} from './Filter';
 import {Format as _Format, Formatter as _Formatter } from './Format';
 import {FormatHelpers as _FormatHelpers} from './FormatHelpers';
-import {Matcher as _Matcher} from './Matcher.d.ts':
+import {Matcher as _Matcher} from './Matcher':
 import {Options as _Options} from './Options';
 import {Parser as _Parser} from './Parser';
 import {Platform as _Platform} from './Platform';
