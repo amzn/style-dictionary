@@ -64,7 +64,7 @@ export interface FormatHelpers {
     allTokens: DesignToken[],
     options: object
   ) => string;
-  sortByReference: (dictionary: Dictionary) => string;
+  sortByReference: (dictionary: Dictionary) => any;
   sortByName: (a: DesignToken, b: DesignToken) => number;
   setSwiftFileProperties: (
     options: object,
