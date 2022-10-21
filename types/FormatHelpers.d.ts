@@ -11,9 +11,10 @@
  * and limitations under the License.
  */
 
-import { Dictionary } from './Dictionary';
-import { TransformedToken } from './TransformedToken';
-import { File } from './File';
+import { Dictionary } from "./Dictionary";
+import { TransformedToken } from "./TransformedToken";
+import { File } from "./File";
+import { DesignToken } from "./DesignToken";
 
 export interface LineFormatting {
   prefix?: string;
@@ -28,7 +29,7 @@ export type TokenFormatterArgs = {
   dictionary: Dictionary;
   format?: "css" | "sass" | "less" | "stylus";
   formatting?: LineFormatting;
-}
+};
 
 export interface CommentFormatting {
   prefix: string;
@@ -45,7 +46,7 @@ export interface FileHeaderArgs {
 
 export interface FormattedVariablesArgs {
   format: "css" | "sass";
-  dictionary: Dictionary
+  dictionary: Dictionary;
   outputReferences?: boolean;
   formatting?: LineFormatting;
 }
@@ -56,4 +57,18 @@ export interface FormatHelpers {
   ) => (token: TransformedToken) => string;
   fileHeader: (args: FileHeaderArgs) => string;
   formattedVariables: (args: FormattedVariablesArgs) => string;
+  minifyDictionary: (dictionary: object) => object;
+  getTypeScriptType: (value: any) => string;
+  iconsWithPrefix: (
+    prefix: string,
+    allTokens: DesignToken[],
+    options: object
+  ) => string;
+  sortByReference: (dictionary: Dictionary) => string;
+  sortByName: (a: DesignToken, b: DesignToken) => number;
+  setSwiftFileProperties: (
+    options: object,
+    objectType: string,
+    transformGroup: string
+  ) => string;
 }
