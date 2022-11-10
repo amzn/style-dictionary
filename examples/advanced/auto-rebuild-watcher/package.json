@@ -10,13 +10,13 @@
   "scripts": {
     "build": "node_modules/.bin/style-dictionary build",
     "clean": "rm -rf build",
-    "watch": "npm run build && chokidar  \"properties/**/*.json\" -c \"npm run build\"",
+    "watch": "npm run build && chokidar  \"tokens/**/*.json\" -c \"npm run build\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "Apache-2.0",
   "devDependencies": {
     "chokidar-cli": "^1.2.0",
-    "style-dictionary": "3.0.3"
+    "style-dictionary": "3.7.1"
   }
 }

@@ -22,6 +22,9 @@ For detailed usage head to https://amzn.github.io/style-dictionary
 ## Watch the Demo on Youtube
 [![Watch the video](/docs/assets/fake_player.png)](http://youtu.be/1HREvonfqhY)
 
+## Experiment in the playground
+Try the browser-based Style Dictionary playground: [https://www.style-dictionary-play.dev/](https://www.style-dictionary-play.dev/), built by the folks at [\<div\>RIOTS](https://divriots.com/).
+
 ## Contents
 * [Installation](#installation)
 * [Usage](#usage)

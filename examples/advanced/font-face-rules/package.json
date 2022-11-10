@@ -1,0 +1,13 @@
+{
+  "name": "font-face-rules",
+  "version": "1.0.0",
+  "description": "Example showing one way to generate @font-face rules",
+  "main": "sd.config.js",
+  "scripts": {
+    "build": "style-dictionary build --config ./sd.config.js"
+  },
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "style-dictionary": "3.7.1"
+  }
+}

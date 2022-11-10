@@ -51,7 +51,7 @@ Formats can take configuration to make them more flexible. This allows you to re
 }
 ```
 
-In this example we are adding the `mapName` configuration to the `scss/map-deep` format. This will change the name of the SCSS map in the output. Not all formats have the configuration options; format configuration is defined by the format itself. To see the configurtion options of a format, take a look at the documentation of the [specific format](#pre-defined-formats)
+In this example we are adding the `mapName` configuration to the `scss/map-deep` format. This will change the name of the SCSS map in the output. Not all formats have the configuration options; format configuration is defined by the format itself. To see the configuration options of a format, take a look at the documentation of the [specific format](#pre-defined-formats)
 
 ## Filtering tokens
 
@@ -372,6 +372,9 @@ which uses: prefix, indentation, separator, suffix, and commentStyle.
     <td>options.outputReferences</td><td><code>Boolean</code></td><td><p>Whether or not to output references. You will want to pass this from the <code>options</code> object sent to the formatter function.</p>
 </td>
     </tr><tr>
+    <td>options.outputReferenceFallbacks</td><td><code>Boolean</code></td><td><p>Whether or not to output css variable fallback values when using output references. You will want to pass this from the <code>options</code> object sent to the formatter function.</p>
+</td>
+    </tr><tr>
     <td>options.dictionary</td><td><code>Dictionary</code></td><td><p>The dictionary object sent to the formatter function</p>
 </td>
     </tr><tr>
@@ -379,6 +382,9 @@ which uses: prefix, indentation, separator, suffix, and commentStyle.
 </td>
     </tr><tr>
     <td>options.formatting</td><td><code>Object</code></td><td><p>Custom formatting properties that define parts of a declaration line in code. The configurable strings are: prefix, indentation, separator, suffix, and commentStyle. Those are used to generate a line like this: <code>${indentation}${prefix}${prop.name}${separator} ${prop.value}${suffix}</code></p>
+</td>
+    </tr><tr>
+    <td>options.themeable</td><td><code>Boolean</code></td><td><p>[false] - Whether tokens should default to being themeable.</p>
 </td>
     </tr>  </tbody>
 </table>
@@ -434,7 +440,7 @@ default file header.
 StyleDictionary.registerFormat({
   name: 'myCustomFormat',
   formatter: function({ dictionary, file }) {
-    return fileHeader({file, 'short') +
+    return fileHeader({file, commentStyle: 'short'}) +
       dictionary.allTokens.map(token => `${token.name} = ${token.value}`)
         .join('\n');
   }
@@ -469,6 +475,9 @@ This is used to create lists of variables like Sass variables or CSS custom prop
     </tr><tr>
     <td>options.formatting</td><td><code>Object</code></td><td><p>Custom formatting properties that define parts of a declaration line in code. This will get passed to <code>formatHelpers.createPropertyFormatter</code> and used for the <code>lineSeparator</code> between lines of code.</p>
 </td>
+    </tr><tr>
+    <td>options.themeable</td><td><code>Boolean</code></td><td><p>[false] - Whether tokens should default to being themeable.</p>
+</td>
     </tr>  </tbody>
 </table>
 
@@ -477,7 +486,11 @@ This is used to create lists of variables like Sass variables or CSS custom prop
 StyleDictionary.registerFormat({
   name: 'myCustomFormat',
   formatter: function({ dictionary, options }) {
-    return formattedVariables('less', dictionary, options.outputReferences);
+    return formattedVariables({
+      format: 'less',
+      dictionary,
+      outputReferences: options.outputReferences
+    });
   }
 });
 ```
@@ -488,10 +501,9 @@ StyleDictionary.registerFormat({
 > formatHelpers.getTypeScriptType(value) ⇒ <code>String</code>
 
 Given some value, returns a basic valid TypeScript type for that value.
-Supports numbers, strings, booleans, and arrays of any of those types.
+Supports numbers, strings, booleans, arrays and objects of any of those types.
 
-**Returns**: <code>String</code> - A valid name for a TypeScript type.
-```  
+**Returns**: <code>String</code> - A valid name for a TypeScript type.  
 <table>
   <thead>
     <tr>
@@ -518,6 +530,7 @@ StyleDictionary.registerFormat({
    }).join('\n');
   }
 });
+``` 
 
 * * *
 
@@ -587,6 +600,33 @@ StyleDictionary.registerFormat({
   }
 });
 ```
+
+* * *
+
+### setSwiftFileProperties 
+> formatHelpers.setSwiftFileProperties(options, objectType, transformGroup) ⇒ <code>Object</code>
+
+Outputs an object with swift format configurations. Sets import, object type and access control.
+
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>options</td><td><code>Object</code></td><td><p>The options object declared at configuration</p>
+</td>
+    </tr><tr>
+    <td>objectType</td><td><code>String</code></td><td><p>The type of the object in the final file. Could be a class, enum, struct, etc.</p>
+</td>
+    </tr><tr>
+    <td>transformGroup</td><td><code>String</code></td><td><p>The transformGroup of the file, so it can be applied proper import</p>
+</td>
+    </tr>  </tbody>
+</table>
+
 
 * * *
 
@@ -767,7 +807,7 @@ $tokens: (
 
 Creates a SCSS file with a deep map based on the style dictionary.
 
-Note that `options.themeable` defaults to `true` by default, unlike the [scss/variables](scss/variables) format, for backwards compatibility.
+Name the map by adding a 'mapName' attribute on the file object in your config.
 
 <table>
   <thead>
@@ -779,16 +819,10 @@ Note that `options.themeable` defaults to `true` by default, unlike the [scss/va
 <tr>
     <td>options</td><td><code>Object</code></td><td></td><td></td>
     </tr><tr>
-    <td>[options.mapName]</td><td><code>String</code></td><td><code>tokens</code></td><td><p>Name the Sass map</p>
-</td>
-    </tr><tr>
-    <td>[options.showFileHeader]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not to include a comment that has the build date</p>
-</td>
-    </tr><tr>
-    <td>[options.themeable]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not to add the `!default` flag on Sass variables by default. This may be overridden by setting a `themeable` attribute in a <a href="/#/tokens?id=design-token-attributes">token's definition</a>.</p>
-</td>
-    </tr><tr>
     <td>[options.outputReferences]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to keep <a href="/#/formats?id=references-in-output-files">references</a> (a -&gt; b -&gt; c) in the output.</p>
+</td>
+    </tr><tr>
+    <td>[options.themeable]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not tokens should default to being themeable, if not otherwise specified per token.</p>
 </td>
     </tr>  </tbody>
 </table>
@@ -815,6 +849,8 @@ $tokens: {
 
 Creates a SCSS file with variable definitions based on the style dictionary.
 
+Add `!default` to any variable by setting a `themeable: true` attribute in the token's definition.
+
 <table>
   <thead>
     <tr>
@@ -828,10 +864,10 @@ Creates a SCSS file with variable definitions based on the style dictionary.
     <td>[options.showFileHeader]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not to include a comment that has the build date</p>
 </td>
     </tr><tr>
-    <td>[options.themeable]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to add the `!default` flag on Sass variables by default. This may be overridden by setting a `themeable` attribute in a <a href="/#/tokens?id=design-token-attributes">token's definition</a>.</p>
+    <td>[options.outputReferences]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to keep <a href="/#/formats?id=references-in-output-files">references</a> (a -&gt; b -&gt; c) in the output.</p>
 </td>
     </tr><tr>
-    <td>[options.outputReferences]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to keep <a href="/#/formats?id=references-in-output-files">references</a> (a -&gt; b -&gt; c) in the output.</p>
+    <td>[options.themeable]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not tokens should default to being themeable, if not otherwise specified per token.</p>
 </td>
     </tr>  </tbody>
 </table>
@@ -1471,7 +1507,7 @@ Creates an Objective-C implementation file of strings
 ### ios-swift/class.swift 
 
 
-Creates a Swift implementation file of a class with values
+Creates a Swift implementation file of a class with values. It adds default `class` object type, `public` access control and `UIKit` import.
 
 <table>
   <thead>
@@ -1482,6 +1518,12 @@ Creates a Swift implementation file of a class with values
   <tbody>
 <tr>
     <td>options</td><td><code>Object</code></td><td></td><td></td>
+    </tr><tr>
+    <td>[options.accessControl]</td><td><code>String</code></td><td><code>public</code></td><td><p>Level of <a href="https://docs.swift.org/swift-book/LanguageGuide/AccessControl.html">access</a> of the generated swift object</p>
+</td>
+    </tr><tr>
+    <td>[options.import]</td><td><code>Array.&lt;String&gt;</code></td><td><code>UIKit</code></td><td><p>Modules to import. Can be a string or array of string</p>
+</td>
     </tr><tr>
     <td>[options.showFileHeader]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not to include a comment that has the build date</p>
 </td>
@@ -1503,12 +1545,89 @@ public class StyleDictionary {
 ### ios-swift/enum.swift 
 
 
-Creates a Swift implementation file of an enum with values
+Creates a Swift implementation file of an enum with values. It adds default `enum` object type, `public` access control and `UIKit` import.
 
-**Todo**
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Default</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>options</td><td><code>Object</code></td><td></td><td></td>
+    </tr><tr>
+    <td>[options.accessControl]</td><td><code>String</code></td><td><code>public</code></td><td><p>Level of <a href="https://docs.swift.org/swift-book/LanguageGuide/AccessControl.html">access</a> of the generated swift object</p>
+</td>
+    </tr><tr>
+    <td>[options.import]</td><td><code>Array.&lt;String&gt;</code></td><td><code>UIKit</code></td><td><p>Modules to import. Can be a string or array of string</p>
+</td>
+    </tr><tr>
+    <td>[options.showFileHeader]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not to include a comment that has the build date</p>
+</td>
+    </tr><tr>
+    <td>[options.outputReferences]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to keep <a href="/#/formats?id=references-in-output-files">references</a> (a -&gt; b -&gt; c) in the output.</p>
+</td>
+    </tr>  </tbody>
+</table>
 
-- Add example and usage
+**Example**  
+```swift
+public enum StyleDictionary {
+  public static let colorBackgroundDanger = UIColor(red: 1.000, green: 0.918, blue: 0.914, alpha: 1)
+}
+```
 
+* * *
+
+### ios-swift/any.swift 
+
+
+Creates a Swift implementation file of any given type with values. It has by default `class` object type, `public` access control and `UIKit` import.
+
+```javascript
+format: 'ios-swift/any.swift',
+import: ['UIKit', 'AnotherModule'],
+objectType: 'struct',
+accessControl: 'internal',
+```
+
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Default</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>options</td><td><code>Object</code></td><td></td><td></td>
+    </tr><tr>
+    <td>[options.accessControl]</td><td><code>String</code></td><td><code>public</code></td><td><p>Level of <a href="https://docs.swift.org/swift-book/LanguageGuide/AccessControl.html">access</a> of the generated swift object</p>
+</td>
+    </tr><tr>
+    <td>[options.import]</td><td><code>Array.&lt;String&gt;</code></td><td><code>UIKit</code></td><td><p>Modules to import. Can be a string or array of strings</p>
+</td>
+    </tr><tr>
+    <td>[options.objectType]</td><td><code>String</code></td><td><code>class</code></td><td><p>The type of the generated Swift object</p>
+</td>
+    </tr><tr>
+    <td>[options.showFileHeader]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not to include a comment that has the build date</p>
+</td>
+    </tr><tr>
+    <td>[options.outputReferences]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to keep <a href="/#/formats?id=references-in-output-files">references</a> (a -&gt; b -&gt; c) in the output.</p>
+</td>
+    </tr>  </tbody>
+</table>
+
+**Example**  
+```swift
+import UIKit
+import AnotherModule
+
+internal struct StyleDictionary {
+  internal static let colorBackgroundDanger = UIColor(red: 1.000, green: 0.918, blue: 0.914, alpha: 1)
+}
+```
 
 * * *
 

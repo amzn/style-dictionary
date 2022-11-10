@@ -43,6 +43,16 @@ describe('utils', () => {
       var test = resolveObject( helpers.fileToJSON(__dirname + '/../__json_files/simple.json') );
       expect(test).toHaveProperty('bar', 'bar');
     });
+    
+    it('should do simple interpolation for both strings and numbers', () => {
+      var test = resolveObject( helpers.fileToJSON(__dirname + '/../__json_files/interpolation.json') );
+      expect(test).toHaveProperty('c', 'test1 value text after');
+      expect(test).toHaveProperty('d', 'text before test1 value');
+      expect(test).toHaveProperty('e', 'text before test1 value text after');
+      expect(test).toHaveProperty('f', '123 text after');
+      expect(test).toHaveProperty('g', 'text before 123');
+      expect(test).toHaveProperty('h', 'text before 123 text after');
+    });
 
     it('should do nested references', () => {
       var obj = helpers.fileToJSON(__dirname + '/../__json_files/nested_references.json');
@@ -176,8 +186,15 @@ describe('utils', () => {
         prop2: { value: 'test2 value' },
         prop3: { value: 'test1 value' },
         prop4: { value: 'test1 value' },
+        prop5: { value: 5 },
+        prop6: { value: 6 },
+        prop7: { value: 5 },
+        prop8: { value: 5 },
         prop12: { value: 'test1 value, test2 value and some extra stuff' },
-        prop124: { value: 'test1 value, test2 value and test1 value' }
+        prop124: { value: 'test1 value, test2 value and test1 value' },
+        prop15 : { value: 'test1 value, 5 and some extra stuff' },
+        prop156 : { value: 'test1 value, 5 and 6' },
+        prop1568 : { value: 'test1 value, 5, 6 and 5' }
       }));
     });
 

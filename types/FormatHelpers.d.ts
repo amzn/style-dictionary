@@ -39,7 +39,7 @@ export interface CommentFormatting {
 
 export interface FileHeaderArgs {
   file: File;
-  commentStyle: string;
+  commentStyle?: string;
   formatting?: CommentFormatting;
 }
 

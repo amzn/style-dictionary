@@ -43,8 +43,8 @@ var StyleDictionary = {
   format: require('./lib/common/formats'),
   action: require('./lib/common/actions'),
   formatHelpers: require('./lib/common/formatHelpers'),
-  filter: {}, // we need to initialise the object, since we don't have built-in filters
-  parsers: [], // ditto ^
+  filter: require('./lib/common/filters'),
+  parsers: [], // we need to initialise the array, since we don't have built-in parsers
   fileHeader: {},
 
   registerTransform: require('./lib/register/transform'),
