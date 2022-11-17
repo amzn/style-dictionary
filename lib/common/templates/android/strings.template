@@ -20,6 +20,6 @@ var props = dictionary.allTokens.filter(function(prop) {
 <%= fileHeader({file, commentStyle: 'xml'}) %>
 <resources>
   <% props.forEach(function(prop) {
-  %><string name="<%= prop.name %>"><%= prop.value %></string><% if (prop.comment) { %><!-- <%= prop.comment %> --><% } %>
+  %><string name="<%= prop.name %>" translateble="false"><%= prop.value %></string><% if (prop.comment) { %><!-- <%= prop.comment %> --><% } %>
   <% }); %>
 </resources>
