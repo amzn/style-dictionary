@@ -198,7 +198,7 @@ float const SizeFontBase = 16.00f;
 
 ## Quick Start
 
-The style dictionary framework comes with some example code to get you stared. Install the node module globally, create a directory and `cd` into it.
+The style dictionary framework comes with some example code to get you started. Install the node module globally, create a directory and `cd` into it.
 
 ```
 $ npm i -g style-dictionary
