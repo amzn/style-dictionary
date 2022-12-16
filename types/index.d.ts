@@ -66,7 +66,7 @@ declare namespace StyleDictionary {
     transformGroup: Record<string, TransformGroup['transforms']>;
     format: Record<string, Formatter>;
     action: Record<string, Action>;
-    filter: Record<string, Filter>;
+    filter: Record<string, Filter['matcher']>;
     fileHeader: Record<string, FileHeader>;
     parsers: Parser[];
 

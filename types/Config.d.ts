@@ -26,7 +26,7 @@ export interface Config {
   transform?: Record<string, Transform>;
   transformGroup?: Record<string, TransformGroup>;
   format?: Record<string, Formatter>;
-  filter?: Record<string, Filter>;
+  filter?: Record<string, Filter['matcher']>;
   fileHeader?: Record<string, FileHeader>;
   action?: Record<string, Action>;
   include?: string[];
