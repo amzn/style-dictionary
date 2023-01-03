@@ -530,7 +530,7 @@ StyleDictionary.registerFormat({
    }).join('\n');
   }
 });
-``` 
+```
 
 * * *
 

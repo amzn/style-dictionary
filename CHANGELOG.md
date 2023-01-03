@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.7.2](https://github.com/amzn/style-dictionary/compare/v3.7.0...v3.7.2) (2023-01-03)
+
+
+### Bug Fixes
+
+* **docs:** Correct custom-file-header example link ([#869](https://github.com/amzn/style-dictionary/issues/869)) ([4e156b1](https://github.com/amzn/style-dictionary/commit/4e156b103a35dfb6e70d48db4d04892cc6fb2d43))
+* **docs:** removed the duplicate wording ([#870](https://github.com/amzn/style-dictionary/issues/870)) ([dbb89e5](https://github.com/amzn/style-dictionary/commit/dbb89e59c656c2951ee36ed11ab65edb4d60ee05))
+* **formats:** scss/map-deep type error when values are strings or null ([#838](https://github.com/amzn/style-dictionary/issues/838)) ([d338633](https://github.com/amzn/style-dictionary/commit/d338633fd8c864470e44ff902ed0ed45dc4a3958)), closes [#837](https://github.com/amzn/style-dictionary/issues/837)
+* **references:** getReferences now searches the entire object ([#812](https://github.com/amzn/style-dictionary/issues/812)) ([884b1b8](https://github.com/amzn/style-dictionary/commit/884b1b896852d9e0b75066207d06619d500d1d3f))
+* **references:** tokens with a number value should be interpolated correctly ([#825](https://github.com/amzn/style-dictionary/issues/825)) ([a2f7784](https://github.com/amzn/style-dictionary/commit/a2f7784d719f3f416f32a8346cb33f83266f288a))
+* **transforms:** transitive transforms now work without .value in refs ([#808](https://github.com/amzn/style-dictionary/issues/808)) ([41bc893](https://github.com/amzn/style-dictionary/commit/41bc893ffb49ed241c8affe9098672d558966472))
+* **types:** add matcher type to export ([#878](https://github.com/amzn/style-dictionary/issues/878)) ([2617a0d](https://github.com/amzn/style-dictionary/commit/2617a0d42d9c0c017e2a54ad9ea5e8667ece9c92)), closes [#875](https://github.com/amzn/style-dictionary/issues/875)
+* **types:** added packageName as optional property on interface File ([#829](https://github.com/amzn/style-dictionary/issues/829)) ([0996cc4](https://github.com/amzn/style-dictionary/commit/0996cc473fe97aaff3298cdfeb20b159e8329ce1))
+* **types:** adding missing format helpers ([#834](https://github.com/amzn/style-dictionary/issues/834)) ([a6f4b34](https://github.com/amzn/style-dictionary/commit/a6f4b3487cf5ef9230417108b07ad73a74d9fa0e))
+* **types:** fix filter config key expected matcher value ([#883](https://github.com/amzn/style-dictionary/issues/883)) ([c77c3db](https://github.com/amzn/style-dictionary/commit/c77c3db2244ccb736b4752591f0494c31b9a1184))
+* **types:** fixing transform group property type of Config ([#833](https://github.com/amzn/style-dictionary/issues/833)) ([0f0ad10](https://github.com/amzn/style-dictionary/commit/0f0ad10564df93813df1261a8ddc55e70f261ad5))
+
 ### [3.7.1](https://github.com/amzn/style-dictionary/compare/v3.7.0...v3.7.1) (2022-06-07)
 
 
