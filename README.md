@@ -19,7 +19,7 @@ When you are managing user experiences, it can be quite challenging to keep styl
 
 For detailed usage head to https://amzn.github.io/style-dictionary
 
-## Watch the Demo on Youtube
+## Watch the Demo on YouTube
 [![Watch the video](/docs/assets/fake_player.png)](http://youtu.be/1HREvonfqhY)
 
 ## Experiment in the playground
@@ -198,7 +198,7 @@ float const SizeFontBase = 16.00f;
 
 ## Quick Start
 
-The style dictionary framework comes with some example code to get you stared. Install the node module globally, create a directory and `cd` into it.
+The style dictionary framework comes with some example code to get you started. Install the node module globally, create a directory and `cd` into it.
 
 ```
 $ npm i -g style-dictionary

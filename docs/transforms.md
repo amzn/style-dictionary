@@ -618,6 +618,21 @@ Scales the number by 16 (or the value of 'basePxFontSize' on the platform in you
 
 * * *
 
+### size/pxToRem 
+
+
+Scales non-zero numbers to rem, and adds 'rem' to the end. If you define a "basePxFontSize" on the platform in your config, it will be used to scale the value, otherwise 16 (default web font size) will be used.
+
+```js
+// Matches: token.attributes.category === 'size'
+// Returns:
+"0"
+"1rem"
+```
+
+
+* * *
+
 ### content/icon 
 
 

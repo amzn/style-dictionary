@@ -207,7 +207,7 @@ Which should output a file that will start like this:
  */
 ```
 
-For an in-depth example see the [custom-file-header](https://github.com/amzn/style-dictionary/examples/advanced/custom-file-header) example.
+For an in-depth example see the [custom-file-header](https://github.com/amzn/style-dictionary/tree/main/examples/advanced/custom-file-header) example.
 
 ## Custom formats
 
@@ -535,7 +535,7 @@ StyleDictionary.registerFormat({
    }).join('\n');
   }
 });
-``` 
+```
 
 * * *
 
