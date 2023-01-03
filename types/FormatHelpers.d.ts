@@ -12,6 +12,7 @@
  */
 
 import { Dictionary } from './Dictionary';
+import { DesignToken } from './DesignToken';
 import { TransformedToken } from './TransformedToken';
 import { File } from './File';
 
@@ -56,4 +57,10 @@ export interface FormatHelpers {
   ) => (token: TransformedToken) => string;
   fileHeader: (args: FileHeaderArgs) => string;
   formattedVariables: (args: FormattedVariablesArgs) => string;
+  minifyDictionary: (dictionary: object) => object;
+  getTypeScriptType: (value: unknown) => string;
+  iconsWithPrefix: (prefix: string, allTokens: DesignToken[], options: object) => string;
+  sortByReference: (dictionary: Dictionary) => string;
+  sortByName: (a: DesignToken, b: DesignToken) => number;
+  setSwiftFileProperties: (options: object, objectType: string, transformGroup: string) => string;
 }
