@@ -229,7 +229,7 @@ A design token is an attribute to describe something visually. It is atomic (it 
 
 While not exactly necessary, we feel this classification structure of design tokens makes the most sense semantically. Design tokens can be organized into a hierarchical tree structure with the top level, category, defining the primitive nature of the token. For example, we have the color category and every token underneath is always a color. As you proceed down the tree to type, item, sub-item, and state, you get more specific about what that color is. Is it a background color, a text color, or a border color? What kind of text color is it? You get the point. Now you can structure your token json files like simple objects:
 
-```
+```json
 {
   "size": {
     "font": {
@@ -250,7 +250,7 @@ Also, the CTI structure provides a good mechanism to target transforms for speci
 
 You can also add a _comment_ to a design token:
 
-```
+```json
 {
   "size": {
     "font": {
