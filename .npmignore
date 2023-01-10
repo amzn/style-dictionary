@@ -3,3 +3,6 @@
 .editorconfig
 images/
 test/
+examples/
+docs/
+.jsdoc.json
