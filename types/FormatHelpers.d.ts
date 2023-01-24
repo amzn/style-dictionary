@@ -11,10 +11,10 @@
  * and limitations under the License.
  */
 
-import { Dictionary } from './Dictionary';
-import { DesignToken } from './DesignToken';
-import { TransformedToken } from './TransformedToken';
-import { File } from './File';
+import { Dictionary } from "./Dictionary";
+import { DesignToken } from "./DesignToken";
+import { TransformedToken } from "./TransformedToken";
+import { File } from "./File";
 
 export interface LineFormatting {
   prefix?: string;
@@ -29,7 +29,7 @@ export type TokenFormatterArgs = {
   dictionary: Dictionary;
   format?: "css" | "sass" | "less" | "stylus";
   formatting?: LineFormatting;
-}
+};
 
 export interface CommentFormatting {
   prefix: string;
@@ -46,7 +46,7 @@ export interface FileHeaderArgs {
 
 export interface FormattedVariablesArgs {
   format: "css" | "sass";
-  dictionary: Dictionary
+  dictionary: Dictionary;
   outputReferences?: boolean;
   formatting?: LineFormatting;
 }
@@ -59,8 +59,18 @@ export interface FormatHelpers {
   formattedVariables: (args: FormattedVariablesArgs) => string;
   minifyDictionary: (dictionary: object) => object;
   getTypeScriptType: (value: unknown) => string;
-  iconsWithPrefix: (prefix: string, allTokens: DesignToken[], options: object) => string;
-  sortByReference: (dictionary: Dictionary) => string;
+  iconsWithPrefix: (
+    prefix: string,
+    allTokens: DesignToken[],
+    options: object
+  ) => string;
+  sortByReference: (
+    dictionary: Dictionary
+  ) => (a: TransformedToken, b: TransformedToken) => number;
   sortByName: (a: DesignToken, b: DesignToken) => number;
-  setSwiftFileProperties: (options: object, objectType: string, transformGroup: string) => string;
+  setSwiftFileProperties: (
+    options: object,
+    objectType: string,
+    transformGroup: string
+  ) => string;
 }
