@@ -17,9 +17,10 @@
 
 package <%= file.packageName %>;
 
-<%  // Ideally we would selectively import the correct classes & functions based on whether the applied transforms actually need them. %>
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.*
+<%= options.import.map(function(item) {
+    return 'import ' + item
+  }).join('\n')
+%>
 
 object <%= file.className %> {
   <%= allProperties.map(function(prop) {
