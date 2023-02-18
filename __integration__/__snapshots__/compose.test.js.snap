@@ -10,7 +10,6 @@ exports[`integration compose compose/object should match snapshot 1`] = `
 
 package com.example.tokens;
 
-
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.*
 
@@ -190,7 +189,6 @@ exports[`integration compose compose/object with references should match snapsho
 
 
 package com.example.tokens;
-
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.*
