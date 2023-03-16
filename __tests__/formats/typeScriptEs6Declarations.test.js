@@ -22,6 +22,7 @@ const file = {
 const properties = {
   "color": {
     "red": {
+      "comment": "Used for errors",
       "name": "colorRed",
       "value": "#FF0000"
     }
