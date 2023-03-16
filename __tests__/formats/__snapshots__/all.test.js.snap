@@ -90,7 +90,6 @@ exports[`formats all should match compose/object snapshot 1`] = `
 
 package ;
 
-
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.*
 
