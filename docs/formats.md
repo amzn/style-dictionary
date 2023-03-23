@@ -608,6 +608,27 @@ StyleDictionary.registerFormat({
 
 * * *
 
+### setComposeObjectProperties 
+> formatHelpers.setComposeObjectProperties(options) ⇒ <code>Object</code>
+
+Outputs an object for compose format configurations. Sets import.
+
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>options</td><td><code>Object</code></td><td><p>The options object declared at configuration</p>
+</td>
+    </tr>  </tbody>
+</table>
+
+
+* * *
+
 ### setSwiftFileProperties 
 > formatHelpers.setSwiftFileProperties(options, objectType, transformGroup) ⇒ <code>Object</code>
 
@@ -1377,7 +1398,10 @@ Creates a Kotlin file for Compose containing an object with a `val` for each pro
     <td>packageName</td><td><code>String</code></td><td></td><td><p>The package for the generated Kotlin object</p>
 </td>
     </tr><tr>
-    <td>options</td><td><code>Object</code></td><td></td><td></td>
+    <td>options</td><td><code>Object</code></td><td></td><td><ul>
+<li>@param {String[]} [options.import=androidx.compose.ui.unit.*] - Modules to import. Can be a string or array of string</li>
+</ul>
+</td>
     </tr><tr>
     <td>[options.showFileHeader]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not to include a comment that has the build date</p>
 </td>
@@ -1543,6 +1567,9 @@ Creates a Swift implementation file of a class with values. It adds default `cla
 </td>
     </tr><tr>
     <td>[options.import]</td><td><code>Array.&lt;String&gt;</code></td><td><code>UIKit</code></td><td><p>Modules to import. Can be a string or array of string</p>
+</td>
+    </tr><tr>
+    <td>[options.className]</td><td><code>String</code></td><td></td><td><p>The name of the generated Swift class</p>
 </td>
     </tr><tr>
     <td>[options.showFileHeader]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not to include a comment that has the build date</p>

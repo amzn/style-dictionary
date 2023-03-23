@@ -169,7 +169,7 @@ A File configuration object represents a single output file. The `options` objec
 
 | Attribute | Type | Description |
 | :--- | :--- | :--- |
-| destination | String (optional) | Location to build the file, will be appended to the buildPath. |
+| destination | String | Location to build the file, will be appended to the buildPath. |
 | format | String (optional) | [Format](formats.md) used to generate the file. Can be a built-in one or you can create your own via [registerFormat](api.md#registerformat). |
 | filter | String/Function/Object (optional) | A function, string or object used to filter the tokens that will be included in the file. If a function is provided, each design token will be passed to the function and the result (true or false) will determine whether the design token is included. If an object is provided, each design token will be matched against the object using a partial deep comparison. If a match is found, the design token is included. If a string is passed, is considered a custom filter registered via [registerFilter](api.md#registerfilter) |
 | options | Object (optional) | A set of extra options associated with the file. Includes `showFileHeader` and `outputReferences`. |
