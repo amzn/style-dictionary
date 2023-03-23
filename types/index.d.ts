@@ -49,8 +49,8 @@ declare namespace StyleDictionary {
   type Matcher = _Matcher;
   type Options = _Options;
   type Parser = _Parser;
-  type Platform = _Platform;
-  type Transform = _Transform;
+  type Platform<PlatformType = Record<string,any>> = _Platform<PlatformType>;
+  type Transform<PlatformType = Record<string,any>> = _Transform<PlatformType>;
   type TransformedToken = _TransformedToken;
   type TransformedTokens = _TransformedTokens;
   type TransformGroup = _TransformGroup;
@@ -97,7 +97,7 @@ declare namespace StyleDictionary {
      * });
      * ```
      */
-    registerTransform(transform: Named<Transform>): this;
+    registerTransform<PlatformType>(transform: Named<Transform<PlatformType>>): this;
 
     /**
      * Add a custom transformGroup to the Style Dictionary, which is a
