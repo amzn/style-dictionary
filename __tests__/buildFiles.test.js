@@ -25,7 +25,7 @@ var dictionary = {
 var platform = {
   files: [
     {
-      destination: '__tests__/__output/test.json',
+      destination: '__tests__/__output/__t3/test.json',
       format: function(dictionary) {
         return JSON.stringify(dictionary.properties)
       }
@@ -34,7 +34,7 @@ var platform = {
 };
 
 var platformWithBuildPath = {
-  buildPath: '__tests__/__output/',
+  buildPath: '__tests__/__output/__t3/',
   files: [
     {
       destination: 'test.json',
@@ -46,7 +46,7 @@ var platformWithBuildPath = {
 };
 
 var platformWithFilter = {
-  buildPath: '__tests__/__output/',
+  buildPath: '__tests__/__output/__t3/',
   files: [
     {
       destination: 'test.json',
@@ -61,7 +61,7 @@ var platformWithFilter = {
 };
 
 var platformWithoutFormatter = {
-  buildPath: '__tests__/__output/',
+  buildPath: '__tests__/__output/__t3/',
   files: [
     {
       destination: 'test.json',
@@ -84,11 +84,11 @@ var platformWithBadBuildPath = {
 describe('buildFiles', () => {
 
   beforeEach(() => {
-    helpers.clearOutput();
+    helpers.clearOutput('__tests__/__output/__t3/');
   });
 
   afterEach(() => {
-    helpers.clearOutput();
+    helpers.clearOutput('__tests__/__output/__t3/');
   });
 
   it('should throw if build path doesn\'t have a trailing slash', () => {
@@ -105,17 +105,17 @@ describe('buildFiles', () => {
 
   it('should work without buildPath', () => {
     buildFiles( dictionary, platform );
-    expect(helpers.fileExists('./__tests__/__output/test.json')).toBeTruthy();
+    expect(helpers.fileExists('./__tests__/__output/__t3/test.json')).toBeTruthy();
   });
 
   it('should work with buildPath', () => {
     buildFiles( dictionary, platformWithBuildPath );
-    expect(helpers.fileExists('./__tests__/__output/test.json')).toBeTruthy();
+    expect(helpers.fileExists('./__tests__/__output/__t3/test.json')).toBeTruthy();
   });
 
   it('should work with a filter', () => {
     buildFiles(dictionary, platformWithFilter);
-    expect(helpers.fileExists('./__tests__/__output/test.json')).toBeTruthy();
+    expect(helpers.fileExists('./__tests__/__output/__t3/test.json')).toBeTruthy();
     var output = require("./__output/test.json")
     expect(output).toHaveProperty('bingo');
     expect(output).not.toHaveProperty('foo');

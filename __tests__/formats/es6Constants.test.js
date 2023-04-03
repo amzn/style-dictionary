@@ -56,20 +56,20 @@ const dictionary = createDictionary({ properties });
 describe('formats', () => {
   describe('javascript/es6', () => {
     beforeEach(() => {
-      helpers.clearOutput();
+      helpers.clearOutput('__tests__/__output/__t14/');
     });
 
     afterEach(() => {
-      helpers.clearOutput();
+      helpers.clearOutput('__tests__/__output/__t14/');
     });
 
     it('should be a valid JS file', () => {
-      fs.writeFileSync('./__tests__/__output/output.js', formatter(createFormatArgs({
+      fs.writeFileSync('./__tests__/__output/__t14/output.js', formatter(createFormatArgs({
         dictionary,
         file,
         platform: {}
       }), {}, file) );
-      const test = require('../__output/output.js');
+      const test = require('../__output/__t14/output.js');
       expect(test.red).toEqual(dictionary.allProperties[0].value);
     });
   });

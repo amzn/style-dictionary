@@ -25,27 +25,27 @@ var fs = require('fs-extra');
 StyleDictionaryExtended.registerAction({
   name: 'test',
   do: function() {
-    fs.writeFileSync('./__tests__/__output/action.txt', 'hi')
+    fs.writeFileSync('./__tests__/__output/__t13/action.txt', 'hi')
   },
   undo: function() {
-    fs.removeSync('./__tests__/__output/action.txt')
+    fs.removeSync('./__tests__/__output/__t13/action.txt')
   }
 });
 
 describe('performAction', () => {
 
   beforeEach(() => {
-    helpers.clearOutput();
+    helpers.clearOutput('__tests__/__output/__t13/');
   });
 
   afterEach(() => {
-    helpers.clearOutput();
+    helpers.clearOutput('__tests__/__output/__t13/');
   });
 
   describe('handle actions', () => {
     it('should write to a file properly', () => {
       StyleDictionaryExtended.buildPlatform('android');
-      expect(helpers.fileExists('./__tests__/__output/action.txt')).toBeTruthy();
+      expect(helpers.fileExists('./__tests__/__output/__t13/action.txt')).toBeTruthy();
     });
   });
 

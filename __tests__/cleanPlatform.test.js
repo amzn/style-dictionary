@@ -19,36 +19,36 @@ var StyleDictionaryExtended = StyleDictionary.extend(config);
 describe('cleanPlatform', () => {
 
   beforeEach(() => {
-    helpers.clearOutput();
+    helpers.clearOutput('__tests__/__output/__t11/');
   });
 
   afterEach(() => {
-    helpers.clearOutput();
+    helpers.clearOutput('__tests__/__output/__t11/');
   });
 
   it('should delete the proper files', () => {
     StyleDictionaryExtended.buildPlatform('web');
     StyleDictionaryExtended.cleanPlatform('web');
-    expect(helpers.fileDoesNotExist('./__tests__/__output/web/_icons.scss')).toBeTruthy();
-    expect(helpers.fileDoesNotExist('./__tests__/__output/web/_styles.js')).toBeTruthy();
-    expect(helpers.fileDoesNotExist('./__tests__/__output/web/_variables.scss')).toBeTruthy();
+    expect(helpers.fileDoesNotExist('./__tests__/__output/__t11/web/_icons.scss')).toBeTruthy();
+    expect(helpers.fileDoesNotExist('./__tests__/__output/__t11/web/_styles.js')).toBeTruthy();
+    expect(helpers.fileDoesNotExist('./__tests__/__output/__t11/web/_variables.scss')).toBeTruthy();
   });
 
   it('should delete android stuff', () => {
     StyleDictionaryExtended.buildPlatform('android');
     StyleDictionaryExtended.cleanPlatform('android');
-    expect(helpers.fileDoesNotExist('./__tests__/__output/android/main/res/drawable-hdpi/flag_us.png')).toBeTruthy();
-    expect(helpers.fileDoesNotExist('./__tests__/__output/android/main/res/drawable-xhdpi/flag_us.png')).toBeTruthy();
-    expect(helpers.fileDoesNotExist('./__tests__/__output/android/colors.xml')).toBeTruthy();
-    expect(helpers.fileDoesNotExist('./__tests__/__output/android/dimens.xml')).toBeTruthy();
-    expect(helpers.fileDoesNotExist('./__tests__/__output/android/font_dimen.xml')).toBeTruthy();
+    expect(helpers.fileDoesNotExist('./__tests__/__output/__t11/android/main/res/drawable-hdpi/flag_us.png')).toBeTruthy();
+    expect(helpers.fileDoesNotExist('./__tests__/__output/__t11/android/main/res/drawable-xhdpi/flag_us.png')).toBeTruthy();
+    expect(helpers.fileDoesNotExist('./__tests__/__output/__t11/android/colors.xml')).toBeTruthy();
+    expect(helpers.fileDoesNotExist('./__tests__/__output/__t11/android/dimens.xml')).toBeTruthy();
+    expect(helpers.fileDoesNotExist('./__tests__/__output/__t11/android/font_dimen.xml')).toBeTruthy();
   });
 
   it('should delete ios stuff', () => {
     StyleDictionaryExtended.buildPlatform('ios');
     StyleDictionaryExtended.cleanPlatform('ios');
-    expect(helpers.fileDoesNotExist('./__tests__/__output/ios/style_dictionary.plist')).toBeTruthy();
-    expect(helpers.fileDoesNotExist('./__tests__/__output/ios/style_dictionary.h')).toBeTruthy();
+    expect(helpers.fileDoesNotExist('./__tests__/__output/__t11/ios/style_dictionary.plist')).toBeTruthy();
+    expect(helpers.fileDoesNotExist('./__tests__/__output/__t11/ios/style_dictionary.h')).toBeTruthy();
   });
 
 });

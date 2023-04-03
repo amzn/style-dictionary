@@ -17,24 +17,24 @@ var StyleDictionary = require('../index');
 describe('buildAllPlatforms', () => {
 
   beforeEach(() => {
-    helpers.clearOutput();
+    helpers.clearOutput('__tests__/__output/__t1/');
   });
 
   afterEach(() => {
-    helpers.clearOutput();
+    helpers.clearOutput('__tests__/__output/__t1/');
   });
 
   it('should work with json config', () => {
     var StyleDictionaryExtended = StyleDictionary.extend(__dirname + '/__configs/test.json');
     StyleDictionaryExtended.buildAllPlatforms();
-    expect(helpers.fileExists('./__tests__/__output/web/_icons.css')).toBeTruthy();
-    expect(helpers.fileExists('./__tests__/__output/android/colors.xml')).toBeTruthy();
+    expect(helpers.fileExists('./__tests__/__output/__t1/web/_icons.css')).toBeTruthy();
+    expect(helpers.fileExists('./__tests__/__output/__t1/android/colors.xml')).toBeTruthy();
   });
 
   it('should work with js config', () => {
     var StyleDictionaryExtended = StyleDictionary.extend(__dirname + '/__configs/test.js');
     StyleDictionaryExtended.buildAllPlatforms();
-    expect(helpers.fileExists('./__tests__/__output/web/_icons.css')).toBeTruthy();
-    expect(helpers.fileExists('./__tests__/__output/android/colors.xml')).toBeTruthy();
+    expect(helpers.fileExists('./__tests__/__output/__t1/web/_icons.css')).toBeTruthy();
+    expect(helpers.fileExists('./__tests__/__output/__t1/android/colors.xml')).toBeTruthy();
   });
 });

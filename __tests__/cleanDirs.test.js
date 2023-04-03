@@ -25,7 +25,7 @@ var dictionary = {
 var platform = {
   files: [
     {
-      destination: '__tests__/__output/extradir1/extradir2/extradir1/extradir2/test.json',
+      destination: '__tests__/__output/__t8/extradir1/extradir2/extradir1/extradir2/test.json',
       format: function(dictionary) {
         return JSON.stringify(dictionary.properties)
       }
@@ -34,7 +34,7 @@ var platform = {
 };
 
 var platformWithBuildPath = {
-  buildPath: '__tests__/__output/extradir1/extradir2/',
+  buildPath: '__tests__/__output/__t8/extradir1/extradir2/',
   files: [
     {
       destination: 'test.json',
@@ -48,27 +48,27 @@ var platformWithBuildPath = {
 describe('cleanDirs', () => {
 
   beforeEach(() => {
-    helpers.clearOutput();
+    helpers.clearOutput('__tests__/__output/__t8/');
   });
 
   afterEach(() => {
-    helpers.clearOutput();
+    helpers.clearOutput('__tests__/__output/__t8/');
   });
 
   it('should delete without buildPath', () => {
     buildFiles( dictionary, platform );
     cleanFiles( dictionary, platform );
     cleanDirs( dictionary, platform );
-    expect(helpers.dirDoesNotExist('./__tests__/__output/extradir1/extradir2')).toBeTruthy();
-    expect(helpers.dirDoesNotExist('./__tests__/__output/extradir1')).toBeTruthy();
+    expect(helpers.dirDoesNotExist('./__tests__/__output/__t8/extradir1/extradir2')).toBeTruthy();
+    expect(helpers.dirDoesNotExist('./__tests__/__output/__t8/extradir1')).toBeTruthy();
   });
 
   it('should delete with buildPath', () => {
     buildFiles( dictionary, platformWithBuildPath );
     cleanFiles( dictionary, platformWithBuildPath );
     cleanDirs( dictionary, platformWithBuildPath );
-    expect(helpers.dirDoesNotExist('./__tests__/__output/extradir1/extradir2')).toBeTruthy();
-    expect(helpers.dirDoesNotExist('./__tests__/__output/extradir1')).toBeTruthy();
+    expect(helpers.dirDoesNotExist('./__tests__/__output/__t8/extradir1/extradir2')).toBeTruthy();
+    expect(helpers.dirDoesNotExist('./__tests__/__output/__t8/extradir1')).toBeTruthy();
   });
 
   it('should throw if buildPath does not end in a trailing slash', () => {

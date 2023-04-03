@@ -23,19 +23,19 @@ function format() {
 describe('cleanDir', () => {
 
   beforeEach(() => {
-    helpers.clearOutput();
+    helpers.clearOutput('__tests__/__output/__t7/');
   });
 
   afterEach(() => {
-    helpers.clearOutput();
+    helpers.clearOutput('__tests__/__output/__t7/');
   });
 
   it('should delete a dir properly', () => {
-    buildFile({destination:'test.txt', format}, {buildPath: '__tests__/__output/extradir1/extradir2/'}, {});
-    cleanFile({destination:'test.txt', format}, {buildPath: '__tests__/__output/extradir1/extradir2/'}, {});
-    cleanDir({destination:'test.txt', format}, {buildPath: '__tests__/__output/extradir1/extradir2/'}, {});
-    expect(helpers.dirDoesNotExist('./__tests__/__output/extradir1/extradir2')).toBeTruthy();
-    expect(helpers.dirDoesNotExist('./__tests__/__output/extradir1')).toBeTruthy();
+    buildFile({destination:'test.txt', format}, {buildPath: '__tests__/__output/__t7/extradir1/extradir2/'}, {});
+    cleanFile({destination:'test.txt', format}, {buildPath: '__tests__/__output/__t7/extradir1/extradir2/'}, {});
+    cleanDir({destination:'test.txt', format}, {buildPath: '__tests__/__output/__t7/extradir1/extradir2/'}, {});
+    expect(helpers.dirDoesNotExist('./__tests__/__output/__t7/extradir1/extradir2')).toBeTruthy();
+    expect(helpers.dirDoesNotExist('./__tests__/__output/__t7/extradir1')).toBeTruthy();
   });
 
 });

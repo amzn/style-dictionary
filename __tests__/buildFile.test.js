@@ -29,22 +29,22 @@ nestedFormat.nested = true;
 describe('buildFile', () => {
 
   beforeEach(() => {
-    helpers.clearOutput();
+    helpers.clearOutput('__tests__/__output/__t2/');
   });
 
   afterEach(() => {
-    helpers.clearOutput();
+    helpers.clearOutput('__tests__/__output/__t2/');
   });
 
   it('should error if format doesnt exist or isnt a function', () => {
     expect(
-      buildFile.bind(null, {destination: '__tests__/__output/test.txt'}, {}, {})
+      buildFile.bind(null, {destination: '__tests__/__output/__t2/test.txt'}, {}, {})
     ).toThrow('Please enter a valid file format');
     expect(
-      buildFile.bind(null, {destination: '__tests__/__output/test.txt', format: {}}, {}, {})
+      buildFile.bind(null, {destination: '__tests__/__output/__t2/test.txt', format: {}}, {}, {})
     ).toThrow('Please enter a valid file format');
     expect(
-      buildFile.bind(null, {destination: '__tests__/__output/test.txt', format: []}, {}, {})
+      buildFile.bind(null, {destination: '__tests__/__output/__t2/test.txt', format: []}, {}, {})
     ).toThrow('Please enter a valid file format');
   });
 
@@ -61,7 +61,7 @@ describe('buildFile', () => {
   });
 
   describe('name collisions', () => {
-    let destination = './__tests__/__output/test.collisions';
+    let destination = './__tests__/__output/__t2/test.collisions';
     let PROPERTY_NAME_COLLISION_WARNINGS = GroupMessages.GROUP.PropertyNameCollisionWarnings + ":" + destination;
     let name = 'someName';
     let properties = {

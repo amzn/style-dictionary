@@ -18,7 +18,7 @@ const createDictionary = require('../../lib/utils/createDictionary');
 const createFormatArgs = require('../../lib/utils/createFormatArgs');
 
 const file = {
-  "destination": "__output/",
+  "destination": "__output/__t15/",
   "format": "javascript/module",
   "filter": {
     "attributes": {
@@ -40,20 +40,20 @@ describe('formats', () => {
   describe('javascript/module', () => {
 
     beforeEach(() => {
-      helpers.clearOutput();
+      helpers.clearOutput('__tests__/__output/');
     });
 
     afterEach(() => {
-      helpers.clearOutput();
+      helpers.clearOutput('__tests__/__output/');
     });
 
     it('should be a valid JS file', () => {
-      fs.writeFileSync('./__tests__/__output/output.js', formatter(createFormatArgs({
+      fs.writeFileSync('./__tests__/__output/__t15/output.js', formatter(createFormatArgs({
         dictionary,
         file,
         platform: {}
       }), {}, file) );
-      const test = require('../__output/output.js');
+      const test = require('../__output/__t15/output.js');
       expect(test.color.red.value).toEqual(dictionary.properties.color.red.value);
     });
 

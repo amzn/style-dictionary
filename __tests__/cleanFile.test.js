@@ -22,22 +22,22 @@ function format() {
 describe('cleanFile', () => {
 
   beforeEach(() => {
-    helpers.clearOutput();
+    helpers.clearOutput('__tests__/__output/__t9/');
   });
 
   afterEach(() => {
-    helpers.clearOutput();
+    helpers.clearOutput('__tests__/__output/__t9/');
   });
 
   it('should delete a file properly', () => {
-    buildFile({destination:'test.txt', format}, {buildPath: '__tests__/__output/'}, {});
-    cleanFile({destination:'test.txt', format}, {buildPath: '__tests__/__output/'}, {});
-    expect(helpers.fileDoesNotExist('./__tests__/__output/test.txt')).toBeTruthy();
+    buildFile({destination:'test.txt', format}, {buildPath: '__tests__/__output/__t9/'}, {});
+    cleanFile({destination:'test.txt', format}, {buildPath: '__tests__/__output/__t9/'}, {});
+    expect(helpers.fileDoesNotExist('./__tests__/__output/__t9/test.txt')).toBeTruthy();
   });
 
   describe('if a file does not exist', () => {
     it('should not throw', () => {
-      expect(() => cleanFile({destination: 'non-existent.txt', format}, { buildPath: '__tests__/__output/' }, {})).not.toThrow();
+      expect(() => cleanFile({destination: 'non-existent.txt', format}, { buildPath: '__tests__/__output/__t9/' }, {})).not.toThrow();
     })
   })
 

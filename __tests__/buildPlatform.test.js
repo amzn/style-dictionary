@@ -19,7 +19,7 @@ var StyleDictionaryExtended = StyleDictionary.extend(config);
 describe('buildPlatform', () => {
 
   beforeEach(() => {
-    helpers.clearOutput();
+    helpers.clearOutput('__tests__/__output/__t4/');
   });
 
   it('should throw if passed a platform that doesn\'t exist', () => {
@@ -36,36 +36,36 @@ describe('buildPlatform', () => {
 
   it('should build web platform files', () => {
     StyleDictionaryExtended.buildPlatform('web');
-    expect(helpers.fileExists('./__tests__/__output/web/_icons.css')).toBeTruthy();
-    expect(helpers.fileExists('./__tests__/__output/web/_styles.js')).toBeTruthy();
-    expect(helpers.fileExists('./__tests__/__output/web/_variables.css')).toBeTruthy();
+    expect(helpers.fileExists('./__tests__/__output/__t4/web/_icons.css')).toBeTruthy();
+    expect(helpers.fileExists('./__tests__/__output/__t4/web/_styles.js')).toBeTruthy();
+    expect(helpers.fileExists('./__tests__/__output/__t4/web/_variables.css')).toBeTruthy();
   });
 
   it('should build scss platform files', () => {
     StyleDictionaryExtended.buildPlatform('scss');
-    expect(helpers.fileExists('./__tests__/__output/scss/_icons.scss')).toBeTruthy();
-    expect(helpers.fileExists('./__tests__/__output/scss/_variables.scss')).toBeTruthy();
+    expect(helpers.fileExists('./__tests__/__output/__t4/scss/_icons.scss')).toBeTruthy();
+    expect(helpers.fileExists('./__tests__/__output/__t4/scss/_variables.scss')).toBeTruthy();
   });
 
   it('should build less platform files', () => {
     StyleDictionaryExtended.buildPlatform('less');
-    expect(helpers.fileExists('./__tests__/__output/less/_icons.less')).toBeTruthy();
-    expect(helpers.fileExists('./__tests__/__output/less/_variables.less')).toBeTruthy();
+    expect(helpers.fileExists('./__tests__/__output/__t4/less/_icons.less')).toBeTruthy();
+    expect(helpers.fileExists('./__tests__/__output/__t4/less/_variables.less')).toBeTruthy();
   });
 
   it('should do android stuff', () => {
     StyleDictionaryExtended.buildPlatform('android');
-    expect(helpers.fileExists('./__tests__/__output/android/main/res/drawable-hdpi/flag_us.png')).toBeTruthy();
-    expect(helpers.fileExists('./__tests__/__output/android/main/res/drawable-xhdpi/flag_us.png')).toBeTruthy();
-    expect(helpers.fileExists('./__tests__/__output/android/colors.xml')).toBeTruthy();
-    expect(helpers.fileExists('./__tests__/__output/android/dimens.xml')).toBeTruthy();
-    expect(helpers.fileExists('./__tests__/__output/android/font_dimen.xml')).toBeTruthy();
+    expect(helpers.fileExists('./__tests__/__output/__t4/android/main/res/drawable-hdpi/flag_us.png')).toBeTruthy();
+    expect(helpers.fileExists('./__tests__/__output/__t4/android/main/res/drawable-xhdpi/flag_us.png')).toBeTruthy();
+    expect(helpers.fileExists('./__tests__/__output/__t4/android/colors.xml')).toBeTruthy();
+    expect(helpers.fileExists('./__tests__/__output/__t4/android/dimens.xml')).toBeTruthy();
+    expect(helpers.fileExists('./__tests__/__output/__t4/android/font_dimen.xml')).toBeTruthy();
   });
 
   it('should do ios stuff', () => {
     StyleDictionaryExtended.buildPlatform('ios');
-    expect(helpers.fileExists('./__tests__/__output/ios/style_dictionary.plist')).toBeTruthy();
-    expect(helpers.fileExists('./__tests__/__output/ios/style_dictionary.h')).toBeTruthy();
+    expect(helpers.fileExists('./__tests__/__output/__t4/ios/style_dictionary.plist')).toBeTruthy();
+    expect(helpers.fileExists('./__tests__/__output/__t4/ios/style_dictionary.h')).toBeTruthy();
   });
 
   it('should handle non-string values in properties', () => {
@@ -73,7 +73,7 @@ describe('buildPlatform', () => {
       source: ['__tests__/__properties/nonString.json'],
       platforms: {
         test: {
-          buildPath: "__tests__/__output/",
+          buildPath: "__tests__/__output/__t4/",
           transforms: ["attribute/cti","size/px","color/hex"],
           files: [
             {
@@ -85,9 +85,9 @@ describe('buildPlatform', () => {
       }
     });
     StyleDictionaryExtended.buildPlatform('test');
-    expect(helpers.fileExists('./__tests__/__output/output.json')).toBeTruthy();
+    expect(helpers.fileExists('./__tests__/__output/__t4/output.json')).toBeTruthy();
     // var input = helpers.fileToJSON('./__tests__/__properties/nonString.json');
-    var output = helpers.fileToJSON('./__tests__/__output/output.json');
+    var output = helpers.fileToJSON('./__tests__/__output/__t4/output.json');
 
     // Make sure transforms run on non-string values as they normally would
     expect(output).toHaveProperty('color.red.value', output.color.otherRed.value);
@@ -108,7 +108,7 @@ describe('buildPlatform', () => {
       source: ['__tests__/__properties/nonPropertyNode.json'],
       platforms: {
         test: {
-          buildPath: "__tests__/__output/",
+          buildPath: "__tests__/__output/__t4/",
           transformGroup: "scss",
           files: [
             {
@@ -120,9 +120,9 @@ describe('buildPlatform', () => {
       }
     });
     StyleDictionaryExtended.buildPlatform('test');
-    expect(helpers.fileExists('./__tests__/__output/output.json')).toBeTruthy();
+    expect(helpers.fileExists('./__tests__/__output/__t4/output.json')).toBeTruthy();
     var input = helpers.fileToJSON('./__tests__/__properties/nonPropertyNode.json');
-    var output = helpers.fileToJSON('./__tests__/__output/output.json');
+    var output = helpers.fileToJSON('./__tests__/__output/__t4/output.json');
     expect(output.color.key1).toEqual(input.color.key1);
     expect(output.color.base.red.key2).toEqual(input.color.base.red.key2);
     expect(output.color.base.attributes.key3).toEqual(input.color.base.attributes.key3);
@@ -133,7 +133,7 @@ describe('buildPlatform', () => {
       source: ['__tests__/__properties/comment.json'],
       platforms: {
         test: {
-          buildPath: "__tests__/__output/",
+          buildPath: "__tests__/__output/__t4/",
           transformGroup: "scss",
           files: [
             {
@@ -145,9 +145,9 @@ describe('buildPlatform', () => {
       }
     });
     StyleDictionaryExtended.buildPlatform('test');
-    expect(helpers.fileExists('./__tests__/__output/output.json')).toBeTruthy();
+    expect(helpers.fileExists('./__tests__/__output/__t4/output.json')).toBeTruthy();
     var input = helpers.fileToJSON('./__tests__/__properties/comment.json');
-    var output = helpers.fileToJSON('./__tests__/__output/output.json');
+    var output = helpers.fileToJSON('./__tests__/__output/__t4/output.json');
     expect(output.size.large.comment).toEqual(input.size.large.comment);
   });
 
@@ -158,7 +158,7 @@ describe('buildPlatform', () => {
         foo: {
           transformGroup: 'bar',
           files: [{
-            destination: '__tests__/__output/test.css',
+            destination: '__tests__/__output/__t4/test.css',
             format: 'css/variables'
           }]
         }

@@ -19,18 +19,18 @@ var StyleDictionaryExtended = StyleDictionary.extend(config);
 describe('cleanAllPlatforms', () => {
 
   beforeEach(() => {
-    helpers.clearOutput();
+    helpers.clearOutput('__tests__/__output/__t6/');
   });
 
   afterEach(() => {
-    helpers.clearOutput();
+    helpers.clearOutput('__tests__/__output/__t6/');
   });
 
   it('should work', () => {
     StyleDictionaryExtended.buildAllPlatforms();
     StyleDictionaryExtended.cleanAllPlatforms();
-    expect(helpers.fileDoesNotExist('./__tests__/__output/web/_icons.scss')).toBeTruthy();
-    expect(helpers.fileDoesNotExist('./__tests__/__output/android/colors.xml')).toBeTruthy();
+    expect(helpers.fileDoesNotExist('./__tests__/__output/__t6/web/_icons.scss')).toBeTruthy();
+    expect(helpers.fileDoesNotExist('./__tests__/__output/__t6/android/colors.xml')).toBeTruthy();
   });
 
 });

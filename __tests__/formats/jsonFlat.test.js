@@ -18,7 +18,7 @@ const { colorDictionary } = require('./__constants');
 const createFormatArgs = require('../../lib/utils/createFormatArgs');
 
 const file = {
-  "destination": "__output/",
+  "destination": "__output/__t20/",
   "format": "json/flat"
 };
 
@@ -28,20 +28,20 @@ describe('formats', () => {
   describe('json/flat', () => {
 
     beforeEach(() => {
-      helpers.clearOutput();
+      helpers.clearOutput('__tests__/__output/__t20/');
     });
 
     afterEach(() => {
-      helpers.clearOutput();
+      helpers.clearOutput('__tests__/__output/__t20/');
     });
 
     it('should be a valid JSON file', () => {
-      fs.writeFileSync('./__tests__/__output/output.flat.json', formatter(createFormatArgs({
+      fs.writeFileSync('./__tests__/__output/__t20/output.flat.json', formatter(createFormatArgs({
         dictionary: colorDictionary,
         file,
         platform: {}
       }), {}, file) );
-      const test = require('../__output/output.flat.json');
+      const test = require('../__output/__t20/output.flat.json');
       expect(test['color-base-red-400']).toEqual(colorDictionary.allProperties[0].value);
     });
   });
