@@ -70,7 +70,7 @@ var platformWithoutFormatter = {
 };
 
 var platformWithBadBuildPath = {
-  buildPath: '__tests__/__output',
+  buildPath: '__tests__/__output/__t3',
   files: [
     {
       destination: 'test.json',
@@ -116,7 +116,7 @@ describe('buildFiles', () => {
   it('should work with a filter', () => {
     buildFiles(dictionary, platformWithFilter);
     expect(helpers.fileExists('./__tests__/__output/__t3/test.json')).toBeTruthy();
-    var output = require("./__output/test.json")
+    var output = require("./__output/__t3/test.json")
     expect(output).toHaveProperty('bingo');
     expect(output).not.toHaveProperty('foo');
     _.each(output, function(property) {

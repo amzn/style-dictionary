@@ -17,22 +17,22 @@ var helpers = require('./__helpers');
 describe('cliBuildWithJsConfig', () => {
 
   beforeAll(() => {
-    helpers.clearOutput('__tests__/__output/__t12/');
-    childProcess.execSync("node ./bin/style-dictionary build --config ./__tests__/__configs/test.js")
+    helpers.clearOutput('__tests__/__output/__cli/');
+    childProcess.execSync("node ./bin/style-dictionary build --config ./__tests__/__configs/test_cli.js")
   });
 
   afterAll(() => {
-    helpers.clearOutput('__tests__/__output/__t12/');
+    helpers.clearOutput('__tests__/__output/__cli/');
   });
 
   it('should work with json config', () => {
-    expect(helpers.fileExists('./__tests__/__output/__t12/web/_icons.css')).toBeTruthy();
-    expect(helpers.fileExists('./__tests__/__output/__t12/android/colors.xml')).toBeTruthy();
+    expect(helpers.fileExists('./__tests__/__output/__cli/web/_icons.css')).toBeTruthy();
+    expect(helpers.fileExists('./__tests__/__output/__cli/android/colors.xml')).toBeTruthy();
   });
 
   it('should work with javascript config', () => {
-    expect(helpers.fileExists('./__tests__/__output/__t12/web/_icons.css')).toBeTruthy();
-    expect(helpers.fileExists('./__tests__/__output/__t12/android/colors.xml')).toBeTruthy();
+    expect(helpers.fileExists('./__tests__/__output/__cli/web/_icons.css')).toBeTruthy();
+    expect(helpers.fileExists('./__tests__/__output/__cli/android/colors.xml')).toBeTruthy();
   });
 
 });

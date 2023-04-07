@@ -13,7 +13,7 @@
 
 const fs = require('fs-extra');
 const StyleDictionary = require('../index');
-const {buildPath} = require('./_constants');
+const {buildPath} = require('./_constants_10');
 
 describe('integration', () => {
   describe('output references', () => {

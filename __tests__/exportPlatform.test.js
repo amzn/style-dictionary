@@ -12,7 +12,7 @@
  */
 
 const helpers = require('./__helpers');
-const config = helpers.fileToJSON(__dirname + '/__configs/test.json');
+const config = helpers.fileToJSON(__dirname + '/__configs/test_export.json');
 const StyleDictionary = require('../index');
 const styleDictionary = StyleDictionary.extend(config);
 

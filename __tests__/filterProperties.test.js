@@ -123,11 +123,11 @@ var falsy_dictionary = {
 describe('filterProperties', () => {
 
   beforeEach(() => {
-    helpers.clearOutput();
+    helpers.clearOutput('__tests__/__output/t0');
   });
 
   afterEach(() => {
-    helpers.clearOutput();
+    helpers.clearOutput('__tests__/__output/t0');
   });
 
   it('should return the original dictionary if no filter is provided', () => {

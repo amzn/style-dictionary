@@ -14,7 +14,7 @@
 const fs = require('fs-extra');
 const scss = require('node-sass');
 const StyleDictionary = require('../index');
-const {buildPath} = require('./_constants');
+const {buildPath} = require('./_constants_11');
 
 describe(`integration`, () => {
   describe(`scss`, () => {

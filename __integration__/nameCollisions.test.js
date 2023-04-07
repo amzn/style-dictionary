@@ -14,7 +14,7 @@
 const fs = require('fs-extra');
 const chalk = require('chalk');
 const StyleDictionary = require('../index');
-const {buildPath} = require('./_constants');
+const {buildPath} = require('./_constants_8');
 
 const properties = {
   color: {

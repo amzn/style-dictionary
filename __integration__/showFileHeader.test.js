@@ -13,7 +13,7 @@
 
 const fs = require('fs-extra');
 const StyleDictionary = require('../index');
-const {buildPath} = require('./_constants');
+const {buildPath} = require('./_constants_12');
 
 describe('integration', () => {
   describe('showFileHeader', () => {

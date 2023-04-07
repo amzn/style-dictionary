@@ -99,7 +99,7 @@ describe('buildFile', () => {
   });
 
 
-  let destEmptyProperties = './__tests__/__output/test.emptyProperties';
+  let destEmptyProperties = './__tests__/__output/__t2/test.emptyProperties';
   it('should warn when a file is not created because of empty properties', () => {
     let dictionary = {
       allProperties: [{
@@ -119,7 +119,7 @@ describe('buildFile', () => {
       format,
       filter
     }, {}, dictionary);
-    expect(helpers.fileExists('./__tests__/__output/test.emptyProperties')).toBeFalsy();
+    expect(helpers.fileExists('./__tests__/__output/__t2/test.emptyProperties')).toBeFalsy();
   });
 
   it('should write to a file properly', () => {
@@ -127,9 +127,9 @@ describe('buildFile', () => {
         destination: 'test.txt',
         format
       },{
-        buildPath: '__tests__/__output/'
+        buildPath: '__tests__/__output/__t2/'
       },{}
     );
-    expect(helpers.fileExists('./__tests__/__output/test.txt')).toBeTruthy();
+    expect(helpers.fileExists('./__tests__/__output/__/t2/test.txt')).toBeTruthy();
   });
 });

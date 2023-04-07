@@ -14,7 +14,7 @@
 const fs = require('fs-extra');
 const Color = require('tinycolor2');
 const StyleDictionary = require('../index');
-const {buildPath} = require('./_constants');
+const {buildPath} = require('./_constants_9');
 
 const options = {
   outputReferences: true
