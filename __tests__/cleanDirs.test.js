@@ -25,7 +25,7 @@ var dictionary = {
 var platform = {
   files: [
     {
-      destination: '__tests__/__output/__t8/extradir1/extradir2/extradir1/extradir2/test.json',
+      destination: '__tests__/__output/__t8/extradir1/extradir2/test.json',
       format: function(dictionary) {
         return JSON.stringify(dictionary.properties)
       }

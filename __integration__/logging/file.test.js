@@ -13,7 +13,7 @@
 
 const fs = require('fs-extra');
 const StyleDictionary = require('../../index');
-const {buildPath, cleanConsoleOutput} = require('../_constants');
+const {buildPath, cleanConsoleOutput} = require('../_constants_15');
 
 // Spy on console.log and add all messages to an array
 let consoleOutput = [];

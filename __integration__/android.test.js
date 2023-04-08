@@ -13,7 +13,7 @@
 
 const fs = require('fs-extra');
 const StyleDictionary = require('../index');
-const {buildPath} = require('./_constants1');
+const {buildPath} = require('./_constants_1');
 
 describe('integration', () => {
   describe('android', () => {
