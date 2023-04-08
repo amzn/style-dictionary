@@ -18,7 +18,7 @@ const createDictionary = require('../../lib/utils/createDictionary');
 const createFormatArgs = require('../../lib/utils/createFormatArgs');
 
 const file = {
-  destination: 'output/',
+  destination: '__output/__21/',
   format: 'json/nested',
 };
 

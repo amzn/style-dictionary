@@ -52,7 +52,7 @@ describe('formats', () => {
     });
 
     afterEach(() => {
-      helpers.clearOutput('__tests__/__output/');
+      helpers.clearOutput('__tests__/__output/__t16');
     });
 
     it('should be a valid JS file', () => {

@@ -40,11 +40,11 @@ describe('formats', () => {
   describe('javascript/module', () => {
 
     beforeEach(() => {
-      helpers.clearOutput('__tests__/__output/');
+      helpers.clearOutput('__tests__/__output/__t15/');
     });
 
     afterEach(() => {
-      helpers.clearOutput('__tests__/__output/');
+      helpers.clearOutput('__tests__/__output/__t15/');
     });
 
     it('should be a valid JS file', () => {

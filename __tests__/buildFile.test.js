@@ -130,6 +130,6 @@ describe('buildFile', () => {
         buildPath: '__tests__/__output/__t2/'
       },{}
     );
-    expect(helpers.fileExists('./__tests__/__output/__/t2/test.txt')).toBeTruthy();
+    expect(helpers.fileExists('./__tests__/__output/__t2/test.txt')).toBeTruthy();
   });
 });

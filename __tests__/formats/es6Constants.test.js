@@ -17,7 +17,7 @@ const createDictionary = require('../../lib/utils/createDictionary');
 const createFormatArgs = require('../../lib/utils/createFormatArgs');
 
 const file = {
-  "destination": "__output/",
+  "destination": "__output/__t14",
   "format": "javascript/es6",
   "filter": {
     "attributes": {
