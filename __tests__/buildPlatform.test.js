@@ -36,7 +36,7 @@ describe('buildPlatform', () => {
 
   it('should build web platform files', () => {
     StyleDictionaryExtended.buildPlatform('web');
-    expect(helpers.fileExists('./__tests__/__output/buildPlatform/web/_icons.css')).toBeTruthy();
+    expect(helpers.fileExists('./__tests__/__output/__buildPlatform/web/_icons.css')).toBeTruthy();
     expect(helpers.fileExists('./__tests__/__output/__buildPlatform/web/_styles.js')).toBeTruthy();
     expect(helpers.fileExists('./__tests__/__output/__buildPlatform/web/_variables.css')).toBeTruthy();
   });
