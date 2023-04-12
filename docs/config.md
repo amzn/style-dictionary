@@ -145,7 +145,7 @@ You would then change your npm script or CLI command to run that file with Node:
 | action | Object (optional) | Custom inline [actions](actions.md). The keys in this object will be the action's name and the value should be an object containing `do` and `undo` methods.
 | parsers | Array[Parser] (optional) | Custom [file parsers](parsers.md) to run on input files |
 | include | Array[String] (optional) | An array of file path [globs](https://github.com/isaacs/node-glob) to design token files that contain default styles. Style Dictionary uses this as a base collection of design tokens. The tokens found using the "source" attribute will overwrite tokens found using include. |
-| source | Array[String] | An array of file path [globs](https://github.com/isaacs/node-glob) to design token files. Style Dictionary will do a deep merge of all of the token files, allowing you to organize your files files however you want. |
+| source | Array[String] | An array of file path [globs](https://github.com/isaacs/node-glob) to design token files. Style Dictionary will do a deep merge of all of the token files, allowing you to organize your files however you want. |
 | tokens | Object | The tokens object is a way to include inline design tokens as opposed to using the `source` and `include` arrays. 
 | properties | Object | **DEPRECATED** The properties object has been renamed to `tokens`. Using the `properties` object will still work for backwards compatibility. 
 | platforms | Object[Platform] | An object containing [platform](#platform) config objects that describe how the Style Dictionary should build for that platform. You can add any arbitrary attributes on this object that will get passed to formats and actions (more on these in a bit). This is useful for things like build paths, name prefixes, variable names, etc.
@@ -169,7 +169,7 @@ A File configuration object represents a single output file. The `options` objec
 
 | Attribute | Type | Description |
 | :--- | :--- | :--- |
-| destination | String (optional) | Location to build the file, will be appended to the buildPath. |
+| destination | String | Location to build the file, will be appended to the buildPath. |
 | format | String (optional) | [Format](formats.md) used to generate the file. Can be a built-in one or you can create your own via [registerFormat](api.md#registerformat). |
 | filter | String/Function/Object (optional) | A function, string or object used to filter the tokens that will be included in the file. If a function is provided, each design token will be passed to the function and the result (true or false) will determine whether the design token is included. If an object is provided, each design token will be matched against the object using a partial deep comparison. If a match is found, the design token is included. If a string is passed, is considered a custom filter registered via [registerFilter](api.md#registerfilter) |
 | options | Object (optional) | A set of extra options associated with the file. Includes `showFileHeader` and `outputReferences`. |

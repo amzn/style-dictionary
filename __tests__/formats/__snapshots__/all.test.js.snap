@@ -90,7 +90,6 @@ exports[`formats all should match compose/object snapshot 1`] = `
 
 package ;
 
-
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.*
 
@@ -752,7 +751,8 @@ exports[`formats all should match typescript/es6-declarations snapshot 1`] = `
  * Generated on Sat, 01 Jan 2000 00:00:00 GMT
  */
 
-export const color_red : string; // comment"
+/** comment */
+export const color_red : string;"
 `;
 
 exports[`formats all should match typescript/module-declarations snapshot 1`] = `

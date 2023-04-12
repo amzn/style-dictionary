@@ -14,7 +14,7 @@
 import { Options } from './Options';
 import { File } from './File';
 
-export interface Platform {
+export type Platform<PlatformType = Record<string, any>> = {
   transformGroup?: string;
   transforms?: string[];
   basePxFontSize?: number;
@@ -23,4 +23,4 @@ export interface Platform {
   files?: File[];
   actions?: string[];
   options?: Options;
-}
+} & PlatformType;

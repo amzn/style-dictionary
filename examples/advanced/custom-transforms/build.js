@@ -4,7 +4,7 @@ console.log('Build started...');
 console.log('\n==============================================');
 
 
-// REGISTER THE CUSTOM TRANFORMS
+// REGISTER THE CUSTOM TRANSFORMS
 
 StyleDictionary.registerTransform({
   name: 'size/px', // notice: the name is an override of an existing predefined method (yes, you can do it)
@@ -65,7 +65,7 @@ StyleDictionary.registerTransform({ // this is a silly example, to show how you 
 });
 
 
-// REGISTER THE CUSTOM TRANFORM GROUPS
+// REGISTER THE CUSTOM TRANSFORM GROUPS
 
 // if you want to see what a pre-defined group contains, uncomment the next line:
 // console.log(StyleDictionary.transformGroup['group_name']);

@@ -207,7 +207,7 @@ Which should output a file that will start like this:
  */
 ```
 
-For an in-depth example see the [custom-file-header](https://github.com/amzn/style-dictionary/examples/advanced/custom-file-header) example.
+For an in-depth example see the [custom-file-header](https://github.com/amzn/style-dictionary/tree/main/examples/advanced/custom-file-header) example.
 
 ## Custom formats
 
@@ -498,7 +498,7 @@ StyleDictionary.registerFormat({
 * * *
 
 ### getTypeScriptType 
-> formatHelpers.getTypeScriptType(value) ⇒ <code>String</code>
+> formatHelpers.getTypeScriptType(value, options) ⇒ <code>String</code>
 
 Given some value, returns a basic valid TypeScript type for that value.
 Supports numbers, strings, booleans, arrays and objects of any of those types.
@@ -513,6 +513,11 @@ Supports numbers, strings, booleans, arrays and objects of any of those types.
   <tbody>
 <tr>
     <td>value</td><td><code>*</code></td><td><p>A value to check the type of.</p>
+</td>
+    </tr><tr>
+    <td>options</td><td><code>Object</code></td><td></td>
+    </tr><tr>
+    <td>options.outputStringLiterals</td><td><code>Boolean</code></td><td><p>Whether or not to output literal types for string values</p>
 </td>
     </tr>  </tbody>
 </table>
@@ -530,7 +535,7 @@ StyleDictionary.registerFormat({
    }).join('\n');
   }
 });
-``` 
+```
 
 * * *
 
@@ -600,6 +605,27 @@ StyleDictionary.registerFormat({
   }
 });
 ```
+
+* * *
+
+### setComposeObjectProperties 
+> formatHelpers.setComposeObjectProperties(options) ⇒ <code>Object</code>
+
+Outputs an object for compose format configurations. Sets import.
+
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>options</td><td><code>Object</code></td><td><p>The options object declared at configuration</p>
+</td>
+    </tr>  </tbody>
+</table>
+
 
 * * *
 
@@ -1096,6 +1122,21 @@ Creates TypeScript declarations for ES6 modules
 }
 ```
 
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Default</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>options</td><td><code>Object</code></td><td></td><td></td>
+    </tr><tr>
+    <td>[options.outputStringLiterals]</td><td><code>Boolean</code></td><td><code>false</code></td><td><p>Whether or not to output literal types for string values</p>
+</td>
+    </tr>  </tbody>
+</table>
+
 **Example**  
 ```typescript
 export const ColorBackgroundBase : string;
@@ -1357,7 +1398,10 @@ Creates a Kotlin file for Compose containing an object with a `val` for each pro
     <td>packageName</td><td><code>String</code></td><td></td><td><p>The package for the generated Kotlin object</p>
 </td>
     </tr><tr>
-    <td>options</td><td><code>Object</code></td><td></td><td></td>
+    <td>options</td><td><code>Object</code></td><td></td><td><ul>
+<li>@param {String[]} [options.import=androidx.compose.ui.unit.*] - Modules to import. Can be a string or array of string</li>
+</ul>
+</td>
     </tr><tr>
     <td>[options.showFileHeader]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not to include a comment that has the build date</p>
 </td>
@@ -1523,6 +1567,9 @@ Creates a Swift implementation file of a class with values. It adds default `cla
 </td>
     </tr><tr>
     <td>[options.import]</td><td><code>Array.&lt;String&gt;</code></td><td><code>UIKit</code></td><td><p>Modules to import. Can be a string or array of string</p>
+</td>
+    </tr><tr>
+    <td>[options.className]</td><td><code>String</code></td><td></td><td><p>The name of the generated Swift class</p>
 </td>
     </tr><tr>
     <td>[options.showFileHeader]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not to include a comment that has the build date</p>

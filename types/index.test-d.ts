@@ -101,6 +101,29 @@ expectType<StyleDictionary.Core>(
   })
 );
 
+type CustomPlatform = {
+  colorMode: 'light' | 'dark';
+}
+
+expectType<StyleDictionary.Core>(
+  StyleDictionary.registerTransform<CustomPlatform>({
+    name: "colormode",
+    type: "value",
+    matcher: function (token) {
+      return token.attributes?.category === "color";
+    },
+    transformer: function (token, platform) {
+      expectType<StyleDictionary.TransformedToken>(token);
+      expectType<StyleDictionary.Platform<CustomPlatform>>(platform);
+      if (platform.colorMode === 'light') {
+        return 'light'
+      } else {
+        return 'dark'
+      }
+    },
+  })
+);
+
 expectType<StyleDictionary.Core>(
   StyleDictionary.registerTransformGroup({
     name: "Swift",
@@ -152,6 +175,12 @@ expectAssignable<StyleDictionary.Platform>({
 
 expectAssignable<StyleDictionary.Platform>({
   transforms: [`attribute/cti`],
+});
+
+expectAssignable<StyleDictionary.Platform>({
+  colorMode: 'dark',
+  files: [],
+  transformGroup: 'scss',
 });
 
 expectAssignable<StyleDictionary.Platform>({

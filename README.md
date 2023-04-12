@@ -19,7 +19,7 @@ When you are managing user experiences, it can be quite challenging to keep styl
 
 For detailed usage head to https://amzn.github.io/style-dictionary
 
-## Watch the Demo on Youtube
+## Watch the Demo on YouTube
 [![Watch the video](/docs/assets/fake_player.png)](http://youtu.be/1HREvonfqhY)
 
 ## Experiment in the playground
@@ -198,7 +198,7 @@ float const SizeFontBase = 16.00f;
 
 ## Quick Start
 
-The style dictionary framework comes with some example code to get you stared. Install the node module globally, create a directory and `cd` into it.
+The style dictionary framework comes with some example code to get you started. Install the node module globally, create a directory and `cd` into it.
 
 ```
 $ npm i -g style-dictionary
@@ -229,7 +229,7 @@ A design token is an attribute to describe something visually. It is atomic (it 
 
 While not exactly necessary, we feel this classification structure of design tokens makes the most sense semantically. Design tokens can be organized into a hierarchical tree structure with the top level, category, defining the primitive nature of the token. For example, we have the color category and every token underneath is always a color. As you proceed down the tree to type, item, sub-item, and state, you get more specific about what that color is. Is it a background color, a text color, or a border color? What kind of text color is it? You get the point. Now you can structure your token json files like simple objects:
 
-```
+```json
 {
   "size": {
     "font": {
@@ -250,7 +250,7 @@ Also, the CTI structure provides a good mechanism to target transforms for speci
 
 You can also add a _comment_ to a design token:
 
-```
+```json
 {
   "size": {
     "font": {
@@ -280,11 +280,11 @@ const StyleDictionary = require('style-dictionary').extend('config.json');
 StyleDictionary.registerTransform({
   name: 'time/seconds',
   type: 'value',
-  matcher: function(prop) {
-    return prop.attributes.category === 'time';
+  matcher: function(token) {
+    return token.attributes.category === 'time';
   },
-  transformer: function(prop) {
-    return (parseInt(prop.original.value) / 1000).toString() + 's';
+  transformer: function(token) {
+    return (parseInt(token.original.value) / 1000).toString() + 's';
   }
 });
 
