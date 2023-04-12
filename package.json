@@ -38,7 +38,7 @@
   ],
   "scripts": {
     "lint": "eslint --fix index.js \"lib/**/*.js\" \"__tests__/**/*.js\"",
-    "test": "npm run test-types && npm run lint && jest --runInBand --silent --coverage",
+    "test": "npm run test-types && npm run lint && jest --silent --coverage",
     "test-types": "tsd",
     "test-watch": "npm run test-types && npm run lint && jest --runInBand --watch",
     "generate-docs": "node ./scripts/generateDocs.js",
