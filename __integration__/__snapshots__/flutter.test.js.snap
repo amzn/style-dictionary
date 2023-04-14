@@ -169,7 +169,8 @@ class StyleDictionaryColor {
     static const fontSuccess = Color(0xFF08422F);
     static const fontTertiary = Color(0xFF364141);
     static const fontWarning = Color(0xFF601700);
-}"
+}
+"
 `;
 
 exports[`integration flutter flutter/class.dart should match snapshot 1`] = `
@@ -350,7 +351,8 @@ class StyleDictionary {
     static const sizePaddingMedium = 16.00;
     static const sizePaddingSmall = 8.00;
     static const sizePaddingXl = 16.00;
-}"
+}
+"
 `;
 
 exports[`integration flutter flutter/class.dart with references should match snapshot 1`] = `
@@ -531,5 +533,6 @@ class StyleDictionary {
     static const colorFontInteractiveHover = colorBrandPrimary;
     static const colorFontInteractive = colorBrandPrimary;
     static const colorBackgroundDisabled = colorBackgroundTertiary;
-}"
+}
+"
 `;
