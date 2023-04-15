@@ -10,30 +10,30 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-const createPropertyFormatter = require('../../../lib/common/formatHelpers/createPropertyFormatter');
-const createDictionary = require('../../../lib/utils/createDictionary');
+const createPropertyFormatter = require("../../../lib/common/formatHelpers/createPropertyFormatter");
+const createDictionary = require("../../../lib/utils/createDictionary");
 
 const dictionary = createDictionary({
   properties: {
     tokens: {
       foo: {
         original: {
-          value: '5px',
-          type: 'spacing'
+          value: "5px",
+          type: "spacing",
         },
         attributes: {
-          category: 'tokens',
-          type: 'foo'
+          category: "tokens",
+          type: "foo",
         },
-        name: 'tokens-foo',
-        path: ['tokens', 'foo'],
-        value: '5px',
-        type: 'spacing'
+        name: "tokens-foo",
+        path: ["tokens", "foo"],
+        value: "5px",
+        type: "spacing",
       },
       ref: {
         original: {
-          value: '{tokens.foo}',
-          type: 'spacing'
+          value: "{tokens.foo}",
+          type: "spacing",
         },
         attributes: {
           category: 'tokens',
@@ -53,22 +53,22 @@ const transformedDictionary = createDictionary({
     tokens: {
       foo: {
         original: {
-          value: '5px',
-          type: 'spacing'
+          value: "5px",
+          type: "spacing",
         },
         attributes: {
-          category: 'tokens',
-          type: 'foo'
+          category: "tokens",
+          type: "foo",
         },
-        name: 'tokens-foo',
-        path: ['tokens', 'foo'],
-        value: '5px',
-        type: 'spacing'
+        name: "tokens-foo",
+        path: ["tokens", "foo"],
+        value: "5px",
+        type: "spacing",
       },
       ref: {
         original: {
-          value: '{tokens.foo}',
-          type: 'spacing'
+          value: "{tokens.foo}",
+          type: "spacing",
         },
         attributes: {
           category: 'tokens',
@@ -79,8 +79,8 @@ const transformedDictionary = createDictionary({
         value: 'changed by transitive transform',
         type: 'spacing'
       },
-    }
-  }
+    },
+  },
 });
 
 const numberDictionary = createDictionary({
