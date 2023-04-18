@@ -1507,7 +1507,8 @@ $size-font-xl: 2.25rem;
 $size-padding-small: 0.5rem;
 $size-padding-medium: 1rem;
 $size-padding-large: 1rem;
-$size-padding-xl: 1rem;"
+$size-padding-xl: 1rem;
+"
 `;
 
 exports[`integration scss scss/variables with filter and output references should match snapshot 1`] = `
@@ -1522,7 +1523,8 @@ $color-background-danger: $color-core-red-0;
 $color-background-tertiary: $color-core-neutral-200;
 $color-background-secondary: $color-core-neutral-100;
 $color-background-primary: $color-core-neutral-0 !default;
-$color-background-disabled: $color-background-tertiary;"
+$color-background-disabled: $color-background-tertiary;
+"
 `;
 
 exports[`integration scss scss/variables with outputReferences should match snapshot 1`] = `
@@ -1691,7 +1693,8 @@ $color-font-interactive-disabled: $color-font-tertiary;
 $color-font-interactive-active: $color-brand-secondary;
 $color-font-interactive-hover: $color-brand-primary;
 $color-font-interactive: $color-brand-primary;
-$color-background-disabled: $color-background-tertiary;"
+$color-background-disabled: $color-background-tertiary;
+"
 `;
 
 exports[`integration scss scss/variables with themeable should match snapshot 1`] = `
@@ -1860,5 +1863,6 @@ $size-font-xl: 2.25rem !default;
 $size-padding-small: 0.5rem !default;
 $size-padding-medium: 1rem !default;
 $size-padding-large: 1rem !default;
-$size-padding-xl: 1rem !default;"
+$size-padding-xl: 1rem !default;
+"
 `;

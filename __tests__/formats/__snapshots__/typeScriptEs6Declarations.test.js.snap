@@ -7,5 +7,6 @@ exports[`formats typescript/es6-declarations with outputStringLiterals should ma
  */
 
 /** Used for errors */
-export const colorRed : \\"#FF0000\\";"
+export const colorRed : \\"#FF0000\\";
+"
 `;

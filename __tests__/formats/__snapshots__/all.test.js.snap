@@ -134,7 +134,8 @@ class  {
   ._();
 
     static const color_red = #FF0000; /* comment */
-}"
+}
+"
 `;
 
 exports[`formats all should match ios/colors.h snapshot 1`] = `
@@ -466,7 +467,8 @@ exports[`formats all should match javascript/es6 snapshot 1`] = `
  * Generated on Sat, 01 Jan 2000 00:00:00 GMT
  */
 
-export const color_red = \\"#FF0000\\"; // comment"
+export const color_red = \\"#FF0000\\"; // comment
+"
 `;
 
 exports[`formats all should match javascript/module snapshot 1`] = `
@@ -494,7 +496,8 @@ module.exports = {
       ]
     }
   }
-};"
+};
+"
 `;
 
 exports[`formats all should match javascript/module-flat snapshot 1`] = `
@@ -505,7 +508,8 @@ exports[`formats all should match javascript/module-flat snapshot 1`] = `
 
 module.exports = {
   \\"color_red\\": \\"#FF0000\\"
-};"
+};
+"
 `;
 
 exports[`formats all should match javascript/object snapshot 1`] = `
@@ -533,7 +537,8 @@ var _styleDictionary = {
       ]
     }
   }
-};"
+};
+"
 `;
 
 exports[`formats all should match javascript/umd snapshot 1`] = `
@@ -597,7 +602,8 @@ exports[`formats all should match json snapshot 1`] = `
       ]
     }
   }
-}"
+}
+"
 `;
 
 exports[`formats all should match json/asset snapshot 1`] = `"{}"`;
@@ -605,7 +611,8 @@ exports[`formats all should match json/asset snapshot 1`] = `"{}"`;
 exports[`formats all should match json/flat snapshot 1`] = `
 "{
   \\"color_red\\": \\"#FF0000\\"
-}"
+}
+"
 `;
 
 exports[`formats all should match json/nested snapshot 1`] = `
@@ -613,7 +620,8 @@ exports[`formats all should match json/nested snapshot 1`] = `
   \\"color\\": {
     \\"red\\": \\"#FF0000\\"
   }
-}"
+}
+"
 `;
 
 exports[`formats all should match less/icons snapshot 1`] = `
@@ -629,7 +637,8 @@ exports[`formats all should match less/variables snapshot 1`] = `
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
 
-@color_red: #FF0000; // comment"
+@color_red: #FF0000; // comment
+"
 `;
 
 exports[`formats all should match sass/map-deep snapshot 1`] = `
@@ -707,7 +716,8 @@ exports[`formats all should match scss/variables snapshot 1`] = `
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
 
-$color_red: #FF0000; // comment"
+$color_red: #FF0000; // comment
+"
 `;
 
 exports[`formats all should match sketch/palette snapshot 1`] = `
@@ -715,7 +725,8 @@ exports[`formats all should match sketch/palette snapshot 1`] = `
   \\"compatibleVersion\\": \\"1.0\\",
   \\"pluginVersion\\": \\"1.1\\",
   \\"colors\\": []
-}"
+}
+"
 `;
 
 exports[`formats all should match sketch/palette/v2 snapshot 1`] = `
@@ -734,7 +745,8 @@ exports[`formats all should match sketch/palette/v2 snapshot 1`] = `
       \\"name\\": \\"color_red\\"
     }
   ]
-}"
+}
+"
 `;
 
 exports[`formats all should match stylus/variables snapshot 1`] = `
@@ -742,7 +754,8 @@ exports[`formats all should match stylus/variables snapshot 1`] = `
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
 
-$color_red= #FF0000; // comment"
+$color_red= #FF0000; // comment
+"
 `;
 
 exports[`formats all should match typescript/es6-declarations snapshot 1`] = `
@@ -752,7 +765,8 @@ exports[`formats all should match typescript/es6-declarations snapshot 1`] = `
  */
 
 /** comment */
-export const color_red : string;"
+export const color_red : string;
+"
 `;
 
 exports[`formats all should match typescript/module-declarations snapshot 1`] = `
@@ -783,5 +797,6 @@ declare const tokens: {
   \\"color\\": {
     \\"red\\": DesignToken
   }
-}"
+}
+"
 `;

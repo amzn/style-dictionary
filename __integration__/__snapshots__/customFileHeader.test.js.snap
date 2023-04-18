@@ -60,7 +60,8 @@ module.exports = {
       ]
     }
   }
-};"
+};
+"
 `;
 
 exports[`integration valid custom file headers platform options no file options should match snapshot 1`] = `
@@ -88,7 +89,8 @@ module.exports = {
       ]
     }
   }
-};"
+};
+"
 `;
 
 exports[`integration valid custom file headers platform options showFileHeader should match snapshot 1`] = `
@@ -110,5 +112,6 @@ exports[`integration valid custom file headers platform options showFileHeader s
       ]
     }
   }
-};"
+};
+"
 `;
