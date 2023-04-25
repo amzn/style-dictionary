@@ -1398,9 +1398,9 @@ Creates a Kotlin file for Compose containing an object with a `val` for each pro
     <td>packageName</td><td><code>String</code></td><td></td><td><p>The package for the generated Kotlin object</p>
 </td>
     </tr><tr>
-    <td>options</td><td><code>Object</code></td><td></td><td><ul>
-<li>@param {String[]} [options.import=androidx.compose.ui.unit.*] - Modules to import. Can be a string or array of string</li>
-</ul>
+    <td>options</td><td><code>Object</code></td><td></td><td></td>
+    </tr><tr>
+    <td>[options.import]</td><td><code>Array.&lt;String&gt;</code></td><td><code>[&#x27;androidx.compose.ui.graphics.Color&#x27;, &#x27;androidx.compose.ui.unit.*&#x27;]</code></td><td><p>Modules to import. Can be a string or array of strings</p>
 </td>
     </tr><tr>
     <td>[options.showFileHeader]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not to include a comment that has the build date</p>
@@ -1566,7 +1566,7 @@ Creates a Swift implementation file of a class with values. It adds default `cla
     <td>[options.accessControl]</td><td><code>String</code></td><td><code>public</code></td><td><p>Level of <a href="https://docs.swift.org/swift-book/LanguageGuide/AccessControl.html">access</a> of the generated swift object</p>
 </td>
     </tr><tr>
-    <td>[options.import]</td><td><code>Array.&lt;String&gt;</code></td><td><code>UIKit</code></td><td><p>Modules to import. Can be a string or array of string</p>
+    <td>[options.import]</td><td><code>Array.&lt;String&gt;</code></td><td><code>UIKit</code></td><td><p>Modules to import. Can be a string or array of strings</p>
 </td>
     </tr><tr>
     <td>[options.className]</td><td><code>String</code></td><td></td><td><p>The name of the generated Swift class</p>
@@ -1607,7 +1607,7 @@ Creates a Swift implementation file of an enum with values. It adds default `enu
     <td>[options.accessControl]</td><td><code>String</code></td><td><code>public</code></td><td><p>Level of <a href="https://docs.swift.org/swift-book/LanguageGuide/AccessControl.html">access</a> of the generated swift object</p>
 </td>
     </tr><tr>
-    <td>[options.import]</td><td><code>Array.&lt;String&gt;</code></td><td><code>UIKit</code></td><td><p>Modules to import. Can be a string or array of string</p>
+    <td>[options.import]</td><td><code>Array.&lt;String&gt;</code></td><td><code>UIKit</code></td><td><p>Modules to import. Can be a string or array of strings</p>
 </td>
     </tr><tr>
     <td>[options.showFileHeader]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Whether or not to include a comment that has the build date</p>

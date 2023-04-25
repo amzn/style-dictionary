@@ -346,7 +346,7 @@ Transforms the value into an 8-digit hex string for Android because they put the
 Transforms the value into a Color class for Compose
 
 ```kotlin
-// Matches: prop.attributes.category === 'color'
+// Matches: token.attributes.category === 'color'
 // Returns:
 Color(0xFF009688)
 ```
@@ -555,7 +555,7 @@ Scales the number by 16 (or the value of 'basePxFontSize' on the platform in you
 Transforms the value from a REM size on web into a scale-independent pixel (sp) value for font sizes in Compose. It WILL scale the number by a factor of 16 (or the value of 'basePxFontSize' on the platform in your config).
 
 ```kotlin
-// Matches: prop.attributes.category === 'size' && prop.attributes.type === 'font'
+// Matches: token.attributes.category === 'size' && token.attributes.type === 'font'
 // Returns:
 "16.0.sp"
 ```
@@ -569,7 +569,7 @@ Transforms the value from a REM size on web into a scale-independent pixel (sp) 
 Transforms the value from a REM size on web into a density-independent pixel (dp) value for font sizes in Compose. It WILL scale the number by a factor of 16 (or the value of 'basePxFontSize' on the platform in your config).
 
 ```kotlin
-// Matches: prop.attributes.category === 'size' && prop.attributes.type !== 'font'
+// Matches: token.attributes.category === 'size' && token.attributes.type !== 'font'
 // Returns:
 "16.0.dp"
 ```
@@ -583,7 +583,7 @@ Transforms the value from a REM size on web into a density-independent pixel (dp
 Adds the .em Compose extension to the end of a number. Does not scale the value
 
 ```kotlin
-// Matches: prop.attributes.category === 'size' && prop.attributes.type === 'font'
+// Matches: token.attributes.category === 'size' && token.attributes.type === 'font'
 // Returns:
 "16.0em"
 ```

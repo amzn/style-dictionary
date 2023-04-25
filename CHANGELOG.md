@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.8.0](https://github.com/amzn/style-dictionary/compare/v3.7.2...v3.8.0) (2023-04-25)
+
+
+### Features
+
+* **formats:** add options.outputStringLiterals to typescript/es6-declarations ([#857](https://github.com/amzn/style-dictionary/issues/857)) ([0c31718](https://github.com/amzn/style-dictionary/commit/0c31718eb09e89216fb2446a94d9b505635b9f18)), closes [#905](https://github.com/amzn/style-dictionary/issues/905)
+* **formats:** compose object imports ([#874](https://github.com/amzn/style-dictionary/issues/874)) ([8373721](https://github.com/amzn/style-dictionary/commit/83737211d2da2e004ddfb09ede912175f5b4b1bd))
+* **types:** loosening the Platform type to allow for extension ([#926](https://github.com/amzn/style-dictionary/issues/926)) ([c43263b](https://github.com/amzn/style-dictionary/commit/c43263bfd5223a7f24525f20aa87958aeedab812))
+
+
+### Bug Fixes
+
+* **formats:** added missing EOL before EOF for some formats ([#963](https://github.com/amzn/style-dictionary/issues/963)) ([dd60479](https://github.com/amzn/style-dictionary/commit/dd60479d9a5dbc707476259b03f27c719f17e17d))
+* **types:** add correct return types for sortByReference ([#919](https://github.com/amzn/style-dictionary/issues/919)) ([2eff17d](https://github.com/amzn/style-dictionary/commit/2eff17d50c518cd86d68970f904413908e848fa7)), closes [#918](https://github.com/amzn/style-dictionary/issues/918)
+
 ### [3.7.2](https://github.com/amzn/style-dictionary/compare/v3.7.0...v3.7.2) (2023-01-03)
 
 
