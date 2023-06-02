@@ -149,6 +149,7 @@ You would then change your npm script or CLI command to run that file with Node:
 | tokens | Object | The tokens object is a way to include inline design tokens as opposed to using the `source` and `include` arrays. 
 | properties | Object | **DEPRECATED** The properties object has been renamed to `tokens`. Using the `properties` object will still work for backwards compatibility. 
 | platforms | Object[Platform] | An object containing [platform](#platform) config objects that describe how the Style Dictionary should build for that platform. You can add any arbitrary attributes on this object that will get passed to formats and actions (more on these in a bit). This is useful for things like build paths, name prefixes, variable names, etc.
+| log | String (optional) | The default log level is set to warn. However, if you change it to error, collisions will cause the StyleDictionary process to stop. 
 
 ### Platform
 
@@ -162,6 +163,7 @@ A platform is a build target that tells Style Dictionary how to properly transfo
 | options | Object (optional) | Options that apply to all files in the platform, for example `outputReferences` and `showFileHeader`
 | files | Array[File] (optional) | [Files](#file) to be generated for this platform.
 | actions | Array[String] (optional) | [Actions](actions.md) to be performed after the files are built for that platform. Actions can be any arbitrary code you want to run like copying files, generating assets, etc. You can use pre-defined actions or create custom actions.
+ 
 
 ### File
 
