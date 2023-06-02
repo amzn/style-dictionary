@@ -149,6 +149,7 @@ You would then change your npm script or CLI command to run that file with Node:
 | tokens | Object | The tokens object is a way to include inline design tokens as opposed to using the `source` and `include` arrays. 
 | properties | Object | **DEPRECATED** The properties object has been renamed to `tokens`. Using the `properties` object will still work for backwards compatibility. 
 | platforms | Object[Platform] | An object containing [platform](#platform) config objects that describe how the Style Dictionary should build for that platform. You can add any arbitrary attributes on this object that will get passed to formats and actions (more on these in a bit). This is useful for things like build paths, name prefixes, variable names, etc.
+| log | String (optional) | The default log value is `warn`. However, if you change it to `error`, collisions will cause the StyleDictionary process to stop. 
 
 ### Platform
 
