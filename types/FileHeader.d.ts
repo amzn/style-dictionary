@@ -11,4 +11,4 @@
  * and limitations under the License.
  */
 
-export type FileHeader = (defaultMessage: string[]) => string[];
+export type FileHeader = (defaultMessage?: string[]) => string[];
