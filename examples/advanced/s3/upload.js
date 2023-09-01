@@ -1,5 +1,5 @@
 var AWS = require('aws-sdk'),
-    fs = require('fs-extra');
+  fs = require('fs-extra');
 
 // Create an S3 client
 var s3 = new AWS.S3();
@@ -11,18 +11,16 @@ var bucketName = 'style-dictionary-test';
 process.chdir('build');
 var files = fs.walkSync('./');
 
-s3.createBucket({Bucket: bucketName}, function() {
-  files.forEach(function(file) {
+s3.createBucket({ Bucket: bucketName }, function () {
+  files.forEach(function (file) {
     var options = {
       Bucket: bucketName,
       Key: file,
-      Body: fs.readFileSync(file)
+      Body: fs.readFileSync(file),
     };
-    s3.putObject(options, function(err, data) {
-      if (err)
-        console.log(err);
-      else
-        console.log("Successfully uploaded data to " + bucketName + "/" + file);
+    s3.putObject(options, function (err, data) {
+      if (err) console.log(err);
+      else console.log('Successfully uploaded data to ' + bucketName + '/' + file);
     });
   });
 });

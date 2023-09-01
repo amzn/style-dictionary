@@ -1,7 +1,7 @@
-import { StatusBar } from "expo-status-bar";
-import React from "react";
-import { StyleSheet, Text, View, PixelRatio } from "react-native";
-import * as variables from "./style-dictionary-dist/variables";
+import { StatusBar } from 'expo-status-bar';
+import React from 'react';
+import { StyleSheet, Text, View, PixelRatio } from 'react-native';
+import * as variables from './style-dictionary-dist/variables';
 
 export default function App() {
   return (
@@ -17,8 +17,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: variables.colorBrand01,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   title: {
     fontSize: PixelRatio.getFontScale() * variables.sizeFontMd.scale,

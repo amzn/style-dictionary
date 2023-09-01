@@ -5,5 +5,5 @@ const base = require('./base');
 // styles if you have a base style and variations.
 module.exports = Object.assign({}, base, {
   'background-color': { value: '{color.background.link.value}' },
-  'color': { value: '{color.font.inverse.base.value}' },
+  color: { value: '{color.font.inverse.base.value}' },
 });

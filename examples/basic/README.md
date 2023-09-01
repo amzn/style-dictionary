@@ -1,11 +1,13 @@
 # Basic Style Dictionary
 
 This example code is bare-bones to show you what this framework can do. If you have the style-dictionary module installed globally, you can `cd` into this directory and run:
+
 ```bash
 style-dictionary build
 ```
 
 You should see something like this output:
+
 ```
 Copying starter files...
 
@@ -40,6 +42,7 @@ ios-swift-separate-enums
 ```
 
 Good for you! You have now built your first style dictionary! Moving on, take a look at what we have built. This should have created a build directory and it should look like this:
+
 ```
 ├── README.md
 ├── config.json
@@ -72,6 +75,7 @@ Good for you! You have now built your first style dictionary! Moving on, take a 
 If you open `config.json` you will see there are 5 platforms defined: scss, android, compose, ios, and ios-swift. Each platform has a transformGroup, buildPath, and files. The buildPath and files of the platform should match up to the files what were built. The files built should look like these:
 
 **Android**
+
 ```xml
 <!-- font_dimens.xml -->
 <resources>
@@ -95,6 +99,7 @@ If you open `config.json` you will see there are 5 platforms defined: scss, andr
 ```
 
 **Compose**
+
 ```kotlin
 object StyleDictionaryColor {
   val colorBaseGrayDark = Color(0xff111111)
@@ -120,6 +125,7 @@ object StyleDictionarySize {
 ```
 
 **SCSS**
+
 ```scss
 // variables.scss
 $color-base-gray-light: #cccccc;
@@ -137,6 +143,7 @@ $size-font-base: 1rem;
 ```
 
 **iOS**
+
 ```objc
 #import "StyleDictionaryColor.h"
 
@@ -170,6 +177,7 @@ $size-font-base: 1rem;
 ```
 
 Pretty nifty! This shows a few things happening:
+
 1. The build system does a deep merge of all the token JSON files defined in the `source` attribute of `config.json`. This allows you to split up the token JSON files however you want. There are 2 JSON files with `color` as the top level key, but they get merged properly.
 1. The build system resolves references to other design tokens. `{size.font.medium.value}` gets resolved properly.
 1. The build system handles references to token values in other files as well as you can see in `tokens/color/font.json`.

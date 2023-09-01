@@ -4,7 +4,7 @@ This example shows how to use the format helper methods to create custom formats
 
 #### Running the example
 
-First of all, set up the required dependencies running the command `npm install` in your local CLI environment (if you prefer to use *yarn* update the commands accordingly).
+First of all, set up the required dependencies running the command `npm install` in your local CLI environment (if you prefer to use _yarn_ update the commands accordingly).
 
 At this point, if you want to build the tokens you can run `npm run build`. This command will run the Style Dictionary CLI with the **sd.config.js** as the configuration file and will generate the files in the `build` folder.
 

@@ -13,13 +13,11 @@
 
 const fs = require('fs-extra');
 const StyleDictionary = require('../../index');
-const {buildPath, cleanConsoleOutput} = require('../_constants');
+const { buildPath, cleanConsoleOutput } = require('../_constants');
 
 // Spy on console.log and add all messages to an array
 let consoleOutput = [];
-const log = jest.spyOn(console, "log")
-  .mockImplementation(message => consoleOutput.push(message))
-
+const log = jest.spyOn(console, 'log').mockImplementation((message) => consoleOutput.push(message));
 
 /**
  * The last and final level of logging: file.
@@ -43,13 +41,15 @@ describe(`integration`, () => {
           platforms: {
             css: {
               transformGroup: `css`,
-              files: [{
-                destination: `empty.css`,
-                format: `css/variables`,
-                filter: (token) => token.attributes.category === `foo`
-              }]
-            }
-          }
+              files: [
+                {
+                  destination: `empty.css`,
+                  format: `css/variables`,
+                  filter: (token) => token.attributes.category === `foo`,
+                },
+              ],
+            },
+          },
         }).buildAllPlatforms();
 
         expect(consoleOutput.map(cleanConsoleOutput).join('\n')).toMatchSnapshot();
@@ -62,13 +62,15 @@ describe(`integration`, () => {
           platforms: {
             css: {
               transformGroup: `css`,
-              files: [{
-                destination: `empty.css`,
-                format: `css/variables`,
-                filter: (token) => token.attributes.category === `foo`
-              }]
-            }
-          }
+              files: [
+                {
+                  destination: `empty.css`,
+                  format: `css/variables`,
+                  filter: (token) => token.attributes.category === `foo`,
+                },
+              ],
+            },
+          },
         }).buildAllPlatforms();
         expect(consoleOutput.map(cleanConsoleOutput).join('\n')).toMatchSnapshot();
       });
@@ -81,13 +83,15 @@ describe(`integration`, () => {
               // no name transform means there will be name collisions
               transforms: [`attribute/cti`],
               buildPath,
-              files: [{
-                destination: `nameCollisions.css`,
-                format: `css/variables`,
-                filter: (token) => token.attributes.category === `color`
-              }]
-            }
-          }
+              files: [
+                {
+                  destination: `nameCollisions.css`,
+                  format: `css/variables`,
+                  filter: (token) => token.attributes.category === `color`,
+                },
+              ],
+            },
+          },
         }).buildAllPlatforms();
         expect(consoleOutput.map(cleanConsoleOutput).join('\n')).toMatchSnapshot();
       });
@@ -101,13 +105,15 @@ describe(`integration`, () => {
               // no name transform means there will be name collisions
               transforms: [`attribute/cti`],
               buildPath,
-              files: [{
-                destination: `nameCollisions.css`,
-                format: `css/variables`,
-                filter: (token) => token.attributes.category === `color`
-              }]
-            }
-          }
+              files: [
+                {
+                  destination: `nameCollisions.css`,
+                  format: `css/variables`,
+                  filter: (token) => token.attributes.category === `color`,
+                },
+              ],
+            },
+          },
         }).buildAllPlatforms();
         expect(consoleOutput.map(cleanConsoleOutput).join('\n')).toMatchSnapshot();
       });
@@ -119,18 +125,20 @@ describe(`integration`, () => {
             css: {
               transformGroup: `css`,
               buildPath,
-              files: [{
-                destination: `filteredReferences.css`,
-                format: `css/variables`,
-                options: {
-                  outputReferences: true
+              files: [
+                {
+                  destination: `filteredReferences.css`,
+                  format: `css/variables`,
+                  options: {
+                    outputReferences: true,
+                  },
+                  // background colors have references, only including them
+                  // should warn the user
+                  filter: (token) => token.attributes.type === `background`,
                 },
-                // background colors have references, only including them
-                // should warn the user
-                filter: (token) => token.attributes.type === `background`
-              }]
-            }
-          }
+              ],
+            },
+          },
         }).buildAllPlatforms();
         expect(consoleOutput.map(cleanConsoleOutput).join('\n')).toMatchSnapshot();
       });
@@ -143,18 +151,20 @@ describe(`integration`, () => {
             css: {
               transformGroup: `css`,
               buildPath,
-              files: [{
-                destination: `filteredReferences.css`,
-                format: `css/variables`,
-                options: {
-                  outputReferences: true
+              files: [
+                {
+                  destination: `filteredReferences.css`,
+                  format: `css/variables`,
+                  options: {
+                    outputReferences: true,
+                  },
+                  // background colors have references, only including them
+                  // should warn the user
+                  filter: (token) => token.attributes.type === `background`,
                 },
-                // background colors have references, only including them
-                // should warn the user
-                filter: (token) => token.attributes.type === `background`
-              }]
-            }
-          }
+              ],
+            },
+          },
         }).buildAllPlatforms();
         expect(consoleOutput.map(cleanConsoleOutput).join('\n')).toMatchSnapshot();
       });

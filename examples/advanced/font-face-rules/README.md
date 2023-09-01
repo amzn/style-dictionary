@@ -5,11 +5,12 @@ To generate `@font-face` rules, we will need a few moving parts (described below
 ```css
 /** build/css/fonts.css */
 @font-face {
-  font-family: "Roboto";
+  font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
-  src: url("../fonts/Roboto.woff2") format("woff2"),
-       url("../fonts/Roboto.woff") format("woff");
+  src:
+    url('../fonts/Roboto.woff2') format('woff2'),
+    url('../fonts/Roboto.woff') format('woff');
   font-display: fallback;
 }
 ```
@@ -17,11 +18,12 @@ To generate `@font-face` rules, we will need a few moving parts (described below
 ```scss
 // build/scss/_fonts.scss
 @font-face {
-  font-family: "Roboto";
+  font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
-  src: url("#{$font-path}/fonts/Roboto.woff2") format("woff2"),
-       url("#{$font-path}/fonts/Roboto.woff") format("woff");
+  src:
+    url('#{$font-path}/fonts/Roboto.woff2') format('woff2'),
+    url('#{$font-path}/fonts/Roboto.woff') format('woff');
   font-display: fallback;
 }
 ```

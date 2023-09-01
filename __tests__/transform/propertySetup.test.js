@@ -15,32 +15,22 @@ var propertySetup = require('../../lib/transform/propertySetup');
 
 describe('transform', () => {
   describe('propertySetup', () => {
-
     it('should error if property is not an object', () => {
-      expect(
-        propertySetup.bind(null, null, 'foo', [])
-      ).toThrow('Property object must be an object');
+      expect(propertySetup.bind(null, null, 'foo', [])).toThrow(
+        'Property object must be an object',
+      );
     });
 
     it('should error if name in not a string', () => {
-      expect(
-        propertySetup.bind(null, {}, null, [])
-      ).toThrow('Name must be a string');
+      expect(propertySetup.bind(null, {}, null, [])).toThrow('Name must be a string');
     });
 
     it('should error path is not an array', () => {
-      expect(
-        propertySetup.bind(null, {}, 'name', null)
-      ).toThrow('Path must be an array');
+      expect(propertySetup.bind(null, {}, 'name', null)).toThrow('Path must be an array');
     });
 
-
     it('should work if all the args are proper', () => {
-      var test = propertySetup(
-        {value: "#fff"},
-        "white",
-        ["color","base"]
-      );
+      var test = propertySetup({ value: '#fff' }, 'white', ['color', 'base']);
       expect(typeof test).toBe('object');
       expect(test).toHaveProperty('value');
       expect(test).toHaveProperty('original');
@@ -48,55 +38,46 @@ describe('transform', () => {
       expect(test).toHaveProperty('path');
     });
 
-
     it('should not do anything and return the property if it has been setup previously', () => {
-      var original = {value: "#fff", original:{}};
-      var test = propertySetup(
-        original,
-        "white",
-        ["color","base"]
-      );
+      var original = { value: '#fff', original: {} };
+      var test = propertySetup(original, 'white', ['color', 'base']);
       expect(test).toMatchObject(original);
     });
 
     it('should use attributes if already set', () => {
-      var attributes = {"foo":"bar"};
-      var test = propertySetup(
-        {value:"#fff", attributes:attributes},
-        "white",
-        ["color","base"]
-      );
+      var attributes = { foo: 'bar' };
+      var test = propertySetup({ value: '#fff', attributes: attributes }, 'white', [
+        'color',
+        'base',
+      ]);
       expect(test.attributes).toMatchObject(attributes);
     });
 
     it('should use the name on the property if set', () => {
-      var name = "name";
-      var test = propertySetup(
-        {value:"#fff", name:name},
-        'white',
-        ["color","base"]
-      );
+      var name = 'name';
+      var test = propertySetup({ value: '#fff', name: name }, 'white', ['color', 'base']);
       expect(test).toHaveProperty('name', name);
     });
 
     it('should use the name passed in if not set on the property', () => {
-      var test = propertySetup(
-        {value:"#fff"},
-        'white',
-        ["color","base"]
-      );
+      var test = propertySetup({ value: '#fff' }, 'white', ['color', 'base']);
       expect(test).toHaveProperty('name', 'white');
     });
 
     it('should handle objects', () => {
-      const test = propertySetup({
-        value: {
-          h: 20, s: 50, l: 50
-        }
-      }, 'red', ['color','red']);
+      const test = propertySetup(
+        {
+          value: {
+            h: 20,
+            s: 50,
+            l: 50,
+          },
+        },
+        'red',
+        ['color', 'red'],
+      );
       expect(test).toHaveProperty('value.h', 20);
       expect(test).toHaveProperty('original.value.h', 20);
-    })
-
+    });
   });
 });

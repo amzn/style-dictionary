@@ -8,7 +8,7 @@ The tokens are organized in **specific folders**, depending if they are "platfor
 
 #### Running the example
 
-First of all, set up the required dependencies running the command `npm install` in your local CLI environment (if you prefer to use *yarn*, update the commands accordingly).
+First of all, set up the required dependencies running the command `npm install` in your local CLI environment (if you prefer to use _yarn_, update the commands accordingly).
 
 At this point, if you want to build the tokens you can run `npm run build`. This command will generate the files in the `build` folder. Unlike other examples, the files are organised not only by "platform", but also organised in "brand" sub-folders.
 
@@ -50,11 +50,12 @@ function getStyleDictionaryConfig(brand, platform) {
   };
 }
 ```
+
 The tokens are stored in three different folders:
 
-* **brands**: this folder contain tokens that depend on the "brand", eg. the "primary" and "secondary" colors (generally these are called "brand colors", think of the blue of Facebook, the orange of Amazon, or the red of Gmail).
-* **platforms**: this folder contain tokens that depend on the "platform", eg. the font family used in the application or website (eg. a font stack like "Tahoma, Arial, 'Helvetica Neue', sans" on web, "San Francisco" in iOS, "Roboto" in Android).
-* **global**: this folder contain tokens that are common, that don't depend on the specific "platform" or "brand", eg. the base grayscale colors, the font sizes, etc.
+- **brands**: this folder contain tokens that depend on the "brand", eg. the "primary" and "secondary" colors (generally these are called "brand colors", think of the blue of Facebook, the orange of Amazon, or the red of Gmail).
+- **platforms**: this folder contain tokens that depend on the "platform", eg. the font family used in the application or website (eg. a font stack like "Tahoma, Arial, 'Helvetica Neue', sans" on web, "San Francisco" in iOS, "Roboto" in Android).
+- **global**: this folder contain tokens that are common, that don't depend on the specific "platform" or "brand", eg. the base grayscale colors, the font sizes, etc.
 
 Leveraging the ability of Style Dictionary to reference other tokens values as "aliases", we can have generic tokens like `font.family.base` or `color.primary` whose values actually depend on the "platform" and "brand" and whose values are computed dynamically at build time depending on the specific "platform/brand" files, included dynamically by the `getStyleDictionaryConfig` function.
 
@@ -103,6 +104,7 @@ In the same way, now open `tokens/platforms/android/font.json` and you will see:
   }
 }
 ```
+
 the value `font.platform.system` is consumed by the `tokens/globals/font/index.json` file:
 
 ```
@@ -115,6 +117,7 @@ the value `font.platform.system` is consumed by the `tokens/globals/font/index.j
   }
 }
 ```
+
 In this way the design tokens for the different platforms will be:
 
 ```

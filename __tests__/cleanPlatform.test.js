@@ -17,7 +17,6 @@ var StyleDictionary = require('../index');
 var StyleDictionaryExtended = StyleDictionary.extend(config);
 
 describe('cleanPlatform', () => {
-
   beforeEach(() => {
     helpers.clearOutput();
   });
@@ -37,8 +36,12 @@ describe('cleanPlatform', () => {
   it('should delete android stuff', () => {
     StyleDictionaryExtended.buildPlatform('android');
     StyleDictionaryExtended.cleanPlatform('android');
-    expect(helpers.fileDoesNotExist('./__tests__/__output/android/main/res/drawable-hdpi/flag_us.png')).toBeTruthy();
-    expect(helpers.fileDoesNotExist('./__tests__/__output/android/main/res/drawable-xhdpi/flag_us.png')).toBeTruthy();
+    expect(
+      helpers.fileDoesNotExist('./__tests__/__output/android/main/res/drawable-hdpi/flag_us.png'),
+    ).toBeTruthy();
+    expect(
+      helpers.fileDoesNotExist('./__tests__/__output/android/main/res/drawable-xhdpi/flag_us.png'),
+    ).toBeTruthy();
     expect(helpers.fileDoesNotExist('./__tests__/__output/android/colors.xml')).toBeTruthy();
     expect(helpers.fileDoesNotExist('./__tests__/__output/android/dimens.xml')).toBeTruthy();
     expect(helpers.fileDoesNotExist('./__tests__/__output/android/font_dimen.xml')).toBeTruthy();
@@ -47,8 +50,9 @@ describe('cleanPlatform', () => {
   it('should delete ios stuff', () => {
     StyleDictionaryExtended.buildPlatform('ios');
     StyleDictionaryExtended.cleanPlatform('ios');
-    expect(helpers.fileDoesNotExist('./__tests__/__output/ios/style_dictionary.plist')).toBeTruthy();
+    expect(
+      helpers.fileDoesNotExist('./__tests__/__output/ios/style_dictionary.plist'),
+    ).toBeTruthy();
     expect(helpers.fileDoesNotExist('./__tests__/__output/ios/style_dictionary.h')).toBeTruthy();
   });
-
 });

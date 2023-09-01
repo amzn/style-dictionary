@@ -11,16 +11,15 @@
  * and limitations under the License.
  */
 
-var helpers   = require('./__helpers');
+var helpers = require('./__helpers');
 var buildFile = require('../lib/buildFile');
 var cleanFile = require('../lib/cleanFile');
 
 function format() {
-  return "hi";
+  return 'hi';
 }
 
 describe('cleanFile', () => {
-
   beforeEach(() => {
     helpers.clearOutput();
   });
@@ -30,15 +29,20 @@ describe('cleanFile', () => {
   });
 
   it('should delete a file properly', () => {
-    buildFile({destination:'test.txt', format}, {buildPath: '__tests__/__output/'}, {});
-    cleanFile({destination:'test.txt', format}, {buildPath: '__tests__/__output/'}, {});
+    buildFile({ destination: 'test.txt', format }, { buildPath: '__tests__/__output/' }, {});
+    cleanFile({ destination: 'test.txt', format }, { buildPath: '__tests__/__output/' }, {});
     expect(helpers.fileDoesNotExist('./__tests__/__output/test.txt')).toBeTruthy();
   });
 
   describe('if a file does not exist', () => {
     it('should not throw', () => {
-      expect(() => cleanFile({destination: 'non-existent.txt', format}, { buildPath: '__tests__/__output/' }, {})).not.toThrow();
-    })
-  })
-
+      expect(() =>
+        cleanFile(
+          { destination: 'non-existent.txt', format },
+          { buildPath: '__tests__/__output/' },
+          {},
+        ),
+      ).not.toThrow();
+    });
+  });
 });

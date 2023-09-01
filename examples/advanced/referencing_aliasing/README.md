@@ -6,7 +6,7 @@ This is quite handy when you want to create a system that uses some basic design
 
 #### Running the example
 
-First of all, set up the required dependencies running the command `npm install` in your local CLI environment (if you prefer to use *yarn*, update the commands accordingly).
+First of all, set up the required dependencies running the command `npm install` in your local CLI environment (if you prefer to use _yarn_, update the commands accordingly).
 
 At this point, you can run `npm run build`. This command will generate the output file in the `build` folder.
 
@@ -19,6 +19,7 @@ The "build" command processes the JSON files in the `tokens` folder. Whenever it
        "value": "{ref.to.object.value}"
    }
 ```
+
 the build process resolves the reference using the declared path (`ref.to.object`) to retrieve the actual value of the referenced token inside the Style Dictionary object.
 
 **Notice**: if the path is not valid, doesn't exist or is a circular reference, Style Dictionary generates an error in the console.
@@ -33,6 +34,7 @@ For example, open `color/base.json` and see how the value of the "primary" color
    "primary": { "value": "{color.base.green.value}" }
 
 ```
+
 In this case, the string `"{color.base.green.value}"` is resolved at build time, and gets its value from the value of the "green" base color, `"#00FF00"`.
 
 The reference can point to another token in a **different JSON file**. For example open `color/font.json` and see how the value for the base/secondary font colors are references to the tokens declared in `color/base.json`:
@@ -68,7 +70,8 @@ The value associated to a token can be an **object** (eg. an RGB color). In that
         "medium": { "value": { "r": 146, "g": 153, "b": 162 } }
 
 ```
-In that case Style Dictionary still resolves correctly the alias to the  corresponding value:
+
+In that case Style Dictionary still resolves correctly the alias to the corresponding value:
 
 ```
 "color-base-gray-medium": "#9299a2"
@@ -84,6 +87,7 @@ You can also reference **other attributes of a token**, not only its value. For 
     }
 
 ```
+
 this at build time gets resolved to:
 
 ```

@@ -13,7 +13,7 @@
 
 const fs = require('fs-extra');
 const StyleDictionary = require('../index');
-const {buildPath} = require('./_constants');
+const { buildPath } = require('./_constants');
 
 describe('integration', () => {
   describe('showFileHeader', () => {
@@ -25,57 +25,71 @@ describe('integration', () => {
         css: {
           transformGroup: 'css',
           buildPath,
-          files: [{
-            destination: 'platform-none-file-none.css',
-            format: 'css/variables'
-          },{
-            destination: 'platform-none-file-false.css',
-            format: 'css/variables',
-            options: {
-              showFileHeader: false
-            }
-          }]
+          files: [
+            {
+              destination: 'platform-none-file-none.css',
+              format: 'css/variables',
+            },
+            {
+              destination: 'platform-none-file-false.css',
+              format: 'css/variables',
+              options: {
+                showFileHeader: false,
+              },
+            },
+          ],
         },
         fileHeader: {
           transformGroup: 'css',
           buildPath,
           options: {
-            showFileHeader: false
+            showFileHeader: false,
           },
-          files: [{
-            destination: 'platform-false-file-none.css',
-            format: 'css/variables'
-          },{
-            destination: 'platform-false-file-true.css',
-            format: 'css/variables',
-            options: {
-              showFileHeader: true
-            }
-          }]
-        }
-      }
+          files: [
+            {
+              destination: 'platform-false-file-none.css',
+              format: 'css/variables',
+            },
+            {
+              destination: 'platform-false-file-true.css',
+              format: 'css/variables',
+              options: {
+                showFileHeader: true,
+              },
+            },
+          ],
+        },
+      },
     }).buildAllPlatforms();
 
     describe(`without platform options`, () => {
       it(`should show file header if no file options set`, () => {
-        const output = fs.readFileSync(`${buildPath}platform-none-file-none.css`, {encoding:'UTF-8'});
+        const output = fs.readFileSync(`${buildPath}platform-none-file-none.css`, {
+          encoding: 'UTF-8',
+        });
         expect(output).toMatchSnapshot();
       });
 
       it(`should not show file header if file options set to false`, () => {
-        const output = fs.readFileSync(`${buildPath}platform-none-file-false.css`, {encoding:'UTF-8'});
+        const output = fs.readFileSync(`${buildPath}platform-none-file-false.css`, {
+          encoding: 'UTF-8',
+        });
         expect(output).toMatchSnapshot();
       });
     });
 
     describe(`with platform options set to false`, () => {
       it(`should not show file header if no file options set`, () => {
-        const output = fs.readFileSync(`${buildPath}platform-false-file-none.css`, {encoding:'UTF-8'});
+        const output = fs.readFileSync(`${buildPath}platform-false-file-none.css`, {
+          encoding: 'UTF-8',
+        });
         expect(output).toMatchSnapshot();
       });
 
       it(`should show file header if file options set to true`, () => {
-        const output = fs.readFileSync(`${buildPath}platform-false-file-true.css`, {encoding:'UTF-8'});
+        const output = fs.readFileSync(`${buildPath}platform-false-file-true.css`, {
+          encoding: 'UTF-8',
+        });
         expect(output).toMatchSnapshot();
       });
     });

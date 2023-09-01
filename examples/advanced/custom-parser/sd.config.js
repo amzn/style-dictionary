@@ -3,7 +3,7 @@ const StyleDictionary = require('style-dictionary');
 // You can use the .registerParser() method like this
 StyleDictionary.registerParser({
   pattern: /\.json$/,
-  parse: ({contents, filePath}) => {
+  parse: ({ contents, filePath }) => {
     // Probably a good idea to wrap this in a try/catch block
     try {
       const object = JSON.parse(contents);
@@ -13,8 +13,9 @@ StyleDictionary.registerParser({
       // Here we are going to grab the filepath and turn it into a prefix.
       // tokens/color/core.json will become 'color-core'. We will append this
       // to all token names.
-      const pathParts = filePath.replace(__dirname + '/tokens/', '')
-        .replace('.json','')
+      const pathParts = filePath
+        .replace(__dirname + '/tokens/', '')
+        .replace('.json', '')
         .split('/')
         .join('-');
 
@@ -31,7 +32,7 @@ StyleDictionary.registerParser({
     } catch (error) {
       console.log(error);
     }
-  }
+  },
 });
 
 // Or you can add parsers directly on the configuration object here like this:
@@ -64,10 +65,12 @@ module.exports = {
     css: {
       transformGroup: 'css',
       buildPath: 'build/',
-      files: [{
-        destination: 'variables.css',
-        format: 'css/variables'
-      }]
-    }
-  }
-}
+      files: [
+        {
+          destination: 'variables.css',
+          format: 'css/variables',
+        },
+      ],
+    },
+  },
+};

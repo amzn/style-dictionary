@@ -15,18 +15,18 @@ const createDictionary = require('../../lib/utils/createDictionary');
 const createFormatArgs = require('../../lib/utils/createFormatArgs');
 
 const file = {
-  "destination": "__output/",
-  "format": "typescript/es6-declarations"
+  destination: '__output/',
+  format: 'typescript/es6-declarations',
 };
 
 const properties = {
-  "color": {
-    "red": {
-      "comment": "Used for errors",
-      "name": "colorRed",
-      "value": "#FF0000"
-    }
-  }
+  color: {
+    red: {
+      comment: 'Used for errors',
+      name: 'colorRed',
+      value: '#FF0000',
+    },
+  },
 };
 
 const formatter = formats['typescript/es6-declarations'].bind(file);
@@ -35,19 +35,19 @@ describe('formats', () => {
   describe('typescript/es6-declarations', () => {
     it('should be a valid TS file', () => {
       const dictionary = createDictionary({ properties });
-      const output = formatter(createFormatArgs({
-        dictionary,
-        file,
-        platform: {},
-      }));
+      const output = formatter(
+        createFormatArgs({
+          dictionary,
+          file,
+          platform: {},
+        }),
+      );
 
       // get all lines that begin with export
-      const lines = output
-        .split('\n')
-        .filter(l => l.indexOf('export') >= 0);
+      const lines = output.split('\n').filter((l) => l.indexOf('export') >= 0);
 
       // assert that any lines have a string type definition
-      lines.forEach(l => {
+      lines.forEach((l) => {
         expect(l.match(/^export.* : string;$/g).length).toEqual(1);
       });
     });
@@ -55,16 +55,18 @@ describe('formats', () => {
     it('with outputStringLiterals should match snapshot', () => {
       const customFile = Object.assign({}, file, {
         options: {
-          outputStringLiterals: true
-        }
+          outputStringLiterals: true,
+        },
       });
 
       const dictionary = createDictionary({ properties });
-      const output = formatter(createFormatArgs({
-        dictionary,
-        file: customFile,
-        platform: {},
-      }));
+      const output = formatter(
+        createFormatArgs({
+          dictionary,
+          file: customFile,
+          platform: {},
+        }),
+      );
 
       expect(output).toMatchSnapshot();
     });

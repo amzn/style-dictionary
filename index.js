@@ -13,7 +13,8 @@
 var chalk = require('chalk');
 var GroupMessages = require('./lib/utils/groupMessages');
 var TEMPLATE_DEPRECATION_WARNINGS = GroupMessages.GROUP.TemplateDeprecationWarnings;
-var REGISTER_TEMPLATE_DEPRECATION_WARNINGS = GroupMessages.GROUP.RegisterTemplateDeprecationWarnings;
+var REGISTER_TEMPLATE_DEPRECATION_WARNINGS =
+  GroupMessages.GROUP.RegisterTemplateDeprecationWarnings;
 var SASS_MAP_FORMAT_DEPRECATION_WARNINGS = GroupMessages.GROUP.SassMapFormatDeprecationWarnings;
 
 /**
@@ -63,15 +64,16 @@ var StyleDictionary = {
   cleanPlatform: require('./lib/cleanPlatform'),
   cleanAllPlatforms: require('./lib/cleanAllPlatforms'),
 
-  extend: require('./lib/extend')
+  extend: require('./lib/extend'),
 };
 
 module.exports = StyleDictionary;
 
 process.on('exit', function () {
-  if(GroupMessages.count(TEMPLATE_DEPRECATION_WARNINGS) > 0) {
+  if (GroupMessages.count(TEMPLATE_DEPRECATION_WARNINGS) > 0) {
     var template_warnings = GroupMessages.flush(TEMPLATE_DEPRECATION_WARNINGS).join('\n  ');
-    console.log(chalk.bold.yellow(`
+    console.log(
+      chalk.bold.yellow(`
 ⚠️ DEPRECATION WARNING ️️️️️⚠️
 Templates are deprecated and will be removed, please update your config to use formats.
 This is an example of how to update your config.json:
@@ -90,12 +92,16 @@ After:
 
 Your current config uses the following templates:
   ${template_warnings}
-`));
+`),
+    );
   }
 
-  if(GroupMessages.count(REGISTER_TEMPLATE_DEPRECATION_WARNINGS) > 0) {
-    var register_template_warnings = GroupMessages.flush(REGISTER_TEMPLATE_DEPRECATION_WARNINGS).join('\n  ');
-    console.log(chalk.bold.yellow(`
+  if (GroupMessages.count(REGISTER_TEMPLATE_DEPRECATION_WARNINGS) > 0) {
+    var register_template_warnings = GroupMessages.flush(
+      REGISTER_TEMPLATE_DEPRECATION_WARNINGS,
+    ).join('\n  ');
+    console.log(
+      chalk.bold.yellow(`
 ⚠️ DEPRECATION WARNING ️️️️️⚠️
 The registerTemplate method is deprecated and will be removed, please
 migrate to registerFormat. You can use any templating engine you would
@@ -122,12 +128,16 @@ process the style dictionary.
 
 Calls to registerTemplate included the registration of the following
 custom templates:
-  ${register_template_warnings}`));
+  ${register_template_warnings}`),
+    );
   }
 
-  if(GroupMessages.count(SASS_MAP_FORMAT_DEPRECATION_WARNINGS) > 0) {
-    var sass_map_format_warnings = GroupMessages.flush(SASS_MAP_FORMAT_DEPRECATION_WARNINGS).join('\n  ');
-    console.log(chalk.bold.cyan(`
+  if (GroupMessages.count(SASS_MAP_FORMAT_DEPRECATION_WARNINGS) > 0) {
+    var sass_map_format_warnings = GroupMessages.flush(SASS_MAP_FORMAT_DEPRECATION_WARNINGS).join(
+      '\n  ',
+    );
+    console.log(
+      chalk.bold.cyan(`
 🔔 NOTICE 🔔
 The formats 'sass/map-***' have been renamed to 'scss/map-***', please update your config.
 In the future 'sass/map-***' formats may output actual Sass instead of SCSS, which may break your current configuration.
@@ -147,7 +157,7 @@ After:
 
 Your current config uses the following formats:
   ${sass_map_format_warnings}
-`));
+`),
+    );
   }
-
 });

@@ -1,8 +1,7 @@
 {
   "parserOptions": {
-    "ecmaVersion": 6,
-    "sourceType": "module",
-    "allowImportExportEverywhere": true
+    "ecmaVersion": "latest",
+    "sourceType": "module"
   },
   "plugins": ["jest"],
   "env": {

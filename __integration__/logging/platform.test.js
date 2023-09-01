@@ -13,12 +13,11 @@
 
 const fs = require('fs-extra');
 const StyleDictionary = require('../../index');
-const {buildPath, cleanConsoleOutput} = require('../_constants');
+const { buildPath, cleanConsoleOutput } = require('../_constants');
 
 // Spy on console.log and add all messages to an array
 let consoleOutput = [];
-const log = jest.spyOn(console, "log")
-  .mockImplementation(message => consoleOutput.push(message))
+const log = jest.spyOn(console, 'log').mockImplementation((message) => consoleOutput.push(message));
 
 /**
  * This is the 2nd phase of logging: the platform configuration. This happens
@@ -45,9 +44,9 @@ describe(`integration`, () => {
             properties: {},
             platforms: {
               css: {
-                actions: [`foo`]
-              }
-            }
+                actions: [`foo`],
+              },
+            },
           }).buildAllPlatforms();
         }).toThrow();
         expect(consoleOutput.map(cleanConsoleOutput).join('\n')).toMatchSnapshot();
@@ -58,9 +57,9 @@ describe(`integration`, () => {
           StyleDictionary.extend({
             platforms: {
               css: {
-                transforms: [`foo`,`bar`]
-              }
-            }
+                transforms: [`foo`, `bar`],
+              },
+            },
           }).buildAllPlatforms();
         }).toThrow();
         expect(consoleOutput.map(cleanConsoleOutput).join(`\n`)).toMatchSnapshot();
@@ -71,9 +70,9 @@ describe(`integration`, () => {
           StyleDictionary.extend({
             platforms: {
               css: {
-                transformGroup: `foo`
-              }
-            }
+                transformGroup: `foo`,
+              },
+            },
           }).buildAllPlatforms();
         }).toThrow();
         expect(consoleOutput.map(cleanConsoleOutput).join(`\n`)).toMatchSnapshot();
@@ -85,12 +84,12 @@ describe(`integration`, () => {
             StyleDictionary.extend({
               properties: {
                 color: {
-                  danger: { value: "{color.red.value}" },
-                }
+                  danger: { value: '{color.red.value}' },
+                },
               },
               platforms: {
-                css: {}
-              }
+                css: {},
+              },
             }).buildAllPlatforms();
           }).toThrow();
           expect(consoleOutput.map(cleanConsoleOutput).join('\n')).toMatchSnapshot();
@@ -101,16 +100,16 @@ describe(`integration`, () => {
             StyleDictionary.extend({
               properties: {
                 color: {
-                  foo: { value: "{color.foo.value}" },
-                  teal: { value: "{color.blue.value}" },
-                  blue: { value: "{color.green.value}" },
-                  green: { value: "{color.teal.value}" },
-                  purple: { value: "{color.teal.value}" }
-                }
+                  foo: { value: '{color.foo.value}' },
+                  teal: { value: '{color.blue.value}' },
+                  blue: { value: '{color.green.value}' },
+                  green: { value: '{color.teal.value}' },
+                  purple: { value: '{color.teal.value}' },
+                },
               },
               platforms: {
-                css: {}
-              }
+                css: {},
+              },
             }).buildAllPlatforms();
           }).toThrow();
           expect(consoleOutput.map(cleanConsoleOutput).join('\n')).toMatchSnapshot();

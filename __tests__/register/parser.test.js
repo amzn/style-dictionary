@@ -16,76 +16,75 @@ var StyleDictionaryExtended = StyleDictionary.extend({});
 
 describe('register', () => {
   describe('parser', () => {
-
     it('should error if pattern is not a regex', () => {
       expect(
         StyleDictionaryExtended.registerParser.bind(null, {
-          parse: function () {}
-        })
+          parse: function () {},
+        }),
       ).toThrow('pattern must be a regular expression');
 
       expect(
         StyleDictionaryExtended.registerParser.bind(null, {
           pattern: 1,
-          parse: function () {}
-        })
+          parse: function () {},
+        }),
       ).toThrow('pattern must be a regular expression');
 
       expect(
         StyleDictionaryExtended.registerParser.bind(null, {
           pattern: [],
-          parse: function () {}
-        })
+          parse: function () {},
+        }),
       ).toThrow('pattern must be a regular expression');
 
       expect(
         StyleDictionaryExtended.registerParser.bind(null, {
           pattern: {},
-          parse: function () {}
-        })
+          parse: function () {},
+        }),
       ).toThrow('pattern must be a regular expression');
     });
 
     it('should error if parser is not a function', () => {
       expect(
         StyleDictionaryExtended.registerParser.bind(null, {
-          pattern: /$.json/
-        })
+          pattern: /$.json/,
+        }),
       ).toThrow('parse must be a function');
 
       expect(
         StyleDictionaryExtended.registerParser.bind(null, {
           pattern: /$.json/,
-          parse: 1
-        })
+          parse: 1,
+        }),
       ).toThrow('parse must be a function');
 
       expect(
         StyleDictionaryExtended.registerParser.bind(null, {
           pattern: /$.json/,
-          parse: 'name'
-        })
+          parse: 'name',
+        }),
       ).toThrow('parse must be a function');
 
       expect(
         StyleDictionaryExtended.registerParser.bind(null, {
           pattern: /$.json/,
-          parse: []
-        })
+          parse: [],
+        }),
       ).toThrow('parse must be a function');
 
       expect(
         StyleDictionaryExtended.registerParser.bind(null, {
           pattern: /$.json/,
-          parse: {}
-        })
+          parse: {},
+        }),
       ).toThrow('parse must be a function');
     });
 
     it('should work if pattern and parser are good', () => {
       StyleDictionaryExtended.registerParser({
         pattern: /$.json/,
-        parse: function() {}
+        parse: function () {},
       });
       expect(typeof StyleDictionaryExtended.parsers[0].parse).toBe('function');
     });
@@ -94,6 +93,5 @@ describe('register', () => {
       var SDE2 = StyleDictionaryExtended.extend({});
       expect(typeof SDE2.parsers[0].parse).toBe('function');
     });
-
   });
 });

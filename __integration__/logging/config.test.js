@@ -13,12 +13,11 @@
 
 const fs = require('fs-extra');
 const StyleDictionary = require('../../index');
-const {buildPath, cleanConsoleOutput} = require('../_constants');
+const { buildPath, cleanConsoleOutput } = require('../_constants');
 
 // Spy on console.log and add all messages to an array
 let consoleOutput = [];
-const log = jest.spyOn(console, "log")
-  .mockImplementation(message => consoleOutput.push(message))
+const log = jest.spyOn(console, 'log').mockImplementation((message) => consoleOutput.push(message));
 
 /**
  * These integration tests will verify the behavior and logging at the *config*
@@ -43,10 +42,9 @@ describe(`integration >`, () => {
             source: [
               // including a specific file twice will throw value collision warnings
               `__integration__/tokens/size/padding.json`,
-              `__integration__/tokens/size/padding.json`
+              `__integration__/tokens/size/padding.json`,
             ],
-            platforms: {
-            }
+            platforms: {},
           });
           expect(consoleOutput.map(cleanConsoleOutput).join(`\n`)).toMatchSnapshot();
         });
@@ -57,10 +55,9 @@ describe(`integration >`, () => {
             source: [
               // including a specific file twice will throw value collision warnings
               `__integration__/tokens/size/padding.json`,
-              `__integration__/tokens/size/padding.json`
+              `__integration__/tokens/size/padding.json`,
             ],
-            platforms: {
-            }
+            platforms: {},
           });
           expect(consoleOutput.map(cleanConsoleOutput).join(`\n`)).toMatchSnapshot();
         });

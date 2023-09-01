@@ -16,76 +16,75 @@ var StyleDictionaryExtended = StyleDictionary.extend({});
 
 describe('register', () => {
   describe('fileHeader', () => {
-
     it('should error if name is not a string', () => {
       expect(
         StyleDictionaryExtended.registerFileHeader.bind(null, {
-          fileHeader: function () {}
-        })
+          fileHeader: function () {},
+        }),
       ).toThrow('name must be a string');
 
       expect(
         StyleDictionaryExtended.registerFileHeader.bind(null, {
           name: 1,
-          fileHeader: function () {}
-        })
+          fileHeader: function () {},
+        }),
       ).toThrow('name must be a string');
 
       expect(
         StyleDictionaryExtended.registerFileHeader.bind(null, {
           name: [],
-          fileHeader: function () {}
-        })
+          fileHeader: function () {},
+        }),
       ).toThrow('name must be a string');
 
       expect(
         StyleDictionaryExtended.registerFilter.bind(null, {
           name: {},
-          matcher: function () {}
-        })
+          matcher: function () {},
+        }),
       ).toThrow('name must be a string');
     });
 
     it('should error if fileHeader is not a function', () => {
       expect(
         StyleDictionaryExtended.registerFileHeader.bind(null, {
-          name: 'myCustomHeader'
-        })
+          name: 'myCustomHeader',
+        }),
       ).toThrow('fileHeader must be a function');
 
       expect(
         StyleDictionaryExtended.registerFileHeader.bind(null, {
           name: 'myCustomHeader',
-          fileHeader: 1
-        })
+          fileHeader: 1,
+        }),
       ).toThrow('fileHeader must be a function');
 
       expect(
         StyleDictionaryExtended.registerFileHeader.bind(null, {
           name: 'myCustomHeader',
-          fileHeader: 'name'
-        })
+          fileHeader: 'name',
+        }),
       ).toThrow('fileHeader must be a function');
 
       expect(
         StyleDictionaryExtended.registerFileHeader.bind(null, {
           name: 'myCustomHeader',
-          fileHeader: []
-        })
+          fileHeader: [],
+        }),
       ).toThrow('fileHeader must be a function');
 
       expect(
         StyleDictionaryExtended.registerFileHeader.bind(null, {
           name: 'myCustomHeader',
-          fileHeader: {}
-        })
+          fileHeader: {},
+        }),
       ).toThrow('fileHeader must be a function');
     });
 
     it('should work if name and matcher are good', () => {
       StyleDictionaryExtended.registerFileHeader({
         name: 'myCustomHeader',
-        fileHeader: function() {}
+        fileHeader: function () {},
       });
       expect(typeof StyleDictionaryExtended.fileHeader['myCustomHeader']).toBe('function');
     });
@@ -94,6 +93,5 @@ describe('register', () => {
       var SDE2 = StyleDictionaryExtended.extend({});
       expect(typeof SDE2.fileHeader['myCustomHeader']).toBe('function');
     });
-
   });
 });

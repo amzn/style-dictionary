@@ -36,7 +36,7 @@ becomes
   }
 ```
 
-Update "build.js" to the name of the file you created. 
+Update "build.js" to the name of the file you created.
 
 Using a JSON [configuration](config.md) file, that looks like this:
 
@@ -55,13 +55,15 @@ const StyleDictionary = require('style-dictionary').extend({
     scss: {
       transformGroup: 'scss',
       buildPath: 'build/',
-      files: [{
-        destination: 'variables.scss',
-        format: 'scss/variables'
-      }]
-    }
+      files: [
+        {
+          destination: 'variables.scss',
+          format: 'scss/variables',
+        },
+      ],
+    },
     // ...
-  }
+  },
 });
 
 StyleDictionary.buildAllPlatforms();
@@ -76,13 +78,17 @@ const styleDictionary = StyleDictionary.extend({
   // add custom formats/transforms
 });
 
-styleDictionary.extend({
-  // ...
-}).buildAllPlatforms();
+styleDictionary
+  .extend({
+    // ...
+  })
+  .buildAllPlatforms();
 
-styleDictionary.extend({
-  // ...
-}).buildAllPlatforms();
+styleDictionary
+  .extend({
+    // ...
+  })
+  .buildAllPlatforms();
 ```
 
 Another way to do this is to loop over an array and apply different configurations to Style Dictionary:
@@ -91,7 +97,7 @@ Another way to do this is to loop over an array and apply different configuratio
 const StyleDictionary = require('style-dictionary');
 
 const brands = [`brand-1`, `brand-2`, `brand-3`];
-brands.forEach(brand => {
+brands.forEach((brand) => {
   StyleDictionary.extend({
     include: [`tokens/default/**/*.json`],
     source: [`tokens/${brand}/**/*.json`],
@@ -102,7 +108,7 @@ brands.forEach(brand => {
 
 The [multi-brand-multi-platform example](https://github.com/amzn/style-dictionary/tree/main/examples/advanced/multi-brand-multi-platform) uses this method.
 
-----
+---
 
 ## NPM Module API
 

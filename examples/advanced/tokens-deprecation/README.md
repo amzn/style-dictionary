@@ -4,15 +4,13 @@ There are many ways in which one can decide to deprecate a design token. This ex
 
 #### Running the example
 
-First of all, set up the required dependencies running the command `npm install` in your local CLI environment (if you prefer to use *yarn*, update the commands accordingly).
+First of all, set up the required dependencies running the command `npm install` in your local CLI environment (if you prefer to use _yarn_, update the commands accordingly).
 
 At this point, if you want to build the tokens run `npm run build`. This command will generate the files in the `build` folder.
-
 
 #### How does it work
 
 Using extra attributes associated to a design token, is possible (at build time) to read this extra meta-information and, using custom templates, generates output files that contain these extra information in the form of specific comments that inform the consumers of these files about the fact that some of the design tokens are to be considered deprecated.
-
 
 #### What to look at
 

@@ -17,35 +17,35 @@ const createDictionary = require('../../../lib/utils/createDictionary');
 
 const properties = {
   color: {
-    red: { value: "#f00" },
-    danger: { value: "{color.red.value}" }
+    red: { value: '#f00' },
+    danger: { value: '{color.red.value}' },
   },
   size: {
-    border: { value: "2px" }
+    border: { value: '2px' },
   },
   border: {
     primary: {
       // getReferences should work on objects like this:
       value: {
-        color: "{color.red.value}",
-        width: "{size.border.value}",
-        style: "solid"
+        color: '{color.red.value}',
+        width: '{size.border.value}',
+        style: 'solid',
       },
     },
     secondary: {
       // and objects that have a non-string
       value: {
-        color: "{color.red.value}",
+        color: '{color.red.value}',
         width: 2,
-        style: "solid"
-      }
+        style: 'solid',
+      },
     },
     tertiary: {
       // getReferences should work on interpolated values like this:
-      value: "{size.border.value} solid {color.red.value}"
-    }
-  }
-}
+      value: '{size.border.value} solid {color.red.value}',
+    },
+  },
+};
 
 const dictionary = createDictionary({ properties });
 
@@ -58,35 +58,25 @@ describe('utils', () => {
 
       it(`should work with a single reference`, () => {
         expect(dictionary.getReferences(properties.color.danger.value)).toEqual(
-          expect.arrayContaining([
-            {value: "#f00"}
-          ])
+          expect.arrayContaining([{ value: '#f00' }]),
         );
       });
 
       it(`should work with object values`, () => {
         expect(dictionary.getReferences(properties.border.primary.value)).toEqual(
-          expect.arrayContaining([
-            {value: "2px"},
-            {value: "#f00"}
-          ])
+          expect.arrayContaining([{ value: '2px' }, { value: '#f00' }]),
         );
       });
 
       it(`should work with objects that have numbers`, () => {
         expect(dictionary.getReferences(properties.border.secondary.value)).toEqual(
-          expect.arrayContaining([
-            {value: "#f00"}
-          ])
+          expect.arrayContaining([{ value: '#f00' }]),
         );
       });
 
       it(`should work with interpolated values`, () => {
         expect(dictionary.getReferences(properties.border.tertiary.value)).toEqual(
-          expect.arrayContaining([
-            {value: "2px"},
-            {value: "#f00"}
-          ])
+          expect.arrayContaining([{ value: '2px' }, { value: '#f00' }]),
         );
       });
     });

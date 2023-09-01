@@ -17,19 +17,16 @@ const dictionary = {
   color: {
     palette: {
       neutral: {
-        0: { value: "#ffffff" },
-        5: { value: "#f2f3f4" }
-      }
+        0: { value: '#ffffff' },
+        5: { value: '#f2f3f4' },
+      },
     },
     background: {
-      primary: { value: "{color.palette.neutral.0.value}" }
-    }
+      primary: { value: '{color.palette.neutral.0.value}' },
+    },
   },
-  arr: [
-    'one',
-    'two'
-  ]
-}
+  arr: ['one', 'two'],
+};
 
 describe('resolveReference()', () => {
   it(`returns undefined for non-strings`, () => {
@@ -37,28 +34,22 @@ describe('resolveReference()', () => {
   });
 
   it(`returns undefined if it does not find the path in the object`, () => {
-    expect(resolveReference(['color','foo'], dictionary)).toBe(undefined);
-    expect(resolveReference(['color','foo','bar'], dictionary)).toBe(undefined);
+    expect(resolveReference(['color', 'foo'], dictionary)).toBe(undefined);
+    expect(resolveReference(['color', 'foo', 'bar'], dictionary)).toBe(undefined);
   });
 
   it(`returns the part of the object if referenced path exists`, () => {
-    expect(
-      resolveReference(['color','palette','neutral','0','value'], dictionary)
-    ).toEqual(dictionary.color.palette.neutral['0'].value);
-    expect(
-      resolveReference(['color'], dictionary)
-    ).toEqual(dictionary.color);
+    expect(resolveReference(['color', 'palette', 'neutral', '0', 'value'], dictionary)).toEqual(
+      dictionary.color.palette.neutral['0'].value,
+    );
+    expect(resolveReference(['color'], dictionary)).toEqual(dictionary.color);
   });
 
   it(`works with arrays`, () => {
-    expect(
-      resolveReference(['arr'], dictionary)
-    ).toEqual(dictionary.arr);
+    expect(resolveReference(['arr'], dictionary)).toEqual(dictionary.arr);
   });
 
   it(`works with array indices`, () => {
-    expect(
-      resolveReference(['arr','0'], dictionary)
-    ).toEqual(dictionary.arr[0]);
+    expect(resolveReference(['arr', '0'], dictionary)).toEqual(dictionary.arr[0]);
   });
 });
