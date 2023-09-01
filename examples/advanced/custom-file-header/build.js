@@ -15,7 +15,7 @@ const myCustomFormat = ({ dictionary, file }) => {
     .join(`\n`)}`;
 };
 
-const styleDictionary = StyleDictionary.extend({
+const styleDictionary = await StyleDictionary.extend({
   // You can add custom file headers directly on the configuration by
   // adding a `fileHeader` object. The keys inside are the names of
   // the file headers

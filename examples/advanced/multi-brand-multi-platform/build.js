@@ -61,13 +61,13 @@ console.log('Build started...');
     console.log('\n==============================================');
     console.log(`\nProcessing: [${platform}] [${brand}]`);
 
-    const StyleDictionary = StyleDictionaryPackage.extend(
-      getStyleDictionaryConfig(brand, platform),
+    StyleDictionaryPackage.extend(getStyleDictionaryConfig(brand, platform)).then(
+      (StyleDictionary) => {
+        StyleDictionary.buildPlatform(platform);
+
+        console.log('\nEnd processing');
+      },
     );
-
-    StyleDictionary.buildPlatform(platform);
-
-    console.log('\nEnd processing');
   });
 });
 

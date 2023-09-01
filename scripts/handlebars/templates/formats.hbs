@@ -309,12 +309,13 @@ Any templating language can work as long as there is a node module for it. All y
 Here is a quick example for Lodash.
 
 ```js
-const styleDictionary = require('style-dictionary').extend('config.json');
+import StyleDictionary from 'style-dictionary';
+const sd = await StyleDictionary.extend('config.json');
 const _ = require('lodash');
 
 const template = _.template( fs.readFileSync('templates/myFormat.template') );
 
-styleDictionary.registerFormat({
+sd.registerFormat({
   name: 'my/format',
   formatter: template
 });
@@ -325,12 +326,13 @@ styleDictionary.registerFormat({
 And another example for Handlebars.
 
 ```js
-const styleDictionary = require('style-dictionary').extend('config.json');
+import StyleDictionary from 'style-dictionary';
+const sd = await StyleDictionary.extend('config.json');
 const Handlebars = require('handlebars');
 
 const template = Handlebars.compile( fs.readFileSync('templates/MyTemplate.hbs').toString() );
 
-styleDictionary.registerFormat({
+sd.registerFormat({
   name: 'my/format',
   formatter: function({dictionary, platform}) {
     return template({

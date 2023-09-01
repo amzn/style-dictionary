@@ -11,133 +11,129 @@
  * and limitations under the License.
  */
 
-import { expectType, expectError, expectAssignable } from "tsd";
-import StyleDictionary = require(".");
+import { expectType, expectError, expectAssignable } from 'tsd';
+import StyleDictionary from './index';
 
 expectType<StyleDictionary.Core>(StyleDictionary.buildAllPlatforms());
-expectType<StyleDictionary.Core>(StyleDictionary.buildPlatform("web"));
+expectType<StyleDictionary.Core>(StyleDictionary.buildPlatform('web'));
 
 expectType<StyleDictionary.Core>(StyleDictionary.cleanAllPlatforms());
 
-expectType<StyleDictionary.Core>(StyleDictionary.cleanPlatform("web"));
-expectType<StyleDictionary.TransformedTokens>(StyleDictionary.exportPlatform("web"));
+expectType<StyleDictionary.Core>(StyleDictionary.cleanPlatform('web'));
+expectType<StyleDictionary.TransformedTokens>(StyleDictionary.exportPlatform('web'));
 
-expectType<StyleDictionary.Core>(StyleDictionary.extend("config.json"));
+expectType<Promise<StyleDictionary.Core>>(StyleDictionary.extend('config.json'));
 
-expectType<StyleDictionary.Core>(
+expectType<Promise<StyleDictionary.Core>>(
   StyleDictionary.extend({
-    source: ["tokens/**/*.json"],
+    source: ['tokens/**/*.json'],
     platforms: {
       scss: {
-        transformGroup: "scss",
-        buildPath: "build/",
+        transformGroup: 'scss',
+        buildPath: 'build/',
         files: [
           {
-            destination: "variables.scss",
-            format: "scss/variables",
+            destination: 'variables.scss',
+            format: 'scss/variables',
           },
         ],
       },
     },
-  })
+  }),
 );
 
 expectType<StyleDictionary.Core>(
   StyleDictionary.registerAction({
-    name: "copy_assets",
+    name: 'copy_assets',
     do: function (dictionary, config) {
-      console.log(
-        "Copying assets directory",
-        "assets",
-        config.buildPath + "assets"
-      );
+      console.log('Copying assets directory', 'assets', config.buildPath + 'assets');
     },
     undo: function (dictionary, config) {
-      console.log("Cleaning assets directory", config.buildPath + "assets");
+      console.log('Cleaning assets directory', config.buildPath + 'assets');
     },
-  })
+  }),
 );
 
 expectType<StyleDictionary.Core>(
   StyleDictionary.registerFilter({
-    name: "isColor",
+    name: 'isColor',
     matcher: function (token) {
-      return token.attributes?.category === "color";
+      return token.attributes?.category === 'color';
     },
-  })
+  }),
 );
 
 expectType<StyleDictionary.Core>(
   StyleDictionary.registerFormat({
-    name: "json",
-    formatter: function ({dictionary, file, options, platform}) {
+    name: 'json',
+    formatter: function ({ dictionary, file, options, platform }) {
       expectType<StyleDictionary.Dictionary>(dictionary);
       expectType<StyleDictionary.File>(file);
       expectType<StyleDictionary.Options>(options);
       expectType<StyleDictionary.Platform>(platform);
       return JSON.stringify(dictionary.tokens, null, 2);
     },
-  })
+  }),
 );
 
 expectType<StyleDictionary.Core>(
   StyleDictionary.registerTemplate({
-    name: "Swift/colors",
-    template: __dirname + "/templates/swift/colors.template",
-  })
+    name: 'Swift/colors',
+    template: __dirname + '/templates/swift/colors.template',
+  }),
 );
 
 expectType<StyleDictionary.Core>(
   StyleDictionary.registerTransform({
-    name: "time/seconds",
-    type: "value",
+    name: 'time/seconds',
+    type: 'value',
     matcher: function (token) {
-      return token.attributes?.category === "time";
+      return token.attributes?.category === 'time';
     },
     transformer: function (token) {
       expectType<StyleDictionary.TransformedToken>(token);
-      return (parseInt(token.original.value) / 1000).toString() + "s";
+      return (parseInt(token.original.value) / 1000).toString() + 's';
     },
-  })
+  }),
 );
 
 type CustomPlatform = {
   colorMode: 'light' | 'dark';
-}
+};
 
 expectType<StyleDictionary.Core>(
   StyleDictionary.registerTransform<CustomPlatform>({
-    name: "colormode",
-    type: "value",
+    name: 'colormode',
+    type: 'value',
     matcher: function (token) {
-      return token.attributes?.category === "color";
+      return token.attributes?.category === 'color';
     },
     transformer: function (token, platform) {
       expectType<StyleDictionary.TransformedToken>(token);
       expectType<StyleDictionary.Platform<CustomPlatform>>(platform);
       if (platform.colorMode === 'light') {
-        return 'light'
+        return 'light';
       } else {
-        return 'dark'
+        return 'dark';
       }
     },
-  })
+  }),
 );
 
 expectType<StyleDictionary.Core>(
   StyleDictionary.registerTransformGroup({
-    name: "Swift",
-    transforms: ["attribute/cti", "size/pt", "name/cti"],
-  })
+    name: 'Swift',
+    transforms: ['attribute/cti', 'size/pt', 'name/cti'],
+  }),
 );
 
 expectType<StyleDictionary.Core>(
   StyleDictionary.registerParser({
     pattern: /\.json$/,
     parse: ({ contents, filePath }) => {
-      return {}
-    }
-  })
+      return {};
+    },
+  }),
 );
 
 const file: StyleDictionary.File = {
@@ -149,8 +145,8 @@ const file: StyleDictionary.File = {
   },
   options: {
     showFileHeader: true,
-  }
-}
+  },
+};
 
 expectType<StyleDictionary.Options | undefined>(file.options);
 
@@ -161,9 +157,8 @@ expectError<StyleDictionary.File>({
 
 expectAssignable<StyleDictionary.File>({
   format: `css/variables`,
-  destination: `variables.css`
+  destination: `variables.css`,
 });
-
 
 expectAssignable<StyleDictionary.Platform>({
   basePxFontSize: 16,
@@ -185,9 +180,11 @@ expectAssignable<StyleDictionary.Platform>({
 
 expectAssignable<StyleDictionary.Platform>({
   transforms: [`attribute/cti`],
-  files: [{
-    destination: `destination`
-  }]
+  files: [
+    {
+      destination: `destination`,
+    },
+  ],
 });
 
 expectError<StyleDictionary.Platform>({
@@ -197,7 +194,6 @@ expectError<StyleDictionary.Platform>({
 expectError<StyleDictionary.Platform>({
   transformGroup: [`attribute/cti`],
 });
-
 
 /**
  * Testing Options type.
