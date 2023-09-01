@@ -13,7 +13,7 @@
 
 const fs = require('fs-extra');
 const StyleDictionary = require('../index');
-const {buildPath} = require('./_constants');
+const { buildPath } = require('./_constants');
 
 describe('integration', () => {
   describe('android', () => {
@@ -23,44 +23,53 @@ describe('integration', () => {
         android: {
           transformGroup: `android`,
           buildPath,
-          files: [{
-            destination: `resources.xml`,
-            format: `android/resources`
-          },{
-            destination: `resourcesWithReferences.xml`,
-            format: `android/resources`,
-            options: {
-              outputReferences: true
-            }
-          },{
-            destination: `colors.xml`,
-            format: `android/resources`,
-            filter: {
-              attributes: { category: `color` }
-            }
-          }]
-        }
-      }
+          files: [
+            {
+              destination: `resources.xml`,
+              format: `android/resources`,
+            },
+            {
+              destination: `resourcesWithReferences.xml`,
+              format: `android/resources`,
+              options: {
+                outputReferences: true,
+              },
+            },
+            {
+              destination: `colors.xml`,
+              format: `android/resources`,
+              filter: {
+                attributes: { category: `color` },
+              },
+            },
+          ],
+        },
+      },
     }).buildAllPlatforms();
 
     describe(`android/resources`, () => {
-      const output = fs.readFileSync(`${buildPath}resources.xml`, {encoding:'UTF-8'});
+      const output = fs.readFileSync(`${buildPath}resources.xml`, {
+        encoding: 'UTF-8',
+      });
 
       it(`should match snapshot`, () => {
         expect(output).toMatchSnapshot();
       });
 
       describe(`with references`, () => {
-        const output = fs.readFileSync(`${buildPath}resourcesWithReferences.xml`, {encoding:'UTF-8'});
+        const output = fs.readFileSync(`${buildPath}resourcesWithReferences.xml`, {
+          encoding: 'UTF-8',
+        });
 
         it(`should match snapshot`, () => {
           expect(output).toMatchSnapshot();
         });
-
       });
 
       describe(`with filter`, () => {
-        const output = fs.readFileSync(`${buildPath}colors.xml`, {encoding:'UTF-8'});
+        const output = fs.readFileSync(`${buildPath}colors.xml`, {
+          encoding: 'UTF-8',
+        });
 
         it(`should match snapshot`, () => {
           expect(output).toMatchSnapshot();

@@ -13,7 +13,7 @@
 
 const fs = require('fs-extra');
 const StyleDictionary = require('../index');
-const {buildPath} = require('./_constants');
+const { buildPath } = require('./_constants');
 
 describe('integration', () => {
   describe('flutter', () => {
@@ -23,69 +23,80 @@ describe('integration', () => {
         flutter: {
           transformGroup: `flutter`,
           buildPath,
-          files: [{
-            destination: "style_dictionary.dart",
-            format: "flutter/class.dart",
-            className: "StyleDictionary"
-          },{
-            destination: "style_dictionary_with_references.dart",
-            format: "flutter/class.dart",
-            className: "StyleDictionary",
-            options: {
-              outputReferences: true
-            }
-          }]
+          files: [
+            {
+              destination: 'style_dictionary.dart',
+              format: 'flutter/class.dart',
+              className: 'StyleDictionary',
+            },
+            {
+              destination: 'style_dictionary_with_references.dart',
+              format: 'flutter/class.dart',
+              className: 'StyleDictionary',
+              options: {
+                outputReferences: true,
+              },
+            },
+          ],
         },
         flutter_separate: {
           transformGroup: `flutter-separate`,
           buildPath,
-          files: [{
-            destination: "style_dictionary_color.dart",
-            format: "flutter/class.dart",
-            className: "StyleDictionaryColor",
-            type: "color",
-            filter: {
-              attributes: {
-                category: "color"
-              }
-            }
-          },{
-            destination: "style_dictionary_sizes.dart",
-            format: "flutter/class.dart",
-            className: "StyleDictionarySize",
-            type: "float",
-            filter: {
-              attributes: {
-                category: "size"
-              }
-            }
-          }]
-        }
-      }
+          files: [
+            {
+              destination: 'style_dictionary_color.dart',
+              format: 'flutter/class.dart',
+              className: 'StyleDictionaryColor',
+              type: 'color',
+              filter: {
+                attributes: {
+                  category: 'color',
+                },
+              },
+            },
+            {
+              destination: 'style_dictionary_sizes.dart',
+              format: 'flutter/class.dart',
+              className: 'StyleDictionarySize',
+              type: 'float',
+              filter: {
+                attributes: {
+                  category: 'size',
+                },
+              },
+            },
+          ],
+        },
+      },
     }).buildAllPlatforms();
 
     describe(`flutter/class.dart`, () => {
-      const output = fs.readFileSync(`${buildPath}style_dictionary.dart`, {encoding:`UTF-8`});
+      const output = fs.readFileSync(`${buildPath}style_dictionary.dart`, {
+        encoding: `UTF-8`,
+      });
 
       it(`should match snapshot`, () => {
         expect(output).toMatchSnapshot();
       });
 
       describe(`with references`, () => {
-        const output = fs.readFileSync(`${buildPath}style_dictionary_with_references.dart`, {encoding:`UTF-8`});
+        const output = fs.readFileSync(`${buildPath}style_dictionary_with_references.dart`, {
+          encoding: `UTF-8`,
+        });
 
         it(`should match snapshot`, () => {
           expect(output).toMatchSnapshot();
         });
-
       });
 
       describe(`separate`, () => {
-        const output = fs.readFileSync(`${buildPath}style_dictionary_color.dart`,{encoding:`UTF-8`});
+        const output = fs.readFileSync(`${buildPath}style_dictionary_color.dart`, {
+          encoding: `UTF-8`,
+        });
         it(`should match snapshot`, () => {
           expect(output).toMatchSnapshot();
         });
-      })
+      });
     });
   });
 });

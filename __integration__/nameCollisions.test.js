@@ -14,16 +14,16 @@
 const fs = require('fs-extra');
 const chalk = require('chalk');
 const StyleDictionary = require('../index');
-const {buildPath} = require('./_constants');
+const { buildPath } = require('./_constants');
 
 const properties = {
   color: {
     red: { value: '#f00' },
     background: {
-      red: { value: '{color.red.value}' }
-    }
-  }
-}
+      red: { value: '{color.red.value}' },
+    },
+  },
+};
 
 describe('integration', () => {
   describe('name collisions', () => {
@@ -36,12 +36,14 @@ describe('integration', () => {
         platforms: {
           web: {
             buildPath,
-            files: [{
-              destination: 'variables.css',
-              format: 'css/variables',
-            }]
+            files: [
+              {
+                destination: 'variables.css',
+                format: 'css/variables',
+              },
+            ],
           },
-        }
+        },
       }).buildAllPlatforms();
       expect(console.log).toHaveBeenCalledWith(`⚠️ ${buildPath}variables.css`);
     });
@@ -55,17 +57,17 @@ describe('integration', () => {
         platforms: {
           web: {
             buildPath,
-            files: [{
-              destination: 'tokens.json',
-              format: 'json/nested'
-            }]
+            files: [
+              {
+                destination: 'tokens.json',
+                format: 'json/nested',
+              },
+            ],
           },
-        }
+        },
       }).buildAllPlatforms();
       expect(console.log).toHaveBeenCalledWith(chalk.bold.green(`✔︎ ${buildPath}tokens.json`));
     });
-
-
   });
 });
 

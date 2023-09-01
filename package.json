@@ -37,8 +37,11 @@
     "types"
   ],
   "scripts": {
-    "lint": "eslint --fix index.js \"lib/**/*.js\" \"__tests__/**/*.js\"",
-    "test": "npm run test-types && npm run lint && jest --runInBand --silent --coverage",
+    "format:eslint": "eslint --file index.js \"lib/**/*.js\" \"__tests__/**/*.js\" --fix",
+    "format:prettier": "prettier \"**/*.{js,md}\" \"package.json\" --write",
+    "lint:eslint": "eslint --fix index.js \"lib/**/*.js\" \"__tests__/**/*.js\"",
+    "lint:prettier": "prettier \"**/*.{js,md}\" \"package.json\" --list-different || (echo '↑↑ these files are not prettier formatted ↑↑' && exit 1)",
+    "test": "npm run test-types && run-p lint:* && jest --runInBand --silent --coverage",
     "test-types": "tsd",
     "test-watch": "npm run test-types && npm run lint && jest --runInBand --watch",
     "generate-docs": "node ./scripts/generateDocs.js",
@@ -116,6 +119,12 @@
     "Dustin Boudreau <boudrd@amazon.com>",
     "Danny Banks <djb@amazon.com>"
   ],
+  "prettier": {
+    "singleQuote": true,
+    "arrowParens": "always",
+    "trailingComma": "all",
+    "printWidth": 100
+  },
   "homepage": "https://github.com/amzn/style-dictionary",
   "dependencies": {
     "chalk": "^4.0.0",
@@ -136,7 +145,7 @@
     "babel-preset-env": "^1.7.0",
     "docsify": "^4.12.2",
     "docsify-cli": "^4.4.3",
-    "eslint": "^8.7.0",
+    "eslint": "^8.48.0",
     "eslint-plugin-jest": "^26.0.0",
     "husky": "^7.0.0",
     "istanbul": "^0.4.5",
@@ -147,6 +156,8 @@
     "less": "^4.1.2",
     "lint-staged": "^12.3.1",
     "node-sass": "^9.0.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^3.0.3",
     "standard-version": "^9.3.2",
     "stylus": "^0.56.0",
     "tsd": "^0.19.1",

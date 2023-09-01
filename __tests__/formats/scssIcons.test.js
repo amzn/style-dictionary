@@ -17,37 +17,37 @@ const createDictionary = require('../../lib/utils/createDictionary');
 const createFormatArgs = require('../../lib/utils/createFormatArgs');
 
 const file = {
-  "destination": "__output/",
-  "format": "scss/icons",
-  "name": "foo"
+  destination: '__output/',
+  format: 'scss/icons',
+  name: 'foo',
 };
 
-const propertyName = "content-icon-email";
+const propertyName = 'content-icon-email';
 const propertyValue = "'\\E001'";
-const itemClass = "3d_rotation";
+const itemClass = '3d_rotation';
 
 const properties = {
   content: {
     icon: {
       email: {
-        "name": propertyName,
-        "value": propertyValue,
-        "original": {
-          "value": propertyValue
+        name: propertyName,
+        value: propertyValue,
+        original: {
+          value: propertyValue,
         },
-        "attributes": {
-          "category": "content",
-          "type": "icon",
-          "item": itemClass
+        attributes: {
+          category: 'content',
+          type: 'icon',
+          item: itemClass,
         },
-        path: ['content','icon','email']
-      }
-    }
-  }
+        path: ['content', 'icon', 'email'],
+      },
+    },
+  },
 };
 
 const platform = {
-  prefix: 'sd' // Style-Dictionary Prefix
+  prefix: 'sd', // Style-Dictionary Prefix
 };
 
 const formatter = formats['scss/icons'].bind(file);
@@ -55,17 +55,19 @@ const dictionary = createDictionary({ properties });
 
 describe('formats', () => {
   describe('scss/icons', () => {
-
     it('should have a valid scss syntax', () => {
       const result = scss.renderSync({
-        data: formatter(createFormatArgs({
-          dictionary,
+        data: formatter(
+          createFormatArgs({
+            dictionary,
+            file,
+            platform,
+          }),
+          platform,
           file,
-          platform
-        }), platform, file),
+        ),
       });
       expect(result.css).toBeDefined();
     });
-
   });
 });

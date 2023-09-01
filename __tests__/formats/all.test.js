@@ -17,47 +17,49 @@ var createFormatArgs = require('../../lib/utils/createFormatArgs');
 var _ = require('../../lib/utils/es6_');
 
 var file = {
-  "destination": "__output/",
-  "format": "javascript/es6",
-  "filter": {
-    "attributes": {
-      "category": "color"
-    }
-  }
+  destination: '__output/',
+  format: 'javascript/es6',
+  filter: {
+    attributes: {
+      category: 'color',
+    },
+  },
 };
 
 var properties = {
-  "color": {
-    "red": {
+  color: {
+    red: {
       value: '#FF0000',
       original: { value: '#FF0000' },
       name: 'color_red',
       comment: 'comment',
       attributes: {
-          category: 'color',
-          type: 'red',
-          item: undefined,
-          subitem: undefined,
-          state: undefined
+        category: 'color',
+        type: 'red',
+        item: undefined,
+        subitem: undefined,
+        state: undefined,
       },
-      path: ['color','red']
-    }
-  }
+      path: ['color', 'red'],
+    },
+  },
 };
 
 describe('formats', () => {
-  _.each(_.keys(formats), function(key) {
-
+  _.each(_.keys(formats), function (key) {
     var formatter = formats[key].bind(file);
     const dictionary = createDictionary({ properties });
-    var output = formatter(createFormatArgs({
-      dictionary,
+    var output = formatter(
+      createFormatArgs({
+        dictionary,
+        file,
+        platform: {},
+      }),
+      {},
       file,
-      platform: {},
-    }), {}, file);
+    );
 
     describe('all', () => {
-
       it('should match ' + key + ' snapshot', () => {
         expect(output).toMatchSnapshot();
       });
@@ -66,6 +68,5 @@ describe('formats', () => {
         expect(typeof output).toBe('string');
       });
     });
-
   });
 });

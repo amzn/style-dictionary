@@ -33,22 +33,35 @@ describe('common', () => {
       });
 
       it('should support nested arrays', () => {
-        expect(getTypeScriptType([[100, 200], [300, 400]])).toEqual('number[][]');
+        expect(
+          getTypeScriptType([
+            [100, 200],
+            [300, 400],
+          ]),
+        ).toEqual('number[][]');
       });
 
       it('should handle simple object types', () => {
         expect(getTypeScriptType({})).toEqual('{  }');
-        expect(getTypeScriptType({ property1: '', property2: false })).toEqual('{ property1: string, property2: boolean }');
+        expect(getTypeScriptType({ property1: '', property2: false })).toEqual(
+          '{ property1: string, property2: boolean }',
+        );
       });
 
       it('should handle complex object types', () => {
-        const complexObject = { property1: 'foo', property2: ['foo', 'bar'], property3: { subProperty1: 'foo', subProperty2: ['foo', 'bar', 1], } }
-        expect(getTypeScriptType(complexObject)).toEqual('{ property1: string, property2: string[], property3: { subProperty1: string, subProperty2: (string | number)[] } }');
+        const complexObject = {
+          property1: 'foo',
+          property2: ['foo', 'bar'],
+          property3: { subProperty1: 'foo', subProperty2: ['foo', 'bar', 1] },
+        };
+        expect(getTypeScriptType(complexObject)).toEqual(
+          '{ property1: string, property2: string[], property3: { subProperty1: string, subProperty2: (string | number)[] } }',
+        );
       });
 
       it('should handle outputStringLiterals', () => {
         const stringValue = 'I am a string';
-        const options = { outputStringLiterals: true};
+        const options = { outputStringLiterals: true };
         expect(getTypeScriptType(stringValue, options)).toEqual(`"${stringValue}"`);
       });
     });

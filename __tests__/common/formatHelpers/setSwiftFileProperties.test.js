@@ -15,7 +15,6 @@ const setSwiftFileProperties = require('../../../lib/common/formatHelpers/setSwi
 
 describe('common', () => {
   describe('formatHelpers', () => {
-
     describe('setSwiftFileProperties', () => {
       it('should default accessControl be public', () => {
         const file = setSwiftFileProperties({}, undefined, 'ios-swift');
@@ -40,12 +39,19 @@ describe('common', () => {
       });
 
       it('should file be properly configured', () => {
-        const file = setSwiftFileProperties({ objectType: 'extension', import: ['SwiftUI'], accessControl: 'public'}, undefined, 'ios-swift');
+        const file = setSwiftFileProperties(
+          {
+            objectType: 'extension',
+            import: ['SwiftUI'],
+            accessControl: 'public',
+          },
+          undefined,
+          'ios-swift',
+        );
         expect(file.objectType).toEqual('extension');
         expect(file.import).toEqual(['SwiftUI']);
         expect(file.accessControl).toEqual('public ');
       });
-
     });
-  })
-})
+  });
+});

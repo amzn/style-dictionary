@@ -17,40 +17,35 @@ const createDictionary = require('../../lib/utils/createDictionary');
 const createFormatArgs = require('../../lib/utils/createFormatArgs');
 
 var file = {
-  "destination": "__output/",
-  "format": "less/variables",
-  "name": "foo"
+  destination: '__output/',
+  format: 'less/variables',
+  name: 'foo',
 };
 
-const propertyName = "color-base-red-400";
-const propertyValue = "#EF5350";
+const propertyName = 'color-base-red-400';
+const propertyValue = '#EF5350';
 
 const properties = {
   color: {
     base: {
       red: {
         400: {
-          "name": propertyName,
-          "value": propertyValue,
-          "original": {
-            "value": propertyValue
+          name: propertyName,
+          value: propertyValue,
+          original: {
+            value: propertyValue,
           },
-          "attributes": {
-            "category": "color",
-            "type": "base",
-            "item": "red",
-            "subitem": "400"
+          attributes: {
+            category: 'color',
+            type: 'base',
+            item: 'red',
+            subitem: '400',
           },
-          "path": [
-            "color",
-            "base",
-            "red",
-            "400"
-          ]
-        }
-      }
-    }
-  }
+          path: ['color', 'base', 'red', '400'],
+        },
+      },
+    },
+  },
 };
 
 const formatter = formats['less/variables'].bind(file);
@@ -58,15 +53,21 @@ const dictionary = createDictionary({ properties });
 
 describe('formats', () => {
   describe('less/variables', () => {
-
     it('should have a valid less syntax', () => {
       expect.assertions(1);
-      return expect(less.render(formatter(createFormatArgs({
-        dictionary,
-        file,
-        platform: {}
-      }), {}, file))).resolves.toBeDefined();
+      return expect(
+        less.render(
+          formatter(
+            createFormatArgs({
+              dictionary,
+              file,
+              platform: {},
+            }),
+            {},
+            file,
+          ),
+        ),
+      ).resolves.toBeDefined();
     });
-
   });
 });

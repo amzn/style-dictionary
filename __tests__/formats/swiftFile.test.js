@@ -16,18 +16,18 @@ const createFormatArgs = require('../../lib/utils/createFormatArgs');
 const _ = require('../../lib/utils/es6_');
 
 const originalFile = {
-  "destination": "__output/",
-  "format": "ios-swift/any.swift",
-  "className": "StyleDictionary",
-  "filter": {
-    "attributes": {
-      "category": "color"
-    }
+  destination: '__output/',
+  format: 'ios-swift/any.swift',
+  className: 'StyleDictionary',
+  filter: {
+    attributes: {
+      category: 'color',
+    },
   },
-  "options": {}
+  options: {},
 };
 
-var file = {}
+var file = {};
 
 const properties = {
   color: {
@@ -38,57 +38,78 @@ const properties = {
         original: { value: '#FF0000' },
         name: 'colorBaseRed',
         attributes: { category: 'color', type: 'base', item: 'red' },
-        path: [ 'color', 'base', 'red' ]
-      }
-    }
-  }
+        path: ['color', 'base', 'red'],
+      },
+    },
+  },
 };
 
 const format = formats['ios-swift/any.swift'];
 const dictionary = createDictionary({ properties });
 
 describe('formats', () => {
-
   describe('ios-swift/any.swift', () => {
     beforeEach(() => {
       file = _.cloneDeep(originalFile);
     });
 
     it('should match default snapshot', () => {
-      expect(format(createFormatArgs({
-        dictionary,
-        file,
-        platform: {}
-      }), {}, file)).toMatchSnapshot();
+      expect(
+        format(
+          createFormatArgs({
+            dictionary,
+            file,
+            platform: {},
+          }),
+          {},
+          file,
+        ),
+      ).toMatchSnapshot();
     });
 
     it('with import override should match snapshot', () => {
-      file.options.import = ["UIKit", "AnotherModule"];
-      expect(format(createFormatArgs({
-        dictionary,
-        file,
-        platform: {}
-      }), {}, file)).toMatchSnapshot();
+      file.options.import = ['UIKit', 'AnotherModule'];
+      expect(
+        format(
+          createFormatArgs({
+            dictionary,
+            file,
+            platform: {},
+          }),
+          {},
+          file,
+        ),
+      ).toMatchSnapshot();
     });
 
     it('with objectType override should match snapshot', () => {
-      file.options.objectType = "struct"
-      expect(format(createFormatArgs({
-        dictionary,
-        file,
-        platform: {}
-      }), {}, file)).toMatchSnapshot();
+      file.options.objectType = 'struct';
+      expect(
+        format(
+          createFormatArgs({
+            dictionary,
+            file,
+            platform: {},
+          }),
+          {},
+          file,
+        ),
+      ).toMatchSnapshot();
     });
 
     it('with access control override should match snapshot', () => {
-      file.options.accessControl = "internal"
-      expect(format(createFormatArgs({
-        dictionary,
-        file,
-        platform: {}
-      }), {}, file)).toMatchSnapshot();
+      file.options.accessControl = 'internal';
+      expect(
+        format(
+          createFormatArgs({
+            dictionary,
+            file,
+            platform: {},
+          }),
+          {},
+          file,
+        ),
+      ).toMatchSnapshot();
     });
-
   });
-
 });

@@ -17,7 +17,7 @@ const colorTransform = (token) => {
   });
 
   return color.hex();
-}
+};
 
 module.exports = {
   // This will match any files ending in json or json5
@@ -32,15 +32,14 @@ module.exports = {
       // only transforms that have transitive: true will be applied to tokens
       // that alias/reference other tokens
       transitive: true,
-      matcher: (token) => token.attributes.category === 'color'
-        && token.modify,
-      transformer: colorTransform
+      matcher: (token) => token.attributes.category === 'color' && token.modify,
+      transformer: colorTransform,
     },
 
     // For backwards compatibility, all built-in transforms are not transitive
     // by default. This will make the 'color/css' transform transitive
     'color/css': Object.assign({}, StyleDictionary.transform[`color/css`], {
-      transitive: true
+      transitive: true,
     }),
   },
 
@@ -48,10 +47,12 @@ module.exports = {
     css: {
       transforms: [`attribute/cti`, `name/cti/kebab`, `colorTransform`, `color/css`],
       buildPath: `build/`,
-      files: [{
-        destination: `variables.css`,
-        format: `css/variables`
-      }]
-    }
-  }
-}
+      files: [
+        {
+          destination: `variables.css`,
+          format: `css/variables`,
+        },
+      ],
+    },
+  },
+};

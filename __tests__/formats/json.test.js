@@ -18,14 +18,14 @@ const createDictionary = require('../../lib/utils/createDictionary');
 const createFormatArgs = require('../../lib/utils/createFormatArgs');
 
 const file = {
-  "destination": "__output/",
-  "format": "json"
+  destination: '__output/',
+  format: 'json',
 };
 
 const properties = {
-  "color": {
-    "red": {"value": "#FF0000"}
-  }
+  color: {
+    red: { value: '#FF0000' },
+  },
 };
 
 const formatter = formats['json'].bind(file);
@@ -33,7 +33,6 @@ const dictionary = createDictionary({ properties });
 
 describe('formats', () => {
   describe('json', () => {
-
     beforeEach(() => {
       helpers.clearOutput();
     });
@@ -43,14 +42,20 @@ describe('formats', () => {
     });
 
     it('should be a valid JSON file', () => {
-      fs.writeFileSync('./__tests__/__output/output.json', formatter(createFormatArgs({
-        dictionary,
-        file,
-        platform: {}
-      }), {}, file) );
+      fs.writeFileSync(
+        './__tests__/__output/output.json',
+        formatter(
+          createFormatArgs({
+            dictionary,
+            file,
+            platform: {},
+          }),
+          {},
+          file,
+        ),
+      );
       const test = require('../__output/output.json');
       expect(test.color.red.value).toEqual(dictionary.properties.color.red.value);
     });
   });
-
 });

@@ -15,7 +15,6 @@ var helpers = require('./__helpers');
 var StyleDictionary = require('../index');
 
 describe('buildAllPlatforms', () => {
-
   beforeEach(() => {
     helpers.clearOutput();
   });

@@ -48,13 +48,22 @@ class MyComponent extends Component {
   render() {
     return (
       <Box>
-          <Media src={logo} alt="Styled Components logo" />
-          <Text>
-            <Description>
-              This component is styled with Styled Components and Style Dictionary tokens
-            </Description>
-            <Reference>More information about Styled Components: <Link href="https://www.styled-components.com/" target="_blank" rel="noopener noreferrer">styled-components.com</Link></Reference>
-          </Text>
+        <Media src={logo} alt="Styled Components logo" />
+        <Text>
+          <Description>
+            This component is styled with Styled Components and Style Dictionary tokens
+          </Description>
+          <Reference>
+            More information about Styled Components:{' '}
+            <Link
+              href="https://www.styled-components.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              styled-components.com
+            </Link>
+          </Reference>
+        </Text>
       </Box>
     );
   }

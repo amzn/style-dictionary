@@ -4,7 +4,7 @@ const execSync = require('child_process').execSync;
 const PACKAGE = require('../package.json');
 const packageJSONs = glob.sync('./examples/*/*/package.json', {});
 
-packageJSONs.forEach(function(filePath) {
+packageJSONs.forEach(function (filePath) {
   let pkg = fs.readJsonSync(filePath);
   if (pkg.devDependencies) {
     pkg.devDependencies[PACKAGE.name] = PACKAGE.version;

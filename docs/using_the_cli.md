@@ -2,7 +2,6 @@
 
 The Style Dictionary command line interface (CLI) provides an executable system to create and act upon style dictionaries.
 
-
 # Installation
 
 To use the CLI, you can install it globally via npm:
@@ -11,7 +10,7 @@ To use the CLI, you can install it globally via npm:
 $ npm install -g style-dictionary
 ```
 
-Most of the time you will want to install Style Dictionary as a dev dependency in your NPM package. The reason to have it as a dev dependency rather than a regular dependency is that Style Dictionary is a build tool rather than a runtime tool because it is used to *generate* files rather than used directly in an application.
+Most of the time you will want to install Style Dictionary as a dev dependency in your NPM package. The reason to have it as a dev dependency rather than a regular dependency is that Style Dictionary is a build tool rather than a runtime tool because it is used to _generate_ files rather than used directly in an application.
 
 ```bash
 $ npm install --save-dev style-dictionary
@@ -24,7 +23,6 @@ In your `package.json` file you can add an NPM script that runs Style Dictionary
     "build": "style-dictionary build"
   }
 ```
-
 
 # CLI Quick Start
 
@@ -45,9 +43,9 @@ $ style-dictionary build
 
 The CLI provides three basic commands:
 
-* [build](using_the_cli.md?id=build) Builds a style dictionary package from the current directory.
-* [clean](using_the_cli.md?id=clean) Removes files specified in the config of the style dictionary package of the current directory.
-* [init](using_the_cli.md?id=init) Generates a starter style dictionary
+- [build](using_the_cli.md?id=build) Builds a style dictionary package from the current directory.
+- [clean](using_the_cli.md?id=clean) Removes files specified in the config of the style dictionary package of the current directory.
+- [init](using_the_cli.md?id=init) Generates a starter style dictionary
 
 These commands can be run using:
 
@@ -65,10 +63,10 @@ $ style-dictionary build [options]
 
 Options:
 
-| Name | Usage | Description |
-| :--- | :--- | :--- |
-| Configuration Path | -c <path>, --config <path> | Set the path to the configuration file. Defaults to './config.json'. |
-| Platform | -p <platform>, --platform <platform> | Only build a specific platform. If not supplied, builds all platform found in the configuration file. |
+| Name               | Usage                                | Description                                                                                           |
+| :----------------- | :----------------------------------- | :---------------------------------------------------------------------------------------------------- |
+| Configuration Path | -c <path>, --config <path>           | Set the path to the configuration file. Defaults to './config.json'.                                  |
+| Platform           | -p <platform>, --platform <platform> | Only build a specific platform. If not supplied, builds all platform found in the configuration file. |
 
 ## clean
 
@@ -80,10 +78,10 @@ $ style-dictionary clean [options]
 
 Options:
 
-| Name | Usage | Description |
-| :--- | :--- | :--- |
-| Configuration Path | -c <path>, --config <path> | Set the path to the configuration file. Defaults to './config.json'. |
-| Platform | -p <platform>, --platform <platform> | Only clean a specific platform. If not supplied, cleans all platform found in the configuration file. |
+| Name               | Usage                                | Description                                                                                           |
+| :----------------- | :----------------------------------- | :---------------------------------------------------------------------------------------------------- |
+| Configuration Path | -c <path>, --config <path>           | Set the path to the configuration file. Defaults to './config.json'.                                  |
+| Platform           | -p <platform>, --platform <platform> | Only clean a specific platform. If not supplied, cleans all platform found in the configuration file. |
 
 ## init
 
@@ -94,9 +92,9 @@ $ style-dictionary init <example-type>
 ```
 
 Where example-type is one of:
-* `basic`
-* `complete`
 
+- `basic`
+- `complete`
 
 ## version
 

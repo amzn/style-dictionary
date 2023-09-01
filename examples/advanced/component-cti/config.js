@@ -2,26 +2,26 @@ const StyleDictionary = require('style-dictionary');
 const transformer = StyleDictionary.transform['attribute/cti'].transformer;
 
 const propertiesToCTI = {
-  'width': {category: 'size', type: 'dimension'},
-  'min-width': {category: 'size', type: 'dimension'},
-  'max-width': {category: 'size', type: 'dimension'},
-  'height': {category: 'size', type: 'dimension'},
-  'min-height': {category: 'size', type: 'dimension'},
-  'max-height': {category: 'size', type: 'dimension'},
-  'border-width': {category: 'size', type: 'border', item: 'width'},
+  width: { category: 'size', type: 'dimension' },
+  'min-width': { category: 'size', type: 'dimension' },
+  'max-width': { category: 'size', type: 'dimension' },
+  height: { category: 'size', type: 'dimension' },
+  'min-height': { category: 'size', type: 'dimension' },
+  'max-height': { category: 'size', type: 'dimension' },
+  'border-width': { category: 'size', type: 'border', item: 'width' },
   'border-radius': { category: 'size', type: 'border', item: 'width' },
-  'border-color': {category: 'color', type: 'border'},
-  'background-color': {category: 'color', type: 'background'},
-  'color': {category: 'color', type: 'font'},
+  'border-color': { category: 'color', type: 'border' },
+  'background-color': { category: 'color', type: 'background' },
+  color: { category: 'color', type: 'font' },
   'text-color': { category: 'color', type: 'font' },
-  'padding': {category: 'size', type: 'padding'},
-  'padding-vertical': {category: 'size', type: 'padding'},
-  'padding-horizontal': {category: 'size', type: 'padding'},
-  'icon': {category: 'content', type: 'icon'},
-  'font-size': {category: 'size', type: 'font'},
+  padding: { category: 'size', type: 'padding' },
+  'padding-vertical': { category: 'size', type: 'padding' },
+  'padding-horizontal': { category: 'size', type: 'padding' },
+  icon: { category: 'content', type: 'icon' },
+  'font-size': { category: 'size', type: 'font' },
   'line-height': { category: 'size', type: 'line-height' },
-  'size': {category: 'size', type: 'icon'}
-}
+  size: { category: 'size', type: 'icon' },
+};
 
 const CTITransform = {
   type: `attribute`,
@@ -35,8 +35,8 @@ const CTITransform = {
       // Fallback to the original 'attribute/cti' transformer
       return transformer(prop);
     }
-  }
-}
+  },
+};
 
 // We can call .registerTransform here
 // or apply the custom transform directly in the configuration below
@@ -53,19 +53,21 @@ module.exports = {
   // transform name, 'attribute/cti', would work as well.
   transform: {
     // Override the attribute/cti transform
-    'attribute/cti': CTITransform
+    'attribute/cti': CTITransform,
   },
   source: ['tokens/**/*.json'],
   platforms: {
     scss: {
       // We can still use this transformGroup because we are overriding
       // the underlying transform
-      transformGroup: "scss",
+      transformGroup: 'scss',
       buildPath: 'build/',
-      files: [{
-        destination: 'variables.scss',
-        format: 'scss/variables'
-      }]
-    }
-  }
-}
+      files: [
+        {
+          destination: 'variables.scss',
+          format: 'scss/variables',
+        },
+      ],
+    },
+  },
+};

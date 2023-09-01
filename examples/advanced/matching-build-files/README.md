@@ -4,13 +4,13 @@ This example shows how you can manage what tokens are generated and how they are
 
 Common use cases include:
 
-- Each token category as its own Sass partial (_colors.scss)
+- Each token category as its own Sass partial (\_colors.scss)
 - Separate component files (button.css, input.css, etc)
 - Tree shaking (only import what you need)
 
 #### Running the example
 
-First of all, set up the required dependencies running the command `npm install` in your local CLI environment (if you prefer to use *yarn*, update the commands accordingly).
+First of all, set up the required dependencies running the command `npm install` in your local CLI environment (if you prefer to use _yarn_, update the commands accordingly).
 
 At this point, you can run `npm run build`. This command will generate the output file in the `build` folder.
 

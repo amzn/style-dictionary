@@ -13,7 +13,7 @@
 
 const fs = require('fs-extra');
 const StyleDictionary = require('../index');
-const {buildPath} = require('./_constants');
+const { buildPath } = require('./_constants');
 
 describe('integration', () => {
   describe('ios objective-c', () => {
@@ -23,78 +23,100 @@ describe('integration', () => {
         flutter: {
           transformGroup: `ios`,
           buildPath,
-          files: [{
-            destination: "singleton.m",
-            format: "ios/singleton.m",
-            className: "StyleDictionary"
-          },{
-            destination: "singleton.h",
-            format: "ios/singleton.h",
-            className: "StyleDictionary"
-          },{
-            destination: "color.h",
-            format: "ios/colors.h",
-            className: "StyleDictionaryColor",
-            type: "StyleDictionaryColorName",
-            filter: (token) => token.attributes.category === 'color'
-          },{
-            destination: "color.m",
-            format: "ios/colors.m",
-            className: "StyleDictionaryColor",
-            type: "StyleDictionaryColorName",
-            filter: (token) => token.attributes.category === 'color'
-          },{
-            destination: "macros.h",
-            format: "ios/macros",
-          },{
-            destination: "static.h",
-            format: "ios/static.h",
-            className: "StyleDictionaryStatic",
-            type: "CGFloat",
-            filter: (token) => token.attributes.category === 'size'
-          },{
-            destination: "static.m",
-            format: "ios/static.m",
-            className: "StyleDictionaryStatic",
-            type: "CGFloat",
-            filter: (token) => token.attributes.category === 'size'
-          }]
+          files: [
+            {
+              destination: 'singleton.m',
+              format: 'ios/singleton.m',
+              className: 'StyleDictionary',
+            },
+            {
+              destination: 'singleton.h',
+              format: 'ios/singleton.h',
+              className: 'StyleDictionary',
+            },
+            {
+              destination: 'color.h',
+              format: 'ios/colors.h',
+              className: 'StyleDictionaryColor',
+              type: 'StyleDictionaryColorName',
+              filter: (token) => token.attributes.category === 'color',
+            },
+            {
+              destination: 'color.m',
+              format: 'ios/colors.m',
+              className: 'StyleDictionaryColor',
+              type: 'StyleDictionaryColorName',
+              filter: (token) => token.attributes.category === 'color',
+            },
+            {
+              destination: 'macros.h',
+              format: 'ios/macros',
+            },
+            {
+              destination: 'static.h',
+              format: 'ios/static.h',
+              className: 'StyleDictionaryStatic',
+              type: 'CGFloat',
+              filter: (token) => token.attributes.category === 'size',
+            },
+            {
+              destination: 'static.m',
+              format: 'ios/static.m',
+              className: 'StyleDictionaryStatic',
+              type: 'CGFloat',
+              filter: (token) => token.attributes.category === 'size',
+            },
+          ],
         },
-      }
+      },
     }).buildAllPlatforms();
 
     it(`ios/singleton.m should match snapshot`, () => {
-      const output = fs.readFileSync(`${buildPath}singleton.m`, {encoding:`UTF-8`});
+      const output = fs.readFileSync(`${buildPath}singleton.m`, {
+        encoding: `UTF-8`,
+      });
       expect(output).toMatchSnapshot();
     });
 
     it(`ios/singleton.h should match snapshot`, () => {
-      const output = fs.readFileSync(`${buildPath}singleton.h`, {encoding:`UTF-8`});
+      const output = fs.readFileSync(`${buildPath}singleton.h`, {
+        encoding: `UTF-8`,
+      });
       expect(output).toMatchSnapshot();
     });
 
     it(`ios/color.m should match snapshot`, () => {
-      const output = fs.readFileSync(`${buildPath}color.m`, {encoding:`UTF-8`});
+      const output = fs.readFileSync(`${buildPath}color.m`, {
+        encoding: `UTF-8`,
+      });
       expect(output).toMatchSnapshot();
     });
 
     it(`ios/color.h should match snapshot`, () => {
-      const output = fs.readFileSync(`${buildPath}color.h`, {encoding:`UTF-8`});
+      const output = fs.readFileSync(`${buildPath}color.h`, {
+        encoding: `UTF-8`,
+      });
       expect(output).toMatchSnapshot();
     });
 
     it(`ios/macros.h should match snapshot`, () => {
-      const output = fs.readFileSync(`${buildPath}macros.h`, {encoding:`UTF-8`});
+      const output = fs.readFileSync(`${buildPath}macros.h`, {
+        encoding: `UTF-8`,
+      });
       expect(output).toMatchSnapshot();
     });
 
     it(`ios/static.h should match snapshot`, () => {
-      const output = fs.readFileSync(`${buildPath}static.h`, {encoding:`UTF-8`});
+      const output = fs.readFileSync(`${buildPath}static.h`, {
+        encoding: `UTF-8`,
+      });
       expect(output).toMatchSnapshot();
     });
 
     it(`ios/static.m should match snapshot`, () => {
-      const output = fs.readFileSync(`${buildPath}static.m`, {encoding:`UTF-8`});
+      const output = fs.readFileSync(`${buildPath}static.m`, {
+        encoding: `UTF-8`,
+      });
       expect(output).toMatchSnapshot();
     });
   });

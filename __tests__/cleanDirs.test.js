@@ -11,26 +11,26 @@
  * and limitations under the License.
  */
 
-var helpers    = require('./__helpers');
+var helpers = require('./__helpers');
 var buildFiles = require('../lib/buildFiles');
 var cleanFiles = require('../lib/cleanFiles');
-var cleanDirs  = require('../lib/cleanDirs');
+var cleanDirs = require('../lib/cleanDirs');
 
 var dictionary = {
   properties: {
-    foo: 'bar'
-  }
+    foo: 'bar',
+  },
 };
 
 var platform = {
   files: [
     {
       destination: '__tests__/__output/extradir1/extradir2/extradir1/extradir2/test.json',
-      format: function(dictionary) {
-        return JSON.stringify(dictionary.properties)
-      }
-    }
-  ]
+      format: function (dictionary) {
+        return JSON.stringify(dictionary.properties);
+      },
+    },
+  ],
 };
 
 var platformWithBuildPath = {
@@ -38,15 +38,14 @@ var platformWithBuildPath = {
   files: [
     {
       destination: 'test.json',
-      format: function(dictionary) {
-        return JSON.stringify(dictionary.properties)
-      }
-    }
-  ]
+      format: function (dictionary) {
+        return JSON.stringify(dictionary.properties);
+      },
+    },
+  ],
 };
 
 describe('cleanDirs', () => {
-
   beforeEach(() => {
     helpers.clearOutput();
   });
@@ -56,28 +55,29 @@ describe('cleanDirs', () => {
   });
 
   it('should delete without buildPath', () => {
-    buildFiles( dictionary, platform );
-    cleanFiles( dictionary, platform );
-    cleanDirs( dictionary, platform );
+    buildFiles(dictionary, platform);
+    cleanFiles(dictionary, platform);
+    cleanDirs(dictionary, platform);
     expect(helpers.dirDoesNotExist('./__tests__/__output/extradir1/extradir2')).toBeTruthy();
     expect(helpers.dirDoesNotExist('./__tests__/__output/extradir1')).toBeTruthy();
   });
 
   it('should delete with buildPath', () => {
-    buildFiles( dictionary, platformWithBuildPath );
-    cleanFiles( dictionary, platformWithBuildPath );
-    cleanDirs( dictionary, platformWithBuildPath );
+    buildFiles(dictionary, platformWithBuildPath);
+    cleanFiles(dictionary, platformWithBuildPath);
+    cleanDirs(dictionary, platformWithBuildPath);
     expect(helpers.dirDoesNotExist('./__tests__/__output/extradir1/extradir2')).toBeTruthy();
     expect(helpers.dirDoesNotExist('./__tests__/__output/extradir1')).toBeTruthy();
   });
 
   it('should throw if buildPath does not end in a trailing slash', () => {
-    expect(
-      function() {
-        cleanDirs( {}, {
-          buildPath: "foo"
-        })
-      }
-    ).toThrow('Build path must end in a trailing slash or you will get weird file names.')
-  })
+    expect(function () {
+      cleanDirs(
+        {},
+        {
+          buildPath: 'foo',
+        },
+      );
+    }).toThrow('Build path must end in a trailing slash or you will get weird file names.');
+  });
 });

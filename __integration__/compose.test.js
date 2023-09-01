@@ -13,7 +13,7 @@
 
 const fs = require('fs-extra');
 const StyleDictionary = require('../index');
-const {buildPath} = require('./_constants');
+const { buildPath } = require('./_constants');
 
 describe('integration', () => {
   describe('compose', () => {
@@ -23,38 +23,44 @@ describe('integration', () => {
         compose: {
           transformGroup: `compose`,
           buildPath,
-          files: [{
-            destination: "StyleDictionary.kt",
-            format: "compose/object",
-            className: "StyleDictionary",
-            packageName: "com.example.tokens"
-          },{
-            destination: "StyleDictionaryWithReferences.kt",
-            format: "compose/object",
-            className: "StyleDictionary",
-            packageName: "com.example.tokens",
-            options: {
-              outputReferences: true
-            }
-          }]
+          files: [
+            {
+              destination: 'StyleDictionary.kt',
+              format: 'compose/object',
+              className: 'StyleDictionary',
+              packageName: 'com.example.tokens',
+            },
+            {
+              destination: 'StyleDictionaryWithReferences.kt',
+              format: 'compose/object',
+              className: 'StyleDictionary',
+              packageName: 'com.example.tokens',
+              options: {
+                outputReferences: true,
+              },
+            },
+          ],
         },
-      }
+      },
     }).buildAllPlatforms();
 
     describe(`compose/object`, () => {
-      const output = fs.readFileSync(`${buildPath}StyleDictionary.kt`, {encoding:`UTF-8`});
+      const output = fs.readFileSync(`${buildPath}StyleDictionary.kt`, {
+        encoding: `UTF-8`,
+      });
 
       it(`should match snapshot`, () => {
         expect(output).toMatchSnapshot();
       });
 
       describe(`with references`, () => {
-        const output = fs.readFileSync(`${buildPath}StyleDictionaryWithReferences.kt`, {encoding:`UTF-8`});
+        const output = fs.readFileSync(`${buildPath}StyleDictionaryWithReferences.kt`, {
+          encoding: `UTF-8`,
+        });
 
         it(`should match snapshot`, () => {
           expect(output).toMatchSnapshot();
         });
-
       });
     });
   });

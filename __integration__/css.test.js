@@ -13,7 +13,7 @@
 
 const fs = require('fs-extra');
 const StyleDictionary = require('../index');
-const {buildPath} = require('./_constants');
+const { buildPath } = require('./_constants');
 
 describe('integration', () => {
   describe('css', () => {
@@ -24,51 +24,61 @@ describe('integration', () => {
       // integration test.
       properties: {
         breakpoint: {
-          xs: { value: "304px" },
-          sm: { value: "768px" },
-          md: { value: "calc({breakpoint.xs.value} / {breakpoint.sm.value})"}
-        }
+          xs: { value: '304px' },
+          sm: { value: '768px' },
+          md: { value: 'calc({breakpoint.xs.value} / {breakpoint.sm.value})' },
+        },
       },
       platforms: {
         css: {
           transformGroup: 'css',
           buildPath,
-          files: [{
-            destination: 'variables.css',
-            format: 'css/variables'
-          },{
-            destination: 'variablesWithReferences.css',
-            format: 'css/variables',
-            options: {
-              outputReferences: true,
-              outputReferenceFallbacks: true
-            }
-          },{
-            destination: 'variablesWithSelector.css',
-            format: 'css/variables',
-            options: {
-              selector: '.test'
-            }
-          }]
-        }
-      }
+          files: [
+            {
+              destination: 'variables.css',
+              format: 'css/variables',
+            },
+            {
+              destination: 'variablesWithReferences.css',
+              format: 'css/variables',
+              options: {
+                outputReferences: true,
+                outputReferenceFallbacks: true,
+              },
+            },
+            {
+              destination: 'variablesWithSelector.css',
+              format: 'css/variables',
+              options: {
+                selector: '.test',
+              },
+            },
+          ],
+        },
+      },
     }).buildAllPlatforms();
 
     describe('css/variables', () => {
-      const output = fs.readFileSync(`${buildPath}variables.css`, {encoding:'UTF-8'});
+      const output = fs.readFileSync(`${buildPath}variables.css`, {
+        encoding: 'UTF-8',
+      });
       it(`should match snapshot`, () => {
         expect(output).toMatchSnapshot();
       });
 
       describe(`with references`, () => {
-        const output = fs.readFileSync(`${buildPath}variablesWithReferences.css`, {encoding:'UTF-8'});
+        const output = fs.readFileSync(`${buildPath}variablesWithReferences.css`, {
+          encoding: 'UTF-8',
+        });
         it(`should match snapshot`, () => {
           expect(output).toMatchSnapshot();
         });
       });
 
       describe(`with selector`, () => {
-        const output = fs.readFileSync(`${buildPath}variablesWithSelector.css`, {encoding:'UTF-8'});
+        const output = fs.readFileSync(`${buildPath}variablesWithSelector.css`, {
+          encoding: 'UTF-8',
+        });
         it(`should match snapshot`, () => {
           expect(output).toMatchSnapshot();
         });
