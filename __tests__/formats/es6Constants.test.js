@@ -17,37 +17,32 @@ const createDictionary = require('../../lib/utils/createDictionary');
 const createFormatArgs = require('../../lib/utils/createFormatArgs');
 
 const file = {
-  "destination": "__output/",
-  "format": "javascript/es6",
-  "filter": {
-    "attributes": {
-      "category": "color"
-    }
-  }
+  destination: '__output/',
+  format: 'javascript/es6',
+  filter: {
+    attributes: {
+      category: 'color',
+    },
+  },
 };
 
 const properties = {
   color: {
     red: {
-      "name": "red",
-      "value": "#EF5350",
-      "original": {
-        "value": "#EF5350"
+      name: 'red',
+      value: '#EF5350',
+      original: {
+        value: '#EF5350',
       },
-      "attributes": {
-        "category": "color",
-        "type": "base",
-        "item": "red",
-        "subitem": "400"
+      attributes: {
+        category: 'color',
+        type: 'base',
+        item: 'red',
+        subitem: '400',
       },
-      "path": [
-        "color",
-        "base",
-        "red",
-        "400"
-      ]
-    }
-  }
+      path: ['color', 'base', 'red', '400'],
+    },
+  },
 };
 
 const formatter = formats['javascript/es6'].bind(file);
@@ -64,14 +59,20 @@ describe('formats', () => {
     });
 
     it('should be a valid JS file', () => {
-      fs.writeFileSync('./__tests__/__output/output.js', formatter(createFormatArgs({
-        dictionary,
-        file,
-        platform: {}
-      }), {}, file) );
+      fs.writeFileSync(
+        './__tests__/__output/output.js',
+        formatter(
+          createFormatArgs({
+            dictionary,
+            file,
+            platform: {},
+          }),
+          {},
+          file,
+        ),
+      );
       const test = require('../__output/output.js');
       expect(test.red).toEqual(dictionary.allProperties[0].value);
     });
   });
-
 });

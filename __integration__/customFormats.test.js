@@ -13,7 +13,7 @@
 
 const fs = require('fs-extra');
 const StyleDictionary = require('../index');
-const {buildPath} = require('./_constants');
+const { buildPath } = require('./_constants');
 
 describe('integration', () => {
   describe('custom formats', () => {
@@ -22,7 +22,7 @@ describe('integration', () => {
       // Adding formats directly to SD
       format: {
         inlineCustomFormatWithOldArgs: (dictionary, platform, file) => {
-          return JSON.stringify({dictionary, platform, file}, null, 2);
+          return JSON.stringify({ dictionary, platform, file }, null, 2);
         },
         inlineCustomFormatWithNewArgs: (opts) => {
           return JSON.stringify(opts, null, 2);
@@ -33,67 +33,75 @@ describe('integration', () => {
           transformGroup: 'js',
           buildPath,
           options: {
-            otherOption: `platform option`
+            otherOption: `platform option`,
           },
-          files: [{
-            destination: 'inlineCustomFormatWithOldArgs.json',
-            format: 'inlineCustomFormatWithOldArgs',
-            options: {
-              showFileHeader: true,
-              otherOption: 'Test'
-            }
-          },{
-            destination: 'inlineCustomFormatWithNewArgs.json',
-            format: 'inlineCustomFormatWithNewArgs',
-            options: {
-              showFileHeader: true,
-              otherOption: 'Test'
-            }
-          }]
+          files: [
+            {
+              destination: 'inlineCustomFormatWithOldArgs.json',
+              format: 'inlineCustomFormatWithOldArgs',
+              options: {
+                showFileHeader: true,
+                otherOption: 'Test',
+              },
+            },
+            {
+              destination: 'inlineCustomFormatWithNewArgs.json',
+              format: 'inlineCustomFormatWithNewArgs',
+              options: {
+                showFileHeader: true,
+                otherOption: 'Test',
+              },
+            },
+          ],
         },
         customFormats: {
           transformGroup: 'js',
           buildPath,
           options: {
-            otherOption: `platform option`
+            otherOption: `platform option`,
           },
-          files: [{
-            destination: 'registerCustomFormatWithOldArgs.json',
-            format: 'registerCustomFormatWithOldArgs',
-            options: {
-              showFileHeader: true,
-              otherOption: 'Test'
-            }
-          },{
-            destination: 'registerCustomFormatWithNewArgs.json',
-            format: 'registerCustomFormatWithNewArgs',
-            options: {
-              showFileHeader: true,
-              otherOption: 'Test'
-            }
-          }]
-        }
-      }
+          files: [
+            {
+              destination: 'registerCustomFormatWithOldArgs.json',
+              format: 'registerCustomFormatWithOldArgs',
+              options: {
+                showFileHeader: true,
+                otherOption: 'Test',
+              },
+            },
+            {
+              destination: 'registerCustomFormatWithNewArgs.json',
+              format: 'registerCustomFormatWithNewArgs',
+              options: {
+                showFileHeader: true,
+                otherOption: 'Test',
+              },
+            },
+          ],
+        },
+      },
     });
 
     styleDictionary.registerFormat({
       name: 'registerCustomFormatWithOldArgs',
       formatter: (dictionary, platform, file) => {
-        return JSON.stringify({dictionary, platform, file}, null, 2);
-      }
+        return JSON.stringify({ dictionary, platform, file }, null, 2);
+      },
     });
 
     styleDictionary.registerFormat({
       name: 'registerCustomFormatWithNewArgs',
       formatter: (opts) => {
         return JSON.stringify(opts, null, 2);
-      }
+      },
     });
 
     styleDictionary.buildAllPlatforms();
 
     describe(`inline custom with old args`, () => {
-      const output = fs.readFileSync(`${buildPath}inlineCustomFormatWithOldArgs.json`, {encoding:'UTF-8'});
+      const output = fs.readFileSync(`${buildPath}inlineCustomFormatWithOldArgs.json`, {
+        encoding: 'UTF-8',
+      });
 
       it(`should match snapshot`, () => {
         expect(output).toMatchSnapshot();
@@ -109,7 +117,9 @@ describe('integration', () => {
     });
 
     describe(`inline custom with new args`, () => {
-      const output = fs.readFileSync(`${buildPath}inlineCustomFormatWithNewArgs.json`, {encoding:'UTF-8'});
+      const output = fs.readFileSync(`${buildPath}inlineCustomFormatWithNewArgs.json`, {
+        encoding: 'UTF-8',
+      });
       it(`should match snapshot`, () => {
         expect(output).toMatchSnapshot();
       });
@@ -124,9 +134,10 @@ describe('integration', () => {
       });
     });
 
-
     describe(`register custom format with old args`, () => {
-      const output = fs.readFileSync(`${buildPath}registerCustomFormatWithOldArgs.json`, {encoding:'UTF-8'});
+      const output = fs.readFileSync(`${buildPath}registerCustomFormatWithOldArgs.json`, {
+        encoding: 'UTF-8',
+      });
 
       it(`should match snapshot`, () => {
         expect(output).toMatchSnapshot();
@@ -142,7 +153,9 @@ describe('integration', () => {
     });
 
     describe(`register custom format with new args`, () => {
-      const output = fs.readFileSync(`${buildPath}registerCustomFormatWithNewArgs.json`, {encoding:'UTF-8'});
+      const output = fs.readFileSync(`${buildPath}registerCustomFormatWithNewArgs.json`, {
+        encoding: 'UTF-8',
+      });
 
       it(`should match snapshot`, () => {
         expect(output).toMatchSnapshot();
@@ -157,7 +170,6 @@ describe('integration', () => {
         expect(options).toHaveProperty(`otherOption`, `Test`);
       });
     });
-
   });
 });
 

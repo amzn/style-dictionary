@@ -13,15 +13,15 @@ StyleDictionary.registerTransform({
   name: 'myRegisteredTransform',
   type: 'value',
   matcher: (token) => token.attributes.category === 'size',
-  transformer: (token) => `${parseInt(token.value) * 16}px`
+  transformer: (token) => `${parseInt(token.value) * 16}px`,
 });
 
 StyleDictionary.registerFormat({
   name: 'myRegisteredFormat',
   formatter: ({ dictionary }) => {
     return dictionary.allTokens.map((token) => token.value).join('\n');
-  }
-})
+  },
+});
 
 // You can export a plain JS object and point the Style Dictionary CLI to it,
 // similar to webpack.
@@ -39,15 +39,15 @@ module.exports = {
     // Now we can use the transform 'myTransform' below
     myTransform: {
       type: 'name',
-      transformer: (token) => token.path.join('_').toUpperCase()
-    }
+      transformer: (token) => token.path.join('_').toUpperCase(),
+    },
   },
   // Same with formats, you can now write them directly to this config
   // object. The name of the format is the key.
   format: {
-    myFormat: ({dictionary}) => {
-      return dictionary.allTokens.map(token => `${token.name}: ${token.value}`).join('\n');
-    }
+    myFormat: ({ dictionary }) => {
+      return dictionary.allTokens.map((token) => `${token.name}: ${token.value}`).join('\n');
+    },
   },
   // You can also bypass the merging of files Style Dictionary does
   // by adding a 'tokens' object directly like this:
@@ -58,29 +58,35 @@ module.exports = {
       // Using the custom transforms we defined above
       transforms: ['attribute/cti', 'myTransform', 'myRegisteredTransform', 'color/hex'],
       buildPath: buildPath,
-      files: [{
-        destination: 'variables.yml',
-        // Using the custom format defined above
-        format: 'myFormat'
-      }]
+      files: [
+        {
+          destination: 'variables.yml',
+          // Using the custom format defined above
+          format: 'myFormat',
+        },
+      ],
     },
     css: {
       transformGroup: 'css',
       buildPath: buildPath,
-      files: [{
-        destination: 'variables.css',
-        format: 'css/variables'
-      }]
+      files: [
+        {
+          destination: 'variables.css',
+          format: 'css/variables',
+        },
+      ],
     },
 
     scss: {
       // This works, we can create new transform arrays on the fly and edit built-ins
       transforms: StyleDictionary.transformGroup.scss.concat('color/rgb'),
       buildPath: buildPath,
-      files: [{
-        destination: 'variables.scss',
-        format: 'scss/variables'
-      }]
+      files: [
+        {
+          destination: 'variables.scss',
+          format: 'scss/variables',
+        },
+      ],
     },
 
     js: {
@@ -94,18 +100,20 @@ module.exports = {
         destination: `${colorType}.js`,
         format: 'javascript/es6',
         // Filters can be functions that return a boolean
-        filter: (token) => token.attributes.type === colorType
-      }))
+        filter: (token) => token.attributes.type === colorType,
+      })),
     },
 
     // You can still use built-in transformGroups and formats like before
     json: {
       transformGroup: 'js',
       buildPath: buildPath,
-      files: [{
-        destination: 'tokens.json',
-        format: 'json'
-      }]
-    }
-  }
-}
+      files: [
+        {
+          destination: 'tokens.json',
+          format: 'json',
+        },
+      ],
+    },
+  },
+};

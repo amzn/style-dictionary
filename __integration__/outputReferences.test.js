@@ -13,7 +13,7 @@
 
 const fs = require('fs-extra');
 const StyleDictionary = require('../index');
-const {buildPath} = require('./_constants');
+const { buildPath } = require('./_constants');
 
 describe('integration', () => {
   describe('output references', () => {
@@ -27,19 +27,21 @@ describe('integration', () => {
           css: {
             transformGroup: 'css',
             buildPath,
-            files: [{
-              destination: 'filteredVariables.css',
-              format: 'css/variables',
-              // filter tokens and use outputReferences
-              // Style Dictionary should build this file ok
-              // but warn the user
-              filter: (token) => token.attributes.type === 'background',
-              options: {
-                outputReferences: true
-              }
-            }]
-          }
-        }
+            files: [
+              {
+                destination: 'filteredVariables.css',
+                format: 'css/variables',
+                // filter tokens and use outputReferences
+                // Style Dictionary should build this file ok
+                // but warn the user
+                filter: (token) => token.attributes.type === 'background',
+                options: {
+                  outputReferences: true,
+                },
+              },
+            ],
+          },
+        },
       }).buildAllPlatforms();
 
       expect(console.log).toHaveBeenCalledWith(`⚠️ ${buildPath}filteredVariables.css`);

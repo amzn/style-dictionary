@@ -16,10 +16,17 @@ class App extends Component {
             <img className="App-logo" src={logo} alt="React logo" />
           </a>
           <div>
-            <h3 className="App-description">
-              This app is built with Create React App (CRA)
-            </h3>
-            <code>More information about CRA: <a href="https://github.com/facebook/create-react-app" target="_blank" rel="noopener noreferrer">github.com/facebook/create-react-app</a></code>
+            <h3 className="App-description">This app is built with Create React App (CRA)</h3>
+            <code>
+              More information about CRA:{' '}
+              <a
+                href="https://github.com/facebook/create-react-app"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                github.com/facebook/create-react-app
+              </a>
+            </code>
           </div>
         </header>
         <main>

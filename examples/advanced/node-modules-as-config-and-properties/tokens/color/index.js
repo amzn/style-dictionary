@@ -5,5 +5,5 @@ module.exports = {
   brand: require('./brand'),
   font: require('./font'),
   background: require('./background'),
-  border: require('./border')
-}
+  border: require('./border'),
+};

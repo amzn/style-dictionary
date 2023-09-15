@@ -13,76 +13,75 @@
 
 var StyleDictionary = require('../../index').extend({});
 
+describe('registerTemplate', function () {
+  it('should error if name is not a string', function () {
+    expect(StyleDictionary.registerTemplate.bind(null, {})).toThrow(
+      /Template name must be a string:/,
+    );
 
-describe('registerTemplate', function() {
-  it('should error if name is not a string', function() {
-    expect(
-      StyleDictionary.registerTemplate.bind(null, {})
-    ).toThrow(/Template name must be a string:/);
-    
     expect(
       StyleDictionary.registerTemplate.bind(null, {
         name: 1,
-      })
+      }),
     ).toThrow(/Template name must be a string:/);
 
     expect(
       StyleDictionary.registerTemplate.bind(null, {
         name: [],
-      })
+      }),
     ).toThrow(/Template name must be a string:/);
 
     expect(
       StyleDictionary.registerTemplate.bind(null, {
         name: {},
-      })
+      }),
     ).toThrow(/Template name must be a string:/);
   });
 
-  it('should error if path is not a string', function() {
+  it('should error if path is not a string', function () {
     expect(
       StyleDictionary.registerTemplate.bind(null, {
         name: 'data',
-      })
+      }),
     ).toThrow(/Template path must be a string:/);
 
     expect(
       StyleDictionary.registerTemplate.bind(null, {
         name: 'data',
         template: 1,
-      })
+      }),
     ).toThrow(/Template path must be a string:/);
 
     expect(
       StyleDictionary.registerTemplate.bind(null, {
         name: 'data',
         template: [],
-      })
+      }),
     ).toThrow(/Template path must be a string:/);
 
     expect(
       StyleDictionary.registerTemplate.bind(null, {
         name: 'data',
         template: {},
-      })
+      }),
     ).toThrow(/Template path must be a string:/);
   });
 
-  it('should error if path is not a file', function() {
+  it('should error if path is not a file', function () {
     expect(
       StyleDictionary.registerTemplate.bind(null, {
         name: 'data',
         template: 'non_existent_file',
-      })
+      }),
     ).toThrow(/Can't find template: /);
   });
 
-  it('should return StyleDictionary', function() {
+  it('should return StyleDictionary', function () {
     expect(
       StyleDictionary.registerTemplate({
         name: 'data',
         template: 'index.js',
-      })
+      }),
     ).toMatchObject(StyleDictionary);
   });
 });

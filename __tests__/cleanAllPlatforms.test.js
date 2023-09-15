@@ -17,7 +17,6 @@ var StyleDictionary = require('../index');
 var StyleDictionaryExtended = StyleDictionary.extend(config);
 
 describe('cleanAllPlatforms', () => {
-
   beforeEach(() => {
     helpers.clearOutput();
   });
@@ -32,5 +31,4 @@ describe('cleanAllPlatforms', () => {
     expect(helpers.fileDoesNotExist('./__tests__/__output/web/_icons.scss')).toBeTruthy();
     expect(helpers.fileDoesNotExist('./__tests__/__output/android/colors.xml')).toBeTruthy();
   });
-
 });

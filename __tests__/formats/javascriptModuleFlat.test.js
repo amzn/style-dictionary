@@ -18,27 +18,24 @@ const createDictionary = require('../../lib/utils/createDictionary');
 const createFormatArgs = require('../../lib/utils/createFormatArgs');
 
 const file = {
-  "destination": "__output/",
-  "format": "javascript/module-flat",
+  destination: '__output/',
+  format: 'javascript/module-flat',
 };
 const properties = {
   color: {
     red: {
-      value: "#EF5350",
-      name: "ColorRed",
+      value: '#EF5350',
+      name: 'ColorRed',
       original: {
-        value: "#EF5350"
+        value: '#EF5350',
       },
       attributes: {
-        category: "color",
-        type: "red"
+        category: 'color',
+        type: 'red',
       },
-      path: [
-        "color",
-        "red"
-      ]
-    }
-  }
+      path: ['color', 'red'],
+    },
+  },
 };
 
 const formatter = formats['javascript/module-flat'].bind(file);
@@ -46,7 +43,6 @@ const dictionary = createDictionary({ properties });
 
 describe('formats', () => {
   describe('javascript/module-flat', () => {
-
     beforeEach(() => {
       helpers.clearOutput();
     });
@@ -56,14 +52,20 @@ describe('formats', () => {
     });
 
     it('should be a valid JS file', () => {
-      fs.writeFileSync('./__tests__/__output/output.js', formatter(createFormatArgs({
-        dictionary,
-        file: {},
-        platform: {}
-      }), {}, {}) );
+      fs.writeFileSync(
+        './__tests__/__output/output.js',
+        formatter(
+          createFormatArgs({
+            dictionary,
+            file: {},
+            platform: {},
+          }),
+          {},
+          {},
+        ),
+      );
       const test = require('../__output/output.js');
       expect(test.ColorRed).toEqual(dictionary.allProperties[0].value);
     });
-
   });
 });

@@ -11,25 +11,25 @@
  * and limitations under the License.
  */
 
-var helpers    = require('./__helpers');
+var helpers = require('./__helpers');
 var buildFiles = require('../lib/buildFiles');
 var cleanFiles = require('../lib/cleanFiles');
 
 var dictionary = {
   properties: {
-    foo: 'bar'
-  }
+    foo: 'bar',
+  },
 };
 
 var platform = {
   files: [
     {
       destination: '__tests__/__output/test.json',
-      format: function(dictionary) {
-        return JSON.stringify(dictionary.properties)
-      }
-    }
-  ]
+      format: function (dictionary) {
+        return JSON.stringify(dictionary.properties);
+      },
+    },
+  ],
 };
 
 var platformWithBuildPath = {
@@ -37,15 +37,14 @@ var platformWithBuildPath = {
   files: [
     {
       destination: 'test.json',
-      format: function(dictionary) {
-        return JSON.stringify(dictionary.properties)
-      }
-    }
-  ]
+      format: function (dictionary) {
+        return JSON.stringify(dictionary.properties);
+      },
+    },
+  ],
 };
 
 describe('cleanFiles', () => {
-
   beforeEach(() => {
     helpers.clearOutput();
   });
@@ -55,14 +54,14 @@ describe('cleanFiles', () => {
   });
 
   it('should delete without buildPath', () => {
-    buildFiles( dictionary, platform );
-    cleanFiles( dictionary, platform );
+    buildFiles(dictionary, platform);
+    cleanFiles(dictionary, platform);
     expect(helpers.fileDoesNotExist('./__tests__/__output/test.json')).toBeTruthy();
   });
 
   it('should delete with buildPath', () => {
-    buildFiles( dictionary, platformWithBuildPath );
-    cleanFiles( dictionary, platformWithBuildPath );
+    buildFiles(dictionary, platformWithBuildPath);
+    cleanFiles(dictionary, platformWithBuildPath);
     expect(helpers.fileDoesNotExist('./__tests__/__output/test.json')).toBeTruthy();
   });
 });

@@ -18,78 +18,84 @@ const createFormatArgs = require('../../lib/utils/createFormatArgs');
 var _ = require('../../lib/utils/es6_');
 
 var file = {
-  "destination": "__output/",
-  "format": "scss/variables",
-  "name": "foo"
+  destination: '__output/',
+  format: 'scss/variables',
+  name: 'foo',
 };
 
-const propertyName = "color-base-red-400";
-const propertyValue = "#EF5350";
+const propertyName = 'color-base-red-400';
+const propertyValue = '#EF5350';
 
 const properties = {
   color: {
     base: {
       red: {
         400: {
-          "name": propertyName,
-          "value": propertyValue,
-          "original": {
-            "value": propertyValue
+          name: propertyName,
+          value: propertyValue,
+          original: {
+            value: propertyValue,
           },
-          "attributes": {
-            "category": "color",
-            "type": "base",
-            "item": "red",
-            "subitem": "400"
+          attributes: {
+            category: 'color',
+            type: 'base',
+            item: 'red',
+            subitem: '400',
           },
-          "path": [
-            "color",
-            "base",
-            "red",
-            "400"
-          ]
-        }
-      }
-    }
-  }
+          path: ['color', 'base', 'red', '400'],
+        },
+      },
+    },
+  },
 };
 
 var formatter = formats['scss/variables'].bind(file);
-const dictionary = createDictionary({properties});
+const dictionary = createDictionary({ properties });
 
 describe('formats', () => {
   describe('scss/variables', () => {
-
     it('should have a valid scss syntax', () => {
       const result = scss.renderSync({
-        data: formatter(createFormatArgs({
-          dictionary,
+        data: formatter(
+          createFormatArgs({
+            dictionary,
+            file,
+            platform: {},
+          }),
+          {},
           file,
-          platform: {}
-        }), {}, file),
+        ),
       });
       expect(result.css).toBeDefined();
     });
 
     it('should optionally use !default', () => {
       var themeableDictionary = _.cloneDeep(dictionary),
-        formattedScss = formatter(createFormatArgs({
-          dictionary,
+        formattedScss = formatter(
+          createFormatArgs({
+            dictionary,
+            file,
+            platform: {},
+          }),
+          {},
           file,
-          platform: {}
-        }), {}, file),
-        themeableScss = "";
+        ),
+        themeableScss = '';
 
-      expect(formattedScss).not.toMatch("!default");
+      expect(formattedScss).not.toMatch('!default');
 
       themeableDictionary.allTokens[0].themeable = true;
-      themeableScss = formatter(createFormatArgs({
-        dictionary: themeableDictionary,
+      themeableScss = formatter(
+        createFormatArgs({
+          dictionary: themeableDictionary,
+          file,
+          platform: {},
+        }),
+        {},
         file,
-        platform: {}
-      }), {}, file);
+      );
 
-      expect(themeableScss).toMatch("#EF5350 !default;");
+      expect(themeableScss).toMatch('#EF5350 !default;');
     });
   });
 });

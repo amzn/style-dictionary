@@ -13,12 +13,11 @@
 
 var flattenProperties = require('../../lib/utils/flattenProperties');
 const sortBy = (key) => {
-  return (a, b) => (a[key] > b[key]) ? 1 : ((b[key] > a[key]) ? -1 : 0);
+  return (a, b) => (a[key] > b[key] ? 1 : b[key] > a[key] ? -1 : 0);
 };
 
 describe('utils', () => {
   describe('flattenProperties', () => {
-
     it('should return an empty array', () => {
       var ret = flattenProperties({});
       expect(ret).toEqual([]);
@@ -32,18 +31,15 @@ describe('utils', () => {
 
     it('should return leaf node values as an array', () => {
       var properties = {
-        'black': {
-          'value': '#000000'
+        black: {
+          value: '#000000',
         },
-        'white': {
-          'value': '#FFFFFF'
-        }
+        white: {
+          value: '#FFFFFF',
+        },
       };
 
-      var expected_ret = [
-        properties.black,
-        properties.white
-      ];
+      var expected_ret = [properties.black, properties.white];
 
       var sortedExpectedRet = expected_ret.sort(sortBy('value'));
       var ret = flattenProperties(properties);
@@ -53,20 +49,17 @@ describe('utils', () => {
 
     it('should return nested leaf node values as an array', () => {
       var properties = {
-        'color': {
-          'black': {
-            'value': '#000000'
+        color: {
+          black: {
+            value: '#000000',
           },
-          'white': {
-            'value': '#FFFFFF'
-          }
-        }
+          white: {
+            value: '#FFFFFF',
+          },
+        },
       };
 
-      var expected_ret = [
-        properties.color.black,
-        properties.color.white
-      ];
+      var expected_ret = [properties.color.black, properties.color.white];
 
       var sortedExpectedRet = expected_ret.sort(sortBy('value'));
       var ret = flattenProperties(properties);

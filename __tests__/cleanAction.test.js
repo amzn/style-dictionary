@@ -15,27 +15,25 @@ var helpers = require('./__helpers');
 var fs = require('fs-extra');
 var StyleDictionary = require('../index');
 var StyleDictionaryExtended = StyleDictionary.extend({
-  "platforms": {
-    "android": {
-      "actions": ["test"]
-    }
-  }
+  platforms: {
+    android: {
+      actions: ['test'],
+    },
+  },
 });
 
 StyleDictionaryExtended.registerAction({
   name: 'test',
-  do: function() {
-    fs.writeFileSync('./__tests__/__output/action.txt', 'hi')
+  do: function () {
+    fs.writeFileSync('./__tests__/__output/action.txt', 'hi');
   },
-  undo: function() {
-    fs.removeSync('./__tests__/__output/action.txt')
-  }
+  undo: function () {
+    fs.removeSync('./__tests__/__output/action.txt');
+  },
 });
 
 describe('cleanAction', () => {
-
   describe('clean actions', () => {
-
     beforeEach(() => {
       helpers.clearOutput();
     });
@@ -50,5 +48,4 @@ describe('cleanAction', () => {
       expect(helpers.fileDoesNotExist('./__tests__/__output/action.txt')).toBeTruthy();
     });
   });
-
 });

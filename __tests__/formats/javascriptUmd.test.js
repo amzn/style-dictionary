@@ -18,19 +18,19 @@ const createDictionary = require('../../lib/utils/createDictionary');
 const createFormatArgs = require('../../lib/utils/createFormatArgs');
 
 const file = {
-  "destination": "__output/",
-  "format": "javascript/umd",
-  "filter": {
-    "attributes": {
-      "category": "color"
-    }
-  }
+  destination: '__output/',
+  format: 'javascript/umd',
+  filter: {
+    attributes: {
+      category: 'color',
+    },
+  },
 };
 
 const properties = {
-  "color": {
-    "red": {"value": "#FF0000"}
-  }
+  color: {
+    red: { value: '#FF0000' },
+  },
 };
 
 const formatter = formats['javascript/umd'].bind(file);
@@ -38,7 +38,6 @@ const dictionary = createDictionary({ properties });
 
 describe('formats', () => {
   describe('javascript/umd', () => {
-
     beforeEach(() => {
       helpers.clearOutput();
     });
@@ -48,14 +47,20 @@ describe('formats', () => {
     });
 
     it('should be a valid JS file', () => {
-      fs.writeFileSync('./__tests__/__output/umd.js', formatter(createFormatArgs({
-        dictionary,
-        file,
-        platform: {}
-      }), {}, file) );
+      fs.writeFileSync(
+        './__tests__/__output/umd.js',
+        formatter(
+          createFormatArgs({
+            dictionary,
+            file,
+            platform: {},
+          }),
+          {},
+          file,
+        ),
+      );
       const test = require('../__output/umd.js');
       expect(test.color.red.value).toEqual(dictionary.properties.color.red.value);
     });
-
   });
 });

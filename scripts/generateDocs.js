@@ -10,94 +10,87 @@ EDIT ${source} OR JSDOC COMMENT INSTEAD!
 ${input}`;
 }
 
-
 const DOCS_PATH = './docs/api.md';
 const docs = jsdoc2md.renderSync({
-  files: ['index.js','lib/**/*.js'],
+  files: ['index.js', 'lib/**/*.js'],
   template: fs.readFileSync('scripts/handlebars/templates/api.hbs').toString(),
   // 'no-gfm': true,
   separators: true,
-  partial: ['scripts/handlebars/header.hbs','scripts/handlebars/sig-name.hbs', 'scripts/handlebars/body.hbs'],
-  configure: '.jsdoc.json'
+  partial: [
+    'scripts/handlebars/header.hbs',
+    'scripts/handlebars/sig-name.hbs',
+    'scripts/handlebars/body.hbs',
+  ],
+  configure: '.jsdoc.json',
 });
 
-fs.ensureFileSync( DOCS_PATH );
-fs.writeFileSync(
-  DOCS_PATH,
-  prependWarning(docs, 'scripts/handlebars/templates/api.hbs')
-);
+fs.ensureFileSync(DOCS_PATH);
+fs.writeFileSync(DOCS_PATH, prependWarning(docs, 'scripts/handlebars/templates/api.hbs'));
 execSync(`git add ${DOCS_PATH}`);
 console.log(DOCS_PATH + ' generated.');
 
-
-const TRANSFORMS_PATH = './docs/transforms.md'
+const TRANSFORMS_PATH = './docs/transforms.md';
 const transforms = jsdoc2md.renderSync({
   files: ['lib/common/transforms.js'],
   template: fs.readFileSync('scripts/handlebars/templates/transforms.hbs').toString(),
   'no-gfm': true,
   separators: true,
-  partial: ['scripts/handlebars/header.hbs','scripts/handlebars/body.hbs'],
-  configure: '.jsdoc.json'
+  partial: ['scripts/handlebars/header.hbs', 'scripts/handlebars/body.hbs'],
+  configure: '.jsdoc.json',
 });
 
-fs.ensureFileSync( TRANSFORMS_PATH );
+fs.ensureFileSync(TRANSFORMS_PATH);
 fs.writeFileSync(
   TRANSFORMS_PATH,
-  prependWarning(transforms, 'scripts/handlebars/templates/api.hbs')
+  prependWarning(transforms, 'scripts/handlebars/templates/api.hbs'),
 );
 execSync(`git add ${TRANSFORMS_PATH}`);
 console.log(TRANSFORMS_PATH + ' generated.');
 
-const TRANSFORM_GROUPS_PATH = './docs/transform_groups.md'
+const TRANSFORM_GROUPS_PATH = './docs/transform_groups.md';
 const transform_groups = jsdoc2md.renderSync({
   files: ['lib/common/transformGroups.js'],
   template: fs.readFileSync('scripts/handlebars/templates/transform_groups.hbs').toString(),
   'no-gfm': true,
   separators: true,
-  partial: ['scripts/handlebars/header.hbs','scripts/handlebars/body.hbs'],
-  configure: '.jsdoc.json'
+  partial: ['scripts/handlebars/header.hbs', 'scripts/handlebars/body.hbs'],
+  configure: '.jsdoc.json',
 });
 
-fs.ensureFileSync( TRANSFORM_GROUPS_PATH );
+fs.ensureFileSync(TRANSFORM_GROUPS_PATH);
 fs.writeFileSync(
   TRANSFORM_GROUPS_PATH,
-  prependWarning(transform_groups, 'scripts/handlebars/templates/api.hbs')
+  prependWarning(transform_groups, 'scripts/handlebars/templates/api.hbs'),
 );
 execSync(`git add ${TRANSFORM_GROUPS_PATH}`);
 console.log(TRANSFORM_GROUPS_PATH + ' generated.');
 
-const ACTIONS_PATH = './docs/actions.md'
+const ACTIONS_PATH = './docs/actions.md';
 const actions = jsdoc2md.renderSync({
   files: ['lib/common/actions.js'],
   template: fs.readFileSync('scripts/handlebars/templates/actions.hbs').toString(),
   'no-gfm': true,
   separators: true,
-  partial: ['scripts/handlebars/header.hbs','scripts/handlebars/body.hbs'],
-  configure: '.jsdoc.json'
+  partial: ['scripts/handlebars/header.hbs', 'scripts/handlebars/body.hbs'],
+  configure: '.jsdoc.json',
 });
 
-fs.ensureFileSync( ACTIONS_PATH );
-fs.writeFileSync(
-  ACTIONS_PATH,
-  prependWarning(actions, 'scripts/handlebars/templates/api.hbs')
-);
+fs.ensureFileSync(ACTIONS_PATH);
+fs.writeFileSync(ACTIONS_PATH, prependWarning(actions, 'scripts/handlebars/templates/api.hbs'));
 execSync(`git add ${ACTIONS_PATH}`);
 console.log(ACTIONS_PATH + ' generated.');
 
-const FORMATS_PATH = './docs/formats.md'
+const FORMATS_PATH = './docs/formats.md';
 const formats = jsdoc2md.renderSync({
   files: ['lib/common/formats.js', 'lib/register/format.js', 'lib/common/formatHelpers/*.js'],
   template: fs.readFileSync('scripts/handlebars/templates/formats.hbs').toString(),
   'no-gfm': true,
   separators: true,
-  partial: ['scripts/handlebars/header.hbs','scripts/handlebars/body.hbs'],
-  configure: '.jsdoc.json'
+  partial: ['scripts/handlebars/header.hbs', 'scripts/handlebars/body.hbs'],
+  configure: '.jsdoc.json',
 });
 
-fs.ensureFileSync( FORMATS_PATH );
-fs.writeFileSync(
-  FORMATS_PATH,
-  prependWarning(formats, 'scripts/handlebars/templates/api.hbs')
-);
+fs.ensureFileSync(FORMATS_PATH);
+fs.writeFileSync(FORMATS_PATH, prependWarning(formats, 'scripts/handlebars/templates/api.hbs'));
 execSync(`git add ${FORMATS_PATH}`);
 console.log(FORMATS_PATH + ' generated.');

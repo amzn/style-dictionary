@@ -13,7 +13,7 @@
 
 const fs = require('fs-extra');
 const StyleDictionary = require('../index');
-const {buildPath} = require('./_constants');
+const { buildPath } = require('./_constants');
 
 describe('integration', () => {
   describe('swift', () => {
@@ -23,36 +23,42 @@ describe('integration', () => {
         flutter: {
           transformGroup: `ios-swift`,
           buildPath,
-          files: [{
-            destination: "style_dictionary.swift",
-            format: "ios-swift/class.swift",
-            className: "StyleDictionary"
-          },{
-            destination: "style_dictionary_with_references.swift",
-            format: "ios-swift/class.swift",
-            className: "StyleDictionary",
-            options: {
-              outputReferences: true
-            }
-          }]
+          files: [
+            {
+              destination: 'style_dictionary.swift',
+              format: 'ios-swift/class.swift',
+              className: 'StyleDictionary',
+            },
+            {
+              destination: 'style_dictionary_with_references.swift',
+              format: 'ios-swift/class.swift',
+              className: 'StyleDictionary',
+              options: {
+                outputReferences: true,
+              },
+            },
+          ],
         },
-      }
+      },
     }).buildAllPlatforms();
 
     describe(`ios-swift/class.swift`, () => {
-      const output = fs.readFileSync(`${buildPath}style_dictionary.swift`, {encoding:`UTF-8`});
+      const output = fs.readFileSync(`${buildPath}style_dictionary.swift`, {
+        encoding: `UTF-8`,
+      });
 
       it(`should match snapshot`, () => {
         expect(output).toMatchSnapshot();
       });
 
       describe(`with references`, () => {
-        const output = fs.readFileSync(`${buildPath}style_dictionary_with_references.swift`, {encoding:`UTF-8`});
+        const output = fs.readFileSync(`${buildPath}style_dictionary_with_references.swift`, {
+          encoding: `UTF-8`,
+        });
 
         it(`should match snapshot`, () => {
           expect(output).toMatchSnapshot();
         });
-
       });
 
       // describe(`separate`, () => {

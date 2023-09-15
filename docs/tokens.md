@@ -31,13 +31,13 @@ Any node in the object that has a `value` attribute on it is a design token. In 
 
 For any design tokens you wish to output, the "value" attribute is required. This provides the data that will be used throughout the build process (and ultimately used for styling in your deliverables). You can optionally include any custom attributes you would like (e.g. "comment" with a string or "metadata" as an object with its own attributes).
 
-| Attribute | Type | Description |
-| :--- | :--- | :--- |
-| value | Any | The value of the design token. This can be any type of data, a hex string, an integer, a file path to a file, even an object or array.
-| comment | String (optional) | The comment attribute will show up in a code comment in output files if the format supports it.
-| themeable | Boolean (optional) | This is used in formats that support override-able or themable values like the `!default` flag in Sass.
-| name | String (optional) | Usually the name for a design token is generated with a [name transform](transforms.md#transform-types), but you can write your own if you choose. By default Style Dictionary will add a default name which is the key of the design token object.
-| attributes | Object (optional) | Extra information about the design token you want to include. [Attribute transforms](transforms.md#transform-types) will modify this object so be careful
+| Attribute  | Type               | Description                                                                                                                                                                                                                                         |
+| :--------- | :----------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| value      | Any                | The value of the design token. This can be any type of data, a hex string, an integer, a file path to a file, even an object or array.                                                                                                              |
+| comment    | String (optional)  | The comment attribute will show up in a code comment in output files if the format supports it.                                                                                                                                                     |
+| themeable  | Boolean (optional) | This is used in formats that support override-able or themable values like the `!default` flag in Sass.                                                                                                                                             |
+| name       | String (optional)  | Usually the name for a design token is generated with a [name transform](transforms.md#transform-types), but you can write your own if you choose. By default Style Dictionary will add a default name which is the key of the design token object. |
+| attributes | Object (optional)  | Extra information about the design token you want to include. [Attribute transforms](transforms.md#transform-types) will modify this object so be careful                                                                                           |
 
 You can add any attributes or data you want in a design token and Style Dictionary will pass it along to transforms and formats. For example, you could add a `deprecated` flag like in [this example](https://github.com/amzn/style-dictionary/tree/main/examples/advanced/tokens-deprecation). Other things you can do is add documentation information about each design token or information about color contrast.
 
@@ -45,19 +45,19 @@ You can add any attributes or data you want in a design token and Style Dictiona
 
 Style Dictionary adds some default metadata on each design token that helps with transforms and formats. Here is what Style Dictionary adds onto each design token:
 
-| Attribute | Type | Description |
-| :--- | :--- | :--- |
-| name | String | A default name of the design token that is set to the key of the design token. This is only added if you do not provide one.
-| path | Array[String] | The object path of the design token. `color: { background: { primary: { value: "#fff" } } }` will have a path of `['color','background', 'primary']`.
-| original | Object | A pristine copy of the original design token object. This is to make sure transforms and formats always have the unmodified version of the original design token.
-| filePath | String | The file path of the file the token is defined in. This file path is derived from the `source` or `include` file path arrays defined in the [configuration](config.md).
-| isSource | Boolean | If the token is from a file defined in the `source` array as opposed to `include` in the [configuration](config.md).
+| Attribute | Type          | Description                                                                                                                                                             |
+| :-------- | :------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| name      | String        | A default name of the design token that is set to the key of the design token. This is only added if you do not provide one.                                            |
+| path      | Array[String] | The object path of the design token. `color: { background: { primary: { value: "#fff" } } }` will have a path of `['color','background', 'primary']`.                   |
+| original  | Object        | A pristine copy of the original design token object. This is to make sure transforms and formats always have the unmodified version of the original design token.       |
+| filePath  | String        | The file path of the file the token is defined in. This file path is derived from the `source` or `include` file path arrays defined in the [configuration](config.md). |
+| isSource  | Boolean       | If the token is from a file defined in the `source` array as opposed to `include` in the [configuration](config.md).                                                    |
 
 Given this configuration:
 
 ```json5
 {
-  "source": ["tokens/**/*.json"]
+  source: ['tokens/**/*.json'],
   //...
 }
 ```
@@ -67,11 +67,11 @@ This design token:
 ```json5
 // tokens/color/background.json
 {
-  "color": {
-    "background": {
-      "primary": { "value": "#fff" }
-    }
-  }
+  color: {
+    background: {
+      primary: { value: '#fff' },
+    },
+  },
 }
 ```
 
@@ -79,26 +79,24 @@ becomes:
 
 ```json5
 {
-  "color": {
-    "background": {
-      "primary": {
-        "name": "primary",
-        "value": "#fff",
-        "path": ["color","background","primary"],
-        "original": {
-          "value": "#fff"
+  color: {
+    background: {
+      primary: {
+        name: 'primary',
+        value: '#fff',
+        path: ['color', 'background', 'primary'],
+        original: {
+          value: '#fff',
         },
-        "filePath": "tokens/color/background.json",
-        "isSource": true
-      }
-    }
-  }
+        filePath: 'tokens/color/background.json',
+        isSource: true,
+      },
+    },
+  },
 }
 ```
 
-
-----
-
+---
 
 ## Referencing / Aliasing
 
@@ -108,10 +106,10 @@ You can reference (alias) existing values by using the dot-notation object path 
 {
   "size": {
     "font": {
-      "small" : { "value": "10" },
+      "small": { "value": "10" },
       "medium": { "value": "16" },
-      "large" : { "value": "24" },
-      "base"  : { "value": "{size.font.medium.value}" }
+      "large": { "value": "24" },
+      "base": { "value": "{size.font.medium.value}" }
     }
   }
 }
@@ -119,21 +117,19 @@ You can reference (alias) existing values by using the dot-notation object path 
 
 See more in the advanced [referencing-aliasing example](https://github.com/amzn/style-dictionary/tree/main/examples/advanced/referencing_aliasing).
 
-
-----
-
+---
 
 ## Defining design tokens
 
 Design token files can included inline in the configuration, or be written in separate files. Style Dictionary supports these languages for design token files:
 
-* JSON
-* [JSONC](https://code.visualstudio.com/docs/languages/json#_json-with-comments)
-* [JSON5](https://json5.org)
-* CommonJS modules
-* Potentially any language with [custom parsers](#customfileparsers)
+- JSON
+- [JSONC](https://code.visualstudio.com/docs/languages/json#_json-with-comments)
+- [JSON5](https://json5.org)
+- CommonJS modules
+- Potentially any language with [custom parsers](#customfileparsers)
 
-Tokens can be defined *inline* in the Style Dictionary configuration, or in files. You can add a `tokens` object to your Style Dictionary configuration like this:
+Tokens can be defined _inline_ in the Style Dictionary configuration, or in files. You can add a `tokens` object to your Style Dictionary configuration like this:
 
 ```javascript
 // config.js
@@ -141,14 +137,14 @@ module.exports = {
   tokens: {
     color: {
       background: {
-        primary: { value: "#fff" }
-      }
-    }
+        primary: { value: '#fff' },
+      },
+    },
   },
   platforms: {
     //...
-  }
-}
+  },
+};
 ```
 
 Generally you will have too many design tokens to include them all inline, so you can separate them out into their own files. You can tell Style Dictionary where to find your design token files with the `source` and `include` attributes in the configuration like this:
@@ -157,15 +153,15 @@ Generally you will have too many design tokens to include them all inline, so yo
 module.exports = {
   include: [
     // you can list singular files:
-    `node_modules/my-other-style-dictionary/tokens.json`
+    `node_modules/my-other-style-dictionary/tokens.json`,
   ],
   source: [
     // or use file path [globs](https://www.npmjs.com/package/glob)
     // this says grab all files in the tokens directory with a .json extension
-    `tokens/**/*.json`
-  ]
+    `tokens/**/*.json`,
+  ],
   // ...
-}
+};
 ```
 
 **You can organize your design token files in any way as long as you can tell Style Dictionary where to find them.** The directory and file structure of design token files does not have any effect on the object structure of the tokens because Style Dictionary does a deep merge on all design token files. Separating tokens into files and folders is to make the authoring experience cleaner and more flexible.
@@ -176,34 +172,31 @@ Style Dictionary takes all the files it finds in the include and source arrays a
 
 ```javascript
 module.exports = {
-  source: [
-    `tokens.json`,
-    `tokens2.json`
-  ]
-}
+  source: [`tokens.json`, `tokens2.json`],
+};
 ```
 
 ```json5
 // tokens.json
 {
-  "color": {
-    "background": {
-      "primary": { "value": "#fff" },
-      "secondary": { "value": "#ccc" }
-    }
-  }
+  color: {
+    background: {
+      primary: { value: '#fff' },
+      secondary: { value: '#ccc' },
+    },
+  },
 }
 ```
 
 ```json5
 // tokens2.json
 {
-  "color": {
-    "background": {
-      "primary": { "value": "#eee" },
-      "tertiary": { "value": "#999" }
-    }
-  }
+  color: {
+    background: {
+      primary: { value: '#eee' },
+      tertiary: { value: '#999' },
+    },
+  },
 }
 ```
 
@@ -211,13 +204,13 @@ The resulting merged dictionary would be:
 
 ```json5
 {
-  "color": {
-    "background": {
-      "primary": { "value": "#eee" },
-      "secondary": { "value": "#ccc" },
-      "tertiary": { "value": "#999" }
-    }
-  }
+  color: {
+    background: {
+      primary: { value: '#eee' },
+      secondary: { value: '#ccc' },
+      tertiary: { value: '#999' },
+    },
+  },
 }
 ```
 
@@ -231,10 +224,10 @@ One way to write your design token files is to write them in Javascript rather t
 module.exports = {
   color: {
     base: {
-      red: { value: '#ff0000' }
-    }
-  }
-}
+      red: { value: '#ff0000' },
+    },
+  },
+};
 ```
 
 is equivalent to this JSON file:
@@ -255,15 +248,15 @@ You might prefer authoring your design token files in Javascript because it can 
 const Color = require('tinycolor2');
 
 const baseColors = {
-  red:    {h: 4,   s: 62, v: 90},
-  purple: {h: 262, s: 47, v: 65},
-  blue:   {h: 206, s: 70, v: 85},
-  teal:   {h: 178, s: 75, v: 80},
-  green:  {h: 119, s: 47, v: 73},
-  yellow: {h: 45,  s: 70, v: 95},
-  orange: {h: 28,  s: 76, v: 98},
-  grey:   {h: 240, s: 14, v: 35},
-}
+  red: { h: 4, s: 62, v: 90 },
+  purple: { h: 262, s: 47, v: 65 },
+  blue: { h: 206, s: 70, v: 85 },
+  teal: { h: 178, s: 75, v: 80 },
+  green: { h: 119, s: 47, v: 73 },
+  yellow: { h: 45, s: 70, v: 95 },
+  orange: { h: 28, s: 76, v: 98 },
+  grey: { h: 240, s: 14, v: 35 },
+};
 
 // Use a reduce function to take the array of keys in baseColor
 // and map them to an object with the same keys.
@@ -271,15 +264,15 @@ module.exports = Object.keys(baseColors).reduce((ret, color) => {
   return Object.assign({}, ret, {
     [color]: {
       // generate the shades/tints for each color
-      "20":  { value: Color(baseColors[color]).lighten(30).toString()},
-      "40":  { value: Color(baseColors[color]).lighten(25).toString()},
-      "60":  { value: Color(baseColors[color]).lighten(20).toString()},
-      "80":  { value: Color(baseColors[color]).lighten(10).toString()},
-      "100": { value: baseColors[color]},
-      "120": { value: Color(baseColors[color]).darken(10).toString()},
-      "140": { value: Color(baseColors[color]).darken(20).toString()}
-    }
-  })
+      20: { value: Color(baseColors[color]).lighten(30).toString() },
+      40: { value: Color(baseColors[color]).lighten(25).toString() },
+      60: { value: Color(baseColors[color]).lighten(20).toString() },
+      80: { value: Color(baseColors[color]).lighten(10).toString() },
+      100: { value: baseColors[color] },
+      120: { value: Color(baseColors[color]).darken(10).toString() },
+      140: { value: Color(baseColors[color]).darken(20).toString() },
+    },
+  });
 }, {});
 ```
 
@@ -294,9 +287,9 @@ const StyleDictionary = require('style-dictionary');
 
 StyleDictionary.registerParser({
   pattern: /.json$/,
-  parse: ({contents, filePath}) => {
+  parse: ({ contents, filePath }) => {
     return JSON.parse(contents);
-  }
+  },
 });
 ```
 
@@ -304,9 +297,7 @@ StyleDictionary.registerParser({
 
 [yaml-tokens example](https://github.com/amzn/style-dictionary/tree/main/examples/advanced/yaml-tokens)
 
-
-----
-
+---
 
 ## Design token structure
 
@@ -333,7 +324,7 @@ Now you can structure your tokens in a nested object like this:
 {
   "size": {
     "font": {
-      "base":  { "value": "16" },
+      "base": { "value": "16" },
       "large": { "value": "20" }
     }
   }
@@ -351,50 +342,59 @@ Also, the CTI structure provides a good mechanism to target transforms for speci
 Here are the categories and types the built-in transforms and formats use:
 
 #### Category: color
+
 Everything under this category is a color. You can further organize by background, font, border, etc. if you want. The built-ins only look for a category of `color`
-* [`color/rgb`](transforms.md#colorrgb)
-* [`color/hsl`](transforms.md#colorhsl)
-* [`color/hsl-4`](transforms.md#colorhsl-4)
-* [`color/hex`](transforms.md#colorhex)
-* [`color/hex8`](transforms.md#colorhex8)
-* [`color/hex8android`](transforms.md#colorhex8android)
-* [`color/UIColor`](transforms.md#coloruicolor)
-* [`color/UIColorSwift`](transforms.md#coloruicolorswift)
-* [`color/ColorSwiftUI`](transforms.md#colorcolorswiftui)
-* [`color/css`](transforms.md#colorcss)
-* [`color/sketch`](transforms.md#colorsketch)
-* [`color/hex8flutter`](transforms.md#colorhex8flutter)
+
+- [`color/rgb`](transforms.md#colorrgb)
+- [`color/hsl`](transforms.md#colorhsl)
+- [`color/hsl-4`](transforms.md#colorhsl-4)
+- [`color/hex`](transforms.md#colorhex)
+- [`color/hex8`](transforms.md#colorhex8)
+- [`color/hex8android`](transforms.md#colorhex8android)
+- [`color/UIColor`](transforms.md#coloruicolor)
+- [`color/UIColorSwift`](transforms.md#coloruicolorswift)
+- [`color/ColorSwiftUI`](transforms.md#colorcolorswiftui)
+- [`color/css`](transforms.md#colorcss)
+- [`color/sketch`](transforms.md#colorsketch)
+- [`color/hex8flutter`](transforms.md#colorhex8flutter)
 
 #### Category: size
+
 Most platforms any type of size is treated the same. On Android it is common to use SP for font sizes and DP for paddings and dimensions.
-* [`size/sp`](transforms.md#sizesp)
-* [`size/dp`](transforms.md#sizedp)
-* [`size/object`](transforms.md#sizeobject)
-* [`size/remToSp`](transforms.md#sizeremtosp)
-* [`size/remToDp`](transforms.md#sizeremtodp)
-* [`size/px`](transforms.md#sizepx)
-* [`size/rem`](transforms.md#sizerem)
-* [`size/remToPt`](transforms.md#sizeremtopt)
-* [`size/swift/remToCGFloat`](transforms.md#sizeswiftremtocgfloat)
-* [`size/remToPx`](transforms.md#sizeremtopx)
-* [`size/pxToRem`](transforms.md#sizepxtorem)
-* [`size/flutter/remToDouble`](transforms.md#sizeflutterremtodouble)
+
+- [`size/sp`](transforms.md#sizesp)
+- [`size/dp`](transforms.md#sizedp)
+- [`size/object`](transforms.md#sizeobject)
+- [`size/remToSp`](transforms.md#sizeremtosp)
+- [`size/remToDp`](transforms.md#sizeremtodp)
+- [`size/px`](transforms.md#sizepx)
+- [`size/rem`](transforms.md#sizerem)
+- [`size/remToPt`](transforms.md#sizeremtopt)
+- [`size/swift/remToCGFloat`](transforms.md#sizeswiftremtocgfloat)
+- [`size/remToPx`](transforms.md#sizeremtopx)
+- [`size/pxToRem`](transforms.md#sizepxtorem)
+- [`size/flutter/remToDouble`](transforms.md#sizeflutterremtodouble)
 
 #### Category: time
-* [`time/seconds`](transforms.md#timeseconds)
+
+- [`time/seconds`](transforms.md#timeseconds)
 
 #### Category: asset
+
 These should be file paths used for images and font files
-* [`asset/base64`](transforms.md#assetbase64)
-* [`asset/path`](transforms.md#assetpath)
-* [`asset/objC/literal`](transforms.md#assetobjcliteral)
-* [`asset/swift/literal`](transforms.md#assetswiftliteral)
-* [`asset/flutter/literal`](transforms.md#assetflutterliteral)
+
+- [`asset/base64`](transforms.md#assetbase64)
+- [`asset/path`](transforms.md#assetpath)
+- [`asset/objC/literal`](transforms.md#assetobjcliteral)
+- [`asset/swift/literal`](transforms.md#assetswiftliteral)
+- [`asset/flutter/literal`](transforms.md#assetflutterliteral)
 
 #### Category: content
+
 These should be strings
-* [`content/icon`](transforms.md#contenticon)
-* [`content/quote`](transforms.md#contentquote)
-* [`content/objC/literal`](transforms.md#contentobjcliteral)
-* [`content/swift/literal`](transforms.md#contentswiftliteral)
-* [`content/flutter/literal`](transforms.md#contentflutterliteral)
+
+- [`content/icon`](transforms.md#contenticon)
+- [`content/quote`](transforms.md#contentquote)
+- [`content/objC/literal`](transforms.md#contentobjcliteral)
+- [`content/swift/literal`](transforms.md#contentswiftliteral)
+- [`content/flutter/literal`](transforms.md#contentflutterliteral)

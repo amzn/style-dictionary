@@ -31,23 +31,23 @@ describe('usesReference()', () => {
   });
 
   it(`returns true if an object uses a reference`, () => {
-    expect(usesReference({foo: '{bar}'})).toBe(true);
+    expect(usesReference({ foo: '{bar}' })).toBe(true);
   });
 
   it(`returns false if an object doesn't have a reference`, () => {
-    expect(usesReference({foo: 'bar'})).toBe(false);
+    expect(usesReference({ foo: 'bar' })).toBe(false);
   });
 
   it(`returns true if a nested object has a reference`, () => {
-    expect(usesReference({foo: {bar: '{bar}'}})).toBe(true);
+    expect(usesReference({ foo: { bar: '{bar}' } })).toBe(true);
   });
 
   it(`returns true if an array uses a reference`, () => {
-    expect(usesReference(["foo", "{bar}"])).toBe(true);
+    expect(usesReference(['foo', '{bar}'])).toBe(true);
   });
 
   it(`returns false if an array doesn't use a reference`, () => {
-    expect(usesReference(["foo", "bar"])).toBe(false);
+    expect(usesReference(['foo', 'bar'])).toBe(false);
   });
 
   describe(`with custom options`, () => {
@@ -55,7 +55,7 @@ describe('usesReference()', () => {
       const customOpts = {
         opening_character: '(',
         closing_character: ')',
-        separator: '|'
+        separator: '|',
       };
 
       expect(usesReference('(foo|bar)', customOpts)).toBe(true);

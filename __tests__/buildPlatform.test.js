@@ -17,21 +17,18 @@ var StyleDictionary = require('../index');
 var StyleDictionaryExtended = StyleDictionary.extend(config);
 
 describe('buildPlatform', () => {
-
   beforeEach(() => {
     helpers.clearOutput();
   });
 
-  it('should throw if passed a platform that doesn\'t exist', () => {
-    expect(
-      StyleDictionaryExtended.buildPlatform.bind(test, 'foobar')
-    ).toThrow('Platform "foobar" does not exist');
+  it("should throw if passed a platform that doesn't exist", () => {
+    expect(StyleDictionaryExtended.buildPlatform.bind(test, 'foobar')).toThrow(
+      'Platform "foobar" does not exist',
+    );
 
-    expect(
-      function() {
-        StyleDictionaryExtended.buildPlatform('web');
-      }
-    ).not.toThrow();
+    expect(function () {
+      StyleDictionaryExtended.buildPlatform('web');
+    }).not.toThrow();
   });
 
   it('should build web platform files', () => {
@@ -55,8 +52,12 @@ describe('buildPlatform', () => {
 
   it('should do android stuff', () => {
     StyleDictionaryExtended.buildPlatform('android');
-    expect(helpers.fileExists('./__tests__/__output/android/main/res/drawable-hdpi/flag_us.png')).toBeTruthy();
-    expect(helpers.fileExists('./__tests__/__output/android/main/res/drawable-xhdpi/flag_us.png')).toBeTruthy();
+    expect(
+      helpers.fileExists('./__tests__/__output/android/main/res/drawable-hdpi/flag_us.png'),
+    ).toBeTruthy();
+    expect(
+      helpers.fileExists('./__tests__/__output/android/main/res/drawable-xhdpi/flag_us.png'),
+    ).toBeTruthy();
     expect(helpers.fileExists('./__tests__/__output/android/colors.xml')).toBeTruthy();
     expect(helpers.fileExists('./__tests__/__output/android/dimens.xml')).toBeTruthy();
     expect(helpers.fileExists('./__tests__/__output/android/font_dimen.xml')).toBeTruthy();
@@ -73,16 +74,16 @@ describe('buildPlatform', () => {
       source: ['__tests__/__properties/nonString.json'],
       platforms: {
         test: {
-          buildPath: "__tests__/__output/",
-          transforms: ["attribute/cti","size/px","color/hex"],
+          buildPath: '__tests__/__output/',
+          transforms: ['attribute/cti', 'size/px', 'color/hex'],
           files: [
             {
-              "destination": "output.json",
-              "format": "json"
-            }
-          ]
-        }
-      }
+              destination: 'output.json',
+              format: 'json',
+            },
+          ],
+        },
+      },
     });
     StyleDictionaryExtended.buildPlatform('test');
     expect(helpers.fileExists('./__tests__/__output/output.json')).toBeTruthy();
@@ -91,9 +92,9 @@ describe('buildPlatform', () => {
 
     // Make sure transforms run on non-string values as they normally would
     expect(output).toHaveProperty('color.red.value', output.color.otherRed.value);
-    expect(output).toHaveProperty('color.red.value', "#ff0000");
+    expect(output).toHaveProperty('color.red.value', '#ff0000');
     expect(output).toHaveProperty('size.large.value', output.size.otherLarge.value);
-    expect(output).toHaveProperty('size.large.value', "20px");
+    expect(output).toHaveProperty('size.large.value', '20px');
 
     expect(output.number.test.value).toEqual(output.number.otherTest.value);
     expect(typeof output.number.otherTest.value).toBe('number');
@@ -108,16 +109,16 @@ describe('buildPlatform', () => {
       source: ['__tests__/__properties/nonPropertyNode.json'],
       platforms: {
         test: {
-          buildPath: "__tests__/__output/",
-          transformGroup: "scss",
+          buildPath: '__tests__/__output/',
+          transformGroup: 'scss',
           files: [
             {
-              "destination": "output.json",
-              "format": "json"
-            }
-          ]
-        }
-      }
+              destination: 'output.json',
+              format: 'json',
+            },
+          ],
+        },
+      },
     });
     StyleDictionaryExtended.buildPlatform('test');
     expect(helpers.fileExists('./__tests__/__output/output.json')).toBeTruthy();
@@ -133,16 +134,16 @@ describe('buildPlatform', () => {
       source: ['__tests__/__properties/comment.json'],
       platforms: {
         test: {
-          buildPath: "__tests__/__output/",
-          transformGroup: "scss",
+          buildPath: '__tests__/__output/',
+          transformGroup: 'scss',
           files: [
             {
-              "destination": "output.json",
-              "format": "json"
-            }
-          ]
-        }
-      }
+              destination: 'output.json',
+              format: 'json',
+            },
+          ],
+        },
+      },
     });
     StyleDictionaryExtended.buildPlatform('test');
     expect(helpers.fileExists('./__tests__/__output/output.json')).toBeTruthy();
@@ -151,18 +152,20 @@ describe('buildPlatform', () => {
     expect(output.size.large.comment).toEqual(input.size.large.comment);
   });
 
-  it('should throw an error if given a transformGroup that doesn\'t exist', () => {
+  it("should throw an error if given a transformGroup that doesn't exist", () => {
     var StyleDictionaryExtended = StyleDictionary.extend({
       source: ['__properties/**/*.json'],
       platforms: {
         foo: {
           transformGroup: 'bar',
-          files: [{
-            destination: '__tests__/__output/test.css',
-            format: 'css/variables'
-          }]
-        }
-      }
+          files: [
+            {
+              destination: '__tests__/__output/test.css',
+              format: 'css/variables',
+            },
+          ],
+        },
+      },
     });
 
     let err = `
@@ -170,9 +173,6 @@ Unknown transformGroup "bar" found in platform "foo":
 "bar" does not match the name of a registered transformGroup.
 `;
 
-    expect(
-      StyleDictionaryExtended.buildPlatform.bind(StyleDictionaryExtended, 'foo')
-    ).toThrow(err);
+    expect(StyleDictionaryExtended.buildPlatform.bind(StyleDictionaryExtended, 'foo')).toThrow(err);
   });
-
 });

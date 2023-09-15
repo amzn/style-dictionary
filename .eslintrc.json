@@ -1,6 +1,6 @@
 {
   "parserOptions": {
-    "ecmaVersion": 6
+    "ecmaVersion": "latest"
   },
   "plugins": ["jest"],
   "env": {
@@ -12,10 +12,7 @@
     "Buffer": true,
     "escape": true
   },
-  "extends": [
-    "eslint:recommended",
-    "plugin:jest/recommended"
-  ],
+  "extends": ["eslint:recommended", "plugin:jest/recommended"],
   "rules": {
     "no-console": 0,
     "no-unused-vars": 1,

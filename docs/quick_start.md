@@ -2,7 +2,7 @@
 
 ## Installation
 
-*Note that you must have [node (and npm) installed](https://www.npmjs.com/get-npm) before you can follow this guide.*
+_Note that you must have [node (and npm) installed](https://www.npmjs.com/get-npm) before you can follow this guide._
 
 If you want to use the CLI, you can install it globally via npm:
 
@@ -62,6 +62,7 @@ ios-swift-separate-enums
 ```
 
 Pat yourself on the back, you built your first style dictionary! Take a look at what you built. This should have created a build directory and it should look like this:
+
 ```
 ├── README.md
 ├── config.json
@@ -94,6 +95,7 @@ Pat yourself on the back, you built your first style dictionary! Take a look at 
 If you open `config.json` you will see there are 3 platforms defined: scss, android, ios. Each platform has a transformGroup, buildPath, and files defined. The buildPath and files of the platform should match up to the files what were built. Those files should look like these:
 
 **Android**
+
 ```xml
 <!-- font_dimens.xml -->
 <resources>
@@ -117,6 +119,7 @@ If you open `config.json` you will see there are 3 platforms defined: scss, andr
 ```
 
 **Compose**
+
 ```kotlin
 object StyleDictionaryColor {
   val colorBaseGrayDark = Color(0xff111111)
@@ -142,6 +145,7 @@ object StyleDictionarySize {
 ```
 
 **SCSS**
+
 ```scss
 $color-base-gray-light: #cccccc;
 $color-base-gray-medium: #999999;
@@ -158,6 +162,7 @@ $size-font-base: 1rem;
 ```
 
 **iOS**
+
 ```objectivec
 #import "StyleDictionaryColor.h"
 
@@ -191,17 +196,18 @@ $size-font-base: 1rem;
 ```
 
 Pretty nifty! This shows a few things happening:
+
 1. The build system does a deep merge of all the design token files defined in the `source` attribute of `config.json`. This allows you to split up the design token files however you want. There are 2 JSON files with `color` as the top level key, but they get merged properly.
 1. The build system resolves references to other design tokens. `{size.font.medium.value}` is resolved properly.
 1. The build system handles references to design token values in other files as well (as you can see in `tokens/color/font.json`).
 1. Values are transformed specifically for each platform.
-
 
 ## Making a change
 
 Now let's make a change and see how that affects things. Open up `tokens/color/base.json` and change `"#111111"` to `"#000000"`. After you make that change, save the file and re-run the build command `style-dictionary build`. Open up the build files and take a look. Now:
 
 **Android**
+
 ```xml
 <!-- colors.xml -->
 <resources>
@@ -215,6 +221,7 @@ Now let's make a change and see how that affects things. Open up `tokens/color/b
   <color name="color_font_tertiary">#ffcccccc</color>
 </resources>
 ```
+
 ```kotlin
 object StyleDictionaryColor {
   val colorBaseGrayDark = Color(0xff000000)
@@ -227,6 +234,7 @@ object StyleDictionaryColor {
   val colorFontTertiary = Color(0xffcccccc)
 }
 ```
+
 ```scss
 $color-base-gray-light: #cccccc;
 $color-base-gray-medium: #999999;
@@ -237,6 +245,7 @@ $color-font-base: #ff0000;
 $color-font-secondary: #00ff00;
 $color-font-tertiary: #cccccc;
 ```
+
 ```objectivec
 [UIColor colorWithRed:0.800f green:0.800f blue:0.800f alpha:1.000f],
 [UIColor colorWithRed:0.600f green:0.600f blue:0.600f alpha:1.000f],
@@ -252,10 +261,13 @@ That's it! There is a lot more you can do with your style dictionary than genera
 at some [examples](examples.md) or take a deeper dive into [package structure](package_structure.md), [extending](extending.md), or how the [build process](build_process.md) works.
 
 ## Basic Usage
+
 ### Command Line Interface (CLI)
+
 ```bash
 $ style-dictionary build
 ```
+
 Call this in the root directory of your project, which must include a [configuration](config.md) file.
 
 More detailed information about [using the Style Dictionary CLI is available here](using_the_cli.md).
@@ -279,13 +291,15 @@ const StyleDictionary = require('style-dictionary').extend({
     scss: {
       transformGroup: 'scss',
       buildPath: 'build/',
-      files: [{
-        destination: 'variables.scss',
-        format: 'scss/variables'
-      }]
-    }
+      files: [
+        {
+          destination: 'variables.scss',
+          format: 'scss/variables',
+        },
+      ],
+    },
     // ...
-  }
+  },
 });
 
 StyleDictionary.buildAllPlatforms();

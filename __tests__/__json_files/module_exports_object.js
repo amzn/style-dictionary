@@ -1,4 +1,4 @@
 module.exports = {
-  "foo": "bar",
-  "bar": "{foo}"
-}
+  foo: 'bar',
+  bar: '{foo}',
+};
