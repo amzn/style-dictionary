@@ -47,9 +47,10 @@ describe('common', () => {
       });
 
       it('should handle outputStringLiterals', () => {
-        const stringValue = 'I am a string';
+        const stringValue = 'I "am" a string';
         const options = { outputStringLiterals: true};
-        expect(getTypeScriptType(stringValue, options)).toEqual(`"${stringValue}"`);
+        /* eslint-disable no-useless-escape */
+        expect(getTypeScriptType(stringValue, options)).toEqual(`\"I \\\"am\\\" a string\"`);
       });
     });
   });

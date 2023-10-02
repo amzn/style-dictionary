@@ -26,7 +26,13 @@ const properties = {
       "name": "colorRed",
       "value": "#FF0000"
     }
-  }
+  },
+  "font": {
+    "family": {
+      "name": "fontFamily",
+      "value": '"Source Sans Pro", Arial, sans-serif',
+    },
+  },
 };
 
 const formatter = formats['typescript/es6-declarations'].bind(file);
