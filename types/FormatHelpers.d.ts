@@ -26,6 +26,8 @@ export interface LineFormatting {
 
 export type TokenFormatterArgs = {
   outputReferences?: boolean;
+  outputReferenceFallbacks?: boolean;
+  themeable?: boolean;
   dictionary: Dictionary;
   format?: "css" | "sass" | "less" | "stylus";
   formatting?: LineFormatting;
