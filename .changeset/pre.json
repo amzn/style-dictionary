@@ -1,0 +1,8 @@
+{
+  "mode": "pre",
+  "tag": "prerelease",
+  "initialVersions": {
+    "style-dictionary": "3.8.0"
+  },
+  "changesets": []
+}

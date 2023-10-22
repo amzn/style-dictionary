@@ -12,13 +12,9 @@
  */
 
 /**
- * This type is also used in the `typescript/module-declarations` format,
- * but we only want to include the lines of the DesignToken interface.
- * The comments surrounding the definition are used to trim the lines of
- * this file in that format.
+ * This type is also used in the `typescript/module-declarations` format
+ * Make sure to also change it there when this type changes!
  */
-
-//start
 interface DesignToken {
   value: any;
   name?: string;
@@ -34,7 +30,6 @@ interface DesignToken {
   };
   [key: string]: any;
 }
-//end
 
 export { DesignToken };
 export interface DesignTokens {

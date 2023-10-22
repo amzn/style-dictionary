@@ -13,23 +13,26 @@
 
 // Minimum TypeScript Version: 3.0
 
-import {Action as _Action} from './Action';
-import {Config as _Config} from './Config';
-import {DesignToken as _DesignToken, DesignTokens as _DesignTokens} from './DesignToken';
-import {Dictionary as _Dictionary} from './Dictionary';
-import {File as _File} from './File';
-import {FileHeader as _FileHeader} from './FileHeader';
-import {Filter as _Filter} from './Filter';
-import {Format as _Format, Formatter as _Formatter } from './Format';
-import {FormatHelpers as _FormatHelpers} from './FormatHelpers';
-import {Matcher as _Matcher} from './Matcher';
-import {Options as _Options} from './Options';
-import {Parser as _Parser} from './Parser';
-import {Platform as _Platform} from './Platform';
-import {Transform as _Transform} from './Transform';
-import {TransformedToken as _TransformedToken, TransformedTokens as _TransformedTokens} from './TransformedToken';
-import {TransformGroup as _TransformGroup} from './TransformGroup';
-import {Named as _Named} from './_helpers';
+import { Action as _Action } from './Action';
+import { Config as _Config } from './Config';
+import { DesignToken as _DesignToken, DesignTokens as _DesignTokens } from './DesignToken';
+import { Dictionary as _Dictionary } from './Dictionary';
+import { File as _File } from './File';
+import { FileHeader as _FileHeader } from './FileHeader';
+import { Filter as _Filter } from './Filter';
+import { Format as _Format, Formatter as _Formatter } from './Format';
+import { FormatHelpers as _FormatHelpers } from './FormatHelpers';
+import { Matcher as _Matcher } from './Matcher';
+import { Options as _Options } from './Options';
+import { Parser as _Parser } from './Parser';
+import { Platform as _Platform } from './Platform';
+import { Transform as _Transform } from './Transform';
+import {
+  TransformedToken as _TransformedToken,
+  TransformedTokens as _TransformedTokens,
+} from './TransformedToken';
+import { TransformGroup as _TransformGroup } from './TransformGroup';
+import { Named as _Named } from './_helpers';
 
 // Because this library is used in Node and needs to be accessible
 // as a CommonJS module, we are declaring it as a namespace so that
@@ -49,12 +52,12 @@ declare namespace StyleDictionary {
   type Matcher = _Matcher;
   type Options = _Options;
   type Parser = _Parser;
-  type Platform<PlatformType = Record<string,any>> = _Platform<PlatformType>;
-  type Transform<PlatformType = Record<string,any>> = _Transform<PlatformType>;
+  type Platform<PlatformType = Record<string, any>> = _Platform<PlatformType>;
+  type Transform<PlatformType = Record<string, any>> = _Transform<PlatformType>;
   type TransformedToken = _TransformedToken;
   type TransformedTokens = _TransformedTokens;
   type TransformGroup = _TransformGroup;
-  type Named<T> = _Named<T>
+  type Named<T> = _Named<T>;
 
   interface Core {
     VERSION: string;
@@ -159,11 +162,11 @@ declare namespace StyleDictionary {
      * StyleDictionary.registerFilter({
      *   name: 'isColor',
      *   matcher: function(token) {
-      *     return token.attributes.category === 'color';
-      *   }
-    * })
-    * ```
-    */
+     *     return token.attributes.category === 'color';
+     *   }
+     * })
+     * ```
+     */
     registerFilter(filter: Named<Filter>): this;
 
     /**
@@ -184,7 +187,7 @@ declare namespace StyleDictionary {
      * })
      * ```
      */
-     registerFileHeader(fileHeader: Named<{ fileHeader: FileHeader }>): this;
+    registerFileHeader(fileHeader: Named<{ fileHeader: FileHeader }>): this;
 
     /**
      * Adds a custom parser to parse style dictionary files. This allows you to modify
@@ -274,10 +277,11 @@ declare namespace StyleDictionary {
      *
      * @example
      * ```js
-     * const StyleDictionary = require('style-dictionary').extend('config.json');
-     * StyleDictionary.buildAllPlatforms();
+     * import StyleDictionary from 'style-dictionary';
+     * const sd = await StyleDictionary.extend('config.json');
+     * sd.buildAllPlatforms();
      * ```
-    */
+     */
     buildAllPlatforms(): this;
 
     /**
@@ -306,9 +310,10 @@ declare namespace StyleDictionary {
      * @param {String | Config} config - The configuration for Style Dictionary, can either be a path to a JSON or CommonJS file or a configuration object.
      * @example
      * ```js
-     * const StyleDictionary = require('style-dictionary').extend('config.json');
+     * import StyleDictionary from 'style-dictionary';
+     * const sd = await StyleDictionary.extend('config.json');
      *
-     * const StyleDictionary = require('style-dictionary').extend({
+     * const sd = await StyleDictionary.extend({
      *   source: ['tokens/*.json'],
      *   platforms: {
      *     scss: {
@@ -324,7 +329,7 @@ declare namespace StyleDictionary {
      * });
      * ```
      */
-    extend(config: string | Config): Core;
+    extend(config: string | Config): Promise<Core>;
   }
 }
 
