@@ -1,4 +1,8 @@
-const StyleDictionary = require('style-dictionary');
+import StyleDictionary from 'style-dictionary';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 console.log('Build started...');
 console.log('\n==============================================');
@@ -112,7 +116,7 @@ StyleDictionary.registerFormat({
 // APPLY THE CONFIGURATION
 // IMPORTANT: the registration of custom transforms
 // needs to be done _before_ applying the configuration
-const StyleDictionaryExtended = StyleDictionary.extend(__dirname + '/config.json');
+const StyleDictionaryExtended = await StyleDictionary.extend(__dirname + '/config.json');
 
 // FINALLY, BUILD ALL THE PLATFORMS
 StyleDictionaryExtended.buildAllPlatforms();

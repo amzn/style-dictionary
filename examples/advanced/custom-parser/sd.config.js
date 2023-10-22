@@ -36,7 +36,7 @@ StyleDictionary.registerParser({
 });
 
 // Or you can add parsers directly on the configuration object here like this:
-// StyleDictionary.extend({
+// (await StyleDictionary.extend({
 //   parsers: [{
 //     pattern: /\.json$/,
 //     parse: ({contents, filePath}) => {}
@@ -52,7 +52,7 @@ StyleDictionary.registerParser({
 //       }]
 //     }
 //   }
-// }).buildAllPlatforms();
+// })).buildAllPlatforms();
 
 module.exports = {
   // Or you can add parsers directly on the configuration object here like this:

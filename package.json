@@ -19,35 +19,46 @@
     "react native",
     "style guide"
   ],
-  "main": "index.js",
-  "types": "types/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "node": "./index-node.js",
+      "default": "./index.js"
+    },
+    "./fs": "./fs.js"
+  },
   "bin": {
     "style-dictionary": "./bin/style-dictionary"
   },
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=18.0.0"
   },
   "files": [
     "bin",
     "lib",
     "examples",
+    "fs.js",
     "index.js",
+    "index-node.js",
     "LICENSE",
     "NOTICE",
     "types"
   ],
   "scripts": {
+    "format": "run-p format:*",
     "format:eslint": "eslint --file index.js \"lib/**/*.js\" \"__tests__/**/*.js\" --fix",
     "format:prettier": "prettier \"**/*.{js,md}\" \"package.json\" --write",
+    "lint": "run-p lint:*",
     "lint:eslint": "eslint --fix index.js \"lib/**/*.js\" \"__tests__/**/*.js\"",
     "lint:prettier": "prettier \"**/*.{js,md}\" \"package.json\" --list-different || (echo '↑↑ these files are not prettier formatted ↑↑' && exit 1)",
-    "test": "npm run test-types && run-p lint:* && jest --runInBand --silent --coverage",
-    "test-types": "tsd",
-    "test-watch": "npm run test-types && npm run lint && jest --runInBand --watch",
+    "test": "run-p test:*",
+    "test:unit": "jest --runInBand --silent --coverage",
+    "test:types": "tsd",
     "generate-docs": "node ./scripts/generateDocs.js",
     "serve-docs": "docsify serve docs -p 3000 -P 12345",
     "install-cli": "npm install -g $(npm pack)",
-    "release": "git add . && standard-version -a",
+    "release": "node scripts/inject-version.js && changeset publish",
     "prepare": "husky install"
   },
   "standard-version": {
@@ -104,6 +115,12 @@
       "@commitlint/config-conventional"
     ]
   },
+  "prettier": {
+    "singleQuote": true,
+    "arrowParens": "always",
+    "trailingComma": "all",
+    "printWidth": 100
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/amzn/style-dictionary.git"
@@ -117,35 +134,35 @@
     "Yuliya Baran <baranyu@amazon.com>",
     "Charles Dorner <dornerc@amazon.com>",
     "Dustin Boudreau <boudrd@amazon.com>",
-    "Danny Banks <djb@amazon.com>"
+    "Danny Banks <djb@amazon.com>",
+    "Joren Broekema <joren.broekema@gmail.com>"
   ],
-  "prettier": {
-    "singleQuote": true,
-    "arrowParens": "always",
-    "trailingComma": "all",
-    "printWidth": 100
-  },
   "homepage": "https://github.com/amzn/style-dictionary",
   "dependencies": {
-    "chalk": "^4.0.0",
+    "@bundled-es-modules/glob": "^10.3.5",
+    "@bundled-es-modules/memfs": "^4.2.3",
+    "@bundled-es-modules/path-browserify": "^1.0.2",
+    "chalk": "^5.3.0",
     "change-case": "^4.1.2",
     "commander": "^8.3.0",
     "fs-extra": "^10.0.0",
-    "glob": "^10.3.10",
     "json5": "^2.2.2",
     "jsonc-parser": "^3.0.0",
     "lodash": "^4.17.15",
-    "tinycolor2": "^1.4.1"
+    "lodash-es": "^4.17.21",
+    "tinycolor2": "^1.6.0",
+    "url": "^0.11.1"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.16.11",
+    "@changesets/cli": "^2.26.2",
     "@commitlint/cli": "^16.1.0",
     "@commitlint/config-conventional": "^16.0.0",
     "babel-jest": "^27.4.6",
     "babel-preset-env": "^1.7.0",
     "docsify": "^4.12.2",
     "docsify-cli": "^4.4.3",
-    "eslint": "^8.48.0",
+    "eslint": "^8.7.0",
     "eslint-plugin-jest": "^26.0.0",
     "husky": "^7.0.0",
     "istanbul": "^0.4.5",
