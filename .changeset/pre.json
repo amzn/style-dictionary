@@ -4,5 +4,8 @@
   "initialVersions": {
     "style-dictionary": "3.8.0"
   },
-  "changesets": []
+  "changesets": [
+    "big-worms-collect-2",
+    "big-worms-collect"
+  ]
 }
