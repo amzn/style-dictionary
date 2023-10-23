@@ -2,8 +2,6 @@
 'style-dictionary': major
 ---
 
-#### BREAKING:
-
 - The project has been fully converted to [ESM format](https://nodejs.org/api/esm.html), which is also the format that the browser uses.
   For users, this means you'll have to either use Style-Dictionary in ESM JavaScript code, or dynamically import it into your CommonJS code.
 - `Style-Dictionary.extend()` method is now asynchronous, which means it returns `Promise<StyleDictionary.Core>` instead of `StyleDictionary.Core`.
