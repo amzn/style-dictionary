@@ -10,7 +10,7 @@
     "styled-components": "^5.3.0"
   },
   "devDependencies": {
-    "style-dictionary": "3.8.0"
+    "style-dictionary": "3.9.0"
   },
   "resolutions": {
     "immer": "8.0.1",
