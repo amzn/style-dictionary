@@ -47,10 +47,10 @@
   ],
   "scripts": {
     "format": "run-p format:*",
-    "format:eslint": "eslint --file index.js \"lib/**/*.js\" \"__tests__/**/*.js\" --fix",
+    "format:eslint": "eslint --fix index.js \"lib/**/*.js\" \"__tests__/**/*.js\"",
     "format:prettier": "prettier \"**/*.{js,md}\" \"package.json\" --write",
     "lint": "run-p lint:*",
-    "lint:eslint": "eslint --fix index.js \"lib/**/*.js\" \"__tests__/**/*.js\"",
+    "lint:eslint": "eslint index.js \"lib/**/*.js\" \"__tests__/**/*.js\"",
     "lint:prettier": "prettier \"**/*.{js,md}\" \"package.json\" --list-different || (echo '↑↑ these files are not prettier formatted ↑↑' && exit 1)",
     "test": "run-p test:*",
     "test:unit": "jest --runInBand --silent --coverage",
@@ -98,17 +98,12 @@
       "^.+\\.jsx?$": "babel-jest"
     }
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm test && lint-staged",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
   "lint-staged": {
     "*.js": [
-      "npm run lint",
-      "git add"
-    ]
+      "eslint",
+      "prettier --list-different"
+    ],
+    "*.md": "prettier --list-different"
   },
   "commitlint": {
     "extends": [
@@ -164,7 +159,7 @@
     "docsify-cli": "^4.4.3",
     "eslint": "^8.7.0",
     "eslint-plugin-jest": "^26.0.0",
-    "husky": "^7.0.0",
+    "husky": "^8.0.3",
     "istanbul": "^0.4.5",
     "jest": "^27.4.7",
     "jsdoc-escape-at": "^1.0.1",
