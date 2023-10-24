@@ -114,6 +114,34 @@ const numberDictionary = createDictionary({
         value: 10,
         type: 'dimension'
       },
+      zero: {
+        original: {
+          value: 0,
+          type: 'dimension',
+        },
+        attributes: {
+          category: 'tokens',
+          type: 'zero',
+        },
+        name: 'tokens-zero',
+        path: ['tokens', 'zero'],
+        value: 0,
+        type: 'dimension',
+      },
+      'ref-zero': {
+        original: {
+          value: '{tokens.zero}',
+          type: 'dimension',
+        },
+        attributes: {
+          category: 'tokens',
+          type: 'ref-zero',
+        },
+        name: 'tokens-ref-zero',
+        path: ['tokens', 'ref-zero'],
+        value: 0,
+        type: 'dimension',
+      },
     }
   }
 })
@@ -227,6 +255,12 @@ describe('common', () => {
           const propFormatter = createPropertyFormatter({ outputReferences: true, dictionary: numberDictionary, format: 'css' })
           expect(propFormatter(numberDictionary.tokens.tokens.foo)).toEqual('  --tokens-foo: 10;');
           expect(propFormatter(numberDictionary.tokens.tokens.ref)).toEqual('  --tokens-ref: var(--tokens-foo);');
+        })
+
+        it('should support valid falsy values for outputReferences', () => {
+          const propFormatter = createPropertyFormatter({ outputReferences: true, dictionary: numberDictionary, format: 'css' })
+          expect(propFormatter(numberDictionary.tokens.tokens.zero)).toEqual('  --tokens-zero: 0;');
+          expect(propFormatter(numberDictionary.tokens.tokens['ref-zero'])).toEqual('  --tokens-ref-zero: var(--tokens-zero);');
         })
 
         it('should support multiple references for outputReferences', () => {
