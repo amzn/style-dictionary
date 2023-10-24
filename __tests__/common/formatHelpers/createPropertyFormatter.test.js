@@ -209,70 +209,181 @@ const objectDictionary = createDictionary({
 describe('common', () => {
   describe('formatHelpers', () => {
     describe('createPropertyFormatter', () => {
-      it('should support outputReferences', () => {
-        const propFormatter = createPropertyFormatter({
-          outputReferences: true,
-          dictionary,
-          format: 'css',
+      describe('outputReferences', () => {
+        it('should support outputReferences', () => {
+          const propFormatter = createPropertyFormatter({
+            outputReferences: true,
+            dictionary,
+            format: 'css',
+          });
+          expect(propFormatter(dictionary.tokens.tokens.foo)).toEqual('  --tokens-foo: 5px;');
+          expect(propFormatter(dictionary.tokens.tokens.ref)).toEqual(
+            '  --tokens-ref: var(--tokens-foo);',
+          );
         });
-        expect(propFormatter(dictionary.tokens.tokens.foo)).toEqual('  --tokens-foo: 5px;');
-        expect(propFormatter(dictionary.tokens.tokens.ref)).toEqual(
-          '  --tokens-ref: var(--tokens-foo);',
-        );
+
+        it('should support outputReferences when values are transformed by (transitive) "value" transforms', () => {
+          const propFormatter = createPropertyFormatter({
+            outputReferences: true,
+            dictionary: transformedDictionary,
+            format: 'css',
+          });
+          expect(propFormatter(transformedDictionary.tokens.tokens.foo)).toEqual(
+            '  --tokens-foo: 5px;',
+          );
+          expect(propFormatter(transformedDictionary.tokens.tokens.ref)).toEqual(
+            '  --tokens-ref: var(--tokens-foo);',
+          );
+        });
+
+        it('should support number values for outputReferences', () => {
+          const propFormatter = createPropertyFormatter({
+            outputReferences: true,
+            dictionary: numberDictionary,
+            format: 'css',
+          });
+          expect(propFormatter(numberDictionary.tokens.tokens.foo)).toEqual('  --tokens-foo: 10;');
+          expect(propFormatter(numberDictionary.tokens.tokens.ref)).toEqual(
+            '  --tokens-ref: var(--tokens-foo);',
+          );
+        });
+
+        it('should support multiple references for outputReferences', () => {
+          const propFormatter = createPropertyFormatter({
+            outputReferences: true,
+            dictionary: multiDictionary,
+            format: 'css',
+          });
+          expect(propFormatter(multiDictionary.tokens.tokens.foo)).toEqual('  --tokens-foo: 10px;');
+          expect(propFormatter(multiDictionary.tokens.tokens.bar)).toEqual('  --tokens-bar: 15px;');
+          expect(propFormatter(multiDictionary.tokens.tokens.ref)).toEqual(
+            '  --tokens-ref: var(--tokens-foo) 5px var(--tokens-bar);',
+          );
+        });
+
+        it('should support object value references for outputReferences', () => {
+          // The ref is an object type value, which means there will usually be some kind of transform (e.g. a CSS shorthand transform)
+          // to change it from an object to a string. In our example, we use a border CSS shorthand for border token.
+          // In this case, since it is an object value, we will run the transformation on the transformed (string) value.
+          const propFormatter = createPropertyFormatter({
+            outputReferences: true,
+            dictionary: objectDictionary,
+            format: 'css',
+          });
+          expect(propFormatter(objectDictionary.tokens.tokens.foo)).toEqual('  --tokens-foo: 5px;');
+          expect(propFormatter(objectDictionary.tokens.tokens.ref)).toEqual(
+            '  --tokens-ref: var(--tokens-foo) dashed #FF00FF;',
+          );
+        });
       });
 
-      it('should support outputReferences when values are transformed by (transitive) "value" transforms', () => {
-        const propFormatter = createPropertyFormatter({
-          outputReferences: true,
-          dictionary: transformedDictionary,
-          format: 'css',
-        });
-        expect(propFormatter(transformedDictionary.tokens.tokens.foo)).toEqual(
-          '  --tokens-foo: 5px;',
-        );
-        expect(propFormatter(transformedDictionary.tokens.tokens.ref)).toEqual(
-          '  --tokens-ref: var(--tokens-foo);',
-        );
-      });
+      describe('commentStyle', () => {
+        const commentProperties = {
+          color: {
+            red: {
+              name: 'color-red',
+              value: '#FF0000',
+              comment: 'Foo bar qux',
+              attributes: {
+                category: 'color',
+                type: 'red',
+              },
+              path: ['color', 'red'],
+            },
+            blue: {
+              name: 'color-blue',
+              value: '#0000FF',
+              comment: 'Foo\nbar\nqux',
+              attributes: {
+                category: 'color',
+                type: 'blue',
+              },
+              path: ['color', 'blue'],
+            },
+            green: {
+              name: 'color-green',
+              value: '#00FF00',
+              comment: 'Foo bar qux',
+              attributes: {
+                category: 'color',
+                type: 'green',
+              },
+              path: ['color', 'green'],
+            },
+          },
+        };
 
-      it('should support number values for outputReferences', () => {
-        const propFormatter = createPropertyFormatter({
-          outputReferences: true,
-          dictionary: numberDictionary,
-          format: 'css',
+        const commentDictionary = createDictionary({
+          properties: commentProperties,
         });
-        expect(propFormatter(numberDictionary.tokens.tokens.foo)).toEqual('  --tokens-foo: 10;');
-        expect(propFormatter(numberDictionary.tokens.tokens.ref)).toEqual(
-          '  --tokens-ref: var(--tokens-foo);',
-        );
-      });
 
-      it('should support multiple references for outputReferences', () => {
-        const propFormatter = createPropertyFormatter({
-          outputReferences: true,
-          dictionary: multiDictionary,
-          format: 'css',
-        });
-        expect(propFormatter(multiDictionary.tokens.tokens.foo)).toEqual('  --tokens-foo: 10px;');
-        expect(propFormatter(multiDictionary.tokens.tokens.bar)).toEqual('  --tokens-bar: 15px;');
-        expect(propFormatter(multiDictionary.tokens.tokens.ref)).toEqual(
-          '  --tokens-ref: var(--tokens-foo) 5px var(--tokens-bar);',
-        );
-      });
+        it('should default to putting comment next to the output value', () => {
+          // long commentStyle
+          const cssFormatter = createPropertyFormatter({
+            format: 'css',
+            commentDictionary,
+          });
+          // short commentStyle
+          const sassFormatter = createPropertyFormatter({
+            format: 'sass',
+            commentDictionary,
+          });
 
-      it('should support object value references for outputReferences', () => {
-        // The ref is an object type value, which means there will usually be some kind of transform (e.g. a CSS shorthand transform)
-        // to change it from an object to a string. In our example, we use a border CSS shorthand for border token.
-        // In this case, since it is an object value, we will run the transformation on the transformed (string) value.
-        const propFormatter = createPropertyFormatter({
-          outputReferences: true,
-          dictionary: objectDictionary,
-          format: 'css',
+          // red = single-line comment, blue = multi-line comment
+          const cssRed = cssFormatter(commentDictionary.tokens.color.red);
+          const cssBlue = cssFormatter(commentDictionary.tokens.color.blue);
+          const sassRed = sassFormatter(commentDictionary.tokens.color.red);
+          const sassBlue = sassFormatter(commentDictionary.tokens.color.blue);
+
+          // Note that since CSS puts it inside a selector, there is an indentation of 2 spaces as well
+          // CSS also has commentStyle long, whereas sass uses short
+          expect(cssRed).toMatchInlineSnapshot(`"  --color-red: #FF0000; /* Foo bar qux */"`);
+
+          expect(cssBlue).toMatchInlineSnapshot(`
+"  /**
+   * Foo
+   * bar
+   * qux
+   */
+  --color-blue: #0000FF;"
+`);
+
+          expect(sassRed).toMatchInlineSnapshot(`"$color-red: #FF0000; // Foo bar qux"`);
+          expect(sassBlue).toMatchInlineSnapshot(`
+"// Foo
+// bar
+// qux
+$color-blue: #0000FF;"
+`);
         });
-        expect(propFormatter(objectDictionary.tokens.tokens.foo)).toEqual('  --tokens-foo: 5px;');
-        expect(propFormatter(objectDictionary.tokens.tokens.ref)).toEqual(
-          '  --tokens-ref: var(--tokens-foo) dashed #FF00FF;',
-        );
+
+        it('allows overriding formatting commentStyle', () => {
+          // long commentStyle
+          const cssFormatter = createPropertyFormatter({
+            format: 'css',
+            commentDictionary,
+            formatting: { commentStyle: 'long', commentPosition: 'above' },
+          });
+          // short commentStyle
+          const sassFormatter = createPropertyFormatter({
+            format: 'sass',
+            commentDictionary,
+            formatting: { commentStyle: 'short', commentPosition: 'above' },
+          });
+
+          const cssRed = cssFormatter(commentDictionary.tokens.color.green);
+          const sassRed = sassFormatter(commentDictionary.tokens.color.green);
+
+          expect(cssRed).toMatchInlineSnapshot(`
+"  /* Foo bar qux */
+  --color-green: #00FF00;"
+`);
+
+          expect(sassRed).toMatchInlineSnapshot(`
+"// Foo bar qux
+$color-green: #00FF00;"
+`);
+        });
       });
     });
   });
