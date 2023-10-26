@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.9.0](https://github.com/amzn/style-dictionary/compare/v3.8.0...v3.9.0) (2023-10-23)
+
+
+### Features
+
+* allow overriding formatting, add commentStyle long-above, short-above ([b627ff1](https://github.com/amzn/style-dictionary/commit/b627ff1e2b9ec0b9d72ba7181f2e66f73c08b04b))
+
+
+### Bug Fixes
+
+* account for multi-line comments in tokens, improve comment style ([b5d4cc2](https://github.com/amzn/style-dictionary/commit/b5d4cc2384202e8a2f69e0439dbbeab136364911))
+* allow outputReferences to work on non-string values ([8021ec0](https://github.com/amzn/style-dictionary/commit/8021ec0c914d904333cdcc063a4e34c49d2db418))
+* outputReferences to use original.value when possible ([#1002](https://github.com/amzn/style-dictionary/issues/1002)) ([bd73b62](https://github.com/amzn/style-dictionary/commit/bd73b622b01839325faf2f0129b57e5e58716588))
+
 ## [3.8.0](https://github.com/amzn/style-dictionary/compare/v3.7.2...v3.8.0) (2023-04-25)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "style-dictionary",
-  "version": "3.8.0",
+  "version": "3.9.0",
   "description": "Style once, use everywhere. A build system for creating cross-platform styles.",
   "keywords": [
     "style dictionary",
@@ -146,7 +146,7 @@
     "json5-jest": "^1.0.1",
     "less": "^4.1.2",
     "lint-staged": "^12.3.1",
-    "node-sass": "^7.0.1",
+    "node-sass": "^9.0.0",
     "standard-version": "^9.3.2",
     "stylus": "^0.56.0",
     "tsd": "^0.19.1",
