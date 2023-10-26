@@ -1,5 +1,20 @@
 # Changelog
 
+## 4.0.0-prerelease.1
+
+### Patch Changes
+
+- c1dd5ec: Allow overriding CSS formatting with commentStyle and commentPosition props.
+  For commentStyle, options are 'short' or 'long'.
+  For commentPosition, options are 'above' or 'inline'.
+
+  We also ensure that the right defaults are picked for CSS, SASS/SCSS, Stylus and Less.
+
+  This also contains a fix for ensuring that multi-line comments are automatically put "above" rather than "inline".
+
+- 6fb81ad: Allow falsy token values for outputReferences, e.g. `0`.
+- 24d41c3: Allow outputReferences to work on non-string values.
+
 ## 4.0.0-prerelease.0
 
 ### Major Changes
