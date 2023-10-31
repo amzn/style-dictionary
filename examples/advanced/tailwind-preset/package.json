@@ -1,11 +1,10 @@
 {
   "name": "tailwind-preset",
   "version": "1.0.0",
-  "description": "",
-  "main": "sd.config.js",
+  "description": "Builds tailwind preset from tokens",
   "scripts": {
-    "build": "style-dictionary build --config ./sd.config.js",
-    "dev": "npx tailwindcss -i ./demo/input.css -o ./demo/output.css --watch"
+    "build-tokens": "style-dictionary build --config ./config.js",
+    "build-css": "npx tailwindcss -i ./demo/input.css -o ./demo/output.css --watch"
   },
   "license": "Apache-2.0",
   "devDependencies": {

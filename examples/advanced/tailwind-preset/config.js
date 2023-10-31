@@ -1,25 +1,24 @@
 const StyleDictionary = require("style-dictionary");
-const { spaceSeparatedRgb } = require("./src/transformer");
-const { cssVarsPlugin, themeColors, preset } = require("./src/formatter");
-const { isColor } = require("./src/matcher");
+const { rgbChannels } = require("./config/transformer");
+const { cssVarsPlugin, themeColors, preset } = require("./config/formatter");
+const { isColor } = require("./config/matcher");
 
+// Split rgb value into space-separated channels
+// for opacity modifier syntax
+// https://tailwindcss.com/docs/customizing-colors#using-css-variables
 StyleDictionary.registerTransform({
-  name: "color/space-separated-rgb",
+  name: "color/rgb-channels",
   type: "value",
   matcher: isColor,
-  transformer: spaceSeparatedRgb,
+  transformer: rgbChannels,
 });
 
 StyleDictionary.registerTransformGroup({
   name: "color/tailwind",
-  transforms: [
-    "attribute/cti",
-    "name/cti/kebab",
-    "color/rgb",
-    "color/space-separated-rgb",
-  ],
+  transforms: ["name/cti/kebab", "color/rgb", "color/rgb-channels"],
 });
 
+// Output
 StyleDictionary.registerFormat({
   name: "tailwind/css-vars-plugin",
   formatter: cssVarsPlugin,

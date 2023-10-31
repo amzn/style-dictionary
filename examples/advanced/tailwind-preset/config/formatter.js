@@ -8,13 +8,13 @@ module.exports = {
       .join(",\n      ");
     return `const plugin = require('tailwindcss/plugin');
 
-  module.exports = plugin(function ({ addBase }) {
-    addBase({
-      ':root': {
-        ${vars}
-      }
-    });
-  });`;
+module.exports = plugin(function ({ addBase }) {
+  addBase({
+    ':root': {
+      ${vars}
+    }
+  });
+});`;
   },
   themeColors: ({ dictionary }) => {
     const tokens = dictionary.allTokens.filter((token) => isColor(token));
@@ -28,7 +28,7 @@ module.exports = {
   },
   preset: () => {
     return `const themeColors = require('./themeColors');
-const tailwindCSSVarsPlugin = require('./cssVarsPlugin');
+const cssVarsPlugin = require('./cssVarsPlugin');
 
 module.exports = {
   theme: {
@@ -38,7 +38,7 @@ module.exports = {
       },
     },
   },
-  plugins: [tailwindCSSVarsPlugin],
+  plugins: [cssVarsPlugin],
 };
 `;
   },
