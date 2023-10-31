@@ -33,7 +33,7 @@ There are 3 types of transforms: attribute, name, and value.
 
 **Attribute:** An attribute transform adds to the attributes object on a design token. This is for including any meta-data about a design token such as it's CTI or other information.
 
-**Name:** A name transform transform the name of a design token. You should really only be apply one name transformer because they will override each other if you use more than one.
+**Name:** A name transform transforms the name of a design token. You should really only be applying one name transformer because they will override each other if you use more than one.
 
 **Value:** The value transform is the most important as this is the one that changes the representation of the value. Colors can be turned into hex values, rgb, hsl, hsv, etc. Value transforms have a matcher function that filter which tokens that transform runs on. This allows us to only run a color transform on only the colors and not every design token.
 
