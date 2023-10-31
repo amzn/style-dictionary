@@ -18,7 +18,6 @@ StyleDictionary.registerTransformGroup({
   transforms: ["name/cti/kebab", "color/rgb", "color/rgb-channels"],
 });
 
-// Output
 StyleDictionary.registerFormat({
   name: "tailwind/css-vars-plugin",
   formatter: cssVarsPlugin,
