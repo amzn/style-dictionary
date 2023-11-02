@@ -25,6 +25,7 @@ import { FormatHelpers as _FormatHelpers } from './FormatHelpers';
 import { Matcher as _Matcher } from './Matcher';
 import { Options as _Options } from './Options';
 import { Parser as _Parser } from './Parser';
+import { Preprocessor as _Preprocessor, preprocessor as _preprocessor } from './Preprocessor';
 import { Platform as _Platform } from './Platform';
 import { Transform as _Transform } from './Transform';
 import {
@@ -52,6 +53,8 @@ declare namespace StyleDictionary {
   type Matcher = _Matcher;
   type Options = _Options;
   type Parser = _Parser;
+  type Preprocessor = _Preprocessor;
+  type preprocessor = _preprocessor;
   type Platform<PlatformType = Record<string, any>> = _Platform<PlatformType>;
   type Transform<PlatformType = Record<string, any>> = _Transform<PlatformType>;
   type TransformedToken = _TransformedToken;
@@ -72,6 +75,7 @@ declare namespace StyleDictionary {
     filter: Record<string, Filter['matcher']>;
     fileHeader: Record<string, FileHeader>;
     parsers: Parser[];
+    preprocessors: Record<string, Preprocessor>;
 
     formatHelpers: FormatHelpers;
 
@@ -205,6 +209,25 @@ declare namespace StyleDictionary {
      * ```
      */
     registerParser(parser: Parser): this;
+
+    /**
+     * Adds a custom preprocessor to preprocess dictionary object.
+     *
+     * @param {Preprocessor} Preprocessor
+     * @param {string} Preprocessor.name - name of the preprocessor
+     * @param {preprocessor} Preprocessor.preprocessor - Function to preprocess the dictionary. The function should return a plain Javascript object.
+     * @example
+     * ```js
+     * StyleDictionary.registerPreprocessor({
+     *   name: 'strip-third-party-meta',
+     *   preprocessor: (dictionary) => {
+     *     delete dictionary.thirdPartyMetadata;
+     *     return dictionary;
+     *   },
+     * });
+     * ```
+     */
+    registerPreprocessor(preprocessor: Preprocessor): this;
 
     /**
      * Adds a custom action to Style Dictionary. Actions
