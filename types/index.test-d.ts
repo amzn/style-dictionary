@@ -136,6 +136,13 @@ expectType<StyleDictionary.Core>(
   }),
 );
 
+expectType<StyleDictionary.Core>(
+  StyleDictionary.registerPreprocessor({
+    name: 'foo',
+    preprocessor: (dictionary) => dictionary,
+  }),
+);
+
 const file: StyleDictionary.File = {
   destination: `somePath.json`,
   format: `css/variables`,

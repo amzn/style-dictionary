@@ -48,7 +48,7 @@
   ],
   "scripts": {
     "format": "run-p format:*",
-    "format:eslint": "eslint --fix index.js \"lib/**/*.js\" \"__tests__/**/*.js\"",
+    "format:eslint": "eslint --fix \"**/*.js\"",
     "format:prettier": "prettier \"**/*.{js,md}\" \"package.json\" --write",
     "lint": "run-p lint:*",
     "lint:eslint": "eslint \"**/*.js\"",
