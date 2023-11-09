@@ -10,19 +10,17 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
-const formats = require('../../lib/common/formats');
-const fs = require('fs-extra');
-const helpers = require('../__helpers');
-const createDictionary = require('../../lib/utils/createDictionary');
-const createFormatArgs = require('../../lib/utils/createFormatArgs');
+import { expect } from 'chai';
+import formats from '../../lib/common/formats.js';
+import createDictionary from '../../lib/utils/createDictionary.js';
+import createFormatArgs from '../../lib/utils/createFormatArgs.js';
 
 const file = {
   destination: 'output/',
   format: 'json/nested',
 };
 
-const properties = {
+const tokens = {
   color: {
     base: {
       comment: 'This is a comment',
@@ -37,23 +35,14 @@ const properties = {
   },
 };
 
-const formatter = formats['json/nested'].bind(file);
-const dictionary = createDictionary({ properties });
+const format = formats['json/nested'];
+const dictionary = createDictionary({ tokens });
 
 describe('formats', function () {
   describe('json/nested', function () {
-    beforeEach(() => {
-      helpers.clearOutput();
-    });
-
-    afterEach(() => {
-      helpers.clearOutput();
-    });
-
-    it('should be a valid JSON file', function () {
-      fs.writeFileSync(
-        './__tests__/__output/json-nested.json',
-        formatter(
+    it('should be a valid JSON file and match snapshot', async () => {
+      await expect(
+        format(
           createFormatArgs({
             dictionary,
             file,
@@ -62,35 +51,7 @@ describe('formats', function () {
           {},
           file,
         ),
-      );
-      const test = require('../__output/json-nested.json');
-      expect(test.color.base.red.primary).toEqual(
-        dictionary.properties.color.base.red.primary.value,
-      );
-      expect(test.color.base.red.secondary.inverse).toEqual(
-        dictionary.properties.color.base.red.secondary.inverse.value,
-      );
-    });
-
-    it('should handle non-token data', function () {
-      // non-token data is anything in the dictionary object that is not a token object
-      // i.e. anything in the rest of the object that doesn't have a 'value'
-
-      fs.writeFileSync(
-        './__tests__/__output/json-nested.json',
-        formatter(
-          createFormatArgs({
-            dictionary,
-            file,
-            platform: {},
-          }),
-          {},
-          file,
-        ),
-      );
-      const test = require('../__output/json-nested.json');
-      expect(test.color.base.comment).toEqual(dictionary.properties.color.base.comment);
-      expect(test.color.base.metadata).toEqual(dictionary.properties.color.base.metadata);
+      ).to.matchSnapshot();
     });
   });
 });

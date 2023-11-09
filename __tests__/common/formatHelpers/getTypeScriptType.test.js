@@ -10,26 +10,28 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
-const getTypeScriptType = require('../../../lib/common/formatHelpers/getTypeScriptType');
+import { expect } from 'chai';
+import getTypeScriptType from '../../../lib/common/formatHelpers/getTypeScriptType.js';
 
 describe('common', () => {
   describe('formatHelpers', () => {
     describe('getTypeScriptType', () => {
       it('should recognize basic types', () => {
-        expect(getTypeScriptType('a string')).toEqual('string');
-        expect(getTypeScriptType(3.14159)).toEqual('number');
-        expect(getTypeScriptType(true)).toEqual('boolean');
+        expect(getTypeScriptType('a string')).to.equal('string');
+        expect(getTypeScriptType(3.14159)).to.equal('number');
+        expect(getTypeScriptType(true)).to.equal('boolean');
       });
 
       it('should recognize arrays consisting out of same-type primitives', () => {
-        expect(getTypeScriptType(['an', 'array', 'of', 'strings'])).toEqual('string[]');
-        expect(getTypeScriptType([3.14159])).toEqual('number[]');
-        expect(getTypeScriptType([true, false, true, true])).toEqual('boolean[]');
+        expect(getTypeScriptType(['an', 'array', 'of', 'strings'])).to.equal('string[]');
+        expect(getTypeScriptType([3.14159])).to.equal('number[]');
+        expect(getTypeScriptType([true, false, true, true])).to.equal('boolean[]');
       });
 
       it('should recognize arrays consisting out of different primitives', () => {
-        expect(getTypeScriptType(['string', 3.14, false])).toEqual('(string | number | boolean)[]');
+        expect(getTypeScriptType(['string', 3.14, false])).to.equal(
+          '(string | number | boolean)[]',
+        );
       });
 
       it('should support nested arrays', () => {
@@ -38,12 +40,12 @@ describe('common', () => {
             [100, 200],
             [300, 400],
           ]),
-        ).toEqual('number[][]');
+        ).to.equal('number[][]');
       });
 
       it('should handle simple object types', () => {
-        expect(getTypeScriptType({})).toEqual('{  }');
-        expect(getTypeScriptType({ property1: '', property2: false })).toEqual(
+        expect(getTypeScriptType({})).to.equal('{  }');
+        expect(getTypeScriptType({ property1: '', property2: false })).to.equal(
           '{ property1: string, property2: boolean }',
         );
       });
@@ -54,7 +56,7 @@ describe('common', () => {
           property2: ['foo', 'bar'],
           property3: { subProperty1: 'foo', subProperty2: ['foo', 'bar', 1] },
         };
-        expect(getTypeScriptType(complexObject)).toEqual(
+        expect(getTypeScriptType(complexObject)).to.equal(
           '{ property1: string, property2: string[], property3: { subProperty1: string, subProperty2: (string | number)[] } }',
         );
       });
@@ -62,7 +64,7 @@ describe('common', () => {
       it('should handle outputStringLiterals', () => {
         const stringValue = 'I am a string';
         const options = { outputStringLiterals: true };
-        expect(getTypeScriptType(stringValue, options)).toEqual(`"${stringValue}"`);
+        expect(getTypeScriptType(stringValue, options)).to.equal(`"${stringValue}"`);
       });
     });
   });

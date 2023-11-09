@@ -63,8 +63,6 @@ declare namespace StyleDictionary {
     VERSION: string;
     tokens: DesignTokens | TransformedTokens;
     allTokens: TransformedTokens[];
-    properties: DesignTokens | TransformedTokens;
-    allProperties: TransformedTokens[];
     options: Config;
 
     transform: Record<string, Transform>;

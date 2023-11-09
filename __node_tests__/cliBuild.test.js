@@ -10,29 +10,28 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
-var childProcess = require('child_process');
-var helpers = require('./__helpers');
+import { expect } from 'chai';
+import childProcess from 'child_process';
+import fs from 'node:fs';
+import { clearOutput, fileExists } from '../__tests__/__helpers.js';
 
 describe('cliBuildWithJsConfig', () => {
-  beforeAll(() => {
-    helpers.clearOutput();
-    childProcess.execSync(
-      'node ./bin/style-dictionary build --config ./__tests__/__configs/test.js',
-    );
+  beforeEach(() => {
+    clearOutput(undefined, fs);
+    childProcess.execSync('node ./bin/style-dictionary build --config __tests__/__configs/test.js');
   });
 
-  afterAll(() => {
-    helpers.clearOutput();
+  afterEach(() => {
+    clearOutput();
   });
 
   it('should work with json config', () => {
-    expect(helpers.fileExists('./__tests__/__output/web/_icons.css')).toBeTruthy();
-    expect(helpers.fileExists('./__tests__/__output/android/colors.xml')).toBeTruthy();
+    expect(fileExists('__tests__/__output/web/_icons.css', fs)).to.be.true;
+    expect(fileExists('__tests__/__output/android/colors.xml', fs)).to.be.true;
   });
 
   it('should work with javascript config', () => {
-    expect(helpers.fileExists('./__tests__/__output/web/_icons.css')).toBeTruthy();
-    expect(helpers.fileExists('./__tests__/__output/android/colors.xml')).toBeTruthy();
+    expect(fileExists('__tests__/__output/web/_icons.css', fs)).to.be.true;
+    expect(fileExists('__tests__/__output/android/colors.xml', fs)).to.be.true;
   });
 });

@@ -8,8 +8,8 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import node_fs from 'node:fs';
 // usually also node:fs in this context, but can be customized by user
-import { fs } from '../fs.js';
-import StyleDictionary from '../index.js';
+import { fs } from 'style-dictionary/fs';
+import StyleDictionary from 'style-dictionary';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -34,7 +34,7 @@ function getConfigPath(options) {
     }
   }
 
-  return configPath;
+  return path.resolve(configPath);
 }
 
 program.version(pkg.version).description(pkg.description).usage('[command] [options]');
@@ -98,14 +98,14 @@ async function styleDictionaryBuild(options) {
   const configPath = getConfigPath(options);
 
   // Create a style dictionary object with the config
-  const styleDictionary = await StyleDictionary.extend(configPath);
+  const styleDictionary = new StyleDictionary(configPath);
 
   if (options.platform && options.platform.length > 0) {
-    options.platform.forEach(function (platform) {
-      styleDictionary.buildPlatform(platform);
-    });
+    return Promise.all(
+      options.platforms.map((platform) => styleDictionary.buildPlatform(platform)),
+    );
   } else {
-    styleDictionary.buildAllPlatforms();
+    return styleDictionary.buildAllPlatforms();
   }
 }
 
@@ -114,14 +114,14 @@ async function styleDictionaryClean(options) {
   const configPath = getConfigPath(options);
 
   // Create a style dictionary object with the config
-  const styleDictionary = await StyleDictionary.extend(configPath);
+  const styleDictionary = new StyleDictionary(configPath);
 
   if (options.platform && options.platform.length > 0) {
-    options.platform.forEach(function (platform) {
-      styleDictionary.cleanPlatform(platform);
-    });
+    return Promise.all(
+      options.platforms.map((platform) => styleDictionary.cleanPlatform(platform)),
+    );
   } else {
-    styleDictionary.cleanAllPlatforms();
+    return styleDictionary.cleanAllPlatforms();
   }
 }
 

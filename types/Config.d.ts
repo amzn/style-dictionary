@@ -32,6 +32,5 @@ export interface Config {
   include?: string[];
   source?: string[];
   tokens?: DesignTokens;
-  properties?: DesignTokens;
   platforms: Record<string, Platform>;
 }

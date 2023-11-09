@@ -10,16 +10,17 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-const formats = require('../../lib/common/formats');
-const createDictionary = require('../../lib/utils/createDictionary');
-const createFormatArgs = require('../../lib/utils/createFormatArgs');
+import { expect } from 'chai';
+import formats from '../../lib/common/formats.js';
+import createDictionary from '../../lib/utils/createDictionary.js';
+import createFormatArgs from '../../lib/utils/createFormatArgs.js';
 
 const file = {
   destination: '__output/',
   format: 'typescript/es6-declarations',
 };
 
-const properties = {
+const tokens = {
   color: {
     red: {
       comment: 'Used for errors',
@@ -29,13 +30,13 @@ const properties = {
   },
 };
 
-const formatter = formats['typescript/es6-declarations'].bind(file);
+const format = formats['typescript/es6-declarations'];
 
 describe('formats', () => {
   describe('typescript/es6-declarations', () => {
     it('should be a valid TS file', () => {
-      const dictionary = createDictionary({ properties });
-      const output = formatter(
+      const dictionary = createDictionary({ tokens });
+      const output = format(
         createFormatArgs({
           dictionary,
           file,
@@ -48,19 +49,20 @@ describe('formats', () => {
 
       // assert that any lines have a string type definition
       lines.forEach((l) => {
-        expect(l.match(/^export.* : string;$/g).length).toEqual(1);
+        expect(l.match(/^export.* : string;$/g).length).to.equal(1);
       });
     });
 
-    it('with outputStringLiterals should match snapshot', () => {
-      const customFile = Object.assign({}, file, {
+    it('with outputStringLiterals should match snapshot', async () => {
+      const customFile = {
+        ...file,
         options: {
           outputStringLiterals: true,
         },
-      });
+      };
 
-      const dictionary = createDictionary({ properties });
-      const output = formatter(
+      const dictionary = createDictionary({ tokens });
+      const output = format(
         createFormatArgs({
           dictionary,
           file: customFile,
@@ -68,7 +70,7 @@ describe('formats', () => {
         }),
       );
 
-      expect(output).toMatchSnapshot();
+      await expect(output).to.matchSnapshot();
     });
   });
 });

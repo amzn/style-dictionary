@@ -23,7 +23,7 @@ const options = {
 describe('integration', () => {
   describe('object values', () => {
     StyleDictionary.extend({
-      properties: {
+      tokens: {
         hue: `120`,
         saturation: `50%`,
         lightness: `50%`,

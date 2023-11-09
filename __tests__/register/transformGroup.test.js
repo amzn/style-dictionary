@@ -10,83 +10,86 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
+import { expect } from 'chai';
+import StyleDictionary from 'style-dictionary';
 
-var StyleDictionary = require('../../index');
-var StyleDictionaryExtended = StyleDictionary.extend({});
+const dummyTransformName = 'transformGroup.test.js';
 
-describe('register/transformGroup', () => {
+describe('register/transformGroup', async () => {
+  const StyleDictionaryExtended = new StyleDictionary({});
+
   it('should error if name is not a string', () => {
-    expect(
-      StyleDictionaryExtended.registerTransformGroup.bind(null, {
-        transforms: ['foo'],
-      }),
-    ).toThrow('transform name must be a string');
+    expect(() => {
+      StyleDictionaryExtended.registerTransformGroup({
+        transforms: [dummyTransformName],
+      });
+    }).to.throw('transform name must be a string');
 
-    expect(
-      StyleDictionaryExtended.registerTransformGroup.bind(null, {
+    expect(() => {
+      StyleDictionaryExtended.registerTransformGroup({
         name: 1,
-        transforms: ['foo'],
-      }),
-    ).toThrow('transform name must be a string');
+        transforms: [dummyTransformName],
+      });
+    }).to.throw('transform name must be a string');
 
-    expect(
-      StyleDictionaryExtended.registerTransformGroup.bind(null, {
+    expect(() => {
+      StyleDictionaryExtended.registerTransformGroup({
         name: [],
-        transforms: ['foo'],
-      }),
-    ).toThrow('transform name must be a string');
+        transforms: [dummyTransformName],
+      });
+    }).to.throw('transform name must be a string');
 
-    expect(
-      StyleDictionaryExtended.registerTransformGroup.bind(null, {
+    expect(() => {
+      StyleDictionaryExtended.registerTransformGroup({
         name: {},
-        transforms: ['foo'],
-      }),
-    ).toThrow('transform name must be a string');
+        transforms: [dummyTransformName],
+      });
+    }).to.throw('transform name must be a string');
 
-    expect(
-      StyleDictionaryExtended.registerTransformGroup.bind(null, {
+    expect(() => {
+      StyleDictionaryExtended.registerTransformGroup({
         name: function () {},
-        transforms: ['foo'],
-      }),
-    ).toThrow('transform name must be a string');
+        transforms: [dummyTransformName],
+      });
+    }).to.throw('transform name must be a string');
   });
 
-  it('should error if transforms isnt an array', () => {
-    expect(
-      StyleDictionaryExtended.registerTransformGroup.bind(null, {
+  it("should error if transforms isn't an array", () => {
+    expect(() => {
+      StyleDictionaryExtended.registerTransformGroup({
         name: 'foo',
-      }),
-    ).toThrow('transforms must be an array of registered value transforms');
+      });
+    }).to.throw('transforms must be an array of registered value transforms');
 
-    expect(
-      StyleDictionaryExtended.registerTransformGroup.bind(null, {
+    expect(() => {
+      StyleDictionaryExtended.registerTransformGroup({
         name: 'foo',
-        transforms: 'foo',
-      }),
-    ).toThrow('transforms must be an array of registered value transforms');
+        transforms: dummyTransformName,
+      });
+    }).to.throw('transforms must be an array of registered value transforms');
 
-    expect(
-      StyleDictionaryExtended.registerTransformGroup.bind(null, {
+    expect(() => {
+      StyleDictionaryExtended.registerTransformGroup({
         name: 'foo',
         transforms: {},
-      }),
-    ).toThrow('transforms must be an array of registered value transforms');
+      });
+    }).to.throw('transforms must be an array of registered value transforms');
 
-    expect(
-      StyleDictionaryExtended.registerTransformGroup.bind(null, {
+    expect(() => {
+      StyleDictionaryExtended.registerTransformGroup({
         name: 'foo',
         transforms: function () {},
-      }),
-    ).toThrow('transforms must be an array of registered value transforms');
+      });
+    }).to.throw('transforms must be an array of registered value transforms');
   });
 
   it('should error if transforms arent registered', () => {
-    expect(
-      StyleDictionaryExtended.registerTransformGroup.bind(StyleDictionary, {
+    expect(() => {
+      StyleDictionaryExtended.registerTransformGroup({
         name: 'foo',
-        transforms: ['foo'],
-      }),
-    ).toThrow('transforms must be an array of registered value transforms');
+        transforms: [dummyTransformName],
+      });
+    }).to.throw('transforms must be an array of registered value transforms');
   });
 
   it('should work if everything is good', () => {
@@ -94,15 +97,15 @@ describe('register/transformGroup', () => {
       name: 'foo',
       transforms: ['size/px'],
     });
-    expect(Array.isArray(StyleDictionaryExtended.transformGroup.foo)).toBeTruthy();
-    expect(typeof StyleDictionaryExtended.transformGroup.foo[0]).toBe('string');
-    expect(StyleDictionaryExtended.transformGroup.foo[0]).toBe('size/px');
+    expect(Array.isArray(StyleDictionaryExtended.transformGroup.foo)).to.be.true;
+    expect(typeof StyleDictionaryExtended.transformGroup.foo[0]).to.equal('string');
+    expect(StyleDictionaryExtended.transformGroup.foo[0]).to.equal('size/px');
   });
 
-  it('should properly pass the registered format to instances', () => {
-    var SDE2 = StyleDictionaryExtended.extend({});
-    expect(Array.isArray(SDE2.transformGroup.foo)).toBeTruthy();
-    expect(typeof SDE2.transformGroup.foo[0]).toBe('string');
-    expect(SDE2.transformGroup.foo[0]).toBe('size/px');
+  it('should properly pass the registered format to instances', async () => {
+    const SDE2 = await StyleDictionaryExtended.extend({});
+    expect(Array.isArray(SDE2.transformGroup.foo)).to.be.true;
+    expect(typeof SDE2.transformGroup.foo[0]).to.equal('string');
+    expect(SDE2.transformGroup.foo[0]).to.equal('size/px');
   });
 });

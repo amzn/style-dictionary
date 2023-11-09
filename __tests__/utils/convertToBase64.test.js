@@ -10,29 +10,29 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
-var convertToBase64 = require('../../lib/utils/convertToBase64.js');
+import { expect } from 'chai';
+import convertToBase64 from '../../lib/utils/convertToBase64.js';
 
 describe('utils', () => {
   describe('convertToBase64', () => {
     it('should error if filePath isnt a string', () => {
-      expect(convertToBase64.bind(null)).toThrow('filePath name must be a string');
-      expect(convertToBase64.bind(null, [])).toThrow('filePath name must be a string');
-      expect(convertToBase64.bind(null, {})).toThrow('filePath name must be a string');
+      expect(convertToBase64.bind(null)).to.throw('filePath name must be a string');
+      expect(convertToBase64.bind(null, [])).to.throw('filePath name must be a string');
+      expect(convertToBase64.bind(null, {})).to.throw('filePath name must be a string');
     });
 
     it('should error if filePath isnt a file', () => {
-      expect(convertToBase64.bind(null, 'foo')).toThrow(
+      expect(convertToBase64.bind(null, 'foo')).to.throw(
         "ENOENT: no such file or directory, open 'foo'",
       );
     });
 
     it('should return a string', () => {
-      expect(typeof convertToBase64('__tests__/__configs/test.json')).toBe('string');
+      expect(typeof convertToBase64('__tests__/__configs/test.json')).to.equal('string');
     });
 
     it('should be a valid base64 string', () => {
-      expect(convertToBase64('__tests__/__json_files/simple.json')).toEqual(
+      expect(convertToBase64('__tests__/__json_files/simple.json')).to.equal(
         'ewogICJmb28iOiAiYmFyIiwKICAiYmFyIjogIntmb299Igp9',
       );
     });

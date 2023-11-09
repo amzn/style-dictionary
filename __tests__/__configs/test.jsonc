@@ -1,11 +1,11 @@
 {
   // some comment
-  "source": ["test/properties/**/*.json"],
+  "source": ["__tests__/__tokens/**/*.json"],
   "platforms": {
     "web": {
       "transformGroup": "web",
       "prefix": "smop",
-      "buildPath": "test/output/web/",
+      "buildPath": "__tests__/output/web/",
       "files": [
         {
           "destination": "_icons.css",
@@ -24,7 +24,7 @@
     "scss": {
       "transformGroup": "scss",
       "prefix": "smop",
-      "buildPath": "test/output/scss/",
+      "buildPath": "__tests__/output/scss/",
       "files": [
         {
           "destination": "_icons.scss",
@@ -39,7 +39,7 @@
     "less": {
       "transformGroup": "less",
       "prefix": "smop",
-      "buildPath": "test/output/less/",
+      "buildPath": "__tests__/output/less/",
       "files": [
         {
           "destination": "_icons.less",
@@ -53,7 +53,7 @@
     },
     "android": {
       "transformGroup": "android",
-      "buildPath": "test/output/",
+      "buildPath": "__tests__/output/",
       "files": [
         {
           "destination": "android/colors.xml",
@@ -72,7 +72,7 @@
     },
     "ios": {
       "transformGroup": "ios",
-      "buildPath": "test/output/ios/",
+      "buildPath": "__tests__/output/ios/",
       "files": [
         {
           "destination": "style_dictionary.plist",

@@ -10,13 +10,12 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
+import { expect } from 'chai';
+import filterTokens from '../lib/filterTokens.js';
+import { clearOutput } from './__helpers.js';
+import flattenTokens from '../lib/utils/flattenTokens.js';
 
-var filterProperties = require('../lib/filterProperties');
-var helpers = require('./__helpers');
-var flattenProperties = require('../lib/utils/flattenProperties');
-var _ = require('../lib/utils/es6_');
-
-var colorRed = {
+const colorRed = {
   value: '#FF0000',
   original: {
     value: '#FF0000',
@@ -26,7 +25,7 @@ var colorRed = {
   path: ['color', 'red'],
 };
 
-var colorBlue = {
+const colorBlue = {
   value: '#0000FF',
   original: {
     value: '#0000FF',
@@ -36,7 +35,7 @@ var colorBlue = {
   path: ['color', 'blue'],
 };
 
-var sizeSmall = {
+const sizeSmall = {
   value: '2px',
   original: {
     value: '2px',
@@ -46,7 +45,7 @@ var sizeSmall = {
   path: ['size', 'small'],
 };
 
-var sizeLarge = {
+const sizeLarge = {
   value: '4px',
   original: {
     value: '4px',
@@ -56,7 +55,7 @@ var sizeLarge = {
   path: ['size', 'large'],
 };
 
-var not_kept = {
+const not_kept = {
   value: 0,
   original: {
     value: 0,
@@ -66,7 +65,7 @@ var not_kept = {
   path: ['falsy_values', 'not_kept'],
 };
 
-var kept = {
+const kept = {
   value: 0,
   original: {
     value: 0,
@@ -76,7 +75,7 @@ var kept = {
   path: ['falsy_values', 'kept'],
 };
 
-var properties = {
+const tokens = {
   color: {
     red: colorRed,
     blue: colorBlue,
@@ -87,72 +86,68 @@ var properties = {
   },
 };
 
-var falsy_values = {
+const falsy_values = {
   kept: kept,
   not_kept: not_kept,
 };
 
-var dictionary = {
-  properties: properties,
-  allProperties: flattenProperties(properties),
+const dictionary = {
+  tokens,
+  allTokens: flattenTokens(tokens),
 };
 
-var falsy_dictionary = {
-  properties: falsy_values,
-  allProperties: flattenProperties(falsy_values),
+const falsy_dictionary = {
+  tokens: falsy_values,
+  allTokens: flattenTokens(falsy_values),
 };
 
-describe('filterProperties', () => {
+describe('filterTokens', () => {
   beforeEach(() => {
-    helpers.clearOutput();
+    clearOutput();
   });
 
   afterEach(() => {
-    helpers.clearOutput();
+    clearOutput();
   });
 
   it('should return the original dictionary if no filter is provided', () => {
-    expect(dictionary).toMatchObject(filterProperties(dictionary));
+    expect(dictionary).to.eql(filterTokens(dictionary));
   });
 
   it('should work with a filter function', () => {
-    var filter = function (property) {
-      return property.path.includes('size');
-    };
-    var filteredDictionary = filterProperties(dictionary, filter);
-    _.each(filteredDictionary.allProperties, function (property) {
-      expect(property).not.toBe(colorRed);
-      expect(property).not.toBe(colorBlue);
+    const filter = (property) => property.path.includes('size');
+    const filteredDictionary = filterTokens(dictionary, filter);
+    filteredDictionary.allTokens.forEach((property) => {
+      expect(property).to.not.equal(colorRed);
+      expect(property).not.to.not.equal(colorBlue);
     });
-    expect(filteredDictionary.allProperties).toEqual([sizeSmall, sizeLarge]);
-    expect(filteredDictionary.properties).toHaveProperty('size');
-    expect(filteredDictionary.properties).not.toHaveProperty('color');
+    expect(filteredDictionary.allTokens).to.eql([sizeSmall, sizeLarge]);
+    expect(filteredDictionary.tokens).to.have.property('size');
+    expect(filteredDictionary.tokens).to.not.have.property('color');
   });
 
   it('should work with falsy values and a filter function', () => {
-    var filter = function (property) {
-      return property.path.includes('kept');
-    };
+    const filter = (property) => property.path.includes('kept');
 
-    var filteredDictionary = filterProperties(falsy_dictionary, filter);
-    _.each(filteredDictionary.allProperties, function (property) {
-      expect(property).not.toBe(not_kept);
+    const filteredDictionary = filterTokens(falsy_dictionary, filter);
+    filteredDictionary.allTokens.forEach((property) => {
+      expect(property).to.not.equal(not_kept);
     });
-    expect(filteredDictionary.allProperties).toEqual([kept]);
-    expect(filteredDictionary.properties).toHaveProperty('kept');
-    expect(filteredDictionary.properties).not.toHaveProperty('not_kept');
+    expect(filteredDictionary.allTokens).to.eql([kept]);
+    expect(filteredDictionary.tokens).to.have.property('kept');
+    expect(filteredDictionary.tokens).to.not.have.property('not_kept');
   });
 
   describe('should throw if', () => {
     it('filter is a string', () => {
-      expect(function () {
-        filterProperties(dictionary, 'my_filter');
-      }).toThrow(/filter is not a function/);
+      expect(() => {
+        filterTokens(dictionary, 'my_filter');
+      }).to.throw(/filter is not a function/);
     });
     it('filter is an object', () => {
-      expect(function () {
-        filterProperties(dictionary, { attributes: { category: 'size' } });
-      }).toThrow(/filter is not a function/);
+      expect(() => {
+        filterTokens(dictionary, { attributes: { category: 'size' } });
+      }).to.throw(/filter is not a function/);
     });
   });
 });

@@ -1,0 +1,74 @@
+diff --git a/node_modules/@web/test-runner-commands/dist/index.js b/node_modules/@web/test-runner-commands/dist/index.js
+index 86ca323..9f4c9b0 100644
+--- a/node_modules/@web/test-runner-commands/dist/index.js
++++ b/node_modules/@web/test-runner-commands/dist/index.js
+@@ -19,4 +19,7 @@ var filePlugin_1 = require("./filePlugin");
+ Object.defineProperty(exports, "filePlugin", { enumerable: true, get: function () { return filePlugin_1.filePlugin; } });
+ var snapshotPlugin_1 = require("./snapshotPlugin");
+ Object.defineProperty(exports, "snapshotPlugin", { enumerable: true, get: function () { return snapshotPlugin_1.snapshotPlugin; } });
++Object.defineProperty(exports, "SnapshotStore", { enumerable: true, get: function () { return snapshotPlugin_1.SnapshotStore; } });
++Object.defineProperty(exports, "getSnapshotPath", { enumerable: true, get: function () { return snapshotPlugin_1.getSnapshotPath; } });
++Object.defineProperty(exports, "isSaveSnapshotPayload", { enumerable: true, get: function () { return snapshotPlugin_1.isSaveSnapshotPayload; } });
+ //# sourceMappingURL=index.js.map
+\ No newline at end of file
+diff --git a/node_modules/@web/test-runner-commands/dist/snapshotPlugin.js b/node_modules/@web/test-runner-commands/dist/snapshotPlugin.js
+index 6606c7e..9d49140 100644
+--- a/node_modules/@web/test-runner-commands/dist/snapshotPlugin.js
++++ b/node_modules/@web/test-runner-commands/dist/snapshotPlugin.js
+@@ -33,6 +33,7 @@ function isSaveSnapshotPayload(payload) {
+         throw new Error('You must provide a content option');
+     return true;
+ }
++exports.isSaveSnapshotPayload = isSaveSnapshotPayload;
+ function getSnapshotPath(testFile) {
+     const testDir = path_1.default.dirname(testFile);
+     const testFileName = path_1.default.basename(testFile);
+@@ -40,6 +41,7 @@ function getSnapshotPath(testFile) {
+     const fileWithoutExt = testFileName.substring(0, testFileName.length - ext.length);
+     return path_1.default.join(testDir, '__snapshots__', `${fileWithoutExt}.snap.js`);
+ }
++exports.getSnapshotPath = getSnapshotPath;
+ class SnapshotStore {
+     constructor() {
+         this.snapshots = new Map();
+@@ -78,9 +80,7 @@ class SnapshotStore {
+         const nameStr = JSON.stringify(name);
+         const startMarker = `snapshots[${nameStr}]`;
+         const endMarker = `/* end snapshot ${name} */\n\n`;
+-        const replacement = updatedSnapshot
+-            ? `${startMarker} = \n\`${updatedSnapshot}\`;\n${endMarker}`
+-            : '';
++        const replacement = `${startMarker} = \n\`${updatedSnapshot}\`;\n${endMarker}`;
+         const content = await this.get(testFilePath);
+         let updatedContent;
+         const startIndex = content.indexOf(startMarker);
+@@ -127,6 +127,7 @@ class SnapshotStore {
+         }
+     }
+ }
++exports.SnapshotStore = SnapshotStore;
+ function snapshotPlugin(config) {
+     const updateSnapshots = config && config.updateSnapshots;
+     const snapshots = new SnapshotStore();
+diff --git a/node_modules/@web/test-runner-commands/plugins.mjs b/node_modules/@web/test-runner-commands/plugins.mjs
+index 88bc3da..4fb6254 100644
+--- a/node_modules/@web/test-runner-commands/plugins.mjs
++++ b/node_modules/@web/test-runner-commands/plugins.mjs
+@@ -11,6 +11,9 @@ const {
+   a11ySnapshotPlugin,
+   filePlugin,
+   snapshotPlugin,
++  SnapshotStore,
++  getSnapshotPath,
++  isSaveSnapshotPayload,
+ } = cjsEntrypoint;
+ 
+ export {
+@@ -23,4 +26,7 @@ export {
+   a11ySnapshotPlugin,
+   filePlugin,
+   snapshotPlugin,
++  SnapshotStore,
++  getSnapshotPath,
++  isSaveSnapshotPayload,
+ };

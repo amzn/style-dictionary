@@ -10,8 +10,8 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
-const fileHeader = require('../../../lib/common/formatHelpers/fileHeader');
+import { expect } from 'chai';
+import fileHeader from '../../../lib/common/formatHelpers/fileHeader.js';
 
 const defaultLine1 = `Do not edit directly`;
 const defaultLine2 = `Generated on Sat, 01 Jan 2000 00:00:00 GMT`;
@@ -21,7 +21,7 @@ describe('common', () => {
     describe('fileHeader', () => {
       it(`should default to /**/ comment style`, () => {
         const comment = fileHeader({});
-        expect(comment).toEqual(
+        expect(comment).to.equal(
           `/**
  * ${defaultLine1}
  * ${defaultLine2}
@@ -33,7 +33,7 @@ describe('common', () => {
 
       it(`should handle commentStyle short`, () => {
         const comment = fileHeader({ commentStyle: 'short' });
-        expect(comment).toEqual(
+        expect(comment).to.equal(
           `
 // ${defaultLine1}
 // ${defaultLine2}
@@ -44,7 +44,7 @@ describe('common', () => {
 
       it(`should handle commentStyle xml`, () => {
         const comment = fileHeader({ commentStyle: 'xml' });
-        expect(comment).toEqual(
+        expect(comment).to.equal(
           `<!--
   ${defaultLine1}
   ${defaultLine2}
@@ -60,7 +60,7 @@ describe('common', () => {
             },
           },
         });
-        expect(comment).toEqual('');
+        expect(comment).to.equal('');
       });
 
       it(`should handle custom fileHeader function`, () => {
@@ -73,7 +73,7 @@ describe('common', () => {
             },
           },
         });
-        expect(comment).toEqual(
+        expect(comment).to.equal(
           `/**
  * Never gonna give you up
  * Never gonna let you down
@@ -93,7 +93,7 @@ describe('common', () => {
             },
           },
         });
-        expect(comment).toEqual(
+        expect(comment).to.equal(
           `/**
  * ${defaultLine1}
  * ${defaultLine2}
@@ -113,7 +113,7 @@ describe('common', () => {
             footer: `\n#}`,
           },
         });
-        expect(comment).toEqual(
+        expect(comment).to.equal(
           `{#
   ${defaultLine1}
   ${defaultLine2}
