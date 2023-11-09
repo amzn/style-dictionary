@@ -10,14 +10,13 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
+import { expect } from 'chai';
+import { compileString } from 'sass';
+import formats from '../../lib/common/formats.js';
+import createDictionary from '../../lib/utils/createDictionary.js';
+import createFormatArgs from '../../lib/utils/createFormatArgs.js';
 
-var formats = require('../../lib/common/formats');
-var scss = require('node-sass');
-const createDictionary = require('../../lib/utils/createDictionary');
-const createFormatArgs = require('../../lib/utils/createFormatArgs');
-var _ = require('../../lib/utils/es6_');
-
-var file = {
+const file = {
   destination: '__output/',
   format: 'scss/variables',
   name: 'foo',
@@ -26,7 +25,7 @@ var file = {
 const propertyName = 'color-base-red-400';
 const propertyValue = '#EF5350';
 
-const properties = {
+const tokens = {
   color: {
     base: {
       red: {
@@ -49,43 +48,42 @@ const properties = {
   },
 };
 
-var formatter = formats['scss/variables'].bind(file);
-const dictionary = createDictionary({ properties });
+const format = formats['scss/variables'];
+const dictionary = createDictionary({ tokens });
 
 describe('formats', () => {
   describe('scss/variables', () => {
-    it('should have a valid scss syntax', () => {
-      const result = scss.renderSync({
-        data: formatter(
-          createFormatArgs({
-            dictionary,
-            file,
-            platform: {},
-          }),
-          {},
+    it('should have a valid scss syntax and match snapshot', async () => {
+      const result = format(
+        createFormatArgs({
+          dictionary,
           file,
-        ),
-      });
-      expect(result.css).toBeDefined();
+          platform: {},
+        }),
+        {},
+        file,
+      );
+      const scssResult = compileString(result);
+      await expect(result).to.matchSnapshot(1);
+      await expect(scssResult.css).to.matchSnapshot(2);
     });
 
-    it('should optionally use !default', () => {
-      var themeableDictionary = _.cloneDeep(dictionary),
-        formattedScss = formatter(
-          createFormatArgs({
-            dictionary,
-            file,
-            platform: {},
-          }),
-          {},
+    it('should optionally use !default', async () => {
+      const themeableDictionary = { ...dictionary };
+      const formattedScss = format(
+        createFormatArgs({
+          dictionary,
           file,
-        ),
-        themeableScss = '';
+          platform: {},
+        }),
+        {},
+        file,
+      );
 
-      expect(formattedScss).not.toMatch('!default');
+      expect(formattedScss).not.to.match(new RegExp('!default;'));
 
       themeableDictionary.allTokens[0].themeable = true;
-      themeableScss = formatter(
+      const themeableScss = format(
         createFormatArgs({
           dictionary: themeableDictionary,
           file,
@@ -95,7 +93,7 @@ describe('formats', () => {
         file,
       );
 
-      expect(themeableScss).toMatch('#EF5350 !default;');
+      expect(themeableScss).to.match(new RegExp('#EF5350 !default;'));
     });
   });
 });

@@ -10,41 +10,44 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
+import { expect } from 'chai';
+import { fs } from 'style-dictionary/fs';
+import StyleDictionary from 'style-dictionary';
+import { clearOutput, fileExists } from './__helpers.js';
 
-var StyleDictionary = require('../index');
-var StyleDictionaryExtended = StyleDictionary.extend({
+const StyleDictionaryExtended = new StyleDictionary({
   platforms: {
     android: {
       actions: ['test'],
     },
   },
 });
-var helpers = require('./__helpers');
-var fs = require('fs-extra');
+await StyleDictionaryExtended.hasInitialized;
 
 StyleDictionaryExtended.registerAction({
   name: 'test',
   do: function () {
-    fs.writeFileSync('./__tests__/__output/action.txt', 'hi');
+    fs.mkdirSync('__tests__/__output', { recursive: true });
+    fs.writeFileSync('__tests__/__output/action.txt', 'hi', 'utf-8');
   },
   undo: function () {
-    fs.removeSync('./__tests__/__output/action.txt');
+    fs.unlinkSync('__tests__/__output/action.txt');
   },
 });
 
 describe('performAction', () => {
   beforeEach(() => {
-    helpers.clearOutput();
+    clearOutput();
   });
 
   afterEach(() => {
-    helpers.clearOutput();
+    clearOutput();
   });
 
   describe('handle actions', () => {
-    it('should write to a file properly', () => {
-      StyleDictionaryExtended.buildPlatform('android');
-      expect(helpers.fileExists('./__tests__/__output/action.txt')).toBeTruthy();
+    it('should write to a file properly', async () => {
+      await StyleDictionaryExtended.buildPlatform('android');
+      expect(fileExists('__tests__/__output/action.txt')).to.be.true;
     });
   });
 });

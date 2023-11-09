@@ -10,14 +10,13 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
+import { expect } from 'chai';
+import { compileString } from 'sass';
+import formats from '../../lib/common/formats.js';
+import createDictionary from '../../lib/utils/createDictionary.js';
+import createFormatArgs from '../../lib/utils/createFormatArgs.js';
 
-var formats = require('../../lib/common/formats');
-var scss = require('node-sass');
-var _ = require('../../lib/utils/es6_');
-var createDictionary = require('../../lib/utils/createDictionary');
-var createFormatArgs = require('../../lib/utils/createFormatArgs');
-
-var properties = {
+const tokens = {
   size: {
     font: {
       small: {
@@ -85,7 +84,7 @@ var properties = {
         value:
           'PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItYm9vayI+PHBhdGggZD0iTTQgMTkuNUEyLjUgMi41IDAgMCAxIDYuNSAxN0gyMCI+PC9wYXRoPjxwYXRoIGQ9Ik02LjUgMkgyMHYyMEg2LjVBMi41IDIuNSAwIDAgMSA0IDE5LjV2LTE1QTIuNSAyLjUgMCAwIDEgNi41IDJ6Ij48L3BhdGg+PC9zdmc+',
         original: {
-          value: './test/__assets/icons/book.svg',
+          value: '__tests__/__assets/icons/book.svg',
         },
         name: 'asset-icon-book',
         attributes: {
@@ -100,16 +99,16 @@ var properties = {
 };
 
 describe('formats', () => {
-  _.each(['scss/map-flat', 'scss/map-deep'], function (key) {
+  ['scss/map-flat', 'scss/map-deep'].forEach((key) => {
     describe(key, () => {
-      var file = {
+      const file = {
         destination: '__output/',
         format: key,
       };
 
-      var formatter = formats[key].bind(file);
-      const dictionary = createDictionary({ properties });
-      var output = formatter(
+      const formatter = formats[key].bind(file);
+      const dictionary = createDictionary({ tokens });
+      const output = formatter(
         createFormatArgs({
           dictionary,
           file,
@@ -120,18 +119,16 @@ describe('formats', () => {
       );
 
       it('should return ' + key + ' as a string', () => {
-        expect(typeof output).toBe('string');
+        expect(typeof output).to.equal('string');
       });
 
       it('should have a valid scss syntax', () => {
-        const result = scss.renderSync({
-          data: output,
-        });
-        expect(result.css).toBeDefined();
+        const result = compileString(output);
+        expect(result.css).to.not.be.undefined;
       });
 
-      it(key + ' snapshot', () => {
-        expect(output).toMatchSnapshot();
+      it(key + ' snapshot', async () => {
+        await expect(output).to.matchSnapshot();
       });
     });
   });

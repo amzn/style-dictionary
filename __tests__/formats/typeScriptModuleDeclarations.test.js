@@ -10,9 +10,10 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-const formats = require('../../lib/common/formats');
-const createDictionary = require('../../lib/utils/createDictionary');
-const createFormatArgs = require('../../lib/utils/createFormatArgs');
+import { expect } from 'chai';
+import formats from '../../lib/common/formats.js';
+import createDictionary from '../../lib/utils/createDictionary.js';
+import createFormatArgs from '../../lib/utils/createFormatArgs.js';
 
 const file = {
   destination: '__output/',
@@ -24,19 +25,19 @@ const file = {
   },
 };
 
-const properties = {
+const tokens = {
   color: {
     red: { value: '#FF0000' },
   },
 };
 
-var formatter = formats['typescript/module-declarations'].bind(file);
+const format = formats['typescript/module-declarations'].bind(file);
 
 describe('formats', () => {
   describe('typescript/module-declarations', () => {
     it('should be a valid TS file', () => {
-      const dictionary = createDictionary({ properties });
-      const output = formatter(
+      const dictionary = createDictionary({ tokens });
+      const output = format(
         createFormatArgs({
           dictionary,
           file,
@@ -51,7 +52,7 @@ describe('formats', () => {
 
       // assert that any lines have a DesignToken type definition
       lines.forEach((l) => {
-        expect(l.match(/^.*: DesignToken$/g).length).toEqual(1);
+        expect(l.match(/^.*: DesignToken$/g).length).to.equal(1);
       });
     });
   });

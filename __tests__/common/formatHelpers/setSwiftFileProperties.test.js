@@ -10,32 +10,32 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
-const setSwiftFileProperties = require('../../../lib/common/formatHelpers/setSwiftFileProperties');
+import { expect } from 'chai';
+import setSwiftFileProperties from '../../../lib/common/formatHelpers/setSwiftFileProperties.js';
 
 describe('common', () => {
   describe('formatHelpers', () => {
     describe('setSwiftFileProperties', () => {
       it('should default accessControl be public', () => {
         const file = setSwiftFileProperties({}, undefined, 'ios-swift');
-        expect(file.accessControl).toEqual('public ');
+        expect(file.accessControl).to.equal('public ');
       });
 
       it('should default objectType be class', () => {
         const file = setSwiftFileProperties({}, undefined, 'ios-swift');
-        expect(file.objectType).toEqual('class');
+        expect(file.objectType).to.equal('class');
       });
 
       it('should default import be ["UIKit"]', () => {
         const file = setSwiftFileProperties({}, undefined, 'ios-swift');
         const fileSeparate = setSwiftFileProperties({}, undefined, 'ios-swift-separate');
-        expect(file.import).toEqual(['UIKit']);
-        expect(fileSeparate.import).toEqual(['UIKit']);
+        expect(file.import).to.eql(['UIKit']);
+        expect(fileSeparate.import).to.eql(['UIKit']);
       });
 
       it('should transform string import to array', () => {
         const file = setSwiftFileProperties({ import: 'SwiftUI' }, undefined, 'ios-swift');
-        expect(file.import).toEqual(['SwiftUI']);
+        expect(file.import).to.eql(['SwiftUI']);
       });
 
       it('should file be properly configured', () => {
@@ -48,9 +48,9 @@ describe('common', () => {
           undefined,
           'ios-swift',
         );
-        expect(file.objectType).toEqual('extension');
-        expect(file.import).toEqual(['SwiftUI']);
-        expect(file.accessControl).toEqual('public ');
+        expect(file.objectType).to.equal('extension');
+        expect(file.import).to.eql(['SwiftUI']);
+        expect(file.accessControl).to.equal('public ');
       });
     });
   });

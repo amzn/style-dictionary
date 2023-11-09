@@ -10,30 +10,30 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
-var helpers = require('./__helpers');
-var StyleDictionary = require('../index');
+import { expect } from 'chai';
+import StyleDictionary from 'style-dictionary';
+import { clearOutput, fileExists } from './__helpers.js';
 
 describe('buildAllPlatforms', () => {
   beforeEach(() => {
-    helpers.clearOutput();
+    clearOutput();
   });
 
   afterEach(() => {
-    helpers.clearOutput();
+    clearOutput();
   });
 
-  it('should work with json config', () => {
-    var StyleDictionaryExtended = StyleDictionary.extend(__dirname + '/__configs/test.json');
-    StyleDictionaryExtended.buildAllPlatforms();
-    expect(helpers.fileExists('./__tests__/__output/web/_icons.css')).toBeTruthy();
-    expect(helpers.fileExists('./__tests__/__output/android/colors.xml')).toBeTruthy();
+  it('should work with json config', async () => {
+    const StyleDictionaryExtended = new StyleDictionary('__tests__/__configs/test.json');
+    await StyleDictionaryExtended.buildAllPlatforms();
+    expect(fileExists('__tests__/__output/web/_icons.css')).to.be.true;
+    expect(fileExists('__tests__/__output/android/colors.xml')).to.be.true;
   });
 
-  it('should work with js config', () => {
-    var StyleDictionaryExtended = StyleDictionary.extend(__dirname + '/__configs/test.js');
-    StyleDictionaryExtended.buildAllPlatforms();
-    expect(helpers.fileExists('./__tests__/__output/web/_icons.css')).toBeTruthy();
-    expect(helpers.fileExists('./__tests__/__output/android/colors.xml')).toBeTruthy();
+  it('should work with js config', async () => {
+    const StyleDictionaryExtended = new StyleDictionary('__tests__/__configs/test.js');
+    await StyleDictionaryExtended.buildAllPlatforms();
+    expect(fileExists('__tests__/__output/web/_icons.css')).to.be.true;
+    expect(fileExists('__tests__/__output/android/colors.xml')).to.be.true;
   });
 });

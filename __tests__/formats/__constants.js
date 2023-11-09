@@ -1,17 +1,17 @@
-const createDictionary = require('../../lib/utils/createDictionary');
+import createDictionary from '../../lib/utils/createDictionary.js';
 
-const colorPropertyName = 'color-base-red-400';
-const colorPropertyValue = '#EF5350';
+const colorTokenName = 'color-base-red-400';
+const colorTokenValue = '#EF5350';
 
-const colorProperties = {
+const colorTokens = {
   color: {
     base: {
       red: {
         400: {
-          name: colorPropertyName,
-          value: colorPropertyValue,
+          name: colorTokenName,
+          value: colorTokenValue,
           original: {
-            value: colorPropertyValue,
+            value: colorTokenValue,
           },
           attributes: {
             category: 'color',
@@ -26,18 +26,18 @@ const colorProperties = {
   },
 };
 
-const iconPropertyName = 'content-icon-email';
-const iconPropertyValue = "'\\E001'";
+const iconTokenName = 'content-icon-email';
+const iconTokenValue = "'\\E001'";
 const itemClass = '3d_rotation';
 
-const iconProperties = {
+const iconTokens = {
   content: {
     icon: {
       email: {
-        name: iconPropertyName,
-        value: iconPropertyValue,
+        name: iconTokenName,
+        value: iconTokenValue,
         original: {
-          value: iconPropertyValue,
+          value: iconTokenValue,
         },
         attributes: {
           category: 'content',
@@ -50,10 +50,5 @@ const iconProperties = {
   },
 };
 
-const colorDictionary = createDictionary({ properties: colorProperties });
-const iconDictionary = createDictionary({ properties: iconProperties });
-
-module.exports = {
-  colorDictionary,
-  iconDictionary,
-};
+export const colorDictionary = createDictionary({ tokens: colorTokens });
+export const iconDictionary = createDictionary({ tokens: iconTokens });

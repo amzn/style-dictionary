@@ -35,7 +35,7 @@ describe(`integration`, () => {
 
   describe(`logging`, () => {
     describe(`file`, () => {
-      it(`should warn user empty properties`, () => {
+      it(`should warn user empty tokens`, () => {
         StyleDictionary.extend({
           source: [`__integration__/tokens/**/*.json?(c)`],
           platforms: {
@@ -55,7 +55,7 @@ describe(`integration`, () => {
         expect(consoleOutput.map(cleanConsoleOutput).join('\n')).toMatchSnapshot();
       });
 
-      it(`should not warn user of empty properties with log level set to error`, () => {
+      it(`should not warn user of empty tokens with log level set to error`, () => {
         StyleDictionary.extend({
           logLevel: `error`,
           source: [`__integration__/tokens/**/*.json?(c)`],

@@ -10,8 +10,8 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
-var transformConfig = require('../../lib/transform/config');
+import { expect } from 'chai';
+import transformConfig from '../../lib/transform/config.js';
 
 const dictionary = {
   transformGroup: {
@@ -39,7 +39,7 @@ Unknown transformGroup "barTransformGroup" found in platform "test":
 "barTransformGroup" does not match the name of a registered transformGroup.
 `;
 
-      expect(transformConfig.bind(null, noTransformGroupCfg, dictionary, 'test')).toThrow(err);
+      expect(transformConfig.bind(null, noTransformGroupCfg, dictionary, 'test')).to.throw(err);
     });
 
     it('Emits errors when called with a transform that does not exist', () => {
@@ -52,7 +52,7 @@ Unknown transforms "barTransform", "bazTransform" found in platform "test":
 None of "barTransform", "bazTransform" match the name of a registered transform.
 `;
 
-      expect(transformConfig.bind(null, noTransformCfg, dictionary, 'test')).toThrow(err);
+      expect(transformConfig.bind(null, noTransformCfg, dictionary, 'test')).to.throw(err);
     });
   });
 });

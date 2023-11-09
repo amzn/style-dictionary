@@ -16,7 +16,7 @@ const chalk = require('chalk');
 const StyleDictionary = require('../index');
 const { buildPath } = require('./_constants');
 
-const properties = {
+const tokens = {
   color: {
     red: { value: '#f00' },
     background: {
@@ -32,7 +32,7 @@ describe('integration', () => {
       StyleDictionary.extend({
         // we are only testing name collision warnings options so we don't need
         // the full source.
-        properties,
+        tokens,
         platforms: {
           web: {
             buildPath,
@@ -53,7 +53,7 @@ describe('integration', () => {
       StyleDictionary.extend({
         // we are only testing name collision warnings options so we don't need
         // the full source.
-        properties,
+        tokens,
         platforms: {
           web: {
             buildPath,

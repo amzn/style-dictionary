@@ -11,38 +11,42 @@
  * and limitations under the License.
  */
 
-var fs = require('fs-extra');
+import { expect } from 'chai';
+import { fs } from 'style-dictionary/fs';
 
-module.exports = {
-  clearOutput: function () {
-    fs.emptyDirSync('__tests__/__output');
-  },
+export const expectThrowsAsync = async (method, errorMessage) => {
+  let error = null;
+  try {
+    await method();
+  } catch (err) {
+    error = err;
+  }
+  expect(error).to.be.an('Error');
+  if (errorMessage) {
+    expect(error.message).to.equal(errorMessage);
+  }
+};
 
-  fileToJSON: function (path) {
-    return fs.readJsonSync(path);
-  },
+export const fileToJSON = (path, _fs = fs) => {
+  return JSON.parse(_fs.readFileSync(path, 'utf-8'));
+};
 
-  fileExists: function (filePath) {
-    try {
-      return fs.statSync(filePath).isFile();
-    } catch (err) {
-      return false;
-    }
-  },
+export const clearOutput = (outputFolder = '__tests__/__output', _fs = fs) => {
+  try {
+    _fs.rmdirSync(outputFolder);
+  } catch (e) {
+    //
+  }
+};
 
-  pathDoesNotExist: function (path) {
-    try {
-      return !fs.existsSync(path);
-    } catch (err) {
-      return false;
-    }
-  },
+export const fileExists = (filePath, _fs = fs) => {
+  try {
+    return _fs.statSync(filePath).isFile();
+  } catch (err) {
+    return false;
+  }
+};
 
-  dirDoesNotExist: function (dirPath) {
-    return this.pathDoesNotExist(dirPath);
-  },
-
-  fileDoesNotExist: function (filePath) {
-    return this.pathDoesNotExist(filePath);
-  },
+export const dirExists = (dirPath, _fs = fs) => {
+  return _fs.existsSync(dirPath);
 };

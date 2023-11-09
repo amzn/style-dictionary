@@ -24,7 +24,7 @@ const log = jest.spyOn(console, 'log').mockImplementation((message) => consoleOu
  * level. These messages happen when `.extend()` is called to verify
  * proper configuration such as source being an array. This will also check
  * for collisions in source files and any errors that happen when parsing
- * and merging properties. This is the first of 3 phases of logging, the
+ * and merging tokens. This is the first of 3 phases of logging, the
  * next two are: platform and file.
  */
 describe(`integration >`, () => {

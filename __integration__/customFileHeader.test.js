@@ -33,8 +33,8 @@ describe(`integration`, () => {
       },
 
       // only testing the file header in these tests so we are
-      // using a small properties object with a single token
-      properties: {
+      // using a small tokens object with a single token
+      tokens: {
         color: {
           red: { value: '#ff0000' },
         },

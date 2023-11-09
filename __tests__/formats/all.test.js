@@ -10,13 +10,12 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
+import { expect } from 'chai';
+import formats from '../../lib/common/formats.js';
+import createDictionary from '../../lib/utils/createDictionary.js';
+import createFormatArgs from '../../lib/utils/createFormatArgs.js';
 
-var formats = require('../../lib/common/formats');
-var createDictionary = require('../../lib/utils/createDictionary');
-var createFormatArgs = require('../../lib/utils/createFormatArgs');
-var _ = require('../../lib/utils/es6_');
-
-var file = {
+const file = {
   destination: '__output/',
   format: 'javascript/es6',
   filter: {
@@ -26,7 +25,7 @@ var file = {
   },
 };
 
-var properties = {
+const tokens = {
   color: {
     red: {
       value: '#FF0000',
@@ -46,10 +45,10 @@ var properties = {
 };
 
 describe('formats', () => {
-  _.each(_.keys(formats), function (key) {
-    var formatter = formats[key].bind(file);
-    const dictionary = createDictionary({ properties });
-    var output = formatter(
+  Object.keys(formats).forEach((key) => {
+    const formatter = formats[key].bind(file);
+    const dictionary = createDictionary({ tokens });
+    const output = formatter(
       createFormatArgs({
         dictionary,
         file,
@@ -60,12 +59,12 @@ describe('formats', () => {
     );
 
     describe('all', () => {
-      it('should match ' + key + ' snapshot', () => {
-        expect(output).toMatchSnapshot();
+      it('should match ' + key + ' snapshot', async () => {
+        await expect(output).to.matchSnapshot();
       });
 
       it('should return ' + key + ' as a string', () => {
-        expect(typeof output).toBe('string');
+        expect(typeof output).to.equal('string');
       });
     });
   });

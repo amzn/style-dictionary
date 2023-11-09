@@ -393,7 +393,7 @@ which uses: prefix, indentation, separator, suffix, and commentStyle.
     <td>options.formatting</td><td><code>Object</code></td><td><p>Custom formatting properties that define parts of a declaration line in code. The configurable strings are: prefix, indentation, separator, suffix, and commentStyle. Those are used to generate a line like this: <code>${indentation}${prefix}${prop.name}${separator} ${prop.value}${suffix}</code></p>
 </td>
     </tr><tr>
-    <td>options.themeable</td><td><code>Boolean</code></td><td><p>[false] - Whether tokens should default to being themeable.</p>
+    <td>options.themeable</td><td><code>Boolean</code></td><td><p>[false] - Whether properties should default to being themeable.</p>
 </td>
     </tr>  </tbody>
 </table>
@@ -441,7 +441,7 @@ default file header.
     <td>options.commentStyle</td><td><code>String</code></td><td><p>The only options are &#39;short&#39; and &#39;xml&#39;, which will use the // or &lt;!-- --&gt; style comments respectively. Anything else will use /* style comments.</p>
 </td>
     </tr><tr>
-    <td>options.formatting</td><td><code>Object</code></td><td><p>Custom formatting properties that define parts of a comment in code. The configurable strings are: prefix, lineSeparator, header, and footer.</p>
+    <td>options.formatting</td><td><code>Object</code></td><td><p>Custom formatting tokens that define parts of a comment in code. The configurable strings are: prefix, lineSeparator, header, and footer.</p>
 </td>
     </tr>  </tbody>
 </table>
@@ -545,7 +545,7 @@ Supports numbers, strings, booleans, arrays and objects of any of those types.
 StyleDictionary.registerFormat({
   name: 'myCustomFormat',
   formatter: function ({ dictionary, options }) {
-    return dictionary.allProperties
+    return dictionary.allTokens
       .map(function (prop) {
         var to_ret_prop = 'export const ' + prop.name + ' : ' + getTypeScriptType(prop.value) + ';';
         if (prop.comment) to_ret_prop = to_ret_prop.concat(' // ' + prop.comment);

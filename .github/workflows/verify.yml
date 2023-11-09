@@ -24,9 +24,11 @@ jobs:
       - name: Linting & Formatting
         run: npm run lint
 
-      - name: Tests
-        run: npm run test
+      - name: Tests Node
+        run: npm run test:node
 
-      # in case we use playwright & @web/test-runner in the future
-      # - name: Install chromium
-      #   run: npx playwright install-deps chromium
+      - name: Install chromium
+        run: npx playwright install-deps chromium
+
+      - name: Tests Chromium
+        run: npm run test:unit

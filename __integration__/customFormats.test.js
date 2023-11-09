@@ -109,8 +109,8 @@ describe('integration', () => {
 
       it(`should receive proper arguments`, () => {
         const { dictionary, platform, file } = JSON.parse(output);
-        expect(dictionary).toHaveProperty(`properties`);
-        expect(dictionary).toHaveProperty(`allProperties`);
+        expect(dictionary).toHaveProperty(`tokens`);
+        expect(dictionary).toHaveProperty(`allTokens`);
         expect(platform).toHaveProperty(`options.otherOption`, `platform option`);
         expect(file).toHaveProperty(`options.otherOption`, `Test`);
       });
@@ -126,8 +126,8 @@ describe('integration', () => {
 
       it(`should receive proper arguments`, () => {
         const { dictionary, platform, file, options } = JSON.parse(output);
-        expect(dictionary).toHaveProperty(`properties`);
-        expect(dictionary).toHaveProperty(`allProperties`);
+        expect(dictionary).toHaveProperty(`tokens`);
+        expect(dictionary).toHaveProperty(`allTokens`);
         expect(platform).toHaveProperty(`options.otherOption`, `platform option`);
         expect(file).toHaveProperty(`options.otherOption`, `Test`);
         expect(options).toHaveProperty(`otherOption`, `Test`);
@@ -145,8 +145,8 @@ describe('integration', () => {
 
       it(`should receive proper arguments`, () => {
         const { dictionary, platform, file } = JSON.parse(output);
-        expect(dictionary).toHaveProperty(`properties`);
-        expect(dictionary).toHaveProperty(`allProperties`);
+        expect(dictionary).toHaveProperty(`tokens`);
+        expect(dictionary).toHaveProperty(`allTokens`);
         expect(platform).toHaveProperty(`options.otherOption`, `platform option`);
         expect(file).toHaveProperty(`options.otherOption`, `Test`);
       });
@@ -163,8 +163,8 @@ describe('integration', () => {
 
       it(`should receive proper arguments`, () => {
         const { dictionary, platform, file, options } = JSON.parse(output);
-        expect(dictionary).toHaveProperty(`properties`);
-        expect(dictionary).toHaveProperty(`allProperties`);
+        expect(dictionary).toHaveProperty(`tokens`);
+        expect(dictionary).toHaveProperty(`allTokens`);
         expect(platform).toHaveProperty(`options.otherOption`, `platform option`);
         expect(file).toHaveProperty(`options.otherOption`, `Test`);
         expect(options).toHaveProperty(`otherOption`, `Test`);

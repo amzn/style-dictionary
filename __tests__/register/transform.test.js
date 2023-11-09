@@ -10,57 +10,58 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
-var StyleDictionary = require('../../index');
-var StyleDictionaryExtended = StyleDictionary.extend({});
+import { expect } from 'chai';
+import StyleDictionary from 'style-dictionary';
 
 describe('register', () => {
-  describe('transform', () => {
+  describe('transform', async () => {
+    const StyleDictionaryExtended = new StyleDictionary({});
+
     it('should error if type is not a string', () => {
-      expect(
-        StyleDictionaryExtended.registerTransform.bind(null, {
+      expect(() => {
+        StyleDictionaryExtended.registerTransform({
           type: 3,
-        }),
-      ).toThrow('type must be a string');
+        });
+      }).to.throw('type must be a string');
     });
 
     it('should error if type is not a valid type', () => {
-      expect(
-        StyleDictionaryExtended.registerTransform.bind(null, {
+      expect(() => {
+        StyleDictionaryExtended.registerTransform({
           type: 'foo',
-        }),
-      ).toThrow('foo type is not one of: name, value, attribute');
+        });
+      }).to.throw('foo type is not one of: name, value, attribute');
     });
 
     it('should error if name is not a string', () => {
-      expect(
-        StyleDictionaryExtended.registerTransform.bind(null, {
+      expect(() => {
+        StyleDictionaryExtended.registerTransform({
           type: 'name',
-        }),
-      ).toThrow('name must be a string');
+        });
+      }).to.throw('name must be a string');
     });
 
     it('should error if matcher is not a function', () => {
-      expect(
-        StyleDictionaryExtended.registerTransform.bind(null, {
+      expect(() => {
+        StyleDictionaryExtended.registerTransform({
           type: 'name',
           name: 'name',
           matcher: 'foo',
-        }),
-      ).toThrow('matcher must be a function');
+        });
+      }).to.throw('matcher must be a function');
     });
 
     it('should error if transformer is not a function', () => {
-      expect(
-        StyleDictionaryExtended.registerTransform.bind(null, {
+      expect(() => {
+        StyleDictionaryExtended.registerTransform({
           type: 'name',
           name: 'name',
           matcher: function () {
             return true;
           },
           transformer: 'foo',
-        }),
-      ).toThrow('transformer must be a function');
+        });
+      }).to.throw('transformer must be a function');
     });
 
     it('should work if type, matcher, and transformer are all proper', () => {
@@ -74,18 +75,18 @@ describe('register', () => {
           return true;
         },
       });
-      expect(typeof StyleDictionaryExtended.transform.foo).toBe('object');
-      expect(StyleDictionaryExtended).toHaveProperty('transform.foo.type', 'name');
-      expect(typeof StyleDictionaryExtended.transform.foo.matcher).toBe('function');
-      expect(typeof StyleDictionaryExtended.transform.foo.transformer).toBe('function');
+      expect(typeof StyleDictionaryExtended.transform.foo).to.equal('object');
+      expect(StyleDictionaryExtended).to.have.nested.property('transform.foo.type', 'name');
+      expect(typeof StyleDictionaryExtended.transform.foo.matcher).to.equal('function');
+      expect(typeof StyleDictionaryExtended.transform.foo.transformer).to.equal('function');
     });
 
-    it('should properly pass the registered transform to instances', () => {
-      var SDE2 = StyleDictionaryExtended.extend({});
-      expect(typeof SDE2.transform.foo).toBe('object');
-      expect(SDE2).toHaveProperty('transform.foo.type', 'name');
-      expect(typeof SDE2.transform.foo.matcher).toBe('function');
-      expect(typeof SDE2.transform.foo.transformer).toBe('function');
+    it('should properly pass the registered transform to instances', async () => {
+      const SDE2 = await StyleDictionaryExtended.extend({});
+      expect(typeof SDE2.transform.foo).to.equal('object');
+      expect(SDE2).to.have.nested.property('transform.foo.type', 'name');
+      expect(typeof SDE2.transform.foo.matcher).to.equal('function');
+      expect(typeof SDE2.transform.foo.transformer).to.equal('function');
     });
   });
 });

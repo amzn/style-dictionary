@@ -10,36 +10,36 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
+import { expect } from 'chai';
+import { clearOutput, dirExists } from './__helpers.js';
+import buildFiles from '../lib/buildFiles.js';
+import cleanFiles from '../lib/cleanFiles.js';
+import cleanDirs from '../lib/cleanDirs.js';
 
-var helpers = require('./__helpers');
-var buildFiles = require('../lib/buildFiles');
-var cleanFiles = require('../lib/cleanFiles');
-var cleanDirs = require('../lib/cleanDirs');
-
-var dictionary = {
-  properties: {
+const dictionary = {
+  tokens: {
     foo: 'bar',
   },
 };
 
-var platform = {
+const platform = {
   files: [
     {
       destination: '__tests__/__output/extradir1/extradir2/extradir1/extradir2/test.json',
       format: function (dictionary) {
-        return JSON.stringify(dictionary.properties);
+        return JSON.stringify(dictionary.tokens);
       },
     },
   ],
 };
 
-var platformWithBuildPath = {
+const platformWithBuildPath = {
   buildPath: '__tests__/__output/extradir1/extradir2/',
   files: [
     {
       destination: 'test.json',
       format: function (dictionary) {
-        return JSON.stringify(dictionary.properties);
+        return JSON.stringify(dictionary.tokens);
       },
     },
   ],
@@ -47,27 +47,27 @@ var platformWithBuildPath = {
 
 describe('cleanDirs', () => {
   beforeEach(() => {
-    helpers.clearOutput();
+    clearOutput();
   });
 
   afterEach(() => {
-    helpers.clearOutput();
+    clearOutput();
   });
 
   it('should delete without buildPath', () => {
     buildFiles(dictionary, platform);
     cleanFiles(dictionary, platform);
     cleanDirs(dictionary, platform);
-    expect(helpers.dirDoesNotExist('./__tests__/__output/extradir1/extradir2')).toBeTruthy();
-    expect(helpers.dirDoesNotExist('./__tests__/__output/extradir1')).toBeTruthy();
+    expect(dirExists('__tests__/__output/extradir1/extradir2')).to.be.false;
+    expect(dirExists('__tests__/__output/extradir1')).to.be.false;
   });
 
   it('should delete with buildPath', () => {
     buildFiles(dictionary, platformWithBuildPath);
     cleanFiles(dictionary, platformWithBuildPath);
     cleanDirs(dictionary, platformWithBuildPath);
-    expect(helpers.dirDoesNotExist('./__tests__/__output/extradir1/extradir2')).toBeTruthy();
-    expect(helpers.dirDoesNotExist('./__tests__/__output/extradir1')).toBeTruthy();
+    expect(dirExists('__tests__/__output/extradir1/extradir2')).to.be.false;
+    expect(dirExists('__tests__/t__/__output/extradir1')).to.be.false;
   });
 
   it('should throw if buildPath does not end in a trailing slash', () => {
@@ -78,6 +78,6 @@ describe('cleanDirs', () => {
           buildPath: 'foo',
         },
       );
-    }).toThrow('Build path must end in a trailing slash or you will get weird file names.');
+    }).to.throw('Build path must end in a trailing slash or you will get weird file names.');
   });
 });

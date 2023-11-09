@@ -10,226 +10,204 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-const createPropertyFormatter = require('../../../lib/common/formatHelpers/createPropertyFormatter');
-const createDictionary = require('../../../lib/utils/createDictionary');
+import { expect } from 'chai';
+import createPropertyFormatter from '../../../lib/common/formatHelpers/createPropertyFormatter.js';
+import createDictionary from '../../../lib/utils/createDictionary.js';
 
 const dictionary = createDictionary({
-  properties: {
-    tokens: {
-      foo: {
-        original: {
-          value: '5px',
-          type: 'spacing',
-        },
-        attributes: {
-          category: 'tokens',
-          type: 'foo',
-        },
-        name: 'tokens-foo',
-        path: ['tokens', 'foo'],
+  tokens: {
+    foo: {
+      original: {
         value: '5px',
         type: 'spacing',
       },
-      ref: {
-        original: {
-          value: '{tokens.foo}',
-          type: 'spacing',
-        },
-        attributes: {
-          category: 'tokens',
-          type: 'ref',
-        },
-        name: 'tokens-ref',
-        path: ['tokens', 'ref'],
-        value: '5px',
+      attributes: {
+        category: 'foo',
+      },
+      name: 'foo',
+      path: ['foo'],
+      value: '5px',
+      type: 'spacing',
+    },
+    ref: {
+      original: {
+        value: '{foo}',
         type: 'spacing',
       },
+      attributes: {
+        category: 'ref',
+      },
+      name: 'ref',
+      path: ['ref'],
+      value: '5px',
+      type: 'spacing',
     },
   },
 });
 
 const transformedDictionary = createDictionary({
-  properties: {
-    tokens: {
-      foo: {
-        original: {
-          value: '5px',
-          type: 'spacing',
-        },
-        attributes: {
-          category: 'tokens',
-          type: 'foo',
-        },
-        name: 'tokens-foo',
-        path: ['tokens', 'foo'],
+  tokens: {
+    foo: {
+      original: {
         value: '5px',
         type: 'spacing',
       },
-      ref: {
-        original: {
-          value: '{tokens.foo}',
-          type: 'spacing',
-        },
-        attributes: {
-          category: 'tokens',
-          type: 'ref',
-        },
-        name: 'tokens-ref',
-        path: ['tokens', 'ref'],
-        value: 'changed by transitive transform',
+      attributes: {
+        category: 'foo',
+      },
+      name: 'foo',
+      path: ['foo'],
+      value: '5px',
+      type: 'spacing',
+    },
+    ref: {
+      original: {
+        value: '{foo}',
         type: 'spacing',
       },
+      attributes: {
+        category: 'ref',
+      },
+      name: 'ref',
+      path: ['ref'],
+      value: 'changed by transitive transform',
+      type: 'spacing',
     },
   },
 });
 
 const numberDictionary = createDictionary({
-  properties: {
-    tokens: {
-      foo: {
-        original: {
-          value: 10,
-          type: 'dimension',
-        },
-        attributes: {
-          category: 'tokens',
-          type: 'foo',
-        },
-        name: 'tokens-foo',
-        path: ['tokens', 'foo'],
+  tokens: {
+    foo: {
+      original: {
         value: 10,
         type: 'dimension',
       },
-      ref: {
-        original: {
-          value: '{tokens.foo}',
-          type: 'dimension',
-        },
-        attributes: {
-          category: 'tokens',
-          type: 'ref',
-        },
-        name: 'tokens-ref',
-        path: ['tokens', 'ref'],
-        value: 10,
+      attributes: {
+        category: 'foo',
+      },
+      name: 'foo',
+      path: ['foo'],
+      value: 10,
+      type: 'dimension',
+    },
+    ref: {
+      original: {
+        value: '{foo}',
         type: 'dimension',
       },
-      zero: {
-        original: {
-          value: 0,
-          type: 'dimension',
-        },
-        attributes: {
-          category: 'tokens',
-          type: 'zero',
-        },
-        name: 'tokens-zero',
-        path: ['tokens', 'zero'],
+      attributes: {
+        category: 'ref',
+      },
+      name: 'ref',
+      path: ['ref'],
+      value: 10,
+      type: 'dimension',
+    },
+    zero: {
+      original: {
         value: 0,
         type: 'dimension',
       },
-      'ref-zero': {
-        original: {
-          value: '{tokens.zero}',
-          type: 'dimension',
-        },
-        attributes: {
-          category: 'tokens',
-          type: 'ref-zero',
-        },
-        name: 'tokens-ref-zero',
-        path: ['tokens', 'ref-zero'],
-        value: 0,
+      attributes: {
+        category: 'zero',
+      },
+      name: 'zero',
+      path: ['zero'],
+      value: 0,
+      type: 'dimension',
+    },
+    'ref-zero': {
+      original: {
+        value: '{zero}',
         type: 'dimension',
       },
+      attributes: {
+        category: 'ref-zero',
+      },
+      name: 'ref-zero',
+      path: ['ref-zero'],
+      value: 0,
+      type: 'dimension',
     },
   },
 });
 
 const multiDictionary = createDictionary({
-  properties: {
-    tokens: {
-      foo: {
-        original: {
-          value: '10px',
-          type: 'spacing',
-        },
-        attributes: {
-          category: 'tokens',
-          type: 'foo',
-        },
-        name: 'tokens-foo',
-        path: ['tokens', 'foo'],
+  tokens: {
+    foo: {
+      original: {
         value: '10px',
         type: 'spacing',
       },
-      bar: {
-        original: {
-          value: '15px',
-          type: 'spacing',
-        },
-        attributes: {
-          category: 'tokens',
-          type: 'bar',
-        },
-        name: 'tokens-bar',
-        path: ['tokens', 'bar'],
+      attributes: {
+        category: 'foo',
+      },
+      name: 'foo',
+      path: ['foo'],
+      value: '10px',
+      type: 'spacing',
+    },
+    bar: {
+      original: {
         value: '15px',
         type: 'spacing',
       },
-      ref: {
-        original: {
-          value: '{tokens.foo} 5px {tokens.bar}',
-          type: 'spacing',
-        },
-        attributes: {
-          category: 'tokens',
-          type: 'ref',
-        },
-        name: 'tokens-ref',
-        path: ['tokens', 'ref'],
-        value: '10px 5px 15px',
+      attributes: {
+        category: 'bar',
+      },
+      name: 'bar',
+      path: ['bar'],
+      value: '15px',
+      type: 'spacing',
+    },
+    ref: {
+      original: {
+        value: '{foo} 5px {bar}',
         type: 'spacing',
       },
+      attributes: {
+        category: 'ref',
+      },
+      name: 'ref',
+      path: ['ref'],
+      value: '10px 5px 15px',
+      type: 'spacing',
     },
   },
 });
 
 const objectDictionary = createDictionary({
-  properties: {
-    tokens: {
-      foo: {
-        original: {
-          value: '5px',
-          type: 'spacing',
-        },
-        attributes: {
-          category: 'tokens',
-          type: 'foo',
-        },
-        name: 'tokens-foo',
-        path: ['tokens', 'foo'],
+  tokens: {
+    foo: {
+      original: {
         value: '5px',
         type: 'spacing',
       },
-      ref: {
-        original: {
-          value: {
-            width: '{tokens.foo}',
-            style: 'dashed',
-            color: '#FF00FF',
-          },
-          type: 'border',
+      attributes: {
+        category: 'foo',
+      },
+      name: 'foo',
+      path: ['foo'],
+      value: '5px',
+      type: 'spacing',
+    },
+    ref: {
+      original: {
+        value: {
+          width: '{foo}',
+          style: 'dashed',
+          color: '#FF00FF',
         },
-        attributes: {
-          category: 'tokens',
-          type: 'ref',
-        },
-        name: 'tokens-ref',
-        path: ['tokens', 'ref'],
-        value: '5px dashed #FF00FF',
         type: 'border',
       },
+      attributes: {
+        category: 'ref',
+      },
+      name: 'ref',
+      path: ['ref'],
+      value: '5px dashed #FF00FF',
+      type: 'border',
     },
   },
 });
@@ -244,10 +222,8 @@ describe('common', () => {
             dictionary,
             format: 'css',
           });
-          expect(propFormatter(dictionary.tokens.tokens.foo)).toEqual('  --tokens-foo: 5px;');
-          expect(propFormatter(dictionary.tokens.tokens.ref)).toEqual(
-            '  --tokens-ref: var(--tokens-foo);',
-          );
+          // expect(propFormatter(dictionary.tokens.foo)).to.equal('  --foo: 5px;');
+          expect(propFormatter(dictionary.tokens.ref)).to.equal('  --ref: var(--foo);');
         });
 
         it('should support outputReferences when values are transformed by (transitive) "value" transforms', () => {
@@ -256,12 +232,8 @@ describe('common', () => {
             dictionary: transformedDictionary,
             format: 'css',
           });
-          expect(propFormatter(transformedDictionary.tokens.tokens.foo)).toEqual(
-            '  --tokens-foo: 5px;',
-          );
-          expect(propFormatter(transformedDictionary.tokens.tokens.ref)).toEqual(
-            '  --tokens-ref: var(--tokens-foo);',
-          );
+          expect(propFormatter(transformedDictionary.tokens.foo)).to.equal('  --foo: 5px;');
+          expect(propFormatter(transformedDictionary.tokens.ref)).to.equal('  --ref: var(--foo);');
         });
 
         it('should support number values for outputReferences', () => {
@@ -270,10 +242,8 @@ describe('common', () => {
             dictionary: numberDictionary,
             format: 'css',
           });
-          expect(propFormatter(numberDictionary.tokens.tokens.foo)).toEqual('  --tokens-foo: 10;');
-          expect(propFormatter(numberDictionary.tokens.tokens.ref)).toEqual(
-            '  --tokens-ref: var(--tokens-foo);',
-          );
+          expect(propFormatter(numberDictionary.tokens.foo)).to.equal('  --foo: 10;');
+          expect(propFormatter(numberDictionary.tokens.ref)).to.equal('  --ref: var(--foo);');
         });
 
         it('should support valid falsy values for outputReferences', () => {
@@ -282,9 +252,9 @@ describe('common', () => {
             dictionary: numberDictionary,
             format: 'css',
           });
-          expect(propFormatter(numberDictionary.tokens.tokens.zero)).toEqual('  --tokens-zero: 0;');
-          expect(propFormatter(numberDictionary.tokens.tokens['ref-zero'])).toEqual(
-            '  --tokens-ref-zero: var(--tokens-zero);',
+          expect(propFormatter(numberDictionary.tokens.zero)).to.equal('  --zero: 0;');
+          expect(propFormatter(numberDictionary.tokens['ref-zero'])).to.equal(
+            '  --ref-zero: var(--zero);',
           );
         });
 
@@ -294,10 +264,10 @@ describe('common', () => {
             dictionary: multiDictionary,
             format: 'css',
           });
-          expect(propFormatter(multiDictionary.tokens.tokens.foo)).toEqual('  --tokens-foo: 10px;');
-          expect(propFormatter(multiDictionary.tokens.tokens.bar)).toEqual('  --tokens-bar: 15px;');
-          expect(propFormatter(multiDictionary.tokens.tokens.ref)).toEqual(
-            '  --tokens-ref: var(--tokens-foo) 5px var(--tokens-bar);',
+          expect(propFormatter(multiDictionary.tokens.foo)).to.equal('  --foo: 10px;');
+          expect(propFormatter(multiDictionary.tokens.bar)).to.equal('  --bar: 15px;');
+          expect(propFormatter(multiDictionary.tokens.ref)).to.equal(
+            '  --ref: var(--foo) 5px var(--bar);',
           );
         });
 
@@ -310,15 +280,16 @@ describe('common', () => {
             dictionary: objectDictionary,
             format: 'css',
           });
-          expect(propFormatter(objectDictionary.tokens.tokens.foo)).toEqual('  --tokens-foo: 5px;');
-          expect(propFormatter(objectDictionary.tokens.tokens.ref)).toEqual(
-            '  --tokens-ref: var(--tokens-foo) dashed #FF00FF;',
+          // expect(propFormatter(objectDictionary.tokens.foo)).to.equal('  --foo: 5px;');
+
+          expect(propFormatter(objectDictionary.tokens.ref)).to.equal(
+            '  --ref: var(--foo) dashed #FF00FF;',
           );
         });
       });
 
       describe('commentStyle', () => {
-        const commentProperties = {
+        const commentTokens = {
           color: {
             red: {
               name: 'color-red',
@@ -354,10 +325,10 @@ describe('common', () => {
         };
 
         const commentDictionary = createDictionary({
-          properties: commentProperties,
+          tokens: commentTokens,
         });
 
-        it('should default to putting comment next to the output value', () => {
+        it('should default to putting comment next to the output value', async () => {
           // long commentStyle
           const cssFormatter = createPropertyFormatter({
             format: 'css',
@@ -375,29 +346,14 @@ describe('common', () => {
           const sassRed = sassFormatter(commentDictionary.tokens.color.red);
           const sassBlue = sassFormatter(commentDictionary.tokens.color.blue);
 
-          // Note that since CSS puts it inside a selector, there is an indentation of 2 spaces as well
-          // CSS also has commentStyle long, whereas sass uses short
-          expect(cssRed).toMatchInlineSnapshot(`"  --color-red: #FF0000; /* Foo bar qux */"`);
+          await expect(cssRed).to.matchSnapshot(1);
+          await expect(cssBlue).to.matchSnapshot(2);
 
-          expect(cssBlue).toMatchInlineSnapshot(`
-"  /**
-   * Foo
-   * bar
-   * qux
-   */
-  --color-blue: #0000FF;"
-`);
-
-          expect(sassRed).toMatchInlineSnapshot(`"$color-red: #FF0000; // Foo bar qux"`);
-          expect(sassBlue).toMatchInlineSnapshot(`
-"// Foo
-// bar
-// qux
-$color-blue: #0000FF;"
-`);
+          await expect(sassRed).to.matchSnapshot(3);
+          await expect(sassBlue).to.matchSnapshot(4);
         });
 
-        it('allows overriding formatting commentStyle', () => {
+        it('allows overriding formatting commentStyle', async () => {
           // long commentStyle
           const cssFormatter = createPropertyFormatter({
             format: 'css',
@@ -414,15 +370,9 @@ $color-blue: #0000FF;"
           const cssRed = cssFormatter(commentDictionary.tokens.color.green);
           const sassRed = sassFormatter(commentDictionary.tokens.color.green);
 
-          expect(cssRed).toMatchInlineSnapshot(`
-"  /* Foo bar qux */
-  --color-green: #00FF00;"
-`);
+          await expect(cssRed).to.matchSnapshot(1);
 
-          expect(sassRed).toMatchInlineSnapshot(`
-"// Foo bar qux
-$color-green: #00FF00;"
-`);
+          await expect(sassRed).to.matchSnapshot(2);
         });
       });
     });

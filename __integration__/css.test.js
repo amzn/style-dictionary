@@ -22,7 +22,7 @@ describe('integration', () => {
       // Testing proper string interpolation with multiple references here.
       // This is a CSS/web-specific thing so only including them in this
       // integration test.
-      properties: {
+      tokens: {
         breakpoint: {
           xs: { value: '304px' },
           sm: { value: '768px' },

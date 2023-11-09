@@ -10,11 +10,10 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
-const formats = require('../../lib/common/formats');
-const less = require('less');
-const createDictionary = require('../../lib/utils/createDictionary');
-const createFormatArgs = require('../../lib/utils/createFormatArgs');
+import { expect } from 'chai';
+import formats from '../../lib/common/formats.js';
+import createDictionary from '../../lib/utils/createDictionary.js';
+import createFormatArgs from '../../lib/utils/createFormatArgs.js';
 
 const file = {
   destination: '__output/',
@@ -26,7 +25,7 @@ const propertyName = 'content-icon-email';
 const propertyValue = "'\\E001'";
 const itemClass = '3d_rotation';
 
-const properties = {
+const tokens = {
   content: {
     icon: {
       email: {
@@ -48,28 +47,38 @@ const properties = {
 
 const platform = {
   prefix: 'sd', // Style-Dictionary Prefix
+  // FIXME: check why createFormatArgs requires this prefix to be wrapped inside
+  // an options object for it to be properly set as option?
+  options: {
+    prefix: 'sd',
+  },
 };
 
-const formatter = formats['less/icons'].bind(file);
-const dictionary = createDictionary({ properties });
+const format = formats['less/icons'];
+const dictionary = createDictionary({ tokens });
 
 describe('formats', () => {
   describe('less/icons', () => {
-    it('should have a valid less syntax', () => {
-      expect.assertions(1);
-      return expect(
-        less.render(
-          formatter(
-            createFormatArgs({
-              dictionary,
-              file,
-              platform,
-            }),
-            platform,
-            file,
-          ),
-        ),
-      ).resolves.toBeDefined();
+    it('should have a valid less syntax and match snapshot', async () => {
+      const result = format(
+        createFormatArgs({
+          dictionary,
+          file,
+          platform,
+        }),
+      );
+
+      let _less;
+      if (typeof window === 'object') {
+        await import('less/dist/less.js');
+        // eslint-disable-next-line no-undef
+        _less = less;
+      } else {
+        _less = (await import('less')).default;
+      }
+      const lessResult = await _less.render(result);
+      await expect(result).to.matchSnapshot(1);
+      await expect(lessResult.css).to.matchSnapshot(2);
     });
   });
 });

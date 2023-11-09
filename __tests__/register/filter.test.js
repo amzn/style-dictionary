@@ -10,75 +10,76 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
-var StyleDictionary = require('../../index');
-var StyleDictionaryExtended = StyleDictionary.extend({});
+import { expect } from 'chai';
+import StyleDictionary from 'style-dictionary';
 
 describe('register', () => {
-  describe('filter', () => {
-    it('should error if name is not a string', () => {
-      expect(
-        StyleDictionaryExtended.registerFilter.bind(null, {
-          matcher: function () {},
-        }),
-      ).toThrow('name must be a string');
+  describe('filter', async () => {
+    const StyleDictionaryExtended = new StyleDictionary({});
 
-      expect(
-        StyleDictionaryExtended.registerFilter.bind(null, {
+    it('should error if name is not a string', () => {
+      expect(() => {
+        StyleDictionaryExtended.registerFilter({
+          matcher: function () {},
+        });
+      }).to.throw('name must be a string');
+
+      expect(() => {
+        StyleDictionaryExtended.registerFilter({
           name: 1,
           matcher: function () {},
-        }),
-      ).toThrow('name must be a string');
+        });
+      }).to.throw('name must be a string');
 
-      expect(
-        StyleDictionaryExtended.registerFilter.bind(null, {
+      expect(() => {
+        StyleDictionaryExtended.registerFilter({
           name: [],
           matcher: function () {},
-        }),
-      ).toThrow('name must be a string');
+        });
+      }).to.throw('name must be a string');
 
-      expect(
-        StyleDictionaryExtended.registerFilter.bind(null, {
+      expect(() => {
+        StyleDictionaryExtended.registerFilter({
           name: {},
           matcher: function () {},
-        }),
-      ).toThrow('name must be a string');
+        });
+      }).to.throw('name must be a string');
     });
 
     it('should error if matcher is not a function', () => {
-      expect(
-        StyleDictionaryExtended.registerFilter.bind(null, {
+      expect(() => {
+        StyleDictionaryExtended.registerFilter({
           name: 'test',
-        }),
-      ).toThrow('matcher must be a function');
+        });
+      }).to.throw('matcher must be a function');
 
-      expect(
-        StyleDictionaryExtended.registerFilter.bind(null, {
+      expect(() => {
+        StyleDictionaryExtended.registerFilter({
           name: 'test',
           matcher: 1,
-        }),
-      ).toThrow('matcher must be a function');
+        });
+      }).to.throw('matcher must be a function');
 
-      expect(
-        StyleDictionaryExtended.registerFilter.bind(null, {
+      expect(() => {
+        StyleDictionaryExtended.registerFilter({
           name: 'test',
           matcher: 'name',
-        }),
-      ).toThrow('matcher must be a function');
+        });
+      }).to.throw('matcher must be a function');
 
-      expect(
-        StyleDictionaryExtended.registerFilter.bind(null, {
+      expect(() => {
+        StyleDictionaryExtended.registerFilter({
           name: 'test',
           matcher: [],
-        }),
-      ).toThrow('matcher must be a function');
+        });
+      }).to.throw('matcher must be a function');
 
-      expect(
-        StyleDictionaryExtended.registerFilter.bind(null, {
+      expect(() => {
+        StyleDictionaryExtended.registerFilter({
           name: 'test',
           matcher: {},
-        }),
-      ).toThrow('matcher must be a function');
+        });
+      }).to.throw('matcher must be a function');
     });
 
     it('should work if name and matcher are good', () => {
@@ -86,12 +87,12 @@ describe('register', () => {
         name: 'scss',
         matcher: function () {},
       });
-      expect(typeof StyleDictionaryExtended.filter['scss']).toBe('function');
+      expect(typeof StyleDictionaryExtended.filter['scss']).to.equal('function');
     });
 
-    it('should properly pass the registered filter to instances', () => {
-      var SDE2 = StyleDictionaryExtended.extend({});
-      expect(typeof SDE2.filter['scss']).toBe('function');
+    it('should properly pass the registered filter to instances', async () => {
+      const SDE2 = await StyleDictionaryExtended.extend({});
+      expect(typeof SDE2.filter['scss']).to.equal('function');
     });
   });
 });

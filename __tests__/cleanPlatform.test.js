@@ -10,49 +10,45 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
+import { expect } from 'chai';
+import StyleDictionary from 'style-dictionary';
+import { fileToJSON, clearOutput, fileExists } from './__helpers.js';
 
-var helpers = require('./__helpers');
-var config = helpers.fileToJSON(__dirname + '/__configs/test.json');
-var StyleDictionary = require('../index');
-var StyleDictionaryExtended = StyleDictionary.extend(config);
+const config = fileToJSON('__tests__/__configs/test.json');
+const StyleDictionaryExtended = new StyleDictionary(config);
 
 describe('cleanPlatform', () => {
   beforeEach(() => {
-    helpers.clearOutput();
+    clearOutput();
   });
 
   afterEach(() => {
-    helpers.clearOutput();
+    clearOutput();
   });
 
-  it('should delete the proper files', () => {
-    StyleDictionaryExtended.buildPlatform('web');
-    StyleDictionaryExtended.cleanPlatform('web');
-    expect(helpers.fileDoesNotExist('./__tests__/__output/web/_icons.scss')).toBeTruthy();
-    expect(helpers.fileDoesNotExist('./__tests__/__output/web/_styles.js')).toBeTruthy();
-    expect(helpers.fileDoesNotExist('./__tests__/__output/web/_variables.scss')).toBeTruthy();
+  it('should delete the proper files', async () => {
+    await StyleDictionaryExtended.buildPlatform('web');
+    await StyleDictionaryExtended.cleanPlatform('web');
+    expect(fileExists('__tests__/__output/web/_icons.scss')).to.be.false;
+    expect(fileExists('__tests__/__output/web/_styles.js')).to.be.false;
+    expect(fileExists('__tests__/__output/web/_variables.scss')).to.be.false;
   });
 
-  it('should delete android stuff', () => {
-    StyleDictionaryExtended.buildPlatform('android');
-    StyleDictionaryExtended.cleanPlatform('android');
-    expect(
-      helpers.fileDoesNotExist('./__tests__/__output/android/main/res/drawable-hdpi/flag_us.png'),
-    ).toBeTruthy();
-    expect(
-      helpers.fileDoesNotExist('./__tests__/__output/android/main/res/drawable-xhdpi/flag_us.png'),
-    ).toBeTruthy();
-    expect(helpers.fileDoesNotExist('./__tests__/__output/android/colors.xml')).toBeTruthy();
-    expect(helpers.fileDoesNotExist('./__tests__/__output/android/dimens.xml')).toBeTruthy();
-    expect(helpers.fileDoesNotExist('./__tests__/__output/android/font_dimen.xml')).toBeTruthy();
+  it('should delete android stuff', async () => {
+    await StyleDictionaryExtended.buildPlatform('android');
+    await StyleDictionaryExtended.cleanPlatform('android');
+    expect(fileExists('__tests__/__output/android/main/res/drawable-hdpi/flag_us.png')).to.be.false;
+    expect(fileExists('__tests__/__output/android/main/res/drawable-xhdpi/flag_us.png')).to.be
+      .false;
+    expect(fileExists('__tests__/__output/android/colors.xml')).to.be.false;
+    expect(fileExists('__tests__/__output/android/dimens.xml')).to.be.false;
+    expect(fileExists('__tests__/__output/android/font_dimen.xml')).to.be.false;
   });
 
-  it('should delete ios stuff', () => {
-    StyleDictionaryExtended.buildPlatform('ios');
-    StyleDictionaryExtended.cleanPlatform('ios');
-    expect(
-      helpers.fileDoesNotExist('./__tests__/__output/ios/style_dictionary.plist'),
-    ).toBeTruthy();
-    expect(helpers.fileDoesNotExist('./__tests__/__output/ios/style_dictionary.h')).toBeTruthy();
+  it('should delete ios stuff', async () => {
+    await StyleDictionaryExtended.buildPlatform('ios');
+    await StyleDictionaryExtended.cleanPlatform('ios');
+    expect(fileExists('__tests__/__output/ios/style_dictionary.plist')).to.be.false;
+    expect(fileExists('__tests__/__output/ios/style_dictionary.h')).to.be.false;
   });
 });

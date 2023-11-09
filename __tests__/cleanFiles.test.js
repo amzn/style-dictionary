@@ -10,35 +10,35 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
+import { expect } from 'chai';
+import { clearOutput, fileExists } from './__helpers.js';
+import buildFiles from '../lib/buildFiles.js';
+import cleanFiles from '../lib/cleanFiles.js';
 
-var helpers = require('./__helpers');
-var buildFiles = require('../lib/buildFiles');
-var cleanFiles = require('../lib/cleanFiles');
-
-var dictionary = {
-  properties: {
+const dictionary = {
+  tokens: {
     foo: 'bar',
   },
 };
 
-var platform = {
+const platform = {
   files: [
     {
       destination: '__tests__/__output/test.json',
       format: function (dictionary) {
-        return JSON.stringify(dictionary.properties);
+        return JSON.stringify(dictionary.tokens);
       },
     },
   ],
 };
 
-var platformWithBuildPath = {
+const platformWithBuildPath = {
   buildPath: '__tests__/__output/',
   files: [
     {
       destination: 'test.json',
       format: function (dictionary) {
-        return JSON.stringify(dictionary.properties);
+        return JSON.stringify(dictionary.tokens);
       },
     },
   ],
@@ -46,22 +46,22 @@ var platformWithBuildPath = {
 
 describe('cleanFiles', () => {
   beforeEach(() => {
-    helpers.clearOutput();
+    clearOutput();
   });
 
   afterEach(() => {
-    helpers.clearOutput();
+    clearOutput();
   });
 
   it('should delete without buildPath', () => {
     buildFiles(dictionary, platform);
     cleanFiles(dictionary, platform);
-    expect(helpers.fileDoesNotExist('./__tests__/__output/test.json')).toBeTruthy();
+    expect(fileExists('__tests__/__output/test.json')).to.be.false;
   });
 
   it('should delete with buildPath', () => {
     buildFiles(dictionary, platformWithBuildPath);
     cleanFiles(dictionary, platformWithBuildPath);
-    expect(helpers.fileDoesNotExist('./__tests__/__output/test.json')).toBeTruthy();
+    expect(fileExists('__tests__/t__/__output/test.json')).to.be.false;
   });
 });

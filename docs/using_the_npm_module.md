@@ -15,7 +15,7 @@ $ npm install -D style-dictionary
 To use the style dictionary build system in node, there are generally three steps:
 
 1. Require/import the StyleDictionary module
-1. Extend the module with a configuration, creating the fully defined dictionary (importing all properties and intended outputs)
+1. Extend the module with a configuration, creating the fully defined dictionary (importing all tokens and intended outputs)
 1. Call one or more build calls for various platforms
 
 To use the NPM module you will need to update your NPM script that runs Style Dictionary from using the CLI command to running Node on the file you are using.
@@ -50,7 +50,7 @@ Alternatively, you can pass in a [configuration](config.md) object to the extend
 
 ```javascript
 const StyleDictionary = require('style-dictionary').extend({
-  source: ['properties/**/*.json'],
+  source: ['tokens/**/*.json'],
   platforms: {
     scss: {
       transformGroup: 'scss',

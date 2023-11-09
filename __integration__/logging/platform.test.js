@@ -41,7 +41,7 @@ describe(`integration`, () => {
         // unknown actions should throw
         expect(() => {
           StyleDictionary.extend({
-            properties: {},
+            tokens: {},
             platforms: {
               css: {
                 actions: [`foo`],
@@ -82,7 +82,7 @@ describe(`integration`, () => {
         it(`should throw and notify users of unknown references`, () => {
           expect(() => {
             StyleDictionary.extend({
-              properties: {
+              tokens: {
                 color: {
                   danger: { value: '{color.red.value}' },
                 },
@@ -98,7 +98,7 @@ describe(`integration`, () => {
         it(`circular references should throw notify users`, () => {
           expect(() => {
             StyleDictionary.extend({
-              properties: {
+              tokens: {
                 color: {
                   foo: { value: '{color.foo.value}' },
                   teal: { value: '{color.blue.value}' },
