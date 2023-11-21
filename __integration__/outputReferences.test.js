@@ -10,16 +10,26 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
-const fs = require('fs-extra');
-const StyleDictionary = require('../index');
-const { buildPath } = require('./_constants');
+import { expect } from 'chai';
+import StyleDictionary from 'style-dictionary';
+import { restore, stubMethod } from 'hanbi';
+import { buildPath, cleanConsoleOutput } from './_constants.js';
+import { clearOutput } from '../__tests__/__helpers.js';
 
 describe('integration', () => {
-  describe('output references', () => {
-    it('should warn the user if filters out references', () => {
-      console.log = jest.fn();
-      StyleDictionary.extend({
+  let stub;
+  beforeEach(() => {
+    stub = stubMethod(console, 'log');
+  });
+
+  afterEach(() => {
+    clearOutput(buildPath);
+    restore();
+  });
+
+  describe('output references', async () => {
+    it('should warn the user if filters out references', async () => {
+      const sd = new StyleDictionary({
         // we are only testing showFileHeader options so we don't need
         // the full source.
         source: [`__integration__/tokens/**/*.json?(c)`],
@@ -42,13 +52,9 @@ describe('integration', () => {
             ],
           },
         },
-      }).buildAllPlatforms();
-
-      expect(console.log).toHaveBeenCalledWith(`⚠️ ${buildPath}filteredVariables.css`);
+      });
+      await sd.buildAllPlatforms();
+      await expect(stub.lastCall.args.map(cleanConsoleOutput).join('\n')).to.matchSnapshot();
     });
   });
-});
-
-afterAll(() => {
-  fs.emptyDirSync(buildPath);
 });

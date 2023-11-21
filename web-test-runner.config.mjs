@@ -10,6 +10,7 @@ const filesToMirror = glob
       '__tests__/__configs/**/*',
       '__tests__/__json_files/**/*',
       '__tests__/__tokens/**/*',
+      '__integration__/tokens/**/*',
     ],
     {
       fs,
@@ -21,16 +22,15 @@ const filesToMirror = glob
 
 export default {
   nodeResolve: true,
-  // browserLogs: false,
-  files: ['__tests__/**/*.test.js'],
+  files: ['__(tests|integration)__/**/*.test.js'],
   coverageConfig: {
     report: true,
     reportDir: 'coverage',
     threshold: {
-      statements: 96,
-      branches: 99,
-      functions: 92,
-      lines: 96,
+      statements: 98.9,
+      branches: 99.89,
+      functions: 96.53,
+      lines: 98.9,
     },
   },
   browsers: [

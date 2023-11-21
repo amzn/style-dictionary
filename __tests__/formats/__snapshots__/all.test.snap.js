@@ -750,3 +750,203 @@ snapshots["formats all should match css/fonts.css snapshot"] =
 ``;
 /* end snapshot formats all should match css/fonts.css snapshot */
 
+snapshots["formats all should match registerCustomFormatWithOldArgs snapshot"] = 
+`{
+  "dictionary": {
+    "dictionary": {
+      "tokens": {
+        "color": {
+          "red": {
+            "value": "#FF0000",
+            "original": {
+              "value": "#FF0000"
+            },
+            "name": "color_red",
+            "comment": "comment",
+            "attributes": {
+              "category": "color",
+              "type": "red"
+            },
+            "path": [
+              "color",
+              "red"
+            ]
+          }
+        }
+      },
+      "allTokens": [
+        {
+          "value": "#FF0000",
+          "original": {
+            "value": "#FF0000"
+          },
+          "name": "color_red",
+          "comment": "comment",
+          "attributes": {
+            "category": "color",
+            "type": "red"
+          },
+          "path": [
+            "color",
+            "red"
+          ]
+        }
+      ]
+    },
+    "allTokens": [
+      {
+        "value": "#FF0000",
+        "original": {
+          "value": "#FF0000"
+        },
+        "name": "color_red",
+        "comment": "comment",
+        "attributes": {
+          "category": "color",
+          "type": "red"
+        },
+        "path": [
+          "color",
+          "red"
+        ]
+      }
+    ],
+    "tokens": {
+      "color": {
+        "red": {
+          "value": "#FF0000",
+          "original": {
+            "value": "#FF0000"
+          },
+          "name": "color_red",
+          "comment": "comment",
+          "attributes": {
+            "category": "color",
+            "type": "red"
+          },
+          "path": [
+            "color",
+            "red"
+          ]
+        }
+      }
+    },
+    "platform": {},
+    "file": {
+      "destination": "__output/",
+      "format": "javascript/es6",
+      "filter": {
+        "attributes": {
+          "category": "color"
+        }
+      }
+    },
+    "options": {}
+  },
+  "platform": {},
+  "file": {
+    "destination": "__output/",
+    "format": "javascript/es6",
+    "filter": {
+      "attributes": {
+        "category": "color"
+      }
+    }
+  }
+}`;
+/* end snapshot formats all should match registerCustomFormatWithOldArgs snapshot */
+
+snapshots["formats all should match registerCustomFormatWithNewArgs snapshot"] = 
+`{
+  "dictionary": {
+    "tokens": {
+      "color": {
+        "red": {
+          "value": "#FF0000",
+          "original": {
+            "value": "#FF0000"
+          },
+          "name": "color_red",
+          "comment": "comment",
+          "attributes": {
+            "category": "color",
+            "type": "red"
+          },
+          "path": [
+            "color",
+            "red"
+          ]
+        }
+      }
+    },
+    "allTokens": [
+      {
+        "value": "#FF0000",
+        "original": {
+          "value": "#FF0000"
+        },
+        "name": "color_red",
+        "comment": "comment",
+        "attributes": {
+          "category": "color",
+          "type": "red"
+        },
+        "path": [
+          "color",
+          "red"
+        ]
+      }
+    ]
+  },
+  "allTokens": [
+    {
+      "value": "#FF0000",
+      "original": {
+        "value": "#FF0000"
+      },
+      "name": "color_red",
+      "comment": "comment",
+      "attributes": {
+        "category": "color",
+        "type": "red"
+      },
+      "path": [
+        "color",
+        "red"
+      ]
+    }
+  ],
+  "tokens": {
+    "color": {
+      "red": {
+        "value": "#FF0000",
+        "original": {
+          "value": "#FF0000"
+        },
+        "name": "color_red",
+        "comment": "comment",
+        "attributes": {
+          "category": "color",
+          "type": "red"
+        },
+        "path": [
+          "color",
+          "red"
+        ]
+      }
+    }
+  },
+  "platform": {},
+  "file": {
+    "destination": "__output/",
+    "format": "javascript/es6",
+    "filter": {
+      "attributes": {
+        "category": "color"
+      }
+    }
+  },
+  "options": {}
+}`;
+/* end snapshot formats all should match registerCustomFormatWithNewArgs snapshot */
+

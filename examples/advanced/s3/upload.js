@@ -18,7 +18,7 @@ s3.createBucket({ Bucket: bucketName }, function () {
       Key: file,
       Body: fs.readFileSync(file),
     };
-    s3.putObject(options, function (err, data) {
+    s3.putObject(options, function (err) {
       if (err) console.log(err);
       else console.log('Successfully uploaded data to ' + bucketName + '/' + file);
     });

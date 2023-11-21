@@ -10,19 +10,24 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
-const fs = require('fs-extra');
-const Color = require('tinycolor2');
-const StyleDictionary = require('../index');
-const { buildPath } = require('./_constants');
+import { expect } from 'chai';
+import Color from 'tinycolor2';
+import StyleDictionary from 'style-dictionary';
+import { fs } from 'style-dictionary/fs';
+import { buildPath } from './_constants.js';
+import { clearOutput } from '../__tests__/__helpers.js';
 
 const options = {
   outputReferences: true,
 };
 
 describe('integration', () => {
-  describe('object values', () => {
-    StyleDictionary.extend({
+  afterEach(() => {
+    clearOutput(buildPath);
+  });
+
+  describe('object values', async () => {
+    const sd = new StyleDictionary({
       tokens: {
         hue: `120`,
         saturation: `50%`,
@@ -204,23 +209,24 @@ describe('integration', () => {
           ],
         },
       },
-    }).buildAllPlatforms();
+    });
+    await sd.buildAllPlatforms();
 
     describe('css/variables', () => {
       describe(`hsl syntax`, () => {
         const output = fs.readFileSync(`${buildPath}hsl.css`, {
           encoding: 'UTF-8',
         });
-        it(`should match snapshot`, () => {
-          expect(output).toMatchSnapshot();
+        it(`should match snapshot`, async () => {
+          await expect(output).to.matchSnapshot();
         });
 
         describe(`with references`, () => {
           const output = fs.readFileSync(`${buildPath}hslWithReferences.css`, {
             encoding: 'UTF-8',
           });
-          it(`should match snapshot`, () => {
-            expect(output).toMatchSnapshot();
+          it(`should match snapshot`, async () => {
+            await expect(output).to.matchSnapshot();
           });
         });
       });
@@ -229,16 +235,16 @@ describe('integration', () => {
         const output = fs.readFileSync(`${buildPath}hex.css`, {
           encoding: 'UTF-8',
         });
-        it(`should match snapshot`, () => {
-          expect(output).toMatchSnapshot();
+        it(`should match snapshot`, async () => {
+          await expect(output).to.matchSnapshot();
         });
 
         describe(`with references`, () => {
           const output = fs.readFileSync(`${buildPath}hexWithReferences.css`, {
             encoding: 'UTF-8',
           });
-          it(`should match snapshot`, () => {
-            expect(output).toMatchSnapshot();
+          it(`should match snapshot`, async () => {
+            await expect(output).to.matchSnapshot();
           });
         });
       });
@@ -247,33 +253,33 @@ describe('integration', () => {
         const output = fs.readFileSync(`${buildPath}border.css`, {
           encoding: 'UTF-8',
         });
-        it(`should match snapshot`, () => {
-          expect(output).toMatchSnapshot();
+        it(`should match snapshot`, async () => {
+          await expect(output).to.matchSnapshot();
         });
 
         describe(`with references`, () => {
           const output = fs.readFileSync(`${buildPath}borderWithReferences.css`, {
             encoding: 'UTF-8',
           });
-          it(`should match snapshot`, () => {
-            expect(output).toMatchSnapshot();
+          it(`should match snapshot`, async () => {
+            await expect(output).to.matchSnapshot();
           });
         });
       });
 
       describe('shadow', () => {
-        it(`should match snapshot`, () => {
+        it(`should match snapshot`, async () => {
           const output = fs.readFileSync(`${buildPath}shadow.css`, {
             encoding: 'UTF-8',
           });
-          expect(output).toMatchSnapshot();
+          await expect(output).to.matchSnapshot();
         });
 
-        it(`should match snapshot with references`, () => {
+        it(`should match snapshot with references`, async () => {
           const output = fs.readFileSync(`${buildPath}shadowWithReferences.css`, {
             encoding: 'UTF-8',
           });
-          expect(output).toMatchSnapshot();
+          await expect(output).to.matchSnapshot();
         });
       });
     });
@@ -282,22 +288,18 @@ describe('integration', () => {
       const output = fs.readFileSync(`${buildPath}border.scss`, {
         encoding: 'UTF-8',
       });
-      it(`should match snapshot`, () => {
-        expect(output).toMatchSnapshot();
+      it(`should match snapshot`, async () => {
+        await expect(output).to.matchSnapshot();
       });
 
       describe(`with references`, () => {
         const output = fs.readFileSync(`${buildPath}borderWithReferences.scss`, {
           encoding: 'UTF-8',
         });
-        it(`should match snapshot`, () => {
-          expect(output).toMatchSnapshot();
+        it(`should match snapshot`, async () => {
+          await expect(output).to.matchSnapshot();
         });
       });
     });
   });
-});
-
-afterAll(() => {
-  fs.emptyDirSync(buildPath);
 });

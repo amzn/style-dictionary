@@ -10,14 +10,19 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
-const fs = require('fs-extra');
-const StyleDictionary = require('../index');
-const { buildPath } = require('./_constants');
+import { expect } from 'chai';
+import StyleDictionary from 'style-dictionary';
+import { fs } from 'style-dictionary/fs';
+import { buildPath } from './_constants.js';
+import { clearOutput } from '../__tests__/__helpers.js';
 
 describe('integration', () => {
-  describe('ios objective-c', () => {
-    StyleDictionary.extend({
+  afterEach(() => {
+    clearOutput(buildPath);
+  });
+
+  describe('ios objective-c', async () => {
+    const sd = new StyleDictionary({
       source: [`__integration__/tokens/**/*.json?(c)`],
       platforms: {
         flutter: {
@@ -69,59 +74,56 @@ describe('integration', () => {
           ],
         },
       },
-    }).buildAllPlatforms();
+    });
+    await sd.buildAllPlatforms();
 
-    it(`ios/singleton.m should match snapshot`, () => {
+    it(`ios/singleton.m should match snapshot`, async () => {
       const output = fs.readFileSync(`${buildPath}singleton.m`, {
         encoding: `UTF-8`,
       });
-      expect(output).toMatchSnapshot();
+      await expect(output).to.matchSnapshot();
     });
 
-    it(`ios/singleton.h should match snapshot`, () => {
+    it(`ios/singleton.h should match snapshot`, async () => {
       const output = fs.readFileSync(`${buildPath}singleton.h`, {
         encoding: `UTF-8`,
       });
-      expect(output).toMatchSnapshot();
+      await expect(output).to.matchSnapshot();
     });
 
-    it(`ios/color.m should match snapshot`, () => {
+    it(`ios/color.m should match snapshot`, async () => {
       const output = fs.readFileSync(`${buildPath}color.m`, {
         encoding: `UTF-8`,
       });
-      expect(output).toMatchSnapshot();
+      await expect(output).to.matchSnapshot();
     });
 
-    it(`ios/color.h should match snapshot`, () => {
+    it(`ios/color.h should match snapshot`, async () => {
       const output = fs.readFileSync(`${buildPath}color.h`, {
         encoding: `UTF-8`,
       });
-      expect(output).toMatchSnapshot();
+      await expect(output).to.matchSnapshot();
     });
 
-    it(`ios/macros.h should match snapshot`, () => {
+    it(`ios/macros.h should match snapshot`, async () => {
       const output = fs.readFileSync(`${buildPath}macros.h`, {
         encoding: `UTF-8`,
       });
-      expect(output).toMatchSnapshot();
+      await expect(output).to.matchSnapshot();
     });
 
-    it(`ios/static.h should match snapshot`, () => {
+    it(`ios/static.h should match snapshot`, async () => {
       const output = fs.readFileSync(`${buildPath}static.h`, {
         encoding: `UTF-8`,
       });
-      expect(output).toMatchSnapshot();
+      await expect(output).to.matchSnapshot();
     });
 
-    it(`ios/static.m should match snapshot`, () => {
+    it(`ios/static.m should match snapshot`, async () => {
       const output = fs.readFileSync(`${buildPath}static.m`, {
         encoding: `UTF-8`,
       });
-      expect(output).toMatchSnapshot();
+      await expect(output).to.matchSnapshot();
     });
   });
-});
-
-afterAll(() => {
-  fs.emptyDirSync(buildPath);
 });

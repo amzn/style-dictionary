@@ -1,180 +1,8 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+/* @web/test-runner snapshot v1 */
+export const snapshots = {};
 
-exports[`integration flutter flutter/class.dart separate should match snapshot 1`] = `
-"
-//
-// style_dictionary_color.dart
-//
-
-// Do not edit directly
-// Generated on Sat, 01 Jan 2000 00:00:00 GMT
-
-
-
-import 'dart:ui';
-
-class StyleDictionaryColor {
-  StyleDictionaryColor._();
-
-    static const backgroundDanger = Color(0xFFFFEAE9);
-    static const backgroundDisabled = Color(0xFFDEE1E1);
-    static const backgroundInfo = Color(0xFFE9F8FF);
-    static const backgroundPrimary = Color(0xFFFFFFFF);
-    static const backgroundSecondary = Color(0xFFF3F4F4);
-    static const backgroundSuccess = Color(0xFFEBF9EB);
-    static const backgroundTertiary = Color(0xFFDEE1E1);
-    static const backgroundWarning = Color(0xFFFFEDE3);
-    static const borderPrimary = Color(0xFFC8CCCC);
-    static const brandPrimary = Color(0xFF0B8599);
-    static const brandSecondary = Color(0xFF6F5ED3);
-    static const coreAqua0 = Color(0xFFD9FCFB);
-    static const coreAqua100 = Color(0xFFC5F9F9);
-    static const coreAqua1000 = Color(0xFF083D4F);
-    static const coreAqua1100 = Color(0xFF002838);
-    static const coreAqua200 = Color(0xFFA5F2F2);
-    static const coreAqua300 = Color(0xFF76E5E2);
-    static const coreAqua400 = Color(0xFF33D6E2);
-    static const coreAqua500 = Color(0xFF17B8CE);
-    static const coreAqua600 = Color(0xFF0797AE);
-    static const coreAqua700 = Color(0xFF0B8599);
-    static const coreAqua800 = Color(0xFF0F6E84);
-    static const coreAqua900 = Color(0xFF035E73);
-    static const coreBlue0 = Color(0xFFE9F8FF);
-    static const coreBlue100 = Color(0xFFDCF2FF);
-    static const coreBlue1000 = Color(0xFF0A3960);
-    static const coreBlue1100 = Color(0xFF002138);
-    static const coreBlue200 = Color(0xFFC7E4F9);
-    static const coreBlue300 = Color(0xFFA1D2F8);
-    static const coreBlue400 = Color(0xFF56ADF5);
-    static const coreBlue500 = Color(0xFF3896E3);
-    static const coreBlue600 = Color(0xFF2B87D3);
-    static const coreBlue700 = Color(0xFF2079C3);
-    static const coreBlue800 = Color(0xFF116DAA);
-    static const coreBlue900 = Color(0xFF0C5689);
-    static const coreGreen0 = Color(0xFFEBF9EB);
-    static const coreGreen100 = Color(0xFFD7F4D7);
-    static const coreGreen1000 = Color(0xFF08422F);
-    static const coreGreen1100 = Color(0xFF002B20);
-    static const coreGreen200 = Color(0xFFC2F2BD);
-    static const coreGreen300 = Color(0xFF98E58E);
-    static const coreGreen400 = Color(0xFF75DD66);
-    static const coreGreen500 = Color(0xFF59CB59);
-    static const coreGreen600 = Color(0xFF2BB656);
-    static const coreGreen700 = Color(0xFF0CA750);
-    static const coreGreen800 = Color(0xFF008B46);
-    static const coreGreen900 = Color(0xFF006B40);
-    static const coreMagenta0 = Color(0xFFFEF0FF);
-    static const coreMagenta100 = Color(0xFFF9E3FC);
-    static const coreMagenta1000 = Color(0xFF451551);
-    static const coreMagenta1100 = Color(0xFF29192D);
-    static const coreMagenta200 = Color(0xFFF4C4F7);
-    static const coreMagenta300 = Color(0xFFEDADF2);
-    static const coreMagenta400 = Color(0xFFF282F5);
-    static const coreMagenta500 = Color(0xFFDB61DB);
-    static const coreMagenta600 = Color(0xFFC44EB9);
-    static const coreMagenta700 = Color(0xFFAC44A8);
-    static const coreMagenta800 = Color(0xFF8F3896);
-    static const coreMagenta900 = Color(0xFF6C2277);
-    static const coreNeutral0 = Color(0xFFFFFFFF);
-    static const coreNeutral100 = Color(0xFFF3F4F4);
-    static const coreNeutral1000 = Color(0xFF162020);
-    static const coreNeutral1100 = Color(0xFF040404);
-    static const coreNeutral200 = Color(0xFFDEE1E1);
-    static const coreNeutral300 = Color(0xFFC8CCCC);
-    static const coreNeutral400 = Color(0xFFB0B6B7);
-    static const coreNeutral500 = Color(0xFF929A9B);
-    static const coreNeutral600 = Color(0xFF6E797A);
-    static const coreNeutral700 = Color(0xFF515E5F);
-    static const coreNeutral800 = Color(0xFF364141);
-    static const coreNeutral900 = Color(0xFF273333);
-    static const coreOrange0 = Color(0xFFFFEDE3);
-    static const coreOrange100 = Color(0xFFFCDCCC);
-    static const coreOrange1000 = Color(0xFF601700);
-    static const coreOrange1100 = Color(0xFF2D130E);
-    static const coreOrange200 = Color(0xFFFFC6A4);
-    static const coreOrange300 = Color(0xFFFFB180);
-    static const coreOrange400 = Color(0xFFFF9C5D);
-    static const coreOrange500 = Color(0xFFFC8943);
-    static const coreOrange600 = Color(0xFFF57D33);
-    static const coreOrange700 = Color(0xFFED7024);
-    static const coreOrange800 = Color(0xFFCE5511);
-    static const coreOrange900 = Color(0xFF962C0B);
-    static const corePink0 = Color(0xFFFFE9F3);
-    static const corePink100 = Color(0xFFFCDBEB);
-    static const corePink1000 = Color(0xFF561231);
-    static const corePink1100 = Color(0xFF2B1721);
-    static const corePink200 = Color(0xFFFFB5D5);
-    static const corePink300 = Color(0xFFFF95C1);
-    static const corePink400 = Color(0xFFFF76AE);
-    static const corePink500 = Color(0xFFEF588B);
-    static const corePink600 = Color(0xFFE0447C);
-    static const corePink700 = Color(0xFFCE3665);
-    static const corePink800 = Color(0xFFB22F5B);
-    static const corePink900 = Color(0xFF931847);
-    static const corePurple0 = Color(0xFFF2F2F9);
-    static const corePurple100 = Color(0xFFEAEAF9);
-    static const corePurple1000 = Color(0xFF2D246B);
-    static const corePurple1100 = Color(0xFF1D1D38);
-    static const corePurple200 = Color(0xFFD8D7F9);
-    static const corePurple300 = Color(0xFFC1C1F7);
-    static const corePurple400 = Color(0xFFA193F2);
-    static const corePurple500 = Color(0xFF9180F4);
-    static const corePurple600 = Color(0xFF816FEA);
-    static const corePurple700 = Color(0xFF6F5ED3);
-    static const corePurple800 = Color(0xFF5E4EBA);
-    static const corePurple900 = Color(0xFF483A9C);
-    static const coreRed0 = Color(0xFFFFEAE9);
-    static const coreRed100 = Color(0xFFFFD5D2);
-    static const coreRed1000 = Color(0xFF6D1313);
-    static const coreRed1100 = Color(0xFF2B1111);
-    static const coreRed200 = Color(0xFFFFB8B1);
-    static const coreRed300 = Color(0xFFFF9C8F);
-    static const coreRed400 = Color(0xFFFF7F6E);
-    static const coreRed500 = Color(0xFFF76054);
-    static const coreRed600 = Color(0xFFED4C42);
-    static const coreRed700 = Color(0xFFDB3E3E);
-    static const coreRed800 = Color(0xFFC63434);
-    static const coreRed900 = Color(0xFF992222);
-    static const coreTeal0 = Color(0xFFE5F9F5);
-    static const coreTeal100 = Color(0xFFCDF7EF);
-    static const coreTeal1000 = Color(0xFF083F3F);
-    static const coreTeal1100 = Color(0xFF002528);
-    static const coreTeal200 = Color(0xFFB3F2E6);
-    static const coreTeal300 = Color(0xFF7DEAD5);
-    static const coreTeal400 = Color(0xFF24E0C5);
-    static const coreTeal500 = Color(0xFF08C4B2);
-    static const coreTeal600 = Color(0xFF00A99C);
-    static const coreTeal700 = Color(0xFF0B968F);
-    static const coreTeal800 = Color(0xFF067C7C);
-    static const coreTeal900 = Color(0xFF026661);
-    static const coreYellow0 = Color(0xFFFFF8E2);
-    static const coreYellow100 = Color(0xFFFDEFCD);
-    static const coreYellow1000 = Color(0xFF542A00);
-    static const coreYellow1100 = Color(0xFF2D1A05);
-    static const coreYellow200 = Color(0xFFFFE99A);
-    static const coreYellow300 = Color(0xFFFFE16E);
-    static const coreYellow400 = Color(0xFFFFD943);
-    static const coreYellow500 = Color(0xFFFFCD1C);
-    static const coreYellow600 = Color(0xFFFFBC00);
-    static const coreYellow700 = Color(0xFFDD9903);
-    static const coreYellow800 = Color(0xFFBA7506);
-    static const coreYellow900 = Color(0xFF944C0C);
-    static const fontDanger = Color(0xFF6D1313);
-    static const fontInteractive = Color(0xFF0B8599);
-    static const fontInteractiveActive = Color(0xFF6F5ED3);
-    static const fontInteractiveDisabled = Color(0xFF364141);
-    static const fontInteractiveHover = Color(0xFF0B8599);
-    static const fontPrimary = Color(0xFF040404);
-    static const fontSecondary = Color(0xFF273333);
-    static const fontSuccess = Color(0xFF08422F);
-    static const fontTertiary = Color(0xFF364141);
-    static const fontWarning = Color(0xFF601700);
-}
-"
-`;
-
-exports[`integration flutter flutter/class.dart should match snapshot 1`] = `
-"
+snapshots["flutter/class.dart should match snapshot"] = 
+`
 //
 // style_dictionary.dart
 //
@@ -351,12 +179,11 @@ class StyleDictionary {
     static const sizePaddingMedium = 16.00;
     static const sizePaddingSmall = 8.00;
     static const sizePaddingXl = 16.00;
-}
-"
-`;
+}`;
+/* end snapshot flutter/class.dart should match snapshot */
 
-exports[`integration flutter flutter/class.dart with references should match snapshot 1`] = `
-"
+snapshots["flutter/class.dart with references should match snapshot"] = 
+`
 //
 // style_dictionary_with_references.dart
 //
@@ -533,6 +360,178 @@ class StyleDictionary {
     static const colorFontInteractiveHover = colorBrandPrimary;
     static const colorFontInteractive = colorBrandPrimary;
     static const colorBackgroundDisabled = colorBackgroundTertiary;
-}
-"
-`;
+}`;
+/* end snapshot flutter/class.dart with references should match snapshot */
+
+snapshots["flutter/class.dart separate should match snapshot"] = 
+`
+//
+// style_dictionary_color.dart
+//
+
+// Do not edit directly
+// Generated on Sat, 01 Jan 2000 00:00:00 GMT
+
+
+
+import 'dart:ui';
+
+class StyleDictionaryColor {
+  StyleDictionaryColor._();
+
+    static const backgroundDanger = Color(0xFFFFEAE9);
+    static const backgroundDisabled = Color(0xFFDEE1E1);
+    static const backgroundInfo = Color(0xFFE9F8FF);
+    static const backgroundPrimary = Color(0xFFFFFFFF);
+    static const backgroundSecondary = Color(0xFFF3F4F4);
+    static const backgroundSuccess = Color(0xFFEBF9EB);
+    static const backgroundTertiary = Color(0xFFDEE1E1);
+    static const backgroundWarning = Color(0xFFFFEDE3);
+    static const borderPrimary = Color(0xFFC8CCCC);
+    static const brandPrimary = Color(0xFF0B8599);
+    static const brandSecondary = Color(0xFF6F5ED3);
+    static const coreAqua0 = Color(0xFFD9FCFB);
+    static const coreAqua100 = Color(0xFFC5F9F9);
+    static const coreAqua1000 = Color(0xFF083D4F);
+    static const coreAqua1100 = Color(0xFF002838);
+    static const coreAqua200 = Color(0xFFA5F2F2);
+    static const coreAqua300 = Color(0xFF76E5E2);
+    static const coreAqua400 = Color(0xFF33D6E2);
+    static const coreAqua500 = Color(0xFF17B8CE);
+    static const coreAqua600 = Color(0xFF0797AE);
+    static const coreAqua700 = Color(0xFF0B8599);
+    static const coreAqua800 = Color(0xFF0F6E84);
+    static const coreAqua900 = Color(0xFF035E73);
+    static const coreBlue0 = Color(0xFFE9F8FF);
+    static const coreBlue100 = Color(0xFFDCF2FF);
+    static const coreBlue1000 = Color(0xFF0A3960);
+    static const coreBlue1100 = Color(0xFF002138);
+    static const coreBlue200 = Color(0xFFC7E4F9);
+    static const coreBlue300 = Color(0xFFA1D2F8);
+    static const coreBlue400 = Color(0xFF56ADF5);
+    static const coreBlue500 = Color(0xFF3896E3);
+    static const coreBlue600 = Color(0xFF2B87D3);
+    static const coreBlue700 = Color(0xFF2079C3);
+    static const coreBlue800 = Color(0xFF116DAA);
+    static const coreBlue900 = Color(0xFF0C5689);
+    static const coreGreen0 = Color(0xFFEBF9EB);
+    static const coreGreen100 = Color(0xFFD7F4D7);
+    static const coreGreen1000 = Color(0xFF08422F);
+    static const coreGreen1100 = Color(0xFF002B20);
+    static const coreGreen200 = Color(0xFFC2F2BD);
+    static const coreGreen300 = Color(0xFF98E58E);
+    static const coreGreen400 = Color(0xFF75DD66);
+    static const coreGreen500 = Color(0xFF59CB59);
+    static const coreGreen600 = Color(0xFF2BB656);
+    static const coreGreen700 = Color(0xFF0CA750);
+    static const coreGreen800 = Color(0xFF008B46);
+    static const coreGreen900 = Color(0xFF006B40);
+    static const coreMagenta0 = Color(0xFFFEF0FF);
+    static const coreMagenta100 = Color(0xFFF9E3FC);
+    static const coreMagenta1000 = Color(0xFF451551);
+    static const coreMagenta1100 = Color(0xFF29192D);
+    static const coreMagenta200 = Color(0xFFF4C4F7);
+    static const coreMagenta300 = Color(0xFFEDADF2);
+    static const coreMagenta400 = Color(0xFFF282F5);
+    static const coreMagenta500 = Color(0xFFDB61DB);
+    static const coreMagenta600 = Color(0xFFC44EB9);
+    static const coreMagenta700 = Color(0xFFAC44A8);
+    static const coreMagenta800 = Color(0xFF8F3896);
+    static const coreMagenta900 = Color(0xFF6C2277);
+    static const coreNeutral0 = Color(0xFFFFFFFF);
+    static const coreNeutral100 = Color(0xFFF3F4F4);
+    static const coreNeutral1000 = Color(0xFF162020);
+    static const coreNeutral1100 = Color(0xFF040404);
+    static const coreNeutral200 = Color(0xFFDEE1E1);
+    static const coreNeutral300 = Color(0xFFC8CCCC);
+    static const coreNeutral400 = Color(0xFFB0B6B7);
+    static const coreNeutral500 = Color(0xFF929A9B);
+    static const coreNeutral600 = Color(0xFF6E797A);
+    static const coreNeutral700 = Color(0xFF515E5F);
+    static const coreNeutral800 = Color(0xFF364141);
+    static const coreNeutral900 = Color(0xFF273333);
+    static const coreOrange0 = Color(0xFFFFEDE3);
+    static const coreOrange100 = Color(0xFFFCDCCC);
+    static const coreOrange1000 = Color(0xFF601700);
+    static const coreOrange1100 = Color(0xFF2D130E);
+    static const coreOrange200 = Color(0xFFFFC6A4);
+    static const coreOrange300 = Color(0xFFFFB180);
+    static const coreOrange400 = Color(0xFFFF9C5D);
+    static const coreOrange500 = Color(0xFFFC8943);
+    static const coreOrange600 = Color(0xFFF57D33);
+    static const coreOrange700 = Color(0xFFED7024);
+    static const coreOrange800 = Color(0xFFCE5511);
+    static const coreOrange900 = Color(0xFF962C0B);
+    static const corePink0 = Color(0xFFFFE9F3);
+    static const corePink100 = Color(0xFFFCDBEB);
+    static const corePink1000 = Color(0xFF561231);
+    static const corePink1100 = Color(0xFF2B1721);
+    static const corePink200 = Color(0xFFFFB5D5);
+    static const corePink300 = Color(0xFFFF95C1);
+    static const corePink400 = Color(0xFFFF76AE);
+    static const corePink500 = Color(0xFFEF588B);
+    static const corePink600 = Color(0xFFE0447C);
+    static const corePink700 = Color(0xFFCE3665);
+    static const corePink800 = Color(0xFFB22F5B);
+    static const corePink900 = Color(0xFF931847);
+    static const corePurple0 = Color(0xFFF2F2F9);
+    static const corePurple100 = Color(0xFFEAEAF9);
+    static const corePurple1000 = Color(0xFF2D246B);
+    static const corePurple1100 = Color(0xFF1D1D38);
+    static const corePurple200 = Color(0xFFD8D7F9);
+    static const corePurple300 = Color(0xFFC1C1F7);
+    static const corePurple400 = Color(0xFFA193F2);
+    static const corePurple500 = Color(0xFF9180F4);
+    static const corePurple600 = Color(0xFF816FEA);
+    static const corePurple700 = Color(0xFF6F5ED3);
+    static const corePurple800 = Color(0xFF5E4EBA);
+    static const corePurple900 = Color(0xFF483A9C);
+    static const coreRed0 = Color(0xFFFFEAE9);
+    static const coreRed100 = Color(0xFFFFD5D2);
+    static const coreRed1000 = Color(0xFF6D1313);
+    static const coreRed1100 = Color(0xFF2B1111);
+    static const coreRed200 = Color(0xFFFFB8B1);
+    static const coreRed300 = Color(0xFFFF9C8F);
+    static const coreRed400 = Color(0xFFFF7F6E);
+    static const coreRed500 = Color(0xFFF76054);
+    static const coreRed600 = Color(0xFFED4C42);
+    static const coreRed700 = Color(0xFFDB3E3E);
+    static const coreRed800 = Color(0xFFC63434);
+    static const coreRed900 = Color(0xFF992222);
+    static const coreTeal0 = Color(0xFFE5F9F5);
+    static const coreTeal100 = Color(0xFFCDF7EF);
+    static const coreTeal1000 = Color(0xFF083F3F);
+    static const coreTeal1100 = Color(0xFF002528);
+    static const coreTeal200 = Color(0xFFB3F2E6);
+    static const coreTeal300 = Color(0xFF7DEAD5);
+    static const coreTeal400 = Color(0xFF24E0C5);
+    static const coreTeal500 = Color(0xFF08C4B2);
+    static const coreTeal600 = Color(0xFF00A99C);
+    static const coreTeal700 = Color(0xFF0B968F);
+    static const coreTeal800 = Color(0xFF067C7C);
+    static const coreTeal900 = Color(0xFF026661);
+    static const coreYellow0 = Color(0xFFFFF8E2);
+    static const coreYellow100 = Color(0xFFFDEFCD);
+    static const coreYellow1000 = Color(0xFF542A00);
+    static const coreYellow1100 = Color(0xFF2D1A05);
+    static const coreYellow200 = Color(0xFFFFE99A);
+    static const coreYellow300 = Color(0xFFFFE16E);
+    static const coreYellow400 = Color(0xFFFFD943);
+    static const coreYellow500 = Color(0xFFFFCD1C);
+    static const coreYellow600 = Color(0xFFFFBC00);
+    static const coreYellow700 = Color(0xFFDD9903);
+    static const coreYellow800 = Color(0xFFBA7506);
+    static const coreYellow900 = Color(0xFF944C0C);
+    static const fontDanger = Color(0xFF6D1313);
+    static const fontInteractive = Color(0xFF0B8599);
+    static const fontInteractiveActive = Color(0xFF6F5ED3);
+    static const fontInteractiveDisabled = Color(0xFF364141);
+    static const fontInteractiveHover = Color(0xFF0B8599);
+    static const fontPrimary = Color(0xFF040404);
+    static const fontSecondary = Color(0xFF273333);
+    static const fontSuccess = Color(0xFF08422F);
+    static const fontTertiary = Color(0xFF364141);
+    static const fontWarning = Color(0xFF601700);
+}`;
+/* end snapshot flutter/class.dart separate should match snapshot */
+

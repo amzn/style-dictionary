@@ -10,6 +10,7 @@
     "styled-components": "^5.3.0"
   },
   "devDependencies": {
+    "eslint-config-react-app": "^7.0.1",
     "style-dictionary": "3.9.2"
   },
   "resolutions": {

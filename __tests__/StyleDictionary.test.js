@@ -209,7 +209,7 @@ describe('StyleDictionary class + extend method', () => {
     expect(StyleDictionaryExtended.tokens).to.eql(output);
   });
 
-  it('should throw a error if the collision is in source files and log is set to error', async () => {
+  it('should throw an error if the collision is in source files and log is set to error', async () => {
     const sd = new StyleDictionary(
       {
         source: ['__tests__/__tokens/paddings.json', '__tests__/__tokens/paddings.json'],
@@ -217,8 +217,13 @@ describe('StyleDictionary class + extend method', () => {
       },
       { init: false },
     );
-
-    await expect(sd.init()).to.eventually.be.rejectedWith('Collisions detected');
+    let error;
+    try {
+      await sd.init();
+    } catch (e) {
+      error = e;
+    }
+    await expect(error.message).to.matchSnapshot();
   });
 
   it('should throw a warning if the collision is in source files and log is set to warn', async () => {
