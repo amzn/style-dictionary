@@ -10,14 +10,11 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
-const fs = require('fs-extra');
-const StyleDictionary = require('../../index');
-const { buildPath, cleanConsoleOutput } = require('../_constants');
-
-// Spy on console.log and add all messages to an array
-let consoleOutput = [];
-const log = jest.spyOn(console, 'log').mockImplementation((message) => consoleOutput.push(message));
+import { expect } from 'chai';
+import { restore, stubMethod } from 'hanbi';
+import StyleDictionary from 'style-dictionary';
+import { buildPath, cleanConsoleOutput } from '../_constants.js';
+import { clearOutput } from '../../__tests__/__helpers.js';
 
 /**
  * This is the 2nd phase of logging: the platform configuration. This happens
@@ -29,96 +26,134 @@ const log = jest.spyOn(console, 'log').mockImplementation((message) => consoleOu
  *
  */
 describe(`integration`, () => {
-  // before each test clear the mocked console.log and the output array
+  let stub;
   beforeEach(() => {
-    log.mockClear();
-    consoleOutput = [];
+    stub = stubMethod(console, 'log');
+  });
+  afterEach(() => {
+    restore();
+    clearOutput(buildPath);
   });
 
   describe(`logging`, () => {
     describe(`platform`, () => {
-      it(`should throw and notify users of unknown actions`, () => {
+      it(`should throw and notify users of unknown actions`, async () => {
+        const sd = new StyleDictionary({
+          tokens: {},
+          platforms: {
+            css: {
+              actions: [`foo`],
+            },
+          },
+        });
         // unknown actions should throw
-        expect(() => {
-          StyleDictionary.extend({
-            tokens: {},
-            platforms: {
-              css: {
-                actions: [`foo`],
-              },
-            },
-          }).buildAllPlatforms();
-        }).toThrow();
-        expect(consoleOutput.map(cleanConsoleOutput).join('\n')).toMatchSnapshot();
+        let error;
+        try {
+          await sd.buildAllPlatforms();
+        } catch (e) {
+          error = e;
+        }
+        await expect(cleanConsoleOutput(error.message)).to.matchSnapshot();
+        // only log is the platform name at the start of the buildPlatform method
+        expect(stub.callCount).to.equal(1);
+        expect(stub.firstCall.args).to.eql(['\ncss']);
       });
 
-      it(`should throw and notify users of unknown transforms`, () => {
-        expect(() => {
-          StyleDictionary.extend({
-            platforms: {
-              css: {
-                transforms: [`foo`, `bar`],
-              },
+      it(`should throw and notify users of unknown transforms`, async () => {
+        const sd = new StyleDictionary({
+          platforms: {
+            css: {
+              transforms: [`foo`, `bar`],
             },
-          }).buildAllPlatforms();
-        }).toThrow();
-        expect(consoleOutput.map(cleanConsoleOutput).join(`\n`)).toMatchSnapshot();
+          },
+        });
+        // unknown actions should throw
+        let error;
+        try {
+          await sd.buildAllPlatforms();
+        } catch (e) {
+          error = e;
+        }
+        await expect(cleanConsoleOutput(error.message)).to.matchSnapshot();
+        // only log is the platform name at the start of the buildPlatform method
+        expect(stub.callCount).to.equal(1);
+        expect(stub.firstCall.args).to.eql(['\ncss']);
       });
 
-      it(`should throw and notify users of unknown transformGroups`, () => {
-        expect(() => {
-          StyleDictionary.extend({
-            platforms: {
-              css: {
-                transformGroup: `foo`,
-              },
+      it(`should throw and notify users of unknown transformGroups`, async () => {
+        const sd = new StyleDictionary({
+          platforms: {
+            css: {
+              transformGroup: `foo`,
             },
-          }).buildAllPlatforms();
-        }).toThrow();
-        expect(consoleOutput.map(cleanConsoleOutput).join(`\n`)).toMatchSnapshot();
+          },
+        });
+        // unknown actions should throw
+        let error;
+        try {
+          await sd.buildAllPlatforms();
+        } catch (e) {
+          error = e;
+        }
+        await expect(cleanConsoleOutput(error.message)).to.matchSnapshot();
+        // only log is the platform name at the start of the buildPlatform method
+        expect(stub.callCount).to.equal(1);
+        expect(stub.firstCall.args).to.eql(['\ncss']);
       });
 
       describe(`property reference errors`, () => {
-        it(`should throw and notify users of unknown references`, () => {
-          expect(() => {
-            StyleDictionary.extend({
-              tokens: {
-                color: {
-                  danger: { value: '{color.red.value}' },
-                },
+        it(`should throw and notify users of unknown references`, async () => {
+          const sd = new StyleDictionary({
+            tokens: {
+              color: {
+                danger: { value: '{color.red.value}' },
               },
-              platforms: {
-                css: {},
-              },
-            }).buildAllPlatforms();
-          }).toThrow();
-          expect(consoleOutput.map(cleanConsoleOutput).join('\n')).toMatchSnapshot();
+            },
+            platforms: {
+              css: {},
+            },
+          });
+          // unknown actions should throw
+          let error;
+          try {
+            await sd.buildAllPlatforms();
+          } catch (e) {
+            error = e;
+          }
+          await expect(cleanConsoleOutput(error.message)).to.matchSnapshot();
+          // only log is the platform name at the start of the buildPlatform method
+          expect(stub.callCount).to.equal(1);
+          expect(stub.firstCall.args).to.eql(['\ncss']);
         });
 
-        it(`circular references should throw notify users`, () => {
-          expect(() => {
-            StyleDictionary.extend({
-              tokens: {
-                color: {
-                  foo: { value: '{color.foo.value}' },
-                  teal: { value: '{color.blue.value}' },
-                  blue: { value: '{color.green.value}' },
-                  green: { value: '{color.teal.value}' },
-                  purple: { value: '{color.teal.value}' },
-                },
+        it(`circular references should throw and notify users`, async () => {
+          const sd = new StyleDictionary({
+            tokens: {
+              color: {
+                foo: { value: '{color.foo.value}' },
+                teal: { value: '{color.blue.value}' },
+                blue: { value: '{color.green.value}' },
+                green: { value: '{color.teal.value}' },
+                purple: { value: '{color.teal.value}' },
               },
-              platforms: {
-                css: {},
-              },
-            }).buildAllPlatforms();
-          }).toThrow();
-          expect(consoleOutput.map(cleanConsoleOutput).join('\n')).toMatchSnapshot();
+            },
+            platforms: {
+              css: {},
+            },
+          });
+          // unknown actions should throw
+          let error;
+          try {
+            await sd.buildAllPlatforms();
+          } catch (e) {
+            error = e;
+          }
+          await expect(cleanConsoleOutput(error.message)).to.matchSnapshot();
+          // only log is the platform name at the start of the buildPlatform method
+          expect(stub.callCount).to.equal(1);
+          expect(stub.firstCall.args).to.eql(['\ncss']);
         });
       });
     });
   });
-});
-
-afterAll(() => {
-  fs.emptyDirSync(buildPath);
 });

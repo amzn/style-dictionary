@@ -10,14 +10,19 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
-const fs = require('fs-extra');
-const StyleDictionary = require('../index');
-const { buildPath } = require('./_constants');
+import { expect } from 'chai';
+import StyleDictionary from 'style-dictionary';
+import { fs } from 'style-dictionary/fs';
+import { buildPath } from './_constants.js';
+import { clearOutput } from '../__tests__/__helpers.js';
 
 describe('integration', () => {
-  describe('flutter', () => {
-    StyleDictionary.extend({
+  afterEach(() => {
+    clearOutput(buildPath);
+  });
+
+  describe('flutter', async () => {
+    const sd = new StyleDictionary({
       source: [`__integration__/tokens/**/*.json?(c)`],
       platforms: {
         flutter: {
@@ -68,15 +73,16 @@ describe('integration', () => {
           ],
         },
       },
-    }).buildAllPlatforms();
+    });
+    await sd.buildAllPlatforms();
 
     describe(`flutter/class.dart`, () => {
       const output = fs.readFileSync(`${buildPath}style_dictionary.dart`, {
         encoding: `UTF-8`,
       });
 
-      it(`should match snapshot`, () => {
-        expect(output).toMatchSnapshot();
+      it(`should match snapshot`, async () => {
+        await expect(output).to.matchSnapshot();
       });
 
       describe(`with references`, () => {
@@ -84,8 +90,8 @@ describe('integration', () => {
           encoding: `UTF-8`,
         });
 
-        it(`should match snapshot`, () => {
-          expect(output).toMatchSnapshot();
+        it(`should match snapshot`, async () => {
+          await expect(output).to.matchSnapshot();
         });
       });
 
@@ -93,14 +99,10 @@ describe('integration', () => {
         const output = fs.readFileSync(`${buildPath}style_dictionary_color.dart`, {
           encoding: `UTF-8`,
         });
-        it(`should match snapshot`, () => {
-          expect(output).toMatchSnapshot();
+        it(`should match snapshot`, async () => {
+          await expect(output).to.matchSnapshot();
         });
       });
     });
   });
-});
-
-afterAll(() => {
-  fs.emptyDirSync(buildPath);
 });

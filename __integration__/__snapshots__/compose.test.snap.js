@@ -1,7 +1,8 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+/* @web/test-runner snapshot v1 */
+export const snapshots = {};
 
-exports[`integration compose compose/object should match snapshot 1`] = `
-"
+snapshots["compose/object should match snapshot"] = 
+`
 
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
@@ -176,12 +177,11 @@ object StyleDictionary {
   val sizePaddingMedium = 16.00.dp
   val sizePaddingSmall = 8.00.dp
   val sizePaddingXl = 16.00.dp
-}
-"
-`;
+}`;
+/* end snapshot compose/object should match snapshot */
 
-exports[`integration compose compose/object with references should match snapshot 1`] = `
-"
+snapshots["compose/object with references should match snapshot"] = 
+`
 
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
@@ -356,6 +356,6 @@ object StyleDictionary {
   val colorFontInteractiveHover = colorBrandPrimary
   val colorFontInteractive = colorBrandPrimary
   val colorBackgroundDisabled = colorBackgroundTertiary
-}
-"
-`;
+}`;
+/* end snapshot compose/object with references should match snapshot */
+

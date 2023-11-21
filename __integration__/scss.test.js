@@ -10,15 +10,20 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
-const fs = require('fs-extra');
-const scss = require('node-sass');
-const StyleDictionary = require('../index');
-const { buildPath } = require('./_constants');
+import { expect } from 'chai';
+import StyleDictionary from 'style-dictionary';
+import { fs } from 'style-dictionary/fs';
+import { compileString } from 'sass';
+import { buildPath } from './_constants.js';
+import { clearOutput } from '../__tests__/__helpers.js';
 
 describe(`integration`, () => {
-  describe(`scss`, () => {
-    StyleDictionary.extend({
+  afterEach(() => {
+    clearOutput(buildPath);
+  });
+
+  describe(`scss`, async () => {
+    const sd = new StyleDictionary({
       source: [`__integration__/tokens/**/*.json?(c)`],
       platforms: {
         css: {
@@ -80,7 +85,8 @@ describe(`integration`, () => {
           ],
         },
       },
-    }).buildAllPlatforms();
+    });
+    await sd.buildAllPlatforms();
 
     describe(`scss/variables`, () => {
       const output = fs.readFileSync(`${buildPath}variables.scss`, {
@@ -88,14 +94,12 @@ describe(`integration`, () => {
       });
 
       it(`should have a valid scss syntax`, () => {
-        const result = scss.renderSync({
-          data: output,
-        });
-        expect(result.css).toBeDefined();
+        const result = compileString(output);
+        expect(result.css).to.not.be.undefined;
       });
 
-      it(`should match snapshot`, () => {
-        expect(output).toMatchSnapshot();
+      it(`should match snapshot`, async () => {
+        await expect(output).to.matchSnapshot();
       });
 
       describe(`with themeable`, () => {
@@ -103,14 +107,12 @@ describe(`integration`, () => {
           encoding: 'UTF-8',
         });
         it(`should have a valid scss syntax`, () => {
-          const result = scss.renderSync({
-            data: output,
-          });
-          expect(result.css).toBeDefined();
+          const result = compileString(output);
+          expect(result.css).to.not.be.undefined;
         });
 
-        it(`should match snapshot`, () => {
-          expect(output).toMatchSnapshot();
+        it(`should match snapshot`, async () => {
+          await expect(output).to.matchSnapshot();
         });
       });
 
@@ -119,14 +121,12 @@ describe(`integration`, () => {
           encoding: 'UTF-8',
         });
         it(`should have a valid scss syntax`, () => {
-          const result = scss.renderSync({
-            data: output,
-          });
-          expect(result.css).toBeDefined();
+          const result = compileString(output);
+          expect(result.css).to.not.be.undefined;
         });
 
-        it(`should match snapshot`, () => {
-          expect(output).toMatchSnapshot();
+        it(`should match snapshot`, async () => {
+          await expect(output).to.matchSnapshot();
         });
       });
 
@@ -134,8 +134,8 @@ describe(`integration`, () => {
         const output = fs.readFileSync(`${buildPath}filtered-variables-with-references.scss`, {
           encoding: 'UTF-8',
         });
-        it(`should match snapshot`, () => {
-          expect(output).toMatchSnapshot();
+        it(`should match snapshot`, async () => {
+          await expect(output).to.matchSnapshot();
         });
       });
     });
@@ -146,14 +146,12 @@ describe(`integration`, () => {
       });
 
       it(`should have a valid scss syntax`, () => {
-        const result = scss.renderSync({
-          data: output,
-        });
-        expect(result.css).toBeDefined();
+        const result = compileString(output);
+        expect(result.css).to.not.be.undefined;
       });
 
-      it(`should match snapshot`, () => {
-        expect(output).toMatchSnapshot();
+      it(`should match snapshot`, async () => {
+        await expect(output).to.matchSnapshot();
       });
     });
 
@@ -163,14 +161,12 @@ describe(`integration`, () => {
       });
 
       it(`should have a valid scss syntax`, () => {
-        const result = scss.renderSync({
-          data: output,
-        });
-        expect(result.css).toBeDefined();
+        const result = compileString(output);
+        expect(result.css).to.not.be.undefined;
       });
 
-      it(`should match snapshot`, () => {
-        expect(output).toMatchSnapshot();
+      it(`should match snapshot`, async () => {
+        await expect(output).to.matchSnapshot();
       });
 
       describe(`with outputReferences`, () => {
@@ -178,14 +174,12 @@ describe(`integration`, () => {
           encoding: 'UTF-8',
         });
         it(`should have a valid scss syntax`, () => {
-          const result = scss.renderSync({
-            data: output,
-          });
-          expect(result.css).toBeDefined();
+          const result = compileString(output);
+          expect(result.css).to.not.be.undefined;
         });
 
-        it(`should match snapshot`, () => {
-          expect(output).toMatchSnapshot();
+        it(`should match snapshot`, async () => {
+          await expect(output).to.matchSnapshot();
         });
       });
 
@@ -194,20 +188,14 @@ describe(`integration`, () => {
           encoding: 'UTF-8',
         });
         it(`should have a valid scss syntax`, () => {
-          const result = scss.renderSync({
-            data: output,
-          });
-          expect(result.css).toBeDefined();
+          const result = compileString(output);
+          expect(result.css).to.not.be.undefined;
         });
 
-        it(`should match snapshot`, () => {
-          expect(output).toMatchSnapshot();
+        it(`should match snapshot`, async () => {
+          await expect(output).to.matchSnapshot();
         });
       });
     });
   });
-});
-
-afterAll(() => {
-  fs.emptyDirSync(buildPath);
 });

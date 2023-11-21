@@ -1,8 +1,11 @@
 /**
  * TODO: allow inline snapshots (requires update to @web/test-runner-commands snapshot plugin)
  * TODO: contribute feature to WTR snapshot plugin to allow Javascript complex values as snapshots
- * e.g. with https://www.npmjs.com/package/pretty-format
+ * e.g. with https://www.npmjs.com/package/pretty-format (right now we only escape tildes)
  */
+
+// Exclude from code coverage since this is just a devtool
+/* c8 ignore start */
 
 /**
  * @typedef {import('@types/chai')} Chai
@@ -52,13 +55,23 @@ const writeSnapshotsSet = new Set();
  */
 export function chaiWtrSnapshot(chai, utils) {
   /**
+   * @param {string} [str]
+   */
+  function escapeTildes(str) {
+    if (typeof str === 'string') {
+      return str.replace(/`/g, '\\`');
+    }
+    return str;
+  }
+
+  /**
    * Base HTML snapshot assertion for `assert` interface.
    * @this {Chai.AssertionStatic}
    * @param {string|Node} actual
    * @param {boolean} negate
    */
   async function assertMatchSnapshot(actual, negate, index) {
-    const snapshot = actual;
+    const snapshot = escapeTildes(actual);
     let updateSnapshots = false;
     let currentSnapshot;
     let name;
@@ -82,6 +95,7 @@ export function chaiWtrSnapshot(chai, utils) {
       // TODO: get --update-snapshots flag
       // updateSnapshots = (await getSnapshotConfig()).updateSnapshots;
     }
+    currentSnapshot = escapeTildes(currentSnapshot);
 
     if (currentSnapshot && !updateSnapshots) {
       if (negate ? currentSnapshot === snapshot : currentSnapshot !== snapshot) {
@@ -167,3 +181,4 @@ export function chaiWtrSnapshot(chai, utils) {
     );
   });
 }
+/* c8 ignore stop */

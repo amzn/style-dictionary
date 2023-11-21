@@ -4,6 +4,16 @@ import path from '@bundled-es-modules/path-browserify';
 import { fs } from 'style-dictionary/fs';
 import { chaiWtrSnapshot } from '../snapshot-plugin/chai-wtr-snapshot.js';
 
+const constantDate = new Date('2000-01-01');
+// eslint-disable-next-line no-undef
+window.Date = function () {
+  return constantDate;
+};
+// eslint-disable-next-line no-undef
+window.Date.now = function () {
+  return constantDate;
+};
+
 /**
  * We have a bunch of files that we use a mock data for our tests
  * Since we run tests in the browser, we will have to mirror these mock files
@@ -30,16 +40,6 @@ function mirrorFile(file, contents) {
 export function setup(filesToMirror) {
   use(chaiAsPromised);
   use(chaiWtrSnapshot);
-
-  const constantDate = new Date('2000-01-01');
-  // eslint-disable-next-line no-undef
-  window.Date = function () {
-    return constantDate;
-  };
-  // eslint-disable-next-line no-undef
-  window.Date.now = function () {
-    return constantDate;
-  };
 
   filesToMirror.forEach(([file, contents]) => {
     mirrorFile(file, contents);

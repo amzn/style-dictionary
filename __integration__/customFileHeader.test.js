@@ -10,22 +10,27 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
-const fs = require('fs-extra');
-const StyleDictionary = require('../index');
-const { buildPath } = require('./_constants');
+import { expect } from 'chai';
+import StyleDictionary from 'style-dictionary';
+import { fs } from 'style-dictionary/fs';
+import { buildPath } from './_constants.js';
+import { clearOutput } from '../__tests__/__helpers.js';
 
 describe(`integration`, () => {
-  describe(`valid custom file headers`, () => {
+  afterEach(() => {
+    clearOutput(buildPath);
+  });
+
+  describe(`valid custom file headers`, async () => {
     // Adding a custom file header with the `.registerFileHeader`
     StyleDictionary.registerFileHeader({
-      name: `registeredFileHeader`,
+      name: `valid custom file headers test fileHeader`,
       fileHeader: (defaultMessage) => {
         return [`hello`, ...defaultMessage];
       },
     });
 
-    StyleDictionary.extend({
+    const sd = new StyleDictionary({
       fileHeader: {
         configFileHeader: (defaultMessage) => {
           return [...defaultMessage, 'hello, world!'];
@@ -49,7 +54,7 @@ describe(`integration`, () => {
               destination: `registeredFileHeader.css`,
               format: `css/variables`,
               options: {
-                fileHeader: `registeredFileHeader`,
+                fileHeader: `valid custom file headers test fileHeader`,
               },
             },
             {
@@ -98,73 +103,78 @@ describe(`integration`, () => {
           ],
         },
       },
-    }).buildAllPlatforms();
+    });
+
+    await sd.buildAllPlatforms();
 
     describe('file options', () => {
-      it(`registered file header should match snapshot`, () => {
+      it(`registered file header should match snapshot`, async () => {
         const output = fs.readFileSync(`${buildPath}registeredFileHeader.css`, {
           encoding: 'UTF-8',
         });
-        expect(output).toMatchSnapshot();
+        await expect(output).to.matchSnapshot();
       });
 
-      it(`config file header should match snapshot`, () => {
+      it(`config file header should match snapshot`, async () => {
         const output = fs.readFileSync(`${buildPath}configFileHeader.css`, {
           encoding: 'UTF-8',
         });
-        expect(output).toMatchSnapshot();
+        await expect(output).to.matchSnapshot();
       });
 
-      it(`inline file header should match snapshot`, () => {
+      it(`inline file header should match snapshot`, async () => {
         const output = fs.readFileSync(`${buildPath}inlineFileHeader.css`, {
           encoding: 'UTF-8',
         });
-        expect(output).toMatchSnapshot();
+        await expect(output).to.matchSnapshot();
       });
     });
 
     describe('platform options', () => {
-      it(`no file options should match snapshot`, () => {
+      it(`no file options should match snapshot`, async () => {
         const output = fs.readFileSync(`${buildPath}noOptions.js`, {
           encoding: 'UTF-8',
         });
-        expect(output).toMatchSnapshot();
+        await expect(output).to.matchSnapshot();
       });
 
-      it(`showFileHeader should match snapshot`, () => {
+      it(`showFileHeader should match snapshot`, async () => {
         const output = fs.readFileSync(`${buildPath}showFileHeader.js`, {
           encoding: 'UTF-8',
         });
-        expect(output).toMatchSnapshot();
+        await expect(output).to.matchSnapshot();
       });
 
-      it(`file header override should match snapshot`, () => {
+      it(`file header override should match snapshot`, async () => {
         const output = fs.readFileSync(`${buildPath}fileHeaderOverride.js`, {
           encoding: 'UTF-8',
         });
-        expect(output).toMatchSnapshot();
+        await expect(output).to.matchSnapshot();
       });
     });
   });
+
   describe(`invalid custom file headers`, () => {
-    it(`should throw if trying to use an undefined file header`, () => {
-      expect(() => {
-        StyleDictionary.extend({
-          platforms: {
-            css: {
-              buildPath,
-              files: [
-                {
-                  destination: `variables.css`,
-                  options: {
-                    fileHeader: `nonexistentFileHeader`,
-                  },
+    it(`should throw if trying to use an undefined file header`, async () => {
+      const sd = new StyleDictionary({
+        platforms: {
+          css: {
+            buildPath,
+            files: [
+              {
+                destination: `variables.css`,
+                options: {
+                  fileHeader: `nonexistentFileHeader`,
                 },
-              ],
-            },
+              },
+            ],
           },
-        }).buildAllPlatforms();
-      }).toThrow(`Can't find fileHeader: nonexistentFileHeader`);
+        },
+      });
+
+      await expect(sd.buildAllPlatforms()).to.eventually.be.rejectedWith(
+        `Can't find fileHeader: nonexistentFileHeader`,
+      );
     });
   });
 });
