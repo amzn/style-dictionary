@@ -11,14 +11,15 @@
  * and limitations under the License.
  */
 
-import { Dictionary } from "./Dictionary";
-import { DesignToken } from "./DesignToken";
-import { TransformedToken } from "./TransformedToken";
-import { File } from "./File";
+import { Dictionary } from './Dictionary';
+import { DesignToken } from './DesignToken';
+import { TransformedToken } from './TransformedToken';
+import { File } from './File';
 
 export interface LineFormatting {
   prefix?: string;
-  commentStyle?: "short" | "long" | "none";
+  commentStyle?: 'short' | 'long' | 'none';
+  commentPosition?: 'inline' | 'above';
   indentation?: string;
   separator?: string;
   suffix?: string;
@@ -27,7 +28,7 @@ export interface LineFormatting {
 export type TokenFormatterArgs = {
   outputReferences?: boolean;
   dictionary: Dictionary;
-  format?: "css" | "sass" | "less" | "stylus";
+  format?: 'css' | 'sass' | 'less' | 'stylus';
   formatting?: LineFormatting;
 };
 
@@ -45,32 +46,20 @@ export interface FileHeaderArgs {
 }
 
 export interface FormattedVariablesArgs {
-  format: "css" | "sass";
+  format: 'css' | 'sass';
   dictionary: Dictionary;
   outputReferences?: boolean;
   formatting?: LineFormatting;
 }
 
 export interface FormatHelpers {
-  createPropertyFormatter: (
-    args: TokenFormatterArgs
-  ) => (token: TransformedToken) => string;
+  createPropertyFormatter: (args: TokenFormatterArgs) => (token: TransformedToken) => string;
   fileHeader: (args: FileHeaderArgs) => string;
   formattedVariables: (args: FormattedVariablesArgs) => string;
   minifyDictionary: (dictionary: object) => object;
   getTypeScriptType: (value: unknown) => string;
-  iconsWithPrefix: (
-    prefix: string,
-    allTokens: DesignToken[],
-    options: object
-  ) => string;
-  sortByReference: (
-    dictionary: Dictionary
-  ) => (a: TransformedToken, b: TransformedToken) => number;
+  iconsWithPrefix: (prefix: string, allTokens: DesignToken[], options: object) => string;
+  sortByReference: (dictionary: Dictionary) => (a: TransformedToken, b: TransformedToken) => number;
   sortByName: (a: DesignToken, b: DesignToken) => number;
-  setSwiftFileProperties: (
-    options: object,
-    objectType: string,
-    transformGroup: string
-  ) => string;
+  setSwiftFileProperties: (options: object, objectType: string, transformGroup: string) => string;
 }
