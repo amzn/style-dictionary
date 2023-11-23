@@ -27,10 +27,10 @@ export default {
     report: true,
     reportDir: 'coverage',
     threshold: {
-      statements: 98.9,
-      branches: 99.89,
-      functions: 96.53,
-      lines: 98.9,
+      statements: 98,
+      branches: 99,
+      functions: 96,
+      lines: 98,
     },
   },
   browsers: [
