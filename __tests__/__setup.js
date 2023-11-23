@@ -3,16 +3,7 @@ import chaiAsPromised from '@esm-bundle/chai-as-promised';
 import path from '@bundled-es-modules/path-browserify';
 import { fs } from 'style-dictionary/fs';
 import { chaiWtrSnapshot } from '../snapshot-plugin/chai-wtr-snapshot.js';
-
-const constantDate = new Date('2000-01-01');
-// eslint-disable-next-line no-undef
-window.Date = function () {
-  return constantDate;
-};
-// eslint-disable-next-line no-undef
-window.Date.now = function () {
-  return constantDate;
-};
+import { fixDate } from './__helpers.js';
 
 /**
  * We have a bunch of files that we use a mock data for our tests
@@ -23,6 +14,8 @@ window.Date.now = function () {
  * We also use a custom WTR + Chai snapshot plugin for snapshot testing,
  * which needs to be initialized client-side
  */
+
+fixDate();
 
 function ensureDirectoryExistence(filePath) {
   const dirname = path.dirname(filePath);

@@ -11,6 +11,7 @@
  * and limitations under the License.
  */
 import { expect } from 'chai';
+import { fixDate } from '../../__helpers.js';
 import fileHeader from '../../../lib/common/formatHelpers/fileHeader.js';
 
 const defaultLine1 = `Do not edit directly`;
@@ -18,6 +19,11 @@ const defaultLine2 = `Generated on Sat, 01 Jan 2000 00:00:00 GMT`;
 
 describe('common', () => {
   describe('formatHelpers', () => {
+    beforeEach(() => {
+      // reset Date again, for some reasons these tests are flaky otherwise in the pipelines
+      fixDate();
+    });
+
     describe('fileHeader', () => {
       it(`should default to /**/ comment style`, () => {
         const comment = fileHeader({});

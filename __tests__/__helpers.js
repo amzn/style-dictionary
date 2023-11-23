@@ -50,3 +50,18 @@ export const fileExists = (filePath, _fs = fs) => {
 export const dirExists = (dirPath, _fs = fs) => {
   return _fs.existsSync(dirPath);
 };
+
+export function fixDate() {
+  const constantDate = new Date('2000-01-01');
+  // eslint-disable-next-line no-undef
+  const __global = typeof window === 'object' ? window : globalThis;
+
+  // eslint-disable-next-line no-undef
+  __global.Date = function () {
+    return constantDate;
+  };
+  // eslint-disable-next-line no-undef
+  __global.Date.now = function () {
+    return constantDate;
+  };
+}
