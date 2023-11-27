@@ -12,7 +12,7 @@
  */
 
 const formats = require('../../lib/common/formats');
-const scss = require('node-sass');
+const scss = require('sass');
 const createDictionary = require('../../lib/utils/createDictionary');
 const createFormatArgs = require('../../lib/utils/createFormatArgs');
 
@@ -57,13 +57,12 @@ describe('formats', () => {
   describe('scss/icons', () => {
 
     it('should have a valid scss syntax', () => {
-      const result = scss.renderSync({
-        data: formatter(createFormatArgs({
-          dictionary,
-          file,
-          platform
-        }), platform, file),
-      });
+      const result = scss.compileString(formatter(createFormatArgs({
+        dictionary,
+        file,
+        platform
+      }), platform, file));
+      
       expect(result.css).toBeDefined();
     });
 
