@@ -10,24 +10,24 @@ EDIT ${source} OR JSDOC COMMENT INSTEAD!
 ${input}`;
 }
 
-const DOCS_PATH = './docs/api.md';
-const docs = jsdoc2md.renderSync({
-  files: ['fs.js', 'fs-node.js', 'lib/**/*.js'],
-  template: fs.readFileSync('scripts/handlebars/templates/api.hbs').toString(),
-  // 'no-gfm': true,
-  separators: true,
-  partial: [
-    'scripts/handlebars/header.hbs',
-    'scripts/handlebars/sig-name.hbs',
-    'scripts/handlebars/body.hbs',
-  ],
-  configure: '.jsdoc.json',
-});
+// TODO: re-enable automatic generation of API docs via template and JSDocs
+// const DOCS_PATH = './docs/api.md';
+// const docs = jsdoc2md.renderSync({
+//   files: ['lib/**/*.js'],
+//   template: fs.readFileSync('scripts/handlebars/templates/api.hbs').toString(),
+//   // 'no-gfm': true,
+//   separators: true,
+//   partial: [
+//     'scripts/handlebars/header.hbs',
+//     'scripts/handlebars/sig-name.hbs',
+//     'scripts/handlebars/body.hbs',
+//   ],
+//   configure: '.jsdoc.json',
+// });
 
-fs.ensureFileSync(DOCS_PATH);
-fs.writeFileSync(DOCS_PATH, prependWarning(docs, 'scripts/handlebars/templates/api.hbs'));
-execSync(`git add ${DOCS_PATH}`);
-console.log(DOCS_PATH + ' generated.');
+// fs.ensureFileSync(DOCS_PATH);
+// fs.writeFileSync(DOCS_PATH, prependWarning(docs, 'scripts/handlebars/templates/api.hbs'));
+// console.log(DOCS_PATH + ' generated.');
 
 const TRANSFORMS_PATH = './docs/transforms.md';
 const transforms = jsdoc2md.renderSync({
@@ -44,7 +44,6 @@ fs.writeFileSync(
   TRANSFORMS_PATH,
   prependWarning(transforms, 'scripts/handlebars/templates/api.hbs'),
 );
-execSync(`git add ${TRANSFORMS_PATH}`);
 console.log(TRANSFORMS_PATH + ' generated.');
 
 const TRANSFORM_GROUPS_PATH = './docs/transform_groups.md';
@@ -62,7 +61,6 @@ fs.writeFileSync(
   TRANSFORM_GROUPS_PATH,
   prependWarning(transform_groups, 'scripts/handlebars/templates/api.hbs'),
 );
-execSync(`git add ${TRANSFORM_GROUPS_PATH}`);
 console.log(TRANSFORM_GROUPS_PATH + ' generated.');
 
 const ACTIONS_PATH = './docs/actions.md';
@@ -77,7 +75,6 @@ const actions = jsdoc2md.renderSync({
 
 fs.ensureFileSync(ACTIONS_PATH);
 fs.writeFileSync(ACTIONS_PATH, prependWarning(actions, 'scripts/handlebars/templates/api.hbs'));
-execSync(`git add ${ACTIONS_PATH}`);
 console.log(ACTIONS_PATH + ' generated.');
 
 const FORMATS_PATH = './docs/formats.md';
@@ -92,5 +89,7 @@ const formats = jsdoc2md.renderSync({
 
 fs.ensureFileSync(FORMATS_PATH);
 fs.writeFileSync(FORMATS_PATH, prependWarning(formats, 'scripts/handlebars/templates/api.hbs'));
-execSync(`git add ${FORMATS_PATH}`);
 console.log(FORMATS_PATH + ' generated.');
+
+execSync(`npm run format:prettier`);
+execSync(`git add ./docs/`);

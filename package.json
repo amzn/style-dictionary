@@ -62,8 +62,7 @@
     "generate-docs": "node ./scripts/generateDocs.cjs",
     "serve-docs": "docsify serve docs -p 3000 -P 12345",
     "install-cli": "npm install -g $(npm pack)",
-    "release": "node scripts/inject-version.js && changeset publish",
-    "postrelease": "node ./scripts/version.cjs && npm run generate-docs",
+    "release": "node ./scripts/version.cjs && npm run generate-docs && node scripts/inject-version.js && changeset publish",
     "prepare": "husky install",
     "postinstall": "patch-package"
   },
@@ -116,6 +115,7 @@
     "tinycolor2": "^1.6.0"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@changesets/cli": "^2.26.2",
     "@commitlint/cli": "^16.1.0",
     "@commitlint/config-conventional": "^16.0.0",

@@ -60,9 +60,9 @@ In this example we are adding the `mapName` configuration to the `scss/map-deep`
 
 A special file configuration is `filter`, which will filter the tokens before they get to the format. This allows you to re-use the same format to generate multiple files with different sets of tokens. Filtering tokens works by adding a `filter` attribute on the file object, where `filter` is:
 
+- An object which gets passed to [Lodash's filter method](https://lodash.com/docs/4.17.14#filter).
 - A string that references the name of a registered filter, using the [`registerFilter`](api.md#registerfilter) method
 - A function that takes a token and returns a boolean if the token should be included (true) or excluded (false). **This is only available if you are defining your configuration in Javascript.**
-- An object which is treated similar to [Lodash's matches method](https://lodash.com/docs/4.17.15#matches).
 
 ```javascript
 {
@@ -361,8 +361,6 @@ Here are the available format helper methods:
 
 ### createPropertyFormatter
 
-> formatHelpers.createPropertyFormatter(options) ⇒ <code>function</code>
-
 Creates a function that can be used to format a property. This can be useful
 to use as the function on `dictionary.allTokens.map`. The formatting
 is configurable either by supplying a `format` option or a `formatting` object
@@ -393,7 +391,7 @@ which uses: prefix, indentation, separator, suffix, and commentStyle.
     <td>options.formatting</td><td><code>Object</code></td><td><p>Custom formatting properties that define parts of a declaration line in code. The configurable strings are: prefix, indentation, separator, suffix, and commentStyle. Those are used to generate a line like this: <code>${indentation}${prefix}${prop.name}${separator} ${prop.value}${suffix}</code></p>
 </td>
     </tr><tr>
-    <td>options.themeable</td><td><code>Boolean</code></td><td><p>[false] - Whether properties should default to being themeable.</p>
+    <td>options.themeable</td><td><code>Boolean</code></td><td><p>[false] - Whether tokens should default to being themeable.</p>
 </td>
     </tr>  </tbody>
 </table>
@@ -419,8 +417,6 @@ StyleDictionary.registerFormat({
 
 ### fileHeader
 
-> formatHelpers.fileHeader(options) ⇒ <code>String</code>
-
 This is for creating the comment at the top of generated files with the generated at date.
 It will use the custom file header if defined on the configuration, or use the
 default file header.
@@ -441,7 +437,7 @@ default file header.
     <td>options.commentStyle</td><td><code>String</code></td><td><p>The only options are &#39;short&#39; and &#39;xml&#39;, which will use the // or &lt;!-- --&gt; style comments respectively. Anything else will use /* style comments.</p>
 </td>
     </tr><tr>
-    <td>options.formatting</td><td><code>Object</code></td><td><p>Custom formatting tokens that define parts of a comment in code. The configurable strings are: prefix, lineSeparator, header, and footer.</p>
+    <td>options.formatting</td><td><code>Object</code></td><td><p>Custom formatting properties that define parts of a comment in code. The configurable strings are: prefix, lineSeparator, header, and footer.</p>
 </td>
     </tr>  </tbody>
 </table>
@@ -463,8 +459,6 @@ StyleDictionary.registerFormat({
 ---
 
 ### formattedVariables
-
-> formatHelpers.formattedVariables(options) ⇒ <code>String</code>
 
 This is used to create lists of variables like Sass variables or CSS custom properties
 
@@ -514,8 +508,6 @@ StyleDictionary.registerFormat({
 
 ### getTypeScriptType
 
-> formatHelpers.getTypeScriptType(value, options) ⇒ <code>String</code>
-
 Given some value, returns a basic valid TypeScript type for that value.
 Supports numbers, strings, booleans, arrays and objects of any of those types.
 
@@ -560,8 +552,6 @@ StyleDictionary.registerFormat({
 
 ### iconsWithPrefix
 
-> formatHelpers.iconsWithPrefix(prefix, allTokens, options) ⇒ <code>String</code>
-
 This is used to create CSS (and CSS pre-processor) lists of icons. It assumes you are
 using an icon font and creates helper classes with the :before pseudo-selector to add
 a unicode character.
@@ -601,8 +591,6 @@ StyleDictionary.registerFormat({
 
 ### minifyDictionary
 
-> formatHelpers.minifyDictionary(obj) ⇒ <code>Object</code>
-
 Outputs an object stripping out everything except values
 
 <table>
@@ -633,8 +621,6 @@ StyleDictionary.registerFormat({
 
 ### setComposeObjectProperties
 
-> formatHelpers.setComposeObjectProperties(options) ⇒ <code>Object</code>
-
 Outputs an object for compose format configurations. Sets import.
 
 <table>
@@ -653,8 +639,6 @@ Outputs an object for compose format configurations. Sets import.
 ---
 
 ### setSwiftFileProperties
-
-> formatHelpers.setSwiftFileProperties(options, objectType, transformGroup) ⇒ <code>Object</code>
 
 Outputs an object with swift format configurations. Sets import, object type and access control.
 
@@ -680,8 +664,6 @@ Outputs an object with swift format configurations. Sets import, object type and
 ---
 
 ### sortByName
-
-> formatHelpers.sortByName(a, b) ⇒ <code>Integer</code>
 
 A sorting function to be used when iterating over `dictionary.allTokens` in
 a format.
@@ -722,8 +704,6 @@ StyleDictionary.registerFormat({
 
 ### sortByReference
 
-> formatHelpers.sortByReference(dictionary) ⇒ <code>function</code>
-
 A function that returns a sorting function to be used with Array.sort that
 will sort the allTokens array based on references. This is to make sure
 if you use output references that you never use a reference before it is
@@ -758,12 +738,13 @@ Any templating language can work as long as there is a node module for it. All y
 Here is a quick example for Lodash.
 
 ```js
-const styleDictionary = require('style-dictionary').extend('config.json');
+import StyleDictionary from 'style-dictionary';
+const sd = await StyleDictionary.extend('config.json');
 const _ = require('lodash');
 
 const template = _.template(fs.readFileSync('templates/myFormat.template'));
 
-styleDictionary.registerFormat({
+sd.registerFormat({
   name: 'my/format',
   formatter: template,
 });
@@ -774,12 +755,13 @@ styleDictionary.registerFormat({
 And another example for Handlebars.
 
 ```js
-const styleDictionary = require('style-dictionary').extend('config.json');
+import StyleDictionary from 'style-dictionary';
+const sd = await StyleDictionary.extend('config.json');
 const Handlebars = require('handlebars');
 
 const template = Handlebars.compile(fs.readFileSync('templates/MyTemplate.hbs').toString());
 
-styleDictionary.registerFormat({
+sd.registerFormat({
   name: 'my/format',
   formatter: function ({ dictionary, platform }) {
     return template({
@@ -1231,7 +1213,7 @@ StyleDictionaryPackage.registerFormat({
     return (
       'declare const root: RootObject\n' +
       'export default root\n' +
-      JsonToTS(dictionary.properties).join('\n')
+      JsonToTS(dictionary.tokens).join('\n')
     );
   },
 });

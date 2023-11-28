@@ -33,7 +33,7 @@ First you will need to tell Style Dictionary about your parser. You can do this 
 ### .registerParser
 
 ```javascript
-const StyleDictionary = require('style-dictionary');
+import StyleDictionary from 'style-dictionary';
 
 StyleDictionary.registerParser({
   pattern: /\.json$/,
@@ -46,7 +46,7 @@ StyleDictionary.registerParser({
 ### Inline
 
 ```javascript
-module.exports = {
+export default {
   parsers: [
     {
       pattern: /\.json$/,

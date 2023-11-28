@@ -10,5 +10,6 @@
 [Get Started](README.md)
 
 [See what's new in 3.0!](version_3.md)
+[See what's new in 4.0!](version_4.md)
 
 ![color](#D9F8F5)

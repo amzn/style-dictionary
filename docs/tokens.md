@@ -133,7 +133,7 @@ Tokens can be defined _inline_ in the Style Dictionary configuration, or in file
 
 ```javascript
 // config.js
-module.exports = {
+export default {
   tokens: {
     color: {
       background: {
@@ -150,7 +150,7 @@ module.exports = {
 Generally you will have too many design tokens to include them all inline, so you can separate them out into their own files. You can tell Style Dictionary where to find your design token files with the `source` and `include` attributes in the configuration like this:
 
 ```javascript
-module.exports = {
+export default {
   include: [
     // you can list singular files:
     `node_modules/my-other-style-dictionary/tokens.json`,
@@ -171,7 +171,7 @@ module.exports = {
 Style Dictionary takes all the files it finds in the include and source arrays and performs a deep merge on them. It will first add files in the include array, in order, and then the source array in order. Later files will take precedence. For example if you defined 2 source files like this:
 
 ```javascript
-module.exports = {
+export default {
   source: [`tokens.json`, `tokens2.json`],
 };
 ```
@@ -221,7 +221,7 @@ This example would show a warning in the console that you have a collision at `c
 One way to write your design token files is to write them in Javascript rather than JSON. The only requirement for writing your source files in Javascript is to use a CommonJS module to export a plain object. For example:
 
 ```javascript
-module.exports = {
+export default {
   color: {
     base: {
       red: { value: '#ff0000' },
@@ -260,7 +260,7 @@ const baseColors = {
 
 // Use a reduce function to take the array of keys in baseColor
 // and map them to an object with the same keys.
-module.exports = Object.keys(baseColors).reduce((ret, color) => {
+export default Object.keys(baseColors).reduce((ret, color) => {
   return Object.assign({}, ret, {
     [color]: {
       // generate the shades/tints for each color
