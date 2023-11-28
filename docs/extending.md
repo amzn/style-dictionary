@@ -11,6 +11,7 @@ There is a straightforward way to extend Style Dictionary to meet your needs - s
 - [registerTemplate](api.md#registertemplate) (deprecated)
 - [registerAction](api.md#registeraction)
 - [registerParser](api.md#registerparser)
+- [registerPreprocessor](api.md#registerpreprocessor)
 
 ## Extension Examples
 

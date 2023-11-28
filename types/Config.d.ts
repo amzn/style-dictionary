@@ -12,6 +12,7 @@
  */
 
 import { Parser } from './Parser';
+import { Preprocessor } from './Preprocessor';
 import { Transform } from './Transform';
 import { TransformGroup } from './TransformGroup';
 import { Filter } from './Filter';
@@ -23,6 +24,7 @@ import { DesignTokens } from './DesignToken';
 
 export interface Config {
   parsers?: Parser[];
+  preprocessors?: Record<string, Preprocessor>;
   transform?: Record<string, Transform>;
   transformGroup?: Record<string, TransformGroup['transforms']>;
   format?: Record<string, Formatter>;

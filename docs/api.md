@@ -265,6 +265,32 @@ StyleDictionary.registerParser({
 
 ---
 
+### registerPreprocessor
+
+> StyleDictionary.registerPreprocessor({ name, preprocessor }) => [<code>style-dictionary</code>](#module_style-dictionary)
+
+Adds a custom parser to parse style dictionary files
+
+| Param                     | Type                  | Description                                                                                  |
+| ------------------------- | --------------------- | -------------------------------------------------------------------------------------------- |
+| Preprocessor              | <code>Object</code>   |                                                                                              |
+| Preprocessor.name         | <code>String</code>   | Name of the format to be referenced in your config.json                                      |
+| Preprocessor.preprocessor | <code>function</code> | Function to preprocess the dictionary. The function should return a plain Javascript object. |
+
+**Example**
+
+```js
+StyleDictionary.registerPreprocessor({
+  name: 'strip-third-party-meta',
+  preprocessor: (dictionary) => {
+    delete dictionary.thirdPartyMetadata;
+    return dictionary;
+  },
+});
+```
+
+---
+
 ### registerTemplate
 
 > ~~StyleDictionary.registerTemplate(template) ⇒ [<code>style-dictionary</code>](#module_style-dictionary)~~
