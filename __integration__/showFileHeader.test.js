@@ -10,14 +10,19 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
-const fs = require('fs-extra');
-const StyleDictionary = require('../index');
-const { buildPath } = require('./_constants');
+import { expect } from 'chai';
+import StyleDictionary from 'style-dictionary';
+import { fs } from 'style-dictionary/fs';
+import { buildPath } from './_constants.js';
+import { clearOutput } from '../__tests__/__helpers.js';
 
 describe('integration', () => {
-  describe('showFileHeader', () => {
-    StyleDictionary.extend({
+  afterEach(() => {
+    clearOutput(buildPath);
+  });
+
+  describe('showFileHeader', async () => {
+    const sd = new StyleDictionary({
       // we are only testing showFileHeader options so we don't need
       // the full source.
       source: [`__integration__/tokens/size/padding.json`],
@@ -60,42 +65,39 @@ describe('integration', () => {
           ],
         },
       },
-    }).buildAllPlatforms();
+    });
+    await sd.buildAllPlatforms();
 
     describe(`without platform options`, () => {
-      it(`should show file header if no file options set`, () => {
+      it(`should show file header if no file options set`, async () => {
         const output = fs.readFileSync(`${buildPath}platform-none-file-none.css`, {
           encoding: 'UTF-8',
         });
-        expect(output).toMatchSnapshot();
+        await expect(output).to.matchSnapshot();
       });
 
-      it(`should not show file header if file options set to false`, () => {
+      it(`should not show file header if file options set to false`, async () => {
         const output = fs.readFileSync(`${buildPath}platform-none-file-false.css`, {
           encoding: 'UTF-8',
         });
-        expect(output).toMatchSnapshot();
+        await expect(output).to.matchSnapshot();
       });
     });
 
     describe(`with platform options set to false`, () => {
-      it(`should not show file header if no file options set`, () => {
+      it(`should not show file header if no file options set`, async () => {
         const output = fs.readFileSync(`${buildPath}platform-false-file-none.css`, {
           encoding: 'UTF-8',
         });
-        expect(output).toMatchSnapshot();
+        await expect(output).to.matchSnapshot();
       });
 
-      it(`should show file header if file options set to true`, () => {
+      it(`should show file header if file options set to true`, async () => {
         const output = fs.readFileSync(`${buildPath}platform-false-file-true.css`, {
           encoding: 'UTF-8',
         });
-        expect(output).toMatchSnapshot();
+        await expect(output).to.matchSnapshot();
       });
     });
   });
-});
-
-afterAll(() => {
-  fs.emptyDirSync(buildPath);
 });

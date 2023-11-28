@@ -10,14 +10,19 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
-const fs = require('fs-extra');
-const StyleDictionary = require('../index');
-const { buildPath } = require('./_constants');
+import { expect } from 'chai';
+import StyleDictionary from 'style-dictionary';
+import { fs } from 'style-dictionary/fs';
+import { buildPath } from './_constants.js';
+import { clearOutput } from '../__tests__/__helpers.js';
 
 describe('integration', () => {
-  describe('compose', () => {
-    StyleDictionary.extend({
+  afterEach(() => {
+    clearOutput(buildPath);
+  });
+
+  describe('compose', async () => {
+    const sd = new StyleDictionary({
       source: [`__integration__/tokens/**/*.json?(c)`],
       platforms: {
         compose: {
@@ -42,15 +47,16 @@ describe('integration', () => {
           ],
         },
       },
-    }).buildAllPlatforms();
+    });
+    await sd.buildAllPlatforms();
 
     describe(`compose/object`, () => {
       const output = fs.readFileSync(`${buildPath}StyleDictionary.kt`, {
         encoding: `UTF-8`,
       });
 
-      it(`should match snapshot`, () => {
-        expect(output).toMatchSnapshot();
+      it(`should match snapshot`, async () => {
+        await expect(output).to.matchSnapshot();
       });
 
       describe(`with references`, () => {
@@ -58,14 +64,10 @@ describe('integration', () => {
           encoding: `UTF-8`,
         });
 
-        it(`should match snapshot`, () => {
-          expect(output).toMatchSnapshot();
+        it(`should match snapshot`, async () => {
+          await expect(output).to.matchSnapshot();
         });
       });
     });
   });
-});
-
-afterAll(() => {
-  fs.emptyDirSync(buildPath);
 });

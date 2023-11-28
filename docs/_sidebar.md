@@ -15,6 +15,7 @@
   - [Using the NPM Module](using_the_npm_module.md)
   - [API](api.md)
   - [Parsers](parsers.md)
+  - [Preprocessors](preprocessors.md)
   - [Transforms](transforms.md)
   - [Transform groups](transform_groups.md)
   - [Formats](formats.md)

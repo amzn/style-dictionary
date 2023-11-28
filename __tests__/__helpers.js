@@ -11,38 +11,57 @@
  * and limitations under the License.
  */
 
-var fs = require('fs-extra');
+import { expect } from 'chai';
+import { fs } from 'style-dictionary/fs';
 
-module.exports = {
-  clearOutput: function () {
-    fs.emptyDirSync('__tests__/__output');
-  },
-
-  fileToJSON: function (path) {
-    return fs.readJsonSync(path);
-  },
-
-  fileExists: function (filePath) {
-    try {
-      return fs.statSync(filePath).isFile();
-    } catch (err) {
-      return false;
-    }
-  },
-
-  pathDoesNotExist: function (path) {
-    try {
-      return !fs.existsSync(path);
-    } catch (err) {
-      return false;
-    }
-  },
-
-  dirDoesNotExist: function (dirPath) {
-    return this.pathDoesNotExist(dirPath);
-  },
-
-  fileDoesNotExist: function (filePath) {
-    return this.pathDoesNotExist(filePath);
-  },
+export const expectThrowsAsync = async (method, errorMessage) => {
+  let error = null;
+  try {
+    await method();
+  } catch (err) {
+    error = err;
+  }
+  expect(error).to.be.an('Error');
+  if (errorMessage) {
+    expect(error.message).to.equal(errorMessage);
+  }
 };
+
+export const fileToJSON = (path, _fs = fs) => {
+  return JSON.parse(_fs.readFileSync(path, 'utf-8'));
+};
+
+export const clearOutput = (outputFolder = '__tests__/__output', _fs = fs) => {
+  try {
+    _fs.rmdirSync(outputFolder);
+  } catch (e) {
+    //
+  }
+};
+
+export const fileExists = (filePath, _fs = fs) => {
+  try {
+    return _fs.statSync(filePath).isFile();
+  } catch (err) {
+    return false;
+  }
+};
+
+export const dirExists = (dirPath, _fs = fs) => {
+  return _fs.existsSync(dirPath);
+};
+
+export function fixDate() {
+  const constantDate = new Date('2000-01-01');
+  // eslint-disable-next-line no-undef
+  const __global = typeof window === 'object' ? window : globalThis;
+
+  // eslint-disable-next-line no-undef
+  __global.Date = function () {
+    return constantDate;
+  };
+  // eslint-disable-next-line no-undef
+  __global.Date.now = function () {
+    return constantDate;
+  };
+}

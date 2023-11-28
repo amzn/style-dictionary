@@ -10,25 +10,26 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
+import { expect } from 'chai';
+import StyleDictionary from 'style-dictionary';
+import { fileToJSON, clearOutput, fileExists } from './__helpers.js';
 
-var helpers = require('./__helpers');
-var config = helpers.fileToJSON(__dirname + '/__configs/test.json');
-var StyleDictionary = require('../index');
-var StyleDictionaryExtended = StyleDictionary.extend(config);
+const config = fileToJSON('__tests__/__configs/test.json');
+const StyleDictionaryExtended = new StyleDictionary(config);
 
 describe('cleanAllPlatforms', () => {
   beforeEach(() => {
-    helpers.clearOutput();
+    clearOutput();
   });
 
   afterEach(() => {
-    helpers.clearOutput();
+    clearOutput();
   });
 
-  it('should work', () => {
-    StyleDictionaryExtended.buildAllPlatforms();
-    StyleDictionaryExtended.cleanAllPlatforms();
-    expect(helpers.fileDoesNotExist('./__tests__/__output/web/_icons.scss')).toBeTruthy();
-    expect(helpers.fileDoesNotExist('./__tests__/__output/android/colors.xml')).toBeTruthy();
+  it('should work', async () => {
+    await StyleDictionaryExtended.buildAllPlatforms();
+    await StyleDictionaryExtended.cleanAllPlatforms();
+    expect(fileExists('__tests__/__output/web/_icons.css')).to.be.false;
+    expect(fileExists('__tests__/__output/android/colors.xml')).to.be.false;
   });
 });

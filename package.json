@@ -9,7 +9,6 @@
     "amazon",
     "css",
     "design",
-    "properties",
     "tokens",
     "sass",
     "scss",
@@ -23,10 +22,12 @@
   "exports": {
     ".": {
       "types": "./types/index.d.ts",
-      "node": "./index-node.js",
-      "default": "./index.js"
+      "default": "./lib/StyleDictionary.js"
     },
-    "./fs": "./fs.js"
+    "./fs": {
+      "node": "./fs-node.js",
+      "default": "./fs.js"
+    }
   },
   "bin": {
     "style-dictionary": "./bin/style-dictionary"
@@ -47,19 +48,23 @@
   ],
   "scripts": {
     "format": "run-p format:*",
-    "format:eslint": "eslint --fix index.js \"lib/**/*.js\" \"__tests__/**/*.js\"",
+    "format:eslint": "eslint --fix \"**/*.js\"",
     "format:prettier": "prettier \"**/*.{js,md}\" \"package.json\" --write",
     "lint": "run-p lint:*",
-    "lint:eslint": "eslint index.js \"lib/**/*.js\" \"__tests__/**/*.js\"",
+    "lint:eslint": "eslint \"**/*.js\"",
     "lint:prettier": "prettier \"**/*.{js,md}\" \"package.json\" --list-different || (echo '↑↑ these files are not prettier formatted ↑↑' && exit 1)",
-    "test": "run-p test:*",
-    "test:unit": "jest --runInBand --silent --coverage",
-    "test:types": "tsd",
+    "test": "npm run test:browser && npm run test:node",
+    "test:browser": "web-test-runner --coverage",
+    "test:browser:coverage": "cd coverage/lcov-report && npx http-server -o -c-1",
+    "test:browser:watch": "web-test-runner --watch",
+    "test:browser:update-snapshots": "web-test-runner --update-snapshots",
+    "test:node": "mocha -r mocha-hooks.mjs './__integration__/**/*.test.js' './__tests__/**/*.test.js' './__node_tests__/**/*.test.js'",
     "generate-docs": "node ./scripts/generateDocs.js",
     "serve-docs": "docsify serve docs -p 3000 -P 12345",
     "install-cli": "npm install -g $(npm pack)",
     "release": "node scripts/inject-version.js && changeset publish",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "postinstall": "patch-package"
   },
   "standard-version": {
     "scripts": {
@@ -88,7 +93,7 @@
       "/__tests__/__assets/",
       "/__tests__/__configs/",
       "/__tests__/__json_files/",
-      "/__tests__/__properties/",
+      "/__tests__/__tokens/",
       "/__tests__/__output/",
       "/__tests__/formats/__constants.js"
     ],
@@ -134,6 +139,7 @@
   ],
   "homepage": "https://github.com/amzn/style-dictionary",
   "dependencies": {
+    "@bundled-es-modules/deepmerge": "^4.3.1",
     "@bundled-es-modules/glob": "^10.3.5",
     "@bundled-es-modules/memfs": "^4.2.3",
     "@bundled-es-modules/path-browserify": "^1.0.2",
@@ -141,6 +147,7 @@
     "change-case": "^4.1.2",
     "commander": "^8.3.0",
     "fs-extra": "^10.0.0",
+    "is-plain-object": "^5.0.0",
     "json5": "^2.2.2",
     "jsonc-parser": "^3.0.0",
     "lodash": "^4.17.15",
@@ -149,30 +156,36 @@
     "url": "^0.11.1"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.16.11",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@changesets/cli": "^2.26.2",
     "@commitlint/cli": "^16.1.0",
     "@commitlint/config-conventional": "^16.0.0",
-    "babel-jest": "^27.4.6",
-    "babel-preset-env": "^1.7.0",
+    "@esm-bundle/chai-as-promised": "^7.1.1",
+    "@types/chai": "^4.3.9",
+    "@web/test-runner": "^0.18.0",
+    "@web/test-runner-commands": "^0.9.0",
+    "@web/test-runner-playwright": "^0.11.0",
+    "chai": "^5.0.0-alpha.2",
+    "chai-as-promised": "npm:@esm-bundle/chai-as-promised@^7.1.1",
     "docsify": "^4.12.2",
     "docsify-cli": "^4.4.3",
     "eslint": "^8.7.0",
+    "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-jest": "^26.0.0",
+    "hanbi": "^1.0.1",
     "husky": "^8.0.3",
-    "istanbul": "^0.4.5",
-    "jest": "^27.4.7",
     "jsdoc-escape-at": "^1.0.1",
     "jsdoc-to-markdown": "^7.1.0",
     "json5-jest": "^1.0.1",
     "less": "^4.1.2",
     "lint-staged": "^12.3.1",
-    "node-sass": "^9.0.0",
+    "mocha": "^10.2.0",
     "npm-run-all": "^4.1.5",
+    "patch-package": "^8.0.0",
     "prettier": "^3.0.3",
+    "sass": "^1.69.5",
     "standard-version": "^9.3.2",
     "stylus": "^0.56.0",
-    "tsd": "^0.19.1",
-    "yaml": "^1.10.2"
+    "yaml": "^2.3.4"
   }
 }

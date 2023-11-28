@@ -11,11 +11,12 @@
  * and limitations under the License.
  */
 
+import { expect } from 'chai';
 // `.getReferences` is bound to a dictionary object, so to test it we will
 // create a dictionary object and then call `.getReferences` on it.
-const createDictionary = require('../../../lib/utils/createDictionary');
+import createDictionary from '../../../lib/utils/createDictionary.js';
 
-const properties = {
+const tokens = {
   color: {
     red: { value: '#f00' },
     danger: { value: '{color.red.value}' },
@@ -47,37 +48,35 @@ const properties = {
   },
 };
 
-const dictionary = createDictionary({ properties });
+const dictionary = createDictionary({ tokens });
 
 describe('utils', () => {
   describe('reference', () => {
     describe('getReferences()', () => {
       it(`should return an empty array if the value has no references`, () => {
-        expect(dictionary.getReferences(properties.color.red.value)).toEqual([]);
+        expect(dictionary.getReferences(tokens.color.red.value)).to.eql([]);
       });
 
       it(`should work with a single reference`, () => {
-        expect(dictionary.getReferences(properties.color.danger.value)).toEqual(
-          expect.arrayContaining([{ value: '#f00' }]),
-        );
+        expect(dictionary.getReferences(tokens.color.danger.value)).to.eql([{ value: '#f00' }]);
       });
 
       it(`should work with object values`, () => {
-        expect(dictionary.getReferences(properties.border.primary.value)).toEqual(
-          expect.arrayContaining([{ value: '2px' }, { value: '#f00' }]),
-        );
+        expect(dictionary.getReferences(tokens.border.primary.value)).to.eql([
+          { value: '#f00' },
+          { value: '2px' },
+        ]);
       });
 
       it(`should work with objects that have numbers`, () => {
-        expect(dictionary.getReferences(properties.border.secondary.value)).toEqual(
-          expect.arrayContaining([{ value: '#f00' }]),
-        );
+        expect(dictionary.getReferences(tokens.border.secondary.value)).to.eql([{ value: '#f00' }]);
       });
 
       it(`should work with interpolated values`, () => {
-        expect(dictionary.getReferences(properties.border.tertiary.value)).toEqual(
-          expect.arrayContaining([{ value: '2px' }, { value: '#f00' }]),
-        );
+        expect(dictionary.getReferences(tokens.border.tertiary.value)).to.eql([
+          { value: '2px' },
+          { value: '#f00' },
+        ]);
       });
     });
   });

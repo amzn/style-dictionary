@@ -10,11 +10,11 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
-var helpers = require('./__helpers');
-var buildFile = require('../lib/buildFile');
-var cleanFile = require('../lib/cleanFile');
-var cleanDir = require('../lib/cleanDir');
+import { expect } from 'chai';
+import { clearOutput, dirExists } from './__helpers.js';
+import buildFile from '../lib/buildFile.js';
+import cleanFile from '../lib/cleanFile.js';
+import cleanDir from '../lib/cleanDir.js';
 
 function format() {
   return 'hi';
@@ -22,11 +22,11 @@ function format() {
 
 describe('cleanDir', () => {
   beforeEach(() => {
-    helpers.clearOutput();
+    clearOutput();
   });
 
   afterEach(() => {
-    helpers.clearOutput();
+    clearOutput();
   });
 
   it('should delete a dir properly', () => {
@@ -45,7 +45,7 @@ describe('cleanDir', () => {
       { buildPath: '__tests__/__output/extradir1/extradir2/' },
       {},
     );
-    expect(helpers.dirDoesNotExist('./__tests__/__output/extradir1/extradir2')).toBeTruthy();
-    expect(helpers.dirDoesNotExist('./__tests__/__output/extradir1')).toBeTruthy();
+    expect(dirExists('__tests__/__output/extradir1/extradir2')).to.be.false;
+    expect(dirExists('__tests__/__output/extradir1')).to.be.false;
   });
 });

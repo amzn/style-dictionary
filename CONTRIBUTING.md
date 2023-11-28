@@ -58,7 +58,7 @@ We separate each function/method into its own file and group them into directori
 
 Any new features should implement the proper unit tests. We use Jest to test our framework.
 
-If you are adding a new transform, action, or format: please add new unit tests. You can see examples in test/formats.
+If you are adding a new transform, action, or format: please add new unit tests. You can see examples in **tests**/formats.
 
 ## Documentation
 

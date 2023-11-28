@@ -10,8 +10,8 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
-var transformObject = require('../../lib/transform/object');
+import { expect } from 'chai';
+import transformObject from '../../lib/transform/object.js';
 
 const options = {
   transforms: [
@@ -51,7 +51,7 @@ const options = {
 describe('transform', () => {
   describe('object', () => {
     it('does not crash when called without parameters', () => {
-      expect(transformObject()).toEqual({});
+      expect(transformObject()).to.eql({});
     });
 
     it('returns expected result when called with an object without value property', () => {
@@ -64,7 +64,7 @@ describe('transform', () => {
       };
 
       const actual = transformObject(objectToTransform, options);
-      expect(actual).toEqual(expected);
+      expect(actual).to.eql(expected);
     });
 
     it('returns expected result when called with an with value leaf', () => {
@@ -94,7 +94,7 @@ describe('transform', () => {
       };
 
       const actual = transformObject(objectToTransform, options);
-      expect(actual).toEqual(expected);
+      expect(actual).to.eql(expected);
     });
 
     it('fills the transformationContext with transformed and deferred transforms', () => {
@@ -118,8 +118,8 @@ describe('transform', () => {
 
       transformObject(objectToTransform, options, transformationContext);
 
-      expect(transformedPropRefs).toEqual(['spacing.base']);
-      expect(deferredPropValueTransforms).toEqual(['spacing.medium']);
+      expect(transformedPropRefs).to.eql(['spacing.base']);
+      expect(deferredPropValueTransforms).to.eql(['spacing.medium']);
     });
   });
 });

@@ -10,14 +10,19 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
-const fs = require('fs-extra');
-const StyleDictionary = require('../index');
-const { buildPath } = require('./_constants');
+import { expect } from 'chai';
+import StyleDictionary from 'style-dictionary';
+import { fs } from 'style-dictionary/fs';
+import { buildPath } from './_constants.js';
+import { clearOutput } from '../__tests__/__helpers.js';
 
 describe('integration', () => {
-  describe('custom formats', () => {
-    const styleDictionary = StyleDictionary.extend({
+  afterEach(() => {
+    clearOutput(buildPath);
+  });
+
+  describe('custom formats', async () => {
+    const sd = new StyleDictionary({
       source: [`__integration__/tokens/size/padding.json`],
       // Adding formats directly to SD
       format: {
@@ -82,55 +87,55 @@ describe('integration', () => {
       },
     });
 
-    styleDictionary.registerFormat({
+    sd.registerFormat({
       name: 'registerCustomFormatWithOldArgs',
       formatter: (dictionary, platform, file) => {
         return JSON.stringify({ dictionary, platform, file }, null, 2);
       },
     });
 
-    styleDictionary.registerFormat({
+    sd.registerFormat({
       name: 'registerCustomFormatWithNewArgs',
       formatter: (opts) => {
         return JSON.stringify(opts, null, 2);
       },
     });
 
-    styleDictionary.buildAllPlatforms();
+    await sd.buildAllPlatforms();
 
     describe(`inline custom with old args`, () => {
       const output = fs.readFileSync(`${buildPath}inlineCustomFormatWithOldArgs.json`, {
         encoding: 'UTF-8',
       });
 
-      it(`should match snapshot`, () => {
-        expect(output).toMatchSnapshot();
+      it(`should match snapshot`, async () => {
+        await expect(output).to.matchSnapshot();
       });
 
       it(`should receive proper arguments`, () => {
         const { dictionary, platform, file } = JSON.parse(output);
-        expect(dictionary).toHaveProperty(`properties`);
-        expect(dictionary).toHaveProperty(`allProperties`);
-        expect(platform).toHaveProperty(`options.otherOption`, `platform option`);
-        expect(file).toHaveProperty(`options.otherOption`, `Test`);
+        expect(dictionary).to.have.property(`tokens`);
+        expect(dictionary).to.have.property(`allTokens`);
+        expect(platform).to.have.nested.property(`options.otherOption`, `platform option`);
+        expect(file).to.have.nested.property(`options.otherOption`, `Test`);
       });
     });
 
-    describe(`inline custom with new args`, () => {
+    describe(`inline custom with new args`, async () => {
       const output = fs.readFileSync(`${buildPath}inlineCustomFormatWithNewArgs.json`, {
         encoding: 'UTF-8',
       });
-      it(`should match snapshot`, () => {
-        expect(output).toMatchSnapshot();
+      it(`should match snapshot`, async () => {
+        await expect(output).to.matchSnapshot();
       });
 
       it(`should receive proper arguments`, () => {
         const { dictionary, platform, file, options } = JSON.parse(output);
-        expect(dictionary).toHaveProperty(`properties`);
-        expect(dictionary).toHaveProperty(`allProperties`);
-        expect(platform).toHaveProperty(`options.otherOption`, `platform option`);
-        expect(file).toHaveProperty(`options.otherOption`, `Test`);
-        expect(options).toHaveProperty(`otherOption`, `Test`);
+        expect(dictionary).to.have.property(`tokens`);
+        expect(dictionary).to.have.property(`allTokens`);
+        expect(platform).to.have.nested.property(`options.otherOption`, `platform option`);
+        expect(file).to.have.nested.property(`options.otherOption`, `Test`);
+        expect(options).to.have.property(`otherOption`, `Test`);
       });
     });
 
@@ -139,16 +144,16 @@ describe('integration', () => {
         encoding: 'UTF-8',
       });
 
-      it(`should match snapshot`, () => {
-        expect(output).toMatchSnapshot();
+      it(`should match snapshot`, async () => {
+        await expect(output).to.matchSnapshot();
       });
 
       it(`should receive proper arguments`, () => {
         const { dictionary, platform, file } = JSON.parse(output);
-        expect(dictionary).toHaveProperty(`properties`);
-        expect(dictionary).toHaveProperty(`allProperties`);
-        expect(platform).toHaveProperty(`options.otherOption`, `platform option`);
-        expect(file).toHaveProperty(`options.otherOption`, `Test`);
+        expect(dictionary).to.have.property(`tokens`);
+        expect(dictionary).to.have.property(`allTokens`);
+        expect(platform).to.have.nested.property(`options.otherOption`, `platform option`);
+        expect(file).to.have.nested.property(`options.otherOption`, `Test`);
       });
     });
 
@@ -157,22 +162,18 @@ describe('integration', () => {
         encoding: 'UTF-8',
       });
 
-      it(`should match snapshot`, () => {
-        expect(output).toMatchSnapshot();
+      it(`should match snapshot`, async () => {
+        await expect(output).to.matchSnapshot();
       });
 
       it(`should receive proper arguments`, () => {
         const { dictionary, platform, file, options } = JSON.parse(output);
-        expect(dictionary).toHaveProperty(`properties`);
-        expect(dictionary).toHaveProperty(`allProperties`);
-        expect(platform).toHaveProperty(`options.otherOption`, `platform option`);
-        expect(file).toHaveProperty(`options.otherOption`, `Test`);
-        expect(options).toHaveProperty(`otherOption`, `Test`);
+        expect(dictionary).to.have.property(`tokens`);
+        expect(dictionary).to.have.property(`allTokens`);
+        expect(platform).to.have.nested.property(`options.otherOption`, `platform option`);
+        expect(file).to.have.nested.property(`options.otherOption`, `Test`);
+        expect(options).to.have.property(`otherOption`, `Test`);
       });
     });
   });
-});
-
-afterAll(() => {
-  fs.emptyDirSync(buildPath);
 });

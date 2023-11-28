@@ -10,42 +10,44 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
+import { expect } from 'chai';
+import { fs } from 'style-dictionary/fs';
+import StyleDictionary from 'style-dictionary';
+import { fileExists, clearOutput } from './__helpers.js';
 
-var helpers = require('./__helpers');
-var fs = require('fs-extra');
-var StyleDictionary = require('../index');
-var StyleDictionaryExtended = StyleDictionary.extend({
+const StyleDictionaryExtended = new StyleDictionary({
   platforms: {
     android: {
-      actions: ['test'],
+      actions: ['cleanAction.test.js'],
     },
   },
 });
 
 StyleDictionaryExtended.registerAction({
-  name: 'test',
+  name: 'cleanAction.test.js',
   do: function () {
-    fs.writeFileSync('./__tests__/__output/action.txt', 'hi');
+    fs.mkdirSync('__tests__/__output', { recursive: true });
+    fs.writeFileSync('__tests__/__output/action.txt', 'hi');
   },
   undo: function () {
-    fs.removeSync('./__tests__/__output/action.txt');
+    fs.unlinkSync('__tests__/__output/action.txt');
   },
 });
 
 describe('cleanAction', () => {
   describe('clean actions', () => {
     beforeEach(() => {
-      helpers.clearOutput();
+      clearOutput();
     });
 
     afterEach(() => {
-      helpers.clearOutput();
+      clearOutput();
     });
 
-    it('should delete a file properly', () => {
-      StyleDictionaryExtended.buildPlatform('android');
-      StyleDictionaryExtended.cleanPlatform('android');
-      expect(helpers.fileDoesNotExist('./__tests__/__output/action.txt')).toBeTruthy();
+    it('should delete a file properly', async () => {
+      await StyleDictionaryExtended.buildPlatform('android');
+      await StyleDictionaryExtended.cleanPlatform('android');
+      expect(fileExists('__tests__/__output/action.txt')).to.be.false;
     });
   });
 });

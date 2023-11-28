@@ -10,35 +10,35 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
-const fs = require('fs-extra');
-const StyleDictionary = require('../../index');
-const { buildPath, cleanConsoleOutput } = require('../_constants');
-
-// Spy on console.log and add all messages to an array
-let consoleOutput = [];
-const log = jest.spyOn(console, 'log').mockImplementation((message) => consoleOutput.push(message));
+import { expect } from 'chai';
+import { restore, stubMethod } from 'hanbi';
+import StyleDictionary from 'style-dictionary';
+import { buildPath, cleanConsoleOutput } from '../_constants.js';
+import { clearOutput } from '../../__tests__/__helpers.js';
 
 /**
  * These integration tests will verify the behavior and logging at the *config*
  * level. These messages happen when `.extend()` is called to verify
  * proper configuration such as source being an array. This will also check
  * for collisions in source files and any errors that happen when parsing
- * and merging properties. This is the first of 3 phases of logging, the
+ * and merging tokens. This is the first of 3 phases of logging, the
  * next two are: platform and file.
  */
 describe(`integration >`, () => {
-  // before each test clear the mocked console.log and the output array
+  let stub;
   beforeEach(() => {
-    log.mockClear();
-    consoleOutput = [];
+    stub = stubMethod(console, 'log');
+  });
+  afterEach(() => {
+    restore();
+    clearOutput(buildPath);
   });
 
   describe(`logging >`, () => {
     describe(`config >`, () => {
       describe(`property value collisions`, () => {
-        it(`should not throw, but notify users by default`, () => {
-          StyleDictionary.extend({
+        it(`should not throw, but notify users by default`, async () => {
+          const sd = new StyleDictionary({
             source: [
               // including a specific file twice will throw value collision warnings
               `__integration__/tokens/size/padding.json`,
@@ -46,26 +46,36 @@ describe(`integration >`, () => {
             ],
             platforms: {},
           });
-          expect(consoleOutput.map(cleanConsoleOutput).join(`\n`)).toMatchSnapshot();
+          await sd.hasInitialized;
+          const consoleOutput = stub.firstCall.args.map(cleanConsoleOutput).join('\n');
+          await expect(consoleOutput).to.matchSnapshot();
         });
 
-        it(`should not show warnings if given higher log level`, () => {
-          StyleDictionary.extend({
-            logLevel: `error`,
-            source: [
-              // including a specific file twice will throw value collision warnings
-              `__integration__/tokens/size/padding.json`,
-              `__integration__/tokens/size/padding.json`,
-            ],
-            platforms: {},
-          });
-          expect(consoleOutput.map(cleanConsoleOutput).join(`\n`)).toMatchSnapshot();
+        it(`should not show warnings if given higher log level`, async () => {
+          const sd = new StyleDictionary(
+            {
+              log: `error`,
+              source: [
+                // including a specific file twice will throw value collision warnings
+                `__integration__/tokens/size/padding.json`,
+                `__integration__/tokens/size/padding.json`,
+              ],
+              platforms: {},
+            },
+            { init: false },
+          );
+
+          let error;
+          try {
+            await sd.init();
+          } catch (e) {
+            error = e;
+          }
+
+          await expect(error.message).to.matchSnapshot();
+          expect(stub.called).to.be.false;
         });
       });
     });
   });
-});
-
-afterAll(() => {
-  fs.emptyDirSync(buildPath);
 });

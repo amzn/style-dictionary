@@ -10,62 +10,57 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
-var propertySetup = require('../../lib/transform/propertySetup');
+import { expect } from 'chai';
+import tokenSetup from '../../lib/transform/tokenSetup.js';
 
 describe('transform', () => {
-  describe('propertySetup', () => {
+  describe('tokenSetup', () => {
     it('should error if property is not an object', () => {
-      expect(propertySetup.bind(null, null, 'foo', [])).toThrow(
-        'Property object must be an object',
-      );
+      expect(tokenSetup.bind(null, null, 'foo', [])).to.throw('Property object must be an object');
     });
 
     it('should error if name in not a string', () => {
-      expect(propertySetup.bind(null, {}, null, [])).toThrow('Name must be a string');
+      expect(tokenSetup.bind(null, {}, null, [])).to.throw('Name must be a string');
     });
 
     it('should error path is not an array', () => {
-      expect(propertySetup.bind(null, {}, 'name', null)).toThrow('Path must be an array');
+      expect(tokenSetup.bind(null, {}, 'name', null)).to.throw('Path must be an array');
     });
 
     it('should work if all the args are proper', () => {
-      var test = propertySetup({ value: '#fff' }, 'white', ['color', 'base']);
-      expect(typeof test).toBe('object');
-      expect(test).toHaveProperty('value');
-      expect(test).toHaveProperty('original');
-      expect(test).toHaveProperty('attributes');
-      expect(test).toHaveProperty('path');
+      var test = tokenSetup({ value: '#fff' }, 'white', ['color', 'base']);
+      expect(typeof test).to.equal('object');
+      expect(test).to.have.property('value');
+      expect(test).to.have.property('original');
+      expect(test).to.have.property('attributes');
+      expect(test).to.have.property('path');
     });
 
     it('should not do anything and return the property if it has been setup previously', () => {
       var original = { value: '#fff', original: {} };
-      var test = propertySetup(original, 'white', ['color', 'base']);
-      expect(test).toMatchObject(original);
+      var test = tokenSetup(original, 'white', ['color', 'base']);
+      expect(test).to.eql(original);
     });
 
     it('should use attributes if already set', () => {
       var attributes = { foo: 'bar' };
-      var test = propertySetup({ value: '#fff', attributes: attributes }, 'white', [
-        'color',
-        'base',
-      ]);
-      expect(test.attributes).toMatchObject(attributes);
+      var test = tokenSetup({ value: '#fff', attributes: attributes }, 'white', ['color', 'base']);
+      expect(test.attributes).to.eql(attributes);
     });
 
     it('should use the name on the property if set', () => {
       var name = 'name';
-      var test = propertySetup({ value: '#fff', name: name }, 'white', ['color', 'base']);
-      expect(test).toHaveProperty('name', name);
+      var test = tokenSetup({ value: '#fff', name: name }, 'white', ['color', 'base']);
+      expect(test).to.have.property('name', name);
     });
 
     it('should use the name passed in if not set on the property', () => {
-      var test = propertySetup({ value: '#fff' }, 'white', ['color', 'base']);
-      expect(test).toHaveProperty('name', 'white');
+      var test = tokenSetup({ value: '#fff' }, 'white', ['color', 'base']);
+      expect(test).to.have.property('name', 'white');
     });
 
     it('should handle objects', () => {
-      const test = propertySetup(
+      const test = tokenSetup(
         {
           value: {
             h: 20,
@@ -76,8 +71,8 @@ describe('transform', () => {
         'red',
         ['color', 'red'],
       );
-      expect(test).toHaveProperty('value.h', 20);
-      expect(test).toHaveProperty('original.value.h', 20);
+      expect(test).to.have.nested.property('value.h', 20);
+      expect(test).to.have.nested.property('original.value.h', 20);
     });
   });
 });

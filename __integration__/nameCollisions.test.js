@@ -10,13 +10,13 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
+import { expect } from 'chai';
+import StyleDictionary from 'style-dictionary';
+import { stubMethod, restore } from 'hanbi';
+import { buildPath, cleanConsoleOutput } from './_constants.js';
+import { clearOutput } from '../__tests__/__helpers.js';
 
-const fs = require('fs-extra');
-const chalk = require('chalk');
-const StyleDictionary = require('../index');
-const { buildPath } = require('./_constants');
-
-const properties = {
+const tokens = {
   color: {
     red: { value: '#f00' },
     background: {
@@ -26,13 +26,22 @@ const properties = {
 };
 
 describe('integration', () => {
+  let stub;
+  beforeEach(() => {
+    stub = stubMethod(console, 'log');
+  });
+
+  afterEach(() => {
+    clearOutput(buildPath);
+    restore();
+  });
+
   describe('name collisions', () => {
-    it(`should warn users of name collisions for flat files`, () => {
-      console.log = jest.fn();
-      StyleDictionary.extend({
+    it(`should warn users of name collisions for flat files`, async () => {
+      const sd = new StyleDictionary({
         // we are only testing name collision warnings options so we don't need
         // the full source.
-        properties,
+        tokens,
         platforms: {
           web: {
             buildPath,
@@ -44,16 +53,16 @@ describe('integration', () => {
             ],
           },
         },
-      }).buildAllPlatforms();
-      expect(console.log).toHaveBeenCalledWith(`⚠️ ${buildPath}variables.css`);
+      });
+      await sd.buildAllPlatforms();
+      await expect(stub.lastCall.args.map(cleanConsoleOutput).join('\n')).to.matchSnapshot();
     });
 
-    it(`should not warn users of name collisions for nested files`, () => {
-      console.log = jest.fn();
-      StyleDictionary.extend({
+    it(`should not warn users of name collisions for nested files`, async () => {
+      const sd = new StyleDictionary({
         // we are only testing name collision warnings options so we don't need
         // the full source.
-        properties,
+        tokens,
         platforms: {
           web: {
             buildPath,
@@ -65,12 +74,11 @@ describe('integration', () => {
             ],
           },
         },
-      }).buildAllPlatforms();
-      expect(console.log).toHaveBeenCalledWith(chalk.bold.green(`✔︎ ${buildPath}tokens.json`));
+      });
+      await sd.buildAllPlatforms();
+      expect(stub.lastCall.args.map(cleanConsoleOutput).join('\n')).to.equal(
+        `✔︎ ${buildPath}tokens.json`,
+      );
     });
   });
-});
-
-afterAll(() => {
-  fs.emptyDirSync(buildPath);
 });

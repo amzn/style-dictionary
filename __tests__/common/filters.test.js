@@ -10,8 +10,8 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
-var filters = require('../../lib/common/filters');
+import { expect } from 'chai';
+import filters from '../../lib/common/filters.js';
 
 describe('common', () => {
   describe('filters', () => {
@@ -22,7 +22,7 @@ describe('common', () => {
           value: '#1a1aed',
         };
 
-        expect(filters['removePrivate'](regularToken)).toEqual(true);
+        expect(filters['removePrivate'](regularToken)).to.be.true;
       });
 
       it('should keep an unfiltered token in for distribution', () => {
@@ -32,7 +32,7 @@ describe('common', () => {
           private: false,
         };
 
-        expect(filters['removePrivate'](unfilteredToken)).toEqual(true);
+        expect(filters['removePrivate'](unfilteredToken)).to.be.true;
       });
 
       it('should remove a filtered token from the distribution output', () => {
@@ -42,7 +42,7 @@ describe('common', () => {
           private: true,
         };
 
-        expect(filters['removePrivate'](filteredToken)).toEqual(false);
+        expect(filters['removePrivate'](filteredToken)).to.be.false;
       });
     });
   });

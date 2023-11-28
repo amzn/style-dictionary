@@ -2,4 +2,4 @@
 .eslintrc.json
 .editorconfig
 images/
-test/
+__tests__/

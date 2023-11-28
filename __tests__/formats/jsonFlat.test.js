@@ -10,34 +10,23 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
-const formats = require('../../lib/common/formats');
-const fs = require('fs-extra');
-const helpers = require('../__helpers');
-const { colorDictionary } = require('./__constants');
-const createFormatArgs = require('../../lib/utils/createFormatArgs');
+import { expect } from 'chai';
+import formats from '../../lib/common/formats.js';
+import { colorDictionary } from './__constants.js';
+import createFormatArgs from '../../lib/utils/createFormatArgs.js';
 
 const file = {
   destination: '__output/',
   format: 'json/flat',
 };
 
-const formatter = formats['json/flat'].bind(file);
+const format = formats['json/flat'];
 
 describe('formats', () => {
   describe('json/flat', () => {
-    beforeEach(() => {
-      helpers.clearOutput();
-    });
-
-    afterEach(() => {
-      helpers.clearOutput();
-    });
-
-    it('should be a valid JSON file', () => {
-      fs.writeFileSync(
-        './__tests__/__output/output.flat.json',
-        formatter(
+    it('should be a valid JSON file and match snapshot', async () => {
+      await expect(
+        format(
           createFormatArgs({
             dictionary: colorDictionary,
             file,
@@ -46,9 +35,7 @@ describe('formats', () => {
           {},
           file,
         ),
-      );
-      const test = require('../__output/output.flat.json');
-      expect(test['color-base-red-400']).toEqual(colorDictionary.allProperties[0].value);
+      ).to.matchSnapshot();
     });
   });
 });

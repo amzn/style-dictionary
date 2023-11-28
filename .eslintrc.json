@@ -3,23 +3,21 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["jest"],
   "env": {
     "node": true,
     "mocha": true,
-    "jest": true
+    "es6": true
   },
   "globals": {
     "Buffer": true,
     "escape": true
   },
-  "extends": ["eslint:recommended", "plugin:jest/recommended"],
+  "extends": ["eslint:recommended"],
   "rules": {
     "no-console": 0,
     "no-unused-vars": 1,
     "no-control-regex": 0,
     "comma-dangle": 0,
-    "no-prototype-builtins": 0,
-    "jest/valid-title": 0
+    "no-prototype-builtins": 0
   }
 }

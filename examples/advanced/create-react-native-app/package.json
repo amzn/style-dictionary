@@ -25,12 +25,16 @@
   "devDependencies": {
     "@babel/core": "~7.9.0",
     "babel-jest": "~25.2.6",
+    "eslint-config-react-app": "^7.0.1",
     "jest": "~25.2.6",
     "react-test-renderer": "~16.13.1",
     "style-dictionary": "3.8.0"
   },
   "jest": {
     "preset": "react-native"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
   },
   "private": true
 }

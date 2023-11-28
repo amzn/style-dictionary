@@ -31,9 +31,9 @@ If you have an existing project, you can upgrade to 3.0 by updating the version 
 
 ### Style Properties → Design Tokens
 
-Style Dictionary is moving to the term "design tokens", both in documentation and in code. This has become the industry standard term for a while and it is time we respect that. Until now, Style Dictionary had called these "style properties" or just "properties", with some parts of the documentation also mentioning "design tokens". We want to be consistent with the direction of the community as well as in our documentation and code. We use the terms `properties` and `allProperties` in different APIs in Style Dictionary. To be consistent in documentation as well as code, we will be moving to using `tokens` and `allTokens`.
+Style Dictionary has moved to the term "design tokens", both in documentation and in code. This has become the industry standard term for a while and it is time we respect that. Before, Style Dictionary had called these "style properties" or just "properties", with some parts of the documentation also mentioning "design tokens". We want to be consistent with the direction of the community as well as in our documentation and code. We now use the terms `tokens` and `allTokens` in different APIs in Style Dictionary.
 
-Don't worry! This change is backwards-compatible; you will still be able to use `properties` and `allProperties` wherever you currently do in your code. If you want, you can update those to tokens and allTokens and everything will work as expected. Moving forward, all examples and documentation will use the term "design tokens" and "tokens" rather than "style properties" and "properties". We do recommend using `tokens` and `allTokens` in new code from here on out!
+This change was backwards-compatible in Style Dictionary v3, but no longer is in v4.
 
 ### Transitive transforms
 

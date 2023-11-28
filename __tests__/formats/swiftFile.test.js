@@ -10,10 +10,10 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-const formats = require('../../lib/common/formats');
-const createDictionary = require('../../lib/utils/createDictionary');
-const createFormatArgs = require('../../lib/utils/createFormatArgs');
-const _ = require('../../lib/utils/es6_');
+import { expect } from 'chai';
+import formats from '../../lib/common/formats.js';
+import createDictionary from '../../lib/utils/createDictionary.js';
+import createFormatArgs from '../../lib/utils/createFormatArgs.js';
 
 const originalFile = {
   destination: '__output/',
@@ -27,9 +27,9 @@ const originalFile = {
   options: {},
 };
 
-var file = {};
+let file = {};
 
-const properties = {
+const tokens = {
   color: {
     base: {
       red: {
@@ -45,16 +45,16 @@ const properties = {
 };
 
 const format = formats['ios-swift/any.swift'];
-const dictionary = createDictionary({ properties });
+const dictionary = createDictionary({ tokens });
 
 describe('formats', () => {
   describe('ios-swift/any.swift', () => {
     beforeEach(() => {
-      file = _.cloneDeep(originalFile);
+      file = structuredClone(originalFile);
     });
 
-    it('should match default snapshot', () => {
-      expect(
+    it('should match default snapshot', async () => {
+      await expect(
         format(
           createFormatArgs({
             dictionary,
@@ -64,12 +64,12 @@ describe('formats', () => {
           {},
           file,
         ),
-      ).toMatchSnapshot();
+      ).to.matchSnapshot();
     });
 
-    it('with import override should match snapshot', () => {
+    it('with import override should match snapshot', async () => {
       file.options.import = ['UIKit', 'AnotherModule'];
-      expect(
+      await expect(
         format(
           createFormatArgs({
             dictionary,
@@ -79,12 +79,12 @@ describe('formats', () => {
           {},
           file,
         ),
-      ).toMatchSnapshot();
+      ).to.matchSnapshot();
     });
 
-    it('with objectType override should match snapshot', () => {
+    it('with objectType override should match snapshot', async () => {
       file.options.objectType = 'struct';
-      expect(
+      await expect(
         format(
           createFormatArgs({
             dictionary,
@@ -94,12 +94,12 @@ describe('formats', () => {
           {},
           file,
         ),
-      ).toMatchSnapshot();
+      ).to.matchSnapshot();
     });
 
-    it('with access control override should match snapshot', () => {
+    it('with access control override should match snapshot', async () => {
       file.options.accessControl = 'internal';
-      expect(
+      await expect(
         format(
           createFormatArgs({
             dictionary,
@@ -109,7 +109,7 @@ describe('formats', () => {
           {},
           file,
         ),
-      ).toMatchSnapshot();
+      ).to.matchSnapshot();
     });
   });
 });

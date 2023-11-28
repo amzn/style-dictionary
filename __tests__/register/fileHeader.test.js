@@ -10,75 +10,76 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
-var StyleDictionary = require('../../index');
-var StyleDictionaryExtended = StyleDictionary.extend({});
+import { expect } from 'chai';
+import StyleDictionary from 'style-dictionary';
 
 describe('register', () => {
-  describe('fileHeader', () => {
-    it('should error if name is not a string', () => {
-      expect(
-        StyleDictionaryExtended.registerFileHeader.bind(null, {
-          fileHeader: function () {},
-        }),
-      ).toThrow('name must be a string');
+  describe('fileHeader', async () => {
+    const StyleDictionaryExtended = new StyleDictionary({});
 
-      expect(
-        StyleDictionaryExtended.registerFileHeader.bind(null, {
+    it('should error if name is not a string', () => {
+      expect(() => {
+        StyleDictionaryExtended.registerFileHeader({
+          fileHeader: function () {},
+        });
+      }).to.throw('name must be a string');
+
+      expect(() => {
+        StyleDictionaryExtended.registerFileHeader({
           name: 1,
           fileHeader: function () {},
-        }),
-      ).toThrow('name must be a string');
+        });
+      }).to.throw('name must be a string');
 
-      expect(
-        StyleDictionaryExtended.registerFileHeader.bind(null, {
+      expect(() => {
+        StyleDictionaryExtended.registerFileHeader({
           name: [],
           fileHeader: function () {},
-        }),
-      ).toThrow('name must be a string');
+        });
+      }).to.throw('name must be a string');
 
-      expect(
-        StyleDictionaryExtended.registerFilter.bind(null, {
+      expect(() => {
+        StyleDictionaryExtended.registerFilter({
           name: {},
           matcher: function () {},
-        }),
-      ).toThrow('name must be a string');
+        });
+      }).to.throw('name must be a string');
     });
 
     it('should error if fileHeader is not a function', () => {
-      expect(
-        StyleDictionaryExtended.registerFileHeader.bind(null, {
+      expect(() => {
+        StyleDictionaryExtended.registerFileHeader({
           name: 'myCustomHeader',
-        }),
-      ).toThrow('fileHeader must be a function');
+        });
+      }).to.throw('fileHeader must be a function');
 
-      expect(
-        StyleDictionaryExtended.registerFileHeader.bind(null, {
+      expect(() => {
+        StyleDictionaryExtended.registerFileHeader({
           name: 'myCustomHeader',
           fileHeader: 1,
-        }),
-      ).toThrow('fileHeader must be a function');
+        });
+      }).to.throw('fileHeader must be a function');
 
-      expect(
-        StyleDictionaryExtended.registerFileHeader.bind(null, {
+      expect(() => {
+        StyleDictionaryExtended.registerFileHeader({
           name: 'myCustomHeader',
           fileHeader: 'name',
-        }),
-      ).toThrow('fileHeader must be a function');
+        });
+      }).to.throw('fileHeader must be a function');
 
-      expect(
-        StyleDictionaryExtended.registerFileHeader.bind(null, {
+      expect(() => {
+        StyleDictionaryExtended.registerFileHeader({
           name: 'myCustomHeader',
           fileHeader: [],
-        }),
-      ).toThrow('fileHeader must be a function');
+        });
+      }).to.throw('fileHeader must be a function');
 
-      expect(
-        StyleDictionaryExtended.registerFileHeader.bind(null, {
+      expect(() => {
+        StyleDictionaryExtended.registerFileHeader({
           name: 'myCustomHeader',
           fileHeader: {},
-        }),
-      ).toThrow('fileHeader must be a function');
+        });
+      }).to.throw('fileHeader must be a function');
     });
 
     it('should work if name and matcher are good', () => {
@@ -86,12 +87,12 @@ describe('register', () => {
         name: 'myCustomHeader',
         fileHeader: function () {},
       });
-      expect(typeof StyleDictionaryExtended.fileHeader['myCustomHeader']).toBe('function');
+      expect(typeof StyleDictionaryExtended.fileHeader['myCustomHeader']).to.equal('function');
     });
 
-    it('should properly pass the registered fileHeader to instances', () => {
-      var SDE2 = StyleDictionaryExtended.extend({});
-      expect(typeof SDE2.fileHeader['myCustomHeader']).toBe('function');
+    it('should properly pass the registered fileHeader to instances', async () => {
+      const SDE2 = await StyleDictionaryExtended.extend({});
+      expect(typeof SDE2.fileHeader['myCustomHeader']).to.equal('function');
     });
   });
 });
