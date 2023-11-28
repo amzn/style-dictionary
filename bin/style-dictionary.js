@@ -2,11 +2,11 @@
 
 'use strict';
 
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import node_fs from 'node:fs';
 import JSON5 from 'json5';
 import program from 'commander';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import node_fs from 'node:fs';
 // usually also node:fs in this context, but can be customized by user
 import { fs } from 'style-dictionary/fs';
 import StyleDictionary from 'style-dictionary';

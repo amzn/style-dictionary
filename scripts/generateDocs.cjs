@@ -12,7 +12,7 @@ ${input}`;
 
 const DOCS_PATH = './docs/api.md';
 const docs = jsdoc2md.renderSync({
-  files: ['index.js', 'lib/**/*.js'],
+  files: ['fs.js', 'fs-node.js', 'lib/**/*.js'],
   template: fs.readFileSync('scripts/handlebars/templates/api.hbs').toString(),
   // 'no-gfm': true,
   separators: true,

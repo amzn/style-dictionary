@@ -59,49 +59,13 @@
     "test:browser:watch": "web-test-runner --watch",
     "test:browser:update-snapshots": "web-test-runner --update-snapshots",
     "test:node": "mocha -r mocha-hooks.mjs './__integration__/**/*.test.js' './__tests__/**/*.test.js' './__node_tests__/**/*.test.js'",
-    "generate-docs": "node ./scripts/generateDocs.js",
+    "generate-docs": "node ./scripts/generateDocs.cjs",
     "serve-docs": "docsify serve docs -p 3000 -P 12345",
     "install-cli": "npm install -g $(npm pack)",
     "release": "node scripts/inject-version.js && changeset publish",
+    "postrelease": "node ./scripts/version.cjs && npm run generate-docs",
     "prepare": "husky install",
     "postinstall": "patch-package"
-  },
-  "standard-version": {
-    "scripts": {
-      "postbump": "node ./scripts/version.js && npm run generate-docs"
-    }
-  },
-  "jest": {
-    "verbose": false,
-    "collectCoverageFrom": [
-      "lib/**/*.js"
-    ],
-    "coverageReporters": [
-      "html"
-    ],
-    "coverageDirectory": "docs/coverage",
-    "roots": [
-      "__tests__",
-      "__integration__"
-    ],
-    "setupFilesAfterEnv": [
-      "<rootDir>/__tests__/__setup.js"
-    ],
-    "testPathIgnorePatterns": [
-      "/__tests__/__setup.js",
-      "/__tests__/__helpers.js",
-      "/__tests__/__assets/",
-      "/__tests__/__configs/",
-      "/__tests__/__json_files/",
-      "/__tests__/__tokens/",
-      "/__tests__/__output/",
-      "/__tests__/formats/__constants.js"
-    ],
-    "transform": {
-      "^.+\\.json5$": "json5-jest",
-      "^.+\\.jsonc$": "json5-jest",
-      "^.+\\.jsx?$": "babel-jest"
-    }
   },
   "lint-staged": {
     "*.js": [
@@ -146,17 +110,12 @@
     "chalk": "^5.3.0",
     "change-case": "^4.1.2",
     "commander": "^8.3.0",
-    "fs-extra": "^10.0.0",
     "is-plain-object": "^5.0.0",
     "json5": "^2.2.2",
-    "jsonc-parser": "^3.0.0",
-    "lodash": "^4.17.15",
     "lodash-es": "^4.17.21",
-    "tinycolor2": "^1.6.0",
-    "url": "^0.11.1"
+    "tinycolor2": "^1.6.0"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@changesets/cli": "^2.26.2",
     "@commitlint/cli": "^16.1.0",
     "@commitlint/config-conventional": "^16.0.0",
@@ -166,19 +125,19 @@
     "@web/test-runner-commands": "^0.9.0",
     "@web/test-runner-playwright": "^0.11.0",
     "chai": "^5.0.0-alpha.2",
-    "chai-as-promised": "npm:@esm-bundle/chai-as-promised@^7.1.1",
     "docsify": "^4.12.2",
     "docsify-cli": "^4.4.3",
     "eslint": "^8.7.0",
     "eslint-config-react-app": "^7.0.1",
-    "eslint-plugin-jest": "^26.0.0",
+    "fs-extra": "^10.0.0",
     "hanbi": "^1.0.1",
     "husky": "^8.0.3",
     "jsdoc-escape-at": "^1.0.1",
-    "jsdoc-to-markdown": "^7.1.0",
-    "json5-jest": "^1.0.1",
+    "jsdoc-to-markdown": "^8.0.0",
+    "jsdoc-tsimport-plugin": "^1.0.5",
     "less": "^4.1.2",
     "lint-staged": "^12.3.1",
+    "lodash": "^4.17.15",
     "mocha": "^10.2.0",
     "npm-run-all": "^4.1.5",
     "patch-package": "^8.0.0",
