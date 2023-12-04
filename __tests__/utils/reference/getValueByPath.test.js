@@ -11,7 +11,7 @@
  * and limitations under the License.
  */
 import { expect } from 'chai';
-import resolveReference from '../../../lib/utils/references/resolveReference.js';
+import getValueByPath from '../../../lib/utils/references/getValueByPath.js';
 
 const dictionary = {
   color: {
@@ -28,28 +28,28 @@ const dictionary = {
   arr: ['one', 'two'],
 };
 
-describe('resolveReference()', () => {
+describe('getValueByPath()', () => {
   it(`returns undefined for non-strings`, () => {
-    expect(resolveReference(42, dictionary)).to.be.undefined;
+    expect(getValueByPath(42, dictionary)).to.be.undefined;
   });
 
   it(`returns undefined if it does not find the path in the object`, () => {
-    expect(resolveReference(['color', 'foo'], dictionary)).to.be.undefined;
-    expect(resolveReference(['color', 'foo', 'bar'], dictionary)).to.be.undefined;
+    expect(getValueByPath(['color', 'foo'], dictionary)).to.be.undefined;
+    expect(getValueByPath(['color', 'foo', 'bar'], dictionary)).to.be.undefined;
   });
 
   it(`returns the part of the object if referenced path exists`, () => {
-    expect(resolveReference(['color', 'palette', 'neutral', '0', 'value'], dictionary)).to.equal(
+    expect(getValueByPath(['color', 'palette', 'neutral', '0', 'value'], dictionary)).to.equal(
       dictionary.color.palette.neutral['0'].value,
     );
-    expect(resolveReference(['color'], dictionary)).to.equal(dictionary.color);
+    expect(getValueByPath(['color'], dictionary)).to.equal(dictionary.color);
   });
 
   it(`works with arrays`, () => {
-    expect(resolveReference(['arr'], dictionary)).to.equal(dictionary.arr);
+    expect(getValueByPath(['arr'], dictionary)).to.equal(dictionary.arr);
   });
 
   it(`works with array indices`, () => {
-    expect(resolveReference(['arr', '0'], dictionary)).to.equal(dictionary.arr[0]);
+    expect(getValueByPath(['arr', '0'], dictionary)).to.equal(dictionary.arr[0]);
   });
 });

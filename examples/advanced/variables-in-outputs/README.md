@@ -14,7 +14,7 @@ At this point, you can run `npm run build`. This command will generate the outpu
 
 #### How does it work
 
-The "build" command uses the `sd.config.js` file as the Style Dictionary configuration. It is configured to use JSON files in the `tokens/` directory as the source files. It adds a custom format directly in the configuration (as opposed to using the `.registerFormat()` method) that uses 2 new methods added onto the internal dictionary object that is passed to formats and actions: `.usesReference()` and `.resolveReference()`. Also, it uses a new configuration on some formats: `keepReferences: true` to include variable references in the output.
+The "build" command uses the `sd.config.js` file as the Style Dictionary configuration. It is configured to use JSON files in the `tokens/` directory as the source files. It adds a custom format directly in the configuration (as opposed to using the `.registerFormat()` method) that uses 2 new methods added as exposed utilities: `usesReference()` and `getReferences()`. Also, it uses a new configuration on some formats: `outputReferences: true` to include variable references in the output.
 
 #### What to look at
 
@@ -23,6 +23,8 @@ The `sd.config.js` file has everything you need to see. The tokens included in t
 Here is an example that shows how to get an alias's name within a custom format:
 
 ```javascript
+import { usesReference, getReferences } from 'style-dictionary/utils';
+
 //...
 function({ dictionary }) {
   return dictionary.allTokens.map(token => {
@@ -32,8 +34,8 @@ function({ dictionary }) {
     // the value has a reference in it. `getReferences()` will return
     // an array of references to the whole tokens so that you can access their
     // names or any other attributes.
-    if (dictionary.usesReference(token.original.value)) {
-      const refs = dictionary.getReferences(token.original.value);
+    if (usesReference(token.original.value)) {
+      const refs = getReferences(dictionary, token.original.value);
       refs.forEach(ref => {
         value = value.replace(ref.value, function() {
           return `${ref.name}`;
@@ -49,5 +51,5 @@ The `build/` directory is where all the files are being built to. After Style Di
 
 - `build/tokens.js` This file is generated from the custom format in this example. Tokens that are references to other tokens use the variable name instead of raw value.
 - `build/tokens.json` This file does not use variable references to show that other outputs work as intended.
-- `build/tokens.css` This file is generated using the `css/variables` built-in format with the new `keepReferences` configuration.
-- `build/tokens.scss` This file is generated using the `scss/variables` built-in format with the new `keepReferences` configuration.
+- `build/tokens.css` This file is generated using the `css/variables` built-in format with the new `outputReferences` configuration.
+- `build/tokens.scss` This file is generated using the `scss/variables` built-in format with the new `outputReferences` configuration.
