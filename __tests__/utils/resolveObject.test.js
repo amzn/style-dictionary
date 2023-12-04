@@ -19,6 +19,13 @@ const PROPERTY_REFERENCE_WARNINGS = GroupMessages.GROUP.PropertyReferenceWarning
 
 describe('utils', () => {
   describe('resolveObject', () => {
+    beforeEach(() => {
+      GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
+    });
+    afterEach(() => {
+      GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
+    });
+
     it('should error on non-objects', () => {
       expect(resolveObject.bind(null)).to.throw('Please pass an object in');
       expect(resolveObject.bind(null, 'foo')).to.throw('Please pass an object in');
@@ -116,8 +123,6 @@ describe('utils', () => {
     });
 
     it('should gracefully handle basic circular references', () => {
-      GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
-
       resolveObject(fileToJSON('__tests__/__json_files/circular.json'));
       expect(GroupMessages.count(PROPERTY_REFERENCE_WARNINGS)).to.equal(1);
       expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS))).to.equal(
@@ -126,8 +131,6 @@ describe('utils', () => {
     });
 
     it('should gracefully handle basic and nested circular references', () => {
-      GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
-
       resolveObject(fileToJSON('__tests__/__json_files/circular_2.json'));
       expect(GroupMessages.count(PROPERTY_REFERENCE_WARNINGS)).to.equal(1);
       expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS))).to.equal(
@@ -136,8 +139,6 @@ describe('utils', () => {
     });
 
     it('should gracefully handle nested circular references', () => {
-      GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
-
       resolveObject(fileToJSON('__tests__/__json_files/circular_3.json'));
       expect(GroupMessages.count(PROPERTY_REFERENCE_WARNINGS)).to.equal(1);
       expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS))).to.equal(
@@ -146,8 +147,6 @@ describe('utils', () => {
     });
 
     it('should gracefully handle multiple nested circular references', () => {
-      GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
-
       resolveObject(fileToJSON('__tests__/__json_files/circular_4.json'));
       expect(GroupMessages.count(PROPERTY_REFERENCE_WARNINGS)).to.equal(1);
       expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS))).to.equal(
@@ -156,8 +155,6 @@ describe('utils', () => {
     });
 
     it('should gracefully handle down-chain circular references', () => {
-      GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
-
       resolveObject(fileToJSON('__tests__/__json_files/circular_5.json'));
       expect(GroupMessages.count(PROPERTY_REFERENCE_WARNINGS)).to.equal(1);
       expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS))).to.equal(
@@ -166,8 +163,6 @@ describe('utils', () => {
     });
 
     it('should correctly replace multiple references without reference errors', function () {
-      GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
-
       const obj = resolveObject(fileToJSON('__tests__/__json_files/not_circular.json'));
       expect(GroupMessages.count(PROPERTY_REFERENCE_WARNINGS)).to.equal(0);
       expect(JSON.stringify(obj)).to.equal(
@@ -322,8 +317,6 @@ describe('utils', () => {
     });
 
     it('should collect multiple reference errors', () => {
-      GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
-
       resolveObject(fileToJSON('__tests__/__json_files/multiple_reference_errors.json'));
       expect(GroupMessages.count(PROPERTY_REFERENCE_WARNINGS)).to.equal(3);
       expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS))).to.equal(
@@ -336,7 +329,6 @@ describe('utils', () => {
     });
 
     it('should handle 0', () => {
-      GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
       const test = resolveObject({
         test: { value: '{zero.value}' },
         zero: { value: 0 },
