@@ -27,7 +27,8 @@
     "./fs": {
       "node": "./fs-node.js",
       "default": "./fs.js"
-    }
+    },
+    "./utils": "./lib/utils/index.js"
   },
   "bin": {
     "style-dictionary": "./bin/style-dictionary.js"

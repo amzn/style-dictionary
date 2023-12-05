@@ -12,8 +12,7 @@
  */
 
 import { expect } from 'chai';
-// `.getReferences` is bound to a dictionary object, so to test it we will
-// create a dictionary object and then call `.getReferences` on it.
+import getReferences from '../../../lib/utils/references/getReferences.js';
 import createDictionary from '../../../lib/utils/createDictionary.js';
 
 const tokens = {
@@ -54,26 +53,28 @@ describe('utils', () => {
   describe('reference', () => {
     describe('getReferences()', () => {
       it(`should return an empty array if the value has no references`, () => {
-        expect(dictionary.getReferences(tokens.color.red.value)).to.eql([]);
+        expect(getReferences(dictionary, tokens.color.red.value)).to.eql([]);
       });
 
       it(`should work with a single reference`, () => {
-        expect(dictionary.getReferences(tokens.color.danger.value)).to.eql([{ value: '#f00' }]);
+        expect(getReferences(dictionary, tokens.color.danger.value)).to.eql([{ value: '#f00' }]);
       });
 
       it(`should work with object values`, () => {
-        expect(dictionary.getReferences(tokens.border.primary.value)).to.eql([
+        expect(getReferences(dictionary, tokens.border.primary.value)).to.eql([
           { value: '#f00' },
           { value: '2px' },
         ]);
       });
 
       it(`should work with objects that have numbers`, () => {
-        expect(dictionary.getReferences(tokens.border.secondary.value)).to.eql([{ value: '#f00' }]);
+        expect(getReferences(dictionary, tokens.border.secondary.value)).to.eql([
+          { value: '#f00' },
+        ]);
       });
 
       it(`should work with interpolated values`, () => {
-        expect(dictionary.getReferences(tokens.border.tertiary.value)).to.eql([
+        expect(getReferences(dictionary, tokens.border.tertiary.value)).to.eql([
           { value: '2px' },
           { value: '#f00' },
         ]);

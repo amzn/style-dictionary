@@ -16,6 +16,4 @@ import { TransformedToken, TransformedTokens } from './TransformedToken';
 export interface Dictionary {
   allTokens: TransformedToken[];
   tokens: TransformedTokens;
-  usesReference: (value: any) => boolean;
-  getReferences: (value: any) => TransformedToken[];
 }
