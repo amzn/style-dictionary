@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.0.0-prerelease.3
+
+### Patch Changes
+
+- 8d2f6d8: Make sure fs-node.js file is published to NPM.
+
 ## 4.0.0-prerelease.2
 
 ### Major Changes
