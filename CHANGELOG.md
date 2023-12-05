@@ -1,5 +1,32 @@
 # Changelog
 
+## 4.0.0-prerelease.4
+
+### Minor Changes
+
+- 122c8f6: Expose a new utility called resolveReferences which takes a value containing references, the dictionary object, and resolves the value's references for you.
+
+  ```js
+  import StyleDictionary from 'style-dictionary';
+  import { resolveReferences } from 'style-dictionary/utils';
+
+  const sd = new StyleDictionary({
+    tokens: {
+      foo: { value: 'foo' },
+      bar: { value: '{foo}' },
+      qux: { value: '{bar}' },
+    },
+  });
+
+  console.log(resolveReferences(sd.tokens.qux.value, sd.tokens)); // 'foo'
+  ```
+
+- 122c8f6: BREAKING: expose getReferences and usesReference utilities as standalone utils rather than requiring them to be bound to dictionary object. This makes it easier to use.
+
+### Patch Changes
+
+- 044123c: Patch StyleDictionary main type file to export default instead of "export =" which does not work in ESM.
+
 ## 4.0.0-prerelease.3
 
 ### Patch Changes
