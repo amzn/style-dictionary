@@ -41,8 +41,7 @@
     "lib",
     "examples",
     "fs.js",
-    "index.js",
-    "index-node.js",
+    "fs-node.js",
     "LICENSE",
     "NOTICE",
     "types"
