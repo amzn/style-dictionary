@@ -31,7 +31,7 @@
     "./utils": "./lib/utils/index.js"
   },
   "bin": {
-    "style-dictionary": "./bin/style-dictionary"
+    "style-dictionary": "./bin/style-dictionary.js"
   },
   "engines": {
     "node": ">=18.0.0"
