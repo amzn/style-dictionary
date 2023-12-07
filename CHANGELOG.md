@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.9.1](https://github.com/amzn/style-dictionary/compare/v3.9.0...v3.9.1) (2023-12-07)
+
+
+### Bug Fixes
+
+* allow falsy token values for outputReferences, e.g. 0 ([83a9934](https://github.com/amzn/style-dictionary/commit/83a9934c4bda0bfe6ba711b92ddee6a064dfb0e5))
+* types for FormatHelpers.LineFormatting to add commentPosition ([fcce1d4](https://github.com/amzn/style-dictionary/commit/fcce1d45e9f879703b26db0dd281a338bb6db988))
+
 ## [3.9.0](https://github.com/amzn/style-dictionary/compare/v3.8.0...v3.9.0) (2023-10-23)
 
 
