@@ -11,14 +11,14 @@
  * and limitations under the License.
  */
 
-import { DesignTokens } from './DesignToken';
+import type { Options } from './Options.d.ts';
+import type { TransformedToken } from './TransformedToken.d.ts';
 
-export interface ParserOptions {
-  contents: string;
-  filePath: string;
-}
-
-export interface Parser {
-  pattern: RegExp;
-  parse: (options: ParserOptions) => DesignTokens;
+export interface File {
+  className?: string;
+  packageName?: string;
+  destination: string;
+  format?: string;
+  filter?: string | Partial<TransformedToken> | ((token: TransformedToken) => boolean);
+  options?: Options;
 }

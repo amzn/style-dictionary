@@ -11,19 +11,9 @@
  * and limitations under the License.
  */
 
-import defaults from './defaults.js';
+import type { Matcher } from './Matcher.d.ts';
 
-/**
- * Returns the path from a path name be splitting the name by a given separator.
- * @private
- * @param {string} pathName
- * @param {string} separator
- * @returns {string[]} - The path
- */
-export default function getPathFromName(pathName, separator) {
-  const sep = separator ?? defaults.separator;
-  if (typeof pathName !== 'string') {
-    throw new Error('Getting path from name failed. Name must be a string');
-  }
-  return pathName.split(sep);
+export interface Filter {
+  name: string;
+  matcher: Matcher;
 }

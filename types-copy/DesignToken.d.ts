@@ -11,19 +11,27 @@
  * and limitations under the License.
  */
 
-import defaults from './defaults.js';
-
 /**
- * Returns the path from a path name be splitting the name by a given separator.
- * @private
- * @param {string} pathName
- * @param {string} separator
- * @returns {string[]} - The path
+ * This type is also used in the `typescript/module-declarations` format
+ * Make sure to also change it there when this type changes!
  */
-export default function getPathFromName(pathName, separator) {
-  const sep = separator ?? defaults.separator;
-  if (typeof pathName !== 'string') {
-    throw new Error('Getting path from name failed. Name must be a string');
-  }
-  return pathName.split(sep);
+interface DesignToken {
+  value: any;
+  name?: string;
+  comment?: string;
+  themeable?: boolean;
+  attributes?: {
+    category?: string;
+    type?: string;
+    item?: string;
+    subitem?: string;
+    state?: string;
+    [key: string]: any;
+  };
+  [key: string]: any;
+}
+
+export { DesignToken };
+export interface DesignTokens {
+  [key: string]: DesignTokens | DesignToken;
 }

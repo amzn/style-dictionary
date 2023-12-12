@@ -11,9 +11,6 @@
  * and limitations under the License.
  */
 
-import { TransformedToken, TransformedTokens } from './TransformedToken';
+import type { TransformedToken } from './TransformedToken.d.ts';
 
-export interface Dictionary {
-  allTokens: TransformedToken[];
-  tokens: TransformedTokens;
-}
+export type Matcher = (token: TransformedToken) => boolean;

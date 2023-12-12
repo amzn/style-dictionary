@@ -11,16 +11,9 @@
  * and limitations under the License.
  */
 
-import { Options } from './Options';
-import { File } from './File';
+import type { TransformedToken, TransformedTokens } from './TransformedToken.d.ts';
 
-export type Platform<PlatformType = Record<string, any>> = {
-  transformGroup?: string;
-  transforms?: string[];
-  basePxFontSize?: number;
-  prefix?: string;
-  buildPath?: string;
-  files?: File[];
-  actions?: string[];
-  options?: Options;
-} & PlatformType;
+export interface Dictionary {
+  allTokens: TransformedToken[];
+  tokens: TransformedTokens;
+}

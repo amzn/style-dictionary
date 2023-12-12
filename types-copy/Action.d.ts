@@ -11,11 +11,13 @@
  * and limitations under the License.
  */
 
-import { FileHeader } from './FileHeader';
+import type { Dictionary } from './Dictionary.d.ts';
+import type { Platform } from './Platform.d.ts';
 
-export interface Options {
-  showFileHeader?: boolean;
-  fileHeader?: string | FileHeader;
-  outputReferences?: boolean;
-  [key: string]: any;
+export interface Action {
+  /** The action in the form of a function. */
+  do(dictionary: Dictionary, config: Platform): void;
+
+  /** A function that undoes the action. */
+  undo?(dictionary: Dictionary, config: Platform): void;
 }

@@ -11,10 +11,10 @@
  * and limitations under the License.
  */
 
-import { Dictionary } from './Dictionary';
-import { File } from './File';
-import { Options } from './Options';
-import { Platform } from './Platform';
+import type { Dictionary } from './Dictionary.d.ts';
+import type { File } from './File.d.ts';
+import type { Options } from './Options.d.ts';
+import type { Platform } from './Platform.d.ts';
 
 export interface FormatterArguments {
   /**

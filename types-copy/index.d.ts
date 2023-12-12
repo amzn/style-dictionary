@@ -13,27 +13,33 @@
 
 // Minimum TypeScript Version: 3.0
 
-import { Action as _Action } from './Action';
-import { Config as _Config } from './Config';
-import { DesignToken as _DesignToken, DesignTokens as _DesignTokens } from './DesignToken';
-import { Dictionary as _Dictionary } from './Dictionary';
-import { File as _File } from './File';
-import { FileHeader as _FileHeader } from './FileHeader';
-import { Filter as _Filter } from './Filter';
-import { Format as _Format, Formatter as _Formatter } from './Format';
-import { FormatHelpers as _FormatHelpers } from './FormatHelpers';
-import { Matcher as _Matcher } from './Matcher';
-import { Options as _Options } from './Options';
-import { Parser as _Parser } from './Parser';
-import { Preprocessor as _Preprocessor, preprocessor as _preprocessor } from './Preprocessor';
-import { Platform as _Platform } from './Platform';
-import { Transform as _Transform } from './Transform';
-import {
+import type { Action as _Action } from './Action.d.ts';
+import type { Config as _Config } from './Config.d.ts';
+import type {
+  DesignToken as _DesignToken,
+  DesignTokens as _DesignTokens,
+} from './DesignToken.d.ts';
+import type { Dictionary as _Dictionary } from './Dictionary.d.ts';
+import type { File as _File } from './File.d.ts';
+import type { FileHeader as _FileHeader } from './FileHeader.d.ts';
+import type { Filter as _Filter } from './Filter.d.ts';
+import type { Format as _Format, Formatter as _Formatter } from './Format.d.ts';
+import type { FormatHelpers as _FormatHelpers } from './FormatHelpers.d.ts';
+import type { Matcher as _Matcher } from './Matcher.d.ts';
+import type { Options as _Options } from './Options.d.ts';
+import type { Parser as _Parser } from './Parser.d.ts';
+import type {
+  Preprocessor as _Preprocessor,
+  preprocessor as _preprocessor,
+} from './Preprocessor.d.ts';
+import type { Platform as _Platform } from './Platform.d.ts';
+import type { Transform as _Transform } from './Transform.d.ts';
+import type {
   TransformedToken as _TransformedToken,
   TransformedTokens as _TransformedTokens,
-} from './TransformedToken';
-import { TransformGroup as _TransformGroup } from './TransformGroup';
-import { Named as _Named } from './_helpers';
+} from './TransformedToken.d.ts';
+import type { TransformGroup as _TransformGroup } from './TransformGroup.d.ts';
+import type { Named as _Named } from './_helpers.d.ts';
 
 // Because this library is used in Node and needs to be accessible
 // as a CommonJS module, we are declaring it as a namespace so that
@@ -66,6 +72,7 @@ declare namespace StyleDictionary {
     VERSION: string;
     tokens: DesignTokens | TransformedTokens;
     allTokens: TransformedTokens[];
+    unfilteredTokens?: DesignTokens | TransformedToken;
     options: Config;
 
     transform: Record<string, Transform>;
@@ -356,3 +363,24 @@ declare namespace StyleDictionary {
 
 declare const StyleDictionary: StyleDictionary.Core;
 export default StyleDictionary;
+export { StyleDictionary };
+
+// Also export the other tokens as standalones for it to work in ESM
+export { _Action as Action };
+export { _Config as Config };
+export { _DesignToken as DesignToken, _DesignTokens as DesignTokens };
+export { _Dictionary as Dictionary };
+export { _File as File };
+export { _FileHeader as FileHeader };
+export { _Filter as Filter };
+export { _Format as Format, _Formatter as Formatter };
+export { _FormatHelpers as FormatHelpers };
+export { _Matcher as Matcher };
+export { _Options as Options };
+export { _Parser as Parser };
+export { _Preprocessor as Preprocessor, _preprocessor as preprocessor };
+export { _Platform as Platform };
+export { _Transform as Transform };
+export { _TransformedToken as TransformedToken, _TransformedTokens as TransformedTokens };
+export { _TransformGroup as TransformGroup };
+export { _Named as Named };

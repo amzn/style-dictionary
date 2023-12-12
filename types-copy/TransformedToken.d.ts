@@ -11,7 +11,7 @@
  * and limitations under the License.
  */
 
-import { DesignToken } from './DesignToken';
+import type { DesignToken } from './DesignToken.d.ts';
 
 export type TransformedToken = DesignToken & {
   name: string;

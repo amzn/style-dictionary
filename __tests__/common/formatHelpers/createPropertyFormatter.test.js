@@ -332,12 +332,12 @@ describe('common', () => {
           // long commentStyle
           const cssFormatter = createPropertyFormatter({
             format: 'css',
-            commentDictionary,
+            dictionary: commentDictionary,
           });
           // short commentStyle
           const sassFormatter = createPropertyFormatter({
             format: 'sass',
-            commentDictionary,
+            dictionary: commentDictionary,
           });
 
           // red = single-line comment, blue = multi-line comment
@@ -357,13 +357,13 @@ describe('common', () => {
           // long commentStyle
           const cssFormatter = createPropertyFormatter({
             format: 'css',
-            commentDictionary,
+            dictionary: commentDictionary,
             formatting: { commentStyle: 'long', commentPosition: 'above' },
           });
           // short commentStyle
           const sassFormatter = createPropertyFormatter({
             format: 'sass',
-            commentDictionary,
+            dictionary: commentDictionary,
             formatting: { commentStyle: 'short', commentPosition: 'above' },
           });
 

@@ -11,18 +11,58 @@
  * and limitations under the License.
  */
 
-import { Parser } from './Parser';
-import { Preprocessor } from './Preprocessor';
-import { Transform } from './Transform';
-import { TransformGroup } from './TransformGroup';
-import { Filter } from './Filter';
-import { FileHeader } from './FileHeader';
-import { Formatter } from './Format';
-import { Action } from './Action';
-import { Platform } from './Platform';
-import { DesignTokens } from './DesignToken';
+import type { DesignTokens, TransformedToken } from './DesignToken.d.ts';
+import type { Filter, Matcher } from './Filter.d.ts';
+import type { FileHeader, File } from './File.d.ts';
+
+// TODO: import directly from source files typedefs once they are sufficiently typed.
+import type { Parser } from '../types-copy/Parser.d.ts';
+import type { Preprocessor } from '../types-copy/Preprocessor.d.ts';
+import type { Transform } from '../types-copy/Transform.d.ts';
+import type { TransformGroup } from '../types-copy/TransformGroup.d.ts';
+import type { Formatter } from '../types-copy/Format.d.ts';
+import type { Action } from '../types-copy/Action.d.ts';
+export interface LocalOptions {
+  showFileHeader?: boolean;
+  fileHeader?: string | FileHeader;
+  outputReferences?: boolean;
+  [key: string]: any;
+}
+
+export interface RegexOptions {
+  regex?: RegExp;
+  opening_character?: string;
+  closing_character?: string;
+  separator?: string;
+}
+
+export interface ResolveReferenceOptions extends RegexOptions {
+  ignorePaths?: string[];
+}
+
+export interface ResolveReferenceOptionsInternal extends ResolveReferenceOptions {
+  current_context?: string[];
+  stack?: string[];
+  foundCirc?: Object<string, boolean>;
+  firstIteration?: boolean;
+}
+
+export interface PlatformConfig {
+  transformGroup?: string;
+  transforms?: string[];
+  basePxFontSize?: number;
+  prefix?: string;
+  buildPath?: string;
+  files?: File[];
+  actions?: string[];
+  options?: LocalOptions;
+}
 
 export interface Config {
+  source?: string[];
+  include?: string[];
+  tokens?: DesignTokens;
+  platforms: Record<string, PlatformConfig>;
   parsers?: Parser[];
   preprocessors?: Record<string, Preprocessor>;
   transform?: Record<string, Transform>;
@@ -31,8 +71,4 @@ export interface Config {
   filter?: Record<string, Filter['matcher']>;
   fileHeader?: Record<string, FileHeader>;
   action?: Record<string, Action>;
-  include?: string[];
-  source?: string[];
-  tokens?: DesignTokens;
-  platforms: Record<string, Platform>;
 }

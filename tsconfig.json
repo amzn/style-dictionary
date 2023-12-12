@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "allowJs": true,
+    "checkJs": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "skipLibCheck": true
+  },
+  "include": [
+    "lib/common/formatHelpers/createPropertyFormatter.js",
+    "lib/common/formatHelpers/fileHeader.js",
+    "lib/common/formatHelpers/formattedVariables.js"
+  ],
+  "exclude": ["node_modules", "**/coverage/*"]
+}

@@ -11,11 +11,16 @@
  * and limitations under the License.
  */
 
-import { DesignTokens } from './DesignToken';
+import type { Options } from './Options.d.ts';
+import type { File } from './File.d.ts';
 
-export type Preprocessor = {
-  name: string;
-  preprocessor: preprocessor;
-};
-
-export type preprocessor = (dictionary: DesignTokens) => DesignTokens | Promise<DesignTokens>;
+export type Platform<PlatformType = Record<string, any>> = {
+  transformGroup?: string;
+  transforms?: string[];
+  basePxFontSize?: number;
+  prefix?: string;
+  buildPath?: string;
+  files?: File[];
+  actions?: string[];
+  options?: Options;
+} & PlatformType;

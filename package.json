@@ -53,6 +53,7 @@
     "lint": "run-p lint:*",
     "lint:eslint": "eslint \"**/*.js\"",
     "lint:prettier": "prettier \"**/*.{js,md}\" \"package.json\" --list-different || (echo '↑↑ these files are not prettier formatted ↑↑' && exit 1)",
+    "lint:types": "tsc --noEmit",
     "test": "npm run test:browser && npm run test:node",
     "test:browser": "web-test-runner --coverage",
     "test:browser:coverage": "cd coverage/lcov-report && npx http-server -o -c-1",
@@ -144,6 +145,7 @@
     "prettier": "^3.0.3",
     "sass": "^1.69.5",
     "stylus": "^0.56.0",
+    "typescript": "^5.3.3",
     "yaml": "^2.3.4"
   }
 }

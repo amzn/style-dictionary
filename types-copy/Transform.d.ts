@@ -11,9 +11,9 @@
  * and limitations under the License.
  */
 
-import { Matcher } from './Matcher';
-import { TransformedToken } from './TransformedToken';
-import { Platform } from './Platform';
+import type { Matcher } from './Matcher.d.ts';
+import type { TransformedToken } from './TransformedToken.d.ts';
+import type { Platform } from './Platform.d.ts';
 
 export interface NameTransform<PlatformType = Record<string,any>> {
   type: "name";

@@ -165,7 +165,7 @@ snapshots["inline custom with old args should match snapshot"] =
           ]
         }
       ],
-      "_tokens": {
+      "unfilteredTokens": {
         "size": {
           "padding": {
             "small": {
@@ -669,7 +669,7 @@ snapshots["inline custom with new args should match snapshot"] =
         ]
       }
     ],
-    "_tokens": {
+    "unfilteredTokens": {
       "size": {
         "padding": {
           "small": {
@@ -1128,7 +1128,7 @@ snapshots["register custom format with old args should match snapshot"] =
           ]
         }
       ],
-      "_tokens": {
+      "unfilteredTokens": {
         "size": {
           "padding": {
             "small": {
@@ -1632,7 +1632,7 @@ snapshots["register custom format with new args should match snapshot"] =
         ]
       }
     ],
-    "_tokens": {
+    "unfilteredTokens": {
       "size": {
         "padding": {
           "small": {

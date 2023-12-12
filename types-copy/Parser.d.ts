@@ -11,6 +11,14 @@
  * and limitations under the License.
  */
 
-import { TransformedToken } from './TransformedToken';
+import type { DesignTokens } from './DesignToken.d.ts';
 
-export type Matcher = (token: TransformedToken) => boolean;
+export interface ParserOptions {
+  contents: string;
+  filePath: string;
+}
+
+export interface Parser {
+  pattern: RegExp;
+  parse: (options: ParserOptions) => DesignTokens;
+}
