@@ -212,7 +212,7 @@ describe('StyleDictionary class + extend method', () => {
   it('should throw an error if the collision is in source files and log is set to error', async () => {
     const sd = new StyleDictionary(
       {
-        source: ['__tests__/__tokens/paddings.json', '__tests__/__tokens/paddings.json'],
+        source: ['__tests__/__tokens/paddings.json', '__tests__/__tokens/_paddings.json'],
         log: 'error',
       },
       { init: false },

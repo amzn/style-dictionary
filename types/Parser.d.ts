@@ -11,21 +11,14 @@
  * and limitations under the License.
  */
 
-/**
- * @typedef {import('../../types/Filter.d.ts').Matcher} FilterMatcher
- */
+import type { DesignTokens } from './DesignToken.d.ts';
 
-/**
- * @namespace Filters
- */
+export interface ParserOptions {
+  contents: string;
+  filePath: string;
+}
 
-/** @type {Record<string, FilterMatcher>} */
-export default {
-  /**
-   * Remove a token from the ditribution output if it contains a key `private` set to true
-   * @memberof Filters
-   */
-  removePrivate: function (token) {
-    return token && token.private ? false : true;
-  },
-};
+export interface Parser {
+  pattern: RegExp;
+  parse: (options: ParserOptions) => DesignTokens;
+}

@@ -108,63 +108,63 @@ const sd = new StyleDictionary({
   platforms: {
     // This will test to see if a value object for an hsl color works
     // with and without `outputReferences`
-    // cssHsl: {
-    //   buildPath,
-    //   transforms: StyleDictionary.transformGroup.css.concat([`hsl`]),
-    //   files: [
-    //     {
-    //       destination: `hsl.css`,
-    //       format: `css/variables`,
-    //       filter: (token) => token.attributes.category === `color`,
-    //     },
-    //     {
-    //       destination: `hslWithReferences.css`,
-    //       format: `css/variables`,
-    //       filter: (token) => token.attributes.category === `color`,
-    //       options,
-    //     },
-    //   ],
-    // },
+    cssHsl: {
+      buildPath,
+      transforms: StyleDictionary.transformGroup.css.concat([`hsl`]),
+      files: [
+        {
+          destination: `hsl.css`,
+          format: `css/variables`,
+          filter: (token) => token.attributes.category === `color`,
+        },
+        {
+          destination: `hslWithReferences.css`,
+          format: `css/variables`,
+          filter: (token) => token.attributes.category === `color`,
+          options,
+        },
+      ],
+    },
 
-    // // This will test to see if a value object for an hsl that has been
-    // // transformed to a hex color works with and without `outputReferences`
-    // cssHex: {
-    //   buildPath,
-    //   transforms: StyleDictionary.transformGroup.css.concat([`cssBorder`, `hslToHex`]),
-    //   files: [
-    //     {
-    //       destination: 'hex.css',
-    //       format: 'css/variables',
-    //       filter: (token) => token.attributes.category === `color`,
-    //     },
-    //     {
-    //       destination: 'hexWithReferences.css',
-    //       format: 'css/variables',
-    //       filter: (token) => token.attributes.category === `color`,
-    //       options,
-    //     },
-    //   ],
-    // },
+    // This will test to see if a value object for an hsl that has been
+    // transformed to a hex color works with and without `outputReferences`
+    cssHex: {
+      buildPath,
+      transforms: StyleDictionary.transformGroup.css.concat([`cssBorder`, `hslToHex`]),
+      files: [
+        {
+          destination: 'hex.css',
+          format: 'css/variables',
+          filter: (token) => token.attributes.category === `color`,
+        },
+        {
+          destination: 'hexWithReferences.css',
+          format: 'css/variables',
+          filter: (token) => token.attributes.category === `color`,
+          options,
+        },
+      ],
+    },
 
-    // // This will test to see if a value object for a border
-    // // works with and without `outputReferences`
-    // cssBorder: {
-    //   buildPath,
-    //   transforms: StyleDictionary.transformGroup.css.concat([`cssBorder`]),
-    //   files: [
-    //     {
-    //       destination: 'border.css',
-    //       format: 'css/variables',
-    //       filter: (token) => token.attributes.category === `border`,
-    //     },
-    //     {
-    //       destination: 'borderWithReferences.css',
-    //       format: 'css/variables',
-    //       filter: (token) => token.attributes.category === `border`,
-    //       options,
-    //     },
-    //   ],
-    // },
+    // This will test to see if a value object for a border
+    // works with and without `outputReferences`
+    cssBorder: {
+      buildPath,
+      transforms: StyleDictionary.transformGroup.css.concat([`cssBorder`]),
+      files: [
+        {
+          destination: 'border.css',
+          format: 'css/variables',
+          filter: (token) => token.attributes.category === `border`,
+        },
+        {
+          destination: 'borderWithReferences.css',
+          format: 'css/variables',
+          filter: (token) => token.attributes.category === `border`,
+          options,
+        },
+      ],
+    },
 
     cssShadow: {
       buildPath,
@@ -184,23 +184,23 @@ const sd = new StyleDictionary({
       ],
     },
 
-    // scss: {
-    //   buildPath,
-    //   transforms: StyleDictionary.transformGroup.css.concat([`cssBorder`, `hslToHex`]),
-    //   files: [
-    //     {
-    //       destination: 'border.scss',
-    //       format: 'scss/variables',
-    //       filter: (token) => token.attributes.category === `border`,
-    //     },
-    //     {
-    //       destination: 'borderWithReferences.scss',
-    //       format: 'scss/variables',
-    //       filter: (token) => token.attributes.category === `border`,
-    //       options,
-    //     },
-    //   ],
-    // },
+    scss: {
+      buildPath,
+      transforms: StyleDictionary.transformGroup.css.concat([`cssBorder`, `hslToHex`]),
+      files: [
+        {
+          destination: 'border.scss',
+          format: 'scss/variables',
+          filter: (token) => token.attributes.category === `border`,
+        },
+        {
+          destination: 'borderWithReferences.scss',
+          format: 'scss/variables',
+          filter: (token) => token.attributes.category === `border`,
+          options,
+        },
+      ],
+    },
   },
 });
 await sd.buildAllPlatforms();

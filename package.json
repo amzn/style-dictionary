@@ -25,8 +25,8 @@
       "default": "./lib/StyleDictionary.js"
     },
     "./fs": {
-      "node": "./fs-node.js",
-      "default": "./fs.js"
+      "node": "./lib/fs-node.js",
+      "default": "./lib/fs.js"
     },
     "./utils": "./lib/utils/index.js"
   },
@@ -40,8 +40,6 @@
     "bin",
     "lib",
     "examples",
-    "fs.js",
-    "fs-node.js",
     "LICENSE",
     "NOTICE",
     "types"
@@ -122,6 +120,7 @@
     "@commitlint/config-conventional": "^18.4.3",
     "@esm-bundle/chai-as-promised": "^7.1.1",
     "@types/chai": "^4.3.9",
+    "@types/tinycolor2": "^1.4.6",
     "@web/test-runner": "^0.18.0",
     "@web/test-runner-commands": "^0.9.0",
     "@web/test-runner-playwright": "^0.11.0",
@@ -138,7 +137,7 @@
     "jsdoc-tsimport-plugin": "^1.0.5",
     "less": "^4.1.2",
     "lint-staged": "^12.3.1",
-    "lodash": "^4.17.15",
+    "memfs": "^4.6.0",
     "mocha": "^10.2.0",
     "npm-run-all": "^4.1.5",
     "patch-package": "^8.0.0",

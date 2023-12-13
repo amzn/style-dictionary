@@ -12,6 +12,15 @@
  */
 import { expect } from 'chai';
 import StyleDictionary from 'style-dictionary';
+import { registerSuite } from './register.suite.js';
+
+registerSuite({
+  config: {
+    preprocessor: () => {},
+  },
+  registerMethod: 'registerPreprocessor',
+  prop: 'preprocessors',
+});
 
 describe('register/transformGroup', async () => {
   let StyleDictionaryExtended;
@@ -23,15 +32,6 @@ describe('register/transformGroup', async () => {
 
   it('should support registering preprocessor on StyleDictionary class', () => {
     StyleDictionary.registerPreprocessor({
-      name: 'example-preprocessor',
-      preprocessor: (dict) => dict,
-    });
-    expect(StyleDictionary.preprocessors['example-preprocessor']).to.not.be.undefined;
-    expect(StyleDictionaryExtended.preprocessors['example-preprocessor']).to.not.be.undefined;
-  });
-
-  it('should support registering preprocessor on StyleDictionary instance, which registers it on the class', () => {
-    StyleDictionaryExtended.registerPreprocessor({
       name: 'example-preprocessor',
       preprocessor: (dict) => dict,
     });

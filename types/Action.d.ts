@@ -11,21 +11,14 @@
  * and limitations under the License.
  */
 
-/**
- * @typedef {import('../../types/Filter.d.ts').Matcher} FilterMatcher
- */
+import type { StyleDictionary } from '../types-copy/index.d.ts';
+import type { PlatformConfig } from './Config.d.ts';
 
-/**
- * @namespace Filters
- */
+export interface Action {
+  name: string;
+  /** The action in the form of a function. */
+  do(dictionary: StyleDictionary, config: Platform): void;
 
-/** @type {Record<string, FilterMatcher>} */
-export default {
-  /**
-   * Remove a token from the ditribution output if it contains a key `private` set to true
-   * @memberof Filters
-   */
-  removePrivate: function (token) {
-    return token && token.private ? false : true;
-  },
-};
+  /** A function that undoes the action. */
+  undo?(dictionary: StyleDictionary, config: Platform): void;
+}

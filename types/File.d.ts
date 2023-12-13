@@ -14,4 +14,7 @@ export interface File {
   format?: string;
   filter?: string | Partial<TransformedToken> | Matcher;
   options?: LocalOptions;
+  resourceType?: string;
+  resourceMap?: Record<string, string>;
+  name?: string;
 }

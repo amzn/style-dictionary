@@ -23,7 +23,7 @@ describe('integration', () => {
 
   describe('css', async () => {
     const sd = new StyleDictionary({
-      source: [`__integration__/tokens/**/*.json?(c)`],
+      source: [`__integration__/tokens/**/[!_]*.json?(c)`],
       // Testing proper string interpolation with multiple references here.
       // This is a CSS/web-specific thing so only including them in this
       // integration test.

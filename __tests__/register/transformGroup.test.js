@@ -12,8 +12,17 @@
  */
 import { expect } from 'chai';
 import StyleDictionary from 'style-dictionary';
+import { registerSuite } from './register.suite.js';
 
 const dummyTransformName = 'transformGroup.test.js';
+
+registerSuite({
+  config: {
+    transforms: ['size/px'],
+  },
+  registerMethod: 'registerTransformGroup',
+  prop: 'transformGroup',
+});
 
 describe('register/transformGroup', async () => {
   const StyleDictionaryExtended = new StyleDictionary({});
@@ -102,10 +111,15 @@ describe('register/transformGroup', async () => {
     expect(StyleDictionaryExtended.transformGroup.foo[0]).to.equal('size/px');
   });
 
-  it('should properly pass the registered format to instances', async () => {
-    const SDE2 = await StyleDictionaryExtended.extend({});
-    expect(Array.isArray(SDE2.transformGroup.foo)).to.be.true;
-    expect(typeof SDE2.transformGroup.foo[0]).to.equal('string');
-    expect(SDE2.transformGroup.foo[0]).to.equal('size/px');
+  it('should properly pass the registered transformGroup to instances when extending', async () => {
+    const StyleDictionaryBase = new StyleDictionary({});
+    StyleDictionaryBase.registerTransformGroup({
+      name: 'bar',
+      transforms: ['size/px'],
+    });
+    const SDE2 = await StyleDictionaryBase.extend({});
+    expect(Array.isArray(SDE2.transformGroup.bar)).to.be.true;
+    expect(typeof SDE2.transformGroup.bar[0]).to.equal('string');
+    expect(SDE2.transformGroup.bar[0]).to.equal('size/px');
   });
 });

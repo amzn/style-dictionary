@@ -62,7 +62,7 @@ export interface Config {
   source?: string[];
   include?: string[];
   tokens?: DesignTokens;
-  platforms: Record<string, PlatformConfig>;
+  platforms?: Record<string, PlatformConfig>;
   parsers?: Parser[];
   preprocessors?: Record<string, Preprocessor>;
   transform?: Record<string, Transform>;

@@ -71,7 +71,7 @@ declare namespace StyleDictionary {
   interface Core {
     VERSION: string;
     tokens: DesignTokens | TransformedTokens;
-    allTokens: TransformedTokens[];
+    allTokens: TransformedToken[];
     unfilteredTokens?: DesignTokens | TransformedToken;
     options: Config;
 

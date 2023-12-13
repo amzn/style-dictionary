@@ -32,7 +32,7 @@ describe('integration', () => {
       const sd = new StyleDictionary({
         // we are only testing showFileHeader options so we don't need
         // the full source.
-        source: [`__integration__/tokens/**/*.json?(c)`],
+        source: [`__integration__/tokens/**/[!_]*.json?(c)`],
         platforms: {
           css: {
             transformGroup: 'css',
