@@ -277,15 +277,18 @@ More detailed information about [using the Style Dictionary CLI is available her
 You can also use the style dictionary build system in node if you want to [extend](extending.md) the functionality or use it in another build system like Grunt or Gulp.
 
 ```javascript
-const StyleDictionary = require('style-dictionary').extend('config.json');
+import StyleDictionary from 'style-dictionary';
 
-StyleDictionary.buildAllPlatforms();
+const sd = new StyleDictionary('config.json');
+await sd.buildAllPlatforms();
 ```
 
-The `.extend()` method is an overloaded method that can also take a [configuration](config.md) object.
+The StyleDictionary constructor can also take a [configuration](config.md) object.
 
 ```javascript
-const StyleDictionary = require('style-dictionary').extend({
+import StyleDictionary from 'style-dictionary';
+
+const sd = new StyleDictionary({
   source: ['tokens/**/*.json'],
   platforms: {
     scss: {
@@ -302,7 +305,7 @@ const StyleDictionary = require('style-dictionary').extend({
   },
 });
 
-StyleDictionary.buildAllPlatforms();
+await sd.buildAllPlatforms();
 ```
 
 More detailed information about [using the Style Dictionary npm module is available here](using_the_npm_module.md).
