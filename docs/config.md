@@ -56,7 +56,7 @@ Here is an example using a CommonJS module for configuration:
 
 ```javascript
 // config.js
-module.exports = {
+export default {
   source: [`tokens/**/*.json`],
   // If you don't want to call the registerTransform method a bunch of times
   // you can override the whole transform object directly. This works because
@@ -116,20 +116,20 @@ You can also use Style Dictionary as an [npm module](using_the_npm_module.md) an
 
 ```javascript
 // build.js
-const StyleDictionary = require('style-dictionary');
+import StyleDictionary from 'style-dictionary';
 
-const myStyleDictionary = StyleDictionary.extend({
+const myStyleDictionary = new StyleDictionary({
   // configuration
 });
 
-myStyleDictionary.buildAllPlatforms();
+await myStyleDictionary.buildAllPlatforms();
 
 // You can also extend Style Dictionary multiple times:
-const myOtherStyleDictionary = myStyleDictionary.extend({
+const myOtherStyleDictionary = await myStyleDictionary.extend({
   // new configuration
 });
 
-myOtherStyleDictionary.buildAllPlatforms();
+await myOtherStyleDictionary.buildAllPlatforms();
 ```
 
 You would then change your npm script or CLI command to run that file with Node:

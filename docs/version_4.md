@@ -18,3 +18,9 @@ Rather than starting our own spinoff tool, we much prefer bringing Style-Diction
 I think it's important to stress that it is our shared vision to keep Style-Dictionary as an agnostic (so not "Tokens Studio"-specific) and flexible tool. As Tokens Studio, while we are highly incentivized to see this project progress further to strengthen our product journey, we value the open source community highly and want to make sure this library remains the go-to tool for exporting Design Tokens, whether you use Tokens Studio or not.
 
 We are very open to feedback and collaboration, feel free to reach out to us in [our Slack](https://join.slack.com/t/tokens-studio/shared_invite/zt-1p8ea3m6t-C163oJcN9g3~YZTKRgo2hg) -> `style-dictionary-v4` channel!
+
+## List of Changes
+
+The prereleases will contain breaking changes, so it's important to read the list of changes since v3 if you're looking to migrate.
+
+You can find the list of changes in [our changelog on the v4 branch](https://github.com/amzn/style-dictionary/blob/v4/CHANGELOG.md)

@@ -18,7 +18,7 @@ There is a straightforward way to extend Style Dictionary to meet your needs - s
 Importing a configuration, defining a new `time/seconds` transform, and building the style dictionary.
 
 ```javascript
-const StyleDictionary = require('style-dictionary').extend('config.json');
+import StyleDictionary from 'style-dictionary';
 
 StyleDictionary.registerTransform({
   name: 'time/seconds',
@@ -31,14 +31,16 @@ StyleDictionary.registerTransform({
   },
 });
 
-StyleDictionary.buildAllPlatforms();
+const sd = new StyleDictionary('config.json');
+await sd.buildAllPlatforms();
 ```
 
 Export your extended style dictionary as a node module (without building) if you need other projects to depend on it.
 
 ```javascript
 // package a
-const StyleDictionary = require('style-dictionary').extend('config.json');
+import StyleDictionary from 'style-dictionary';
+
 StyleDictionary.registerTransform({
   name: 'name/uppercase',
   type: 'name',
@@ -47,8 +49,10 @@ StyleDictionary.registerTransform({
   },
 });
 
-module.exports = StyleDictionary;
+const sd = new StyleDictionary('config.json');
+
+export default sd;
 
 // package b
-const StyleDictionary = require('package-a');
+import sd from 'package-a';
 ```

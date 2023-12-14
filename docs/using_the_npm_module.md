@@ -41,9 +41,10 @@ Update "build.js" to the name of the file you created.
 Using a JSON [configuration](config.md) file, that looks like this:
 
 ```javascript
-const StyleDictionary = require('style-dictionary').extend('config.json');
+import StyleDictionary from 'style-dictionary';
 
-StyleDictionary.buildAllPlatforms();
+const sd = new StyleDictionary('config.json');
+await sd.buildAllPlatforms();
 ```
 
 Alternatively, you can pass in a [configuration](config.md) object to the extend call. The `buildAllPlatforms` call is the same.
@@ -72,38 +73,42 @@ StyleDictionary.buildAllPlatforms();
 You can `extend` Style Dictionary multiple times and call `buildAllPlatforms` as many times as you need. This can be useful if you are creating nested (parent-child) themes with Style Dictionary.
 
 ```javascript
-const StyleDictionary = require('style-dictionary');
+import StyleDictionary from 'style-dictionary';
 
-const styleDictionary = StyleDictionary.extend({
+const sd = new StyleDictionary({
   // add custom formats/transforms
 });
 
-styleDictionary
-  .extend({
+await (
+  await sd.extend({
     // ...
   })
-  .buildAllPlatforms();
+).buildAllPlatforms();
 
-styleDictionary
-  .extend({
+await (
+  await sd.extend({
     // ...
   })
-  .buildAllPlatforms();
+).buildAllPlatforms();
 ```
 
 Another way to do this is to loop over an array and apply different configurations to Style Dictionary:
 
 ```javascript
-const StyleDictionary = require('style-dictionary');
+import StyleDictionary from 'style-dictionary';
 
 const brands = [`brand-1`, `brand-2`, `brand-3`];
-brands.forEach((brand) => {
-  StyleDictionary.extend({
-    include: [`tokens/default/**/*.json`],
-    source: [`tokens/${brand}/**/*.json`],
-    // ...
-  }).buildAllPlatforms();
-});
+
+await Promise.all(
+  brands.map((brand) => {
+    const sd = new StyleDictionary({
+      include: [`tokens/default/**/*.json`],
+      source: [`tokens/${brand}/**/*.json`],
+      // ...
+    });
+    return sd.buildAllPlatforms();
+  }),
+);
 ```
 
 The [multi-brand-multi-platform example](https://github.com/amzn/style-dictionary/tree/main/examples/advanced/multi-brand-multi-platform) uses this method.
