@@ -1382,13 +1382,6 @@ snapshots["register custom format with old args should match snapshot"] =
       },
       "files": [
         {
-          "destination": "registerCustomFormatWithOldArgs.json",
-          "options": {
-            "showFileHeader": true,
-            "otherOption": "Test"
-          }
-        },
-        {
           "destination": "registerCustomFormatWithNewArgs.json",
           "options": {
             "showFileHeader": true,
@@ -1413,13 +1406,6 @@ snapshots["register custom format with old args should match snapshot"] =
       ],
       "actions": []
     },
-    "file": {
-      "options": {
-        "otherOption": "Test",
-        "showFileHeader": true
-      },
-      "destination": "registerCustomFormatWithOldArgs.json"
-    },
     "options": {
       "otherOption": "Test",
       "showFileHeader": true
@@ -1432,13 +1418,6 @@ snapshots["register custom format with old args should match snapshot"] =
       "otherOption": "platform option"
     },
     "files": [
-      {
-        "destination": "registerCustomFormatWithOldArgs.json",
-        "options": {
-          "showFileHeader": true,
-          "otherOption": "Test"
-        }
-      },
       {
         "destination": "registerCustomFormatWithNewArgs.json",
         "options": {
@@ -1463,13 +1442,6 @@ snapshots["register custom format with old args should match snapshot"] =
       }
     ],
     "actions": []
-  },
-  "file": {
-    "destination": "registerCustomFormatWithOldArgs.json",
-    "options": {
-      "showFileHeader": true,
-      "otherOption": "Test"
-    }
   }
 }`;
 /* end snapshot register custom format with old args should match snapshot */
@@ -1887,13 +1859,6 @@ snapshots["register custom format with new args should match snapshot"] =
       "otherOption": "platform option"
     },
     "files": [
-      {
-        "destination": "registerCustomFormatWithOldArgs.json",
-        "options": {
-          "showFileHeader": true,
-          "otherOption": "Test"
-        }
-      },
       {
         "destination": "registerCustomFormatWithNewArgs.json",
         "options": {

@@ -67,14 +67,6 @@ describe('integration', () => {
           },
           files: [
             {
-              destination: 'registerCustomFormatWithOldArgs.json',
-              format: 'registerCustomFormatWithOldArgs',
-              options: {
-                showFileHeader: true,
-                otherOption: 'Test',
-              },
-            },
-            {
               destination: 'registerCustomFormatWithNewArgs.json',
               format: 'registerCustomFormatWithNewArgs',
               options: {
@@ -88,13 +80,6 @@ describe('integration', () => {
     });
 
     sd.registerFormat({
-      name: 'registerCustomFormatWithOldArgs',
-      formatter: (dictionary, platform, file) => {
-        return JSON.stringify({ dictionary, platform, file }, null, 2);
-      },
-    });
-
-    sd.registerFormat({
       name: 'registerCustomFormatWithNewArgs',
       formatter: (opts) => {
         return JSON.stringify(opts, null, 2);
@@ -102,24 +87,6 @@ describe('integration', () => {
     });
 
     await sd.buildAllPlatforms();
-
-    describe(`inline custom with old args`, () => {
-      const output = fs.readFileSync(`${buildPath}inlineCustomFormatWithOldArgs.json`, {
-        encoding: 'UTF-8',
-      });
-
-      it(`should match snapshot`, async () => {
-        await expect(output).to.matchSnapshot();
-      });
-
-      it(`should receive proper arguments`, () => {
-        const { dictionary, platform, file } = JSON.parse(output);
-        expect(dictionary).to.have.property(`tokens`);
-        expect(dictionary).to.have.property(`allTokens`);
-        expect(platform).to.have.nested.property(`options.otherOption`, `platform option`);
-        expect(file).to.have.nested.property(`options.otherOption`, `Test`);
-      });
-    });
 
     describe(`inline custom with new args`, async () => {
       const output = fs.readFileSync(`${buildPath}inlineCustomFormatWithNewArgs.json`, {
@@ -136,24 +103,6 @@ describe('integration', () => {
         expect(platform).to.have.nested.property(`options.otherOption`, `platform option`);
         expect(file).to.have.nested.property(`options.otherOption`, `Test`);
         expect(options).to.have.property(`otherOption`, `Test`);
-      });
-    });
-
-    describe(`register custom format with old args`, () => {
-      const output = fs.readFileSync(`${buildPath}registerCustomFormatWithOldArgs.json`, {
-        encoding: 'UTF-8',
-      });
-
-      it(`should match snapshot`, async () => {
-        await expect(output).to.matchSnapshot();
-      });
-
-      it(`should receive proper arguments`, () => {
-        const { dictionary, platform, file } = JSON.parse(output);
-        expect(dictionary).to.have.property(`tokens`);
-        expect(dictionary).to.have.property(`allTokens`);
-        expect(platform).to.have.nested.property(`options.otherOption`, `platform option`);
-        expect(file).to.have.nested.property(`options.otherOption`, `Test`);
       });
     });
 
