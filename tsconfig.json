@@ -9,12 +9,6 @@
     "noImplicitAny": true,
     "skipLibCheck": true
   },
-  "include": [
-    "types/**/*.d.ts",
-    "lib/common/**/*.js",
-    "lib/fs.js",
-    "lib/fs-node.js",
-    "lib/StyleDictionary.js"
-  ],
+  "include": ["types/**/*.d.ts", "lib/**/*.js"],
   "exclude": ["node_modules", "**/coverage/*"]
 }

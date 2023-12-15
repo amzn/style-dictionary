@@ -55,13 +55,13 @@ describe('cleanFiles', () => {
 
   it('should delete without buildPath', () => {
     buildFiles(dictionary, platform);
-    cleanFiles(dictionary, platform);
+    cleanFiles(platform);
     expect(fileExists('__tests__/__output/test.json')).to.be.false;
   });
 
   it('should delete with buildPath', () => {
     buildFiles(dictionary, platformWithBuildPath);
-    cleanFiles(dictionary, platformWithBuildPath);
+    cleanFiles(platformWithBuildPath);
     expect(fileExists('__tests__/t__/__output/test.json')).to.be.false;
   });
 });

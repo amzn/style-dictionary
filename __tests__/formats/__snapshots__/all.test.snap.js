@@ -259,7 +259,6 @@ snapshots["formats all should match android/resources snapshot"] =
 -->
 <resources>
   <color name="color_red">#FF0000</color><!-- comment -->
-  
 </resources>`;
 /* end snapshot formats all should match android/resources snapshot */
 

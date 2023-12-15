@@ -35,7 +35,7 @@ export interface DesignTokens {
   [key: string]: DesignTokens | DesignToken;
 }
 
-export type TransformedToken = DesignToken & {
+export interface TransformedToken extends DesignToken {
   name: string;
   /** The object path of the property.
    *
@@ -58,8 +58,14 @@ export type TransformedToken = DesignToken & {
    * If the token is from a file defined in the source array as opposed to include in the [configuration](https://amzn.github.io/style-dictionary/#/config).
    */
   isSource: boolean;
-};
+}
 
 export interface TransformedTokens {
   [key: string]: TransformedTokens | TransformedToken;
+}
+
+export interface Dictionary {
+  tokens: DesignTokens;
+  allTokens: TransformedToken[];
+  unfilteredTokens?: DesignTokens;
 }

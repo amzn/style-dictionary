@@ -45,7 +45,7 @@ const tokens = {
 };
 
 const format = formats['ios-swift/any.swift'];
-const dictionary = createDictionary({ tokens });
+const dictionary = createDictionary(tokens);
 
 describe('formats', () => {
   describe('ios-swift/any.swift', () => {

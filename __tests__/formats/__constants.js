@@ -50,5 +50,5 @@ const iconTokens = {
   },
 };
 
-export const colorDictionary = createDictionary({ tokens: colorTokens });
-export const iconDictionary = createDictionary({ tokens: iconTokens });
+export const colorDictionary = createDictionary(colorTokens);
+export const iconDictionary = createDictionary(iconTokens);

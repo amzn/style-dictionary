@@ -49,7 +49,7 @@ const tokens = {
 };
 
 const format = formats['stylus/variables'];
-const dictionary = createDictionary({ tokens });
+const dictionary = createDictionary(tokens);
 
 describe('formats', () => {
   describe('stylus/variables', () => {

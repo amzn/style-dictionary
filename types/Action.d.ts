@@ -11,14 +11,14 @@
  * and limitations under the License.
  */
 
-import type { StyleDictionary } from '../types-copy/index.d.ts';
+import type { Dictionary } from './DesignToken.d.ts';
 import type { PlatformConfig } from './Config.d.ts';
 
 export interface Action {
   name: string;
   /** The action in the form of a function. */
-  do(dictionary: StyleDictionary, config: Platform): void;
+  do(dictionary: Dictionary, config: Platform): void;
 
   /** A function that undoes the action. */
-  undo?(dictionary: StyleDictionary, config: Platform): void;
+  undo?(dictionary: Dictionary, config: Platform): void;
 }

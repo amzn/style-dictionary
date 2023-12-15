@@ -45,7 +45,7 @@ const tokens = {
 };
 
 const format = formats['javascript/es6'];
-const dictionary = createDictionary({ tokens });
+const dictionary = createDictionary(tokens);
 
 describe('formats', () => {
   describe('javascript/es6', () => {

@@ -32,7 +32,7 @@ const tokens = {
 };
 
 const format = formats['javascript/module'];
-const dictionary = createDictionary({ tokens });
+const dictionary = createDictionary(tokens);
 
 describe('formats', () => {
   describe('javascript/module', () => {

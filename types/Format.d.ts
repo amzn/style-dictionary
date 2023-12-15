@@ -11,7 +11,7 @@
  * and limitations under the License.
  */
 
-import type { StyleDictionary } from '../types-copy/index.d.ts';
+import type { Dictionary } from './DesignToken.d.ts';
 import type { File } from './File.d.ts';
 import type { LocalOptions } from './Config.d.ts';
 import type { PlatformConfig } from './Platform.d.ts';
@@ -20,7 +20,7 @@ export interface FormatterArguments {
   /**
    * The transformed and resolved dictionary object
    */
-  dictionary: StyleDictionary;
+  dictionary: Dictionary;
   /**
    * The file configuration the format is called in
    */

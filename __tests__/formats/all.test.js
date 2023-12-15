@@ -47,7 +47,7 @@ const tokens = {
 describe('formats', () => {
   Object.keys(formats).forEach((key) => {
     const formatter = formats[key].bind(file);
-    const dictionary = createDictionary({ tokens });
+    const dictionary = createDictionary(tokens);
     const output = formatter(
       createFormatArgs({
         dictionary,

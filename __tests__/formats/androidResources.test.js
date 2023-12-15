@@ -106,8 +106,8 @@ const file = {
   format: 'android/resources',
 };
 
-const dictionary = createDictionary({ tokens });
-const customDictionary = createDictionary({ tokens: customTokens });
+const dictionary = createDictionary(tokens);
+const customDictionary = createDictionary(customTokens);
 
 describe('formats', () => {
   describe(`android/resources`, () => {

@@ -15,200 +15,190 @@ import createPropertyFormatter from '../../../lib/common/formatHelpers/createPro
 import createDictionary from '../../../lib/utils/createDictionary.js';
 
 const dictionary = createDictionary({
-  tokens: {
-    foo: {
-      original: {
-        value: '5px',
-        type: 'spacing',
-      },
-      attributes: {
-        category: 'foo',
-      },
-      name: 'foo',
-      path: ['foo'],
+  foo: {
+    original: {
       value: '5px',
       type: 'spacing',
     },
-    ref: {
-      original: {
-        value: '{foo}',
-        type: 'spacing',
-      },
-      attributes: {
-        category: 'ref',
-      },
-      name: 'ref',
-      path: ['ref'],
-      value: '5px',
+    attributes: {
+      category: 'foo',
+    },
+    name: 'foo',
+    path: ['foo'],
+    value: '5px',
+    type: 'spacing',
+  },
+  ref: {
+    original: {
+      value: '{foo}',
       type: 'spacing',
     },
+    attributes: {
+      category: 'ref',
+    },
+    name: 'ref',
+    path: ['ref'],
+    value: '5px',
+    type: 'spacing',
   },
 });
 
 const transformedDictionary = createDictionary({
-  tokens: {
-    foo: {
-      original: {
-        value: '5px',
-        type: 'spacing',
-      },
-      attributes: {
-        category: 'foo',
-      },
-      name: 'foo',
-      path: ['foo'],
+  foo: {
+    original: {
       value: '5px',
       type: 'spacing',
     },
-    ref: {
-      original: {
-        value: '{foo}',
-        type: 'spacing',
-      },
-      attributes: {
-        category: 'ref',
-      },
-      name: 'ref',
-      path: ['ref'],
-      value: 'changed by transitive transform',
+    attributes: {
+      category: 'foo',
+    },
+    name: 'foo',
+    path: ['foo'],
+    value: '5px',
+    type: 'spacing',
+  },
+  ref: {
+    original: {
+      value: '{foo}',
       type: 'spacing',
     },
+    attributes: {
+      category: 'ref',
+    },
+    name: 'ref',
+    path: ['ref'],
+    value: 'changed by transitive transform',
+    type: 'spacing',
   },
 });
 
 const numberDictionary = createDictionary({
-  tokens: {
-    foo: {
-      original: {
-        value: 10,
-        type: 'dimension',
-      },
-      attributes: {
-        category: 'foo',
-      },
-      name: 'foo',
-      path: ['foo'],
+  foo: {
+    original: {
       value: 10,
       type: 'dimension',
     },
-    ref: {
-      original: {
-        value: '{foo}',
-        type: 'dimension',
-      },
-      attributes: {
-        category: 'ref',
-      },
-      name: 'ref',
-      path: ['ref'],
-      value: 10,
+    attributes: {
+      category: 'foo',
+    },
+    name: 'foo',
+    path: ['foo'],
+    value: 10,
+    type: 'dimension',
+  },
+  ref: {
+    original: {
+      value: '{foo}',
       type: 'dimension',
     },
-    zero: {
-      original: {
-        value: 0,
-        type: 'dimension',
-      },
-      attributes: {
-        category: 'zero',
-      },
-      name: 'zero',
-      path: ['zero'],
+    attributes: {
+      category: 'ref',
+    },
+    name: 'ref',
+    path: ['ref'],
+    value: 10,
+    type: 'dimension',
+  },
+  zero: {
+    original: {
       value: 0,
       type: 'dimension',
     },
-    'ref-zero': {
-      original: {
-        value: '{zero}',
-        type: 'dimension',
-      },
-      attributes: {
-        category: 'ref-zero',
-      },
-      name: 'ref-zero',
-      path: ['ref-zero'],
-      value: 0,
+    attributes: {
+      category: 'zero',
+    },
+    name: 'zero',
+    path: ['zero'],
+    value: 0,
+    type: 'dimension',
+  },
+  'ref-zero': {
+    original: {
+      value: '{zero}',
       type: 'dimension',
     },
+    attributes: {
+      category: 'ref-zero',
+    },
+    name: 'ref-zero',
+    path: ['ref-zero'],
+    value: 0,
+    type: 'dimension',
   },
 });
 
 const multiDictionary = createDictionary({
-  tokens: {
-    foo: {
-      original: {
-        value: '10px',
-        type: 'spacing',
-      },
-      attributes: {
-        category: 'foo',
-      },
-      name: 'foo',
-      path: ['foo'],
+  foo: {
+    original: {
       value: '10px',
       type: 'spacing',
     },
-    bar: {
-      original: {
-        value: '15px',
-        type: 'spacing',
-      },
-      attributes: {
-        category: 'bar',
-      },
-      name: 'bar',
-      path: ['bar'],
+    attributes: {
+      category: 'foo',
+    },
+    name: 'foo',
+    path: ['foo'],
+    value: '10px',
+    type: 'spacing',
+  },
+  bar: {
+    original: {
       value: '15px',
       type: 'spacing',
     },
-    ref: {
-      original: {
-        value: '{foo} 5px {bar}',
-        type: 'spacing',
-      },
-      attributes: {
-        category: 'ref',
-      },
-      name: 'ref',
-      path: ['ref'],
-      value: '10px 5px 15px',
+    attributes: {
+      category: 'bar',
+    },
+    name: 'bar',
+    path: ['bar'],
+    value: '15px',
+    type: 'spacing',
+  },
+  ref: {
+    original: {
+      value: '{foo} 5px {bar}',
       type: 'spacing',
     },
+    attributes: {
+      category: 'ref',
+    },
+    name: 'ref',
+    path: ['ref'],
+    value: '10px 5px 15px',
+    type: 'spacing',
   },
 });
 
 const objectDictionary = createDictionary({
-  tokens: {
-    foo: {
-      original: {
-        value: '5px',
-        type: 'spacing',
-      },
-      attributes: {
-        category: 'foo',
-      },
-      name: 'foo',
-      path: ['foo'],
+  foo: {
+    original: {
       value: '5px',
       type: 'spacing',
     },
-    ref: {
-      original: {
-        value: {
-          width: '{foo}',
-          style: 'dashed',
-          color: '#FF00FF',
-        },
-        type: 'border',
+    attributes: {
+      category: 'foo',
+    },
+    name: 'foo',
+    path: ['foo'],
+    value: '5px',
+    type: 'spacing',
+  },
+  ref: {
+    original: {
+      value: {
+        width: '{foo}',
+        style: 'dashed',
+        color: '#FF00FF',
       },
-      attributes: {
-        category: 'ref',
-      },
-      name: 'ref',
-      path: ['ref'],
-      value: '5px dashed #FF00FF',
       type: 'border',
     },
+    attributes: {
+      category: 'ref',
+    },
+    name: 'ref',
+    path: ['ref'],
+    value: '5px dashed #FF00FF',
+    type: 'border',
   },
 });
 
@@ -324,9 +314,7 @@ describe('common', () => {
           },
         };
 
-        const commentDictionary = createDictionary({
-          tokens: commentTokens,
-        });
+        const commentDictionary = createDictionary(commentTokens);
 
         it('should default to putting comment next to the output value', async () => {
           // long commentStyle

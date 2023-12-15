@@ -430,6 +430,7 @@ snapshots["inline custom with old args should match snapshot"] =
           }
         }
       ],
+      "log": "warn",
       "transforms": [
         {
           "type": "attribute"
@@ -480,6 +481,7 @@ snapshots["inline custom with old args should match snapshot"] =
         }
       }
     ],
+    "log": "warn",
     "transforms": [
       {
         "type": "attribute"
@@ -934,6 +936,7 @@ snapshots["inline custom with new args should match snapshot"] =
         }
       }
     ],
+    "log": "warn",
     "transforms": [
       {
         "type": "attribute"
@@ -1393,6 +1396,7 @@ snapshots["register custom format with old args should match snapshot"] =
           }
         }
       ],
+      "log": "warn",
       "transforms": [
         {
           "type": "attribute"
@@ -1443,6 +1447,7 @@ snapshots["register custom format with old args should match snapshot"] =
         }
       }
     ],
+    "log": "warn",
     "transforms": [
       {
         "type": "attribute"
@@ -1897,6 +1902,7 @@ snapshots["register custom format with new args should match snapshot"] =
         }
       }
     ],
+    "log": "warn",
     "transforms": [
       {
         "type": "attribute"

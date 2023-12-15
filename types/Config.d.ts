@@ -14,14 +14,16 @@
 import type { DesignTokens, TransformedToken } from './DesignToken.d.ts';
 import type { Filter, Matcher } from './Filter.d.ts';
 import type { FileHeader, File } from './File.d.ts';
+import type { Parser } from './Parser.d.ts';
+import type { Preprocessor } from './Preprocessor.d.ts';
+import type { Transform } from './Transform.d.ts';
+import type { Formatter } from './Format.d.ts';
+import type { Action } from './Action.d.ts';
 
-// TODO: import directly from source files typedefs once they are sufficiently typed.
-import type { Parser } from '../types-copy/Parser.d.ts';
-import type { Preprocessor } from '../types-copy/Preprocessor.d.ts';
-import type { Transform } from '../types-copy/Transform.d.ts';
-import type { TransformGroup } from '../types-copy/TransformGroup.d.ts';
-import type { Formatter } from '../types-copy/Format.d.ts';
-import type { Action } from '../types-copy/Action.d.ts';
+export interface Obj {
+  [key: string]: unknown | Obj;
+}
+
 export interface LocalOptions {
   showFileHeader?: boolean;
   fileHeader?: string | FileHeader;
@@ -43,22 +45,24 @@ export interface ResolveReferenceOptions extends RegexOptions {
 export interface ResolveReferenceOptionsInternal extends ResolveReferenceOptions {
   current_context?: string[];
   stack?: string[];
-  foundCirc?: Object<string, boolean>;
+  foundCirc?: Record<string, boolean>;
   firstIteration?: boolean;
 }
 
-export interface PlatformConfig {
+export interface PlatformConfig extends RegexOptions {
+  log?: 'warn' | 'error';
   transformGroup?: string;
-  transforms?: string[];
+  transforms?: string[] | Omit<Transform, 'name'>[];
   basePxFontSize?: number;
   prefix?: string;
   buildPath?: string;
   files?: File[];
-  actions?: string[];
+  actions?: string[] | Omit<Action, 'name'>[];
   options?: LocalOptions;
 }
 
 export interface Config {
+  log?: 'warn' | 'error';
   source?: string[];
   include?: string[];
   tokens?: DesignTokens;
@@ -66,7 +70,7 @@ export interface Config {
   parsers?: Parser[];
   preprocessors?: Record<string, Preprocessor>;
   transform?: Record<string, Transform>;
-  transformGroup?: Record<string, TransformGroup['transforms']>;
+  transformGroup?: Record<string, string[]>;
   format?: Record<string, Formatter>;
   filter?: Record<string, Filter['matcher']>;
   fileHeader?: Record<string, FileHeader>;

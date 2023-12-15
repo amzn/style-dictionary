@@ -56,7 +56,7 @@ const platform = {
 };
 
 const format = formats['scss/icons'];
-const dictionary = createDictionary({ tokens });
+const dictionary = createDictionary(tokens);
 
 describe('formats', () => {
   describe('scss/icons', () => {
