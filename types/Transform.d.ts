@@ -11,7 +11,7 @@
  * and limitations under the License.
  */
 
-import type { Matcher } from './File.d.ts';
+import type { Matcher } from './Filter.d.ts';
 import type { TransformedToken } from './DesignToken.d.ts';
 import type { PlatformConfig } from './Config.d.ts';
 
