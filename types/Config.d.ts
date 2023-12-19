@@ -20,10 +20,6 @@ import type { Transform } from './Transform.d.ts';
 import type { Formatter } from './Format.d.ts';
 import type { Action } from './Action.d.ts';
 
-export interface Obj {
-  [key: string]: unknown | Obj;
-}
-
 export interface LocalOptions {
   showFileHeader?: boolean;
   fileHeader?: string | FileHeader;
