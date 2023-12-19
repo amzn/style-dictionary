@@ -1,7 +1,23 @@
 import fs from 'node:fs';
+import glob from 'glob';
+import { execSync } from 'child_process';
 
-const filePath = 'lib/StyleDictionary.js';
-const indexContent = fs.readFileSync(filePath, 'utf-8');
-const { version } = JSON.parse(fs.readFileSync('package.json', 'utf-8'));
+const { version, name } = JSON.parse(fs.readFileSync('package.json', 'utf-8'));
+
+// examples
+const packageJSONs = glob.sync('./examples/*/*/package.json', {});
+packageJSONs.forEach(function (filePath) {
+  let pkg = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+  if (pkg.devDependencies) {
+    pkg.devDependencies[name] = version;
+    fs.writeFileSync(filePath, JSON.stringify(pkg, null, 2));
+  }
+  execSync(`git add ${filePath}`);
+});
+
+// version in lib file
+const sdPath = 'lib/StyleDictionary.js';
+const indexContent = fs.readFileSync(sdPath, 'utf-8');
 const newIndexContent = indexContent.replace('<? version placeholder ?>', version);
-fs.writeFileSync(filePath, newIndexContent, 'utf-8');
+fs.writeFileSync(sdPath, newIndexContent, 'utf-8');
+execSync(`git add ${sdPath}`);
