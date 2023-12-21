@@ -14,6 +14,7 @@ import { expect } from 'chai';
 import StyleDictionary from 'style-dictionary';
 import { fs } from 'style-dictionary/fs';
 import { compileString } from 'sass';
+import { resolve } from '../lib/resolve.js';
 import { buildPath } from './_constants.js';
 import { clearOutput } from '../__tests__/__helpers.js';
 
@@ -89,7 +90,7 @@ describe(`integration`, () => {
     await sd.buildAllPlatforms();
 
     describe(`scss/variables`, () => {
-      const output = fs.readFileSync(`${buildPath}variables.scss`, {
+      const output = fs.readFileSync(resolve(`${buildPath}variables.scss`), {
         encoding: 'UTF-8',
       });
 
@@ -103,7 +104,7 @@ describe(`integration`, () => {
       });
 
       describe(`with themeable`, () => {
-        const output = fs.readFileSync(`${buildPath}variables-themeable.scss`, {
+        const output = fs.readFileSync(resolve(`${buildPath}variables-themeable.scss`), {
           encoding: 'UTF-8',
         });
         it(`should have a valid scss syntax`, () => {
@@ -117,7 +118,7 @@ describe(`integration`, () => {
       });
 
       describe(`with outputReferences`, () => {
-        const output = fs.readFileSync(`${buildPath}variables-with-references.scss`, {
+        const output = fs.readFileSync(resolve(`${buildPath}variables-with-references.scss`), {
           encoding: 'UTF-8',
         });
         it(`should have a valid scss syntax`, () => {
@@ -131,9 +132,12 @@ describe(`integration`, () => {
       });
 
       describe(`with filter and output references`, () => {
-        const output = fs.readFileSync(`${buildPath}filtered-variables-with-references.scss`, {
-          encoding: 'UTF-8',
-        });
+        const output = fs.readFileSync(
+          resolve(`${buildPath}filtered-variables-with-references.scss`),
+          {
+            encoding: 'UTF-8',
+          },
+        );
         it(`should match snapshot`, async () => {
           await expect(output).to.matchSnapshot();
         });
@@ -141,7 +145,7 @@ describe(`integration`, () => {
     });
 
     describe(`scss/map-flat`, () => {
-      const output = fs.readFileSync(`${buildPath}map-flat.scss`, {
+      const output = fs.readFileSync(resolve(`${buildPath}map-flat.scss`), {
         encoding: 'UTF-8',
       });
 
@@ -156,7 +160,7 @@ describe(`integration`, () => {
     });
 
     describe(`scss/map-deep`, () => {
-      const output = fs.readFileSync(`${buildPath}map-deep.scss`, {
+      const output = fs.readFileSync(resolve(`${buildPath}map-deep.scss`), {
         encoding: 'UTF-8',
       });
 
@@ -170,7 +174,7 @@ describe(`integration`, () => {
       });
 
       describe(`with outputReferences`, () => {
-        const output = fs.readFileSync(`${buildPath}map-deep-with-references.scss`, {
+        const output = fs.readFileSync(resolve(`${buildPath}map-deep-with-references.scss`), {
           encoding: 'UTF-8',
         });
         it(`should have a valid scss syntax`, () => {
@@ -184,7 +188,7 @@ describe(`integration`, () => {
       });
 
       describe(`without themeable`, () => {
-        const output = fs.readFileSync(`${buildPath}map-deep-not-themeable.scss`, {
+        const output = fs.readFileSync(resolve(`${buildPath}map-deep-not-themeable.scss`), {
           encoding: 'UTF-8',
         });
         it(`should have a valid scss syntax`, () => {

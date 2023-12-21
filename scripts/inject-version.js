@@ -1,11 +1,11 @@
 import fs from 'node:fs';
-import glob from 'glob';
+import { globSync } from 'glob';
 import { execSync } from 'child_process';
 
 const { version, name } = JSON.parse(fs.readFileSync('package.json', 'utf-8'));
 
 // examples
-const packageJSONs = glob.sync('./examples/*/*/package.json', {});
+const packageJSONs = globSync('./examples/*/*/package.json', {});
 packageJSONs.forEach(function (filePath) {
   let pkg = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
   if (pkg.devDependencies) {

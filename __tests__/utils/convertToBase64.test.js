@@ -22,8 +22,16 @@ describe('utils', () => {
     });
 
     it('should error if filePath isnt a file', () => {
-      expect(convertToBase64.bind(null, 'foo')).to.throw(
-        "ENOENT: no such file or directory, open 'foo'",
+      let errMessage;
+      try {
+        convertToBase64('foo');
+      } catch (e) {
+        errMessage = e.message;
+      }
+      // Note: on windows fs.readFileSync ENOENT error puts the full path in the error
+      // on linux only the name of the filepath "foo"
+      expect(errMessage).to.satisfy((msg) =>
+        msg.startsWith('ENOENT: no such file or directory, open'),
       );
     });
 

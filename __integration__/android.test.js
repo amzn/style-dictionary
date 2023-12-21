@@ -13,6 +13,7 @@
 import { expect } from 'chai';
 import StyleDictionary from 'style-dictionary';
 import { fs } from 'style-dictionary/fs';
+import { resolve } from '../lib/resolve.js';
 import { buildPath } from './_constants.js';
 import { clearOutput } from '../__tests__/__helpers.js';
 
@@ -54,7 +55,7 @@ describe('integration', () => {
     await sd.buildAllPlatforms();
 
     describe(`android/resources`, () => {
-      const output = fs.readFileSync(`${buildPath}resources.xml`, {
+      const output = fs.readFileSync(resolve(`${buildPath}resources.xml`), {
         encoding: 'UTF-8',
       });
 
@@ -63,7 +64,7 @@ describe('integration', () => {
       });
 
       describe(`with references`, () => {
-        const output = fs.readFileSync(`${buildPath}resourcesWithReferences.xml`, {
+        const output = fs.readFileSync(resolve(`${buildPath}resourcesWithReferences.xml`), {
           encoding: 'UTF-8',
         });
 
@@ -73,7 +74,7 @@ describe('integration', () => {
       });
 
       describe(`with filter`, () => {
-        const output = fs.readFileSync(`${buildPath}colors.xml`, {
+        const output = fs.readFileSync(resolve(`${buildPath}colors.xml`), {
           encoding: 'UTF-8',
         });
 
