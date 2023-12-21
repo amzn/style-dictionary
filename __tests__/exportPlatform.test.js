@@ -121,6 +121,50 @@ describe('exportPlatform', () => {
       expect(dictionary.eight.value).to.equal('foo-bar-bar');
       expect(dictionary.nine.value).to.equal('foo-bar-bar-bar');
     });
+
+    it('should apply transitive transforms with references nested beyond "value" prop, so transforms can consume the resolved value', async () => {
+      const StyleDictionaryExtended = new StyleDictionary({
+        tokens: {
+          a: {
+            value: 0.5,
+          },
+          b: {
+            value: '#fff',
+            type: 'color',
+            $extensions: {
+              'bar.foo': {
+                darken: '{a}',
+              },
+            },
+          },
+        },
+        platforms: {
+          test: {
+            transforms: ['color/darken'],
+          },
+        },
+      });
+      StyleDictionaryExtended.registerTransform({
+        type: 'value',
+        name: 'color/darken',
+        transitive: true,
+        matcher: (token) => token.type === 'color',
+        transformer: (token) => {
+          const darkenMod = token?.$extensions?.['bar.foo']?.darken;
+          if (usesReferences(darkenMod)) {
+            // defer this transform, because our darken value is a ref
+            return undefined;
+          }
+          if (typeof darkenMod === 'number') {
+            // don't actually darken, just return darken value for this test
+            return '#000';
+          }
+          return token.value;
+        },
+      });
+      const dictionary = await StyleDictionaryExtended.exportPlatform('test');
+      expect(dictionary.b.value).to.equal('#000');
+    });
   });
 
   it('should not have mutated the original tokens', async () => {

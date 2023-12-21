@@ -25,6 +25,6 @@ interface BaseTransform<Type, Value> {
 
 export type NameTransform = BaseTransform<'name', string>;
 export type AttributeTransform = BaseTransform<'attribute', Record<string, unknown>>;
-export type ValueTransform = BaseTransform<'value', unknown>;
+export type ValueTransform = BaseTransform<'value', unknown | undefined>;
 
 export type Transform = NameTransform | AttributeTransform | ValueTransform;
