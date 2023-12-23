@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.0.0-prerelease.6
+
+### Patch Changes
+
+- 1dd828c: Fix issue in browser-bundled glob, bump.
+
 ## 4.0.0-prerelease.5
 
 ### Major Changes
