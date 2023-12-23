@@ -34,7 +34,7 @@ function getConfigPath(options) {
     }
   }
 
-  return path.resolve(configPath);
+  return configPath;
 }
 
 program.version(pkg.version).description(pkg.description).usage('[command] [options]');

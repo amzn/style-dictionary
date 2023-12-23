@@ -13,6 +13,7 @@
 import { expect } from 'chai';
 import StyleDictionary from 'style-dictionary';
 import { fs } from 'style-dictionary/fs';
+import { resolve } from '../lib/resolve.js';
 import { buildPath } from './_constants.js';
 import { clearOutput } from '../__tests__/__helpers.js';
 
@@ -49,7 +50,7 @@ describe('integration', () => {
     await sd.buildAllPlatforms();
 
     describe(`ios-swift/class.swift`, () => {
-      const output = fs.readFileSync(`${buildPath}style_dictionary.swift`, {
+      const output = fs.readFileSync(resolve(`${buildPath}style_dictionary.swift`), {
         encoding: `UTF-8`,
       });
 
@@ -58,9 +59,12 @@ describe('integration', () => {
       });
 
       describe(`with references`, () => {
-        const output = fs.readFileSync(`${buildPath}style_dictionary_with_references.swift`, {
-          encoding: `UTF-8`,
-        });
+        const output = fs.readFileSync(
+          resolve(`${buildPath}style_dictionary_with_references.swift`),
+          {
+            encoding: `UTF-8`,
+          },
+        );
 
         it(`should match snapshot`, async () => {
           await expect(output).to.matchSnapshot();

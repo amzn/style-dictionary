@@ -13,6 +13,7 @@
 import { expect } from 'chai';
 import StyleDictionary from 'style-dictionary';
 import { fs } from 'style-dictionary/fs';
+import { resolve } from '../lib/resolve.js';
 import { buildPath } from './_constants.js';
 import { clearOutput } from '../__tests__/__helpers.js';
 
@@ -70,14 +71,14 @@ describe('integration', () => {
 
     describe(`without platform options`, () => {
       it(`should show file header if no file options set`, async () => {
-        const output = fs.readFileSync(`${buildPath}platform-none-file-none.css`, {
+        const output = fs.readFileSync(resolve(`${buildPath}platform-none-file-none.css`), {
           encoding: 'UTF-8',
         });
         await expect(output).to.matchSnapshot();
       });
 
       it(`should not show file header if file options set to false`, async () => {
-        const output = fs.readFileSync(`${buildPath}platform-none-file-false.css`, {
+        const output = fs.readFileSync(resolve(`${buildPath}platform-none-file-false.css`), {
           encoding: 'UTF-8',
         });
         await expect(output).to.matchSnapshot();
@@ -86,14 +87,14 @@ describe('integration', () => {
 
     describe(`with platform options set to false`, () => {
       it(`should not show file header if no file options set`, async () => {
-        const output = fs.readFileSync(`${buildPath}platform-false-file-none.css`, {
+        const output = fs.readFileSync(resolve(`${buildPath}platform-false-file-none.css`), {
           encoding: 'UTF-8',
         });
         await expect(output).to.matchSnapshot();
       });
 
       it(`should show file header if file options set to true`, async () => {
-        const output = fs.readFileSync(`${buildPath}platform-false-file-true.css`, {
+        const output = fs.readFileSync(resolve(`${buildPath}platform-false-file-true.css`), {
           encoding: 'UTF-8',
         });
         await expect(output).to.matchSnapshot();

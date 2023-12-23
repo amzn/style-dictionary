@@ -12,6 +12,7 @@
  */
 import { expect } from 'chai';
 import { fs } from 'style-dictionary/fs';
+import { resolve } from '../lib/resolve.js';
 import buildFiles from '../lib/buildFiles.js';
 import { clearOutput, fileExists } from './__helpers.js';
 
@@ -115,7 +116,7 @@ describe('buildFiles', () => {
   it('should work with a filter', () => {
     buildFiles(dictionary, platformWithFilter);
     expect(fileExists('__tests__/__output/test.json')).to.be.true;
-    const output = JSON.parse(fs.readFileSync('__tests__/__output/test.json'));
+    const output = JSON.parse(fs.readFileSync(resolve('__tests__/__output/test.json')));
     expect(output).to.have.property('bingo');
     expect(output).to.not.have.property('foo');
     Object.values(output).forEach((property) => {

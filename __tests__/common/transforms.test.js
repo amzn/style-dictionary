@@ -11,7 +11,7 @@
  * and limitations under the License.
  */
 import { expect } from 'chai';
-import path from '@bundled-es-modules/path-browserify';
+import { join } from 'path-unified';
 import Color from 'tinycolor2';
 import transforms from '../../lib/common/transforms.js';
 
@@ -830,7 +830,7 @@ describe('common', () => {
         var value = transforms['asset/path'].transformer({
           value: 'foo.json',
         });
-        expect(value).to.equal(path.join('foo.json'));
+        expect(value).to.equal(join('foo.json'));
       });
     });
   });

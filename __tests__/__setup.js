@@ -1,6 +1,6 @@
 import { use } from 'chai';
 import chaiAsPromised from '@esm-bundle/chai-as-promised';
-import path from '@bundled-es-modules/path-browserify';
+import { dirname } from 'path-unified';
 import { fs } from 'style-dictionary/fs';
 import { chaiWtrSnapshot } from '../snapshot-plugin/chai-wtr-snapshot.js';
 import { fixDate } from './__helpers.js';
@@ -18,11 +18,11 @@ import { fixDate } from './__helpers.js';
 fixDate();
 
 function ensureDirectoryExistence(filePath) {
-  const dirname = path.dirname(filePath);
-  if (fs.existsSync(dirname)) {
+  const dir = dirname(filePath);
+  if (fs.existsSync(dir)) {
     return true;
   }
-  fs.mkdirSync(dirname, { recursive: true });
+  fs.mkdirSync(dir, { recursive: true });
 }
 
 function mirrorFile(file, contents) {

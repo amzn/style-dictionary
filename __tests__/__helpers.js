@@ -13,6 +13,7 @@
 
 import { expect } from 'chai';
 import { fs } from 'style-dictionary/fs';
+import { resolve } from '../lib/resolve.js';
 
 export const expectThrowsAsync = async (method, errorMessage) => {
   let error = null;
@@ -27,8 +28,8 @@ export const expectThrowsAsync = async (method, errorMessage) => {
   }
 };
 
-export const fileToJSON = (path, _fs = fs) => {
-  return JSON.parse(_fs.readFileSync(path, 'utf-8'));
+export const fileToJSON = (_path, _fs = fs) => {
+  return JSON.parse(_fs.readFileSync(resolve(_path), 'utf-8'));
 };
 
 export const clearOutput = (outputFolder = '__tests__/__output', _fs = fs) => {

@@ -13,6 +13,7 @@
 import { expect } from 'chai';
 import StyleDictionary from 'style-dictionary';
 import { fs } from 'style-dictionary/fs';
+import { resolve } from '../lib/resolve.js';
 import { buildPath } from './_constants.js';
 import { clearOutput } from '../__tests__/__helpers.js';
 
@@ -89,7 +90,7 @@ describe('integration', () => {
     await sd.buildAllPlatforms();
 
     describe(`inline custom with new args`, async () => {
-      const output = fs.readFileSync(`${buildPath}inlineCustomFormatWithNewArgs.json`, {
+      const output = fs.readFileSync(resolve(`${buildPath}inlineCustomFormatWithNewArgs.json`), {
         encoding: 'UTF-8',
       });
       it(`should match snapshot`, async () => {
@@ -107,7 +108,7 @@ describe('integration', () => {
     });
 
     describe(`register custom format with new args`, () => {
-      const output = fs.readFileSync(`${buildPath}registerCustomFormatWithNewArgs.json`, {
+      const output = fs.readFileSync(resolve(`${buildPath}registerCustomFormatWithNewArgs.json`), {
         encoding: 'UTF-8',
       });
 

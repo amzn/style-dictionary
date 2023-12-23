@@ -100,9 +100,9 @@
   "homepage": "https://github.com/amzn/style-dictionary",
   "dependencies": {
     "@bundled-es-modules/deepmerge": "^4.3.1",
-    "@bundled-es-modules/glob": "^10.3.5",
+    "@bundled-es-modules/glob": "^10.3.12",
     "@bundled-es-modules/memfs": "^4.2.3",
-    "@bundled-es-modules/path-browserify": "^1.0.2",
+    "path-unified": "^0.1.0",
     "chalk": "^5.3.0",
     "change-case": "^5.3.0",
     "commander": "^8.3.0",
