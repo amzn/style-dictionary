@@ -5,6 +5,7 @@
     "style-dictionary": "3.8.0"
   },
   "changesets": [
+    "angry-balloons-yell",
     "big-worms-collect-2",
     "big-worms-collect",
     "bright-timers-shout",
@@ -16,6 +17,7 @@
     "light-games-occur",
     "nice-ears-shop",
     "old-ants-fix",
+    "smooth-bulldogs-type",
     "sweet-toes-fly",
     "unlucky-cameras-draw"
   ]
