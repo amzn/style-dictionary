@@ -58,8 +58,7 @@
     "test:node": "mocha -r mocha-hooks.mjs './__integration__/**/*.test.js' './__tests__/**/*.test.js' './__node_tests__/**/*.test.js'",
     "serve-docs": "docsify serve docs -p 3000 -P 12345",
     "install-cli": "npm install -g $(npm pack)",
-    "prerelease": "node scripts/inject-version.js && tsc --emitDeclarationOnly",
-    "release": "npm run prerelease && changeset publish",
+    "release": "node scripts/inject-version.js && tsc --emitDeclarationOnly && changeset publish",
     "prepare": "husky install",
     "postinstall": "patch-package"
   },
