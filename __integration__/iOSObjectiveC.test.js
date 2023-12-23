@@ -13,6 +13,7 @@
 import { expect } from 'chai';
 import StyleDictionary from 'style-dictionary';
 import { fs } from 'style-dictionary/fs';
+import { resolve } from '../lib/resolve.js';
 import { buildPath } from './_constants.js';
 import { clearOutput } from '../__tests__/__helpers.js';
 
@@ -78,49 +79,49 @@ describe('integration', () => {
     await sd.buildAllPlatforms();
 
     it(`ios/singleton.m should match snapshot`, async () => {
-      const output = fs.readFileSync(`${buildPath}singleton.m`, {
+      const output = fs.readFileSync(resolve(`${buildPath}singleton.m`), {
         encoding: `UTF-8`,
       });
       await expect(output).to.matchSnapshot();
     });
 
     it(`ios/singleton.h should match snapshot`, async () => {
-      const output = fs.readFileSync(`${buildPath}singleton.h`, {
+      const output = fs.readFileSync(resolve(`${buildPath}singleton.h`), {
         encoding: `UTF-8`,
       });
       await expect(output).to.matchSnapshot();
     });
 
     it(`ios/color.m should match snapshot`, async () => {
-      const output = fs.readFileSync(`${buildPath}color.m`, {
+      const output = fs.readFileSync(resolve(`${buildPath}color.m`), {
         encoding: `UTF-8`,
       });
       await expect(output).to.matchSnapshot();
     });
 
     it(`ios/color.h should match snapshot`, async () => {
-      const output = fs.readFileSync(`${buildPath}color.h`, {
+      const output = fs.readFileSync(resolve(`${buildPath}color.h`), {
         encoding: `UTF-8`,
       });
       await expect(output).to.matchSnapshot();
     });
 
     it(`ios/macros.h should match snapshot`, async () => {
-      const output = fs.readFileSync(`${buildPath}macros.h`, {
+      const output = fs.readFileSync(resolve(`${buildPath}macros.h`), {
         encoding: `UTF-8`,
       });
       await expect(output).to.matchSnapshot();
     });
 
     it(`ios/static.h should match snapshot`, async () => {
-      const output = fs.readFileSync(`${buildPath}static.h`, {
+      const output = fs.readFileSync(resolve(`${buildPath}static.h`), {
         encoding: `UTF-8`,
       });
       await expect(output).to.matchSnapshot();
     });
 
     it(`ios/static.m should match snapshot`, async () => {
-      const output = fs.readFileSync(`${buildPath}static.m`, {
+      const output = fs.readFileSync(resolve(`${buildPath}static.m`), {
         encoding: `UTF-8`,
       });
       await expect(output).to.matchSnapshot();

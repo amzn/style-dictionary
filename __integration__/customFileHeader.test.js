@@ -13,6 +13,7 @@
 import { expect } from 'chai';
 import StyleDictionary from 'style-dictionary';
 import { fs } from 'style-dictionary/fs';
+import { resolve } from '../lib/resolve.js';
 import { buildPath } from './_constants.js';
 import { clearOutput } from '../__tests__/__helpers.js';
 
@@ -109,21 +110,21 @@ describe(`integration`, () => {
 
     describe('file options', () => {
       it(`registered file header should match snapshot`, async () => {
-        const output = fs.readFileSync(`${buildPath}registeredFileHeader.css`, {
+        const output = fs.readFileSync(resolve(`${buildPath}registeredFileHeader.css`), {
           encoding: 'UTF-8',
         });
         await expect(output).to.matchSnapshot();
       });
 
       it(`config file header should match snapshot`, async () => {
-        const output = fs.readFileSync(`${buildPath}configFileHeader.css`, {
+        const output = fs.readFileSync(resolve(`${buildPath}configFileHeader.css`), {
           encoding: 'UTF-8',
         });
         await expect(output).to.matchSnapshot();
       });
 
       it(`inline file header should match snapshot`, async () => {
-        const output = fs.readFileSync(`${buildPath}inlineFileHeader.css`, {
+        const output = fs.readFileSync(resolve(`${buildPath}inlineFileHeader.css`), {
           encoding: 'UTF-8',
         });
         await expect(output).to.matchSnapshot();
@@ -132,21 +133,21 @@ describe(`integration`, () => {
 
     describe('platform options', () => {
       it(`no file options should match snapshot`, async () => {
-        const output = fs.readFileSync(`${buildPath}noOptions.js`, {
+        const output = fs.readFileSync(resolve(`${buildPath}noOptions.js`), {
           encoding: 'UTF-8',
         });
         await expect(output).to.matchSnapshot();
       });
 
       it(`showFileHeader should match snapshot`, async () => {
-        const output = fs.readFileSync(`${buildPath}showFileHeader.js`, {
+        const output = fs.readFileSync(resolve(`${buildPath}showFileHeader.js`), {
           encoding: 'UTF-8',
         });
         await expect(output).to.matchSnapshot();
       });
 
       it(`file header override should match snapshot`, async () => {
-        const output = fs.readFileSync(`${buildPath}fileHeaderOverride.js`, {
+        const output = fs.readFileSync(resolve(`${buildPath}fileHeaderOverride.js`), {
           encoding: 'UTF-8',
         });
         await expect(output).to.matchSnapshot();

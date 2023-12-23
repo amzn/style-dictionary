@@ -13,6 +13,7 @@
 import { expect } from 'chai';
 import StyleDictionary from 'style-dictionary';
 import { fs } from 'style-dictionary/fs';
+import { resolve } from '../lib/resolve.js';
 import { buildPath } from './_constants.js';
 import { clearOutput } from '../__tests__/__helpers.js';
 
@@ -51,7 +52,7 @@ describe('integration', () => {
     await sd.buildAllPlatforms();
 
     describe(`compose/object`, () => {
-      const output = fs.readFileSync(`${buildPath}StyleDictionary.kt`, {
+      const output = fs.readFileSync(resolve(`${buildPath}StyleDictionary.kt`), {
         encoding: `UTF-8`,
       });
 
@@ -60,7 +61,7 @@ describe('integration', () => {
       });
 
       describe(`with references`, () => {
-        const output = fs.readFileSync(`${buildPath}StyleDictionaryWithReferences.kt`, {
+        const output = fs.readFileSync(resolve(`${buildPath}StyleDictionaryWithReferences.kt`), {
           encoding: `UTF-8`,
         });
 

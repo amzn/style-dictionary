@@ -11,7 +11,7 @@
  * and limitations under the License.
  */
 import { expect } from 'chai';
-import path from '@bundled-es-modules/path-browserify';
+import { join } from 'path-unified';
 import yaml from 'yaml';
 import { expectThrowsAsync } from '../__helpers.js';
 import combineJSON from '../../lib/utils/combineJSON.js';
@@ -29,7 +29,7 @@ describe('utils', () => {
     });
 
     it('should handle js modules that export objects', async () => {
-      const absPath = path.join('__tests__', '__json_files', '*.js');
+      const absPath = join('__tests__', '__json_files', '*.js');
       const relativePath = '__tests__/__json_files/*.js';
       const test = await combineJSON([absPath, relativePath]);
       expect(typeof test).to.equal('object');

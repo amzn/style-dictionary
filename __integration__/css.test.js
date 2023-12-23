@@ -13,6 +13,7 @@
 import { expect } from 'chai';
 import StyleDictionary from 'style-dictionary';
 import { fs } from 'style-dictionary/fs';
+import { resolve } from '../lib/resolve.js';
 import { buildPath } from './_constants.js';
 import { clearOutput } from '../__tests__/__helpers.js';
 
@@ -65,7 +66,7 @@ describe('integration', () => {
     await sd.buildAllPlatforms();
 
     describe('css/variables', () => {
-      const output = fs.readFileSync(`${buildPath}variables.css`, {
+      const output = fs.readFileSync(resolve(`${buildPath}variables.css`), {
         encoding: 'UTF-8',
       });
       it(`should match snapshot`, async () => {
@@ -73,7 +74,7 @@ describe('integration', () => {
       });
 
       describe(`with references`, () => {
-        const output = fs.readFileSync(`${buildPath}variablesWithReferences.css`, {
+        const output = fs.readFileSync(resolve(`${buildPath}variablesWithReferences.css`), {
           encoding: 'UTF-8',
         });
         it(`should match snapshot`, async () => {
@@ -82,7 +83,7 @@ describe('integration', () => {
       });
 
       describe(`with selector`, () => {
-        const output = fs.readFileSync(`${buildPath}variablesWithSelector.css`, {
+        const output = fs.readFileSync(resolve(`${buildPath}variablesWithSelector.css`), {
           encoding: 'UTF-8',
         });
         it(`should match snapshot`, async () => {
