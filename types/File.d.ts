@@ -1,24 +1,28 @@
-/*
- * Copyright 2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
- * the License. A copy of the License is located at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
- * and limitations under the License.
- */
+import type { TransformedToken } from './DesignToken.d.ts';
+import type { Formatter } from './Format.d.ts';
 
-import { Options } from './Options';
-import { TransformedToken } from './TransformedToken';
+export interface FormattingOptions {
+  prefix?: string;
+  suffix?: string;
+  lineSeparator?: string;
+  header?: string;
+  footer?: string;
+  commentStyle?: 'short' | 'long' | 'none';
+  commentPosition?: 'above' | 'inline';
+  indentation?: string;
+  separator?: string;
+}
+
+export type FileHeader = (defaultMessage: string[]) => string[];
 
 export interface File {
   className?: string;
   packageName?: string;
   destination: string;
-  format?: string;
-  filter?: string | Partial<TransformedToken> | ((token: TransformedToken) => boolean);
-  options?: Options;
+  format?: string | Formatter;
+  filter?: string | Partial<TransformedToken> | Matcher;
+  options?: LocalOptions;
+  resourceType?: string;
+  resourceMap?: Record<string, string>;
+  name?: string;
 }

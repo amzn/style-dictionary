@@ -42,7 +42,7 @@ describe(`integration >`, () => {
             source: [
               // including a specific file twice will throw value collision warnings
               `__integration__/tokens/size/padding.json`,
-              `__integration__/tokens/size/padding.json`,
+              `__integration__/tokens/size/_padding.json`,
             ],
             platforms: {},
           });
@@ -58,7 +58,7 @@ describe(`integration >`, () => {
               source: [
                 // including a specific file twice will throw value collision warnings
                 `__integration__/tokens/size/padding.json`,
-                `__integration__/tokens/size/padding.json`,
+                `__integration__/tokens/size/_padding.json`,
               ],
               platforms: {},
             },

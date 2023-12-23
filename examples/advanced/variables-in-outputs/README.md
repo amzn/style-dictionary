@@ -14,7 +14,7 @@ At this point, you can run `npm run build`. This command will generate the outpu
 
 #### How does it work
 
-The "build" command uses the `sd.config.js` file as the Style Dictionary configuration. It is configured to use JSON files in the `tokens/` directory as the source files. It adds a custom format directly in the configuration (as opposed to using the `.registerFormat()` method) that uses 2 new methods added as exposed utilities: `usesReference()` and `getReferences()`. Also, it uses a new configuration on some formats: `outputReferences: true` to include variable references in the output.
+The "build" command uses the `sd.config.js` file as the Style Dictionary configuration. It is configured to use JSON files in the `tokens/` directory as the source files. It adds a custom format directly in the configuration (as opposed to using the `.registerFormat()` method) that uses 2 new methods added as exposed utilities: `usesReferences()` and `getReferences()`. Also, it uses a new configuration on some formats: `outputReferences: true` to include variable references in the output.
 
 #### What to look at
 
@@ -23,19 +23,19 @@ The `sd.config.js` file has everything you need to see. The tokens included in t
 Here is an example that shows how to get an alias's name within a custom format:
 
 ```javascript
-import { usesReference, getReferences } from 'style-dictionary/utils';
+import { usesReferences, getReferences } from 'style-dictionary/utils';
 
 //...
 function({ dictionary }) {
   return dictionary.allTokens.map(token => {
     let value = JSON.stringify(token.value);
-    // the `dictionary` object now has `usesReference()` and
-    // `getReferences()` methods. `usesReference()` will return true if
+    // the `dictionary` object now has `usesReferences()` and
+    // `getReferences()` methods. `usesReferences()` will return true if
     // the value has a reference in it. `getReferences()` will return
     // an array of references to the whole tokens so that you can access their
     // names or any other attributes.
-    if (usesReference(token.original.value)) {
-      const refs = getReferences(dictionary, token.original.value);
+    if (usesReferences(token.original.value)) {
+      const refs = getReferences(token.original.value, dictionary);
       refs.forEach(ref => {
         value = value.replace(ref.value, function() {
           return `${ref.name}`;

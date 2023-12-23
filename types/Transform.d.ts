@@ -11,39 +11,20 @@
  * and limitations under the License.
  */
 
-import { Matcher } from './Matcher';
-import { TransformedToken } from './TransformedToken';
-import { Platform } from './Platform';
+import type { Matcher } from './Filter.d.ts';
+import type { TransformedToken } from './DesignToken.d.ts';
+import type { PlatformConfig } from './Config.d.ts';
 
-export interface NameTransform<PlatformType = Record<string,any>> {
-  type: "name";
+interface BaseTransform<Type, Value> {
+  name: string;
+  type: Type;
   matcher?: Matcher;
-  transformer: (
-    token: TransformedToken,
-    options: Platform<PlatformType>
-  ) => string;
-}
-
-export interface ValueTransform<PlatformType = Record<string,any>> {
-  type: "value";
   transitive?: boolean;
-  matcher?: Matcher;
-  transformer: (
-    token: TransformedToken,
-    options: Platform<PlatformType>
-  ) => any;
+  transformer: (token: TransformedToken, options: PlatformConfig) => Value;
 }
 
-export interface AttributeTransform<PlatformType = Record<string,any>> {
-  type: "attribute";
-  matcher?: Matcher;
-  transformer: (
-    token: TransformedToken,
-    options: Platform<PlatformType>
-  ) => { [key: string]: any };
-}
+export type NameTransform = BaseTransform<'name', string>;
+export type AttributeTransform = BaseTransform<'attribute', Record<string, unknown>>;
+export type ValueTransform = BaseTransform<'value', unknown>;
 
-export type Transform<PlatformType = Record<string,any>> =
-  | NameTransform<PlatformType>
-  | ValueTransform<PlatformType>
-  | AttributeTransform<PlatformType>;
+export type Transform = NameTransform | AttributeTransform | ValueTransform;

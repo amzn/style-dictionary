@@ -23,7 +23,7 @@ describe('integration', () => {
 
   describe('compose', async () => {
     const sd = new StyleDictionary({
-      source: [`__integration__/tokens/**/*.json?(c)`],
+      source: [`__integration__/tokens/**/[!_]*.json?(c)`],
       platforms: {
         compose: {
           transformGroup: `compose`,

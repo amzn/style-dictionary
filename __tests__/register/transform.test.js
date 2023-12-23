@@ -12,8 +12,166 @@
  */
 import { expect } from 'chai';
 import StyleDictionary from 'style-dictionary';
+import { registerSuite } from './register.suite.js';
+import transform from '../../lib/common/transforms.js';
+
+const transformerPxAppender = {
+  name: 'px-appender',
+  type: 'value',
+  transformer: (token) => `${token.value}px`,
+};
+
+const transformerValueIncrementer = {
+  name: 'value-incrementer',
+  type: 'value',
+  matcher: (token) => typeof token.value === 'number',
+  transformer: (token) => token.value + 1,
+};
+
+registerSuite({
+  config: {
+    type: 'value',
+    transformer: () => {},
+  },
+  registerMethod: 'registerTransform',
+  prop: 'transform',
+});
 
 describe('register', () => {
+  beforeEach(() => {
+    StyleDictionary.transform = transform;
+  });
+  afterEach(() => {
+    StyleDictionary.transform = transform;
+  });
+
+  describe('instance vs class registration', () => {
+    it('should allow registering on class, affecting all instances', async () => {
+      StyleDictionary.registerTransform(transformerPxAppender);
+
+      const baseCfg = {
+        platforms: {
+          test: {
+            transforms: ['px-appender'],
+          },
+        },
+      };
+
+      const sd1 = new StyleDictionary({
+        ...baseCfg,
+        tokens: {
+          size1: {
+            value: 1,
+            type: 'dimension',
+          },
+        },
+      });
+      const sd2 = new StyleDictionary({
+        ...baseCfg,
+        tokens: {
+          size2: {
+            value: 2,
+            type: 'dimension',
+          },
+        },
+      });
+      const sd3 = await sd2.extend({
+        ...baseCfg,
+        tokens: {
+          size3: {
+            value: 3,
+            type: 'dimension',
+          },
+        },
+      });
+
+      const [sd1After, sd2After, sd3After] = await Promise.all(
+        [sd1, sd2, sd3].map((sd) => sd.exportPlatform('test')),
+      );
+
+      expect(sd1.transform['px-appender']).to.not.be.undefined;
+      expect(sd2.transform['px-appender']).to.not.be.undefined;
+      expect(sd3.transform['px-appender']).to.not.be.undefined;
+
+      expect(sd1After.size1.value).to.equal('1px');
+      expect(sd2After.size2.value).to.equal('2px');
+      expect(sd3After.size2.value).to.equal('2px');
+      expect(sd3After.size3.value).to.equal('3px');
+    });
+
+    it('should allow registering on instance, affecting only that instance', async () => {
+      const sd1 = new StyleDictionary();
+      const sd2 = new StyleDictionary();
+      const sd3 = await sd2.extend();
+
+      sd2.registerTransform(transformerPxAppender);
+
+      expect(sd1.transform['px-appender']).to.be.undefined;
+      expect(sd2.transform['px-appender']).to.not.be.undefined;
+      expect(sd3.transform['px-appender']).to.be.undefined;
+    });
+
+    it('should combine class and instance registrations on the instance', async () => {
+      StyleDictionary.registerTransform(transformerPxAppender);
+
+      const sd1 = new StyleDictionary({
+        platforms: {
+          test: {
+            transforms: ['px-appender'],
+          },
+        },
+        tokens: {
+          size1: {
+            value: 1,
+            type: 'dimension',
+          },
+        },
+      });
+
+      const sd2 = new StyleDictionary({
+        platforms: {
+          test: {
+            transforms: ['value-incrementer', 'px-appender'],
+          },
+        },
+        tokens: {
+          size2: {
+            value: 2,
+            type: 'dimension',
+          },
+        },
+      });
+      sd2.registerTransform(transformerValueIncrementer);
+
+      const sd3 = await sd2.extend({
+        tokens: {
+          size3: {
+            value: 3,
+            type: 'dimension',
+          },
+        },
+      });
+
+      const [sd1After, sd2After, sd3After] = await Promise.all(
+        [sd1, sd2, sd3].map((sd) => sd.exportPlatform('test')),
+      );
+
+      expect(sd1.transform['px-appender']).to.not.be.undefined;
+      expect(sd2.transform['px-appender']).to.not.be.undefined;
+      expect(sd3.transform['px-appender']).to.not.be.undefined;
+      // should not be registered on sd1, because we registered only on sd2
+      expect(sd1.transform['value-incrementer']).to.be.undefined;
+      expect(sd2.transform['value-incrementer']).to.not.be.undefined;
+      // should be registered because sd3 extends sd2
+      expect(sd3.transform['value-incrementer']).to.not.be.undefined;
+
+      expect(sd1After.size1.value).to.equal('1px');
+      expect(sd2After.size2.value).to.equal('3px');
+      expect(sd3After.size2.value).to.equal('3px');
+      expect(sd3After.size3.value).to.equal('4px');
+    });
+  });
+
   describe('transform', async () => {
     const StyleDictionaryExtended = new StyleDictionary({});
 

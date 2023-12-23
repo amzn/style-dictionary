@@ -49,7 +49,7 @@ const tokens = {
 };
 
 const format = formats['scss/variables'];
-const dictionary = createDictionary({ tokens });
+const dictionary = createDictionary(tokens);
 
 describe('formats', () => {
   describe('scss/variables', () => {

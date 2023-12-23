@@ -37,7 +37,7 @@ const tokens = {
 };
 
 const format = formats['javascript/module-flat'];
-const dictionary = createDictionary({ tokens });
+const dictionary = createDictionary(tokens);
 
 describe('formats', () => {
   describe('javascript/module-flat', () => {

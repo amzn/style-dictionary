@@ -36,7 +36,7 @@ const tokens = {
 };
 
 const format = formats['json/nested'];
-const dictionary = createDictionary({ tokens });
+const dictionary = createDictionary(tokens);
 
 describe('formats', function () {
   describe('json/nested', function () {

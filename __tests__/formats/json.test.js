@@ -27,7 +27,7 @@ const tokens = {
 };
 
 const format = formats['json'];
-const dictionary = createDictionary({ tokens });
+const dictionary = createDictionary(tokens);
 
 describe('formats', () => {
   describe('json', () => {

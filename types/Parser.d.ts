@@ -11,11 +11,11 @@
  * and limitations under the License.
  */
 
-import { DesignTokens } from './DesignToken';
+import type { DesignTokens } from './DesignToken.d.ts';
 
 export interface ParserOptions {
   contents: string;
-  filePath: string;
+  filePath?: string;
 }
 
 export interface Parser {

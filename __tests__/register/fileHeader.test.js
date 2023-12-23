@@ -12,6 +12,15 @@
  */
 import { expect } from 'chai';
 import StyleDictionary from 'style-dictionary';
+import { registerSuite } from './register.suite.js';
+
+registerSuite({
+  config: {
+    fileHeader: () => {},
+  },
+  registerMethod: 'registerFileHeader',
+  prop: 'fileHeader',
+});
 
 describe('register', () => {
   describe('fileHeader', async () => {
@@ -39,7 +48,7 @@ describe('register', () => {
       }).to.throw('name must be a string');
 
       expect(() => {
-        StyleDictionaryExtended.registerFilter({
+        StyleDictionaryExtended.registerFileHeader({
           name: {},
           matcher: function () {},
         });

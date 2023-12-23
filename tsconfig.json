@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "allowJs": true,
+    "checkJs": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "skipLibCheck": true,
+    "declaration": true
+  },
+  "include": ["types/**/*.d.ts", "lib/**/*.js"],
+  "exclude": ["node_modules", "**/coverage/*"]
+}
