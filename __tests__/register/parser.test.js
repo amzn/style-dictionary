@@ -12,6 +12,16 @@
  */
 import { expect } from 'chai';
 import StyleDictionary from 'style-dictionary';
+// import { registerSuite } from './register.suite.js';
+
+// Skipping for now because parsers signature doesn't really match the other things you can register
+// registerSuite({
+//   config: {
+//     parse: () => {},
+//   },
+//   registerMethod: 'registerParser',
+//   prop: 'parsers',
+// });
 
 describe('register', () => {
   describe('parser', async () => {

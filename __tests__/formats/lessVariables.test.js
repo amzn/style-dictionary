@@ -48,7 +48,7 @@ const tokens = {
 };
 
 const format = formats['less/variables'];
-const dictionary = createDictionary({ tokens });
+const dictionary = createDictionary(tokens);
 
 describe('formats', () => {
   describe('less/variables', () => {

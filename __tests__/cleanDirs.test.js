@@ -56,28 +56,25 @@ describe('cleanDirs', () => {
 
   it('should delete without buildPath', () => {
     buildFiles(dictionary, platform);
-    cleanFiles(dictionary, platform);
-    cleanDirs(dictionary, platform);
+    cleanFiles(platform);
+    cleanDirs(platform);
     expect(dirExists('__tests__/__output/extradir1/extradir2')).to.be.false;
     expect(dirExists('__tests__/__output/extradir1')).to.be.false;
   });
 
   it('should delete with buildPath', () => {
     buildFiles(dictionary, platformWithBuildPath);
-    cleanFiles(dictionary, platformWithBuildPath);
-    cleanDirs(dictionary, platformWithBuildPath);
+    cleanFiles(platformWithBuildPath);
+    cleanDirs(platformWithBuildPath);
     expect(dirExists('__tests__/__output/extradir1/extradir2')).to.be.false;
     expect(dirExists('__tests__/t__/__output/extradir1')).to.be.false;
   });
 
   it('should throw if buildPath does not end in a trailing slash', () => {
     expect(function () {
-      cleanDirs(
-        {},
-        {
-          buildPath: 'foo',
-        },
-      );
+      cleanDirs({
+        buildPath: 'foo',
+      });
     }).to.throw('Build path must end in a trailing slash or you will get weird file names.');
   });
 });

@@ -23,7 +23,7 @@ describe('integration', () => {
 
   describe('android', async () => {
     const sd = new StyleDictionary({
-      source: [`__integration__/tokens/**/*.json?(c)`],
+      source: [`__integration__/tokens/**/[!_]*.json?(c)`],
       platforms: {
         android: {
           transformGroup: `android`,

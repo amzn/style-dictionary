@@ -10,10 +10,11 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
-import { Matcher } from './Matcher';
+import type { TransformedToken } from './DesignToken.d.ts';
 
 export interface Filter {
   name: string;
   matcher: Matcher;
 }
+
+export type Matcher = (token: TransformedToken) => boolean;

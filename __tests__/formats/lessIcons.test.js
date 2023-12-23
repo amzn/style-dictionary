@@ -55,7 +55,7 @@ const platform = {
 };
 
 const format = formats['less/icons'];
-const dictionary = createDictionary({ tokens });
+const dictionary = createDictionary(tokens);
 
 describe('formats', () => {
   describe('less/icons', () => {

@@ -36,7 +36,7 @@ const format = formats['typescript/module-declarations'].bind(file);
 describe('formats', () => {
   describe('typescript/module-declarations', () => {
     it('should be a valid TS file', () => {
-      const dictionary = createDictionary({ tokens });
+      const dictionary = createDictionary(tokens);
       const output = format(
         createFormatArgs({
           dictionary,

@@ -11,10 +11,11 @@
  * and limitations under the License.
  */
 
-import { Dictionary } from './Dictionary';
-import { Platform } from './Platform';
+import type { Dictionary } from './DesignToken.d.ts';
+import type { PlatformConfig } from './Config.d.ts';
 
 export interface Action {
+  name: string;
   /** The action in the form of a function. */
   do(dictionary: Dictionary, config: Platform): void;
 

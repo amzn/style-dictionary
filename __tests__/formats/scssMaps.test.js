@@ -107,7 +107,7 @@ describe('formats', () => {
       };
 
       const formatter = formats[key].bind(file);
-      const dictionary = createDictionary({ tokens });
+      const dictionary = createDictionary(tokens);
       const output = formatter(
         createFormatArgs({
           dictionary,

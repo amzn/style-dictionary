@@ -244,23 +244,25 @@ Note: to support legacy ways of defining custom formats, <code>this</code> in th
 
 ## Custom format with output references
 
-To take advantage of outputting references in your custom formats there are 2 helper methods in the `dictionary` argument passed to your formatter function: `usesReference(value)` and `getReferences(value)`. Here is an example using those:
+To take advantage of outputting references in your custom formats there are 2 helper methods available: `usesReferences(value)` and `getReferences(value, tokens)`. Here is an example using those:
 
 ```javascript
+import { getReferences, usesReferences } from 'style-dictionary/utils';
+
 StyleDictionary.registerFormat({
   name: `es6WithReferences`,
   formatter: function({dictionary}) {
     return dictionary.allTokens.map(token => {
       let value = JSON.stringify(token.value);
-      // the `dictionary` object now has `usesReference()` and
-      // `getReferences()` methods. `usesReference()` will return true if
+      // the `dictionary` object now has `usesReferences()` and
+      // `getReferences()` methods. `usesReferences()` will return true if
       // the value has a reference in it. `getReferences()` will return
       // an array of references to the whole tokens so that you can access their
       // names or any other attributes.
-      if (dictionary.usesReference(token.original.value)) {
+      if (usesReferences(token.original.value)) {
         // Note: make sure to use `token.original.value` because
         // `token.value` is already resolved at this point.
-        const refs = dictionary.getReferences(token.original.value);
+        const refs = getReferences(token.original.value, dictionary.tokens);
         refs.forEach(ref => {
           value = value.replace(ref.value, function() {
             return `${ref.name}`;

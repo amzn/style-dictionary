@@ -12,6 +12,15 @@
  */
 import { expect } from 'chai';
 import StyleDictionary from 'style-dictionary';
+import { registerSuite } from './register.suite.js';
+
+registerSuite({
+  config: {
+    formatter: () => {},
+  },
+  registerMethod: 'registerFormat',
+  prop: 'format',
+});
 
 describe('register', () => {
   describe('format', async () => {

@@ -43,7 +43,6 @@ describe('cleanDir', () => {
     cleanDir(
       { destination: 'test.txt', format },
       { buildPath: '__tests__/__output/extradir1/extradir2/' },
-      {},
     );
     expect(dirExists('__tests__/__output/extradir1/extradir2')).to.be.false;
     expect(dirExists('__tests__/__output/extradir1')).to.be.false;

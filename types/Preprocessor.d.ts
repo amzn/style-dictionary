@@ -11,7 +11,7 @@
  * and limitations under the License.
  */
 
-import { DesignTokens } from './DesignToken';
+import type { DesignTokens } from './DesignToken.d.ts';
 
 export type Preprocessor = {
   name: string;

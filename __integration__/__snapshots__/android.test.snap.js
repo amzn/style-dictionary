@@ -171,7 +171,6 @@ snapshots["android/resources should match snapshot"] =
   <dimen name="size_padding_medium">16.00dp</dimen>
   <dimen name="size_padding_large">16.00dp</dimen>
   <dimen name="size_padding_xl">16.00dp</dimen>
-  
 </resources>`;
 /* end snapshot android/resources should match snapshot */
 
@@ -345,7 +344,6 @@ snapshots["android/resources with references should match snapshot"] =
   <dimen name="size_padding_medium">16.00dp</dimen>
   <dimen name="size_padding_large">16.00dp</dimen>
   <dimen name="size_padding_xl">16.00dp</dimen>
-  
 </resources>`;
 /* end snapshot android/resources with references should match snapshot */
 
@@ -510,7 +508,6 @@ snapshots["android/resources with filter should match snapshot"] =
   <color name="color_font_danger">#ff6d1313</color>
   <color name="color_font_warning">#ff601700</color>
   <color name="color_font_success">#ff08422f</color>
-  
 </resources>`;
 /* end snapshot android/resources with filter should match snapshot */
 

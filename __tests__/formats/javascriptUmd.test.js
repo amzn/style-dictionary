@@ -32,7 +32,7 @@ const tokens = {
 };
 
 const format = formats['javascript/umd'];
-const dictionary = createDictionary({ tokens });
+const dictionary = createDictionary(tokens);
 
 describe('formats', () => {
   describe('javascript/umd', () => {

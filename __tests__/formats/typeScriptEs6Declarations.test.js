@@ -35,7 +35,7 @@ const format = formats['typescript/es6-declarations'];
 describe('formats', () => {
   describe('typescript/es6-declarations', () => {
     it('should be a valid TS file', () => {
-      const dictionary = createDictionary({ tokens });
+      const dictionary = createDictionary(tokens);
       const output = format(
         createFormatArgs({
           dictionary,
@@ -61,7 +61,7 @@ describe('formats', () => {
         },
       };
 
-      const dictionary = createDictionary({ tokens });
+      const dictionary = createDictionary(tokens);
       const output = format(
         createFormatArgs({
           dictionary,

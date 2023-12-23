@@ -1,0 +1,27 @@
+{
+  "size": {
+    "padding": {
+      "zero": {
+        "value": 0
+      },
+      "tiny": {
+        "value": "3"
+      },
+      "small": {
+        "value": "5"
+      },
+      "base": {
+        "value": "10"
+      },
+      "large": {
+        "value": "15"
+      },
+      "xl": {
+        "value": "20"
+      },
+      "xxl": {
+        "value": "30"
+      }
+    }
+  }
+}

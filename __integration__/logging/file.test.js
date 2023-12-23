@@ -36,7 +36,7 @@ describe(`integration`, () => {
     describe(`file`, () => {
       it(`should warn user empty tokens`, async () => {
         const sd = new StyleDictionary({
-          source: [`__integration__/tokens/**/*.json?(c)`],
+          source: [`__integration__/tokens/**/[!_]*.json?(c)`],
           platforms: {
             css: {
               transformGroup: `css`,
@@ -59,7 +59,7 @@ describe(`integration`, () => {
 
       it(`should warn user of name collisions`, async () => {
         const sd = new StyleDictionary({
-          source: [`__integration__/tokens/**/*.json?(c)`],
+          source: [`__integration__/tokens/**/[!_]*.json?(c)`],
           platforms: {
             css: {
               // no name transform means there will be name collisions
@@ -84,7 +84,7 @@ describe(`integration`, () => {
       it(`should not warn user of name collisions with log level set to error`, async () => {
         const sd = new StyleDictionary({
           log: `error`,
-          source: [`__integration__/tokens/**/*.json?(c)`],
+          source: [`__integration__/tokens/**/[!_]*.json?(c)`],
           platforms: {
             css: {
               // no name transform means there will be name collisions
@@ -114,7 +114,7 @@ describe(`integration`, () => {
 
       it(`should warn user of filtered references`, async () => {
         const sd = new StyleDictionary({
-          source: [`__integration__/tokens/**/*.json?(c)`],
+          source: [`__integration__/tokens/**/[!_]*.json?(c)`],
           platforms: {
             css: {
               transformGroup: `css`,
@@ -143,7 +143,7 @@ describe(`integration`, () => {
       it(`should not warn user of filtered references with log level set to error`, async () => {
         const sd = new StyleDictionary({
           log: `error`,
-          source: [`__integration__/tokens/**/*.json?(c)`],
+          source: [`__integration__/tokens/**/[!_]*.json?(c)`],
           platforms: {
             css: {
               transformGroup: `css`,
