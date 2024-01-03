@@ -19,6 +19,7 @@ import { File } from "./File";
 export interface LineFormatting {
   prefix?: string;
   commentStyle?: "short" | "long" | "none";
+  commentPosition?: "inline" | "above";
   indentation?: string;
   separator?: string;
   suffix?: string;
@@ -53,7 +54,7 @@ export interface FormattedVariablesArgs {
 
 export interface FormatHelpers {
   createPropertyFormatter: (
-    args: TokenFormatterArgs
+    args: TokenFormatterArgs,
   ) => (token: TransformedToken) => string;
   fileHeader: (args: FileHeaderArgs) => string;
   formattedVariables: (args: FormattedVariablesArgs) => string;
@@ -62,15 +63,15 @@ export interface FormatHelpers {
   iconsWithPrefix: (
     prefix: string,
     allTokens: DesignToken[],
-    options: object
+    options: object,
   ) => string;
   sortByReference: (
-    dictionary: Dictionary
+    dictionary: Dictionary,
   ) => (a: TransformedToken, b: TransformedToken) => number;
   sortByName: (a: DesignToken, b: DesignToken) => number;
   setSwiftFileProperties: (
     options: object,
     objectType: string,
-    transformGroup: string
+    transformGroup: string,
   ) => string;
 }
