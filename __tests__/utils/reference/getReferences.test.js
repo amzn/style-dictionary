@@ -12,7 +12,9 @@
  */
 
 import { expect } from 'chai';
-import getReferences from '../../../lib/utils/references/getReferences.js';
+import getReferences, {
+  getReferences as publicGetReferences,
+} from '../../../lib/utils/references/getReferences.js';
 
 const tokens = {
   color: {
@@ -49,6 +51,14 @@ const tokens = {
 describe('utils', () => {
   describe('reference', () => {
     describe('getReferences()', () => {
+      describe('public API', () => {
+        it('should not collect errors but rather throw immediately when using public API', () => {
+          expect(() => publicGetReferences('{foo.bar}', tokens)).to.throw(
+            `Reference doesn't exist: tries to reference foo.bar, which is not defined.`,
+          );
+        });
+      });
+
       it(`should return an empty array if the value has no references`, () => {
         expect(getReferences(tokens.color.red.value, tokens)).to.eql([]);
       });

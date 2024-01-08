@@ -43,6 +43,7 @@ export interface ResolveReferenceOptionsInternal extends ResolveReferenceOptions
   stack?: string[];
   foundCirc?: Record<string, boolean>;
   firstIteration?: boolean;
+  throwImmediately?: boolean;
 }
 
 export interface PlatformConfig extends RegexOptions {

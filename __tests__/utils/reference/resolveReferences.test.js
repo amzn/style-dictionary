@@ -12,7 +12,10 @@
  */
 import { expect } from 'chai';
 import { fileToJSON } from '../../__helpers.js';
-import { resolveReferences } from '../../../lib/utils/references/resolveReferences.js';
+import {
+  _resolveReferences as resolveReferences,
+  resolveReferences as publicResolveReferences,
+} from '../../../lib/utils/references/resolveReferences.js';
 import GroupMessages from '../../../lib/utils/groupMessages.js';
 
 const PROPERTY_REFERENCE_WARNINGS = GroupMessages.GROUP.PropertyReferenceWarnings;
@@ -22,6 +25,21 @@ describe('utils', () => {
     describe('resolveReferences', () => {
       beforeEach(() => {
         GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
+      });
+
+      describe('public API', () => {
+        it('should not collect errors but rather throw immediately when using public API', () => {
+          const obj = fileToJSON('__tests__/__json_files/multiple_reference_errors.json');
+          expect(() => publicResolveReferences(obj.a.b, obj)).to.throw(
+            `Reference doesn't exist: tries to reference b.a, which is not defined.`,
+          );
+          expect(() => publicResolveReferences(obj.a.c, obj)).to.throw(
+            `Reference doesn't exist: tries to reference b.c, which is not defined.`,
+          );
+          expect(() => publicResolveReferences(obj.a.d, obj)).to.throw(
+            `Reference doesn't exist: tries to reference d, which is not defined.`,
+          );
+        });
       });
 
       it('should do simple references', () => {
@@ -105,8 +123,8 @@ describe('utils', () => {
         expect(resolveReferences(obj.foo, obj)).to.be.undefined;
         expect(resolveReferences(obj.error, obj)).to.be.undefined;
         expect(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS)).to.eql([
-          "Reference doesn't exist: tries to reference bar, which is not defined",
-          "Reference doesn't exist: tries to reference a.b.d, which is not defined",
+          "Reference doesn't exist: tries to reference bar, which is not defined.",
+          "Reference doesn't exist: tries to reference a.b.d, which is not defined.",
         ]);
       });
 
@@ -202,9 +220,9 @@ describe('utils', () => {
         expect(GroupMessages.count(PROPERTY_REFERENCE_WARNINGS)).to.equal(3);
         expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS))).to.equal(
           JSON.stringify([
-            "Reference doesn't exist: tries to reference b.a, which is not defined",
-            "Reference doesn't exist: tries to reference b.c, which is not defined",
-            "Reference doesn't exist: tries to reference d, which is not defined",
+            "Reference doesn't exist: tries to reference b.a, which is not defined.",
+            "Reference doesn't exist: tries to reference b.c, which is not defined.",
+            "Reference doesn't exist: tries to reference d, which is not defined.",
           ]),
         );
       });
