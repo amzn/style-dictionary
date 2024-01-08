@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.0.0-prerelease.7
+
+### Minor Changes
+
+- 0410295: Improve and test the error handling of standalone usage of reference utilities.
+
 ## 4.0.0-prerelease.6
 
 ### Patch Changes
