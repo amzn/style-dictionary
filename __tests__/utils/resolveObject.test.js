@@ -321,9 +321,9 @@ describe('utils', () => {
       expect(GroupMessages.count(PROPERTY_REFERENCE_WARNINGS)).to.equal(3);
       expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS))).to.equal(
         JSON.stringify([
-          "Reference doesn't exist: a.b tries to reference b.a, which is not defined",
-          "Reference doesn't exist: a.c tries to reference b.c, which is not defined",
-          "Reference doesn't exist: a.d tries to reference d, which is not defined",
+          "Reference doesn't exist: a.b tries to reference b.a, which is not defined.",
+          "Reference doesn't exist: a.c tries to reference b.c, which is not defined.",
+          "Reference doesn't exist: a.d tries to reference d, which is not defined.",
         ]),
       );
     });
