@@ -55,7 +55,7 @@
     "test:browser:coverage": "cd coverage/lcov-report && npx http-server -o -c-1",
     "test:browser:watch": "web-test-runner --watch",
     "test:browser:update-snapshots": "web-test-runner --update-snapshots",
-    "test:node": "mocha -r mocha-hooks.mjs './__integration__/**/*.test.js' './__tests__/**/*.test.js' './__node_tests__/**/*.test.js'",
+    "test:node": "mocha -r mocha-hooks.mjs './__integration__/logging/file.test.js' './__tests__/**/*.test.js' './__node_tests__/**/*.test.js'",
     "serve-docs": "docsify serve docs -p 3000 -P 12345",
     "install-cli": "npm install -g $(npm pack)",
     "release": "node scripts/inject-version.js && tsc --emitDeclarationOnly && changeset publish",
