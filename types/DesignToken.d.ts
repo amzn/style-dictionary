@@ -16,7 +16,8 @@
  * Make sure to also change it there when this type changes!
  */
 export interface DesignToken {
-  value: any;
+  value?: any;
+  $value?: any;
   name?: string;
   comment?: string;
   themeable?: boolean;
