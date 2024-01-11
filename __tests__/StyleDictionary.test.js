@@ -82,7 +82,7 @@ describe('StyleDictionary class + extend method', () => {
       });
       const output = fileToJSON('__tests__/__tokens/paddings.json');
       traverseObj(output, (obj) => {
-        if (obj.hasOwnProperty('value') && !obj.filePath) {
+        if (Object.hasOwn(obj, 'value') && !obj.filePath) {
           obj.filePath = '__tests__/__tokens/paddings.json';
           obj.isSource = false;
         }
@@ -98,7 +98,7 @@ describe('StyleDictionary class + extend method', () => {
       });
       const output = fileToJSON('__tests__/__tokens/paddings.json');
       traverseObj(output, (obj) => {
-        if (obj.hasOwnProperty('value') && !obj.filePath) {
+        if (Object.hasOwn(obj, 'value') && !obj.filePath) {
           obj.filePath = '__tests__/__tokens/paddings.json';
           obj.isSource = false;
         }
@@ -148,7 +148,7 @@ describe('StyleDictionary class + extend method', () => {
       });
       const output = fileToJSON('__tests__/__tokens/paddings.json');
       traverseObj(output, (obj) => {
-        if (obj.hasOwnProperty('value') && !obj.filePath) {
+        if (Object.hasOwn(obj, 'value') && !obj.filePath) {
           obj.filePath = '__tests__/__tokens/paddings.json';
           obj.isSource = true;
         }
@@ -164,7 +164,7 @@ describe('StyleDictionary class + extend method', () => {
       });
       const output = fileToJSON('__tests__/__tokens/paddings.json');
       traverseObj(output, (obj) => {
-        if (obj.hasOwnProperty('value') && !obj.filePath) {
+        if (Object.hasOwn(obj, 'value') && !obj.filePath) {
           obj.filePath = filePath;
           obj.isSource = true;
         }
@@ -180,7 +180,7 @@ describe('StyleDictionary class + extend method', () => {
       });
       const output = fileToJSON('__tests__/__tokens/paddings.json');
       traverseObj(output, (obj) => {
-        if (obj.hasOwnProperty('value') && !obj.filePath) {
+        if (Object.hasOwn(obj, 'value') && !obj.filePath) {
           obj.filePath = '__tests__/__tokens/paddings.json';
           obj.isSource = true;
         }
@@ -200,7 +200,7 @@ describe('StyleDictionary class + extend method', () => {
     });
     const output = fileToJSON('__tests__/__tokens/paddings.json');
     traverseObj(output, (obj) => {
-      if (obj.hasOwnProperty('value') && !obj.filePath) {
+      if (Object.hasOwn(obj, 'value') && !obj.filePath) {
         obj.filePath = '__tests__/__tokens/paddings.json';
         obj.isSource = true;
       }
@@ -287,5 +287,43 @@ describe('StyleDictionary class + extend method', () => {
     // however, we don't actually test this here..
 
     expect(obj.polluted).to.be.undefined;
+  });
+
+  it('should allow using $type value on a token group, children inherit, local overrides take precedence', async () => {
+    const sd = new StyleDictionary({
+      tokens: {
+        dimensions: {
+          $type: 'dimension',
+          sm: {
+            $value: '5',
+          },
+          md: {
+            $value: '10',
+          },
+          nested: {
+            deep: {
+              lg: {
+                $value: '15',
+              },
+            },
+          },
+          nope: {
+            $value: '20',
+            $type: 'spacing',
+          },
+        },
+      },
+      platforms: {
+        css: {
+          transformGroup: 'css',
+        },
+      },
+    });
+    await sd.hasInitialized;
+
+    expect(sd.tokens.dimensions.sm.$type).to.equal('dimension');
+    expect(sd.tokens.dimensions.md.$type).to.equal('dimension');
+    expect(sd.tokens.dimensions.nested.deep.lg.$type).to.equal('dimension');
+    expect(sd.tokens.dimensions.nope.$type).to.equal('spacing');
   });
 });

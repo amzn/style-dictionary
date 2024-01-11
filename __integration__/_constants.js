@@ -6,6 +6,7 @@ export const cleanConsoleOutput = (str) => {
     // https://github.com/chalk/ansi-regex/blob/main/index.js#L3
     .map((s) =>
       s
+        // eslint-disable-next-line no-control-regex
         .replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, '')
         .trim(),
     );

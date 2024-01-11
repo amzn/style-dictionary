@@ -28,7 +28,7 @@ describe('transform', () => {
     });
 
     it('should work if all the args are proper', () => {
-      var test = tokenSetup({ value: '#fff' }, 'white', ['color', 'base']);
+      const test = tokenSetup({ value: '#fff' }, 'white', ['color', 'base']);
       expect(typeof test).to.equal('object');
       expect(test).to.have.property('value');
       expect(test).to.have.property('original');
@@ -37,25 +37,28 @@ describe('transform', () => {
     });
 
     it('should not do anything and return the property if it has been setup previously', () => {
-      var original = { value: '#fff', original: {} };
-      var test = tokenSetup(original, 'white', ['color', 'base']);
+      const original = { value: '#fff', original: {} };
+      const test = tokenSetup(original, 'white', ['color', 'base']);
       expect(test).to.eql(original);
     });
 
     it('should use attributes if already set', () => {
-      var attributes = { foo: 'bar' };
-      var test = tokenSetup({ value: '#fff', attributes: attributes }, 'white', ['color', 'base']);
+      const attributes = { foo: 'bar' };
+      const test = tokenSetup({ value: '#fff', attributes: attributes }, 'white', [
+        'color',
+        'base',
+      ]);
       expect(test.attributes).to.eql(attributes);
     });
 
     it('should use the name on the property if set', () => {
-      var name = 'name';
-      var test = tokenSetup({ value: '#fff', name: name }, 'white', ['color', 'base']);
+      const name = 'name';
+      const test = tokenSetup({ value: '#fff', name: name }, 'white', ['color', 'base']);
       expect(test).to.have.property('name', name);
     });
 
     it('should use the name passed in if not set on the property', () => {
-      var test = tokenSetup({ value: '#fff' }, 'white', ['color', 'base']);
+      const test = tokenSetup({ value: '#fff' }, 'white', ['color', 'base']);
       expect(test).to.have.property('name', 'white');
     });
 

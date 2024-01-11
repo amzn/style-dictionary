@@ -227,7 +227,8 @@ snapshots["formats all should match typescript/module-declarations snapshot"] =
 export default tokens;
 
 declare interface DesignToken {
-      value: any;
+      value?: any;
+      $value?: any;
       name?: string;
       comment?: string;
       themeable?: boolean;

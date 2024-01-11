@@ -13,7 +13,7 @@
 import { expect } from 'chai';
 import token from '../../lib/transform/token.js';
 
-var options = {
+const options = {
   transforms: [
     {
       type: 'attribute',
