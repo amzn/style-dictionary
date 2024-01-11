@@ -12,9 +12,8 @@
  */
 import { expect } from 'chai';
 import createPropertyFormatter from '../../../lib/common/formatHelpers/createPropertyFormatter.js';
-import createDictionary from '../../../lib/utils/createDictionary.js';
 
-const dictionary = createDictionary({
+const dictionary = {
   foo: {
     original: {
       value: '5px',
@@ -41,9 +40,9 @@ const dictionary = createDictionary({
     value: '5px',
     type: 'spacing',
   },
-});
+};
 
-const transformedDictionary = createDictionary({
+const transformedDictionary = {
   foo: {
     original: {
       value: '5px',
@@ -70,9 +69,9 @@ const transformedDictionary = createDictionary({
     value: 'changed by transitive transform',
     type: 'spacing',
   },
-});
+};
 
-const numberDictionary = createDictionary({
+const numberDictionary = {
   foo: {
     original: {
       value: 10,
@@ -125,9 +124,9 @@ const numberDictionary = createDictionary({
     value: 0,
     type: 'dimension',
   },
-});
+};
 
-const multiDictionary = createDictionary({
+const multiDictionary = {
   foo: {
     original: {
       value: '10px',
@@ -167,9 +166,9 @@ const multiDictionary = createDictionary({
     value: '10px 5px 15px',
     type: 'spacing',
   },
-});
+};
 
-const objectDictionary = createDictionary({
+const objectDictionary = {
   foo: {
     original: {
       value: '5px',
@@ -200,7 +199,7 @@ const objectDictionary = createDictionary({
     value: '5px dashed #FF00FF',
     type: 'border',
   },
-});
+};
 
 describe('common', () => {
   describe('formatHelpers', () => {
@@ -209,41 +208,41 @@ describe('common', () => {
         it('should support outputReferences', () => {
           const propFormatter = createPropertyFormatter({
             outputReferences: true,
-            dictionary,
+            dictionary: { tokens: dictionary },
             format: 'css',
           });
-          // expect(propFormatter(dictionary.tokens.foo)).to.equal('  --foo: 5px;');
-          expect(propFormatter(dictionary.tokens.ref)).to.equal('  --ref: var(--foo);');
+          expect(propFormatter(dictionary.foo)).to.equal('  --foo: 5px;');
+          expect(propFormatter(dictionary.ref)).to.equal('  --ref: var(--foo);');
         });
 
         it('should support outputReferences when values are transformed by (transitive) "value" transforms', () => {
           const propFormatter = createPropertyFormatter({
             outputReferences: true,
-            dictionary: transformedDictionary,
+            dictionary: { tokens: transformedDictionary },
             format: 'css',
           });
-          expect(propFormatter(transformedDictionary.tokens.foo)).to.equal('  --foo: 5px;');
-          expect(propFormatter(transformedDictionary.tokens.ref)).to.equal('  --ref: var(--foo);');
+          expect(propFormatter(transformedDictionary.foo)).to.equal('  --foo: 5px;');
+          expect(propFormatter(transformedDictionary.ref)).to.equal('  --ref: var(--foo);');
         });
 
         it('should support number values for outputReferences', () => {
           const propFormatter = createPropertyFormatter({
             outputReferences: true,
-            dictionary: numberDictionary,
+            dictionary: { tokens: numberDictionary },
             format: 'css',
           });
-          expect(propFormatter(numberDictionary.tokens.foo)).to.equal('  --foo: 10;');
-          expect(propFormatter(numberDictionary.tokens.ref)).to.equal('  --ref: var(--foo);');
+          expect(propFormatter(numberDictionary.foo)).to.equal('  --foo: 10;');
+          expect(propFormatter(numberDictionary.ref)).to.equal('  --ref: var(--foo);');
         });
 
         it('should support valid falsy values for outputReferences', () => {
           const propFormatter = createPropertyFormatter({
             outputReferences: true,
-            dictionary: numberDictionary,
+            dictionary: { tokens: numberDictionary },
             format: 'css',
           });
-          expect(propFormatter(numberDictionary.tokens.zero)).to.equal('  --zero: 0;');
-          expect(propFormatter(numberDictionary.tokens['ref-zero'])).to.equal(
+          expect(propFormatter(numberDictionary.zero)).to.equal('  --zero: 0;');
+          expect(propFormatter(numberDictionary['ref-zero'])).to.equal(
             '  --ref-zero: var(--zero);',
           );
         });
@@ -251,12 +250,12 @@ describe('common', () => {
         it('should support multiple references for outputReferences', () => {
           const propFormatter = createPropertyFormatter({
             outputReferences: true,
-            dictionary: multiDictionary,
+            dictionary: { tokens: multiDictionary },
             format: 'css',
           });
-          expect(propFormatter(multiDictionary.tokens.foo)).to.equal('  --foo: 10px;');
-          expect(propFormatter(multiDictionary.tokens.bar)).to.equal('  --bar: 15px;');
-          expect(propFormatter(multiDictionary.tokens.ref)).to.equal(
+          expect(propFormatter(multiDictionary.foo)).to.equal('  --foo: 10px;');
+          expect(propFormatter(multiDictionary.bar)).to.equal('  --bar: 15px;');
+          expect(propFormatter(multiDictionary.ref)).to.equal(
             '  --ref: var(--foo) 5px var(--bar);',
           );
         });
@@ -267,19 +266,19 @@ describe('common', () => {
           // In this case, since it is an object value, we will run the transformation on the transformed (string) value.
           const propFormatter = createPropertyFormatter({
             outputReferences: true,
-            dictionary: objectDictionary,
+            dictionary: { tokens: objectDictionary },
             format: 'css',
           });
           // expect(propFormatter(objectDictionary.tokens.foo)).to.equal('  --foo: 5px;');
 
-          expect(propFormatter(objectDictionary.tokens.ref)).to.equal(
+          expect(propFormatter(objectDictionary.ref)).to.equal(
             '  --ref: var(--foo) dashed #FF00FF;',
           );
         });
       });
 
       describe('commentStyle', () => {
-        const commentTokens = {
+        const commentDictionary = {
           color: {
             red: {
               name: 'color-red',
@@ -314,25 +313,23 @@ describe('common', () => {
           },
         };
 
-        const commentDictionary = createDictionary(commentTokens);
-
         it('should default to putting comment next to the output value', async () => {
           // long commentStyle
           const cssFormatter = createPropertyFormatter({
             format: 'css',
-            dictionary: commentDictionary,
+            dictionary: { tokens: commentDictionary },
           });
           // short commentStyle
           const sassFormatter = createPropertyFormatter({
             format: 'sass',
-            dictionary: commentDictionary,
+            dictionary: { tokens: commentDictionary },
           });
 
           // red = single-line comment, blue = multi-line comment
-          const cssRed = cssFormatter(commentDictionary.tokens.color.red);
-          const cssBlue = cssFormatter(commentDictionary.tokens.color.blue);
-          const sassRed = sassFormatter(commentDictionary.tokens.color.red);
-          const sassBlue = sassFormatter(commentDictionary.tokens.color.blue);
+          const cssRed = cssFormatter(commentDictionary.color.red);
+          const cssBlue = cssFormatter(commentDictionary.color.blue);
+          const sassRed = sassFormatter(commentDictionary.color.red);
+          const sassBlue = sassFormatter(commentDictionary.color.blue);
 
           await expect(cssRed).to.matchSnapshot(1);
           await expect(cssBlue).to.matchSnapshot(2);
@@ -345,18 +342,18 @@ describe('common', () => {
           // long commentStyle
           const cssFormatter = createPropertyFormatter({
             format: 'css',
-            dictionary: commentDictionary,
+            dictionary: { tokens: commentDictionary },
             formatting: { commentStyle: 'long', commentPosition: 'above' },
           });
           // short commentStyle
           const sassFormatter = createPropertyFormatter({
             format: 'sass',
-            dictionary: commentDictionary,
+            dictionary: { tokens: commentDictionary },
             formatting: { commentStyle: 'short', commentPosition: 'above' },
           });
 
-          const cssRed = cssFormatter(commentDictionary.tokens.color.green);
-          const sassRed = sassFormatter(commentDictionary.tokens.color.green);
+          const cssRed = cssFormatter(commentDictionary.color.green);
+          const sassRed = sassFormatter(commentDictionary.color.green);
 
           await expect(cssRed).to.matchSnapshot(1);
 

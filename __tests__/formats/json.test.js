@@ -12,8 +12,8 @@
  */
 import { expect } from 'chai';
 import formats from '../../lib/common/formats.js';
-import createDictionary from '../../lib/utils/createDictionary.js';
 import createFormatArgs from '../../lib/utils/createFormatArgs.js';
+import flattenTokens from '../../lib/utils/flattenTokens.js';
 
 const file = {
   destination: '__output/',
@@ -27,7 +27,6 @@ const tokens = {
 };
 
 const format = formats['json'];
-const dictionary = createDictionary(tokens);
 
 describe('formats', () => {
   describe('json', () => {
@@ -35,7 +34,7 @@ describe('formats', () => {
       await expect(
         format(
           createFormatArgs({
-            dictionary,
+            dictionary: { tokens, allTokens: flattenTokens(tokens) },
             file,
             platform: {},
           }),

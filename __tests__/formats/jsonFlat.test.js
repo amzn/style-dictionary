@@ -12,8 +12,34 @@
  */
 import { expect } from 'chai';
 import formats from '../../lib/common/formats.js';
-import { colorDictionary } from './__constants.js';
 import createFormatArgs from '../../lib/utils/createFormatArgs.js';
+import flattenTokens from '../../lib/utils/flattenTokens.js';
+
+const colorTokenName = 'color-base-red-400';
+const colorTokenValue = '#EF5350';
+
+const colorTokens = {
+  color: {
+    base: {
+      red: {
+        400: {
+          name: colorTokenName,
+          value: colorTokenValue,
+          original: {
+            value: colorTokenValue,
+          },
+          attributes: {
+            category: 'color',
+            type: 'base',
+            item: 'red',
+            subitem: '400',
+          },
+          path: ['color', 'base', 'red', '400'],
+        },
+      },
+    },
+  },
+};
 
 const file = {
   destination: '__output/',
@@ -28,7 +54,7 @@ describe('formats', () => {
       await expect(
         format(
           createFormatArgs({
-            dictionary: colorDictionary,
+            dictionary: { tokens: colorTokens, allTokens: flattenTokens(colorTokens) },
             file,
             platform: {},
           }),

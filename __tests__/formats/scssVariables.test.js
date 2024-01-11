@@ -13,8 +13,8 @@
 import { expect } from 'chai';
 import { compileString } from 'sass';
 import formats from '../../lib/common/formats.js';
-import createDictionary from '../../lib/utils/createDictionary.js';
 import createFormatArgs from '../../lib/utils/createFormatArgs.js';
+import flattenTokens from '../../lib/utils/flattenTokens.js';
 
 const file = {
   destination: '__output/',
@@ -49,14 +49,13 @@ const tokens = {
 };
 
 const format = formats['scss/variables'];
-const dictionary = createDictionary(tokens);
 
 describe('formats', () => {
   describe('scss/variables', () => {
     it('should have a valid scss syntax and match snapshot', async () => {
       const result = format(
         createFormatArgs({
-          dictionary,
+          dictionary: { tokens, allTokens: flattenTokens(tokens) },
           file,
           platform: {},
         }),
@@ -69,10 +68,10 @@ describe('formats', () => {
     });
 
     it('should optionally use !default', async () => {
-      const themeableDictionary = { ...dictionary };
+      const themeableDictionary = { tokens, allTokens: flattenTokens(tokens) };
       const formattedScss = format(
         createFormatArgs({
-          dictionary,
+          dictionary: { tokens, allTokens: flattenTokens(tokens) },
           file,
           platform: {},
         }),

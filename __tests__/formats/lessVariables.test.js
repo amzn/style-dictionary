@@ -12,8 +12,8 @@
  */
 import { expect } from 'chai';
 import formats from '../../lib/common/formats.js';
-import createDictionary from '../../lib/utils/createDictionary.js';
 import createFormatArgs from '../../lib/utils/createFormatArgs.js';
+import flattenTokens from '../../lib/utils/flattenTokens.js';
 
 const file = {
   destination: '__output/',
@@ -48,14 +48,13 @@ const tokens = {
 };
 
 const format = formats['less/variables'];
-const dictionary = createDictionary(tokens);
 
 describe('formats', () => {
   describe('less/variables', () => {
     it('should have a valid less syntax and match snapshot', async () => {
       const result = format(
         createFormatArgs({
-          dictionary,
+          dictionary: { tokens, allTokens: flattenTokens(tokens) },
           file,
           platform: {},
         }),
