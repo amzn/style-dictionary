@@ -12,8 +12,8 @@
  */
 import { expect } from 'chai';
 import formats from '../../lib/common/formats.js';
-import createDictionary from '../../lib/utils/createDictionary.js';
 import createFormatArgs from '../../lib/utils/createFormatArgs.js';
+import flattenTokens from '../../lib/utils/flattenTokens.js';
 
 const file = {
   destination: 'output/',
@@ -36,7 +36,6 @@ const tokens = {
 };
 
 const format = formats['json/nested'];
-const dictionary = createDictionary(tokens);
 
 describe('formats', function () {
   describe('json/nested', function () {
@@ -44,7 +43,7 @@ describe('formats', function () {
       await expect(
         format(
           createFormatArgs({
-            dictionary,
+            dictionary: { tokens, allTokens: flattenTokens(tokens) },
             file,
             platform: {},
           }),

@@ -12,8 +12,8 @@
  */
 import { expect } from 'chai';
 import formats from '../../lib/common/formats.js';
-import createDictionary from '../../lib/utils/createDictionary.js';
 import createFormatArgs from '../../lib/utils/createFormatArgs.js';
+import flattenTokens from '../../lib/utils/flattenTokens.js';
 
 const file = {
   destination: '__output/',
@@ -36,10 +36,9 @@ const format = formats['typescript/module-declarations'].bind(file);
 describe('formats', () => {
   describe('typescript/module-declarations', () => {
     it('should be a valid TS file', () => {
-      const dictionary = createDictionary(tokens);
       const output = format(
         createFormatArgs({
-          dictionary,
+          dictionary: { tokens, allTokens: flattenTokens(tokens) },
           file,
           platform: {},
         }),

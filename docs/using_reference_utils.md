@@ -10,6 +10,47 @@ $ npm install -D style-dictionary
 
 ## Usage
 
+### Flatten Tokens
+
+Flatten dictionary tokens object to an array of flattened tokens.
+
+```javascript
+import StyleDictionary from 'style-dictionary';
+import { flattenTokens } from 'style-dictionary/utils';
+
+const sd = new StyleDictionary({
+  tokens: {
+    colors: {
+      black: {
+        value: '#000',
+        type: 'color',
+        name: 'colors-black',
+      },
+    },
+    spacing: {
+      2: {
+        value: '2px',
+        type: 'dimension',
+        name: 'spacing-2',
+      },
+    },
+    border: {
+      value: 'solid {spacing.2} {colors.black}',
+      name: 'border',
+    },
+  },
+});
+
+const flat = flattenTokens(sd, sd.tokens.border.value);
+/**
+ * [
+ *   { value: '#000', type: 'color', name: 'colors-black' },
+ *   { value: '2px', type: 'dimension', name: 'spacing-2' },
+ *   { value: 'solid {spacing.2} {colors.black}', name: 'border' }
+ * ]
+ */
+```
+
 ### usesReference
 
 Whether or not a token value contains references
