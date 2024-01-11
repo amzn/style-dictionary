@@ -13,8 +13,8 @@
 import { expect } from 'chai';
 import { compileString } from 'sass';
 import formats from '../../lib/common/formats.js';
-import createDictionary from '../../lib/utils/createDictionary.js';
 import createFormatArgs from '../../lib/utils/createFormatArgs.js';
+import flattenTokens from '../../lib/utils/flattenTokens.js';
 
 const file = {
   destination: '__output/',
@@ -56,14 +56,13 @@ const platform = {
 };
 
 const format = formats['scss/icons'];
-const dictionary = createDictionary(tokens);
 
 describe('formats', () => {
   describe('scss/icons', () => {
     it('should have a valid scss syntax and match snapshot', async () => {
       const result = format(
         createFormatArgs({
-          dictionary,
+          dictionary: { tokens, allTokens: flattenTokens(tokens) },
           file,
           platform,
         }),

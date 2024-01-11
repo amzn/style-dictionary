@@ -12,8 +12,8 @@
  */
 import { expect } from 'chai';
 import formats from '../../lib/common/formats.js';
-import createDictionary from '../../lib/utils/createDictionary.js';
 import createFormatArgs from '../../lib/utils/createFormatArgs.js';
+import flattenTokens from '../../lib/utils/flattenTokens.js';
 
 const originalFile = {
   destination: '__output/',
@@ -45,7 +45,6 @@ const tokens = {
 };
 
 const format = formats['ios-swift/any.swift'];
-const dictionary = createDictionary(tokens);
 
 describe('formats', () => {
   describe('ios-swift/any.swift', () => {
@@ -57,7 +56,7 @@ describe('formats', () => {
       await expect(
         format(
           createFormatArgs({
-            dictionary,
+            dictionary: { tokens, allTokens: flattenTokens(tokens) },
             file,
             platform: {},
           }),
@@ -72,7 +71,7 @@ describe('formats', () => {
       await expect(
         format(
           createFormatArgs({
-            dictionary,
+            dictionary: { tokens, allTokens: flattenTokens(tokens) },
             file,
             platform: {},
           }),
@@ -87,7 +86,7 @@ describe('formats', () => {
       await expect(
         format(
           createFormatArgs({
-            dictionary,
+            dictionary: { tokens, allTokens: flattenTokens(tokens) },
             file,
             platform: {},
           }),
@@ -102,7 +101,7 @@ describe('formats', () => {
       await expect(
         format(
           createFormatArgs({
-            dictionary,
+            dictionary: { tokens, allTokens: flattenTokens(tokens) },
             file,
             platform: {},
           }),
