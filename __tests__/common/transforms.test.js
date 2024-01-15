@@ -160,12 +160,16 @@ describe('common', () => {
         var attributes2 = transforms["attribute/color"].transformer({
           value: "rgba(170,170,170,0.6)"
         });
+        var attributes3 = transforms["attribute/color"].transformer({
+          value: "hsl(332, 98%, 36%, 0.97)"
+        });
         expect(attributes).toHaveProperty('rgb.a', 0.6);
         expect(attributes).toHaveProperty('rgb.r', 170);
         expect(attributes).toHaveProperty('hsl.s', 0);
         expect(attributes2).toHaveProperty('rgb.a', 0.6);
         expect(attributes2).toHaveProperty('rgb.r', 170);
         expect(attributes2).toHaveProperty('hsl.s', 0);
+        expect(attributes3).toHaveProperty('hsl.a', 0.97);
       });
     });
 
