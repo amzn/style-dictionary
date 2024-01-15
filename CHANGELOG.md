@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.0.0-prerelease.8
+
+### Patch Changes
+
+- 59f3eb0: Expose flattenTokens utility.
+- 39547fb: Fix parsers async support, use resolved filePath instead of raw.
+
 ## 4.0.0-prerelease.7
 
 ### Minor Changes
