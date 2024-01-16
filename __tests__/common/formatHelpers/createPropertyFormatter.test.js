@@ -290,16 +290,6 @@ describe('common', () => {
               },
               path: ['color', 'red'],
             },
-            blue: {
-              name: 'color-blue',
-              value: '#0000FF',
-              comment: 'Foo\nbar\nqux',
-              attributes: {
-                category: 'color',
-                type: 'blue',
-              },
-              path: ['color', 'blue'],
-            },
             green: {
               name: 'color-green',
               value: '#00FF00',
@@ -309,6 +299,16 @@ describe('common', () => {
                 type: 'green',
               },
               path: ['color', 'green'],
+            },
+            blue: {
+              name: 'color-blue',
+              value: '#0000FF',
+              comment: 'Foo\nbar\nqux',
+              attributes: {
+                category: 'color',
+                type: 'blue',
+              },
+              path: ['color', 'blue'],
             },
           },
         };
@@ -356,8 +356,57 @@ describe('common', () => {
           const sassRed = sassFormatter(commentDictionary.color.green);
 
           await expect(cssRed).to.matchSnapshot(1);
-
           await expect(sassRed).to.matchSnapshot(2);
+        });
+
+        it('supports W3C spec $description property for comments', async () => {
+          const descriptionDictionary = {
+            color: {
+              red: {
+                name: 'color-red',
+                value: '#FF0000',
+                $description: 'Foo bar qux red',
+                attributes: {
+                  category: 'color',
+                  type: 'red',
+                },
+                path: ['color', 'red'],
+              },
+              green: {
+                name: 'color-green',
+                value: '#00FF00',
+                $description: 'Foo bar qux green',
+                attributes: {
+                  category: 'color',
+                  type: 'green',
+                },
+                path: ['color', 'green'],
+              },
+              blue: {
+                name: 'color-blue',
+                value: '#0000FF',
+                $description: 'Foo\nbar\nqux\nblue',
+                attributes: {
+                  category: 'color',
+                  type: 'blue',
+                },
+                path: ['color', 'blue'],
+              },
+            },
+          };
+          // long commentStyle
+          const cssFormatter = createPropertyFormatter({
+            format: 'css',
+            dictionary: { tokens: descriptionDictionary },
+          });
+
+          const cssRed = cssFormatter(descriptionDictionary.color.red);
+          const cssGreen = cssFormatter(descriptionDictionary.color.green);
+          const cssBlue = cssFormatter(descriptionDictionary.color.blue);
+
+          await expect(cssRed).to.matchSnapshot(1);
+          await expect(cssGreen).to.matchSnapshot(2);
+          await expect(cssBlue).to.matchSnapshot(3);
         });
       });
     });

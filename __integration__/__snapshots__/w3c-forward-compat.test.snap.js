@@ -8,7 +8,8 @@ snapshots["should match snapshot"] =
  */
 
 :root {
-  --colors-black: #000000;
+  --colors-black-500: rgb(0, 0, 0);
+  --colors-black-dimension: 5px; /* Some description */
 }
 `;
 /* end snapshot should match snapshot */

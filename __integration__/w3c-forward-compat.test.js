@@ -23,13 +23,30 @@ describe('integration', () => {
     clearOutput(buildPath);
   });
 
+  /**
+   * Integration test for forward compatibility with https://design-tokens.github.io/community-group/format/
+   * - $value special property
+   * - $type special property & inherits from ancestors
+   * - $description special property
+   */
   describe('W3C DTCG draft spec forward compatibility', async () => {
     const sd = new StyleDictionary({
       tokens: {
         colors: {
           $type: 'color', // $type should be inherited by the children
           black: {
-            $value: '#000000', // $value should work
+            500: {
+              $value: '#000000', // $value should work
+              value: {}, // should be allowed as $ prop takes precedence -> bad practice though
+              type: 'dimension', // should be allowed as the inherited $type takes precedence -> bad practice though
+            },
+            dimension: {
+              $value: '5',
+              value: 'something else', // should be allowed as $ prop takes precedence -> bad practice though
+              $type: 'dimension',
+              type: 'color', // should be allowed as $ prop takes precedence -> bad practice though
+              $description: 'Some description',
+            },
           },
         },
       },
@@ -41,10 +58,17 @@ describe('integration', () => {
             return Color(token.$value).toRgbString();
           },
         },
+        'custom/add/px': {
+          type: 'value',
+          matcher: (token) => token.$type === 'dimension',
+          transformer: (token) => {
+            return `${token.$value}px`;
+          },
+        },
       },
       platforms: {
         css: {
-          transforms: ['name/cti/kebab', 'custom/css/color'],
+          transforms: ['name/cti/kebab', 'custom/css/color', 'custom/add/px'],
           buildPath,
           files: [
             {

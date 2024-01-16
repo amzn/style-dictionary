@@ -18,6 +18,9 @@
 export interface DesignToken {
   value?: any;
   $value?: any;
+  type?: string;
+  $type?: string;
+  $description?: string;
   name?: string;
   comment?: string;
   themeable?: boolean;
