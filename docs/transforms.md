@@ -88,6 +88,47 @@ This allows you to modify a reference that modifies another reference. For examp
 
 Using a custom transitive transform you could have `color.danger` darken `color.red` and `color.error` darken `color.danger`. The pre-defined transforms are _not transitive_ to be backwards compatible with Style Dictionary v2 - an upgrade should not cause breaking changes.
 
+### Defer transitive transformation manually
+
+It's also possible to control inside a transitive transform's transform function whether the transformation should be deferred until a later cycle of references resolution.
+This is done by returning `undefined`, which basically means "I cannot currently do the transform due to a reference not yet being resolved".
+
+Imagine the following transform:
+
+```js
+import { StyleDictionary } from 'style-dictionary';
+import { usesReferences } from 'style-dictionary/utils';
+
+StyleDictionary.registerTransform({
+  name: '',
+  type: 'value',
+  transitive: true,
+  transformer: (token) => {
+    const darkenModifier = token.darken;
+    if (usesReferences(darkenModifier)) {
+      // defer this transform, because our darken value is a reference
+      return undefined;
+    }
+    return darken(token.value, darkenModifier);
+  },
+});
+```
+
+Combined with the following tokens:
+
+```json
+{
+  "color": {
+    "darken": { "value": 0.5 },
+    "red": { "value": "#f00" },
+    "danger": { "value": "{color.red}", "darken": "{darken}" }
+  }
+}
+```
+
+Due to `token.darken` being a property that uses a reference, we need the ability to defer its transformation from within the transformer,
+since the transformer is the only place where we know which token properties the transformation is reliant upon.
+
 If you want to learn more about transitive transforms, take a look at the [transitive transforms example](https://github.com/amzn/style-dictionary/tree/main/examples/advanced/transitive-transforms).
 
 ## Pre-defined Transforms
