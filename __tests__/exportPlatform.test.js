@@ -12,6 +12,7 @@
  */
 import { expect } from 'chai';
 import StyleDictionary from 'style-dictionary';
+import { usesReferences } from 'style-dictionary/utils';
 import { fileToJSON } from './__helpers.js';
 
 const config = fileToJSON('__tests__/__configs/test.json');
@@ -58,66 +59,112 @@ describe('exportPlatform', () => {
     expect(dictionary.size.padding.base.value.endsWith('px')).to.be.true;
   });
 
-  it('should have applied transforms for props with refs in it', async () => {
-    const StyleDictionaryExtended = await styleDictionary.extend({
-      platforms: {
-        test: {
-          transforms: ['color/css', 'color/darken'],
+  describe('transitive transforms', () => {
+    it('should have applied transforms for props with refs in it', async () => {
+      const StyleDictionaryExtended = await styleDictionary.extend({
+        platforms: {
+          test: {
+            transforms: ['color/css', 'color/darken'],
+          },
         },
-      },
+      });
+      StyleDictionary.registerTransform({
+        type: 'value',
+        name: 'color/darken',
+        transitive: true,
+        matcher: function (prop) {
+          return !!prop.original.transformColor;
+        },
+        transformer: function (prop) {
+          return prop.value + '-darker';
+        },
+      });
+      const dictionary = await StyleDictionaryExtended.exportPlatform('test');
+      expect(dictionary.color.button.active.value).to.equal('#0077CC-darker');
+      expect(dictionary.color.button.hover.value).to.equal('#0077CC-darker-darker');
     });
-    StyleDictionary.registerTransform({
-      type: 'value',
-      name: 'color/darken',
-      transitive: true,
-      matcher: function (prop) {
-        return !!prop.original.transformColor;
-      },
-      transformer: function (prop) {
-        return prop.value + '-darker';
-      },
-    });
-    const dictionary = await StyleDictionaryExtended.exportPlatform('test');
-    expect(dictionary.color.button.active.value).to.equal('#0077CC-darker');
-    expect(dictionary.color.button.hover.value).to.equal('#0077CC-darker-darker');
-  });
 
-  it('should have transitive transforms applied without .value in references', async () => {
-    const sd = new StyleDictionary({
-      tokens: {
-        one: { value: 'foo' },
-        two: { value: '{one.value}' },
-        three: { value: '{two}' },
-        four: { value: '{one}' },
-        five: { value: '{four.value}' },
-        six: { value: '{one}' },
-        seven: { value: '{six}' },
-        eight: { value: '{one.value}' },
-        nine: { value: '{eight.value}' },
-      },
-      transform: {
-        transitive: {
-          type: 'value',
-          transitive: true,
-          transformer: (token) => `${token.value}-bar`,
+    it('should have transitive transforms applied without .value in references', async () => {
+      const sd = new StyleDictionary({
+        tokens: {
+          one: { value: 'foo' },
+          two: { value: '{one.value}' },
+          three: { value: '{two}' },
+          four: { value: '{one}' },
+          five: { value: '{four.value}' },
+          six: { value: '{one}' },
+          seven: { value: '{six}' },
+          eight: { value: '{one.value}' },
+          nine: { value: '{eight.value}' },
         },
-      },
-      platforms: {
-        test: {
-          transforms: ['transitive'],
+        transform: {
+          transitive: {
+            type: 'value',
+            transitive: true,
+            transformer: (token) => `${token.value}-bar`,
+          },
         },
-      },
+        platforms: {
+          test: {
+            transforms: ['transitive'],
+          },
+        },
+      });
+      const dictionary = await sd.exportPlatform('test');
+      expect(dictionary.one.value).to.equal('foo-bar');
+      expect(dictionary.two.value).to.equal('foo-bar-bar');
+      expect(dictionary.three.value).to.equal('foo-bar-bar-bar');
+      expect(dictionary.four.value).to.equal('foo-bar-bar');
+      expect(dictionary.five.value).to.equal('foo-bar-bar-bar');
+      expect(dictionary.six.value).to.equal('foo-bar-bar');
+      expect(dictionary.seven.value).to.equal('foo-bar-bar-bar');
+      expect(dictionary.eight.value).to.equal('foo-bar-bar');
+      expect(dictionary.nine.value).to.equal('foo-bar-bar-bar');
     });
-    const dictionary = await sd.exportPlatform('test');
-    expect(dictionary.one.value).to.equal('foo-bar');
-    expect(dictionary.two.value).to.equal('foo-bar-bar');
-    expect(dictionary.three.value).to.equal('foo-bar-bar-bar');
-    expect(dictionary.four.value).to.equal('foo-bar-bar');
-    expect(dictionary.five.value).to.equal('foo-bar-bar-bar');
-    expect(dictionary.six.value).to.equal('foo-bar-bar');
-    expect(dictionary.seven.value).to.equal('foo-bar-bar-bar');
-    expect(dictionary.eight.value).to.equal('foo-bar-bar');
-    expect(dictionary.nine.value).to.equal('foo-bar-bar-bar');
+
+    it('should apply transitive transforms with references nested beyond "value" prop, so transforms can consume the resolved value', async () => {
+      const StyleDictionaryExtended = new StyleDictionary({
+        tokens: {
+          a: {
+            value: 0.5,
+          },
+          b: {
+            value: '#fff',
+            type: 'color',
+            $extensions: {
+              'bar.foo': {
+                darken: '{a}',
+              },
+            },
+          },
+        },
+        platforms: {
+          test: {
+            transforms: ['color/darken'],
+          },
+        },
+      });
+      StyleDictionaryExtended.registerTransform({
+        type: 'value',
+        name: 'color/darken',
+        transitive: true,
+        matcher: (token) => token.type === 'color',
+        transformer: (token) => {
+          const darkenMod = token?.$extensions?.['bar.foo']?.darken;
+          if (usesReferences(darkenMod)) {
+            // defer this transform, because our darken value is a ref
+            return undefined;
+          }
+          if (typeof darkenMod === 'number') {
+            // don't actually darken, just return darken value for this test
+            return '#000';
+          }
+          return token.value;
+        },
+      });
+      const dictionary = await StyleDictionaryExtended.exportPlatform('test');
+      expect(dictionary.b.value).to.equal('#000');
+    });
   });
 
   it('should not have mutated the original tokens', async () => {
@@ -234,156 +281,151 @@ describe('exportPlatform', () => {
     expect(actual).to.eql(expected);
   });
 
-  // describe('token references without .value', async () => {
-  //   const tokens = {
-  //     color: {
-  //       red: { value: '#f00' },
-  //       error: { value: '{color.red}' },
-  //       errorWithValue: { value: '{color.red.value}' },
-  //       danger: { value: '{color.error}' },
-  //       dangerWithValue: { value: '{color.error.value}' },
-  //       dangerErrorValue: { value: '{color.errorWithValue}' },
-  //     },
-  //   };
-  //   const actual = (
-  //     await StyleDictionary.extend({
-  //       tokens,
-  //       platforms: {
-  //         css: {
-  //           transformGroup: 'css',
-  //         },
-  //       },
-  //     })
-  //   ).exportPlatform('css');
-  //   it('should work if referenced directly', () => {
-  //     expect(actual.color.error.value).toEqual('#ff0000');
-  //   });
-  //   it('should work if there is a transitive reference', () => {
-  //     expect(actual.color.danger.value).toEqual('#ff0000');
-  //   });
-  //   it('should work if there is a transitive reference with .value', () => {
-  //     expect(actual.color.errorWithValue.value).toEqual('#ff0000');
-  //     expect(actual.color.dangerWithValue.value).toEqual('#ff0000');
-  //     expect(actual.color.dangerErrorValue.value).toEqual('#ff0000');
-  //   });
-  // });
-  // describe('non-token references', async () => {
-  //   const tokens = {
-  //     nonTokenColor: 'hsl(10,20%,20%)',
-  //     hue: {
-  //       red: '10',
-  //       green: '120',
-  //       blue: '220',
-  //     },
-  //     comment: 'hello',
-  //     color: {
-  //       red: {
-  //         // Note having references as part of the value,
-  //         // either in an object like this, or in an interpolated
-  //         // string like below, requires the use of transitive
-  //         // transforms if you want it to be transformed.
-  //         value: {
-  //           h: '{hue.red}',
-  //           s: '100%',
-  //           l: '50%',
-  //         },
-  //       },
-  //       blue: {
-  //         value: '{nonTokenColor}',
-  //         comment: '{comment}',
-  //       },
-  //       green: {
-  //         value: 'hsl({hue.green}, 50%, 50%)',
-  //       },
-  //     },
-  //   };
-  //   // making the css/color transform transitive so we can be sure the references
-  //   // get resolved properly and transformed.
-  //   const transitiveTransform = Object.assign({}, StyleDictionary.transform['color/css'], {
-  //     transitive: true,
-  //   });
-  //   const actual = (
-  //     await StyleDictionary.extend({
-  //       tokens,
-  //       transform: {
-  //         transitiveTransform,
-  //       },
-  //       platforms: {
-  //         css: {
-  //           transforms: ['attribute/cti', 'name/cti/kebab', 'transitiveTransform'],
-  //         },
-  //       },
-  //     })
-  //   ).exportPlatform('css');
-  //   it('should work if referenced directly', () => {
-  //     expect(actual.color.blue.value).toEqual('#3d2c29');
-  //   });
-  //   it('should work if referenced from a non-value', () => {
-  //     expect(actual.color.blue.comment).toEqual(tokens.comment);
-  //   });
-  //   it('should work if interpolated', () => {
-  //     expect(actual.color.green.value).toEqual('#40bf40');
-  //   });
-  //   it('should work if part of an object value', () => {
-  //     expect(actual.color.red.value).toEqual('#ff2b00');
-  //   });
-  // });
+  describe('token references without .value', async () => {
+    const tokens = {
+      color: {
+        red: { value: '#f00' },
+        error: { value: '{color.red}' },
+        errorWithValue: { value: '{color.red.value}' },
+        danger: { value: '{color.error}' },
+        dangerWithValue: { value: '{color.error.value}' },
+        dangerErrorValue: { value: '{color.errorWithValue}' },
+      },
+    };
+    const dict = new StyleDictionary({
+      tokens,
+      platforms: {
+        css: {
+          transformGroup: 'css',
+        },
+      },
+    });
+    const actual = await dict.exportPlatform('css');
+
+    it('should work if referenced directly', () => {
+      expect(actual.color.error.value).to.equal('#ff0000');
+    });
+
+    it('should work if there is a transitive reference', () => {
+      expect(actual.color.danger.value).to.equal('#ff0000');
+    });
+
+    it('should work if there is a transitive reference with .value', () => {
+      expect(actual.color.errorWithValue.value).to.equal('#ff0000');
+      expect(actual.color.dangerWithValue.value).to.equal('#ff0000');
+      expect(actual.color.dangerErrorValue.value).to.equal('#ff0000');
+    });
+  });
+
+  describe('non-token references', async () => {
+    const tokens = {
+      nonTokenColor: 'hsl(10,20%,20%)',
+      hue: {
+        red: '10',
+        green: '120',
+        blue: '220',
+      },
+      comment: 'hello',
+      color: {
+        red: {
+          // Note having references as part of the value,
+          // either in an object like this, or in an interpolated
+          // string like below, requires the use of transitive
+          // transforms if you want it to be transformed.
+          value: {
+            h: '{hue.red}',
+            s: '100%',
+            l: '50%',
+          },
+        },
+        blue: {
+          value: '{nonTokenColor}',
+          comment: '{comment}',
+        },
+        green: {
+          value: 'hsl({hue.green}, 50%, 50%)',
+        },
+      },
+    };
+    // making the css/color transform transitive so we can be sure the references
+    // get resolved properly and transformed.
+    const transitiveTransform = Object.assign({}, StyleDictionary.transform['color/css'], {
+      transitive: true,
+    });
+    const dict = new StyleDictionary({
+      tokens,
+      transform: {
+        transitiveTransform,
+      },
+      platforms: {
+        css: {
+          transforms: ['attribute/cti', 'name/cti/kebab', 'transitiveTransform'],
+        },
+      },
+    });
+    const actual = await dict.exportPlatform('css');
+    it('should work if referenced directly', () => {
+      expect(actual.color.blue.value).to.equal('#3d2c29');
+    });
+    it('should work if referenced from a non-value', () => {
+      expect(actual.color.blue.comment).to.equal(tokens.comment);
+    });
+    it('should work if interpolated', () => {
+      expect(actual.color.green.value).to.equal('#40bf40');
+    });
+    it('should work if part of an object value', () => {
+      expect(actual.color.red.value).to.equal('#ff2b00');
+    });
+  });
 });
 
-// describe('reference warnings', () => {
-//   const errorMessage = `Problems were found when trying to resolve property references`;
-//   const platforms = {
-//     css: {
-//       transformGroup: `css`,
-//     },
-//   };
+describe('reference warnings', () => {
+  const errorMessage = `Problems were found when trying to resolve property references`;
+  const platforms = {
+    css: {
+      transformGroup: `css`,
+    },
+  };
 
-//   it('should throw if there are simple property reference errors', async () => {
-//     const tokens = {
-//       a: '#ff0000',
-//       b: '{c}',
-//     };
-//     await expect(
-//       StyleDictionary.extend({
-//         tokens,
-//         platforms,
-//       }).then((sd) => sd.exportPlatform('css')),
-//     ).to.eventually.be.rejectedWith(errorMessage);
-//   });
+  it('should throw if there are simple property reference errors', async () => {
+    const tokens = {
+      a: '#ff0000',
+      b: '{c}',
+    };
+    const dict = new StyleDictionary({
+      tokens,
+      platforms,
+    });
 
-//   it('should throw if there are circular reference errors', async () => {
-//     const tokens = {
-//       a: '{b}',
-//       b: '{a}',
-//     };
-//     await expect(
-//       StyleDictionary.extend({
-//         tokens,
-//         platforms,
-//       }).then((sd) => sd.exportPlatform('css')),
-//     ).to.eventually.be.rejectedWith(errorMessage);
-//   });
+    await expect(dict.exportPlatform('css')).to.eventually.be.rejectedWith(errorMessage);
+  });
 
-//   it('should throw if there are complex property reference errors', async () => {
-//     const tokens = {
-//       color: {
-//         core: {
-//           red: { valuer: '#ff0000' }, // notice misspelling
-//           blue: { 'value:': '#0000ff' },
-//         },
-//         danger: { value: '{color.core.red.value}' },
-//         warning: { value: '{color.base.red.valuer}' },
-//         info: { value: '{color.core.blue.value}' },
-//         error: { value: '{color.danger.value}' },
-//       },
-//     };
-//     await expect(
-//       StyleDictionary.extend({
-//         tokens,
-//         platforms,
-//       }).then((sd) => {
-//         sd.exportPlatform('css');
-//       }),
-//     ).to.eventually.be.rejectedWith(errorMessage);
-//   });
-// });
+  it('should throw if there are circular reference errors', async () => {
+    const tokens = {
+      a: '{b}',
+      b: '{a}',
+    };
+    const dict = new StyleDictionary({
+      tokens,
+      platforms,
+    });
+    await expect(dict.exportPlatform('css')).to.eventually.be.rejectedWith(errorMessage);
+  });
+
+  it('should throw if there are complex property reference errors', async () => {
+    const tokens = {
+      color: {
+        core: {
+          red: { valuer: '#ff0000' }, // notice misspelling
+          blue: { 'value:': '#0000ff' },
+        },
+        danger: { value: '{color.core.red.value}' },
+        warning: { value: '{color.base.red.valuer}' },
+        info: { value: '{color.core.blue.value}' },
+        error: { value: '{color.danger.value}' },
+      },
+    };
+    const dict = new StyleDictionary({ tokens, platforms });
+    await expect(dict.exportPlatform('css')).to.eventually.be.rejectedWith(errorMessage);
+  });
+});
