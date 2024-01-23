@@ -292,7 +292,8 @@ describe('exportPlatform', () => {
         dangerErrorValue: { value: '{color.errorWithValue}' },
       },
     };
-    const dict = new StyleDictionary({
+
+    const sd = new StyleDictionary({
       tokens,
       platforms: {
         css: {
@@ -300,7 +301,7 @@ describe('exportPlatform', () => {
         },
       },
     });
-    const actual = await dict.exportPlatform('css');
+    const actual = await sd.exportPlatform('css');
 
     it('should work if referenced directly', () => {
       expect(actual.color.error.value).to.equal('#ff0000');
@@ -352,7 +353,8 @@ describe('exportPlatform', () => {
     const transitiveTransform = Object.assign({}, StyleDictionary.transform['color/css'], {
       transitive: true,
     });
-    const dict = new StyleDictionary({
+
+    const sd = new StyleDictionary({
       tokens,
       transform: {
         transitiveTransform,
@@ -363,7 +365,8 @@ describe('exportPlatform', () => {
         },
       },
     });
-    const actual = await dict.exportPlatform('css');
+    const actual = await sd.exportPlatform('css');
+
     it('should work if referenced directly', () => {
       expect(actual.color.blue.value).to.equal('#3d2c29');
     });
@@ -377,55 +380,111 @@ describe('exportPlatform', () => {
       expect(actual.color.red.value).to.equal('#ff2b00');
     });
   });
-});
 
-describe('reference warnings', () => {
-  const errorMessage = `Problems were found when trying to resolve property references`;
-  const platforms = {
-    css: {
-      transformGroup: `css`,
-    },
-  };
-
-  it('should throw if there are simple property reference errors', async () => {
-    const tokens = {
-      a: '#ff0000',
-      b: '{c}',
-    };
-    const dict = new StyleDictionary({
-      tokens,
-      platforms,
-    });
-
-    await expect(dict.exportPlatform('css')).to.eventually.be.rejectedWith(errorMessage);
-  });
-
-  it('should throw if there are circular reference errors', async () => {
-    const tokens = {
-      a: '{b}',
-      b: '{a}',
-    };
-    const dict = new StyleDictionary({
-      tokens,
-      platforms,
-    });
-    await expect(dict.exportPlatform('css')).to.eventually.be.rejectedWith(errorMessage);
-  });
-
-  it('should throw if there are complex property reference errors', async () => {
-    const tokens = {
-      color: {
-        core: {
-          red: { valuer: '#ff0000' }, // notice misspelling
-          blue: { 'value:': '#0000ff' },
-        },
-        danger: { value: '{color.core.red.value}' },
-        warning: { value: '{color.base.red.valuer}' },
-        info: { value: '{color.core.blue.value}' },
-        error: { value: '{color.danger.value}' },
+  describe('reference warnings', () => {
+    const errorMessage = `Problems were found when trying to resolve property references`;
+    const platforms = {
+      css: {
+        transformGroup: `css`,
       },
     };
-    const dict = new StyleDictionary({ tokens, platforms });
-    await expect(dict.exportPlatform('css')).to.eventually.be.rejectedWith(errorMessage);
+
+    it('should throw if there are simple property reference errors', async () => {
+      const tokens = {
+        a: '#ff0000',
+        b: '{c}',
+      };
+
+      const sd = new StyleDictionary({
+        tokens,
+        platforms,
+      });
+
+      await expect(sd.exportPlatform('css')).to.eventually.be.rejectedWith(errorMessage);
+    });
+
+    it('should throw if there are circular reference errors', async () => {
+      const tokens = {
+        a: '{b}',
+        b: '{a}',
+      };
+
+      const sd = new StyleDictionary({
+        tokens,
+        platforms,
+      });
+      await expect(sd.exportPlatform('css')).to.eventually.be.rejectedWith(errorMessage);
+    });
+
+    it('should throw if there are complex property reference errors', async () => {
+      const tokens = {
+        color: {
+          core: {
+            red: { valuer: '#ff0000' }, // notice misspelling
+            blue: { 'value:': '#0000ff' },
+          },
+          danger: { value: '{color.core.red.value}' },
+          warning: { value: '{color.base.red.valuer}' },
+          info: { value: '{color.core.blue.value}' },
+          error: { value: '{color.danger.value}' },
+        },
+      };
+      const sd = new StyleDictionary({
+        tokens,
+        platforms,
+      });
+      await expect(sd.exportPlatform('css')).to.eventually.be.rejectedWith(errorMessage);
+    });
+  });
+
+  describe('w3c forward compatibility', () => {
+    it('should allow using $value instead of value, even combining them', async () => {
+      const sd = new StyleDictionary({
+        tokens: {
+          dimensions: {
+            sm: {
+              $value: '5',
+              type: 'dimension',
+            },
+            md: {
+              $value: '10',
+              value: '2000',
+              type: 'dimension',
+            },
+            lg: {
+              value: '20',
+              type: 'dimension',
+            },
+          },
+        },
+        transform: {
+          'custom/add/px': {
+            type: 'value',
+            matcher: (token) => token.type === 'dimension',
+            transformer: (token) => {
+              return `${token.$value ?? token.value}px`;
+            },
+          },
+        },
+        platforms: {
+          css: {
+            transforms: ['name/cti/kebab', 'custom/add/px'],
+          },
+        },
+      });
+
+      const tokens = await sd.exportPlatform('css');
+
+      expect(tokens.dimensions.sm.$value).to.equal('5px');
+      expect(tokens.dimensions.md.$value).to.equal('10px');
+
+      // unaffected, because $value took precedence in both the transform and transformed output
+      expect(tokens.dimensions.md.value).to.equal('2000');
+
+      // the transform in this test happens to fallback to regular value prop if $value does not exist
+      // Whether or not a transform should ignore "value" or use it as a fallback is up to the transform author:
+      // whether or not they want to support both the old and new format simultaneously
+      expect(tokens.dimensions.lg.value).to.equal('20px');
+    });
   });
 });
