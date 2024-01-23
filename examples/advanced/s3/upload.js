@@ -1,19 +1,19 @@
-var AWS = require('aws-sdk'),
+const AWS = require('aws-sdk'),
   fs = require('fs-extra');
 
 // Create an S3 client
-var s3 = new AWS.S3();
+const s3 = new AWS.S3();
 
 // Enter your bucket name here
-var bucketName = 'style-dictionary-test';
+const bucketName = 'style-dictionary-test';
 
 // Change working directory to ./build
 process.chdir('build');
-var files = fs.walkSync('./');
+const files = fs.walkSync('./');
 
 s3.createBucket({ Bucket: bucketName }, function () {
   files.forEach(function (file) {
-    var options = {
+    const options = {
       Bucket: bucketName,
       Key: file,
       Body: fs.readFileSync(file),

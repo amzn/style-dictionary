@@ -74,13 +74,14 @@ program
       console.error('Please supply 1 type of project from: ' + types.join(', '));
       process.exit(1);
     }
-
+    /* eslint-disable no-console */
     console.log('Copying starter files...\n');
     node_fs.copySync(path.join(__dirname, '..', 'examples', type), process.cwd());
     console.log('Source style dictionary starter files created!\n');
     console.log(
       'Running `style-dictionary build` for the first time to generate build artifacts.\n',
     );
+    /* eslint-disable no-console */
     styleDictionaryBuild();
   });
 

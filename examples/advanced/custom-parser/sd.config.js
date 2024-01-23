@@ -22,7 +22,7 @@ StyleDictionary.registerParser({
       const output = {};
 
       for (const key in object) {
-        if (object.hasOwnProperty(key)) {
+        if (Object.hasOwn(object, key)) {
           const element = object[key];
           output[`${pathParts}-${key}`] = element;
         }

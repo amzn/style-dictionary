@@ -17,7 +17,7 @@ describe('common', () => {
   describe('filters', () => {
     describe('removePrivate', () => {
       it('should keep a regular token in for distribution', () => {
-        var regularToken = {
+        const regularToken = {
           name: 'color-border',
           value: '#1a1aed',
         };
@@ -26,7 +26,7 @@ describe('common', () => {
       });
 
       it('should keep an unfiltered token in for distribution', () => {
-        var unfilteredToken = {
+        const unfilteredToken = {
           name: 'color-border',
           value: '#1a1aed',
           private: false,
@@ -36,7 +36,7 @@ describe('common', () => {
       });
 
       it('should remove a filtered token from the distribution output', () => {
-        var filteredToken = {
+        const filteredToken = {
           name: 'color-border',
           value: '#1a1aed',
           private: true,

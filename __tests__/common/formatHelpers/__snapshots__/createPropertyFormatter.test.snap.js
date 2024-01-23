@@ -34,3 +34,21 @@ snapshots["common formatHelpers createPropertyFormatter commentStyle allows over
 $color-green: #00FF00;`;
 /* end snapshot common formatHelpers createPropertyFormatter commentStyle allows overriding formatting commentStyle 2 */
 
+snapshots["common formatHelpers createPropertyFormatter commentStyle supports W3C spec $description property for comments 1"] = 
+`  --color-red: #FF0000; /* Foo bar qux red */`;
+/* end snapshot common formatHelpers createPropertyFormatter commentStyle supports W3C spec $description property for comments 1 */
+
+snapshots["common formatHelpers createPropertyFormatter commentStyle supports W3C spec $description property for comments 2"] = 
+`  --color-green: #00FF00; /* Foo bar qux green */`;
+/* end snapshot common formatHelpers createPropertyFormatter commentStyle supports W3C spec $description property for comments 2 */
+
+snapshots["common formatHelpers createPropertyFormatter commentStyle supports W3C spec $description property for comments 3"] = 
+`  /**
+   * Foo
+   * bar
+   * qux
+   * blue
+   */
+  --color-blue: #0000FF;`;
+/* end snapshot common formatHelpers createPropertyFormatter commentStyle supports W3C spec $description property for comments 3 */
+
