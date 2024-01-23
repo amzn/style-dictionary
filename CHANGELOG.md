@@ -1,5 +1,15 @@
 # Changelog
 
+## 4.0.0-prerelease.9
+
+### Minor Changes
+
+- 294fd0e: Support W3C Draft specification for Design Tokens, by adding support for $value, $type and $description properties.
+
+### Patch Changes
+
+- 3138313: Allow transitive transforms to return undefined, by doing this the transformer can mark itself as "deferred" for that specific token. This is useful when references in properties other than "value" need to be resolved first.
+
 ## 4.0.0-prerelease.8
 
 ### Patch Changes
