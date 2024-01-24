@@ -24,6 +24,6 @@
 
 <%= options.accessControl %><%= options.objectType %> <%= file.className %> {
     <%= allTokens.map(function(prop) {
-      return options.accessControl + 'static let ' + formatProperty(prop);
+      return options.accessControl + (options.static ? 'static ' : '') + 'let ' + formatProperty(prop);
     }).join('\n    ') %>
 }

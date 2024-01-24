@@ -72,3 +72,39 @@ public struct StyleDictionary {
 }
 "
 `;
+
+exports[`formats ios-swift/any.swift with static should match snapshot 1`] = `
+"
+//
+// __output/
+//
+
+// Do not edit directly
+// Generated on Sat, 01 Jan 2000 00:00:00 GMT
+
+
+import UIKit
+
+public class StyleDictionary {
+    public static let colorBaseRed = UIColor(red: 1.000, green: 0.000, blue: 0.000, alpha: 1)
+}
+"
+`;
+
+exports[`formats ios-swift/any.swift without static should match snapshot 1`] = `
+"
+//
+// __output/
+//
+
+// Do not edit directly
+// Generated on Sat, 01 Jan 2000 00:00:00 GMT
+
+
+import UIKit
+
+public class StyleDictionary {
+    public let colorBaseRed = UIColor(red: 1.000, green: 0.000, blue: 0.000, alpha: 1)
+}
+"
+`;

@@ -89,6 +89,24 @@ describe('formats', () => {
       }), {}, file)).toMatchSnapshot();
     });
 
+    it('without static should match snapshot', () => {
+      file.options.static = false
+      expect(format(createFormatArgs({
+        dictionary,
+        file,
+        platform: {}
+      }), {}, file)).toMatchSnapshot();
+    });
+
+    it('with static should match snapshot', () => {
+      file.options.static = true
+      expect(format(createFormatArgs({
+        dictionary,
+        file,
+        platform: {}
+      }), {}, file)).toMatchSnapshot();
+    });
+
   });
 
 });

@@ -1563,7 +1563,10 @@ Creates a Swift implementation file of a class with values. It adds default `cla
 <tr>
     <td>options</td><td><code>Object</code></td><td></td><td></td>
     </tr><tr>
-    <td>[options.accessControl]</td><td><code>String</code></td><td><code>public</code></td><td><p>Level of <a href="https://docs.swift.org/swift-book/LanguageGuide/AccessControl.html">access</a> of the generated swift object</p>
+    <td>[options.accessControl]</td><td><code>String</code></td><td><code>public</code></td><td><p>Level of <a href="https://docs.swift.org/swift-book/documentation/the-swift-programming-language/accesscontrol/">access</a> of the generated swift object</p>
+</td>
+    </tr><tr>
+    <td>[options.static]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Type of property of the generated swift object</p>
 </td>
     </tr><tr>
     <td>[options.import]</td><td><code>Array.&lt;String&gt;</code></td><td><code>UIKit</code></td><td><p>Modules to import. Can be a string or array of strings</p>
@@ -1605,6 +1608,9 @@ Creates a Swift implementation file of an enum with values. It adds default `enu
     <td>options</td><td><code>Object</code></td><td></td><td></td>
     </tr><tr>
     <td>[options.accessControl]</td><td><code>String</code></td><td><code>public</code></td><td><p>Level of <a href="https://docs.swift.org/swift-book/LanguageGuide/AccessControl.html">access</a> of the generated swift object</p>
+</td>
+    </tr><tr>
+    <td>[options.static]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Type of property of the generated swift object</p>
 </td>
     </tr><tr>
     <td>[options.import]</td><td><code>Array.&lt;String&gt;</code></td><td><code>UIKit</code></td><td><p>Modules to import. Can be a string or array of strings</p>
@@ -1650,6 +1656,9 @@ accessControl: 'internal',
     <td>options</td><td><code>Object</code></td><td></td><td></td>
     </tr><tr>
     <td>[options.accessControl]</td><td><code>String</code></td><td><code>public</code></td><td><p>Level of <a href="https://docs.swift.org/swift-book/LanguageGuide/AccessControl.html">access</a> of the generated swift object</p>
+</td>
+    </tr><tr>
+    <td>[options.static]</td><td><code>Boolean</code></td><td><code>true</code></td><td><p>Type of property of the generated swift object</p>
 </td>
     </tr><tr>
     <td>[options.import]</td><td><code>Array.&lt;String&gt;</code></td><td><code>UIKit</code></td><td><p>Modules to import. Can be a string or array of strings</p>
