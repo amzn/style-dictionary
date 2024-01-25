@@ -48,6 +48,9 @@ describe('integration', () => {
               $description: 'Some description',
             },
           },
+          foo: {
+            $value: '{colors.black.500}',
+          },
         },
       },
       transform: {
