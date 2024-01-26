@@ -40,8 +40,7 @@
     "examples",
     "LICENSE",
     "NOTICE",
-    "types",
-    "scripts/postinstall-dev.cjs"
+    "types"
   ],
   "scripts": {
     "format": "run-p format:*",
@@ -60,7 +59,8 @@
     "serve-docs": "docsify serve docs -p 3000 -P 12345",
     "install-cli": "npm install -g $(npm pack)",
     "release": "node scripts/inject-version.js && tsc --emitDeclarationOnly && changeset publish",
-    "postinstall": "node scripts/postinstall-dev.cjs"
+    "prepare": "husky install",
+    "postinstall": "patch-package"
   },
   "lint-staged": {
     "*.js": [
@@ -107,6 +107,7 @@
     "is-plain-obj": "^4.1.0",
     "json5": "^2.2.2",
     "lodash-es": "^4.17.21",
+    "patch-package": "^8.0.0",
     "path-unified": "^0.1.0",
     "tinycolor2": "^1.6.0"
   },
@@ -139,7 +140,6 @@
     "memfs": "^4.6.0",
     "mocha": "^10.2.0",
     "npm-run-all": "^4.1.5",
-    "patch-package": "^8.0.0",
     "prettier": "^3.0.3",
     "sass": "^1.69.5",
     "stylus": "^0.56.0",
