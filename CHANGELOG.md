@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.0.0-prerelease.13
+
+### Patch Changes
+
+- 24584b4: Conditionally only run dev scripts when CWD is style-dictionary, so our consumers don't run it by accident
+
 ## 4.0.0-prerelease.12
 
 ### Patch Changes
