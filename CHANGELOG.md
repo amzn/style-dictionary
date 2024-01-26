@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.0.0-prerelease.12
+
+### Patch Changes
+
+- c2cbd1b: Publish the postinstall-dev script to NPM.
+
 ## 4.0.0-prerelease.11
 
 ### Patch Changes
