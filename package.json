@@ -40,7 +40,8 @@
     "examples",
     "LICENSE",
     "NOTICE",
-    "types"
+    "types",
+    "scripts/postinstall-dev.cjs"
   ],
   "scripts": {
     "format": "run-p format:*",
