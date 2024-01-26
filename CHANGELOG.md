@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.0.0-prerelease.11
+
+### Patch Changes
+
+- cd48aac: Only run postinstall scripts when NODE_ENV isn't production (e.g. npm install --production or --omit=dev). To avoid errors running husky/patch-package.
+
 ## 4.0.0-prerelease.10
 
 ### Patch Changes
