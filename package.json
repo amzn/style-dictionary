@@ -59,8 +59,7 @@
     "serve-docs": "docsify serve docs -p 3000 -P 12345",
     "install-cli": "npm install -g $(npm pack)",
     "release": "node scripts/inject-version.js && tsc --emitDeclarationOnly && changeset publish",
-    "prepare": "husky install",
-    "postinstall": "patch-package"
+    "postinstall": "node scripts/postinstall-dev.cjs"
   },
   "lint-staged": {
     "*.js": [
