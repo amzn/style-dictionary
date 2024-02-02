@@ -41,7 +41,7 @@ const sd = new StyleDictionary({
   },
 });
 
-const flat = flattenTokens(sd, sd.tokens.border.value);
+const flat = flattenTokens(sd);
 /**
  * [
  *   { value: '#000', type: 'color', name: 'colors-black' },
@@ -50,6 +50,8 @@ const flat = flattenTokens(sd, sd.tokens.border.value);
  * ]
  */
 ```
+
+> You can pass a second argument `usesW3C`, if set to true, the flattenTokens utility will assume W3C syntax (`$value` props)
 
 ### usesReference
 
@@ -99,6 +101,9 @@ resolveReferences(sd.tokens.border.value, sd.tokens); // "solid 2px #000"
 resolveReferences('solid {spacing.2} {colors.black}', sd.tokens); // alternative way, yet identical to line above -> "solid 2px #000"
 ```
 
+> You can pass a third `options` argument where you can pass some configuration options for how references are resolved
+> Most notable option for public usage is `usesW3C`, if set to true, the resolveReferences utility will assume W3C syntax (`$value` props)
+
 ### getReferences
 
 Whether or not a token value contains references
@@ -136,6 +141,9 @@ getReferences(sd, 'solid {spacing.2} {colors.black}'); // alternative way, yet i
  * ]
  */
 ```
+
+> You can pass a third `options` argument where you can pass some configuration options for how references are resolved
+> Most notable option for public usage is `usesW3C`, if set to true, the resolveReferences utility will assume W3C syntax (`$value` props)
 
 #### Complicated example
 
@@ -264,6 +272,9 @@ export const ZIndexAboveFold = 1;
 export const SemanticBgPrimary = ColorsBlack;
 export const Border = `solid ${Spacing2} ${SemanticBgPrimary}`;
 ```
+
+> Note that the above example does not support W3C syntax, but this could be quite easily added,
+> since you can query `sd.options.usesW3C` or inside a formatter functions `dictionary.options.usesW3C`
 
 ### typeW3CDelegate
 

@@ -438,31 +438,38 @@ describe('exportPlatform', () => {
   });
 
   describe('w3c forward compatibility', () => {
-    it('should allow using $value instead of value, even combining them', async () => {
+    it('should allow using $value instead of value', async () => {
       const sd = new StyleDictionary({
         tokens: {
+          $type: 'dimension',
           dimensions: {
             sm: {
               $value: '5',
-              type: 'dimension',
             },
             md: {
               $value: '10',
               value: '2000',
-              type: 'dimension',
             },
-            lg: {
-              value: '20',
-              type: 'dimension',
+            value: {
+              $value: '20',
+            },
+            nested: {
+              value: {
+                deep: {
+                  $value: '30',
+                },
+              },
             },
           },
         },
         transform: {
           'custom/add/px': {
             type: 'value',
-            matcher: (token) => token.type === 'dimension',
+            matcher: (token) => {
+              return token.$type === 'dimension';
+            },
             transformer: (token) => {
-              return `${token.$value ?? token.value}px`;
+              return `${sd.options.usesW3C ? token.$value : token.value}px`;
             },
           },
         },
@@ -478,13 +485,14 @@ describe('exportPlatform', () => {
       expect(tokens.dimensions.sm.$value).to.equal('5px');
       expect(tokens.dimensions.md.$value).to.equal('10px');
 
-      // unaffected, because $value took precedence in both the transform and transformed output
+      // unaffected, because "metadata" property
       expect(tokens.dimensions.md.value).to.equal('2000');
 
-      // the transform in this test happens to fallback to regular value prop if $value does not exist
-      // Whether or not a transform should ignore "value" or use it as a fallback is up to the transform author:
-      // whether or not they want to support both the old and new format simultaneously
-      expect(tokens.dimensions.lg.value).to.equal('20px');
+      // considers "value" a token name here
+      expect(tokens.dimensions.value.$value).to.equal('20px');
+
+      // considers "value" a token group here
+      expect(tokens.dimensions.nested.value.deep.$value).to.equal('30px');
     });
   });
 });

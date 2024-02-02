@@ -58,14 +58,14 @@ describe('integration', () => {
           type: 'value',
           matcher: (token) => token.$type === 'color',
           transformer: (token) => {
-            return Color(token.$value).toRgbString();
+            return Color(sd.options.usesW3C ? token.$value : token.value).toRgbString();
           },
         },
         'custom/add/px': {
           type: 'value',
           matcher: (token) => token.$type === 'dimension',
           transformer: (token) => {
-            return `${token.$value}px`;
+            return `${sd.options.usesW3C ? token.$value : token.value}px`;
           },
         },
       },

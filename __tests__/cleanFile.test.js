@@ -29,7 +29,7 @@ describe('cleanFile', () => {
   });
 
   it('should delete a file properly', () => {
-    buildFile({ destination: 'test.txt', format }, { buildPath: '__tests__/__output/' }, {});
+    buildFile({ destination: 'test.txt', format }, { buildPath: '__tests__/__output/' }, {}, {});
     cleanFile({ destination: 'test.txt', format }, { buildPath: '__tests__/__output/' }, {});
     expect(fileExists('__tests__/__output/test.txt')).to.be.false;
   });

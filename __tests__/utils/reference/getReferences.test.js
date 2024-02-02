@@ -12,9 +12,7 @@
  */
 
 import { expect } from 'chai';
-import getReferences, {
-  getReferences as publicGetReferences,
-} from '../../../lib/utils/references/getReferences.js';
+import { _getReferences, getReferences } from '../../../lib/utils/references/getReferences.js';
 
 const tokens = {
   color: {
@@ -53,33 +51,33 @@ describe('utils', () => {
     describe('getReferences()', () => {
       describe('public API', () => {
         it('should not collect errors but rather throw immediately when using public API', () => {
-          expect(() => publicGetReferences('{foo.bar}', tokens)).to.throw(
+          expect(() => getReferences('{foo.bar}', tokens)).to.throw(
             `Reference doesn't exist: tries to reference foo.bar, which is not defined.`,
           );
         });
       });
 
       it(`should return an empty array if the value has no references`, () => {
-        expect(getReferences(tokens.color.red.value, tokens)).to.eql([]);
+        expect(_getReferences(tokens.color.red.value, tokens)).to.eql([]);
       });
 
       it(`should work with a single reference`, () => {
-        expect(getReferences(tokens.color.danger.value, tokens)).to.eql([{ value: '#f00' }]);
+        expect(_getReferences(tokens.color.danger.value, tokens)).to.eql([{ value: '#f00' }]);
       });
 
       it(`should work with object values`, () => {
-        expect(getReferences(tokens.border.primary.value, tokens)).to.eql([
+        expect(_getReferences(tokens.border.primary.value, tokens)).to.eql([
           { value: '#f00' },
           { value: '2px' },
         ]);
       });
 
       it(`should work with objects that have numbers`, () => {
-        expect(getReferences(tokens.border.secondary.value, tokens)).to.eql([{ value: '#f00' }]);
+        expect(_getReferences(tokens.border.secondary.value, tokens)).to.eql([{ value: '#f00' }]);
       });
 
       it(`should work with interpolated values`, () => {
-        expect(getReferences(tokens.border.tertiary.value, tokens)).to.eql([
+        expect(_getReferences(tokens.border.tertiary.value, tokens)).to.eql([
           { value: '2px' },
           { value: '#f00' },
         ]);

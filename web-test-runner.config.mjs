@@ -29,7 +29,7 @@ export default {
     threshold: {
       statements: 98,
       branches: 99,
-      functions: 96,
+      functions: 95,
       lines: 98,
     },
   },

@@ -34,6 +34,7 @@ describe('cleanDir', () => {
       { destination: 'test.txt', format },
       { buildPath: '__tests__/__output/extradir1/extradir2/' },
       {},
+      {},
     );
     cleanFile(
       { destination: 'test.txt', format },

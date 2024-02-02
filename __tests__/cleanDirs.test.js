@@ -55,7 +55,7 @@ describe('cleanDirs', () => {
   });
 
   it('should delete without buildPath', () => {
-    buildFiles(dictionary, platform);
+    buildFiles(dictionary, platform, {});
     cleanFiles(platform);
     cleanDirs(platform);
     expect(dirExists('__tests__/__output/extradir1/extradir2')).to.be.false;
@@ -63,7 +63,7 @@ describe('cleanDirs', () => {
   });
 
   it('should delete with buildPath', () => {
-    buildFiles(dictionary, platformWithBuildPath);
+    buildFiles(dictionary, platformWithBuildPath, {});
     cleanFiles(platformWithBuildPath);
     cleanDirs(platformWithBuildPath);
     expect(dirExists('__tests__/__output/extradir1/extradir2')).to.be.false;

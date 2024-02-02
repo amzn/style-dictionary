@@ -34,11 +34,17 @@ export interface RegexOptions {
   separator?: string;
 }
 
-export interface ResolveReferenceOptions extends RegexOptions {
-  ignorePaths?: string[];
+export interface GetReferencesOptions extends RegexOptions {
+  usesW3C?: boolean;
+  unfilteredTokens?: DesignTokens;
 }
 
-export interface ResolveReferenceOptionsInternal extends ResolveReferenceOptions {
+export interface ResolveReferencesOptions extends RegexOptions {
+  ignorePaths?: string[];
+  usesW3C?: boolean;
+}
+
+export interface ResolveReferencesOptionsInternal extends ResolveReferencesOptions {
   current_context?: string[];
   stack?: string[];
   foundCirc?: Record<string, boolean>;
@@ -72,4 +78,5 @@ export interface Config {
   filter?: Record<string, Filter['matcher']>;
   fileHeader?: Record<string, FileHeader>;
   action?: Record<string, Action>;
+  usesW3C?: boolean;
 }

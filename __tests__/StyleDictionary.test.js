@@ -326,4 +326,17 @@ describe('StyleDictionary class + extend method', () => {
     expect(sd.tokens.dimensions.nested.deep.lg.$type).to.equal('dimension');
     expect(sd.tokens.dimensions.nope.$type).to.equal('spacing');
   });
+
+  it('should detect usage of W3C draft spec tokens', async () => {
+    const sd = new StyleDictionary({
+      tokens: {
+        datalist: {
+          key: { color: { $value: '#222' } },
+          value: { color: { $value: '#000' } },
+        },
+      },
+    });
+    await sd.hasInitialized;
+    expect(sd.options.usesW3C).to.be.true;
+  });
 });
