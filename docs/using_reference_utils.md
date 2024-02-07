@@ -51,7 +51,7 @@ const flat = flattenTokens(sd);
  */
 ```
 
-> You can pass a second argument `usesW3C`, if set to true, the flattenTokens utility will assume W3C syntax (`$value` props)
+> You can pass a second argument `usesDtcg`, if set to true, the flattenTokens utility will assume DTCG syntax (`$value` props)
 
 ### usesReference
 
@@ -102,7 +102,7 @@ resolveReferences('solid {spacing.2} {colors.black}', sd.tokens); // alternative
 ```
 
 > You can pass a third `options` argument where you can pass some configuration options for how references are resolved
-> Most notable option for public usage is `usesW3C`, if set to true, the resolveReferences utility will assume W3C syntax (`$value` props)
+> Most notable option for public usage is `usesDtcg`, if set to true, the resolveReferences utility will assume DTCG syntax (`$value` props)
 
 ### getReferences
 
@@ -143,7 +143,7 @@ getReferences(sd, 'solid {spacing.2} {colors.black}'); // alternative way, yet i
 ```
 
 > You can pass a third `options` argument where you can pass some configuration options for how references are resolved
-> Most notable option for public usage is `usesW3C`, if set to true, the resolveReferences utility will assume W3C syntax (`$value` props)
+> Most notable option for public usage is `usesDtcg`, if set to true, the resolveReferences utility will assume DTCG syntax (`$value` props)
 
 #### Complicated example
 
@@ -273,12 +273,12 @@ export const SemanticBgPrimary = ColorsBlack;
 export const Border = `solid ${Spacing2} ${SemanticBgPrimary}`;
 ```
 
-> Note that the above example does not support W3C syntax, but this could be quite easily added,
-> since you can query `sd.options.usesW3C` or inside a formatter functions `dictionary.options.usesW3C`
+> Note that the above example does not support DTCG syntax, but this could be quite easily added,
+> since you can query `sd.options.usesDtcg` or inside a formatter functions `dictionary.options.usesDtcg`
 
-### typeW3CDelegate
+### typeDtcgDelegate
 
-This function processes your ["W3C Design Token Community Group Draft spec"-compliant](https://design-tokens.github.io/community-group/format/) dictionary of tokens, and ensures that `$type` inheritance is applied.
+This function processes your ["Design Token Community Group Draft spec"-compliant](https://design-tokens.github.io/community-group/format/) dictionary of tokens, and ensures that `$type` inheritance is applied.
 
 We built this utility because it's cheaper to apply the inheritance once, rather than on every access of a token's "$type" property, checking the ancestor tree to find it.
 

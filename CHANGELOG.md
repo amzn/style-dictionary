@@ -22,14 +22,14 @@
 
 ### Patch Changes
 
-- 0c1a36f: Fix small issue in type w3c delegate utility type tracking.
-- 0c1a36f: Expose typeW3CDelegate utility. Don't take "value" into account anymore to determine that it's a design token, use $value.
+- 0c1a36f: Fix small issue in type DTCG delegate utility type tracking.
+- 0c1a36f: Expose `typeDtcgDelegate` utility. Don't take `value` into account anymore to determine that it's a design token, use `$value`.
 
 ## 4.0.0-prerelease.9
 
 ### Minor Changes
 
-- 294fd0e: Support W3C Draft specification for Design Tokens, by adding support for $value, $type and $description properties.
+- 294fd0e: Support Design Token Community Group Draft specification for Design Tokens, by adding support for $value, $type and $description properties.
 
 ### Patch Changes
 

@@ -18,20 +18,20 @@ import combineJSON from '../../lib/utils/combineJSON.js';
 
 describe('utils', () => {
   describe('combineJSON', () => {
-    it('should return an object with usesW3C & tokens prop', async () => {
+    it('should return an object with usesDtcg & tokens prop', async () => {
       const test = await combineJSON(['__tests__/__json_files/*.json']);
       expect(typeof test).to.equal('object');
-      const { tokens, usesW3C } = test;
+      const { tokens, usesDtcg } = test;
       expect(typeof tokens).to.equal('object');
-      expect(typeof usesW3C).to.equal('boolean');
+      expect(typeof usesDtcg).to.equal('boolean');
     });
 
     it('should handle wildcards', async () => {
       const test = await combineJSON(['__tests__/__json_files/*.json']);
       expect(typeof test).to.equal('object');
-      const { tokens, usesW3C } = test;
+      const { tokens, usesDtcg } = test;
       expect(typeof tokens).to.equal('object');
-      expect(typeof usesW3C).to.equal('boolean');
+      expect(typeof usesDtcg).to.equal('boolean');
     });
 
     it('should handle js modules that export objects', async () => {
@@ -39,9 +39,9 @@ describe('utils', () => {
       const relativePath = '__tests__/__json_files/*.js';
       const test = await combineJSON([absPath, relativePath]);
       expect(typeof test).to.equal('object');
-      const { tokens, usesW3C } = test;
+      const { tokens, usesDtcg } = test;
       expect(typeof tokens).to.equal('object');
-      expect(typeof usesW3C).to.equal('boolean');
+      expect(typeof usesDtcg).to.equal('boolean');
     });
 
     it('should do a deep merge', async () => {

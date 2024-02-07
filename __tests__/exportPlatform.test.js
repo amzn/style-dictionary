@@ -209,7 +209,7 @@ describe('exportPlatform', () => {
     expect(dictionary.color.red.value.h).to.equal(20);
   });
 
-  it('should handle .value and non .value references per the W3C spec', async () => {
+  it('should handle .value and non .value references per the DTCG spec', async () => {
     const tokens = {
       colors: {
         red: { value: '#f00' },
@@ -437,7 +437,7 @@ describe('exportPlatform', () => {
     });
   });
 
-  describe('w3c forward compatibility', () => {
+  describe('DTCG forward compatibility', () => {
     it('should allow using $value instead of value', async () => {
       const sd = new StyleDictionary({
         tokens: {
@@ -469,7 +469,7 @@ describe('exportPlatform', () => {
               return token.$type === 'dimension';
             },
             transformer: (token) => {
-              return `${sd.options.usesW3C ? token.$value : token.value}px`;
+              return `${sd.options.usesDtcg ? token.$value : token.value}px`;
             },
           },
         },

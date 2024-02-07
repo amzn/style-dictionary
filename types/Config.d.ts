@@ -35,13 +35,13 @@ export interface RegexOptions {
 }
 
 export interface GetReferencesOptions extends RegexOptions {
-  usesW3C?: boolean;
+  usesDtcg?: boolean;
   unfilteredTokens?: DesignTokens;
 }
 
 export interface ResolveReferencesOptions extends RegexOptions {
   ignorePaths?: string[];
-  usesW3C?: boolean;
+  usesDtcg?: boolean;
 }
 
 export interface ResolveReferencesOptionsInternal extends ResolveReferencesOptions {
@@ -78,5 +78,5 @@ export interface Config {
   filter?: Record<string, Filter['matcher']>;
   fileHeader?: Record<string, FileHeader>;
   action?: Record<string, Action>;
-  usesW3C?: boolean;
+  usesDtcg?: boolean;
 }

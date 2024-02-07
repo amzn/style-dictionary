@@ -327,7 +327,7 @@ describe('StyleDictionary class + extend method', () => {
     expect(sd.tokens.dimensions.nope.$type).to.equal('spacing');
   });
 
-  it('should detect usage of W3C draft spec tokens', async () => {
+  it('should detect usage of DTCG draft spec tokens', async () => {
     const sd = new StyleDictionary({
       tokens: {
         datalist: {
@@ -337,6 +337,6 @@ describe('StyleDictionary class + extend method', () => {
       },
     });
     await sd.hasInitialized;
-    expect(sd.options.usesW3C).to.be.true;
+    expect(sd.options.usesDtcg).to.be.true;
   });
 });
