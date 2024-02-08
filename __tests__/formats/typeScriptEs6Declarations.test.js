@@ -28,6 +28,12 @@ const tokens = {
       value: '#FF0000',
     },
   },
+  font: {
+    family: {
+      name: 'fontFamily',
+      value: '"Source Sans Pro", Arial, sans-serif',
+    },
+  },
 };
 
 const format = formats['typescript/es6-declarations'];
