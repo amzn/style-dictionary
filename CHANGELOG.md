@@ -1,5 +1,16 @@
 # Changelog
 
+## 4.0.0-prerelease.14
+
+### Minor Changes
+
+- 606af51: Rename `typeW3CDelegate` utility function to `typeDtcgDelegate`, as using "W3C" is highly discouraged when the standard isn't a W3C standard yet.
+- 606af51: Support the use of "value"/"type"/"description" as token names or token group names, at the sacrifice of now no longer being able to combine non-DTCG and DTCG syntax within the same token dictionary.
+
+### Patch Changes
+
+- cd9f484: Escape double quotes for ts outputStringLiterals
+
 ## 4.0.0-prerelease.13
 
 ### Patch Changes
