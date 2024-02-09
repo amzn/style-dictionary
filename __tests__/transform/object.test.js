@@ -13,7 +13,7 @@
 import { expect } from 'chai';
 import transformObject from '../../lib/transform/object.js';
 
-const options = {
+const config = {
   transforms: [
     {
       type: 'attribute',
@@ -63,11 +63,11 @@ describe('transform', () => {
         color: '#FFFF00',
       };
 
-      const actual = transformObject(objectToTransform, options);
+      const actual = transformObject(objectToTransform, config, {});
       expect(actual).to.eql(expected);
     });
 
-    it('returns expected result when called with an with value leaf', () => {
+    it('returns expected result when called with value leaf', () => {
       const objectToTransform = {
         font: {
           base: {
@@ -93,7 +93,7 @@ describe('transform', () => {
         },
       };
 
-      const actual = transformObject(objectToTransform, options);
+      const actual = transformObject(objectToTransform, config, {});
       expect(actual).to.eql(expected);
     });
 
@@ -116,7 +116,7 @@ describe('transform', () => {
         },
       };
 
-      transformObject(objectToTransform, options, transformationContext);
+      transformObject(objectToTransform, config, {}, transformationContext);
 
       expect(transformedPropRefs).to.eql(['spacing.base']);
       expect(deferredPropValueTransforms).to.eql(['spacing.medium']);

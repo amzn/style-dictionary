@@ -13,7 +13,7 @@
 import { expect } from 'chai';
 import token from '../../lib/transform/token.js';
 
-const options = {
+const config = {
   transforms: [
     {
       type: 'attribute',
@@ -44,7 +44,7 @@ const options = {
 describe('transform', () => {
   describe('token', () => {
     it('transform token and apply transforms', () => {
-      const test = token({ attributes: { baz: 'blah' } }, options);
+      const test = token({ attributes: { baz: 'blah' } }, config, {});
       expect(test).to.have.nested.property('attributes.bar', 'foo');
       expect(test).to.have.property('name', 'hello');
     });
@@ -69,6 +69,7 @@ describe('transform', () => {
             },
           ],
         },
+        {},
       );
 
       expect(result).to.be.undefined;

@@ -41,7 +41,7 @@ const sd = new StyleDictionary({
   },
 });
 
-const flat = flattenTokens(sd, sd.tokens.border.value);
+const flat = flattenTokens(sd);
 /**
  * [
  *   { value: '#000', type: 'color', name: 'colors-black' },
@@ -50,6 +50,8 @@ const flat = flattenTokens(sd, sd.tokens.border.value);
  * ]
  */
 ```
+
+> You can pass a second argument `usesDtcg`, if set to true, the flattenTokens utility will assume DTCG syntax (`$value` props)
 
 ### usesReference
 
@@ -99,6 +101,9 @@ resolveReferences(sd.tokens.border.value, sd.tokens); // "solid 2px #000"
 resolveReferences('solid {spacing.2} {colors.black}', sd.tokens); // alternative way, yet identical to line above -> "solid 2px #000"
 ```
 
+> You can pass a third `options` argument where you can pass some configuration options for how references are resolved
+> Most notable option for public usage is `usesDtcg`, if set to true, the resolveReferences utility will assume DTCG syntax (`$value` props)
+
 ### getReferences
 
 Whether or not a token value contains references
@@ -136,6 +141,9 @@ getReferences(sd, 'solid {spacing.2} {colors.black}'); // alternative way, yet i
  * ]
  */
 ```
+
+> You can pass a third `options` argument where you can pass some configuration options for how references are resolved
+> Most notable option for public usage is `usesDtcg`, if set to true, the resolveReferences utility will assume DTCG syntax (`$value` props)
 
 #### Complicated example
 
@@ -265,9 +273,12 @@ export const SemanticBgPrimary = ColorsBlack;
 export const Border = `solid ${Spacing2} ${SemanticBgPrimary}`;
 ```
 
-### typeW3CDelegate
+> Note that the above example does not support DTCG syntax, but this could be quite easily added,
+> since you can query `sd.options.usesDtcg` or inside a formatter functions `dictionary.options.usesDtcg`
 
-This function processes your ["W3C Design Token Community Group Draft spec"-compliant](https://design-tokens.github.io/community-group/format/) dictionary of tokens, and ensures that `$type` inheritance is applied.
+### typeDtcgDelegate
+
+This function processes your ["Design Token Community Group Draft spec"-compliant](https://design-tokens.github.io/community-group/format/) dictionary of tokens, and ensures that `$type` inheritance is applied.
 
 We built this utility because it's cheaper to apply the inheritance once, rather than on every access of a token's "$type" property, checking the ancestor tree to find it.
 
