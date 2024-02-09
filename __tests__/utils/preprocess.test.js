@@ -11,10 +11,10 @@
  * and limitations under the License.
  */
 import { expect } from 'chai';
-import { typeW3CDelegate } from '../../lib/utils/preprocess.js';
+import { typeDtcgDelegate } from '../../lib/utils/preprocess.js';
 
 describe('utils', () => {
-  describe('typeW3CDelegate', () => {
+  describe('typeDtcgDelegate', () => {
     it('should correctly let tokens inherit the $type property while respecting local overrides', () => {
       const tokens = {
         dimension: {
@@ -52,7 +52,7 @@ describe('utils', () => {
         },
       };
 
-      expect(typeW3CDelegate(tokens)).to.eql({
+      expect(typeDtcgDelegate(tokens)).to.eql({
         dimension: {
           $type: 'dimension',
           scale: {

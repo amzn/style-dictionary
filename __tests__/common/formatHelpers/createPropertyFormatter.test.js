@@ -359,7 +359,7 @@ describe('common', () => {
           await expect(sassRed).to.matchSnapshot(2);
         });
 
-        it('supports W3C spec $description property for comments', async () => {
+        it('supports DTCG spec $description property for comments', async () => {
           const descriptionDictionary = {
             color: {
               red: {

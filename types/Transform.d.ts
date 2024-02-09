@@ -13,14 +13,14 @@
 
 import type { Matcher } from './Filter.d.ts';
 import type { TransformedToken } from './DesignToken.d.ts';
-import type { PlatformConfig } from './Config.d.ts';
+import type { PlatformConfig, Config } from './Config.d.ts';
 
 interface BaseTransform<Type, Value> {
   name: string;
   type: Type;
   matcher?: Matcher;
   transitive?: boolean;
-  transformer: (token: TransformedToken, options: PlatformConfig) => Value;
+  transformer: (token: TransformedToken, config: PlatformConfig, options: Config) => Value;
 }
 
 export type NameTransform = BaseTransform<'name', string>;

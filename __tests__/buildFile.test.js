@@ -39,23 +39,25 @@ describe('buildFile', () => {
   });
 
   it('should error if format doesnt exist or isnt a function', () => {
-    expect(buildFile.bind(null, { destination: '__tests__output/test.txt' }, {}, {})).to.throw(
+    expect(buildFile.bind(null, { destination: '__tests__output/test.txt' }, {}, {}, {})).to.throw(
       'Please enter a valid file format',
     );
     expect(
-      buildFile.bind(null, { destination: '__tests__output/test.txt', format: {} }, {}, {}),
+      buildFile.bind(null, { destination: '__tests__output/test.txt', format: {} }, {}, {}, {}),
     ).to.throw('Please enter a valid file format');
     expect(
-      buildFile.bind(null, { destination: '__tests__/__output/test.txt', format: [] }, {}, {}),
+      buildFile.bind(null, { destination: '__tests__/__output/test.txt', format: [] }, {}, {}, {}),
     ).to.throw('Please enter a valid file format');
   });
 
   it('should error if destination doesnt exist or isnt a string', () => {
-    expect(buildFile.bind(null, { format }, {}, {})).to.throw('Please enter a valid destination');
-    expect(buildFile.bind(null, { format, destination: [] }, {}, {})).to.throw(
+    expect(buildFile.bind(null, { format }, {}, {}, {})).to.throw(
       'Please enter a valid destination',
     );
-    expect(buildFile.bind(null, { format, destination: {} }, {}, {})).to.throw(
+    expect(buildFile.bind(null, { format, destination: [] }, {}, {}, {})).to.throw(
+      'Please enter a valid destination',
+    );
+    expect(buildFile.bind(null, { format, destination: {} }, {}, {}, {})).to.throw(
       'Please enter a valid destination',
     );
   });
@@ -81,7 +83,7 @@ describe('buildFile', () => {
 
     it('should generate warning messages for output name collisions', () => {
       GroupMessages.clear(PROPERTY_NAME_COLLISION_WARNINGS);
-      buildFile({ destination, format }, {}, dictionary);
+      buildFile({ destination, format }, {}, dictionary, {});
 
       const collisions = dictionary.allTokens
         .map(
@@ -107,7 +109,7 @@ describe('buildFile', () => {
 
     it('should not warn users if the format is a nested format', () => {
       const consoleStub = stubMethod(console, 'log');
-      buildFile({ destination, format: nestedFormat }, {}, dictionary);
+      buildFile({ destination, format: nestedFormat }, {}, dictionary, {});
       expect(consoleStub.calledWith(chalk.bold.green(`✔︎ ${destination}`))).to.be.true;
     });
   });
@@ -137,6 +139,7 @@ describe('buildFile', () => {
       },
       {},
       dictionary,
+      {},
     );
     expect(fileExists('__tests__/__output/test.emptyTokens')).to.be.false;
   });
@@ -150,6 +153,7 @@ describe('buildFile', () => {
       {
         buildPath: '__tests__/__output/',
       },
+      {},
       {},
     );
     expect(fileExists('__tests__/__output/test.txt')).to.be.true;

@@ -962,7 +962,8 @@ snapshots["inline custom with new args should match snapshot"] =
   },
   "options": {
     "otherOption": "Test",
-    "showFileHeader": true
+    "showFileHeader": true,
+    "usesDtcg": false
   }
 }`;
 /* end snapshot inline custom with new args should match snapshot */
@@ -1893,7 +1894,8 @@ snapshots["register custom format with new args should match snapshot"] =
   },
   "options": {
     "otherOption": "Test",
-    "showFileHeader": true
+    "showFileHeader": true,
+    "usesDtcg": false
   }
 }`;
 /* end snapshot register custom format with new args should match snapshot */

@@ -104,17 +104,17 @@ describe('buildFiles', () => {
   });
 
   it('should work without buildPath', () => {
-    buildFiles(dictionary, platform);
+    buildFiles(dictionary, platform, {});
     expect(fileExists('__tests__/__output/test.json')).to.be.true;
   });
 
   it('should work with buildPath', () => {
-    buildFiles(dictionary, platformWithBuildPath);
+    buildFiles(dictionary, platformWithBuildPath, {});
     expect(fileExists('__tests__/__output/test.json')).to.be.true;
   });
 
   it('should work with a filter', () => {
-    buildFiles(dictionary, platformWithFilter);
+    buildFiles(dictionary, platformWithFilter, {});
     expect(fileExists('__tests__/__output/test.json')).to.be.true;
     const output = JSON.parse(fs.readFileSync(resolve('__tests__/__output/test.json')));
     expect(output).to.have.property('bingo');
