@@ -23,7 +23,9 @@ const config = {
     },
     {
       type: 'attribute',
-      transformer: function () {
+      // verify async transforms to also work properly
+      transformer: async function () {
+        await new Promise((resolve) => setTimeout(resolve, 100));
         return { bar: 'foo' };
       },
     },
@@ -32,7 +34,9 @@ const config = {
       matcher: function (prop) {
         return prop.attributes.foo === 'bar';
       },
-      transformer: function () {
+      // verify async transforms to also work properly
+      transformer: async function () {
+        await new Promise((resolve) => setTimeout(resolve, 100));
         return 'transformer result';
       },
     },
@@ -50,11 +54,11 @@ const config = {
 
 describe('transform', () => {
   describe('object', () => {
-    it('does not crash when called without parameters', () => {
-      expect(transformObject()).to.eql({});
+    it('does not crash when called without parameters', async () => {
+      expect(await transformObject()).to.eql({});
     });
 
-    it('returns expected result when called with an object without value property', () => {
+    it('returns expected result when called with an object without value property', async () => {
       const objectToTransform = {
         color: '#FFFF00',
       };
@@ -63,11 +67,11 @@ describe('transform', () => {
         color: '#FFFF00',
       };
 
-      const actual = transformObject(objectToTransform, config, {});
+      const actual = await transformObject(objectToTransform, config, {});
       expect(actual).to.eql(expected);
     });
 
-    it('returns expected result when called with value leaf', () => {
+    it('returns expected result when called with value leaf', async () => {
       const objectToTransform = {
         font: {
           base: {
@@ -93,11 +97,11 @@ describe('transform', () => {
         },
       };
 
-      const actual = transformObject(objectToTransform, config, {});
+      const actual = await transformObject(objectToTransform, config, {});
       expect(actual).to.eql(expected);
     });
 
-    it('fills the transformationContext with transformed and deferred transforms', () => {
+    it('fills the transformationContext with transformed and deferred transforms', async () => {
       const transformedPropRefs = [];
       const deferredPropValueTransforms = [];
       const transformationContext = {
@@ -116,7 +120,7 @@ describe('transform', () => {
         },
       };
 
-      transformObject(objectToTransform, config, {}, transformationContext);
+      await transformObject(objectToTransform, config, {}, transformationContext);
 
       expect(transformedPropRefs).to.eql(['spacing.base']);
       expect(deferredPropValueTransforms).to.eql(['spacing.medium']);

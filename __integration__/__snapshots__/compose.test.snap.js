@@ -1,7 +1,7 @@
 /* @web/test-runner snapshot v1 */
 export const snapshots = {};
 
-snapshots["compose/object should match snapshot"] = 
+snapshots["integration compose compose/object should match snapshot"] = 
 `
 
 // Do not edit directly
@@ -178,9 +178,9 @@ object StyleDictionary {
   val sizePaddingSmall = 8.00.dp
   val sizePaddingXl = 16.00.dp
 }`;
-/* end snapshot compose/object should match snapshot */
+/* end snapshot integration compose compose/object should match snapshot */
 
-snapshots["compose/object with references should match snapshot"] = 
+snapshots["integration compose compose/object with references should match snapshot"] = 
 `
 
 // Do not edit directly
@@ -357,5 +357,5 @@ object StyleDictionary {
   val colorFontInteractive = colorBrandPrimary
   val colorBackgroundDisabled = colorBackgroundTertiary
 }`;
-/* end snapshot compose/object with references should match snapshot */
+/* end snapshot integration compose compose/object with references should match snapshot */
 

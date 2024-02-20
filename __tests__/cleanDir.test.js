@@ -29,19 +29,19 @@ describe('cleanDir', () => {
     clearOutput();
   });
 
-  it('should delete a dir properly', () => {
-    buildFile(
+  it('should delete a dir properly', async () => {
+    await buildFile(
       { destination: 'test.txt', format },
       { buildPath: '__tests__/__output/extradir1/extradir2/' },
       {},
       {},
     );
-    cleanFile(
+    await cleanFile(
       { destination: 'test.txt', format },
       { buildPath: '__tests__/__output/extradir1/extradir2/' },
       {},
     );
-    cleanDir(
+    await cleanDir(
       { destination: 'test.txt', format },
       { buildPath: '__tests__/__output/extradir1/extradir2/' },
     );

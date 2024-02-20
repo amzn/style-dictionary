@@ -17,4 +17,4 @@ export interface Filter {
   matcher: Matcher;
 }
 
-export type Matcher = (token: TransformedToken) => boolean;
+export type Matcher = (token: TransformedToken) => boolean | Promise<boolean>;

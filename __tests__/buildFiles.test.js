@@ -91,30 +91,30 @@ describe('buildFiles', () => {
     clearOutput();
   });
 
-  it("should throw if build path doesn't have a trailing slash", () => {
-    expect(buildFiles.bind(null, dictionary, platformWithBadBuildPath)).to.throw(
+  it("should throw if build path doesn't have a trailing slash", async () => {
+    await expect(buildFiles(dictionary, platformWithBadBuildPath)).to.eventually.rejectedWith(
       'Build path must end in a trailing slash or you will get weird file names.',
     );
   });
 
-  it('should throw if missing a format', () => {
-    expect(buildFiles.bind(null, dictionary, platformWithoutFormatter)).to.throw(
+  it('should throw if missing a format', async () => {
+    await expect(buildFiles(dictionary, platformWithoutFormatter)).to.eventually.rejectedWith(
       'Please supply a format',
     );
   });
 
-  it('should work without buildPath', () => {
-    buildFiles(dictionary, platform, {});
+  it('should work without buildPath', async () => {
+    await buildFiles(dictionary, platform, {});
     expect(fileExists('__tests__/__output/test.json')).to.be.true;
   });
 
-  it('should work with buildPath', () => {
-    buildFiles(dictionary, platformWithBuildPath, {});
+  it('should work with buildPath', async () => {
+    await buildFiles(dictionary, platformWithBuildPath, {});
     expect(fileExists('__tests__/__output/test.json')).to.be.true;
   });
 
-  it('should work with a filter', () => {
-    buildFiles(dictionary, platformWithFilter, {});
+  it('should work with a filter', async () => {
+    await buildFiles(dictionary, platformWithFilter, {});
     expect(fileExists('__tests__/__output/test.json')).to.be.true;
     const output = JSON.parse(fs.readFileSync(resolve('__tests__/__output/test.json')));
     expect(output).to.have.property('bingo');

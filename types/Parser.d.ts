@@ -20,5 +20,5 @@ export interface ParserOptions {
 
 export interface Parser {
   pattern: RegExp;
-  parse: (options: ParserOptions) => DesignTokens;
+  parse: (options: ParserOptions) => DesignTokens | Promise<DesignTokens>;
 }

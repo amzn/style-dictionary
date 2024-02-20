@@ -59,7 +59,7 @@ const format = formats['less/icons'];
 describe('formats', () => {
   describe('less/icons', () => {
     it('should have a valid less syntax and match snapshot', async () => {
-      const result = format(
+      const result = await format(
         createFormatArgs({
           dictionary: { tokens, allTokens: flattenTokens(tokens) },
           file,

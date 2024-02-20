@@ -54,7 +54,7 @@ describe('formats', () => {
 
     it('should match default snapshot', async () => {
       await expect(
-        format(
+        await format(
           createFormatArgs({
             dictionary: { tokens, allTokens: flattenTokens(tokens) },
             file,
@@ -69,7 +69,7 @@ describe('formats', () => {
     it('with import override should match snapshot', async () => {
       file.options.import = ['UIKit', 'AnotherModule'];
       await expect(
-        format(
+        await format(
           createFormatArgs({
             dictionary: { tokens, allTokens: flattenTokens(tokens) },
             file,
@@ -84,7 +84,7 @@ describe('formats', () => {
     it('with objectType override should match snapshot', async () => {
       file.options.objectType = 'struct';
       await expect(
-        format(
+        await format(
           createFormatArgs({
             dictionary: { tokens, allTokens: flattenTokens(tokens) },
             file,
@@ -99,7 +99,7 @@ describe('formats', () => {
     it('with access control override should match snapshot', async () => {
       file.options.accessControl = 'internal';
       await expect(
-        format(
+        await format(
           createFormatArgs({
             dictionary: { tokens, allTokens: flattenTokens(tokens) },
             file,

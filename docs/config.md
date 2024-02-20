@@ -74,7 +74,7 @@ export default {
   // object. The name of the format is the key.
   format: {
     myFormat: ({ dictionary, platform }) => {
-      return dictionary.allTokens.map((token) => `${token.name}: ${token.value}`).join('\n');
+      return dictionary.allTokens.map((token) => `${token.name}: ${token.value};`).join('\n');
     },
   },
   platforms: {

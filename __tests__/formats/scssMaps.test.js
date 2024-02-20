@@ -99,15 +99,15 @@ const tokens = {
 };
 
 describe('formats', () => {
-  ['scss/map-flat', 'scss/map-deep'].forEach((key) => {
-    describe(key, () => {
+  for (const key of ['scss/map-flat', 'scss/map-deep']) {
+    describe(key, async () => {
       const file = {
         destination: '__output/',
         format: key,
       };
 
-      const formatter = formats[key].bind(file);
-      const output = formatter(
+      const format = formats[key].bind(file);
+      const output = await format(
         createFormatArgs({
           dictionary: { tokens, allTokens: flattenTokens(tokens) },
           file,
@@ -130,5 +130,5 @@ describe('formats', () => {
         await expect(output).to.matchSnapshot();
       });
     });
-  });
+  }
 });

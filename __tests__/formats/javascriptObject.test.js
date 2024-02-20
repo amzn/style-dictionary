@@ -33,7 +33,7 @@ describe('formats', () => {
   describe('javascript/object', () => {
     it('should be valid JS syntax and match snapshot', async () => {
       await expect(
-        format(
+        await format(
           createFormatArgs({
             dictionary: { tokens, allTokens: flattenTokens(tokens) },
             file,

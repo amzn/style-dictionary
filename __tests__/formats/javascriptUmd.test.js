@@ -37,7 +37,7 @@ describe('formats', () => {
   describe('javascript/umd', () => {
     it('should be a valid JS file and match snapshot', async () => {
       await expect(
-        format(
+        await format(
           createFormatArgs({
             dictionary: { tokens, allTokens: flattenTokens(tokens) },
             file,

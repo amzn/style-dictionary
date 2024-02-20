@@ -17,12 +17,8 @@ import { resolve } from '../lib/resolve.js';
 import { buildPath } from './_constants.js';
 import { clearOutput } from '../__tests__/__helpers.js';
 
-describe('integration', () => {
-  afterEach(() => {
-    clearOutput(buildPath);
-  });
-
-  describe('compose', async () => {
+describe('integration', async () => {
+  before(async () => {
     const sd = new StyleDictionary({
       source: [`__integration__/tokens/**/[!_]*.json?(c)`],
       platforms: {
@@ -50,22 +46,26 @@ describe('integration', () => {
       },
     });
     await sd.buildAllPlatforms();
+  });
 
-    describe(`compose/object`, () => {
-      const output = fs.readFileSync(resolve(`${buildPath}StyleDictionary.kt`), {
-        encoding: `UTF-8`,
-      });
+  afterEach(() => {
+    clearOutput(buildPath);
+  });
 
+  describe('compose', async () => {
+    describe(`compose/object`, async () => {
       it(`should match snapshot`, async () => {
+        const output = fs.readFileSync(resolve(`${buildPath}StyleDictionary.kt`), {
+          encoding: `UTF-8`,
+        });
         await expect(output).to.matchSnapshot();
       });
 
-      describe(`with references`, () => {
-        const output = fs.readFileSync(resolve(`${buildPath}StyleDictionaryWithReferences.kt`), {
-          encoding: `UTF-8`,
-        });
-
+      describe(`with references`, async () => {
         it(`should match snapshot`, async () => {
+          const output = fs.readFileSync(resolve(`${buildPath}StyleDictionaryWithReferences.kt`), {
+            encoding: `UTF-8`,
+          });
           await expect(output).to.matchSnapshot();
         });
       });

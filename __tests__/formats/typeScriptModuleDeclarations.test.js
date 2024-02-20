@@ -35,8 +35,8 @@ const format = formats['typescript/module-declarations'].bind(file);
 
 describe('formats', () => {
   describe('typescript/module-declarations', () => {
-    it('should be a valid TS file', () => {
-      const output = format(
+    it('should be a valid TS file', async () => {
+      const output = await format(
         createFormatArgs({
           dictionary: { tokens, allTokens: flattenTokens(tokens) },
           file,
