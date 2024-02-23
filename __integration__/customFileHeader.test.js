@@ -17,12 +17,8 @@ import { resolve } from '../lib/resolve.js';
 import { buildPath } from './_constants.js';
 import { clearOutput } from '../__tests__/__helpers.js';
 
-describe(`integration`, () => {
-  afterEach(() => {
-    clearOutput(buildPath);
-  });
-
-  describe(`valid custom file headers`, async () => {
+describe(`integration`, async () => {
+  before(async () => {
     // Adding a custom file header with the `.registerFileHeader`
     StyleDictionary.registerFileHeader({
       name: `valid custom file headers test fileHeader`,
@@ -107,8 +103,14 @@ describe(`integration`, () => {
     });
 
     await sd.buildAllPlatforms();
+  });
 
-    describe('file options', () => {
+  afterEach(() => {
+    clearOutput(buildPath);
+  });
+
+  describe(`valid custom file headers`, async () => {
+    describe('file options', async () => {
       it(`registered file header should match snapshot`, async () => {
         const output = fs.readFileSync(resolve(`${buildPath}registeredFileHeader.css`), {
           encoding: 'UTF-8',
@@ -131,7 +133,7 @@ describe(`integration`, () => {
       });
     });
 
-    describe('platform options', () => {
+    describe('platform options', async () => {
       it(`no file options should match snapshot`, async () => {
         const output = fs.readFileSync(resolve(`${buildPath}noOptions.js`), {
           encoding: 'UTF-8',
@@ -155,7 +157,7 @@ describe(`integration`, () => {
     });
   });
 
-  describe(`invalid custom file headers`, () => {
+  describe(`invalid custom file headers`, async () => {
     it(`should throw if trying to use an undefined file header`, async () => {
       const sd = new StyleDictionary({
         platforms: {

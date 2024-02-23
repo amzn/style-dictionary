@@ -40,8 +40,8 @@ const format = formats['typescript/es6-declarations'];
 
 describe('formats', () => {
   describe('typescript/es6-declarations', () => {
-    it('should be a valid TS file', () => {
-      const output = format(
+    it('should be a valid TS file', async () => {
+      const output = await format(
         createFormatArgs({
           dictionary: { tokens, allTokens: flattenTokens(tokens) },
           file,
@@ -66,7 +66,7 @@ describe('formats', () => {
         },
       };
 
-      const output = format(
+      const output = await format(
         createFormatArgs({
           dictionary: { tokens, allTokens: flattenTokens(tokens) },
           file: customFile,

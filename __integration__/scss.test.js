@@ -18,12 +18,8 @@ import { resolve } from '../lib/resolve.js';
 import { buildPath } from './_constants.js';
 import { clearOutput } from '../__tests__/__helpers.js';
 
-describe(`integration`, () => {
-  afterEach(() => {
-    clearOutput(buildPath);
-  });
-
-  describe(`scss`, async () => {
+describe(`integration`, async () => {
+  before(async () => {
     const sd = new StyleDictionary({
       source: [`__integration__/tokens/**/[!_]*.json?(c)`],
       platforms: {
@@ -88,115 +84,139 @@ describe(`integration`, () => {
       },
     });
     await sd.buildAllPlatforms();
+  });
 
-    describe(`scss/variables`, () => {
-      const output = fs.readFileSync(resolve(`${buildPath}variables.scss`), {
-        encoding: 'UTF-8',
-      });
+  afterEach(() => {
+    clearOutput(buildPath);
+  });
 
+  describe(`scss`, async () => {
+    describe(`scss/variables`, async () => {
       it(`should have a valid scss syntax`, () => {
+        const output = fs.readFileSync(resolve(`${buildPath}variables.scss`), {
+          encoding: 'UTF-8',
+        });
         const result = compileString(output);
         expect(result.css).to.not.be.undefined;
       });
 
       it(`should match snapshot`, async () => {
+        const output = fs.readFileSync(resolve(`${buildPath}variables.scss`), {
+          encoding: 'UTF-8',
+        });
         await expect(output).to.matchSnapshot();
       });
 
-      describe(`with themeable`, () => {
-        const output = fs.readFileSync(resolve(`${buildPath}variables-themeable.scss`), {
-          encoding: 'UTF-8',
-        });
+      describe(`with themeable`, async () => {
         it(`should have a valid scss syntax`, () => {
-          const result = compileString(output);
-          expect(result.css).to.not.be.undefined;
-        });
-
-        it(`should match snapshot`, async () => {
-          await expect(output).to.matchSnapshot();
-        });
-      });
-
-      describe(`with outputReferences`, () => {
-        const output = fs.readFileSync(resolve(`${buildPath}variables-with-references.scss`), {
-          encoding: 'UTF-8',
-        });
-        it(`should have a valid scss syntax`, () => {
-          const result = compileString(output);
-          expect(result.css).to.not.be.undefined;
-        });
-
-        it(`should match snapshot`, async () => {
-          await expect(output).to.matchSnapshot();
-        });
-      });
-
-      describe(`with filter and output references`, () => {
-        const output = fs.readFileSync(
-          resolve(`${buildPath}filtered-variables-with-references.scss`),
-          {
+          const output = fs.readFileSync(resolve(`${buildPath}variables-themeable.scss`), {
             encoding: 'UTF-8',
-          },
-        );
-        it(`should match snapshot`, async () => {
-          await expect(output).to.matchSnapshot();
-        });
-      });
-    });
-
-    describe(`scss/map-flat`, () => {
-      const output = fs.readFileSync(resolve(`${buildPath}map-flat.scss`), {
-        encoding: 'UTF-8',
-      });
-
-      it(`should have a valid scss syntax`, () => {
-        const result = compileString(output);
-        expect(result.css).to.not.be.undefined;
-      });
-
-      it(`should match snapshot`, async () => {
-        await expect(output).to.matchSnapshot();
-      });
-    });
-
-    describe(`scss/map-deep`, () => {
-      const output = fs.readFileSync(resolve(`${buildPath}map-deep.scss`), {
-        encoding: 'UTF-8',
-      });
-
-      it(`should have a valid scss syntax`, () => {
-        const result = compileString(output);
-        expect(result.css).to.not.be.undefined;
-      });
-
-      it(`should match snapshot`, async () => {
-        await expect(output).to.matchSnapshot();
-      });
-
-      describe(`with outputReferences`, () => {
-        const output = fs.readFileSync(resolve(`${buildPath}map-deep-with-references.scss`), {
-          encoding: 'UTF-8',
-        });
-        it(`should have a valid scss syntax`, () => {
+          });
           const result = compileString(output);
           expect(result.css).to.not.be.undefined;
         });
 
         it(`should match snapshot`, async () => {
+          const output = fs.readFileSync(resolve(`${buildPath}variables-themeable.scss`), {
+            encoding: 'UTF-8',
+          });
           await expect(output).to.matchSnapshot();
         });
       });
 
-      describe(`without themeable`, () => {
-        const output = fs.readFileSync(resolve(`${buildPath}map-deep-not-themeable.scss`), {
-          encoding: 'UTF-8',
-        });
+      describe(`with outputReferences`, async () => {
         it(`should have a valid scss syntax`, () => {
+          const output = fs.readFileSync(resolve(`${buildPath}variables-with-references.scss`), {
+            encoding: 'UTF-8',
+          });
           const result = compileString(output);
           expect(result.css).to.not.be.undefined;
         });
 
         it(`should match snapshot`, async () => {
+          const output = fs.readFileSync(resolve(`${buildPath}variables-with-references.scss`), {
+            encoding: 'UTF-8',
+          });
+          await expect(output).to.matchSnapshot();
+        });
+      });
+
+      describe(`with filter and output references`, async () => {
+        it(`should match snapshot`, async () => {
+          const output = fs.readFileSync(
+            resolve(`${buildPath}filtered-variables-with-references.scss`),
+            {
+              encoding: 'UTF-8',
+            },
+          );
+          await expect(output).to.matchSnapshot();
+        });
+      });
+    });
+
+    describe(`scss/map-flat`, async () => {
+      it(`should have a valid scss syntax`, () => {
+        const output = fs.readFileSync(resolve(`${buildPath}map-flat.scss`), {
+          encoding: 'UTF-8',
+        });
+        const result = compileString(output);
+        expect(result.css).to.not.be.undefined;
+      });
+
+      it(`should match snapshot`, async () => {
+        const output = fs.readFileSync(resolve(`${buildPath}map-flat.scss`), {
+          encoding: 'UTF-8',
+        });
+        await expect(output).to.matchSnapshot();
+      });
+    });
+
+    describe(`scss/map-deep`, async () => {
+      it(`should have a valid scss syntax`, () => {
+        const output = fs.readFileSync(resolve(`${buildPath}map-deep.scss`), {
+          encoding: 'UTF-8',
+        });
+        const result = compileString(output);
+        expect(result.css).to.not.be.undefined;
+      });
+
+      it(`should match snapshot`, async () => {
+        const output = fs.readFileSync(resolve(`${buildPath}map-deep.scss`), {
+          encoding: 'UTF-8',
+        });
+        await expect(output).to.matchSnapshot();
+      });
+
+      describe(`with outputReferences`, async () => {
+        it(`should have a valid scss syntax`, () => {
+          const output = fs.readFileSync(resolve(`${buildPath}map-deep-with-references.scss`), {
+            encoding: 'UTF-8',
+          });
+          const result = compileString(output);
+          expect(result.css).to.not.be.undefined;
+        });
+
+        it(`should match snapshot`, async () => {
+          const output = fs.readFileSync(resolve(`${buildPath}map-deep-with-references.scss`), {
+            encoding: 'UTF-8',
+          });
+          await expect(output).to.matchSnapshot();
+        });
+      });
+
+      describe(`without themeable`, async () => {
+        it(`should have a valid scss syntax`, () => {
+          const output = fs.readFileSync(resolve(`${buildPath}map-deep-not-themeable.scss`), {
+            encoding: 'UTF-8',
+          });
+          const result = compileString(output);
+          expect(result.css).to.not.be.undefined;
+        });
+
+        it(`should match snapshot`, async () => {
+          const output = fs.readFileSync(resolve(`${buildPath}map-deep-not-themeable.scss`), {
+            encoding: 'UTF-8',
+          });
           await expect(output).to.matchSnapshot();
         });
       });

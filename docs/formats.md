@@ -164,6 +164,7 @@ Custom file headers can be added the same way you would add a custom format, eit
 const StyleDictionary = require('style-dictionary');
 StyleDictionary.registerFileHeader({
   name: 'myCustomHeader',
+  // This can be an async function as well
   fileHeader: (defaultMessage) => {
     // defaultMessage are the 2 lines above that appear in the default file header
     // you can use this to add a message before or after the default message 👇
@@ -345,10 +346,11 @@ const { fileHeader, formattedVariables } = StyleDictionary.formatHelpers;
 
 StyleDictionary.registerFormat({
   name: 'myCustomFormat',
-  formatter: function ({ dictionary, file, options }) {
+  formatter: async ({ dictionary, file, options }) => {
     const { outputReferences } = options;
+    const header = await fileHeader({ file });
     return (
-      fileHeader({ file }) +
+      header +
       ':root {\n' +
       formattedVariables({ format: 'css', dictionary, outputReferences }) +
       '\n}\n'
@@ -447,10 +449,10 @@ default file header.
 ```js
 StyleDictionary.registerFormat({
   name: 'myCustomFormat',
-  formatter: function ({ dictionary, file }) {
+  formatter: async ({ dictionary, file }) => {
+    const header = await fileHeader({ file, commentStyle: 'short' });
     return (
-      fileHeader({ file, commentStyle: 'short' }) +
-      dictionary.allTokens.map((token) => `${token.name} = ${token.value}`).join('\n')
+      header + dictionary.allTokens.map((token) => `${token.name} = ${token.value};`).join('\n')
     );
   },
 });
@@ -735,16 +737,35 @@ Formatters are functions and created easily with most templating engines. Format
 
 Any templating language can work as long as there is a node module for it. All you need to do is register a format that calls your template and returns a string.
 
-Here is a quick example for Lodash.
+Our recommendation is to use Template Literals for this as the easiest way to accomplish this:
 
 ```js
 import StyleDictionary from 'style-dictionary';
-const sd = await StyleDictionary.extend('config.json');
-const _ = require('lodash');
+
+// Very simplistic/naive custom CSS format, just as an example, for CSS you should prefer using our predefined formats
+const template = ({ dictionary, file, options, platform }) => `:root {
+${dictionary.allTokens.map(token => `  ${token.name}`: `"${token.value}"`).join('\n')}
+}
+`;
+
+StyleDictionary.registerFormat({
+  name: 'my/format',
+  formatter: template,
+});
+
+// format: 'my/format' is now available for use...
+```
+
+Here is a quick example for Lodash templates.
+
+```js
+import StyleDictionary from 'style-dictionary';
+import _ from 'lodash-es';
+import fs from 'node:fs';
 
 const template = _.template(fs.readFileSync('templates/myFormat.template'));
 
-sd.registerFormat({
+StyleDictionary.registerFormat({
   name: 'my/format',
   formatter: template,
 });
@@ -756,12 +777,11 @@ And another example for Handlebars.
 
 ```js
 import StyleDictionary from 'style-dictionary';
-const sd = await StyleDictionary.extend('config.json');
-const Handlebars = require('handlebars');
+import Handlebars from 'handlebars';
 
 const template = Handlebars.compile(fs.readFileSync('templates/MyTemplate.hbs').toString());
 
-sd.registerFormat({
+StyleDictionary.registerFormat({
   name: 'my/format',
   formatter: function ({ dictionary, platform }) {
     return template({

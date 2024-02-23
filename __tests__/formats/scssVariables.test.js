@@ -53,7 +53,7 @@ const format = formats['scss/variables'];
 describe('formats', () => {
   describe('scss/variables', () => {
     it('should have a valid scss syntax and match snapshot', async () => {
-      const result = format(
+      const result = await format(
         createFormatArgs({
           dictionary: { tokens, allTokens: flattenTokens(tokens) },
           file,
@@ -69,7 +69,7 @@ describe('formats', () => {
 
     it('should optionally use !default', async () => {
       const themeableDictionary = { tokens, allTokens: flattenTokens(tokens) };
-      const formattedScss = format(
+      const formattedScss = await format(
         createFormatArgs({
           dictionary: { tokens, allTokens: flattenTokens(tokens) },
           file,
@@ -82,7 +82,7 @@ describe('formats', () => {
       expect(formattedScss).not.to.match(new RegExp('!default;'));
 
       themeableDictionary.allTokens[0].themeable = true;
-      const themeableScss = format(
+      const themeableScss = await format(
         createFormatArgs({
           dictionary: themeableDictionary,
           file,

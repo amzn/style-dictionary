@@ -13,7 +13,7 @@ export interface FormattingOptions {
   separator?: string;
 }
 
-export type FileHeader = (defaultMessage: string[]) => string[];
+export type FileHeader = (defaultMessage: string[]) => Promise<string[]> | string[];
 
 export interface File {
   className?: string;

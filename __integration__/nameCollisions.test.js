@@ -25,7 +25,7 @@ const tokens = {
   },
 };
 
-describe('integration', () => {
+describe('integration', async () => {
   let stub;
   beforeEach(() => {
     stub = stubMethod(console, 'log');
@@ -36,7 +36,7 @@ describe('integration', () => {
     restore();
   });
 
-  describe('name collisions', () => {
+  describe('name collisions', async () => {
     it(`should warn users of name collisions for flat files`, async () => {
       const sd = new StyleDictionary({
         // we are only testing name collision warnings options so we don't need

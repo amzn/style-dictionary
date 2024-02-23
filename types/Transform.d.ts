@@ -20,7 +20,11 @@ interface BaseTransform<Type, Value> {
   type: Type;
   matcher?: Matcher;
   transitive?: boolean;
-  transformer: (token: TransformedToken, config: PlatformConfig, options: Config) => Value;
+  transformer: (
+    token: TransformedToken,
+    config: PlatformConfig,
+    options: Config,
+  ) => Promise<Value> | Value;
 }
 
 export type NameTransform = BaseTransform<'name', string>;

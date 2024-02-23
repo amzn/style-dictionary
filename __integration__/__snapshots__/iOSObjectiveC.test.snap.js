@@ -1,7 +1,7 @@
 /* @web/test-runner snapshot v1 */
 export const snapshots = {};
 
-snapshots["ios/singleton.m should match snapshot"] = 
+snapshots["integration ios objective-c ios/singleton.m should match snapshot"] = 
 `
 //
 // singleton.m
@@ -1359,9 +1359,9 @@ snapshots["ios/singleton.m should match snapshot"] =
 @end
 
 `;
-/* end snapshot ios/singleton.m should match snapshot */
+/* end snapshot integration ios objective-c ios/singleton.m should match snapshot */
 
-snapshots["ios/singleton.h should match snapshot"] = 
+snapshots["integration ios objective-c ios/singleton.h should match snapshot"] = 
 `
 //
 // singleton.h
@@ -1381,9 +1381,9 @@ snapshots["ios/singleton.h should match snapshot"] =
 + (nonnull)getValue:(NSString *)keyPath;
 
 @end`;
-/* end snapshot ios/singleton.h should match snapshot */
+/* end snapshot integration ios objective-c ios/singleton.h should match snapshot */
 
-snapshots["ios/color.m should match snapshot"] = 
+snapshots["integration ios objective-c ios/color.m should match snapshot"] = 
 `
 //
 // color.m
@@ -1567,9 +1567,9 @@ snapshots["ios/color.m should match snapshot"] =
 }
 
 @end`;
-/* end snapshot ios/color.m should match snapshot */
+/* end snapshot integration ios objective-c ios/color.m should match snapshot */
 
-snapshots["ios/color.h should match snapshot"] = 
+snapshots["integration ios objective-c ios/color.h should match snapshot"] = 
 `
 //
 // color.h
@@ -1741,9 +1741,9 @@ ColorFontSuccess
 + (NSArray *)values;
 + (UIColor *)color:(StyleDictionaryColorName)color;
 @end`;
-/* end snapshot ios/color.h should match snapshot */
+/* end snapshot integration ios objective-c ios/color.h should match snapshot */
 
-snapshots["ios/macros.h should match snapshot"] = 
+snapshots["integration ios objective-c ios/macros.h should match snapshot"] = 
 `
 //
 // macros.h
@@ -1919,9 +1919,9 @@ snapshots["ios/macros.h should match snapshot"] =
 #define SizePaddingLarge 16.00f
 #define SizePaddingXl 16.00f
 `;
-/* end snapshot ios/macros.h should match snapshot */
+/* end snapshot integration ios objective-c ios/macros.h should match snapshot */
 
-snapshots["ios/static.h should match snapshot"] = 
+snapshots["integration ios objective-c ios/static.h should match snapshot"] = 
 `
 // static.h
 //
@@ -1942,9 +1942,9 @@ extern CGFloat const SizePaddingSmall;
 extern CGFloat const SizePaddingMedium;
 extern CGFloat const SizePaddingLarge;
 extern CGFloat const SizePaddingXl;`;
-/* end snapshot ios/static.h should match snapshot */
+/* end snapshot integration ios objective-c ios/static.h should match snapshot */
 
-snapshots["ios/static.m should match snapshot"] = 
+snapshots["integration ios objective-c ios/static.m should match snapshot"] = 
 `
 //
 // static.m
@@ -1966,5 +1966,5 @@ CGFloat const SizePaddingSmall = 8.00f;
 CGFloat const SizePaddingMedium = 16.00f;
 CGFloat const SizePaddingLarge = 16.00f;
 CGFloat const SizePaddingXl = 16.00f;`;
-/* end snapshot ios/static.m should match snapshot */
+/* end snapshot integration ios objective-c ios/static.m should match snapshot */
 

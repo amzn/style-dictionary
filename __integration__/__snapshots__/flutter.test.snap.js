@@ -1,7 +1,7 @@
 /* @web/test-runner snapshot v1 */
 export const snapshots = {};
 
-snapshots["flutter/class.dart should match snapshot"] = 
+snapshots["integration flutter flutter/class.dart should match snapshot"] = 
 `
 //
 // style_dictionary.dart
@@ -180,9 +180,9 @@ class StyleDictionary {
     static const sizePaddingSmall = 8.00;
     static const sizePaddingXl = 16.00;
 }`;
-/* end snapshot flutter/class.dart should match snapshot */
+/* end snapshot integration flutter flutter/class.dart should match snapshot */
 
-snapshots["flutter/class.dart with references should match snapshot"] = 
+snapshots["integration flutter flutter/class.dart with references should match snapshot"] = 
 `
 //
 // style_dictionary_with_references.dart
@@ -361,9 +361,9 @@ class StyleDictionary {
     static const colorFontInteractive = colorBrandPrimary;
     static const colorBackgroundDisabled = colorBackgroundTertiary;
 }`;
-/* end snapshot flutter/class.dart with references should match snapshot */
+/* end snapshot integration flutter flutter/class.dart with references should match snapshot */
 
-snapshots["flutter/class.dart separate should match snapshot"] = 
+snapshots["integration flutter flutter/class.dart separate should match snapshot"] = 
 `
 //
 // style_dictionary_color.dart
@@ -533,5 +533,5 @@ class StyleDictionaryColor {
     static const fontTertiary = Color(0xFF364141);
     static const fontWarning = Color(0xFF601700);
 }`;
-/* end snapshot flutter/class.dart separate should match snapshot */
+/* end snapshot integration flutter flutter/class.dart separate should match snapshot */
 

@@ -16,7 +16,7 @@ import { restore, stubMethod } from 'hanbi';
 import { buildPath, cleanConsoleOutput } from './_constants.js';
 import { clearOutput } from '../__tests__/__helpers.js';
 
-describe('integration', () => {
+describe('integration', async () => {
   let stub;
   beforeEach(() => {
     stub = stubMethod(console, 'log');

@@ -208,7 +208,7 @@ const sd = new StyleDictionary({
 // Note that this example format does not account for token values that are arrays or objects
 StyleDictionary.registerFormat({
   name: 'es6',
-  formatter: (dictionary) => {
+  formatter: async (dictionary) => {
     const { allTokens, options, file } = dictionary;
     const isNumeric = (str) => {
       if (typeof str !== 'string') return false;
@@ -246,7 +246,9 @@ StyleDictionary.registerFormat({
       return isNumeric(value) ? value : JSON.stringify(value);
     };
 
-    return `${fileHeader({ file })}${allTokens.reduce((acc, token) => {
+    const header = await fileHeader({ file });
+
+    return `${header}${allTokens.reduce((acc, token) => {
       return (
         acc +
         `export const ${token.name} = ${compileTokenValue(token)}; ${

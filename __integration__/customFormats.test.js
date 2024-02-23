@@ -17,12 +17,8 @@ import { resolve } from '../lib/resolve.js';
 import { buildPath } from './_constants.js';
 import { clearOutput } from '../__tests__/__helpers.js';
 
-describe('integration', () => {
-  afterEach(() => {
-    clearOutput(buildPath);
-  });
-
-  describe('custom formats', async () => {
+describe('integration', async () => {
+  before(async () => {
     const sd = new StyleDictionary({
       source: [`__integration__/tokens/size/padding.json`],
       // Adding formats directly to SD
@@ -88,16 +84,25 @@ describe('integration', () => {
     });
 
     await sd.buildAllPlatforms();
+  });
 
+  afterEach(() => {
+    clearOutput(buildPath);
+  });
+
+  describe('custom formats', async () => {
     describe(`inline custom with new args`, async () => {
-      const output = fs.readFileSync(resolve(`${buildPath}inlineCustomFormatWithNewArgs.json`), {
-        encoding: 'UTF-8',
-      });
       it(`should match snapshot`, async () => {
+        const output = fs.readFileSync(resolve(`${buildPath}inlineCustomFormatWithNewArgs.json`), {
+          encoding: 'UTF-8',
+        });
         await expect(output).to.matchSnapshot();
       });
 
       it(`should receive proper arguments`, () => {
+        const output = fs.readFileSync(resolve(`${buildPath}inlineCustomFormatWithNewArgs.json`), {
+          encoding: 'UTF-8',
+        });
         const { dictionary, platform, file, options } = JSON.parse(output);
         expect(dictionary).to.have.property(`tokens`);
         expect(dictionary).to.have.property(`allTokens`);
@@ -107,16 +112,24 @@ describe('integration', () => {
       });
     });
 
-    describe(`register custom format with new args`, () => {
-      const output = fs.readFileSync(resolve(`${buildPath}registerCustomFormatWithNewArgs.json`), {
-        encoding: 'UTF-8',
-      });
-
+    describe(`register custom format with new args`, async () => {
       it(`should match snapshot`, async () => {
+        const output = fs.readFileSync(
+          resolve(`${buildPath}registerCustomFormatWithNewArgs.json`),
+          {
+            encoding: 'UTF-8',
+          },
+        );
         await expect(output).to.matchSnapshot();
       });
 
       it(`should receive proper arguments`, () => {
+        const output = fs.readFileSync(
+          resolve(`${buildPath}registerCustomFormatWithNewArgs.json`),
+          {
+            encoding: 'UTF-8',
+          },
+        );
         const { dictionary, platform, file, options } = JSON.parse(output);
         expect(dictionary).to.have.property(`tokens`);
         expect(dictionary).to.have.property(`allTokens`);

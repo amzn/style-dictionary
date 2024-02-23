@@ -138,6 +138,26 @@ describe('utils', () => {
         );
         expect(tokens).to.have.property('test', 'test');
       });
+
+      it('should support asynchronous parsers', async () => {
+        const parsers = [
+          {
+            pattern: /.json$/,
+            parse: async () => {
+              await new Promise((resolve) => setTimeout(resolve, 10));
+              return { test: 'foo' };
+            },
+          },
+        ];
+        const { tokens } = await combineJSON(
+          [`__tests__/__json_files/simple.json`],
+          false,
+          null,
+          false,
+          parsers,
+        );
+        expect(tokens).to.have.property('test', 'foo');
+      });
     });
   });
 });

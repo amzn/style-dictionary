@@ -8,10 +8,11 @@ There is a straightforward way to extend Style Dictionary to meet your needs - s
 - [registerTransformGroup](api.md#registertransformgroup)
 - [registerFilter](api.md#registerfilter)
 - [registerFormat](api.md#registerformat)
-- [registerTemplate](api.md#registertemplate) (deprecated)
 - [registerAction](api.md#registeraction)
 - [registerParser](api.md#registerparser)
 - [registerPreprocessor](api.md#registerpreprocessor)
+
+> Note: all of these now support async functions as well.
 
 ## Extension Examples
 
