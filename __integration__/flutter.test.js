@@ -17,12 +17,8 @@ import { resolve } from '../lib/resolve.js';
 import { buildPath } from './_constants.js';
 import { clearOutput } from '../__tests__/__helpers.js';
 
-describe('integration', () => {
-  afterEach(() => {
-    clearOutput(buildPath);
-  });
-
-  describe('flutter', async () => {
+describe('integration', async () => {
+  before(async () => {
     const sd = new StyleDictionary({
       source: [`__integration__/tokens/**/[!_]*.json?(c)`],
       platforms: {
@@ -76,34 +72,38 @@ describe('integration', () => {
       },
     });
     await sd.buildAllPlatforms();
+  });
 
-    describe(`flutter/class.dart`, () => {
-      const output = fs.readFileSync(resolve(`${buildPath}style_dictionary.dart`), {
-        encoding: `UTF-8`,
-      });
+  afterEach(() => {
+    clearOutput(buildPath);
+  });
 
+  describe('flutter', async () => {
+    describe(`flutter/class.dart`, async () => {
       it(`should match snapshot`, async () => {
+        const output = fs.readFileSync(resolve(`${buildPath}style_dictionary.dart`), {
+          encoding: `UTF-8`,
+        });
         await expect(output).to.matchSnapshot();
       });
 
-      describe(`with references`, () => {
-        const output = fs.readFileSync(
-          resolve(`${buildPath}style_dictionary_with_references.dart`),
-          {
-            encoding: `UTF-8`,
-          },
-        );
-
+      describe(`with references`, async () => {
         it(`should match snapshot`, async () => {
+          const output = fs.readFileSync(
+            resolve(`${buildPath}style_dictionary_with_references.dart`),
+            {
+              encoding: `UTF-8`,
+            },
+          );
           await expect(output).to.matchSnapshot();
         });
       });
 
-      describe(`separate`, () => {
-        const output = fs.readFileSync(resolve(`${buildPath}style_dictionary_color.dart`), {
-          encoding: `UTF-8`,
-        });
+      describe(`separate`, async () => {
         it(`should match snapshot`, async () => {
+          const output = fs.readFileSync(resolve(`${buildPath}style_dictionary_color.dart`), {
+            encoding: `UTF-8`,
+          });
           await expect(output).to.matchSnapshot();
         });
       });

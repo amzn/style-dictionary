@@ -1,7 +1,7 @@
 /* @web/test-runner snapshot v1 */
 export const snapshots = {};
 
-snapshots["should match snapshot"] = 
+snapshots["integration DTCG draft spec forward compatibility should match snapshot"] = 
 `/**
  * Do not edit directly
  * Generated on Sat, 01 Jan 2000 00:00:00 GMT
@@ -13,5 +13,5 @@ snapshots["should match snapshot"] =
   --colors-foo: rgb(0, 0, 0);
 }
 `;
-/* end snapshot should match snapshot */
+/* end snapshot integration DTCG draft spec forward compatibility should match snapshot */
 

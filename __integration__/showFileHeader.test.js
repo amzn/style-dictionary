@@ -17,12 +17,8 @@ import { resolve } from '../lib/resolve.js';
 import { buildPath } from './_constants.js';
 import { clearOutput } from '../__tests__/__helpers.js';
 
-describe('integration', () => {
-  afterEach(() => {
-    clearOutput(buildPath);
-  });
-
-  describe('showFileHeader', async () => {
+describe('integration', async () => {
+  before(async () => {
     const sd = new StyleDictionary({
       // we are only testing showFileHeader options so we don't need
       // the full source.
@@ -68,8 +64,14 @@ describe('integration', () => {
       },
     });
     await sd.buildAllPlatforms();
+  });
 
-    describe(`without platform options`, () => {
+  afterEach(() => {
+    clearOutput(buildPath);
+  });
+
+  describe('showFileHeader', async () => {
+    describe(`without platform options`, async () => {
       it(`should show file header if no file options set`, async () => {
         const output = fs.readFileSync(resolve(`${buildPath}platform-none-file-none.css`), {
           encoding: 'UTF-8',
@@ -85,7 +87,7 @@ describe('integration', () => {
       });
     });
 
-    describe(`with platform options set to false`, () => {
+    describe(`with platform options set to false`, async () => {
       it(`should not show file header if no file options set`, async () => {
         const output = fs.readFileSync(resolve(`${buildPath}platform-false-file-none.css`), {
           encoding: 'UTF-8',

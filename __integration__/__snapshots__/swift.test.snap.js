@@ -1,7 +1,7 @@
 /* @web/test-runner snapshot v1 */
 export const snapshots = {};
 
-snapshots["ios-swift/class.swift should match snapshot"] = 
+snapshots["integration swift ios-swift/class.swift should match snapshot"] = 
 `
 //
 // style_dictionary.swift
@@ -177,9 +177,9 @@ public class StyleDictionary {
     public static let sizePaddingSmall = CGFloat(8.00)
     public static let sizePaddingXl = CGFloat(16.00)
 }`;
-/* end snapshot ios-swift/class.swift should match snapshot */
+/* end snapshot integration swift ios-swift/class.swift should match snapshot */
 
-snapshots["ios-swift/class.swift with references should match snapshot"] = 
+snapshots["integration swift ios-swift/class.swift with references should match snapshot"] = 
 `
 //
 // style_dictionary_with_references.swift
@@ -355,5 +355,5 @@ public class StyleDictionary {
     public static let colorFontInteractive = colorBrandPrimary
     public static let colorBackgroundDisabled = colorBackgroundTertiary
 }`;
-/* end snapshot ios-swift/class.swift with references should match snapshot */
+/* end snapshot integration swift ios-swift/class.swift with references should match snapshot */
 

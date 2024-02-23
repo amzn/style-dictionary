@@ -109,32 +109,30 @@ const file = {
 describe('formats', () => {
   describe(`android/resources`, () => {
     it('should match default snapshot', async () => {
-      await expect(
-        format(
-          createFormatArgs({
-            dictionary: { tokens, allTokens: flattenTokens(tokens) },
-            file,
-            platform: {},
-          }),
-          {},
+      const f = await format(
+        createFormatArgs({
+          dictionary: { tokens, allTokens: flattenTokens(tokens) },
           file,
-        ),
-      ).to.matchSnapshot();
+          platform: {},
+        }),
+        {},
+        file,
+      );
+      await expect(f).to.matchSnapshot();
     });
 
     it('with resourceType override should match snapshot', async () => {
       const file = { resourceType: 'dimen' };
-      await expect(
-        format(
-          createFormatArgs({
-            dictionary: { tokens, allTokens: flattenTokens(tokens) },
-            file,
-            platform: {},
-          }),
-          {},
+      const f = await format(
+        createFormatArgs({
+          dictionary: { tokens, allTokens: flattenTokens(tokens) },
           file,
-        ),
-      ).to.matchSnapshot();
+          platform: {},
+        }),
+        {},
+        file,
+      );
+      await expect(f).to.matchSnapshot();
     });
 
     it('with resourceMap override should match snapshot', async () => {
@@ -145,17 +143,16 @@ describe('formats', () => {
           backgroundColor: 'color',
         },
       };
-      await expect(
-        format(
-          createFormatArgs({
-            dictionary: { tokens: customTokens, allTokens: flattenTokens(customTokens) },
-            file,
-            platform: {},
-          }),
-          {},
+      const f = await format(
+        createFormatArgs({
+          dictionary: { tokens: customTokens, allTokens: flattenTokens(customTokens) },
           file,
-        ),
-      ).to.matchSnapshot();
+          platform: {},
+        }),
+        {},
+        file,
+      );
+      await expect(f).to.matchSnapshot();
     });
   });
 });

@@ -25,8 +25,8 @@ describe('common', () => {
     });
 
     describe('fileHeader', () => {
-      it(`should default to /**/ comment style`, () => {
-        const comment = fileHeader({});
+      it(`should default to /**/ comment style`, async () => {
+        const comment = await fileHeader({});
         expect(comment).to.equal(
           `/**
  * ${defaultLine1}
@@ -37,8 +37,8 @@ describe('common', () => {
         );
       });
 
-      it(`should handle commentStyle short`, () => {
-        const comment = fileHeader({ commentStyle: 'short' });
+      it(`should handle commentStyle short`, async () => {
+        const comment = await fileHeader({ commentStyle: 'short' });
         expect(comment).to.equal(
           `
 // ${defaultLine1}
@@ -48,8 +48,8 @@ describe('common', () => {
         );
       });
 
-      it(`should handle commentStyle xml`, () => {
-        const comment = fileHeader({ commentStyle: 'xml' });
+      it(`should handle commentStyle xml`, async () => {
+        const comment = await fileHeader({ commentStyle: 'xml' });
         expect(comment).to.equal(
           `<!--
   ${defaultLine1}
@@ -58,8 +58,8 @@ describe('common', () => {
         );
       });
 
-      it(`should handle showFileHeader option`, () => {
-        const comment = fileHeader({
+      it(`should handle showFileHeader option`, async () => {
+        const comment = await fileHeader({
           file: {
             options: {
               showFileHeader: false,
@@ -69,8 +69,8 @@ describe('common', () => {
         expect(comment).to.equal('');
       });
 
-      it(`should handle custom fileHeader function`, () => {
-        const comment = fileHeader({
+      it(`should handle custom fileHeader function`, async () => {
+        const comment = await fileHeader({
           file: {
             options: {
               fileHeader: () => {
@@ -89,8 +89,8 @@ describe('common', () => {
         );
       });
 
-      it(`should handle custom fileHeader function with default`, () => {
-        const comment = fileHeader({
+      it(`should handle custom fileHeader function with default`, async () => {
+        const comment = await fileHeader({
           file: {
             options: {
               fileHeader: (defaultMessage) => {
@@ -111,8 +111,8 @@ describe('common', () => {
         );
       });
 
-      it('should handle custom formatting', () => {
-        const comment = fileHeader({
+      it('should handle custom formatting', async () => {
+        const comment = await fileHeader({
           formatting: {
             prefix: `  `,
             header: `{#\n`,

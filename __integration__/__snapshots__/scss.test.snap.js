@@ -1,7 +1,7 @@
 /* @web/test-runner snapshot v1 */
 export const snapshots = {};
 
-snapshots["scss/variables should match snapshot"] = 
+snapshots["integration scss scss/variables should match snapshot"] = 
 `
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
@@ -169,9 +169,9 @@ $size-padding-medium: 1rem;
 $size-padding-large: 1rem;
 $size-padding-xl: 1rem;
 `;
-/* end snapshot scss/variables should match snapshot */
+/* end snapshot integration scss scss/variables should match snapshot */
 
-snapshots["scss/variables with themeable should match snapshot"] = 
+snapshots["integration scss scss/variables with themeable should match snapshot"] = 
 `
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
@@ -339,9 +339,9 @@ $size-padding-medium: 1rem !default;
 $size-padding-large: 1rem !default;
 $size-padding-xl: 1rem !default;
 `;
-/* end snapshot scss/variables with themeable should match snapshot */
+/* end snapshot integration scss scss/variables with themeable should match snapshot */
 
-snapshots["scss/variables with outputReferences should match snapshot"] = 
+snapshots["integration scss scss/variables with outputReferences should match snapshot"] = 
 `
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
@@ -509,9 +509,9 @@ $color-font-interactive-hover: $color-brand-primary;
 $color-font-interactive: $color-brand-primary;
 $color-background-disabled: $color-background-tertiary;
 `;
-/* end snapshot scss/variables with outputReferences should match snapshot */
+/* end snapshot integration scss scss/variables with outputReferences should match snapshot */
 
-snapshots["scss/variables with filter and output references should match snapshot"] = 
+snapshots["integration scss scss/variables with filter and output references should match snapshot"] = 
 `
 // Do not edit directly
 // Generated on Sat, 01 Jan 2000 00:00:00 GMT
@@ -525,9 +525,9 @@ $color-background-secondary: $color-core-neutral-100;
 $color-background-primary: $color-core-neutral-0 !default;
 $color-background-disabled: $color-background-tertiary;
 `;
-/* end snapshot scss/variables with filter and output references should match snapshot */
+/* end snapshot integration scss scss/variables with filter and output references should match snapshot */
 
-snapshots["scss/map-flat should match snapshot"] = 
+snapshots["integration scss scss/map-flat should match snapshot"] = 
 `
 /**
  * Do not edit directly
@@ -698,9 +698,9 @@ $design-system-tokens: (
   'size-padding-large': 1rem,
   'size-padding-xl': 1rem
 );`;
-/* end snapshot scss/map-flat should match snapshot */
+/* end snapshot integration scss scss/map-flat should match snapshot */
 
-snapshots["scss/map-deep should match snapshot"] = 
+snapshots["integration scss scss/map-deep should match snapshot"] = 
 `
 /**
  * Do not edit directly
@@ -1087,9 +1087,9 @@ $design-system-tokens: (
   )
 );
 `;
-/* end snapshot scss/map-deep should match snapshot */
+/* end snapshot integration scss scss/map-deep should match snapshot */
 
-snapshots["scss/map-deep with outputReferences should match snapshot"] = 
+snapshots["integration scss scss/map-deep with outputReferences should match snapshot"] = 
 `
 /**
  * Do not edit directly
@@ -1476,9 +1476,9 @@ $design-system-tokens: (
   )
 );
 `;
-/* end snapshot scss/map-deep with outputReferences should match snapshot */
+/* end snapshot integration scss scss/map-deep with outputReferences should match snapshot */
 
-snapshots["scss/map-deep without themeable should match snapshot"] = 
+snapshots["integration scss scss/map-deep without themeable should match snapshot"] = 
 `
 /**
  * Do not edit directly
@@ -1865,5 +1865,5 @@ $design-system-tokens: (
   )
 );
 `;
-/* end snapshot scss/map-deep without themeable should match snapshot */
+/* end snapshot integration scss scss/map-deep without themeable should match snapshot */
 

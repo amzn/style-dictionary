@@ -44,27 +44,36 @@ const tokens = {
   },
 };
 
-describe('formats', () => {
-  Object.keys(formats).forEach((key) => {
-    const formatter = formats[key].bind(file);
-    const output = formatter(
-      createFormatArgs({
-        dictionary: { tokens, allTokens: flattenTokens(tokens) },
-        file,
-        platform: {},
-      }),
-      {},
-      file,
-    );
+describe('formats', async () => {
+  for (const key of Object.keys(formats)) {
+    const format = formats[key].bind(file);
 
     describe('all', () => {
       it('should match ' + key + ' snapshot', async () => {
+        const output = await format(
+          createFormatArgs({
+            dictionary: { tokens, allTokens: flattenTokens(tokens) },
+            file,
+            platform: {},
+          }),
+          {},
+          file,
+        );
         await expect(output).to.matchSnapshot();
       });
 
-      it('should return ' + key + ' as a string', () => {
+      it('should return ' + key + ' as a string', async () => {
+        const output = await format(
+          createFormatArgs({
+            dictionary: { tokens, allTokens: flattenTokens(tokens) },
+            file,
+            platform: {},
+          }),
+          {},
+          file,
+        );
         expect(typeof output).to.equal('string');
       });
     });
-  });
+  }
 });

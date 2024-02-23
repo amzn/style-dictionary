@@ -17,12 +17,8 @@ import { resolve } from '../lib/resolve.js';
 import { buildPath } from './_constants.js';
 import { clearOutput } from '../__tests__/__helpers.js';
 
-describe('integration', () => {
-  afterEach(() => {
-    clearOutput(buildPath);
-  });
-
-  describe('ios objective-c', async () => {
+describe('integration', async () => {
+  before(async () => {
     const sd = new StyleDictionary({
       source: [`__integration__/tokens/**/[!_]*.json?(c)`],
       platforms: {
@@ -77,7 +73,13 @@ describe('integration', () => {
       },
     });
     await sd.buildAllPlatforms();
+  });
 
+  afterEach(() => {
+    clearOutput(buildPath);
+  });
+
+  describe('ios objective-c', async () => {
     it(`ios/singleton.m should match snapshot`, async () => {
       const output = fs.readFileSync(resolve(`${buildPath}singleton.m`), {
         encoding: `UTF-8`,

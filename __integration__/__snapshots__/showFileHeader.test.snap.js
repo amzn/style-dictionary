@@ -1,7 +1,7 @@
 /* @web/test-runner snapshot v1 */
 export const snapshots = {};
 
-snapshots["without platform options should show file header if no file options set"] = 
+snapshots["integration showFileHeader without platform options should show file header if no file options set"] = 
 `/**
  * Do not edit directly
  * Generated on Sat, 01 Jan 2000 00:00:00 GMT
@@ -14,9 +14,9 @@ snapshots["without platform options should show file header if no file options s
   --size-padding-xl: 1rem;
 }
 `;
-/* end snapshot without platform options should show file header if no file options set */
+/* end snapshot integration showFileHeader without platform options should show file header if no file options set */
 
-snapshots["without platform options should not show file header if file options set to false"] = 
+snapshots["integration showFileHeader without platform options should not show file header if file options set to false"] = 
 `:root {
   --size-padding-small: 0.5rem;
   --size-padding-medium: 1rem;
@@ -24,9 +24,9 @@ snapshots["without platform options should not show file header if file options 
   --size-padding-xl: 1rem;
 }
 `;
-/* end snapshot without platform options should not show file header if file options set to false */
+/* end snapshot integration showFileHeader without platform options should not show file header if file options set to false */
 
-snapshots["with platform options set to false should not show file header if no file options set"] = 
+snapshots["integration showFileHeader with platform options set to false should not show file header if no file options set"] = 
 `:root {
   --size-padding-small: 0.5rem;
   --size-padding-medium: 1rem;
@@ -34,9 +34,9 @@ snapshots["with platform options set to false should not show file header if no 
   --size-padding-xl: 1rem;
 }
 `;
-/* end snapshot with platform options set to false should not show file header if no file options set */
+/* end snapshot integration showFileHeader with platform options set to false should not show file header if no file options set */
 
-snapshots["with platform options set to false should show file header if file options set to true"] = 
+snapshots["integration showFileHeader with platform options set to false should show file header if file options set to true"] = 
 `/**
  * Do not edit directly
  * Generated on Sat, 01 Jan 2000 00:00:00 GMT
@@ -49,5 +49,5 @@ snapshots["with platform options set to false should show file header if file op
   --size-padding-xl: 1rem;
 }
 `;
-/* end snapshot with platform options set to false should show file header if file options set to true */
+/* end snapshot integration showFileHeader with platform options set to false should show file header if file options set to true */
 

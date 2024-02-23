@@ -1,7 +1,7 @@
 /* @web/test-runner snapshot v1 */
 export const snapshots = {};
 
-snapshots["formats scss/map-flat scss/map-flat snapshot"] = 
+snapshots["scss/map-flat snapshot"] = 
 `
 /**
  * Do not edit directly
@@ -16,9 +16,9 @@ $tokens: (
   'color-white': #ffffff,
   'asset-icon-book': "PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItYm9vayI+PHBhdGggZD0iTTQgMTkuNUEyLjUgMi41IDAgMCAxIDYuNSAxN0gyMCI+PC9wYXRoPjxwYXRoIGQ9Ik02LjUgMkgyMHYyMEg2LjVBMi41IDIuNSAwIDAgMSA0IDE5LjV2LTE1QTIuNSAyLjUgMCAwIDEgNi41IDJ6Ij48L3BhdGg+PC9zdmc+"
 );`;
-/* end snapshot formats scss/map-flat scss/map-flat snapshot */
+/* end snapshot scss/map-flat snapshot */
 
-snapshots["formats scss/map-deep scss/map-deep snapshot"] = 
+snapshots["scss/map-deep snapshot"] = 
 `
 /**
  * Do not edit directly
@@ -51,5 +51,5 @@ $tokens: (
   )
 );
 `;
-/* end snapshot formats scss/map-deep scss/map-deep snapshot */
+/* end snapshot scss/map-deep snapshot */
 

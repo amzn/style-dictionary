@@ -110,13 +110,13 @@ describe('filterTokens', () => {
     clearOutput();
   });
 
-  it('should return the original dictionary if no filter is provided', () => {
-    expect(dictionary).to.eql(filterTokens(dictionary));
+  it('should return the original dictionary if no filter is provided', async () => {
+    expect(dictionary).to.eql(await filterTokens(dictionary));
   });
 
-  it('should work with a filter function', () => {
+  it('should work with a filter function', async () => {
     const filter = (property) => property.path.includes('size');
-    const filteredDictionary = filterTokens(dictionary, filter);
+    const filteredDictionary = await filterTokens(dictionary, filter);
     filteredDictionary.allTokens.forEach((property) => {
       expect(property).to.not.equal(colorRed);
       expect(property).not.to.not.equal(colorBlue);
@@ -126,10 +126,10 @@ describe('filterTokens', () => {
     expect(filteredDictionary.tokens).to.not.have.property('color');
   });
 
-  it('should work with falsy values and a filter function', () => {
+  it('should work with falsy values and a filter function', async () => {
     const filter = (property) => property.path.includes('kept');
 
-    const filteredDictionary = filterTokens(falsy_dictionary, filter);
+    const filteredDictionary = await filterTokens(falsy_dictionary, filter);
     filteredDictionary.allTokens.forEach((property) => {
       expect(property).to.not.equal(not_kept);
     });
@@ -138,16 +138,46 @@ describe('filterTokens', () => {
     expect(filteredDictionary.tokens).to.not.have.property('not_kept');
   });
 
-  describe('should throw if', () => {
-    it('filter is a string', () => {
-      expect(() => {
-        filterTokens(dictionary, 'my_filter');
-      }).to.throw(/filter is not a function/);
+  it('should work with async filters', async () => {
+    const filtered = await filterTokens(dictionary, async (token) => {
+      await new Promise((resolve) => setTimeout(resolve, 100));
+      return token.path.includes('size');
     });
-    it('filter is an object', () => {
-      expect(() => {
-        filterTokens(dictionary, { attributes: { category: 'size' } });
-      }).to.throw(/filter is not a function/);
+
+    expect(filtered.allTokens.map((token) => token.name)).to.eql(['size-small', 'size-large']);
+    expect(filtered.tokens).to.eql({
+      size: {
+        small: {
+          value: '2px',
+          original: { value: '2px' },
+          name: 'size-small',
+          attributes: { category: 'size' },
+          path: ['size', 'small'],
+        },
+        large: {
+          value: '4px',
+          original: {
+            value: '4px',
+          },
+          name: 'size-large',
+          attributes: { category: 'size' },
+          path: ['size', 'large'],
+        },
+      },
+    });
+  });
+
+  describe('should throw if', () => {
+    it('filter is a string', async () => {
+      await expect(filterTokens(dictionary, 'my_filter')).to.eventually.rejectedWith(
+        /filter is not a function/,
+      );
+    });
+
+    it('filter is an object', async () => {
+      await expect(
+        filterTokens(dictionary, { attributes: { category: 'size' } }),
+      ).to.eventually.rejectedWith(/filter is not a function/);
     });
   });
 });

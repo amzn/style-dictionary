@@ -186,25 +186,25 @@ Actions are run sequentially, if you write synchronous code then
 it will block other actions, or if you use asynchronous code like Promises
 it will not block.
 
-| Param         | Type                  | Description                           |
-| ------------- | --------------------- | ------------------------------------- |
-| action        | <code>Object</code>   |                                       |
-| action.name   | <code>String</code>   | The name of the action                |
-| action.do     | <code>function</code> | The action in the form of a function. |
-| [action.undo] | <code>function</code> | A function that undoes the action.    |
+| Param       | Type                  | Description                                        |
+| ----------- | --------------------- | -------------------------------------------------- |
+| action      | <code>Object</code>   |                                                    |
+| action.name | <code>String</code>   | The name of the action                             |
+| action.do   | <code>function</code> | The action in the form of a function. Can be async |
+| action.undo | <code>function</code> | A function that undoes the action. Can be async    |
 
 **Example**
 
 ```js
 StyleDictionary.registerAction({
   name: 'copy_assets',
-  do: function (dictionary, config) {
+  do: async function (dictionary, config) {
     console.log('Copying assets directory');
-    fs.copySync('assets', config.buildPath + 'assets');
+    await fs.promises.copy('assets', config.buildPath + 'assets');
   },
-  undo: function (dictionary, config) {
+  undo: async function (dictionary, config) {
     console.log('Cleaning assets directory');
-    fs.removeSync(config.buildPath + 'assets');
+    await fs.promises.remove(config.buildPath + 'assets');
   },
 });
 ```
@@ -218,11 +218,11 @@ StyleDictionary.registerAction({
 Add a custom file header to the style dictionary. File headers are used in
 formats to display some information about how the file was built in a comment.
 
-| Param              | Type                  | Description                                                                                                                                                                                                        |
-| ------------------ | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| options            | <code>Object</code>   |                                                                                                                                                                                                                    |
-| options.name       | <code>String</code>   | Name of the format to be referenced in your config.json                                                                                                                                                            |
-| options.fileHeader | <code>function</code> | Function that returns an array of strings, which will be mapped to comment lines. It takes a single argument which is the default message array. See [file headers](formats.md#file-headers) for more information. |
+| Param              | Type                  | Description                                                                                                                                                                                                                      |
+| ------------------ | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| options            | <code>Object</code>   |                                                                                                                                                                                                                                  |
+| options.name       | <code>String</code>   | Name of the format to be referenced in your config.json                                                                                                                                                                          |
+| options.fileHeader | <code>function</code> | Function that returns an array of strings, which will be mapped to comment lines. It takes a single argument which is the default message array. See [file headers](formats.md#file-headers) for more information. Can be async. |
 
 **Example**
 
@@ -243,11 +243,11 @@ StyleDictionary.registerFileHeader({
 
 Add a custom filter to the style dictionary
 
-| Param          | Type                  | Description                                                       |
-| -------------- | --------------------- | ----------------------------------------------------------------- |
-| filter         | <code>Object</code>   |                                                                   |
-| filter.name    | <code>String</code>   | Name of the filter to be referenced in your config.json           |
-| filter.matcher | <code>function</code> | Matcher function, return boolean if the token should be included. |
+| Param          | Type                  | Description                                                                    |
+| -------------- | --------------------- | ------------------------------------------------------------------------------ |
+| filter         | <code>Object</code>   |                                                                                |
+| filter.name    | <code>String</code>   | Name of the filter to be referenced in your config.json                        |
+| filter.matcher | <code>function</code> | Matcher function, return boolean if the token should be included. Can be async |
 
 **Example**
 
@@ -268,11 +268,11 @@ StyleDictionary.registerFilter({
 
 Add a custom format to the style dictionary
 
-| Param            | Type                  | Description                                                                                                                                                                |
-| ---------------- | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| format           | <code>Object</code>   |                                                                                                                                                                            |
-| format.name      | <code>String</code>   | Name of the format to be referenced in your config.json                                                                                                                    |
-| format.formatter | <code>function</code> | Function to perform the format. Takes a single argument. See [creating custom formats](formats.md#creating-formats) Must return a string, which is then written to a file. |
+| Param            | Type                  | Description                                                                                                                                                                             |
+| ---------------- | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| format           | <code>Object</code>   |                                                                                                                                                                                         |
+| format.name      | <code>String</code>   | Name of the format to be referenced in your config.json                                                                                                                                 |
+| format.formatter | <code>function</code> | Function to perform the format. Takes a single argument. See [creating custom formats](formats.md#creating-formats) Must return a string, which is then written to a file. Can be async |
 
 **Example**
 
@@ -293,10 +293,10 @@ StyleDictionary.registerFormat({
 
 Adds a custom parser to parse style dictionary files
 
-| Param   | Type                  | Description                                                                                                                                                                                                       |
-| ------- | --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| pattern | <code>Regex</code>    | A file path regular expression to match which files this parser should be be used on. This is similar to how webpack loaders work. `/\.json$/` will match any file ending in '.json', for example.                |
-| parse   | <code>function</code> | Function to parse the file contents. Takes 1 argument, which is an object with 2 attributes: contents wich is the string of the file contents and filePath. The function should return a plain Javascript object. |
+| Param   | Type                  | Description                                                                                                                                                                                                                     |
+| ------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| pattern | <code>Regex</code>    | A file path regular expression to match which files this parser should be be used on. This is similar to how webpack loaders work. `/\.json$/` will match any file ending in '.json', for example.                              |
+| parse   | <code>function</code> | Function to parse the file contents. Takes 1 argument, which is an object with 2 attributes: contents wich is the string of the file contents and filePath. The function should return a plain Javascript object. Can be async. |
 
 **Example**
 
@@ -317,11 +317,11 @@ StyleDictionary.registerParser({
 
 Adds a custom parser to parse style dictionary files
 
-| Param                     | Type                  | Description                                                                                  |
-| ------------------------- | --------------------- | -------------------------------------------------------------------------------------------- |
-| Preprocessor              | <code>Object</code>   |                                                                                              |
-| Preprocessor.name         | <code>String</code>   | Name of the format to be referenced in your config.json                                      |
-| Preprocessor.preprocessor | <code>function</code> | Function to preprocess the dictionary. The function should return a plain Javascript object. |
+| Param                     | Type                  | Description                                                                                               |
+| ------------------------- | --------------------- | --------------------------------------------------------------------------------------------------------- |
+| Preprocessor              | <code>Object</code>   |                                                                                                           |
+| Preprocessor.name         | <code>String</code>   | Name of the format to be referenced in your config.json                                                   |
+| Preprocessor.preprocessor | <code>function</code> | Function to preprocess the dictionary. The function should return a plain Javascript object. Can be async |
 
 **Example**
 
@@ -344,14 +344,14 @@ StyleDictionary.registerPreprocessor({
 Add a custom transform to the Style Dictionary
 Transforms can manipulate a token's name, value, or attributes
 
-| Param                 | Type                  | Description                                                                                                                                                                                                                                                                             |
-| --------------------- | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| transform             | <code>Object</code>   | Transform object                                                                                                                                                                                                                                                                        |
-| transform.type        | <code>String</code>   | Type of transform, can be: name, attribute, or value                                                                                                                                                                                                                                    |
-| transform.name        | <code>String</code>   | Name of the transformer (used by transformGroup to call a list of transforms).                                                                                                                                                                                                          |
-| transform.transitive  | <code>Boolean</code>  | If the value transform should be applied transitively, i.e. should be applied to referenced values as well as absolute values.                                                                                                                                                          |
-| [transform.matcher]   | <code>function</code> | Matcher function, return boolean if transform should be applied. If you omit the matcher function, it will match all tokens.                                                                                                                                                            |
-| transform.transformer | <code>function</code> | Modifies a design token object. The transformer function will receive the token and the platform configuration as its arguments. The transformer function should return a string for name transforms, an object for attribute transforms, and same type of value for a value transform. |
+| Param                 | Type                  | Description                                                                                                                                                                                                                                                                                           |
+| --------------------- | --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| transform             | <code>Object</code>   | Transform object                                                                                                                                                                                                                                                                                      |
+| transform.type        | <code>String</code>   | Type of transform, can be: name, attribute, or value                                                                                                                                                                                                                                                  |
+| transform.name        | <code>String</code>   | Name of the transformer (used by transformGroup to call a list of transforms).                                                                                                                                                                                                                        |
+| transform.transitive  | <code>Boolean</code>  | If the value transform should be applied transitively, i.e. should be applied to referenced values as well as absolute values.                                                                                                                                                                        |
+| [transform.matcher]   | <code>function</code> | Matcher function, return boolean if transform should be applied. If you omit the matcher function, it will match all tokens.                                                                                                                                                                          |
+| transform.transformer | <code>function</code> | Modifies a design token object. The transformer function will receive the token and the platform configuration as its arguments. The transformer function should return a string for name transforms, an object for attribute transforms, and same type of value for a value transform. Can be async. |
 
 **Example**
 

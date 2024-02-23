@@ -26,7 +26,11 @@ You use transforms in your config file under platforms > [platform] > transforms
 }
 ```
 
-A transform consists of 4 parts: type, name, matcher, and transformer. Transforms are run on all design tokens where the matcher returns true. _NOTE: if you don't provide a matcher function, it will match all tokens._
+A transform consists of 4 parts: type, name, matcher, and transformer. Transforms are run on all design tokens where the matcher returns true.
+
+_NOTE: if you don't provide a matcher function, it will match all tokens._
+
+> `transformer` functions can be async as well.
 
 ## Transform Types
 

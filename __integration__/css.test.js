@@ -17,12 +17,8 @@ import { resolve } from '../lib/resolve.js';
 import { buildPath } from './_constants.js';
 import { clearOutput } from '../__tests__/__helpers.js';
 
-describe('integration', () => {
-  afterEach(() => {
-    clearOutput(buildPath);
-  });
-
-  describe('css', async () => {
+describe('integration', async () => {
+  before(async () => {
     const sd = new StyleDictionary({
       source: [`__integration__/tokens/**/[!_]*.json?(c)`],
       // Testing proper string interpolation with multiple references here.
@@ -64,29 +60,35 @@ describe('integration', () => {
       },
     });
     await sd.buildAllPlatforms();
+  });
 
-    describe('css/variables', () => {
-      const output = fs.readFileSync(resolve(`${buildPath}variables.css`), {
-        encoding: 'UTF-8',
-      });
+  afterEach(() => {
+    clearOutput(buildPath);
+  });
+
+  describe('css', async () => {
+    describe('css/variables', async () => {
       it(`should match snapshot`, async () => {
+        const output = fs.readFileSync(resolve(`${buildPath}variables.css`), {
+          encoding: 'UTF-8',
+        });
         await expect(output).to.matchSnapshot();
       });
 
-      describe(`with references`, () => {
-        const output = fs.readFileSync(resolve(`${buildPath}variablesWithReferences.css`), {
-          encoding: 'UTF-8',
-        });
+      describe(`with references`, async () => {
         it(`should match snapshot`, async () => {
+          const output = fs.readFileSync(resolve(`${buildPath}variablesWithReferences.css`), {
+            encoding: 'UTF-8',
+          });
           await expect(output).to.matchSnapshot();
         });
       });
 
-      describe(`with selector`, () => {
-        const output = fs.readFileSync(resolve(`${buildPath}variablesWithSelector.css`), {
-          encoding: 'UTF-8',
-        });
+      describe(`with selector`, async () => {
         it(`should match snapshot`, async () => {
+          const output = fs.readFileSync(resolve(`${buildPath}variablesWithSelector.css`), {
+            encoding: 'UTF-8',
+          });
           await expect(output).to.matchSnapshot();
         });
       });

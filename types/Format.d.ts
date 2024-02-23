@@ -39,7 +39,9 @@ export interface FormatterArguments {
  * The formatter function receives an overloaded object as its arguments and
  * it should return a string, which will be written to a file.
  */
-export type Formatter = ((arguments: FormatterArguments) => string) & { nested?: boolean };
+export type Formatter = ((arguments: FormatterArguments) => string | Promise<string>) & {
+  nested?: boolean;
+};
 
 export interface Format {
   name: string;

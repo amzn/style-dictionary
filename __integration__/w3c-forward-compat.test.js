@@ -18,18 +18,8 @@ import { resolve } from '../lib/resolve.js';
 import { buildPath } from './_constants.js';
 import { clearOutput } from '../__tests__/__helpers.js';
 
-describe('integration', () => {
-  afterEach(() => {
-    clearOutput(buildPath);
-  });
-
-  /**
-   * Integration test for forward compatibility with https://design-tokens.github.io/community-group/format/
-   * - $value special property
-   * - $type special property & inherits from ancestors
-   * - $description special property
-   */
-  describe('DTCG draft spec forward compatibility', async () => {
+describe('integration', async () => {
+  before(async () => {
     const sd = new StyleDictionary({
       tokens: {
         colors: {
@@ -83,12 +73,23 @@ describe('integration', () => {
       },
     });
     await sd.buildAllPlatforms();
+  });
 
-    const output = fs.readFileSync(resolve(`${buildPath}vars.css`), {
-      encoding: `UTF-8`,
-    });
+  afterEach(() => {
+    clearOutput(buildPath);
+  });
 
+  /**
+   * Integration test for forward compatibility with https://design-tokens.github.io/community-group/format/
+   * - $value special property
+   * - $type special property & inherits from ancestors
+   * - $description special property
+   */
+  describe('DTCG draft spec forward compatibility', async () => {
     it(`should match snapshot`, async () => {
+      const output = fs.readFileSync(resolve(`${buildPath}vars.css`), {
+        encoding: `UTF-8`,
+      });
       await expect(output).to.matchSnapshot();
     });
   });

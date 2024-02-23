@@ -1,7 +1,7 @@
 /* @web/test-runner snapshot v1 */
 export const snapshots = {};
 
-snapshots["css/variables should match snapshot"] = 
+snapshots["integration css css/variables should match snapshot"] = 
 `/**
  * Do not edit directly
  * Generated on Sat, 01 Jan 2000 00:00:00 GMT
@@ -175,9 +175,9 @@ snapshots["css/variables should match snapshot"] =
   --size-padding-xl: 1rem;
 }
 `;
-/* end snapshot css/variables should match snapshot */
+/* end snapshot integration css css/variables should match snapshot */
 
-snapshots["css/variables with references should match snapshot"] = 
+snapshots["integration css css/variables with references should match snapshot"] = 
 `/**
  * Do not edit directly
  * Generated on Sat, 01 Jan 2000 00:00:00 GMT
@@ -351,9 +351,9 @@ snapshots["css/variables with references should match snapshot"] =
   --color-background-disabled: var(--color-background-tertiary);
 }
 `;
-/* end snapshot css/variables with references should match snapshot */
+/* end snapshot integration css css/variables with references should match snapshot */
 
-snapshots["css/variables with selector should match snapshot"] = 
+snapshots["integration css css/variables with selector should match snapshot"] = 
 `/**
  * Do not edit directly
  * Generated on Sat, 01 Jan 2000 00:00:00 GMT
@@ -527,5 +527,5 @@ snapshots["css/variables with selector should match snapshot"] =
   --size-padding-xl: 1rem;
 }
 `;
-/* end snapshot css/variables with selector should match snapshot */
+/* end snapshot integration css css/variables with selector should match snapshot */
 

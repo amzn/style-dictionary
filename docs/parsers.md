@@ -6,6 +6,8 @@ A custom parser matches design token files based on a file path regular expressi
 
 Custom parsers can be used to keep design token files in other languages like YAML, but they can also be used to add extra metadata or modify the design tokens themselves before they get to Style Dictionary. For example, you could modify the token object based on its file path or programmatically generate tokens based on the data in certain files.
 
+> Note: parse function can be async as well.
+
 ---
 
 ## Parser structure

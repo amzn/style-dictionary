@@ -17,12 +17,8 @@ import { resolve } from '../lib/resolve.js';
 import { buildPath } from './_constants.js';
 import { clearOutput } from '../__tests__/__helpers.js';
 
-describe('integration', () => {
-  afterEach(() => {
-    clearOutput(buildPath);
-  });
-
-  describe('android', async () => {
+describe('integration', async () => {
+  before(async () => {
     const sd = new StyleDictionary({
       source: [`__integration__/tokens/**/[!_]*.json?(c)`],
       platforms: {
@@ -53,32 +49,35 @@ describe('integration', () => {
       },
     });
     await sd.buildAllPlatforms();
+  });
 
-    describe(`android/resources`, () => {
-      const output = fs.readFileSync(resolve(`${buildPath}resources.xml`), {
-        encoding: 'UTF-8',
-      });
+  afterEach(() => {
+    clearOutput(buildPath);
+  });
 
+  describe('android', async () => {
+    describe(`android/resources`, async () => {
       it(`should match snapshot`, async () => {
+        const output = fs.readFileSync(resolve(`${buildPath}resources.xml`), {
+          encoding: 'UTF-8',
+        });
         await expect(output).to.matchSnapshot();
       });
 
-      describe(`with references`, () => {
-        const output = fs.readFileSync(resolve(`${buildPath}resourcesWithReferences.xml`), {
-          encoding: 'UTF-8',
-        });
-
+      describe(`with references`, async () => {
         it(`should match snapshot`, async () => {
+          const output = fs.readFileSync(resolve(`${buildPath}resourcesWithReferences.xml`), {
+            encoding: 'UTF-8',
+          });
           await expect(output).to.matchSnapshot();
         });
       });
 
-      describe(`with filter`, () => {
-        const output = fs.readFileSync(resolve(`${buildPath}colors.xml`), {
-          encoding: 'UTF-8',
-        });
-
+      describe(`with filter`, async () => {
         it(`should match snapshot`, async () => {
+          const output = fs.readFileSync(resolve(`${buildPath}colors.xml`), {
+            encoding: 'UTF-8',
+          });
           await expect(output).to.matchSnapshot();
         });
       });

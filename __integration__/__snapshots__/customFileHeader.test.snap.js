@@ -1,7 +1,7 @@
 /* @web/test-runner snapshot v1 */
 export const snapshots = {};
 
-snapshots["file options registered file header should match snapshot"] = 
+snapshots["integration valid custom file headers file options registered file header should match snapshot"] = 
 `/**
  * hello
  * Do not edit directly
@@ -12,9 +12,9 @@ snapshots["file options registered file header should match snapshot"] =
   --color-red: #ff0000;
 }
 `;
-/* end snapshot file options registered file header should match snapshot */
+/* end snapshot integration valid custom file headers file options registered file header should match snapshot */
 
-snapshots["file options config file header should match snapshot"] = 
+snapshots["integration valid custom file headers file options config file header should match snapshot"] = 
 `/**
  * Do not edit directly
  * Generated on Sat, 01 Jan 2000 00:00:00 GMT
@@ -25,9 +25,9 @@ snapshots["file options config file header should match snapshot"] =
   --color-red: #ff0000;
 }
 `;
-/* end snapshot file options config file header should match snapshot */
+/* end snapshot integration valid custom file headers file options config file header should match snapshot */
 
-snapshots["file options inline file header should match snapshot"] = 
+snapshots["integration valid custom file headers file options inline file header should match snapshot"] = 
 `/**
  * build version 1.0.0
  */
@@ -36,9 +36,9 @@ snapshots["file options inline file header should match snapshot"] =
   --color-red: #ff0000;
 }
 `;
-/* end snapshot file options inline file header should match snapshot */
+/* end snapshot integration valid custom file headers file options inline file header should match snapshot */
 
-snapshots["platform options no file options should match snapshot"] = 
+snapshots["integration valid custom file headers platform options no file options should match snapshot"] = 
 `/**
  * Do not edit directly
  * Generated on Sat, 01 Jan 2000 00:00:00 GMT
@@ -65,9 +65,9 @@ module.exports = {
   }
 };
 `;
-/* end snapshot platform options no file options should match snapshot */
+/* end snapshot integration valid custom file headers platform options no file options should match snapshot */
 
-snapshots["platform options showFileHeader should match snapshot"] = 
+snapshots["integration valid custom file headers platform options showFileHeader should match snapshot"] = 
 `module.exports = {
   "color": {
     "red": {
@@ -88,9 +88,9 @@ snapshots["platform options showFileHeader should match snapshot"] =
   }
 };
 `;
-/* end snapshot platform options showFileHeader should match snapshot */
+/* end snapshot integration valid custom file headers platform options showFileHeader should match snapshot */
 
-snapshots["platform options file header override should match snapshot"] = 
+snapshots["integration valid custom file headers platform options file header override should match snapshot"] = 
 `/**
  * Header overridden
  */
@@ -115,5 +115,5 @@ module.exports = {
   }
 };
 `;
-/* end snapshot platform options file header override should match snapshot */
+/* end snapshot integration valid custom file headers platform options file header override should match snapshot */
 
