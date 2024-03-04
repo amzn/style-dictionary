@@ -45,6 +45,14 @@ describe('integration', async () => {
               format: 'css/variables',
               options: {
                 outputReferences: true,
+                outputReferenceFallbacks: false,
+              },
+            },
+            {
+              destination: 'variablesWithReferenceFallbacks.css',
+              format: 'css/variables',
+              options: {
+                outputReferences: true,
                 outputReferenceFallbacks: true,
               },
             },
@@ -80,6 +88,18 @@ describe('integration', async () => {
           const output = fs.readFileSync(resolve(`${buildPath}variablesWithReferences.css`), {
             encoding: 'UTF-8',
           });
+          await expect(output).to.matchSnapshot();
+        });
+      });
+
+      describe(`with referenceFallbacks`, async () => {
+        it(`should match snapshot`, async () => {
+          const output = fs.readFileSync(
+            resolve(`${buildPath}variablesWithReferenceFallbacks.css`),
+            {
+              encoding: 'UTF-8',
+            },
+          );
           await expect(output).to.matchSnapshot();
         });
       });
