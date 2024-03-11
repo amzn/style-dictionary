@@ -1,5 +1,7 @@
 import type { TransformedToken } from './DesignToken.d.ts';
 import type { Formatter } from './Format.d.ts';
+import type { LocalOptions } from './Config.d.ts';
+import type { Matcher } from './Filter.d.ts';
 
 export interface FormattingOptions {
   prefix?: string;

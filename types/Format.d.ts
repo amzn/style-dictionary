@@ -13,8 +13,7 @@
 
 import type { Dictionary } from './DesignToken.d.ts';
 import type { File } from './File.d.ts';
-import type { LocalOptions, Config } from './Config.d.ts';
-import type { PlatformConfig } from './Platform.d.ts';
+import type { LocalOptions, Config, PlatformConfig } from './Config.d.ts';
 
 export interface FormatterArguments {
   /**
@@ -28,7 +27,7 @@ export interface FormatterArguments {
   /**
    * The options object,
    */
-  options: LocalOptions & Config;
+  options: Config & LocalConfig;
   /**
    * The platform configuration the format is called in
    */
