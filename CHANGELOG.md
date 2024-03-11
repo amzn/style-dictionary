@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.0.0-prerelease.17
+
+### Patch Changes
+
+- 63681a6: Fix a couple of type imports issues in .d.ts files
+
 ## 4.0.0-prerelease.16
 
 ### Patch Changes
