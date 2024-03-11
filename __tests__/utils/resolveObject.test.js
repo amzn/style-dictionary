@@ -336,5 +336,19 @@ describe('utils', () => {
       expect(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS).length).to.equal(0);
       expect(test.test.value).to.equal(0);
     });
+
+    it('should support DTCG format', () => {
+      const test = resolveObject(
+        {
+          test: { $value: '{zero.$value}' },
+          zero: { $value: 0 },
+          test2: { $value: '{one}' },
+          one: { $value: 1 },
+        },
+        { usesDtcg: true },
+      );
+      expect(test.test.$value).to.equal(0);
+      expect(test.test2.$value).to.equal(1);
+    });
   });
 });
