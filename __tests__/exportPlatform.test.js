@@ -461,6 +461,10 @@ describe('exportPlatform', () => {
               },
             },
           },
+          reftest: { $value: '{zero.$value}' },
+          zero: { $value: '0' },
+          reftest2: { $value: '{one}' },
+          one: { $value: '1' },
         },
         transform: {
           'custom/add/px': {
@@ -493,6 +497,9 @@ describe('exportPlatform', () => {
 
       // considers "value" a token group here
       expect(tokens.dimensions.nested.value.deep.$value).to.equal('30px');
+
+      expect(tokens.reftest.$value).to.equal('0px');
+      expect(tokens.reftest2.$value).to.equal('1px');
     });
   });
 });
