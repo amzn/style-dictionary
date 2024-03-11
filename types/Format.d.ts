@@ -27,7 +27,7 @@ export interface FormatterArguments {
   /**
    * The options object,
    */
-  options: Config & LocalConfig;
+  options: Config & LocalOptions;
   /**
    * The platform configuration the format is called in
    */
