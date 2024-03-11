@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.0.0-prerelease.16
+
+### Patch Changes
+
+- 72f020d: Pass outputReferencesFallback option to the relevant utilities, so the option actually works.
+- d008c67: Fix a couple of spots where DTCG option wasn't properly taken into account, more tests added.
+
 ## 4.0.0-prerelease.15
 
 ### Major Changes
