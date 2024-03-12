@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.0.0-prerelease.18
+
+### Patch Changes
+
+- 738686b: Allow transformGroup to be combined with transforms, where standalone transforms will be added after the group's transforms.
+
 ## 4.0.0-prerelease.17
 
 ### Patch Changes
