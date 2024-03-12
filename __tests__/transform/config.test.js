@@ -54,5 +54,47 @@ None of "barTransform", "bazTransform" match the name of a registered transform.
 
       expect(transformConfig.bind(null, noTransformCfg, dictionary, 'test')).to.throw(err);
     });
+
+    it('allows combining transformGroup with transforms', () => {
+      const cfg = {
+        transformGroup: {
+          foobarTransformGroup: ['fooTransform', 'barTransform'],
+        },
+        transform: {
+          fooTransform: {
+            name: 'fooTransform',
+            type: 'attribute',
+            transformer: function () {
+              return { foo: 'foo' };
+            },
+          },
+          barTransform: {
+            name: 'barTransform',
+            type: 'attribute',
+            transformer: function () {
+              return { bar: 'bar' };
+            },
+          },
+          quxTransform: {
+            name: 'quxTransform',
+            type: 'attribute',
+            transformer: function () {
+              return { qux: 'qux' };
+            },
+          },
+        },
+      };
+
+      const platformCfg = {
+        transformGroup: 'foobarTransformGroup',
+        transforms: ['quxTransform'],
+      };
+      const transformedCfg = transformConfig(platformCfg, cfg, 'test');
+      expect(transformedCfg.transforms.map((t) => t.name)).to.eql([
+        'fooTransform',
+        'barTransform',
+        'quxTransform',
+      ]);
+    });
   });
 });
