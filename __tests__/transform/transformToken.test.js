@@ -11,7 +11,7 @@
  * and limitations under the License.
  */
 import { expect } from 'chai';
-import token from '../../lib/transform/token.js';
+import transformToken from '../../lib/transform/token.js';
 
 const config = {
   transforms: [
@@ -44,14 +44,14 @@ const config = {
 describe('transform', () => {
   describe('token', () => {
     it('transform token and apply transforms', async () => {
-      const test = await token({ attributes: { baz: 'blah' } }, config, {});
+      const test = await transformToken({ attributes: { baz: 'blah' } }, config, {});
       expect(test).to.have.nested.property('attributes.bar', 'foo');
       expect(test).to.have.property('name', 'hello');
     });
 
     // This allows transformObject utility to then consider this token's transformation undefined and thus "deferred"
     it('returns a token as undefined if transitive transformer dictates that the transformation has to be deferred', async () => {
-      const result = await token(
+      const result = await transformToken(
         {
           value: '16',
           original: {

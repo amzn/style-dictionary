@@ -20,6 +20,25 @@ You use transformGroups in your config file under platforms > [platform] > trans
 }
 ```
 
+## Combining with transforms
+
+You can also combine transforms with transformGroup:
+
+```json
+{
+  "source": ["tokens/**/*.json"],
+  "platforms": {
+    "android": {
+      "transformGroup": "android",
+      "transforms": ["name/cti/snake"]
+    }
+  }
+}
+```
+
+The transforms that are standalone will be added **after** the ones inside the transformGroup.
+If it's important to determine the order of these yourself, you can always register a custom transformGroup to have more granular control.
+
 ---
 
 ## Pre-defined Transform groups
