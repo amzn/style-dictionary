@@ -99,6 +99,7 @@ const sd = new StyleDictionary({
 });
 resolveReferences(sd.tokens.border.value, sd.tokens); // "solid 2px #000"
 resolveReferences('solid {spacing.2} {colors.black}', sd.tokens); // alternative way, yet identical to line above -> "solid 2px #000"
+resolveReferences('solid {spacing.2} {colors.black}', sd.tokens, { usesDtcg: true }); // Assumes DTCG spec format, with $ prefix ($value, $type)
 ```
 
 > You can pass a third `options` argument where you can pass some configuration options for how references are resolved
@@ -132,8 +133,9 @@ const sd = new StyleDictionary({
   },
 });
 
-getReferences(sd, sd.tokens.border.value);
-getReferences(sd, 'solid {spacing.2} {colors.black}'); // alternative way, yet identical to line above
+getReferences(sd.tokens.border.value, sd.tokens);
+getReferences('solid {spacing.2} {colors.black}', sd.tokens); // alternative way, yet identical to line above
+getReferences('solid {spacing.2} {colors.black}', sd.tokens, { usesDtcg: true }); // Assumes DTCG spec format, with $ prefix ($value, $type)
 /**
  * [
  *   { value: '2px', type: 'dimension' },
