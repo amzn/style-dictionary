@@ -24,13 +24,7 @@ Here is an example configuration:
       "actions": ["copy_assets"]
     },
     "android": {
-      "transforms": [
-        "attribute/cti",
-        "name/cti/snake",
-        "color/hex",
-        "size/remToSp",
-        "size/remToDp"
-      ],
+      "transforms": ["attribute/cti", "name/snake", "color/hex", "size/remToSp", "size/remToDp"],
       "buildPath": "build/android/src/main/res/values/",
       "files": [
         {

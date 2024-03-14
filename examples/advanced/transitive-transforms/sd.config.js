@@ -55,7 +55,7 @@ export default {
 
   platforms: {
     css: {
-      transforms: [`attribute/cti`, `name/cti/kebab`, `colorTransform`, `color/css`],
+      transforms: [`attribute/cti`, `name/kebab`, `colorTransform`, `color/css`],
       buildPath: `build/`,
       files: [
         {

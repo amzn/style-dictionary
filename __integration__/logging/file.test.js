@@ -44,7 +44,7 @@ describe(`integration`, () => {
                 {
                   destination: `empty.css`,
                   format: `css/variables`,
-                  filter: (token) => token.attributes.category === `foo`,
+                  filter: (token) => token.type === `foo`,
                 },
               ],
             },
@@ -69,7 +69,7 @@ describe(`integration`, () => {
                 {
                   destination: `nameCollisions.css`,
                   format: `css/variables`,
-                  filter: (token) => token.attributes.category === `color`,
+                  filter: (token) => token.type === `color`,
                 },
               ],
             },
@@ -94,7 +94,7 @@ describe(`integration`, () => {
                 {
                   destination: `nameCollisions.css`,
                   format: `css/variables`,
-                  filter: (token) => token.attributes.category === `color`,
+                  filter: (token) => token.type === `color`,
                 },
               ],
             },

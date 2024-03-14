@@ -96,15 +96,12 @@ module.exports = {
   "color": {
     "red": {
       "value": "#FF0000",
+      "type": "color",
       "original": {
         "value": "#FF0000"
       },
       "name": "color_red",
       "comment": "comment",
-      "attributes": {
-        "category": "color",
-        "type": "red"
-      },
       "path": [
         "color",
         "red"
@@ -137,15 +134,12 @@ var _styleDictionary = {
   "color": {
     "red": {
       "value": "#FF0000",
+      "type": "color",
       "original": {
         "value": "#FF0000"
       },
       "name": "color_red",
       "comment": "comment",
-      "attributes": {
-        "category": "color",
-        "type": "red"
-      },
       "path": [
         "color",
         "red"
@@ -177,15 +171,12 @@ snapshots["formats all should match javascript/umd snapshot"] =
   "color": {
     "red": {
       "value": "#FF0000",
+      "type": "color",
       "original": {
         "value": "#FF0000"
       },
       "name": "color_red",
       "comment": "comment",
-      "attributes": {
-        "category": "color",
-        "type": "red"
-      },
       "path": [
         "color",
         "red"
@@ -227,20 +218,14 @@ snapshots["formats all should match typescript/module-declarations snapshot"] =
 export default tokens;
 
 declare interface DesignToken {
-      value?: any;
-      name?: string;
-      comment?: string;
-      themeable?: boolean;
-      attributes?: {
-        category?: string;
-        type?: string;
-        item?: string;
-        subitem?: string;
-        state?: string;
-        [key: string]: any;
-      };
-      [key: string]: any;
-    }
+  value?: any;
+  type?: string;
+  comment?: string;
+  name?: string;
+  themeable?: boolean;
+  attributes?: Record<string, unknown>;
+  [key: string]: any;
+}
 
 declare const tokens: {
   "color": {
@@ -416,9 +401,7 @@ snapshots["formats all should match ios/singleton.m snapshot"] =
   @"color": @{
     @"red": @{
       @"value": #FF0000,
-      @"name": @"color_red",
-      @"category": @"color",
-      @"type": @"red"
+      @"name": @"color_red"
       }
     }
   };
@@ -586,9 +569,7 @@ NSString * const color_red = #FF0000;
     array = @[
       @{
   @"value": #FF0000,
-  @"name": @"color_red",
-    @"category": @"color",
-    @"type": @"red"
+  @"name": @"color_red"
   }
     ];
   });
@@ -657,15 +638,12 @@ snapshots["formats all should match json snapshot"] =
   "color": {
     "red": {
       "value": "#FF0000",
+      "type": "color",
       "original": {
         "value": "#FF0000"
       },
       "name": "color_red",
       "comment": "comment",
-      "attributes": {
-        "category": "color",
-        "type": "red"
-      },
       "path": [
         "color",
         "red"
@@ -700,7 +678,9 @@ snapshots["formats all should match sketch/palette snapshot"] =
 `{
   "compatibleVersion": "1.0",
   "pluginVersion": "1.1",
-  "colors": []
+  "colors": [
+    "#FF0000"
+  ]
 }
 `;
 /* end snapshot formats all should match sketch/palette snapshot */

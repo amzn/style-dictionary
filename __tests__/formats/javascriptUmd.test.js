@@ -19,9 +19,7 @@ const file = {
   destination: '__output/',
   format: 'javascript/umd',
   filter: {
-    attributes: {
-      category: 'color',
-    },
+    type: 'color',
   },
 };
 

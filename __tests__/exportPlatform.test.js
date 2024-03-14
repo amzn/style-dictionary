@@ -80,8 +80,8 @@ describe('exportPlatform', () => {
         },
       });
       const dictionary = await StyleDictionaryExtended.exportPlatform('test');
-      expect(dictionary.color.button.active.value).to.equal('#0077CC-darker');
-      expect(dictionary.color.button.hover.value).to.equal('#0077CC-darker-darker');
+      expect(dictionary.color.button.active.value).to.equal('#0077cc-darker');
+      expect(dictionary.color.button.hover.value).to.equal('#0077cc-darker-darker');
     });
 
     it('should have transitive transforms applied without .value in references', async () => {
@@ -224,48 +224,48 @@ describe('exportPlatform', () => {
           value: '#f00',
           name: 'colors-red',
           path: ['colors', 'red'],
+          original: {
+            value: '#f00',
+          },
           attributes: {
             category: 'colors',
             type: 'red',
-          },
-          original: {
-            value: '#f00',
           },
         },
         error: {
           value: '#f00',
           name: 'colors-error',
           path: ['colors', 'error'],
+          original: {
+            value: '{colors.red}',
+          },
           attributes: {
             category: 'colors',
             type: 'error',
-          },
-          original: {
-            value: '{colors.red}',
           },
         },
         danger: {
           value: '#f00',
           name: 'colors-danger',
           path: ['colors', 'danger'],
+          original: {
+            value: '{colors.error}',
+          },
           attributes: {
             category: 'colors',
             type: 'danger',
-          },
-          original: {
-            value: '{colors.error}',
           },
         },
         alert: {
           value: '#f00',
           name: 'colors-alert',
           path: ['colors', 'alert'],
+          original: {
+            value: '{colors.error.value}',
+          },
           attributes: {
             category: 'colors',
             type: 'alert',
-          },
-          original: {
-            value: '{colors.error.value}',
           },
         },
       },
@@ -284,12 +284,12 @@ describe('exportPlatform', () => {
   describe('token references without .value', async () => {
     const tokens = {
       color: {
-        red: { value: '#f00' },
-        error: { value: '{color.red}' },
-        errorWithValue: { value: '{color.red.value}' },
-        danger: { value: '{color.error}' },
-        dangerWithValue: { value: '{color.error.value}' },
-        dangerErrorValue: { value: '{color.errorWithValue}' },
+        red: { value: '#f00', type: 'color' },
+        error: { value: '{color.red}', type: 'color' },
+        errorWithValue: { value: '{color.red.value}', type: 'color' },
+        danger: { value: '{color.error}', type: 'color' },
+        dangerWithValue: { value: '{color.error.value}', type: 'color' },
+        dangerErrorValue: { value: '{color.errorWithValue}', type: 'color' },
       },
     };
 
@@ -338,13 +338,16 @@ describe('exportPlatform', () => {
             s: '100%',
             l: '50%',
           },
+          type: 'color',
         },
         blue: {
           value: '{nonTokenColor}',
           comment: '{comment}',
+          type: 'color',
         },
         green: {
           value: 'hsl({hue.green}, 50%, 50%)',
+          type: 'color',
         },
       },
     };
@@ -361,7 +364,7 @@ describe('exportPlatform', () => {
       },
       platforms: {
         css: {
-          transforms: ['attribute/cti', 'name/cti/kebab', 'transitiveTransform'],
+          transforms: ['name/kebab', 'transitiveTransform'],
         },
       },
     });
@@ -479,7 +482,7 @@ describe('exportPlatform', () => {
         },
         platforms: {
           css: {
-            transforms: ['name/cti/kebab', 'custom/add/px'],
+            transforms: ['name/kebab', 'custom/add/px'],
           },
         },
       });

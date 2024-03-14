@@ -61,7 +61,7 @@ describe('integration', async () => {
       },
       platforms: {
         css: {
-          transforms: ['name/cti/kebab', 'custom/css/color', 'custom/add/px'],
+          transforms: ['name/kebab', 'custom/css/color', 'custom/add/px'],
           buildPath,
           files: [
             {

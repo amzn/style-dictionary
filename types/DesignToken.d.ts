@@ -24,14 +24,7 @@ export interface DesignToken {
   name?: string;
   comment?: string;
   themeable?: boolean;
-  attributes?: {
-    category?: string;
-    type?: string;
-    item?: string;
-    subitem?: string;
-    state?: string;
-    [key: string]: any;
-  };
+  attributes?: Record<string, unknown>;
   [key: string]: any;
 }
 

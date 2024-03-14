@@ -51,9 +51,7 @@ describe('integration', async () => {
               className: 'StyleDictionaryColor',
               type: 'color',
               filter: {
-                attributes: {
-                  category: 'color',
-                },
+                type: 'color',
               },
             },
             {
@@ -62,9 +60,7 @@ describe('integration', async () => {
               className: 'StyleDictionarySize',
               type: 'float',
               filter: {
-                attributes: {
-                  category: 'size',
-                },
+                type: 'color',
               },
             },
           ],

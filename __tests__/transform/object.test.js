@@ -31,8 +31,8 @@ const config = {
     },
     {
       type: 'name',
-      matcher: function (prop) {
-        return prop.attributes.foo === 'bar';
+      matcher: function (token) {
+        return token.attributes.foo === 'bar';
       },
       // verify async transforms to also work properly
       transformer: async function () {
@@ -42,8 +42,8 @@ const config = {
     },
     {
       type: 'value',
-      matcher: function (prop) {
-        return prop.path[0] === 'spacing';
+      matcher: function (token) {
+        return token.path[0] === 'spacing';
       },
       transformer: function (val) {
         return val + 'px';

@@ -96,9 +96,9 @@ describe('integration', async function () {
         css: {
           transforms: [
             'attribute/cti',
-            'name/cti/kebab',
+            'name/kebab',
             'time/seconds',
-            'content/icon',
+            'html/icon',
             'size/rem',
             'color/css',
             'foo-value-transform',

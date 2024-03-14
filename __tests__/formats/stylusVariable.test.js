@@ -35,12 +35,6 @@ const tokens = {
           original: {
             value: propertyValue,
           },
-          attributes: {
-            category: 'color',
-            type: 'base',
-            item: 'red',
-            subitem: '400',
-          },
           path: ['color', 'base', 'red', '400'],
         },
       },

@@ -255,7 +255,7 @@ Add a custom filter to the style dictionary
 StyleDictionary.registerFilter({
   name: 'isColor',
   matcher: function (token) {
-    return token.attributes.category === 'color';
+    return token.type === 'color';
   },
 });
 ```
@@ -360,7 +360,7 @@ StyleDictionary.registerTransform({
   name: 'time/seconds',
   type: 'value',
   matcher: function (token) {
-    return token.attributes.category === 'time';
+    return token.type === 'time';
   },
   transformer: function (token) {
     // Note the use of prop.original.value,
@@ -391,7 +391,7 @@ group of transforms.
 ```js
 StyleDictionary.registerTransformGroup({
   name: 'Swift',
-  transforms: ['attribute/cti', 'size/pt', 'name/cti'],
+  transforms: ['attribute/cti', 'size/pt', 'name'],
 });
 ```
 

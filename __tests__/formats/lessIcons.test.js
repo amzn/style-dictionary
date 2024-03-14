@@ -31,12 +31,11 @@ const tokens = {
       email: {
         name: propertyName,
         value: propertyValue,
+        type: 'icon',
         original: {
           value: propertyValue,
         },
         attributes: {
-          category: 'content',
-          type: 'icon',
           item: itemClass,
         },
         path: ['content', 'icon', 'email'],
