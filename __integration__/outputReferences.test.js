@@ -28,8 +28,38 @@ describe('integration', async () => {
   });
 
   describe('output references', async () => {
-    it('should warn the user if filters out references', async () => {
+    it('should warn the user if filters out references briefly', async () => {
       const sd = new StyleDictionary({
+        // we are only testing showFileHeader options so we don't need
+        // the full source.
+        source: [`__integration__/tokens/**/[!_]*.json?(c)`],
+        platforms: {
+          css: {
+            transformGroup: 'css',
+            buildPath,
+            files: [
+              {
+                destination: 'filteredVariables.css',
+                format: 'css/variables',
+                // filter tokens and use outputReferences
+                // Style Dictionary should build this file ok
+                // but warn the user
+                filter: (token) => token.attributes.type === 'background',
+                options: {
+                  outputReferences: true,
+                },
+              },
+            ],
+          },
+        },
+      });
+      await sd.buildAllPlatforms();
+      await expect(stub.lastCall.args.map(cleanConsoleOutput).join('\n')).to.matchSnapshot();
+    });
+
+    it('should warn the user if filters out references with a detailed message when using verbose logging', async () => {
+      const sd = new StyleDictionary({
+        log: { verbosity: 'verbose' },
         // we are only testing showFileHeader options so we don't need
         // the full source.
         source: [`__integration__/tokens/**/[!_]*.json?(c)`],

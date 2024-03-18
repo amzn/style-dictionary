@@ -51,10 +51,26 @@ describe(`integration >`, () => {
           await expect(consoleOutput).to.matchSnapshot();
         });
 
+        it(`should not log anything if the log verbosity is set to silent`, async () => {
+          const sd = new StyleDictionary({
+            log: {
+              verbosity: 'silent',
+            },
+            source: [
+              // including a specific file twice will throw value collision warnings
+              `__integration__/tokens/size/padding.json`,
+              `__integration__/tokens/size/_padding.json`,
+            ],
+            platforms: {},
+          });
+          await sd.hasInitialized;
+          await expect(stub.callCount).to.equal(0);
+        });
+
         it(`should not show warnings if given higher log level`, async () => {
           const sd = new StyleDictionary(
             {
-              log: `error`,
+              log: { warnings: `error` },
               source: [
                 // including a specific file twice will throw value collision warnings
                 `__integration__/tokens/size/padding.json`,

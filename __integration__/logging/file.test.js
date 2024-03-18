@@ -34,145 +34,455 @@ describe(`integration`, () => {
 
   describe(`logging`, () => {
     describe(`file`, () => {
-      it(`should warn user empty tokens`, async () => {
-        const sd = new StyleDictionary({
-          source: [`__integration__/tokens/**/[!_]*.json?(c)`],
-          platforms: {
-            css: {
-              transformGroup: `css`,
-              files: [
-                {
-                  destination: `empty.css`,
-                  format: `css/variables`,
-                  filter: (token) => token.type === `foo`,
-                },
-              ],
-            },
-          },
-        });
-
-        await sd.buildAllPlatforms();
-        const logs = Array.from(stub.calls).flatMap((call) => call.args);
-        const consoleOutput = logs.map(cleanConsoleOutput).join('\n');
-        await expect(consoleOutput).to.matchSnapshot();
-      });
-
-      it(`should warn user of name collisions`, async () => {
-        const sd = new StyleDictionary({
-          source: [`__integration__/tokens/**/[!_]*.json?(c)`],
-          platforms: {
-            css: {
-              // no name transform means there will be name collisions
-              transforms: [`attribute/cti`],
-              buildPath,
-              files: [
-                {
-                  destination: `nameCollisions.css`,
-                  format: `css/variables`,
-                  filter: (token) => token.type === `color`,
-                },
-              ],
-            },
-          },
-        });
-        await sd.buildAllPlatforms();
-        const logs = Array.from(stub.calls).flatMap((call) => call.args);
-        const consoleOutput = logs.map(cleanConsoleOutput).join('\n');
-        await expect(consoleOutput).to.matchSnapshot();
-      });
-
-      it(`should not warn user of name collisions with log level set to error`, async () => {
-        const sd = new StyleDictionary({
-          log: `error`,
-          source: [`__integration__/tokens/**/[!_]*.json?(c)`],
-          platforms: {
-            css: {
-              // no name transform means there will be name collisions
-              transforms: [`attribute/cti`],
-              buildPath,
-              files: [
-                {
-                  destination: `nameCollisions.css`,
-                  format: `css/variables`,
-                  filter: (token) => token.type === `color`,
-                },
-              ],
-            },
-          },
-        });
-        let error;
-        try {
-          await sd.buildAllPlatforms();
-        } catch (e) {
-          error = e;
-        }
-        await expect(cleanConsoleOutput(error.message)).to.matchSnapshot();
-        // only log is the platform name at the start of the buildPlatform method
-        expect(stub.callCount).to.equal(1);
-        expect(stub.firstCall.args).to.eql(['\ncss']);
-      });
-
-      it(`should warn user of filtered references`, async () => {
-        const sd = new StyleDictionary({
-          source: [`__integration__/tokens/**/[!_]*.json?(c)`],
-          platforms: {
-            css: {
-              transformGroup: `css`,
-              buildPath,
-              files: [
-                {
-                  destination: `filteredReferences.css`,
-                  format: `css/variables`,
-                  options: {
-                    outputReferences: true,
+      describe('empty tokens', () => {
+        it(`should warn user about empty tokens`, async () => {
+          const sd = new StyleDictionary({
+            source: [`__integration__/tokens/**/[!_]*.json?(c)`],
+            platforms: {
+              css: {
+                transformGroup: `css`,
+                files: [
+                  {
+                    destination: `empty.css`,
+                    format: `css/variables`,
+                    filter: (token) => token.type === `foo`,
                   },
-                  // background colors have references, only including them
-                  // should warn the user
-                  filter: (token) => token.attributes.type === `background`,
-                },
-              ],
+                ],
+              },
             },
-          },
+          });
+
+          await sd.buildAllPlatforms();
+          const logs = Array.from(stub.calls).flatMap((call) => call.args);
+          const consoleOutput = logs.map(cleanConsoleOutput).join('\n');
+          await expect(consoleOutput).to.matchSnapshot();
         });
-        await sd.buildAllPlatforms();
-        const logs = Array.from(stub.calls).flatMap((call) => call.args);
-        const consoleOutput = logs.map(cleanConsoleOutput).join('\n');
-        await expect(consoleOutput).to.matchSnapshot();
+
+        it(`should not warn user about empty tokens with silent log verbosity`, async () => {
+          const sd = new StyleDictionary({
+            log: { verbosity: 'silent' },
+            source: [`__integration__/tokens/**/[!_]*.json?(c)`],
+            platforms: {
+              css: {
+                transformGroup: `css`,
+                files: [
+                  {
+                    destination: `empty.css`,
+                    format: `css/variables`,
+                    filter: (token) => token.type === `foo`,
+                  },
+                ],
+              },
+            },
+          });
+
+          await sd.buildAllPlatforms();
+          expect(stub.callCount).to.equal(0);
+        });
+
+        it(`should not warn user about empty tokens with log level set to error`, async () => {
+          const sd = new StyleDictionary({
+            log: { warnings: 'error' },
+            source: [`__integration__/tokens/**/[!_]*.json?(c)`],
+            platforms: {
+              css: {
+                transformGroup: `css`,
+                files: [
+                  {
+                    destination: `empty.css`,
+                    format: `css/variables`,
+                    filter: (token) => token.type === `foo`,
+                  },
+                ],
+              },
+            },
+          });
+
+          await expect(sd.buildAllPlatforms()).to.eventually.rejectedWith(
+            'No tokens for empty.css. File not created.',
+          );
+        });
+
+        it(`should not warn user about empty tokens with log level set to error on platform level`, async () => {
+          const sd = new StyleDictionary({
+            source: [`__integration__/tokens/**/[!_]*.json?(c)`],
+            platforms: {
+              css: {
+                log: { warnings: 'error' },
+                transformGroup: `css`,
+                files: [
+                  {
+                    destination: `empty.css`,
+                    format: `css/variables`,
+                    filter: (token) => token.type === `foo`,
+                  },
+                ],
+              },
+            },
+          });
+
+          await expect(sd.buildAllPlatforms()).to.eventually.rejectedWith(
+            'No tokens for empty.css. File not created.',
+          );
+        });
       });
 
-      it(`should not warn user of filtered references with log level set to error`, async () => {
-        const sd = new StyleDictionary({
-          log: `error`,
-          source: [`__integration__/tokens/**/[!_]*.json?(c)`],
-          platforms: {
-            css: {
-              transformGroup: `css`,
-              buildPath,
-              files: [
-                {
-                  destination: `filteredReferences.css`,
-                  format: `css/variables`,
-                  options: {
-                    outputReferences: true,
+      describe('name collisions', () => {
+        it(`should warn users briefly of name collisions by default`, async () => {
+          const sd = new StyleDictionary({
+            source: [`__integration__/tokens/**/[!_]*.json?(c)`],
+            platforms: {
+              css: {
+                // no name transform means there will be name collisions
+                transforms: [`attribute/cti`],
+                buildPath,
+                files: [
+                  {
+                    destination: `nameCollisions.css`,
+                    format: `css/variables`,
+                    filter: (token) => token.type === `color`,
                   },
-                  // background colors have references, only including them
-                  // should warn the user
-                  filter: (token) => token.attributes.type === `background`,
-                },
-              ],
+                ],
+              },
             },
-          },
-        });
-        let error;
-        try {
+          });
           await sd.buildAllPlatforms();
-        } catch (e) {
-          error = e;
-        }
-        await expect(cleanConsoleOutput(error.message)).to.matchSnapshot();
-        // only log is the platform name at the start of the buildPlatform method
-        expect(stub.callCount).to.equal(1);
-        expect(stub.firstCall.args).to.eql(['\ncss']);
+          const logs = Array.from(stub.calls).flatMap((call) => call.args);
+          const consoleOutput = logs.map(cleanConsoleOutput).join('\n');
+          await expect(consoleOutput).to.matchSnapshot();
+        });
+
+        it(`should not warn user of name collisions with log verbosity silent`, async () => {
+          const sd = new StyleDictionary({
+            log: { verbosity: 'silent' },
+            source: [`__integration__/tokens/**/[!_]*.json?(c)`],
+            platforms: {
+              css: {
+                // no name transform means there will be name collisions
+                transforms: [`attribute/cti`],
+                buildPath,
+                files: [
+                  {
+                    destination: `nameCollisions.css`,
+                    format: `css/variables`,
+                    filter: (token) => token.type === `color`,
+                  },
+                ],
+              },
+            },
+          });
+          await sd.buildAllPlatforms();
+          expect(stub.callCount).to.equal(0);
+        });
+
+        it(`should throw a brief error of name collisions with log level set to error`, async () => {
+          const sd = new StyleDictionary({
+            log: { warnings: `error` },
+            source: [`__integration__/tokens/**/[!_]*.json?(c)`],
+            platforms: {
+              css: {
+                // no name transform means there will be name collisions
+                transforms: [`attribute/cti`],
+                buildPath,
+                files: [
+                  {
+                    destination: `nameCollisions.css`,
+                    format: `css/variables`,
+                    filter: (token) => token.type === `color`,
+                  },
+                ],
+              },
+            },
+          });
+          let error;
+          try {
+            await sd.buildAllPlatforms();
+          } catch (e) {
+            error = e;
+          }
+          await expect(cleanConsoleOutput(error.message)).to.matchSnapshot();
+          // only log is the platform name at the start of the buildPlatform method
+          expect(stub.callCount).to.equal(1);
+          expect(stub.firstCall.args).to.eql(['\ncss']);
+        });
+
+        it(`should throw a brief error of name collisions with log level set to error on platform level`, async () => {
+          const sd = new StyleDictionary({
+            source: [`__integration__/tokens/**/[!_]*.json?(c)`],
+            platforms: {
+              css: {
+                log: { warnings: `error` },
+                // no name transform means there will be name collisions
+                transforms: [`attribute/cti`],
+                buildPath,
+                files: [
+                  {
+                    destination: `nameCollisions.css`,
+                    format: `css/variables`,
+                    filter: (token) => token.type === `color`,
+                  },
+                ],
+              },
+            },
+          });
+          let error;
+          try {
+            await sd.buildAllPlatforms();
+          } catch (e) {
+            error = e;
+          }
+          await expect(cleanConsoleOutput(error.message)).to.matchSnapshot();
+          // only log is the platform name at the start of the buildPlatform method
+          expect(stub.callCount).to.equal(1);
+          expect(stub.firstCall.args).to.eql(['\ncss']);
+        });
+
+        it(`should warn user of name collisions with a detailed message through "verbose" verbosity`, async () => {
+          const sd = new StyleDictionary({
+            log: { verbosity: 'verbose' },
+            source: [`__integration__/tokens/**/[!_]*.json?(c)`],
+            platforms: {
+              css: {
+                // no name transform means there will be name collisions
+                transforms: [`attribute/cti`],
+                buildPath,
+                files: [
+                  {
+                    destination: `nameCollisions.css`,
+                    format: `css/variables`,
+                    filter: (token) => token.type === `color`,
+                  },
+                ],
+              },
+            },
+          });
+          await sd.buildAllPlatforms();
+          const logs = Array.from(stub.calls).flatMap((call) => call.args);
+          const consoleOutput = logs.map(cleanConsoleOutput).join('\n');
+          await expect(consoleOutput).to.matchSnapshot();
+        });
+
+        it(`should throw detailed error of name collisions through "verbose" verbosity and log level set to error`, async () => {
+          const sd = new StyleDictionary({
+            log: { warnings: `error`, verbosity: 'verbose' },
+            source: [`__integration__/tokens/**/[!_]*.json?(c)`],
+            platforms: {
+              css: {
+                // no name transform means there will be name collisions
+                transforms: [`attribute/cti`],
+                buildPath,
+                files: [
+                  {
+                    destination: `nameCollisions.css`,
+                    format: `css/variables`,
+                    filter: (token) => token.type === `color`,
+                  },
+                ],
+              },
+            },
+          });
+          let error;
+          try {
+            await sd.buildAllPlatforms();
+          } catch (e) {
+            error = e;
+          }
+          await expect(cleanConsoleOutput(error.message)).to.matchSnapshot();
+          // only log is the platform name at the start of the buildPlatform method
+          expect(stub.callCount).to.equal(1);
+          expect(stub.firstCall.args).to.eql(['\ncss']);
+        });
+      });
+
+      describe('filtered references', () => {
+        it(`should warn users briefly of filtered references by default`, async () => {
+          const sd = new StyleDictionary({
+            source: [`__integration__/tokens/**/[!_]*.json?(c)`],
+            platforms: {
+              css: {
+                transformGroup: `css`,
+                buildPath,
+                files: [
+                  {
+                    destination: `filteredReferences.css`,
+                    format: `css/variables`,
+                    options: {
+                      outputReferences: true,
+                    },
+                    // background colors have references, only including them
+                    // should warn the user
+                    filter: (token) => token.attributes.type === `background`,
+                  },
+                ],
+              },
+            },
+          });
+          await sd.buildAllPlatforms();
+          const logs = Array.from(stub.calls).flatMap((call) => call.args);
+          const consoleOutput = logs.map(cleanConsoleOutput).join('\n');
+          await expect(consoleOutput).to.matchSnapshot();
+        });
+
+        it(`should not warn user of filtered references with log verbosity silent`, async () => {
+          const sd = new StyleDictionary({
+            log: { verbosity: 'silent' },
+            source: [`__integration__/tokens/**/[!_]*.json?(c)`],
+            platforms: {
+              css: {
+                transformGroup: `css`,
+                buildPath,
+                files: [
+                  {
+                    destination: `filteredReferences.css`,
+                    format: `css/variables`,
+                    options: {
+                      outputReferences: true,
+                    },
+                    // background colors have references, only including them
+                    // should warn the user
+                    filter: (token) => token.attributes.type === `background`,
+                  },
+                ],
+              },
+            },
+          });
+          await sd.buildAllPlatforms();
+          expect(stub.callCount).to.equal(0);
+        });
+
+        it(`should throw a brief error of filtered references with log level set to error`, async () => {
+          const sd = new StyleDictionary({
+            log: { warnings: `error` },
+            source: [`__integration__/tokens/**/[!_]*.json?(c)`],
+            platforms: {
+              css: {
+                transformGroup: `css`,
+                buildPath,
+                files: [
+                  {
+                    destination: `filteredReferences.css`,
+                    format: `css/variables`,
+                    options: {
+                      outputReferences: true,
+                    },
+                    // background colors have references, only including them
+                    // should warn the user
+                    filter: (token) => token.attributes.type === `background`,
+                  },
+                ],
+              },
+            },
+          });
+          let error;
+          try {
+            await sd.buildAllPlatforms();
+          } catch (e) {
+            error = e;
+          }
+          await expect(cleanConsoleOutput(error.message)).to.matchSnapshot();
+          // only log is the platform name at the start of the buildPlatform method
+          expect(stub.callCount).to.equal(1);
+          expect(stub.firstCall.args).to.eql(['\ncss']);
+        });
+
+        it(`should throw a brief error of filtered references with log level set to error on platform level`, async () => {
+          const sd = new StyleDictionary({
+            source: [`__integration__/tokens/**/[!_]*.json?(c)`],
+            platforms: {
+              css: {
+                log: { warnings: `error` },
+                transformGroup: `css`,
+                buildPath,
+                files: [
+                  {
+                    destination: `filteredReferences.css`,
+                    format: `css/variables`,
+                    options: {
+                      outputReferences: true,
+                    },
+                    // background colors have references, only including them
+                    // should warn the user
+                    filter: (token) => token.attributes.type === `background`,
+                  },
+                ],
+              },
+            },
+          });
+          let error;
+          try {
+            await sd.buildAllPlatforms();
+          } catch (e) {
+            error = e;
+          }
+          await expect(cleanConsoleOutput(error.message)).to.matchSnapshot();
+          // only log is the platform name at the start of the buildPlatform method
+          expect(stub.callCount).to.equal(1);
+          expect(stub.firstCall.args).to.eql(['\ncss']);
+        });
+
+        it(`should warn user of filtered references with a detailed message through "verbose" verbosity`, async () => {
+          const sd = new StyleDictionary({
+            log: { verbosity: 'verbose' },
+            source: [`__integration__/tokens/**/[!_]*.json?(c)`],
+            platforms: {
+              css: {
+                transformGroup: `css`,
+                buildPath,
+                files: [
+                  {
+                    destination: `filteredReferences.css`,
+                    format: `css/variables`,
+                    options: {
+                      outputReferences: true,
+                    },
+                    // background colors have references, only including them
+                    // should warn the user
+                    filter: (token) => token.attributes.type === `background`,
+                  },
+                ],
+              },
+            },
+          });
+          await sd.buildAllPlatforms();
+          const logs = Array.from(stub.calls).flatMap((call) => call.args);
+          const consoleOutput = logs.map(cleanConsoleOutput).join('\n');
+          await expect(consoleOutput).to.matchSnapshot();
+        });
+
+        it(`should throw detailed error of filtered references through "verbose" verbosity and log level set to error`, async () => {
+          const sd = new StyleDictionary({
+            log: { warnings: `error`, verbosity: 'verbose' },
+            source: [`__integration__/tokens/**/[!_]*.json?(c)`],
+            platforms: {
+              css: {
+                transformGroup: `css`,
+                buildPath,
+                files: [
+                  {
+                    destination: `filteredReferences.css`,
+                    format: `css/variables`,
+                    options: {
+                      outputReferences: true,
+                    },
+                    // background colors have references, only including them
+                    // should warn the user
+                    filter: (token) => token.attributes.type === `background`,
+                  },
+                ],
+              },
+            },
+          });
+          let error;
+          try {
+            await sd.buildAllPlatforms();
+          } catch (e) {
+            error = e;
+          }
+          await expect(cleanConsoleOutput(error.message)).to.matchSnapshot();
+          // only log is the platform name at the start of the buildPlatform method
+          expect(stub.callCount).to.equal(1);
+          expect(stub.firstCall.args).to.eql(['\ncss']);
+        });
       });
     });
   });

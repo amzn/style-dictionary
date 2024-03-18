@@ -476,7 +476,7 @@ describe('exportPlatform', () => {
               return token.$type === 'dimension';
             },
             transformer: (token) => {
-              return `${sd.options.usesDtcg ? token.$value : token.value}px`;
+              return `${sd.usesDtcg ? token.$value : token.value}px`;
             },
           },
         },

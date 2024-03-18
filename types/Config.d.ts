@@ -52,8 +52,13 @@ export interface ResolveReferencesOptionsInternal extends ResolveReferencesOptio
   throwImmediately?: boolean;
 }
 
+export interface LogConfig {
+  warnings?: 'warn' | 'error';
+  verbosity?: 'default' | 'silent' | 'verbose';
+}
+
 export interface PlatformConfig extends RegexOptions {
-  log?: 'warn' | 'error';
+  log?: LogConfig;
   transformGroup?: string;
   transforms?: string[] | Omit<Transform, 'name'>[];
   basePxFontSize?: number;
@@ -65,7 +70,7 @@ export interface PlatformConfig extends RegexOptions {
 }
 
 export interface Config {
-  log?: 'warn' | 'error';
+  log?: LogConfig;
   source?: string[];
   include?: string[];
   tokens?: DesignTokens;

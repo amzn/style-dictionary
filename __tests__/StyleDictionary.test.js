@@ -213,7 +213,7 @@ describe('StyleDictionary class + extend method', () => {
     const sd = new StyleDictionary(
       {
         source: ['__tests__/__tokens/paddings.json', '__tests__/__tokens/_paddings.json'],
-        log: 'error',
+        log: { warnings: 'error' },
       },
       { init: false },
     );
@@ -337,6 +337,6 @@ describe('StyleDictionary class + extend method', () => {
       },
     });
     await sd.hasInitialized;
-    expect(sd.options.usesDtcg).to.be.true;
+    expect(sd.usesDtcg).to.be.true;
   });
 });

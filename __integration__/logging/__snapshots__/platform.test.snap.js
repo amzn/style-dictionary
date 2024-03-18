@@ -21,7 +21,7 @@ Unknown transformGroup "foo" found in platform "css":
 snapshots["integration logging platform property reference errors should throw and notify users of unknown references"] = 
 `
 Property Reference Errors:
-Reference doesn't exist: color.danger.value tries to reference color.red.value, which is not defined.
+color.danger.value tries to reference color.red.value, which is not defined.
 
 Problems were found when trying to resolve property references`;
 /* end snapshot integration logging platform property reference errors should throw and notify users of unknown references */

@@ -34,7 +34,7 @@ Set up the required dependencies by running the command `npm install` in your lo
 
 At this point, if you want to build the tokens you can run `npm run build`. This command will generate the files in the `build` folder.
 
-Note, running this example will generate a "While building fonts.css, token collisions were found; output may be unexpected." warning. The warning is expected and can be ignored.
+Note, running this example will generate a "While building fonts.css, token collisions were found; output may be unexpected. Ignore this warning if intentional." warning. The warning is expected and can be ignored.
 
 #### How does it work
 
