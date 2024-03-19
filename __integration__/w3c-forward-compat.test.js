@@ -48,14 +48,14 @@ describe('integration', async () => {
           type: 'value',
           matcher: (token) => token.$type === 'color',
           transformer: (token) => {
-            return Color(sd.options.usesDtcg ? token.$value : token.value).toRgbString();
+            return Color(sd.usesDtcg ? token.$value : token.value).toRgbString();
           },
         },
         'custom/add/px': {
           type: 'value',
           matcher: (token) => token.$type === 'dimension',
           transformer: (token) => {
-            return `${sd.options.usesDtcg ? token.$value : token.value}px`;
+            return `${sd.usesDtcg ? token.$value : token.value}px`;
           },
         },
       },

@@ -37,11 +37,33 @@ describe('integration', async () => {
   });
 
   describe('name collisions', async () => {
+    it(`should warn users of name collisions for flat files, brief version`, async () => {
+      const sd = new StyleDictionary({
+        // we are only testing name collision warnings options so we don't need
+        // the full source.
+        tokens,
+        platforms: {
+          web: {
+            buildPath,
+            files: [
+              {
+                destination: 'variables.css',
+                format: 'css/variables',
+              },
+            ],
+          },
+        },
+      });
+      await sd.buildAllPlatforms();
+      await expect(stub.lastCall.args.map(cleanConsoleOutput).join('\n')).to.matchSnapshot();
+    });
+
     it(`should warn users of name collisions for flat files`, async () => {
       const sd = new StyleDictionary({
         // we are only testing name collision warnings options so we don't need
         // the full source.
         tokens,
+        log: { verbosity: 'verbose' },
         platforms: {
           web: {
             buildPath,

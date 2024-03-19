@@ -11,7 +11,9 @@
  * and limitations under the License.
  */
 import { expect } from 'chai';
+import { restore, stubMethod } from 'hanbi';
 import transformConfig from '../../lib/transform/config.js';
+import chalk from 'chalk';
 
 const dictionary = {
   transformGroup: {
@@ -95,6 +97,58 @@ None of "barTransform", "bazTransform" match the name of a registered transform.
         'barTransform',
         'quxTransform',
       ]);
+    });
+
+    it('warns the user if an action is used without a clean function', () => {
+      const cfg = {
+        action: {
+          foo: {},
+        },
+      };
+      const platformCfg = {
+        actions: ['foo'],
+      };
+
+      const logStub = stubMethod(console, 'log');
+      transformConfig(platformCfg, cfg, 'test');
+      restore();
+      expect(logStub.callCount).to.equal(1);
+      expect(Array.from(logStub.calls)[0].args[0]).to.equal(
+        chalk.rgb(255, 140, 0).bold('foo action does not have a clean function!'),
+      );
+    });
+
+    it('throws if an action is used without a clean function with log.warnings set to error', () => {
+      const cfg = {
+        log: { warnings: 'error' },
+        action: {
+          foo: {},
+        },
+      };
+      const platformCfg = {
+        actions: ['foo'],
+      };
+
+      expect(() => transformConfig(platformCfg, cfg, 'test')).to.throw(
+        'foo action does not have a clean function!',
+      );
+    });
+
+    it('does not warn user at all when log.verbosity silent is used', () => {
+      const cfg = {
+        log: { verbosity: 'silent' },
+        action: {
+          foo: {},
+        },
+      };
+      const platformCfg = {
+        actions: ['foo'],
+      };
+
+      const logStub = stubMethod(console, 'log');
+      transformConfig(platformCfg, cfg, 'test');
+      restore();
+      expect(logStub.callCount).to.equal(0);
     });
   });
 });

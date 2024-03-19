@@ -44,6 +44,11 @@ program
   .description('Builds a style dictionary package from the current directory.')
   .option('-c, --config <path>', 'set config path. defaults to ./config.json')
   .option(
+    '-v, --verbose',
+    'enable verbose logging for reference errors, token collisions and filtered tokens with outputReferences',
+  )
+  .option('-s, --silent', 'silence all logging, except for fatal errors')
+  .option(
     '-p, --platform [platform]',
     'only build specific platforms. Must be defined in the config',
     collect,
@@ -57,6 +62,11 @@ program
     'Removes files specified in the config of the style dictionary package of the current directory.',
   )
   .option('-c, --config <path>', 'set config path. defaults to ./config.json')
+  .option(
+    '-v, --verbose',
+    'enable verbose logging for reference errors, token collisions and filtered tokens with outputReferences',
+  )
+  .option('-s, --silent', 'silence all logging, except for fatal errors')
   .option(
     '-p, --platform [platform]',
     'only clean specific platform(s). Must be defined in the config',
@@ -94,35 +104,35 @@ program.on('command:*', function () {
   process.exit(1);
 });
 
+function getSD(configPath, options) {
+  let verbosity;
+  if (options.verbose || options.silent) {
+    verbosity = options.verbose ? 'verbose' : 'silent';
+  }
+  return new StyleDictionary(configPath, { verbosity });
+}
+
 async function styleDictionaryBuild(options) {
   options = options || {};
   const configPath = getConfigPath(options);
-
-  // Create a style dictionary object with the config
-  const styleDictionary = new StyleDictionary(configPath);
+  const sd = getSD(configPath, options);
 
   if (options.platform && options.platform.length > 0) {
-    return Promise.all(
-      options.platforms.map((platform) => styleDictionary.buildPlatform(platform)),
-    );
+    return Promise.all(options.platforms.map((platform) => sd.buildPlatform(platform)));
   } else {
-    return styleDictionary.buildAllPlatforms();
+    return sd.buildAllPlatforms();
   }
 }
 
 async function styleDictionaryClean(options) {
   options = options || {};
   const configPath = getConfigPath(options);
-
-  // Create a style dictionary object with the config
-  const styleDictionary = new StyleDictionary(configPath);
+  const sd = getSD(configPath, options);
 
   if (options.platform && options.platform.length > 0) {
-    return Promise.all(
-      options.platforms.map((platform) => styleDictionary.cleanPlatform(platform)),
-    );
+    return Promise.all(options.platforms.map((platform) => sd.cleanPlatform(platform)));
   } else {
-    return styleDictionary.cleanAllPlatforms();
+    return sd.cleanAllPlatforms();
   }
 }
 
