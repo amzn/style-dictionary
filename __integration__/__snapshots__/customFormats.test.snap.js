@@ -469,7 +469,10 @@ snapshots["integration custom formats inline custom with new args should match s
         }
       }
     ],
-    "log": "warn",
+    "log": {
+      "warnings": "warn",
+      "verbosity": "default"
+    },
     "transforms": [
       {
         "type": "attribute"
@@ -962,7 +965,10 @@ snapshots["integration custom formats register custom format with new args shoul
         }
       }
     ],
-    "log": "warn",
+    "log": {
+      "warnings": "warn",
+      "verbosity": "default"
+    },
     "transforms": [
       {
         "type": "attribute"

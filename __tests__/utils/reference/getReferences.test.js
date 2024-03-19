@@ -52,7 +52,7 @@ describe('utils', () => {
       describe('public API', () => {
         it('should not collect errors but rather throw immediately when using public API', () => {
           expect(() => getReferences('{foo.bar}', tokens)).to.throw(
-            `Reference doesn't exist: tries to reference foo.bar, which is not defined.`,
+            `tries to reference foo.bar, which is not defined.`,
           );
         });
       });

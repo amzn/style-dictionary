@@ -63,10 +63,12 @@ $ style-dictionary build [options]
 
 Options:
 
-| Name               | Usage                                | Description                                                                                           |
-| :----------------- | :----------------------------------- | :---------------------------------------------------------------------------------------------------- |
-| Configuration Path | -c <path>, --config <path>           | Set the path to the configuration file. Defaults to './config.json'.                                  |
-| Platform           | -p <platform>, --platform <platform> | Only build a specific platform. If not supplied, builds all platform found in the configuration file. |
+| Name               | Usage                                | Description                                                                                              |
+| :----------------- | :----------------------------------- | :------------------------------------------------------------------------------------------------------- |
+| Configuration Path | -c <path>, --config <path>           | Set the path to the configuration file. Defaults to './config.json'.                                     |
+| Platform           | -p <platform>, --platform <platform> | Only build a specific platform. If not supplied, builds all platform found in the configuration file.    |
+| Silent             | -s, --silent                         | Silence all logging, except for fatal errors.                                                            |
+| Verbose            | -v, --verbose                        | Enable verbose logging for reference errors, token collisions and filtered tokens with outputReferences. |
 
 ## clean
 
@@ -78,10 +80,12 @@ $ style-dictionary clean [options]
 
 Options:
 
-| Name               | Usage                                | Description                                                                                           |
-| :----------------- | :----------------------------------- | :---------------------------------------------------------------------------------------------------- |
-| Configuration Path | -c <path>, --config <path>           | Set the path to the configuration file. Defaults to './config.json'.                                  |
-| Platform           | -p <platform>, --platform <platform> | Only clean a specific platform. If not supplied, cleans all platform found in the configuration file. |
+| Name               | Usage                                | Description                                                                                              |
+| :----------------- | :----------------------------------- | :------------------------------------------------------------------------------------------------------- |
+| Configuration Path | -c <path>, --config <path>           | Set the path to the configuration file. Defaults to './config.json'.                                     |
+| Platform           | -p <platform>, --platform <platform> | Only clean a specific platform. If not supplied, cleans all platform found in the configuration file.    |
+| Silent             | -s, --silent                         | Silence all logging, except for fatal errors.                                                            |
+| Verbose            | -v, --verbose                        | Enable verbose logging for reference errors, token collisions and filtered tokens with outputReferences. |
 
 ## init
 

@@ -278,7 +278,7 @@ export const Border = `solid ${Spacing2} ${SemanticBgPrimary}`;
 ```
 
 > Note that the above example does not support DTCG syntax, but this could be quite easily added,
-> since you can query `sd.options.usesDtcg` or inside a formatter functions `dictionary.options.usesDtcg`
+> since you can query `sd.usesDtcg` or inside a formatter functions `dictionary.options.usesDtcg`
 
 ### typeDtcgDelegate
 

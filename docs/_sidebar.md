@@ -16,6 +16,7 @@
   - [Using the NPM Module](using_the_npm_module.md)
   - [Using reference utilities](using_reference_utils.md)
   - [API](api.md)
+  - [Logging](logging.md)
   - [Parsers](parsers.md)
   - [Preprocessors](preprocessors.md)
   - [Transforms](transforms.md)
