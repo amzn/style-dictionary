@@ -19,9 +19,6 @@ const dictionary = {
       value: '5px',
       type: 'spacing',
     },
-    attributes: {
-      category: 'foo',
-    },
     name: 'foo',
     path: ['foo'],
     value: '5px',
@@ -31,9 +28,6 @@ const dictionary = {
     original: {
       value: '{foo}',
       type: 'spacing',
-    },
-    attributes: {
-      category: 'ref',
     },
     name: 'ref',
     path: ['ref'],
@@ -48,9 +42,6 @@ const transformedDictionary = {
       value: '5px',
       type: 'spacing',
     },
-    attributes: {
-      category: 'foo',
-    },
     name: 'foo',
     path: ['foo'],
     value: '5px',
@@ -60,9 +51,6 @@ const transformedDictionary = {
     original: {
       value: '{foo}',
       type: 'spacing',
-    },
-    attributes: {
-      category: 'ref',
     },
     name: 'ref',
     path: ['ref'],
@@ -77,9 +65,6 @@ const numberDictionary = {
       value: 10,
       type: 'dimension',
     },
-    attributes: {
-      category: 'foo',
-    },
     name: 'foo',
     path: ['foo'],
     value: 10,
@@ -89,9 +74,6 @@ const numberDictionary = {
     original: {
       value: '{foo}',
       type: 'dimension',
-    },
-    attributes: {
-      category: 'ref',
     },
     name: 'ref',
     path: ['ref'],
@@ -103,9 +85,6 @@ const numberDictionary = {
       value: 0,
       type: 'dimension',
     },
-    attributes: {
-      category: 'zero',
-    },
     name: 'zero',
     path: ['zero'],
     value: 0,
@@ -115,9 +94,6 @@ const numberDictionary = {
     original: {
       value: '{zero}',
       type: 'dimension',
-    },
-    attributes: {
-      category: 'ref-zero',
     },
     name: 'ref-zero',
     path: ['ref-zero'],
@@ -132,9 +108,6 @@ const multiDictionary = {
       value: '10px',
       type: 'spacing',
     },
-    attributes: {
-      category: 'foo',
-    },
     name: 'foo',
     path: ['foo'],
     value: '10px',
@@ -145,9 +118,6 @@ const multiDictionary = {
       value: '15px',
       type: 'spacing',
     },
-    attributes: {
-      category: 'bar',
-    },
     name: 'bar',
     path: ['bar'],
     value: '15px',
@@ -157,9 +127,6 @@ const multiDictionary = {
     original: {
       value: '{foo} 5px {bar}',
       type: 'spacing',
-    },
-    attributes: {
-      category: 'ref',
     },
     name: 'ref',
     path: ['ref'],
@@ -174,9 +141,6 @@ const objectDictionary = {
       value: '5px',
       type: 'spacing',
     },
-    attributes: {
-      category: 'foo',
-    },
     name: 'foo',
     path: ['foo'],
     value: '5px',
@@ -190,9 +154,6 @@ const objectDictionary = {
         color: '#FF00FF',
       },
       type: 'border',
-    },
-    attributes: {
-      category: 'ref',
     },
     name: 'ref',
     path: ['ref'],
@@ -284,30 +245,18 @@ describe('common', () => {
               name: 'color-red',
               value: '#FF0000',
               comment: 'Foo bar qux',
-              attributes: {
-                category: 'color',
-                type: 'red',
-              },
               path: ['color', 'red'],
             },
             green: {
               name: 'color-green',
               value: '#00FF00',
               comment: 'Foo bar qux',
-              attributes: {
-                category: 'color',
-                type: 'green',
-              },
               path: ['color', 'green'],
             },
             blue: {
               name: 'color-blue',
               value: '#0000FF',
               comment: 'Foo\nbar\nqux',
-              attributes: {
-                category: 'color',
-                type: 'blue',
-              },
               path: ['color', 'blue'],
             },
           },
@@ -366,30 +315,18 @@ describe('common', () => {
                 name: 'color-red',
                 value: '#FF0000',
                 $description: 'Foo bar qux red',
-                attributes: {
-                  category: 'color',
-                  type: 'red',
-                },
                 path: ['color', 'red'],
               },
               green: {
                 name: 'color-green',
                 value: '#00FF00',
                 $description: 'Foo bar qux green',
-                attributes: {
-                  category: 'color',
-                  type: 'green',
-                },
                 path: ['color', 'green'],
               },
               blue: {
                 name: 'color-blue',
                 value: '#0000FF',
                 $description: 'Foo\nbar\nqux\nblue',
-                attributes: {
-                  category: 'color',
-                  type: 'blue',
-                },
                 path: ['color', 'blue'],
               },
             },

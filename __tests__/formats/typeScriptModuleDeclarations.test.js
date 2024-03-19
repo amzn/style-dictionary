@@ -18,11 +18,7 @@ import flattenTokens from '../../lib/utils/flattenTokens.js';
 const file = {
   destination: '__output/',
   format: 'typescript/module-declarations',
-  filter: {
-    attributes: {
-      category: 'color',
-    },
-  },
+  filter: { type: 'color' },
 };
 
 const tokens = {

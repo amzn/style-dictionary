@@ -29,17 +29,18 @@ describe('integration', async () => {
         saturation: `50%`,
         lightness: `50%`,
         color: {
-          red: { value: '#f00' },
+          red: { value: '#f00', type: 'color' },
           green: {
             value: {
               h: '{hue}',
               s: '{saturation}',
               l: '{lightness}',
             },
+            type: 'color',
           },
         },
         size: {
-          border: { value: 0.125 },
+          border: { value: 0.125, type: 'dimension' },
         },
         border: {
           primary: {
@@ -49,6 +50,7 @@ describe('integration', async () => {
               width: '{size.border.value}',
               style: 'solid',
             },
+            type: 'border',
           },
         },
         shadow: {
@@ -61,6 +63,7 @@ describe('integration', async () => {
                 color: '{color.green.value}',
               },
             ],
+            type: 'shadow',
           },
           dark: {
             value: [
@@ -71,6 +74,7 @@ describe('integration', async () => {
                 color: '{color.red.value}',
               },
             ],
+            type: 'shadow',
           },
         },
       },
@@ -102,7 +106,7 @@ describe('integration', async () => {
         shadow: {
           type: 'value',
           transitive: true,
-          matcher: (token) => token.attributes.category === 'shadow',
+          matcher: (token) => token.type === 'shadow',
           transformer: (token) => {
             return token.value.map((obj) => obj.color).join(', ');
           },
@@ -118,12 +122,12 @@ describe('integration', async () => {
             {
               destination: `hsl.css`,
               format: `css/variables`,
-              filter: (token) => token.attributes.category === `color`,
+              filter: (token) => token.type === `color`,
             },
             {
               destination: `hslWithReferences.css`,
               format: `css/variables`,
-              filter: (token) => token.attributes.category === `color`,
+              filter: (token) => token.type === `color`,
               options,
             },
           ],
@@ -138,12 +142,12 @@ describe('integration', async () => {
             {
               destination: 'hex.css',
               format: 'css/variables',
-              filter: (token) => token.attributes.category === `color`,
+              filter: (token) => token.type === `color`,
             },
             {
               destination: 'hexWithReferences.css',
               format: 'css/variables',
-              filter: (token) => token.attributes.category === `color`,
+              filter: (token) => token.type === `color`,
               options,
             },
           ],
@@ -158,12 +162,12 @@ describe('integration', async () => {
             {
               destination: 'border.css',
               format: 'css/variables',
-              filter: (token) => token.attributes.category === `border`,
+              filter: (token) => token.type === `border`,
             },
             {
               destination: 'borderWithReferences.css',
               format: 'css/variables',
-              filter: (token) => token.attributes.category === `border`,
+              filter: (token) => token.type === `border`,
               options,
             },
           ],
@@ -176,12 +180,12 @@ describe('integration', async () => {
             {
               destination: 'shadow.css',
               format: 'css/variables',
-              filter: (token) => token.attributes.category === `shadow`,
+              filter: (token) => token.type === `shadow`,
             },
             {
               destination: 'shadowWithReferences.css',
               format: 'css/variables',
-              filter: (token) => token.attributes.category === `shadow`,
+              filter: (token) => token.type === `shadow`,
               options,
             },
           ],
@@ -194,12 +198,12 @@ describe('integration', async () => {
             {
               destination: 'border.scss',
               format: 'scss/variables',
-              filter: (token) => token.attributes.category === `border`,
+              filter: (token) => token.type === `border`,
             },
             {
               destination: 'borderWithReferences.scss',
               format: 'scss/variables',
-              filter: (token) => token.attributes.category === `border`,
+              filter: (token) => token.type === `border`,
               options,
             },
           ],

@@ -6,29 +6,33 @@
         "g": 0,
         "b": 0,
         "a": 1
-      }
+      },
+      "type": "color"
     },
     "otherRed": {
-      "value": "{color.red.value}"
+      "value": "{color.red.value}",
+      "type": "color"
     }
   },
 
   "size": {
     "large": {
-      "value": 20
+      "value": 20,
+      "type": "dimension"
     },
     "otherLarge": {
-      "value": "{size.large.value}"
+      "value": "{size.large.value}",
+      "type": "dimension"
     }
   },
 
   "number": {
-    "test": { "value": 20 },
-    "otherTest": { "value": "{number.test.value}" }
+    "test": { "value": 20, "type": "number" },
+    "otherTest": { "value": "{number.test.value}", "type": "number" }
   },
 
   "array": {
-    "test": { "value": ["foo","bar"] },
+    "test": { "value": ["foo", "bar"] },
     "otherTest": { "value": "{array.test.value}" }
   },
 

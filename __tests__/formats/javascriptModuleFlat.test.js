@@ -27,10 +27,6 @@ const tokens = {
       original: {
         value: '#EF5350',
       },
-      attributes: {
-        category: 'color',
-        type: 'red',
-      },
       path: ['color', 'red'],
     },
   },

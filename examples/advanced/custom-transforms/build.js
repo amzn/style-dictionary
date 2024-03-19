@@ -76,14 +76,7 @@ StyleDictionary.registerTransform({
 StyleDictionary.registerTransformGroup({
   name: 'custom/web',
   // notice: here the "size/px" transform is not the pre-defined one, but the custom one we have declared above
-  transforms: [
-    'attribute/cti',
-    'name/cti/constant',
-    'size/px',
-    'color/css',
-    'time/seconds',
-    'ratio/%',
-  ],
+  transforms: ['attribute/cti', 'name/constant', 'size/px', 'color/css', 'time/seconds', 'ratio/%'],
 });
 
 StyleDictionary.registerTransformGroup({

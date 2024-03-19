@@ -2,7 +2,7 @@
   "size": {
     "border": {
       "radius": {
-        "large": { "value": 30 }
+        "large": { "value": 30, "type": "dimension" }
       }
     }
   }

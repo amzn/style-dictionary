@@ -28,12 +28,6 @@ const colorTokens = {
           original: {
             value: colorTokenValue,
           },
-          attributes: {
-            category: 'color',
-            type: 'base',
-            item: 'red',
-            subitem: '400',
-          },
           path: ['color', 'base', 'red', '400'],
         },
       },

@@ -6,7 +6,7 @@ module.exports = {
   platforms: {
     'esm/category': {
       buildPath: 'build/js/esm/',
-      transforms: ['attribute/cti', 'name/cti/camel', 'size/px', 'color/hex'],
+      transforms: ['attribute/cti', 'name/camel', 'size/px', 'color/hex'],
       files: tokens.map((tokenCategory) => ({
         destination: `${tokenCategory}.js`,
         format: 'javascript/es6',
@@ -19,7 +19,7 @@ module.exports = {
     },
     'esm/index': {
       buildPath: 'build/js/esm/',
-      transforms: ['attribute/cti', 'name/cti/camel', 'size/px', 'color/hex'],
+      transforms: ['attribute/cti', 'name/camel', 'size/px', 'color/hex'],
       files: [
         {
           destination: `index.js`,
@@ -29,7 +29,7 @@ module.exports = {
     },
     'cjs/category': {
       buildPath: 'build/js/cjs/',
-      transforms: ['attribute/cti', 'name/cti/camel', 'size/px', 'color/hex'],
+      transforms: ['attribute/cti', 'name/camel', 'size/px', 'color/hex'],
       files: tokens.map((tokenCategory) => ({
         destination: `${tokenCategory}.js`,
         format: 'custom/cjsmodule',
@@ -42,7 +42,7 @@ module.exports = {
     },
     'cjs/index': {
       buildPath: 'build/js/cjs/',
-      transforms: ['attribute/cti', 'name/cti/camel', 'size/px', 'color/hex'],
+      transforms: ['attribute/cti', 'name/camel', 'size/px', 'color/hex'],
       files: [
         {
           destination: `index.js`,

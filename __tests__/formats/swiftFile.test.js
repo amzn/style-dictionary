@@ -20,9 +20,7 @@ const originalFile = {
   format: 'ios-swift/any.swift',
   className: 'StyleDictionary',
   filter: {
-    attributes: {
-      category: 'color',
-    },
+    type: 'color',
   },
   options: {},
 };
@@ -37,7 +35,6 @@ const tokens = {
         filePath: 'tokens/color/base.json',
         original: { value: '#FF0000' },
         name: 'colorBaseRed',
-        attributes: { category: 'color', type: 'base', item: 'red' },
         path: ['color', 'base', 'red'],
       },
     },

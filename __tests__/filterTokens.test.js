@@ -17,61 +17,61 @@ import flattenTokens from '../lib/utils/flattenTokens.js';
 
 const colorRed = {
   value: '#FF0000',
+  type: 'color',
   original: {
     value: '#FF0000',
   },
   name: 'color-red',
-  attributes: { type: 'color' },
   path: ['color', 'red'],
 };
 
 const colorBlue = {
   value: '#0000FF',
+  type: 'color',
   original: {
     value: '#0000FF',
   },
   name: 'color-blue',
-  attributes: { type: 'color' },
   path: ['color', 'blue'],
 };
 
 const sizeSmall = {
   value: '2px',
+  type: 'dimension',
   original: {
     value: '2px',
   },
   name: 'size-small',
-  attributes: { category: 'size' },
   path: ['size', 'small'],
 };
 
 const sizeLarge = {
   value: '4px',
+  type: 'dimension',
   original: {
     value: '4px',
   },
   name: 'size-large',
-  attributes: { category: 'size' },
   path: ['size', 'large'],
 };
 
 const not_kept = {
   value: 0,
+  type: 'number',
   original: {
     value: 0,
   },
   name: 'falsy_values-not_kept',
-  attributes: { category: 'falsy_values' },
   path: ['falsy_values', 'not_kept'],
 };
 
 const kept = {
   value: 0,
+  type: 'number',
   original: {
     value: 0,
   },
   name: 'falsy_values-kept',
-  attributes: { category: 'falsy_values' },
   path: ['falsy_values', 'kept'],
 };
 
@@ -149,18 +149,18 @@ describe('filterTokens', () => {
       size: {
         small: {
           value: '2px',
+          type: 'dimension',
           original: { value: '2px' },
           name: 'size-small',
-          attributes: { category: 'size' },
           path: ['size', 'small'],
         },
         large: {
           value: '4px',
+          type: 'dimension',
           original: {
             value: '4px',
           },
           name: 'size-large',
-          attributes: { category: 'size' },
           path: ['size', 'large'],
         },
       },
@@ -175,9 +175,9 @@ describe('filterTokens', () => {
     });
 
     it('filter is an object', async () => {
-      await expect(
-        filterTokens(dictionary, { attributes: { category: 'size' } }),
-      ).to.eventually.rejectedWith(/filter is not a function/);
+      await expect(filterTokens(dictionary, { type: 'dimension' })).to.eventually.rejectedWith(
+        /filter is not a function/,
+      );
     });
   });
 });

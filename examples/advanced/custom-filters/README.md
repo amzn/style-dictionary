@@ -18,7 +18,7 @@ Currently StyleDictionary supports just the following built-in filters:
 
 You have to apply it in the `config.json` file:
 
-```
+```json
 "scss": {
   "buildPath": "build/web/",
   "files": [{
@@ -31,11 +31,11 @@ You have to apply it in the `config.json` file:
 
 The StyleDictionary will take care of filtering out proper design tokens from the source of truth:
 
-```
+```json
 {
   "color": {
     "gray": {
-      "light" : {
+      "light": {
         "value": "#CCCCCC",
         "group": "color",
         "private": true
@@ -44,11 +44,11 @@ The StyleDictionary will take care of filtering out proper design tokens from th
         "value": "#999999",
         "group": "color"
       },
-      "dark"  : {
+      "dark": {
         "value": "#111111",
         "group": "color"
       }
-    },
+    }
   }
 }
 ```
@@ -57,18 +57,18 @@ The StyleDictionary will take care of filtering out proper design tokens from th
 
 To declare a custom **filter**, you have to call the `registerFilter` method:
 
-```
+```js
 StyleDictionary.registerFilter({
   name: 'isTextTransform',
-  matcher: function(token) {
-    return token.attributes.category === 'font' && token.value.includes['lowercase', 'uppercase]
-  }
+  matcher: function (token) {
+    return token.attributes.category === 'font' && token.value.includes[('lowercase', 'uppercase')];
+  },
 });
 ```
 
 You have to apply it in the `config.json` file:
 
-```
+```json
 "scss": {
   "buildPath": "build/web/",
   "files": [{
@@ -81,7 +81,7 @@ You have to apply it in the `config.json` file:
 
 The StyleDictionary will take care of filtering out proper design tokens from the source of truth:
 
-```
+```json
 {
   "fonts": {
     "title-transform": {

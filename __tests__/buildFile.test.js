@@ -123,15 +123,15 @@ describe('buildFile', () => {
       allTokens: [
         {
           name: 'someName',
-          attributes: { category: 'category1' },
+          type: 'color',
           path: ['some', 'name', 'path1'],
           value: 'value1',
         },
       ],
     };
 
-    const filter = function (prop) {
-      return prop.attributes.category === 'category2';
+    const filter = function (token) {
+      return token.type === 'color2';
     };
 
     await buildFile(
@@ -152,16 +152,16 @@ describe('buildFile', () => {
       allTokens: [
         {
           name: 'someName',
-          attributes: { category: 'category1' },
+          type: 'color',
           path: ['some', 'name', 'path1'],
           value: 'value1',
         },
       ],
     };
 
-    const filter = async (prop) => {
+    const filter = async (token) => {
       await new Promise((resolve) => setTimeout(resolve, 100));
-      return prop.attributes.category === 'category2';
+      return token.type === 'color2';
     };
 
     await buildFile(
@@ -202,11 +202,6 @@ describe('buildFile', () => {
               value: '12px',
             },
             name: 'size-font-small',
-            attributes: {
-              category: 'size',
-              type: 'font',
-              item: 'small',
-            },
             path: ['size', 'font', 'small'],
           },
           large: {
@@ -215,11 +210,6 @@ describe('buildFile', () => {
               value: '18px',
             },
             name: 'size-font-large',
-            attributes: {
-              category: 'size',
-              type: 'font',
-              item: 'large',
-            },
             path: ['size', 'font', 'large'],
           },
         },
@@ -234,11 +224,6 @@ describe('buildFile', () => {
               comment: 'comment',
             },
             name: 'color-base-red',
-            attributes: {
-              category: 'color',
-              type: 'base',
-              item: 'red',
-            },
             path: ['color', 'base', 'red'],
           },
         },
@@ -248,10 +233,6 @@ describe('buildFile', () => {
             value: '#ffffff',
           },
           name: 'color-white',
-          attributes: {
-            category: 'color',
-            type: 'white',
-          },
           path: ['color', 'white'],
         },
       },
@@ -286,7 +267,7 @@ ${dictionary.allTokens.map((tok) => `  ${tok.name}: "${tok.value}";`).join('\n')
       allTokens: [
         {
           name: 'someName',
-          attributes: { category: 'category1' },
+          type: 'color',
           path: ['some', 'name', 'path1'],
           value: 'value1',
         },

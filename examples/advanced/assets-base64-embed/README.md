@@ -44,7 +44,7 @@ Open the `config.json` file and see how all the "assets/embed/\*" platform block
 
 ```
     "assets/embed/json": {
-      "transforms": ["attribute/cti", "name/cti/kebab", "asset/base64"],
+      "transforms": ["attribute/cti", "name/kebab", "asset/base64"],
       "buildPath": "build/json/",
       "files": [{
         "destination": "assets_icons.json",
@@ -56,7 +56,7 @@ Open the `config.json` file and see how all the "assets/embed/\*" platform block
       ...
 ```
 
-Here there are **three specific transforms**: _attribute/cti_ to assign the Category/Type/Item attributes to the tokens, _name/cti/kebab_ to assign them the correct name, and finally _asset/base64_ to take the path declared in the "value" of the tokens, convert the file at that path in base64 format, and assign the output of the base64 conversion to the "value" of the token.
+Here there are **three specific transforms**: _attribute/cti_ to assign the Category/Type/Item attributes to the tokens, _name/kebab_ to assign them the correct name, and finally _asset/base64_ to take the path declared in the "value" of the tokens, convert the file at that path in base64 format, and assign the output of the base64 conversion to the "value" of the token.
 
 If you take for example the file `assets/icons.json` you will see this declaration:
 

@@ -19,9 +19,7 @@ const file = {
   destination: '__output/',
   format: 'javascript/module',
   filter: {
-    attributes: {
-      category: 'color',
-    },
+    type: 'color',
   },
 };
 

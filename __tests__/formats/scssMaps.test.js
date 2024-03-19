@@ -25,11 +25,6 @@ const tokens = {
           value: '12px',
         },
         name: 'size-font-small',
-        attributes: {
-          category: 'size',
-          type: 'font',
-          item: 'small',
-        },
         path: ['size', 'font', 'small'],
       },
       large: {
@@ -38,11 +33,6 @@ const tokens = {
           value: '18px',
         },
         name: 'size-font-large',
-        attributes: {
-          category: 'size',
-          type: 'font',
-          item: 'large',
-        },
         path: ['size', 'font', 'large'],
       },
     },
@@ -57,11 +47,6 @@ const tokens = {
           comment: 'comment',
         },
         name: 'color-base-red',
-        attributes: {
-          category: 'color',
-          type: 'base',
-          item: 'red',
-        },
         path: ['color', 'base', 'red'],
       },
     },
@@ -71,10 +56,6 @@ const tokens = {
         value: '#ffffff',
       },
       name: 'color-white',
-      attributes: {
-        category: 'color',
-        type: 'white',
-      },
       path: ['color', 'white'],
     },
   },
@@ -83,15 +64,11 @@ const tokens = {
       book: {
         value:
           'PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItYm9vayI+PHBhdGggZD0iTTQgMTkuNUEyLjUgMi41IDAgMCAxIDYuNSAxN0gyMCI+PC9wYXRoPjxwYXRoIGQ9Ik02LjUgMkgyMHYyMEg2LjVBMi41IDIuNSAwIDAgMSA0IDE5LjV2LTE1QTIuNSAyLjUgMCAwIDEgNi41IDJ6Ij48L3BhdGg+PC9zdmc+',
+        type: 'asset',
         original: {
           value: '__tests__/__assets/icons/book.svg',
         },
         name: 'asset-icon-book',
-        attributes: {
-          category: 'asset',
-          type: 'icon',
-          item: 'book',
-        },
         path: ['asset', 'icon', 'book'],
       },
     },

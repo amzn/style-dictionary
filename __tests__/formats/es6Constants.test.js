@@ -19,9 +19,7 @@ const file = {
   destination: '__output/',
   format: 'javascript/es6',
   filter: {
-    attributes: {
-      category: 'color',
-    },
+    type: 'color',
   },
 };
 
@@ -32,12 +30,6 @@ const tokens = {
       value: '#EF5350',
       original: {
         value: '#EF5350',
-      },
-      attributes: {
-        category: 'color',
-        type: 'base',
-        item: 'red',
-        subitem: '400',
       },
       path: ['color', 'base', 'red', '400'],
     },
