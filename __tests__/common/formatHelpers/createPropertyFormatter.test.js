@@ -246,18 +246,27 @@ describe('common', () => {
               value: '#FF0000',
               comment: 'Foo bar qux',
               path: ['color', 'red'],
+              original: {
+                value: '#FF0000',
+              },
             },
             green: {
               name: 'color-green',
               value: '#00FF00',
               comment: 'Foo bar qux',
               path: ['color', 'green'],
+              original: {
+                value: '#00FF00',
+              },
             },
             blue: {
               name: 'color-blue',
               value: '#0000FF',
               comment: 'Foo\nbar\nqux',
               path: ['color', 'blue'],
+              original: {
+                value: '#0000FF',
+              },
             },
           },
         };
@@ -307,43 +316,78 @@ describe('common', () => {
           await expect(cssRed).to.matchSnapshot(1);
           await expect(sassRed).to.matchSnapshot(2);
         });
+      });
 
-        it('supports DTCG spec $description property for comments', async () => {
-          const descriptionDictionary = {
-            color: {
-              red: {
-                name: 'color-red',
-                value: '#FF0000',
-                $description: 'Foo bar qux red',
-                path: ['color', 'red'],
+      describe('DTCG', () => {
+        const dtcgDictionary = {
+          color: {
+            red: {
+              name: 'color-red',
+              $value: '#FF0000',
+              original: {
+                $value: '#FF0000',
               },
-              green: {
-                name: 'color-green',
-                value: '#00FF00',
-                $description: 'Foo bar qux green',
-                path: ['color', 'green'],
-              },
-              blue: {
-                name: 'color-blue',
-                value: '#0000FF',
-                $description: 'Foo\nbar\nqux\nblue',
-                path: ['color', 'blue'],
-              },
+              $description: 'Foo bar qux red',
+              path: ['color', 'red'],
             },
-          };
+            green: {
+              name: 'color-green',
+              $value: '#00FF00',
+              original: {
+                $value: '#00FF00',
+              },
+              $description: 'Foo bar qux green',
+              path: ['color', 'green'],
+            },
+            blue: {
+              name: 'color-blue',
+              $value: '#0000FF',
+              original: {
+                $value: '#0000FF',
+              },
+              $description: 'Foo\nbar\nqux\nblue',
+              path: ['color', 'blue'],
+            },
+            ref: {
+              name: 'color-ref',
+              $value: '#FF0000',
+              original: {
+                $value: '{color.red}',
+              },
+              $description: 'Foo\nbar\nqux\nref',
+              path: ['color', 'ref'],
+            },
+          },
+        };
+        it('supports DTCG spec $description property for comments', async () => {
           // long commentStyle
           const cssFormatter = createPropertyFormatter({
             format: 'css',
-            dictionary: { tokens: descriptionDictionary },
+            dictionary: { tokens: dtcgDictionary },
+            usesDtcg: true,
           });
 
-          const cssRed = cssFormatter(descriptionDictionary.color.red);
-          const cssGreen = cssFormatter(descriptionDictionary.color.green);
-          const cssBlue = cssFormatter(descriptionDictionary.color.blue);
+          const cssRed = cssFormatter(dtcgDictionary.color.red);
+          const cssGreen = cssFormatter(dtcgDictionary.color.green);
+          const cssBlue = cssFormatter(dtcgDictionary.color.blue);
 
           await expect(cssRed).to.matchSnapshot(1);
           await expect(cssGreen).to.matchSnapshot(2);
           await expect(cssBlue).to.matchSnapshot(3);
+        });
+
+        it('supports DTCG spec $value for outputReferences', async () => {
+          // long commentStyle
+          const cssFormatter = createPropertyFormatter({
+            format: 'css',
+            outputReferences: true,
+            dictionary: { tokens: dtcgDictionary },
+            usesDtcg: true,
+          });
+
+          const cssRef = cssFormatter(dtcgDictionary.color.ref);
+
+          await expect(cssRef).to.matchSnapshot();
         });
       });
     });

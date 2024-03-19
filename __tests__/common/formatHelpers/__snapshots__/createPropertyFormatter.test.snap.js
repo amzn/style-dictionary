@@ -52,3 +52,49 @@ snapshots["common formatHelpers createPropertyFormatter commentStyle supports DT
   --color-blue: #0000FF;`;
 /* end snapshot common formatHelpers createPropertyFormatter commentStyle supports DTCG spec $description property for comments 3 */
 
+snapshots["common formatHelpers createPropertyFormatter DTCG supports DTCG spec $description property for comments 1"] = 
+`  --color-red: #FF0000; /* Foo bar qux red */`;
+/* end snapshot common formatHelpers createPropertyFormatter DTCG supports DTCG spec $description property for comments 1 */
+
+snapshots["common formatHelpers createPropertyFormatter DTCG supports DTCG spec $description property for comments 2"] = 
+`  --color-green: #00FF00; /* Foo bar qux green */`;
+/* end snapshot common formatHelpers createPropertyFormatter DTCG supports DTCG spec $description property for comments 2 */
+
+snapshots["common formatHelpers createPropertyFormatter DTCG supports DTCG spec $description property for comments 3"] = 
+`  /**
+   * Foo
+   * bar
+   * qux
+   * blue
+   */
+  --color-blue: #0000FF;`;
+/* end snapshot common formatHelpers createPropertyFormatter DTCG supports DTCG spec $description property for comments 3 */
+
+snapshots["common formatHelpers createPropertyFormatter DTCG supports DTCG spec $value for outputReferences 1"] = 
+`  --color-red: #FF0000; /* Foo bar qux red */`;
+/* end snapshot common formatHelpers createPropertyFormatter DTCG supports DTCG spec $value for outputReferences 1 */
+
+snapshots["common formatHelpers createPropertyFormatter DTCG supports DTCG spec $value for outputReferences 2"] = 
+`  --color-green: #00FF00; /* Foo bar qux green */`;
+/* end snapshot common formatHelpers createPropertyFormatter DTCG supports DTCG spec $value for outputReferences 2 */
+
+snapshots["common formatHelpers createPropertyFormatter DTCG supports DTCG spec $value for outputReferences 3"] = 
+`  /**
+   * Foo
+   * bar
+   * qux
+   * blue
+   */
+  --color-blue: #0000FF;`;
+/* end snapshot common formatHelpers createPropertyFormatter DTCG supports DTCG spec $value for outputReferences 3 */
+
+snapshots["common formatHelpers createPropertyFormatter DTCG supports DTCG spec $value for outputReferences"] = 
+`  /**
+   * Foo
+   * bar
+   * qux
+   * ref
+   */
+  --color-ref: var(--color-red);`;
+/* end snapshot common formatHelpers createPropertyFormatter DTCG supports DTCG spec $value for outputReferences */
+

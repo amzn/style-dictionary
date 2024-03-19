@@ -70,6 +70,10 @@ const customTokens = {
       name: 'backgroundColorSecondary',
       value: '#F2F3F4',
       type: 'color',
+      original: {
+        value: '#F2F3F4',
+        type: 'color',
+      },
     },
   },
   fontColor: {
@@ -77,6 +81,10 @@ const customTokens = {
       name: 'fontColorPrimary',
       value: '#000000',
       type: 'color',
+      original: {
+        value: '#000000',
+        type: 'color',
+      },
     },
   },
 };
