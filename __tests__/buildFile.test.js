@@ -269,6 +269,7 @@ ${dictionary.allTokens.map((tok) => `  ${tok.name}: "${tok.value}";`).join('\n')
           name: 'someName',
           type: 'color',
           path: ['some', 'name', 'path1'],
+          original: { value: 'value1' },
           value: 'value1',
         },
       ],
