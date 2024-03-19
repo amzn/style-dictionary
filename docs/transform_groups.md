@@ -30,7 +30,7 @@ You can also combine transforms with transformGroup:
   "platforms": {
     "android": {
       "transformGroup": "android",
-      "transforms": ["name/cti/snake"]
+      "transforms": ["name/snake"]
     }
   }
 }
@@ -50,7 +50,7 @@ If it's important to determine the order of these yourself, you can always regis
 Transforms:
 
 [attribute/cti](transforms.md#attributecti)
-[name/cti/kebab](transforms.md#namectikebab)
+[name/kebab](transforms.md#namekebab)
 [size/px](transforms.md#sizepx)
 [color/css](transforms.md#colorcss)
 
@@ -61,7 +61,7 @@ Transforms:
 Transforms:
 
 [attribute/cti](transforms.md#attributecti)
-[name/cti/pascal](transforms.md#namectipascal)
+[name/pascal](transforms.md#namepascal)
 [size/rem](transforms.md#sizerem)
 [color/hex](transforms.md#colorhex)
 
@@ -72,9 +72,9 @@ Transforms:
 Transforms:
 
 [attribute/cti](transforms.md#attributecti)
-[name/cti/kebab](transforms.md#namectikebab)
+[name/kebab](transforms.md#namekebab)
 [time/seconds](transforms.md#timeseconds)
-[content/icon](transforms.md#contenticon)
+[html/icon](transforms.md#htmlicon)
 [size/rem](transforms.md#sizerem)
 [color/css](transforms.md#colorcss)
 
@@ -85,9 +85,9 @@ Transforms:
 Transforms:
 
 [attribute/cti](transforms.md#attributecti)
-[name/cti/kebab](transforms.md#namectikebab)
+[name/kebab](transforms.md#namekebab)
 [time/seconds](transforms.md#timeseconds)
-[content/icon](transforms.md#contenticon)
+[html/icon](transforms.md#htmlicon)
 [size/rem](transforms.md#sizerem)
 [color/css](transforms.md#colorcss)
 
@@ -98,9 +98,9 @@ Transforms:
 Transforms:
 
 [attribute/cti](transforms.md#attributecti)
-[name/cti/kebab](transforms.md#namectikebab)
+[name/kebab](transforms.md#namekebab)
 [time/seconds](transforms.md#timeseconds)
-[content/icon](transforms.md#contenticon)
+[html/icon](transforms.md#htmlicon)
 [size/rem](transforms.md#sizerem)
 [color/hex](transforms.md#colorhex)
 
@@ -121,7 +121,7 @@ Transforms:
 Transforms:
 
 [attribute/cti](transforms.md#attributecti)
-[name/cti/snake](transforms.md#namectisnake)
+[name/snake](transforms.md#namesnake)
 [color/hex8android](transforms.md#colorhex8android)
 [size/remToSp](transforms.md#sizeremtosp)
 [size/remToDp](transforms.md#sizeremtodp)
@@ -133,7 +133,7 @@ Transforms:
 Transforms:
 
 [attribute/cti](transforms.md#attributecti)
-[name/cti/camel](transforms.md#namecticamel)
+[name/camel](transforms.md#namecamel)
 [color/composeColor](transforms.md#colorcomposecolor)
 [size/compose/em](transforms.md#sizecomposeem)
 [size/compose/remToSp](transforms.md#sizecomposeremtosp)
@@ -146,12 +146,11 @@ Transforms:
 Transforms:
 
 [attribute/cti](transforms.md#attributecti)
-[name/cti/pascal](transforms.md#namectipascal)
+[name/pascal](transforms.md#namepascal)
 [color/UIColor](transforms.md#coloruicolor)
 [content/objC/literal](transforms.md#contentobjcliteral)
 [asset/objC/literal](transforms.md#assetobjcliteral)
 [size/remToPt](transforms.md#sizeremtopt)
-[font/objC/literal](transforms.md#fontobjcliteral)
 
 ---
 
@@ -160,12 +159,11 @@ Transforms:
 Transforms:
 
 [attribute/cti](transforms.md#attributecti)
-[name/cti/camel](transforms.md#namecticamel)
+[name/camel](transforms.md#namecamel)
 [color/UIColorSwift](transforms.md#coloruicolorswift)
 [content/swift/literal](transforms.md#contentswiftliteral)
 [asset/swift/literal](transforms.md#assetswiftliteral)
 [size/swift/remToCGFloat](transforms.md#sizeswiftremtocgfloat)
-[font/swift/literal](transforms.md#fontswiftliteral)
 
 ---
 
@@ -174,12 +172,11 @@ Transforms:
 Transforms:
 
 [attribute/cti](transforms.md#attributecti)
-[name/ti/camel](transforms.md#nameticamel)
+[name/camel](transforms.md#namecamel)
 [color/UIColorSwift](transforms.md#coloruicolorswift)
 [content/swift/literal](transforms.md#contentswiftliteral)
 [asset/swift/literal](transforms.md#assetswiftliteral)
 [size/swift/remToCGFloat](transforms.md#sizeswiftremtocgfloat)
-[font/swift/literal](transforms.md#fontswiftliteral)
 
 This is to be used if you want to have separate files per category and you don't want the category (e.g., color) as the lead value in the name of the token (e.g., StyleDictionaryColor.baseText instead of StyleDictionary.colorBaseText).
 
@@ -198,12 +195,11 @@ Transforms:
 Transforms:
 
 [attribute/cti](transforms.md#attributecti)
-[name/cti/camel](transforms.md#namecticamel)
+[name/camel](transforms.md#namecamel)
 [color/hex8flutter](transforms.md#colorhex8flutter)
 [size/flutter/remToDouble](transforms.md#sizeflutterremToDouble)
 [content/flutter/literal](transforms.md#contentflutterliteral)
 [asset/flutter/literal](transforms.md#assetflutterliteral)
-[font/flutter/literal](transforms.md#fontflutterliteral)
 
 ---
 
@@ -212,12 +208,11 @@ Transforms:
 Transforms:
 
 [attribute/cti](transforms.md#attributecti)
-[name/ti/camel](transforms.md#nameticamel)
+[name/camel](transforms.md#namecamel)
 [color/hex8flutter](transforms.md#colorhex8flutter)
 [size/flutter/remToDouble](transforms.md#sizeflutterremToDouble)
 [content/flutter/literal](transforms.md#contentflutterliteral)
 [asset/flutter/literal](transforms.md#assetflutterliteral)
-[font/flutter/literal](transforms.md#fontflutterliteral)
 
 This is to be used if you want to have separate files per category and you don't want the category (e.g., color) as the lead value in the name of the token (e.g., StyleDictionaryColor.baseText instead of StyleDictionary.colorBaseText).
 
@@ -227,7 +222,7 @@ This is to be used if you want to have separate files per category and you don't
 
 Transforms:
 
-[name/cti/camel](transforms.md#namecticamel)
+[name/camel](transforms.md#namecamel)
 [size/object](transforms.md#sizeobject)
 [color/css](transforms.md#colorcss)
 

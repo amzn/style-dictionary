@@ -6,7 +6,7 @@ Transforms are functions that modify a design token (in a non-destructive way). 
 
 **Remember**: transforms are performed sequentially, hence the order you use transforms matters.
 
-The need for custom transforms is that Style Dictionary expects the tokens to be declared according to certain criteria, to use the pre-defined transforms and formats/templates. For example, the _web_ transformGroup consists of the _attribute/cti_, _name/cti/kebab_, _size/px_ and _color/css_ transforms.
+The need for custom transforms is that Style Dictionary expects the tokens to be declared according to certain criteria, to use the pre-defined transforms and formats/templates. For example, the _web_ transformGroup consists of the _attribute/cti_, _name/kebab_, _size/px_ and _color/css_ transforms.
 The _size/px_ adds 'px' to the end of the number, and is applied only if `token.attributes.category === 'size'`. This means that your token needs to be expressed without units, and be under the _'size'_ "category. If you need a different logic or you want to organize your tokens differently, probably you can't use the out-of-the-box transformation groups, but you have to declare your custom ones.
 
 If [custom formats](../custom-formats-with-templates/) are the way to allow users to customize the format of the _output_ of Style Dictionary, custom transforms are the way to allow them to customize both the _input_ (the token names/values/attributes) and the _output_ (the actual values expressed in the design tokens). For this reasons, custom transforms are probably one of the **most powerful features** of Style Dictionary: they make it extremely versatile, allowing limitless possibilities of extension and customization of the entire design token pipeline.

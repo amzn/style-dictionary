@@ -19,9 +19,7 @@ const file = {
   destination: '__output/',
   format: 'javascript/es6',
   filter: {
-    attributes: {
-      category: 'color',
-    },
+    type: 'color',
   },
 };
 
@@ -29,16 +27,10 @@ const tokens = {
   color: {
     red: {
       value: '#FF0000',
+      type: 'color',
       original: { value: '#FF0000' },
       name: 'color_red',
       comment: 'comment',
-      attributes: {
-        category: 'color',
-        type: 'red',
-        item: undefined,
-        subitem: undefined,
-        state: undefined,
-      },
       path: ['color', 'red'],
     },
   },

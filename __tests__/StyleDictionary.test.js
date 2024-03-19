@@ -45,7 +45,7 @@ describe('StyleDictionary class + extend method', () => {
       expect(StyleDictionaryExtended).to.have.nested.property('platforms.web');
     });
 
-    it('should override attributes', () => {
+    it('should override config props', () => {
       const StyleDictionaryExtended = new StyleDictionary({
         tokens: {
           foo: 'bar',

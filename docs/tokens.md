@@ -393,7 +393,7 @@ These should be file paths used for images and font files
 
 These should be strings
 
-- [`content/icon`](transforms.md#contenticon)
+- [`html/icon`](transforms.md#htmlicon)
 - [`content/quote`](transforms.md#contentquote)
 - [`content/objC/literal`](transforms.md#contentobjcliteral)
 - [`content/swift/literal`](transforms.md#contentswiftliteral)

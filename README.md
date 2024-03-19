@@ -303,7 +303,7 @@ StyleDictionary.registerTransform({
   name: 'time/seconds',
   type: 'value',
   matcher: function (token) {
-    return token.attributes.category === 'time';
+    return token.type === 'time';
   },
   transformer: function (token) {
     return (parseInt(token.original.value) / 1000).toString() + 's';

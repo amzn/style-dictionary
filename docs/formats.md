@@ -1109,9 +1109,7 @@ Creates a ES6 module of the style dictionary.
           "format": "javascript/es6",
           "destination": "colors.js",
           "filter": {
-            "attributes": {
-              "category": "color"
-            }
+            "type": "color"
           }
         }
       ]
@@ -1179,7 +1177,7 @@ export const ColorBackgroundAlt: string;
 
 ### typescript/module-declarations
 
-Creates TypeScript declarations for CommonJS module
+Creates TypeScript declarations for module
 
 ```json
 {
@@ -1206,12 +1204,13 @@ Creates TypeScript declarations for CommonJS module
 ```typescript
 export default tokens;
 declare interface DesignToken {
-  value: string;
+  value?: any;
+  type?: string;
   name?: string;
-  path?: string[];
   comment?: string;
-  attributes?: any;
-  original?: any;
+  themeable?: boolean;
+  attributes?: Record<string, unknown>;
+  [key: string]: any;
 }
 declare const tokens: {
   color: {
@@ -1294,7 +1293,7 @@ instead of this format:
 ```javascript
 format: 'android/resources',
 filter: {
-  attributes: { category: 'color' }
+  type: "color"
 }
 ```
 
@@ -1320,7 +1319,7 @@ instead of this format:
 ```javascript
 format: 'android/resources',
 filter: {
-  attributes: { category: 'size' }
+  type: "dimension"
 }
 ```
 
@@ -1346,7 +1345,7 @@ instead of this format:
 ```javascript
 format: 'android/resources',
 filter: {
-  attributes: { category: 'size' }
+  type: "dimension"
 }
 ```
 
@@ -1365,7 +1364,7 @@ filter: {
 ### android/integers
 
 Creates a resource xml file with all the integers in your style dictionary. It filters your
-design tokens by `token.attributes.category === 'time'`
+design tokens by `token.type === 'time'`
 
 It is recommended to use the 'android/resources' format with a custom filter
 instead of this format:
@@ -1373,7 +1372,7 @@ instead of this format:
 ```javascript
 format: 'android/resources',
 filter: {
-  attributes: { category: 'time' }
+  type: 'time'
 }
 ```
 
@@ -1396,7 +1395,7 @@ filter: {
 ### android/strings
 
 Creates a resource xml file with all the strings in your style dictionary. Filters your
-design tokens by `token.attributes.category === 'content'`
+design tokens by `token.type === 'content'`
 
 It is recommended to use the 'android/resources' format with a custom filter
 instead of this format:
@@ -1404,7 +1403,7 @@ instead of this format:
 ```javascript
 format: 'android/resources',
 filter: {
-  attributes: { category: 'content' }
+  type: 'content'
 }
 ```
 

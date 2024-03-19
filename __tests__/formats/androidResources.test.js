@@ -20,28 +20,20 @@ const tokens = {
     font: {
       small: {
         value: '12rem',
+        type: 'fontSize',
         original: {
           value: '12px',
         },
         name: 'size-font-small',
-        attributes: {
-          category: 'size',
-          type: 'font',
-          item: 'small',
-        },
         path: ['size', 'font', 'small'],
       },
       large: {
         value: '18rem',
+        type: 'fontSize',
         original: {
           value: '18px',
         },
         name: 'size-font-large',
-        attributes: {
-          category: 'size',
-          type: 'font',
-          item: 'large',
-        },
         path: ['size', 'font', 'large'],
       },
     },
@@ -50,30 +42,23 @@ const tokens = {
     base: {
       red: {
         value: '#ff0000',
+        type: 'color',
         comment: 'comment',
         original: {
           value: '#FF0000',
           comment: 'comment',
         },
         name: 'color-base-red',
-        attributes: {
-          category: 'color',
-          type: 'base',
-          item: 'red',
-        },
         path: ['color', 'base', 'red'],
       },
     },
     white: {
       value: '#ffffff',
+      type: 'color',
       original: {
         value: '#ffffff',
       },
       name: 'color-white',
-      attributes: {
-        category: 'color',
-        type: 'white',
-      },
       path: ['color', 'white'],
     },
   },
@@ -84,18 +69,14 @@ const customTokens = {
     secondary: {
       name: 'backgroundColorSecondary',
       value: '#F2F3F4',
-      attributes: {
-        category: 'backgroundColor',
-      },
+      type: 'color',
     },
   },
   fontColor: {
     primary: {
       name: 'fontColorPrimary',
       value: '#000000',
-      attributes: {
-        category: 'fontColor',
-      },
+      type: 'color',
     },
   },
 };

@@ -41,7 +41,7 @@ describe('integration', async () => {
               destination: `colors.xml`,
               format: `android/resources`,
               filter: {
-                attributes: { category: `color` },
+                type: `color`,
               },
             },
           ],

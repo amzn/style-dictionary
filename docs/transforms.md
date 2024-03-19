@@ -20,7 +20,7 @@ You use transforms in your config file under platforms > [platform] > transforms
   "source": ["tokens/**/*.json"],
   "platforms": {
     "android": {
-      "transforms": ["attribute/cti", "name/cti/kebab", "color/hex", "size/rem"]
+      "transforms": ["attribute/cti", "name/kebab", "color/hex", "size/rem"]
     }
   }
 }
@@ -164,7 +164,7 @@ Adds: category, type, item, subitem, and state on the attributes object based on
 Adds: hex, hsl, hsv, rgb, red, blue, green.
 
 ```js
-// Matches: token.attributes.category === 'color'
+// Matches: token.type === 'color'
 // Returns
 {
   "hex": "009688",
@@ -188,7 +188,7 @@ Creates a human-friendly name
 
 ---
 
-### name/cti/camel
+### name/camel
 
 Creates a camel case name. If you define a prefix on the platform in your config, it will prepend with your prefix
 
@@ -201,22 +201,7 @@ Creates a camel case name. If you define a prefix on the platform in your config
 
 ---
 
-### name/ti/camel
-
-Creates a camel case name without the category at the front. This is most useful when there is a class, struct, enum, etc.
-that already has the category in it (e.g., StyleDictionaryColors.baseDarkRed instad of StyleDictionaryColors.colorBaseDarkRed).
-If you define a prefix on the platform in your config, it will prepend with your prefix
-
-```js
-// Matches: all
-// Returns:
-'backgroundButtonPrimaryActive';
-'prefixBackgroundButtonPrimaryActive';
-```
-
----
-
-### name/cti/kebab
+### name/kebab
 
 Creates a kebab case name. If you define a prefix on the platform in your config, it will prepend with your prefix
 
@@ -229,7 +214,7 @@ Creates a kebab case name. If you define a prefix on the platform in your config
 
 ---
 
-### name/cti/snake
+### name/snake
 
 Creates a snake case name. If you define a prefix on the platform in your config, it will prepend with your prefix
 
@@ -242,7 +227,7 @@ Creates a snake case name. If you define a prefix on the platform in your config
 
 ---
 
-### name/cti/constant
+### name/constant
 
 Creates a constant-style name based on the full CTI of the token. If you define a prefix on the platform in your config, it will prepend with your prefix
 
@@ -255,20 +240,7 @@ Creates a constant-style name based on the full CTI of the token. If you define 
 
 ---
 
-### name/ti/constant
-
-Creates a constant-style name on the type and item of the token. This is useful if you want to create different static classes/files for categories like `Color.BACKGROUND_BASE`. If you define a prefix on the platform in your config, it will prepend with your prefix.
-
-```js
-// Matches: all
-// Returns:
-'BACKGROUND_BUTTON_PRIMARY_ACTIVE';
-'PREFIX_BACKGROUND_BUTTON_PRIMARY_ACTIVE';
-```
-
----
-
-### name/cti/pascal
+### name/pascal
 
 Creates a Pascal case name. If you define a prefix on the platform in your config, it will prepend with your prefix
 
@@ -286,7 +258,7 @@ Creates a Pascal case name. If you define a prefix on the platform in your confi
 Transforms the value into an RGB string
 
 ```js
-// Matches: token.attributes.category === 'color'
+// Matches: token.type === 'color'
 // Returns:
 'rgb(0, 150, 136)';
 ```
@@ -298,7 +270,7 @@ Transforms the value into an RGB string
 Transforms the value into an HSL string or HSLA if alpha is present. Better browser support than color/hsl-4
 
 ```js
-// Matches: token.attributes.category === 'color'
+// Matches: token.type === 'color'
 // Returns:
 'hsl(174, 100%, 29%)';
 'hsl(174, 100%, 29%, .5)';
@@ -311,7 +283,7 @@ Transforms the value into an HSL string or HSLA if alpha is present. Better brow
 Transforms the value into an HSL string, using fourth argument if alpha is present.
 
 ```js
-// Matches: token.attributes.category === 'color'
+// Matches: token.type === 'color'
 // Returns:
 'hsl(174 100% 29%)';
 'hsl(174 100% 29% / .5)';
@@ -324,7 +296,7 @@ Transforms the value into an HSL string, using fourth argument if alpha is prese
 Transforms the value into an 6-digit hex string
 
 ```js
-// Matches: token.attributes.category === 'color'
+// Matches: token.type === 'color'
 // Returns:
 '#009688';
 ```
@@ -336,7 +308,7 @@ Transforms the value into an 6-digit hex string
 Transforms the value into an 8-digit hex string
 
 ```js
-// Matches: token.attributes.category === 'color'
+// Matches: token.type === 'color'
 // Returns:
 '#009688ff';
 ```
@@ -348,7 +320,7 @@ Transforms the value into an 8-digit hex string
 Transforms the value into an 8-digit hex string for Android because they put the alpha channel first
 
 ```js
-// Matches: token.attributes.category === 'color'
+// Matches: token.type === 'color'
 // Returns:
 '#ff009688';
 ```
@@ -360,7 +332,7 @@ Transforms the value into an 8-digit hex string for Android because they put the
 Transforms the value into a Color class for Compose
 
 ```kotlin
-// Matches: token.attributes.category === 'color'
+// Matches: token.type === 'color'
 // Returns:
 Color(0xFF009688)
 ```
@@ -372,7 +344,7 @@ Color(0xFF009688)
 Transforms the value into an UIColor class for iOS
 
 ```objectivec
-// Matches: token.attributes.category === 'color'
+// Matches: token.type === 'color'
 // Returns:
 [UIColor colorWithRed:0.114f green:0.114f blue:0.114f alpha:1.000f]
 ```
@@ -384,7 +356,7 @@ Transforms the value into an UIColor class for iOS
 Transforms the value into an UIColor swift class for iOS
 
 ```swift
-// Matches: token.attributes.category === 'color'
+// Matches: token.type === 'color'
 // Returns:
 UIColor(red: 0.667, green: 0.667, blue: 0.667, alpha: 0.6)
 ```
@@ -396,7 +368,7 @@ UIColor(red: 0.667, green: 0.667, blue: 0.667, alpha: 0.6)
 Transforms the value into an UIColor swift class for iOS
 
 ```swift
-// Matches: token.attributes.category === 'color'
+// Matches: token.type === 'color'
 // Returns:
 Color(red: 0.667, green: 0.667, blue: 0.667, opacity: 0.6)
 ```
@@ -408,7 +380,7 @@ Color(red: 0.667, green: 0.667, blue: 0.667, opacity: 0.6)
 Transforms the value into a hex or rgb string depending on if it has transparency
 
 ```css
-// Matches: token.attributes.category === 'color'
+// Matches: token.type === 'color'
 // Returns:
 #000000
 rgba(0,0,0,0.5)
@@ -423,7 +395,7 @@ attributes that are floats from 0 - 1. This object is how Sketch stores
 colors.
 
 ```js
-// Matches: token.attributes.category === 'color'
+// Matches: token.type === 'color'
 // Returns:
 {
   red: 0.5,
@@ -440,7 +412,7 @@ colors.
 Transforms the value into a scale-independent pixel (sp) value for font sizes on Android. It will not scale the number.
 
 ```js
-// Matches: token.attributes.category === 'size' && token.attributes.type === 'font'
+// Matches: token.type === 'fontSize'
 // Returns:
 '10.0sp';
 ```
@@ -452,7 +424,7 @@ Transforms the value into a scale-independent pixel (sp) value for font sizes on
 Transforms the value into a density-independent pixel (dp) value for non-font sizes on Android. It will not scale the number.
 
 ```js
-// Matches: token.attributes.category === 'size' && token.attributes.type !== 'font'
+// Matches: token.type === 'fontSize'
 // Returns:
 '10.0dp';
 ```
@@ -461,10 +433,10 @@ Transforms the value into a density-independent pixel (dp) value for non-font si
 
 ### size/object
 
-Transforms the value into a usefull object ( for React Native support )
+Transforms the value into a useful object ( for React Native support )
 
 ```js
-// Matches: token.attributes.category === 'size'
+// Matches: token.type === 'dimension'
 // Returns:
 {
  original: "10px",
@@ -481,7 +453,7 @@ Transforms the value into a usefull object ( for React Native support )
 Transforms the value from a REM size on web into a scale-independent pixel (sp) value for font sizes on Android. It WILL scale the number by a factor of 16 (or the value of 'basePxFontSize' on the platform in your config).
 
 ```js
-// Matches: token.attributes.category === 'size' && token.attributes.type === 'font'
+// Matches: token.type === 'fontSize'
 // Returns:
 '16.0sp';
 ```
@@ -493,7 +465,7 @@ Transforms the value from a REM size on web into a scale-independent pixel (sp) 
 Transforms the value from a REM size on web into a density-independent pixel (dp) value for font sizes on Android. It WILL scale the number by a factor of 16 (or the value of 'basePxFontSize' on the platform in your config).
 
 ```js
-// Matches: token.attributes.category === 'size' && token.attributes.type !== 'font'
+// Matches: token.type === 'fontSize'
 // Returns:
 '16.0dp';
 ```
@@ -505,7 +477,7 @@ Transforms the value from a REM size on web into a density-independent pixel (dp
 Adds 'px' to the end of the number. Does not scale the number
 
 ```js
-// Matches: token.attributes.category === 'size'
+// Matches: token.type === 'dimension'
 // Returns:
 '10px';
 ```
@@ -517,7 +489,7 @@ Adds 'px' to the end of the number. Does not scale the number
 Adds 'rem' to the end of the number. Does not scale the number
 
 ```js
-// Matches: token.attributes.category === 'size'
+// Matches: token.type === 'dimension'
 // Returns:
 '10rem';
 ```
@@ -529,7 +501,7 @@ Adds 'rem' to the end of the number. Does not scale the number
 Scales the number by 16 (or the value of 'basePxFontSize' on the platform in your config) and adds 'pt' to the end.
 
 ```js
-// Matches: token.attributes.category === 'size'
+// Matches: token.type === 'dimension'
 // Returns:
 '16pt';
 ```
@@ -541,7 +513,7 @@ Scales the number by 16 (or the value of 'basePxFontSize' on the platform in you
 Transforms the value from a REM size on web into a scale-independent pixel (sp) value for font sizes in Compose. It WILL scale the number by a factor of 16 (or the value of 'basePxFontSize' on the platform in your config).
 
 ```kotlin
-// Matches: token.attributes.category === 'size' && token.attributes.type === 'font'
+// Matches: token.type === 'fontSize'
 // Returns:
 "16.0.sp"
 ```
@@ -553,7 +525,7 @@ Transforms the value from a REM size on web into a scale-independent pixel (sp) 
 Transforms the value from a REM size on web into a density-independent pixel (dp) value for font sizes in Compose. It WILL scale the number by a factor of 16 (or the value of 'basePxFontSize' on the platform in your config).
 
 ```kotlin
-// Matches: token.attributes.category === 'size' && token.attributes.type !== 'font'
+// Matches: token.type === 'fontSize'
 // Returns:
 "16.0.dp"
 ```
@@ -565,7 +537,7 @@ Transforms the value from a REM size on web into a density-independent pixel (dp
 Adds the .em Compose extension to the end of a number. Does not scale the value
 
 ```kotlin
-// Matches: token.attributes.category === 'size' && token.attributes.type === 'font'
+// Matches: token.type === 'fontSize'
 // Returns:
 "16.0em"
 ```
@@ -577,7 +549,7 @@ Adds the .em Compose extension to the end of a number. Does not scale the value
 Scales the number by 16 (or the value of 'basePxFontSize' on the platform in your config) to get to points for Swift and initializes a CGFloat
 
 ```js
-// Matches: token.attributes.category === 'size'
+// Matches: token.type === 'dimension'
 // Returns: "CGFloat(16.00)""
 ```
 
@@ -588,7 +560,7 @@ Scales the number by 16 (or the value of 'basePxFontSize' on the platform in you
 Scales the number by 16 (or the value of 'basePxFontSize' on the platform in your config) and adds 'px' to the end.
 
 ```js
-// Matches: token.attributes.category === 'size'
+// Matches: token.type === 'dimension'
 // Returns:
 '16px';
 ```
@@ -600,7 +572,7 @@ Scales the number by 16 (or the value of 'basePxFontSize' on the platform in you
 Scales non-zero numbers to rem, and adds 'rem' to the end. If you define a "basePxFontSize" on the platform in your config, it will be used to scale the value, otherwise 16 (default web font size) will be used.
 
 ```js
-// Matches: token.attributes.category === 'size'
+// Matches: token.type === 'dimension'
 // Returns:
 '0';
 '1rem';
@@ -608,12 +580,12 @@ Scales non-zero numbers to rem, and adds 'rem' to the end. If you define a "base
 
 ---
 
-### content/icon
+### html/icon
 
-Takes a unicode point and transforms it into a form CSS can use.
+Takes an HTML entity and transforms it into a form CSS can use.
 
 ```js
-// Matches: token.attributes.category === 'content' && token.attributes.type === 'icon'
+// Matches: token.type === 'html'
 // Returns:
 "'\\E001'";
 ```
@@ -625,7 +597,7 @@ Takes a unicode point and transforms it into a form CSS can use.
 Wraps the value in a single quoted string
 
 ```js
-// Matches: token.attributes.category === 'content'
+// Matches: token.type === 'content'
 // Returns:
 "'string'";
 ```
@@ -636,45 +608,22 @@ Wraps the value in a single quoted string
 
 Wraps the value in a double-quoted string and prepends an '@' to make a string literal.
 
-````objectivec
-// Matches: token.attributes.category === 'content'
-// Returns:
-
-**&quot;string&quot;**: ```
-
-* * *
-
-### content/swift/literal
-
-
-Wraps the value in a double-quoted string to make a string literal.
-
-```swift
-// Matches: token.attributes.category === 'content'
-// Returns:
-"string"
-````
-
----
-
-### font/objC/literal
-
-Wraps the value in a double-quoted string and prepends an '@' to make a string literal.
-
 ```objectivec
-// Matches: token.attributes.category === 'font'
-// Returns: @"string"
+// Matches: token.type === 'content'
+// Returns:
+**&quot;string&quot;**:
 ```
 
 ---
 
-### font/swift/literal
+### content/swift/literal
 
 Wraps the value in a double-quoted string to make a string literal.
 
 ```swift
-// Matches: token.attributes.category === 'font'
-// Returns: "string"
+// Matches: token.type === 'content'
+// Returns:
+"string"
 ```
 
 ---
@@ -684,7 +633,7 @@ Wraps the value in a double-quoted string to make a string literal.
 Assumes a time in miliseconds and transforms it into a decimal
 
 ```js
-// Matches: token.attributes.category === 'time'
+// Matches: token.type === 'time'
 // Returns:
 '0.5s';
 ```
@@ -696,7 +645,7 @@ Assumes a time in miliseconds and transforms it into a decimal
 Wraps the value in a double-quoted string and prepends an '@' to make a string literal.
 
 ```js
-// Matches: token.attributes.category === 'asset'
+// Matches: token.type === 'asset'
 // Returns:
 'IyBlZGl0b3Jjb25maWcub3JnCnJvb3QgPSB0cnVlCgpbKl0KaW5kZW50X3N0eWxlID0gc3BhY2UKaW5kZW50X3NpemUgPSAyCmVuZF9vZl9saW5lID0gbGYKY2hhcnNldCA9IHV0Zi04CnRyaW1fdHJhaWxpbmdfd2hpdGVzcGFjZSA9IHRydWUKaW5zZXJ0X2ZpbmFsX25ld2xpbmUgPSB0cnVlCgpbKi5tZF0KdHJpbV90cmFpbGluZ193aGl0ZXNwYWNlID0gZmFsc2U=';
 ```
@@ -708,7 +657,7 @@ Wraps the value in a double-quoted string and prepends an '@' to make a string l
 Prepends the local file path
 
 ```js
-// Matches: token.attributes.category === 'asset'
+// Matches: token.type === 'asset'
 // Returns:
 'path/to/file/asset.png';
 ```
@@ -720,7 +669,7 @@ Prepends the local file path
 Wraps the value in a double-quoted string and prepends an '@' to make a string literal.
 
 ```objectivec
-// Matches: token.attributes.category === 'asset'
+// Matches: token.type === 'asset'
 // Returns: @"string"
 ```
 
@@ -731,7 +680,7 @@ Wraps the value in a double-quoted string and prepends an '@' to make a string l
 Wraps the value in a double-quoted string to make a string literal.
 
 ```swift
-// Matches: token.attributes.category === 'asset'
+// Matches: token.type === 'asset'
 // Returns: "string"
 ```
 
@@ -742,7 +691,7 @@ Wraps the value in a double-quoted string to make a string literal.
 Transforms the value into a Flutter Color object using 8-digit hex with the alpha chanel on start
 
 ```js
-// Matches: token.attributes.category === 'color'
+// Matches: token.type === 'color'
 // Returns:
 Color(0xff00ff5f);
 ```
@@ -754,7 +703,7 @@ Color(0xff00ff5f);
 Wraps the value in a double-quoted string to make a string literal.
 
 ```dart
-// Matches: token.attributes.category === 'content'
+// Matches: token.type === 'content'
 // Returns: "string"
 ```
 
@@ -765,18 +714,7 @@ Wraps the value in a double-quoted string to make a string literal.
 Wraps the value in a double-quoted string to make a string literal.
 
 ```dart
-// Matches: token.attributes.category === 'asset'
-// Returns: "string"
-```
-
----
-
-### font/flutter/literal
-
-Wraps the value in a double-quoted string to make a string literal.
-
-```dart
-// Matches: token.attributes.category === 'font'
+// Matches: token.type === 'asset'
 // Returns: "string"
 ```
 
@@ -787,7 +725,7 @@ Wraps the value in a double-quoted string to make a string literal.
 Scales the number by 16 (or the value of 'basePxFontSize' on the platform in your config) to get to points for Flutter
 
 ```dart
-// Matches: token.attributes.category === 'size'
+// Matches: token.type === 'dimension'
 // Returns: 16.00
 ```
 

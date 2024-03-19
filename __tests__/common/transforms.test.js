@@ -17,10 +17,10 @@ import transforms from '../../lib/common/transforms.js';
 
 describe('common', () => {
   describe('transforms', () => {
-    describe('name/cti/camel', () => {
+    describe('name/camel', () => {
       it('should handle prefix', () => {
         expect(
-          transforms['name/cti/camel'].transformer(
+          transforms['name/camel'].transformer(
             {
               path: ['one', 'two', 'three'],
             },
@@ -33,7 +33,7 @@ describe('common', () => {
 
       it('should handle no prefix', () => {
         expect(
-          transforms['name/cti/camel'].transformer(
+          transforms['name/camel'].transformer(
             {
               path: ['one', 'two', 'three'],
             },
@@ -43,36 +43,10 @@ describe('common', () => {
       });
     });
 
-    describe('name/ti/camel', () => {
+    describe('name/kebab', () => {
       it('should handle prefix', () => {
         expect(
-          transforms['name/ti/camel'].transformer(
-            {
-              path: ['one', 'two', 'three'],
-            },
-            {
-              prefix: 'prefix',
-            },
-          ),
-        ).to.equal('prefixTwoThree');
-      });
-
-      it('should handle no prefix', () => {
-        expect(
-          transforms['name/ti/camel'].transformer(
-            {
-              path: ['one', 'two', 'three'],
-            },
-            {},
-          ),
-        ).to.equal('twoThree');
-      });
-    });
-
-    describe('name/cti/kebab', () => {
-      it('should handle prefix', () => {
-        expect(
-          transforms['name/cti/kebab'].transformer(
+          transforms['name/kebab'].transformer(
             {
               path: ['one', 'two', 'three'],
             },
@@ -85,7 +59,7 @@ describe('common', () => {
 
       it('should handle no prefix', () => {
         expect(
-          transforms['name/cti/kebab'].transformer(
+          transforms['name/kebab'].transformer(
             {
               path: ['one', 'two', 'three'],
             },
@@ -95,10 +69,10 @@ describe('common', () => {
       });
     });
 
-    describe('name/cti/snake', () => {
+    describe('name/snake', () => {
       it('should handle prefix', () => {
         expect(
-          transforms['name/cti/snake'].transformer(
+          transforms['name/snake'].transformer(
             {
               path: ['one', 'two', 'three'],
             },
@@ -111,7 +85,7 @@ describe('common', () => {
 
       it('should handle no prefix', () => {
         expect(
-          transforms['name/cti/snake'].transformer(
+          transforms['name/snake'].transformer(
             {
               path: ['one', 'two', 'three'],
             },
@@ -121,10 +95,10 @@ describe('common', () => {
       });
     });
 
-    describe('name/cti/constant', () => {
+    describe('name/constant', () => {
       it('should handle prefix', () => {
         expect(
-          transforms['name/cti/constant'].transformer(
+          transforms['name/constant'].transformer(
             {
               path: ['one', 'two', 'three'],
             },
@@ -137,39 +111,13 @@ describe('common', () => {
 
       it('should handle no prefix', () => {
         expect(
-          transforms['name/cti/constant'].transformer(
+          transforms['name/constant'].transformer(
             {
               path: ['one', 'two', 'three'],
             },
             {},
           ),
         ).to.equal('ONE_TWO_THREE');
-      });
-    });
-
-    describe('name/ti/constant', () => {
-      it('should handle prefix', () => {
-        expect(
-          transforms['name/ti/constant'].transformer(
-            {
-              path: ['one', 'two', 'three'],
-            },
-            {
-              prefix: 'prefix',
-            },
-          ),
-        ).to.equal('PREFIX_TWO_THREE');
-      });
-
-      it('should handle no prefix', () => {
-        expect(
-          transforms['name/ti/constant'].transformer(
-            {
-              path: ['one', 'two', 'three'],
-            },
-            {},
-          ),
-        ).to.equal('TWO_THREE');
       });
     });
 
@@ -1021,9 +969,9 @@ describe('common', () => {
       });
     });
 
-    describe('content/icon', () => {
+    describe('html/icon', () => {
       it('should work', () => {
-        const value = transforms['content/icon'].transformer(
+        const value = transforms['html/icon'].transformer(
           {
             value: '&#xE001;',
           },
@@ -1050,19 +998,6 @@ describe('common', () => {
     describe('asset/objC/literal', () => {
       it('should work', () => {
         const value = transforms['asset/objC/literal'].transformer(
-          {
-            value: 'hello',
-          },
-          {},
-          {},
-        );
-        expect(value).to.equal('@"hello"');
-      });
-    });
-
-    describe('font/objC/literal', () => {
-      it('should work', () => {
-        const value = transforms['font/objC/literal'].transformer(
           {
             value: 'hello',
           },
