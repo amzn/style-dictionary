@@ -14,6 +14,7 @@
 import type { Matcher } from './Filter.d.ts';
 import type { TransformedToken } from './DesignToken.d.ts';
 import type { PlatformConfig, Config } from './Config.d.ts';
+import type { Volume } from './Volume.d.ts';
 
 interface BaseTransform<Type, Value> {
   name: string;
@@ -24,6 +25,7 @@ interface BaseTransform<Type, Value> {
     token: TransformedToken,
     config: PlatformConfig,
     options: Config,
+    vol?: Volume,
   ) => Promise<Value> | Value;
 }
 
