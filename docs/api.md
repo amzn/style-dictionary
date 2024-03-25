@@ -42,6 +42,10 @@ Using volume option:
 
 ```js
 import { Volume } from 'memfs';
+// You will need a bundler for memfs in browser...
+// Or use as a prebundled fork:
+import memfs from '@bundled-es-modules/memfs';
+const { Volume } = memfs;
 
 const vol = new Volume();
 
