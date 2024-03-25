@@ -6,11 +6,13 @@
 
 Create a new StyleDictionary instance.
 
-| Param        | Type                           | Description                                                                                                                                                                      |
-| ------------ | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| config       | [<code>Config</code>](#Config) | Configuration options to build your style dictionary. If you pass a string, it will be used as a path to a JSON config file. You can also pass an object with the configuration. |
-| options      | <code>Object</code>            | Options object when creating a new StyleDictionary instance.                                                                                                                     |
-| options.init | <code>Boolean</code>           | `true` by default but can be disabled to delay initializing the dictionary. You can then call `sdInstance.init()` yourself, e.g. for testing or error handling purposes.         |
+| Param             | Type                                                         | Description                                                                                                                                                                      |
+| ----------------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| config            | [<code>Config</code>](#Config)                               | Configuration options to build your style dictionary. If you pass a string, it will be used as a path to a JSON config file. You can also pass an object with the configuration. |
+| options           | <code>Object</code>                                          | Options object when creating a new StyleDictionary instance.                                                                                                                     |
+| options.init      | <code>Boolean</code>                                         | `true` by default but can be disabled to delay initializing the dictionary. You can then call `sdInstance.init()` yourself, e.g. for testing or error handling purposes.         |
+| options.verbosity | <code>String</code>                                          | `"verbose" \| "silent" \| "default"`, used by CLI to ensure log verbosity is set, which takes precedence over anything configured in the Style Dictionary user config            |
+| options.volume    | <code>import('memfs').IFs \| typeof import('node:fs')</code> | Volume instance used as the filesystem for this Style-Dictionary instance. Allows isolating Style-Dictionary input/outputs to a volume                                           |
 
 **Example**
 
@@ -34,6 +36,48 @@ const sdTwo = new StyleDictionary({
     // ...
   },
 });
+```
+
+Using volume option:
+
+```js
+import { Volume } from 'memfs';
+
+const vol = new Volume();
+
+const sd = new StyleDictionary(
+  {
+    tokens: {
+      colors: {
+        red: {
+          value: '#FF0000',
+          type: 'color',
+        },
+      },
+    },
+    platforms: {
+      css: {
+        transformGroup: 'css',
+        files: [
+          {
+            destination: 'variables.css',
+            format: 'css/variables',
+          },
+        ],
+      },
+    },
+  },
+  { volume: vol },
+);
+
+await sd.buildAllPlatforms();
+
+vol.readFileSync('/variables.css');
+/**
+ * :root {
+ *   --colors-red: #FF0000;
+ * }
+ */
 ```
 
 ## init
@@ -76,6 +120,12 @@ const sdExtended = await sd.extend({
     // ...
   },
 });
+```
+
+Volume option also works when using extend:
+
+```js
+const extendedSd = await sd.extend(cfg, { volume: vol });
 ```
 
 ---
