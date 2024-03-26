@@ -1,5 +1,18 @@
 # Changelog
 
+## 4.0.0-prerelease.21
+
+### Minor Changes
+
+- 8b6fff3: Fixes some noisy warnings still being outputted even when verbosity is set to default.
+
+  We also added log.warning "disabled" option for turning off warnings altogether, meaning you only get success logs and fatal errors.
+  This option can be used from the CLI as well using the `--no-warn` flag.
+
+### Patch Changes
+
+- 77ae35f: Fix scenario of passing absolute paths in Node env, do not remove leading slash in absolute paths.
+
 ## 4.0.0-prerelease.20
 
 ### Minor Changes
