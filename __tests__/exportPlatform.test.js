@@ -385,7 +385,9 @@ describe('exportPlatform', () => {
   });
 
   describe('reference warnings', () => {
-    const errorMessage = `Problems were found when trying to resolve property references`;
+    const errorMessage = (amount = 1) => `Reference Errors:
+Some token references (${amount}) could not be found.
+Use log.verbosity "verbose" or use CLI option --verbose for more details.`;
     const platforms = {
       css: {
         transformGroup: `css`,
@@ -403,7 +405,7 @@ describe('exportPlatform', () => {
         platforms,
       });
 
-      await expect(sd.exportPlatform('css')).to.eventually.be.rejectedWith(errorMessage);
+      await expect(sd.exportPlatform('css')).to.eventually.be.rejectedWith(errorMessage());
     });
 
     it('should throw if there are circular reference errors', async () => {
@@ -416,7 +418,7 @@ describe('exportPlatform', () => {
         tokens,
         platforms,
       });
-      await expect(sd.exportPlatform('css')).to.eventually.be.rejectedWith(errorMessage);
+      await expect(sd.exportPlatform('css')).to.eventually.be.rejectedWith(errorMessage());
     });
 
     it('should throw if there are complex property reference errors', async () => {
@@ -436,7 +438,7 @@ describe('exportPlatform', () => {
         tokens,
         platforms,
       });
-      await expect(sd.exportPlatform('css')).to.eventually.be.rejectedWith(errorMessage);
+      await expect(sd.exportPlatform('css')).to.eventually.be.rejectedWith(errorMessage(4));
     });
   });
 

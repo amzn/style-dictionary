@@ -2,7 +2,8 @@
 export const snapshots = {};
 snapshots["StyleDictionary class + extend method should throw an error if the collision is in source files and log is set to error"] = 
 `
-Property Value Collisions:
+Token collisions detected (28):
+
 Collision detected at: size.padding.zero! Original value: 0, New value: 0
 Collision detected at: size.padding.zero! Original value: dimension, New value: dimension
 Collision detected at: size.padding.zero! Original value: __tests__/__tokens/paddings.json, New value: __tests__/__tokens/_paddings.json
@@ -34,4 +35,10 @@ Collision detected at: size.padding.xxl! Original value: true, New value: true
 
 `;
 /* end snapshot StyleDictionary class + extend method should throw an error if the collision is in source files and log is set to error */
+
+snapshots["StyleDictionary class + extend method should throw a brief error if the collision is in source files and log is set to error and verbosity default"] = 
+`
+Token collisions detected (28):
+Use log.verbosity "verbose" or use CLI option --verbose for more details.`;
+/* end snapshot StyleDictionary class + extend method should throw a brief error if the collision is in source files and log is set to error and verbosity default */
 
