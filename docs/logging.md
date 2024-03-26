@@ -17,7 +17,7 @@ const sd = new StyleDictionary({
 | Param         | Type                             | Description                                                                                                                                                          |
 | ------------- | -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | log           | `Object`                         |                                                                                                                                                                      |
-| log.warnings  | `'warn'\|'error'`                | Whether warnings should be logged as warnings or thrown as errors. Defaults to 'warn'                                                                                |
+| log.warnings  | `'warn'\|'error'\|'disabled'`    | Whether warnings should be logged as warnings, thrown as errors or disabled entirely. Defaults to 'warn'                                                             |
 | log.verbosity | `'default'\|'silent'\|'verbose'` | How verbose logs should be, default value is 'default'. 'silent' means no logs at all apart from fatal errors. 'verbose' means detailed error messages for debugging |
 
 There are five types of warnings that will be thrown as errors instead of being logged as warnings when `log.warnings` is set to `error`:
@@ -42,3 +42,4 @@ By default the verbosity ('default') will keep logs relatively brief to prevent 
 
 Log verbosity can be passed as an option in the CLI by passing either `-v` or `--verbose` to get verbose logging,
 and `-s` or `--silent` to get silent logging.
+Warnings can be disabled by using the `-n` or `--no-warn` flag.

@@ -80,6 +80,29 @@ describe(`integration`, () => {
           expect(stub.callCount).to.equal(0);
         });
 
+        it(`should not warn user about empty tokens with silent log verbosity`, async () => {
+          const sd = new StyleDictionary({
+            log: { warnings: 'disabled' },
+            source: [`__integration__/tokens/**/[!_]*.json?(c)`],
+            platforms: {
+              css: {
+                transformGroup: `css`,
+                files: [
+                  {
+                    destination: `empty.css`,
+                    format: `css/variables`,
+                    filter: (token) => token.type === `foo`,
+                  },
+                ],
+              },
+            },
+          });
+
+          await sd.buildAllPlatforms();
+          // 1 due to success log "css"
+          expect(stub.callCount).to.equal(1);
+        });
+
         it(`should not warn user about empty tokens with log level set to error`, async () => {
           const sd = new StyleDictionary({
             log: { warnings: 'error' },
@@ -173,6 +196,30 @@ describe(`integration`, () => {
           });
           await sd.buildAllPlatforms();
           expect(stub.callCount).to.equal(0);
+        });
+
+        it(`should not warn user of name collisions with log verbosity silent`, async () => {
+          const sd = new StyleDictionary({
+            log: { warnings: 'disabled' },
+            source: [`__integration__/tokens/**/[!_]*.json?(c)`],
+            platforms: {
+              css: {
+                // no name transform means there will be name collisions
+                transforms: [`attribute/cti`],
+                buildPath,
+                files: [
+                  {
+                    destination: `nameCollisions.css`,
+                    format: `css/variables`,
+                    filter: (token) => token.type === `color`,
+                  },
+                ],
+              },
+            },
+          });
+          await sd.buildAllPlatforms();
+          // 1 due to success log "css"
+          expect(stub.callCount).to.equal(1);
         });
 
         it(`should throw a brief error of name collisions with log level set to error`, async () => {
@@ -348,6 +395,34 @@ describe(`integration`, () => {
           });
           await sd.buildAllPlatforms();
           expect(stub.callCount).to.equal(0);
+        });
+
+        it(`should not warn user of filtered references with log verbosity silent`, async () => {
+          const sd = new StyleDictionary({
+            log: { warnings: 'disabled' },
+            source: [`__integration__/tokens/**/[!_]*.json?(c)`],
+            platforms: {
+              css: {
+                transformGroup: `css`,
+                buildPath,
+                files: [
+                  {
+                    destination: `filteredReferences.css`,
+                    format: `css/variables`,
+                    options: {
+                      outputReferences: true,
+                    },
+                    // background colors have references, only including them
+                    // should warn the user
+                    filter: (token) => token.attributes.type === `background`,
+                  },
+                ],
+              },
+            },
+          });
+          await sd.buildAllPlatforms();
+          // 1 due to success log "css"
+          expect(stub.callCount).to.equal(1);
         });
 
         it(`should throw a brief error of filtered references with log level set to error`, async () => {

@@ -67,6 +67,22 @@ describe(`integration >`, () => {
           await expect(stub.callCount).to.equal(0);
         });
 
+        it(`should not log anything if the log warnings is set to disabled`, async () => {
+          const sd = new StyleDictionary({
+            log: {
+              warnings: 'disabled',
+            },
+            source: [
+              // including a specific file twice will throw value collision warnings
+              `__integration__/tokens/size/padding.json`,
+              `__integration__/tokens/size/_padding.json`,
+            ],
+            platforms: {},
+          });
+          await sd.hasInitialized;
+          await expect(stub.callCount).to.equal(0);
+        });
+
         it(`should not show warnings if given higher log level`, async () => {
           const sd = new StyleDictionary(
             {

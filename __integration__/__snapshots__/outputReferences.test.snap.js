@@ -6,7 +6,7 @@ snapshots["integration output references should warn the user if filters out ref
 While building filteredVariables.css, filtered out token references were found; output may be unexpected. Ignore this warning if intentional.
 Here are the references that are used but not defined in the file:
 
-Use --verbose or log.verbosity: 'verbose' option for more details`;
+Use log.verbosity "verbose" or use CLI option --verbose for more details.`;
 /* end snapshot integration output references should warn the user if filters out references briefly */
 
 snapshots["integration output references should warn the user if filters out references with a detailed message when using verbose logging"] = 

@@ -20,18 +20,17 @@ Unknown transformGroup "foo" found in platform "css":
 /* end snapshot integration logging platform should throw and notify users of unknown transformGroups */
 snapshots["integration logging platform property reference errors should throw and notify users of unknown references"] = 
 `
-Property Reference Errors:
-color.danger.value tries to reference color.red.value, which is not defined.
-
-Problems were found when trying to resolve property references`;
+Reference Errors:
+Some token references (1) could not be found.
+Use log.verbosity "verbose" or use CLI option --verbose for more details.
+`;
 /* end snapshot integration logging platform property reference errors should throw and notify users of unknown references */
 
 snapshots["integration logging platform property reference errors circular references should throw and notify users"] = 
 `
-Property Reference Errors:
-Circular definition cycle:  color.foo.value, color.foo.value, color.foo.value
-Circular definition cycle:  color.teal.value, color.blue.value, color.green.value, color.teal.value
-
-Problems were found when trying to resolve property references`;
+Reference Errors:
+Some token references (2) could not be found.
+Use log.verbosity "verbose" or use CLI option --verbose for more details.
+`;
 /* end snapshot integration logging platform property reference errors circular references should throw and notify users */
 

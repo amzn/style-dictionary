@@ -53,7 +53,7 @@ export interface ResolveReferencesOptionsInternal extends ResolveReferencesOptio
 }
 
 export interface LogConfig {
-  warnings?: 'warn' | 'error';
+  warnings?: 'warn' | 'error' | 'disabled';
   verbosity?: 'default' | 'silent' | 'verbose';
 }
 
