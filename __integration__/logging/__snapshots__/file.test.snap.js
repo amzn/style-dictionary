@@ -13,21 +13,21 @@ css
 ⚠️ __integration__/build/nameCollisions.css
 While building nameCollisions.css, token collisions were found; output may be unexpected. Ignore this warning if intentional.
 
-Use --verbose or log.verbosity: 'verbose' option for more details`;
+Use log.verbosity "verbose" or use CLI option --verbose for more details.`;
 /* end snapshot integration logging file name collisions should warn users briefly of name collisions by default */
 
 snapshots["integration logging file name collisions should throw a brief error of name collisions with log level set to error"] = 
 `⚠️ __integration__/build/nameCollisions.css
 While building nameCollisions.css, token collisions were found; output may be unexpected. Ignore this warning if intentional.
 
-Use --verbose or log.verbosity: 'verbose' option for more details`;
+Use log.verbosity "verbose" or use CLI option --verbose for more details.`;
 /* end snapshot integration logging file name collisions should throw a brief error of name collisions with log level set to error */
 
 snapshots["integration logging file name collisions should throw a brief error of name collisions with log level set to error on platform level"] = 
 `⚠️ __integration__/build/nameCollisions.css
 While building nameCollisions.css, token collisions were found; output may be unexpected. Ignore this warning if intentional.
 
-Use --verbose or log.verbosity: 'verbose' option for more details`;
+Use log.verbosity "verbose" or use CLI option --verbose for more details.`;
 /* end snapshot integration logging file name collisions should throw a brief error of name collisions with log level set to error on platform level */
 
 snapshots["integration logging file name collisions should warn user of name collisions with a detailed message through \"verbose\" verbosity"] = 
@@ -393,7 +393,7 @@ css
 While building filteredReferences.css, filtered out token references were found; output may be unexpected. Ignore this warning if intentional.
 Here are the references that are used but not defined in the file:
 
-Use --verbose or log.verbosity: 'verbose' option for more details`;
+Use log.verbosity "verbose" or use CLI option --verbose for more details.`;
 /* end snapshot integration logging file filtered references should warn users briefly of filtered references by default */
 
 snapshots["integration logging file filtered references should throw a brief error of filtered references with log level set to error"] = 
@@ -401,7 +401,7 @@ snapshots["integration logging file filtered references should throw a brief err
 While building filteredReferences.css, filtered out token references were found; output may be unexpected. Ignore this warning if intentional.
 Here are the references that are used but not defined in the file:
 
-Use --verbose or log.verbosity: 'verbose' option for more details`;
+Use log.verbosity "verbose" or use CLI option --verbose for more details.`;
 /* end snapshot integration logging file filtered references should throw a brief error of filtered references with log level set to error */
 
 snapshots["integration logging file filtered references should throw a brief error of filtered references with log level set to error on platform level"] = 
@@ -409,7 +409,7 @@ snapshots["integration logging file filtered references should throw a brief err
 While building filteredReferences.css, filtered out token references were found; output may be unexpected. Ignore this warning if intentional.
 Here are the references that are used but not defined in the file:
 
-Use --verbose or log.verbosity: 'verbose' option for more details`;
+Use log.verbosity "verbose" or use CLI option --verbose for more details.`;
 /* end snapshot integration logging file filtered references should throw a brief error of filtered references with log level set to error on platform level */
 
 snapshots["integration logging file filtered references should warn user of filtered references with a detailed message through \"verbose\" verbosity"] = 

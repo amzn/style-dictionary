@@ -44,6 +44,14 @@ describe('cliBuildWithJsConfig', () => {
       expect(result.toString()).to.equal(``);
     });
 
+    it('should only log success logs if --no-warn is used', () => {
+      const result = childProcess.execSync(
+        'node ./bin/style-dictionary build --config __tests__/__configs/test.js --no-warn',
+      );
+
+      expect(result.toString().match('Token collisions detected')).to.be.null;
+    });
+
     it('should log briefly if neither --verbose nor --silent is used', () => {
       //const logStub = stubMethod(console, 'log');
       const result = childProcess.execSync(
@@ -54,7 +62,7 @@ css
 ⚠️ __tests__/__output/css/vars.css
 While building vars.css, token collisions were found; output may be unexpected. Ignore this warning if intentional.
 
-Use --verbose or log.verbosity: 'verbose' option for more details\n`);
+Use log.verbosity "verbose" or use CLI option --verbose for more details.\n`);
     });
 
     it('should log verbosely if --verbose is used', () => {

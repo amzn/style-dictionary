@@ -213,6 +213,23 @@ describe('StyleDictionary class + extend method', () => {
     const sd = new StyleDictionary(
       {
         source: ['__tests__/__tokens/paddings.json', '__tests__/__tokens/_paddings.json'],
+        log: { warnings: 'error', verbosity: 'verbose' },
+      },
+      { init: false },
+    );
+    let error;
+    try {
+      await sd.init();
+    } catch (e) {
+      error = e;
+    }
+    await expect(error.message).to.matchSnapshot();
+  });
+
+  it('should throw a brief error if the collision is in source files and log is set to error and verbosity default', async () => {
+    const sd = new StyleDictionary(
+      {
+        source: ['__tests__/__tokens/paddings.json', '__tests__/__tokens/_paddings.json'],
         log: { warnings: 'error' },
       },
       { init: false },

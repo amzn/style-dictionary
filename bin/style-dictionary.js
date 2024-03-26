@@ -47,6 +47,7 @@ program
     '-v, --verbose',
     'enable verbose logging for reference errors, token collisions and filtered tokens with outputReferences',
   )
+  .option('-n, --no-warn', 'disable all warnings, only success logs and fatal errors shown')
   .option('-s, --silent', 'silence all logging, except for fatal errors')
   .option(
     '-p, --platform [platform]',
@@ -66,6 +67,7 @@ program
     '-v, --verbose',
     'enable verbose logging for reference errors, token collisions and filtered tokens with outputReferences',
   )
+  .option('-n, --no-warn', 'disable all warnings, only success logs and fatal errors shown')
   .option('-s, --silent', 'silence all logging, except for fatal errors')
   .option(
     '-p, --platform [platform]',
@@ -106,10 +108,14 @@ program.on('command:*', function () {
 
 function getSD(configPath, options) {
   let verbosity;
+  let warnings;
   if (options.verbose || options.silent) {
     verbosity = options.verbose ? 'verbose' : 'silent';
   }
-  return new StyleDictionary(configPath, { verbosity });
+  if (options.warn === false) {
+    warnings = 'disabled';
+  }
+  return new StyleDictionary(configPath, { verbosity, warnings });
 }
 
 async function styleDictionaryBuild(options) {
