@@ -1,12 +1,13 @@
 export type { Action } from './Action.d.ts';
 
-export * from './Config.d.ts';
+export { PlatformConfig, Config, LocalOptions, LogConfig } from './Config.d.ts';
 
 export type {
   DesignToken,
   DesignTokens,
   TransformedToken,
   TransformedTokens,
+  Dictionary
 } from './DesignToken.d.ts';
 
 export type { FileHeader, File, FormattingOptions } from './File.d.ts';
