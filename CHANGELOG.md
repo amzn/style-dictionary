@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.0.0-prerelease.22
+
+### Patch Changes
+
+- daa78e1: Added missing type exports
+
 ## 4.0.0-prerelease.21
 
 ### Minor Changes
