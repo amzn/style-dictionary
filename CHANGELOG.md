@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.0.0-prerelease.23
+
+### Patch Changes
+
+- f8c40f7: fix(types): add missing type keyword for type export from index.d.ts
+
 ## 4.0.0-prerelease.22
 
 ### Patch Changes
