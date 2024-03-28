@@ -2,8 +2,8 @@
 'style-dictionary': minor
 ---
 
-Allow passing a custom FileSystem Volume to your Style-Dictionary instances, to ensure input/output files are read/written from/to that specific volume. 
-Useful in case you want multiple Style-Dictionary instances that are isolated from one another in terms of inputs/outputs.
+Allow passing a custom FileSystem Volume to your Style Dictionary instances, to ensure input/output files are read/written from/to that specific volume. 
+Useful in case you want multiple Style Dictionary instances that are isolated from one another in terms of inputs/outputs.
 
 ```js
 import { Volume } from 'memfs';

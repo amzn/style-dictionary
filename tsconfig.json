@@ -1,8 +1,9 @@
 {
+  "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     "target": "ESNext",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "allowJs": true,
     "checkJs": true,
     "strict": true,
@@ -10,6 +11,6 @@
     "skipLibCheck": true,
     "declaration": true
   },
-  "include": ["types/**/*.d.ts", "lib/**/*.js"],
+  "include": ["types/**/*.d.ts", "lib/**/*.js", "**/*.ts"],
   "exclude": ["node_modules", "**/coverage/*"]
 }

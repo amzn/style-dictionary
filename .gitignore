@@ -79,3 +79,8 @@ xcuserdata/
 
 # Temporary build output directory for unit tests
 __tests__/__output
+
+# build output
+dist/
+# generated types
+.astro/

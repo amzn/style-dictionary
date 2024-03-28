@@ -29,8 +29,8 @@
 
 ### Minor Changes
 
-- aff6646: Allow passing a custom FileSystem Volume to your Style-Dictionary instances, to ensure input/output files are read/written from/to that specific volume.
-  Useful in case you want multiple Style-Dictionary instances that are isolated from one another in terms of inputs/outputs.
+- aff6646: Allow passing a custom FileSystem Volume to your Style Dictionary instances, to ensure input/output files are read/written from/to that specific volume.
+  Useful in case you want multiple Style Dictionary instances that are isolated from one another in terms of inputs/outputs.
 
   ```js
   import { Volume } from 'memfs';
@@ -438,15 +438,15 @@
 
 - dcbe2fb:
   - The project has been fully converted to [ESM format](https://nodejs.org/api/esm.html), which is also the format that the browser uses.
-    For users, this means you'll have to either use Style-Dictionary in ESM JavaScript code, or dynamically import it into your CommonJS code.
-  - `Style-Dictionary.extend()` method is now asynchronous, which means it returns `Promise<StyleDictionary.Core>` instead of `StyleDictionary.Core`.
+    For users, this means you'll have to either use Style Dictionary in ESM JavaScript code, or dynamically import it into your CommonJS code.
+  - `StyleDictionary.extend()` method is now asynchronous, which means it returns `Promise<StyleDictionary.Core>` instead of `StyleDictionary.Core`.
   - `allProperties` / `properties` was deprecated in v3, and is now removed from `StyleDictionary.Core`, use `allTokens` and `tokens` instead.
   - Templates and the method `registerTemplate` were deprecated in v3, now removed. Use Formats instead.
   - The package now uses [package entrypoints](https://nodejs.org/api/packages.html), which means that what is importable from the package is locked down to just the specified entrypoints: `style-dictionary` & `style-dictionary/fs`. If more is needed, please raise an issue explaining which file you were importing and why you need it to be public API.
 
 ### Minor Changes
 
-- dcbe2fb: FileSystem that is used by Style-Dictionary can now be customized:
+- dcbe2fb: FileSystem that is used by Style Dictionary can now be customized:
 
   ```js
   import { setFs } from 'style-dictionary/fs';
