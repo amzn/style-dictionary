@@ -48,6 +48,8 @@ const getLang = (lang: string) => {
 declare type Files = 'tokens' | 'config' | 'script' | 'output';
 const files: Files[] = ['tokens', 'config', 'script', 'output'];
 
+export const registeredComponents: SdPlayground[] = [];
+
 class SdPlayground extends LitElement {
   static get styles() {
     return css`
@@ -136,6 +138,7 @@ class SdPlayground extends LitElement {
     this.hasInitialized = new Promise((resolve) => {
       this.hasInitializedResolve = resolve;
     });
+    registeredComponents.push(this);
   }
 
   connectedCallback() {

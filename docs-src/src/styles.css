@@ -12,6 +12,21 @@
   --sl-color-accent-high: #07524f;
 }
 
+:root {
+  /* Changes the primary theme color to purple using primitives */
+  --sl-color-primary-50: var(--sl-color-teal-50) !important;
+  --sl-color-primary-100: var(--sl-color-teal-100) !important;
+  --sl-color-primary-200: var(--sl-color-teal-200) !important;
+  --sl-color-primary-300: var(--sl-color-teal-300) !important;
+  --sl-color-primary-400: var(--sl-color-teal-400) !important;
+  --sl-color-primary-500: var(--sl-color-teal-500) !important;
+  --sl-color-primary-600: var(--sl-color-teal-600) !important;
+  --sl-color-primary-700: var(--sl-color-teal-700) !important;
+  --sl-color-primary-800: var(--sl-color-teal-800) !important;
+  --sl-color-primary-900: var(--sl-color-teal-900) !important;
+  --sl-color-primary-950: var(--sl-color-teal-950) !important;
+}
+
 table code {
   overflow-wrap: break-word;
 }

@@ -1,4 +1,4 @@
-export const themeData = {
+export default {
   base: 'vs-dark',
   inherit: true,
   rules: [
