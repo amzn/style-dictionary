@@ -74,10 +74,11 @@ xcuserdata/
 # Mac directory hidden files
 *.DS_Store
 
-# Temporary build output directory for unit tests
+# Temporary build output directory for tests
 /__tests__/__output
+/__integration__/build
 
 # build output
-/docs/
+/docs/dist/
 # generated types
 .astro/

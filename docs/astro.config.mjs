@@ -5,7 +5,6 @@ import starlightConfig from './starlight-config';
 
 // https://astro.build/config
 export default defineConfig({
-  outDir: '../docs', // necessary folder for Github Pages
   integrations: [starlight(starlightConfig)],
   markdown: {
     remarkPlugins: [remarkPlayground],
@@ -25,10 +24,6 @@ export default defineConfig({
         // to support top-level-await
         target: 'esnext',
       },
-    },
-    build: {
-      modulePreload: { polyfill: false },
-      minify: false,
     },
   },
 });

@@ -1,9 +1,0 @@
-/**
- * Do not edit directly
- * Generated on Sat, 01 Jan 2000 00:00:00 GMT
- */
-
-:root {
-  --shadow-light: var(--color-red), var(--color-green);
-  --shadow-dark: var(--color-green), var(--color-red);
-}

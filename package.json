@@ -44,9 +44,9 @@
   ],
   "scripts": {
     "build": "node scripts/inject-version.js && tsc --emitDeclarationOnly",
-    "docs:start": "astro dev --root ./docs-src",
-    "docs:build": "astro check  --root ./docs-src && astro build --root ./docs-src",
-    "docs:preview": "astro preview --root ./docs-src",
+    "docs:start": "astro dev --root ./docs",
+    "docs:build": "astro check  --root ./docs && astro build --root ./docs",
+    "docs:preview": "astro preview --root ./docs",
     "format": "run-p format:*",
     "format:eslint": "eslint --fix \"**/*.js\"",
     "format:prettier": "prettier \"**/*.{js,md}\" \"package.json\" --write",

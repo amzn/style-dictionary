@@ -263,7 +263,6 @@ class SdPlayground extends LitElement {
       sdConfig.tokens = sdConfig.tokens ?? tokens;
     }
 
-    console.log(sdConfig.tokens);
     return sdConfig as Config;
   }
 
