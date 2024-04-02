@@ -4,7 +4,7 @@ title: Architecture
 
 This is how Style Dictionary works under the hood.
 
-![build structure](/src/assets/build-diagram.png)
+![build structure](../../../assets/build-diagram.png)
 
 Let's take a closer look into each of these steps.
 

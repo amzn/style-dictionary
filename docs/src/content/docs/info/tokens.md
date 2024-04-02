@@ -340,7 +340,7 @@ For more information, [read the parsers docs](/reference/hooks/parsers).
 
 Design tokens are organized into a hierarchical tree structure with 'category' defining the primitive nature of the design token. For example, we have the color category and every design token underneath is always a color. As you proceed down the tree, you get more specific about what that color is. Is it a background color, a text color, or a border color? What kind of text color is it? You get the point. It's like the animal kingdom classification:
 
-![](/src/assets/cti.png)
+![](../../../assets/cti.png)
 
 Now you can structure your tokens in a nested object like this:
 
