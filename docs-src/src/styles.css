@@ -1,0 +1,50 @@
+/* Dark mode colors. */
+:root {
+  --sl-color-accent-low: #074947;
+  --sl-color-accent: #3fc6bf;
+  --sl-color-accent-high: #80d9d6;
+}
+
+/* Light mode colors. */
+:root[data-theme='light'] {
+  --sl-color-accent-low: #55b3af;
+  --sl-color-accent: #047771;
+  --sl-color-accent-high: #07524f;
+}
+
+table code {
+  overflow-wrap: break-word;
+}
+
+.monaco-editor div {
+  margin-top: 0 !important;
+}
+
+.sl-container {
+  max-width: 1000px;
+}
+
+@media (min-width: 72rem) {
+  [data-has-sidebar][data-has-toc] .main-pane {
+    width: auto;
+  }
+}
+
+@media (min-width: 72rem) {
+  .right-sidebar-container {
+    width: 400px;
+  }
+}
+
+@media (max-width: 90rem) {
+  .right-sidebar-container {
+    display: none;
+  }
+}
+
+@media (min-width: 72rem) {
+  .lg\:sl-flex {
+    display: flex;
+    justify-content: center;
+  }
+}
