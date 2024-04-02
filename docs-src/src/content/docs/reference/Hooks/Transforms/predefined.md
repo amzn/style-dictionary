@@ -219,7 +219,7 @@ Color(0xFF009688)
 
 Transforms the value into an UIColor class for iOS
 
-```objectivec
+```objective-c
 // Matches: token.type === 'color'
 // Returns:
 [UIColor colorWithRed:0.114f green:0.114f blue:0.114f alpha:1.000f]
@@ -484,7 +484,7 @@ Wraps the value in a single quoted string
 
 Wraps the value in a double-quoted string and prepends an '@' to make a string literal.
 
-```objectivec
+```objective-c
 // Matches: token.type === 'content'
 // Returns:
 **&quot;string&quot;**:
@@ -544,7 +544,7 @@ Prepends the local file path
 
 Wraps the value in a double-quoted string and prepends an '@' to make a string literal.
 
-```objectivec
+```objective-c
 // Matches: token.type === 'asset'
 // Returns: @"string"
 ```

@@ -10,6 +10,7 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [remarkPlayground],
   },
+  site: 'https://style-dictionary-v4.netlify.app',
   vite: {
     force: true,
     server: {
