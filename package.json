@@ -43,6 +43,10 @@
     "types"
   ],
   "scripts": {
+    "build": "node scripts/inject-version.js && tsc --emitDeclarationOnly",
+    "docs:start": "astro dev --root ./docs",
+    "docs:build": "astro check  --root ./docs && astro build --root ./docs",
+    "docs:preview": "astro preview --root ./docs",
     "format": "run-p format:*",
     "format:eslint": "eslint --fix \"**/*.js\"",
     "format:prettier": "prettier \"**/*.{js,md}\" \"package.json\" --write",
@@ -58,7 +62,7 @@
     "test:node": "mocha -r mocha-hooks.mjs './__integration__/**/*.test.js' './__tests__/**/*.test.js' './__node_tests__/**/*.test.js'",
     "serve-docs": "docsify serve docs -p 3000 -P 12345",
     "install-cli": "npm install -g $(npm pack)",
-    "release": "node scripts/inject-version.js && tsc --emitDeclarationOnly && changeset publish",
+    "release": "npm run build && changeset publish",
     "prepare": "husky install",
     "postinstall": "patch-package"
   },
@@ -100,7 +104,7 @@
   "dependencies": {
     "@bundled-es-modules/deepmerge": "^4.3.1",
     "@bundled-es-modules/glob": "^10.3.13",
-    "@bundled-es-modules/memfs": "^4.2.3",
+    "@bundled-es-modules/memfs": "^4.8.1",
     "chalk": "^5.3.0",
     "change-case": "^5.3.0",
     "commander": "^8.3.0",
@@ -112,17 +116,24 @@
     "tinycolor2": "^1.6.0"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.5.10",
+    "@astrojs/starlight": "^0.21.2",
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@changesets/cli": "^2.27.1",
     "@commitlint/cli": "^18.4.3",
     "@commitlint/config-conventional": "^18.4.3",
     "@esm-bundle/chai-as-promised": "^7.1.1",
+    "@rollup/browser": "^4.13.1",
+    "@rollup/plugin-virtual": "^3.0.2",
+    "@shoelace-style/shoelace": "^2.15.0",
     "@types/chai": "^4.3.9",
     "@types/lodash-es": "^4.17.12",
     "@types/tinycolor2": "^1.4.6",
+    "@types/uuid": "^9.0.8",
     "@web/test-runner": "^0.18.0",
     "@web/test-runner-commands": "^0.9.0",
     "@web/test-runner-playwright": "^0.11.0",
+    "astro": "^4.3.5",
     "chai": "^5.0.0-alpha.2",
     "docsify": "^4.12.2",
     "docsify-cli": "^4.4.3",
@@ -137,13 +148,19 @@
     "jsdoc-tsimport-plugin": "^1.0.5",
     "less": "^4.1.2",
     "lint-staged": "^12.3.1",
+    "lit": "^3.1.2",
+    "mdast": "^3.0.0",
     "memfs": "^4.6.0",
     "mocha": "^10.2.0",
+    "monaco-editor": "^0.47.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^3.0.3",
     "sass": "^1.69.5",
+    "sharp": "^0.32.5",
     "stylus": "^0.56.0",
     "typescript": "^5.3.3",
+    "unist-util-visit": "^5.0.0",
+    "uuid": "^9.0.1",
     "yaml": "^2.3.4"
   }
 }
