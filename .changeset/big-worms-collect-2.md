@@ -2,7 +2,7 @@
 'style-dictionary': minor
 ---
 
-FileSystem that is used by Style-Dictionary can now be customized:
+FileSystem that is used by Style Dictionary can now be customized:
   
 ```js
 import { setFs } from 'style-dictionary/fs';

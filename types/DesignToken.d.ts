@@ -62,7 +62,7 @@ export interface TransformedTokens {
 }
 
 export interface Dictionary {
-  tokens: DesignTokens;
+  tokens: TransformedTokens;
   allTokens: TransformedToken[];
-  unfilteredTokens?: DesignTokens;
+  unfilteredTokens?: TransformedTokens;
 }
