@@ -60,7 +60,7 @@ Most notable option for public usage is `usesDtcg`, if set to true, the `resolve
 
 ## getReferences
 
-Whether or not a token value contains references
+(Whether or not a token value contains references
 
 ```javascript title="build-tokens.js"
 import StyleDictionary from 'style-dictionary';
@@ -100,7 +100,7 @@ getReferences('solid {spacing.2} {colors.black}', sd.tokens, { usesDtcg: true })
 :::note
 You can pass a third `options` argument where you can pass some configuration options for how references are resolved
 Most notable option for public usage is `usesDtcg`, if set to true, the `resolveReferences` utility will assume DTCG syntax (`$value` props)
-:::
+:::)
 
 ### Complicated example
 
@@ -236,3 +236,126 @@ export const Border = `solid ${Spacing2} ${SemanticBgPrimary}`;
 The above example does not support DTCG syntax, but this could be quite easily added,
 since you can query `sd.usesDtcg` or inside a formatter functions `dictionary.options.usesDtcg`.
 :::
+
+## outputReferencesFilter
+
+An `OutputReferences` function that filters for tokens containing references to other tokens that are filtered out in the output.
+Usually Style Dictionary will throw a warning when you're using `outputReferences: true` and are about to have a broken reference in your output because the token you're referencing is filtered out.
+What that means is that you usually have to either adjust your filter or disable `outputReferences` altogether, but supplying a function instead [allows you to conditionally output references on a per token basis](/reference/hooks/formats#references-in-output-files).
+
+```javascript title="build-tokens.js"
+import StyleDictionary from 'style-dictionary';
+import { outputReferencesFilter } from 'style-dictionary/utils';
+
+const sd = new StyleDictionary({
+  tokens: {
+    colors: {
+      black: {
+        value: '#000',
+        type: 'color',
+      },
+      grey: {
+        // filtering this one out
+        value: '#ccc',
+        type: 'color',
+      },
+    },
+    spacing: {
+      2: {
+        value: '2px',
+        type: 'dimension',
+      },
+    },
+    border: {
+      value: 'solid {spacing.2} {colors.black}',
+    },
+    shadow: {
+      // danger: references a filtered out token!
+      value: '0 4px 2px {colors.grey}',
+    },
+  },
+  platforms: {
+    css: {
+      transformGroup: 'css',
+      files: [
+        {
+          destination: 'vars.css',
+          format: 'css/variables',
+          filter: (token) => token.name !== 'colors-grey',
+          options: {
+            // returns false for the shadow token because it refs color-grey which is filtered out
+            outputReferences: outputReferencesFilter,
+          },
+        },
+      ],
+    },
+  },
+});
+```
+
+Output:
+
+```css title="vars.css"
+:root {
+  --spacing-2: 2rem;
+  --colors-black: #000000;
+  --shadow: 0 4px 2px #cccccc;
+  --border: solid var(--spacing-2) var(--colors-black);
+}
+```
+
+Note that `--colors-grey` was filtered out and therefore the shadow does not contain a CSS custom property (reference) but rather the resolved value.
+
+Live Demo:
+
+~ sd-playground
+
+```json tokens
+{
+  "colors": {
+    "black": {
+      "value": "#000",
+      "type": "color"
+    },
+    "grey": {
+      "value": "#ccc",
+      "type": "color"
+    }
+  },
+  "spacing": {
+    "2": {
+      "value": "2px",
+      "type": "dimension"
+    }
+  },
+  "border": {
+    "value": "solid {spacing.2} {colors.black}"
+  },
+  "shadow": {
+    "value": "0 4px 2px {colors.grey}"
+  }
+}
+```
+
+```js config
+import { outputReferencesFilter } from 'style-dictionary/utils';
+
+export default {
+  platforms: {
+    css: {
+      transformGroup: 'css',
+      files: [
+        {
+          destination: 'vars.css',
+          format: 'css/variables',
+          filter: (token) => token.name !== 'colors-grey',
+          options: {
+            // returns false for the shadow token because it refs color-grey which is filtered out
+            outputReferences: outputReferencesFilter,
+          },
+        },
+      ],
+    },
+  },
+};
+```

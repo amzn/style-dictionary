@@ -15,6 +15,7 @@ import StyleDictionary from 'style-dictionary';
 import { restore, stubMethod } from 'hanbi';
 import { buildPath, cleanConsoleOutput } from './_constants.js';
 import { clearOutput } from '../__tests__/__helpers.js';
+import { outputReferencesFilter } from '../lib/utils/references/outputReferencesFilter.js';
 
 describe('integration', async () => {
   let stub;
@@ -55,6 +56,38 @@ describe('integration', async () => {
       });
       await sd.buildAllPlatforms();
       await expect(stub.lastCall.args.map(cleanConsoleOutput).join('\n')).to.matchSnapshot();
+    });
+
+    it('should not warn the user if filters out references is prevented with outputReferencesFilter', async () => {
+      const sd = new StyleDictionary({
+        // we are only testing showFileHeader options so we don't need
+        // the full source.
+        log: { verbosity: 'verbose' },
+        source: [`__integration__/tokens/**/[!_]*.json?(c)`],
+        platforms: {
+          css: {
+            transformGroup: 'css',
+            buildPath,
+            files: [
+              {
+                destination: 'filteredVariables.css',
+                format: 'css/variables',
+                // filter tokens and use outputReferences
+                // Style Dictionary should build this file ok
+                // but warn the user
+                filter: (token) => token.attributes.type === 'background',
+                options: {
+                  outputReferences: outputReferencesFilter,
+                },
+              },
+            ],
+          },
+        },
+      });
+      await sd.buildAllPlatforms();
+      await expect(
+        [...stub.calls].map((cal) => cal.args.map(cleanConsoleOutput)).join('\n'),
+      ).to.matchSnapshot();
     });
 
     it('should warn the user if filters out references with a detailed message when using verbose logging', async () => {

@@ -7,14 +7,14 @@ export type {
   DesignTokens,
   TransformedToken,
   TransformedTokens,
-  Dictionary
+  Dictionary,
 } from './DesignToken.d.ts';
 
 export type { FileHeader, File, FormattingOptions } from './File.d.ts';
 
 export type { Filter, Matcher } from './Filter.d.ts';
 
-export type { Format, FormatterArguments, Formatter } from './Format.d.ts';
+export type { Format, FormatterArguments, Formatter, OutputReferences } from './Format.d.ts';
 
 export type { Parser, ParserOptions } from './Parser.d.ts';
 
