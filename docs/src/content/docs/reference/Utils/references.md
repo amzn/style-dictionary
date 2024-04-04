@@ -108,9 +108,7 @@ You can use the `getReferences` utility to create your own custom formats that h
 
 ```js title="build-tokens.js"
 import StyleDictionary from 'style-dictionary';
-import { usesReference, getReferences } from 'style-dictionary/utils';
-
-const { fileHeader } = StyleDictionary.formatHelpers;
+import { usesReference, getReferences, fileHeader } from 'style-dictionary/utils';
 
 const sd = new StyleDictionary({
   tokens: {
