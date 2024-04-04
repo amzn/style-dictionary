@@ -11,7 +11,7 @@
  * and limitations under the License.
  */
 
-import type { Dictionary } from './DesignToken.d.ts';
+import type { Dictionary, TransformedToken } from './DesignToken.d.ts';
 import type { File } from './File.d.ts';
 import type { LocalOptions, Config, PlatformConfig } from './Config.d.ts';
 
@@ -46,3 +46,7 @@ export interface Format {
   name: string;
   formatter: Formatter;
 }
+
+export type OutputReferences =
+  | ((token: TransformedToken, options: { dictionary: Dictionary; usesDtcg?: boolean }) => boolean)
+  | boolean;

@@ -1,4 +1,5 @@
 {
+  "ignorePatterns": ["/docs/dist/**/*"],
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module"

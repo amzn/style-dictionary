@@ -12,12 +12,12 @@ You created a format and think it should be included? [Send us a PR](https://git
 
 Creates a CSS file with variable definitions based on the style dictionary
 
-| Param                      | Type      | Description                                                                                                       |
-| -------------------------- | --------- | ----------------------------------------------------------------------------------------------------------------- |
-| `options`                  | `Object`  |                                                                                                                   |
-| `options.showFileHeader`   | `boolean` | Whether or not to include a comment that has the build date. Defaults to `true`                                   |
-| `options.outputReferences` | `boolean` | Whether or not to keep [references](#references-in-output-files) (a -> b -> c) in the output. Defaults to `false` |
-| `options.selector`         | `string`  | Override the root css selector                                                                                    |
+| Param                      | Type                                  | Description                                                                                                                                                                                                |
+| -------------------------- | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `options`                  | `Object`                              |                                                                                                                                                                                                            |
+| `options.showFileHeader`   | `boolean`                             | Whether or not to include a comment that has the build date. Defaults to `true`                                                                                                                            |
+| `options.outputReferences` | `boolean \| OutputReferencesFunction` | Whether or not to keep [references](#references-in-output-files) (a -> b -> c) in the output. Defaults to `false`. Also allows passing a function to conditionally output references on a per token basis. |
+| `options.selector`         | `string`                              | Override the root css selector                                                                                                                                                                             |
 
 Example:
 
@@ -52,11 +52,11 @@ Creates a SCSS file with a deep map based on the style dictionary.
 
 Name the map by adding a 'mapName' attribute on the file object in your config.
 
-| Param                      | Type      | Description                                                                                                         |
-| -------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------- |
-| `options`                  | `Object`  |                                                                                                                     |
-| `options.outputReferences` | `boolean` | Whether or not to keep [references](#references-in-output-files) (a -> b -> c) in the output. Defaults to `false`.  |
-| `options.themeable`        | `boolean` | Whether or not tokens should default to being themeable, if not otherwise specified per token. Defaults to `false`. |
+| Param                      | Type                                  | Description                                                                                                                                                                                                |
+| -------------------------- | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `options`                  | `Object`                              |                                                                                                                                                                                                            |
+| `options.outputReferences` | `boolean \| OutputReferencesFunction` | Whether or not to keep [references](#references-in-output-files) (a -> b -> c) in the output. Defaults to `false`. Also allows passing a function to conditionally output references on a per token basis. |
+| `options.themeable`        | `boolean`                             | Whether or not tokens should default to being themeable, if not otherwise specified per token. Defaults to `false`.                                                                                        |
 
 Example:
 
@@ -82,12 +82,12 @@ Creates a SCSS file with variable definitions based on the style dictionary.
 
 Add `!default` to any variable by setting a `themeable: true` attribute in the token's definition.
 
-| Param                      | Type      | Description                                                                                                         |
-| -------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------- |
-| `options`                  | `Object`  |                                                                                                                     |
-| `options.showFileHeader`   | `boolean` | Whether or not to include a comment that has the build date. Defaults to `true`                                     |
-| `options.outputReferences` | `boolean` | Whether or not to keep [references](#references-in-output-files) (a -> b -> c) in the output. Defaults to `false`.  |
-| `options.themeable`        | `boolean` | Whether or not tokens should default to being themeable, if not otherwise specified per token. Defaults to `false`. |
+| Param                      | Type                                  | Description                                                                                                                                                                                                |
+| -------------------------- | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `options`                  | `Object`                              |                                                                                                                                                                                                            |
+| `options.showFileHeader`   | `boolean`                             | Whether or not to include a comment that has the build date. Defaults to `true`                                                                                                                            |
+| `options.outputReferences` | `boolean \| OutputReferencesFunction` | Whether or not to keep [references](#references-in-output-files) (a -> b -> c) in the output. Defaults to `false`. Also allows passing a function to conditionally output references on a per token basis. |
+| `options.themeable`        | `boolean`                             | Whether or not tokens should default to being themeable, if not otherwise specified per token. Defaults to `false`.                                                                                        |
 
 Example:
 
@@ -117,11 +117,11 @@ $content-icon-email: '\E001';
 
 Creates a LESS file with variable definitions based on the style dictionary
 
-| Param                      | Type      | Description                                                                                                        |
-| -------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------ |
-| `options`                  | `Object`  |                                                                                                                    |
-| `options.showFileHeader`   | `boolean` | Whether or not to include a comment that has the build date. Defaults to `true`                                    |
-| `options.outputReferences` | `boolean` | Whether or not to keep [references](#references-in-output-files) (a -> b -> c) in the output. Defaults to `false`. |
+| Param                      | Type                                  | Description                                                                                                                                                                                                |
+| -------------------------- | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `options`                  | `Object`                              |                                                                                                                                                                                                            |
+| `options.showFileHeader`   | `boolean`                             | Whether or not to include a comment that has the build date. Defaults to `true`                                                                                                                            |
+| `options.outputReferences` | `boolean \| OutputReferencesFunction` | Whether or not to keep [references](#references-in-output-files) (a -> b -> c) in the output. Defaults to `false`. Also allows passing a function to conditionally output references on a per token basis. |
 
 Example:
 
@@ -396,11 +396,11 @@ force a particular resource type you can provide a 'resourceType' attribute
 on the file configuration. You can also provide a 'resourceMap' if you
 don't use Style Dictionary's built-in CTI structure.
 
-| Param                      | Type      | Description                                                                                                        |
-| -------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------ |
-| `options`                  | `Object`  |                                                                                                                    |
-| `options.showFileHeader`   | `boolean` | Whether or not to include a comment that has the build date. Defaults to `true`                                    |
-| `options.outputReferences` | `boolean` | Whether or not to keep [references](#references-in-output-files) (a -> b -> c) in the output. Defaults to `false`. |
+| Param                      | Type                                  | Description                                                                                                                                                                                                |
+| -------------------------- | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `options`                  | `Object`                              |                                                                                                                                                                                                            |
+| `options.showFileHeader`   | `boolean`                             | Whether or not to include a comment that has the build date. Defaults to `true`                                                                                                                            |
+| `options.outputReferences` | `boolean \| OutputReferencesFunction` | Whether or not to keep [references](#references-in-output-files) (a -> b -> c) in the output. Defaults to `false`. Also allows passing a function to conditionally output references on a per token basis. |
 
 Example:
 
@@ -550,14 +550,14 @@ Example:
 
 Creates a Kotlin file for Compose containing an object with a `val` for each property.
 
-| Param                      | Type                 | Description                                                                                                                                 |
-| -------------------------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `className`                | `string`             | The name of the generated Kotlin object                                                                                                     |
-| `packageName`              | `string`             | The package for the generated Kotlin object                                                                                                 |
-| `options`                  | `Object`             |                                                                                                                                             |
-| `options.import`           | `string[] \| string` | Modules to import. Can be a string or array of strings. Defaults to `['androidx.compose.ui.graphics.Color', 'androidx.compose.ui.unit.*']`. |
-| `options.showFileHeader`   | `boolean`            | Whether or not to include a comment that has the build date. Defaults to `true`                                                             |
-| `options.outputReferences` | `boolean`            | Whether or not to keep [references](#references-in-output-files) (a -> b -> c) in the output. Defaults to `false`.                          |
+| Param                      | Type                                  | Description                                                                                                                                                                                                |
+| -------------------------- | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `className`                | `string`                              | The name of the generated Kotlin object                                                                                                                                                                    |
+| `packageName`              | `string`                              | The package for the generated Kotlin object                                                                                                                                                                |
+| `options`                  | `Object`                              |                                                                                                                                                                                                            |
+| `options.import`           | `string[] \| string`                  | Modules to import. Can be a string or array of strings. Defaults to `['androidx.compose.ui.graphics.Color', 'androidx.compose.ui.unit.*']`.                                                                |
+| `options.showFileHeader`   | `boolean`                             | Whether or not to include a comment that has the build date. Defaults to `true`                                                                                                                            |
+| `options.outputReferences` | `boolean \| OutputReferencesFunction` | Whether or not to keep [references](#references-in-output-files) (a -> b -> c) in the output. Defaults to `false`. Also allows passing a function to conditionally output references on a per token basis. |
 
 Example:
 
@@ -683,14 +683,14 @@ Creates an Objective-C implementation file of strings
 
 Creates a Swift implementation file of a class with values. It adds default `class` object type, `public` access control and `UIKit` import.
 
-| Param                      | Type                 | Description                                                                                                                                |
-| -------------------------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `options`                  | `Object`             |                                                                                                                                            |
-| `options.accessControl`    | `string`             | Level of [access](https://docs.swift.org/swift-book/LanguageGuide/AccessControl.html) of the generated swift object. Defaults to `public`. |
-| `options.import`           | `string[] \| string` | Modules to import. Can be a string or array of strings. Defaults to `'UIKit'`.                                                             |
-| `options.className`        | `string`             | The name of the generated Kotlin object                                                                                                    |
-| `options.showFileHeader`   | `boolean`            | Whether or not to include a comment that has the build date. Defaults to `true`                                                            |
-| `options.outputReferences` | `boolean`            | Whether or not to keep [references](#references-in-output-files) (a -> b -> c) in the output. Defaults to `false`.                         |
+| Param                      | Type                                  | Description                                                                                                                                                                                                |
+| -------------------------- | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `options`                  | `Object`                              |                                                                                                                                                                                                            |
+| `options.accessControl`    | `string`                              | Level of [access](https://docs.swift.org/swift-book/LanguageGuide/AccessControl.html) of the generated swift object. Defaults to `public`.                                                                 |
+| `options.import`           | `string[] \| string`                  | Modules to import. Can be a string or array of strings. Defaults to `'UIKit'`.                                                                                                                             |
+| `options.className`        | `string`                              | The name of the generated Kotlin object                                                                                                                                                                    |
+| `options.showFileHeader`   | `boolean`                             | Whether or not to include a comment that has the build date. Defaults to `true`                                                                                                                            |
+| `options.outputReferences` | `boolean \| OutputReferencesFunction` | Whether or not to keep [references](#references-in-output-files) (a -> b -> c) in the output. Defaults to `false`. Also allows passing a function to conditionally output references on a per token basis. |
 
 Example:
 
@@ -706,13 +706,13 @@ public class StyleDictionary {
 
 Creates a Swift implementation file of an enum with values. It adds default `enum` object type, `public` access control and `UIKit` import.
 
-| Param                      | Type                 | Description                                                                                                                                |
-| -------------------------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `options`                  | `Object`             |                                                                                                                                            |
-| `options.accessControl`    | `string`             | Level of [access](https://docs.swift.org/swift-book/LanguageGuide/AccessControl.html) of the generated swift object. Defaults to `public`. |
-| `options.import`           | `string[] \| string` | Modules to import. Can be a string or array of strings. Defaults to `'UIKit'`.                                                             |
-| `options.showFileHeader`   | `boolean`            | Whether or not to include a comment that has the build date. Defaults to `true`                                                            |
-| `options.outputReferences` | `boolean`            | Whether or not to keep [references](#references-in-output-files) (a -> b -> c) in the output. Defaults to `false`.                         |
+| Param                      | Type                                  | Description                                                                                                                                                                                                |
+| -------------------------- | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `options`                  | `Object`                              |                                                                                                                                                                                                            |
+| `options.accessControl`    | `string`                              | Level of [access](https://docs.swift.org/swift-book/LanguageGuide/AccessControl.html) of the generated swift object. Defaults to `public`.                                                                 |
+| `options.import`           | `string[] \| string`                  | Modules to import. Can be a string or array of strings. Defaults to `'UIKit'`.                                                                                                                             |
+| `options.showFileHeader`   | `boolean`                             | Whether or not to include a comment that has the build date. Defaults to `true`                                                                                                                            |
+| `options.outputReferences` | `boolean \| OutputReferencesFunction` | Whether or not to keep [references](#references-in-output-files) (a -> b -> c) in the output. Defaults to `false`. Also allows passing a function to conditionally output references on a per token basis. |
 
 Example:
 
@@ -735,14 +735,14 @@ objectType: 'struct',
 accessControl: 'internal',
 ```
 
-| Param                      | Type                 | Description                                                                                                                                |
-| -------------------------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `options`                  | `Object`             |                                                                                                                                            |
-| `options.accessControl`    | `string`             | Level of [access](https://docs.swift.org/swift-book/LanguageGuide/AccessControl.html) of the generated swift object. Defaults to `public`. |
-| `options.import`           | `string[] \| string` | Modules to import. Can be a string or array of strings. Defaults to `'UIKit'`.                                                             |
-| `options.objectType`       | `string`             | The type of the generated Swift object. Defaults to `'class'`.                                                                             |
-| `options.showFileHeader`   | `boolean`            | Whether or not to include a comment that has the build date. Defaults to `true`                                                            |
-| `options.outputReferences` | `boolean`            | Whether or not to keep [references](#references-in-output-files) (a -> b -> c) in the output. Defaults to `false`.                         |
+| Param                      | Type                                  | Description                                                                                                                                                                                                |
+| -------------------------- | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `options`                  | `Object`                              |                                                                                                                                                                                                            |
+| `options.accessControl`    | `string`                              | Level of [access](https://docs.swift.org/swift-book/LanguageGuide/AccessControl.html) of the generated swift object. Defaults to `public`.                                                                 |
+| `options.import`           | `string[] \| string`                  | Modules to import. Can be a string or array of strings. Defaults to `'UIKit'`.                                                                                                                             |
+| `options.objectType`       | `string`                              | The type of the generated Swift object. Defaults to `'class'`.                                                                                                                                             |
+| `options.showFileHeader`   | `boolean`                             | Whether or not to include a comment that has the build date. Defaults to `true`                                                                                                                            |
+| `options.outputReferences` | `boolean \| OutputReferencesFunction` | Whether or not to keep [references](#references-in-output-files) (a -> b -> c) in the output. Defaults to `false`. Also allows passing a function to conditionally output references on a per token basis. |
 
 Example:
 
@@ -881,10 +881,10 @@ Example:
 
 Creates a Dart implementation file of a class with values
 
-| Param                      | Type      | Description                                                                                                        |
-| -------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------ |
-| `options.showFileHeader`   | `boolean` | Whether or not to include a comment that has the build date. Defaults to `true`                                    |
-| `options.outputReferences` | `boolean` | Whether or not to keep [references](#references-in-output-files) (a -> b -> c) in the output. Defaults to `false`. |
+| Param                      | Type                                  | Description                                                                                                                                                                                                |
+| -------------------------- | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `options.showFileHeader`   | `boolean`                             | Whether or not to include a comment that has the build date. Defaults to `true`                                                                                                                            |
+| `options.outputReferences` | `boolean \| OutputReferencesFunction` | Whether or not to keep [references](#references-in-output-files) (a -> b -> c) in the output. Defaults to `false`. Also allows passing a function to conditionally output references on a per token basis. |
 
 Example:
 
