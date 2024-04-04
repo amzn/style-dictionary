@@ -179,7 +179,14 @@ StyleDictionary.registerFormat({
       let value = `${token.value}`;
       const original = `${token.original.value}`;
       const originalIsReferenceExclusively = original.match(/^\{.+\}$/g);
-      if (options.outputReferences && usesReference(original)) {
+
+      const shouldOutputRef =
+        usesReferences(original) &&
+        (typeof options.outputReferences === 'function'
+          ? outputReferences(token, { dictionary })
+          : options.outputReferences);
+
+      if (shouldOutputRef) {
         value = original;
         if (!originalIsReferenceExclusively) {
           // since we're putting references back and value is not exclusively a reference, use template literals

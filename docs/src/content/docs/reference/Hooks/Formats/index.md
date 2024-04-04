@@ -140,6 +140,34 @@ Without `outputReferences: true` Style Dictionary would resolve all references a
 }
 ```
 
+It is also possible to provide a function instead of `true` or `false` to `outputReferences`, if you need to conditionally output references on a per token basis.
+
+```js
+// config.js
+export default {
+  source: ['tokens.json'],
+  platforms: {
+    css: {
+      transformGroup: 'css',
+      files: [
+        {
+          destination: 'variables.css',
+          format: 'css/variables',
+          options: {
+            // Look here 👇
+            outputReferences: (token, { dictionary, usesDtcg }) => {
+              // `dictionary` contains `allTokens`, `tokens` and `unfilteredTokens` props
+              // `usesDtcg` tells you whether the Design Token Community Group spec is used with $ prefixes ($value, $type etc.)
+              // return true or false
+            },
+          },
+        },
+      ],
+    },
+  },
+};
+```
+
 Not all formats use the `outputReferences` option because that file format might not support it (like JSON for example). The current list of formats that handle `outputReferences`:
 
 - [css/variables](#cssvariables)
