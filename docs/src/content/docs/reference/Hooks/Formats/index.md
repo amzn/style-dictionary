@@ -180,7 +180,7 @@ Not all formats use the `outputReferences` option because that file format might
 
 You can create custom formats that output references as well. See the [Custom format with output references](#custom-format-with-output-references) section.
 
-### Filters
+### Filtering out references
 
 When combining [`filters`](/reference/hooks/filters) with `outputReferences`, it could happen that a token is referencing another token that is getting filtered out.
 When that happens, Style Dictionary will throw a warning. However, it is possible to configure `outputReferences` to use [our `outputReferencesFilter` utility function](/reference/utils/references/#outputreferencesfilter), which will prevent tokens that reference other tokens that are filtered out from outputting references, they will output the resolved values instead.
