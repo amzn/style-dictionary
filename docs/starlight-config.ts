@@ -92,6 +92,7 @@ export default {
             { label: 'Overview', link: '/reference/utils/' },
             { label: 'References', link: '/reference/utils/references' },
             { label: 'Tokens', link: '/reference/utils/tokens' },
+            { label: 'Format Helpers', link: '/reference/utils/format-helpers' },
             { label: 'Design Token Community Group', link: '/reference/utils/dtcg' },
           ],
         },
