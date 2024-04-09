@@ -36,30 +36,36 @@ table code {
 }
 
 .sl-container {
-  max-width: 1000px;
+  max-width: 900px;
 }
 
-@media (min-width: 72rem) {
+@media (min-width: 77rem) {
   [data-has-sidebar][data-has-toc] .main-pane {
     width: auto;
   }
 }
 
-@media (min-width: 72rem) {
+@media (min-width: 77rem) {
   .right-sidebar-container {
     width: 400px;
   }
 }
 
-@media (max-width: 90rem) {
+@media (max-width: 93rem) {
   .right-sidebar-container {
     display: none;
   }
 }
 
-@media (min-width: 72rem) {
+@media (min-width: 77rem) {
   .lg\:sl-flex {
     display: flex;
     justify-content: center;
+  }
+}
+
+@media (max-width: 77rem) {
+  .lg\:sl-flex {
+    display: block;
   }
 }

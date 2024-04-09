@@ -1,5 +1,8 @@
 ---
-title: Version 4
+title: Version 4 statement
+sidebar:
+  order: 1
+  label: Statement
 ---
 
 In May 2021, we started [an issue / RFC, "What would you like to see in Style Dictionary 4.0?"](https://github.com/amzn/style-dictionary/issues/643) to gather feedback on what the community would like to see.
