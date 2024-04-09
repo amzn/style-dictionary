@@ -24,6 +24,10 @@ export default {
       autogenerate: { directory: 'info' },
     },
     {
+      label: 'Version 4',
+      autogenerate: { directory: 'version-4' },
+    },
+    {
       label: 'Reference',
       collapsed: true,
       items: [
@@ -135,6 +139,13 @@ export default {
     },
   ],
   customCss: ['./src/styles.css'],
+  expressiveCode: {
+    styleOverrides: {
+      textMarkers: {
+        defaultLuminance: ['15%', '85%'],
+      },
+    },
+  },
   components: {
     Head: './src/components/Head.astro',
   },

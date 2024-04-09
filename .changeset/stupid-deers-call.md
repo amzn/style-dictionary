@@ -47,7 +47,7 @@ StyleDictionary.registerFormat({
       const originalValue = usesDtcg ? token.original.$value : token.original.value;
 
       // Look here 👇
-      const shouldOutputRef =
+      const shouldOutputRefs =
         usesReferences(original) &&
         (typeof options.outputReferences === 'function'
           ? outputReferences(token, { dictionary, usesDtcg })
