@@ -56,30 +56,51 @@ describe('utils', () => {
     });
 
     it("shouldn't fail loudly if it is a normal deep extend", () => {
-      const test = deepExtend([{ foo: { bar: 'bar' } }, { foo: { baz: 'baz' } }], function () {});
+      const test = deepExtend([{ foo: { bar: 'bar' } }, { foo: { baz: 'baz' } }], {
+        collision: function () {},
+      });
       expect(test).to.have.nested.property('foo.baz', 'baz');
       expect(test).to.have.nested.property('foo.bar', 'bar');
     });
 
+    it("shouldn't merge when keys collide that should override rather than merge", () => {
+      const test = deepExtend(
+        [{ foo: { value: 'bar', metadata: 'meta' } }, { foo: { value: 'baz' } }],
+        { collision: function () {}, overrideKeys: ['value'] },
+      );
+      expect(test).to.have.nested.property('foo.value', 'baz');
+      // we do not want to inherit this metadata from the prop we are overriding
+      expect(test).to.not.have.nested.property('foo.metadata');
+
+      const testDTCG = deepExtend(
+        [{ foo: { $value: 'bar', metadata: 'meta' } }, { foo: { $value: 'baz' } }],
+        { collision: function () {}, overrideKeys: ['$value'] },
+      );
+
+      expect(testDTCG).to.have.nested.property('foo.$value', 'baz');
+      expect(testDTCG).to.not.have.nested.property('foo.metadata');
+    });
+
     describe('collision detection', () => {
       it('should call the collision function if a collision happens', () => {
-        expect(
-          deepExtend.bind(null, [{ foo: { bar: 'bar' } }, { foo: { bar: 'baz' } }], function () {
-            throw new Error('danger danger. high voltage.');
+        expect(() =>
+          deepExtend([{ foo: { bar: 'bar' } }, { foo: { bar: 'baz' } }], {
+            collision: function () {
+              throw new Error('danger danger. high voltage.');
+            },
           }),
         ).to.throw('danger danger. high voltage.');
       });
 
       it('the collision function should have the proper arguments', () => {
-        const test = deepExtend(
-          [{ foo: { bar: 'bar' } }, { foo: { bar: 'baz' } }],
-          function (opts) {
+        const test = deepExtend([{ foo: { bar: 'bar' } }, { foo: { bar: 'baz' } }], {
+          collision: function (opts) {
             expect(opts).to.have.nested.property('target.bar', 'bar');
             expect(opts).to.have.nested.property('copy.bar', 'baz');
             expect(opts.path[0]).to.equal('foo');
             expect(opts).to.have.property('key', 'bar');
           },
-        );
+        });
         expect(test).to.have.nested.property('foo.bar', 'baz');
       });
     });

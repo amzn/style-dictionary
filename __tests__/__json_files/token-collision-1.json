@@ -1,0 +1,15 @@
+{
+  "test": {
+    "value": "#ffffff",
+    "type": "color",
+    "$extensions": {
+      "studio.tokens": {
+        "modify": {
+          "type": "darken",
+          "value": ".25",
+          "space": "srgb"
+        }
+      }
+    }
+  }
+}

@@ -356,4 +356,16 @@ describe('StyleDictionary class + extend method', () => {
     await sd.hasInitialized;
     expect(sd.usesDtcg).to.be.true;
   });
+
+  it('should not merge tokens together but rather override on collision', async () => {
+    const sd = new StyleDictionary({
+      source: [
+        '__tests__/__json_files/token-collision-1.json',
+        '__tests__/__json_files/token-collision-2.json',
+      ],
+    });
+    await sd.hasInitialized;
+    expect(sd.tokens.test.value).to.equal('#ff0000');
+    expect(sd.tokens.test.$extensions).to.be.undefined;
+  });
 });
