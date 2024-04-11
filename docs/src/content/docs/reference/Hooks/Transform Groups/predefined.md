@@ -39,6 +39,7 @@ Transforms:
 [html/icon](/reference/hooks/transforms/predefined#htmlicon)
 [size/rem](/reference/hooks/transforms/predefined#sizerem)
 [color/css](/reference/hooks/transforms/predefined#colorcss)
+[asset/url](/reference/hooks/transforms/predefined#asseturl)
 
 ---
 
@@ -52,6 +53,7 @@ Transforms:
 [html/icon](/reference/hooks/transforms/predefined#htmlicon)
 [size/rem](/reference/hooks/transforms/predefined#sizerem)
 [color/css](/reference/hooks/transforms/predefined#colorcss)
+[asset/url](/reference/hooks/transforms/predefined#asseturl)
 
 ---
 
@@ -65,6 +67,7 @@ Transforms:
 [html/icon](/reference/hooks/transforms/predefined#htmlicon)
 [size/rem](/reference/hooks/transforms/predefined#sizerem)
 [color/hex](/reference/hooks/transforms/predefined#colorhex)
+[asset/url](/reference/hooks/transforms/predefined#asseturl)
 
 ---
 

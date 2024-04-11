@@ -319,6 +319,13 @@ you can now also customize the verbosity of the logs and silence warnings and su
 }
 ```
 
+## Assets in CSS
+
+We no longer wrap tokens of type `asset` in double quotes.
+Rather, we added a transform `asset/url` that will wrap such tokens inside `url("")` statements, this transform is applied to transformGroups `scss`, `css` and `less`.
+
+You may need to update your custom transforms if you were doing this transformation on your end, since it's now being done by default in those transformGroups.
+
 ## Removed Deprecated features
 
 - `templates` and `registerTemplate`, use `formats` and `registerFormat` instead
