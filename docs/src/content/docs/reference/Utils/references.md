@@ -100,7 +100,7 @@ getReferences('solid {spacing.2} {colors.black}', sd.tokens, { usesDtcg: true })
 :::note
 You can pass a third `options` argument where you can pass some configuration options for how references are resolved
 Most notable option for public usage is `usesDtcg`, if set to true, the `resolveReferences` utility will assume DTCG syntax (`$value` props)
-:::)
+:::
 
 ### Complicated example
 

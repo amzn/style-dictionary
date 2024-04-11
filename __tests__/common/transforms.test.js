@@ -995,6 +995,33 @@ describe('common', () => {
       });
     });
 
+    describe('asset/url', () => {
+      it('should work', () => {
+        const value = transforms['asset/url'].transformer(
+          {
+            value: 'https://example.com',
+          },
+          {},
+          {},
+        );
+        expect(value).to.equal('url("https://example.com")');
+      });
+
+      it('should escape double quotes', () => {
+        const value = transforms['asset/url'].transformer(
+          {
+            value:
+              'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="90" height="45"%3E%3Cpath d="M10 10h60" stroke="%2300F" stroke-width="5"/%3E%3Cpath d="M10 20h60" stroke="%230F0" stroke-width="5"/%3E%3Cpath d="M10 30h60" stroke="red" stroke-width="5"/%3E%3C/svg%3E"',
+          },
+          {},
+          {},
+        );
+        expect(value).to.equal(
+          'url("data:image/svg+xml,%3Csvg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"90\\" height=\\"45\\"%3E%3Cpath d=\\"M10 10h60\\" stroke=\\"%2300F\\" stroke-width=\\"5\\"/%3E%3Cpath d=\\"M10 20h60\\" stroke=\\"%230F0\\" stroke-width=\\"5\\"/%3E%3Cpath d=\\"M10 30h60\\" stroke=\\"red\\" stroke-width=\\"5\\"/%3E%3C/svg%3E\\"")',
+        );
+      });
+    });
+
     describe('asset/objC/literal', () => {
       it('should work', () => {
         const value = transforms['asset/objC/literal'].transformer(
