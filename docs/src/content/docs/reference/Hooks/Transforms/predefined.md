@@ -516,6 +516,18 @@ Assumes a time in miliseconds and transforms it into a decimal
 
 ---
 
+### asset/url
+
+Wraps the value in a [CSS `url()` function](https://developer.mozilla.org/en-US/docs/Web/CSS/url)
+
+```js
+// Matches: token.type === 'asset'
+// Returns:
+url('https://www.example.com/style.css');
+```
+
+---
+
 ### asset/base64
 
 Wraps the value in a double-quoted string and prepends an '@' to make a string literal.
