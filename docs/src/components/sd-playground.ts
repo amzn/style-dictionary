@@ -185,8 +185,8 @@ class SdPlayground extends LitElement {
   }
 
   async init() {
-    await this.initData();
     await this.initMonaco();
+    await this.initData();
     this.hasInitializedResolve();
     this.currentFile = 'config';
   }

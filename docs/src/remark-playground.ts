@@ -18,7 +18,7 @@ const paragraphVisitor = (
     let tokensData = serialize({});
     let configData = serialize({});
     let scriptData = serialize({});
-    let skipAmount = 2;
+    let skipAmount = 1;
 
     for (const child of parent.children.slice(index + 1, index + 4)) {
       if (child.type !== 'code') break;
