@@ -1,6 +1,6 @@
 {
   "name": "style-dictionary",
-  "version": "4.0.0-prerelease.24",
+  "version": "4.0.0-prerelease.25",
   "description": "Style once, use everywhere. A build system for creating cross-platform styles.",
   "keywords": [
     "style dictionary",

@@ -1,5 +1,19 @@
 # Changelog
 
+## 4.0.0-prerelease.25
+
+### Major Changes
+
+- 0b81a08: BREAKING: no longer wraps tokens of type asset in double quotes. Rather, we added a transform `asset/url` that will wrap such tokens inside `url("")` statements, this transform is applied to transformGroups scss, css and less.
+
+### Minor Changes
+
+- 2da5130: Added `outputReferencesTransformed` utility function to pass into outputReferences option, which will not output references for values that have been transitively transformed.
+
+### Patch Changes
+
+- 47face0: Token merging behavior changed so that upon token collisions, metadata props aren't accidentally merged together.
+
 ## 4.0.0-prerelease.24
 
 ### Major Changes
