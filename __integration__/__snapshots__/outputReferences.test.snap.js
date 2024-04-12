@@ -28,3 +28,16 @@ css
 ✔︎ __integration__/build/filteredVariables.css`;
 /* end snapshot integration output references should not warn the user if filters out references is prevented with outputReferencesFilter */
 
+snapshots["integration output references should allow using outputReferencesTransformed to not output refs when value has been transitively transformed"] = 
+`/**
+ * Do not edit directly
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ */
+
+:root {
+  --base: rgb(0,0,0);
+  --referred: rgba(0,0,0,0.12);
+}
+`;
+/* end snapshot integration output references should allow using outputReferencesTransformed to not output refs when value has been transitively transformed */
+

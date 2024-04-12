@@ -60,7 +60,7 @@ Most notable option for public usage is `usesDtcg`, if set to true, the `resolve
 
 ## getReferences
 
-(Whether or not a token value contains references
+Whether or not a token value contains references
 
 ```javascript title="build-tokens.js"
 import StyleDictionary from 'style-dictionary';
@@ -363,4 +363,131 @@ export default {
     },
   },
 };
+```
+
+## outputReferencesTransformed
+
+An [`outputReferences`](/reference/hooks/formats/#references-in-output-files) function that checks for each token whether
+the value has changed through a transitive transform compared to the original value where references are resolved.
+
+```javascript title="build-tokens.js"
+import StyleDictionary from 'style-dictionary';
+import { outputReferencesTransformed } from 'style-dictionary/utils';
+
+const sd = new StyleDictionary({
+  tokens: {
+    base: {
+      value: '#000',
+      type: 'color',
+    },
+    referred: {
+      value: 'rgba({base}, 12%)',
+      type: 'color',
+    },
+  },
+  platforms: {
+    css: {
+      transformGroup: 'css',
+      // see https://github.com/tokens-studio/sd-transforms
+      // this transform handles rgba(#000, 0.12) -> rgba(0, 0, 0, 0.12)
+      // as a transitive transform
+      transforms: ['ts/color/css/hexrgba'],
+      files: [
+        {
+          destination: 'vars.css',
+          format: 'css/variables',
+          options: {
+            outputReferences: outputReferencesTransformed,
+          },
+        },
+      ],
+    },
+  },
+});
+```
+
+Output:
+
+```css title="vars.css"
+:root {
+  --base: #000;
+  --referred: rgba(0, 0, 0, 12%);
+}
+```
+
+Note that `--referred` is using the resolved value that is a transformed version of `--base` instead of `rgba(var(--base), 12%)` which would be invalid CSS.
+This can be verified by setting `outputReferences` to `true` in the demo below.
+
+Live Demo:
+
+~ sd-playground
+
+```json tokens
+{
+  "base": {
+    "value": "#000",
+    "type": "color"
+  },
+  "referred": {
+    "value": "rgba({base}, 12%)",
+    "type": "color"
+  }
+}
+```
+
+```js config
+import { outputReferencesTransformed } from 'style-dictionary/utils';
+
+export default {
+  platforms: {
+    css: {
+      transformGroup: 'css',
+      transforms: ['ts/color/css/hexrgba'],
+      files: [
+        {
+          destination: 'vars.css',
+          format: 'css/variables',
+          options: {
+            outputReferences: outputReferencesTransformed,
+          },
+        },
+      ],
+    },
+  },
+};
+```
+
+```js script
+import StyleDictionary from 'style-dictionary';
+import { registerTransforms } from '@tokens-studio/sd-transforms';
+
+// registers 'ts/color/css/hexrgba'
+registerTransforms(StyleDictionary);
+```
+
+### Combining multiple outputReference utility functions
+
+These utility functions can be quite easily combined together:
+
+```javascript title="build-tokens.js"
+import StyleDictionary from 'style-dictionary';
+import { outputReferencesFilter, outputReferencesTransformed } from 'style-dictionary/utils';
+
+const sd = new StyleDictionary({
+  platforms: {
+    css: {
+      transformGroup: 'css',
+      files: [
+        {
+          destination: 'vars.css',
+          format: 'css/variables',
+          options: {
+            outputReferences: (token, options) =>
+              outputReferencesFilter(token, options) && outputReferencesTransformed(token, options),
+          },
+        },
+      ],
+    },
+  },
+});
 ```

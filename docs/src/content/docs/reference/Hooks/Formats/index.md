@@ -185,6 +185,15 @@ You can create custom formats that output references as well. See the [Custom fo
 When combining [`filters`](/reference/hooks/filters) with `outputReferences`, it could happen that a token is referencing another token that is getting filtered out.
 When that happens, Style Dictionary will throw a warning. However, it is possible to configure `outputReferences` to use [our `outputReferencesFilter` utility function](/reference/utils/references/#outputreferencesfilter), which will prevent tokens that reference other tokens that are filtered out from outputting references, they will output the resolved values instead.
 
+### outputReferences with transitive transforms
+
+When combining [transitive value transforms](/reference/hooks/transforms/#transitive-transforms) with `outputReferences`,
+it could happen that a token that contains references has also been transitively transformed.
+What this means is that putting back the references in the output would mean we are undoing that work.
+In this scenario, it's often preferable not to output a reference.
+
+There is an [`outputReferencesTransformed`](/reference/utils/references/#outputreferencestransformed) utility function that takes care of checking if this happened and not outputting refs for tokens in this scenario.
+
 ## File headers
 
 By default Style Dictionary adds a file header comment in the top of files built using built-in formats like this:
