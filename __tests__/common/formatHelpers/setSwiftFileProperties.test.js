@@ -18,7 +18,7 @@ describe('common', () => {
     describe('setSwiftFileProperties', () => {
       it('should default accessControl be public', () => {
         const file = setSwiftFileProperties({}, undefined, 'ios-swift');
-        expect(file.accessControl).to.equal('public ');
+        expect(file.accessControl).to.equal('public');
       });
 
       it('should default objectType be class', () => {
@@ -50,7 +50,7 @@ describe('common', () => {
         );
         expect(file.objectType).to.equal('extension');
         expect(file.import).to.eql(['SwiftUI']);
-        expect(file.accessControl).to.equal('public ');
+        expect(file.accessControl).to.equal('public');
       });
     });
   });

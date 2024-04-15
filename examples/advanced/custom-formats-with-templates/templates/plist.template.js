@@ -1,32 +1,29 @@
 /**
  * @typedef {import('../../../../types/DesignToken.d.ts').Dictionary} Dictionary
  * @typedef {import('../../../../types/DesignToken.d.ts').TransformedToken} TransformedToken
- * @typedef {import('../../../../types/Config.d.ts').Config} Config
- * @typedef {import('../../../../types/Config.d.ts').LocalOptions} LocalOptions
  */
 
 /**
  *
  * @param {TransformedToken} token
- * @param {Config & LocalOptions} options
  */
-const tokenTemplate = (token, options) => {
+const tokenTemplate = (token) => {
   let output = `  <key>${token.name}</key>\n`;
   if (token.type === 'color') {
     output += `    <dict>
       <key>r</key>
-      <real>${(options.usesDtcg ? token.$value : token.value)[0] / 255}</real>
+      <real>${token.value[0] / 255}</real>
       <key>g</key>
-      <real>${(options.usesDtcg ? token.$value : token.value)[1] / 255}</real>
+      <real>${token.value[1] / 255}</real>
       <key>b</key>
-      <real>${(options.usesDtcg ? token.$value : token.value)[2] / 255}</real>
+      <real>${token.value[2] / 255}</real>
       <key>a</key>
       <real>1</real>
     </dict>`;
   } else if (token.type === 'dimension') {
-    output += `<integer>${options.usesDtcg ? token.$value : token.value}</integer>`;
+    output += `<integer>${token.value}</integer>`;
   } else {
-    output += `<string>${options.usesDtcg ? token.$value : token.value}</string>`;
+    output += `<string>${token.value}</string>`;
   }
 
   if (token.comment) {
@@ -38,14 +35,11 @@ const tokenTemplate = (token, options) => {
 /**
  * @param {{
  *   dictionary: Dictionary
- *   options: Config & LocalOptions
- *   header: string
  * }} opts
  */
-export default ({ dictionary, options, header }) => `
+export default ({ dictionary }) => `
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-${header}
 <plist version="1.0">
   <dict>
   ${dictionary.allTokens
@@ -56,7 +50,7 @@ ${header}
         token.type !== 'shadow' &&
         token.type !== 'transition',
     )
-    .map((token) => tokenTemplate(token, options))
+    .map((token) => tokenTemplate(token))
     .join('\n')}
   </dict>
 </plist>`;
