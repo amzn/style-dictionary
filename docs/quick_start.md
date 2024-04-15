@@ -249,7 +249,7 @@ $color-font-tertiary: #cccccc;
 ```
 
 That's it! There is a lot more you can do with your style dictionary than generating files with color values. Take a look
-at some [examples](examples.md) or take a deeper dive into [package structure](package_structure.md), [extending](extending.md), or how the [build process](build_process.md) works.
+at some [examples](examples.md) or take a deeper dive into [package structure](package_structure.md), [extending](extending.md), or how the [build process](architecture.md) works.
 
 ## Basic Usage
 ### Command Line Interface (CLI)
