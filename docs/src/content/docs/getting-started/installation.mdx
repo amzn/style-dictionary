@@ -291,7 +291,7 @@ $color-font-tertiary: #cccccc;
 ```
 
 That's it! There is a lot more you can do with your style dictionary than generating files with color values. Take a look
-at some [examples](examples.md) or take a deeper dive into [package structure](package_structure.md), [extending](extending.md), or how the [build process](build_process.md) works.
+at some [examples](examples.md) or take a deeper dive into [package structure](/info/package_structure) or how the [build process](/info/architecture) works.
 
 ## Basic Usage
 
@@ -301,13 +301,13 @@ at some [examples](examples.md) or take a deeper dive into [package structure](p
 style-dictionary build
 ```
 
-Call this in the root directory of your project, which must include a [configuration](config.md) file.
+Call this in the root directory of your project, which must include a [configuration](/reference/config) file.
 
-More detailed information about [using the Style Dictionary CLI is available here](using_the_cli.md).
+More detailed information about [using the Style Dictionary CLI is available here](/getting-started/using_the_cli).
 
 ### NodeJS
 
-You can also use the Style Dictionary build system in node if you want to [extend](extending.md) the functionality or use it in another build system like Grunt or Gulp.
+You can also use the Style Dictionary build system in Node if you want to [extend](/getting-started/using_the_npm_module) the functionality or use it in another build system like Grunt or Gulp.
 
 ```javascript title="build-tokens.js"
 import StyleDictionary from 'style-dictionary';
@@ -316,7 +316,7 @@ const sd = new StyleDictionary('config.json');
 await sd.buildAllPlatforms();
 ```
 
-The StyleDictionary constructor can also take a [configuration](config.md) object.
+The StyleDictionary constructor can also take a [configuration](/reference/config) object.
 
 ```javascript title="build-tokens.js"
 import StyleDictionary from 'style-dictionary';
@@ -341,4 +341,4 @@ const sd = new StyleDictionary({
 await sd.buildAllPlatforms();
 ```
 
-More detailed information about [using the Style Dictionary npm module is available here](using_the_npm_module.md).
+More detailed information about [using the Style Dictionary npm module is available here](/getting-started/using_the_npm_module).

@@ -77,7 +77,7 @@ Filtering tokens works by adding a `filter` attribute on the file object, where 
 }
 ```
 
-The design token that is passed to the filter function has already been [transformed](transforms.md) and has [default metadata](tokens.md?id=default-design-token-metadata) added by Style Dictionary.
+The design token that is passed to the filter function has already been [transformed](/reference/hooks/transforms) and has [default metadata](/info/tokens#default-design-token-metadata) added by Style Dictionary.
 
 ## References in output files
 
