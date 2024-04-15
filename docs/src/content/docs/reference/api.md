@@ -292,11 +292,11 @@ StyleDictionary.registerAction({
 Add a custom [fileHeader](/reference/hooks/file_headers) to the Style Dictionary. File headers are used in
 formats to display some information about how the file was built in a comment.
 
-| Param              | Type       | Description                                                                                                                                                                                                                                        |
-| ------------------ | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| options            | `Object`   |                                                                                                                                                                                                                                                    |
-| options.name       | `string`   | Name of the format to be referenced in your config.json                                                                                                                                                                                            |
-| options.fileHeader | `function` | Function that returns an array of strings, which will be mapped to comment lines. It takes a single argument which is the default message array. See [file headers](/references/hooks/formats.md#file-headers) for more information. Can be async. |
+| Param              | Type       | Description                                                                                                                                                                                                                                     |
+| ------------------ | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| options            | `Object`   |                                                                                                                                                                                                                                                 |
+| options.name       | `string`   | Name of the format to be referenced in your config.json                                                                                                                                                                                         |
+| options.fileHeader | `function` | Function that returns an array of strings, which will be mapped to comment lines. It takes a single argument which is the default message array. See [file headers](/references/hooks/formats#file-headers) for more information. Can be async. |
 
 Example:
 
@@ -342,11 +342,11 @@ StyleDictionary.registerFilter({
 
 Add a custom [format](/reference/hooks/formats) to the Style Dictionary.
 
-| Param            | Type       | Description                                                                                                                                                                                               |
-| ---------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| format           | `Object`   |                                                                                                                                                                                                           |
-| format.name      | `string`   | Name of the format to be referenced in your config.json                                                                                                                                                   |
-| format.formatter | `function` | Function to perform the format. Takes a single argument. See [creating custom formats](/references/hooks/formats.md#creating-formats) Must return a string, which is then written to a file. Can be async |
+| Param            | Type       | Description                                                                                                                                                                                            |
+| ---------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| format           | `Object`   |                                                                                                                                                                                                        |
+| format.name      | `string`   | Name of the format to be referenced in your config.json                                                                                                                                                |
+| format.formatter | `function` | Function to perform the format. Takes a single argument. See [creating custom formats](/references/hooks/formats#creating-formats) Must return a string, which is then written to a file. Can be async |
 
 Example:
 
