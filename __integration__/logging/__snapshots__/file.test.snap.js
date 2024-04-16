@@ -391,7 +391,6 @@ snapshots["integration logging file filtered references should warn users briefl
 css
 ⚠️ __integration__/build/filteredReferences.css
 While building filteredReferences.css, filtered out token references were found; output may be unexpected. Ignore this warning if intentional.
-Here are the references that are used but not defined in the file:
 
 Use log.verbosity "verbose" or use CLI option --verbose for more details.`;
 /* end snapshot integration logging file filtered references should warn users briefly of filtered references by default */
@@ -399,7 +398,6 @@ Use log.verbosity "verbose" or use CLI option --verbose for more details.`;
 snapshots["integration logging file filtered references should throw a brief error of filtered references with log level set to error"] = 
 `⚠️ __integration__/build/filteredReferences.css
 While building filteredReferences.css, filtered out token references were found; output may be unexpected. Ignore this warning if intentional.
-Here are the references that are used but not defined in the file:
 
 Use log.verbosity "verbose" or use CLI option --verbose for more details.`;
 /* end snapshot integration logging file filtered references should throw a brief error of filtered references with log level set to error */
@@ -407,7 +405,6 @@ Use log.verbosity "verbose" or use CLI option --verbose for more details.`;
 snapshots["integration logging file filtered references should throw a brief error of filtered references with log level set to error on platform level"] = 
 `⚠️ __integration__/build/filteredReferences.css
 While building filteredReferences.css, filtered out token references were found; output may be unexpected. Ignore this warning if intentional.
-Here are the references that are used but not defined in the file:
 
 Use log.verbosity "verbose" or use CLI option --verbose for more details.`;
 /* end snapshot integration logging file filtered references should throw a brief error of filtered references with log level set to error on platform level */

@@ -46,7 +46,7 @@ const tokens = {
 };
 
 const platform = {
-  prefix: 'sd', // Style-Dictionary Prefix
+  prefix: 'sd', // Style Dictionary Prefix
   // FIXME: check why createFormatArgs requires this prefix to be wrapped inside
   // an options object for it to be properly set as option?
   options: {

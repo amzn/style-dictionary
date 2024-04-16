@@ -1,5 +1,124 @@
 # Changelog
 
+## 4.0.0-prerelease.26
+
+### Minor Changes
+
+- 3485467: Fix some inconsistencies in some of the templates, usually with regards to spaces/newlines
+
+### Patch Changes
+
+- 6cfce97: Fix logging to be ordered by platform when building or cleaning platforms. This now happens in parallel, resulting in the logs being ordered randomly which was a small regression to the logging experience.
+- 061c67e: Hotfix to address outputReferencesTransformed util not handling object-value tokens properly.
+
+## 4.0.0-prerelease.25
+
+### Major Changes
+
+- 0b81a08: BREAKING: no longer wraps tokens of type asset in double quotes. Rather, we added a transform `asset/url` that will wrap such tokens inside `url("")` statements, this transform is applied to transformGroups scss, css and less.
+
+### Minor Changes
+
+- 2da5130: Added `outputReferencesTransformed` utility function to pass into outputReferences option, which will not output references for values that have been transitively transformed.
+
+### Patch Changes
+
+- 47face0: Token merging behavior changed so that upon token collisions, metadata props aren't accidentally merged together.
+
+## 4.0.0-prerelease.24
+
+### Major Changes
+
+- 5e167de: BREAKING: moved `formatHelpers` away from the StyleDictionary class and export them in `'style-dictionary/utils'` entrypoint instead.
+
+  Before
+
+  ```js
+  import StyleDictionary from 'style-dictionary';
+
+  const { fileHeader, formattedVariables } = StyleDictionary.formatHelpers;
+  ```
+
+  After
+
+  ```js
+  import { fileHeader, formattedVariables } from 'style-dictionary/utils';
+  ```
+
+- 90095a6: BREAKING: Allow specifying a `function` for `outputReferences`, conditionally outputting a ref or not per token. Also exposes `outputReferencesFilter` utility function which will determine whether a token should be outputting refs based on whether those referenced tokens were filtered out or not.
+
+  If you are maintaining a custom format that allows `outputReferences` option, you'll need to take into account that it can be a function, and pass the correct options to it.
+
+  Before:
+
+  ```js
+  StyleDictionary.registerFormat({
+    name: 'custom/es6',
+    formatter: async (dictionary) => {
+      const { allTokens, options, file } = dictionary;
+      const { usesDtcg } = options;
+
+      const compileTokenValue = (token) => {
+        let value = usesDtcg ? token.$value : token.value;
+        const originalValue = usesDtcg ? token.original.$value : token.original.value;
+
+        // Look here 👇
+        const shouldOutputRefs = outputReferences && usesReferences(originalValue);
+
+        if (shouldOutputRefs) {
+          // ... your code for putting back the reference in the output
+          value = ...
+        }
+        return value;
+      }
+      return `${allTokens.reduce((acc, token) => `${acc}export const ${token.name} = ${compileTokenValue(token)};\n`, '')}`;
+    },
+  });
+  ```
+
+  After
+
+  ```js
+  StyleDictionary.registerFormat({
+    name: 'custom/es6',
+    formatter: async (dictionary) => {
+      const { allTokens, options, file } = dictionary;
+      const { usesDtcg } = options;
+
+      const compileTokenValue = (token) => {
+        let value = usesDtcg ? token.$value : token.value;
+        const originalValue = usesDtcg ? token.original.$value : token.original.value;
+
+        // Look here 👇
+        const shouldOutputRef =
+          usesReferences(original) &&
+          (typeof options.outputReferences === 'function'
+            ? outputReferences(token, { dictionary, usesDtcg })
+            : options.outputReferences);
+
+        if (shouldOutputRefs) {
+          // ... your code for putting back the reference in the output
+          value = ...
+        }
+        return value;
+      }
+      return `${allTokens.reduce((acc, token) => `${acc}export const ${token.name} = ${compileTokenValue(token)};\n`, '')}`;
+    },
+  });
+  ```
+
+## 4.0.0-prerelease.23
+
+### Patch Changes
+
+- f8c40f7: fix(types): add missing type keyword for type export from index.d.ts
+
+## 4.0.0-prerelease.22
+
+### Patch Changes
+
+- daa78e1: Added missing type exports
+
 ## 4.0.0-prerelease.21
 
 ### Minor Changes
@@ -17,8 +136,8 @@
 
 ### Minor Changes
 
-- aff6646: Allow passing a custom FileSystem Volume to your Style-Dictionary instances, to ensure input/output files are read/written from/to that specific volume.
-  Useful in case you want multiple Style-Dictionary instances that are isolated from one another in terms of inputs/outputs.
+- aff6646: Allow passing a custom FileSystem Volume to your Style Dictionary instances, to ensure input/output files are read/written from/to that specific volume.
+  Useful in case you want multiple Style Dictionary instances that are isolated from one another in terms of inputs/outputs.
 
   ```js
   import { Volume } from 'memfs';
@@ -426,15 +545,15 @@
 
 - dcbe2fb:
   - The project has been fully converted to [ESM format](https://nodejs.org/api/esm.html), which is also the format that the browser uses.
-    For users, this means you'll have to either use Style-Dictionary in ESM JavaScript code, or dynamically import it into your CommonJS code.
-  - `Style-Dictionary.extend()` method is now asynchronous, which means it returns `Promise<StyleDictionary.Core>` instead of `StyleDictionary.Core`.
+    For users, this means you'll have to either use Style Dictionary in ESM JavaScript code, or dynamically import it into your CommonJS code.
+  - `StyleDictionary.extend()` method is now asynchronous, which means it returns `Promise<StyleDictionary.Core>` instead of `StyleDictionary.Core`.
   - `allProperties` / `properties` was deprecated in v3, and is now removed from `StyleDictionary.Core`, use `allTokens` and `tokens` instead.
   - Templates and the method `registerTemplate` were deprecated in v3, now removed. Use Formats instead.
   - The package now uses [package entrypoints](https://nodejs.org/api/packages.html), which means that what is importable from the package is locked down to just the specified entrypoints: `style-dictionary` & `style-dictionary/fs`. If more is needed, please raise an issue explaining which file you were importing and why you need it to be public API.
 
 ### Minor Changes
 
-- dcbe2fb: FileSystem that is used by Style-Dictionary can now be customized:
+- dcbe2fb: FileSystem that is used by Style Dictionary can now be customized:
 
   ```js
   import { setFs } from 'style-dictionary/fs';

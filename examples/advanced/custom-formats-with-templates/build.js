@@ -2,9 +2,11 @@ import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import StyleDictionary from 'style-dictionary';
 import fs from 'fs';
-import _ from 'lodash';
 import handlebars from 'handlebars';
 import pug from 'pug';
+import webScssTemplate from './templates/web-scss.template.js';
+import plistTemplate from './templates/plist.template.js';
+import androidTemplate from './templates/android-xml.template.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -19,17 +21,17 @@ console.log('\n==============================================');
 
 sd.registerFormat({
   name: 'custom/format/scss',
-  formatter: _.template(fs.readFileSync(__dirname + '/templates/web-scss.template')),
+  formatter: ({ dictionary }) => webScssTemplate({ allTokens: dictionary.allTokens }),
 });
 
 sd.registerFormat({
   name: 'custom/format/ios-plist',
-  formatter: _.template(fs.readFileSync(__dirname + '/templates/ios-plist.template')),
+  formatter: async ({ dictionary }) => plistTemplate({ dictionary }),
 });
 
 sd.registerFormat({
   name: 'custom/format/android-xml',
-  formatter: _.template(fs.readFileSync(__dirname + '/templates/android-xml.template')),
+  formatter: async ({ dictionary }) => androidTemplate({ dictionary }),
 });
 
 // In this case we are using an alternative templating engine (Handlebars)

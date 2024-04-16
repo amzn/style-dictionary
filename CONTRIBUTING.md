@@ -58,28 +58,13 @@ We separate each function/method into its own file and group them into directori
 
 Any new features should implement the proper unit tests. We use Jest to test our framework.
 
-If you are adding a new transform, action, or format: please add new unit tests. You can see examples in **tests**/formats.
+If you are adding a new transform, action, or format: please add new unit tests. You can see examples in **\_\_tests\_\_**/formats.
 
 ## Documentation
 
-We use [JSDoc](http://usejsdoc.org) comments in all of the code, including built-in formats and transforms, to document all of the functionality of Style Dictionary. If you are adding a new function or changing how something works, please update the JSDoc comments.
-
-We use [jsdoc-to-markdown](https://github.com/jsdoc2md/jsdoc-to-markdown) to create markdown files based on JSDoc comments in the code. These markdown files get generated in the docs/ directory. To see what is happening, take a look at [scripts/generateDocs.js](scripts/generateDocs.js). This file is run when the npm script `generate-docs` is run, which happens whenever we do an npm release. This script generates:
-
-- docs/actions.md
-- docs/api.md
-- docs/formats.md
-- docs/transform_groups.md
-- docs/transforms.md
-
-Each of these files uses a handlebars template in scripts/handlebars/templates and jsdoc-to-markdown to generate the respective markdown file.
-
-There are other markdown files in the [docs/](docs/) directory that are plain markdown files. You can edit any of those like normal.
-
-We use [docsify](https://docsify.js.org/#/) to transform the markdown files into a documentation website. To preview it locally, run `npm run serve-docs`.
+We use [Astro](https://astro.build/) to transform the markdown files into a documentation website. To preview it locally, run `npm run docs:start`.
 
 [issues]: https://github.com/amzn/style-dictionary/issues
-[pr]: https://github.com/amzn/style-dictionary/pulls
 [license]: https://github.com/amzn/style-dictionary/blob/main/LICENSE
 [cla]: http://en.wikipedia.org/wiki/Contributor_License_Agreement
 [eslint]: https://github.com/amzn/style-dictionary/blob/main/.eslintrc.json

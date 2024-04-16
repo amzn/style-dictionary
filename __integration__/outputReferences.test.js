@@ -12,9 +12,13 @@
  */
 import { expect } from 'chai';
 import StyleDictionary from 'style-dictionary';
+import { fs } from 'style-dictionary/fs';
 import { restore, stubMethod } from 'hanbi';
 import { buildPath, cleanConsoleOutput } from './_constants.js';
+import { resolve } from '../lib/resolve.js';
 import { clearOutput } from '../__tests__/__helpers.js';
+import { outputReferencesFilter } from '../lib/utils/references/outputReferencesFilter.js';
+import { outputReferencesTransformed } from '../lib/utils/index.js';
 
 describe('integration', async () => {
   let stub;
@@ -28,6 +32,58 @@ describe('integration', async () => {
   });
 
   describe('output references', async () => {
+    it('should allow using outputReferencesTransformed to not output refs when value has been transitively transformed', async () => {
+      restore();
+      const sd = new StyleDictionary({
+        tokens: {
+          base: {
+            value: 'rgb(0,0,0)',
+            type: 'color',
+          },
+          referred: {
+            value: 'rgba({base},0.12)',
+            type: 'color',
+          },
+        },
+        transform: {
+          'rgb-in-rgba': {
+            type: 'value',
+            transitive: true,
+            matcher: (token) => token.type === 'color',
+            // quite naive transform to support rgb inside rgba
+            transformer: (token) => {
+              const reg = /rgba\((rgb\((\d,\d,\d)\)),((0\.)?\d+?)\)/g;
+              const match = reg.exec(token.value);
+              if (match && match[1] && match[2]) {
+                return token.value.replace(match[1], match[2]);
+              }
+              return token.value;
+            },
+          },
+        },
+        platforms: {
+          css: {
+            transforms: ['rgb-in-rgba'],
+            buildPath,
+            files: [
+              {
+                destination: 'transformedFilteredVariables.css',
+                format: 'css/variables',
+                options: {
+                  outputReferences: outputReferencesTransformed,
+                },
+              },
+            ],
+          },
+        },
+      });
+      await sd.buildAllPlatforms();
+      const output = fs.readFileSync(resolve(`${buildPath}transformedFilteredVariables.css`), {
+        encoding: 'UTF-8',
+      });
+      await expect(output).to.matchSnapshot();
+    });
+
     it('should warn the user if filters out references briefly', async () => {
       const sd = new StyleDictionary({
         // we are only testing showFileHeader options so we don't need
@@ -55,6 +111,38 @@ describe('integration', async () => {
       });
       await sd.buildAllPlatforms();
       await expect(stub.lastCall.args.map(cleanConsoleOutput).join('\n')).to.matchSnapshot();
+    });
+
+    it('should not warn the user if filters out references is prevented with outputReferencesFilter', async () => {
+      const sd = new StyleDictionary({
+        // we are only testing showFileHeader options so we don't need
+        // the full source.
+        log: { verbosity: 'verbose' },
+        source: [`__integration__/tokens/**/[!_]*.json?(c)`],
+        platforms: {
+          css: {
+            transformGroup: 'css',
+            buildPath,
+            files: [
+              {
+                destination: 'filteredVariables.css',
+                format: 'css/variables',
+                // filter tokens and use outputReferences
+                // Style Dictionary should build this file ok
+                // but warn the user
+                filter: (token) => token.attributes.type === 'background',
+                options: {
+                  outputReferences: outputReferencesFilter,
+                },
+              },
+            ],
+          },
+        },
+      });
+      await sd.buildAllPlatforms();
+      await expect(
+        [...stub.calls].map((cal) => cal.args.map(cleanConsoleOutput)).join('\n'),
+      ).to.matchSnapshot();
     });
 
     it('should warn the user if filters out references with a detailed message when using verbose logging', async () => {

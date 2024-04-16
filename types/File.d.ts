@@ -18,8 +18,12 @@ export interface FormattingOptions {
 export type FileHeader = (defaultMessage: string[]) => Promise<string[]> | string[];
 
 export interface File {
+  // TODO: these should be passed inside the LocalOptions options
   className?: string;
   packageName?: string;
+  mapName?: string;
+  type?: string;
+
   destination: string;
   format?: string | Formatter;
   filter?: string | Partial<TransformedToken> | Matcher;

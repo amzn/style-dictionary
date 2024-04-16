@@ -12,6 +12,8 @@
  */
 import { expect } from 'chai';
 import createPropertyFormatter from '../../../lib/common/formatHelpers/createPropertyFormatter.js';
+import flattenTokens from '../../../lib/utils/flattenTokens.js';
+import { outputReferencesFilter } from '../../../lib/utils/references/outputReferencesFilter.js';
 
 const dictionary = {
   foo: {
@@ -219,6 +221,178 @@ describe('common', () => {
           expect(propFormatter(multiDictionary.ref)).to.equal(
             '  --ref: var(--foo) 5px var(--bar);',
           );
+        });
+
+        it('should support conditionally outputting references', () => {
+          const unfilteredTokens = {
+            foo: {
+              value: '5px',
+              original: {
+                value: '5px',
+                type: 'spacing',
+              },
+              name: 'foo',
+              path: ['foo'],
+              type: 'spacing',
+            },
+            bar: {
+              value: '5px',
+              original: {
+                value: '{foo}',
+                type: 'spacing',
+              },
+              name: 'bar',
+              path: ['bar'],
+              type: 'spacing',
+            },
+            qux: {
+              value: '5px',
+              original: {
+                value: '{foo}',
+                type: 'spacing',
+              },
+              name: 'qux',
+              path: ['qux'],
+              type: 'spacing',
+            },
+          };
+          const tokens = { ...unfilteredTokens };
+          const allTokens = flattenTokens(tokens);
+          const propFormatter = createPropertyFormatter({
+            dictionary: {
+              tokens,
+              unfilteredTokens,
+              allTokens,
+            },
+            format: 'css',
+            // outputReferences function that only outputs the refs if the token name is "bar"
+            outputReferences: (token) => token.name === 'bar',
+          });
+          expect(propFormatter(tokens.bar)).to.equal('  --bar: var(--foo);');
+          expect(propFormatter(tokens.qux)).to.equal('  --qux: 5px;');
+        });
+
+        it('should make it easy to not output refs for tokens that contains refs that are filtered out', () => {
+          const unfilteredTokens = {
+            foo: {
+              value: '5px',
+              original: {
+                value: '5px',
+                type: 'spacing',
+              },
+              name: 'foo',
+              path: ['foo'],
+              type: 'spacing',
+            },
+            bar: {
+              value: '10px',
+              original: {
+                value: '10px',
+                type: 'spacing',
+              },
+              name: 'bar',
+              path: ['bar'],
+              type: 'spacing',
+            },
+            'ref foo': {
+              value: '5px',
+              original: {
+                value: '{foo}',
+                type: 'spacing',
+              },
+              name: 'ref-foo',
+              path: ['ref foo'],
+              type: 'spacing',
+            },
+            'ref bar': {
+              value: '10px',
+              original: {
+                value: '{bar}',
+                type: 'spacing',
+              },
+              name: 'ref-bar',
+              path: ['ref bar'],
+              type: 'spacing',
+            },
+          };
+          const tokens = { ...unfilteredTokens };
+          delete tokens.foo;
+          const allTokens = flattenTokens(tokens);
+          const propFormatter = createPropertyFormatter({
+            dictionary: {
+              tokens,
+              unfilteredTokens,
+              allTokens,
+            },
+            format: 'css',
+            // outputReferences function that only outputs the refs if the referred tokens are not filtered out
+            outputReferences: outputReferencesFilter,
+          });
+
+          expect(propFormatter(tokens['ref foo'])).to.equal('  --ref-foo: 5px;');
+          expect(propFormatter(tokens['ref bar'])).to.equal('  --ref-bar: var(--bar);');
+        });
+
+        it('DTCG: should make it easy to not output refs for tokens that contains refs that are filtered out', () => {
+          const unfilteredTokens = {
+            foo: {
+              $value: '5px',
+              original: {
+                $value: '5px',
+                type: 'spacing',
+              },
+              name: 'foo',
+              path: ['foo'],
+              $type: 'spacing',
+            },
+            bar: {
+              $value: '10px',
+              original: {
+                $value: '10px',
+                $type: 'spacing',
+              },
+              name: 'bar',
+              path: ['bar'],
+              $type: 'spacing',
+            },
+            'ref foo': {
+              $value: '5px',
+              original: {
+                $value: '{foo}',
+                $type: 'spacing',
+              },
+              name: 'ref-foo',
+              path: ['ref foo'],
+              $type: 'spacing',
+            },
+            'ref bar': {
+              $value: '10px',
+              original: {
+                $value: '{bar}',
+                $type: 'spacing',
+              },
+              name: 'ref-bar',
+              path: ['ref bar'],
+              $type: 'spacing',
+            },
+          };
+          const tokens = { ...unfilteredTokens };
+          delete tokens.foo;
+          const allTokens = flattenTokens(tokens, true);
+          const propFormatter = createPropertyFormatter({
+            dictionary: {
+              tokens,
+              unfilteredTokens,
+              allTokens,
+            },
+            format: 'css',
+            usesDtcg: true,
+            // outputReferences function that only outputs the refs if the referred tokens are not filtered out
+            outputReferences: outputReferencesFilter,
+          });
+
+          expect(propFormatter(tokens['ref foo'])).to.equal('  --ref-foo: 5px;');
+          expect(propFormatter(tokens['ref bar'])).to.equal('  --ref-bar: var(--bar);');
         });
 
         it('should support object value references for outputReferences', () => {

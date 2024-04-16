@@ -17,13 +17,13 @@ import type { FileHeader, File } from './File.d.ts';
 import type { Parser } from './Parser.d.ts';
 import type { Preprocessor } from './Preprocessor.d.ts';
 import type { Transform } from './Transform.d.ts';
-import type { Formatter } from './Format.d.ts';
+import type { Formatter, OutputReferences } from './Format.d.ts';
 import type { Action } from './Action.d.ts';
 
 export interface LocalOptions {
   showFileHeader?: boolean;
   fileHeader?: string | FileHeader;
-  outputReferences?: boolean;
+  outputReferences?: OutputReferences;
   [key: string]: any;
 }
 
