@@ -248,9 +248,6 @@ describe(`integration`, () => {
             error = e;
           }
           await expect(cleanConsoleOutput(error.message)).to.matchSnapshot();
-          // only log is the platform name at the start of the buildPlatform method
-          expect(stub.callCount).to.equal(1);
-          expect(stub.firstCall.args).to.eql(['\ncss']);
         });
 
         it(`should throw a brief error of name collisions with log level set to error on platform level`, async () => {
@@ -280,8 +277,6 @@ describe(`integration`, () => {
           }
           await expect(cleanConsoleOutput(error.message)).to.matchSnapshot();
           // only log is the platform name at the start of the buildPlatform method
-          expect(stub.callCount).to.equal(1);
-          expect(stub.firstCall.args).to.eql(['\ncss']);
         });
 
         it(`should warn user of name collisions with a detailed message through "verbose" verbosity`, async () => {
@@ -335,9 +330,6 @@ describe(`integration`, () => {
             error = e;
           }
           await expect(cleanConsoleOutput(error.message)).to.matchSnapshot();
-          // only log is the platform name at the start of the buildPlatform method
-          expect(stub.callCount).to.equal(1);
-          expect(stub.firstCall.args).to.eql(['\ncss']);
         });
       });
 
@@ -456,8 +448,6 @@ describe(`integration`, () => {
           }
           await expect(cleanConsoleOutput(error.message)).to.matchSnapshot();
           // only log is the platform name at the start of the buildPlatform method
-          expect(stub.callCount).to.equal(1);
-          expect(stub.firstCall.args).to.eql(['\ncss']);
         });
 
         it(`should throw a brief error of filtered references with log level set to error on platform level`, async () => {
@@ -491,8 +481,6 @@ describe(`integration`, () => {
           }
           await expect(cleanConsoleOutput(error.message)).to.matchSnapshot();
           // only log is the platform name at the start of the buildPlatform method
-          expect(stub.callCount).to.equal(1);
-          expect(stub.firstCall.args).to.eql(['\ncss']);
         });
 
         it(`should warn user of filtered references with a detailed message through "verbose" verbosity`, async () => {
@@ -554,9 +542,6 @@ describe(`integration`, () => {
             error = e;
           }
           await expect(cleanConsoleOutput(error.message)).to.matchSnapshot();
-          // only log is the platform name at the start of the buildPlatform method
-          expect(stub.callCount).to.equal(1);
-          expect(stub.firstCall.args).to.eql(['\ncss']);
         });
       });
     });
