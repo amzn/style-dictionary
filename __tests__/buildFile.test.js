@@ -111,9 +111,8 @@ describe('buildFile', () => {
     });
 
     it('should not warn users if the format is a nested format', async () => {
-      const consoleStub = stubMethod(console, 'log');
-      await buildFile({ destination, format: nestedFormat }, {}, dictionary, {});
-      expect(consoleStub.calledWith(chalk.bold.green(`✔︎ ${destination}`))).to.be.true;
+      const logs = await buildFile({ destination, format: nestedFormat }, {}, dictionary, {});
+      expect(logs.success[0]).to.equal(chalk.bold.green(`✔︎ ${destination}`));
     });
   });
 

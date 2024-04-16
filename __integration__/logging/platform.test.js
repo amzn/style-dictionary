@@ -54,9 +54,6 @@ describe(`integration`, () => {
           error = e;
         }
         await expect(cleanConsoleOutput(error.message)).to.matchSnapshot();
-        // only log is the platform name at the start of the buildPlatform method
-        expect(stub.callCount).to.equal(1);
-        expect(stub.firstCall.args).to.eql(['\ncss']);
       });
 
       it(`should throw and notify users of unknown transforms`, async () => {
@@ -75,9 +72,6 @@ describe(`integration`, () => {
           error = e;
         }
         await expect(cleanConsoleOutput(error.message)).to.matchSnapshot();
-        // only log is the platform name at the start of the buildPlatform method
-        expect(stub.callCount).to.equal(1);
-        expect(stub.firstCall.args).to.eql(['\ncss']);
       });
 
       it(`should throw and notify users of unknown transformGroups`, async () => {
@@ -96,9 +90,6 @@ describe(`integration`, () => {
           error = e;
         }
         await expect(cleanConsoleOutput(error.message)).to.matchSnapshot();
-        // only log is the platform name at the start of the buildPlatform method
-        expect(stub.callCount).to.equal(1);
-        expect(stub.firstCall.args).to.eql(['\ncss']);
       });
 
       describe(`property reference errors`, () => {
@@ -121,9 +112,6 @@ describe(`integration`, () => {
             error = e;
           }
           await expect(cleanConsoleOutput(error.message)).to.matchSnapshot();
-          // only log is the platform name at the start of the buildPlatform method
-          expect(stub.callCount).to.equal(1);
-          expect(stub.firstCall.args).to.eql(['\ncss']);
         });
 
         it(`circular references should throw and notify users`, async () => {
@@ -149,9 +137,6 @@ describe(`integration`, () => {
             error = e;
           }
           await expect(cleanConsoleOutput(error.message)).to.matchSnapshot();
-          // only log is the platform name at the start of the buildPlatform method
-          expect(stub.callCount).to.equal(1);
-          expect(stub.firstCall.args).to.eql(['\ncss']);
         });
       });
     });
