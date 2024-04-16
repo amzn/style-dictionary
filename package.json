@@ -145,5 +145,13 @@
     "stylus": "^0.56.0",
     "typescript": "^5.3.3",
     "yaml": "^2.3.4"
+  },
+  "mocha": {
+    "require": "mocha-hooks.mjs",
+    "spec": [
+      "./__integration__/**/*.test.js",
+      "./__tests__/**/*.test.js",
+      "./__node_tests__/**/*.test.js"
+    ]
   }
 }
