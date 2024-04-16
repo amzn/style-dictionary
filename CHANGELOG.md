@@ -1,5 +1,16 @@
 # Changelog
 
+## 4.0.0-prerelease.26
+
+### Minor Changes
+
+- 3485467: Fix some inconsistencies in some of the templates, usually with regards to spaces/newlines
+
+### Patch Changes
+
+- 6cfce97: Fix logging to be ordered by platform when building or cleaning platforms. This now happens in parallel, resulting in the logs being ordered randomly which was a small regression to the logging experience.
+- 061c67e: Hotfix to address outputReferencesTransformed util not handling object-value tokens properly.
+
 ## 4.0.0-prerelease.25
 
 ### Major Changes
