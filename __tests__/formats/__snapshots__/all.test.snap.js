@@ -256,19 +256,18 @@ snapshots["formats all should match android/colors snapshot"] =
 -->
 <resources>
   <color name="color_red">#FF0000</color><!-- comment -->
-  
 </resources>`;
 /* end snapshot formats all should match android/colors snapshot */
 
 snapshots["formats all should match android/dimens snapshot"] = 
-`xml version="1.0" encoding="UTF-8"?>
+`<?xml version="1.0" encoding="UTF-8"?>
 
 <!--
   Do not edit directly
   Generated on Sat, 01 Jan 2000 00:00:00 GMT
 -->
 <resources>
-  
+
 </resources>`;
 /* end snapshot formats all should match android/dimens snapshot */
 
@@ -280,7 +279,7 @@ snapshots["formats all should match android/fontDimens snapshot"] =
   Generated on Sat, 01 Jan 2000 00:00:00 GMT
 -->
 <resources>
-  
+
 </resources>`;
 /* end snapshot formats all should match android/fontDimens snapshot */
 
@@ -292,7 +291,7 @@ snapshots["formats all should match android/integers snapshot"] =
   Generated on Sat, 01 Jan 2000 00:00:00 GMT
 -->
 <resources>
-  
+
 </resources>`;
 /* end snapshot formats all should match android/integers snapshot */
 
@@ -304,7 +303,7 @@ snapshots["formats all should match android/strings snapshot"] =
   Generated on Sat, 01 Jan 2000 00:00:00 GMT
 -->
 <resources>
-  
+
 </resources>`;
 /* end snapshot formats all should match android/strings snapshot */
 
@@ -364,7 +363,7 @@ snapshots["formats all should match ios/plist snapshot"] =
       <real>NaN</real>
       <key>a</key>
       <real>1</real>
-      </dict>
+    </dict>
     <!-- comment -->
   </dict>
 </plist>`;
@@ -428,7 +427,7 @@ snapshots["formats all should match ios/singleton.h snapshot"] =
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface  : NSObject
+@interface : NSObject
 
 + (NSDictionary *)properties;
 + (NSDictionary *)getProperty:(NSString *)keyPath;
@@ -449,7 +448,7 @@ snapshots["formats all should match ios/static.h snapshot"] =
 #import <Foundation/Foundation.h>
 
 
-extern  const color_red;`;
+extern const color_red;`;
 /* end snapshot formats all should match ios/static.h snapshot */
 
 snapshots["formats all should match ios/static.m snapshot"] = 
@@ -465,7 +464,7 @@ snapshots["formats all should match ios/static.m snapshot"] =
 #import ".h"
 
 
- const color_red = #FF0000;`;
+const color_red = #FF0000;`;
 /* end snapshot formats all should match ios/static.m snapshot */
 
 snapshots["formats all should match ios/colors.h snapshot"] = 
@@ -484,7 +483,7 @@ typedef NS_ENUM(NSInteger, ) {
 color_red
 };
 
-@interface  : NSObject
+@interface : NSObject
 + (NSArray *)values;
 + (UIColor *)color:()color;
 @end`;
@@ -594,7 +593,7 @@ snapshots["formats all should match ios-swift/class.swift snapshot"] =
 
 import UIKit
 
-public class  {
+public class {
     public static let color_red = #FF0000 /* comment */
 }`;
 /* end snapshot formats all should match ios-swift/class.swift snapshot */
@@ -611,7 +610,7 @@ snapshots["formats all should match ios-swift/enum.swift snapshot"] =
 
 import UIKit
 
-public enum  {
+public enum {
     public static let color_red = #FF0000 /* comment */
 }`;
 /* end snapshot formats all should match ios-swift/enum.swift snapshot */
@@ -628,7 +627,7 @@ snapshots["formats all should match ios-swift/any.swift snapshot"] =
 
 import UIKit
 
-public class  {
+public class {
     public static let color_red = #FF0000 /* comment */
 }`;
 /* end snapshot formats all should match ios-swift/any.swift snapshot */
@@ -718,8 +717,8 @@ snapshots["formats all should match flutter/class.dart snapshot"] =
 
 import 'dart:ui';
 
-class  {
-  ._();
+class {
+    ._();
 
     static const color_red = #FF0000; /* comment */
 }`;

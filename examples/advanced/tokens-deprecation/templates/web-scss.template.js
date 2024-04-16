@@ -18,7 +18,13 @@ ${header}$${file.mapName ?? 'tokens'}: (
 ${allTokens
   .map(
     (token) =>
-      `${token.comment ? `  // ${token.comment}\n` : ''}  '${token.name}': ${
+      `${
+        token.deprecated
+          ? `  // Notice: the following value is deprecated ${
+              token.deprecated_comment ? `(${token.deprecated_comment})` : ''
+            }\n`
+          : ''
+      }${token.comment ? `  // ${token.comment}\n` : ''}  '${token.name}': ${
         options.usesDtcg ? token.$value : token.value
       }`,
   )
