@@ -15,7 +15,7 @@ snapshots["integration flutter flutter/class.dart should match snapshot"] =
 import 'dart:ui';
 
 class StyleDictionary {
-  StyleDictionary._();
+    StyleDictionary._();
 
     static const colorBackgroundDanger = Color(0xFFFFEAE9);
     static const colorBackgroundDisabled = Color(0xFFDEE1E1);
@@ -196,7 +196,7 @@ snapshots["integration flutter flutter/class.dart with references should match s
 import 'dart:ui';
 
 class StyleDictionary {
-  StyleDictionary._();
+    StyleDictionary._();
 
     static const sizePaddingXl = 16.00;
     static const sizePaddingLarge = 16.00;
@@ -377,7 +377,7 @@ snapshots["integration flutter flutter/class.dart separate should match snapshot
 import 'dart:ui';
 
 class StyleDictionaryColor {
-  StyleDictionaryColor._();
+    StyleDictionaryColor._();
 
     static const colorBackgroundDanger = Color(0xFFFFEAE9);
     static const colorBackgroundDisabled = Color(0xFFDEE1E1);
