@@ -39,6 +39,9 @@ describe('integration', async () => {
             {
               destination: 'variables.css',
               format: 'css/variables',
+              options: {
+                formatting: { indentation: '    ' },
+              },
             },
             {
               destination: 'variablesWithReferences.css',
