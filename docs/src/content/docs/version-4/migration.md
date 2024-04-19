@@ -217,6 +217,57 @@ import { fileHeader, formattedVariables } from 'style-dictionary/utils';
 const { fileHeader, formattedVariables } = StyleDictionary.formatHelpers;
 ```
 
+## Formatting options
+
+Using [file formats](/reference/hooks/formats), it is possible to pass options that influence how your output is created, and these options differ based on which format you are using.
+
+In v3, the following options were put on the file properties level itself next to `destination` and `format` props, but have been moved into the `options` property:
+
+- `className` -> for formats:
+  - `compose/object`
+  - `flutter/class.dart`
+  - `ios-swift/any.swift`
+  - `ios/colors.h`
+  - `ios/colors.m`
+  - `ios/singleton.h`
+  - `ios/singleton.m`
+  - `ios/static.m`
+  - `ios/strings.h`
+  - `ios/strings.m`
+- `packageName` -> for formats:
+  - `compose/object`
+- `type` -> for formats:
+  - `ios/colors.h`
+  - `ios/colors.m`
+  - `ios/singleton.h`
+  - `ios/singleton.m`
+  - `ios/static.h`
+  - `ios/static.m`
+- `mapName` -> for formats:
+  - `scss/map-deep`
+  - `scss/map-flat`
+
+```json title="config.json" del={9} ins={10-13}
+{
+  "source": ["tokens.json"],
+  "platforms": {
+    "css": {
+      "transformGroup": "scss",
+      "files": [
+        {
+          "destination": "map.scss",
+          "format": "scss/map-deep",
+          "mapName": "tokens",
+          "options": {
+            "mapName": "tokens"
+          }
+        }
+      ]
+    }
+  }
+}
+```
+
 ## Types
 
 Style Dictionary is entirely strictly typed now, and there will be `.d.ts` files published next to every file, this means that if you import from one of Style Dictionary's entrypoints, you automatically get the types implicitly with it. This is a big win for people using TypeScript, as the majority of the codebase now has much better types, with much fewer `any`s.
