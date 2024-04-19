@@ -11,7 +11,6 @@
  * and limitations under the License.
  */
 import { expect } from 'chai';
-import { stubMethod, restore } from 'hanbi';
 import chalk from 'chalk';
 import { fs } from 'style-dictionary/fs';
 import buildFile from '../lib/buildFile.js';
@@ -33,12 +32,10 @@ nestedFormat.nested = true;
 describe('buildFile', () => {
   beforeEach(() => {
     clearOutput();
-    restore();
   });
 
   afterEach(() => {
     clearOutput();
-    restore();
   });
 
   it('should error if format doesnt exist or isnt a function', async () => {

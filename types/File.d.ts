@@ -19,10 +19,10 @@ export type FileHeader = (defaultMessage: string[]) => Promise<string[]> | strin
 
 export interface File {
   // TODO: these should be passed inside the LocalOptions options
-  className?: string;
-  packageName?: string;
-  mapName?: string;
-  type?: string;
+  // className?: string;
+  // packageName?: string;
+  // mapName?: string;
+  // type?: string;
 
   destination: string;
   format?: string | Formatter;

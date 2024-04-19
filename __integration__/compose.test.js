@@ -29,16 +29,18 @@ describe('integration', async () => {
             {
               destination: 'StyleDictionary.kt',
               format: 'compose/object',
-              className: 'StyleDictionary',
-              packageName: 'com.example.tokens',
+              options: {
+                className: 'StyleDictionary',
+                packageName: 'com.example.tokens',
+              },
             },
             {
               destination: 'StyleDictionaryWithReferences.kt',
               format: 'compose/object',
-              className: 'StyleDictionary',
-              packageName: 'com.example.tokens',
               options: {
                 outputReferences: true,
+                className: 'StyleDictionary',
+                packageName: 'com.example.tokens',
               },
             },
           ],

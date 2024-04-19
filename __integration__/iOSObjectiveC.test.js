@@ -29,25 +29,33 @@ describe('integration', async () => {
             {
               destination: 'singleton.m',
               format: 'ios/singleton.m',
-              className: 'StyleDictionary',
+              options: {
+                className: 'StyleDictionary',
+              },
             },
             {
               destination: 'singleton.h',
               format: 'ios/singleton.h',
-              className: 'StyleDictionary',
+              options: {
+                className: 'StyleDictionary',
+              },
             },
             {
               destination: 'color.h',
               format: 'ios/colors.h',
-              className: 'StyleDictionaryColor',
-              type: 'StyleDictionaryColorName',
+              options: {
+                className: 'StyleDictionaryColor',
+                type: 'StyleDictionaryColorName',
+              },
               filter: (token) => token.type === 'color',
             },
             {
               destination: 'color.m',
               format: 'ios/colors.m',
-              className: 'StyleDictionaryColor',
-              type: 'StyleDictionaryColorName',
+              options: {
+                className: 'StyleDictionaryColor',
+                type: 'StyleDictionaryColorName',
+              },
               filter: (token) => token.type === 'color',
             },
             {
@@ -57,15 +65,19 @@ describe('integration', async () => {
             {
               destination: 'static.h',
               format: 'ios/static.h',
-              className: 'StyleDictionaryStatic',
-              type: 'CGFloat',
+              options: {
+                className: 'StyleDictionaryStatic',
+                type: 'CGFloat',
+              },
               filter: (token) => token.type === 'dimension' || token.type === 'fontSize',
             },
             {
               destination: 'static.m',
               format: 'ios/static.m',
-              className: 'StyleDictionaryStatic',
-              type: 'CGFloat',
+              options: {
+                className: 'StyleDictionaryStatic',
+                type: 'CGFloat',
+              },
               filter: (token) => token.type === 'dimension' || token.type === 'fontSize',
             },
           ],

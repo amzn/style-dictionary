@@ -29,13 +29,15 @@ describe('integration', async () => {
             {
               destination: 'style_dictionary.swift',
               format: 'ios-swift/class.swift',
-              className: 'StyleDictionary',
+              options: {
+                className: 'StyleDictionary',
+              },
             },
             {
               destination: 'style_dictionary_with_references.swift',
               format: 'ios-swift/class.swift',
-              className: 'StyleDictionary',
               options: {
+                className: 'StyleDictionary',
                 outputReferences: true,
               },
             },
