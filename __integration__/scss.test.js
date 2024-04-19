@@ -56,26 +56,30 @@ describe(`integration`, async () => {
             {
               destination: `map-flat.scss`,
               format: `scss/map-flat`,
-              mapName: 'design-system-tokens',
+              options: {
+                mapName: 'design-system-tokens',
+              },
             },
             {
               destination: `map-deep.scss`,
               format: `scss/map-deep`,
-              mapName: 'design-system-tokens',
+              options: {
+                mapName: 'design-system-tokens',
+              },
             },
             {
               destination: `map-deep-with-references.scss`,
               format: `scss/map-deep`,
-              mapName: 'design-system-tokens',
               options: {
+                mapName: 'design-system-tokens',
                 outputReferences: true,
               },
             },
             {
               destination: `map-deep-not-themeable.scss`,
               format: `scss/map-deep`,
-              mapName: 'design-system-tokens',
               options: {
+                mapName: 'design-system-tokens',
                 themeable: false,
               },
             },

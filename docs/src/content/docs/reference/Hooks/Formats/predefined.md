@@ -50,13 +50,14 @@ $tokens: (
 
 Creates a SCSS file with a deep map based on the style dictionary.
 
-Name the map by adding a 'mapName' attribute on the file object in your config.
+Name the map by adding a 'mapName' attribute on the file `options` object in your config.
 
 | Param                      | Type                                  | Description                                                                                                                                                                                                |
 | -------------------------- | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `options`                  | `Object`                              |                                                                                                                                                                                                            |
 | `options.outputReferences` | `boolean \| OutputReferencesFunction` | Whether or not to keep [references](#references-in-output-files) (a -> b -> c) in the output. Defaults to `false`. Also allows passing a function to conditionally output references on a per token basis. |
 | `options.themeable`        | `boolean`                             | Whether or not tokens should default to being themeable, if not otherwise specified per token. Defaults to `false`.                                                                                        |
+| `options.mapName`          | `string`                              | Name of your SCSS map.                                                                                                                                                                                     |
 
 Example:
 
@@ -64,14 +65,14 @@ Example:
 $color-background-base: #f0f0f0 !default;
 $color-background-alt: #eeeeee !default;
 
-$tokens: {
+$tokens: (
   'color': (
     'background': (
       'base': $color-background-base,
-      'alt': $color-background-alt
-    )
-  )
-)
+      'alt': $color-background-alt,
+    ),
+  ),
+);
 ```
 
 ---
@@ -550,14 +551,15 @@ Example:
 
 Creates a Kotlin file for Compose containing an object with a `val` for each property.
 
-| Param                      | Type                                  | Description                                                                                                                                                                                                |
-| -------------------------- | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `className`                | `string`                              | The name of the generated Kotlin object                                                                                                                                                                    |
-| `packageName`              | `string`                              | The package for the generated Kotlin object                                                                                                                                                                |
-| `options`                  | `Object`                              |                                                                                                                                                                                                            |
-| `options.import`           | `string[] \| string`                  | Modules to import. Can be a string or array of strings. Defaults to `['androidx.compose.ui.graphics.Color', 'androidx.compose.ui.unit.*']`.                                                                |
-| `options.showFileHeader`   | `boolean`                             | Whether or not to include a comment that has the build date. Defaults to `true`                                                                                                                            |
+| Param | Type | Description |
+| ----- | ---- | ----------- |
+
+| `options` | `Object` | |
+| `options.import` | `string[] \| string` | Modules to import. Can be a string or array of strings. Defaults to `['androidx.compose.ui.graphics.Color', 'androidx.compose.ui.unit.*']`. |
+| `options.showFileHeader` | `boolean` | Whether or not to include a comment that has the build date. Defaults to `true` |
 | `options.outputReferences` | `boolean \| OutputReferencesFunction` | Whether or not to keep [references](#references-in-output-files) (a -> b -> c) in the output. Defaults to `false`. Also allows passing a function to conditionally output references on a per token basis. |
+| `options.className` | `string` | The name of the generated Kotlin object |
+| `options.packageName` | `string` | The package for the generated Kotlin object |
 
 Example:
 
