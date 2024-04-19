@@ -11,7 +11,6 @@
  * and limitations under the License.
  */
 import { expect } from 'chai';
-import { restore, stubMethod } from 'hanbi';
 import StyleDictionary from 'style-dictionary';
 import { buildPath, cleanConsoleOutput } from '../_constants.js';
 import { clearOutput } from '../../__tests__/__helpers.js';
@@ -26,12 +25,7 @@ import { clearOutput } from '../../__tests__/__helpers.js';
  *
  */
 describe(`integration`, () => {
-  let stub;
-  beforeEach(() => {
-    stub = stubMethod(console, 'log');
-  });
   afterEach(() => {
-    restore();
     clearOutput(buildPath);
   });
 

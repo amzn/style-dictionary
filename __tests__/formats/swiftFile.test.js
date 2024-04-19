@@ -18,11 +18,12 @@ import flattenTokens from '../../lib/utils/flattenTokens.js';
 const originalFile = {
   destination: '__output/',
   format: 'ios-swift/any.swift',
-  className: 'StyleDictionary',
+  options: {
+    className: 'StyleDictionary',
+  },
   filter: {
     type: 'color',
   },
-  options: {},
 };
 
 let file = {};

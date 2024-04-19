@@ -29,14 +29,16 @@ describe('integration', async () => {
             {
               destination: 'style_dictionary.dart',
               format: 'flutter/class.dart',
-              className: 'StyleDictionary',
+              options: {
+                className: 'StyleDictionary',
+              },
             },
             {
               destination: 'style_dictionary_with_references.dart',
               format: 'flutter/class.dart',
-              className: 'StyleDictionary',
               options: {
                 outputReferences: true,
+                className: 'StyleDictionary',
               },
             },
           ],
@@ -48,8 +50,10 @@ describe('integration', async () => {
             {
               destination: 'style_dictionary_color.dart',
               format: 'flutter/class.dart',
-              className: 'StyleDictionaryColor',
-              type: 'color',
+              options: {
+                className: 'StyleDictionaryColor',
+                type: 'color',
+              },
               filter: {
                 type: 'color',
               },
@@ -57,8 +61,10 @@ describe('integration', async () => {
             {
               destination: 'style_dictionary_sizes.dart',
               format: 'flutter/class.dart',
-              className: 'StyleDictionarySize',
-              type: 'float',
+              options: {
+                className: 'StyleDictionarySize',
+                type: 'float',
+              },
               filter: {
                 type: 'color',
               },
