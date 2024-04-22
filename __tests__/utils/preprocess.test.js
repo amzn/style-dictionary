@@ -23,13 +23,49 @@ describe('utils', () => {
           },
         },
         {
-          preprocessorA: (tokens) => {
-            tokens.bar = tokens.foo;
-            return tokens;
+          preprocessorA: {
+            preprocessor: (tokens) => {
+              tokens.bar = tokens.foo;
+              return tokens;
+            },
           },
         },
       );
       expect(output).to.have.property('bar').eql({
+        value: '5px',
+      });
+    });
+
+    it('should support platform-specific preprocessors', async () => {
+      const preprocessors = {
+        preprocessorA: {
+          platform: 'foo',
+          preprocessor: (tokens) => {
+            tokens.bar = tokens.foo;
+            return tokens;
+          },
+        },
+      };
+      const output = await preprocess(
+        {
+          foo: {
+            value: '5px',
+          },
+        },
+        preprocessors,
+      );
+      expect(output).to.not.have.property('bar');
+
+      const outputWithPlatform = await preprocess(
+        {
+          foo: {
+            value: '5px',
+          },
+        },
+        preprocessors,
+        'foo',
+      );
+      expect(outputWithPlatform).to.have.property('bar').eql({
         value: '5px',
       });
     });
@@ -42,18 +78,24 @@ describe('utils', () => {
           },
         },
         {
-          preprocessorA: (tokens) => {
-            tokens.bar = tokens.foo;
-            return tokens;
+          preprocessorA: {
+            preprocessor: (tokens) => {
+              tokens.bar = tokens.foo;
+              return tokens;
+            },
           },
-          preprocessorB: async (tokens) => {
-            await new Promise((resolve) => setTimeout(resolve, 100));
-            tokens.baz = tokens.bar;
-            return tokens;
+          preprocessorB: {
+            preprocessor: async (tokens) => {
+              await new Promise((resolve) => setTimeout(resolve, 100));
+              tokens.baz = tokens.bar;
+              return tokens;
+            },
           },
-          preprocessorC: (tokens) => {
-            tokens.qux = tokens.baz;
-            return tokens;
+          preprocessorC: {
+            preprocessor: (tokens) => {
+              tokens.qux = tokens.baz;
+              return tokens;
+            },
           },
         },
       );

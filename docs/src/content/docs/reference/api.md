@@ -391,17 +391,20 @@ StyleDictionary.registerParser({
 
 Adds a custom [preprocessor](/reference/hooks/preprocessors) to preprocess already parsed Style Dictionary objects.
 
-| Param                     | Type       | Description                                                                                               |
-| ------------------------- | ---------- | --------------------------------------------------------------------------------------------------------- |
-| Preprocessor              | `Object`   |                                                                                                           |
-| Preprocessor.name         | `string`   | Name of the format to be referenced in your config.json                                                   |
-| Preprocessor.preprocessor | `function` | Function to preprocess the dictionary. The function should return a plain Javascript object. Can be async |
+| Param                     | Type       | Description                                                                                                             |
+| ------------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------- |
+| Preprocessor              | `Object`   |                                                                                                                         |
+| Preprocessor.name         | `string`   | Name of the format to be referenced in your config.json                                                                 |
+| Preprocessor.platform     | `string`   | Optional. Pass a platform name to only have this preprocessor run prior to exporting tokens to that particular platform |
+| Preprocessor.preprocessor | `function` | Function to preprocess the dictionary. The function should return a plain Javascript object. Can be async               |
 
 Example:
 
 ```js
 StyleDictionary.registerPreprocessor({
   name: 'strip-third-party-meta',
+  // platform is optional, leaving this out means the preprocessor runs globally after parsing, prior to exporting to platforms
+  platform: 'css',
   preprocessor: (dictionary) => {
     delete dictionary.thirdPartyMetadata;
     return dictionary;
