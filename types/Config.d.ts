@@ -11,7 +11,7 @@
  * and limitations under the License.
  */
 
-import type { DesignTokens, TransformedToken } from './DesignToken.d.ts';
+import type { DesignToken, DesignTokens, TransformedToken } from './DesignToken.d.ts';
 import type { Filter, Matcher } from './Filter.d.ts';
 import type { FileHeader, File } from './File.d.ts';
 import type { Parser } from './Parser.d.ts';
@@ -57,16 +57,34 @@ export interface LogConfig {
   verbosity?: 'default' | 'silent' | 'verbose';
 }
 
+export type ExpandFilter = (
+  token: DesignToken,
+  options: Config,
+  platform?: PlatformConfig,
+) => boolean;
+
+export interface Expand {
+  typography?: boolean | ExpandFilter;
+  border?: boolean | ExpandFilter;
+  shadow?: boolean | ExpandFilter;
+  // Allows expanding custom types that have object values
+  [key: string]: boolean | ExpandFilter;
+}
+
+export type ExpandConfig = Expand | boolean | ExpandFilter;
+
 export interface PlatformConfig extends RegexOptions {
   log?: LogConfig;
   transformGroup?: string;
   transforms?: string[] | Omit<Transform, 'name'>[];
-  basePxFontSize?: number;
+  expand?: ExpandConfig;
   prefix?: string;
   buildPath?: string;
   files?: File[];
   actions?: string[] | Omit<Action, 'name'>[];
   options?: LocalOptions;
+  // Allows adding custom options on the platform level which is how you can pass external options to transforms
+  [key: string]: any;
 }
 
 export interface Config {
@@ -74,6 +92,8 @@ export interface Config {
   source?: string[];
   include?: string[];
   tokens?: DesignTokens;
+  expand?: ExpandConfig;
+  expandTypesMap?: Record<string, Record<string, string> | string>;
   platforms?: Record<string, PlatformConfig>;
   parsers?: Parser[];
   preprocessors?: Record<string, Preprocessor>;

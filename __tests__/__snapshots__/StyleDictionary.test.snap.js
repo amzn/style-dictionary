@@ -1,6 +1,6 @@
 /* @web/test-runner snapshot v1 */
 export const snapshots = {};
-snapshots["StyleDictionary class + extend method should throw an error if the collision is in source files and log is set to error"] = 
+snapshots["StyleDictionary class + extend method collisions should throw an error if the collision is in source files and log is set to error"] = 
 `
 Token collisions detected (7):
 
@@ -13,11 +13,11 @@ Collision detected at: size.padding.xl! Original value: 20, New value: 20
 Collision detected at: size.padding.xxl! Original value: 30, New value: 30
 
 `;
-/* end snapshot StyleDictionary class + extend method should throw an error if the collision is in source files and log is set to error */
+/* end snapshot StyleDictionary class + extend method collisions should throw an error if the collision is in source files and log is set to error */
 
-snapshots["StyleDictionary class + extend method should throw a brief error if the collision is in source files and log is set to error and verbosity default"] = 
+snapshots["StyleDictionary class + extend method collisions should throw a brief error if the collision is in source files and log is set to error and verbosity default"] = 
 `
 Token collisions detected (7):
 Use log.verbosity "verbose" or use CLI option --verbose for more details.`;
-/* end snapshot StyleDictionary class + extend method should throw a brief error if the collision is in source files and log is set to error and verbosity default */
+/* end snapshot StyleDictionary class + extend method collisions should throw a brief error if the collision is in source files and log is set to error and verbosity default */
 
