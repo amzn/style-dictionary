@@ -40,6 +40,7 @@ export default {
       transformGroup: 'color/tailwind',
       buildPath: 'build/tailwind/',
       files: [
+        // TODO: add prefix to css vars transformed to rgb channels so they can be used alongside original token values
         {
           destination: 'cssVarsPlugin.js',
           format: 'tailwind/css-vars-plugin',
