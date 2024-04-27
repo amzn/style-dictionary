@@ -2,10 +2,11 @@
   "name": "tailwind-preset",
   "version": "1.0.0",
   "description": "Builds tailwind preset from tokens",
+  "type": "module",
   "scripts": {
-    "build-tokens": "style-dictionary build --config ./config.mjs",
+    "build-tokens": "style-dictionary build --config ./config.js",
     "build-css": "npx tailwindcss -i ./demo/input.css -o ./demo/output.css --watch",
-    "test": "mocha '**/*.test.mjs'"
+    "test": "mocha 'config/**/*test.js'"
   },
   "license": "Apache-2.0",
   "devDependencies": {

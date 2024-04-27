@@ -1,7 +1,7 @@
 import StyleDictionary from 'style-dictionary';
-import { cssVarsPlugin, preset, themeColors } from './config/formatter.mjs';
-import { isColor } from './config/matcher.mjs';
-import { rgbChannels } from './config/transformer.mjs';
+import { cssVarsPlugin, preset, themeColors } from './config/formatter.js';
+import { isColor } from './config/matcher.js';
+import { rgbChannels } from './config/transformer.js';
 
 // Register custom transform
 StyleDictionary.registerTransform({

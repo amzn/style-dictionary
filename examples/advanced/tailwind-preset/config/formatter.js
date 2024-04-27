@@ -1,4 +1,4 @@
-import { isColor } from './matcher.mjs';
+import { isColor } from './matcher.js';
 
 export const cssVarsPlugin = ({ dictionary }) => {
   const tokens = dictionary.allTokens.filter((token) => isColor(token));

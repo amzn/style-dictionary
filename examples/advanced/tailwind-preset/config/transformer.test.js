@@ -1,5 +1,6 @@
 import { expect } from 'chai';
-import { rgbChannels } from './transformer.mjs';
+import { describe, it } from 'mocha';
+import { rgbChannels } from './transformer.js';
 
 describe('transformer', () => {
   it('should extract RGB channels from valid RGB string', () => {
