@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "description": "Builds tailwind preset from tokens",
   "scripts": {
-    "build-tokens": "style-dictionary build --config ./config.js",
+    "build-tokens": "style-dictionary build --config ./config.mjs",
     "build-css": "npx tailwindcss -i ./demo/input.css -o ./demo/output.css --watch"
   },
   "license": "Apache-2.0",
   "devDependencies": {
-    "style-dictionary": "3.9.0",
+    "style-dictionary": "4.0.0-prerelease.26",
     "tailwindcss": "^3.3.5"
   }
 }

@@ -4,7 +4,7 @@ Builds [Tailwind preset](https://tailwindcss.com/docs/presets#creating-a-preset)
 
 ## Building the preset
 
-Run `npm build-tokens` to generate files in `build/tailwind/`.
+Run `npm run build-tokens` to generate files in `build/tailwind/`.
 
 ### cssVarPlugin.js
 

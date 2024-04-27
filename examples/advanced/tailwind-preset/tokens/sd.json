@@ -2,43 +2,43 @@
   "sd": {
     "text": {
       "base": {
-        "attributes": { "category": "color" },
+        "type": "color",
         "value": "#2E2E46"
       },
       "secondary": {
-        "attributes": { "category": "color" },
+        "type": "color",
         "value": "#646473"
       },
       "tertiary": {
-        "attributes": { "category": "color" },
+        "type": "color",
         "value": "#81818E"
       }
     },
     "theme": {
       "_": {
-        "attributes": { "category": "color" },
+        "type": "color",
         "value": "#1FC5BF"
       },
       "light": {
         "value": "#99EBE2",
-        "attributes": { "category": "color" }
+        "type": "color"
       },
       "dark": {
         "value": "#00B3AC",
-        "attributes": { "category": "color" }
+        "type": "color"
       },
       "secondary": {
         "_": {
           "value": "#6A5096",
-          "attributes": { "category": "color" }
+          "type": "color"
         },
         "dark": {
           "value": "#3F1C77",
-          "attributes": { "category": "color" }
+          "type": "color"
         },
         "light": {
           "value": "#C4B2E1",
-          "attributes": { "category": "color" }
+          "type": "color"
         }
       }
     }
