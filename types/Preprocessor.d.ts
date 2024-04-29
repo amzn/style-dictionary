@@ -15,7 +15,6 @@ import type { DesignTokens } from './DesignToken.d.ts';
 
 export type Preprocessor = {
   name: string;
-  platform?: string;
   preprocessor: preprocessor;
 };
 

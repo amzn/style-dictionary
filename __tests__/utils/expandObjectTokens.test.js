@@ -13,32 +13,81 @@
 import { expect } from 'chai';
 import { getTypeFromMap, expandToken, expandTokens } from '../../lib/utils/expandObjectTokens.js';
 
+const input = {
+  border: {
+    type: 'border',
+    value: {
+      width: '2px',
+      style: 'solid',
+      color: '#000',
+    },
+  },
+  typography: {
+    type: 'typography',
+    value: {
+      fontWeight: '800',
+      fontSize: '16px',
+      fontFamily: 'Arial Black',
+    },
+  },
+};
+
+const borderOutput = {
+  color: {
+    type: 'color',
+    value: '#000',
+  },
+  style: {
+    type: 'strokeStyle',
+    value: 'solid',
+  },
+  width: {
+    type: 'dimension',
+    value: '2px',
+  },
+};
+
+const typographyOutput = {
+  fontWeight: {
+    type: 'fontWeight',
+    value: '800',
+  },
+  fontSize: {
+    type: 'dimension',
+    value: '16px',
+  },
+  fontFamily: {
+    type: 'fontFamily',
+    value: 'Arial Black',
+  },
+};
+
 describe('utils', () => {
   describe('expandObjectTokens', () => {
     describe('expandObjectTokens', () => {
       describe('getTypeFromMap', () => {
         it('should return the type input as output by default', () => {
-          const output = getTypeFromMap('width', 'border', {});
+          const output = getTypeFromMap('width', 'foo', {});
           expect(output).to.equal('width');
         });
 
-        it('should return mapped type', () => {
+        it('should return mapped type, when overriding the base DTCG map', () => {
           const output = getTypeFromMap('width', 'border', {
-            width: 'foo',
+            border: { width: 'foo' },
           });
           expect(output).to.equal('foo');
         });
 
         it('should return mapped type keyed by the composition type', () => {
-          const output = getTypeFromMap('width', 'border', {
-            border: { width: 'foo' },
+          const output = getTypeFromMap('width', 'foo', {
+            foo: { width: 'foo' },
           });
           expect(output).to.equal('foo');
         });
 
         it('should prioritise the mapped type keyed by composition type when also available on the top-level', () => {
-          const output = getTypeFromMap('width', 'border', {
-            border: { width: 'foo' },
+          const output = getTypeFromMap('width', 'foo', {
+            foo: { width: 'foo' },
             width: 'bar',
           });
           expect(output).to.equal('foo');
@@ -47,31 +96,8 @@ describe('utils', () => {
 
       describe('expandToken', () => {
         it('should expand a single object value token into multiple tokens', () => {
-          const expanded = expandToken(
-            {
-              type: 'border',
-              value: {
-                width: '2px',
-                style: 'solid',
-                color: '#000',
-              },
-            },
-            { expandTypesMap: { style: 'other' }, usesDtcg: false },
-          );
-          expect(expanded).to.eql({
-            color: {
-              type: 'color',
-              value: '#000',
-            },
-            style: {
-              type: 'other',
-              value: 'solid',
-            },
-            width: {
-              type: 'width',
-              value: '2px',
-            },
-          });
+          const expanded = expandToken(input.border, { expand: true, usesDtcg: false });
+          expect(expanded).to.eql(borderOutput);
         });
 
         it('should handle DTCG spec tokens expansion', () => {
@@ -84,7 +110,7 @@ describe('utils', () => {
                 color: '#000',
               },
             },
-            { expandTypesMap: { style: 'other' }, usesDtcg: true },
+            { expand: true, usesDtcg: true },
           );
           expect(expanded).to.eql({
             color: {
@@ -92,11 +118,11 @@ describe('utils', () => {
               $value: '#000',
             },
             style: {
-              $type: 'other',
+              $type: 'strokeStyle',
               $value: 'solid',
             },
             width: {
-              $type: 'width',
+              $type: 'dimension',
               $value: '2px',
             },
           });
@@ -124,12 +150,7 @@ describe('utils', () => {
               ],
             },
             {
-              expandTypesMap: {
-                offsetX: 'dimension',
-                offsetY: 'dimension',
-                blur: 'dimension',
-                spread: 'dimension',
-              },
+              expand: true,
               usesDtcg: false,
             },
           );
@@ -185,19 +206,8 @@ describe('utils', () => {
 
       describe('expandTokens', () => {
         it('should not expand tokens when expand is false', () => {
-          const input = {
-            objectValues: {
-              type: 'border',
-              value: {
-                width: '2px',
-                style: 'solid',
-                color: '#000',
-              },
-            },
-          };
           const expanded = expandTokens(input, {
             expand: false,
-            expandTypesMap: { style: 'other' },
             usesDtcg: false,
           });
 
@@ -208,207 +218,104 @@ describe('utils', () => {
           const expanded = expandTokens(
             {
               objectValues: {
-                nested: {
-                  type: 'border',
-                  value: {
-                    width: '2px',
-                    style: 'solid',
-                    color: '#000',
-                  },
-                },
+                nested: input.border,
                 double: {
-                  nested: {
-                    type: 'typography',
-                    value: {
-                      fontWeight: '800',
-                      fontSize: '16px',
-                      fontFamily: 'Arial Black',
-                    },
-                  },
+                  nested: input.typography,
                 },
               },
             },
             {
               expand: true,
-              expandTypesMap: { style: 'other', fontSize: 'dimension' },
               usesDtcg: false,
             },
           );
 
           expect(expanded).to.eql({
             objectValues: {
-              nested: {
-                color: {
-                  type: 'color',
-                  value: '#000',
-                },
-                style: {
-                  type: 'other',
-                  value: 'solid',
-                },
-                width: {
-                  type: 'width',
-                  value: '2px',
-                },
-              },
+              nested: borderOutput,
               double: {
-                nested: {
-                  fontWeight: {
-                    type: 'fontWeight',
-                    value: '800',
-                  },
-                  fontSize: {
-                    type: 'dimension',
-                    value: '16px',
-                  },
-                  fontFamily: {
-                    type: 'fontFamily',
-                    value: 'Arial Black',
-                  },
-                },
+                nested: typographyOutput,
               },
             },
           });
         });
 
-        it('should allow conditionally expanding tokens by type', () => {
-          const input = {
-            border: {
-              type: 'border',
-              value: {
-                width: '2px',
-                style: 'solid',
-                color: '#000',
-              },
-            },
-            typography: {
-              type: 'typography',
-              value: {
-                fontWeight: '800',
-                fontSize: '16px',
-                fontFamily: 'Arial Black',
-              },
-            },
-          };
+        it('should allow conditionally expanding tokens by type using include', () => {
           const expanded = expandTokens(input, {
-            expand: { typography: true, border: false },
-            expandTypesMap: { fontSize: 'dimension' },
+            expand: {
+              include: ['typography'],
+            },
             usesDtcg: false,
           });
 
           expect(expanded).to.eql({
             border: input.border,
-            typography: {
-              fontWeight: {
-                type: 'fontWeight',
-                value: '800',
-              },
-              fontSize: {
-                type: 'dimension',
-                value: '16px',
-              },
-              fontFamily: {
-                type: 'fontFamily',
-                value: 'Arial Black',
-              },
+            typography: typographyOutput,
+          });
+        });
+
+        it('should allow conditionally expanding tokens by type using exclude', () => {
+          const expanded = expandTokens(input, {
+            expand: {
+              exclude: ['typography'],
             },
+            usesDtcg: false,
+          });
+
+          expect(expanded).to.eql({
+            border: borderOutput,
+            typography: input.typography,
           });
         });
 
         it('should allow conditionally expanding tokens by condition function', () => {
-          const input = {
-            border: {
-              type: 'border',
-              value: {
-                width: '2px',
-                style: 'solid',
-                color: '#000',
-              },
-            },
-            typography: {
-              type: 'typography',
-              value: {
-                fontWeight: '800',
-                fontSize: '16px',
-                fontFamily: 'Arial Black',
-              },
-            },
-          };
           const expanded = expandTokens(input, {
             expand: (token) => token.value.fontWeight === '800',
-            expandTypesMap: { fontSize: 'dimension' },
             usesDtcg: false,
           });
 
           expect(expanded).to.eql({
             border: input.border,
-            typography: {
-              fontWeight: {
-                type: 'fontWeight',
-                value: '800',
-              },
-              fontSize: {
-                type: 'dimension',
-                value: '16px',
-              },
-              fontFamily: {
-                type: 'fontFamily',
-                value: 'Arial Black',
-              },
-            },
+            typography: typographyOutput,
+          });
+
+          const expandedInclude = expandTokens(input, {
+            expand: { include: (token) => token.value.fontWeight === '800' },
+            usesDtcg: false,
+          });
+
+          expect(expandedInclude).to.eql({
+            border: input.border,
+            typography: typographyOutput,
+          });
+
+          const expandedExclude = expandTokens(input, {
+            expand: { exclude: (token) => token.value.fontWeight === '800' },
+            usesDtcg: false,
+          });
+
+          expect(expandedExclude).to.eql({
+            border: borderOutput,
+            typography: input.typography,
           });
         });
 
         it('should also expand tokens that are references to other tokens', () => {
-          const input = {
-            border: {
-              type: 'border',
-              value: {
-                width: '2px',
-                style: 'solid',
-                color: '#000',
-              },
-            },
+          const refInput = {
+            border: input.border,
             borderRef: {
               type: 'border',
               value: '{border}',
             },
           };
-          const expanded = expandTokens(input, {
+          const expanded = expandTokens(refInput, {
             expand: true,
-            expandTypesMap: { style: 'other' },
             usesDtcg: false,
           });
 
           expect(expanded).to.eql({
-            border: {
-              color: {
-                type: 'color',
-                value: '#000',
-              },
-              style: {
-                type: 'other',
-                value: 'solid',
-              },
-              width: {
-                type: 'width',
-                value: '2px',
-              },
-            },
-            borderRef: {
-              color: {
-                type: 'color',
-                value: '#000',
-              },
-              style: {
-                type: 'other',
-                value: 'solid',
-              },
-              width: {
-                type: 'width',
-                value: '2px',
-              },
-            },
+            border: borderOutput,
+            borderRef: borderOutput,
           });
         });
 
@@ -429,7 +336,6 @@ describe('utils', () => {
           };
           const expanded = expandTokens(input, {
             expand: true,
-            expandTypesMap: { style: 'other' },
             usesDtcg: true,
           });
 
@@ -440,11 +346,11 @@ describe('utils', () => {
                 $value: '#000',
               },
               style: {
-                $type: 'other',
+                $type: 'strokeStyle',
                 $value: 'solid',
               },
               width: {
-                $type: 'width',
+                $type: 'dimension',
                 $value: '2px',
               },
             },
@@ -454,11 +360,11 @@ describe('utils', () => {
                 $value: '#000',
               },
               style: {
-                $type: 'other',
+                $type: 'strokeStyle',
                 $value: 'solid',
               },
               width: {
-                $type: 'width',
+                $type: 'dimension',
                 $value: '2px',
               },
             },

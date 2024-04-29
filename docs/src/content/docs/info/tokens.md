@@ -61,7 +61,7 @@ Using DTCG format that would look like:
 
 For any design tokens you wish to output, the "value" attribute is required. This provides the data that will be used throughout the build process (and ultimately used for styling in your deliverables). You can optionally include any custom attributes you would like (e.g. "comment" with a string or "metadata" as an object with its own attributes).
 
-| Attribute  | Type               | Description                                                                                                                                                                                                                                                       |
+| Property   | Type               | Description                                                                                                                                                                                                                                                       |
 | :--------- | :----------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | value      | Any                | The value of the design token. This can be any type of data, a hex string, an integer, a file path to a file, even an object or array.                                                                                                                            |
 | comment    | String (optional)  | The comment attribute will show up in a code comment in output files if the format supports it.                                                                                                                                                                   |
@@ -75,13 +75,13 @@ You can add any attributes or data you want in a design token and Style Dictiona
 
 Style Dictionary adds some default metadata on each design token that helps with transforms and formats. Here is what Style Dictionary adds onto each design token:
 
-| Attribute | Type          | Description                                                                                                                                                                     |
-| :-------- | :------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| name      | String        | A default name of the design token that is set to the key of the design token. This is only added if you do not provide one.                                                    |
-| path      | Array[String] | The object path of the design token. `color: { background: { primary: { value: "#fff" } } }` will have a path of `['color','background', 'primary']`.                           |
-| original  | Object        | A pristine copy of the original design token object. This is to make sure transforms and formats always have the unmodified version of the original design token.               |
-| filePath  | String        | The file path of the file the token is defined in. This file path is derived from the `source` or `include` file path arrays defined in the [configuration](/reference/config). |
-| isSource  | Boolean       | If the token is from a file defined in the `source` array as opposed to `include` in the [configuration](/reference/config).                                                    |
+| Property | Type          | Description                                                                                                                                                                     |
+| :------- | :------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| name     | String        | A default name of the design token that is set to the key of the design token. This is only added if you do not provide one.                                                    |
+| path     | Array[String] | The object path of the design token. `color: { background: { primary: { value: "#fff" } } }` will have a path of `['color','background', 'primary']`.                           |
+| original | Object        | A pristine copy of the original design token object. This is to make sure transforms and formats always have the unmodified version of the original design token.               |
+| filePath | String        | The file path of the file the token is defined in. This file path is derived from the `source` or `include` file path arrays defined in the [configuration](/reference/config). |
+| isSource | Boolean       | If the token is from a file defined in the `source` array as opposed to `include` in the [configuration](/reference/config).                                                    |
 
 Given this configuration:
 

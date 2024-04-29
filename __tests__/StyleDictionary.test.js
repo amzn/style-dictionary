@@ -363,11 +363,6 @@ describe('StyleDictionary class + extend method', () => {
       const sd = new StyleDictionary({
         tokens: input,
         expand: true,
-        expandTypesMap: {
-          border: {
-            style: 'other',
-          },
-        },
       });
       await sd.hasInitialized;
       expect(sd.tokens).to.eql({
@@ -377,11 +372,11 @@ describe('StyleDictionary class + extend method', () => {
             value: '#000',
           },
           style: {
-            type: 'other',
+            type: 'strokeStyle',
             value: 'solid',
           },
           width: {
-            type: 'width',
+            type: 'dimension',
             value: '2px',
           },
         },
@@ -401,11 +396,6 @@ describe('StyleDictionary class + extend method', () => {
       };
       const sd = new StyleDictionary({
         tokens: input,
-        expandTypesMap: {
-          border: {
-            style: 'other',
-          },
-        },
         platforms: {
           css: {
             expand: true,
@@ -423,11 +413,11 @@ describe('StyleDictionary class + extend method', () => {
             value: '#000',
           },
           style: {
-            type: 'other',
+            type: 'strokeStyle',
             value: 'solid',
           },
           width: {
-            type: 'width',
+            type: 'dimension',
             value: '2px',
           },
         },
@@ -456,17 +446,18 @@ describe('StyleDictionary class + extend method', () => {
       };
       const sd = new StyleDictionary({
         tokens: input,
-        expand: (token) => {
-          return token.value.width === '2px';
-        },
-        expandTypesMap: {
-          border: {
-            style: 'other',
+        expand: {
+          include: (token) => {
+            return token.value.width === '2px';
           },
         },
         platforms: {
           css: {},
-          js: { expand: true },
+          js: {
+            expand: {
+              typesMap: true,
+            },
+          },
         },
       });
       await sd.hasInitialized;
@@ -480,11 +471,11 @@ describe('StyleDictionary class + extend method', () => {
             value: '#000',
           },
           style: {
-            type: 'other',
+            type: 'strokeStyle',
             value: 'solid',
           },
           width: {
-            type: 'width',
+            type: 'dimension',
             value: '2px',
           },
         },
@@ -497,11 +488,11 @@ describe('StyleDictionary class + extend method', () => {
             value: '#000',
           },
           style: {
-            type: 'other',
+            type: 'strokeStyle',
             value: 'solid',
           },
           width: {
-            type: 'width',
+            type: 'dimension',
             value: '2px',
           },
         },
@@ -511,11 +502,11 @@ describe('StyleDictionary class + extend method', () => {
             value: '#ccc',
           },
           style: {
-            type: 'other',
+            type: 'strokeStyle',
             value: 'dashed',
           },
           width: {
-            type: 'width',
+            type: 'dimension',
             value: '1px',
           },
         },

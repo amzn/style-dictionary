@@ -162,7 +162,7 @@ This tells the style dictionary build system how and what to build. The default 
 }
 ```
 
-| Attribute                            | Type              | Description                                                                                                                                                                                                                                                                   |
+| Property                             | Type              | Description                                                                                                                                                                                                                                                                   |
 | :----------------------------------- | :---------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | source                               | Array             | An array of file path [globs](https://github.com/isaacs/node-glob) to design token files. Style Dictionary will do a deep merge of all of the token files, allowing you to organize your files files however you want.                                                        |
 | include                              | Array             | An array of file path [globs](https://github.com/isaacs/node-glob) to design token files that contain default styles. The Style Dictionary uses this as a base collection of tokens. The tokens found using the "source" attribute will overwrite tokens found using include. |

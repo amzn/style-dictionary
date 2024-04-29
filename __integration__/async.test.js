@@ -91,6 +91,7 @@ describe('integration', async function () {
 
     const sd = new SDExtension({
       source: [`__integration__/tokens/**/[!_]*.json?(c)`],
+      preprocessors: ['foo-processor'],
       platforms: {
         css: {
           transforms: [

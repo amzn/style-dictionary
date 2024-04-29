@@ -110,6 +110,52 @@ StyleDictionary.registerFormat({
 });
 ```
 
+## Hooks APIs
+
+We've given a name to all of the things that you can register which will execute custom behavior during the Style Dictionary lifecycle: `hooks`.
+Available hooks are: `parsers`, `preprocessors`, `transformGroups`, `transforms`, `formats`, `filters`, `fileHeaders`, `actions`.
+
+:::note
+The other hooks are also going to change similarly to preprocessors, in an effort to align these APIs and make them consistent across.
+They will all be grouped under the `hooks` property, they will all use plural form vs singular (e.g. `transforms` vs `transform`), and lastly,
+they will all use the same signature, with a `name` property and a handler function name that is the same as the hook name (e.g. `transformer` will be `transform`).
+Parsers will also have to be applied explicitly similarly to preprocessors.
+:::
+
+### Preprocessors
+
+Preprocessors, when registered, would always apply on a global level, without explicitly applying them in the config.
+
+This has been changed now:
+
+```js title="config.js" del={3-8} ins={9-24}
+export default {
+  // register it inline or by SD.registerPreprocessor
+  preprocessors: {
+    foo: (dictionary) => {
+      // preprocess it
+      return dictionary;
+    },
+  },
+  hooks: {
+    preprocessors: {
+      foo: (dictionary) => {
+        // preprocess it
+        return dictionary;
+      },
+    },
+  },
+  // apply it globally
+  preprocessors: ['foo'],
+  platforms: {
+    css: {
+      // or apply is per platform
+      preprocessors: ['foo'],
+    },
+  },
+};
+```
+
 ## CTI reliance
 
 [CTI or Category / Type / Item](/info/tokens/#category--type--item) used to be the default way of structuring design tokens in Style Dictionary.

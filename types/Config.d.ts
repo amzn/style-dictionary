@@ -19,6 +19,7 @@ import type { Preprocessor } from './Preprocessor.d.ts';
 import type { Transform } from './Transform.d.ts';
 import type { Formatter, OutputReferences } from './Format.d.ts';
 import type { Action } from './Action.d.ts';
+import type { Hooks } from '../lib/Register.js';
 
 export interface LocalOptions {
   showFileHeader?: boolean;
@@ -64,14 +65,16 @@ export type ExpandFilter = (
 ) => boolean;
 
 export interface Expand {
-  typography?: boolean | ExpandFilter;
-  border?: boolean | ExpandFilter;
-  shadow?: boolean | ExpandFilter;
-  // Allows expanding custom types that have object values
-  [key: string]: boolean | ExpandFilter;
+  typesMap?: Record<string, Record<string, string> | string>;
+  include?: string[] | ExpandFilter;
+  exclude?: string[] | ExpandFilter;
 }
 
 export type ExpandConfig = Expand | boolean | ExpandFilter;
+
+export interface Hooks {
+  preprocessors?: Record<string, Omit<Preprocessor, 'name'>>;
+}
 
 export interface PlatformConfig extends RegexOptions {
   log?: LogConfig;
@@ -92,11 +95,11 @@ export interface Config {
   source?: string[];
   include?: string[];
   tokens?: DesignTokens;
+  hooks?: Hooks;
   expand?: ExpandConfig;
-  expandTypesMap?: Record<string, Record<string, string> | string>;
   platforms?: Record<string, PlatformConfig>;
   parsers?: Parser[];
-  preprocessors?: Record<string, Preprocessor>;
+  preprocessors?: string[];
   transform?: Record<string, Transform>;
   transformGroup?: Record<string, string[]>;
   format?: Record<string, Formatter>;

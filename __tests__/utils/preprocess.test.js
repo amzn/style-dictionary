@@ -22,6 +22,7 @@ describe('utils', () => {
             value: '5px',
           },
         },
+        ['preprocessorA'],
         {
           preprocessorA: {
             preprocessor: (tokens) => {
@@ -36,40 +37,6 @@ describe('utils', () => {
       });
     });
 
-    it('should support platform-specific preprocessors', async () => {
-      const preprocessors = {
-        preprocessorA: {
-          platform: 'foo',
-          preprocessor: (tokens) => {
-            tokens.bar = tokens.foo;
-            return tokens;
-          },
-        },
-      };
-      const output = await preprocess(
-        {
-          foo: {
-            value: '5px',
-          },
-        },
-        preprocessors,
-      );
-      expect(output).to.not.have.property('bar');
-
-      const outputWithPlatform = await preprocess(
-        {
-          foo: {
-            value: '5px',
-          },
-        },
-        preprocessors,
-        'foo',
-      );
-      expect(outputWithPlatform).to.have.property('bar').eql({
-        value: '5px',
-      });
-    });
-
     it('should support asynchronous preprocessors as well', async () => {
       const output = await preprocess(
         {
@@ -77,6 +44,7 @@ describe('utils', () => {
             value: '5px',
           },
         },
+        ['preprocessorA', 'preprocessorB', 'preprocessorC'],
         {
           preprocessorA: {
             preprocessor: (tokens) => {

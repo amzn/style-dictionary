@@ -5,7 +5,7 @@ title: Preprocessors
 Starting in version 4.0, you can define custom preprocessors to process the dictionary object as a whole, after it all token files have been parsed and combined into one.
 This is useful if you want to do more complex transformations on the dictionary as a whole, when all other ways are not powerful enough.
 
-You can also tag a preprocessor with a platform option, so it only runs on the dictionary for that specific platform when building said platform.
+Preprocessors can be applied globally or per platform.
 
 :::caution
 It should be clear that using this feature should be a last resort. Using custom parsers to parse per file or using transforms to do transformations on a per token basis,
@@ -22,12 +22,10 @@ A preprocessor is an object with two props:
 
 - `name`: the name of the preprocessor
 - `preprocessor` a callback function that receives the dictionary as a parameter, and returns the processed dictionary
-- `platform`, optional, will only run the preprocessor for that platform when building for said platform, rather than running it globally after the dictionary is first initialized after parsing
 
 ```javascript title="my-preprocessor.js"
 const myPreprocessor = {
   name: 'strip-third-party-meta',
-  platform: 'css',
   preprocessor: (dictionary) => {
     delete dictionary.thirdPartyMetadata;
     return dictionary;
@@ -73,11 +71,36 @@ StyleDictionary.registerPreprocessor(myPreprocessor);
 
 ```javascript
 export default {
-  preprocessors: {
-    'strip-props': myPreprocessor,
+  registeredHooks: {
+    preprocessors: {
+      'strip-props': myPreprocessor,
+    },
   },
   // ... the rest of the configuration
 };
+```
+
+### Applying it in config
+
+```json
+{
+  "source": ["**/*.tokens.json"],
+  "preprocessors": ["strip-props"]
+}
+```
+
+or platform-specific:
+
+```json
+{
+  "source": ["**/*.tokens.json"],
+  "platforms": {
+    "css": {
+      "transformGroup": "css",
+      "preprocessors": ["strip-props"]
+    }
+  }
+}
 ```
 
 ---
@@ -104,3 +127,12 @@ StyleDictionary.registerPreprocessor({
   },
 });
 ```
+
+---
+
+## Default preprocessors
+
+There are two default preprocessors that are always applied and run before other custom preprocessors do:
+
+- [`typeDtcgDelegate`](/reference/utils/dtcg#typedtcgdelegate), for DTCG tokens, make sure the `$type` is either already present or gets inherited from the closest ancestor that has it defined, so that the `$type` is always available on the token level, for ease of use
+- [`expandObjectTokens`](/reference/config#expand), a private preprocessor that will expand object-value (composite) tokens when user config has this enabled.
