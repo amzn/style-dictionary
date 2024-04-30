@@ -3,8 +3,7 @@ export const snapshots = {};
 
 snapshots["integration scss scss/variables should match snapshot"] = 
 `
-// Do not edit directly
-// Generated on Sat, 01 Jan 2000 00:00:00 GMT
+// Do not edit directly, this file was auto-generated.
 
 $color-background-primary: #ffffff !default;
 $color-background-secondary: #f3f4f4;
@@ -173,8 +172,7 @@ $size-padding-xl: 1rem;
 
 snapshots["integration scss scss/variables with themeable should match snapshot"] = 
 `
-// Do not edit directly
-// Generated on Sat, 01 Jan 2000 00:00:00 GMT
+// Do not edit directly, this file was auto-generated.
 
 $color-background-primary: #ffffff !default;
 $color-background-secondary: #f3f4f4 !default;
@@ -343,8 +341,7 @@ $size-padding-xl: 1rem !default;
 
 snapshots["integration scss scss/variables with outputReferences should match snapshot"] = 
 `
-// Do not edit directly
-// Generated on Sat, 01 Jan 2000 00:00:00 GMT
+// Do not edit directly, this file was auto-generated.
 
 $size-padding-xl: 1rem;
 $size-padding-large: 1rem;
@@ -513,8 +510,7 @@ $color-background-disabled: $color-background-tertiary;
 
 snapshots["integration scss scss/variables with filter and output references should match snapshot"] = 
 `
-// Do not edit directly
-// Generated on Sat, 01 Jan 2000 00:00:00 GMT
+// Do not edit directly, this file was auto-generated.
 
 $color-background-info: $color-core-blue-0;
 $color-background-success: $color-core-green-0;
@@ -530,8 +526,7 @@ $color-background-disabled: $color-background-tertiary;
 snapshots["integration scss scss/map-flat should match snapshot"] = 
 `
 /**
- * Do not edit directly
- * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ * Do not edit directly, this file was auto-generated.
  */
 
 $design-system-tokens: (
@@ -703,8 +698,7 @@ $design-system-tokens: (
 snapshots["integration scss scss/map-deep should match snapshot"] = 
 `
 /**
- * Do not edit directly
- * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ * Do not edit directly, this file was auto-generated.
  */
 
 $color-background-primary: #ffffff !default;
@@ -1092,8 +1086,7 @@ $design-system-tokens: (
 snapshots["integration scss scss/map-deep with outputReferences should match snapshot"] = 
 `
 /**
- * Do not edit directly
- * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ * Do not edit directly, this file was auto-generated.
  */
 
 $size-padding-xl: 1rem !default;
@@ -1481,8 +1474,7 @@ $design-system-tokens: (
 snapshots["integration scss scss/map-deep without themeable should match snapshot"] = 
 `
 /**
- * Do not edit directly
- * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ * Do not edit directly, this file was auto-generated.
  */
 
 $color-background-primary: #ffffff !default;

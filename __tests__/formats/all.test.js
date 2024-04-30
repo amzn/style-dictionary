@@ -14,6 +14,7 @@ import { expect } from 'chai';
 import formats from '../../lib/common/formats.js';
 import createFormatArgs from '../../lib/utils/createFormatArgs.js';
 import flattenTokens from '../../lib/utils/flattenTokens.js';
+import { deepmerge } from '../../lib/utils/deepmerge.js';
 
 const file = {
   destination: '__output/',
@@ -50,6 +51,26 @@ describe('formats', async () => {
           }),
           {},
           file,
+        );
+        await expect(output).to.matchSnapshot();
+      });
+
+      it('should match ' + key + ' snapshot with fileHeaderTimestamp set', async () => {
+        const _file = deepmerge(file, {
+          options: {
+            formatting: {
+              fileHeaderTimestamp: true,
+            },
+          },
+        });
+        const output = await format(
+          createFormatArgs({
+            dictionary: { tokens, allTokens: flattenTokens(tokens) },
+            file: _file,
+            platform: {},
+          }),
+          {},
+          _file,
         );
         await expect(output).to.matchSnapshot();
       });

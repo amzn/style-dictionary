@@ -13,6 +13,7 @@ export interface FormattingOptions {
   commentPosition?: 'above' | 'inline';
   indentation?: string;
   separator?: string;
+  fileHeaderTimestamp?: boolean;
 }
 
 export type FileHeader = (defaultMessage: string[]) => Promise<string[]> | string[];

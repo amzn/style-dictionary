@@ -123,8 +123,7 @@ $border-primary: $size-border solid $color-red;
 
 snapshots["integration object values css/variables shadow should match snapshot with references"] = 
 `/**
- * Do not edit directly
- * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ * Do not edit directly, this file was auto-generated.
  */
 
 :root {
@@ -136,8 +135,7 @@ snapshots["integration object values css/variables shadow should match snapshot 
 
 snapshots["integration object values css/variables hsl syntax should match snapshot"] = 
 `/**
- * Do not edit directly
- * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ * Do not edit directly, this file was auto-generated.
  */
 
 :root {
@@ -149,8 +147,7 @@ snapshots["integration object values css/variables hsl syntax should match snaps
 
 snapshots["integration object values css/variables hsl syntax with references should match snapshot"] = 
 `/**
- * Do not edit directly
- * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ * Do not edit directly, this file was auto-generated.
  */
 
 :root {
@@ -162,8 +159,7 @@ snapshots["integration object values css/variables hsl syntax with references sh
 
 snapshots["integration object values css/variables hex syntax should match snapshot"] = 
 `/**
- * Do not edit directly
- * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ * Do not edit directly, this file was auto-generated.
  */
 
 :root {
@@ -175,8 +171,7 @@ snapshots["integration object values css/variables hex syntax should match snaps
 
 snapshots["integration object values css/variables hex syntax with references should match snapshot"] = 
 `/**
- * Do not edit directly
- * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ * Do not edit directly, this file was auto-generated.
  */
 
 :root {
@@ -188,8 +183,7 @@ snapshots["integration object values css/variables hex syntax with references sh
 
 snapshots["integration object values css/variables border should match snapshot"] = 
 `/**
- * Do not edit directly
- * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ * Do not edit directly, this file was auto-generated.
  */
 
 :root {
@@ -200,8 +194,7 @@ snapshots["integration object values css/variables border should match snapshot"
 
 snapshots["integration object values css/variables border with references should match snapshot"] = 
 `/**
- * Do not edit directly
- * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ * Do not edit directly, this file was auto-generated.
  */
 
 :root {
@@ -212,8 +205,7 @@ snapshots["integration object values css/variables border with references should
 
 snapshots["integration object values css/variables shadow should match snapshot"] = 
 `/**
- * Do not edit directly
- * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ * Do not edit directly, this file was auto-generated.
  */
 
 :root {
@@ -225,8 +217,7 @@ snapshots["integration object values css/variables shadow should match snapshot"
 
 snapshots["integration object values scss/variables should match snapshot"] = 
 `
-// Do not edit directly
-// Generated on Sat, 01 Jan 2000 00:00:00 GMT
+// Do not edit directly, this file was auto-generated.
 
 $border-primary: 0.125rem solid #ff0000;
 `;
@@ -234,8 +225,7 @@ $border-primary: 0.125rem solid #ff0000;
 
 snapshots["integration object values scss/variables with references should match snapshot"] = 
 `
-// Do not edit directly
-// Generated on Sat, 01 Jan 2000 00:00:00 GMT
+// Do not edit directly, this file was auto-generated.
 
 $border-primary: $size-border solid $color-red;
 `;

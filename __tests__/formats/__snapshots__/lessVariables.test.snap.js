@@ -4,8 +4,7 @@ export const snapshots = {};
 
 snapshots["formats less/variables should have a valid less syntax and match snapshot 1"] = 
 `
-// Do not edit directly
-// Generated on Sat, 01 Jan 2000 00:00:00 GMT
+// Do not edit directly, this file was auto-generated.
 
 @color-base-red-400: #EF5350;
 `;

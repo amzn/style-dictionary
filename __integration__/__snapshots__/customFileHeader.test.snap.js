@@ -4,8 +4,7 @@ export const snapshots = {};
 snapshots["integration valid custom file headers file options registered file header should match snapshot"] = 
 `/**
  * hello
- * Do not edit directly
- * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ * Do not edit directly, this file was auto-generated.
  */
 
 :root {
@@ -16,8 +15,7 @@ snapshots["integration valid custom file headers file options registered file he
 
 snapshots["integration valid custom file headers file options config file header should match snapshot"] = 
 `/**
- * Do not edit directly
- * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ * Do not edit directly, this file was auto-generated.
  * hello, world!
  */
 
@@ -40,8 +38,7 @@ snapshots["integration valid custom file headers file options inline file header
 
 snapshots["integration valid custom file headers platform options no file options should match snapshot"] = 
 `/**
- * Do not edit directly
- * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ * Do not edit directly, this file was auto-generated.
  * hello, world!
  */
 

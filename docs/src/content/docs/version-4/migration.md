@@ -268,6 +268,44 @@ In v3, the following options were put on the file properties level itself next t
 }
 ```
 
+## fileHeader default timestamp
+
+For all formats using the `fileHeader` `formatHelpers` utility (most of the built-ins do), it will no longer display a timestamp in the fileHeader output by default. This is now an opt-in by setting `file.formatting.fileHeaderTimestamp` to `true`. The reason for making this opt-in now is that using Style Dictionary in the context of a CI (continuous integration) pipeline is a common use-case, and when running on pull request event, output files always show a diff in git due to the timestamp changing, which often just means that the diff is bloated by redundancy.
+
+To achieve the old behavior:
+
+```json title="config.json" ins={10}
+{
+  "platforms": {
+    "css": {
+      "files": [
+        {
+          "destination": "variables.css",
+          "format": "css/variables",
+          "options": {
+            "formatting": {
+              "fileHeaderTimestamp": true
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+```
+
+or:
+
+```js title="config.js" ins={5}
+import { fileHeader } from 'style-dictionary/utils';
+
+const headerContent = await fileHeader({
+  formatting: {
+    fileHeaderTimestamp: true,
+  },
+});
+```
+
 ## Types
 
 Style Dictionary is entirely strictly typed now, and there will be `.d.ts` files published next to every file, this means that if you import from one of Style Dictionary's entrypoints, you automatically get the types implicitly with it. This is a big win for people using TypeScript, as the majority of the codebase now has much better types, with much fewer `any`s.
