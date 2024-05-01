@@ -3,8 +3,7 @@ export const snapshots = {};
 
 snapshots["integration css css/variables should match snapshot"] = 
 `/**
- * Do not edit directly
- * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ * Do not edit directly, this file was auto-generated.
  */
 
 :root {
@@ -179,8 +178,7 @@ snapshots["integration css css/variables should match snapshot"] =
 
 snapshots["integration css css/variables with references should match snapshot"] = 
 `/**
- * Do not edit directly
- * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ * Do not edit directly, this file was auto-generated.
  */
 
 :root {
@@ -355,8 +353,7 @@ snapshots["integration css css/variables with references should match snapshot"]
 
 snapshots["integration css css/variables with selector should match snapshot"] = 
 `/**
- * Do not edit directly
- * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ * Do not edit directly, this file was auto-generated.
  */
 
 .test {
@@ -531,8 +528,7 @@ snapshots["integration css css/variables with selector should match snapshot"] =
 
 snapshots["integration css css/variables with referenceFallbacks should match snapshot"] = 
 `/**
- * Do not edit directly
- * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ * Do not edit directly, this file was auto-generated.
  */
 
 :root {

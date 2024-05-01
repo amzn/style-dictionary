@@ -30,8 +30,7 @@ css
 
 snapshots["integration output references should allow using outputReferencesTransformed to not output refs when value has been transitively transformed"] = 
 `/**
- * Do not edit directly
- * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ * Do not edit directly, this file was auto-generated.
  */
 
 :root {
