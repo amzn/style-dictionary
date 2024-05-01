@@ -222,6 +222,7 @@ Below are examples of how the `expand` property can be used.
   // only expands typography and border tokens, also passes a typesMap
   expand: {
     include: ['typography', 'border'],
+    // more info about typesMap later...
     typesMap: {
       // all width props are mapped to 'dimension' type
       width: 'dimension',
@@ -252,7 +253,7 @@ Below are examples of how the `expand` property can be used.
 The value of expand can be multiple things:
 
 - `boolean`, `false` by default, when set to `true`, any object-value (composite) design token will be expanded into multiple tokens, one for each property.
-- `ExpandFilter`, a function called with 3 arguments which must return a `boolean`, when `true` will expand that individual token, arguments:
+- a function of type `ExpandFilter`, e.g. `(token, options, platform) => true`, must return a `boolean`, when `true` will expand that individual token, arguments:
   - `token`: the design token of which the value is an object (composite)
   - `options`: the StyleDictionary config options
   - `platform`: this is only passed when expand is used on the platform level, contains the platform specific config options
@@ -326,6 +327,65 @@ Resulting in the following expanded output:
   "color": {
     "value": "#000",
     "type": "color"
+  }
+}
+```
+
+#### Example
+
+~ sd-playground
+
+```json tokens
+{
+  "border": {
+    "type": "border",
+    "value": {
+      "width": "2px",
+      "style": "solid",
+      "color": "#000"
+    }
+  },
+  "typography": {
+    "type": "typography",
+    "value": {
+      "fontWeight": "800",
+      "fontSize": "16px",
+      "fontFamily": "Arial Black"
+    }
+  }
+}
+```
+
+```json config
+{
+  "expand": {
+    "include": ["border"],
+    "typesMap": {
+      "border": {
+        "style": "borderStyle"
+      }
+    }
+  },
+  "platforms": {
+    "css": {
+      "transformGroup": "css",
+      "files": [
+        {
+          "destination": "vars.css",
+          "format": "css/variables"
+        }
+      ],
+      "expand": true
+    },
+    "js": {
+      "transformGroup": "js",
+      "files": [
+        {
+          "destination": "tokens.js",
+          "format": "javascript/es6"
+        }
+      ]
+    }
   }
 }
 ```

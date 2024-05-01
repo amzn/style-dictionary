@@ -370,6 +370,21 @@ describe('utils', () => {
             },
           });
         });
+
+        it('should throw an error when include and exclude are combined', () => {
+          const badFn = () =>
+            expandTokens(input, {
+              expand: {
+                include: ['typography'],
+                exclude: ['border'],
+              },
+              usesDtcg: false,
+            });
+
+          expect(badFn).to.throw(
+            'expand.include should not be combined with expand.exclude, use one or the other.',
+          );
+        });
       });
     });
   });
