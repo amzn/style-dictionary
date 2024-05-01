@@ -14,6 +14,9 @@ export default {
     slack:
       'https://join.slack.com/t/tokens-studio/shared_invite/zt-1p8ea3m6t-C163oJcN9g3~YZTKRgo2hg',
   },
+  tableOfContents: {
+    maxHeadingLevel: 4,
+  },
   sidebar: [
     {
       label: 'Getting Started',

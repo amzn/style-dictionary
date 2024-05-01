@@ -11,7 +11,7 @@
  * and limitations under the License.
  */
 
-import type { DesignTokens, TransformedToken } from './DesignToken.d.ts';
+import type { DesignToken, DesignTokens, TransformedToken } from './DesignToken.d.ts';
 import type { Filter, Matcher } from './Filter.d.ts';
 import type { FileHeader, File, FormattingOptions } from './File.d.ts';
 import type { Parser } from './Parser.d.ts';
@@ -19,6 +19,7 @@ import type { Preprocessor } from './Preprocessor.d.ts';
 import type { Transform } from './Transform.d.ts';
 import type { Formatter, OutputReferences } from './Format.d.ts';
 import type { Action } from './Action.d.ts';
+import type { Hooks } from '../lib/Register.js';
 
 export interface LocalOptions {
   showFileHeader?: boolean;
@@ -59,16 +60,36 @@ export interface LogConfig {
   verbosity?: 'default' | 'silent' | 'verbose';
 }
 
+export type ExpandFilter = (
+  token: DesignToken,
+  options: Config,
+  platform?: PlatformConfig,
+) => boolean;
+
+export interface Expand {
+  typesMap?: Record<string, Record<string, string> | string>;
+  include?: string[] | ExpandFilter;
+  exclude?: string[] | ExpandFilter;
+}
+
+export type ExpandConfig = Expand | boolean | ExpandFilter;
+
+export interface Hooks {
+  preprocessors?: Record<string, Omit<Preprocessor, 'name'>>;
+}
+
 export interface PlatformConfig extends RegexOptions {
   log?: LogConfig;
   transformGroup?: string;
   transforms?: string[] | Omit<Transform, 'name'>[];
-  basePxFontSize?: number;
+  expand?: ExpandConfig;
   prefix?: string;
   buildPath?: string;
   files?: File[];
   actions?: string[] | Omit<Action, 'name'>[];
   options?: LocalOptions;
+  // Allows adding custom options on the platform level which is how you can pass external options to transforms
+  [key: string]: any;
 }
 
 export interface Config {
@@ -76,9 +97,11 @@ export interface Config {
   source?: string[];
   include?: string[];
   tokens?: DesignTokens;
+  hooks?: Hooks;
+  expand?: ExpandConfig;
   platforms?: Record<string, PlatformConfig>;
   parsers?: Parser[];
-  preprocessors?: Record<string, Preprocessor>;
+  preprocessors?: string[];
   transform?: Record<string, Transform>;
   transformGroup?: Record<string, string[]>;
   format?: Record<string, Formatter>;

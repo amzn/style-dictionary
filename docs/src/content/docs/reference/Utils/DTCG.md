@@ -10,6 +10,8 @@ This function processes your ["Design Token Community Group Draft spec"-complian
 
 We built this utility because it's cheaper to apply the inheritance once, rather than on every access of a token's "$type" property, checking the ancestor tree to find it.
 
+This utility is ran by default in Style-Dictionary after the parser hook and before the preprocessor hook.
+
 ```js
 import { typeDtcgDelegate } from 'style-dictionary/utils';
 

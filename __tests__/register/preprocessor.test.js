@@ -20,12 +20,13 @@ registerSuite({
   },
   registerMethod: 'registerPreprocessor',
   prop: 'preprocessors',
+  hooks: true,
 });
 
 describe('register/transformGroup', async () => {
   let StyleDictionaryExtended;
   beforeEach(async () => {
-    StyleDictionary.preprocessors = {};
+    StyleDictionary.hooks.preprocessors = {};
     StyleDictionaryExtended = new StyleDictionary({});
     await StyleDictionaryExtended.hasInitialized;
   });
@@ -35,8 +36,8 @@ describe('register/transformGroup', async () => {
       name: 'example-preprocessor',
       preprocessor: (dict) => dict,
     });
-    expect(StyleDictionary.preprocessors['example-preprocessor']).to.not.be.undefined;
-    expect(StyleDictionaryExtended.preprocessors['example-preprocessor']).to.not.be.undefined;
+    expect(StyleDictionary.hooks.preprocessors['example-preprocessor']).to.not.be.undefined;
+    expect(StyleDictionaryExtended.hooks.preprocessors['example-preprocessor']).to.not.be.undefined;
   });
 
   it('should throw if the preprocessor name is not a string', () => {
@@ -76,6 +77,7 @@ describe('register/transformGroup', async () => {
     });
 
     StyleDictionaryExtended = new StyleDictionary({
+      preprocessors: ['strip-descriptions'],
       tokens: {
         foo: {
           value: '4px',
@@ -120,6 +122,7 @@ describe('register/transformGroup', async () => {
     });
 
     StyleDictionaryExtended = new StyleDictionary({
+      preprocessors: ['strip-descriptions'],
       tokens: {
         foo: {
           value: '4px',
