@@ -23,6 +23,18 @@ function traverseObj(obj, fn) {
   }
 }
 
+function stripMeta(obj) {
+  Object.keys(obj).forEach((key) => {
+    if (['attributes', 'name', 'original', 'path'].includes(key)) {
+      delete obj[key];
+    }
+    if (typeof obj[key] === 'object') {
+      stripMeta(obj[key]);
+    }
+  });
+  return obj;
+}
+
 const test_props = {
   size: {
     padding: {
@@ -33,6 +45,70 @@ const test_props = {
 
 // extend method is called by StyleDictionary constructor, therefore we're basically testing both things here
 describe('StyleDictionary class + extend method', () => {
+  it('should accept a string as a path to a JSON5 file', async () => {
+    const StyleDictionaryExtended = new StyleDictionary('__tests__/__configs/test.json5');
+    await StyleDictionaryExtended.hasInitialized;
+    expect(StyleDictionaryExtended).to.have.nested.property('platforms.web');
+  });
+
+  it('should accept a string as a path to a JSONC file', async () => {
+    const StyleDictionaryExtended = new StyleDictionary('__tests__/__configs/test.jsonc');
+    await StyleDictionaryExtended.hasInitialized;
+    expect(StyleDictionaryExtended).to.have.nested.property('platforms.web');
+  });
+
+  it('should allow for chained extends and not mutate the original', async () => {
+    const StyleDictionary1 = new StyleDictionary({
+      foo: 'bar',
+      bar: 'other',
+    });
+    const StyleDictionary2 = await StyleDictionary1.extend({
+      foo: 'baz',
+    });
+    const StyleDictionary3 = await (
+      await StyleDictionary2.extend({
+        foo: 'bar',
+      })
+    ).extend({
+      foo: 'boo',
+    });
+    expect(StyleDictionary1.foo).to.equal('bar');
+    expect(StyleDictionary2.foo).to.equal('baz');
+    expect(StyleDictionary3.foo).to.equal('boo');
+    // check that the bar prop from SD1 is not lost in SD3
+    expect(StyleDictionary3.bar).to.equal('other');
+    expect(StyleDictionary).not.to.have.property('foo');
+  });
+
+  it(`should not pollute the prototype`, async () => {
+    const obj = {};
+    // method 1
+    new StyleDictionary(JSON.parse('{"__proto__":{"polluted":"yes"}}'));
+    // method 2, which executes a deepmerge under the hood
+    // this verifies that this deepmerge util is also protected against prototype pollution
+    const sd = new StyleDictionary();
+    await sd.hasInitialized;
+    await sd.extend(JSON.parse('{"__proto__":{"polluted":"yes"}}'));
+
+    // FIXME: method 3, by putting it into a design token, currently not tested
+    // for these we use our own deepExtend utility, which must be prototype pollution protected
+    // however, we don't actually test this here..
+
+    expect(obj.polluted).to.be.undefined;
+  });
+
+  it('should not merge tokens together but rather override on collision', async () => {
+    const sd = new StyleDictionary({
+      source: [
+        '__tests__/__json_files/token-collision-1.json',
+        '__tests__/__json_files/token-collision-2.json',
+      ],
+    });
+    await sd.hasInitialized;
+    expect(sd.tokens.test.value).to.equal('#ff0000');
+    expect(sd.tokens.test.$extensions).to.be.undefined;
+  });
+
   describe('method signature', () => {
     it('should accept a string as a path to a JSON file', () => {
       const StyleDictionaryExtended = new StyleDictionary('__tests__/__configs/test.json');
@@ -190,182 +266,304 @@ describe('StyleDictionary class + extend method', () => {
     });
   });
 
-  // This is to allow style dictionaries to depend on other style dictionaries and
-  // override tokens. Useful for skinning
-  it('should not throw a collision error if a source file collides with an include', async () => {
-    const StyleDictionaryExtended = new StyleDictionary({
-      include: ['__tests__/__tokens/paddings.json'],
-      source: ['__tests__/__tokens/paddings.json'],
-      log: 'error',
+  describe('collisions', () => {
+    it('should not throw a collision error if a source file collides with an include', async () => {
+      const StyleDictionaryExtended = new StyleDictionary({
+        include: ['__tests__/__tokens/paddings.json'],
+        source: ['__tests__/__tokens/paddings.json'],
+        log: 'error',
+      });
+      const output = fileToJSON('__tests__/__tokens/paddings.json');
+      traverseObj(output, (obj) => {
+        if (Object.hasOwn(obj, 'value') && !obj.filePath) {
+          obj.filePath = '__tests__/__tokens/paddings.json';
+          obj.isSource = true;
+        }
+      });
+      await StyleDictionaryExtended.hasInitialized;
+      expect(StyleDictionaryExtended.tokens).to.eql(output);
     });
-    const output = fileToJSON('__tests__/__tokens/paddings.json');
-    traverseObj(output, (obj) => {
-      if (Object.hasOwn(obj, 'value') && !obj.filePath) {
-        obj.filePath = '__tests__/__tokens/paddings.json';
-        obj.isSource = true;
+
+    it('should throw an error if the collision is in source files and log is set to error', async () => {
+      const sd = new StyleDictionary(
+        {
+          source: ['__tests__/__tokens/paddings.json', '__tests__/__tokens/_paddings.json'],
+          log: { warnings: 'error', verbosity: 'verbose' },
+        },
+        { init: false },
+      );
+      let error;
+      try {
+        await sd.init();
+      } catch (e) {
+        error = e;
       }
+      await expect(error.message).to.matchSnapshot();
     });
-    await StyleDictionaryExtended.hasInitialized;
-    expect(StyleDictionaryExtended.tokens).to.eql(output);
-  });
 
-  it('should throw an error if the collision is in source files and log is set to error', async () => {
-    const sd = new StyleDictionary(
-      {
-        source: ['__tests__/__tokens/paddings.json', '__tests__/__tokens/_paddings.json'],
-        log: { warnings: 'error', verbosity: 'verbose' },
-      },
-      { init: false },
-    );
-    let error;
-    try {
-      await sd.init();
-    } catch (e) {
-      error = e;
-    }
-    await expect(error.message).to.matchSnapshot();
-  });
-
-  it('should throw a brief error if the collision is in source files and log is set to error and verbosity default', async () => {
-    const sd = new StyleDictionary(
-      {
-        source: ['__tests__/__tokens/paddings.json', '__tests__/__tokens/_paddings.json'],
-        log: { warnings: 'error' },
-      },
-      { init: false },
-    );
-    let error;
-    try {
-      await sd.init();
-    } catch (e) {
-      error = e;
-    }
-    await expect(error.message).to.matchSnapshot();
-  });
-
-  it('should throw a warning if the collision is in source files and log is set to warn', async () => {
-    const sd = new StyleDictionary(
-      {
-        source: ['__tests__/__tokens/paddings.json', '__tests__/__tokens/paddings.json'],
-        log: 'warn',
-      },
-      { init: false },
-    );
-    await expect(sd.init()).to.eventually.be.fulfilled;
-  });
-
-  it('should accept a string as a path to a JSON5 file', async () => {
-    const StyleDictionaryExtended = new StyleDictionary('__tests__/__configs/test.json5');
-    await StyleDictionaryExtended.hasInitialized;
-    expect(StyleDictionaryExtended).to.have.nested.property('platforms.web');
-  });
-
-  it('should accept a string as a path to a JSONC file', async () => {
-    const StyleDictionaryExtended = new StyleDictionary('__tests__/__configs/test.jsonc');
-    await StyleDictionaryExtended.hasInitialized;
-    expect(StyleDictionaryExtended).to.have.nested.property('platforms.web');
-  });
-
-  it('should allow for chained extends and not mutate the original', async () => {
-    const StyleDictionary1 = new StyleDictionary({
-      foo: 'bar',
-      bar: 'other',
+    it('should throw a brief error if the collision is in source files and log is set to error and verbosity default', async () => {
+      const sd = new StyleDictionary(
+        {
+          source: ['__tests__/__tokens/paddings.json', '__tests__/__tokens/_paddings.json'],
+          log: { warnings: 'error' },
+        },
+        { init: false },
+      );
+      let error;
+      try {
+        await sd.init();
+      } catch (e) {
+        error = e;
+      }
+      await expect(error.message).to.matchSnapshot();
     });
-    const StyleDictionary2 = await StyleDictionary1.extend({
-      foo: 'baz',
+
+    it('should throw a warning if the collision is in source files and log is set to warn', async () => {
+      const sd = new StyleDictionary(
+        {
+          source: ['__tests__/__tokens/paddings.json', '__tests__/__tokens/paddings.json'],
+          log: 'warn',
+        },
+        { init: false },
+      );
+      await expect(sd.init()).to.eventually.be.fulfilled;
     });
-    const StyleDictionary3 = await (
-      await StyleDictionary2.extend({
-        foo: 'bar',
-      })
-    ).extend({
-      foo: 'boo',
-    });
-    expect(StyleDictionary1.foo).to.equal('bar');
-    expect(StyleDictionary2.foo).to.equal('baz');
-    expect(StyleDictionary3.foo).to.equal('boo');
-    // check that the bar prop from SD1 is not lost in SD3
-    expect(StyleDictionary3.bar).to.equal('other');
-    expect(StyleDictionary).not.to.have.property('foo');
   });
 
-  it(`should not pollute the prototype`, async () => {
-    const obj = {};
-    // method 1
-    new StyleDictionary(JSON.parse('{"__proto__":{"polluted":"yes"}}'));
-    // method 2, which executes a deepmerge under the hood
-    // this verifies that this deepmerge util is also protected against prototype pollution
-    const sd = new StyleDictionary();
-    await sd.hasInitialized;
-    await sd.extend(JSON.parse('{"__proto__":{"polluted":"yes"}}'));
-
-    // FIXME: method 3, by putting it into a design token, currently not tested
-    // for these we use our own deepExtend utility, which must be prototype pollution protected
-    // however, we don't actually test this here..
-
-    expect(obj.polluted).to.be.undefined;
-  });
-
-  it('should allow using $type value on a token group, children inherit, local overrides take precedence', async () => {
-    const sd = new StyleDictionary({
-      tokens: {
-        dimensions: {
-          $type: 'dimension',
-          sm: {
-            $value: '5',
+  describe('expand object value tokens', () => {
+    it('should not expand object value tokens by default', async () => {
+      const input = {
+        border: {
+          type: 'border',
+          value: {
+            width: '2px',
+            style: 'solid',
+            color: '#000',
           },
-          md: {
-            $value: '10',
+        },
+      };
+      const sd = new StyleDictionary({
+        tokens: input,
+      });
+      await sd.hasInitialized;
+      expect(sd.tokens).to.eql(input);
+    });
+
+    it('should allow expanding tokens globally', async () => {
+      const input = {
+        border: {
+          type: 'border',
+          value: {
+            width: '2px',
+            style: 'solid',
+            color: '#000',
           },
-          nested: {
-            deep: {
-              lg: {
-                $value: '15',
-              },
+        },
+      };
+      const sd = new StyleDictionary({
+        tokens: input,
+        expand: true,
+      });
+      await sd.hasInitialized;
+      expect(sd.tokens).to.eql({
+        border: {
+          color: {
+            type: 'color',
+            value: '#000',
+          },
+          style: {
+            type: 'strokeStyle',
+            value: 'solid',
+          },
+          width: {
+            type: 'dimension',
+            value: '2px',
+          },
+        },
+      });
+    });
+
+    it('should allow expanding tokens on a per platform basis', async () => {
+      const input = {
+        border: {
+          type: 'border',
+          value: {
+            width: '2px',
+            style: 'solid',
+            color: '#000',
+          },
+        },
+      };
+      const sd = new StyleDictionary({
+        tokens: input,
+        platforms: {
+          css: {
+            expand: true,
+          },
+          js: {},
+        },
+      });
+      await sd.hasInitialized;
+      const cssTokens = await sd.exportPlatform('css');
+      const jsTokens = await sd.exportPlatform('js');
+      expect(stripMeta(cssTokens)).to.eql({
+        border: {
+          color: {
+            type: 'color',
+            value: '#000',
+          },
+          style: {
+            type: 'strokeStyle',
+            value: 'solid',
+          },
+          width: {
+            type: 'dimension',
+            value: '2px',
+          },
+        },
+      });
+      expect(stripMeta(jsTokens)).to.eql(input);
+    });
+
+    it('should allow combining global expand with per platform expand', async () => {
+      const input = {
+        border: {
+          type: 'border',
+          value: {
+            width: '2px',
+            style: 'solid',
+            color: '#000',
+          },
+        },
+        borderTwo: {
+          type: 'border',
+          value: {
+            width: '1px',
+            style: 'dashed',
+            color: '#ccc',
+          },
+        },
+      };
+      const sd = new StyleDictionary({
+        tokens: input,
+        expand: {
+          include: (token) => {
+            return token.value.width === '2px';
+          },
+        },
+        platforms: {
+          css: {},
+          js: {
+            expand: {
+              typesMap: true,
             },
           },
-          nope: {
-            $value: '20',
-            $type: 'spacing',
+        },
+      });
+      await sd.hasInitialized;
+      const cssTokens = await sd.exportPlatform('css');
+      const jsTokens = await sd.exportPlatform('js');
+
+      expect(stripMeta(cssTokens)).to.eql({
+        border: {
+          color: {
+            type: 'color',
+            value: '#000',
+          },
+          style: {
+            type: 'strokeStyle',
+            value: 'solid',
+          },
+          width: {
+            type: 'dimension',
+            value: '2px',
           },
         },
-      },
-      platforms: {
-        css: {
-          transformGroup: 'css',
+        borderTwo: input.borderTwo,
+      });
+      expect(stripMeta(jsTokens)).to.eql({
+        border: {
+          color: {
+            type: 'color',
+            value: '#000',
+          },
+          style: {
+            type: 'strokeStyle',
+            value: 'solid',
+          },
+          width: {
+            type: 'dimension',
+            value: '2px',
+          },
         },
-      },
+        borderTwo: {
+          color: {
+            type: 'color',
+            value: '#ccc',
+          },
+          style: {
+            type: 'strokeStyle',
+            value: 'dashed',
+          },
+          width: {
+            type: 'dimension',
+            value: '1px',
+          },
+        },
+      });
     });
-    await sd.hasInitialized;
-
-    expect(sd.tokens.dimensions.sm.$type).to.equal('dimension');
-    expect(sd.tokens.dimensions.md.$type).to.equal('dimension');
-    expect(sd.tokens.dimensions.nested.deep.lg.$type).to.equal('dimension');
-    expect(sd.tokens.dimensions.nope.$type).to.equal('spacing');
   });
 
-  it('should detect usage of DTCG draft spec tokens', async () => {
-    const sd = new StyleDictionary({
-      tokens: {
-        datalist: {
-          key: { color: { $value: '#222' } },
-          value: { color: { $value: '#000' } },
+  describe('DTCG integration', () => {
+    it('should allow using $type value on a token group, children inherit, local overrides take precedence', async () => {
+      const sd = new StyleDictionary({
+        tokens: {
+          dimensions: {
+            $type: 'dimension',
+            sm: {
+              $value: '5',
+            },
+            md: {
+              $value: '10',
+            },
+            nested: {
+              deep: {
+                lg: {
+                  $value: '15',
+                },
+              },
+            },
+            nope: {
+              $value: '20',
+              $type: 'spacing',
+            },
+          },
         },
-      },
-    });
-    await sd.hasInitialized;
-    expect(sd.usesDtcg).to.be.true;
-  });
+        platforms: {
+          css: {
+            transformGroup: 'css',
+          },
+        },
+      });
+      await sd.hasInitialized;
 
-  it('should not merge tokens together but rather override on collision', async () => {
-    const sd = new StyleDictionary({
-      source: [
-        '__tests__/__json_files/token-collision-1.json',
-        '__tests__/__json_files/token-collision-2.json',
-      ],
+      expect(sd.tokens.dimensions.sm.$type).to.equal('dimension');
+      expect(sd.tokens.dimensions.md.$type).to.equal('dimension');
+      expect(sd.tokens.dimensions.nested.deep.lg.$type).to.equal('dimension');
+      expect(sd.tokens.dimensions.nope.$type).to.equal('spacing');
     });
-    await sd.hasInitialized;
-    expect(sd.tokens.test.value).to.equal('#ff0000');
-    expect(sd.tokens.test.$extensions).to.be.undefined;
+
+    it('should detect usage of DTCG draft spec tokens', async () => {
+      const sd = new StyleDictionary({
+        tokens: {
+          datalist: {
+            key: { color: { $value: '#222' } },
+            value: { color: { $value: '#000' } },
+          },
+        },
+      });
+      await sd.hasInitialized;
+      expect(sd.usesDtcg).to.be.true;
+    });
   });
 });

@@ -11,7 +11,7 @@
  * and limitations under the License.
  */
 import { expect } from 'chai';
-import { typeDtcgDelegate, preprocess } from '../../lib/utils/preprocess.js';
+import { preprocess } from '../../lib/utils/preprocess.js';
 
 describe('utils', () => {
   describe('preprocess', () => {
@@ -22,10 +22,13 @@ describe('utils', () => {
             value: '5px',
           },
         },
+        ['preprocessorA'],
         {
-          preprocessorA: (tokens) => {
-            tokens.bar = tokens.foo;
-            return tokens;
+          preprocessorA: {
+            preprocessor: (tokens) => {
+              tokens.bar = tokens.foo;
+              return tokens;
+            },
           },
         },
       );
@@ -41,104 +44,31 @@ describe('utils', () => {
             value: '5px',
           },
         },
+        ['preprocessorA', 'preprocessorB', 'preprocessorC'],
         {
-          preprocessorA: (tokens) => {
-            tokens.bar = tokens.foo;
-            return tokens;
+          preprocessorA: {
+            preprocessor: (tokens) => {
+              tokens.bar = tokens.foo;
+              return tokens;
+            },
           },
-          preprocessorB: async (tokens) => {
-            await new Promise((resolve) => setTimeout(resolve, 100));
-            tokens.baz = tokens.bar;
-            return tokens;
+          preprocessorB: {
+            preprocessor: async (tokens) => {
+              await new Promise((resolve) => setTimeout(resolve, 100));
+              tokens.baz = tokens.bar;
+              return tokens;
+            },
           },
-          preprocessorC: (tokens) => {
-            tokens.qux = tokens.baz;
-            return tokens;
+          preprocessorC: {
+            preprocessor: (tokens) => {
+              tokens.qux = tokens.baz;
+              return tokens;
+            },
           },
         },
       );
       expect(output).to.have.property('qux').eql({
         value: '5px',
-      });
-    });
-  });
-
-  describe('typeDtcgDelegate', () => {
-    it('should correctly let tokens inherit the $type property while respecting local overrides', () => {
-      const tokens = {
-        dimension: {
-          $type: 'dimension',
-          scale: {
-            $value: '2',
-            $type: 'math',
-          },
-          xs: {
-            $value: '4',
-          },
-          nested: {
-            deep: {
-              deeper: {
-                $value: '12',
-              },
-            },
-            deep2: {
-              $type: 'math',
-              deeper: {
-                $type: 'other',
-                evenDeeper: {
-                  $value: '12',
-                  $type: 'math',
-                },
-                evenDeeper2: {
-                  $value: '12',
-                },
-              },
-            },
-          },
-          sm: {
-            $value: '8',
-          },
-        },
-      };
-
-      expect(typeDtcgDelegate(tokens)).to.eql({
-        dimension: {
-          $type: 'dimension',
-          scale: {
-            $value: '2',
-            $type: 'math',
-          },
-          xs: {
-            $value: '4',
-            $type: 'dimension',
-          },
-          nested: {
-            deep: {
-              deeper: {
-                $value: '12',
-                $type: 'dimension',
-              },
-            },
-            deep2: {
-              $type: 'math',
-              deeper: {
-                $type: 'other',
-                evenDeeper: {
-                  $value: '12',
-                  $type: 'math',
-                },
-                evenDeeper2: {
-                  $value: '12',
-                  $type: 'other',
-                },
-              },
-            },
-          },
-          sm: {
-            $value: '8',
-            $type: 'dimension',
-          },
-        },
       });
     });
   });
