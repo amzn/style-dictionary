@@ -5,8 +5,7 @@ snapshots["integration android android/resources should match snapshot"] =
 `<?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-  Do not edit directly
-  Generated on Sat, 01 Jan 2000 00:00:00 GMT
+  Do not edit directly, this file was auto-generated.
 -->
 <resources>
   <color name="color_background_primary">#ffffffff</color>
@@ -178,8 +177,7 @@ snapshots["integration android android/resources with references should match sn
 `<?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-  Do not edit directly
-  Generated on Sat, 01 Jan 2000 00:00:00 GMT
+  Do not edit directly, this file was auto-generated.
 -->
 <resources>
   <color name="color_background_primary">@color/color_core_neutral_0</color>
@@ -351,8 +349,7 @@ snapshots["integration android android/resources with filter should match snapsh
 `<?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-  Do not edit directly
-  Generated on Sat, 01 Jan 2000 00:00:00 GMT
+  Do not edit directly, this file was auto-generated.
 -->
 <resources>
   <color name="color_background_primary">#ffffffff</color>

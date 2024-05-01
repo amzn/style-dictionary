@@ -7,8 +7,7 @@ snapshots["integration ios objective-c ios/singleton.m should match snapshot"] =
 // singleton.m
 //
 
-// Do not edit directly
-// Generated on Sat, 01 Jan 2000 00:00:00 GMT
+// Do not edit directly, this file was auto-generated.
 
 
 #import "StyleDictionary.h"
@@ -1367,8 +1366,7 @@ snapshots["integration ios objective-c ios/singleton.h should match snapshot"] =
 // singleton.h
 //
 
-// Do not edit directly
-// Generated on Sat, 01 Jan 2000 00:00:00 GMT
+// Do not edit directly, this file was auto-generated.
 
 
 #import <Foundation/Foundation.h>
@@ -1389,8 +1387,7 @@ snapshots["integration ios objective-c ios/color.m should match snapshot"] =
 // color.m
 //
 
-// Do not edit directly
-// Generated on Sat, 01 Jan 2000 00:00:00 GMT
+// Do not edit directly, this file was auto-generated.
 
 
 #import "StyleDictionaryColor.h"
@@ -1575,8 +1572,7 @@ snapshots["integration ios objective-c ios/color.h should match snapshot"] =
 // color.h
 //
 
-// Do not edit directly
-// Generated on Sat, 01 Jan 2000 00:00:00 GMT
+// Do not edit directly, this file was auto-generated.
 
 
 #import <UIKit/UIKit.h>
@@ -1749,8 +1745,7 @@ snapshots["integration ios objective-c ios/macros.h should match snapshot"] =
 // macros.h
 //
 
-// Do not edit directly
-// Generated on Sat, 01 Jan 2000 00:00:00 GMT
+// Do not edit directly, this file was auto-generated.
 
 
 #import <Foundation/Foundation.h>
@@ -1926,8 +1921,7 @@ snapshots["integration ios objective-c ios/static.h should match snapshot"] =
 // static.h
 //
 
-// Do not edit directly
-// Generated on Sat, 01 Jan 2000 00:00:00 GMT
+// Do not edit directly, this file was auto-generated.
 
 
 #import <Foundation/Foundation.h>
@@ -1950,8 +1944,7 @@ snapshots["integration ios objective-c ios/static.m should match snapshot"] =
 // static.m
 //
 
-// Do not edit directly
-// Generated on Sat, 01 Jan 2000 00:00:00 GMT
+// Do not edit directly, this file was auto-generated.
 
 
 #import "StyleDictionaryStatic.h"

@@ -5,8 +5,7 @@ snapshots["formats android/resources should match default snapshot"] =
 `<?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-  Do not edit directly
-  Generated on Sat, 01 Jan 2000 00:00:00 GMT
+  Do not edit directly, this file was auto-generated.
 -->
 <resources>
   <dimen name="size-font-small">12rem</dimen>
@@ -20,8 +19,7 @@ snapshots["formats android/resources with resourceType override should match sna
 `<?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-  Do not edit directly
-  Generated on Sat, 01 Jan 2000 00:00:00 GMT
+  Do not edit directly, this file was auto-generated.
 -->
 <resources>
   <dimen name="size-font-small">12rem</dimen>
@@ -35,8 +33,7 @@ snapshots["formats android/resources with resourceMap override should match snap
 `<?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-  Do not edit directly
-  Generated on Sat, 01 Jan 2000 00:00:00 GMT
+  Do not edit directly, this file was auto-generated.
 -->
 <resources>
   <color name="backgroundColorSecondary">#F2F3F4</color>

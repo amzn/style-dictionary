@@ -4,8 +4,7 @@ export const snapshots = {};
 snapshots["integration compose compose/object should match snapshot"] = 
 `
 
-// Do not edit directly
-// Generated on Sat, 01 Jan 2000 00:00:00 GMT
+// Do not edit directly, this file was auto-generated.
 
 
 
@@ -183,8 +182,7 @@ object StyleDictionary {
 snapshots["integration compose compose/object with references should match snapshot"] = 
 `
 
-// Do not edit directly
-// Generated on Sat, 01 Jan 2000 00:00:00 GMT
+// Do not edit directly, this file was auto-generated.
 
 
 

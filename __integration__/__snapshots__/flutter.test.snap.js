@@ -7,8 +7,7 @@ snapshots["integration flutter flutter/class.dart should match snapshot"] =
 // style_dictionary.dart
 //
 
-// Do not edit directly
-// Generated on Sat, 01 Jan 2000 00:00:00 GMT
+// Do not edit directly, this file was auto-generated.
 
 
 
@@ -188,8 +187,7 @@ snapshots["integration flutter flutter/class.dart with references should match s
 // style_dictionary_with_references.dart
 //
 
-// Do not edit directly
-// Generated on Sat, 01 Jan 2000 00:00:00 GMT
+// Do not edit directly, this file was auto-generated.
 
 
 
@@ -369,8 +367,7 @@ snapshots["integration flutter flutter/class.dart separate should match snapshot
 // style_dictionary_color.dart
 //
 
-// Do not edit directly
-// Generated on Sat, 01 Jan 2000 00:00:00 GMT
+// Do not edit directly, this file was auto-generated.
 
 
 

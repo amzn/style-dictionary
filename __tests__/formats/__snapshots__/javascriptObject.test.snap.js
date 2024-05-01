@@ -3,8 +3,7 @@ export const snapshots = {};
 
 snapshots["formats javascript/object should be valid JS syntax and match snapshot"] = 
 `/**
- * Do not edit directly
- * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ * Do not edit directly, this file was auto-generated.
  */
 
 var foo = {
