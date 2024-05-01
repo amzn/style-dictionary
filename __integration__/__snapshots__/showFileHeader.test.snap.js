@@ -3,8 +3,7 @@ export const snapshots = {};
 
 snapshots["integration showFileHeader without platform options should show file header if no file options set"] = 
 `/**
- * Do not edit directly
- * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ * Do not edit directly, this file was auto-generated.
  */
 
 :root {
@@ -38,8 +37,7 @@ snapshots["integration showFileHeader with platform options set to false should 
 
 snapshots["integration showFileHeader with platform options set to false should show file header if file options set to true"] = 
 `/**
- * Do not edit directly
- * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ * Do not edit directly, this file was auto-generated.
  */
 
 :root {

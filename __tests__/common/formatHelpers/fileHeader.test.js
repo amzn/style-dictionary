@@ -14,7 +14,7 @@ import { expect } from 'chai';
 import { fixDate } from '../../__helpers.js';
 import fileHeader from '../../../lib/common/formatHelpers/fileHeader.js';
 
-const defaultLine1 = `Do not edit directly`;
+const defaultLine1 = `Do not edit directly, this file was auto-generated.`;
 const defaultLine2 = `Generated on Sat, 01 Jan 2000 00:00:00 GMT`;
 
 describe('common', () => {
@@ -30,6 +30,17 @@ describe('common', () => {
         expect(comment).to.equal(
           `/**
  * ${defaultLine1}
+ */
+
+`,
+        );
+      });
+
+      it(`should allow adding timestamp to the fileheader`, async () => {
+        const comment = await fileHeader({ formatting: { fileHeaderTimestamp: true } });
+        expect(comment).to.equal(
+          `/**
+ * ${defaultLine1}
  * ${defaultLine2}
  */
 
@@ -42,7 +53,6 @@ describe('common', () => {
         expect(comment).to.equal(
           `
 // ${defaultLine1}
-// ${defaultLine2}
 
 `,
         );
@@ -53,7 +63,6 @@ describe('common', () => {
         expect(comment).to.equal(
           `<!--
   ${defaultLine1}
-  ${defaultLine2}
 -->`,
         );
       });
@@ -102,7 +111,6 @@ describe('common', () => {
         expect(comment).to.equal(
           `/**
  * ${defaultLine1}
- * ${defaultLine2}
  * Never gonna give you up
  * Never gonna let you down
  */
@@ -122,7 +130,6 @@ describe('common', () => {
         expect(comment).to.equal(
           `{#
   ${defaultLine1}
-  ${defaultLine2}
 #}`,
         );
       });

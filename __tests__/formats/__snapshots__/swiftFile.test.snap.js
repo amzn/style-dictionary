@@ -1,14 +1,13 @@
 /* @web/test-runner snapshot v1 */
 export const snapshots = {};
 
-snapshots["formats ios-swift/any.swift should match default snapshot"] =
+snapshots["formats ios-swift/any.swift should match default snapshot"] = 
 `
 //
 // __output/
 //
 
-// Do not edit directly
-// Generated on Sat, 01 Jan 2000 00:00:00 GMT
+// Do not edit directly, this file was auto-generated.
 
 
 import UIKit
@@ -18,14 +17,13 @@ public class StyleDictionary {
 }`;
 /* end snapshot formats ios-swift/any.swift should match default snapshot */
 
-snapshots["formats ios-swift/any.swift with import override should match snapshot"] =
+snapshots["formats ios-swift/any.swift with import override should match snapshot"] = 
 `
 //
 // __output/
 //
 
-// Do not edit directly
-// Generated on Sat, 01 Jan 2000 00:00:00 GMT
+// Do not edit directly, this file was auto-generated.
 
 
 import UIKit
@@ -36,14 +34,13 @@ public class StyleDictionary {
 }`;
 /* end snapshot formats ios-swift/any.swift with import override should match snapshot */
 
-snapshots["formats ios-swift/any.swift with objectType override should match snapshot"] =
+snapshots["formats ios-swift/any.swift with objectType override should match snapshot"] = 
 `
 //
 // __output/
 //
 
-// Do not edit directly
-// Generated on Sat, 01 Jan 2000 00:00:00 GMT
+// Do not edit directly, this file was auto-generated.
 
 
 import UIKit
@@ -53,14 +50,13 @@ public struct StyleDictionary {
 }`;
 /* end snapshot formats ios-swift/any.swift with objectType override should match snapshot */
 
-snapshots["formats ios-swift/any.swift with access control override should match snapshot"] =
+snapshots["formats ios-swift/any.swift with access control override should match snapshot"] = 
 `
 //
 // __output/
 //
 
-// Do not edit directly
-// Generated on Sat, 01 Jan 2000 00:00:00 GMT
+// Do not edit directly, this file was auto-generated.
 
 
 import UIKit
