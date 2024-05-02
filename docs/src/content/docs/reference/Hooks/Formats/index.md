@@ -205,7 +205,7 @@ By default Style Dictionary adds a file header comment in the top of files built
 
 You can remove these comments with the option: `showFileHeader: false` if you do not want them in your generated files. You can also create your own file header or extend the default one. This could be useful if you want to put a version number or hash of the source files rather than a timestamp.
 
-Custom file headers can be added the same way you would add a custom format, either by using the [`registerFileHeader`](/reference/api#registerfileheader) function or adding the [`fileHeader`](/reference/hooks/file_headers) object directly in the Style Dictionary [configuration](/reference/config). Your custom file header can be used in built-in formats as well as custom formats. To use a custom file header in a custom format see the [`fileHeader`](/reference/hooks/formats#fileheader) format helper method.
+Custom file headers can be added the same way you would add a custom format, either by using the [`registerFileHeader`](/reference/api#registerfileheader) function or adding the [`fileHeader`](/reference/hooks/file-headers) object directly in the Style Dictionary [configuration](/reference/config). Your custom file header can be used in built-in formats as well as custom formats. To use a custom file header in a custom format see the [`fileHeader`](/reference/hooks/formats#fileheader) format helper method.
 
 ```js title="build-tokens.js"
 import StyleDictionary from 'style-dictionary';
@@ -278,7 +278,7 @@ The formatter function that is called when Style Dictionary builds files.
 | `args.dictionary.unfilteredTokens` | `TransformedTokens`  | All tokens, still in unflattened object format, including tokens that were filtered out by filters.   |
 | `args.platform`                    | `Platform`           | [Platform config](/reference/config#platform)                                                         |
 | `args.file`                        | `File`               | [File config](/reference/config#file)                                                                 |
-| `args.options`                     | `Object`             | Merged object with SD [Config](/reference/config#attributes) & [FormatOptions](#format-configuration) |
+| `args.options`                     | `Object`             | Merged object with SD [Config](/reference/config#properties) & [FormatOptions](#format-configuration) |
 
 Example:
 

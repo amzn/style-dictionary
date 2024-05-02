@@ -89,6 +89,7 @@ export default {
                 },
               ],
             },
+            { label: 'File Headers', link: '/reference/hooks/file-headers' },
             { label: 'Actions', link: '/reference/hooks/actions' },
           ],
         },

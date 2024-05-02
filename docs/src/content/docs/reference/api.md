@@ -289,14 +289,14 @@ StyleDictionary.registerAction({
 
 `StyleDictionary.registerFileHeader(options) ⇒ StyleDictionary`
 
-Add a custom [fileHeader](/reference/hooks/file_headers) to the Style Dictionary. File headers are used in
+Add a custom [fileHeader](/reference/hooks/file-headers) to the Style Dictionary. File headers are used in
 formats to display some information about how the file was built in a comment.
 
-| Param              | Type       | Description                                                                                                                                                                                                                                     |
-| ------------------ | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| options            | `Object`   |                                                                                                                                                                                                                                                 |
-| options.name       | `string`   | Name of the format to be referenced in your config.json                                                                                                                                                                                         |
-| options.fileHeader | `function` | Function that returns an array of strings, which will be mapped to comment lines. It takes a single argument which is the default message array. See [file headers](/references/hooks/formats#file-headers) for more information. Can be async. |
+| Param              | Type       | Description                                                                                                                                                                                                                             |
+| ------------------ | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| options            | `Object`   |                                                                                                                                                                                                                                         |
+| options.name       | `string`   | Name of the format to be referenced in your config.json                                                                                                                                                                                 |
+| options.fileHeader | `function` | Function that returns an array of strings, which will be mapped to comment lines. It takes a single argument which is the default message array. See [file headers](/references/hooks/file-headers) for more information. Can be async. |
 
 Example:
 

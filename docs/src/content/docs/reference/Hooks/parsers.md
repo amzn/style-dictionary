@@ -34,7 +34,7 @@ const myParser = {
 First you will need to tell Style Dictionary about your parser. You can do this in two ways:
 
 1. Using the [`.registerParser`](/reference/api#registerparser) method
-1. Inline in the [configuration](/reference/config#attributes)
+1. Inline in the [configuration](/reference/config#properties)
 
 ### .registerParser
 

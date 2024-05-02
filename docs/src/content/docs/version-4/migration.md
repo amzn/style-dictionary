@@ -156,6 +156,32 @@ export default {
 };
 ```
 
+### File headers
+
+File headers, when registered, are put inside the `hooks.fileHeaders` property now, as opposed to `fileHeader`.
+Note the change from singular to plural form here.
+
+```js title="config.js" del={2-8} ins={9-17} /fileHeader(s)/
+export default {
+  fileHeader: {
+    foo: (defaultMessages = []) => ['Ola, planet!', ...defaultMessages, 'Hello, World!'],
+  },
+  hooks: {
+    fileHeaders: {
+      foo: (defaultMessages = []) => ['Ola, planet!', ...defaultMessages, 'Hello, World!'],
+    },
+  },
+  platforms: {
+    css: {
+      // or apply is per platform
+      options: {
+        fileHeader: 'foo',
+      },
+    },
+  },
+};
+```
+
 ## CTI reliance
 
 [CTI or Category / Type / Item](/info/tokens/#category--type--item) used to be the default way of structuring design tokens in Style Dictionary.

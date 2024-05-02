@@ -19,7 +19,11 @@ import type { Preprocessor } from './Preprocessor.d.ts';
 import type { Transform } from './Transform.d.ts';
 import type { Formatter, OutputReferences } from './Format.d.ts';
 import type { Action } from './Action.d.ts';
-import type { Hooks } from '../lib/Register.js';
+
+export interface Hooks {
+  preprocessors?: Record<string, Omit<Preprocessor, 'name'>>;
+  fileHeaders?: Record<string, FileHeader>;
+}
 
 export interface LocalOptions {
   showFileHeader?: boolean;
@@ -106,7 +110,6 @@ export interface Config {
   transformGroup?: Record<string, string[]>;
   format?: Record<string, Formatter>;
   filter?: Record<string, Filter['matcher']>;
-  fileHeader?: Record<string, FileHeader>;
   action?: Record<string, Action>;
   usesDtcg?: boolean;
 }

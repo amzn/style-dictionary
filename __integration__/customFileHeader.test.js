@@ -28,9 +28,11 @@ describe(`integration`, async () => {
     });
 
     const sd = new StyleDictionary({
-      fileHeader: {
-        configFileHeader: (defaultMessage) => {
-          return [...defaultMessage, 'hello, world!'];
+      hooks: {
+        fileHeaders: {
+          configFileHeader: (defaultMessage) => {
+            return [...defaultMessage, 'hello, world!'];
+          },
         },
       },
 
