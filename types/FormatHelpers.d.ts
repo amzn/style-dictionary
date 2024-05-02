@@ -73,5 +73,5 @@ export interface FormatHelpers {
     options: object,
     objectType: string,
     transformGroup: string,
-  ) => string;
+  ) => object;
 }
