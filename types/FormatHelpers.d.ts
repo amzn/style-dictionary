@@ -73,5 +73,9 @@ export interface FormatHelpers {
     options: object,
     objectType: string,
     transformGroup: string,
-  ) => object;
+  ) =>  {
+    objectType?: string;
+    import?: string[];
+    accessControl?: string;
+};
 }
