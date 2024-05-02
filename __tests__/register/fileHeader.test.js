@@ -19,7 +19,8 @@ registerSuite({
     fileHeader: () => {},
   },
   registerMethod: 'registerFileHeader',
-  prop: 'fileHeader',
+  prop: 'fileHeaders',
+  hooks: true,
 });
 
 describe('register', () => {
@@ -96,12 +97,14 @@ describe('register', () => {
         name: 'myCustomHeader',
         fileHeader: function () {},
       });
-      expect(typeof StyleDictionaryExtended.fileHeader['myCustomHeader']).to.equal('function');
+      expect(typeof StyleDictionaryExtended.hooks.fileHeaders['myCustomHeader']).to.equal(
+        'function',
+      );
     });
 
     it('should properly pass the registered fileHeader to instances', async () => {
       const SDE2 = await StyleDictionaryExtended.extend({});
-      expect(typeof SDE2.fileHeader['myCustomHeader']).to.equal('function');
+      expect(typeof SDE2.hooks.fileHeaders['myCustomHeader']).to.equal('function');
     });
   });
 });
