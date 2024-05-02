@@ -317,18 +317,18 @@ StyleDictionary.registerFileHeader({
 
 Add a custom [filter](/reference/hooks/filters) to the Style Dictionary.
 
-| Param          | Type       | Description                                                                    |
-| -------------- | ---------- | ------------------------------------------------------------------------------ |
-| filter         | `Object`   |                                                                                |
-| filter.name    | `string`   | Name of the filter to be referenced in your config.json                        |
-| filter.matcher | `function` | Matcher function, return boolean if the token should be included. Can be async |
+| Param         | Type       | Description                                                                   |
+| ------------- | ---------- | ----------------------------------------------------------------------------- |
+| Filter        | `Object`   |                                                                               |
+| Filter.name   | `string`   | Name of the filter to be referenced in your config.json                       |
+| Filter.filter | `function` | Filter function, return boolean if the token should be included. Can be async |
 
 Example:
 
 ```js
 StyleDictionary.registerFilter({
   name: 'isColor',
-  matcher: function (token) {
+  filter: function (token) {
     return token.type === 'color';
   },
 });
@@ -424,7 +424,7 @@ Transforms can manipulate a token's name, value, or attributes.
 | transform.type        | `string`   | Type of transform, can be: name, attribute, or value                                                                                                                                                                                                                                                  |
 | transform.name        | `string`   | Name of the transformer (used by transformGroup to call a list of transforms).                                                                                                                                                                                                                        |
 | transform.transitive  | `boolean`  | If the value transform should be applied transitively, i.e. should be applied to referenced values as well as absolute values.                                                                                                                                                                        |
-| [transform.matcher]   | `function` | Matcher function, return boolean if transform should be applied. If you omit the matcher function, it will match all tokens.                                                                                                                                                                          |
+| transform.filter      | `function` | [Filter](/reference/hooks/filters) function, return boolean if transform should be applied. If you omit the filter function, it will match all tokens.                                                                                                                                                |
 | transform.transformer | `function` | Modifies a design token object. The transformer function will receive the token and the platform configuration as its arguments. The transformer function should return a string for name transforms, an object for attribute transforms, and same type of value for a value transform. Can be async. |
 
 Example:
@@ -433,7 +433,7 @@ Example:
 StyleDictionary.registerTransform({
   name: 'time/seconds',
   type: 'value',
-  matcher: function (token) {
+  filter: function (token) {
     return token.type === 'time';
   },
   transformer: function (token) {

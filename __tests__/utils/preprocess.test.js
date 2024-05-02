@@ -24,11 +24,9 @@ describe('utils', () => {
         },
         ['preprocessorA'],
         {
-          preprocessorA: {
-            preprocessor: (tokens) => {
-              tokens.bar = tokens.foo;
-              return tokens;
-            },
+          preprocessorA: (tokens) => {
+            tokens.bar = tokens.foo;
+            return tokens;
           },
         },
       );
@@ -46,24 +44,19 @@ describe('utils', () => {
         },
         ['preprocessorA', 'preprocessorB', 'preprocessorC'],
         {
-          preprocessorA: {
-            preprocessor: (tokens) => {
-              tokens.bar = tokens.foo;
-              return tokens;
-            },
+          preprocessorA: (tokens) => {
+            tokens.bar = tokens.foo;
+            return tokens;
           },
-          preprocessorB: {
-            preprocessor: async (tokens) => {
-              await new Promise((resolve) => setTimeout(resolve, 100));
-              tokens.baz = tokens.bar;
-              return tokens;
-            },
+          preprocessorB: async (tokens) => {
+            await new Promise((resolve) => setTimeout(resolve, 100));
+            tokens.baz = tokens.bar;
+            return tokens;
           },
-          preprocessorC: {
-            preprocessor: (tokens) => {
-              tokens.qux = tokens.baz;
-              return tokens;
-            },
+
+          preprocessorC: (tokens) => {
+            tokens.qux = tokens.baz;
+            return tokens;
           },
         },
       );

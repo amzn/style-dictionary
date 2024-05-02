@@ -25,10 +25,10 @@ You use transforms in your config file under `platforms` > `[platform]` > `trans
 }
 ```
 
-A transform consists of 4 parts: `type`, `name`, `matcher`, and `transformer`. Transforms are run on all design tokens where the matcher returns true.
+A transform consists of 4 parts: `type`, `name`, `filter`, and `transformer`. Transforms are run on all design tokens where the filter returns true.
 
 :::tip
-If you don't provide a matcher function, it will match all tokens.
+If you don't provide a filter function, it will match all tokens.
 :::
 
 :::note
@@ -43,7 +43,7 @@ There are 3 types of transforms: `attribute`, `name`, and `value`.
 
 **Name:** A name transform transforms the name of a design token. You should really only be applying one name transformer because they will override each other if you use more than one.
 
-**Value:** The value transform is the most important as this is the one that modifies the value or changes the representation of the value. Colors can be turned into hex values, rgb, hsl, hsv, etc. Value transforms have a matcher function that filter which tokens that transform runs on. This allows us to only run a color transform on only the colors and not every design token.
+**Value:** The value transform is the most important as this is the one that modifies the value or changes the representation of the value. Colors can be turned into hex values, rgb, hsl, hsv, etc. Value transforms have a filter function that filter which tokens that transform runs on. This allows us to only run a color transform on only the colors and not every design token.
 
 ## Defining Custom Transforms
 
@@ -60,7 +60,7 @@ StyleDictionary.registerTransform({
   type: `value`,
   transitive: true,
   name: `myTransitiveTransform`,
-  matcher: (token) => {},
+  filter: (token) => {},
   transformer: (token) => {
     // token.value will be resolved and transformed at this point
   },

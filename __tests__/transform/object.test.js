@@ -31,7 +31,7 @@ const config = {
     },
     {
       type: 'name',
-      matcher: function (token) {
+      filter: function (token) {
         return token.attributes.foo === 'bar';
       },
       // verify async transforms to also work properly
@@ -42,7 +42,7 @@ const config = {
     },
     {
       type: 'value',
-      matcher: function (token) {
+      filter: function (token) {
         return token.path[0] === 'spacing';
       },
       transformer: function (val) {

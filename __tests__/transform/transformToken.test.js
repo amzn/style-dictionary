@@ -31,7 +31,7 @@ const config = {
     },
     {
       type: 'name',
-      matcher: function (prop) {
+      filter: function (prop) {
         return prop.attributes.foo === 'bar';
       },
       transformer: function () {

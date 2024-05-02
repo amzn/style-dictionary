@@ -20,7 +20,7 @@ File headers is a hook that provides a way to configure the header of output fil
 A file header is an object with two props:
 
 - `name`: the name of the file header
-- `preprocessor` a callback function that receives the default message array of strings, usually set by the format, and returns an array of strings (message lines) or a Promise with an array of strings.
+- `fileHeader`: a callback function that receives the default message array of strings, usually set by the format, and returns an array of strings (message lines) or a Promise with an array of strings.
 
 The array of strings will be concatenated using newline separator.
 

@@ -12,7 +12,7 @@ const buildPath = 'build/';
 StyleDictionary.registerTransform({
   name: 'myRegisteredTransform',
   type: 'value',
-  matcher: (token) => token.attributes.category === 'size',
+  filter: (token) => token.attributes.category === 'size',
   transformer: (token) => `${parseInt(token.value) * 16}px`,
 });
 

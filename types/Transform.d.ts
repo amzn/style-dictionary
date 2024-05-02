@@ -11,7 +11,7 @@
  * and limitations under the License.
  */
 
-import type { Matcher } from './Filter.d.ts';
+import type { Filter } from './Filter.d.ts';
 import type { TransformedToken } from './DesignToken.d.ts';
 import type { PlatformConfig, Config } from './Config.d.ts';
 import type { Volume } from './Volume.d.ts';
@@ -19,7 +19,7 @@ import type { Volume } from './Volume.d.ts';
 interface BaseTransform<Type, Value> {
   name: string;
   type: Type;
-  matcher?: Matcher;
+  filter?: Filter['filter'];
   transitive?: boolean;
   transformer: (
     token: TransformedToken,

@@ -12,7 +12,7 @@
  */
 
 import type { DesignToken, DesignTokens, TransformedToken } from './DesignToken.d.ts';
-import type { Filter, Matcher } from './Filter.d.ts';
+import type { Filter } from './Filter.d.ts';
 import type { FileHeader, File, FormattingOptions } from './File.d.ts';
 import type { Parser } from './Parser.d.ts';
 import type { Preprocessor } from './Preprocessor.d.ts';
@@ -21,8 +21,9 @@ import type { Formatter, OutputReferences } from './Format.d.ts';
 import type { Action } from './Action.d.ts';
 
 export interface Hooks {
-  preprocessors?: Record<string, Omit<Preprocessor, 'name'>>;
+  preprocessors?: Record<string, Preprocessor['preprocessor']>;
   fileHeaders?: Record<string, FileHeader>;
+  filters?: Record<string, Filter['filter']>;
 }
 
 export interface LocalOptions {
@@ -78,10 +79,6 @@ export interface Expand {
 
 export type ExpandConfig = Expand | boolean | ExpandFilter;
 
-export interface Hooks {
-  preprocessors?: Record<string, Omit<Preprocessor, 'name'>>;
-}
-
 export interface PlatformConfig extends RegexOptions {
   log?: LogConfig;
   transformGroup?: string;
@@ -109,7 +106,6 @@ export interface Config {
   transform?: Record<string, Transform>;
   transformGroup?: Record<string, string[]>;
   format?: Record<string, Formatter>;
-  filter?: Record<string, Filter['matcher']>;
   action?: Record<string, Action>;
   usesDtcg?: boolean;
 }

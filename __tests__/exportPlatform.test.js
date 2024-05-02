@@ -72,7 +72,7 @@ describe('exportPlatform', () => {
         type: 'value',
         name: 'color/darken',
         transitive: true,
-        matcher: function (prop) {
+        filter: function (prop) {
           return !!prop.original.transformColor;
         },
         transformer: function (prop) {
@@ -148,7 +148,7 @@ describe('exportPlatform', () => {
         type: 'value',
         name: 'color/darken',
         transitive: true,
-        matcher: (token) => token.type === 'color',
+        filter: (token) => token.type === 'color',
         transformer: (token) => {
           const darkenMod = token?.$extensions?.['bar.foo']?.darken;
           if (usesReferences(darkenMod)) {
@@ -474,7 +474,7 @@ Use log.verbosity "verbose" or use CLI option --verbose for more details.`;
         transform: {
           'custom/add/px': {
             type: 'value',
-            matcher: (token) => {
+            filter: (token) => {
               return token.$type === 'dimension';
             },
             transformer: (token) => {

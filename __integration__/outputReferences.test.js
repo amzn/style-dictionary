@@ -49,7 +49,7 @@ describe('integration', async () => {
           'rgb-in-rgba': {
             type: 'value',
             transitive: true,
-            matcher: (token) => token.type === 'color',
+            filter: (token) => token.type === 'color',
             // quite naive transform to support rgb inside rgba
             transformer: (token) => {
               const reg = /rgba\((rgb\((\d,\d,\d)\)),((0\.)?\d+?)\)/g;

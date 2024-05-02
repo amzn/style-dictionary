@@ -18,7 +18,7 @@ import flattenTokens from '../../lib/utils/flattenTokens.js';
 const file = {
   destination: '__output/',
   format: 'javascript/object',
-  name: 'foo',
+  options: { name: 'foo' },
 };
 
 const tokens = {
