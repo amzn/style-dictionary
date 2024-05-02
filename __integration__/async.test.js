@@ -58,7 +58,7 @@ describe('integration', async function () {
     SDExtension.registerTransform({
       name: 'foo-value-transform',
       type: 'value',
-      matcher: (token) => token.value === 'foo',
+      filter: (token) => token.value === 'foo',
       transformer: async () => {
         await sleep(10);
         return 'bar';

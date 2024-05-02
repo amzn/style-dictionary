@@ -111,7 +111,7 @@ describe('formats', () => {
     });
 
     it('with resourceType override should match snapshot', async () => {
-      const file = { resourceType: 'dimen' };
+      const file = { options: { resourceType: 'dimen' } };
       const f = await format(
         createFormatArgs({
           dictionary: { tokens, allTokens: flattenTokens(tokens) },
@@ -126,10 +126,12 @@ describe('formats', () => {
 
     it('with resourceMap override should match snapshot', async () => {
       const file = {
-        resourceMap: {
-          color: 'color',
-          fontColor: 'color',
-          backgroundColor: 'color',
+        options: {
+          resourceMap: {
+            color: 'color',
+            fontColor: 'color',
+            backgroundColor: 'color',
+          },
         },
       };
       const f = await format(

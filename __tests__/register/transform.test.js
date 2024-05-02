@@ -24,7 +24,7 @@ const transformerPxAppender = {
 const transformerValueIncrementer = {
   name: 'value-incrementer',
   type: 'value',
-  matcher: (token) => typeof token.value === 'number',
+  filter: (token) => typeof token.value === 'number',
   transformer: (token) => token.value + 1,
 };
 
@@ -199,14 +199,14 @@ describe('register', () => {
       }).to.throw('name must be a string');
     });
 
-    it('should error if matcher is not a function', () => {
+    it('should error if filter is not a function', () => {
       expect(() => {
         StyleDictionaryExtended.registerTransform({
           type: 'name',
           name: 'name',
-          matcher: 'foo',
+          filter: 'foo',
         });
-      }).to.throw('matcher must be a function');
+      }).to.throw('filter must be a function');
     });
 
     it('should error if transformer is not a function', () => {
@@ -214,7 +214,7 @@ describe('register', () => {
         StyleDictionaryExtended.registerTransform({
           type: 'name',
           name: 'name',
-          matcher: function () {
+          filter: function () {
             return true;
           },
           transformer: 'foo',
@@ -222,11 +222,11 @@ describe('register', () => {
       }).to.throw('transformer must be a function');
     });
 
-    it('should work if type, matcher, and transformer are all proper', () => {
+    it('should work if type, filter, and transformer are all proper', () => {
       StyleDictionaryExtended.registerTransform({
         type: 'name',
         name: 'foo',
-        matcher: function () {
+        filter: function () {
           return true;
         },
         transformer: function () {
@@ -235,7 +235,7 @@ describe('register', () => {
       });
       expect(typeof StyleDictionaryExtended.transform.foo).to.equal('object');
       expect(StyleDictionaryExtended).to.have.nested.property('transform.foo.type', 'name');
-      expect(typeof StyleDictionaryExtended.transform.foo.matcher).to.equal('function');
+      expect(typeof StyleDictionaryExtended.transform.foo.filter).to.equal('function');
       expect(typeof StyleDictionaryExtended.transform.foo.transformer).to.equal('function');
     });
 
@@ -243,7 +243,7 @@ describe('register', () => {
       const SDE2 = await StyleDictionaryExtended.extend({});
       expect(typeof SDE2.transform.foo).to.equal('object');
       expect(SDE2).to.have.nested.property('transform.foo.type', 'name');
-      expect(typeof SDE2.transform.foo.matcher).to.equal('function');
+      expect(typeof SDE2.transform.foo.filter).to.equal('function');
       expect(typeof SDE2.transform.foo.transformer).to.equal('function');
     });
   });

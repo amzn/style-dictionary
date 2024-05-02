@@ -161,7 +161,7 @@ export default {
 File headers, when registered, are put inside the `hooks.fileHeaders` property now, as opposed to `fileHeader`.
 Note the change from singular to plural form here.
 
-```js title="config.js" del={2-8} ins={9-17} /fileHeader(s)/
+```js title="config.js" del={2-4} ins={5-9} /fileHeader(s)/
 export default {
   fileHeader: {
     foo: (defaultMessages = []) => ['Ola, planet!', ...defaultMessages, 'Hello, World!'],
@@ -173,7 +173,6 @@ export default {
   },
   platforms: {
     css: {
-      // or apply is per platform
       options: {
         fileHeader: 'foo',
       },
@@ -182,11 +181,70 @@ export default {
 };
 ```
 
+### Filters
+
+Filters, when registered, are put inside the `hooks.filters` property now, as opposed to `filter`.
+Note the change from singular to plural form here.
+
+```js title="config.js" del={2-4} ins={5-9} /filter(s)/
+export default {
+  filter: {
+    'colors-only': (token) => token.type === 'color,
+  },
+  hooks: {
+    filters: {
+      'colors-only': (token) => token.type === 'color,
+    },
+  },
+  platforms: {
+    css: {
+      files: [{
+        format: 'css/variables',
+        destination: '_variables.css',
+        filter: 'colors-only',
+      }],
+    },
+  },
+};
+```
+
+In addition, when using [`registerFilter`](/reference/api#registerfilter) method, the name of the filter function is now `filter` instead of `matcher`:
+
+```js title="build-tokens.js" del={5} ins={6}
+import StyleDictionary from 'style-dictionary';
+
+StyleDictionary.registerFilter({
+  name: 'colors-only',
+  matcher: (token) => token.type === 'color',
+  filter: (token) => token.type === 'color',
+});
+```
+
+:::note
+These changes also apply for the [filter function inside transforms](#transforms).
+:::
+
+### Transforms
+
+The name of the filter function is now `filter` instead of `matcher`:
+
+```js title="build-tokens.js" del={6} ins={7}
+import StyleDictionary from 'style-dictionary';
+
+StyleDictionary.registerTransform({
+  name: 'color-transform',
+  type: 'value',
+  matcher: (token) => token.type === 'color',
+  filter: (token) => token.type === 'color',
+  transform: (token) => token.value,
+});
+```
+
 ## CTI reliance
 
 [CTI or Category / Type / Item](/info/tokens/#category--type--item) used to be the default way of structuring design tokens in Style Dictionary.
 Often, what type of token a token is, would be determined by looking at the "category" part of the token taxonomy.
-Most of the [Built-in transforms](/reference/hooks/transforms/predefined) `matcher` function would rely on the token's `attributes.category` property.
+Most of the [Built-in transforms](/reference/hooks/transforms/predefined) `matcher`/`filter` (filter being the new name for this) function would rely on the token's `attributes.category` property.
 This in turn would rely on applying the [`attribute/cti` transform](/reference/hooks/transforms/predefined#attributecti) so that this attribute was set on a token.
 
 In version 4, we have removed almost all hard-coupling/reliances on CTI structure and instead we will look for a `token.type` property to determine what type of token a design token is.
@@ -318,6 +376,13 @@ In v3, the following options were put on the file properties level itself next t
 - `mapName` -> for formats:
   - `scss/map-deep`
   - `scss/map-flat`
+- `name` -> for formats:
+  - `javascript/object`
+  - `javascript/umd`
+- `resourceType` -> for formats:
+  - `android/resources`
+- `resourceMap` -> for formats:
+  - `android/resources`
 
 ```json title="config.json" del={9} ins={10-13}
 {

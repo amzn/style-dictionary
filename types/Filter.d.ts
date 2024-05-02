@@ -14,7 +14,5 @@ import type { TransformedToken } from './DesignToken.d.ts';
 
 export interface Filter {
   name: string;
-  matcher: Matcher;
+  filter: (token: TransformedToken) => boolean | Promise<boolean>;
 }
-
-export type Matcher = (token: TransformedToken) => boolean | Promise<boolean>;

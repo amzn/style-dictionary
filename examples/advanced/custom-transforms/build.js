@@ -12,8 +12,8 @@ console.log('\n==============================================');
 StyleDictionary.registerTransform({
   name: 'size/px', // notice: the name is an override of an existing predefined method (yes, you can do it)
   type: 'value',
-  matcher: function (token) {
-    // this is an example of a possible filter (based on the "cti" values) to show how a "matcher" works
+  filter: function (token) {
+    // this is an example of a possible filter (based on the "cti" values) to show how a "filter" works
     return token.attributes.category === 'font' || token.attributes.category === 'margin';
   },
   transformer: function (token) {
@@ -24,7 +24,7 @@ StyleDictionary.registerTransform({
 StyleDictionary.registerTransform({
   name: 'ratio/%',
   type: 'value',
-  matcher: function (token) {
+  filter: function (token) {
     // here we are using a custom attribute, declared in the token, to match the values where apply the transform
     return token.group === 'ratio';
   },
@@ -36,7 +36,7 @@ StyleDictionary.registerTransform({
 StyleDictionary.registerTransform({
   name: 'hexRGB/hexARGB',
   type: 'value',
-  matcher: function (token) {
+  filter: function (token) {
     return token.group === 'color';
   },
   transformer: function (token) {
@@ -48,7 +48,7 @@ StyleDictionary.registerTransform({
 StyleDictionary.registerTransform({
   name: 'unitless/dp-sp',
   type: 'value',
-  matcher: function (token) {
+  filter: function (token) {
     return token.group === 'typography' || token.group === 'spacing';
   },
   transformer: function (token) {
@@ -62,7 +62,7 @@ StyleDictionary.registerTransform({
   // this is a silly example, to show how you can apply transform to names
   name: 'name/squiggle',
   type: 'name',
-  // notice: if you don't specify a matcher, the transformation will be applied to all the tokens
+  // notice: if you don't specify a filter, the transformation will be applied to all the tokens
   transformer: function (token) {
     return token.path.join('~');
   },
@@ -89,7 +89,7 @@ StyleDictionary.registerTransformGroup({
 StyleDictionary.registerTransformGroup({
   name: 'custom/android',
   // as you can see, here we are completely ignoring the "attribute/cti" transform (it's totally possible),
-  // because we are relying on custom attributes for the matchers and the custom format for the output
+  // because we are relying on custom attributes for the filters and the custom format for the output
   transforms: ['name/squiggle', 'hexRGB/hexARGB', 'unitless/dp-sp'],
 });
 

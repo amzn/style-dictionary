@@ -36,7 +36,7 @@ Example:
 
 Creates a SCSS file with a flat map based on the style dictionary
 
-Name the map by adding a 'mapName' attribute on the file object in your config.
+Name the map by adding a `mapName` property on the `options` object property on the `file` object property in your config.
 
 Example:
 
@@ -52,7 +52,7 @@ $tokens: (
 
 Creates a SCSS file with a deep map based on the style dictionary.
 
-Name the map by adding a 'mapName' attribute on the file `options` object in your config.
+Name the map by adding a `mapName` property on the `options` object property on the `file` object property in your config.
 
 | Param                              | Type                                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | ---------------------------------- | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -206,7 +206,7 @@ module.exports = {
 ### javascript/object
 
 Creates a JS file a global var that is a plain javascript object of the style dictionary.
-Name the variable by adding a 'name' attribute on the file object in your config.
+Name the variable by adding a `name` property on the `options` object property of the `file` object property in your config.
 
 Example:
 
@@ -227,8 +227,7 @@ var StyleDictionary = {
 ### javascript/umd
 
 Creates a [UMD](https://github.com/umdjs/umd) module of the style
-dictionary. Name the module by adding a 'name' attribute on the file object
-in your config.
+dictionary. Name the module by adding a `name` property on the `options` object property of the `file` object property in your config.
 
 Example
 
@@ -401,8 +400,9 @@ with mixed resources will still work.
 
 This format will try to use the proper resource type for each token based on
 the category (color => color, size => dimen, etc.). However if you want to
-force a particular resource type you can provide a 'resourceType' attribute
-on the file configuration. You can also provide a 'resourceMap' if you
+force a particular resource type you can provide a `resourceType` property on the `options`
+object property on the `file` object property configuration.
+You can also provide a `resourceMap` if you
 don't use Style Dictionary's built-in CTI structure.
 
 | Param                      | Type                                  | Description                                                                                                                                                                                                |

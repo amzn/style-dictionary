@@ -51,7 +51,7 @@ describe('register', () => {
       expect(() => {
         StyleDictionaryExtended.registerFileHeader({
           name: {},
-          matcher: function () {},
+          fileHeader: function () {},
         });
       }).to.throw('name must be a string');
     });
@@ -92,7 +92,7 @@ describe('register', () => {
       }).to.throw('fileHeader must be a function');
     });
 
-    it('should work if name and matcher are good', () => {
+    it('should work if name and fileHeader are good', () => {
       StyleDictionaryExtended.registerFileHeader({
         name: 'myCustomHeader',
         fileHeader: function () {},
