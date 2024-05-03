@@ -24,6 +24,7 @@ export interface Hooks {
   preprocessors?: Record<string, Preprocessor['preprocessor']>;
   fileHeaders?: Record<string, FileHeader>;
   filters?: Record<string, Filter['filter']>;
+  actions?: Record<string, Omit<Action, 'name'>>;
 }
 
 export interface LocalOptions {
@@ -106,6 +107,5 @@ export interface Config {
   transform?: Record<string, Transform>;
   transformGroup?: Record<string, string[]>;
   format?: Record<string, Formatter>;
-  action?: Record<string, Action>;
   usesDtcg?: boolean;
 }
