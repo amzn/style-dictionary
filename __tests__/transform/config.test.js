@@ -101,8 +101,10 @@ None of "barTransform", "bazTransform" match the name of a registered transform.
 
     it('warns the user if an action is used without a clean function', () => {
       const cfg = {
-        action: {
-          foo: {},
+        hooks: {
+          actions: {
+            foo: {},
+          },
         },
       };
       const platformCfg = {
@@ -121,8 +123,10 @@ None of "barTransform", "bazTransform" match the name of a registered transform.
     it('throws if an action is used without a clean function with log.warnings set to error', () => {
       const cfg = {
         log: { warnings: 'error' },
-        action: {
-          foo: {},
+        hooks: {
+          actions: {
+            foo: {},
+          },
         },
       };
       const platformCfg = {
@@ -137,8 +141,10 @@ None of "barTransform", "bazTransform" match the name of a registered transform.
     it('does not warn user at all when log.verbosity silent is used', () => {
       const cfg = {
         log: { verbosity: 'silent' },
-        action: {
-          foo: {},
+        hooks: {
+          actions: {
+            foo: {},
+          },
         },
       };
       const platformCfg = {

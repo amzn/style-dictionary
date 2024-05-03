@@ -240,6 +240,39 @@ StyleDictionary.registerTransform({
 });
 ```
 
+### Actions
+
+Actions, when registered, are put inside the `hooks.actions` property now, as opposed to `action`.
+Note the change from singular to plural form here.
+
+```js title="config.js" del={2-7} ins={8-15} /action(s): {/
+export default {
+  action: {
+    'copy-assets': {
+      do: () => {}
+      undo: () => {}
+    }
+  },
+  hooks: {
+    actions: {
+      'copy-assets': {
+        do: () => {}
+        undo: () => {}
+      }
+    },
+  },
+  platforms: {
+    css: {
+      actions: ['copy-assets'],
+      files: [{
+        format: 'css/variables',
+        destination: '_variables.css',
+      }],
+    },
+  },
+};
+```
+
 ## CTI reliance
 
 [CTI or Category / Type / Item](/info/tokens/#category--type--item) used to be the default way of structuring design tokens in Style Dictionary.
