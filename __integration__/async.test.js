@@ -33,8 +33,9 @@ describe('integration', async function () {
     const SDExtension = class extends StyleDictionary {};
 
     SDExtension.registerParser({
+      name: 'json-parser',
       pattern: /^.+\.json$/g,
-      parse: async ({ contents }) => {
+      parser: async ({ contents }) => {
         await sleep(10);
         // TODO: verify this is called
         return JSON.parse(contents);

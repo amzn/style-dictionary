@@ -122,11 +122,45 @@ they will all use the same signature, with a `name` property and a handler funct
 Parsers will also have to be applied explicitly similarly to preprocessors.
 :::
 
+### Parsers
+
+Parsers, when registered, would always apply on a global level, without explicitly applying them in the config.
+They are put inside the `hooks.parsers` property now, as opposed to `parsers`.
+Lastly, the `parse` function is now `parser`, for consistency.
+
+Changes:
+
+```js title="config.js" del={3-10} ins={9-24} /parse(r): (/
+export default {
+  // register it inline or by SD.registerPreprocessor
+  parsers: [
+    {
+      pattern: /\.json5$/,
+      parse: ({ contents, filePath }) => {
+        return JSON5.parse(contents);
+      },
+    },
+  ],
+  hooks: {
+    parsers: {
+      name: 'json5-parser',
+      pattern: /\.json5$/,
+      parser: ({ contents, filePath }) => {
+        return JSON5.parse(contents);
+      },
+    },
+  },
+  // apply it globally by name reference
+  parsers: ['json5-parser'],
+};
+```
+
 ### Preprocessors
 
 Preprocessors, when registered, would always apply on a global level, without explicitly applying them in the config.
+They are put inside the `hooks.preprocessors` property now, as opposed to `preprocessors`.
 
-This has been changed now:
+Changes:
 
 ```js title="config.js" del={3-8} ins={9-24}
 export default {
