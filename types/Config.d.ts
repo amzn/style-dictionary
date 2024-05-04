@@ -21,6 +21,7 @@ import type { Formatter, OutputReferences } from './Format.d.ts';
 import type { Action } from './Action.d.ts';
 
 export interface Hooks {
+  parsers?: Record<string, Omit<Parser, 'name'>>;
   preprocessors?: Record<string, Preprocessor['preprocessor']>;
   fileHeaders?: Record<string, FileHeader>;
   filters?: Record<string, Filter['filter']>;

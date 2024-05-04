@@ -95,13 +95,13 @@ describe('utils', () => {
 
     describe('custom parsers', () => {
       it('should support yaml.parse', async () => {
-        const parsers = [
-          {
+        const parsers = {
+          'yaml-parser': {
             pattern: /\.yaml$/,
             // yaml.parse function matches the intended function signature
-            parse: ({ contents }) => yaml.parse(contents),
+            parser: ({ contents }) => yaml.parse(contents),
           },
-        ];
+        };
         const { tokens } = await combineJSON(
           [`__tests__/__json_files/yaml.yaml`],
           false,
@@ -115,20 +115,20 @@ describe('utils', () => {
 
       it('should multiple parsers on the same file', async () => {
         const testOutput = { test: 'test' };
-        const parsers = [
-          {
+        const parsers = {
+          'json-foo': {
             pattern: /.json$/,
-            parse: () => {
+            parser: () => {
               return { test: 'foo' };
             },
           },
-          {
+          'json-return': {
             pattern: /.json$/,
-            parse: () => {
+            parser: () => {
               return testOutput;
             },
           },
-        ];
+        };
         const { tokens } = await combineJSON(
           [`__tests__/__json_files/simple.json`],
           false,
@@ -140,15 +140,15 @@ describe('utils', () => {
       });
 
       it('should support asynchronous parsers', async () => {
-        const parsers = [
-          {
+        const parsers = {
+          'json-test': {
             pattern: /.json$/,
-            parse: async () => {
+            parser: async () => {
               await new Promise((resolve) => setTimeout(resolve, 10));
               return { test: 'foo' };
             },
           },
-        ];
+        };
         const { tokens } = await combineJSON(
           [`__tests__/__json_files/simple.json`],
           false,

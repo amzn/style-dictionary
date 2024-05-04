@@ -287,7 +287,7 @@ StyleDictionary.registerAction({
 
 ### registerFileHeader
 
-`StyleDictionary.registerFileHeader(options) ⇒ StyleDictionary`
+`StyleDictionary.registerFileHeader(fileHeader) ⇒ StyleDictionary`
 
 Add a custom [fileHeader](/reference/hooks/file-headers) to the Style Dictionary. File headers are used in
 formats to display some information about how the file was built in a comment.
@@ -363,21 +363,23 @@ StyleDictionary.registerFormat({
 
 ### registerParser
 
-`StyleDictionary.registerParser(pattern, parse) ⇒ StyleDictionary`
+`StyleDictionary.registerParser(parser) ⇒ StyleDictionary`
 
 Adds a custom [parser](/reference/hooks/parsers) to parse style dictionary files.
 
-| Param   | Type       | Description                                                                                                                                                                                                                     |
-| ------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| pattern | `Regex`    | A file path regular expression to match which files this parser should be be used on. This is similar to how webpack loaders work. `/\.json$/` will match any file ending in '.json', for example.                              |
-| parse   | `function` | Function to parse the file contents. Takes 1 argument, which is an object with 2 attributes: contents wich is the string of the file contents and filePath. The function should return a plain Javascript object. Can be async. |
+| Param          | Type       | Description                                                                                                                                                                                                                         |
+| -------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Parser.name    | `string`   | Name of the parser to be referenced in your config.json                                                                                                                                                                             |
+| Parser.pattern | `Regex`    | A file path regular expression to match which files this parser should be be used on. This is similar to how webpack loaders work. `/\.json$/` will match any file ending in '.json', for example.                                  |
+| Parser.parser  | `function` | Function to parse the file contents. Takes 1 argument, which is an object with 2 properties: `contents` wich is the string of the file contents and `filePath`. The function should return a plain JavaScript object. Can be async. |
 
 Example:
 
 ```js
 StyleDictionary.registerParser({
+  name: 'json-parser',
   pattern: /\.json$/,
-  parse: ({ contents, filePath }) => {
+  parser: ({ contents, filePath }) => {
     return JSON.parse(contents);
   },
 });
