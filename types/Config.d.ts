@@ -23,6 +23,7 @@ import type { Action } from './Action.d.ts';
 export interface Hooks {
   parsers?: Record<string, Omit<Parser, 'name'>>;
   preprocessors?: Record<string, Preprocessor['preprocessor']>;
+  transformGroups?: Record<string, string[]>;
   fileHeaders?: Record<string, FileHeader>;
   filters?: Record<string, Filter['filter']>;
   actions?: Record<string, Omit<Action, 'name'>>;
@@ -106,7 +107,6 @@ export interface Config {
   parsers?: Parser[];
   preprocessors?: string[];
   transform?: Record<string, Transform>;
-  transformGroup?: Record<string, string[]>;
   format?: Record<string, Formatter>;
   usesDtcg?: boolean;
 }
