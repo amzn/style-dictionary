@@ -16,8 +16,10 @@ import transformConfig from '../../lib/transform/config.js';
 import chalk from 'chalk';
 
 const dictionary = {
-  transformGroup: {
-    fooTransformGroup: ['barTransform'],
+  hooks: {
+    transformGroups: {
+      fooTransformGroup: ['barTransform'],
+    },
   },
   transform: {
     fooTransform: {
@@ -59,8 +61,10 @@ None of "barTransform", "bazTransform" match the name of a registered transform.
 
     it('allows combining transformGroup with transforms', () => {
       const cfg = {
-        transformGroup: {
-          foobarTransformGroup: ['fooTransform', 'barTransform'],
+        hooks: {
+          transformGroups: {
+            foobarTransformGroup: ['fooTransform', 'barTransform'],
+          },
         },
         transform: {
           fooTransform: {

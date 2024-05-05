@@ -190,6 +190,33 @@ export default {
 };
 ```
 
+### Transform Groups
+
+Transform groups, when registered, are put inside the `hooks.transformGroups` property now, as opposed to `transformGroup`.
+Note the change from singular to plural form here.
+
+Changes:
+
+```js title="config.js" del={3-5} ins={6-10} /transformGroup(s): {/
+export default {
+  // register it inline or by SD.registerTransformGroup
+  transformGroup: {
+    foo: ['foo-transform'],
+  },
+  hooks: {
+    transformGroups: {
+      foo: ['foo-transform'],
+    },
+  },
+  platforms: {
+    css: {
+      // or apply is per platform
+      transformGroup: ['foo'],
+    },
+  },
+};
+```
+
 ### File headers
 
 File headers, when registered, are put inside the `hooks.fileHeaders` property now, as opposed to `fileHeader`.

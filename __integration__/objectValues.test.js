@@ -117,7 +117,7 @@ describe('integration', async () => {
         // with and without `outputReferences`
         cssHsl: {
           buildPath,
-          transforms: StyleDictionary.transformGroup.css.concat([`hsl`]),
+          transforms: StyleDictionary.hooks.transformGroups.css.concat([`hsl`]),
           files: [
             {
               destination: `hsl.css`,
@@ -137,7 +137,7 @@ describe('integration', async () => {
         // transformed to a hex color works with and without `outputReferences`
         cssHex: {
           buildPath,
-          transforms: StyleDictionary.transformGroup.css.concat([`cssBorder`, `hslToHex`]),
+          transforms: StyleDictionary.hooks.transformGroups.css.concat([`cssBorder`, `hslToHex`]),
           files: [
             {
               destination: 'hex.css',
@@ -157,7 +157,7 @@ describe('integration', async () => {
         // works with and without `outputReferences`
         cssBorder: {
           buildPath,
-          transforms: StyleDictionary.transformGroup.css.concat([`cssBorder`]),
+          transforms: StyleDictionary.hooks.transformGroups.css.concat([`cssBorder`]),
           files: [
             {
               destination: 'border.css',
@@ -175,7 +175,7 @@ describe('integration', async () => {
 
         cssShadow: {
           buildPath,
-          transforms: StyleDictionary.transformGroup.css.concat([`shadow`, `hslToHex`]),
+          transforms: StyleDictionary.hooks.transformGroups.css.concat([`shadow`, `hslToHex`]),
           files: [
             {
               destination: 'shadow.css',
@@ -193,7 +193,7 @@ describe('integration', async () => {
 
         scss: {
           buildPath,
-          transforms: StyleDictionary.transformGroup.css.concat([`cssBorder`, `hslToHex`]),
+          transforms: StyleDictionary.hooks.transformGroups.css.concat([`cssBorder`, `hslToHex`]),
           files: [
             {
               destination: 'border.scss',
