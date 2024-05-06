@@ -9,8 +9,8 @@ snapshots["integration_android android android/resources should match snapshot"]
   Generated on Sat, 01 Jan 2000 00:00:00 GMT
 -->
 <resources>
-  <string name="line_height_100">100%</string>
-  <string name="line_height_150">150%</string>
+  <item name="line_height_100" format="float" type="dimen">1.0</item>
+  <item name="line_height_150" format="float" type="dimen">1.5</item>
   <item name="opacity_50" format="float" type="dimen">0.5</item>
   <item name="opacity_100" format="float" type="dimen">1.0</item>
   <dimen name="icon_size_s">16dp</dimen>
