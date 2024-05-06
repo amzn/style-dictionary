@@ -72,7 +72,7 @@ const StyleDictionary = require('style-dictionary');
 const cti = StyleDictionary.transform['attribute/cti'];
 // {
 //   type: 'attribute',
-//   transformer: f () {}
+//   transform: f () {}
 // }
 ```
 
@@ -84,5 +84,5 @@ For example, if the key of the token (the last part of the object path) is "back
 
 - `config.js`:
   - `propertiesToCTI`: A plain object where we map the CSS property name to the proper category and type.
-  - `CTITransform`: A transform object that defines a transformer method, which will override the default `attribute/cti` transform. This is similar to creating a child class with some custom logic and then calling `super`. In the transformer function it first looks at the top-level namespace, the first item in the object path, and if it is 'component' we run our custom logic using the `propertiesToCTI` map. If it is not 'component', use the built-in `attribute/cti`.
+  - `CTITransform`: A transform object that defines a transform method, which will override the default `attribute/cti` transform. This is similar to creating a child class with some custom logic and then calling `super`. In the transform function it first looks at the top-level namespace, the first item in the object path, and if it is 'component' we run our custom logic using the `propertiesToCTI` map. If it is not 'component', use the built-in `attribute/cti`.
 - `tokens/component/button.json`: Take a look at how it defines the component tokens and uses the last part of the object path as the CSS property. Notice how we can define token values in here that are not references, but they still get transformed properly: font-size uses 'rem' and background-color uses hex in the output.

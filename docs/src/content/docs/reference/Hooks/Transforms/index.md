@@ -25,14 +25,14 @@ You use transforms in your config file under `platforms` > `[platform]` > `trans
 }
 ```
 
-A transform consists of 4 parts: `type`, `name`, `filter`, and `transformer`. Transforms are run on all design tokens where the filter returns true.
+A transform consists of 4 parts: `type`, `name`, `filter`, and `transform`. Transforms are run on all design tokens where the filter returns true.
 
 :::tip
 If you don't provide a filter function, it will match all tokens.
 :::
 
 :::note
-`transformer` functions can be async as well.
+`transform` functions can be async as well.
 :::
 
 ## Transform Types
@@ -41,7 +41,7 @@ There are 3 types of transforms: `attribute`, `name`, and `value`.
 
 **Attribute:** An attribute transform adds to the attributes object on a design token. This is for including any meta-data about a design token such as it's CTI attributes or other information.
 
-**Name:** A name transform transforms the name of a design token. You should really only be applying one name transformer because they will override each other if you use more than one.
+**Name:** A name transform transforms the name of a design token. You should really only be applying one name transform because they will override each other if you use more than one.
 
 **Value:** The value transform is the most important as this is the one that modifies the value or changes the representation of the value. Colors can be turned into hex values, rgb, hsl, hsv, etc. Value transforms have a filter function that filter which tokens that transform runs on. This allows us to only run a color transform on only the colors and not every design token.
 
@@ -61,7 +61,7 @@ StyleDictionary.registerTransform({
   transitive: true,
   name: `myTransitiveTransform`,
   filter: (token) => {},
-  transformer: (token) => {
+  transform: (token) => {
     // token.value will be resolved and transformed at this point
   },
 });
@@ -97,7 +97,7 @@ Using a custom transitive transform you could have `color.danger` darken `color.
 
 ### Defer transitive transformation manually
 
-It's also possible to control, inside a transitive transform's `transformer` function, whether the transformation should be deferred until a later cycle of references resolution.
+It's also possible to control, inside a transitive transform's `transform` function, whether the transformation should be deferred until a later cycle of references resolution.
 This is done by returning `undefined`, which basically means "I cannot currently do the transform due to a reference not yet being resolved".
 
 Imagine the following transform:
@@ -110,7 +110,7 @@ StyleDictionary.registerTransform({
   name: '',
   type: 'value',
   transitive: true,
-  transformer: (token) => {
+  transform: (token) => {
     const darkenModifier = token.darken;
     if (usesReferences(darkenModifier)) {
       // defer this transform, because our darken value is a reference
@@ -133,7 +133,7 @@ Combined with the following tokens:
 }
 ```
 
-Due to `token.darken` being a property that uses a reference, we need the ability to defer its transformation from within the transformer,
-since the transformer is the only place where we know which token properties the transformation is reliant upon.
+Due to `token.darken` being a property that uses a reference, we need the ability to defer its transformation from within the transform,
+since the transform is the only place where we know which token properties the transformation is reliant upon.
 
 If you want to learn more about transitive transforms, take a look at the [transitive transforms example](https://github.com/amzn/style-dictionary/tree/main/examples/advanced/transitive-transforms).

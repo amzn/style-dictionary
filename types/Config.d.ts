@@ -24,6 +24,7 @@ export interface Hooks {
   parsers?: Record<string, Omit<Parser, 'name'>>;
   preprocessors?: Record<string, Preprocessor['preprocessor']>;
   transformGroups?: Record<string, string[]>;
+  transforms?: Record<string, Omit<Transform, 'name'>>;
   fileHeaders?: Record<string, FileHeader>;
   filters?: Record<string, Filter['filter']>;
   actions?: Record<string, Omit<Action, 'name'>>;
@@ -106,7 +107,6 @@ export interface Config {
   platforms?: Record<string, PlatformConfig>;
   parsers?: Parser[];
   preprocessors?: string[];
-  transform?: Record<string, Transform>;
   format?: Record<string, Formatter>;
   usesDtcg?: boolean;
 }

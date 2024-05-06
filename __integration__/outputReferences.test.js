@@ -45,19 +45,21 @@ describe('integration', async () => {
             type: 'color',
           },
         },
-        transform: {
-          'rgb-in-rgba': {
-            type: 'value',
-            transitive: true,
-            filter: (token) => token.type === 'color',
-            // quite naive transform to support rgb inside rgba
-            transformer: (token) => {
-              const reg = /rgba\((rgb\((\d,\d,\d)\)),((0\.)?\d+?)\)/g;
-              const match = reg.exec(token.value);
-              if (match && match[1] && match[2]) {
-                return token.value.replace(match[1], match[2]);
-              }
-              return token.value;
+        hooks: {
+          transforms: {
+            'rgb-in-rgba': {
+              type: 'value',
+              transitive: true,
+              filter: (token) => token.type === 'color',
+              // quite naive transform to support rgb inside rgba
+              transform: (token) => {
+                const reg = /rgba\((rgb\((\d,\d,\d)\)),((0\.)?\d+?)\)/g;
+                const match = reg.exec(token.value);
+                if (match && match[1] && match[2]) {
+                  return token.value.replace(match[1], match[2]);
+                }
+                return token.value;
+              },
             },
           },
         },

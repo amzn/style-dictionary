@@ -420,14 +420,14 @@ StyleDictionary.registerPreprocessor({
 Add a custom [transform](/reference/hooks/transforms) to the Style Dictionary.
 Transforms can manipulate a token's name, value, or attributes.
 
-| Param                 | Type       | Description                                                                                                                                                                                                                                                                                           |
-| --------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| transform             | `Object`   | Transform object                                                                                                                                                                                                                                                                                      |
-| transform.type        | `string`   | Type of transform, can be: name, attribute, or value                                                                                                                                                                                                                                                  |
-| transform.name        | `string`   | Name of the transformer (used by transformGroup to call a list of transforms).                                                                                                                                                                                                                        |
-| transform.transitive  | `boolean`  | If the value transform should be applied transitively, i.e. should be applied to referenced values as well as absolute values.                                                                                                                                                                        |
-| transform.filter      | `function` | [Filter](/reference/hooks/filters) function, return boolean if transform should be applied. If you omit the filter function, it will match all tokens.                                                                                                                                                |
-| transform.transformer | `function` | Modifies a design token object. The transformer function will receive the token and the platform configuration as its arguments. The transformer function should return a string for name transforms, an object for attribute transforms, and same type of value for a value transform. Can be async. |
+| Param                | Type       | Description                                                                                                                                                                                                                                                                                       |
+| -------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| transform            | `Object`   | Transform object                                                                                                                                                                                                                                                                                  |
+| transform.type       | `string`   | Type of transform, can be: name, attribute, or value                                                                                                                                                                                                                                              |
+| transform.name       | `string`   | Name of the transform (used by transformGroup to call a list of transforms).                                                                                                                                                                                                                      |
+| transform.transitive | `boolean`  | If the value transform should be applied transitively, i.e. should be applied to referenced values as well as absolute values.                                                                                                                                                                    |
+| transform.filter     | `function` | [Filter](/reference/hooks/filters) function, return boolean if transform should be applied. If you omit the filter function, it will match all tokens.                                                                                                                                            |
+| transform.transform  | `function` | Modifies a design token object. The transform function will receive the token and the platform configuration as its arguments. The transform function should return a string for name transforms, an object for attribute transforms, and same type of value for a value transform. Can be async. |
 
 Example:
 
@@ -438,7 +438,7 @@ StyleDictionary.registerTransform({
   filter: function (token) {
     return token.type === 'time';
   },
-  transformer: function (token) {
+  transform: function (token) {
     // Note the use of prop.original.value,
     // before any transforms are performed, the build system
     // clones the original token to the 'original' attribute.

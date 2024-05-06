@@ -64,7 +64,7 @@ export default {
     // Now we can use the transform 'myTransform' below
     myTransform: {
       type: 'name',
-      transformer: (token) => token.path.join('_').toUpperCase(),
+      transform: (token) => token.path.join('_').toUpperCase(),
     },
   },
   // Same with formats, you can now write them directly to this config

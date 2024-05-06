@@ -28,7 +28,7 @@ StyleDictionary.registerTransform({
   filter: function (token) {
     return token.group === 'ratio';
   },
-  transformer: function (token) {
+  transform: function (token) {
     return `${Math.floor(100 * token.value)}%`;
   },
 });

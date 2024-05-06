@@ -17,14 +17,14 @@ const config = {
   transforms: [
     {
       type: 'attribute',
-      transformer: function () {
+      transform: function () {
         return { foo: 'bar' };
       },
     },
     {
       type: 'attribute',
       // verify async transforms to also work properly
-      transformer: async function () {
+      transform: async function () {
         await new Promise((resolve) => setTimeout(resolve, 100));
         return { bar: 'foo' };
       },
@@ -35,9 +35,9 @@ const config = {
         return token.attributes.foo === 'bar';
       },
       // verify async transforms to also work properly
-      transformer: async function () {
+      transform: async function () {
         await new Promise((resolve) => setTimeout(resolve, 100));
-        return 'transformer result';
+        return 'transform result';
       },
     },
     {
@@ -45,7 +45,7 @@ const config = {
       filter: function (token) {
         return token.path[0] === 'spacing';
       },
-      transformer: function (val) {
+      transform: function (val) {
         return val + 'px';
       },
     },
@@ -86,7 +86,7 @@ describe('transform', () => {
           base: {
             attributes: { bar: 'foo', foo: 'bar' },
             comment: 'the base size of the font',
-            name: 'transformer result',
+            name: 'transform result',
             original: {
               comment: 'the base size of the font',
               value: '16',

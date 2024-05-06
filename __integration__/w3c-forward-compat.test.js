@@ -43,19 +43,21 @@ describe('integration', async () => {
           },
         },
       },
-      transform: {
-        'custom/css/color': {
-          type: 'value',
-          filter: (token) => token.$type === 'color',
-          transformer: (token) => {
-            return Color(sd.usesDtcg ? token.$value : token.value).toRgbString();
+      hooks: {
+        transforms: {
+          'custom/css/color': {
+            type: 'value',
+            filter: (token) => token.$type === 'color',
+            transform: (token) => {
+              return Color(sd.usesDtcg ? token.$value : token.value).toRgbString();
+            },
           },
-        },
-        'custom/add/px': {
-          type: 'value',
-          filter: (token) => token.$type === 'dimension',
-          transformer: (token) => {
-            return `${sd.usesDtcg ? token.$value : token.value}px`;
+          'custom/add/px': {
+            type: 'value',
+            filter: (token) => token.$type === 'dimension',
+            transform: (token) => {
+              return `${sd.usesDtcg ? token.$value : token.value}px`;
+            },
           },
         },
       },
