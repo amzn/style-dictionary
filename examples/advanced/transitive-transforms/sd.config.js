@@ -43,7 +43,7 @@ export default {
       // that alias/reference other tokens
       transitive: true,
       filter: (token) => token.attributes.category === 'color' && token.modify,
-      transformer: colorTransform,
+      transform: colorTransform,
     },
 
     // For backwards compatibility, all built-in transforms are not transitive

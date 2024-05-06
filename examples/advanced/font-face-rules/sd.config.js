@@ -5,7 +5,7 @@ const StyleDictionary = require('style-dictionary');
 StyleDictionary.registerTransform({
   name: 'attribute/font',
   type: 'attribute',
-  transformer: (prop) => ({
+  transform: (prop) => ({
     category: prop.path[0],
     type: prop.path[1],
     family: prop.path[2],

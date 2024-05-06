@@ -1,5 +1,5 @@
 const StyleDictionary = require('style-dictionary');
-const transformer = StyleDictionary.transform['attribute/cti'].transformer;
+const transform = StyleDictionary.transform['attribute/cti'].transform;
 
 const propertiesToCTI = {
   width: { category: 'size', type: 'dimension' },
@@ -25,15 +25,15 @@ const propertiesToCTI = {
 
 const CTITransform = {
   type: `attribute`,
-  transformer: (prop) => {
+  transform: (prop) => {
     // Only do this custom functionality in the 'component' top-level namespace.
     if (prop.path[0] === 'component') {
       // When defining component tokens, the key of the token is the relevant CSS property
       // The key of the token is the last element in the path array
       return propertiesToCTI[prop.path[prop.path.length - 1]];
     } else {
-      // Fallback to the original 'attribute/cti' transformer
-      return transformer(prop);
+      // Fallback to the original 'attribute/cti' transform
+      return transform(prop);
     }
   },
 };
@@ -44,7 +44,7 @@ const CTITransform = {
 // StyleDictionary.registerTransform({
 //   name: 'attribute/cti',
 //   type: 'attribute',
-//   transformer: CTITransform.transformer
+//   transform: CTITransform.transform
 // });
 
 module.exports = {

@@ -4,7 +4,7 @@ import { expect } from 'chai';
 export function registerSuite(opts) {
   /**
    * opts example: {
-   *   config: { transformer: () => {} },
+   *   config: { transform: () => {} },
    *   registerMethod: 'registerTransform',
    *   prop: 'transform',
    * }

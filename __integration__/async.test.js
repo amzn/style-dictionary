@@ -60,7 +60,7 @@ describe('integration', async function () {
       name: 'foo-value-transform',
       type: 'value',
       filter: (token) => token.value === 'foo',
-      transformer: async () => {
+      transform: async () => {
         await sleep(10);
         return 'bar';
       },

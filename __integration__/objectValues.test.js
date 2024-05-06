@@ -78,37 +78,41 @@ describe('integration', async () => {
           },
         },
       },
-      transform: {
-        hsl: {
-          type: 'value',
-          transitive: true,
-          filter: (token) => token.original.value.h,
-          transformer: (token) => {
-            return `hsl(${token.value.h}, ${token.value.s}, ${token.value.l})`;
+      hooks: {
+        transforms: {
+          hsl: {
+            type: 'value',
+            transitive: true,
+            filter: (token) => token.original.value.h,
+            transform: (token) => {
+              return `hsl(${token.value.h}, ${token.value.s}, ${token.value.l})`;
+            },
           },
-        },
-        hslToHex: {
-          type: 'value',
-          transitive: true,
-          filter: (token) => token.original.value.h,
-          transformer: (token) => {
-            return Color(`hsl(${token.value.h}, ${token.value.s}, ${token.value.l})`).toHexString();
+          hslToHex: {
+            type: 'value',
+            transitive: true,
+            filter: (token) => token.original.value.h,
+            transform: (token) => {
+              return Color(
+                `hsl(${token.value.h}, ${token.value.s}, ${token.value.l})`,
+              ).toHexString();
+            },
           },
-        },
-        cssBorder: {
-          type: 'value',
-          transitive: true,
-          filter: (token) => token.path[0] === `border`,
-          transformer: (token) => {
-            return `${token.value.width} ${token.value.style} ${token.value.color}`;
+          cssBorder: {
+            type: 'value',
+            transitive: true,
+            filter: (token) => token.path[0] === `border`,
+            transform: (token) => {
+              return `${token.value.width} ${token.value.style} ${token.value.color}`;
+            },
           },
-        },
-        shadow: {
-          type: 'value',
-          transitive: true,
-          filter: (token) => token.type === 'shadow',
-          transformer: (token) => {
-            return token.value.map((obj) => obj.color).join(', ');
+          shadow: {
+            type: 'value',
+            transitive: true,
+            filter: (token) => token.type === 'shadow',
+            transform: (token) => {
+              return token.value.map((obj) => obj.color).join(', ');
+            },
           },
         },
       },

@@ -301,7 +301,7 @@ StyleDictionary.registerTransform({
   filter: function (token) {
     return token.type === 'time';
   },
-  transformer: function (token) {
+  transform: function (token) {
     return (parseInt(token.original.value) / 1000).toString() + 's';
   },
 });

@@ -13,41 +13,42 @@
 import { expect } from 'chai';
 import StyleDictionary from 'style-dictionary';
 import { registerSuite } from './register.suite.js';
-import transform from '../../lib/common/transforms.js';
+import transformBuiltins from '../../lib/common/transforms.js';
 
-const transformerPxAppender = {
+const transformPxAppender = {
   name: 'px-appender',
   type: 'value',
-  transformer: (token) => `${token.value}px`,
+  transform: (token) => `${token.value}px`,
 };
 
-const transformerValueIncrementer = {
+const transformValueIncrementer = {
   name: 'value-incrementer',
   type: 'value',
   filter: (token) => typeof token.value === 'number',
-  transformer: (token) => token.value + 1,
+  transform: (token) => token.value + 1,
 };
 
 registerSuite({
   config: {
     type: 'value',
-    transformer: () => {},
+    transform: () => {},
   },
   registerMethod: 'registerTransform',
-  prop: 'transform',
+  prop: 'transforms',
+  hooks: true,
 });
 
 describe('register', () => {
   beforeEach(() => {
-    StyleDictionary.transform = transform;
+    StyleDictionary.hooks.transforms = transformBuiltins;
   });
   afterEach(() => {
-    StyleDictionary.transform = transform;
+    StyleDictionary.hooks.transforms = transformBuiltins;
   });
 
   describe('instance vs class registration', () => {
     it('should allow registering on class, affecting all instances', async () => {
-      StyleDictionary.registerTransform(transformerPxAppender);
+      StyleDictionary.registerTransform(transformPxAppender);
 
       const baseCfg = {
         platforms: {
@@ -89,9 +90,9 @@ describe('register', () => {
         [sd1, sd2, sd3].map((sd) => sd.exportPlatform('test')),
       );
 
-      expect(sd1.transform['px-appender']).to.not.be.undefined;
-      expect(sd2.transform['px-appender']).to.not.be.undefined;
-      expect(sd3.transform['px-appender']).to.not.be.undefined;
+      expect(sd1.hooks.transforms['px-appender']).to.not.be.undefined;
+      expect(sd2.hooks.transforms['px-appender']).to.not.be.undefined;
+      expect(sd3.hooks.transforms['px-appender']).to.not.be.undefined;
 
       expect(sd1After.size1.value).to.equal('1px');
       expect(sd2After.size2.value).to.equal('2px');
@@ -104,15 +105,15 @@ describe('register', () => {
       const sd2 = new StyleDictionary();
       const sd3 = await sd2.extend();
 
-      sd2.registerTransform(transformerPxAppender);
+      sd2.registerTransform(transformPxAppender);
 
-      expect(sd1.transform['px-appender']).to.be.undefined;
-      expect(sd2.transform['px-appender']).to.not.be.undefined;
-      expect(sd3.transform['px-appender']).to.be.undefined;
+      expect(sd1.hooks.transforms['px-appender']).to.be.undefined;
+      expect(sd2.hooks.transforms['px-appender']).to.not.be.undefined;
+      expect(sd3.hooks.transforms['px-appender']).to.be.undefined;
     });
 
     it('should combine class and instance registrations on the instance', async () => {
-      StyleDictionary.registerTransform(transformerPxAppender);
+      StyleDictionary.registerTransform(transformPxAppender);
 
       const sd1 = new StyleDictionary({
         platforms: {
@@ -141,7 +142,7 @@ describe('register', () => {
           },
         },
       });
-      sd2.registerTransform(transformerValueIncrementer);
+      sd2.registerTransform(transformValueIncrementer);
 
       const sd3 = await sd2.extend({
         tokens: {
@@ -156,14 +157,14 @@ describe('register', () => {
         [sd1, sd2, sd3].map((sd) => sd.exportPlatform('test')),
       );
 
-      expect(sd1.transform['px-appender']).to.not.be.undefined;
-      expect(sd2.transform['px-appender']).to.not.be.undefined;
-      expect(sd3.transform['px-appender']).to.not.be.undefined;
+      expect(sd1.hooks.transforms['px-appender']).to.not.be.undefined;
+      expect(sd2.hooks.transforms['px-appender']).to.not.be.undefined;
+      expect(sd3.hooks.transforms['px-appender']).to.not.be.undefined;
       // should not be registered on sd1, because we registered only on sd2
-      expect(sd1.transform['value-incrementer']).to.be.undefined;
-      expect(sd2.transform['value-incrementer']).to.not.be.undefined;
+      expect(sd1.hooks.transforms['value-incrementer']).to.be.undefined;
+      expect(sd2.hooks.transforms['value-incrementer']).to.not.be.undefined;
       // should be registered because sd3 extends sd2
-      expect(sd3.transform['value-incrementer']).to.not.be.undefined;
+      expect(sd3.hooks.transforms['value-incrementer']).to.not.be.undefined;
 
       expect(sd1After.size1.value).to.equal('1px');
       expect(sd2After.size2.value).to.equal('3px');
@@ -209,7 +210,7 @@ describe('register', () => {
       }).to.throw('filter must be a function');
     });
 
-    it('should error if transformer is not a function', () => {
+    it('should error if transform is not a function', () => {
       expect(() => {
         StyleDictionaryExtended.registerTransform({
           type: 'name',
@@ -217,34 +218,34 @@ describe('register', () => {
           filter: function () {
             return true;
           },
-          transformer: 'foo',
+          transform: 'foo',
         });
-      }).to.throw('transformer must be a function');
+      }).to.throw('transform must be a function');
     });
 
-    it('should work if type, filter, and transformer are all proper', () => {
+    it('should work if type, filter, and transform are all proper', () => {
       StyleDictionaryExtended.registerTransform({
         type: 'name',
         name: 'foo',
         filter: function () {
           return true;
         },
-        transformer: function () {
+        transform: function () {
           return true;
         },
       });
-      expect(typeof StyleDictionaryExtended.transform.foo).to.equal('object');
-      expect(StyleDictionaryExtended).to.have.nested.property('transform.foo.type', 'name');
-      expect(typeof StyleDictionaryExtended.transform.foo.filter).to.equal('function');
-      expect(typeof StyleDictionaryExtended.transform.foo.transformer).to.equal('function');
+      expect(typeof StyleDictionaryExtended.hooks.transforms.foo).to.equal('object');
+      expect(StyleDictionaryExtended).to.have.nested.property('hooks.transforms.foo.type', 'name');
+      expect(typeof StyleDictionaryExtended.hooks.transforms.foo.filter).to.equal('function');
+      expect(typeof StyleDictionaryExtended.hooks.transforms.foo.transform).to.equal('function');
     });
 
     it('should properly pass the registered transform to instances', async () => {
       const SDE2 = await StyleDictionaryExtended.extend({});
-      expect(typeof SDE2.transform.foo).to.equal('object');
-      expect(SDE2).to.have.nested.property('transform.foo.type', 'name');
-      expect(typeof SDE2.transform.foo.filter).to.equal('function');
-      expect(typeof SDE2.transform.foo.transformer).to.equal('function');
+      expect(typeof SDE2.hooks.transforms.foo).to.equal('object');
+      expect(SDE2).to.have.nested.property('hooks.transforms.foo.type', 'name');
+      expect(typeof SDE2.hooks.transforms.foo.filter).to.equal('function');
+      expect(typeof SDE2.hooks.transforms.foo.transform).to.equal('function');
     });
   });
 });

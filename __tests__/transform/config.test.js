@@ -17,16 +17,16 @@ import chalk from 'chalk';
 
 const dictionary = {
   hooks: {
+    transforms: {
+      fooTransform: {
+        type: 'attribute',
+        transform: function () {
+          return { bar: 'foo' };
+        },
+      },
+    },
     transformGroups: {
       fooTransformGroup: ['barTransform'],
-    },
-  },
-  transform: {
-    fooTransform: {
-      type: 'attribute',
-      transformer: function () {
-        return { bar: 'foo' };
-      },
     },
   },
 };
@@ -62,31 +62,31 @@ None of "barTransform", "bazTransform" match the name of a registered transform.
     it('allows combining transformGroup with transforms', () => {
       const cfg = {
         hooks: {
+          transforms: {
+            fooTransform: {
+              name: 'fooTransform',
+              type: 'attribute',
+              transform: function () {
+                return { foo: 'foo' };
+              },
+            },
+            barTransform: {
+              name: 'barTransform',
+              type: 'attribute',
+              transform: function () {
+                return { bar: 'bar' };
+              },
+            },
+            quxTransform: {
+              name: 'quxTransform',
+              type: 'attribute',
+              transform: function () {
+                return { qux: 'qux' };
+              },
+            },
+          },
           transformGroups: {
             foobarTransformGroup: ['fooTransform', 'barTransform'],
-          },
-        },
-        transform: {
-          fooTransform: {
-            name: 'fooTransform',
-            type: 'attribute',
-            transformer: function () {
-              return { foo: 'foo' };
-            },
-          },
-          barTransform: {
-            name: 'barTransform',
-            type: 'attribute',
-            transformer: function () {
-              return { bar: 'bar' };
-            },
-          },
-          quxTransform: {
-            name: 'quxTransform',
-            type: 'attribute',
-            transformer: function () {
-              return { qux: 'qux' };
-            },
           },
         },
       };

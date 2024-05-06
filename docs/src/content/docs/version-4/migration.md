@@ -117,9 +117,9 @@ Available hooks are: `parsers`, `preprocessors`, `transformGroups`, `transforms`
 
 :::note
 The other hooks are also going to change similarly to preprocessors, in an effort to align these APIs and make them consistent across.
-They will all be grouped under the `hooks` property, they will all use plural form vs singular (e.g. `transforms` vs `transform`), and lastly,
-they will all use the same signature, with a `name` property and a handler function name that is the same as the hook name (e.g. `transformer` will be `transform`).
-Parsers will also have to be applied explicitly similarly to preprocessors.
+Hooks are now all grouped under the `hooks` property, they all use plural form vs singular (e.g. `transforms` vs `transform`), and lastly,
+they will all use the same signature, with a `name` property and a handler function name that is the same as the hook name (e.g. `transformer` has become `transform`).
+Parsers and preprocessors now also have to be applied explicitly in the config.
 :::
 
 ### Parsers
@@ -183,7 +183,7 @@ export default {
   preprocessors: ['foo'],
   platforms: {
     css: {
-      // or apply is per platform
+      // or apply it per platform
       preprocessors: ['foo'],
     },
   },
@@ -210,8 +210,59 @@ export default {
   },
   platforms: {
     css: {
-      // or apply is per platform
+      // apply it per platform
       transformGroup: ['foo'],
+    },
+  },
+};
+```
+
+### Transforms
+
+Transform, when registered, are put inside the `hooks.transforms` property now, as opposed to `transform`.
+Note the change from singular to plural form here.
+
+The name of the filter function is now `filter` instead of `matcher`:
+
+```js title="build-tokens.js" del={6} ins={7} /filter/ /matcher/
+import StyleDictionary from 'style-dictionary';
+
+StyleDictionary.registerTransform({
+  name: 'color-transform',
+  type: 'value',
+  matcher: (token) => token.type === 'color',
+  filter: (token) => token.type === 'color',
+  transform: (token) => token.value,
+});
+```
+
+Lastly, the `transformer` handler function has been renamed to `transform` for consistency.
+
+Changes:
+
+```js title="config.js" del={3-9} ins={10-18} /transform(s): {/ /filter/ /matcher/ /transform(er)/ /(transform): (/
+export default {
+  // register it inline or by SD.registerTransform
+  transform: {
+    'color-transform': {
+      type: 'value',
+      matcher: (token) => token.type === 'color',
+      transformer: (token) => token.value,
+    },
+  },
+  hooks: {
+    transforms: {
+      'color-transform': {
+        type: 'value',
+        filter: (token) => token.type === 'color',
+        transform: (token) => token.value,
+      },
+    },
+  },
+  platforms: {
+    css: {
+      // apply it per platform
+      transforms: ['color-transform'],
     },
   },
 };
@@ -284,22 +335,6 @@ StyleDictionary.registerFilter({
 :::note
 These changes also apply for the [filter function inside transforms](#transforms).
 :::
-
-### Transforms
-
-The name of the filter function is now `filter` instead of `matcher`:
-
-```js title="build-tokens.js" del={6} ins={7}
-import StyleDictionary from 'style-dictionary';
-
-StyleDictionary.registerTransform({
-  name: 'color-transform',
-  type: 'value',
-  matcher: (token) => token.type === 'color',
-  filter: (token) => token.type === 'color',
-  transform: (token) => token.value,
-});
-```
 
 ### Actions
 

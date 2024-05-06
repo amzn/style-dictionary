@@ -21,7 +21,7 @@ interface BaseTransform<Type, Value> {
   type: Type;
   filter?: Filter['filter'];
   transitive?: boolean;
-  transformer: (
+  transform: (
     token: TransformedToken,
     config: PlatformConfig,
     options: Config,

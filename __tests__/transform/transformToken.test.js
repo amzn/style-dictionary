@@ -17,7 +17,7 @@ const config = {
   transforms: [
     {
       type: 'attribute',
-      transformer: function () {
+      transform: function () {
         return {
           foo: 'bar',
         };
@@ -25,7 +25,7 @@ const config = {
     },
     {
       type: 'attribute',
-      transformer: function () {
+      transform: function () {
         return { bar: 'foo' };
       },
     },
@@ -34,7 +34,7 @@ const config = {
       filter: function (prop) {
         return prop.attributes.foo === 'bar';
       },
-      transformer: function () {
+      transform: function () {
         return 'hello';
       },
     },
@@ -50,7 +50,7 @@ describe('transform', () => {
     });
 
     // This allows transformObject utility to then consider this token's transformation undefined and thus "deferred"
-    it('returns a token as undefined if transitive transformer dictates that the transformation has to be deferred', async () => {
+    it('returns a token as undefined if transitive transform dictates that the transformation has to be deferred', async () => {
       const result = await transformToken(
         {
           value: '16',
@@ -63,7 +63,7 @@ describe('transform', () => {
             {
               type: 'value',
               transitive: true,
-              transformer: () => {
+              transform: () => {
                 return undefined;
               },
             },

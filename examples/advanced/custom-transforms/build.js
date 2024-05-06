@@ -16,7 +16,7 @@ StyleDictionary.registerTransform({
     // this is an example of a possible filter (based on the "cti" values) to show how a "filter" works
     return token.attributes.category === 'font' || token.attributes.category === 'margin';
   },
-  transformer: function (token) {
+  transform: function (token) {
     return `${token.value}px`;
   },
 });
@@ -28,7 +28,7 @@ StyleDictionary.registerTransform({
     // here we are using a custom attribute, declared in the token, to match the values where apply the transform
     return token.group === 'ratio';
   },
-  transformer: function (token) {
+  transform: function (token) {
     return `${Math.floor(100 * token.value)}%`;
   },
 });
@@ -39,7 +39,7 @@ StyleDictionary.registerTransform({
   filter: function (token) {
     return token.group === 'color';
   },
-  transformer: function (token) {
+  transform: function (token) {
     // for sake of simplicity, in this example we assume colors are always in the format #xxxxxx
     return token.value.replace(/^#/, '#FF');
   },
@@ -51,7 +51,7 @@ StyleDictionary.registerTransform({
   filter: function (token) {
     return token.group === 'typography' || token.group === 'spacing';
   },
-  transformer: function (token) {
+  transform: function (token) {
     // in Android font sizes are expressed in "sp" units
     let unit = token.group === 'typography' ? 'sp' : 'dp';
     return `${token.value}${unit}`;
@@ -63,7 +63,7 @@ StyleDictionary.registerTransform({
   name: 'name/squiggle',
   type: 'name',
   // notice: if you don't specify a filter, the transformation will be applied to all the tokens
-  transformer: function (token) {
+  transform: function (token) {
     return token.path.join('~');
   },
 });

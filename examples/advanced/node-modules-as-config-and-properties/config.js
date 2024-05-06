@@ -13,7 +13,7 @@ StyleDictionary.registerTransform({
   name: 'myRegisteredTransform',
   type: 'value',
   filter: (token) => token.attributes.category === 'size',
-  transformer: (token) => `${parseInt(token.value) * 16}px`,
+  transform: (token) => `${parseInt(token.value) * 16}px`,
 });
 
 StyleDictionary.registerFormat({
@@ -39,7 +39,7 @@ module.exports = {
     // Now we can use the transform 'myTransform' below
     myTransform: {
       type: 'name',
-      transformer: (token) => token.path.join('_').toUpperCase(),
+      transform: (token) => token.path.join('_').toUpperCase(),
     },
   },
   // Same with formats, you can now write them directly to this config
