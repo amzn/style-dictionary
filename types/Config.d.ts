@@ -12,14 +12,24 @@
  */
 
 import type { DesignToken, DesignTokens, TransformedToken } from './DesignToken.d.ts';
-import type { Filter, Matcher } from './Filter.d.ts';
+import type { Filter } from './Filter.d.ts';
 import type { FileHeader, File, FormattingOptions } from './File.d.ts';
 import type { Parser } from './Parser.d.ts';
 import type { Preprocessor } from './Preprocessor.d.ts';
 import type { Transform } from './Transform.d.ts';
-import type { Formatter, OutputReferences } from './Format.d.ts';
+import type { Format, OutputReferences } from './Format.d.ts';
 import type { Action } from './Action.d.ts';
-import type { Hooks } from '../lib/Register.js';
+
+export interface Hooks {
+  parsers?: Record<string, Omit<Parser, 'name'>>;
+  preprocessors?: Record<string, Preprocessor['preprocessor']>;
+  transformGroups?: Record<string, string[]>;
+  transforms?: Record<string, Omit<Transform, 'name'>>;
+  formats?: Record<string, Format['format']>;
+  fileHeaders?: Record<string, FileHeader>;
+  filters?: Record<string, Filter['filter']>;
+  actions?: Record<string, Omit<Action, 'name'>>;
+}
 
 export interface LocalOptions {
   showFileHeader?: boolean;
@@ -74,10 +84,6 @@ export interface Expand {
 
 export type ExpandConfig = Expand | boolean | ExpandFilter;
 
-export interface Hooks {
-  preprocessors?: Record<string, Omit<Preprocessor, 'name'>>;
-}
-
 export interface PlatformConfig extends RegexOptions {
   log?: LogConfig;
   transformGroup?: string;
@@ -102,11 +108,5 @@ export interface Config {
   platforms?: Record<string, PlatformConfig>;
   parsers?: Parser[];
   preprocessors?: string[];
-  transform?: Record<string, Transform>;
-  transformGroup?: Record<string, string[]>;
-  format?: Record<string, Formatter>;
-  filter?: Record<string, Filter['matcher']>;
-  fileHeader?: Record<string, FileHeader>;
-  action?: Record<string, Action>;
   usesDtcg?: boolean;
 }

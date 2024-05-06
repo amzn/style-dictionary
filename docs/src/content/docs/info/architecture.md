@@ -16,7 +16,7 @@ Style Dictionary is a configuration based framework, you tell it what to do in a
 
 In your [config](/reference/config) file can define `include` and `source`, which are arrays of file path globs. These tell Style Dictionary where to find your token files. You can have them anywhere and in any folder structure as long as you tell Style Dictionary where to find them.
 
-If there are [custom parsers](/reference/hooks/parsers) defined, Style Dictionary will run those on files the parsers match.
+If there are [custom parsers](/reference/hooks/parsers) defined and applied in the config, Style Dictionary will run those on files the applied parsers match.
 
 ## 3. Deep merge token files
 
@@ -25,10 +25,12 @@ Style Dictionary takes all the files it found and performs a deep merge. This al
 ## 4. Run preprocessors over the dictionary
 
 Allows users to configure [custom preprocessors](/reference/hooks/preprocessors), to process the merged dictionary as a whole, rather than per token file individually.
+These preprocessors have to be applied in the config, either on a global or platform level.
 
 ## 5. Iterate over the platforms
 
 For each platform defined in your [config](/reference/config), Style Dictionary will do a few steps to get it ready to be consumed on that platform. You don't need to worry about one platform affecting another because everything that happens in a platform is non-destructive.
+Platform-applied preprocessors run now instead of beforehand in step 4.
 
 ## 5a. Transform the tokens
 

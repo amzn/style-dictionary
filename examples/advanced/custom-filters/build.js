@@ -7,7 +7,7 @@ console.log('\n==============================================');
 
 StyleDictionary.registerFilter({
   name: 'removeBigSpacing',
-  matcher: function (token) {
+  filter: function (token) {
     return token.group === 'spacing' && token.value < 0.5;
   },
 });

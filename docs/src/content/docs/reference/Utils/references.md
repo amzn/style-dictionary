@@ -163,7 +163,7 @@ const sd = new StyleDictionary({
 // Note that this example format does not account for token values that are arrays or objects
 StyleDictionary.registerFormat({
   name: 'es6',
-  formatter: async (dictionary) => {
+  format: async (dictionary) => {
     const { allTokens, options, file } = dictionary;
     const isNumeric = (str) => {
       if (typeof str !== 'string') return false;
@@ -239,7 +239,7 @@ export const Border = `solid ${Spacing2} ${SemanticBgPrimary}`;
 
 :::note
 The above example does not support DTCG syntax, but this could be quite easily added,
-since you can query `sd.usesDtcg` or inside a formatter functions `dictionary.options.usesDtcg`.
+since you can query `sd.usesDtcg` or inside a format functions `dictionary.options.usesDtcg`.
 :::
 
 ## outputReferencesFilter

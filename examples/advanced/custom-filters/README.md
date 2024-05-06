@@ -60,7 +60,7 @@ To declare a custom **filter**, you have to call the `registerFilter` method:
 ```js
 StyleDictionary.registerFilter({
   name: 'isTextTransform',
-  matcher: function (token) {
+  filter: function (token) {
     return token.attributes.category === 'font' && token.value.includes[('lowercase', 'uppercase')];
   },
 });

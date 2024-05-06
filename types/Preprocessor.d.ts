@@ -15,7 +15,5 @@ import type { DesignTokens } from './DesignToken.d.ts';
 
 export type Preprocessor = {
   name: string;
-  preprocessor: preprocessor;
+  preprocessor: (dictionary: DesignTokens) => DesignTokens | Promise<DesignTokens>;
 };
-
-export type preprocessor = (dictionary: DesignTokens) => DesignTokens | Promise<DesignTokens>;

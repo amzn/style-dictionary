@@ -33,8 +33,9 @@ describe('integration', async function () {
     const SDExtension = class extends StyleDictionary {};
 
     SDExtension.registerParser({
+      name: 'json-parser',
       pattern: /^.+\.json$/g,
-      parse: async ({ contents }) => {
+      parser: async ({ contents }) => {
         await sleep(10);
         // TODO: verify this is called
         return JSON.parse(contents);
@@ -58,8 +59,8 @@ describe('integration', async function () {
     SDExtension.registerTransform({
       name: 'foo-value-transform',
       type: 'value',
-      matcher: (token) => token.value === 'foo',
-      transformer: async () => {
+      filter: (token) => token.value === 'foo',
+      transform: async () => {
         await sleep(10);
         return 'bar';
       },
@@ -67,7 +68,7 @@ describe('integration', async function () {
 
     SDExtension.registerFormat({
       name: 'custom/css',
-      formatter: async function ({ dictionary, file, options }) {
+      format: async function ({ dictionary, file, options }) {
         await sleep(10);
         const { outputReferences } = options;
         return (

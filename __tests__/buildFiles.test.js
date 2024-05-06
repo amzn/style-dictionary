@@ -61,7 +61,7 @@ const platformWithFilter = {
   ],
 };
 
-const platformWithoutFormatter = {
+const platformWithoutFormat = {
   buildPath: '__tests__/__output/',
   files: [
     {
@@ -98,7 +98,7 @@ describe('buildFiles', () => {
   });
 
   it('should throw if missing a format', async () => {
-    await expect(buildFiles(dictionary, platformWithoutFormatter)).to.eventually.rejectedWith(
+    await expect(buildFiles(dictionary, platformWithoutFormat)).to.eventually.rejectedWith(
       'Please supply a format',
     );
   });

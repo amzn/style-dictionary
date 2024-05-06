@@ -17,7 +17,7 @@ The "build" command will run the custom script `build.js`, that contains three d
 ```
 StyleDictionary.registerFormat({
   name: 'custom/format/android-xml',
-  formatter: _.template(fs.readFileSync(__dirname + '/templates/android-xml.template'))
+  format: _.template(fs.readFileSync(__dirname + '/templates/android-xml.template'))
 });
 ```
 

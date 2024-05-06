@@ -16,15 +16,17 @@ import transformConfig from '../../lib/transform/config.js';
 import chalk from 'chalk';
 
 const dictionary = {
-  transformGroup: {
-    fooTransformGroup: ['barTransform'],
-  },
-  transform: {
-    fooTransform: {
-      type: 'attribute',
-      transformer: function () {
-        return { bar: 'foo' };
+  hooks: {
+    transforms: {
+      fooTransform: {
+        type: 'attribute',
+        transform: function () {
+          return { bar: 'foo' };
+        },
       },
+    },
+    transformGroups: {
+      fooTransformGroup: ['barTransform'],
     },
   },
 };
@@ -59,30 +61,32 @@ None of "barTransform", "bazTransform" match the name of a registered transform.
 
     it('allows combining transformGroup with transforms', () => {
       const cfg = {
-        transformGroup: {
-          foobarTransformGroup: ['fooTransform', 'barTransform'],
-        },
-        transform: {
-          fooTransform: {
-            name: 'fooTransform',
-            type: 'attribute',
-            transformer: function () {
-              return { foo: 'foo' };
+        hooks: {
+          transforms: {
+            fooTransform: {
+              name: 'fooTransform',
+              type: 'attribute',
+              transform: function () {
+                return { foo: 'foo' };
+              },
+            },
+            barTransform: {
+              name: 'barTransform',
+              type: 'attribute',
+              transform: function () {
+                return { bar: 'bar' };
+              },
+            },
+            quxTransform: {
+              name: 'quxTransform',
+              type: 'attribute',
+              transform: function () {
+                return { qux: 'qux' };
+              },
             },
           },
-          barTransform: {
-            name: 'barTransform',
-            type: 'attribute',
-            transformer: function () {
-              return { bar: 'bar' };
-            },
-          },
-          quxTransform: {
-            name: 'quxTransform',
-            type: 'attribute',
-            transformer: function () {
-              return { qux: 'qux' };
-            },
+          transformGroups: {
+            foobarTransformGroup: ['fooTransform', 'barTransform'],
           },
         },
       };
@@ -101,8 +105,10 @@ None of "barTransform", "bazTransform" match the name of a registered transform.
 
     it('warns the user if an action is used without a clean function', () => {
       const cfg = {
-        action: {
-          foo: {},
+        hooks: {
+          actions: {
+            foo: {},
+          },
         },
       };
       const platformCfg = {
@@ -121,8 +127,10 @@ None of "barTransform", "bazTransform" match the name of a registered transform.
     it('throws if an action is used without a clean function with log.warnings set to error', () => {
       const cfg = {
         log: { warnings: 'error' },
-        action: {
-          foo: {},
+        hooks: {
+          actions: {
+            foo: {},
+          },
         },
       };
       const platformCfg = {
@@ -137,8 +145,10 @@ None of "barTransform", "bazTransform" match the name of a registered transform.
     it('does not warn user at all when log.verbosity silent is used', () => {
       const cfg = {
         log: { verbosity: 'silent' },
-        action: {
-          foo: {},
+        hooks: {
+          actions: {
+            foo: {},
+          },
         },
       };
       const platformCfg = {

@@ -17,7 +17,7 @@ Creates a CSS file with variable definitions based on the style dictionary
 | `options`                          | `Object`                              |                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | `options.showFileHeader`           | `boolean`                             | Whether or not to include a comment that has the build date. Defaults to `true`                                                                                                                                                                                                                                                                                                                                                                            |
 | `options.outputReferences`         | `boolean \| OutputReferencesFunction` | Whether or not to keep [references](#references-in-output-files) (a -> b -> c) in the output. Defaults to `false`. Also allows passing a function to conditionally output references on a per token basis.                                                                                                                                                                                                                                                 |
-| `options.outputReferenceFallbacks` | `boolean`                             | Whether or not to output css variable fallback values when using output references. You will want to pass this from the `options` object sent to the formatter function.                                                                                                                                                                                                                                                                                   |
+| `options.outputReferenceFallbacks` | `boolean`                             | Whether or not to output css variable fallback values when using output references. You will want to pass this from the `options` object sent to the format function.                                                                                                                                                                                                                                                                                      |
 | `options.selector`                 | `string`                              | Override the root css selector                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | `options.formatting`               | `FormattingOptions`                   | Custom formatting properties that define parts of a declaration line in code. The configurable strings are: `prefix`, `indentation`, `separator`, `suffix`, `lineSeparator`, `fileHeaderTimestamp`, `header`, `footer`, `commentStyle` and `commentPosition`. Those are used to generate a line like this: `${indentation}${prefix}${token.name}${separator} ${prop.value}${suffix}`. The remaining formatting options are used for the fileHeader helper. |
 
@@ -36,7 +36,7 @@ Example:
 
 Creates a SCSS file with a flat map based on the style dictionary
 
-Name the map by adding a 'mapName' attribute on the file object in your config.
+Name the map by adding a `mapName` property on the `options` object property on the `file` object property in your config.
 
 Example:
 
@@ -52,13 +52,13 @@ $tokens: (
 
 Creates a SCSS file with a deep map based on the style dictionary.
 
-Name the map by adding a 'mapName' attribute on the file `options` object in your config.
+Name the map by adding a `mapName` property on the `options` object property on the `file` object property in your config.
 
 | Param                              | Type                                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | ---------------------------------- | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `options`                          | `Object`                              |                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | `options.outputReferences`         | `boolean \| OutputReferencesFunction` | Whether or not to keep [references](#references-in-output-files) (a -> b -> c) in the output. Defaults to `false`. Also allows passing a function to conditionally output references on a per token basis.                                                                                                                                                                                                                                                 |
-| `options.outputReferenceFallbacks` | `boolean`                             | Whether or not to output css variable fallback values when using output references. You will want to pass this from the `options` object sent to the formatter function.                                                                                                                                                                                                                                                                                   |
+| `options.outputReferenceFallbacks` | `boolean`                             | Whether or not to output css variable fallback values when using output references. You will want to pass this from the `options` object sent to the format function.                                                                                                                                                                                                                                                                                      |
 | `options.themeable`                | `boolean`                             | Whether or not tokens should default to being themeable, if not otherwise specified per token. Defaults to `false`.                                                                                                                                                                                                                                                                                                                                        |
 | `options.mapName`                  | `string`                              | Name of your SCSS map.                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | `options.formatting`               | `FormattingOptions`                   | Custom formatting properties that define parts of a declaration line in code. The configurable strings are: `prefix`, `indentation`, `separator`, `suffix`, `lineSeparator`, `fileHeaderTimestamp`, `header`, `footer`, `commentStyle` and `commentPosition`. Those are used to generate a line like this: `${indentation}${prefix}${token.name}${separator} ${prop.value}${suffix}`. The remaining formatting options are used for the fileHeader helper. |
@@ -92,7 +92,7 @@ Add `!default` to any variable by setting a `themeable: true` attribute in the t
 | `options`                          | `Object`                              |                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | `options.showFileHeader`           | `boolean`                             | Whether or not to include a comment that has the build date. Defaults to `true`                                                                                                                                                                                                                                                                                                                                                                            |
 | `options.outputReferences`         | `boolean \| OutputReferencesFunction` | Whether or not to keep [references](#references-in-output-files) (a -> b -> c) in the output. Defaults to `false`. Also allows passing a function to conditionally output references on a per token basis.                                                                                                                                                                                                                                                 |
-| `options.outputReferenceFallbacks` | `boolean`                             | Whether or not to output css variable fallback values when using output references. You will want to pass this from the `options` object sent to the formatter function.                                                                                                                                                                                                                                                                                   |
+| `options.outputReferenceFallbacks` | `boolean`                             | Whether or not to output css variable fallback values when using output references. You will want to pass this from the `options` object sent to the format function.                                                                                                                                                                                                                                                                                      |
 | `options.themeable`                | `boolean`                             | Whether or not tokens should default to being themeable, if not otherwise specified per token. Defaults to `false`.                                                                                                                                                                                                                                                                                                                                        |
 | `options.formatting`               | `FormattingOptions`                   | Custom formatting properties that define parts of a declaration line in code. The configurable strings are: `prefix`, `indentation`, `separator`, `suffix`, `lineSeparator`, `fileHeaderTimestamp`, `header`, `footer`, `commentStyle` and `commentPosition`. Those are used to generate a line like this: `${indentation}${prefix}${token.name}${separator} ${prop.value}${suffix}`. The remaining formatting options are used for the fileHeader helper. |
 
@@ -129,7 +129,7 @@ Creates a LESS file with variable definitions based on the style dictionary
 | `options`                          | `Object`                              |                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | `options.showFileHeader`           | `boolean`                             | Whether or not to include a comment that has the build date. Defaults to `true`                                                                                                                                                                                                                                                                                                                                                                            |
 | `options.outputReferences`         | `boolean \| OutputReferencesFunction` | Whether or not to keep [references](#references-in-output-files) (a -> b -> c) in the output. Defaults to `false`. Also allows passing a function to conditionally output references on a per token basis.                                                                                                                                                                                                                                                 |
-| `options.outputReferenceFallbacks` | `boolean`                             | Whether or not to output css variable fallback values when using output references. You will want to pass this from the `options` object sent to the formatter function.                                                                                                                                                                                                                                                                                   |
+| `options.outputReferenceFallbacks` | `boolean`                             | Whether or not to output css variable fallback values when using output references. You will want to pass this from the `options` object sent to the format function.                                                                                                                                                                                                                                                                                      |
 | `options.formatting`               | `FormattingOptions`                   | Custom formatting properties that define parts of a declaration line in code. The configurable strings are: `prefix`, `indentation`, `separator`, `suffix`, `lineSeparator`, `fileHeaderTimestamp`, `header`, `footer`, `commentStyle` and `commentPosition`. Those are used to generate a line like this: `${indentation}${prefix}${token.name}${separator} ${prop.value}${suffix}`. The remaining formatting options are used for the fileHeader helper. |
 
 Example:
@@ -206,7 +206,7 @@ module.exports = {
 ### javascript/object
 
 Creates a JS file a global var that is a plain javascript object of the style dictionary.
-Name the variable by adding a 'name' attribute on the file object in your config.
+Name the variable by adding a `name` property on the `options` object property of the `file` object property in your config.
 
 Example:
 
@@ -227,8 +227,7 @@ var StyleDictionary = {
 ### javascript/umd
 
 Creates a [UMD](https://github.com/umdjs/umd) module of the style
-dictionary. Name the module by adding a 'name' attribute on the file object
-in your config.
+dictionary. Name the module by adding a `name` property on the `options` object property of the `file` object property in your config.
 
 Example
 
@@ -380,7 +379,7 @@ import JsonToTS from 'json-to-ts';
 
 StyleDictionaryPackage.registerFormat({
   name: 'typescript/accurate-module-declarations',
-  formatter: function ({ dictionary }) {
+  format: function ({ dictionary }) {
     return (
       'declare const root: RootObject\n' +
       'export default root\n' +
@@ -401,8 +400,9 @@ with mixed resources will still work.
 
 This format will try to use the proper resource type for each token based on
 the category (color => color, size => dimen, etc.). However if you want to
-force a particular resource type you can provide a 'resourceType' attribute
-on the file configuration. You can also provide a 'resourceMap' if you
+force a particular resource type you can provide a `resourceType` property on the `options`
+object property on the `file` object property configuration.
+You can also provide a `resourceMap` if you
 don't use Style Dictionary's built-in CTI structure.
 
 | Param                      | Type                                  | Description                                                                                                                                                                                                |

@@ -287,16 +287,16 @@ StyleDictionary.registerAction({
 
 ### registerFileHeader
 
-`StyleDictionary.registerFileHeader(options) ⇒ StyleDictionary`
+`StyleDictionary.registerFileHeader(fileHeader) ⇒ StyleDictionary`
 
-Add a custom [fileHeader](/reference/hooks/file_headers) to the Style Dictionary. File headers are used in
+Add a custom [fileHeader](/reference/hooks/file-headers) to the Style Dictionary. File headers are used in
 formats to display some information about how the file was built in a comment.
 
-| Param              | Type       | Description                                                                                                                                                                                                                                     |
-| ------------------ | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| options            | `Object`   |                                                                                                                                                                                                                                                 |
-| options.name       | `string`   | Name of the format to be referenced in your config.json                                                                                                                                                                                         |
-| options.fileHeader | `function` | Function that returns an array of strings, which will be mapped to comment lines. It takes a single argument which is the default message array. See [file headers](/references/hooks/formats#file-headers) for more information. Can be async. |
+| Param              | Type       | Description                                                                                                                                                                                                                             |
+| ------------------ | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| options            | `Object`   |                                                                                                                                                                                                                                         |
+| options.name       | `string`   | Name of the format to be referenced in your config.json                                                                                                                                                                                 |
+| options.fileHeader | `function` | Function that returns an array of strings, which will be mapped to comment lines. It takes a single argument which is the default message array. See [file headers](/references/hooks/file-headers) for more information. Can be async. |
 
 Example:
 
@@ -317,18 +317,18 @@ StyleDictionary.registerFileHeader({
 
 Add a custom [filter](/reference/hooks/filters) to the Style Dictionary.
 
-| Param          | Type       | Description                                                                    |
-| -------------- | ---------- | ------------------------------------------------------------------------------ |
-| filter         | `Object`   |                                                                                |
-| filter.name    | `string`   | Name of the filter to be referenced in your config.json                        |
-| filter.matcher | `function` | Matcher function, return boolean if the token should be included. Can be async |
+| Param         | Type       | Description                                                                   |
+| ------------- | ---------- | ----------------------------------------------------------------------------- |
+| Filter        | `Object`   |                                                                               |
+| Filter.name   | `string`   | Name of the filter to be referenced in your config.json                       |
+| Filter.filter | `function` | Filter function, return boolean if the token should be included. Can be async |
 
 Example:
 
 ```js
 StyleDictionary.registerFilter({
   name: 'isColor',
-  matcher: function (token) {
+  filter: function (token) {
     return token.type === 'color';
   },
 });
@@ -342,18 +342,18 @@ StyleDictionary.registerFilter({
 
 Add a custom [format](/reference/hooks/formats) to the Style Dictionary.
 
-| Param            | Type       | Description                                                                                                                                                                                            |
-| ---------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| format           | `Object`   |                                                                                                                                                                                                        |
-| format.name      | `string`   | Name of the format to be referenced in your config.json                                                                                                                                                |
-| format.formatter | `function` | Function to perform the format. Takes a single argument. See [creating custom formats](/references/hooks/formats#creating-formats) Must return a string, which is then written to a file. Can be async |
+| Param         | Type       | Description                                                                                                                                                                                            |
+| ------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| format        | `Object`   |                                                                                                                                                                                                        |
+| format.name   | `string`   | Name of the format to be referenced in your config.json                                                                                                                                                |
+| format.format | `function` | Function to perform the format. Takes a single argument. See [creating custom formats](/references/hooks/formats#creating-formats) Must return a string, which is then written to a file. Can be async |
 
 Example:
 
 ```js
 StyleDictionary.registerFormat({
   name: 'json',
-  formatter: function ({ dictionary, platform, options, file }) {
+  format: function ({ dictionary, platform, options, file }) {
     return JSON.stringify(dictionary.tokens, null, 2);
   },
 });
@@ -363,21 +363,23 @@ StyleDictionary.registerFormat({
 
 ### registerParser
 
-`StyleDictionary.registerParser(pattern, parse) ⇒ StyleDictionary`
+`StyleDictionary.registerParser(parser) ⇒ StyleDictionary`
 
 Adds a custom [parser](/reference/hooks/parsers) to parse style dictionary files.
 
-| Param   | Type       | Description                                                                                                                                                                                                                     |
-| ------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| pattern | `Regex`    | A file path regular expression to match which files this parser should be be used on. This is similar to how webpack loaders work. `/\.json$/` will match any file ending in '.json', for example.                              |
-| parse   | `function` | Function to parse the file contents. Takes 1 argument, which is an object with 2 attributes: contents wich is the string of the file contents and filePath. The function should return a plain Javascript object. Can be async. |
+| Param          | Type       | Description                                                                                                                                                                                                                         |
+| -------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Parser.name    | `string`   | Name of the parser to be referenced in your config.json                                                                                                                                                                             |
+| Parser.pattern | `Regex`    | A file path regular expression to match which files this parser should be be used on. This is similar to how webpack loaders work. `/\.json$/` will match any file ending in '.json', for example.                                  |
+| Parser.parser  | `function` | Function to parse the file contents. Takes 1 argument, which is an object with 2 properties: `contents` wich is the string of the file contents and `filePath`. The function should return a plain JavaScript object. Can be async. |
 
 Example:
 
 ```js
 StyleDictionary.registerParser({
+  name: 'json-parser',
   pattern: /\.json$/,
-  parse: ({ contents, filePath }) => {
+  parser: ({ contents, filePath }) => {
     return JSON.parse(contents);
   },
 });
@@ -418,14 +420,14 @@ StyleDictionary.registerPreprocessor({
 Add a custom [transform](/reference/hooks/transforms) to the Style Dictionary.
 Transforms can manipulate a token's name, value, or attributes.
 
-| Param                 | Type       | Description                                                                                                                                                                                                                                                                                           |
-| --------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| transform             | `Object`   | Transform object                                                                                                                                                                                                                                                                                      |
-| transform.type        | `string`   | Type of transform, can be: name, attribute, or value                                                                                                                                                                                                                                                  |
-| transform.name        | `string`   | Name of the transformer (used by transformGroup to call a list of transforms).                                                                                                                                                                                                                        |
-| transform.transitive  | `boolean`  | If the value transform should be applied transitively, i.e. should be applied to referenced values as well as absolute values.                                                                                                                                                                        |
-| [transform.matcher]   | `function` | Matcher function, return boolean if transform should be applied. If you omit the matcher function, it will match all tokens.                                                                                                                                                                          |
-| transform.transformer | `function` | Modifies a design token object. The transformer function will receive the token and the platform configuration as its arguments. The transformer function should return a string for name transforms, an object for attribute transforms, and same type of value for a value transform. Can be async. |
+| Param                | Type       | Description                                                                                                                                                                                                                                                                                       |
+| -------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| transform            | `Object`   | Transform object                                                                                                                                                                                                                                                                                  |
+| transform.type       | `string`   | Type of transform, can be: name, attribute, or value                                                                                                                                                                                                                                              |
+| transform.name       | `string`   | Name of the transform (used by transformGroup to call a list of transforms).                                                                                                                                                                                                                      |
+| transform.transitive | `boolean`  | If the value transform should be applied transitively, i.e. should be applied to referenced values as well as absolute values.                                                                                                                                                                    |
+| transform.filter     | `function` | [Filter](/reference/hooks/filters) function, return boolean if transform should be applied. If you omit the filter function, it will match all tokens.                                                                                                                                            |
+| transform.transform  | `function` | Modifies a design token object. The transform function will receive the token and the platform configuration as its arguments. The transform function should return a string for name transforms, an object for attribute transforms, and same type of value for a value transform. Can be async. |
 
 Example:
 
@@ -433,10 +435,10 @@ Example:
 StyleDictionary.registerTransform({
   name: 'time/seconds',
   type: 'value',
-  matcher: function (token) {
+  filter: function (token) {
     return token.type === 'time';
   },
-  transformer: function (token) {
+  transform: function (token) {
     // Note the use of prop.original.value,
     // before any transforms are performed, the build system
     // clones the original token to the 'original' attribute.

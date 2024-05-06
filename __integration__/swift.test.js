@@ -72,13 +72,6 @@ describe('integration', async () => {
           await expect(output).to.matchSnapshot();
         });
       });
-
-      // describe(`separate`, async () => {
-      //   const output = fs.readFileSync(`${buildPath}style_dictionary_color.dart`);
-      //   it(`should match snapshot`, async () => {
-      //     await expect(output).to.matchSnapshot();
-      //   });
-      // });
     });
   });
 });

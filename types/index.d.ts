@@ -12,9 +12,9 @@ export type {
 
 export type { FileHeader, File, FormattingOptions } from './File.d.ts';
 
-export type { Filter, Matcher } from './Filter.d.ts';
+export type { Filter } from './Filter.d.ts';
 
-export type { Format, FormatterArguments, Formatter, OutputReferences } from './Format.d.ts';
+export type { Format, FormatFnArguments, FormatFn, OutputReferences } from './Format.d.ts';
 
 export type { Parser, ParserOptions } from './Parser.d.ts';
 

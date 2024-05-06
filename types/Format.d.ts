@@ -15,7 +15,7 @@ import type { Dictionary, TransformedToken } from './DesignToken.d.ts';
 import type { File } from './File.d.ts';
 import type { LocalOptions, Config, PlatformConfig } from './Config.d.ts';
 
-export interface FormatterArguments {
+export interface FormatFnArguments {
   /**
    * The transformed and resolved dictionary object
    */
@@ -35,16 +35,16 @@ export interface FormatterArguments {
 }
 
 /**
- * The formatter function receives an overloaded object as its arguments and
+ * The format function receives an overloaded object as its arguments and
  * it should return a string, which will be written to a file.
  */
-export type Formatter = ((arguments: FormatterArguments) => string | Promise<string>) & {
+export type FormatFn = ((arguments: FormatFnArguments) => string | Promise<string>) & {
   nested?: boolean;
 };
 
 export interface Format {
   name: string;
-  formatter: Formatter;
+  format: FormatFn;
 }
 
 export type OutputReferences =

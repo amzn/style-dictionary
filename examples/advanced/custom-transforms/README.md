@@ -21,16 +21,16 @@ At this point, if you want to build the tokens you can run `npm run build`. This
 
 To declare a custom **transform**, you have to call the `registerTransform` method:
 
-```
+```js
 StyleDictionary.registerTransform({
   name: 'ratio/%',
   type: 'value',
-  matcher: function(token) {
-      return token.group === 'ratio';
+  filter: function (token) {
+    return token.group === 'ratio';
   },
-  transformer: function(token) {
-      return `${Math.floor(100 * token.value)}%`;
-  }
+  transform: function (token) {
+    return `${Math.floor(100 * token.value)}%`;
+  },
 });
 ```
 
@@ -75,15 +75,15 @@ in your code and look the array of transforms associated with the it, directly i
 
 Open the `config.json` file and see how for each platform there is a `transformGroup` declaration. In this specific example, all the transformGroups applied to the platforms are custom.
 
-Now open a token file (eg. `tokens/colors|font|spacing.json`) to see how we have associated custom attributes to the tokens, to be used later in the matchers functions. See also how the values are unit-less, where the units are applied at build time accordingly to the destination platform. Compare the values in the input JSON files, and the values that appear in the files generated in `build`, and you will see where and how the transformations have been applied.
+Now open a token file (eg. `tokens/colors|font|spacing.json`) to see how we have associated custom attributes to the tokens, to be used later in the filter functions. See also how the values are unit-less, where the units are applied at build time accordingly to the destination platform. Compare the values in the input JSON files, and the values that appear in the files generated in `build`, and you will see where and how the transformations have been applied.
 
 Now open the `build.js` script and look at how these custom transforms/transformGroups are declared and registered via the `registerTransform` and `registerTransform` API methods. We have added as many comments as possible to make the code clear and show the interesting parts of it.
 
 A few things to notice in the file:
 
 - the name of a custom "transform" can be the same as an existing pre-defined method; in that case, the pre-defined method is overwritten
-- beyond the existing attributes, you can use custom attributes to create **matcher** functions, used to filter the tokens and apply the transform only to those that match the filter condition.
-- if you don't specify a **matcher**, the transformation will be applied to all the tokens
+- beyond the existing attributes, you can use custom attributes to create **filter** functions, used to filter the tokens and apply the transform only to those that match the filter condition.
+- if you don't specify a **filter**, the transformation will be applied to all the tokens
 - the transformation can be applied not only to the **value** of a token, but also to its **name** (and also to its attributes)
 
 **IMPORTANT**: the registration of custom transforms needs to be done _before_ applying the configuration (the methods needs to be already declared and registered in Style Dictionary to be used when extending it with the configuration). See the code in the `build.js` for more details.

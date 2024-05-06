@@ -14,7 +14,7 @@ import { fileHeader, formattedVariables } from 'style-dictionary/utils';
 
 StyleDictionary.registerFormat({
   name: 'myCustomFormat',
-  formatter: async ({ dictionary, file, options }) => {
+  format: async ({ dictionary, file, options }) => {
     const { outputReferences } = options;
     const header = await fileHeader({ file });
     return (
