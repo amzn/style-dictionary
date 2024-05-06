@@ -21,7 +21,6 @@ registerSuite({
   },
   registerMethod: 'registerAction',
   prop: 'actions',
-  hooks: true,
 });
 
 describe('register', () => {

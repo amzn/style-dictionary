@@ -22,7 +22,6 @@ registerSuite({
   },
   registerMethod: 'registerTransformGroup',
   prop: 'transformGroups',
-  hooks: true,
 });
 
 describe('register/transformGroup', async () => {

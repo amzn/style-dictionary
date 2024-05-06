@@ -35,7 +35,6 @@ registerSuite({
   },
   registerMethod: 'registerTransform',
   prop: 'transforms',
-  hooks: true,
 });
 
 describe('register', () => {

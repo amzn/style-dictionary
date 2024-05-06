@@ -17,11 +17,7 @@ export function registerSuite(opts) {
 
   describe('Register Test Suite', () => {
     const reset = () => {
-      if (opts.hooks) {
-        StyleDictionary.hooks[prop] = defaultPropVal;
-      } else {
-        StyleDictionary[prop] = defaultPropVal;
-      }
+      StyleDictionary.hooks[prop] = defaultPropVal;
     };
     beforeEach(() => {
       reset();
@@ -37,15 +33,9 @@ export function registerSuite(opts) {
         const sd1 = new StyleDictionary();
         const sd2 = new StyleDictionary();
         const sd3 = await sd2.extend();
-        if (opts.hooks) {
-          expect(sd1.hooks[prop][configFoo.name]).to.not.be.undefined;
-          expect(sd2.hooks[prop][configFoo.name]).to.not.be.undefined;
-          expect(sd3.hooks[prop][configFoo.name]).to.not.be.undefined;
-        } else {
-          expect(sd1[prop][configFoo.name]).to.not.be.undefined;
-          expect(sd2[prop][configFoo.name]).to.not.be.undefined;
-          expect(sd3[prop][configFoo.name]).to.not.be.undefined;
-        }
+        expect(sd1.hooks[prop][configFoo.name]).to.not.be.undefined;
+        expect(sd2.hooks[prop][configFoo.name]).to.not.be.undefined;
+        expect(sd3.hooks[prop][configFoo.name]).to.not.be.undefined;
       });
 
       it(`should allow registering ${prop} on instance, affecting only that instance`, async () => {
@@ -54,15 +44,9 @@ export function registerSuite(opts) {
         const sd3 = await sd2.extend();
 
         sd2[registerMethod](configFoo);
-        if (opts.hooks) {
-          expect(sd1.hooks[prop][configFoo.name]).to.be.undefined;
-          expect(sd2.hooks[prop][configFoo.name]).to.not.be.undefined;
-          expect(sd3.hooks[prop][configFoo.name]).to.be.undefined;
-        } else {
-          expect(sd1[prop][configFoo.name]).to.be.undefined;
-          expect(sd2[prop][configFoo.name]).to.not.be.undefined;
-          expect(sd3[prop][configFoo.name]).to.be.undefined;
-        }
+        expect(sd1.hooks[prop][configFoo.name]).to.be.undefined;
+        expect(sd2.hooks[prop][configFoo.name]).to.not.be.undefined;
+        expect(sd3.hooks[prop][configFoo.name]).to.be.undefined;
       });
 
       it(`should combine class and instance registrations for ${prop} on the instance`, async () => {
@@ -73,25 +57,14 @@ export function registerSuite(opts) {
         sd2[registerMethod](configBar);
         const sd3 = await sd2.extend();
 
-        if (opts.hooks) {
-          expect(sd1.hooks[prop][configFoo.name]).to.not.be.undefined;
-          expect(sd2.hooks[prop][configFoo.name]).to.not.be.undefined;
-          expect(sd3.hooks[prop][configFoo.name]).to.not.be.undefined;
-          // should not be registered on sd1, because we registered only on sd2
-          expect(sd1.hooks[prop][configBar.name]).to.be.undefined;
-          expect(sd2.hooks[prop][configBar.name]).to.not.be.undefined;
-          // should be registered because sd3 extends sd2
-          expect(sd3.hooks[prop][configBar.name]).to.not.be.undefined;
-        } else {
-          expect(sd1[prop][configFoo.name]).to.not.be.undefined;
-          expect(sd2[prop][configFoo.name]).to.not.be.undefined;
-          expect(sd3[prop][configFoo.name]).to.not.be.undefined;
-          // should not be registered on sd1, because we registered only on sd2
-          expect(sd1[prop][configBar.name]).to.be.undefined;
-          expect(sd2[prop][configBar.name]).to.not.be.undefined;
-          // should be registered because sd3 extends sd2
-          expect(sd3[prop][configBar.name]).to.not.be.undefined;
-        }
+        expect(sd1.hooks[prop][configFoo.name]).to.not.be.undefined;
+        expect(sd2.hooks[prop][configFoo.name]).to.not.be.undefined;
+        expect(sd3.hooks[prop][configFoo.name]).to.not.be.undefined;
+        // should not be registered on sd1, because we registered only on sd2
+        expect(sd1.hooks[prop][configBar.name]).to.be.undefined;
+        expect(sd2.hooks[prop][configBar.name]).to.not.be.undefined;
+        // should be registered because sd3 extends sd2
+        expect(sd3.hooks[prop][configBar.name]).to.not.be.undefined;
       });
     });
   });

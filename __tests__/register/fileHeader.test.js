@@ -20,7 +20,6 @@ registerSuite({
   },
   registerMethod: 'registerFileHeader',
   prop: 'fileHeaders',
-  hooks: true,
 });
 
 describe('register', () => {

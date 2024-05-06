@@ -17,7 +17,7 @@ import type { FileHeader, File, FormattingOptions } from './File.d.ts';
 import type { Parser } from './Parser.d.ts';
 import type { Preprocessor } from './Preprocessor.d.ts';
 import type { Transform } from './Transform.d.ts';
-import type { Formatter, OutputReferences } from './Format.d.ts';
+import type { Format, OutputReferences } from './Format.d.ts';
 import type { Action } from './Action.d.ts';
 
 export interface Hooks {
@@ -25,6 +25,7 @@ export interface Hooks {
   preprocessors?: Record<string, Preprocessor['preprocessor']>;
   transformGroups?: Record<string, string[]>;
   transforms?: Record<string, Omit<Transform, 'name'>>;
+  formats?: Record<string, Format['format']>;
   fileHeaders?: Record<string, FileHeader>;
   filters?: Record<string, Filter['filter']>;
   actions?: Record<string, Omit<Action, 'name'>>;
@@ -107,6 +108,5 @@ export interface Config {
   platforms?: Record<string, PlatformConfig>;
   parsers?: Parser[];
   preprocessors?: string[];
-  format?: Record<string, Formatter>;
   usesDtcg?: boolean;
 }

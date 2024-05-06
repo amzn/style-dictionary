@@ -16,10 +16,10 @@ import { registerSuite } from './register.suite.js';
 
 registerSuite({
   config: {
-    formatter: () => {},
+    format: () => {},
   },
   registerMethod: 'registerFormat',
-  prop: 'format',
+  prop: 'formats',
 });
 
 describe('register', () => {
@@ -30,34 +30,34 @@ describe('register', () => {
       const errorMessage = `Can't register format; format.name must be a string`;
       expect(() => {
         StyleDictionaryExtended.registerFormat({
-          formatter: function () {},
+          format: function () {},
         });
       }).to.throw(errorMessage);
 
       expect(() => {
         StyleDictionaryExtended.registerFormat({
           name: 1,
-          formatter: function () {},
+          format: function () {},
         });
       }).to.throw(errorMessage);
 
       expect(() => {
         StyleDictionaryExtended.registerFormat({
           name: [],
-          formatter: function () {},
+          format: function () {},
         });
       }).to.throw(errorMessage);
 
       expect(() => {
         StyleDictionaryExtended.registerFormat({
           name: {},
-          formatter: function () {},
+          format: function () {},
         });
       }).to.throw(errorMessage);
     });
 
     it('should error if format is not a function', () => {
-      const errorMessage = `Can't register format; format.formatter must be a function`;
+      const errorMessage = `Can't register format; format.format must be a function`;
       expect(() => {
         StyleDictionaryExtended.registerFormat({
           name: 'test',
@@ -67,28 +67,28 @@ describe('register', () => {
       expect(() => {
         StyleDictionaryExtended.registerFormat({
           name: 'test',
-          formatter: 1,
+          format: 1,
         });
       }).to.throw(errorMessage);
 
       expect(() => {
         StyleDictionaryExtended.registerFormat({
           name: 'test',
-          formatter: 'name',
+          format: 'name',
         });
       }).to.throw(errorMessage);
 
       expect(() => {
         StyleDictionaryExtended.registerFormat({
           name: 'test',
-          formatter: [],
+          format: [],
         });
       }).to.throw(errorMessage);
 
       expect(() => {
         StyleDictionaryExtended.registerFormat({
           name: 'test',
-          formatter: {},
+          format: {},
         });
       }).to.throw(errorMessage);
     });
@@ -96,14 +96,14 @@ describe('register', () => {
     it('should work if name and format are good', () => {
       StyleDictionaryExtended.registerFormat({
         name: 'scss',
-        formatter: function () {},
+        format: function () {},
       });
-      expect(typeof StyleDictionaryExtended.format['scss']).to.equal('function');
+      expect(typeof StyleDictionaryExtended.hooks.formats['scss']).to.equal('function');
     });
 
     it('should properly pass the registered format to instances', async () => {
       const SDE2 = await StyleDictionaryExtended.extend({});
-      expect(typeof SDE2.format['scss']).to.equal('function');
+      expect(typeof SDE2.hooks.formats['scss']).to.equal('function');
     });
   });
 });

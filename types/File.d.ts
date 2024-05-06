@@ -1,5 +1,5 @@
 import type { TransformedToken } from './DesignToken.d.ts';
-import type { Formatter } from './Format.d.ts';
+import type { FormatFn } from './Format.d.ts';
 import type { LocalOptions } from './Config.d.ts';
 import type { Filter } from './Filter.d.ts';
 
@@ -20,7 +20,7 @@ export type FileHeader = (defaultMessage: string[]) => Promise<string[]> | strin
 
 export interface File {
   destination: string;
-  format?: string | Formatter;
+  format?: string | FormatFn;
   filter?: string | Partial<TransformedToken> | Filter['filter'];
   options?: LocalOptions;
 }
