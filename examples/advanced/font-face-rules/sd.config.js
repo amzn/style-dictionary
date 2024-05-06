@@ -17,7 +17,7 @@ StyleDictionary.registerTransform({
 // Register a custom format to generate @font-face rules.
 StyleDictionary.registerFormat({
   name: 'font-face',
-  formatter: ({ dictionary: { allTokens }, options }) => {
+  format: ({ dictionary: { allTokens }, options }) => {
     const fontPathPrefix = options.fontPathPrefix || '../';
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/src

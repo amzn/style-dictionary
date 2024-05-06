@@ -342,18 +342,18 @@ StyleDictionary.registerFilter({
 
 Add a custom [format](/reference/hooks/formats) to the Style Dictionary.
 
-| Param            | Type       | Description                                                                                                                                                                                            |
-| ---------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| format           | `Object`   |                                                                                                                                                                                                        |
-| format.name      | `string`   | Name of the format to be referenced in your config.json                                                                                                                                                |
-| format.formatter | `function` | Function to perform the format. Takes a single argument. See [creating custom formats](/references/hooks/formats#creating-formats) Must return a string, which is then written to a file. Can be async |
+| Param         | Type       | Description                                                                                                                                                                                            |
+| ------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| format        | `Object`   |                                                                                                                                                                                                        |
+| format.name   | `string`   | Name of the format to be referenced in your config.json                                                                                                                                                |
+| format.format | `function` | Function to perform the format. Takes a single argument. See [creating custom formats](/references/hooks/formats#creating-formats) Must return a string, which is then written to a file. Can be async |
 
 Example:
 
 ```js
 StyleDictionary.registerFormat({
   name: 'json',
-  formatter: function ({ dictionary, platform, options, file }) {
+  format: function ({ dictionary, platform, options, file }) {
     return JSON.stringify(dictionary.tokens, null, 2);
   },
 });

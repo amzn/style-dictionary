@@ -12,7 +12,7 @@ import { fileHeader, formattedVariables } from 'style-dictionary/utils';
 
 StyleDictionary.registerFormat({
   name: 'myCustomFormat',
-  formatter: async ({ dictionary, file, options }) => {
+  format: async ({ dictionary, file, options }) => {
     const { outputReferences } = options;
     const header = await fileHeader({ file });
     return (
@@ -37,8 +37,8 @@ which uses: prefix, indentation, separator, suffix, and commentStyle.
 | Param                                 | Type                                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | ------------------------------------- | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `options`                             | `Object`                              | A single argument to support named parameters and destructuring.                                                                                                                                                                                                                                                                                                                                                                                           |
-| `options.outputReferences`            | `boolean \| OutputReferencesFunction` | Whether or not to output references. You will want to pass this from the `options` object sent to the formatter function. Also allows passing a function to conditionally output references on a per token basis.                                                                                                                                                                                                                                          |
-| `options.outputReferenceFallbacks`    | `boolean`                             | Whether or not to output css variable fallback values when using output references. You will want to pass this from the `options` object sent to the formatter function.                                                                                                                                                                                                                                                                                   |
+| `options.outputReferences`            | `boolean \| OutputReferencesFunction` | Whether or not to output references. You will want to pass this from the `options` object sent to the format function. Also allows passing a function to conditionally output references on a per token basis.                                                                                                                                                                                                                                             |
+| `options.outputReferenceFallbacks`    | `boolean`                             | Whether or not to output css variable fallback values when using output references. You will want to pass this from the `options` object sent to the format function.                                                                                                                                                                                                                                                                                      |
 | `options.dictionary`                  | `Dictionary`                          | Transformed Dictionary object containing allTokens, tokens and unfilteredTokens.                                                                                                                                                                                                                                                                                                                                                                           |
 | `options.dictionary.allTokens`        | `TransformedToken[]`                  | Flattened array of all tokens, easiest to loop over and export to a flat format.                                                                                                                                                                                                                                                                                                                                                                           |
 | `options.dictionary.tokens`           | `TransformedTokens`                   | All tokens, still in unflattened object format.                                                                                                                                                                                                                                                                                                                                                                                                            |
@@ -52,7 +52,7 @@ Example:
 ```javascript title="build-tokens.js"
 StyleDictionary.registerFormat({
   name: 'myCustomFormat',
-  formatter: function ({ dictionary, options }) {
+  format: function ({ dictionary, options }) {
     const { outputReferences } = options;
     const formatProperty = createPropertyFormatter({
       outputReferences,
@@ -75,7 +75,7 @@ default file header.
 | Param                     | Type                             | Description                                                                                                                                                       |
 | ------------------------- | -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `options`                 | `Object`                         |                                                                                                                                                                   |
-| `options.file`            | [`File`](/reference/config#file) | The file object that is passed to the formatter.                                                                                                                  |
+| `options.file`            | [`File`](/reference/config#file) | The file object that is passed to the format.                                                                                                                     |
 | `options.commentStyle`    | `string`                         | The only options are 'short', 'xml' and 'long', which will use the `//`, `<!-- -->` or `/*` style comments respectively. Defaults to 'long'.                      |
 | `options.commentPosition` | `string`                         | 'above' or 'inline', so either above the token or inline with the token                                                                                           |
 | `options.formatting`      | `Object`                         | Custom formatting properties that define parts of a comment in code. The configurable strings are: prefix, lineSeparator, header, footer and fileHeaderTimestamp. |
@@ -85,7 +85,7 @@ Example:
 ```js title="build-tokens.js"
 StyleDictionary.registerFormat({
   name: 'myCustomFormat',
-  formatter: async ({ dictionary, file }) => {
+  format: async ({ dictionary, file }) => {
     const header = await fileHeader({ file, commentStyle: 'short' });
     return (
       header + dictionary.allTokens.map((token) => `${token.name} = ${token.value};`).join('\n')
@@ -104,24 +104,24 @@ and not wanting to create redundant git diffs just because of the timestamp chan
 
 This is used to create lists of variables like Sass variables or CSS custom properties
 
-| Param                                 | Type                                  | Description                                                                                                                                                                                                       |
-| ------------------------------------- | ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `options`                             | `Object`                              |                                                                                                                                                                                                                   |
-| `options.format`                      | `string`                              | What type of variables to output. Options are: 'css', 'sass', 'less', and 'stylus'.                                                                                                                               |
-| `options.dictionary`                  | `Dictionary`                          | Transformed Dictionary object containing allTokens, tokens and unfilteredTokens.                                                                                                                                  |
-| `options.dictionary.allTokens`        | `TransformedToken[]`                  | Flattened array of all tokens, easiest to loop over and export to a flat format.                                                                                                                                  |
-| `options.dictionary.tokens`           | `TransformedTokens`                   | All tokens, still in unflattened object format.                                                                                                                                                                   |
-| `options.dictionary.unfilteredTokens` | `TransformedTokens`                   | All tokens, still in unflattened object format, including tokens that were filtered out by filters.                                                                                                               |
-| `options.outputReferences`            | `boolean \| OutputReferencesFunction` | Whether or not to output references. You will want to pass this from the `options` object sent to the formatter function. Also allows passing a function to conditionally output references on a per token basis. |
-| `options.formatting`                  | `Object`                              | Custom formatting properties that define parts of a comment in code. The configurable strings are: prefix, lineSeparator, header, and footer.                                                                     |
-| `options.themeable`                   | `boolean`                             | Whether tokens should default to being themeable. Defaults to false.                                                                                                                                              |
+| Param                                 | Type                                  | Description                                                                                                                                                                                                    |
+| ------------------------------------- | ------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `options`                             | `Object`                              |                                                                                                                                                                                                                |
+| `options.format`                      | `string`                              | What type of variables to output. Options are: 'css', 'sass', 'less', and 'stylus'.                                                                                                                            |
+| `options.dictionary`                  | `Dictionary`                          | Transformed Dictionary object containing allTokens, tokens and unfilteredTokens.                                                                                                                               |
+| `options.dictionary.allTokens`        | `TransformedToken[]`                  | Flattened array of all tokens, easiest to loop over and export to a flat format.                                                                                                                               |
+| `options.dictionary.tokens`           | `TransformedTokens`                   | All tokens, still in unflattened object format.                                                                                                                                                                |
+| `options.dictionary.unfilteredTokens` | `TransformedTokens`                   | All tokens, still in unflattened object format, including tokens that were filtered out by filters.                                                                                                            |
+| `options.outputReferences`            | `boolean \| OutputReferencesFunction` | Whether or not to output references. You will want to pass this from the `options` object sent to the format function. Also allows passing a function to conditionally output references on a per token basis. |
+| `options.formatting`                  | `Object`                              | Custom formatting properties that define parts of a comment in code. The configurable strings are: prefix, lineSeparator, header, and footer.                                                                  |
+| `options.themeable`                   | `boolean`                             | Whether tokens should default to being themeable. Defaults to false.                                                                                                                                           |
 
 Example:
 
 ```js title="build-tokens.js"
 StyleDictionary.registerFormat({
   name: 'myCustomFormat',
-  formatter: function ({ dictionary, options }) {
+  format: function ({ dictionary, options }) {
     return formattedVariables({
       format: 'less',
       dictionary,
@@ -151,7 +151,7 @@ Example:
 ```javascript title="build-tokens.js"
 StyleDictionary.registerFormat({
   name: 'myCustomFormat',
-  formatter: function ({ dictionary, options }) {
+  format: function ({ dictionary, options }) {
     return dictionary.allTokens
       .map(function (prop) {
         var to_ret_prop = 'export const ' + prop.name + ' : ' + getTypeScriptType(prop.value) + ';';
@@ -176,14 +176,14 @@ a unicode character.
 | ----------- | -------------------- | -------------------------------------------------------------------------------- |
 | `prefix`    | `string`             | Character to prefix variable names, like `$` for Sass                            |
 | `allTokens` | `TransformedToken[]` | Flattened array of all tokens, easiest to loop over and export to a flat format. |
-| `options`   | `Object`             | options object passed to the formatter function.                                 |
+| `options`   | `Object`             | options object passed to the format function.                                    |
 
 Example:
 
 ```js title="build-tokens.js"
 StyleDictionary.registerFormat({
   name: 'myCustomFormat',
-  formatter: function ({ dictionary, options }) {
+  format: function ({ dictionary, options }) {
     return iconsWithPrefix('$', dictionary.allTokens, options);
   },
 });
@@ -204,7 +204,7 @@ Example:
 ```js title="build-tokens.js"
 StyleDictionary.registerFormat({
   name: 'myCustomFormat',
-  formatter: function ({ dictionary }) {
+  format: function ({ dictionary }) {
     return JSON.stringify(minifyDictionary(dictionary.tokens));
   },
 });
@@ -251,7 +251,7 @@ Example:
 ```javascript title="build-tokens.js"
 StyleDictionary.registerFormat({
   name: 'myCustomFormat',
-  formatter: function ({ dictionary, options }) {
+  format: function ({ dictionary, options }) {
     return dictionary.allTokens
       .sort(sortByName)
       .map((token) => `${token.name} = ${token.value}`)

@@ -18,7 +18,7 @@ StyleDictionary.registerTransform({
 
 StyleDictionary.registerFormat({
   name: 'myRegisteredFormat',
-  formatter: ({ dictionary }) => {
+  format: ({ dictionary }) => {
     return dictionary.allTokens.map((token) => token.value).join('\n');
   },
 });

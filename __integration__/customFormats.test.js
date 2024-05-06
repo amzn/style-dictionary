@@ -22,12 +22,14 @@ describe('integration', async () => {
     const sd = new StyleDictionary({
       source: [`__integration__/tokens/size/padding.json`],
       // Adding formats directly to SD
-      format: {
-        inlineCustomFormatWithOldArgs: (dictionary, platform, file) => {
-          return JSON.stringify({ dictionary, platform, file }, null, 2);
-        },
-        inlineCustomFormatWithNewArgs: (opts) => {
-          return JSON.stringify(opts, null, 2);
+      hooks: {
+        formats: {
+          inlineCustomFormatWithOldArgs: (dictionary, platform, file) => {
+            return JSON.stringify({ dictionary, platform, file }, null, 2);
+          },
+          inlineCustomFormatWithNewArgs: (opts) => {
+            return JSON.stringify(opts, null, 2);
+          },
         },
       },
       platforms: {
@@ -78,7 +80,7 @@ describe('integration', async () => {
 
     sd.registerFormat({
       name: 'registerCustomFormatWithNewArgs',
-      formatter: (opts) => {
+      format: (opts) => {
         return JSON.stringify(opts, null, 2);
       },
     });

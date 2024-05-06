@@ -96,7 +96,7 @@ StyleDictionary.registerFormat({
   name: 'custom/css',
   // this can be async now, usually it is if you use fileHeader format helper, since that now always returns a Promise
   formatter: function ({ dictionary, file, options }) {
-  formatter: async function ({ dictionary, file, options }) {
+  format: async function ({ dictionary, file, options }) {
     const { outputReferences } = options;
     return (
       fileHeader({ file }) +
@@ -219,7 +219,7 @@ export default {
 
 ### Transforms
 
-Transform, when registered, are put inside the `hooks.transforms` property now, as opposed to `transform`.
+Transforms, when registered, are put inside the `hooks.transforms` property now, as opposed to `transform`.
 Note the change from singular to plural form here.
 
 The name of the filter function is now `filter` instead of `matcher`:
@@ -263,6 +263,50 @@ export default {
     css: {
       // apply it per platform
       transforms: ['color-transform'],
+    },
+  },
+};
+```
+
+### Formats
+
+Formats, when registered, are put inside the `hooks.formats` property now, as opposed to `format`.
+Note the change from singular to plural form here.
+
+The `formatter` handler function has been renamed to `format` for consistency.
+
+Lastly, some importable type interfaces have been renamed as well.
+
+Changes:
+
+```js title="config.js" del={2,8,14-16} ins={3,9,17-21} /format(s): {/ /format(ter)/
+import StyleDictionary from 'style-dictionary';
+import type { Formatter, FormatterArguments } from 'style-dictionary/types';
+import type { FormatFn, FormatFnArguments } from 'style-dictionary/types';
+
+// register it with register method
+StyleDictionary.registerFormat({
+  name: 'custom/json',
+  formatter: ({ dictionary }) => JSON.stringify(dictionary, 2, null),
+  format: ({ dictionary }) => JSON.stringify(dictionary, 2, null),
+})
+
+export default {
+  // OR define it inline
+  format: {
+    'custom/json': ({ dictionary }) => JSON.stringify(dictionary, 2, null),
+  },
+  hooks: {
+    formats: {
+      'custom/json': ({ dictionary }) => JSON.stringify(dictionary, 2, null),
+    },
+  },
+  platforms: {
+    json: {
+      files: [{
+        destination: 'output.json',
+        format: 'custom/json'
+      }],
     },
   },
 };
@@ -599,7 +643,7 @@ import { usesReferences, getReferences } from 'style-dictionary/utils';
 
 StyleDictionary.registerFormat({
   name: `myCustomFormat`,
-  formatter: function({ dictionary }) {
+  format: function({ dictionary }) {
     return dictionary.allTokens.map(token => {
       let value = JSON.stringify(token.value);
       if (dictionary.usesReference(token.original.value)) {
@@ -630,7 +674,7 @@ If you are maintaining a custom format that allows `outputReferences` option, yo
 ```js title="build-tokens.js" del={12} ins={13-17}
 StyleDictionary.registerFormat({
   name: 'custom/es6',
-  formatter: async (dictionary) => {
+  format: async (dictionary) => {
     const { allTokens, options, file } = dictionary;
     const { usesDtcg } = options;
 
@@ -695,7 +739,7 @@ console.log(sd.allProperties, sd.properties);
 console.log(sd.allTokens, sd.tokens);
 ```
 
-- `format.formatter` old function signature of `(dictionary, platform, file)` in favor of `({ dictionary, platform, options, file })`.
+- `format.format` old function signature of `(dictionary, platform, file)` in favor of `({ dictionary, platform, options, file })`.
 
 ```js title="build-tokens.js" del={8,10} ins={9,11}
 import StyleDictionary from 'style-dictionary';
@@ -706,7 +750,7 @@ import { fileHeader } from 'style-dictionary/utils';
 StyleDictionary.registerFormat({
   name: 'custom/css',
   formatter: async function (dictionary, platform, file) {
-  formatter: async function ({ dictionary, file, options }) {
+  format: async function ({ dictionary, file, options }) {
     const { outputReferences } = file.options;
     const { outputReferences } = options;
     return (

@@ -20,7 +20,6 @@ registerSuite({
   },
   registerMethod: 'registerPreprocessor',
   prop: 'preprocessors',
-  hooks: true,
 });
 
 describe('register/transformGroup', async () => {

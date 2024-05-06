@@ -21,7 +21,6 @@ registerSuite({
   },
   registerMethod: 'registerParser',
   prop: 'parsers',
-  hooks: true,
 });
 
 describe('register', () => {

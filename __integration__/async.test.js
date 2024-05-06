@@ -68,7 +68,7 @@ describe('integration', async function () {
 
     SDExtension.registerFormat({
       name: 'custom/css',
-      formatter: async function ({ dictionary, file, options }) {
+      format: async function ({ dictionary, file, options }) {
         await sleep(10);
         const { outputReferences } = options;
         return (

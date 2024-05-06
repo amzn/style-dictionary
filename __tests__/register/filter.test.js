@@ -20,7 +20,6 @@ registerSuite({
   },
   registerMethod: 'registerFilter',
   prop: 'filters',
-  hooks: true,
 });
 
 describe('register', () => {
