@@ -21,7 +21,7 @@ registerSuite({
     transforms: ['size/px'],
   },
   registerMethod: 'registerTransformGroup',
-  prop: 'transformGroup',
+  prop: 'transformGroups',
 });
 
 describe('register/transformGroup', async () => {
@@ -106,9 +106,9 @@ describe('register/transformGroup', async () => {
       name: 'foo',
       transforms: ['size/px'],
     });
-    expect(Array.isArray(StyleDictionaryExtended.transformGroup.foo)).to.be.true;
-    expect(typeof StyleDictionaryExtended.transformGroup.foo[0]).to.equal('string');
-    expect(StyleDictionaryExtended.transformGroup.foo[0]).to.equal('size/px');
+    expect(Array.isArray(StyleDictionaryExtended.hooks.transformGroups.foo)).to.be.true;
+    expect(typeof StyleDictionaryExtended.hooks.transformGroups.foo[0]).to.equal('string');
+    expect(StyleDictionaryExtended.hooks.transformGroups.foo[0]).to.equal('size/px');
   });
 
   it('should properly pass the registered transformGroup to instances when extending', async () => {
@@ -118,8 +118,8 @@ describe('register/transformGroup', async () => {
       transforms: ['size/px'],
     });
     const SDE2 = await StyleDictionaryBase.extend({});
-    expect(Array.isArray(SDE2.transformGroup.bar)).to.be.true;
-    expect(typeof SDE2.transformGroup.bar[0]).to.equal('string');
-    expect(SDE2.transformGroup.bar[0]).to.equal('size/px');
+    expect(Array.isArray(SDE2.hooks.transformGroups.bar)).to.be.true;
+    expect(typeof SDE2.hooks.transformGroups.bar[0]).to.equal('string');
+    expect(SDE2.hooks.transformGroups.bar[0]).to.equal('size/px');
   });
 });

@@ -19,8 +19,9 @@ const config = fileToJSON('__tests__/__configs/test.json');
 
 describe('exportPlatform', () => {
   let styleDictionary;
-  beforeEach(() => {
+  beforeEach(async () => {
     styleDictionary = new StyleDictionary(config);
+    await styleDictionary.hasInitialized;
   });
 
   it('should throw if not given a platform', async () => {
@@ -72,10 +73,10 @@ describe('exportPlatform', () => {
         type: 'value',
         name: 'color/darken',
         transitive: true,
-        matcher: function (prop) {
+        filter: function (prop) {
           return !!prop.original.transformColor;
         },
-        transformer: function (prop) {
+        transform: function (prop) {
           return prop.value + '-darker';
         },
       });
@@ -97,11 +98,13 @@ describe('exportPlatform', () => {
           eight: { value: '{one.value}' },
           nine: { value: '{eight.value}' },
         },
-        transform: {
-          transitive: {
-            type: 'value',
-            transitive: true,
-            transformer: (token) => `${token.value}-bar`,
+        hooks: {
+          transforms: {
+            transitive: {
+              type: 'value',
+              transitive: true,
+              transform: (token) => `${token.value}-bar`,
+            },
           },
         },
         platforms: {
@@ -148,8 +151,8 @@ describe('exportPlatform', () => {
         type: 'value',
         name: 'color/darken',
         transitive: true,
-        matcher: (token) => token.type === 'color',
-        transformer: (token) => {
+        filter: (token) => token.type === 'color',
+        transform: (token) => {
           const darkenMod = token?.$extensions?.['bar.foo']?.darken;
           if (usesReferences(darkenMod)) {
             // defer this transform, because our darken value is a ref
@@ -353,14 +356,16 @@ describe('exportPlatform', () => {
     };
     // making the css/color transform transitive so we can be sure the references
     // get resolved properly and transformed.
-    const transitiveTransform = Object.assign({}, StyleDictionary.transform['color/css'], {
+    const transitiveTransform = Object.assign({}, StyleDictionary.hooks.transforms['color/css'], {
       transitive: true,
     });
 
     const sd = new StyleDictionary({
       tokens,
-      transform: {
-        transitiveTransform,
+      hooks: {
+        transforms: {
+          transitiveTransform,
+        },
       },
       platforms: {
         css: {
@@ -471,14 +476,16 @@ Use log.verbosity "verbose" or use CLI option --verbose for more details.`;
           reftest2: { $value: '{one}' },
           one: { $value: '1' },
         },
-        transform: {
-          'custom/add/px': {
-            type: 'value',
-            matcher: (token) => {
-              return token.$type === 'dimension';
-            },
-            transformer: (token) => {
-              return `${sd.usesDtcg ? token.$value : token.value}px`;
+        hooks: {
+          transforms: {
+            'custom/add/px': {
+              type: 'value',
+              filter: (token) => {
+                return token.$type === 'dimension';
+              },
+              transform: (token) => {
+                return `${sd.usesDtcg ? token.$value : token.value}px`;
+              },
             },
           },
         },

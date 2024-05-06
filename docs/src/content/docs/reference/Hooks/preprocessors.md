@@ -57,7 +57,7 @@ const myPreprocessor = {
 First you will need to tell Style Dictionary about your parser. You can do this in two ways:
 
 1. Using the [`.registerPreprocessor`](/reference/api#registerpreprocessor) method
-1. Inline in the [configuration](/reference/config#attributes)
+1. Inline in the [configuration](/reference/config#properties)
 
 ### .registerPreprocessor
 
@@ -71,7 +71,7 @@ StyleDictionary.registerPreprocessor(myPreprocessor);
 
 ```javascript
 export default {
-  registeredHooks: {
+  hooks: {
     preprocessors: {
       'strip-props': myPreprocessor,
     },

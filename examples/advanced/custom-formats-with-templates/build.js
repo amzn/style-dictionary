@@ -21,17 +21,17 @@ console.log('\n==============================================');
 
 sd.registerFormat({
   name: 'custom/format/scss',
-  formatter: ({ dictionary }) => webScssTemplate({ allTokens: dictionary.allTokens }),
+  format: ({ dictionary }) => webScssTemplate({ allTokens: dictionary.allTokens }),
 });
 
 sd.registerFormat({
   name: 'custom/format/ios-plist',
-  formatter: async ({ dictionary }) => plistTemplate({ dictionary }),
+  format: async ({ dictionary }) => plistTemplate({ dictionary }),
 });
 
 sd.registerFormat({
   name: 'custom/format/android-xml',
-  formatter: async ({ dictionary }) => androidTemplate({ dictionary }),
+  format: async ({ dictionary }) => androidTemplate({ dictionary }),
 });
 
 // In this case we are using an alternative templating engine (Handlebars)
@@ -41,11 +41,11 @@ const templateCustomXml = handlebars.compile(
 
 sd.registerFormat({
   name: 'custom/format/android-xml-alt',
-  formatter: function ({ dictionary, platform }) {
+  format: function ({ dictionary, platform }) {
     return templateCustomXml({
-      // this is to show that the formatter function only takes a "dictionary" and "platform" parameters
+      // this is to show that the format function only takes a "dictionary" and "platform" parameters
       // (and dictionary has "tokens" and "allTokens" attributes)
-      // and returns a string. for more details about the "formatter" function refer to the documentation
+      // and returns a string. for more details about the "format" function refer to the documentation
       allTokens: dictionary.allTokens,
       tokens: dictionary.tokens,
       options: platform,
@@ -60,7 +60,7 @@ const templateCustomPlist = pug.compileFile(__dirname + '/templates/ios-plist_al
 
 sd.registerFormat({
   name: 'custom/format/ios-plist-alt',
-  formatter: function ({ dictionary }) {
+  format: function ({ dictionary }) {
     return templateCustomPlist({
       allTokens: dictionary.allTokens,
     });

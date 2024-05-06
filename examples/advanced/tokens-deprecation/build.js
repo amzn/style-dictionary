@@ -13,7 +13,7 @@ console.log('\n==============================================');
 
 sd.registerFormat({
   name: 'custom/format/scss',
-  formatter: async ({ dictionary, file, options }) => {
+  format: async ({ dictionary, file, options }) => {
     const { allTokens } = dictionary;
     const header = await fileHeader({ file, commentStyle: 'long' });
     return webScssTemplate({ allTokens, file, options, header });
@@ -22,7 +22,7 @@ sd.registerFormat({
 
 sd.registerFormat({
   name: 'custom/format/ios-plist',
-  formatter: async ({ dictionary, file, options }) => {
+  format: async ({ dictionary, file, options }) => {
     const header = await fileHeader({ file, commentStyle: 'xml' });
     return iosPlistTemplate({ dictionary, options, file, header });
   },

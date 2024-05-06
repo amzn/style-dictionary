@@ -9,7 +9,7 @@ A custom parser matches design token files based on a file path regular expressi
 Custom parsers can be used to keep design token files in other languages like YAML, but they can also be used to add extra metadata or modify the design tokens themselves before they get to Style Dictionary. For example, you could modify the token object based on its file path or programmatically generate tokens based on the data in certain files.
 
 :::note
-`parse` function can be async as well.
+`parser` function can be async as well.
 :::
 
 ---
@@ -20,8 +20,9 @@ A parser has 2 parts: a pattern which is a regular expression to match against a
 
 ```javascript title="my-parser.js"
 const myParser = {
+  name: 'json-parser',
   pattern: /\.json$/,
-  parse: ({ filePath, contents }) => {
+  parser: ({ filePath, contents }) => {
     return JSON.parse(contents);
   },
 };
@@ -34,7 +35,17 @@ const myParser = {
 First you will need to tell Style Dictionary about your parser. You can do this in two ways:
 
 1. Using the [`.registerParser`](/reference/api#registerparser) method
-1. Inline in the [configuration](/reference/config#attributes)
+2. Inline in the [configuration](/reference/config#properties)
+
+You will then have to apply the parser by name in the [config](/reference/config):
+
+```json
+{
+  "source": ["tokens/*.json"],
+  "parsers": ["json-parser"],
+  "platforms": {}
+}
+```
 
 ### .registerParser
 
@@ -42,8 +53,9 @@ First you will need to tell Style Dictionary about your parser. You can do this 
 import StyleDictionary from 'style-dictionary';
 
 StyleDictionary.registerParser({
+  name: 'json-parser',
   pattern: /\.json$/,
-  parse: ({ filePath, contents }) => {
+  parser: ({ filePath, contents }) => {
     return JSON.parse(contents);
   },
 });
@@ -53,14 +65,16 @@ StyleDictionary.registerParser({
 
 ```javascript title="config.js"
 export default {
-  parsers: [
-    {
-      pattern: /\.json$/,
-      parse: ({ filePath, contents }) => {
-        return JSON.parse(contents);
+  hooks: {
+    parsers: {
+      'json-parser': {
+        pattern: /\.json$/,
+        parser: ({ filePath, contents }) => {
+          return JSON.parse(contents);
+        },
       },
     },
-  ],
+  },
   // ... the rest of the configuration
 };
 ```

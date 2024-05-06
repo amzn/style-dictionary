@@ -20,7 +20,7 @@ registerSuite({
     undo: () => {},
   },
   registerMethod: 'registerAction',
-  prop: 'action',
+  prop: 'actions',
 });
 
 describe('register', () => {
@@ -97,7 +97,7 @@ describe('register', () => {
         name: 'scss',
         do: function () {},
       });
-      expect(typeof StyleDictionaryExtended.action['scss'].do).to.equal('function');
+      expect(typeof StyleDictionaryExtended.hooks.actions['scss'].do).to.equal('function');
     });
 
     it('should handle an undo function', () => {
@@ -106,12 +106,12 @@ describe('register', () => {
         do: function () {},
         undo: function () {},
       });
-      expect(typeof StyleDictionaryExtended.action['scss'].undo).to.equal('function');
+      expect(typeof StyleDictionaryExtended.hooks.actions['scss'].undo).to.equal('function');
     });
 
     it('should properly pass the registered format to instances', async () => {
       const SDE2 = await StyleDictionaryExtended.extend({});
-      expect(typeof SDE2.action['scss'].do).to.equal('function');
+      expect(typeof SDE2.hooks.actions['scss'].do).to.equal('function');
     });
   });
 });

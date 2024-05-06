@@ -302,10 +302,10 @@ const StyleDictionary = require('style-dictionary').extend('config.json');
 StyleDictionary.registerTransform({
   name: 'time/seconds',
   type: 'value',
-  matcher: function (token) {
+  filter: function (token) {
     return token.type === 'time';
   },
-  transformer: function (token) {
+  transform: function (token) {
     return (parseInt(token.original.value) / 1000).toString() + 's';
   },
 });

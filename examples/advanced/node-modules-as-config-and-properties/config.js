@@ -12,13 +12,13 @@ const buildPath = 'build/';
 StyleDictionary.registerTransform({
   name: 'myRegisteredTransform',
   type: 'value',
-  matcher: (token) => token.attributes.category === 'size',
-  transformer: (token) => `${parseInt(token.value) * 16}px`,
+  filter: (token) => token.attributes.category === 'size',
+  transform: (token) => `${parseInt(token.value) * 16}px`,
 });
 
 StyleDictionary.registerFormat({
   name: 'myRegisteredFormat',
-  formatter: ({ dictionary }) => {
+  format: ({ dictionary }) => {
     return dictionary.allTokens.map((token) => token.value).join('\n');
   },
 });
@@ -39,7 +39,7 @@ module.exports = {
     // Now we can use the transform 'myTransform' below
     myTransform: {
       type: 'name',
-      transformer: (token) => token.path.join('_').toUpperCase(),
+      transform: (token) => token.path.join('_').toUpperCase(),
     },
   },
   // Same with formats, you can now write them directly to this config

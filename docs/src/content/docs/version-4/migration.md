@@ -96,7 +96,7 @@ StyleDictionary.registerFormat({
   name: 'custom/css',
   // this can be async now, usually it is if you use fileHeader format helper, since that now always returns a Promise
   formatter: function ({ dictionary, file, options }) {
-  formatter: async function ({ dictionary, file, options }) {
+  format: async function ({ dictionary, file, options }) {
     const { outputReferences } = options;
     return (
       fileHeader({ file }) +
@@ -117,16 +117,50 @@ Available hooks are: `parsers`, `preprocessors`, `transformGroups`, `transforms`
 
 :::note
 The other hooks are also going to change similarly to preprocessors, in an effort to align these APIs and make them consistent across.
-They will all be grouped under the `hooks` property, they will all use plural form vs singular (e.g. `transforms` vs `transform`), and lastly,
-they will all use the same signature, with a `name` property and a handler function name that is the same as the hook name (e.g. `transformer` will be `transform`).
-Parsers will also have to be applied explicitly similarly to preprocessors.
+Hooks are now all grouped under the `hooks` property, they all use plural form vs singular (e.g. `transforms` vs `transform`), and lastly,
+they will all use the same signature, with a `name` property and a handler function name that is the same as the hook name (e.g. `transformer` has become `transform`).
+Parsers and preprocessors now also have to be applied explicitly in the config.
 :::
+
+### Parsers
+
+Parsers, when registered, would always apply on a global level, without explicitly applying them in the config.
+They are put inside the `hooks.parsers` property now, as opposed to `parsers`.
+Lastly, the `parse` function is now `parser`, for consistency.
+
+Changes:
+
+```js title="config.js" del={3-10} ins={9-24} /parse(r): (/
+export default {
+  // register it inline or by SD.registerPreprocessor
+  parsers: [
+    {
+      pattern: /\.json5$/,
+      parse: ({ contents, filePath }) => {
+        return JSON5.parse(contents);
+      },
+    },
+  ],
+  hooks: {
+    parsers: {
+      name: 'json5-parser',
+      pattern: /\.json5$/,
+      parser: ({ contents, filePath }) => {
+        return JSON5.parse(contents);
+      },
+    },
+  },
+  // apply it globally by name reference
+  parsers: ['json5-parser'],
+};
+```
 
 ### Preprocessors
 
 Preprocessors, when registered, would always apply on a global level, without explicitly applying them in the config.
+They are put inside the `hooks.preprocessors` property now, as opposed to `preprocessors`.
 
-This has been changed now:
+Changes:
 
 ```js title="config.js" del={3-8} ins={9-24}
 export default {
@@ -149,8 +183,231 @@ export default {
   preprocessors: ['foo'],
   platforms: {
     css: {
-      // or apply is per platform
+      // or apply it per platform
       preprocessors: ['foo'],
+    },
+  },
+};
+```
+
+### Transform Groups
+
+Transform groups, when registered, are put inside the `hooks.transformGroups` property now, as opposed to `transformGroup`.
+Note the change from singular to plural form here.
+
+Changes:
+
+```js title="config.js" del={3-5} ins={6-10} /transformGroup(s): {/
+export default {
+  // register it inline or by SD.registerTransformGroup
+  transformGroup: {
+    foo: ['foo-transform'],
+  },
+  hooks: {
+    transformGroups: {
+      foo: ['foo-transform'],
+    },
+  },
+  platforms: {
+    css: {
+      // apply it per platform
+      transformGroup: ['foo'],
+    },
+  },
+};
+```
+
+### Transforms
+
+Transforms, when registered, are put inside the `hooks.transforms` property now, as opposed to `transform`.
+Note the change from singular to plural form here.
+
+The name of the filter function is now `filter` instead of `matcher`:
+
+```js title="build-tokens.js" del={6} ins={7} /filter/ /matcher/
+import StyleDictionary from 'style-dictionary';
+
+StyleDictionary.registerTransform({
+  name: 'color-transform',
+  type: 'value',
+  matcher: (token) => token.type === 'color',
+  filter: (token) => token.type === 'color',
+  transform: (token) => token.value,
+});
+```
+
+Lastly, the `transformer` handler function has been renamed to `transform` for consistency.
+
+Changes:
+
+```js title="config.js" del={3-9} ins={10-18} /transform(s): {/ /filter/ /matcher/ /transform(er)/ /(transform): (/
+export default {
+  // register it inline or by SD.registerTransform
+  transform: {
+    'color-transform': {
+      type: 'value',
+      matcher: (token) => token.type === 'color',
+      transformer: (token) => token.value,
+    },
+  },
+  hooks: {
+    transforms: {
+      'color-transform': {
+        type: 'value',
+        filter: (token) => token.type === 'color',
+        transform: (token) => token.value,
+      },
+    },
+  },
+  platforms: {
+    css: {
+      // apply it per platform
+      transforms: ['color-transform'],
+    },
+  },
+};
+```
+
+### Formats
+
+Formats, when registered, are put inside the `hooks.formats` property now, as opposed to `format`.
+Note the change from singular to plural form here.
+
+The `formatter` handler function has been renamed to `format` for consistency.
+
+Lastly, some importable type interfaces have been renamed as well.
+
+Changes:
+
+```js title="config.js" del={2,8,14-16} ins={3,9,17-21} /format(s): {/ /format(ter)/
+import StyleDictionary from 'style-dictionary';
+import type { Formatter, FormatterArguments } from 'style-dictionary/types';
+import type { FormatFn, FormatFnArguments } from 'style-dictionary/types';
+
+// register it with register method
+StyleDictionary.registerFormat({
+  name: 'custom/json',
+  formatter: ({ dictionary }) => JSON.stringify(dictionary, 2, null),
+  format: ({ dictionary }) => JSON.stringify(dictionary, 2, null),
+})
+
+export default {
+  // OR define it inline
+  format: {
+    'custom/json': ({ dictionary }) => JSON.stringify(dictionary, 2, null),
+  },
+  hooks: {
+    formats: {
+      'custom/json': ({ dictionary }) => JSON.stringify(dictionary, 2, null),
+    },
+  },
+  platforms: {
+    json: {
+      files: [{
+        destination: 'output.json',
+        format: 'custom/json'
+      }],
+    },
+  },
+};
+```
+
+### File headers
+
+File headers, when registered, are put inside the `hooks.fileHeaders` property now, as opposed to `fileHeader`.
+Note the change from singular to plural form here.
+
+```js title="config.js" del={2-4} ins={5-9} /fileHeader(s)/
+export default {
+  fileHeader: {
+    foo: (defaultMessages = []) => ['Ola, planet!', ...defaultMessages, 'Hello, World!'],
+  },
+  hooks: {
+    fileHeaders: {
+      foo: (defaultMessages = []) => ['Ola, planet!', ...defaultMessages, 'Hello, World!'],
+    },
+  },
+  platforms: {
+    css: {
+      options: {
+        fileHeader: 'foo',
+      },
+    },
+  },
+};
+```
+
+### Filters
+
+Filters, when registered, are put inside the `hooks.filters` property now, as opposed to `filter`.
+Note the change from singular to plural form here.
+
+```js title="config.js" del={2-4} ins={5-9} /filter(s)/
+export default {
+  filter: {
+    'colors-only': (token) => token.type === 'color,
+  },
+  hooks: {
+    filters: {
+      'colors-only': (token) => token.type === 'color,
+    },
+  },
+  platforms: {
+    css: {
+      files: [{
+        format: 'css/variables',
+        destination: '_variables.css',
+        filter: 'colors-only',
+      }],
+    },
+  },
+};
+```
+
+In addition, when using [`registerFilter`](/reference/api#registerfilter) method, the name of the filter function is now `filter` instead of `matcher`:
+
+```js title="build-tokens.js" del={5} ins={6}
+import StyleDictionary from 'style-dictionary';
+
+StyleDictionary.registerFilter({
+  name: 'colors-only',
+  matcher: (token) => token.type === 'color',
+  filter: (token) => token.type === 'color',
+});
+```
+
+:::note
+These changes also apply for the [filter function inside transforms](#transforms).
+:::
+
+### Actions
+
+Actions, when registered, are put inside the `hooks.actions` property now, as opposed to `action`.
+Note the change from singular to plural form here.
+
+```js title="config.js" del={2-7} ins={8-15} /action(s): {/
+export default {
+  action: {
+    'copy-assets': {
+      do: () => {}
+      undo: () => {}
+    }
+  },
+  hooks: {
+    actions: {
+      'copy-assets': {
+        do: () => {}
+        undo: () => {}
+      }
+    },
+  },
+  platforms: {
+    css: {
+      actions: ['copy-assets'],
+      files: [{
+        format: 'css/variables',
+        destination: '_variables.css',
+      }],
     },
   },
 };
@@ -160,7 +417,7 @@ export default {
 
 [CTI or Category / Type / Item](/info/tokens/#category--type--item) used to be the default way of structuring design tokens in Style Dictionary.
 Often, what type of token a token is, would be determined by looking at the "category" part of the token taxonomy.
-Most of the [Built-in transforms](/reference/hooks/transforms/predefined) `matcher` function would rely on the token's `attributes.category` property.
+Most of the [Built-in transforms](/reference/hooks/transforms/predefined) `matcher`/`filter` (filter being the new name for this) function would rely on the token's `attributes.category` property.
 This in turn would rely on applying the [`attribute/cti` transform](/reference/hooks/transforms/predefined#attributecti) so that this attribute was set on a token.
 
 In version 4, we have removed almost all hard-coupling/reliances on CTI structure and instead we will look for a `token.type` property to determine what type of token a design token is.
@@ -292,6 +549,13 @@ In v3, the following options were put on the file properties level itself next t
 - `mapName` -> for formats:
   - `scss/map-deep`
   - `scss/map-flat`
+- `name` -> for formats:
+  - `javascript/object`
+  - `javascript/umd`
+- `resourceType` -> for formats:
+  - `android/resources`
+- `resourceMap` -> for formats:
+  - `android/resources`
 
 ```json title="config.json" del={9} ins={10-13}
 {
@@ -379,7 +643,7 @@ import { usesReferences, getReferences } from 'style-dictionary/utils';
 
 StyleDictionary.registerFormat({
   name: `myCustomFormat`,
-  formatter: function({ dictionary }) {
+  format: function({ dictionary }) {
     return dictionary.allTokens.map(token => {
       let value = JSON.stringify(token.value);
       if (dictionary.usesReference(token.original.value)) {
@@ -410,7 +674,7 @@ If you are maintaining a custom format that allows `outputReferences` option, yo
 ```js title="build-tokens.js" del={12} ins={13-17}
 StyleDictionary.registerFormat({
   name: 'custom/es6',
-  formatter: async (dictionary) => {
+  format: async (dictionary) => {
     const { allTokens, options, file } = dictionary;
     const { usesDtcg } = options;
 
@@ -475,7 +739,7 @@ console.log(sd.allProperties, sd.properties);
 console.log(sd.allTokens, sd.tokens);
 ```
 
-- `format.formatter` old function signature of `(dictionary, platform, file)` in favor of `({ dictionary, platform, options, file })`.
+- `format.format` old function signature of `(dictionary, platform, file)` in favor of `({ dictionary, platform, options, file })`.
 
 ```js title="build-tokens.js" del={8,10} ins={9,11}
 import StyleDictionary from 'style-dictionary';
@@ -486,7 +750,7 @@ import { fileHeader } from 'style-dictionary/utils';
 StyleDictionary.registerFormat({
   name: 'custom/css',
   formatter: async function (dictionary, platform, file) {
-  formatter: async function ({ dictionary, file, options }) {
+  format: async function ({ dictionary, file, options }) {
     const { outputReferences } = file.options;
     const { outputReferences } = options;
     return (

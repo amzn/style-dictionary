@@ -205,7 +205,7 @@ By default Style Dictionary adds a file header comment in the top of files built
 
 You can remove these comments with the option: `showFileHeader: false` if you do not want them in your generated files. You can also create your own file header or extend the default one. This could be useful if you want to put a version number or hash of the source files rather than a timestamp.
 
-Custom file headers can be added the same way you would add a custom format, either by using the [`registerFileHeader`](/reference/api#registerfileheader) function or adding the [`fileHeader`](/reference/hooks/file_headers) object directly in the Style Dictionary [configuration](/reference/config). Your custom file header can be used in built-in formats as well as custom formats. To use a custom file header in a custom format see the [`fileHeader`](/reference/hooks/formats#fileheader) format helper method.
+Custom file headers can be added the same way you would add a custom format, either by using the [`registerFileHeader`](/reference/api#registerfileheader) function or adding the [`fileHeader`](/reference/hooks/file-headers) object directly in the Style Dictionary [configuration](/reference/config). Your custom file header can be used in built-in formats as well as custom formats. To use a custom file header in a custom format see the [`fileHeader`](/reference/hooks/formats#fileheader) format helper method.
 
 ```js title="build-tokens.js"
 import StyleDictionary from 'style-dictionary';
@@ -261,13 +261,13 @@ For an in-depth example see the [custom-file-header](https://github.com/amzn/sty
 
 ## Custom formats
 
-You can create custom formats using the [`registerFormat`](/reference/api#registerformat) function or by directly including them in your [configuration](/reference/config). A format has a name and a formatter function, which takes an object as the argument and should return a string which is then written to a file.
+You can create custom formats using the [`registerFormat`](/reference/api#registerformat) function or by directly including them in your [configuration](/reference/config). A format has a name and a format function, which takes an object as the argument and should return a string which is then written to a file.
 
-### formatter
+### format
 
-`format.formatter(args)` ⇒ `string`
+`format.format(args)` ⇒ `string`
 
-The formatter function that is called when Style Dictionary builds files.
+The format function that is called when Style Dictionary builds files.
 
 | Param                              | Type                 | Description                                                                                           |
 | ---------------------------------- | -------------------- | ----------------------------------------------------------------------------------------------------- |
@@ -278,14 +278,14 @@ The formatter function that is called when Style Dictionary builds files.
 | `args.dictionary.unfilteredTokens` | `TransformedTokens`  | All tokens, still in unflattened object format, including tokens that were filtered out by filters.   |
 | `args.platform`                    | `Platform`           | [Platform config](/reference/config#platform)                                                         |
 | `args.file`                        | `File`               | [File config](/reference/config#file)                                                                 |
-| `args.options`                     | `Object`             | Merged object with SD [Config](/reference/config#attributes) & [FormatOptions](#format-configuration) |
+| `args.options`                     | `Object`             | Merged object with SD [Config](/reference/config#properties) & [FormatOptions](#format-configuration) |
 
 Example:
 
 ```js
 StyleDictionary.registerFormat({
   name: 'myCustomFormat',
-  formatter: function ({ dictionary, platform, options, file }) {
+  format: function ({ dictionary, platform, options, file }) {
     return JSON.stringify(dictionary.tokens, null, 2);
   },
 });
@@ -318,16 +318,16 @@ To use your custom format, you call it by name in the file configuration object:
 }
 ```
 
-It is recommended for any configuration needed for your custom format to use the `options` object. Style Dictionary will merge platform and file options so that in your Style Dictionary configuration you can specify options at a platform or file level. In the configuration above, the `options` object passed to the formatter would have `showFileHeader: false`.
+It is recommended for any configuration needed for your custom format to use the `options` object. Style Dictionary will merge platform and file options so that in your Style Dictionary configuration you can specify options at a platform or file level. In the configuration above, the `options` object passed to the format would have `showFileHeader: false`.
 
 ## Custom format with output references
 
-To take advantage of outputting references in your custom formats there are 2 helper methods in the `dictionary` argument passed to your formatter function: `usesReference(value)` and `getReferences(value)`. Here is an example using those:
+To take advantage of outputting references in your custom formats there are 2 helper methods in the `dictionary` argument passed to your format function: `usesReference(value)` and `getReferences(value)`. Here is an example using those:
 
 ```javascript title="build-tokens.js"
 StyleDictionary.registerFormat({
   name: `es6WithReferences`,
-  formatter: function ({ dictionary }) {
+  format: function ({ dictionary }) {
     return dictionary.allTokens
       .map((token) => {
         let value = JSON.stringify(token.value);
@@ -357,7 +357,7 @@ StyleDictionary.registerFormat({
 
 ## Using a template / templating engine to create a format
 
-Formatters are functions and created easily with most templating engines. Formats can be built using templates if there is a lot of boilerplate code to insert (e.g. ObjectiveC files). If the output consists of only the values (e.g. a flat SCSS variables file), writing a formatter function directly may be easier.
+Formats are functions and created easily with most templating engines. Formats can be built using templates if there is a lot of boilerplate code to insert (e.g. ObjectiveC files). If the output consists of only the values (e.g. a flat SCSS variables file), writing a format function directly may be easier.
 
 Any templating language can work as long as there is a node module for it. All you need to do is register a format that calls your template and returns a string.
 
@@ -374,7 +374,7 @@ ${dictionary.allTokens.map(token => `  ${token.name}`: `"${token.value}"`).join(
 
 StyleDictionary.registerFormat({
   name: 'my/format',
-  formatter: template,
+  format: template,
 });
 
 // format: 'my/format' is now available for use...
@@ -391,7 +391,7 @@ const template = _.template(fs.readFileSync('templates/myFormat.template'));
 
 StyleDictionary.registerFormat({
   name: 'my/format',
-  formatter: template,
+  format: template,
 });
 
 // format: 'my/format' is now available for use...
@@ -407,7 +407,7 @@ const template = Handlebars.compile(fs.readFileSync('templates/MyTemplate.hbs').
 
 StyleDictionary.registerFormat({
   name: 'my/format',
-  formatter: function ({ dictionary, platform }) {
+  format: function ({ dictionary, platform }) {
     return template({
       tokens: dictionary.tokens,
       options: platform,
