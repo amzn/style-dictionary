@@ -11,15 +11,17 @@
  * and limitations under the License.
  */
 import { expect } from 'chai';
+import { stubMethod, restore } from 'hanbi';
 import StyleDictionary from 'style-dictionary';
 import { usesReferences } from 'style-dictionary/utils';
-import { fileToJSON } from './__helpers.js';
+import { fileToJSON, cleanConsoleOutput } from './__helpers.js';
 
 const config = fileToJSON('__tests__/__configs/test.json');
 
 describe('exportPlatform', () => {
   let styleDictionary;
   beforeEach(async () => {
+    restore();
     styleDictionary = new StyleDictionary(config);
     await styleDictionary.hasInitialized;
   });
@@ -444,6 +446,312 @@ Use log.verbosity "verbose" or use CLI option --verbose for more details.`;
         platforms,
       });
       await expect(sd.exportPlatform('css')).to.eventually.be.rejectedWith(errorMessage(4));
+    });
+  });
+
+  describe('CSS shorthand transforms integration', () => {
+    describe('typography', () => {
+      it('should warn the user about CSS Font shorthand unknown properties', async () => {
+        const logStub = stubMethod(console, 'log');
+        const sd = new StyleDictionary({
+          tokens: {
+            foo: {
+              bar: {
+                value: {
+                  fontWeight: '500',
+                  fontSize: '20px',
+                  letterSpacing: 'normal',
+                  paragraphSpacing: '20px',
+                  textColor: '#000000',
+                },
+                type: 'typography',
+              },
+            },
+          },
+          platforms: {
+            css: {
+              transforms: ['typography/css/shorthand'],
+            },
+          },
+        });
+
+        await sd.exportPlatform('css');
+        console.warn(cleanConsoleOutput(logStub.firstCall.args[0]));
+
+        expect(cleanConsoleOutput(logStub.firstCall.args[0])).to.equal(`
+Unknown CSS Font Shorthand properties found for 1 tokens, CSS output for Font values will be missing some typography token properties as a result:
+Use log.verbosity "verbose" or use CLI option --verbose for more details.
+`);
+
+        sd.log.verbosity = 'verbose';
+        await sd.exportPlatform('css');
+
+        expect(cleanConsoleOutput(Array.from(logStub.calls)[1].args[0])).to.equal(`
+Unknown CSS Font Shorthand properties found for 1 tokens, CSS output for Font values will be missing some typography token properties as a result:
+
+letterSpacing, paragraphSpacing, textColor for token at foo.bar
+`);
+
+        sd.tokens.foo.bar.filePath = '/tokens.json';
+        await sd.exportPlatform('css');
+
+        expect(cleanConsoleOutput(Array.from(logStub.calls)[2].args[0])).to.equal(`
+Unknown CSS Font Shorthand properties found for 1 tokens, CSS output for Font values will be missing some typography token properties as a result:
+
+letterSpacing, paragraphSpacing, textColor for token at foo.bar in /tokens.json
+`);
+
+        sd.log.verbosity = 'silent';
+        await sd.exportPlatform('css');
+        expect(Array.from(logStub.calls)[3]).to.be.undefined;
+
+        sd.log.verbosity = 'default';
+        sd.log.warnings = 'disabled';
+        await sd.exportPlatform('css');
+        expect(Array.from(logStub.calls)[3]).to.be.undefined;
+
+        sd.log.warnings = 'error';
+        await expect(sd.exportPlatform('css')).to.be.eventually.rejectedWith(`
+Unknown CSS Font Shorthand properties found for 1 tokens, CSS output for Font values will be missing some typography token properties as a result:
+Use log.verbosity "verbose" or use CLI option --verbose for more details.
+`);
+      });
+
+      it('should properly transform typography tokens that are references', async () => {
+        const sd = new StyleDictionary({
+          tokens: {
+            bar: {
+              value: '{foo}',
+              type: 'typography',
+            },
+            foo: {
+              value: {
+                fontWeight: '500',
+                fontSize: '20px',
+                letterSpacing: 'normal',
+                paragraphSpacing: '20px',
+                textColor: '#000000',
+              },
+              type: 'typography',
+            },
+          },
+          platforms: {
+            css: {
+              transforms: ['typography/css/shorthand'],
+            },
+          },
+        });
+
+        const transformed = await sd.exportPlatform('css');
+        expect(transformed.bar.value).to.equal('500 20px sans-serif');
+      });
+
+      it('should properly transform typography tokens that contain references', async () => {
+        const sd = new StyleDictionary({
+          tokens: {
+            bar: {
+              value: '500',
+              type: 'fontWeight',
+            },
+            foo: {
+              value: {
+                fontWeight: '{bar}',
+                fontSize: '20px',
+                letterSpacing: 'normal',
+                paragraphSpacing: '20px',
+                textColor: '#000000',
+              },
+              type: 'typography',
+            },
+          },
+          platforms: {
+            css: {
+              transforms: ['typography/css/shorthand'],
+            },
+          },
+        });
+
+        const transformed = await sd.exportPlatform('css');
+        expect(transformed.foo.value).to.equal('500 20px sans-serif');
+      });
+    });
+
+    describe('border', () => {
+      it('should properly transform typography tokens that are references', async () => {
+        const sd = new StyleDictionary({
+          tokens: {
+            bar: {
+              value: '{foo}',
+              type: 'border',
+            },
+            foo: {
+              value: {
+                style: 'dashed',
+                color: '#000',
+                width: '2px',
+              },
+              type: 'border',
+            },
+          },
+          platforms: {
+            css: {
+              transforms: ['border/css/shorthand'],
+            },
+          },
+        });
+
+        const transformed = await sd.exportPlatform('css');
+        expect(transformed.bar.value).to.equal('2px dashed #000');
+      });
+
+      it('should properly transform typography tokens that contain references', async () => {
+        const sd = new StyleDictionary({
+          tokens: {
+            bar: {
+              value: 'dashed',
+              type: 'strokeStyle',
+            },
+            foo: {
+              value: {
+                style: '{bar}',
+                color: '#000',
+                width: '2px',
+              },
+              type: 'border',
+            },
+          },
+          platforms: {
+            css: {
+              transforms: ['border/css/shorthand'],
+            },
+          },
+        });
+
+        const transformed = await sd.exportPlatform('css');
+        expect(transformed.foo.value).to.equal('2px dashed #000');
+      });
+    });
+
+    describe('transition', () => {
+      it('should properly transform transition tokens that are references', async () => {
+        const sd = new StyleDictionary({
+          tokens: {
+            bar: {
+              value: '{foo}',
+              type: 'transition',
+            },
+            foo: {
+              value: {
+                duration: '200ms',
+                delay: '0ms',
+                timingFunction: [0.5, 0, 1, 1],
+              },
+              type: 'transition',
+            },
+          },
+          platforms: {
+            css: {
+              transforms: ['transition/css/shorthand'],
+            },
+          },
+        });
+
+        const transformed = await sd.exportPlatform('css');
+        expect(transformed.bar.value).to.equal('200ms cubic-bezier(0.5, 0, 1, 1) 0ms');
+      });
+
+      it('should properly transform transition tokens that contain references', async () => {
+        const sd = new StyleDictionary({
+          tokens: {
+            bar: {
+              value: [0.5, 0, 1, 1],
+              type: 'cubicBezier',
+            },
+            foo: {
+              value: {
+                duration: '200ms',
+                delay: '0ms',
+                timingFunction: '{bar}',
+              },
+              type: 'transition',
+            },
+          },
+          platforms: {
+            css: {
+              transforms: ['transition/css/shorthand'],
+            },
+          },
+        });
+
+        const transformed = await sd.exportPlatform('css');
+        expect(transformed.foo.value).to.equal('200ms cubic-bezier(0.5, 0, 1, 1) 0ms');
+      });
+    });
+
+    describe('shadow', () => {
+      it('should properly transform typography tokens that are references', async () => {
+        const sd = new StyleDictionary({
+          tokens: {
+            bar: {
+              value: '{foo}',
+              type: 'shadow',
+            },
+            foo: {
+              value: {
+                offsetX: '2px',
+                offsetY: '4px',
+                blur: '10px',
+                color: '#000',
+              },
+              type: 'shadow',
+            },
+          },
+          platforms: {
+            css: {
+              transforms: ['shadow/css/shorthand'],
+            },
+          },
+        });
+
+        const transformed = await sd.exportPlatform('css');
+        expect(transformed.bar.value).to.equal('2px 4px 10px #000');
+      });
+
+      it('should properly transform typography tokens that contain references', async () => {
+        const sd = new StyleDictionary({
+          tokens: {
+            bar: {
+              value: '#000',
+              type: 'color',
+            },
+            foo: {
+              value: [
+                {
+                  offsetX: '2px',
+                  offsetY: '4px',
+                  blur: '10px',
+                  color: '{bar}',
+                },
+                {
+                  offsetX: '4px',
+                  offsetY: '8px',
+                  blur: '12px',
+                  color: '{bar}',
+                },
+              ],
+              type: 'shadow',
+            },
+          },
+          platforms: {
+            css: {
+              transforms: ['shadow/css/shorthand'],
+            },
+          },
+        });
+
+        const transformed = await sd.exportPlatform('css');
+        expect(transformed.foo.value).to.equal('2px 4px 10px #000, 4px 8px 12px #000');
+      });
     });
   });
 

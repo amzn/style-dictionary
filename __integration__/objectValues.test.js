@@ -98,22 +98,6 @@ describe('integration', async () => {
               ).toHexString();
             },
           },
-          cssBorder: {
-            type: 'value',
-            transitive: true,
-            filter: (token) => token.path[0] === `border`,
-            transform: (token) => {
-              return `${token.value.width} ${token.value.style} ${token.value.color}`;
-            },
-          },
-          shadow: {
-            type: 'value',
-            transitive: true,
-            filter: (token) => token.type === 'shadow',
-            transform: (token) => {
-              return token.value.map((obj) => obj.color).join(', ');
-            },
-          },
         },
       },
       platforms: {
@@ -141,7 +125,7 @@ describe('integration', async () => {
         // transformed to a hex color works with and without `outputReferences`
         cssHex: {
           buildPath,
-          transforms: StyleDictionary.hooks.transformGroups.css.concat([`cssBorder`, `hslToHex`]),
+          transforms: StyleDictionary.hooks.transformGroups.css.concat([`hslToHex`]),
           files: [
             {
               destination: 'hex.css',
@@ -161,7 +145,7 @@ describe('integration', async () => {
         // works with and without `outputReferences`
         cssBorder: {
           buildPath,
-          transforms: StyleDictionary.hooks.transformGroups.css.concat([`cssBorder`]),
+          transforms: StyleDictionary.hooks.transformGroups.css,
           files: [
             {
               destination: 'border.css',
@@ -176,10 +160,9 @@ describe('integration', async () => {
             },
           ],
         },
-
         cssShadow: {
           buildPath,
-          transforms: StyleDictionary.hooks.transformGroups.css.concat([`shadow`, `hslToHex`]),
+          transforms: StyleDictionary.hooks.transformGroups.css.concat([`hslToHex`]),
           files: [
             {
               destination: 'shadow.css',
@@ -197,7 +180,7 @@ describe('integration', async () => {
 
         scss: {
           buildPath,
-          transforms: StyleDictionary.hooks.transformGroups.css.concat([`cssBorder`, `hslToHex`]),
+          transforms: StyleDictionary.hooks.transformGroups.css.concat([`hslToHex`]),
           files: [
             {
               destination: 'border.scss',

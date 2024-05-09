@@ -84,8 +84,8 @@ snapshots["css/variables shadow should match snapshot"] =
  */
 
 :root {
-  --shadow-light: #ff0000, #40bf40;
-  --shadow-dark: #40bf40, #ff0000;
+  --shadow-light: 0 0 0 #ff0000, 0 0 0 #40bf40;
+  --shadow-dark: 0 0 0 #40bf40, 0 0 0 #ff0000;
 }
 `;
 /* end snapshot css/variables shadow should match snapshot */
@@ -97,8 +97,8 @@ snapshots["css/variables shadow should match snapshot with references"] =
  */
 
 :root {
-  --shadow-light: var(--color-red), var(--color-green);
-  --shadow-dark: var(--color-green), var(--color-red);
+  --shadow-light: 0 0 0 var(--color-red), 0 0 0 var(--color-green);
+  --shadow-dark: 0 0 0 var(--color-green), 0 0 0 var(--color-red);
 }
 `;
 /* end snapshot css/variables shadow should match snapshot with references */
@@ -127,8 +127,8 @@ snapshots["integration object values css/variables shadow should match snapshot 
  */
 
 :root {
-  --shadow-light: var(--color-red), var(--color-green);
-  --shadow-dark: var(--color-green), var(--color-red);
+  --shadow-light: 0 0 0 var(--color-red), 0 0 0 var(--color-green);
+  --shadow-dark: 0 0 0 var(--color-green), 0 0 0 var(--color-red);
 }
 `;
 /* end snapshot integration object values css/variables shadow should match snapshot with references */
@@ -209,8 +209,8 @@ snapshots["integration object values css/variables shadow should match snapshot"
  */
 
 :root {
-  --shadow-light: #ff0000, #40bf40;
-  --shadow-dark: #40bf40, #ff0000;
+  --shadow-light: 0 0 0 #ff0000, 0 0 0 #40bf40;
+  --shadow-dark: 0 0 0 #40bf40, 0 0 0 #ff0000;
 }
 `;
 /* end snapshot integration object values css/variables shadow should match snapshot */

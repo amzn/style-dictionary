@@ -15,6 +15,20 @@ import { expect } from 'chai';
 import { fs } from 'style-dictionary/fs';
 import { resolve } from '../lib/resolve.js';
 
+export const cleanConsoleOutput = (str) => {
+  const arr = str
+    .split(`\n`)
+    // Remove ANSI stuff from the console output so we get human-readable strings
+    // https://github.com/chalk/ansi-regex/blob/main/index.js#L3
+    .map((s) =>
+      s
+        // eslint-disable-next-line no-control-regex
+        .replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, '')
+        .trim(),
+    );
+  return arr.join(`\n`);
+};
+
 export const expectThrowsAsync = async (method, errorMessage) => {
   let error = null;
   try {
