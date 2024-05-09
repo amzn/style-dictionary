@@ -1,5 +1,449 @@
 # Changelog
 
+## 4.0.0-prerelease.27
+
+### Major Changes
+
+- f2ed88b: BREAKING: File headers, when registered, are put inside the `hooks.fileHeaders` property now, as opposed to `fileHeader`.
+  Note the change from singular to plural form here.
+
+  Before:
+
+  ```js
+  export default {
+    fileHeader: {
+      foo: (defaultMessages = []) => ['Ola, planet!', ...defaultMessages, 'Hello, World!'],
+    },
+  };
+  ```
+
+  After:
+
+  ```js
+  export default {
+    hooks: {
+      fileHeaders: {
+        foo: (defaultMessages = []) => ['Ola, planet!', ...defaultMessages, 'Hello, World!'],
+      },
+    },
+  };
+  ```
+
+- f2ed88b: BREAKING: Actions, when registered, are put inside the `hooks.actions` property now, as opposed to `action`.
+  Note the change from singular to plural form here.
+
+  Before:
+
+  ```js
+  export default {
+    action: {
+      'copy-assets': {
+        do: () => {}
+        undo: () => {}
+      }
+    },
+  };
+  ```
+
+  After:
+
+  ```js
+  export default {
+    hooks: {
+      actions: {
+        'copy-assets': {
+          do: () => {}
+          undo: () => {}
+        }
+      },
+    },
+  };
+  ```
+
+- f2ed88b: Filters, when registered, are put inside the `hooks.filters` property now, as opposed to `filter`.
+  Note the change from singular to plural form here.
+
+  Before:
+
+  ```js
+  export default {
+    filter: {
+      'colors-only': (token) => token.type === 'color,
+    },
+    platforms: {
+      css: {
+        files: [{
+          format: 'css/variables',
+          destination: '_variables.css',
+          filter: 'colors-only',
+        }],
+      },
+    },
+  };
+  ```
+
+  After:
+
+  ```js
+  export default {
+    hooks: {
+      filters: {
+        'colors-only': (token) => token.type === 'color,
+      },
+    },
+    platforms: {
+      css: {
+        files: [{
+          format: 'css/variables',
+          destination: '_variables.css',
+          filter: 'colors-only',
+        }],
+      },
+    },
+  };
+  ```
+
+  In addition, when using [`registerFilter`](/reference/api#registerfilter) method, the name of the filter function is now `filter` instead of `matcher`.
+
+  Before:
+
+  ```js title="build-tokens.js" del={5} ins={6}
+  import StyleDictionary from 'style-dictionary';
+
+  StyleDictionary.registerFilter({
+    name: 'colors-only',
+    matcher: (token) => token.type === 'color',
+  });
+  ```
+
+  After:
+
+  ```js title="build-tokens.js" del={5} ins={6}
+  import StyleDictionary from 'style-dictionary';
+
+  StyleDictionary.registerFilter({
+    name: 'colors-only',
+    filter: (token) => token.type === 'color',
+  });
+  ```
+
+  > These changes also apply for the `filter` function (previously `matcher`) inside `transforms`.
+
+- f2ed88b: BREAKING: Transform groups, when registered, are put inside the `hooks.transformGroups` property now, as opposed to `transformGroup`.
+
+  Before:
+
+  ```js
+  export default {
+    // register it inline or by SD.registerTransformGroup
+    transformGroup: {
+      foo: ['foo-transform'],
+    },
+  };
+  ```
+
+  After:
+
+  ```js
+  export default {
+    hooks: {
+      transformGroups: {
+        foo: ['foo-transform'],
+      },
+    },
+  };
+  ```
+
+- f2ed88b: BREAKING: Formats, when registered, are put inside the `hooks.formats` property now, as opposed to `format`.
+  The `formatter` handler function has been renamed to `format` for consistency.
+
+  The importable type interfaces have also been renamed, `Formatter` is now `FormatFn` and `FormatterArguments` is now `FormatFnArguments`.
+  Note that you can also use `Format['format']` instead of `FormatFn`, or `Parameters<Format['format']>` instead of `FormatFnArguments`, so these renames may not matter.
+
+  Before:
+
+  ```ts
+  import StyleDictionary from 'style-dictionary';
+  import type { Formatter, FormatterArguments } from 'style-dictionary/types';
+
+  // register it with register method
+  StyleDictionary.registerFormat({
+    name: 'custom/json',
+    formatter: ({ dictionary }) => JSON.stringify(dictionary, 2, null),
+  });
+
+  export default {
+    // OR define it inline
+    format: {
+      'custom/json': ({ dictionary }) => JSON.stringify(dictionary, 2, null),
+    },
+    platforms: {
+      json: {
+        files: [
+          {
+            destination: 'output.json',
+            format: 'custom/json',
+          },
+        ],
+      },
+    },
+  };
+  ```
+
+  After:
+
+  ```ts
+  import StyleDictionary from 'style-dictionary';
+  import type { FormatFn, FormatFnArguments } from 'style-dictionary/types';
+
+  // register it with register method
+  StyleDictionary.registerFormat({
+    name: 'custom/json',
+    format: ({ dictionary }) => JSON.stringify(dictionary, 2, null),
+  });
+
+  export default {
+    // OR define it inline
+    hooks: {
+      formats: {
+        'custom/json': ({ dictionary }) => JSON.stringify(dictionary, 2, null),
+      },
+    },
+    platforms: {
+      json: {
+        files: [
+          {
+            destination: 'output.json',
+            format: 'custom/json',
+          },
+        ],
+      },
+    },
+  };
+  ```
+
+- e83886c: BREAKING: preprocessors must now also be explicitly applied on global or platform level, rather than only registering it. This is more consistent with how the other hooks work and allows applying it on a platform level rather than only on the global level.
+
+  `preprocessors` property that contains the registered preprocessors has been moved under a wrapping property called `hooks`.
+
+  Before:
+
+  ```js
+  export default {
+    // register it inline or by SD.registerPreprocessor
+    // applies automatically, globally
+    preprocessors: {
+      foo: (dictionary) => {
+        // preprocess it
+        return dictionary;
+      },
+    },
+  };
+  ```
+
+  After:
+
+  ```js
+  export default {
+    // register it inline or by SD.registerPreprocessor
+    hooks: {
+      preprocessors: {
+        foo: (dictionary) => {
+          // preprocess it
+          return dictionary;
+        },
+      },
+    },
+    // apply it globally
+    preprocessors: ['foo'],
+    platforms: {
+      css: {
+        // or apply is per platform
+        preprocessors: ['foo'],
+      },
+    },
+  };
+  ```
+
+- 2f80da2: BREAKING: `className`, `packageName`, `mapName`, `type`, `name`, `resourceType` and `resourceMap` options for a bunch of built-in formats have been moved from `file` to go inside the `file.options` object, for API consistency reasons.
+
+  Before:
+
+  ```json
+  {
+    "files": [
+      {
+        "destination": "tokenmap.scss",
+        "format": "scss/map-deep",
+        "mapName": "tokens"
+      }
+    ]
+  }
+  ```
+
+  After:
+
+  ```json
+  {
+    "files": [
+      {
+        "destination": "tokenmap.scss",
+        "format": "scss/map-deep",
+        "options": {
+          "mapName": "tokens"
+        }
+      }
+    ]
+  }
+  ```
+
+- f2ed88b: BREAKING: Transforms, when registered, are put inside the `hooks.transforms` property now, as opposed to `transform`.
+  The `matcher` property has been renamed to `filter` (to align with the Filter hook change), and the `transformer` handler function has been renamed to `transform` for consistency.
+
+  Before:
+
+  ```js
+  export default {
+    // register it inline or by SD.registerTransform
+    transform: {
+      'color-transform': {
+        type: 'value',
+        matcher: (token) => token.type === 'color',
+        transformer: (token) => token.value,
+      },
+    },
+    platforms: {
+      css: {
+        // apply it per platform
+        transforms: ['color-transform'],
+      },
+    },
+  };
+  ```
+
+  After
+
+  ```js
+  export default {
+    // register it inline or by SD.registerTransform
+    hooks: {
+      transforms: {
+        'color-transform': {
+          type: 'value',
+          filter: (token) => token.type === 'color',
+          transform: (token) => token.value,
+        },
+      },
+    },
+    platforms: {
+      css: {
+        // apply it per platform
+        transforms: ['color-transform'],
+      },
+    },
+  };
+  ```
+
+- f2ed88b: BREAKING: Parsers, when registered, are put inside the `hooks.parsers` property now, as opposed to `parsers`.
+  `parsers` property has been repurposed: you will now also need to explicitly apply registered parsers by name in the `parsers` property, they no longer apply by default.
+  When registering a parser, you must also supply a `name` property just like with all other hooks, and the `parse` function has been renamed to `parser` for consistency.
+
+  Before:
+
+  ```js
+  export default {
+    // register it inline or by SD.registerPreprocessor
+    parsers: [
+      {
+        pattern: /\.json5$/,
+        parse: ({ contents, filePath }) => {
+          return JSON5.parse(contents);
+        },
+      },
+    ],
+  };
+  ```
+
+  After:
+
+  ```js
+  export default {
+    hooks: {
+      parsers: {
+        name: 'json5-parser',
+        pattern: /\.json5$/,
+        parser: ({ contents, filePath }) => {
+          return JSON5.parse(contents);
+        },
+      },
+    },
+    // apply it globally by name reference
+    parsers: ['json5-parser'],
+  };
+  ```
+
+- 7b82150: BREAKING: For formats using the `fileHeader` `formatHelpers` utility, it will no longer display a timestamp in the fileHeader output by default. This is now an opt-in by setting `file.formatting.fileHeaderTimestamp` to `true`. The reason for making this opt-in now is that using Style Dictionary in the context of a CI (continuous integration) pipeline is a common use-case, and when running on pull request event, output files always show a diff in git due to the timestamp changing, which often just means that the diff is bloated by redundancy.
+
+  New:
+
+  ```json
+  {
+    "platforms": {
+      "css": {
+        "files": [
+          {
+            "destination": "variables.css",
+            "format": "css/variables",
+            "options": {
+              "formatting": {
+                "fileHeaderTimestamp": true
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+  ```
+
+  or:
+
+  ```js
+  import { fileHeader } from 'style-dictionary/utils';
+
+  const headerContent = await fileHeader({ formatting: { fileHeaderTimestamp: true } });
+  ```
+
+### Minor Changes
+
+- e83886c: Allow expanding tokens on a global or platform-specific level. Supports conditionally expanding per token type, or using a function to determine this per individual token.
+
+### Patch Changes
+
+- 2f80da2: All formats using `createPropertyFormatter` or `formattedVariables` helpers now respect the `file.options.formatting` option passed by users to customize formatting.
+
+  Example:
+
+  ```js
+  {
+    platforms: {
+      css: {
+        transformGroup: 'css',
+        buildPath,
+        files: [
+          {
+            destination: 'variables.css',
+            format: 'css/variables',
+            options: {
+              formatting: { indentation: '    ' },
+            },
+          },
+        ]
+      }
+    }
+  }
+  ```
+
 ## 4.0.0-prerelease.26
 
 ### Minor Changes
