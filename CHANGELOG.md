@@ -169,13 +169,13 @@
   // register it with register method
   StyleDictionary.registerFormat({
     name: 'custom/json',
-    formatter: ({ dictionary }) => JSON.stringify(dictionary, 2, null),
+    formatter: ({ dictionary }) => JSON.stringify(dictionary, null, 2),
   });
 
   export default {
     // OR define it inline
     format: {
-      'custom/json': ({ dictionary }) => JSON.stringify(dictionary, 2, null),
+      'custom/json': ({ dictionary }) => JSON.stringify(dictionary, null, 2),
     },
     platforms: {
       json: {
@@ -199,14 +199,14 @@
   // register it with register method
   StyleDictionary.registerFormat({
     name: 'custom/json',
-    format: ({ dictionary }) => JSON.stringify(dictionary, 2, null),
+    format: ({ dictionary }) => JSON.stringify(dictionary, null, 2),
   });
 
   export default {
     // OR define it inline
     hooks: {
       formats: {
-        'custom/json': ({ dictionary }) => JSON.stringify(dictionary, 2, null),
+        'custom/json': ({ dictionary }) => JSON.stringify(dictionary, null, 2),
       },
     },
     platforms: {
