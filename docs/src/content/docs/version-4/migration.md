@@ -287,18 +287,18 @@ import type { FormatFn, FormatFnArguments } from 'style-dictionary/types';
 // register it with register method
 StyleDictionary.registerFormat({
   name: 'custom/json',
-  formatter: ({ dictionary }) => JSON.stringify(dictionary, 2, null),
-  format: ({ dictionary }) => JSON.stringify(dictionary, 2, null),
+  formatter: ({ dictionary }) => JSON.stringify(dictionary, null, 2),
+  format: ({ dictionary }) => JSON.stringify(dictionary, null, 2),
 })
 
 export default {
   // OR define it inline
   format: {
-    'custom/json': ({ dictionary }) => JSON.stringify(dictionary, 2, null),
+    'custom/json': ({ dictionary }) => JSON.stringify(dictionary, null, 2),
   },
   hooks: {
     formats: {
-      'custom/json': ({ dictionary }) => JSON.stringify(dictionary, 2, null),
+      'custom/json': ({ dictionary }) => JSON.stringify(dictionary, null, 2),
     },
   },
   platforms: {
