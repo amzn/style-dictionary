@@ -67,7 +67,6 @@ The following StyleDictionary class methods are now async:
 - `buildPlatform()`
 - `cleanAllPlatforms()`
 - `cleanPlatform()`
-- `extend()`
 
 All hooks now support async functions as well, this should not be a breaking change for users since sync is also still supported.
 
