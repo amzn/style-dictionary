@@ -13,7 +13,7 @@
 import { expect } from 'chai';
 import { join } from 'path-unified';
 import Color from 'tinycolor2';
-import transforms from '../../lib/common/transforms.js';
+import transforms, { isColor } from '../../lib/common/transforms.js';
 
 describe('common', () => {
   describe('transforms', () => {
@@ -1304,6 +1304,59 @@ describe('common', () => {
           {},
         );
         expect(value).to.equal(join('foo.json'));
+      });
+    });
+  });
+
+  describe('transform filters', () => {
+    describe('isColor', () => {
+      it('should match short hex colors', () => {
+        expect(isColor({ type: 'color', value: '369' })).to.be.true;
+        expect(isColor({ type: 'color', value: '#369' })).to.be.true;
+      });
+
+      it('should match standard hex colors', () => {
+        expect(isColor({ type: 'color', value: 'e66465' })).to.be.true;
+        expect(isColor({ type: 'color', value: '#e66465' })).to.be.true;
+      });
+
+      it('should match 8-digit hex colors', () => {
+        expect(isColor({ type: 'color', value: 'e66465FF' })).to.be.true;
+        expect(isColor({ type: 'color', value: '#e66465FF' })).to.be.true;
+      });
+
+      it('should match legacy rgb/rgba colors', () => {
+        expect(isColor({ type: 'color', value: 'rgb(132, 99, 255)' })).to.be.true;
+        expect(isColor({ type: 'color', value: 'rgb(132, 99, 255, 0.5)' })).to.be.true;
+        expect(isColor({ type: 'color', value: 'rgba(132, 99, 255, 0.5)' })).to.be.true;
+      });
+
+      it('should match rgb colors', () => {
+        expect(isColor({ type: 'color', value: 'rgb(132 99 255)' })).to.be.true;
+        expect(isColor({ type: 'color', value: 'rgb(132 99 255 / .5)' })).to.be.true;
+        expect(isColor({ type: 'color', value: 'rgb(132 99 255 / 50%)' })).to.be.true;
+      });
+
+      it('should match legacy hsl/hsla colors', () => {
+        expect(isColor({ type: 'color', value: 'hsl(30, 100%, 50%, 0.6)' })).to.be.true;
+        expect(isColor({ type: 'color', value: 'hsla(30, 100%, 50%, 0.6)' })).to.be.true;
+      });
+
+      it('should match hsl colors', () => {
+        expect(isColor({ type: 'color', value: 'hsl(30 100% 50% / .6)' })).to.be.true;
+        expect(isColor({ type: 'color', value: 'hsl(30.2 100% 50% / 60%)' })).to.be.true;
+      });
+
+      it('should match named colors', () => {
+        expect(isColor({ type: 'color', value: 'red' })).to.be.true;
+      });
+
+      it('should ignore gradients', () => {
+        expect(isColor({ type: 'color', value: 'linear-gradient(#e66465, #9198e5)' })).to.be.false;
+      });
+
+      it('should ignore values that cannot convert to a color', () => {
+        expect(isColor({ type: 'color', value: 'currentColor' })).to.be.false;
       });
     });
   });
