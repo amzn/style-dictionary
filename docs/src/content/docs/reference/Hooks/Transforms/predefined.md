@@ -516,6 +516,132 @@ Assumes a time in miliseconds and transforms it into a decimal
 
 ---
 
+### fontFamily/css
+
+Transforms `fontFamily` type token (which can be an array) into a CSS string, putting single quotes around font names that contain spaces where necessary.
+
+[DTCG definition](https://design-tokens.github.io/community-group/format/#font-family)
+
+```css
+/**
+ * Matches: token.type === 'fontFamily'
+ * Returns:
+ */
+:root {
+  --var: 'Arial Black', Helvetica, sans-serif;
+}
+```
+
+---
+
+### cubicBezier/css
+
+Transforms `cubicBezier` type token into a CSS string, using the CSS `cubic-bezier` function.
+
+[DTCG definition](https://design-tokens.github.io/community-group/format/#cubic-bezier)
+
+```css
+/**
+ * Matches: token.type === 'cubicBezier'
+ * Returns:
+ */
+:root {
+  --var: cubic-bezier(0, 0, 0.5, 1);
+}
+```
+
+---
+
+### strokeStyle/css/shorthand
+
+Transforms `strokeStyle` type object-value token into a CSS string, using the CSS `dashed` fallback.
+
+[DTCG definition](https://design-tokens.github.io/community-group/format/#stroke-style)
+
+```css
+/**
+ * Matches: token.type === 'strokeStyle'
+ * Returns:
+ */
+:root {
+  --var: dashed;
+}
+```
+
+---
+
+### border/css/shorthand
+
+Transforms `border` type object-value token into a CSS string, using the CSS `border` shorthand notation.
+
+[DTCG definition](https://design-tokens.github.io/community-group/format/#border)
+
+```css
+/**
+ * Matches: token.type === 'border'
+ * Returns:
+ */
+:root {
+  --var: 2px solid #000000;
+}
+```
+
+---
+
+### typography/css/shorthand
+
+Transforms `typography` type object-value token into a CSS string, using the CSS `font` shorthand notation.
+
+[DTCG definition](https://design-tokens.github.io/community-group/format/#typography)
+
+```css
+/**
+ * Matches: token.type === 'typography'
+ * Returns:
+ */
+:root {
+  --var: italic 400 1.2rem/1.5 'Fira Sans', sans-serif;
+}
+```
+
+---
+
+### transition/css/shorthand
+
+Transforms `transition` type object-value token into a CSS string, using the CSS `transition` shorthand notation.
+
+[DTCG definition](https://design-tokens.github.io/community-group/format/#transition)
+
+```css
+/**
+ * Matches: token.type === 'transition'
+ * Returns:
+ */
+:root {
+  --var: 200ms ease-in-out 50ms;
+}
+```
+
+---
+
+### shadow/css/shorthand
+
+Transforms `shadow` type object-value token (which can also be an array) into a CSS string, using the CSS `shadow` shorthand notation.
+
+[DTCG definition](https://design-tokens.github.io/community-group/format/#shadow)
+
+```css
+/**
+ * Matches: token.type === 'shadow'
+ * Returns:
+ */
+:root {
+  --var: 2px 4px 8px 10px #000000, 1px 1px 4px #cccccc;
+}
+```
+
+---
+
 ### asset/url
 
 Wraps the value in a [CSS `url()` function](https://developer.mozilla.org/en-US/docs/Web/CSS/url)

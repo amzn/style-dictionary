@@ -1048,6 +1048,249 @@ describe('common', () => {
       });
     });
 
+    describe('fontFamily/css', () => {
+      const fontFamilyTransform = (value) =>
+        transforms['fontFamily/css'].transform({ value }, {}, {});
+
+      it('should handle simple fontFamily as is', () => {
+        expect(fontFamilyTransform('Arial')).to.equal('Arial');
+      });
+
+      it('should comma separated type fontFamily values', () => {
+        expect(fontFamilyTransform('Arial, sans-serif')).to.equal('Arial, sans-serif');
+      });
+
+      it('should handle array type fontFamily values', () => {
+        expect(fontFamilyTransform(['Arial', 'sans-serif'])).to.equal('Arial, sans-serif');
+      });
+
+      it('should wrap fontFamily values with spaces in quotes', () => {
+        expect(fontFamilyTransform('Gill Sans')).to.equal("'Gill Sans'");
+        expect(fontFamilyTransform('Gill Sans, Arial, Comic Sans, Open Sans, sans-serif')).to.equal(
+          "'Gill Sans', Arial, 'Comic Sans', 'Open Sans', sans-serif",
+        );
+        expect(
+          fontFamilyTransform(['Gill Sans', 'Arial', 'Comic Sans', 'Open Sans', 'sans-serif']),
+        ).to.equal("'Gill Sans', Arial, 'Comic Sans', 'Open Sans', sans-serif");
+      });
+    });
+
+    describe('cubicBezier/css', () => {
+      const cubicBezierTransform = (value) =>
+        transforms['cubicBezier/css'].transform({ value }, {}, {});
+
+      it('should stringify cubicBezier values to cubicBezier() CSS function', () => {
+        expect(cubicBezierTransform([0.5, 0, 1, 1])).to.equal('cubic-bezier(0.5, 0, 1, 1)');
+        expect('ease-in-out').to.equal('ease-in-out');
+      });
+    });
+
+    describe('typography/css/shorthand', () => {
+      const typographyTransform = (value, platformConfig = {}) =>
+        transforms['typography/css/shorthand'].transform({ value }, platformConfig, {});
+
+      it('transforms typography object to typography shorthand', () => {
+        expect(
+          typographyTransform({
+            fontWeight: '500',
+            fontSize: '20px',
+            fontVariant: 'small-caps',
+            fontWidth: 'condensed',
+            fontStyle: 'italic',
+            lineHeight: '1.5',
+            fontFamily: 'Arial',
+          }),
+        ).to.equal('italic small-caps 500 condensed 20px/1.5 Arial');
+      });
+
+      it('transforms fontWeight prop according to fontweight map for CSS and px dimensions', () => {
+        expect(
+          typographyTransform({
+            fontWeight: 300,
+            fontSize: '20px',
+            lineHeight: '1.5',
+            fontFamily: 'Arial',
+          }),
+        ).to.equal('300 20px/1.5 Arial');
+      });
+
+      it('provides defaults for missing properties', () => {
+        expect(typographyTransform({})).to.equal('16px sans-serif');
+        expect(typographyTransform({}, { basePxFontSize: 12 })).to.equal('12px sans-serif');
+      });
+
+      it('sets quotes around fontFamily if it has white-spaces in name', () => {
+        expect(
+          typographyTransform({
+            fontWeight: 300,
+            fontSize: '20px',
+            lineHeight: '1.5',
+            fontFamily: 'Arial Narrow, Arial, sans-serif',
+          }),
+        ).to.equal("300 20px/1.5 'Arial Narrow', Arial, sans-serif");
+      });
+
+      it('handles array fontFamily values', () => {
+        expect(
+          typographyTransform({
+            fontWeight: 300,
+            fontSize: '20px',
+            lineHeight: '1.5',
+            fontFamily: ['Arial Narrow', 'Arial', 'sans-serif'],
+          }),
+        ).to.equal("300 20px/1.5 'Arial Narrow', Arial, sans-serif");
+      });
+    });
+
+    // https://design-tokens.github.io/community-group/format/#border
+    describe('border/css/shorthand', () => {
+      const borderTransform = (value) =>
+        transforms['border/css/shorthand'].transform({ value, type: 'border' }, {}, {});
+
+      it('transforms border object to border shorthand', () => {
+        expect(
+          borderTransform({
+            width: '5px',
+            style: 'dashed',
+            color: '#000000',
+          }),
+        ).to.equal('5px dashed #000000');
+      });
+
+      // https://design-tokens.github.io/community-group/format/#example-fallback-for-object-stroke-style
+      it('handles stroke style of type object using dashed fallback', () => {
+        expect(
+          borderTransform({
+            width: '5px',
+            style: {
+              dashArray: ['0.5rem', '0.25rem'],
+              lineCap: 'round',
+            },
+            color: '#000000',
+          }),
+        ).to.equal('5px dashed #000000');
+      });
+    });
+
+    describe('strokeStyle/css/shorthand', () => {
+      const strokeTransform = (value, platformConfig = {}) =>
+        transforms['strokeStyle/css/shorthand'].transform({ value }, platformConfig, {});
+
+      it('transforms strokeStyle object value to strokeStyle CSS fallback string value', () => {
+        expect(
+          strokeTransform({
+            dashArray: ['0.5rem', '0.25rem'],
+            lineCap: 'round',
+          }),
+        ).to.equal('dashed');
+
+        expect(strokeTransform('dotted')).to.equal('dotted');
+      });
+    });
+
+    describe('transition/css/shorthand', () => {
+      const transitionTransform = (value, platformConfig = {}) =>
+        transforms['transition/css/shorthand'].transform({ value }, platformConfig, {});
+
+      it('transforms transition object value to transition CSS shorthand string value', () => {
+        expect(
+          transitionTransform({
+            duration: '200ms',
+            delay: '0ms',
+            timingFunction: [0.5, 0, 1, 1],
+          }),
+        ).to.equal('200ms cubic-bezier(0.5, 0, 1, 1) 0ms');
+
+        expect(
+          transitionTransform({
+            duration: '200ms',
+            delay: '0ms',
+            timingFunction: 'ease-in-out',
+          }),
+        ).to.equal('200ms ease-in-out 0ms');
+
+        expect(transitionTransform('200ms linear 50ms')).to.equal('200ms linear 50ms');
+      });
+    });
+
+    describe('shadow/css/shorthand', () => {
+      const shadowTransform = (value, platformConfig = {}) =>
+        transforms['shadow/css/shorthand'].transform({ value }, platformConfig, {});
+
+      it('transforms shadow object value to shadow CSS shorthand string value', () => {
+        expect(
+          shadowTransform({
+            type: 'inset',
+            color: '#00000080',
+            offsetX: '4px',
+            offsetY: '4px',
+            blur: '12px',
+            spread: '6px',
+          }),
+        ).to.equal('inset 4px 4px 12px 6px #00000080');
+
+        expect(shadowTransform('4px 4px 12px 6px #00000080')).to.equal(
+          '4px 4px 12px 6px #00000080',
+        );
+      });
+
+      it('transforms shadow object value with missing properties using defaults', () => {
+        expect(shadowTransform({})).to.equal('0 0 0 #000000');
+      });
+
+      it('handles arrays of shadows', () => {
+        expect(
+          shadowTransform([
+            {
+              type: 'inset',
+              color: '#000000',
+              offsetX: '4px',
+              offsetY: '4px',
+              blur: '12px',
+              spread: '6px',
+            },
+            {
+              color: 'rgba(0,0,0, 0.4)',
+              offsetX: '2px',
+              offsetY: '2px',
+              blur: '4px',
+            },
+          ]),
+        ).to.equal('inset 4px 4px 12px 6px #000000, 2px 2px 4px rgba(0,0,0, 0.4)');
+      });
+    });
+
+    /**
+     * The spec for gradient type tokens is not very well thought out at this moment
+     * https://design-tokens.github.io/community-group/format/#gradient
+     * This will inevitably change in a breaking manner, so any transform written as of the time of writing (13-05-24)
+     * will require a breaking change when it does.
+     * Therefore, a community-built custom transform is the better fit for now.
+     */
+    describe.skip('gradient/css/shorthand', () => {
+      const gradientTransform = (value, platformConfig = {}) =>
+        transforms['gradient/css/shorthand'].transform({ value }, platformConfig, {});
+
+      it('transforms gradient object value to gradient CSS shorthand string value', () => {
+        expect(
+          gradientTransform([
+            {
+              color: '#0000ff',
+              position: 0,
+            },
+            {
+              color: '#ff0000',
+              position: 1,
+            },
+          ]),
+        ).to.equal('inset 4px 4px 12px 6px #000000, 2px 2px 4px rgba(0,0,0, 0.4)');
+
+        expect(gradientTransform('4px 4px 12px 6px #00000080')).to.equal(
+          '4px 4px 12px 6px #00000080',
+        );
+      });
+    });
+
     // FIXME: find a browser/node cross compatible way to transform local path
     // current implementation incorrectly uses process.cwd() rather than using
     // the filePath of the token to determine where the asset is located relative to the token that refers to it
