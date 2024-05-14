@@ -40,6 +40,13 @@ Transforms:
 [size/rem](/reference/hooks/transforms/predefined#sizerem)
 [color/css](/reference/hooks/transforms/predefined#colorcss)
 [asset/url](/reference/hooks/transforms/predefined#asseturl)
+[fontFamily/css](/reference/hooks/transforms/predefined#fontfamilycss)
+[cubicBezier/css](/reference/hooks/transforms/predefined#cubicbeziercss)
+[strokeStyle/css/shorthand](/reference/hooks/transforms/predefined#strokestylecssshorthand)
+[border/css/shorthand](/reference/hooks/transforms/predefined#bordercssshorthand)
+[typography/css/shorthand](/reference/hooks/transforms/predefined#typographycssshorthand)
+[transition/css/shorthand](/reference/hooks/transforms/predefined#transitioncssshorthand)
+[shadow/css/shorthand](/reference/hooks/transforms/predefined#shadowcssshorthand)
 
 ---
 
@@ -54,6 +61,13 @@ Transforms:
 [size/rem](/reference/hooks/transforms/predefined#sizerem)
 [color/css](/reference/hooks/transforms/predefined#colorcss)
 [asset/url](/reference/hooks/transforms/predefined#asseturl)
+[fontFamily/css](/reference/hooks/transforms/predefined#fontfamilycss)
+[cubicBezier/css](/reference/hooks/transforms/predefined#cubicbeziercss)
+[strokeStyle/css/shorthand](/reference/hooks/transforms/predefined#strokestylecssshorthand)
+[border/css/shorthand](/reference/hooks/transforms/predefined#bordercssshorthand)
+[typography/css/shorthand](/reference/hooks/transforms/predefined#typographycssshorthand)
+[transition/css/shorthand](/reference/hooks/transforms/predefined#transitioncssshorthand)
+[shadow/css/shorthand](/reference/hooks/transforms/predefined#shadowcssshorthand)
 
 ---
 
@@ -68,6 +82,13 @@ Transforms:
 [size/rem](/reference/hooks/transforms/predefined#sizerem)
 [color/hex](/reference/hooks/transforms/predefined#colorhex)
 [asset/url](/reference/hooks/transforms/predefined#asseturl)
+[fontFamily/css](/reference/hooks/transforms/predefined#fontfamilycss)
+[cubicBezier/css](/reference/hooks/transforms/predefined#cubicbeziercss)
+[strokeStyle/css/shorthand](/reference/hooks/transforms/predefined#strokestylecssshorthand)
+[border/css/shorthand](/reference/hooks/transforms/predefined#bordercssshorthand)
+[typography/css/shorthand](/reference/hooks/transforms/predefined#typographycssshorthand)
+[transition/css/shorthand](/reference/hooks/transforms/predefined#transitioncssshorthand)
+[shadow/css/shorthand](/reference/hooks/transforms/predefined#shadowcssshorthand)
 
 ---
 
