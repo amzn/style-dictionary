@@ -11,8 +11,8 @@ import '@shoelace-style/shoelace/dist/components/option/option.js';
 import { bundle } from '../utils/rollup-bundle.ts';
 import { changeLang, init, monaco } from '../monaco/monaco.ts';
 import { analyzeDependencies } from '../utils/analyzeDependencies.ts';
+import { downloadZIP } from '../../../lib/utils/downloadFile.js';
 import type SlRadioGroup from '@shoelace-style/shoelace/dist/components/radio-group/radio-group.js';
-import { downloadZIP } from '../utils/downloadZIP.ts';
 
 const { Volume } = memfs;
 
@@ -459,7 +459,11 @@ node build-tokens.${scriptLang}
 \`\`\`
 `;
 
-    await downloadZIP(files);
+    const today = new Date(Date.now());
+    const filename = `sd-output_${today.getFullYear()}-${today.getMonth()}-${(
+      '0' + today.getDate()
+    ).slice(-2)}.zip`;
+    await downloadZIP(files, filename);
   }
 }
 

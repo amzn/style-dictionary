@@ -4,6 +4,7 @@ import { dirname } from 'path-unified';
 import { fs } from 'style-dictionary/fs';
 import { chaiWtrSnapshot } from '../snapshot-plugin/chai-wtr-snapshot.js';
 import { fixDate } from './__helpers.js';
+import { writeZIP } from '../lib/utils/convertToDTCG.js';
 
 /**
  * We have a bunch of files that we use a mock data for our tests
@@ -17,7 +18,19 @@ import { fixDate } from './__helpers.js';
 
 fixDate();
 
-function ensureDirectoryExistence(filePath) {
+let hasInitializedResolve;
+export const hasInitialized = new Promise((resolve) => {
+  hasInitializedResolve = resolve;
+});
+// in case of Node env, we can resolve it immediately since we don't do this setup stuff
+if (typeof window !== 'object') {
+  hasInitializedResolve();
+}
+
+/**
+ * @param {string} filePath
+ */
+function ensureDirectoryExists(filePath) {
   const dir = dirname(filePath);
   if (fs.existsSync(dir)) {
     return true;
@@ -25,16 +38,26 @@ function ensureDirectoryExistence(filePath) {
   fs.mkdirSync(dir, { recursive: true });
 }
 
-function mirrorFile(file, contents) {
-  ensureDirectoryExistence(file);
-  fs.writeFileSync(file, contents, 'utf-8');
+/**
+ * @param {string} file
+ * @param {string | Record<string, string>} contents
+ */
+async function mirrorFile(file, contents) {
+  ensureDirectoryExists(file);
+  // zip files cannot just be written to FS using utf-8 encoding..
+  if (file.endsWith('.zip')) {
+    const zipResult = await writeZIP(contents);
+    contents = new Uint8Array(await zipResult.arrayBuffer());
+  }
+  await fs.promises.writeFile(file, contents);
 }
 
-export function setup(filesToMirror) {
+/**
+ * @param {[string, string | Record<string, string>][]} filesToMirror
+ */
+export async function setup(filesToMirror) {
   use(chaiAsPromised);
   use(chaiWtrSnapshot);
-
-  filesToMirror.forEach(([file, contents]) => {
-    mirrorFile(file, contents);
-  });
+  await Promise.all(filesToMirror.map(([file, contents]) => mirrorFile(file, contents)));
+  hasInitializedResolve();
 }

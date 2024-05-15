@@ -1,0 +1,35 @@
+---
+title: Design Token Community Group
+sidebar:
+  order: 4
+---
+
+import tokens from '/public/demo-tokens.json';
+
+There is a [W3C Design Token Community Group](https://www.w3.org/community/design-tokens/), whose goal it is to "provide standards upon which products and design tools can rely for sharing stylistic pieces of a design system at scale".
+
+What that boils down to right now is a [draft specification for how Design Tokens ought to be formatted](https://design-tokens.github.io/community-group/format/), for cross-tool and cross-platform interoperability.
+Since Style Dictionary v4, we have first-class support for this format.
+
+## Convert your Tokens to DTCG
+
+We also export a tool that allows you to convert your design tokens in the old format to the DTCG format:
+
+<div spacer></div>
+<sd-dtcg-convert></sd-dtcg-convert>
+
+What it does:
+
+- Turn `value`, `type` and `description` design token property keys into `$value`, `$type` and `$description` respectively.
+- Move the `$type` properties from the design tokens onto the uppermost common ancestor token group
+
+What it does not do (atm, feel free to raise suggestions):
+
+- Refactor type values commonly used to the DTCG types, e.g. size -> dimension.
+
+## Live demo
+
+<sd-playground tokens={JSON.stringify({ value: JSON.stringify(tokens, null, 2), lang: 'json'})} default-selected="tokens" id="main-demo">
+
+  <div style="height: 100%" slot="monaco-editor"></div>
+</sd-playground>

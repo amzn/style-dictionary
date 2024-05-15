@@ -29,6 +29,7 @@ export interface DesignToken {
 }
 
 export interface DesignTokens {
+  $type?: string;
   [key: string]: DesignTokens | DesignToken;
 }
 
