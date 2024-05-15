@@ -10,6 +10,9 @@ import '@shoelace-style/shoelace/dist/components/select/select.js';
 import '@shoelace-style/shoelace/dist/components/option/option.js';
 import { bundle } from '../utils/rollup-bundle.ts';
 import { changeLang, init } from '../monaco/monaco.ts';
+import { analyzeDependencies } from '../utils/analyzeDependencies.ts';
+import type SlRadioGroup from '@shoelace-style/shoelace/dist/components/radio-group/radio-group.js';
+import { downloadZIP } from '../utils/downloadZIP.ts';
 
 const { Volume } = memfs;
 
@@ -35,6 +38,7 @@ const defaults = {
       },
     },
   },
+  script: "import StyleDictionary from 'style-dictionary';",
 };
 
 const getLang = (lang: string) => {
@@ -77,6 +81,29 @@ class SdPlayground extends LitElement {
         position: absolute !important;
         width: 1px !important;
         white-space: nowrap !important;
+      }
+
+      @media (max-width: 550px) {
+        ::part(button-group) {
+          display: block;
+        }
+        ::part(button-group__base) {
+          flex-direction: column;
+        }
+
+        sl-radio-button[data-sl-button-group__button--first]::part(button) {
+          border-top-left-radius: var(--sl-input-border-radius-medium);
+          border-top-right-radius: var(--sl-input-border-radius-medium);
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+
+        sl-radio-button[data-sl-button-group__button--last]::part(button) {
+          border-top-left-radius: 0;
+          border-top-right-radius: 0;
+          border-bottom-left-radius: var(--sl-input-border-radius-medium);
+          border-bottom-right-radius: var(--sl-input-border-radius-medium);
+        }
       }
     `;
   }
@@ -150,6 +177,9 @@ class SdPlayground extends LitElement {
     return html`
       <sl-radio-group
         @sl-change=${(ev: Event) => {
+          if ((ev.target as SlRadioGroup).value === 'eject') {
+            return;
+          }
           this.currentFile = (ev.target as HTMLInputElement).value as Files;
         }}
         name="file-switch"
@@ -179,6 +209,30 @@ class SdPlayground extends LitElement {
             </sl-radio-button>
           `,
         )}
+        <sl-radio-button value="eject" aria-label="Eject" title="Eject" @click=${this.ejectHandler}>
+          <svg
+            width="20px"
+            height="20px"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="m8 12 4 4 4-4"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M12 16V4M19 17v.6c0 1.33-1.07 2.4-2.4 2.4H7.4C6.07 20 5 18.93 5 17.6V17"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-miterlimit="10"
+              stroke-linecap="round"
+            />
+          </svg>
+        </sl-radio-button>
       </sl-radio-group>
       <slot name="monaco-editor"></slot>
     `;
@@ -266,18 +320,19 @@ class SdPlayground extends LitElement {
     return sdConfig as Config;
   }
 
+  getFileData(file: 'tokens' | 'config' | 'script' | 'output') {
+    const def = defaults[file as keyof typeof defaults];
+    return {
+      lang: JSON.parse(this[file]).lang ?? (file === 'script' ? 'js' : 'json'),
+      value:
+        JSON.parse(this[file]).value ?? (file === 'script' ? def : JSON.stringify(def, null, 2)),
+    };
+  }
+
   async fileSwitch(val: 'tokens' | 'config' | 'script' | 'output') {
     await this.hasInitialized;
-
-    const data = {
-      lang: JSON.parse(this[val as keyof SdPlayground]).lang ?? 'json',
-      value:
-        JSON.parse(this[val]).value ??
-        (val === 'script' ? '' : JSON.stringify(defaults[val as keyof typeof defaults], null, 2)),
-    };
-
+    const data = this.getFileData(val);
     this.editor.setValue(data.value);
-
     await changeLang(getLang(data.lang), this.editor);
   }
 
@@ -321,9 +376,62 @@ class SdPlayground extends LitElement {
   async saveFile() {
     this[this.currentFile] = JSON.stringify({
       value: this.editor.getValue(),
-      lang: JSON.parse(this[this.currentFile]).lang ?? 'json',
+      lang: this.getFileData(this.currentFile).lang,
     });
     await this.initData();
+  }
+
+  async ejectHandler() {
+    const tokens = this.getFileData('tokens');
+    const script = this.getFileData('script');
+    const config = this.getFileData('config');
+    const dependencies = await analyzeDependencies(script.value);
+    const sdDep = dependencies.find((dep) => dep.package === 'style-dictionary');
+    if (sdDep) {
+      sdDep.package = 'style-dictionary@4.0.0-prerelease.28';
+    }
+    const files: Record<string, string> = {};
+    files[`tokens.${tokens.lang}`] = tokens.value;
+
+    const scriptLang = script.lang === 'js' ? 'mjs' : script.lang;
+    const configLang = config.lang === 'js' ? 'mjs' : config.lang;
+
+    if (configLang === 'json') {
+      const parsed = JSON.parse(config.value);
+      parsed.source = [`tokens.${tokens.lang}`];
+      config.value = JSON.stringify(parsed, null, 2);
+    } else if (config.lang === 'js') {
+      // this is a bit brittle, to add the "source" into a JS file like that..
+      config.value = config.value.replace(
+        /export( *)default( *){/,
+        `export default {\n  source: ['tokens.${tokens.lang}'],`,
+      );
+    }
+
+    files[`config.${configLang}`] = config.value;
+    files[`build-tokens.${scriptLang}`] = `${script.value}
+
+const sd = new StyleDictionary('config.${configLang}');
+
+await sd.cleanAllPlatforms();
+await sd.buildAllPlatforms();
+`;
+    files['README.md'] = `# Style Dictionary Eject
+
+Install your dependencies with [NPM](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm):
+
+\`\`\`sh
+npm init -y && npm install ${dependencies.map((dep) => dep.package).join(' ')}
+\`\`\`
+
+Then run
+
+\`\`\`sh
+node build-tokens.${scriptLang}
+\`\`\`
+`;
+
+    await downloadZIP(files);
   }
 }
 
