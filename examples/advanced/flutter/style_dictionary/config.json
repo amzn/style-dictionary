@@ -1,5 +1,5 @@
 {
-  "source": ["properties/**/*.json"],
+  "source": ["tokens/**/*.json"],
   "platforms": {
     "flutter": {
       "transformGroup": "flutter",
@@ -26,9 +26,7 @@
             "type": "color"
           },
           "filter": {
-            "attributes": {
-              "category": "color"
-            }
+            "type": "color"
           }
         },
         {
@@ -39,9 +37,7 @@
             "type": "float"
           },
           "filter": {
-            "attributes": {
-              "category": "size"
-            }
+            "type": "color"
           }
         }
       ]

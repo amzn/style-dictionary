@@ -1,0 +1,9 @@
+{
+  "size": {
+    "font": {
+      "small": { "value": 0.75, "type": "dimension" },
+      "medium": { "value": 1, "type": "dimension" },
+      "large": { "value": 1.5, "type": "dimension" }
+    }
+  }
+}

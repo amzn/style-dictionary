@@ -1,4 +1,4 @@
-const StyleDictionary = require('style-dictionary');
+import StyleDictionary from 'style-dictionary';
 
 // Register an "attribute" transform to codify the font's details
 // as named attributes.
@@ -61,7 +61,7 @@ StyleDictionary.registerFormat({
   },
 });
 
-module.exports = {
+export default {
   source: ['tokens.json'],
   platforms: {
     'css-font-face': {

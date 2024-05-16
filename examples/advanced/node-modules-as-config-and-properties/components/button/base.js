@@ -1,4 +1,4 @@
-module.exports = {
-  padding: { value: '{size.padding.base.value}' },
-  'font-size': { value: '{size.font.large.value}' },
+export default {
+  padding: { value: '{size.padding.base.value}', type: 'dimension' },
+  'font-size': { value: '{size.font.large.value}', type: 'fontSize' },
 };

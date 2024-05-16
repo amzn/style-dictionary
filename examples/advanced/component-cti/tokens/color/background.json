@@ -1,9 +1,0 @@
-{
-  "color": {
-    "background": {
-      "primary": { "value": "#ffffff" },
-      "link": { "value": "#0366d6" },
-      "inverse": { "value": "#111111" }
-    }
-  }
-}

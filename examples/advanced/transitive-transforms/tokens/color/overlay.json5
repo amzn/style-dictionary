@@ -2,22 +2,28 @@
   color: {
     overlay: {
       primary: {
-        value: "{color.core.white.value}",
-        modify: [{
-          type: "alpha",
-          // You can access other parts of your style dictionary in here too:
-          amount: "{alpha.1}"
-        }]
+        value: '{color.core.white.value}',
+        modify: [
+          {
+            type: 'alpha',
+            // You can access other parts of your style dictionary in here too:
+            amount: '{alpha.1}',
+          },
+        ],
+        type: 'color',
       },
 
       secondary: {
-        value: "{color.core.white.value}",
-        modify: [{
-          type: "alpha",
-          // You can access other parts of your style dictionary in here too:
-          amount: "{alpha.2}"
-        }]
-      }
-    }
-  }
+        value: '{color.core.white.value}',
+        modify: [
+          {
+            type: 'alpha',
+            // You can access other parts of your style dictionary in here too:
+            amount: '{alpha.2}',
+          },
+        ],
+        type: 'color',
+      },
+    },
+  },
 }

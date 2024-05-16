@@ -1,7 +1,8 @@
 {
   "button": {
     "height": {
-      "value": "50px"
+      "value": "50px",
+      "type": "dimension"
     }
   }
 }

@@ -1,0 +1,16 @@
+{
+  "spacing": {
+    "small": {
+      "value": "10px",
+      "type": "dimension"
+    },
+    "medium": {
+      "value": "20px",
+      "type": "dimension"
+    },
+    "large": {
+      "value": "30px",
+      "type": "dimension"
+    }
+  }
+}

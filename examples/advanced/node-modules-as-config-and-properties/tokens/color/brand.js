@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   primary: {
     lighter: { value: '{color.core.teal.60.value}' },
     light: { value: '{color.core.teal.80.value}' },

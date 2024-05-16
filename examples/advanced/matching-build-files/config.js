@@ -1,18 +1,18 @@
-const StyleDictionary = require('style-dictionary');
-const tokens = require('./tokens');
+import StyleDictionary from 'style-dictionary';
+import tokens from './tokens/index.js';
 
-module.exports = {
+export default {
   source: ['tokens/**/*.json'],
   platforms: {
     'esm/category': {
       buildPath: 'build/js/esm/',
       transforms: ['attribute/cti', 'name/camel', 'size/px', 'color/hex'],
-      files: tokens.map((tokenCategory) => ({
-        destination: `${tokenCategory}.js`,
+      files: tokens.map((tokenSet) => ({
+        destination: `${tokenSet}.js`,
         format: 'javascript/es6',
         filter: {
           attributes: {
-            category: tokenCategory,
+            category: tokenSet,
           },
         },
       })),
@@ -30,12 +30,12 @@ module.exports = {
     'cjs/category': {
       buildPath: 'build/js/cjs/',
       transforms: ['attribute/cti', 'name/camel', 'size/px', 'color/hex'],
-      files: tokens.map((tokenCategory) => ({
-        destination: `${tokenCategory}.js`,
+      files: tokens.map((tokenSet) => ({
+        destination: `${tokenSet}.js`,
         format: 'custom/cjsmodule',
         filter: {
           attributes: {
-            category: tokenCategory,
+            category: tokenSet,
           },
         },
       })),
@@ -66,12 +66,12 @@ module.exports = {
     'scss/category': {
       transformGroup: 'scss',
       buildPath: `build/scss/`,
-      files: tokens.map((tokenCategory) => ({
-        destination: `_${tokenCategory}.scss`,
+      files: tokens.map((tokenSet) => ({
+        destination: `_${tokenSet}.scss`,
         format: 'scss/variables',
         filter: {
           attributes: {
-            category: tokenCategory,
+            category: tokenSet,
           },
         },
       })),

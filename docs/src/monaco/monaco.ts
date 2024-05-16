@@ -2,6 +2,8 @@ import type * as monacoType from 'monaco-editor';
 import darkTheme from './dark-theme';
 import githubTheme from './github-light-theme';
 
+export let monaco: typeof monacoType;
+
 declare global {
   interface Window {
     monaco: typeof monacoType;
@@ -40,7 +42,6 @@ export function ensureMonacoIsLoaded(
   // srcPath = 'https://cdn.jsdelivr.net/npm/monaco-editor@0.29.1/dev' // <-- for debugging
   srcPath = 'https://cdn.jsdelivr.net/npm/monaco-editor@0.29.1/min',
 ) {
-  const monaco = window.monaco;
   return new Promise((resolve, reject) => {
     if (monaco) {
       resolve(null);
@@ -78,7 +79,10 @@ export function ensureMonacoIsLoaded(
         };
 
         // @ts-expect-error 2nd arg should be ok
-        window.require(['vs/editor/editor.main'], resolve);
+        window.require(['vs/editor/editor.main'], () => {
+          monaco = window.monaco;
+          resolve(null);
+        });
       },
       timeout,
       reject,
@@ -98,7 +102,6 @@ export function ensureMonacoIsLoaded(
 
 export async function init(elem: HTMLDivElement) {
   await ensureMonacoIsLoaded();
-  const monaco = window.monaco;
   monaco.editor.defineTheme(
     'my-light-theme',
     githubTheme as monacoType.editor.IStandaloneThemeData,
@@ -121,7 +124,6 @@ export async function init(elem: HTMLDivElement) {
 
 export async function changeLang(lang: string, ed: typeof monacoType.editor) {
   await ensureMonacoIsLoaded();
-  const monaco = window.monaco;
   // @ts-expect-error supposedly need to pass URI here... but cant find import to Uri for browser...
   monaco.editor.setModelLanguage(ed.getModel(), lang);
 }

@@ -1,4 +1,4 @@
-const StyleDictionaryPackage = require('style-dictionary');
+import StyleDictionary from 'style-dictionary';
 
 // HAVE THE STYLE DICTIONARY CONFIG DYNAMICALLY GENERATED
 
@@ -61,13 +61,8 @@ console.log('Build started...');
     console.log('\n==============================================');
     console.log(`\nProcessing: [${platform}] [${brand}]`);
 
-    StyleDictionaryPackage.extend(getStyleDictionaryConfig(brand, platform)).then(
-      (StyleDictionary) => {
-        StyleDictionary.buildPlatform(platform);
-
-        console.log('\nEnd processing');
-      },
-    );
+    const sd = new StyleDictionary(getStyleDictionaryConfig(brand, platform));
+    sd.buildPlatform(platform);
   });
 });
 

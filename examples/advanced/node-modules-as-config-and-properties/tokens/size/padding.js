@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   1: { value: 0.5 },
   2: { value: 1 },
   3: { value: 2 },

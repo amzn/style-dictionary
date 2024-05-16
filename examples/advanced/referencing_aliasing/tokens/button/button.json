@@ -2,18 +2,22 @@
   "button": {
     "color": {
       "primary": {
-        "value": "{color.primary.value}"
+        "value": "{color.primary.value}",
+        "type": "color"
       },
       "secondary": {
-        "value": "{color.secondary.value}"
+        "value": "{color.secondary.value}",
+        "type": "color"
       },
       "danger": {
-        "value": "{color.base.red.value}"
+        "value": "{color.base.red.value}",
+        "type": "color"
       }
     },
     "text": {
       "size": {
-        "value": "{globals.baseline}{globals.unit}"
+        "value": "{globals.baseline}{globals.unit}",
+        "type": "fontSize"
       }
     }
   }

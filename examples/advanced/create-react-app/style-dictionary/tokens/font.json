@@ -1,0 +1,34 @@
+{
+  "font": {
+    "family": {
+      "base": {
+        "value": "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
+        "type": "fontFamily"
+      },
+      "code": {
+        "value": "source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace",
+        "type": "fontFamily"
+      }
+    }
+  },
+  "size": {
+    "text": {
+      "base": {
+        "value": "{size.text.medium.value}",
+        "type": "fontSize"
+      },
+      "small": {
+        "value": "0.75",
+        "type": "fontSize"
+      },
+      "medium": {
+        "value": "1",
+        "type": "fontSize"
+      },
+      "large": {
+        "value": "1.5",
+        "type": "fontSize"
+      }
+    }
+  }
+}

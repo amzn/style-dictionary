@@ -29,7 +29,7 @@ sd.registerFormat({
 });
 
 // FINALLY, BUILD ALL THE PLATFORMS
-sd.buildAllPlatforms();
+await sd.buildAllPlatforms();
 
 console.log('\n==============================================');
 console.log('\nBuild completed!');
