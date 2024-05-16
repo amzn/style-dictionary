@@ -111,6 +111,10 @@ export default {
         },
       ],
     },
+    {
+      label: 'Examples',
+      autogenerate: { directory: 'examples' },
+    },
   ],
   head: [
     {
