@@ -65,4 +65,5 @@ export interface Dictionary {
   tokens: TransformedTokens;
   allTokens: TransformedToken[];
   unfilteredTokens?: TransformedTokens;
+  unfilteredAllTokens?: TransformedToken[];
 }

@@ -16,13 +16,13 @@ Common use cases for filtering are:
 A filter is an object with two props:
 
 - `name`: the name of the filter
-- `filter`: a callback function that receives the `token` as argument and returns a boolean, `true` to include the token, `false` to exclude/filter it out. Can also be an async function.
+- `filter`: a callback function that receives the `token` as argument and returns a boolean, `true` to include the token, `false` to exclude/filter it out. Can also be an async function. Also has a second argument with the Style Dictionary options, which also contains the `tokens` object, `usesDTCG` option, etc.
 
 ```javascript title="my-filter.js"
 const myFilter = {
   name: 'my-filter',
   // async is optional
-  filter: async (token) => {
+  filter: async (token, options) => {
     return !token.filePath.endsWith('core.json');
   },
 };
@@ -117,7 +117,7 @@ export default {
 export default {
   hooks: {
     filters: {
-      'no-colors': (token) => {
+      'no-colors': (token, options) => {
         return token.type !== 'color';
       },
     },
