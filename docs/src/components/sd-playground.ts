@@ -9,7 +9,7 @@ import '@shoelace-style/shoelace/dist/components/radio-group/radio-group.js';
 import '@shoelace-style/shoelace/dist/components/select/select.js';
 import '@shoelace-style/shoelace/dist/components/option/option.js';
 import { bundle } from '../utils/rollup-bundle.ts';
-import { changeLang, init } from '../monaco/monaco.ts';
+import { changeLang, init, monaco } from '../monaco/monaco.ts';
 import { analyzeDependencies } from '../utils/analyzeDependencies.ts';
 import type SlRadioGroup from '@shoelace-style/shoelace/dist/components/radio-group/radio-group.js';
 import { downloadZIP } from '../utils/downloadZIP.ts';
@@ -43,10 +43,16 @@ const defaults = {
 
 const getLang = (lang: string) => {
   const langMap = {
-    js: 'javascript',
+    h: 'objective-c',
   } as Record<string, string>;
 
-  return langMap[lang] ?? lang;
+  let foundMonacoLanguage;
+  const langs = monaco?.languages?.getLanguages();
+  if (langs) {
+    foundMonacoLanguage = langs.find((l) => l.extensions?.includes(`.${lang}`))?.id;
+  }
+
+  return langMap[lang] ?? foundMonacoLanguage ?? lang;
 };
 
 declare type Files = 'tokens' | 'config' | 'script' | 'output';
@@ -104,6 +110,19 @@ class SdPlayground extends LitElement {
           border-bottom-left-radius: var(--sl-input-border-radius-medium);
           border-bottom-right-radius: var(--sl-input-border-radius-medium);
         }
+      }
+
+      sl-option::part(label) {
+        flex-grow: 0;
+      }
+
+      sl-option::part(base) {
+        min-width: 100%;
+      }
+
+      sl-option::part(base),
+      sl-select::part(listbox) {
+        width: max-content;
       }
     `;
   }
@@ -362,15 +381,17 @@ class SdPlayground extends LitElement {
   }
 
   // TODO: make async and parallelize
-  traverseDir(dir = '/', memo: string[] = []) {
+  traverseDir(dir = '/', files: string[] = []) {
+    let _files = files;
     (this.volume.readdirSync(dir) as string[]).forEach((file: string) => {
       const fullPath = path.join(dir, file);
       if (this.volume.lstatSync(fullPath).isDirectory()) {
-        this.traverseDir(fullPath);
+        _files = [..._files, ...this.traverseDir(fullPath, _files)];
+      } else {
+        _files = [..._files, fullPath];
       }
-      memo.push(fullPath);
     });
-    return memo;
+    return [...new Set(_files)];
   }
 
   async saveFile() {

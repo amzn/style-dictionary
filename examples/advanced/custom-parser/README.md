@@ -18,12 +18,13 @@ At this point, you can run `npm run build`. This command will generate output fi
 You can define custom parsers in 2 ways:
 
 1. With the `.registerParser` method
-1. Adding a `parsers` array to the Style Dictionary configuration
+2. Adding a `hooks.parsers` array to the Style Dictionary configuration
 
 A parser is an object with a `pattern` attribute that is a regular expression, and a `parse` attribute that is a function. The `parse` function accepts `contents` and `filePath` as named arguments and should return a plain Javascript object.
 
 ```javascript
 {
+  name: 'json-parser',
   pattern: /\.json$/,
   parse: ({contents, filePath}) => {
     return JSON.parse(contents);
@@ -34,16 +35,18 @@ A parser is an object with a `pattern` attribute that is a regular expression, a
 Because parsers work on the source files for Style Dictionary, they need to be defined at or before the configuration is passed to Style Dictionary through the `.extend` method.
 
 ```javascript
-const StyleDictionary = require('style-dictionary');
+import StyleDictionary from 'style-dictionary';
 
-const styleDictionary = StyleDictionary.extend({
+const sd = new StyleDictionary({
+  parsers: ['json-parser'],
   source: [`tokens/**/*.json`],
   //..
 });
 
 // This won't work because Style Dictionary has already parsed the source files
 // in the .extend method
-styleDictionary.registerParser({
+sd.registerParser({
+  name: 'json-parser',
   pattern: /\.json$/,
   parse: ({ contents, filePath }) => {
     return JSON.parse(contents);

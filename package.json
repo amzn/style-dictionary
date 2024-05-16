@@ -49,10 +49,10 @@
     "docs:preview": "astro preview --root ./docs",
     "format": "run-p format:*",
     "format:eslint": "eslint --fix \"**/*.js\"",
-    "format:prettier": "prettier \"**/*.{js,md}\" \"package.json\" --write",
+    "format:prettier": "prettier \"**/*.{js,md,mdx}\" \"package.json\" --write",
     "lint": "run-p lint:*",
     "lint:eslint": "eslint \"**/*.js\"",
-    "lint:prettier": "prettier \"**/*.{js,md}\" \"package.json\" --list-different || (echo '↑↑ these files are not prettier formatted ↑↑' && exit 1)",
+    "lint:prettier": "prettier \"**/*.{js,md,mdx}\" \"package.json\" --list-different || (echo '↑↑ these files are not prettier formatted ↑↑' && exit 1)",
     "lint:types": "tsc --noEmit",
     "test": "web-test-runner --coverage",
     "test:watch": "web-test-runner --watch",
@@ -69,7 +69,7 @@
       "eslint",
       "prettier --list-different"
     ],
-    "*.md": "prettier --list-different"
+    "*.{md,mdx}": "prettier --list-different"
   },
   "commitlint": {
     "extends": [

@@ -54,18 +54,26 @@ export async function bundle(inputString: string, _fs = fs) {
           let matchRes;
           while ((matchRes = reg.exec(rewrittenCode)) !== null) {
             if (matchRes.groups) {
-              const { id, entrypoint } = matchRes.groups;
+              let { id, entrypoint } = matchRes.groups;
               let namedImport = id;
+              let originalNamedImport = id;
               let replacement = '';
 
               if (id.startsWith('{') && id.endsWith('}') && entrypoint) {
-                namedImport = namedImport.replace('{', '').replace('}', '').trim();
+                id = id.replace('{', '').replace('}', '').trim();
                 const entry = entrypoint.replace(/^\//, '');
+                const asMatch = /(.+?) as (.+)/.exec(id);
+
+                if (asMatch && asMatch[2]) {
+                  [, originalNamedImport, namedImport] = asMatch;
+                } else {
+                  originalNamedImport = namedImport = id;
+                }
 
                 if (entry === 'fs') {
-                  replacement = `globalThis['${sdFsName}']['${namedImport}']`;
+                  replacement = `globalThis['${sdFsName}']['${originalNamedImport}']`;
                 } else if (entry === 'utils') {
-                  replacement = `globalThis['${sdUtilsName}']['${namedImport}']`;
+                  replacement = `globalThis['${sdUtilsName}']['${originalNamedImport}']`;
                 }
               } else {
                 // Remove the import statement, replace the id wherever used with the global

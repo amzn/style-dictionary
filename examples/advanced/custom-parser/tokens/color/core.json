@@ -1,4 +1,4 @@
 {
-  "blue": { "value": "#0000ff" },
-  "red": { "value": "#ff0000" }
+  "blue": { "value": "#0000ff", "type": "color" },
+  "red": { "value": "#ff0000", "type": "color" }
 }

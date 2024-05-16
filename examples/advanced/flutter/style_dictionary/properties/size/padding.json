@@ -1,9 +1,0 @@
-{
-  "size": {
-    "padding": {
-      "small": { "value": 0.5 },
-      "medium": { "value": 1 },
-      "large": { "value": 2 }
-    }
-  }
-}

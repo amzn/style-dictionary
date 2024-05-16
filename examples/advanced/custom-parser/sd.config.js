@@ -1,9 +1,10 @@
-const StyleDictionary = require('style-dictionary');
+import StyleDictionary from 'style-dictionary';
 
 // You can use the .registerParser() method like this
 StyleDictionary.registerParser({
+  name: 'json-parser',
   pattern: /\.json$/,
-  parse: ({ contents, filePath }) => {
+  parser: ({ contents, filePath }) => {
     // Probably a good idea to wrap this in a try/catch block
     try {
       const object = JSON.parse(contents);
@@ -14,7 +15,7 @@ StyleDictionary.registerParser({
       // tokens/color/core.json will become 'color-core'. We will append this
       // to all token names.
       const pathParts = filePath
-        .replace(__dirname + '/tokens/', '')
+        .replace(import.meta.dirname + '/tokens/', '')
         .replace('.json', '')
         .split('/')
         .join('-');
@@ -35,31 +36,17 @@ StyleDictionary.registerParser({
   },
 });
 
-// Or you can add parsers directly on the configuration object here like this:
-// (await StyleDictionary.extend({
-//   parsers: [{
-//     pattern: /\.json$/,
-//     parse: ({contents, filePath}) => {}
-//   }],
-//   source: [`tokens/**/*.json`],
-//   platforms: {
-//     css: {
-//       transformGroup: 'css',
-//       buildPath: 'build/',
-//       files: [{
-//         destination: 'variables.css',
-//         format: 'css/variables'
-//       }]
-//     }
-//   }
-// })).buildAllPlatforms();
-
-module.exports = {
+export default {
   // Or you can add parsers directly on the configuration object here like this:
-  // parsers: [{
-  //   pattern: /\.json$/,
-  //   parse: ({contents, filePath}) => {}
-  // }],
+  // hooks: {
+  //   parsers: {
+  //     'json-parser': {
+  //       pattern: /\.json$/,
+  //       parse: ({contents, filePath}) => {}
+  //     }
+  //   }
+  // },
+  parsers: ['json-parser'],
   source: [`tokens/**/*.json`],
   platforms: {
     css: {

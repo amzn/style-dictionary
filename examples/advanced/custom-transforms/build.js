@@ -14,7 +14,7 @@ StyleDictionary.registerTransform({
   type: 'value',
   filter: function (token) {
     // this is an example of a possible filter (based on the "cti" values) to show how a "filter" works
-    return token.attributes.category === 'font' || token.attributes.category === 'margin';
+    return token.type === 'fontSize' || token.type === 'dimension';
   },
   transform: function (token) {
     return `${token.value}px`;
@@ -26,7 +26,7 @@ StyleDictionary.registerTransform({
   type: 'value',
   filter: function (token) {
     // here we are using a custom attribute, declared in the token, to match the values where apply the transform
-    return token.group === 'ratio';
+    return token.type === 'ratio';
   },
   transform: function (token) {
     return `${Math.floor(100 * token.value)}%`;
@@ -37,7 +37,7 @@ StyleDictionary.registerTransform({
   name: 'hexRGB/hexARGB',
   type: 'value',
   filter: function (token) {
-    return token.group === 'color';
+    return token.type === 'color';
   },
   transform: function (token) {
     // for sake of simplicity, in this example we assume colors are always in the format #xxxxxx
@@ -46,15 +46,14 @@ StyleDictionary.registerTransform({
 });
 
 StyleDictionary.registerTransform({
-  name: 'unitless/dp-sp',
+  name: 'unitless/sp',
   type: 'value',
   filter: function (token) {
-    return token.group === 'typography' || token.group === 'spacing';
+    return token.type === 'fontSize';
   },
   transform: function (token) {
     // in Android font sizes are expressed in "sp" units
-    let unit = token.group === 'typography' ? 'sp' : 'dp';
-    return `${token.value}${unit}`;
+    return `${token.value}sp`;
   },
 });
 
@@ -109,10 +108,10 @@ StyleDictionary.registerFormat({
 // APPLY THE CONFIGURATION
 // IMPORTANT: the registration of custom transforms
 // needs to be done _before_ applying the configuration
-const StyleDictionaryExtended = await StyleDictionary.extend(__dirname + '/config.json');
+const sd = new StyleDictionary(__dirname + '/config.json');
 
 // FINALLY, BUILD ALL THE PLATFORMS
-StyleDictionaryExtended.buildAllPlatforms();
+await sd.buildAllPlatforms();
 
 console.log('\n==============================================');
 console.log('\nBuild completed!');

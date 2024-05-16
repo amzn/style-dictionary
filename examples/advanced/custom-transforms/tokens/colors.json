@@ -2,26 +2,26 @@
   "color": {
     "base": {
       "gray": {
-        "light" : {
+        "light": {
           "value": "#CCCCCC",
-          "group": "color"
+          "type": "color"
         },
         "medium": {
           "value": "#999999",
-          "group": "color"
+          "type": "color"
         },
-        "dark"  : {
+        "dark": {
           "value": "#111111",
-          "group": "color"
+          "type": "color"
         }
       },
       "red": {
         "value": "#FF0000",
-        "group": "color"
+        "type": "color"
       },
       "green": {
         "value": "#00FF00",
-        "group": "color"
+        "type": "color"
       }
     }
   }

@@ -1,8 +1,8 @@
 {
   "font": {
     "family": {
-      "headers" : { "value": "Montserrat" },
-      "base"    : { "value": "{font.platform.system.value}" }
+      "headers": { "value": "Montserrat", "type": "fontFamily" },
+      "base": { "value": "{font.platform.system.value}", "type": "fontFamily" }
     }
   }
 }

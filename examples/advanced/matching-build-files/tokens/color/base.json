@@ -1,10 +1,12 @@
 {
-    "color": {
-        "red": {
-             "value": "#FF0000"
-         },
-         "blue": {
-            "value": "#0000FF"
-        }
+  "color": {
+    "red": {
+      "value": "#FF0000",
+      "type": "color"
+    },
+    "blue": {
+      "value": "#0000FF",
+      "type": "color"
     }
- }
+  }
+}

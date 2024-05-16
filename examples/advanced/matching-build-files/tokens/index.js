@@ -1,4 +1,4 @@
-const { readdirSync, statSync } = require('fs');
-const { join } = require('path');
+import { readdirSync, statSync } from 'node:fs';
+import { join } from 'node:path';
 const dirs = (p) => readdirSync(p).filter((f) => statSync(join(p, f)).isDirectory());
-module.exports = dirs(__dirname);
+export default dirs(import.meta.url);

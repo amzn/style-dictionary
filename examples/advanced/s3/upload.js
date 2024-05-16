@@ -1,5 +1,5 @@
-const AWS = require('aws-sdk'),
-  fs = require('fs-extra');
+import AWS from 'aws-sdk';
+import fs from 'fs-extra';
 
 // Create an S3 client
 const s3 = new AWS.S3();

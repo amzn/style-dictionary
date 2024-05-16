@@ -1,7 +1,7 @@
 {
   "font": {
     "platform": {
-      "system": { "value": "Roboto" }
+      "system": { "value": "Roboto", "type": "fontFamily" }
     }
   }
 }

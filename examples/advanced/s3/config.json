@@ -37,9 +37,7 @@
             "type": "StyleDictionaryColorName"
           },
           "filter": {
-            "attributes": {
-              "category": "color"
-            }
+            "type": "color"
           }
         },
         {
@@ -50,9 +48,7 @@
             "type": "StyleDictionaryColorName"
           },
           "filter": {
-            "attributes": {
-              "category": "color"
-            }
+            "type": "color"
           }
         },
         {
@@ -63,9 +59,7 @@
             "type": "float"
           },
           "filter": {
-            "attributes": {
-              "category": "size"
-            }
+            "type": "color"
           }
         },
         {
@@ -76,9 +70,7 @@
             "type": "float"
           },
           "filter": {
-            "attributes": {
-              "category": "size"
-            }
+            "type": "color"
           }
         }
       ]

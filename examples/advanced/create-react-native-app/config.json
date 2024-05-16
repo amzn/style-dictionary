@@ -1,5 +1,5 @@
 {
-  "source": ["./style-dictionary/properties/**/*.json"],
+  "source": ["./style-dictionary/tokens/**/*.json"],
   "platforms": {
     "rn": {
       "transformGroup": "react-native",
