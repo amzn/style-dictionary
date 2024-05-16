@@ -1,5 +1,5 @@
 // Look! No namespaces!
-module.exports = {
+export default {
   width: {
     base: { value: 0.125 },
   },

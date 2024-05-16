@@ -16,19 +16,18 @@ At this point, if you want to build the tokens you can run `npm run build`. This
 
 The "build" command will run the custom script `build.js`. This script loops on all the possible combinations of "platform" (web, iOS, Android) and "brand" ("brand-1", "brand-2" and "brand-3" in the example):
 
-```
+```js
 ['brand-1', 'brand-2', 'brand-3'].map(function (brand) {
   ['web', 'ios', 'android'].map(function (platform) {
-    const StyleDictionary = StyleDictionaryPackage.extend(getStyleDictionaryConfig(brand, platform));
-    StyleDictionary.buildPlatform(platform);
-  })
-})
-
+    const sd = new StyleDictionary(getStyleDictionaryConfig(brand, platform));
+    sd.buildPlatform(platform);
+  });
+});
 ```
 
 For each combination it receives a parametric configuration object from the `getStyleDictionaryConfig` function, where the input token files to read and the output paths where to write the generated files depend on the "platform" and "brand" values:
 
-```
+```js
 function getStyleDictionaryConfig(brand, platform) {
   return {
     "source": [
@@ -65,27 +64,28 @@ Open the `build.js` script and look how the `StyleDictionary.buildPlatform` func
 
 Now look at the tokens folders, and see how they are organized. Open `tokens/brands/brand-1/color.json`. You will see this declaration:
 
-```
+```json
 {
   "color": {
     "brand": {
-      "primary"   : { "value": "#3B5998" },
-      "secondary" : { "value": "#4267B2" }
+      "primary": { "value": "#3B5998", "type": "color" },
+      "secondary": { "value": "#4267B2", "type": "color" }
     }
   }
 }
 ```
 
-The actual values depend on the "brand" (compare this file with `brand-2/color.json` and `brand-3/color.json`. These values are used as "aliases" in the `tokens/global/color/base.json` file:
+The actual values depend on the "brand" (compare this file with `brand-2/color.json` and `brand-3/color.json`).
+These values are used as "aliases" in the `tokens/global/color/base.json` file:
 
-```
+```json
 {
   "color": {
     "base": {
       ...
     },
-    "primary"     : { "value": "{color.brand.primary.value}" },
-    "secondary"   : { "value": "{color.brand.secondary.value}" },
+    "primary"     : { "value": "{color.brand.primary.value}", "type": "color" },
+    "secondary"   : { "value": "{color.brand.secondary.value}", "type": "color" },
     ...
   }
 }
@@ -95,11 +95,11 @@ Depending on the file included at build time, the actual value of `color.primary
 
 In the same way, now open `tokens/platforms/android/font.json` and you will see:
 
-```
+```json
 {
   "font": {
     "platform": {
-      "system": { "value": "Roboto" }
+      "system": { "value": "Roboto", "type": "fontFamily" }
     }
   }
 }
@@ -107,12 +107,12 @@ In the same way, now open `tokens/platforms/android/font.json` and you will see:
 
 the value `font.platform.system` is consumed by the `tokens/globals/font/index.json` file:
 
-```
+```json
 {
   "font": {
     "family": {
-      "headers" : { "value": "Montserrat" },
-      "base"    : { "value": "{font.platform.system.value}" }
+      "headers": { "value": "Montserrat", "type": "fontFamily" },
+      "base": { "value": "{font.platform.system.value}", "type": "fontFamily" }
     }
   }
 }
@@ -120,13 +120,13 @@ the value `font.platform.system` is consumed by the `tokens/globals/font/index.j
 
 In this way the design tokens for the different platforms will be:
 
-```
+```scss
 // WEB
 $font-family-headers: Montserrat;
 $font-family-base: Tahoma, Arial, 'Helvetica Neue', sans;
 ```
 
-```
+```swift
 // IOS
 #define FontFamilyHeaders @"Montserrat"
 #define FontFamilyBase @"San Francisco"

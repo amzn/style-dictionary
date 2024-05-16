@@ -1,0 +1,9 @@
+{
+  "color": {
+    "font": {
+      "primary": { "value": "{color.core.black.value}", "type": "color" },
+      "link": { "value": "{color.core.blue.value}", "type": "color" },
+      "inverse": { "value": "{color.core.white.value}", "type": "color" }
+    }
+  }
+}

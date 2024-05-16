@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "sd.config.js",
+  "type": "module",
   "scripts": {
     "build": "style-dictionary build --config ./sd.config.js"
   },
@@ -11,6 +12,6 @@
   "license": "ISC",
   "devDependencies": {
     "chroma-js": "^2.1.0",
-    "style-dictionary": "4.0.0-prerelease.23"
+    "style-dictionary": "4.0.0-prerelease.28"
   }
 }

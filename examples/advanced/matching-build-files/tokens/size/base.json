@@ -1,13 +1,16 @@
 {
-    "size": {
-        "small": {
-            "value": "2px"
-        },
-        "medium": {
-            "value": "8px"
-        },
-        "large": {
-            "value": "16px"
-        }
+  "size": {
+    "small": {
+      "value": "2px",
+      "type": "dimension"
+    },
+    "medium": {
+      "value": "8px",
+      "type": "dimension"
+    },
+    "large": {
+      "value": "16px",
+      "type": "dimension"
     }
+  }
 }

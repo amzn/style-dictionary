@@ -1,6 +1,6 @@
 ## Node Modules as Config and Token files
 
-This example shows some advanced features using Style Dictionary with node modules. Make sure you are familiar with Style Dictionary concepts first by reading the [docs](https://amzn.github.io/style-dictionary) or taking a look at the [basic example](../../basic) first.
+This example shows some advanced features using Style Dictionary with node modules. Make sure you are familiar with Style Dictionary concepts first by reading the [docs](https://amzn.github.io/style-dictionary) first.
 
 #### Running the example
 
@@ -12,7 +12,7 @@ At this point, if you want to build the tokens you can run `npm run build`. This
 
 Style Dictionary understands node modules that export a simple object for both a config file as well as the token source files. Using node module exports allows you to do some pretty cool things like generating tokens programmatically.
 
-The `.extend()` method on the Style Dictionary module can take an object or a path to a JSON or node module and it copies the object attributes onto a new copy of the Style Dictionary object. The Style Dictionary object stores the transforms, transformGroups, and formats as attributes on the SD object. You can override these defaults by directly adding these attributes to your config object. This allows you to add custom transforms and formats without calling `.registerTransform()`!
+The Style Dictionary constructor can take an object or a path to a JSON or node module and it copies the object attributes onto a new copy of the Style Dictionary object. The Style Dictionary object stores the transforms, transformGroups, and formats as attributes on the SD object. You can override these defaults by directly adding these attributes to your config object. This allows you to add custom transforms and formats without calling `.registerTransform()`!
 
 #### What to look at
 

@@ -1,5 +1,6 @@
 {
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
@@ -28,7 +29,7 @@
     "eslint-config-react-app": "^7.0.1",
     "jest": "~25.2.6",
     "react-test-renderer": "~16.13.1",
-    "style-dictionary": "4.0.0-prerelease.23"
+    "style-dictionary": "4.0.0-prerelease.28"
   },
   "jest": {
     "preset": "react-native"

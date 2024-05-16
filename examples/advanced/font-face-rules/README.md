@@ -47,7 +47,8 @@ Note, running this example will generate a "While building fonts.css, token coll
           "<weight>": {
             "<style>": {
               "value": "<path>",
-              "formats": ["<list of formats, e.g. woff2, woff>"]
+              "formats": ["<list of formats, e.g. woff2, woff>"],
+              "type": "asset"
             }
           }
         }

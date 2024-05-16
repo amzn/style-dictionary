@@ -1,0 +1,14 @@
+{
+  "size": {
+    "font": {
+      "sm": {
+        "value": "16px",
+        "type": "fontSize"
+      },
+      "md": {
+        "value": "2rem",
+        "type": "fontSize"
+      }
+    }
+  }
+}

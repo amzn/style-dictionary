@@ -1,0 +1,10 @@
+{
+  "color": {
+    "core": {
+      "white": { "value": "#ffffff", "type": "color" },
+      "black": { "value": "#111111", "type": "color" },
+      "gray": { "value": "#dddddd", "type": "color" },
+      "blue": { "value": "#0366d6", "type": "color" }
+    }
+  }
+}

@@ -1,14 +1,14 @@
 {
   "size": {
     "font": {
-      "tiny"  : { "value": "0.75" },
-      "small" : { "value": "0.875" },
-      "medium": { "value": "1" },
-      "large" : { "value": "1.25" },
-      "xl"    : { "value": "1.5" },
-      "xxl"   : { "value": "2" },
-      "xxxl"  : { "value": "3" },
-      "base"  : { "value": "{size.font.medium.value}" }
+      "tiny": { "value": "0.75", "type": "fontSize" },
+      "small": { "value": "0.875", "type": "fontSize" },
+      "medium": { "value": "1", "type": "fontSize" },
+      "large": { "value": "1.25", "type": "fontSize" },
+      "xl": { "value": "1.5", "type": "fontSize" },
+      "xxl": { "value": "2", "type": "fontSize" },
+      "xxxl": { "value": "3", "type": "fontSize" },
+      "base": { "value": "{size.font.medium.value}", "type": "fontSize" }
     }
   }
 }

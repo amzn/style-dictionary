@@ -9,18 +9,14 @@
           "destination": "colors.scss",
           "format": "scss/variables",
           "filter": {
-            "attributes": {
-              "category": "color"
-            }
+            "type": "color"
           }
         },
         {
           "destination": "sizes.scss",
           "format": "scss/variables",
           "filter": {
-            "attributes": {
-              "category": "size"
-            }
+            "type": "fontSize"
           }
         }
       ]

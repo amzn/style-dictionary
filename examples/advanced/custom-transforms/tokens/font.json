@@ -1,20 +1,20 @@
 {
   "font": {
-    "small" : {
+    "small": {
       "value": "0.75",
-      "group": "typography"
+      "type": "fontSize"
     },
     "medium": {
       "value": "1.5",
-      "group": "typography"
+      "type": "fontSize"
     },
-    "large" : {
+    "large": {
       "value": "2",
-      "group": "typography"
+      "type": "fontSize"
     },
-    "base"  : {
+    "base": {
       "value": "1",
-      "group": "typography"
+      "type": "fontSize"
     }
   }
 }

@@ -1,4 +1,4 @@
-const Color = require('tinycolor2');
+import Color from 'tinycolor2';
 
 // If you wanted to, you could generate the color ramp with base colors.
 // You get less control over specific color values,
@@ -16,8 +16,9 @@ const baseColors = {
 
 // Use a reduce function to take the array of keys in baseColor
 // and map them to an object with the same keys.
-module.exports = Object.keys(baseColors).reduce((ret, color) => {
-  return Object.assign({}, ret, {
+export default Object.keys(baseColors).reduce((ret, color) => {
+  return {
+    ...ret,
     [color]: {
       20: { value: Color(baseColors[color]).lighten(30).toString() },
       40: { value: Color(baseColors[color]).lighten(25).toString() },
@@ -27,5 +28,5 @@ module.exports = Object.keys(baseColors).reduce((ret, color) => {
       120: { value: Color(baseColors[color]).darken(10).toString() },
       140: { value: Color(baseColors[color]).darken(20).toString() },
     },
-  });
+  };
 }, {});

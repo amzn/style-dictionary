@@ -1,0 +1,14 @@
+{
+  "color": {
+    "brand": {
+      "01": {
+        "value": "#eef",
+        "type": "color"
+      },
+      "02": {
+        "value": "#da3",
+        "type": "color"
+      }
+    }
+  }
+}
