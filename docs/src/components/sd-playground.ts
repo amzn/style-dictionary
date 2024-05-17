@@ -144,6 +144,11 @@ class SdPlayground extends LitElement {
       outputFiles: {
         state: true,
       },
+      defaultSelected: {
+        type: String,
+        attribute: 'default-selected',
+        reflect: true,
+      },
     };
   }
 
@@ -166,6 +171,7 @@ class SdPlayground extends LitElement {
   declare config: string;
   declare script: string;
   declare output: string;
+  declare defaultSelected: Files;
   declare outputFiles: string[];
   declare _currentFile: Files;
   declare editor: any;
@@ -179,6 +185,7 @@ class SdPlayground extends LitElement {
     this.config = '{}';
     this.script = '{}';
     this.output = '{}';
+    this.defaultSelected = 'config';
     this.outputFiles = [];
     this.editor = undefined;
     this.hasInitialized = new Promise((resolve) => {
@@ -261,7 +268,7 @@ class SdPlayground extends LitElement {
     await this.initMonaco();
     await this.initData();
     this.hasInitializedResolve();
-    this.currentFile = 'config';
+    this.currentFile = this.defaultSelected;
   }
 
   async initMonaco() {
