@@ -11,8 +11,9 @@
  * and limitations under the License.
  */
 import type { TransformedToken } from './DesignToken.d.ts';
+import type { Config } from './Config.d.ts';
 
 export interface Filter {
   name: string;
-  filter: (token: TransformedToken) => boolean | Promise<boolean>;
+  filter: (token: TransformedToken, options: Config) => boolean | Promise<boolean>;
 }

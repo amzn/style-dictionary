@@ -15,7 +15,6 @@
   "rules": {
     "no-unused-vars": 1,
     "no-console": ["error", { "allow": ["warn", "error"] }],
-    "mocha/no-skipped-tests": "warn",
     "mocha/no-exclusive-tests": "error",
     "no-var": "error"
   },
