@@ -54,7 +54,6 @@ const paragraphVisitor = (
         script="${scriptData}"
       ><div style="height: 100%" slot="monaco-editor"></div></sd-playground>`,
     } as Html;
-
     parent.children.splice(index, skipAmount, newNode);
   }
 };
