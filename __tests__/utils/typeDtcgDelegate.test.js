@@ -92,5 +92,83 @@ describe('utils', () => {
         },
       });
     });
+
+    it('should work regardless at which position the $type property sits', () => {
+      const tokens = {
+        dimension: {
+          scale: {
+            $value: '2',
+            $type: 'math',
+          },
+          xs: {
+            $value: '4',
+          },
+          nested: {
+            deep: {
+              deeper: {
+                $value: '12',
+              },
+            },
+            deep2: {
+              $type: 'math',
+              deeper: {
+                $type: 'other',
+                evenDeeper: {
+                  $value: '12',
+                  $type: 'math',
+                },
+                evenDeeper2: {
+                  $value: '12',
+                },
+              },
+            },
+          },
+          sm: {
+            $value: '8',
+          },
+          $type: 'dimension',
+        },
+      };
+
+      expect(typeDtcgDelegate(tokens)).to.eql({
+        dimension: {
+          $type: 'dimension',
+          scale: {
+            $value: '2',
+            $type: 'math',
+          },
+          xs: {
+            $value: '4',
+            $type: 'dimension',
+          },
+          nested: {
+            deep: {
+              deeper: {
+                $value: '12',
+                $type: 'dimension',
+              },
+            },
+            deep2: {
+              $type: 'math',
+              deeper: {
+                $type: 'other',
+                evenDeeper: {
+                  $value: '12',
+                  $type: 'math',
+                },
+                evenDeeper2: {
+                  $value: '12',
+                  $type: 'other',
+                },
+              },
+            },
+          },
+          sm: {
+            $value: '8',
+            $type: 'dimension',
+          },
+        },
+      });
+    });
   });
 });
