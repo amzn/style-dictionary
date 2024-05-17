@@ -19,28 +19,35 @@ const paragraphVisitor = (
     let configData = serialize({});
     let scriptData = serialize({});
     let skipAmount = 1;
+    let defaultSelected;
 
     for (const child of parent.children.slice(index + 1, index + 4)) {
       if (child.type !== 'code') break;
-      switch (child.meta) {
-        case 'tokens':
-          tokensData = serialize({
-            value: child.value,
-            lang: child.lang ?? 'text',
-          });
-          break;
-        case 'script':
-          scriptData = serialize({
-            value: child.value,
-            lang: child.lang ?? 'text',
-          });
-          break;
-        case 'config':
-          configData = serialize({
-            value: child.value,
-            lang: child.lang ?? 'text',
-          });
-          break;
+      if (child.meta) {
+        const metas = child.meta?.split(' ');
+        switch (metas[0]) {
+          case 'tokens':
+            tokensData = serialize({
+              value: child.value,
+              lang: child.lang ?? 'text',
+            });
+            break;
+          case 'script':
+            scriptData = serialize({
+              value: child.value,
+              lang: child.lang ?? 'text',
+            });
+            break;
+          case 'config':
+            configData = serialize({
+              value: child.value,
+              lang: child.lang ?? 'text',
+            });
+            break;
+        }
+        if (metas[1] === 'selected') {
+          defaultSelected = metas[0];
+        }
       }
 
       skipAmount++;
@@ -51,7 +58,12 @@ const paragraphVisitor = (
       value: `<sd-playground 
         tokens="${tokensData}" 
         config="${configData}" 
-        script="${scriptData}"
+        script="${scriptData}"${
+          defaultSelected
+            ? `
+        default-selected="${defaultSelected}"`
+            : ''
+        }
       ><div style="height: 100%" slot="monaco-editor"></div></sd-playground>`,
     } as Html;
     parent.children.splice(index, skipAmount, newNode);
