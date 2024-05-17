@@ -1,5 +1,18 @@
 # Changelog
 
+## 4.0.0-prerelease.29
+
+### Minor Changes
+
+- cb94554: 'size/rem' transform to not transform tokens that already have a unit, such as `"4px"`, this should not be transformed to `"4rem"`.
+
+### Patch Changes
+
+- cb94554: Fix typeDtcgDelegate util $type property position to be allowed anywhere in the object, not just at the top.
+- 0972b26: Pass SD options to fileheaders and filters, to make it easier to use and adjust according to config or options like usesDTCG.
+- 4ec34fd: Pass options to all of the filter functions in our built-in transforms, to check for `usesDTCG` and `$type` property.
+- 0972b26: Add unfilteredAllTokens property in dictionary object for formats, which is an unfiltered version of allTokens property, or a flattened version of the unfilteredTokens property.
+
 ## 4.0.0-prerelease.28
 
 ### Minor Changes
