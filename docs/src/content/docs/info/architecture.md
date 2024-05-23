@@ -1,5 +1,7 @@
 ---
 title: Architecture
+sidebar:
+  order: 2
 ---
 
 This is how Style Dictionary works under the hood.

@@ -55,16 +55,19 @@ themeObserver.observe(document.documentElement, {
   attributeFilter: [themeAttr],
 });
 
-// Conditionally load the sd-playground Web Component definition if we find an instance of it.
-const firstPlaygroundEl = document.querySelector('sd-playground');
+const CEs = ['sd-playground', 'sd-dtcg-convert'];
 
-if (firstPlaygroundEl) {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        import('./components/sd-playground.ts');
-      }
+CEs.forEach((ce) => {
+  // Conditionally load the sd-playground Web Component definition if we find an instance of it.
+  const firstEl = document.querySelector(ce);
+  if (firstEl) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          import(`./components/${ce}.ts`);
+        }
+      });
     });
-  });
-  observer.observe(firstPlaygroundEl);
-}
+    observer.observe(firstEl);
+  }
+});
