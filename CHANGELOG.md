@@ -1,5 +1,17 @@
 # Changelog
 
+## 4.0.0-prerelease.30
+
+### Minor Changes
+
+- 7418c97: Add a couple of utilities for converting a regular Style Dictionary tokens object/file(s) to DTCG formatted tokens:
+
+  - `convertToDTCG`
+  - `convertJSONToDTCG`
+  - `convertZIPToDTCG`
+
+  [Documentation of these utilities](https://v4.styledictionary.com/reference/utils/dtcg/)
+
 ## 4.0.0-prerelease.29
 
 ### Minor Changes
