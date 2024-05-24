@@ -420,7 +420,7 @@ Most of the [Built-in transforms](/reference/hooks/transforms/predefined) `match
 This in turn would rely on applying the [`attribute/cti` transform](/reference/hooks/transforms/predefined#attributecti) so that this attribute was set on a token.
 
 In version 4, we have removed almost all hard-coupling/reliances on CTI structure and instead we will look for a `token.type` property to determine what type of token a design token is.
-This aligns more with the [Design Token Community Group draft specification](https://design-tokens.github.io/community-group/format/) for standardizing design tokens JSON format.
+This aligns more with the [Design Tokens Community Group specification](https://tr.designtokens.org/format/) for standardizing design tokens JSON format.
 
 ```json title="tokens.json" ins={3-4,7} ""type": "color""
 {
