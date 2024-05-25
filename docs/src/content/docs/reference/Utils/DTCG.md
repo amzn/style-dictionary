@@ -1,10 +1,10 @@
 ---
-title: Design Token Community Group
+title: Design Tokens Community Group
 ---
 
-These utilities have to do with the [Design Token Community Group Draft spec](https://design-tokens.github.io/community-group/format/).
+These utilities have to do with the [Design Tokens W3C Community Group specification](https://tr.designtokens.org/format/).
 
-For converting a ZIP or JSON tokens file to DTCG format, use the button below:
+For converting a ZIP or JSON tokens file to the DTCG format, use the button below:
 
 <sd-dtcg-convert></sd-dtcg-convert>
 
@@ -61,11 +61,11 @@ const outputBlob = convertZIPToDTCG(ZIPBlobOrFilepath, { applyTypesToGroup: fals
 
 ## typeDtcgDelegate
 
-This function processes your ["Design Token Community Group Draft spec"-compliant](https://design-tokens.github.io/community-group/format/) dictionary of tokens, and ensures that `$type` inheritance is applied.
+This function processes your ["Design Tokens Community Group Draft spec"-compliant](https://tr.designtokens.org/format/) dictionary of tokens, and ensures that `$type` inheritance is applied.
 
 We built this utility because it's cheaper to apply the inheritance once, rather than on every access of a token's "$type" property, checking the ancestor tree to find it.
 
-This utility is ran by default in Style-Dictionary after the parser hook and before the preprocessor hook.
+This utility runs by default in Style-Dictionary after the parser hook and before the preprocessor hook.
 
 ```js
 import { typeDtcgDelegate } from 'style-dictionary/utils';
