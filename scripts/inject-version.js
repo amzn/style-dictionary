@@ -16,8 +16,10 @@ packageJSONs.forEach(function (filePath) {
 });
 
 // version in lib file
-const sdPath = 'lib/StyleDictionary.js';
-const indexContent = fs.readFileSync(sdPath, 'utf-8');
-const newIndexContent = indexContent.replace('<? version placeholder ?>', version);
-fs.writeFileSync(sdPath, newIndexContent, 'utf-8');
-execSync(`git add ${sdPath}`);
+const paths = ['lib/StyleDictionary.js', 'docs/src/components/sd-playground.ts'];
+paths.forEach((p) => {
+  const indexContent = fs.readFileSync(p, 'utf-8');
+  const newIndexContent = indexContent.replace('<? version placeholder ?>', version);
+  fs.writeFileSync(p, newIndexContent, 'utf-8');
+  execSync(`git add ${p}`);
+});
