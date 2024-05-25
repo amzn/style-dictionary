@@ -416,7 +416,7 @@ class SdPlayground extends LitElement {
     const dependencies = await analyzeDependencies(script.value);
     const sdDep = dependencies.find((dep) => dep.package === 'style-dictionary');
     if (sdDep) {
-      sdDep.package = 'style-dictionary@4.0.0-prerelease.28';
+      sdDep.package = 'style-dictionary@<? version placeholder ?>';
     }
     const files: Record<string, string> = {};
     files[`tokens.${tokens.lang}`] = tokens.value;
