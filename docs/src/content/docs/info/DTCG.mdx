@@ -1,31 +1,32 @@
 ---
-title: Design Token Community Group
+title: Design Tokens Community Group
 sidebar:
   order: 4
 ---
 
 import tokens from '/public/demo-tokens.json';
 
-There is a [W3C Design Token Community Group](https://www.w3.org/community/design-tokens/), whose goal it is to "provide standards upon which products and design tools can rely for sharing stylistic pieces of a design system at scale".
+The [Design Tokens W3C Community Group](https://www.w3.org/community/design-tokens/)’s (DTCG) goal is to "provide standards upon which products and design tools can rely for sharing stylistic pieces of a design system at scale".
 
-What that boils down to right now is a [draft specification for how Design Tokens ought to be formatted](https://design-tokens.github.io/community-group/format/), for cross-tool and cross-platform interoperability.
-Since Style Dictionary v4, we have first-class support for this format.
+The Community Group publishes a [specification defining how Design Tokens ought to be formatted](https://tr.designtokens.org/format/) for cross-tool and cross-platform interoperability.
 
-## Convert your Tokens to DTCG
+**As of version 4**, Style Dictionary has first-class support for the DTCG format.
 
-We also export a tool that allows you to convert your design tokens in the old format to the DTCG format:
+## Convert your tokens to the DTCG format
+
+We provide a tool that converts design tokens from the Style Dictionary v3 JSON format to the DTCG format:
 
 <div spacer></div>
 <sd-dtcg-convert></sd-dtcg-convert>
 
 What it does:
 
-- Turn `value`, `type` and `description` design token property keys into `$value`, `$type` and `$description` respectively.
-- Move the `$type` properties from the design tokens onto the uppermost common ancestor token group
+- ✅ Converts `value`, `type` and `description` design token property keys into `$value`, `$type` and `$description` respectively.
+- ✅ Moves `$type` properties from the uppermost common ancestor token group to individual design tokens
 
-What it does not do (atm, feel free to raise suggestions):
+What it does not do (at the moment, [suggestions welcome](https://github.com/amzn/style-dictionary/issues/new?title=Conversion%20tool%20suggestion:%20%3Cyour-suggestion-here%3E)):
 
-- Refactor type values commonly used to the DTCG types, e.g. size -> dimension.
+- ⛔ It does not refactor type values commonly used to the DTCG types (for example: `"$type": "size"` -> `"$type": "dimension"`).
 
 ## Live demo
 
