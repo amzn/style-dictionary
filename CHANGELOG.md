@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.0.0-prerelease.31
+
+### Patch Changes
+
+- c708325: Moving the @zip.js/zip.js dependency from a devDependency to a normal dependency.
+
 ## 4.0.0-prerelease.30
 
 ### Minor Changes
