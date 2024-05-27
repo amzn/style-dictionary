@@ -235,8 +235,9 @@ class SdPlayground extends LitElement {
             </sl-radio-button>
           `,
         )}
-        <sl-radio-button value="eject" aria-label="Eject" title="Eject" @click=${this.ejectHandler}>
+        <sl-radio-button value="eject" label="Eject" title="Eject" @click=${this.ejectHandler}>
           <svg
+            aria-label="Eject"
             width="20px"
             height="20px"
             viewBox="0 0 24 24"
