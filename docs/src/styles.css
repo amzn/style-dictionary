@@ -79,3 +79,15 @@ a {
     grid-template-columns: 8fr 4fr;
   }
 }
+.expressive-code pre.mermaid *:not(path) {
+  all: revert-layer;
+}
+
+#graphDiv .clickable:hover .label-container {
+  stroke: #3fc6bf;
+  stroke-width: 3px;
+}
+
+.hidden {
+  display: none !important;
+}
