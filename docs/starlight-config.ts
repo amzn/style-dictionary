@@ -1,6 +1,18 @@
 import type { StarlightUserConfig } from '@astrojs/starlight/types';
+import { pluginLanguageClass } from './expressive-code-plugin-language-class.ts';
 
 export default {
+  expressiveCode: {
+    plugins: [
+      // Call the plugin initialization function inside the `plugins` array
+      pluginLanguageClass(),
+    ],
+    styleOverrides: {
+      textMarkers: {
+        defaultLuminance: ['15%', '85%'],
+      },
+    },
+  },
   title: 'Style Dictionary',
   description:
     'Export your Design Tokens to any platform. iOS, Android, CSS, JS, HTML, sketch files, style documentation, or anything you can think of. Forward-compatible with Design Token Community Group spec.',
@@ -149,13 +161,6 @@ export default {
     },
   ],
   customCss: ['./src/styles.css'],
-  expressiveCode: {
-    styleOverrides: {
-      textMarkers: {
-        defaultLuminance: ['15%', '85%'],
-      },
-    },
-  },
   components: {
     Head: './src/components/Head.astro',
   },
