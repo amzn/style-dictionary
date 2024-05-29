@@ -22,7 +22,7 @@ export type FileHeader = (
 ) => Promise<string[]> | string[];
 
 export interface File {
-  destination: string;
+  destination?: string;
   format?: string | FormatFn;
   filter?: string | Partial<TransformedToken> | Filter['filter'];
   options?: LocalOptions;

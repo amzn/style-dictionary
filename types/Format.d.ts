@@ -38,7 +38,7 @@ export interface FormatFnArguments {
  * The format function receives an overloaded object as its arguments and
  * it should return a string, which will be written to a file.
  */
-export type FormatFn = ((arguments: FormatFnArguments) => string | Promise<string>) & {
+export type FormatFn = ((arguments: FormatFnArguments) => unknown | Promise<unknown>) & {
   nested?: boolean;
 };
 

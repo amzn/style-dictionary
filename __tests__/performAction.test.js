@@ -30,6 +30,7 @@ describe('performAction', () => {
         platforms: {
           android: {
             actions: ['test'],
+            files: [],
           },
         },
       });
@@ -55,6 +56,7 @@ describe('performAction', () => {
         platforms: {
           android: {
             actions: ['test-async'],
+            files: [],
           },
         },
       });

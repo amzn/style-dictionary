@@ -115,7 +115,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.5.10",
-    "@astrojs/starlight": "^0.21.2",
+    "@astrojs/starlight": "^0.23.1",
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@changesets/cli": "^2.27.1",
     "@commitlint/cli": "^18.4.3",
