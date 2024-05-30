@@ -139,4 +139,28 @@ describe('register/transformGroup', async () => {
       },
     });
   });
+
+  it('should pass options to preprocessor function as second argument', async () => {
+    let opts;
+    StyleDictionary.registerPreprocessor({
+      name: 'foo-processor',
+      preprocessor: async (dict, options) => {
+        opts = options;
+        return dict;
+      },
+    });
+
+    StyleDictionaryExtended = new StyleDictionary({
+      preprocessors: ['foo-processor'],
+      tokens: {
+        foo: {
+          $value: '4px',
+          $type: 'dimension',
+          $description: 'Foo description',
+        },
+      },
+    });
+    await StyleDictionaryExtended.hasInitialized;
+    expect(opts.usesDtcg).to.be.true;
+  });
 });
