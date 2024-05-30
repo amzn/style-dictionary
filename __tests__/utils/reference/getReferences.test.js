@@ -62,24 +62,28 @@ describe('utils', () => {
       });
 
       it(`should work with a single reference`, () => {
-        expect(_getReferences(tokens.color.danger.value, tokens)).to.eql([{ value: '#f00' }]);
+        expect(_getReferences(tokens.color.danger.value, tokens)).to.eql([
+          { ref: ['color', 'red'], value: '#f00' },
+        ]);
       });
 
       it(`should work with object values`, () => {
         expect(_getReferences(tokens.border.primary.value, tokens)).to.eql([
-          { value: '#f00' },
-          { value: '2px' },
+          { ref: ['color', 'red'], value: '#f00' },
+          { ref: ['size', 'border'], value: '2px' },
         ]);
       });
 
       it(`should work with objects that have numbers`, () => {
-        expect(_getReferences(tokens.border.secondary.value, tokens)).to.eql([{ value: '#f00' }]);
+        expect(_getReferences(tokens.border.secondary.value, tokens)).to.eql([
+          { ref: ['color', 'red'], value: '#f00' },
+        ]);
       });
 
       it(`should work with interpolated values`, () => {
         expect(_getReferences(tokens.border.tertiary.value, tokens)).to.eql([
-          { value: '2px' },
-          { value: '#f00' },
+          { ref: ['size', 'border'], value: '2px' },
+          { ref: ['color', 'red'], value: '#f00' },
         ]);
       });
     });
