@@ -45,7 +45,7 @@ Using volume option:
 
 ```js title="build-tokens.js"
 import { Volume } from 'memfs';
-// You will need a bundler for memfs in browser...
+// You will need a bundler like webpack/rollup for memfs in browser...
 // Or use as a prebundled fork:
 import memfs from '@bundled-es-modules/memfs';
 const { Volume } = memfs;
@@ -91,7 +91,9 @@ vol.readFileSync('/variables.css');
 
 ### init
 
-> `StyleDictionary.init() ⇒ Promise<StyleDictionary>`
+```ts
+type init = (config: Config) ⇒ Promise<SDInstance>
+```
 
 Called automatically when doing `new StyleDictionary(config)` unless passing a second argument with `init` property set to `false`.
 In this scenario, you can call `.init()` manually, e.g. for testing or error handling purposes.
@@ -104,18 +106,20 @@ In this scenario, you can call `.init()` manually, e.g. for testing or error han
 
 ### extend
 
-> `StyleDictionary.extend(config) ⇒ Promise<StyleDictionary>`
+```ts
+type extend = (config: Config | string, options: Options) ⇒ Promise<SDInstance>
+```
 
 Extend a Style Dictionary instance with a config object, to create an extension instance.
 
-| Param                    | Type                                              | Description                                                                                                                                                                      |
-| ------------------------ | ------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `config`                 | [`Config`](/reference/config)                     | Configuration options to build your style dictionary. If you pass a string, it will be used as a path to a JSON config file. You can also pass an object with the configuration. |
-| `options`                | `Object`                                          |                                                                                                                                                                                  |
-| `options.verbosity`      | `'silent'\|'default'\|'verbose'`                  | Verbosity of logs, overrides `log.verbosity` set in SD config or platform config.                                                                                                |
-| `options.warnings`       | `'error'\|'warn'\|'disabled'`                     | Whether to throw warnings as errors, warn or disable warnings, overrides `log.verbosity` set in SD config or platform config.                                                    |
-| `options.volume`         | `import('memfs').IFs \| typeof import('node:fs')` |                                                                                                                                                                                  |
-| `options.mutateOriginal` | `boolean`                                         | Private option, do not use                                                                                                                                                       |
+| Param                    | Type                                              | Description                                                                                                                                                                                                                   |
+| ------------------------ | ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `config`                 | [`Config`](/reference/config)                     | Configuration options to build your style dictionary. If you pass a string, it will be used as a path to a JSON config file. You can also pass an object with the configuration.                                              |
+| `options`                | `Object`                                          |                                                                                                                                                                                                                               |
+| `options.verbosity`      | `'silent'\|'default'\|'verbose'`                  | Verbosity of logs, overrides `log.verbosity` set in SD config or platform config.                                                                                                                                             |
+| `options.warnings`       | `'error'\|'warn'\|'disabled'`                     | Whether to throw warnings as errors, warn or disable warnings, overrides `log.verbosity` set in SD config or platform config.                                                                                                 |
+| `options.volume`         | `import('memfs').IFs \| typeof import('node:fs')` | Pass a custom Volume to use instead of filesystem shim itself. Only possible in browser or in Node if you're explicitly using `memfs` as filesystem shim (by calling `setFs()` function and setting it to the `memfs` module) |
+| `options.mutateOriginal` | `boolean`                                         | Private option, do not use                                                                                                                                                                                                    |
 
 Example:
 
@@ -150,29 +154,85 @@ const extendedSd = await sd.extend(cfg, { volume: vol });
 
 ---
 
-### buildAllPlatforms
+### exportPlatform
 
-> `StyleDictionary.buildAllPlatforms() ⇒ Promise<StyleDictionary>`
-
-The only top-level method that needs to be called
-to build the Style Dictionary.
-
-Example:
-
-```js
-import StyleDictionary from 'style-dictionary';
-const sd = new StyleDictionary('config.json');
-
-// Async, so you can do `await` or .then() if you
-// want to execute code after buildAllPlatforms has completed
-await sd.buildAllPlatforms();
+```ts
+type exportPlatform = (platform: string) => Promise<DesignTokens>;
 ```
+
+Exports a tokens object with applied platform transforms.
+
+This is useful if you want to use a Style Dictionary in JS build tools like Webpack.
+
+| Param    | Type     | Description                                                           |
+| -------- | -------- | --------------------------------------------------------------------- |
+| platform | `string` | The platform to be exported. Must be defined on the style dictionary. |
+
+---
+
+### getPlatform
+
+```ts
+type getPlatform = (platform: string) => Promise<{
+  platformConfig: PlatformConfig;
+  dictionary: {
+    tokens: DesignTokens;
+    allTokens: DesignToken[];
+  };
+}>;
+```
+
+`SDInstance.getPlatform(platform) ⇒ Promise<Object>`
+
+Wrapper around [`exportPlatform`](#exportplatform), returns a bit more data.
+
+Returns an object with `platformConfig` and `dictionary` properties:
+
+- `platformConfig` a processed version of the user config for the platform
+- `dictionary` an object with `tokens` after transformations and reference resolutions, and an `allTokens` property which is a flattened (Array) version of that.
+
+This is useful if you want to use a Style Dictionary in JS build tools like Webpack.
+
+| Param    | Type     | Description                                                           |
+| -------- | -------- | --------------------------------------------------------------------- |
+| platform | `string` | The platform to be exported. Must be defined on the style dictionary. |
+
+---
+
+### formatPlatform
+
+```ts
+type formatPlatform = (platform: string) => Promise<Array<{output: unknown; destination?:string}>
+```
+
+Runs [`getPlatform`](#getplatform) under the hood, and then loops over the `files`, and formats the dictionary for each file, returning an array of file objects:
+
+- `output` property, which is usually a string but depending on the format, it could also be any other data type. This is useful if you don't intend to write to a file, but want to do something else with the formatted tokens.
+- `destination` property, this one is optional, if you don't intend on writing to a file you don't need this, but it can still be useful to name your outputs if you've got multiple `files`.
+
+---
+
+### formatAllPlatforms
+
+```ts
+type formatAllPlatforms = () => Promise<
+  Record<string, Array<{ output: unknown; destination?: string }>>
+>;
+```
+
+Runs [`formatPlatform`](#formatplatform) under the hood but for each platform.
+
+The resulting object is similar, but an `Object` with key-value pairs where they key is the platform key, and the value is the same data from the `formatPlatform` method.
+
+This is useful if you don't want to write to the filesystem but want to do something custom with the data instead.
 
 ---
 
 ### buildPlatform
 
-> `StyleDictionary.buildPlatform(platform) ⇒ Promise<StyleDictionary>`
+```ts
+type buildPlatform = (platform: string) => Promise<SDInstance>;
+```
 
 Takes a platform and performs all transforms to
 the tokens object (non-mutative) then
@@ -200,19 +260,40 @@ style-dictionary build --platform web
 
 ---
 
-### cleanAllPlatforms
+### buildAllPlatforms
 
-`StyleDictionary.cleanAllPlatforms() ⇒ Promise<StyleDictionary>`
+```ts
+type buildAllPlatforms = () => Promise<SDInstance>;
+```
 
-Does the reverse of [buildAllPlatforms](#buildallplatforms) by
-performing a clean on each platform. This removes all the files
-defined in the platform and calls the undo method on any actions.
+Uses [`buildPlatform`](#buildplatform) under the hood for each platform.
+
+:::tip
+In the majority of cases, this is the method you'll use.
+:::
+
+Example:
+
+```js
+import StyleDictionary from 'style-dictionary';
+const sd = new StyleDictionary('config.json');
+
+// Async, so you can do `await` or .then() if you
+// want to execute code after buildAllPlatforms has completed
+await sd.buildAllPlatforms();
+```
+
+```bash
+style-dictionary build
+```
 
 ---
 
 ### cleanPlatform
 
-`StyleDictionary.cleanPlatform(platform) ⇒ Promise<StyleDictionary>`
+```ts
+type cleanPlatform = (platform: string) => Promise<SDInstance>;
+```
 
 Takes a platform and performs all transforms to
 the tokens object (non-mutative) then
@@ -224,17 +305,17 @@ cleans all the files and performs the undo method of any [actions](/reference/ho
 
 ---
 
-### exportPlatform
+### cleanAllPlatforms
 
-`StyleDictionary.exportPlatform(platform) ⇒ Promise<Object>`
+```ts
+type cleanAllPlatforms = () => Promise<SDInstance>;
+```
 
-Exports a tokens object with applied platform transforms.
+Uses [`cleanPlatform`](#cleanplatform) under the hood for each platform.
 
-This is useful if you want to use a Style Dictionary in JS build tools like Webpack.
-
-| Param    | Type     | Description                                                           |
-| -------- | -------- | --------------------------------------------------------------------- |
-| platform | `string` | The platform to be exported. Must be defined on the style dictionary. |
+Does the reverse of [buildAllPlatforms](#buildallplatforms) by
+performing a clean on each platform. This removes all the files
+defined in the platform and calls the undo method on any actions.
 
 ---
 
@@ -246,7 +327,7 @@ Can also be used on the instance if you want to register something only on that 
 
 ### registerAction
 
-`StyleDictionary.registerAction(action) ⇒ StyleDictionary`
+> `StyleDictionary.registerAction(action) ⇒ StyleDictionary`
 
 Adds a custom [action](/reference/hooks/actions) to Style Dictionary. Custom
 actions can do whatever you need, such as: copying files,
@@ -287,7 +368,7 @@ StyleDictionary.registerAction({
 
 ### registerFileHeader
 
-`StyleDictionary.registerFileHeader(fileHeader) ⇒ StyleDictionary`
+> `StyleDictionary.registerFileHeader(fileHeader) ⇒ StyleDictionary`
 
 Add a custom [fileHeader](/reference/hooks/file-headers) to the Style Dictionary. File headers are used in
 formats to display some information about how the file was built in a comment.
@@ -313,7 +394,7 @@ StyleDictionary.registerFileHeader({
 
 ### registerFilter
 
-`StyleDictionary.registerFilter(filter) ⇒ StyleDictionary`
+> `StyleDictionary.registerFilter(filter) ⇒ StyleDictionary`
 
 Add a custom [filter](/reference/hooks/filters) to the Style Dictionary.
 
@@ -338,7 +419,7 @@ StyleDictionary.registerFilter({
 
 ### registerFormat
 
-`StyleDictionary.registerFormat(format) ⇒ StyleDictionary`
+> `StyleDictionary.registerFormat(format) ⇒ StyleDictionary`
 
 Add a custom [format](/reference/hooks/formats) to the Style Dictionary.
 
@@ -363,7 +444,7 @@ StyleDictionary.registerFormat({
 
 ### registerParser
 
-`StyleDictionary.registerParser(parser) ⇒ StyleDictionary`
+> `StyleDictionary.registerParser(parser) ⇒ StyleDictionary`
 
 Adds a custom [parser](/reference/hooks/parsers) to parse style dictionary files.
 
@@ -389,7 +470,7 @@ StyleDictionary.registerParser({
 
 ### registerPreprocessor
 
-`StyleDictionary.registerPreprocessor({ name, preprocessor }) => StyleDictionary`
+> `StyleDictionary.registerPreprocessor({ name, preprocessor }) => StyleDictionary`
 
 Adds a custom [preprocessor](/reference/hooks/preprocessors) to preprocess already parsed Style Dictionary objects.
 
@@ -415,7 +496,7 @@ StyleDictionary.registerPreprocessor({
 
 ### registerTransform
 
-`StyleDictionary.registerTransform(transform) ⇒ StyleDictionary`
+> `StyleDictionary.registerTransform(transform) ⇒ StyleDictionary`
 
 Add a custom [transform](/reference/hooks/transforms) to the Style Dictionary.
 Transforms can manipulate a token's name, value, or attributes.
@@ -451,7 +532,7 @@ StyleDictionary.registerTransform({
 
 ### registerTransformGroup
 
-`StyleDictionary.registerTransformGroup(transformGroup) ⇒ StyleDictionary`
+> `StyleDictionary.registerTransformGroup(transformGroup) ⇒ StyleDictionary`
 
 Add a custom [transformGroup](/reference/hooks/transform_groups) to the Style Dictionary, which is a
 group of transforms.

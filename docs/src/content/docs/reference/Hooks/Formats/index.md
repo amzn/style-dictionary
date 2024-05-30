@@ -265,9 +265,14 @@ You can create custom formats using the [`registerFormat`](/reference/api#regist
 
 ### format
 
-`format.format(args)` ⇒ `string`
+`format.format(args)` ⇒ `unknown`
 
 The format function that is called when Style Dictionary builds files.
+
+:::tip
+You might be wondering why the return type of a format function is `unknown`.
+[More information about this here](#custom-return-types)
+:::
 
 | Param                                 | Type                 | Description                                                                                           |
 | ------------------------------------- | -------------------- | ----------------------------------------------------------------------------------------------------- |
@@ -320,6 +325,51 @@ To use your custom format, you call it by name in the file configuration object:
 ```
 
 It is recommended for any configuration needed for your custom format to use the `options` object. Style Dictionary will merge platform and file options so that in your Style Dictionary configuration you can specify options at a platform or file level. In the configuration above, the `options` object passed to the format would have `showFileHeader: false`.
+
+## Custom return types
+
+When writing outputs to the filesystem, the return type of the `format` function is always `string`.
+However, since v4 you can return any data format and use [`SD.formatAllPlatforms`](/reference/api#formatallplatforms)
+or [`SD.formatPlatform`](/reference/api#formatplatform) methods when you do not intend to write the output to the filesystem,
+but want to do something custom with the output instead.
+
+Note that when you have a format that returns something that isn't a string, you won't be able to use it with
+[`buildPlatform`](/reference/api#buildplatform) or [`buildAllPlatforms`](/reference/api#buildallplatforms) methods,
+because they are writing to the filesystem and you can't really write data to the filesystem that isn't a string/buffer/stream.
+
+This also means that the `destination` property is therefore optional for formats that aren't ran by the `build` methods:
+
+```json title="config.json"
+{
+  "source": ["tokens/**/*.json"],
+  "platforms": {
+    "css": {
+      "options": {
+        "showFileHeader": true
+      },
+      "transformGroup": "css",
+      "files": [
+        {
+          "format": "format-that-returns-array"
+        }
+      ]
+    }
+  }
+}
+```
+
+```js title="grabTokens.js"
+const sd = new StyleDictionary('config.json');
+
+const cssTokens = (await sd.formatPlatform('css')).output;
+/**
+ * Example:
+ * [
+ *   ["--colors-red-500", "#ff0000"],
+ *   ["--colors-blue-500", "#0000ff"]
+ * ]
+ */
+```
 
 ## Custom format with output references
 
