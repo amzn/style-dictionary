@@ -91,8 +91,8 @@ getReferences('solid {spacing.2} {colors.black}', sd.tokens); // alternative way
 getReferences('solid {spacing.2} {colors.black}', sd.tokens, { usesDtcg: true }); // Assumes DTCG spec format, with $ prefix ($value, $type)
 /**
  * [
- *   { value: '2px', type: 'dimension' },
- *   { value: '#000', type: 'color' }
+ *   { value: '2px', type: 'dimension', ref: ['spacing', '2'] },
+ *   { value: '#000', type: 'color', ref: ['colors', 'black'] }
  * ]
  */
 ```
