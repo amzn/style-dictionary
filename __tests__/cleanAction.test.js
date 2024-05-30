@@ -19,6 +19,7 @@ const StyleDictionaryExtended = new StyleDictionary({
   platforms: {
     android: {
       actions: ['cleanAction.test.js'],
+      files: [],
     },
   },
 });

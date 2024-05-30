@@ -14,7 +14,6 @@ export function pluginLanguageClass(): ExpressiveCodePlugin {
             pre.properties = {
               class: `${opts.codeBlock.language} hidden`,
             };
-            console.log(pre);
 
             // replace the AST that expressive code has made and put back the simple text
             // otherwise mermaid gets confused by all of the generated HTML syntax

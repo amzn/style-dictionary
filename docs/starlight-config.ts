@@ -44,7 +44,6 @@ export default {
     },
     {
       label: 'Reference',
-      collapsed: true,
       items: [
         {
           label: 'API',
@@ -126,7 +125,6 @@ export default {
     {
       label: 'Examples',
       autogenerate: { directory: 'examples' },
-      collapsed: true,
     },
   ],
   head: [

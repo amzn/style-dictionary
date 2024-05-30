@@ -12,7 +12,13 @@
  */
 import { expect } from 'chai';
 import StyleDictionary from 'style-dictionary';
-import { fileToJSON } from './__helpers.js';
+import { fs } from 'style-dictionary/fs';
+import chalk from 'chalk';
+import { fileToJSON, clearOutput, fileExists } from './__helpers.js';
+import { resolve } from '../lib/resolve.js';
+import GroupMessages from '../lib/utils/groupMessages.js';
+import flattenTokens from '../lib/utils/flattenTokens.js';
+import formats from '../lib/common/formats.js';
 
 function traverseObj(obj, fn) {
   for (let key in obj) {
@@ -44,7 +50,15 @@ const test_props = {
 };
 
 // extend method is called by StyleDictionary constructor, therefore we're basically testing both things here
-describe('StyleDictionary class + extend method', () => {
+describe('StyleDictionary class', () => {
+  beforeEach(() => {
+    clearOutput();
+  });
+
+  afterEach(() => {
+    clearOutput();
+  });
+
   it('should accept a string as a path to a JSON5 file', async () => {
     const StyleDictionaryExtended = new StyleDictionary('__tests__/__configs/test.json5');
     await StyleDictionaryExtended.hasInitialized;
@@ -564,6 +578,631 @@ describe('StyleDictionary class + extend method', () => {
       });
       await sd.hasInitialized;
       expect(sd.usesDtcg).to.be.true;
+    });
+  });
+
+  describe('buildPlatform', () => {
+    const dictionary = {
+      tokens: {
+        foo: { value: 'bar' },
+        bingo: { value: 'bango' },
+      },
+    };
+
+    const hooks = {
+      formats: {
+        foo: (dictionary) => JSON.stringify(dictionary.tokens),
+      },
+    };
+
+    const platform = {
+      files: [
+        {
+          destination: '__tests__/__output/test.json',
+          format: 'foo',
+        },
+      ],
+    };
+
+    const platformWithBuildPath = {
+      buildPath: '__tests__/__output/',
+      files: [
+        {
+          destination: 'test.json',
+          format: 'foo',
+        },
+      ],
+    };
+
+    const platformWithFilter = {
+      buildPath: '__tests__/__output/',
+      files: [
+        {
+          destination: 'test.json',
+          filter: function (property) {
+            return property.value === 'bango';
+          },
+          format: 'foo',
+        },
+      ],
+    };
+
+    const platformWithoutFormat = {
+      buildPath: '__tests__/__output/',
+      files: [
+        {
+          destination: 'test.json',
+        },
+      ],
+    };
+
+    const platformWithBadBuildPath = {
+      buildPath: '__tests__/__output',
+      files: [
+        {
+          destination: 'test.json',
+          format: 'foo',
+        },
+      ],
+    };
+
+    const platformWithoutFiles = {
+      buildPath: '__tests__/__output/',
+    };
+
+    it("should throw if build path doesn't have a trailing slash", async () => {
+      const sd = new StyleDictionary({
+        ...dictionary,
+        hooks,
+        platforms: {
+          foo: platformWithBadBuildPath,
+        },
+      });
+      await expect(sd.buildPlatform('foo')).to.eventually.rejectedWith(
+        'Build path must end in a trailing slash or you will get weird file names.',
+      );
+    });
+
+    it('should throw if there is no files property', async () => {
+      const sd = new StyleDictionary({
+        ...dictionary,
+        hooks,
+        platforms: {
+          foo: platformWithoutFiles,
+        },
+      });
+      await expect(sd.buildPlatform('foo')).to.eventually.rejectedWith(
+        'Cannot format platform foo due to missing "files" property',
+      );
+    });
+
+    it('should throw if missing a format', async () => {
+      const sd = new StyleDictionary({
+        ...dictionary,
+        hooks,
+        platforms: {
+          foo: platformWithoutFormat,
+        },
+      });
+      await expect(sd.buildPlatform('foo')).to.eventually.rejectedWith('Please supply a format');
+    });
+
+    it('should work without buildPath', async () => {
+      const sd = new StyleDictionary({
+        ...dictionary,
+        hooks,
+        platforms: {
+          foo: platform,
+        },
+      });
+      await sd.buildPlatform('foo');
+      expect(fileExists('__tests__/__output/test.json')).to.be.true;
+    });
+
+    it('should work with buildPath', async () => {
+      const sd = new StyleDictionary({
+        ...dictionary,
+        hooks,
+        platforms: {
+          foo: platformWithBuildPath,
+        },
+      });
+      await sd.buildPlatform('foo');
+      expect(fileExists('__tests__/__output/test.json')).to.be.true;
+    });
+
+    it('should work with a filter', async () => {
+      const sd = new StyleDictionary({
+        ...dictionary,
+        hooks,
+        platforms: {
+          foo: platformWithFilter,
+        },
+      });
+      await sd.buildPlatform('foo');
+      expect(fileExists('__tests__/__output/test.json')).to.be.true;
+      const output = JSON.parse(fs.readFileSync(resolve('__tests__/__output/test.json')));
+      expect(output).to.have.property('bingo');
+      expect(output).to.not.have.property('foo');
+      Object.values(output).forEach((property) => {
+        expect(property.value).to.equal('bango');
+      });
+    });
+  });
+
+  describe('formatFile', () => {
+    function format() {
+      return 'hi';
+    }
+
+    function nestedFormat() {
+      return 'hi';
+    }
+
+    nestedFormat.nested = true;
+
+    it('should error if format doesnt exist or isnt a function', async () => {
+      const sd = new StyleDictionary({
+        platforms: {
+          foo: {},
+        },
+      });
+      await expect(
+        sd.formatFile({ destination: '__tests__output/test.txt' }, {}, {}),
+      ).to.eventually.rejectedWith('Please enter a valid file format');
+      await expect(
+        sd.formatFile({ destination: '__tests__output/test.txt', format: {} }, {}, {}),
+      ).to.eventually.rejectedWith('Please enter a valid file format');
+      await expect(
+        sd.formatFile({ destination: '__tests__/__output/test.txt', format: [] }, {}, {}),
+      ).to.eventually.rejectedWith('Please enter a valid file format');
+    });
+
+    it('should error if destination isnt a string', async () => {
+      const sd = new StyleDictionary({
+        platforms: {
+          foo: {},
+        },
+      });
+      await expect(sd.formatFile({ format, destination: [] }, {}, {})).to.eventually.rejectedWith(
+        'Please enter a valid destination',
+      );
+      await expect(sd.formatFile({ format, destination: {} }, {}, {})).to.eventually.rejectedWith(
+        'Please enter a valid destination',
+      );
+    });
+
+    describe('name collisions', () => {
+      const destination = '__tests__/__output/test.collisions';
+      const PROPERTY_NAME_COLLISION_WARNINGS = `${GroupMessages.GROUP.PropertyNameCollisionWarnings}:${destination}`;
+      const name = 'someName';
+      const dictionary = {
+        allTokens: [
+          {
+            name: name,
+            path: ['some', 'name', 'path1'],
+            value: 'value1',
+          },
+          {
+            name: name,
+            path: ['some', 'name', 'path2'],
+            value: 'value2',
+          },
+        ],
+      };
+
+      it('should generate warning messages for output name collisions', async () => {
+        GroupMessages.clear(PROPERTY_NAME_COLLISION_WARNINGS);
+        const sd = new StyleDictionary();
+        const { logs } = await sd.formatFile(
+          { destination, format },
+          { log: { verbosity: 'verbose' } },
+          dictionary,
+        );
+
+        expect(logs.warning.length).to.equal(1);
+        expect(logs.warning[0]).to.matchSnapshot();
+      });
+
+      it('should not warn users if the format is a nested format', async () => {
+        const sd = new StyleDictionary();
+        const { logs } = await sd.formatFile({ destination, format: nestedFormat }, {}, dictionary);
+        expect(logs.success[0]).to.equal(chalk.bold.green(`✔︎ ${destination}`));
+      });
+    });
+
+    const destEmptyTokens = '__tests__/__output/test.emptyTokens';
+    it('should warn when a file is not created because of empty tokens', async () => {
+      const dictionary = {
+        allTokens: [
+          {
+            name: 'someName',
+            type: 'color',
+            path: ['some', 'name', 'path1'],
+            value: 'value1',
+          },
+        ],
+      };
+
+      const filter = function (token) {
+        return token.type === 'color2';
+      };
+
+      const sd = new StyleDictionary();
+      const { logs, output } = await sd.formatFile(
+        {
+          destination: destEmptyTokens,
+          format,
+          filter,
+        },
+        {},
+        dictionary,
+      );
+
+      expect(output).to.be.undefined;
+
+      const warn = chalk.rgb(255, 140, 0)(`No tokens for ${destEmptyTokens}. File not created.`);
+      expect(logs.warning[0]).to.equal(warn);
+    });
+
+    it('should warn when a file is not created because of empty tokens using async filters', async () => {
+      const dictionary = {
+        allTokens: [
+          {
+            name: 'someName',
+            type: 'color',
+            path: ['some', 'name', 'path1'],
+            value: 'value1',
+          },
+        ],
+      };
+
+      const filter = async (token) => {
+        await new Promise((resolve) => setTimeout(resolve, 100));
+        return token.type === 'color2';
+      };
+
+      const sd = new StyleDictionary();
+      const { logs, output } = await sd.formatFile(
+        {
+          destination: destEmptyTokens,
+          format,
+          filter,
+        },
+        {},
+        dictionary,
+      );
+      expect(output).to.be.undefined;
+
+      const warn = chalk.rgb(255, 140, 0)(`No tokens for ${destEmptyTokens}. File not created.`);
+      expect(logs.warning[0]).to.equal(warn);
+    });
+
+    it('should create file output properly', async () => {
+      const sd = new StyleDictionary();
+      const { output } = await sd.formatFile(
+        {
+          destination: 'test.txt',
+          format,
+        },
+        {
+          buildPath: '__tests__/__output/',
+        },
+        {},
+      );
+      expect(output).to.equal('hi');
+    });
+
+    it('should support asynchronous formats', async () => {
+      const tokens = {
+        size: {
+          font: {
+            small: {
+              value: '12rem',
+              original: {
+                value: '12px',
+              },
+              name: 'size-font-small',
+              path: ['size', 'font', 'small'],
+            },
+            large: {
+              value: '18rem',
+              original: {
+                value: '18px',
+              },
+              name: 'size-font-large',
+              path: ['size', 'font', 'large'],
+            },
+          },
+        },
+        color: {
+          base: {
+            red: {
+              value: '#ff0000',
+              comment: 'comment',
+              original: {
+                value: '#FF0000',
+                comment: 'comment',
+              },
+              name: 'color-base-red',
+              path: ['color', 'base', 'red'],
+            },
+          },
+          white: {
+            value: '#ffffff',
+            original: {
+              value: '#ffffff',
+            },
+            name: 'color-white',
+            path: ['color', 'white'],
+          },
+        },
+      };
+
+      const customCSSFormat = async ({ dictionary }) => {
+        return `:root {
+${dictionary.allTokens.map((tok) => `  ${tok.name}: "${tok.value}";`).join('\n')}
+}\n`;
+      };
+
+      const sd = new StyleDictionary();
+      const { output } = await sd.formatFile(
+        {
+          destination: 'test.css',
+          format: customCSSFormat,
+        },
+        {
+          buildPath: '__tests__/__output/',
+        },
+        {
+          tokens: tokens,
+          allTokens: flattenTokens(tokens),
+        },
+      );
+      await expect(output).to.matchSnapshot();
+    });
+
+    it('should support asynchronous fileHeader', async () => {
+      const dictionary = {
+        allTokens: [
+          {
+            name: 'someName',
+            type: 'color',
+            path: ['some', 'name', 'path1'],
+            original: { value: 'value1' },
+            value: 'value1',
+          },
+        ],
+      };
+
+      const sd = new StyleDictionary();
+      const { output } = await sd.formatFile(
+        {
+          destination: 'test.css',
+          format: formats['css/variables'],
+          options: {
+            fileHeader: async () => {
+              await new Promise((resolve) => setTimeout(resolve, 100));
+              return ['foo', 'bar'];
+            },
+          },
+        },
+        {
+          buildPath: '__tests__/__output/',
+        },
+        dictionary,
+      );
+      await expect(output).to.matchSnapshot();
+    });
+  });
+
+  // most of the functionality in this method is tested already with buildPlatform tests
+  // here we just need to check if it works without outputting to files
+  describe('formatPlatform', () => {
+    const cfg = {
+      tokens: {
+        colors: {
+          red: {
+            type: 'color',
+            value: '#ff0000',
+          },
+          blue: {
+            type: 'color',
+            value: '#0000ff',
+          },
+        },
+      },
+      hooks: {
+        formats: {
+          foo: ({ dictionary }) => dictionary.allTokens.map(({ value, name }) => ({ value, name })),
+        },
+      },
+      platforms: {
+        foo: {
+          files: [
+            {
+              format: 'foo',
+            },
+          ],
+        },
+      },
+    };
+
+    it('should allow outputting JS data with no file destination', async () => {
+      const sd = new StyleDictionary(cfg);
+      const output = await sd.formatPlatform('foo');
+      expect(output).to.eql([
+        {
+          output: [
+            {
+              value: '#ff0000',
+              name: 'red',
+            },
+            {
+              value: '#0000ff',
+              name: 'blue',
+            },
+          ],
+          destination: '',
+        },
+      ]);
+    });
+
+    it('should allow outputting JS for multiple files, and annotate by destination', async () => {
+      const sd = new StyleDictionary({
+        ...cfg,
+        platforms: {
+          ...cfg.platforms,
+          foo: {
+            ...cfg.platforms.foo,
+            files: [
+              { ...cfg.platforms.foo.files[0], destination: 'output1' },
+              { ...cfg.platforms.foo.files[0], destination: 'output2' },
+            ],
+          },
+        },
+      });
+      const output = await sd.formatPlatform('foo');
+      expect(output).to.eql([
+        {
+          output: [
+            {
+              value: '#ff0000',
+              name: 'red',
+            },
+            {
+              value: '#0000ff',
+              name: 'blue',
+            },
+          ],
+          destination: 'output1',
+        },
+        {
+          output: [
+            {
+              value: '#ff0000',
+              name: 'red',
+            },
+            {
+              value: '#0000ff',
+              name: 'blue',
+            },
+          ],
+          destination: 'output2',
+        },
+      ]);
+    });
+  });
+
+  describe('formatAllPlatforms', () => {
+    it('should allow formatting multiple platforms, giving output as JS data', async () => {
+      const cfg = {
+        tokens: {
+          colors: {
+            red: {
+              type: 'color',
+              value: '#ff0000',
+            },
+            blue: {
+              type: 'color',
+              value: '#0000ff',
+            },
+          },
+        },
+        hooks: {
+          formats: {
+            qux: ({ dictionary }) =>
+              dictionary.allTokens.map(({ value, name }) => ({ value, name })),
+          },
+        },
+        platforms: {
+          foo: {
+            files: [
+              {
+                format: 'qux',
+                destination: 'foo/output1',
+              },
+              {
+                format: 'qux',
+                destination: 'foo/output2',
+              },
+            ],
+          },
+          bar: {
+            files: [
+              {
+                format: 'qux',
+                destination: 'bar/output1',
+              },
+              {
+                format: 'qux',
+                destination: 'bar/output2',
+              },
+            ],
+          },
+        },
+      };
+      const sd = new StyleDictionary(cfg);
+      const output = await sd.formatAllPlatforms();
+
+      expect(output).to.eql({
+        foo: [
+          {
+            destination: 'foo/output1',
+            output: [
+              {
+                value: '#ff0000',
+                name: 'red',
+              },
+              {
+                value: '#0000ff',
+                name: 'blue',
+              },
+            ],
+          },
+          {
+            destination: 'foo/output2',
+            output: [
+              {
+                value: '#ff0000',
+                name: 'red',
+              },
+              {
+                value: '#0000ff',
+                name: 'blue',
+              },
+            ],
+          },
+        ],
+        bar: [
+          {
+            destination: 'bar/output1',
+            output: [
+              {
+                value: '#ff0000',
+                name: 'red',
+              },
+              {
+                value: '#0000ff',
+                name: 'blue',
+              },
+            ],
+          },
+          {
+            destination: 'bar/output2',
+            output: [
+              {
+                value: '#ff0000',
+                name: 'red',
+              },
+              {
+                value: '#0000ff',
+                name: 'blue',
+              },
+            ],
+          },
+        ],
+      });
     });
   });
 });
