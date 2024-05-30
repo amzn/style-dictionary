@@ -66,6 +66,14 @@ export function registerSuite(opts) {
         // should be registered because sd3 extends sd2
         expect(sd3.hooks[prop][configBar.name]).to.not.be.undefined;
       });
+
+      it(`should allow registering an already existing hook and overriding it`, async () => {
+        StyleDictionary.hooks[prop][configFoo.name] = {
+          prop: '_test_',
+        };
+        StyleDictionary[registerMethod](configFoo);
+        expect(StyleDictionary.hooks[prop][configFoo.name].prop).to.be.undefined;
+      });
     });
   });
 }
