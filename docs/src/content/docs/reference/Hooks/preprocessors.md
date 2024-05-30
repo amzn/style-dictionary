@@ -21,12 +21,12 @@ That said, preprocessing the full dictionary gives ultimate flexibility when nee
 A preprocessor is an object with two props:
 
 - `name`: the name of the preprocessor
-- `preprocessor` a callback function that receives the dictionary as a parameter, and returns the processed dictionary
+- `preprocessor` a callback function that receives the dictionary and SD options as parameters, and returns the processed dictionary
 
 ```javascript title="my-preprocessor.js"
 const myPreprocessor = {
   name: 'strip-third-party-meta',
-  preprocessor: (dictionary) => {
+  preprocessor: (dictionary, options) => {
     delete dictionary.thirdPartyMetadata;
     return dictionary;
   },
@@ -38,7 +38,7 @@ Asynchronous callback functions are also supported, giving even more flexibility
 ```javascript title="my-preprocessor-async.js"
 const myPreprocessor = {
   name: 'strip-props',
-  preprocessor: async (dictionary) => {
+  preprocessor: async (dictionary, options) => {
     const propsToDelete = await someAPICall();
 
     propsToDelete.forEach((propName) => {
@@ -112,7 +112,7 @@ Stripping description property recursively in the entire dictionary object:
 ```js
 StyleDictionary.registerPreprocessor({
   name: 'strip-descriptions',
-  preprocessor: (dict) => {
+  preprocessor: (dict, options) => {
     // recursively traverse token objects and delete description props
     function removeDescription(slice) {
       delete slice.description;
