@@ -1170,6 +1170,10 @@ describe('common', () => {
           }),
         ).to.equal('5px dashed #000000');
       });
+
+      it('allows every property to be optional', () => {
+        expect(borderTransform({})).to.equal('solid');
+      });
     });
 
     describe('strokeStyle/css/shorthand', () => {
