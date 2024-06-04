@@ -16,10 +16,6 @@ import StyleDictionary from '../lib/StyleDictionary.js';
 import cleanFile from '../lib/cleanFile.js';
 import cleanDir from '../lib/cleanDir.js';
 
-function format() {
-  return 'hi';
-}
-
 describe('cleanDir', () => {
   beforeEach(() => {
     clearOutput();
