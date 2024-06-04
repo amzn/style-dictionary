@@ -651,7 +651,7 @@ Use log.verbosity "verbose" or use CLI option --verbose for more details.
           },
           platforms: {
             css: {
-              transforms: ['transition/css/shorthand'],
+              transforms: ['cubicBezier/css', 'transition/css/shorthand'],
             },
           },
         });
@@ -678,7 +678,7 @@ Use log.verbosity "verbose" or use CLI option --verbose for more details.
           },
           platforms: {
             css: {
-              transforms: ['transition/css/shorthand'],
+              transforms: ['cubicBezier/css', 'transition/css/shorthand'],
             },
           },
         });

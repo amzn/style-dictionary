@@ -519,12 +519,13 @@ Assumes a time in miliseconds and transforms it into a decimal
 ### fontFamily/css
 
 Transforms `fontFamily` type token (which can be an array) into a CSS string, putting single quotes around font names that contain spaces where necessary.
+Also handles the `fontFamily` property inside `typography` type object-values.
 
 [DTCG definition](https://design-tokens.github.io/community-group/format/#font-family)
 
 ```css
 /**
- * Matches: token.type === 'fontFamily'
+ * Matches: token.type === 'fontFamily' || token.type === 'typography'
  * Returns:
  */
 :root {
@@ -537,12 +538,13 @@ Transforms `fontFamily` type token (which can be an array) into a CSS string, pu
 ### cubicBezier/css
 
 Transforms `cubicBezier` type token into a CSS string, using the CSS `cubic-bezier` function.
+Also handles the `timingFunction` property inside `transition` type object-values.
 
 [DTCG definition](https://design-tokens.github.io/community-group/format/#cubic-bezier)
 
 ```css
 /**
- * Matches: token.type === 'cubicBezier'
+ * Matches: token.type === 'cubicBezier' || token.type === 'transition'
  * Returns:
  */
 :root {
