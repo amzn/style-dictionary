@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.0.0-prerelease.34
+
+### Patch Changes
+
+- ba03ee9: Fix for expand utility on platform level to adjust the token's path property.
+
 ## 4.0.0-prerelease.33
 
 ### Minor Changes
