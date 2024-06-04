@@ -1049,39 +1049,132 @@ describe('common', () => {
     });
 
     describe('fontFamily/css', () => {
-      const fontFamilyTransform = (value) =>
-        transforms['fontFamily/css'].transform({ value }, {}, {});
+      const fontFamilyTransform = (token) => transforms['fontFamily/css'].transform(token, {}, {});
 
       it('should handle simple fontFamily as is', () => {
-        expect(fontFamilyTransform('Arial')).to.equal('Arial');
+        expect(fontFamilyTransform({ value: 'Arial', type: 'fontFamily' })).to.equal('Arial');
       });
 
       it('should comma separated type fontFamily values', () => {
-        expect(fontFamilyTransform('Arial, sans-serif')).to.equal('Arial, sans-serif');
+        expect(fontFamilyTransform({ value: 'Arial, sans-serif', type: 'fontFamily' })).to.equal(
+          'Arial, sans-serif',
+        );
       });
 
       it('should handle array type fontFamily values', () => {
-        expect(fontFamilyTransform(['Arial', 'sans-serif'])).to.equal('Arial, sans-serif');
+        expect(
+          fontFamilyTransform({ value: ['Arial', 'sans-serif'], type: 'fontFamily' }),
+        ).to.equal('Arial, sans-serif');
       });
 
       it('should wrap fontFamily values with spaces in quotes', () => {
-        expect(fontFamilyTransform('Gill Sans')).to.equal("'Gill Sans'");
-        expect(fontFamilyTransform('Gill Sans, Arial, Comic Sans, Open Sans, sans-serif')).to.equal(
-          "'Gill Sans', Arial, 'Comic Sans', 'Open Sans', sans-serif",
+        expect(fontFamilyTransform({ value: 'Gill Sans', type: 'fontFamily' })).to.equal(
+          "'Gill Sans'",
         );
         expect(
-          fontFamilyTransform(['Gill Sans', 'Arial', 'Comic Sans', 'Open Sans', 'sans-serif']),
+          fontFamilyTransform({
+            value: 'Gill Sans, Arial, Comic Sans, Open Sans, sans-serif',
+            type: 'fontFamily',
+          }),
         ).to.equal("'Gill Sans', Arial, 'Comic Sans', 'Open Sans', sans-serif");
+        expect(
+          fontFamilyTransform({
+            value: ['Gill Sans', 'Arial', 'Comic Sans', 'Open Sans', 'sans-serif'],
+            type: 'fontFamily',
+          }),
+        ).to.equal("'Gill Sans', Arial, 'Comic Sans', 'Open Sans', sans-serif");
+      });
+
+      it('should handle fontFamily prop within typography tokens', () => {
+        expect(
+          fontFamilyTransform({
+            value: {
+              fontFamily: ['Gill Sans', 'sans-serif'],
+              fontWeight: 300,
+              fontSize: '20px',
+              lineHeight: '1.5',
+            },
+            type: 'typography',
+          }),
+        ).to.eql({
+          fontFamily: "'Gill Sans', sans-serif",
+          fontWeight: 300,
+          fontSize: '20px',
+          lineHeight: '1.5',
+        });
+
+        expect(
+          fontFamilyTransform({
+            value: {
+              fontWeight: 300,
+              fontSize: '20px',
+              lineHeight: '1.5',
+            },
+            type: 'typography',
+          }),
+        ).to.eql({
+          fontWeight: 300,
+          fontSize: '20px',
+          lineHeight: '1.5',
+        });
       });
     });
 
     describe('cubicBezier/css', () => {
-      const cubicBezierTransform = (value) =>
-        transforms['cubicBezier/css'].transform({ value }, {}, {});
+      const cubicBezierTransform = (token) =>
+        transforms['cubicBezier/css'].transform(token, {}, {});
 
       it('should stringify cubicBezier values to cubicBezier() CSS function', () => {
-        expect(cubicBezierTransform([0.5, 0, 1, 1])).to.equal('cubic-bezier(0.5, 0, 1, 1)');
-        expect('ease-in-out').to.equal('ease-in-out');
+        expect(cubicBezierTransform({ value: [0.5, 0, 1, 1], type: 'cubicBezier' })).to.equal(
+          'cubic-bezier(0.5, 0, 1, 1)',
+        );
+        expect(cubicBezierTransform({ value: 'ease-in-out', type: 'cubicBezier' })).to.equal(
+          'ease-in-out',
+        );
+      });
+
+      it('should stringify transition token cubicBezier properties to cubicBezier() CSS function', () => {
+        expect(
+          cubicBezierTransform({
+            value: {
+              duration: '200ms',
+              delay: '0ms',
+              timingFunction: [0.5, 0, 1, 1],
+            },
+            type: 'transition',
+          }),
+        ).to.eql({
+          duration: '200ms',
+          delay: '0ms',
+          timingFunction: 'cubic-bezier(0.5, 0, 1, 1)',
+        });
+        expect(
+          cubicBezierTransform({
+            value: {
+              duration: '200ms',
+              delay: '0ms',
+              timingFunction: 'ease-in-out',
+            },
+            type: 'transition',
+          }),
+        ).to.eql({
+          duration: '200ms',
+          delay: '0ms',
+          timingFunction: 'ease-in-out',
+        });
+
+        expect(
+          cubicBezierTransform({
+            value: {
+              duration: '200ms',
+              delay: '0ms',
+            },
+            type: 'transition',
+          }),
+        ).to.eql({
+          duration: '200ms',
+          delay: '0ms',
+        });
       });
     });
 
@@ -1118,28 +1211,6 @@ describe('common', () => {
         expect(typographyTransform({})).to.equal('16px sans-serif');
         expect(typographyTransform({}, { basePxFontSize: 12 })).to.equal('12px sans-serif');
       });
-
-      it('sets quotes around fontFamily if it has white-spaces in name', () => {
-        expect(
-          typographyTransform({
-            fontWeight: 300,
-            fontSize: '20px',
-            lineHeight: '1.5',
-            fontFamily: 'Arial Narrow, Arial, sans-serif',
-          }),
-        ).to.equal("300 20px/1.5 'Arial Narrow', Arial, sans-serif");
-      });
-
-      it('handles array fontFamily values', () => {
-        expect(
-          typographyTransform({
-            fontWeight: 300,
-            fontSize: '20px',
-            lineHeight: '1.5',
-            fontFamily: ['Arial Narrow', 'Arial', 'sans-serif'],
-          }),
-        ).to.equal("300 20px/1.5 'Arial Narrow', Arial, sans-serif");
-      });
     });
 
     // https://design-tokens.github.io/community-group/format/#border
@@ -1170,6 +1241,10 @@ describe('common', () => {
           }),
         ).to.equal('5px dashed #000000');
       });
+
+      it('allows every property to be optional', () => {
+        expect(borderTransform({})).to.equal('none');
+      });
     });
 
     describe('strokeStyle/css/shorthand', () => {
@@ -1197,7 +1272,7 @@ describe('common', () => {
           transitionTransform({
             duration: '200ms',
             delay: '0ms',
-            timingFunction: [0.5, 0, 1, 1],
+            timingFunction: 'cubic-bezier(0.5, 0, 1, 1)',
           }),
         ).to.equal('200ms cubic-bezier(0.5, 0, 1, 1) 0ms');
 
