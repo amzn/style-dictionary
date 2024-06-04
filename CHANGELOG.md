@@ -1,5 +1,15 @@
 # Changelog
 
+## 4.0.0-prerelease.33
+
+### Minor Changes
+
+- 261a2cb: Handle transition timingFunction prop in cubicBezier/css transform. Handle typography fontFamily prop in fontFamily/css transform.
+
+### Patch Changes
+
+- 261a2cb: Allow border type tokens to be empty, every property is optional.
+
 ## 4.0.0-prerelease.32
 
 ### Minor Changes
