@@ -100,6 +100,38 @@ describe('utils', () => {
           expect(expanded).to.eql(borderOutput);
         });
 
+        it('should adjust the path properties of the newly expanded tokens if path prop is already present (platform expand)', () => {
+          const expanded = expandToken(
+            {
+              type: 'border',
+              value: {
+                width: '2px',
+                style: 'solid',
+                color: '#000',
+              },
+              path: ['input', 'border'],
+            },
+            { expand: true, usesDtcg: false },
+          );
+          expect(expanded).to.eql({
+            color: {
+              type: 'color',
+              value: '#000',
+              path: ['input', 'border', 'color'],
+            },
+            style: {
+              type: 'strokeStyle',
+              value: 'solid',
+              path: ['input', 'border', 'style'],
+            },
+            width: {
+              type: 'dimension',
+              value: '2px',
+              path: ['input', 'border', 'width'],
+            },
+          });
+        });
+
         it('should handle DTCG spec tokens expansion', () => {
           const expanded = expandToken(
             {
