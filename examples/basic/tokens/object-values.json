@@ -1,0 +1,115 @@
+{
+  "text": {
+    "typography": {
+      "$type": "typography",
+      "heading": {
+        "$value": {
+          "fontFamily": "{text.fonts.sans}",
+          "fontWeight": "{text.weights.bold}",
+          "fontSize": "{dimensions.7}",
+          "lineHeight": "{text.lineHeights.large}"
+        }
+      },
+      "body": {
+        "$value": {
+          "fontFamily": "{text.fonts.serif}",
+          "fontWeight": "{text.weights.regular}",
+          "fontSize": "{dimensions.4}",
+          "lineHeight": "{text.lineHeights.normal}"
+        }
+      }
+    }
+  },
+  "transitions": {
+    "$type": "transition",
+    "emphasis": {
+      "$value": {
+        "duration": "{transitions.durations.medium}",
+        "delay": "{transitions.durations.instant}",
+        "timingFunction": "{transitions.easingFunctions.accelerate}"
+      }
+    },
+    "fade": {
+      "$value": {
+        "duration": "{transitions.durations.long}",
+        "delay": "{transitions.durations.instant}",
+        "timingFunction": "{transitions.easingFunctions.decelerate}"
+      }
+    },
+    "easingFunctions": {
+      "$type": "cubicBezier",
+      "accelerate": {
+        "$value": [0.5, 0, 1, 1]
+      },
+      "decelerate": {
+        "$value": [0, 0, 0.5, 1]
+      }
+    },
+    "durations": {
+      "$type": "duration",
+      "instant": {
+        "$value": "0ms"
+      },
+      "short": {
+        "$value": "100ms"
+      },
+      "medium": {
+        "$value": "300ms"
+      },
+      "long": {
+        "$value": "600ms"
+      }
+    }
+  },
+  "borders": {
+    "$type": "border",
+    "heavy": {
+      "$value": {
+        "color": "{colors.black}",
+        "width": "{dimensions.1}",
+        "style": "{borders.styles.solid}"
+      }
+    },
+    "wireframe": {
+      "$value": {
+        "color": "{colors.orange.600}",
+        "width": "{dimensions.2}",
+        "style": "{borders.styles.dashed}"
+      }
+    },
+    "styles": {
+      "$type": "strokeStyle",
+      "solid": {
+        "$value": "solid"
+      },
+      "dashed": {
+        "$value": {
+          "dashArray": ["0.5rem", "0.25rem"],
+          "lineCap": "round"
+        }
+      }
+    }
+  },
+  "shadows": {
+    "$type": "shadow",
+    "sm": {
+      "$value": {
+        "color": "{colors.black}",
+        "offsetX": "{dimensions.0}",
+        "offsetY": "{dimensions.1}",
+        "blur": "{dimensions.3}"
+      }
+    },
+    "lg": {
+      "$value": {
+        "color": "{colors.black}",
+        "offsetX": "{dimensions.0}",
+        "offsetY": "{dimensions.2}",
+        "blur": "{dimensions.4}"
+      }
+    },
+    "multi": {
+      "$value": ["{shadows.sm}", "{shadows.lg}"]
+    }
+  }
+}
