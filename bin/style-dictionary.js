@@ -88,7 +88,9 @@ program
     }
     /* eslint-disable no-console */
     console.log('Copying starter files...\n');
-    node_fs.copySync(path.join(__dirname, '..', 'examples', type), process.cwd());
+    node_fs.cpSync(path.join(__dirname, '..', 'examples', type), process.cwd(), {
+      recursive: true,
+    });
     console.log('Source style dictionary starter files created!\n');
     console.log(
       'Running `style-dictionary build` for the first time to generate build artifacts.\n',
