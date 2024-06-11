@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.0.0-prerelease.35
+
+### Minor Changes
+
+- c06661d: Re-add and update example basic, fix copySync command in CLI, fix android templates to use $type for DTCG tokens.
+
 ## 4.0.0-prerelease.34
 
 ### Patch Changes
