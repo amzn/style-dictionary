@@ -11,6 +11,7 @@
  * and limitations under the License.
  */
 import { expect } from 'chai';
+import { restore, stubMethod } from 'hanbi';
 import { fileToJSON } from '../../__helpers.js';
 import {
   _resolveReferences as resolveReferences,
@@ -25,6 +26,7 @@ describe('utils', () => {
     describe('resolveReferences', () => {
       beforeEach(() => {
         GroupMessages.clear(PROPERTY_REFERENCE_WARNINGS);
+        restore();
       });
 
       describe('public API', () => {
@@ -39,6 +41,23 @@ describe('utils', () => {
           expect(() => publicResolveReferences(obj.a.d, obj)).to.throw(
             `tries to reference d, which is not defined.`,
           );
+        });
+
+        it('should only console.error if throwOnBrokenReferences is disabled', async () => {
+          const stub = stubMethod(console, 'error');
+          publicResolveReferences('{foo.bar}', {}, { throwOnBrokenReferences: false });
+          expect(stub.firstCall.args[0]).to.equal(
+            `tries to reference foo.bar, which is not defined.`,
+          );
+        });
+
+        it('should gracefully handle basic circular references if throwOnBrokenReferences is disabled', () => {
+          const stub = stubMethod(console, 'error');
+          const obj = fileToJSON('__tests__/__json_files/circular.json');
+          expect(publicResolveReferences(obj.a, obj, { throwOnBrokenReferences: false })).to.equal(
+            '{b}',
+          );
+          expect(stub.firstCall.args[0]).to.equal('Circular definition cycle: b, c, d, a, b');
         });
       });
 
@@ -118,55 +137,55 @@ describe('utils', () => {
         expect(resolveReferences(obj.e[1].a, obj)).to.equal(2);
       });
 
-      it("should store warning if pointers don't exist", () => {
+      it('should collect reference errors when warnImmediately is set to false', () => {
         const obj = fileToJSON('__tests__/__json_files/non_existent.json');
-        expect(resolveReferences(obj.foo, obj)).to.be.undefined;
-        expect(resolveReferences(obj.error, obj)).to.be.undefined;
+        expect(resolveReferences(obj.foo, obj, { warnImmediately: false })).to.be.undefined;
+        expect(resolveReferences(obj.error, obj, { warnImmediately: false })).to.be.undefined;
         expect(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS)).to.eql([
           'tries to reference bar, which is not defined.',
           'tries to reference a.b.d, which is not defined.',
         ]);
       });
 
-      it('should gracefully handle basic circular references', () => {
+      it('should gracefully handle basic circular references, collect warnings when warnImmediately is set to false', () => {
         const obj = fileToJSON('__tests__/__json_files/circular.json');
-        expect(resolveReferences(obj.a, obj)).to.equal('{b}');
+        expect(resolveReferences(obj.a, obj, { warnImmediately: false })).to.equal('{b}');
         expect(GroupMessages.count(PROPERTY_REFERENCE_WARNINGS)).to.equal(1);
         expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS))).to.equal(
           JSON.stringify(['Circular definition cycle:  b, c, d, a, b']),
         );
       });
 
-      it('should gracefully handle basic and nested circular references', () => {
+      it('should gracefully handle basic and nested circular references, collect warnings when warnImmediately is set to false', () => {
         const obj = fileToJSON('__tests__/__json_files/circular_2.json');
-        expect(resolveReferences(obj.j, obj)).to.equal('{a.b.c}');
+        expect(resolveReferences(obj.j, obj, { warnImmediately: false })).to.equal('{a.b.c}');
         expect(GroupMessages.count(PROPERTY_REFERENCE_WARNINGS)).to.equal(1);
         expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS))).to.equal(
           JSON.stringify(['Circular definition cycle:  a.b.c, j, a.b.c']),
         );
       });
 
-      it('should gracefully handle nested circular references', () => {
+      it('should gracefully handle nested circular references, collect warnings when warnImmediately is set to false', () => {
         const obj = fileToJSON('__tests__/__json_files/circular_3.json');
-        expect(resolveReferences(obj.c.d.e, obj)).to.equal('{a.b}');
+        expect(resolveReferences(obj.c.d.e, obj, { warnImmediately: false })).to.equal('{a.b}');
         expect(GroupMessages.count(PROPERTY_REFERENCE_WARNINGS)).to.equal(1);
         expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS))).to.equal(
           JSON.stringify(['Circular definition cycle:  a.b, c.d.e, a.b']),
         );
       });
 
-      it('should gracefully handle multiple nested circular references', () => {
+      it('should gracefully handle multiple nested circular references, collect warnings when warnImmediately is set to false', () => {
         const obj = fileToJSON('__tests__/__json_files/circular_4.json');
-        expect(resolveReferences(obj.h.i, obj)).to.equal('{a.b.c.d}');
+        expect(resolveReferences(obj.h.i, obj, { warnImmediately: false })).to.equal('{a.b.c.d}');
         expect(GroupMessages.count(PROPERTY_REFERENCE_WARNINGS)).to.equal(1);
         expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS))).to.equal(
           JSON.stringify(['Circular definition cycle:  a.b.c.d, e.f.g, h.i, a.b.c.d']),
         );
       });
 
-      it('should gracefully handle down-chain circular references', () => {
+      it('should gracefully handle down-chain circular references, collect warnings when warnImmediately is set to false', () => {
         const obj = fileToJSON('__tests__/__json_files/circular_5.json');
-        expect(resolveReferences(obj.n, obj)).to.equal('{l}');
+        expect(resolveReferences(obj.n, obj, { warnImmediately: false })).to.equal('{l}');
         expect(GroupMessages.count(PROPERTY_REFERENCE_WARNINGS)).to.equal(1);
         expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS))).to.equal(
           JSON.stringify(['Circular definition cycle:  l, m, l']),
@@ -175,18 +194,22 @@ describe('utils', () => {
 
       it('should correctly resolve multiple references without reference errors', function () {
         const obj = fileToJSON('__tests__/__json_files/not_circular.json');
-        expect(resolveReferences(obj.prop8.value, obj)).to.equal(5);
-        expect(resolveReferences(obj.prop12.value, obj)).to.equal(
+        expect(resolveReferences(obj.prop8.value, obj, { warnImmediately: false })).to.equal(5);
+        expect(resolveReferences(obj.prop12.value, obj, { warnImmediately: false })).to.equal(
           'test1 value, test2 value and some extra stuff',
         );
-        expect(resolveReferences(obj.prop124.value, obj)).to.equal(
+        expect(resolveReferences(obj.prop124.value, obj, { warnImmediately: false })).to.equal(
           'test1 value, test2 value and test1 value',
         );
-        expect(resolveReferences(obj.prop15.value, obj)).to.equal(
+        expect(resolveReferences(obj.prop15.value, obj, { warnImmediately: false })).to.equal(
           'test1 value, 5 and some extra stuff',
         );
-        expect(resolveReferences(obj.prop156.value, obj)).to.equal('test1 value, 5 and 6');
-        expect(resolveReferences(obj.prop1568.value, obj)).to.equal('test1 value, 5, 6 and 5');
+        expect(resolveReferences(obj.prop156.value, obj, { warnImmediately: false })).to.equal(
+          'test1 value, 5 and 6',
+        );
+        expect(resolveReferences(obj.prop1568.value, obj, { warnImmediately: false })).to.equal(
+          'test1 value, 5, 6 and 5',
+        );
         expect(GroupMessages.count(PROPERTY_REFERENCE_WARNINGS)).to.equal(0);
       });
 
@@ -212,11 +235,11 @@ describe('utils', () => {
         expect(test).to.equal('foo');
       });
 
-      it('should collect multiple reference errors', () => {
+      it('should collect multiple reference errors when warnImmediately is set to false', () => {
         const obj = fileToJSON('__tests__/__json_files/multiple_reference_errors.json');
-        expect(resolveReferences(obj.a.b, obj)).to.be.undefined;
-        expect(resolveReferences(obj.a.c, obj)).to.be.undefined;
-        expect(resolveReferences(obj.a.d, obj)).to.be.undefined;
+        expect(resolveReferences(obj.a.b, obj, { warnImmediately: false })).to.be.undefined;
+        expect(resolveReferences(obj.a.c, obj, { warnImmediately: false })).to.be.undefined;
+        expect(resolveReferences(obj.a.d, obj, { warnImmediately: false })).to.be.undefined;
         expect(GroupMessages.count(PROPERTY_REFERENCE_WARNINGS)).to.equal(3);
         expect(JSON.stringify(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS))).to.equal(
           JSON.stringify([
@@ -232,7 +255,7 @@ describe('utils', () => {
           test: { value: '{zero.value}' },
           zero: { value: 0 },
         };
-        const test = resolveReferences(obj.test.value, obj);
+        const test = resolveReferences(obj.test.value, obj, { warnImmediately: false });
         expect(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS).length).to.equal(0);
         expect(test).to.equal(0);
       });

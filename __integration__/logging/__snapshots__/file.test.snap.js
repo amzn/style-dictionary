@@ -439,3 +439,9 @@ color.core.blue.0
 This is caused when combining a filter and \`outputReferences\`.`;
 /* end snapshot integration logging file filtered references should throw detailed error of filtered references through "verbose" verbosity and log level set to error */
 
+snapshots["integration logging file empty tokens should not warn user about empty tokens with silent log verbosity"] = 
+`
+css
+No tokens for empty.css. File not created.`;
+/* end snapshot integration logging file empty tokens should not warn user about empty tokens with silent log verbosity */
+

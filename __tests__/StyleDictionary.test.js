@@ -19,6 +19,7 @@ import { resolve } from '../lib/resolve.js';
 import GroupMessages from '../lib/utils/groupMessages.js';
 import flattenTokens from '../lib/utils/flattenTokens.js';
 import formats from '../lib/common/formats.js';
+import { restore, stubMethod } from 'hanbi';
 
 function traverseObj(obj, fn) {
   for (let key in obj) {
@@ -52,6 +53,7 @@ const test_props = {
 // extend method is called by StyleDictionary constructor, therefore we're basically testing both things here
 describe('StyleDictionary class', () => {
   beforeEach(() => {
+    restore();
     clearOutput();
   });
 
@@ -341,6 +343,54 @@ describe('StyleDictionary class', () => {
         { init: false },
       );
       await expect(sd.init()).to.eventually.be.fulfilled;
+    });
+  });
+
+  describe('reference errors', () => {
+    it('should throw an error by default if broken references are encountered', async () => {
+      const sd = new StyleDictionary({
+        tokens: {
+          foo: {
+            value: '{bar}',
+            type: 'other',
+          },
+        },
+        platforms: {
+          css: {},
+        },
+      });
+
+      await expect(sd.exportPlatform('css')).to.eventually.be.rejectedWith(`
+Reference Errors:
+Some token references (1) could not be found.
+Use log.verbosity "verbose" or use CLI option --verbose for more details.
+`);
+    });
+
+    it('should only log an error if broken references are encountered and log.errors.brokenReferences is set to console-', async () => {
+      const stub = stubMethod(console, 'error');
+      const sd = new StyleDictionary({
+        log: {
+          errors: {
+            brokenReferences: 'console',
+          },
+        },
+        tokens: {
+          foo: {
+            value: '{bar}',
+            type: 'other',
+          },
+        },
+        platforms: {
+          css: {},
+        },
+      });
+      await sd.exportPlatform('css');
+      expect(stub.firstCall.args[0]).to.equal(`
+Reference Errors:
+Some token references (1) could not be found.
+Use log.verbosity "verbose" or use CLI option --verbose for more details.
+`);
     });
   });
 

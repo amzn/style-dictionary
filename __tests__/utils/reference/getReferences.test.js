@@ -12,7 +12,8 @@
  */
 
 import { expect } from 'chai';
-import { _getReferences, getReferences } from '../../../lib/utils/references/getReferences.js';
+import { restore, stubMethod } from 'hanbi';
+import { getReferences } from '../../../lib/utils/references/getReferences.js';
 
 const tokens = {
   color: {
@@ -50,38 +51,63 @@ describe('utils', () => {
   describe('reference', () => {
     describe('getReferences()', () => {
       describe('public API', () => {
+        beforeEach(() => {
+          restore();
+        });
+
         it('should not collect errors but rather throw immediately when using public API', () => {
           expect(() => getReferences('{foo.bar}', tokens)).to.throw(
-            `tries to reference foo.bar, which is not defined.`,
+            `Tries to reference foo.bar, which is not defined.`,
+          );
+        });
+
+        it('should not collect errors but rather throw immediately when using public API', () => {
+          const stub = stubMethod(console, 'error');
+          getReferences('{foo.bar}', tokens, { throwOnBrokenReferences: false });
+          expect(stub.firstCall.args[0]).to.equal(
+            `Tries to reference foo.bar, which is not defined.`,
+          );
+        });
+
+        it('should allow warning immediately when references are filtered out', async () => {
+          const stub = stubMethod(console, 'warn');
+          const clonedTokens = structuredClone(tokens);
+          delete clonedTokens.color.red;
+          getReferences('{color.red}', clonedTokens, {
+            unfilteredTokens: tokens,
+            warnImmediately: true,
+          });
+          expect(stub.firstCall.args[0]).to.equal(
+            `Filtered out token references were found: color.red`,
           );
         });
       });
 
       it(`should return an empty array if the value has no references`, () => {
-        expect(_getReferences(tokens.color.red.value, tokens)).to.eql([]);
+        expect(getReferences(tokens.color.red.value, tokens)).to.eql([]);
       });
 
       it(`should work with a single reference`, () => {
-        expect(_getReferences(tokens.color.danger.value, tokens)).to.eql([
+        expect(getReferences(tokens.color.danger.value, tokens)).to.eql([
           { ref: ['color', 'red'], value: '#f00' },
         ]);
       });
 
       it(`should work with object values`, () => {
-        expect(_getReferences(tokens.border.primary.value, tokens)).to.eql([
+        expect(getReferences(tokens.border.primary.value, tokens)).to.eql([
           { ref: ['color', 'red'], value: '#f00' },
           { ref: ['size', 'border'], value: '2px' },
         ]);
       });
 
       it(`should work with objects that have numbers`, () => {
-        expect(_getReferences(tokens.border.secondary.value, tokens)).to.eql([
+        expect(getReferences(tokens.border.secondary.value, tokens)).to.eql([
           { ref: ['color', 'red'], value: '#f00' },
         ]);
       });
 
       it(`should work with interpolated values`, () => {
-        expect(_getReferences(tokens.border.tertiary.value, tokens)).to.eql([
+        expect(getReferences(tokens.border.tertiary.value, tokens)).to.eql([
           { ref: ['size', 'border'], value: '2px' },
           { ref: ['color', 'red'], value: '#f00' },
         ]);
