@@ -87,10 +87,9 @@ export function clearSDMeta(tokens) {
   function recurse(slice) {
     if (isPlainObject(slice)) {
       if (Object.hasOwn(slice, 'value')) {
-        delete slice.path;
-        delete slice.original;
-        delete slice.name;
-        delete slice.attributes;
+        ['path', 'original', 'name', 'attributes', 'filePath', 'isSource'].forEach((prop) => {
+          delete slice[prop];
+        });
       } else {
         Object.values(slice).forEach((prop) => {
           recurse(prop);

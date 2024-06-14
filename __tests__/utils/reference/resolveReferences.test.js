@@ -11,7 +11,7 @@
  * and limitations under the License.
  */
 import { expect } from 'chai';
-import { restore, stubMethod } from 'hanbi';
+import { restore } from 'hanbi';
 import { fileToJSON } from '../../__helpers.js';
 import {
   _resolveReferences as resolveReferences,
@@ -41,23 +41,6 @@ describe('utils', () => {
           expect(() => publicResolveReferences(obj.a.d, obj)).to.throw(
             `tries to reference d, which is not defined.`,
           );
-        });
-
-        it('should only console.error if throwOnBrokenReferences is disabled', async () => {
-          const stub = stubMethod(console, 'error');
-          publicResolveReferences('{foo.bar}', {}, { throwOnBrokenReferences: false });
-          expect(stub.firstCall.args[0]).to.equal(
-            `tries to reference foo.bar, which is not defined.`,
-          );
-        });
-
-        it('should gracefully handle basic circular references if throwOnBrokenReferences is disabled', () => {
-          const stub = stubMethod(console, 'error');
-          const obj = fileToJSON('__tests__/__json_files/circular.json');
-          expect(publicResolveReferences(obj.a, obj, { throwOnBrokenReferences: false })).to.equal(
-            '{b}',
-          );
-          expect(stub.firstCall.args[0]).to.equal('Circular definition cycle: b, c, d, a, b');
         });
       });
 

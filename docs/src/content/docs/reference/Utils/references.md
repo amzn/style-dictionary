@@ -56,7 +56,6 @@ resolveReferences('solid {spacing.2} {colors.black}', sd.tokens, { usesDtcg: tru
 You can pass a third `options` argument where you can pass some configuration options for how references are resolved:
 
 - `usesDtcg` boolean, if set to true, the `resolveReferences` utility will assume DTCG syntax (`$value` props)
-- `throwOnBrokenReferences` boolean, if set to true, it will `console.error` for reference errors instead of fatally throw
 - `warnImmediately` boolean, `true` by default. You should only set this to `false` if you know that this utility is used used inside of the Transform lifecycle hook of Style Dictionary, allowing the errors to be grouped and only thrown at the end of the transform step (end of [exportPlatform](/reference/api#exportplatform) method).
 
 ## getReferences
@@ -101,7 +100,6 @@ getReferences('solid {spacing.2} {colors.black}', sd.tokens, { usesDtcg: true })
 You can pass a third `options` argument where you can pass some configuration options for how references are resolved:
 
 - `usesDtcg` boolean, if set to true, the `resolveReferences` utility will assume DTCG syntax (`$value` props)
-- `throwOnBrokenReferences` boolean, if set to true, it will `console.error` for reference errors instead of fatally throw
 - `unfilteredTokens`, assuming the second `tokens` argument is your filtered `tokens` object where [filters](/reference/hooks/filters) have already done its work, you'll likely want to pass the unfiltered set in case the reference you're trying to find no longer exist in the filtered set, but you still want to get the reference values. This is useful when you're writing your own custom format with an `outputReferences` feature and you want to prevent outputting refs that no longer exist in the filtered set.
 - `warnImmediately` boolean, `true` by default. You should only set this to `false` if you know that this utility is used inside of the Format lifecycle hook of Style Dictionary, allowing the errors to be grouped and only thrown at the end of the format step.
 

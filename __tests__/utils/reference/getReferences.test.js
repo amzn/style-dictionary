@@ -61,12 +61,9 @@ describe('utils', () => {
           );
         });
 
-        it('should not collect errors but rather throw immediately when using public API', () => {
-          const stub = stubMethod(console, 'error');
-          getReferences('{foo.bar}', tokens, { throwOnBrokenReferences: false });
-          expect(stub.firstCall.args[0]).to.equal(
-            `Tries to reference foo.bar, which is not defined.`,
-          );
+        it('should not collect errors but rather throw immediately when using public API', async () => {
+          const badFn = () => getReferences('{foo.bar}', tokens);
+          expect(badFn).to.throw(`Tries to reference foo.bar, which is not defined.`);
         });
 
         it('should allow warning immediately when references are filtered out', async () => {

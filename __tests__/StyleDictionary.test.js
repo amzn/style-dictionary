@@ -393,6 +393,29 @@ Use log.verbosity "verbose" or use CLI option --verbose for more details.
 `);
     });
 
+    it('should allow silencing broken references errors with log.verbosity set to silent and log.errors.brokenReferences set to console', async () => {
+      const stub = stubMethod(console, 'error');
+      const sd = new StyleDictionary({
+        log: {
+          verbosity: 'silent',
+          errors: {
+            brokenReferences: 'console',
+          },
+        },
+        tokens: {
+          foo: {
+            value: '{bar}',
+            type: 'other',
+          },
+        },
+        platforms: {
+          css: {},
+        },
+      });
+      await sd.exportPlatform('css');
+      expect(stub.callCount).to.equal(0);
+    });
+
     it('should resolve correct references when the tokenset contains broken references and log.errors.brokenReferences is set to console', async () => {
       const stub = stubMethod(console, 'error');
       const sd = new StyleDictionary({

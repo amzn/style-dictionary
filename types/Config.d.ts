@@ -49,14 +49,12 @@ export interface RegexOptions {
 
 export interface GetReferencesOptions extends RegexOptions {
   usesDtcg?: boolean;
-  throwOnBrokenReferences?: boolean;
   unfilteredTokens?: DesignTokens;
   warnImmediately?: boolean;
 }
 
 export interface ResolveReferencesOptions extends RegexOptions {
   usesDtcg?: boolean;
-  throwOnBrokenReferences?: boolean;
   warnImmediately?: boolean;
 }
 
