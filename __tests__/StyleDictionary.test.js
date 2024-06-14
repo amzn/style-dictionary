@@ -14,7 +14,7 @@ import { expect } from 'chai';
 import StyleDictionary from 'style-dictionary';
 import { fs } from 'style-dictionary/fs';
 import chalk from 'chalk';
-import { fileToJSON, clearOutput, fileExists } from './__helpers.js';
+import { fileToJSON, clearOutput, fileExists, clearSDMeta } from './__helpers.js';
 import { resolve } from '../lib/resolve.js';
 import GroupMessages from '../lib/utils/groupMessages.js';
 import flattenTokens from '../lib/utils/flattenTokens.js';
@@ -367,7 +367,7 @@ Use log.verbosity "verbose" or use CLI option --verbose for more details.
 `);
     });
 
-    it('should only log an error if broken references are encountered and log.errors.brokenReferences is set to console-', async () => {
+    it('should only log an error if broken references are encountered and log.errors.brokenReferences is set to console', async () => {
       const stub = stubMethod(console, 'error');
       const sd = new StyleDictionary({
         log: {
@@ -391,6 +391,55 @@ Reference Errors:
 Some token references (1) could not be found.
 Use log.verbosity "verbose" or use CLI option --verbose for more details.
 `);
+    });
+
+    it('should resolve correct references when the tokenset contains broken references and log.errors.brokenReferences is set to console', async () => {
+      const stub = stubMethod(console, 'error');
+      const sd = new StyleDictionary({
+        log: {
+          errors: {
+            brokenReferences: 'console',
+          },
+        },
+        tokens: {
+          foo: {
+            value: '{bar}',
+            type: 'other',
+          },
+          baz: {
+            value: '8px',
+            type: 'dimension',
+          },
+          qux: {
+            value: '{baz}',
+            type: 'dimension',
+          },
+        },
+        platforms: {
+          css: {},
+        },
+      });
+      const transformed = await sd.exportPlatform('css');
+      expect(stub.firstCall.args[0]).to.equal(`
+Reference Errors:
+Some token references (1) could not be found.
+Use log.verbosity "verbose" or use CLI option --verbose for more details.
+`);
+
+      expect(clearSDMeta(transformed)).to.eql({
+        foo: {
+          value: '{bar}',
+          type: 'other',
+        },
+        baz: {
+          value: '8px',
+          type: 'dimension',
+        },
+        qux: {
+          value: '8px',
+          type: 'dimension',
+        },
+      });
     });
   });
 

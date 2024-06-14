@@ -14,6 +14,7 @@
 import { expect } from 'chai';
 import { fs } from 'style-dictionary/fs';
 import { resolve } from '../lib/resolve.js';
+import isPlainObject from 'is-plain-obj';
 
 export const cleanConsoleOutput = (str) => {
   const arr = str
@@ -79,4 +80,24 @@ export function fixDate() {
   __global.Date.now = function () {
     return constantDate;
   };
+}
+
+export function clearSDMeta(tokens) {
+  const copy = structuredClone(tokens);
+  function recurse(slice) {
+    if (isPlainObject(slice)) {
+      if (Object.hasOwn(slice, 'value')) {
+        delete slice.path;
+        delete slice.original;
+        delete slice.name;
+        delete slice.attributes;
+      } else {
+        Object.values(slice).forEach((prop) => {
+          recurse(prop);
+        });
+      }
+    }
+  }
+  recurse(copy);
+  return copy;
 }
