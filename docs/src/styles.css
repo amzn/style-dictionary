@@ -1,18 +1,119 @@
 /* Dark mode colors. */
 :root {
-  --sl-color-accent-low: #074947;
+  /* --sl-color-accent-low: #074947;
   --sl-color-accent: #3fc6bf;
-  --sl-color-accent-high: #80d9d6;
+  --sl-color-accent-high: #80d9d6; */
+  --sl-font: 'Inter Variable', sans-serif;
+  font-feature-settings: 'ss01', 'ss02', 'case', 'salt';
+}
+
+html {
+  font-feature-settings: 'ss01', 'ss02', 'case', 'salt';
 }
 
 /* Light mode colors. */
 :root[data-theme='light'] {
-  --sl-color-accent-low: #55b3af;
-  --sl-color-accent: #047771;
-  --sl-color-accent-high: #07524f;
+  /* --accent-hue: 180;
+  --sl-color-accent-low: oklch(87% 0.106 var(--accent-hue) / 0.25);
+  --sl-color-accent: oklch(40% 0.096 var(--accent-hue));
+  --sl-color-accent-high: oklch(87% 0.106 var(--accent-hue));
+
+  --sl-color-gray-1: oklch(10% 0.095 var(--gray-hue));
+  --sl-color-gray-2: oklch(15% 0.05 var(--gray-hue));
+  --sl-color-gray-3: oklch(25% 0.05 var(--gray-hue));
+  --sl-color-gray-4: oklch(50% 0.05 var(--gray-hue));
+  --sl-color-gray-5: oklch(75% 0.05 var(--gray-hue));
+  --sl-color-gray-6: oklch(92% 0.005 var(--gray-hue));
+  --sl-color-gray-7: oklch(98% 0.001 var(--gray-hue));
+  --sl-color-black: oklch(100% 0 var(--gray-hue));
+  --sl-color-bg-nav: var(--sl-color-black);
+
+  --sl-color-orange-low: oklch(84.56% 0.109 var(--sl-hue-orange) / 0.2);
+  --sl-color-orange: oklch(75% 0.146 var(--sl-hue-orange));
+  --sl-color-orange-high: oklch(75% 0.146 var(--sl-hue-orange)); */
 }
 
 :root {
+  /* --sl-badge-note-bg: var(--sl-color-accent-low);
+  --sl-badge-note-border: var(--sl-color-accent);
+  --sl-badge-note-text: var(--sl-color-accent-high); */
+
+  /* --accent-hue: 180;
+  --gray-hue: 287.73;
+  --sl-color-gray-1: oklch(95% 0.05 var(--gray-hue));
+  --sl-color-gray-2: hsl(224, 6%, 77%);
+  --sl-color-gray-3: hsl(224, 6%, 56%);
+  --sl-color-gray-4: hsl(224, 7%, 36%);
+  --sl-color-gray-5: oklch(35% 0.05 var(--gray-hue));
+  --sl-color-gray-6: oklch(26% 0.039 var(--gray-hue));
+  --sl-color-gray-7: oklch(20% 0.03 var(--gray-hue));
+  --sl-color-black: oklch(18% 0.03 var(--gray-hue));
+  --sl-color-bg-nav: var(--sl-color-gray-7);
+  --sl-color-bg-sidebar: var(--sl-color-gray-7);
+  --sl-color-bg: var(--sl-color-gray-7);
+
+  --sl-color-bg-code: var(--sl-color-black);
+  --sl-color-bg-secondary: var(--sl-color-gray-6);
+
+  --sl-color-accent-low: oklch(87% 0.106 var(--accent-hue) / 0.25);
+  --sl-color-accent: oklch(87% 0.106 var(--accent-hue));
+  --sl-color-accent-high: oklch(87% 0.106 var(--accent-hue));
+
+  --ec-brdCol: var(--sl-color-gray-7) !important;
+  --ec-frm-trmTtbBrdBtmCol: var(--sl-color-gray-7) !important;
+
+  --sl-hue-orange: 74.73;
+  --sl-color-orange-low: oklch(84.56% 0.109 var(--sl-hue-orange) / 0.2);
+  --sl-color-orange: oklch(84.56% 0.109 var(--sl-hue-orange));
+  --sl-color-orange-high: oklch(84.56% 0.109 var(--sl-hue-orange));
+
+  --sl-hue-purple: 304;
+  --sl-color-purple-low: oklch(77.55% 0.094 304.85 / 0.2);
+  --sl-color-purple: oklch(77.55% 0.094 304.85);
+  --sl-color-purple-high: oklch(77.55% 0.094 304.85); */
+
+  /* --sl-color-white: hsl(0, 0%, 100%);
+  --sl-color-gray-1: hsl(224, 20%, 94%);
+  --sl-color-gray-2: hsl(224, 6%, 77%);
+  --sl-color-gray-3: hsl(224, 6%, 56%);
+  --sl-color-gray-4: hsl(224, 7%, 36%);
+  --sl-color-gray-5: hsl(224, 10%, 23%);
+  --sl-color-gray-6: hsl(224, 14%, 16%);
+  --sl-color-black: hsl(224, 10%, 10%);
+  --sl-hue-orange: 41;
+  --sl-color-orange-low: hsl(var(--sl-hue-orange), 39%, 22%);
+  --sl-color-orange: hsl(var(--sl-hue-orange), 82%, 63%);
+  --sl-color-orange-high: hsl(var(--sl-hue-orange), 82%, 87%);
+  --sl-hue-green: 101;
+  --sl-color-green-low: hsl(var(--sl-hue-green), 39%, 22%);
+  --sl-color-green: hsl(var(--sl-hue-green), 82%, 63%);
+  --sl-color-green-high: hsl(var(--sl-hue-green), 82%, 80%);
+  --sl-hue-blue: 234;
+  --sl-color-blue-low: hsl(var(--sl-hue-blue), 54%, 20%);
+  --sl-color-blue: hsl(var(--sl-hue-blue), 100%, 60%);
+  --sl-color-blue-high: hsl(var(--sl-hue-blue), 100%, 87%);
+  --sl-hue-purple: 281;
+  --sl-color-purple-low: hsl(var(--sl-hue-purple), 39%, 22%);
+  --sl-color-purple: hsl(var(--sl-hue-purple), 82%, 63%);
+  --sl-color-purple-high: hsl(var(--sl-hue-purple), 82%, 89%);
+  --sl-hue-red: 339;
+  --sl-color-red-low: hsl(var(--sl-hue-red), 39%, 22%);
+  --sl-color-red: hsl(var(--sl-hue-red), 82%, 63%);
+  --sl-color-red-high: hsl(var(--sl-hue-red), 82%, 87%);
+  --sl-color-accent-low: hsl(224, 54%, 20%);
+  --sl-color-accent: hsl(224, 100%, 60%);
+  --sl-color-accent-high: hsl(224, 100%, 85%);
+  --sl-color-text: var(--sl-color-gray-2);
+  --sl-color-text-accent: var(--sl-color-accent-high);
+  --sl-color-text-invert: var(--sl-color-accent-low);
+  --sl-color-bg: var(--sl-color-black);
+  --sl-color-bg-nav: var(--sl-color-gray-6);
+  --sl-color-bg-sidebar: var(--sl-color-gray-6);
+  --sl-color-bg-inline-code: var(--sl-color-gray-5);
+  --sl-color-bg-accent: var(--sl-color-accent-high);
+  --sl-color-hairline-light: var(--sl-color-gray-5);
+  --sl-color-hairline: var(--sl-color-gray-6); */
+
   /* Changes the primary theme color to purple using primitives */
   --sl-color-primary-50: var(--sl-color-teal-50) !important;
   --sl-color-primary-100: var(--sl-color-teal-100) !important;
@@ -25,6 +126,23 @@
   --sl-color-primary-800: var(--sl-color-teal-800) !important;
   --sl-color-primary-900: var(--sl-color-teal-900) !important;
   --sl-color-primary-950: var(--sl-color-teal-950) !important;
+}
+
+.expressive-code .frame {
+  --ec-frm-frameBoxShdCssVal: none;
+}
+
+.starlight-aside {
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 0.5rem;
+  border-color: var(--sl-color-asides-border);
+}
+
+.starlight-aside--note {
+  --sl-color-asides-text-accent: var(--sl-color-purple-high);
+  --sl-color-asides-border: var(--sl-color-purple);
+  background-color: var(--sl-color-purple-low);
 }
 
 table code {
@@ -90,4 +208,114 @@ a {
 
 .hidden {
   display: none !important;
+}
+
+[aria-current='page'],
+[aria-current='page']:hover,
+[aria-current='page']:focus,
+[aria-current='page']:active {
+  background-color: var(--sl-color-accent-low);
+  color: var(--sl-color-accent-high);
+  border-radius: 0 0.25rem 0.25rem 0;
+}
+
+/* .sidebar-pane {
+  --sl-sidebar-item-padding-inline: 1rem;
+} */
+
+.sidebar-pane ul ul li {
+  padding-inline-start: 0;
+}
+
+.sidebar-pane ul ul li a {
+  padding-inline: 1rem;
+  padding-block: 0.5rem;
+  display: block;
+}
+
+.sidebar-pane ul ul li:has([aria-current='page']) {
+  border-color: var(--sl-color-accent);
+}
+
+.content-panel + .content-panel {
+  border: none;
+}
+
+header.header {
+  /* border: none; */
+  backdrop-filter: blur(2px);
+  background-color: transparent;
+}
+
+.expressive-code .frame.is-terminal .header {
+  background: var(--sl-color-bg);
+}
+
+div.monaco-editor {
+  background-color: var(--sl-color-bg-nav);
+  border-radius: 0.25rem;
+  overflow: hidden;
+}
+
+starlight-file-tree {
+  border-width: 0 !important;
+  border-radius: 1rem;
+  background-color: var(--sl-color-black) !important;
+}
+
+.sl-markdown-content code {
+  border-radius: 0.25rem;
+}
+
+.right-sidebar {
+  border: none;
+}
+
+.right-sidebar-panel a {
+  color: var(--sl-color-font-tertiary);
+  font-size: var(--sl-text-sm);
+}
+
+.right-sidebar-panel [aria-current='true'],
+.right-sidebar-panel a:hover {
+  color: var(--sl-color-accent-high);
+}
+
+.sidebar-pane {
+  border: none;
+}
+
+.expressive-code {
+  box-shadow: 0 0.125rem 1rem var(--sl-color-background-secondary);
+}
+
+sd-playground::part(monaco-editor) {
+  border: 1px solid var(--sl-color-border-tertiary);
+  box-shadow: 0 0.125rem 1rem var(--sl-color-background-tertiary);
+  border-radius: 4rem;
+}
+
+.sl-link-card:hover {
+  border-color: var(--sl-color-accent);
+  background-color: var(--sl-color-accent-low);
+  box-shadow: 0 0 1rem var(--sl-color-accent-low);
+}
+
+starlight-file-tree .highlight {
+  color: var(--sl-color-accent-high);
+  background-color: var(--sl-color-accent-low);
+}
+
+starlight-file-tree .highlight svg.tree-icon {
+  fill: var(--sl-color-accent);
+}
+
+a:hover,
+a:focus {
+  color: var(--sl-color-accent-high);
+}
+
+starlight-toc li {
+  /* This is to get the first level aligned with the header */
+  margin-inline-start: -0.5rem;
 }

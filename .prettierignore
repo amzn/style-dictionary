@@ -1,3 +1,4 @@
 .changeset/
 **/*.snap.js
 /docs/dist
+/docs/**/*.mdx

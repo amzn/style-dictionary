@@ -80,5 +80,6 @@ xcuserdata/
 
 # build output
 /docs/dist/
+/docs/theme/dist/
 # generated types
 .astro/

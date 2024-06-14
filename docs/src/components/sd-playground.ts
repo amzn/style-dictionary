@@ -63,9 +63,30 @@ export const registeredComponents: SdPlayground[] = [];
 class SdPlayground extends LitElement {
   static get styles() {
     return css`
+      :host {
+        display: block;
+        border: 1px solid var(--sl-color-border-tertiary);
+        box-shadow: 0 0.125rem 1rem var(--sl-color-background-tertiary);
+        border-radius: 0.25rem;
+      }
+
       sl-radio-group {
-        margin-bottom: 4px;
-        margin-top: 16px;
+        background-color: var(--sl-color-background-tertiary);
+        border-radius: 0.25rem 0.25rem 0 0;
+      }
+      sl-radio-button::part(button) {
+        border: none;
+      }
+
+      sl-radio-button::part(button):hover {
+        background-color: transparent;
+        color: var(--sl-color-text-accent);
+      }
+
+      sl-radio-button::part(button--checked) {
+        background-color: var(--sl-color-bg-code);
+        color: var(--sl-color-text);
+        border-top: 1px solid var(--sl-color-accent);
       }
 
       .output-select::part(combobox) {
@@ -201,67 +222,69 @@ class SdPlayground extends LitElement {
 
   render() {
     return html`
-      <sl-radio-group
-        @sl-change=${(ev: Event) => {
-          if ((ev.target as SlRadioGroup).value === 'eject') {
-            return;
-          }
-          this.currentFile = (ev.target as HTMLInputElement).value as Files;
-        }}
-        name="file-switch"
-      >
-        ${files.map(
-          (file) => html`
-            <sl-radio-button value="${file}">
-              ${file.slice(0, 1).toUpperCase()}${file.slice(1)}
-              ${file === 'output'
-                ? html`
-                    <sl-select
-                      class="output-select"
-                      name="output-select"
-                      label="Select output file"
-                      value="${this.outputFiles[0]}"
-                      @sl-change=${(ev: Event) => {
-                        ev.stopPropagation();
-                        this.changeOutputs((ev.target as HTMLSelectElement).value, true);
-                      }}
-                    >
-                      ${this.outputFiles.map(
-                        (file) => html` <sl-option value="${file}">${file}</sl-option> `,
-                      )}
-                    </sl-select>
-                  `
-                : html``}
-            </sl-radio-button>
-          `,
-        )}
-        <sl-radio-button value="eject" label="Eject" title="Eject" @click=${this.ejectHandler}>
-          <svg
-            aria-label="Eject"
-            width="20px"
-            height="20px"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="m8 12 4 4 4-4"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M12 16V4M19 17v.6c0 1.33-1.07 2.4-2.4 2.4H7.4C6.07 20 5 18.93 5 17.6V17"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-miterlimit="10"
-              stroke-linecap="round"
-            />
-          </svg>
-        </sl-radio-button>
-      </sl-radio-group>
-      <slot name="monaco-editor"></slot>
+      <div class="foo">
+        <sl-radio-group
+          @sl-change=${(ev: Event) => {
+            if ((ev.target as SlRadioGroup).value === 'eject') {
+              return;
+            }
+            this.currentFile = (ev.target as HTMLInputElement).value as Files;
+          }}
+          name="file-switch"
+        >
+          ${files.map(
+            (file) => html`
+              <sl-radio-button value="${file}">
+                ${file.slice(0, 1).toUpperCase()}${file.slice(1)}
+                ${file === 'output'
+                  ? html`
+                      <sl-select
+                        class="output-select"
+                        name="output-select"
+                        label="Select output file"
+                        value="${this.outputFiles[0]}"
+                        @sl-change=${(ev: Event) => {
+                          ev.stopPropagation();
+                          this.changeOutputs((ev.target as HTMLSelectElement).value, true);
+                        }}
+                      >
+                        ${this.outputFiles.map(
+                          (file) => html` <sl-option value="${file}">${file}</sl-option> `,
+                        )}
+                      </sl-select>
+                    `
+                  : html``}
+              </sl-radio-button>
+            `,
+          )}
+          <sl-radio-button value="eject" label="Eject" title="Eject" @click=${this.ejectHandler}>
+            <svg
+              aria-label="Eject"
+              width="20px"
+              height="20px"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="m8 12 4 4 4-4"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M12 16V4M19 17v.6c0 1.33-1.07 2.4-2.4 2.4H7.4C6.07 20 5 18.93 5 17.6V17"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+              />
+            </svg>
+          </sl-radio-button>
+        </sl-radio-group>
+        <slot name="monaco-editor"></slot>
+      </div>
     `;
   }
 

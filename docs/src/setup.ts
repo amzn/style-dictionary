@@ -2,6 +2,7 @@ import dark from '@shoelace-style/shoelace/dist/themes/dark.css?raw' assert { ty
 import light from '@shoelace-style/shoelace/dist/themes/light.css?raw' assert { type: 'css' };
 import mermaid from 'mermaid';
 import { registeredComponents } from './components/sd-playground.ts';
+import { SdColors } from './components/colors.ts';
 
 type Theme = 'dark' | 'light';
 type EnhancedCSSSheet = CSSStyleSheet & { theme?: boolean };
@@ -121,7 +122,7 @@ function handleResize() {
 
 async function setup() {
   handleThemeChange();
-  lazilyLoadCEs(['sd-playground', 'sd-dtcg-convert']);
+  lazilyLoadCEs(['sd-playground', 'sd-dtcg-convert', 'sd-colors']);
   handleResize();
   // initial
   await swapTheme(getSelectedTheme());

@@ -1,0 +1,246 @@
+---
+title: Style
+---
+
+import {
+  Aside,
+  Badge,
+  FileTree,
+  Tabs,
+  TabItem,
+  Card,
+  CardGrid,
+  LinkCard,
+  Steps,
+} from '@astrojs/starlight/components';
+
+<sd-colors></sd-colors>
+
+<Card>
+<Badge text="Tip" variant="tip" size="large" />
+<Badge text="Caution" variant="caution" size="large" />
+<Badge text="Note" variant="note" size="large" />
+<Badge text="Success" variant="success" size='large' />
+<Badge text="Danger" variant="danger" size='large' />
+<Badge text="Default" variant="default" size='large' />
+</Card>
+
+---
+
+```js title="build-tokens.js"
+import StyleDictionary from 'style-dictionary';
+
+const sd = new StyleDictionary('config.json');
+const sdTwo = new StyleDictionary({
+  source: ['tokens/*.json'],
+  platforms: {
+    scss: {
+      transformGroup: 'scss',
+      buildPath: 'build/',
+      files: [
+        {
+          destination: 'variables.scss',
+          format: 'scss/variables',
+        },
+      ],
+    },
+    // ...
+  },
+});
+```
+
+```js title="line-markers.js" del={2} ins={3-4} {6}
+function demo() {
+  console.log('this line is marked as deleted');
+  // This line and the next one are marked as inserted
+  console.log('this is the second inserted line');
+
+  return 'this line uses the neutral default marker type';
+}
+```
+
+```jsx {"1":5} del={"2":7-8} ins={"3":10-12}
+// labeled-line-markers.jsx
+<button
+  role="button"
+  {...props}
+  value={value}
+  className={buttonClassName}
+  disabled={disabled}
+  active={active}
+>
+  {children && !active && (typeof children === 'string' ? <span>{children}</span> : children)}
+</button>
+```
+
+```jsx {"1. Provide the value prop here:":5-6} del={"2. Remove the disabled and active states:":8-10} ins={"3. Add this to render the children inside the button:":12-15}
+// labeled-line-markers.jsx
+<button
+  role="button"
+  {...props}
+
+  value={value}
+  className={buttonClassName}
+
+  disabled={disabled}
+  active={active}
+>
+
+  {children && !active && (typeof children === 'string' ? <span>{children}</span> : children)}
+</button>
+```
+
+```js "given text"
+function demo() {
+  // Mark any given text inside lines
+  return 'Multiple matches of the given text are supported';
+}
+```
+
+<LinkCard
+  title="Customizing Starlight"
+  description="Learn how to make your Starlight site your own with custom styles, fonts, and more."
+  href="/reference/api/"
+/>
+
+<CardGrid>
+  <LinkCard title="Authoring Markdown" href="/reference/api/" />
+  <LinkCard title="Components" href="/reference/api/" />
+</CardGrid>
+
+<Card title="Check this out">Interesting content you want to highlight.</Card>
+
+<CardGrid>
+  <Card title="Stars" icon="star">
+    Sirius, Vega, Betelgeuse
+  </Card>
+  <Card title="Moons" icon="moon">
+    Io, Europa, Ganymede
+  </Card>
+</CardGrid>
+
+<Tabs>
+  <TabItem label="Stars" icon="star">
+    Sirius, Vega, Betelgeuse
+  </TabItem>
+  <TabItem label="Moons" icon="moon">
+    Io, Europa, Ganymede
+  </TabItem>
+</Tabs>
+
+<Aside>A default aside without a custom title.</Aside>
+
+<Aside type="caution" title="Watch out!">
+  A warning aside *with* a custom title.
+</Aside>
+
+<Aside type="tip">
+
+Other content is also supported in asides.
+
+```js
+// A code snippet, for example.
+```
+
+</Aside>
+
+<Aside type="danger">Do not give your password to anyone.</Aside>
+
+<FileTree>
+
+- astro.config.mjs an **important** file
+- package.json
+- README.md
+- src
+  - components
+    - **Header.astro**
+  - …
+- pages/
+
+</FileTree>
+
+<Steps>
+
+1. Import the component into your MDX file:
+
+   ```js
+   import { Steps } from '@astrojs/starlight/components';
+   ```
+
+2. Wrap `<Steps>` around your ordered list items.
+
+</Steps>
+
+<LinkCard
+  title="Customizing Starlight"
+  description="Learn how to make your Starlight site your own with custom styles, fonts, and more."
+  href="/guides/customization/"
+/>
+
+<CardGrid>
+  <LinkCard title="Authoring Markdown" href="/guides/authoring-content/" />
+  <LinkCard title="Components" href="/guides/components/" />
+</CardGrid>
+
+<Card title="Check this out">Interesting content you want to highlight.</Card>
+
+<CardGrid>
+  <Card title="Stars" icon="star">
+    Sirius, Vega, Betelgeuse
+  </Card>
+  <Card title="Moons" icon="moon">
+    Io, Europa, Ganymede
+  </Card>
+</CardGrid>
+
+<Tabs>
+  <TabItem label="Stars" icon="star">
+    Sirius, Vega, Betelgeuse
+  </TabItem>
+  <TabItem label="Moons" icon="moon">
+    Io, Europa, Ganymede
+  </TabItem>
+</Tabs>
+
+<Aside>A default aside without a custom title.</Aside>
+
+<Aside type="caution" title="Watch out!">
+  A warning aside *with* a custom title.
+</Aside>
+
+<Aside type="tip">
+
+Other content is also supported in asides.
+
+```js
+// A code snippet, for example.
+```
+
+</Aside>
+
+<Aside type="danger">Do not give your password to anyone.</Aside>
+
+<FileTree>
+
+- astro.config.mjs an **important** file
+- package.json
+- README.md
+- src
+  - components
+    - **Header.astro**
+  - …
+- pages/
+
+</FileTree>
+
+<Steps>
+
+1. Import the component into your MDX file:
+
+   ```js
+   import { Steps } from '@astrojs/starlight/components';
+   ```
+
+2. Wrap `<Steps>` around your ordered list items.
+
+</Steps>

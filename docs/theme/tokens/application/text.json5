@@ -1,0 +1,23 @@
+// These general text styles can show up in a lot of places like:
+// git hover widget in the editor, settings pages, and welcome pages
+{
+  // You can find this is in the interactive playground page
+  "textBlockQuote": {
+    "background": { "value": "{color.background.tertiary.value}" },
+    "border": { "value": "{color.border.active.value}" }
+  },
+  "textCodeBlock": {
+    "background": { "value": "{color.background.secondary.value}" }
+  },
+  "textLink": {
+    "activeForeground": { "value": "{color.font.link.primary.active.value}" },
+    "foreground": { "value": "{color.font.link.primary.inactive.value}" }
+  },
+  "textPreformat": {
+    "foreground": { "value": "{color.font.info.value}" }
+  },
+  // Still haven't found this
+  "textSeparator": {
+    "foreground": {}
+  }
+}

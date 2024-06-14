@@ -1,5 +1,15 @@
+import { ExpressiveCodeTheme } from 'astro-expressive-code';
+import fs from 'node:fs';
 import type { StarlightUserConfig } from '@astrojs/starlight/types';
 import { pluginLanguageClass } from './expressive-code-plugin-language-class.ts';
+
+const darkTheme = ExpressiveCodeTheme.fromJSONString(
+  fs.readFileSync(new URL(`./theme/dist/dark.vscode.json`, import.meta.url), 'utf-8'),
+);
+
+const lightTheme = ExpressiveCodeTheme.fromJSONString(
+  fs.readFileSync(new URL(`./theme/dist/light.vscode.json`, import.meta.url), 'utf-8'),
+);
 
 export default {
   expressiveCode: {
@@ -10,13 +20,28 @@ export default {
     styleOverrides: {
       textMarkers: {
         defaultLuminance: ['15%', '85%'],
+        insBackground: 'var(--sl-color-green-low)',
+        insBorderColor: 'var(--sl-color-green)',
+        delBackground: 'var(--sl-color-red-low)',
+        delBorderColor: 'var(--sl-color-red)',
+        markBackground: 'var(--sl-color-purple-low)',
+        markBorderColor: 'var(--sl-color-purple)',
+      },
+      borderRadius: '0.25rem',
+      borderColor: 'var(--sl-color-border-tertiary)',
+      frames: {
+        editorActiveTabIndicatorTopColor: 'var(--sl-color-accent)',
+        editorActiveTabBackground: 'var(--sl-color-bg-code)',
+        editorTabBarBackground: 'var(--sl-color-bg-secondary)',
+        editorBackground: 'var(--sl-color-bg-code)',
       },
     },
+    themes: [darkTheme, lightTheme],
   },
   title: 'Style Dictionary',
   description:
     'Export your Design Tokens to any platform. iOS, Android, CSS, JS, HTML, sketch files, style documentation, or anything you can think of. Forward-compatible with Design Token Community Group spec.',
-  logo: { src: './src/assets/logo.png', alt: 'Style-Dictionary logo, Pascal the chameleon.' },
+  logo: { src: './src/assets/logo2.svg', alt: 'Style-Dictionary logo, Pascal the chameleon.' },
   editLink: {
     baseUrl: 'https://github.com/amzn/style-dictionary/edit/v4/src/content/docs/',
   },
@@ -158,7 +183,12 @@ export default {
       },
     },
   ],
-  customCss: ['./src/styles.css'],
+  customCss: [
+    '@fontsource-variable/inter/index.css',
+    './theme/dist/light.variables.css',
+    './theme/dist/dark.variables.css',
+    './src/styles.css',
+  ],
   components: {
     Head: './src/components/Head.astro',
   },
