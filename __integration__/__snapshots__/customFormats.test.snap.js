@@ -557,7 +557,10 @@ snapshots["integration custom formats inline custom with new args should match s
     ],
     "log": {
       "warnings": "warn",
-      "verbosity": "default"
+      "verbosity": "default",
+      "errors": {
+        "brokenReferences": "throw"
+      }
     },
     "transforms": [
       {
@@ -945,7 +948,10 @@ snapshots["integration custom formats inline custom with new args should match s
     },
     "log": {
       "warnings": "warn",
-      "verbosity": "default"
+      "verbosity": "default",
+      "errors": {
+        "brokenReferences": "throw"
+      }
     },
     "usesDtcg": false,
     "otherOption": "Test",
@@ -1503,7 +1509,10 @@ snapshots["integration custom formats register custom format with new args shoul
     ],
     "log": {
       "warnings": "warn",
-      "verbosity": "default"
+      "verbosity": "default",
+      "errors": {
+        "brokenReferences": "throw"
+      }
     },
     "transforms": [
       {
@@ -1891,7 +1900,10 @@ snapshots["integration custom formats register custom format with new args shoul
     },
     "log": {
       "warnings": "warn",
-      "verbosity": "default"
+      "verbosity": "default",
+      "errors": {
+        "brokenReferences": "throw"
+      }
     },
     "usesDtcg": false,
     "otherOption": "Test",

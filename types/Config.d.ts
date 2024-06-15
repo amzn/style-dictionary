@@ -50,24 +50,28 @@ export interface RegexOptions {
 export interface GetReferencesOptions extends RegexOptions {
   usesDtcg?: boolean;
   unfilteredTokens?: DesignTokens;
+  warnImmediately?: boolean;
 }
 
 export interface ResolveReferencesOptions extends RegexOptions {
-  ignorePaths?: string[];
   usesDtcg?: boolean;
+  warnImmediately?: boolean;
 }
 
 export interface ResolveReferencesOptionsInternal extends ResolveReferencesOptions {
+  ignorePaths?: string[];
   current_context?: string[];
   stack?: string[];
   foundCirc?: Record<string, boolean>;
   firstIteration?: boolean;
-  throwImmediately?: boolean;
 }
 
 export interface LogConfig {
   warnings?: 'warn' | 'error' | 'disabled';
   verbosity?: 'default' | 'silent' | 'verbose';
+  errors?: {
+    brokenReferences?: 'throw' | 'console';
+  };
 }
 
 export type ExpandFilter = (

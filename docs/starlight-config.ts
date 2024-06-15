@@ -18,11 +18,11 @@ export default {
     'Export your Design Tokens to any platform. iOS, Android, CSS, JS, HTML, sketch files, style documentation, or anything you can think of. Forward-compatible with Design Token Community Group spec.',
   logo: { src: './src/assets/logo.png', alt: 'Style-Dictionary logo, Pascal the chameleon.' },
   editLink: {
-    baseUrl: 'https://github.com/amzn/style-dictionary/edit/v4/src/content/docs/',
+    baseUrl: 'https://github.com/amzn/style-dictionary/edit/v4/docs/src/content/docs/',
   },
   favicon: '/favicon.png',
   social: {
-    github: 'https://github.com/amzn/style-dictionary',
+    github: 'https://github.com/amzn/style-dictionary/tree/v4',
     slack:
       'https://join.slack.com/t/tokens-studio/shared_invite/zt-1p8ea3m6t-C163oJcN9g3~YZTKRgo2hg',
   },
