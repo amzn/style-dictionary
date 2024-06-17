@@ -414,6 +414,84 @@ describe('utils', () => {
           });
         });
 
+        it('should expand shadow tokens', () => {
+          const refInput = {
+            shade: {
+              type: 'shadow',
+              value: [
+                {
+                  offsetX: '2px',
+                  offsetY: '4px',
+                  blur: '2px',
+                  spread: '0',
+                  color: '#000',
+                },
+                {
+                  offsetX: '10px',
+                  offsetY: '12px',
+                  blur: '4px',
+                  spread: '3px',
+                  color: '#ccc',
+                },
+              ],
+            },
+          };
+
+          const expanded = expandTokens(refInput, {
+            expand: true,
+            usesDtcg: false,
+          });
+
+          expect(expanded).to.eql({
+            shade: {
+              1: {
+                offsetX: {
+                  type: 'dimension',
+                  value: '2px',
+                },
+                offsetY: {
+                  type: 'dimension',
+                  value: '4px',
+                },
+                blur: {
+                  type: 'dimension',
+                  value: '2px',
+                },
+                spread: {
+                  type: 'dimension',
+                  value: '0',
+                },
+                color: {
+                  type: 'color',
+                  value: '#000',
+                },
+              },
+              2: {
+                offsetX: {
+                  type: 'dimension',
+                  value: '10px',
+                },
+                offsetY: {
+                  type: 'dimension',
+                  value: '12px',
+                },
+                blur: {
+                  type: 'dimension',
+                  value: '4px',
+                },
+                spread: {
+                  type: 'dimension',
+                  value: '3px',
+                },
+                color: {
+                  type: 'color',
+                  value: '#ccc',
+                },
+              },
+            },
+          });
+        });
+
         it('should support DTCG format', () => {
           const input = {
             border: {
