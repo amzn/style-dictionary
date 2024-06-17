@@ -351,6 +351,98 @@ describe('utils', () => {
           });
         });
 
+        it('should expand nested composite tokens', () => {
+          const refInput = {
+            Gray: {
+              0: {
+                Background: {
+                  type: 'color',
+                  value: '#ffffff',
+                },
+                Foreground: {
+                  type: 'color',
+                  value: {
+                    Primary: '#000',
+                    Secondary: '#555e65',
+                    Disabled: '#a9aeb1',
+                  },
+                },
+              },
+            },
+            Background: {
+              Surface: {
+                type: 'color',
+                value: {
+                  Background: '{Gray.0.Background}',
+                  Foreground: '{Gray.0.Foreground}',
+                },
+              },
+            },
+          };
+
+          const expanded = expandTokens(refInput, {
+            expand: {
+              typesMap: {
+                color: {
+                  Primary: 'color',
+                  Secondary: 'color',
+                  Disabled: 'color',
+                  Background: 'color',
+                  Foreground: 'color',
+                },
+              },
+            },
+            usesDtcg: false,
+          });
+
+          expect(expanded).to.eql({
+            Gray: {
+              0: {
+                Background: {
+                  type: 'color',
+                  value: '#ffffff',
+                },
+                Foreground: {
+                  Primary: {
+                    value: '#000',
+                    type: 'color',
+                  },
+                  Secondary: {
+                    value: '#555e65',
+                    type: 'color',
+                  },
+                  Disabled: {
+                    value: '#a9aeb1',
+                    type: 'color',
+                  },
+                },
+              },
+            },
+            Background: {
+              Surface: {
+                Background: {
+                  value: '#ffffff',
+                  type: 'color',
+                },
+                Foreground: {
+                  Primary: {
+                    value: '#000',
+                    type: 'color',
+                  },
+                  Secondary: {
+                    value: '#555e65',
+                    type: 'color',
+                  },
+                  Disabled: {
+                    value: '#a9aeb1',
+                    type: 'color',
+                  },
+                },
+              },
+            },
+          });
+        });
+
         it('should support DTCG format', () => {
           const input = {
             border: {
