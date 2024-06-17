@@ -353,90 +353,61 @@ describe('utils', () => {
 
         it('should expand nested composite tokens', () => {
           const refInput = {
-            Gray: {
-              0: {
-                Background: {
-                  type: 'color',
-                  value: '#ffffff',
-                },
-                Foreground: {
-                  type: 'color',
-                  value: {
-                    Primary: '#000',
-                    Secondary: '#555e65',
-                    Disabled: '#a9aeb1',
-                  },
-                },
-              },
+            black: {
+              value: '#000',
+              type: 'color',
             },
-            Background: {
-              Surface: {
-                type: 'color',
-                value: {
-                  Background: '{Gray.0.Background}',
-                  Foreground: '{Gray.0.Foreground}',
-                },
+            stroke: {
+              value: {
+                dashArray: ['0.5rem', '0.25rem'],
+                lineCap: 'round',
               },
+              type: 'strokeStyle',
+            },
+            border: {
+              value: {
+                color: '{black}',
+                width: '3px',
+                style: '{stroke}',
+              },
+              type: 'border',
             },
           };
 
           const expanded = expandTokens(refInput, {
-            expand: {
-              typesMap: {
-                color: {
-                  Primary: 'color',
-                  Secondary: 'color',
-                  Disabled: 'color',
-                  Background: 'color',
-                  Foreground: 'color',
-                },
-              },
-            },
+            expand: true,
             usesDtcg: false,
           });
 
           expect(expanded).to.eql({
-            Gray: {
-              0: {
-                Background: {
-                  type: 'color',
-                  value: '#ffffff',
-                },
-                Foreground: {
-                  Primary: {
-                    value: '#000',
-                    type: 'color',
-                  },
-                  Secondary: {
-                    value: '#555e65',
-                    type: 'color',
-                  },
-                  Disabled: {
-                    value: '#a9aeb1',
-                    type: 'color',
-                  },
-                },
+            black: {
+              value: '#000',
+              type: 'color',
+            },
+            stroke: {
+              dashArray: {
+                value: ['0.5rem', '0.25rem'],
+                type: 'dimension',
+              },
+              lineCap: {
+                value: 'round',
+                type: 'lineCap',
               },
             },
-            Background: {
-              Surface: {
-                Background: {
-                  value: '#ffffff',
-                  type: 'color',
+            border: {
+              // color can remain unresolved ref because its resolved value is not an object
+              color: { value: '{black}', type: 'color' },
+              width: { value: '3px', type: 'dimension' },
+              // style must be its resolved value because it is an object and potentially gets expanded,
+              // breaking the original reference
+              style: {
+                dashArray: {
+                  value: ['0.5rem', '0.25rem'],
+                  type: 'dimension',
                 },
-                Foreground: {
-                  Primary: {
-                    value: '#000',
-                    type: 'color',
-                  },
-                  Secondary: {
-                    value: '#555e65',
-                    type: 'color',
-                  },
-                  Disabled: {
-                    value: '#a9aeb1',
-                    type: 'color',
-                  },
+                lineCap: {
+                  value: 'round',
+                  type: 'lineCap',
                 },
               },
             },
