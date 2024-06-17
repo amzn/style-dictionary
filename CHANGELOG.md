@@ -1,5 +1,16 @@
 # Changelog
 
+## 4.0.0-prerelease.37
+
+### Minor Changes
+
+- 8450a45: Some fixes for Expand utility:
+
+  - Array values such as `dashArray` property of `strokeStyle` tokens no longer get expanded unintentionally, `typeof 'object'` check changed to `isPlainObject` check.
+  - Nested object-value tokens (such as `style` property inside `border` tokens) will now also be expanded.
+  - When references are involved during expansion, the resolved value is used when the property is an object, if not, then we keep the reference as is.
+    This is because if the reference is to an object value, the expansion might break the reference.
+
 ## 4.0.0-prerelease.36
 
 ### Minor Changes
