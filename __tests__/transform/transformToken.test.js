@@ -11,7 +11,7 @@
  * and limitations under the License.
  */
 import { expect } from 'chai';
-import transformToken from '../../lib/transform/token.js';
+import transformToken from '../../dist/esm/transform/token.mjs';
 
 const config = {
   transforms: [

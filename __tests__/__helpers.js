@@ -13,7 +13,7 @@
 
 import { expect } from 'chai';
 import { fs } from 'style-dictionary/fs';
-import { resolve } from '../lib/resolve.js';
+import { resolve } from 'style-dictionary';
 import isPlainObject from 'is-plain-obj';
 
 export const cleanConsoleOutput = (str) => {

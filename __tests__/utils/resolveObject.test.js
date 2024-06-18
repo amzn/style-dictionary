@@ -12,8 +12,8 @@
  */
 import { expect } from 'chai';
 import { fileToJSON } from '../__helpers.js';
-import resolveObject from '../../lib/utils/resolveObject.js';
-import GroupMessages from '../../lib/utils/groupMessages.js';
+import resolveObject from '../../dist/esm/utils/resolveObject.mjs';
+import GroupMessages from '../../dist/esm/utils/groupMessages.mjs';
 
 const PROPERTY_REFERENCE_WARNINGS = GroupMessages.GROUP.PropertyReferenceWarnings;
 

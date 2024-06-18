@@ -11,15 +11,15 @@
  * and limitations under the License.
  */
 import { expect } from 'chai';
+import { restore, stubMethod } from 'hanbi';
 import StyleDictionary from 'style-dictionary';
 import { fs } from 'style-dictionary/fs';
 import chalk from 'chalk';
 import { fileToJSON, clearOutput, fileExists, clearSDMeta } from './__helpers.js';
-import { resolve } from '../lib/resolve.js';
-import GroupMessages from '../lib/utils/groupMessages.js';
-import flattenTokens from '../lib/utils/flattenTokens.js';
-import formats from '../lib/common/formats.js';
-import { restore, stubMethod } from 'hanbi';
+import { resolve } from '../dist/esm/resolve.mjs';
+import GroupMessages from '../dist/esm/utils/groupMessages.mjs';
+import flattenTokens from '../dist/esm/utils/flattenTokens.mjs';
+import formats from '../dist/esm/common/formats.mjs';
 
 function traverseObj(obj, fn) {
   for (let key in obj) {

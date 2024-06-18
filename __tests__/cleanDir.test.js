@@ -12,9 +12,9 @@
  */
 import { expect } from 'chai';
 import { clearOutput, dirExists } from './__helpers.js';
-import StyleDictionary from '../lib/StyleDictionary.js';
-import cleanFile from '../lib/cleanFile.js';
-import cleanDir from '../lib/cleanDir.js';
+import StyleDictionary from 'style-dictionary';
+import cleanFile from '../dist/esm/cleanFile.mjs';
+import cleanDir from '../dist/esm/cleanDir.mjs';
 
 describe('cleanDir', () => {
   beforeEach(() => {

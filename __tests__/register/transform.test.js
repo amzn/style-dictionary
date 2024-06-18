@@ -13,7 +13,7 @@
 import { expect } from 'chai';
 import StyleDictionary from 'style-dictionary';
 import { registerSuite } from './register.suite.js';
-import transformBuiltins from '../../lib/common/transforms.js';
+import transformBuiltins from '../../dist/esm/common/transforms.mjs';
 
 const transformPxAppender = {
   name: 'px-appender',

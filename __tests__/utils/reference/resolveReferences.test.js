@@ -16,8 +16,8 @@ import { fileToJSON } from '../../__helpers.js';
 import {
   _resolveReferences as resolveReferences,
   resolveReferences as publicResolveReferences,
-} from '../../../lib/utils/references/resolveReferences.js';
-import GroupMessages from '../../../lib/utils/groupMessages.js';
+} from '../../../dist/esm/utils/references/resolveReferences.mjs';
+import GroupMessages from '../../../dist/esm/utils/groupMessages.mjs';
 
 const PROPERTY_REFERENCE_WARNINGS = GroupMessages.GROUP.PropertyReferenceWarnings;
 

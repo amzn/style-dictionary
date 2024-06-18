@@ -13,7 +13,7 @@
 import { expect } from 'chai';
 import { join } from 'path-unified';
 import Color from 'tinycolor2';
-import transforms, { isColor } from '../../lib/common/transforms.js';
+import transforms, { isColor } from '../../dist/esm/common/transforms.mjs';
 
 describe('common', () => {
   describe('transforms', () => {

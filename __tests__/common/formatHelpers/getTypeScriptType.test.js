@@ -11,7 +11,7 @@
  * and limitations under the License.
  */
 import { expect } from 'chai';
-import getTypeScriptType from '../../../lib/common/formatHelpers/getTypeScriptType.js';
+import getTypeScriptType from '../../../dist/esm/common/formatHelpers/getTypeScriptType.mjs';
 
 describe('common', () => {
   describe('formatHelpers', () => {

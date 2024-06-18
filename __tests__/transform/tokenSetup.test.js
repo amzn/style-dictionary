@@ -11,7 +11,7 @@
  * and limitations under the License.
  */
 import { expect } from 'chai';
-import tokenSetup from '../../lib/transform/tokenSetup.js';
+import tokenSetup from '../../dist/esm/transform/tokenSetup.mjs';
 
 describe('transform', () => {
   describe('tokenSetup', () => {

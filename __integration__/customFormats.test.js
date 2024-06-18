@@ -13,7 +13,7 @@
 import { expect } from 'chai';
 import StyleDictionary from 'style-dictionary';
 import { fs } from 'style-dictionary/fs';
-import { resolve } from '../lib/resolve.js';
+import { resolve } from '../dist/esm/resolve.mjs';
 import { buildPath } from './_constants.js';
 import { clearOutput } from '../__tests__/__helpers.js';
 

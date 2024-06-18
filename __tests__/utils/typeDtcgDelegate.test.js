@@ -11,7 +11,7 @@
  * and limitations under the License.
  */
 import { expect } from 'chai';
-import { typeDtcgDelegate } from '../../lib/utils/typeDtcgDelegate.js';
+import { typeDtcgDelegate } from '../../dist/esm/utils/typeDtcgDelegate.mjs';
 
 describe('utils', () => {
   describe('typeDtcgDelegate', () => {

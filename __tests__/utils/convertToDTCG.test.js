@@ -18,7 +18,7 @@ import {
   convertJSONToDTCG,
   convertZIPToDTCG,
   readZIP,
-} from '../../lib/utils/convertToDTCG.js';
+} from '../../dist/esm/utils/convertToDTCG.mjs';
 
 const paddingsOutput = {
   $type: 'dimension',

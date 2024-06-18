@@ -12,8 +12,8 @@
  */
 import { expect } from 'chai';
 import { fileExists, clearOutput } from './__helpers.js';
-import cleanFile from '../lib/cleanFile.js';
-import StyleDictionary from '../lib/StyleDictionary.js';
+import cleanFile from '../dist/esm/cleanFile.mjs';
+import StyleDictionary from 'style-dictionary';
 
 describe('cleanFile', () => {
   const buildPath = '__tests__/__output/';

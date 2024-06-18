@@ -11,7 +11,7 @@
  * and limitations under the License.
  */
 import { expect } from 'chai';
-import usesReferences from '../../../lib/utils/references/usesReferences.js';
+import usesReferences from '../../../dist/esm/utils/references/usesReferences.mjs';
 
 describe('usesReferences()', () => {
   it(`returns false for non-strings`, () => {

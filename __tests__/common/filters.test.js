@@ -11,7 +11,7 @@
  * and limitations under the License.
  */
 import { expect } from 'chai';
-import filters from '../../lib/common/filters.js';
+import filters from '../../dist/esm/common/filters.mjs';
 
 describe('common', () => {
   describe('filters', () => {

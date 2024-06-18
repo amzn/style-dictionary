@@ -11,7 +11,7 @@
  * and limitations under the License.
  */
 import { expect } from 'chai';
-import { GroupMessages } from '../../lib/utils/groupMessages.js';
+import { GroupMessages } from '../../dist/esm/utils/groupMessages.mjs';
 
 // TODO: add more tests
 

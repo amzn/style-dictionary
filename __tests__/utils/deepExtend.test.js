@@ -11,7 +11,7 @@
  * and limitations under the License.
  */
 import { expect } from 'chai';
-import deepExtend from '../../lib/utils/deepExtend.js';
+import deepExtend from '../../dist/esm/utils/deepExtend.mjs';
 
 describe('utils', () => {
   describe('deepExtend', () => {

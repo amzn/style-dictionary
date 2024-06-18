@@ -12,7 +12,7 @@
  */
 import { expect } from 'chai';
 import { restore, stubMethod } from 'hanbi';
-import transformConfig from '../../lib/transform/config.js';
+import transformConfig from '../../dist/esm/transform/config.mjs';
 import chalk from 'chalk';
 
 const dictionary = {

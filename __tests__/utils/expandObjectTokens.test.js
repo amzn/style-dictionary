@@ -11,7 +11,11 @@
  * and limitations under the License.
  */
 import { expect } from 'chai';
-import { getTypeFromMap, expandToken, expandTokens } from '../../lib/utils/expandObjectTokens.js';
+import {
+  getTypeFromMap,
+  expandToken,
+  expandTokens,
+} from '../../dist/esm/utils/expandObjectTokens.mjs';
 
 const input = {
   border: {

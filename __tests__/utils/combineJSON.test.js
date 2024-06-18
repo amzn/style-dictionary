@@ -14,7 +14,7 @@ import { expect } from 'chai';
 import { join } from 'path-unified';
 import yaml from 'yaml';
 import { expectThrowsAsync } from '../__helpers.js';
-import combineJSON from '../../lib/utils/combineJSON.js';
+import { combineJSON } from 'style-dictionary/utils';
 
 describe('utils', () => {
   describe('combineJSON', () => {

@@ -11,7 +11,7 @@
  * and limitations under the License.
  */
 import { expect } from 'chai';
-import convertToBase64 from '../../lib/utils/convertToBase64.js';
+import convertToBase64 from '../../dist/esm/utils/convertToBase64.mjs';
 
 describe('utils', () => {
   describe('convertToBase64', () => {

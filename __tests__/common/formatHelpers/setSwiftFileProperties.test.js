@@ -11,7 +11,7 @@
  * and limitations under the License.
  */
 import { expect } from 'chai';
-import setSwiftFileProperties from '../../../lib/common/formatHelpers/setSwiftFileProperties.js';
+import setSwiftFileProperties from '../../../dist/esm/common/formatHelpers/setSwiftFileProperties.mjs';
 
 describe('common', () => {
   describe('formatHelpers', () => {

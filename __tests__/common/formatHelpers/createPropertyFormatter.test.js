@@ -11,9 +11,9 @@
  * and limitations under the License.
  */
 import { expect } from 'chai';
-import createPropertyFormatter from '../../../lib/common/formatHelpers/createPropertyFormatter.js';
-import flattenTokens from '../../../lib/utils/flattenTokens.js';
-import { outputReferencesFilter } from '../../../lib/utils/references/outputReferencesFilter.js';
+import createPropertyFormatter from '../../../dist/esm/common/formatHelpers/createPropertyFormatter.mjs';
+import flattenTokens from '../../../dist/esm/utils/flattenTokens.mjs';
+import { outputReferencesFilter } from '../../../dist/esm/utils/references/outputReferencesFilter.mjs';
 
 const dictionary = {
   foo: {

@@ -11,7 +11,7 @@
  * and limitations under the License.
  */
 import { expect } from 'chai';
-import getValueByPath from '../../../lib/utils/references/getValueByPath.js';
+import getValueByPath from '../../../dist/esm/utils/references/getValueByPath.mjs';
 
 const dictionary = {
   color: {

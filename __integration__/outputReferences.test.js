@@ -15,10 +15,10 @@ import StyleDictionary from 'style-dictionary';
 import { fs } from 'style-dictionary/fs';
 import { restore, stubMethod } from 'hanbi';
 import { buildPath, cleanConsoleOutput } from './_constants.js';
-import { resolve } from '../lib/resolve.js';
+import { resolve } from '../dist/esm/resolve.mjs';
 import { clearOutput } from '../__tests__/__helpers.js';
-import { outputReferencesFilter } from '../lib/utils/references/outputReferencesFilter.js';
-import { outputReferencesTransformed } from '../lib/utils/index.js';
+import { outputReferencesFilter } from '../dist/esm/utils/references/outputReferencesFilter.mjs';
+import { outputReferencesTransformed } from 'style-dictionary/utils';
 
 describe('integration', async () => {
   let stub;

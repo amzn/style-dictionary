@@ -11,9 +11,8 @@
  * and limitations under the License.
  */
 import { expect } from 'chai';
-import formats from '../../lib/common/formats.js';
-import createFormatArgs from '../../lib/utils/createFormatArgs.js';
-import flattenTokens from '../../lib/utils/flattenTokens.js';
+import formats from '../../dist/esm/common/formats.mjs';
+import { createFormatArgs, flattenTokens } from 'style-dictionary/utils';
 
 const tokens = {
   size: {

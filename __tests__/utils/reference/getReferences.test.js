@@ -13,7 +13,7 @@
 
 import { expect } from 'chai';
 import { restore, stubMethod } from 'hanbi';
-import { getReferences } from '../../../lib/utils/references/getReferences.js';
+import { getReferences } from '../../../dist/esm/utils/references/getReferences.mjs';
 
 const tokens = {
   color: {

@@ -1,0 +1,114 @@
+/*
+ * Copyright 2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
+ * the License. A copy of the License is located at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
+ * and limitations under the License.
+ */
+
+import isPlainObject from 'is-plain-obj';
+
+/**
+ * TODO: see if we can use deepmerge instead of maintaining our own utility
+ * Main reason for having our own is that we have a collision function that warns users
+ * when props from different objects collide, e.g. multiple token files colliding on the same token name
+ * https://github.com/TehShrike/deepmerge/issues/262 created a feature request
+ *
+ * Performs an deep extend on the objects, from right to left.
+ * @private
+ * @template {Object} T - Generic type T extends from "Object", to be maximally permissive
+ * @param {Array<T>} objects - An array of JS objects
+ * @param {{collision?: Function, overrideKeys?: string[]}} [opts] - deepExtend options to change its behavior.
+ * @param {string[]} [path] - (for internal use) An array of strings which is the current path down the object when this is called recursively.
+ * @returns {T}
+ */
+export default function deepExtend<T extends object>(
+  objects: unknown[],
+  opts: { collision?: Function; overrideKeys?: string[] } = {},
+  path?: string[],
+): T {
+  const { collision, overrideKeys } = opts;
+  // typecast it to T, to circumvent error thrown because technically,
+  // T could be instantiated with a type that has more limited constraints than Obj
+  // but this isn't actually a problem for us since we are only merging objects together..
+  const defaultVal = {} as T;
+
+  if (objects == null) return defaultVal;
+
+  let target = objects[0] || ({} as T);
+
+  path = path || [];
+
+  // Handle case when target is a string or something (possible in deep copy)
+  if (typeof target !== 'object') {
+    target = defaultVal;
+  }
+
+  for (let i = 1; i < objects.length; i++) {
+    const options = objects[i];
+    // Only deal with non-null/undefined values
+    if (options != null) {
+      // Extend the base object
+      for (const name in options) {
+        // Not everything extends from Object in browser context, so bind from Object just in case
+        if (!Object.hasOwnProperty.bind(options)(name)) continue;
+        if (name === '__proto__') continue;
+
+        // @ts-expect-error
+        const src = target[name];
+        // @ts-expect-error
+        const copy = options[name];
+
+        // Prevent never-ending loop
+        if (target === copy) {
+          continue;
+        }
+
+        let copyIsArray = Array.isArray(copy);
+        // Recurse if we're merging plain objects or arrays
+        if (copy && (isPlainObject(copy) || copyIsArray)) {
+          /** @type {Tokens|TransformedTokens|any} */
+          let clone;
+          if (copyIsArray) {
+            copyIsArray = false;
+            clone = src && Array.isArray(src) ? src : [];
+          } else {
+            clone = src && isPlainObject(src) ? src : {};
+          }
+
+          const nextPath = path.slice(0);
+          nextPath.push(name);
+
+          // Never move original objects, clone them
+          // @ts-expect-error
+          target[name] = deepExtend([clone, copy], opts, nextPath);
+
+          // Don't bring in undefined values
+        } else if (copy !== undefined) {
+          if (src != null) {
+            if (typeof collision == 'function') {
+              collision({ target, copy: options, path, key: name });
+            }
+
+            if (overrideKeys?.includes(name)) {
+              // we dont always want merging behavior, sometimes
+              // we want to fully override an object, e.g. for design tokens
+              // we dont want sibling props of target to be merged into the copy
+              // see tests for more details
+              target = {} as T;
+            }
+          }
+          // @ts-expect-error
+          target[name] = copy;
+        }
+      }
+    }
+  }
+
+  return target as T;
+}

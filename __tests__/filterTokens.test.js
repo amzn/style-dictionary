@@ -11,9 +11,9 @@
  * and limitations under the License.
  */
 import { expect } from 'chai';
-import filterTokens from '../lib/filterTokens.js';
+import filterTokens from '../dist/esm/filterTokens.mjs';
 import { clearOutput } from './__helpers.js';
-import flattenTokens from '../lib/utils/flattenTokens.js';
+import flattenTokens from '../dist/esm/utils/flattenTokens.mjs';
 
 const colorRed = {
   value: '#FF0000',

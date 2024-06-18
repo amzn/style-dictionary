@@ -12,9 +12,9 @@
  */
 import { expect } from 'chai';
 import { clearOutput, dirExists } from './__helpers.js';
-import cleanFiles from '../lib/cleanFiles.js';
-import cleanDirs from '../lib/cleanDirs.js';
-import StyleDictionary from '../lib/StyleDictionary.js';
+import cleanFiles from '../dist/esm/cleanFiles.mjs';
+import cleanDirs from '../dist/esm/cleanDirs.mjs';
+import StyleDictionary from 'style-dictionary';
 
 const dictionary = {
   tokens: {

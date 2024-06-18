@@ -12,8 +12,8 @@
  */
 import { expect } from 'chai';
 import { clearOutput, fileExists } from './__helpers.js';
-import cleanFiles from '../lib/cleanFiles.js';
-import StyleDictionary from '../lib/StyleDictionary.js';
+import cleanFiles from '../dist/esm/cleanFiles.mjs';
+import StyleDictionary from 'style-dictionary';
 
 const tokens = {
   foo: 'bar',

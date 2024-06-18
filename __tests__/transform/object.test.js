@@ -11,7 +11,7 @@
  * and limitations under the License.
  */
 import { expect } from 'chai';
-import transformObject from '../../lib/transform/object.js';
+import transformObject from '../../dist/esm/transform/object.mjs';
 
 const config = {
   transforms: [

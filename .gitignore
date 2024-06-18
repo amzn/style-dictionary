@@ -82,3 +82,5 @@ xcuserdata/
 /docs/dist/
 # generated types
 .astro/
+
+dist

@@ -11,7 +11,7 @@
  * and limitations under the License.
  */
 import { expect } from 'chai';
-import { preprocess } from '../../lib/utils/preprocess.js';
+import { preprocess } from '../../dist/esm/utils/preprocess.mjs';
 
 describe('utils', () => {
   describe('preprocess', () => {

@@ -4,7 +4,7 @@ import { dirname } from 'path-unified';
 import { fs } from 'style-dictionary/fs';
 import { chaiWtrSnapshot } from '../snapshot-plugin/chai-wtr-snapshot.js';
 import { fixDate } from './__helpers.js';
-import { writeZIP } from '../lib/utils/convertToDTCG.js';
+import { writeZIP } from '../dist/esm/utils/convertToDTCG.mjs';
 
 /**
  * We have a bunch of files that we use a mock data for our tests
