@@ -30,7 +30,7 @@ export default function tokenSetup(
   name: string,
   path: string[],
 ): TransformedToken {
-  if (!token && !isPlainObject(token)) throw new Error('Token object must be an object');
+  if (!token && !isPlainObject(token)) throw new Error('Token object must be of type "object"');
   if (!name || !(typeof name === 'string')) throw new Error('Token name must be a string');
   if (!path || !Array.isArray(path)) throw new Error('Token path must be an array');
 

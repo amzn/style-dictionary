@@ -69,12 +69,10 @@ export function _resolveReferences(
     stack?: string[];
     foundCirc?: Record<string, boolean>;
     firstIteration?: boolean;
-  },
+  } = {},
 ) {
   const reg = regex ?? createReferenceRegex({ opening_character, closing_character, separator });
-  /** @type {DesignToken|string|number|undefined} */
   let to_ret = value;
-  /** @type {DesignToken|string|number|undefined} */
   let ref;
   const valProp = usesDtcg ? '$value' : 'value';
 

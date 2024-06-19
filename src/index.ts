@@ -1,4 +1,4 @@
-import { StyleDictionary } from './StyleDictionary';
+import StyleDictionary from './StyleDictionary';
 
 export * from './types';
 export { resolve } from './resolve';

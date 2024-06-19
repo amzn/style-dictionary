@@ -17,7 +17,7 @@ import GroupMessages from '../utils/groupMessages';
 import { deepmerge } from '../utils/deepmerge';
 import chalk from 'chalk';
 import type { PlatformConfig, TransformedFile } from '../types';
-import type { StyleDictionary } from '../StyleDictionary';
+import type StyleDictionary from '../StyleDictionary';
 import type { TransformedPlatformConfig } from '../types/Config';
 
 const MISSING_TRANSFORM_ERRORS = GroupMessages.GROUP.MissingRegisterTransformErrors;
@@ -110,7 +110,7 @@ None of ${transform_warnings} match the name of a registered transform.
     }
   }
 
-  let files: TransformedFile[] = [];
+  let files: TransformedFile[] | undefined;
   if (to_ret.files) {
     files = to_ret.files.map(function (file) {
       const ext: TransformedFile = { options: {} };

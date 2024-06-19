@@ -19,12 +19,6 @@ import { resolve } from '../resolve';
 import deepExtend from './deepExtend';
 import { detectDtcgSyntax } from './detectDtcgSyntax';
 import type { DesignTokens, DesignToken, Parser, Volume } from '../types';
-/**
- * @typedef {import('../../types/Volume.d.ts').Volume} Volume
- * @typedef {import('../../types/DesignToken.d.ts').DesignTokens} Tokens
- * @typedef {import('../../types/DesignToken.d.ts').DesignToken} Token
- * @typedef {import('../../types/Parser.d.ts').Parser} Parser
- */
 
 /**
  * @param {Tokens} obj
@@ -100,7 +94,7 @@ export default async function combineJSON(
 
       // If there is no file_content then no custom parser ran on that file
       if (!file_content) {
-        if (['', '.mjs'].includes(extname(filePath))) {
+        if (['.js', '.mjs'].includes(extname(filePath))) {
           let resolvedPath = resolve(filePath, vol?.__custom_fs__);
           // eslint-disable-next-line no-undef
           if (typeof window !== 'object' && process?.platform === 'win32') {

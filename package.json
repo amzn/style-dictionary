@@ -29,8 +29,9 @@
     },
     "./fs": {
       "types": "./dist/types/fs.d.ts",
-      "import": "./dist/esm/fs-node.mjs",
-      "require": "./dist/fs-node.js"
+      "import": "./dist/esm/fs.mjs",
+      "require": "./dist/fs.js",
+      "node": "./dist/fs-node.js"
     },
     "./utils": {
       "types": "./dist/utils/index.d.ts",

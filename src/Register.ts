@@ -43,7 +43,7 @@ export class Register {
 
   /** @type {Required<Hooks>} */
   get hooks(): Required<Hooks> {
-    return deepmerge(Register.hooks, this._hooks ?? {});
+    return deepmerge((this.constructor as any).hooks, this._hooks ?? {});
   }
 
   /**
@@ -79,7 +79,7 @@ export class Register {
    * @param {Transform} cfg
    */
   registerTransform(cfg: Transform) {
-    Register.__registerTransform(cfg, this);
+    (this.constructor as any).__registerTransform(cfg, this);
   }
 
   /**
@@ -123,7 +123,7 @@ export class Register {
    * @param {{ name: string; transforms: string[]; }} cfg
    */
   registerTransformGroup(cfg: { name: string; transforms: string[] }) {
-    Register.__registerTransformGroup(cfg, this);
+    (this.constructor as any).__registerTransformGroup(cfg, this);
   }
 
   /**
@@ -166,7 +166,7 @@ export class Register {
    * @param {Format} cfg
    */
   registerFormat(cfg: Format) {
-    Register.__registerFormat(cfg, this);
+    (this.constructor as any).__registerFormat(cfg, this);
   }
 
   /**
@@ -202,7 +202,7 @@ export class Register {
    * @param {Action} cfg
    */
   registerAction(cfg: Action) {
-    Register.__registerAction(cfg, this);
+    (this.constructor as any).__registerAction(cfg, this);
   }
 
   /**
@@ -240,7 +240,7 @@ export class Register {
    */
   registerFilter(cfg: Filter) {
     // this = instance
-    Register.__registerFilter(cfg, this);
+    (this.constructor as any).__registerFilter(cfg, this);
   }
 
   /**
@@ -277,7 +277,7 @@ export class Register {
    */
   registerParser(cfg: Parser) {
     // this = instance
-    Register.__registerParser(cfg, this);
+    (this.constructor as any).__registerParser(cfg, this);
   }
 
   /**
@@ -319,7 +319,7 @@ export class Register {
    */
   registerPreprocessor(cfg: Preprocessor) {
     // this = instance
-    Register.__registerPreprocessor(cfg, this);
+    (this.constructor as any).__registerPreprocessor(cfg, this);
   }
 
   /**
@@ -358,7 +358,7 @@ export class Register {
    */
   registerFileHeader(cfg: { name: string; fileHeader: FileHeader }) {
     // this = instance
-    Register.__registerFileHeader(cfg, this);
+    (this.constructor as any).__registerFileHeader(cfg, this);
   }
 
   /**

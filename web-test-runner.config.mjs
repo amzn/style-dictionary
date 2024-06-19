@@ -2,9 +2,7 @@ import { playwrightLauncher } from '@web/test-runner-playwright';
 import { snapshotPlugin } from '@web/test-runner-commands/plugins';
 import fs from 'node:fs';
 import { glob } from '@bundled-es-modules/glob';
-// import { readZIP } from './dist/esm/utils/convertToDTCG.mjs';
 import { readZIP } from 'style-dictionary/utils';
-// import { fs } from 'style-dictionary/fs';
 
 /** @type {string[]} */
 const globResult = (

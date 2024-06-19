@@ -68,11 +68,11 @@ const FILTER_WARNINGS = GroupMessages.GROUP.FilteredOutputReferences;
  * @example
  * ```js
  * import StyleDictionary from 'style-dictionary';
- * new StyleDictionary.extend('configon').buildAllPlatforms();
+ * new StyleDictionary.extend('config.json').buildAllPlatforms();
  * ```
  */
 
-export class StyleDictionary extends Register {
+export default class StyleDictionary extends Register {
   // Placeholder is transformed on prepublish -> see scripts/inject-version
   // Another option might be import pkg from './packageon' with { "type": "json" } which would work in both browser and node, but support is not there yet.
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#browser_compatibility
