@@ -16,7 +16,7 @@ packageJSONs.forEach(function (filePath) {
 });
 
 // version in lib file
-const paths = ['lib/StyleDictionary.js', 'docs/src/components/sd-playground.ts'];
+const paths = ['src/StyleDictionary.ts', 'docs/src/components/sd-playground.ts'];
 paths.forEach((p) => {
   const indexContent = fs.readFileSync(p, 'utf-8');
   const newIndexContent = indexContent.replace('<? version placeholder ?>', version);

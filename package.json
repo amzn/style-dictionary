@@ -47,15 +47,13 @@
   },
   "files": [
     "bin",
-    "lib",
+    "dist",
     "examples",
     "LICENSE",
-    "NOTICE",
-    "types"
+    "NOTICE"
   ],
   "scripts": {
-    "rollup": "rollup --config",
-    "build": "node scripts/inject-version.js && tsc --emitDeclarationOnly",
+    "build": "rollup --config",
     "docs:start": "astro dev --root ./docs",
     "docs:build": "astro check  --root ./docs && astro build --root ./docs",
     "docs:preview": "astro preview --root ./docs",
@@ -66,12 +64,14 @@
     "lint:eslint": "eslint \"**/*.js\"",
     "lint:prettier": "prettier \"**/*.{js,md,mdx}\" \"package.json\" --list-different || (echo '↑↑ these files are not prettier formatted ↑↑' && exit 1)",
     "lint:types": "tsc --noEmit",
+    "pretest": "npm run build",
     "test": "web-test-runner --coverage",
     "test:watch": "web-test-runner --watch",
     "test:coverage": "cd coverage/lcov-report && npx http-server -o -c-1",
     "test:update-snapshots": "web-test-runner --update-snapshots",
-    "test:node": "mocha -r mocha-hooks.mjs './__integration__/**/*.test.js' './__tests__/**/*.test.js' './__node_tests__/**/*.test.js'",
+    "test:node": "npm run build && mocha -r mocha-hooks.mjs './__integration__/**/*.test.js' './__tests__/**/*.test.js' './__node_tests__/**/*.test.js'",
     "install-cli": "npm install -g $(npm pack)",
+    "prerelease": "node scripts/inject-version.js",
     "release": "npm run build && changeset publish",
     "prepare": "husky install",
     "postinstall": "patch-package"
