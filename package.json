@@ -28,10 +28,11 @@
       "require": "./dist/index.js"
     },
     "./fs": {
+      "node": "./dist/esm/fs-node.mjs",
+      "default": "./dist/esm/fs.mjs",
       "types": "./dist/types/fs.d.ts",
       "import": "./dist/esm/fs.mjs",
-      "require": "./dist/fs.js",
-      "node": "./dist/fs-node.js"
+      "require": "./dist/fs.js"
     },
     "./utils": {
       "types": "./dist/utils/index.d.ts",
