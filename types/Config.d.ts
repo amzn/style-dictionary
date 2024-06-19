@@ -11,7 +11,12 @@
  * and limitations under the License.
  */
 
-import type { DesignToken, DesignTokens, TransformedToken } from './DesignToken.d.ts';
+import type {
+  DesignToken,
+  DesignTokens,
+  PreprocessedTokens,
+  TransformedToken,
+} from './DesignToken.d.ts';
 import type { Filter } from './Filter.d.ts';
 import type { FileHeader, File, FormattingOptions } from './File.d.ts';
 import type { Parser } from './Parser.d.ts';
@@ -49,7 +54,7 @@ export interface RegexOptions {
 
 export interface GetReferencesOptions extends RegexOptions {
   usesDtcg?: boolean;
-  unfilteredTokens?: DesignTokens;
+  unfilteredTokens?: PreprocessedTokens;
   warnImmediately?: boolean;
 }
 

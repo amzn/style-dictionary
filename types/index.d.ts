@@ -5,6 +5,7 @@ export type { PlatformConfig, Config, LocalOptions, LogConfig } from './Config.d
 export type {
   DesignToken,
   DesignTokens,
+  PreprocessedTokens,
   TransformedToken,
   TransformedTokens,
   Dictionary,

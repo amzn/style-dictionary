@@ -30,7 +30,13 @@ export interface DesignToken {
 
 export interface DesignTokens {
   $type?: string;
-  [key: string]: DesignTokens | DesignToken;
+  [key: string]: DesignTokens | DesignToken | string | undefined;
+}
+
+// Same as DesignTokens but without the $type group property
+// after preprocessing the type is delegated to tokens level
+export interface PreprocessedTokens {
+  [key: string]: PreprocessedTokens | DesignToken;
 }
 
 export interface TransformedToken extends DesignToken {
