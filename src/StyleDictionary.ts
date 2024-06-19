@@ -13,7 +13,7 @@
 
 import JSON5 from 'json5';
 import { extname } from 'path-unified';
-import { fs } from './fs';
+import { fs } from 'style-dictionary/fs';
 import chalk from 'chalk';
 import { dirname } from 'path-unified';
 
@@ -74,9 +74,9 @@ const FILTER_WARNINGS = GroupMessages.GROUP.FilteredOutputReferences;
 
 export default class StyleDictionary extends Register {
   // Placeholder is transformed on prepublish -> see scripts/inject-version
-  // Another option might be import pkg from './packageon' with { "type": "json" } which would work in both browser and node, but support is not there yet.
+  // Another option might be import pkg from './package.json' with { "type": "json" } which would work in both browser and node, but support is not there yet.
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#browser_compatibility
-  static VERSION = '<? version placeholder ?>';
+  static VERSION = '4.0.0-prerelease.37';
   public _options?: Config;
   public config: Config;
   public tokens?: DesignTokens | TransformedTokens;
