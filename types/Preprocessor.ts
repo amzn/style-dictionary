@@ -10,10 +10,14 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-import type { TransformedToken } from './DesignToken.d.ts';
-import type { Config } from './Config.d.ts';
 
-export interface Filter {
+import type { PreprocessedTokens } from './DesignToken.ts';
+import type { Config } from './Config.ts';
+
+export type Preprocessor = {
   name: string;
-  filter: (token: TransformedToken, options: Config) => boolean | Promise<boolean>;
-}
+  preprocessor: (
+    dictionary: PreprocessedTokens,
+    options: Config,
+  ) => PreprocessedTokens | Promise<PreprocessedTokens>;
+};

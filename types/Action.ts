@@ -11,13 +11,25 @@
  * and limitations under the License.
  */
 
-import type { PreprocessedTokens } from './DesignToken.d.ts';
-import type { Config } from './Config.d.ts';
+import type { Dictionary } from './DesignToken.ts';
+import type { PlatformConfig, Config } from './Config.ts';
+import type { Volume } from './Volume.ts';
 
-export type Preprocessor = {
+export interface Action {
   name: string;
-  preprocessor: (
-    dictionary: PreprocessedTokens,
+  /** The action in the form of a function. */
+  do(
+    dictionary: Dictionary,
+    config: PlatformConfig,
     options: Config,
-  ) => PreprocessedTokens | Promise<PreprocessedTokens>;
-};
+    vol: Volume,
+  ): void | Promise<void>;
+
+  /** A function that undoes the action. */
+  undo?(
+    dictionary: Dictionary,
+    config: PlatformConfig,
+    options: Config,
+    vol: Volume,
+  ): void | Promise<void>;
+}

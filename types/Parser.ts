@@ -11,25 +11,15 @@
  * and limitations under the License.
  */
 
-import type { Dictionary } from './DesignToken.d.ts';
-import type { PlatformConfig, Config } from './Config.d.ts';
-import type { Volume } from './Volume.d.ts';
+import type { DesignTokens } from './DesignToken.ts';
 
-export interface Action {
+export interface ParserOptions {
+  contents: string;
+  filePath?: string;
+}
+
+export interface Parser {
   name: string;
-  /** The action in the form of a function. */
-  do(
-    dictionary: Dictionary,
-    config: PlatformConfig,
-    options: Config,
-    vol: Volume,
-  ): void | Promise<void>;
-
-  /** A function that undoes the action. */
-  undo?(
-    dictionary: Dictionary,
-    config: PlatformConfig,
-    options: Config,
-    vol: Volume,
-  ): void | Promise<void>;
+  pattern: RegExp;
+  parser: (options: ParserOptions) => DesignTokens | Promise<DesignTokens>;
 }

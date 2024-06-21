@@ -37,10 +37,10 @@
   "files": [
     "bin",
     "lib",
+    "types/**/*.d.ts",
     "examples",
     "LICENSE",
-    "NOTICE",
-    "types"
+    "NOTICE"
   ],
   "scripts": {
     "build": "node scripts/inject-version.js && tsc --emitDeclarationOnly",
