@@ -65,18 +65,32 @@ describe('utils', () => {
 
     it("shouldn't merge when keys collide that should override rather than merge", () => {
       const test = deepExtend(
-        [{ foo: { value: 'bar', metadata: 'meta' } }, { foo: { value: 'baz' } }],
+        [
+          { foo: { type: 'other', value: 'bar', metadata: 'meta' } },
+          { foo: { type: 'other', value: 'baz' } },
+        ],
         { collision: function () {}, overrideKeys: ['value'] },
       );
+      expect(test.foo).to.eql({
+        type: 'other',
+        value: 'baz',
+      });
       expect(test).to.have.nested.property('foo.value', 'baz');
       // we do not want to inherit this metadata from the prop we are overriding
       expect(test).to.not.have.nested.property('foo.metadata');
 
       const testDTCG = deepExtend(
-        [{ foo: { $value: 'bar', metadata: 'meta' } }, { foo: { $value: 'baz' } }],
+        [
+          { foo: { $type: 'other', $value: 'bar', metadata: 'meta' } },
+          { foo: { $type: 'other', $value: 'baz' } },
+        ],
         { collision: function () {}, overrideKeys: ['$value'] },
       );
 
+      expect(testDTCG.foo).to.eql({
+        $type: 'other',
+        $value: 'baz',
+      });
       expect(testDTCG).to.have.nested.property('foo.$value', 'baz');
       expect(testDTCG).to.not.have.nested.property('foo.metadata');
     });
