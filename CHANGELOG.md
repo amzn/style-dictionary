@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.0.0-prerelease.38
+
+### Patch Changes
+
+- 5079154: Fix deepExtend util bug with overriding behavior for tokens.
+
 ## 4.0.0-prerelease.37
 
 ### Minor Changes
