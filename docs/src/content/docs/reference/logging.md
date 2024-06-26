@@ -12,17 +12,22 @@ const sd = new StyleDictionary({
   log: {
     warnings: 'warn', // 'warn' | 'error' | 'disabled'
     verbosity: 'default', // 'default' | 'silent' | 'verbose'
+    errors: {
+      brokenReferences: 'throw', // 'throw' | 'console'
+    },
   },
 });
 ```
 
 > `log` can also be set on platform specific configuration
 
-| Param           | Type                                | Description                                                                                                                                                          |
-| --------------- | ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `log`           | `Object`                            |                                                                                                                                                                      |
-| `log.warnings`  | `'warn' \| 'error' \| 'disabled'`   | Whether warnings should be logged as warnings, thrown as errors or disabled entirely. Defaults to 'warn'                                                             |
-| `log.verbosity` | `'default' \|'silent' \| 'verbose'` | How verbose logs should be, default value is 'default'. 'silent' means no logs at all apart from fatal errors. 'verbose' means detailed error messages for debugging |
+| Param                         | Type                                | Description                                                                                                                                                          |
+| ----------------------------- | ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `log`                         | `Object`                            |                                                                                                                                                                      |
+| `log.warnings`                | `'warn' \| 'error' \| 'disabled'`   | Whether warnings should be logged as warnings, thrown as errors or disabled entirely. Defaults to 'warn'                                                             |
+| `log.verbosity`               | `'default' \|'silent' \| 'verbose'` | How verbose logs should be, default value is 'default'. 'silent' means no logs at all apart from fatal errors. 'verbose' means detailed error messages for debugging |
+| `log.errors`                  | `Object`                            | How verbose logs should be, default value is 'default'. 'silent' means no logs at all apart from fatal errors. 'verbose' means detailed error messages for debugging |
+| `log.errors.brokenReferences` | `'throw' \| 'console'`              | Whether broken references in tokens should throw a fatal error or only a `console.error` without exiting the process.                                                |
 
 There are five types of warnings that will be thrown as errors instead of being logged as warnings when `log.warnings` is set to `error`:
 

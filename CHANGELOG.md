@@ -1,5 +1,46 @@
 # Changelog
 
+## 4.0.0-prerelease.38
+
+### Patch Changes
+
+- 5079154: Fix deepExtend util bug with overriding behavior for tokens.
+
+## 4.0.0-prerelease.37
+
+### Minor Changes
+
+- 8450a45: Some fixes for Expand utility:
+
+  - Array values such as `dashArray` property of `strokeStyle` tokens no longer get expanded unintentionally, `typeof 'object'` check changed to `isPlainObject` check.
+  - Nested object-value tokens (such as `style` property inside `border` tokens) will now also be expanded.
+  - When references are involved during expansion, the resolved value is used when the property is an object, if not, then we keep the reference as is.
+    This is because if the reference is to an object value, the expansion might break the reference.
+
+## 4.0.0-prerelease.36
+
+### Minor Changes
+
+- 39f0220: Allow not throwing fatal errors on broken token references/aliases, but `console.error` instead.
+
+  You can also configure this on global/platform `log` property:
+
+  ```json
+  {
+    "log": {
+      "errors": {
+        "brokenReferences": "console"
+      }
+    }
+  }
+  ```
+
+  This setting defaults to `"error"` when not configured.
+
+  `resolveReferences` and `getReferences` `warnImmediately` option is set to `true` which causes an error to be thrown/warned immediately by default, which can be configured to `false` if you know those utils are running in the transform/format hooks respectively, where the errors are collected and grouped, then thrown as 1 error/warning instead of multiple.
+
+  Some minor grammatical improvements to some of the error logs were also done.
+
 ## 4.0.0-prerelease.35
 
 ### Minor Changes
