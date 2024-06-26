@@ -1,12 +1,12 @@
 // Editor Groups are the containers of editors.
 export const editorGroup = {
-  emptyBackground: { value: '{color.background.secondary.value}' },
-  border: { value: '{color.border.primary.value}' },
-  dropBackground: { value: '{color.background.drop.value}' },
+  emptyBackground: { $value: '{color.background.secondary}' },
+  border: { $value: '{color.border.primary}' },
+  dropBackground: { $value: '{color.background.drop}' },
 };
 
 export const editorGroupHeader = {
-  noTabsBackground: { value: '{color.background.primary.value}' },
-  tabsBackground: { value: '{color.background.tertiary.value}' },
-  tabsBorder: { value: '#0000' },
+  noTabsBackground: { $value: '{color.background.primary}' },
+  tabsBackground: { $value: '{color.background.tertiary}' },
+  tabsBorder: { $value: '#0000' },
 };

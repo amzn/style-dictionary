@@ -1,5 +1,5 @@
 export const dropdown = {
-  background: { value: '{color.background.primary.value}' },
-  foreground: { value: '{color.font.primary.value}' },
+  background: { $value: '{color.background.primary}' },
+  foreground: { $value: '{color.font.primary}' },
   border: {},
 };

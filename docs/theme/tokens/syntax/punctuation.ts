@@ -1,36 +1,36 @@
 export const punctuation = {
   accessor: {
-    value: '{color.font.primary.value}',
+    $value: '{color.font.primary}',
   },
   definition: {
     array: {
-      value: '{color.font.primary.value}',
+      $value: '{color.font.primary}',
     },
     block: {
-      value: '{color.font.primary.value}',
+      $value: '{color.font.primary}',
     },
     dictionary: {
-      value: '{color.font.primary.value}',
+      $value: '{color.font.primary}',
     },
-    heading: { value: '{color.font.code.22.value}' },
-    list: { value: '{color.font.code.21.value}' },
+    heading: { $value: '{color.font.code.22}' },
+    list: { $value: '{color.font.code.21}' },
     parameters: {
-      value: '{color.font.primary.value}',
+      $value: '{color.font.primary}',
     },
     quote: {},
     string: {
-      '*': { value: '{color.font.code.25.value}' },
+      '*': { $value: '{color.font.code.25}' },
       begin: {},
       end: {},
     },
     tag: {
-      '*': { value: '{color.font.primary.value}' },
+      '*': { $value: '{color.font.primary}' },
     },
-    typeparameters: { value: '{color.font.primary.value}' },
+    typeparameters: { $value: '{color.font.primary}' },
 
     // ${} in string templates in JS
     'template-expression': {
-      '*': { value: '{color.font.code.21.value}' },
+      '*': { $value: '{color.font.code.21}' },
       begin: {},
       end: {},
     },
@@ -38,14 +38,14 @@ export const punctuation = {
   },
 
   section: {
-    '*': { value: '{color.font.secondary.value}' },
+    '*': { $value: '{color.font.secondary}' },
     interpolation: {
       begin: {},
       end: {},
     },
   },
   separator: {
-    '*': { value: '{color.font.primary.value}' },
+    '*': { $value: '{color.font.primary}' },
     array: {
       /* commas between array items */
     },
@@ -56,6 +56,6 @@ export const punctuation = {
   },
   terminator: {
     /* Semicolons in JS */
-    '*': { value: '{color.font.tertiary.value}' },
+    '*': { $value: '{color.font.tertiary}' },
   },
 };

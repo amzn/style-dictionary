@@ -8,6 +8,7 @@ import { starlightDark } from './starlight';
 
 export const darkTokens = {
   color: {
+    $type: 'color',
     core,
     background,
     border,

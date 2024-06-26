@@ -1,47 +1,47 @@
 export const background = {
-  primary: { value: '{color.core.grey.100.value}' },
-  secondary: { value: '{color.core.grey.90.value}' },
-  tertiary: { value: '{color.core.grey.80.value}' },
-  quaternary: { value: '{color.core.grey.60.value}' },
+  primary: { $value: '{color.core.grey.100}' },
+  secondary: { $value: '{color.core.grey.90}' },
+  tertiary: { $value: '{color.core.grey.80}' },
+  quaternary: { $value: '{color.core.grey.60}' },
 
-  badge: { value: '{color.core.teal.darker.value}' },
-  debug: { value: '{color.core.purple.dark.value}' },
+  badge: { $value: '{color.core.teal.darker}' },
+  debug: { $value: '{color.core.purple.dark}' },
 
-  danger: { value: '{color.core.red.light.value}' },
-  warning: { value: '{color.core.orange.light.value}' },
-  success: { value: '{color.core.green.light.value}' },
-  info: { value: '{color.core.teal.light.value}' },
+  danger: { $value: '{color.core.red.light}' },
+  warning: { $value: '{color.core.orange.light}' },
+  success: { $value: '{color.core.green.light}' },
+  info: { $value: '{color.core.teal.light}' },
 
   interactive: {
-    base: { value: '{color.core.pink.dark.value}', modify: { alpha: 0.4 } },
-    hover: { value: '{color.core.pink.dark.value}', modify: { alpha: 0.6 } },
+    base: { $value: '{color.core.pink.dark}', modify: { alpha: 0.4 } },
+    hover: { $value: '{color.core.pink.dark}', modify: { alpha: 0.6 } },
   },
 
-  drop: { value: '{color.background.selection.secondary.active.value}' },
+  drop: { $value: '{color.background.selection.secondary.active}' },
 
   selection: {
     primary: {
-      active: { value: '{color.core.pink.light.value}', modify: { alpha: 0.4 } },
-      inactive: { value: '{color.core.pink.light.value}', modify: { alpha: 0.2 } },
+      active: { $value: '{color.core.pink.light}', modify: { alpha: 0.4 } },
+      inactive: { $value: '{color.core.pink.light}', modify: { alpha: 0.2 } },
     },
     secondary: {
-      active: { value: '{color.core.teal.light.value}', modify: { alpha: 0.4 } },
-      inactive: { value: '{color.core.teal.light.value}', modify: { alpha: 0.2 } },
+      active: { $value: '{color.core.teal.light}', modify: { alpha: 0.4 } },
+      inactive: { $value: '{color.core.teal.light}', modify: { alpha: 0.2 } },
     },
     tertiary: {
-      active: { value: '{color.core.purple.light.value}', modify: { alpha: 0.4 } },
-      inactive: { value: '{color.core.purple.light.value}', modify: { alpha: 0.2 } },
+      active: { $value: '{color.core.purple.light}', modify: { alpha: 0.4 } },
+      inactive: { $value: '{color.core.purple.light}', modify: { alpha: 0.2 } },
     },
   },
 
   highlight: {
     primary: {
-      active: { value: '{color.core.yellow.light.value}', modify: { alpha: 0.4 } },
-      inactive: { value: '{color.core.yellow.light.value}', modify: { alpha: 0.2 } },
+      active: { $value: '{color.core.yellow.light}', modify: { alpha: 0.4 } },
+      inactive: { $value: '{color.core.yellow.light}', modify: { alpha: 0.2 } },
     },
     secondary: {
-      active: { value: '{color.core.blue.light.value}', modify: { alpha: 0.4 } },
-      inactive: { value: '{color.core.blue.light.value}', modify: { alpha: 0.2 } },
+      active: { $value: '{color.core.blue.light}', modify: { alpha: 0.4 } },
+      inactive: { $value: '{color.core.blue.light}', modify: { alpha: 0.2 } },
     },
   },
 };

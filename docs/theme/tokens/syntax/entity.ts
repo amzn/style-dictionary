@@ -10,22 +10,22 @@
 export const entity = {
   name: {
     tag: {
-      '*': { value: '{color.font.code.21.value}' },
-      reference: { value: '{color.font.code.8.value}' },
-      yaml: { value: '{color.font.code.22.value}' },
+      '*': { $value: '{color.font.code.21}' },
+      reference: { $value: '{color.font.code.8}' },
+      yaml: { $value: '{color.font.code.22}' },
     },
     type: {
-      module: { value: '{color.font.code.22.value}' },
+      module: { $value: '{color.font.code.22}' },
     },
     function: {
-      '*': { value: '{color.font.code.27.value}' },
+      '*': { $value: '{color.font.code.27}' },
     },
   },
   other: {
     'attribute-name': {
-      id: { value: '{color.font.code.22.value}' },
-      class: { value: '{color.font.code.23.value}' },
-      '*': { value: '{color.font.code.27.value}' },
+      id: { $value: '{color.font.code.22}' },
+      class: { $value: '{color.font.code.23}' },
+      '*': { $value: '{color.font.code.27}' },
     },
   },
 };

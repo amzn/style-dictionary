@@ -51,7 +51,7 @@
     "format": "run-p format:*",
     "format:eslint": "eslint --fix \"**/*.js\"",
     "format:prettier": "prettier \"**/*.{js,md,mdx}\" \"package.json\" --write",
-    "lint": "run-p lint:*",
+    "lint": "npm run docs:token-build && run-p lint:*",
     "lint:eslint": "eslint \"**/*.js\"",
     "lint:prettier": "prettier \"**/*.{js,md,mdx}\" \"package.json\" --list-different || (echo '↑↑ these files are not prettier formatted ↑↑' && exit 1)",
     "lint:types": "tsc --noEmit",

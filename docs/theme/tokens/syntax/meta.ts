@@ -6,48 +6,48 @@
 export const meta = {
   brace: {
     round: {
-      /* () */ '*': { value: '{color.font.primary.value}' },
+      /* () */ '*': { $value: '{color.font.primary}' },
     },
     square: {
-      /* [] */ '*': { value: '{color.font.primary.value}' },
+      /* [] */ '*': { $value: '{color.font.primary}' },
     },
   },
   class: {
-    '*': { value: '{color.font.code.22.value}' },
+    '*': { $value: '{color.font.code.22}' },
   },
   jsx: {
     children: {
-      '*': { value: '{color.font.primary.value}' },
+      '*': { $value: '{color.font.primary}' },
     },
   },
   object: {
-    '*': { value: '{color.font.code.29.value}' },
+    '*': { $value: '{color.font.code.29}' },
     member: {},
   },
   'property-name': {
-    css: { value: '{color.font.code.5.value}' },
+    css: { $value: '{color.font.code.5}' },
   },
   'property-value': {
-    css: { value: '{color.font.code.5.value}' },
+    css: { $value: '{color.font.code.5}' },
   },
   'property-list': {},
   selector: {
-    '*': { value: '{color.font.code.5.value}' },
+    '*': { $value: '{color.font.code.5}' },
   },
   structure: {
     dictionary: {
-      '*': { value: '{color.font.code.28.value}' },
+      '*': { $value: '{color.font.code.28}' },
     },
   },
   tag: {
-    attributes: { value: '{color.font.code.29.value}' },
+    attributes: { $value: '{color.font.code.29}' },
   },
   type: {
-    parameters: { value: '{color.font.code.23.value}' },
+    parameters: { $value: '{color.font.code.23}' },
   },
   var: {
     expr: {
-      '*': { value: '{color.font.code.8.value}' },
+      '*': { $value: '{color.font.code.8}' },
     },
   },
 };

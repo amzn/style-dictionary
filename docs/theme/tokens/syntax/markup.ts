@@ -2,25 +2,25 @@
 // documentation comments if you include markdown syntax.
 export const markup = {
   bold: {
-    value: '{color.font.code.28.value}',
+    $value: '{color.font.code.28}',
     fontStyle: 'bold',
   },
   italic: {
-    value: '{color.font.code.27.value}',
+    $value: '{color.font.code.27}',
     fontStyle: 'italic',
   },
   fenced_code: {
-    value: '{color.font.primary.value}',
+    $value: '{color.font.primary}',
   },
   heading: {
-    value: '{color.font.primary.value}',
+    $value: '{color.font.primary}',
     fontStyle: 'bold',
   },
   quote: {
-    value: '{color.font.secondary.value}',
+    $value: '{color.font.secondary}',
     fontStyle: 'italic',
   },
   underline: {
-    link: { value: '{color.font.code.26.value}' },
+    link: { $value: '{color.font.code.26}' },
   },
 };

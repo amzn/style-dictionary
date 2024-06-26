@@ -1,16 +1,16 @@
 export const tab = {
-  border: { value: '{color.border.tertiary.value}' },
+  border: { $value: '{color.border.tertiary}' },
 
-  activeBackground: { value: '{color.background.primary.value}' },
-  activeForeground: { value: '{color.font.primary.value}' },
-  activeBorderTop: { value: '{color.border.focus.value}' },
+  activeBackground: { $value: '{color.background.primary}' },
+  activeForeground: { $value: '{color.font.primary}' },
+  activeBorderTop: { $value: '{color.border.focus}' },
 
-  inactiveBackground: { value: '{color.background.tertiary.value}' },
-  inactiveForeground: { value: '{color.font.tertiary.value}' },
+  inactiveBackground: { $value: '{color.background.tertiary}' },
+  inactiveForeground: { $value: '{color.font.tertiary}' },
 
   // Unfocused tabs are ones in the inactive editor group
   unfocusedActiveBorder: {},
-  unfocusedHoverBorder: { value: '{color.border.active.value}' },
-  unfocusedActiveForeground: { value: '{color.font.secondary.value}' },
-  unfocusedInactiveForeground: { value: '{color.font.tertiary.value}' },
+  unfocusedHoverBorder: { $value: '{color.border.active}' },
+  unfocusedActiveForeground: { $value: '{color.font.secondary}' },
+  unfocusedInactiveForeground: { $value: '{color.font.tertiary}' },
 };

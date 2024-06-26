@@ -24,24 +24,24 @@ export default {
 
   // This applies to focused sections in the sidebar as well
   // as focused inputs
-  focusBorder: { value: '{color.border.secondary.value}' },
-  foreground: { value: '{color.font.primary.value}' },
-  descriptionForeground: { value: '{color.font.secondary.value}' },
-  errorForeground: { value: '{color.font.danger.value}' },
+  focusBorder: { $value: '{color.border.secondary}' },
+  foreground: { $value: '{color.font.primary}' },
+  descriptionForeground: { $value: '{color.font.secondary}' },
+  errorForeground: { $value: '{color.font.danger}' },
 
   // Icons are the ones in the panel, not the ones in the activity bar
   icon: {
-    foreground: { value: '{color.font.primary.value}' },
+    foreground: { $value: '{color.font.primary}' },
   },
 
   // Selection background for elements not in the editor, like selecting
   // text in an input
   selection: {
-    background: { value: '{color.background.selection.primary.active.value}' },
+    background: { $value: '{color.background.selection.primary.active}' },
   },
 
   // Widgets are the quick command palette, notifications, quick search, etc.
   widget: {
-    shadow: { value: '#0000' },
+    shadow: { $value: '#0000' },
   },
 };

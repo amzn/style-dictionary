@@ -8,6 +8,7 @@ import { starlightLight } from './starlight';
 
 export const lightTokens = {
   color: {
+    $type: 'color',
     core,
     background,
     border,
