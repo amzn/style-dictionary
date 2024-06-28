@@ -1,6 +1,6 @@
 {
   "name": "style-dictionary",
-  "version": "3.9.2",
+  "version": "4.0.0",
   "description": "Style once, use everywhere. A build system for creating cross-platform styles.",
   "keywords": [
     "style dictionary",
@@ -9,7 +9,6 @@
     "amazon",
     "css",
     "design",
-    "properties",
     "tokens",
     "sass",
     "scss",
@@ -19,87 +18,69 @@
     "react native",
     "style guide"
   ],
-  "main": "index.js",
-  "types": "types/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": "./lib/StyleDictionary.js",
+    "./fs": {
+      "node": "./lib/fs-node.js",
+      "default": "./lib/fs.js"
+    },
+    "./utils": "./lib/utils/index.js",
+    "./types": "./types/index.d.ts"
+  },
   "bin": {
-    "style-dictionary": "./bin/style-dictionary"
+    "style-dictionary": "./bin/style-dictionary.js"
   },
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=18.0.0"
   },
   "files": [
     "bin",
     "lib",
+    "types/**/*.d.ts",
     "examples",
-    "index.js",
     "LICENSE",
-    "NOTICE",
-    "types"
+    "NOTICE"
   ],
   "scripts": {
-    "lint": "eslint --fix index.js \"lib/**/*.js\" \"__tests__/**/*.js\"",
-    "test": "npm run test-types && npm run lint && jest --runInBand --silent --coverage",
-    "test-types": "tsd",
-    "test-watch": "npm run test-types && npm run lint && jest --runInBand --watch",
-    "generate-docs": "node ./scripts/generateDocs.js",
-    "serve-docs": "docsify serve docs -p 3000 -P 12345",
+    "build": "node scripts/inject-version.js && tsc --emitDeclarationOnly",
+    "docs:start": "astro dev --root ./docs",
+    "docs:build": "astro check  --root ./docs && astro build --root ./docs",
+    "docs:preview": "astro preview --root ./docs",
+    "format": "run-p format:*",
+    "format:eslint": "eslint --fix \"**/*.js\"",
+    "format:prettier": "prettier \"**/*.{js,md,mdx}\" \"package.json\" --write",
+    "lint": "run-p lint:*",
+    "lint:eslint": "eslint \"**/*.js\"",
+    "lint:prettier": "prettier \"**/*.{js,md,mdx}\" \"package.json\" --list-different || (echo '↑↑ these files are not prettier formatted ↑↑' && exit 1)",
+    "lint:types": "tsc --noEmit",
+    "test": "web-test-runner --coverage",
+    "test:watch": "web-test-runner --watch",
+    "test:coverage": "cd coverage/lcov-report && npx http-server -o -c-1",
+    "test:update-snapshots": "web-test-runner --update-snapshots",
+    "test:node": "mocha -r mocha-hooks.mjs './__integration__/**/*.test.js' './__tests__/**/*.test.js' './__node_tests__/**/*.test.js'",
     "install-cli": "npm install -g $(npm pack)",
-    "release": "git add . && standard-version -a",
-    "prepare": "husky install"
-  },
-  "standard-version": {
-    "scripts": {
-      "postbump": "node ./scripts/version.js && npm run generate-docs"
-    }
-  },
-  "jest": {
-    "verbose": false,
-    "collectCoverageFrom": [
-      "lib/**/*.js"
-    ],
-    "coverageReporters": [
-      "html"
-    ],
-    "coverageDirectory": "docs/coverage",
-    "roots": [
-      "__tests__",
-      "__integration__"
-    ],
-    "setupFilesAfterEnv": [
-      "<rootDir>/__tests__/__setup.js"
-    ],
-    "testPathIgnorePatterns": [
-      "/__tests__/__setup.js",
-      "/__tests__/__helpers.js",
-      "/__tests__/__assets/",
-      "/__tests__/__configs/",
-      "/__tests__/__json_files/",
-      "/__tests__/__properties/",
-      "/__tests__/__output/",
-      "/__tests__/formats/__constants.js"
-    ],
-    "transform": {
-      "^.+\\.json5$": "json5-jest",
-      "^.+\\.jsonc$": "json5-jest",
-      "^.+\\.jsx?$": "babel-jest"
-    }
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm test && lint-staged",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
+    "release": "npm run build && changeset publish",
+    "prepare": "husky install",
+    "postinstall": "patch-package"
   },
   "lint-staged": {
     "*.js": [
-      "npm run lint",
-      "git add"
-    ]
+      "eslint",
+      "prettier --list-different"
+    ],
+    "*.{md,mdx}": "prettier --list-different"
   },
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
     ]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "arrowParens": "always",
+    "trailingComma": "all",
+    "printWidth": 100
   },
   "repository": {
     "type": "git",
@@ -114,42 +95,70 @@
     "Yuliya Baran <baranyu@amazon.com>",
     "Charles Dorner <dornerc@amazon.com>",
     "Dustin Boudreau <boudrd@amazon.com>",
-    "Danny Banks <djb@amazon.com>"
+    "Danny Banks <djb@amazon.com>",
+    "Joren Broekema <joren.broekema@gmail.com>"
   ],
   "homepage": "https://github.com/amzn/style-dictionary",
   "dependencies": {
-    "chalk": "^4.0.0",
-    "change-case": "^4.1.2",
+    "@bundled-es-modules/deepmerge": "^4.3.1",
+    "@bundled-es-modules/glob": "^10.4.2",
+    "@bundled-es-modules/memfs": "^4.8.1",
+    "@zip.js/zip.js": "^2.7.44",
+    "chalk": "^5.3.0",
+    "change-case": "^5.3.0",
     "commander": "^8.3.0",
-    "fs-extra": "^10.0.0",
-    "glob": "^10.3.10",
+    "is-plain-obj": "^4.1.0",
     "json5": "^2.2.2",
-    "jsonc-parser": "^3.0.0",
-    "lodash": "^4.17.15",
-    "tinycolor2": "^1.4.1"
+    "patch-package": "^8.0.0",
+    "path-unified": "^0.1.0",
+    "tinycolor2": "^1.6.0"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.16.11",
-    "@commitlint/cli": "^16.1.0",
-    "@commitlint/config-conventional": "^16.0.0",
-    "babel-jest": "^27.4.6",
-    "babel-preset-env": "^1.7.0",
-    "docsify": "^4.12.2",
-    "docsify-cli": "^4.4.3",
+    "@astrojs/check": "^0.5.10",
+    "@astrojs/starlight": "^0.23.1",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@changesets/cli": "^2.27.1",
+    "@commitlint/cli": "^18.4.3",
+    "@commitlint/config-conventional": "^18.4.3",
+    "@esm-bundle/chai-as-promised": "^7.1.1",
+    "@rollup/browser": "^4.13.1",
+    "@rollup/plugin-virtual": "^3.0.2",
+    "@shoelace-style/shoelace": "^2.15.0",
+    "@types/chai": "^4.3.9",
+    "@types/tinycolor2": "^1.4.6",
+    "@types/uuid": "^9.0.8",
+    "@web/test-runner": "^0.18.2",
+    "@web/test-runner-commands": "^0.9.0",
+    "@web/test-runner-playwright": "^0.11.0",
+    "acorn": "^8.11.3",
+    "astro": "^4.3.5",
+    "chai": "^5.0.0-alpha.2",
     "eslint": "^8.7.0",
-    "eslint-plugin-jest": "^26.0.0",
-    "husky": "^7.0.0",
-    "istanbul": "^0.4.5",
-    "jest": "^27.4.7",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-mocha": "^10.2.0",
+    "estree-walker": "^3.0.3",
+    "fs-extra": "^10.0.0",
+    "hanbi": "^1.0.1",
+    "husky": "^8.0.3",
     "jsdoc-escape-at": "^1.0.1",
-    "jsdoc-to-markdown": "^7.1.0",
-    "json5-jest": "^1.0.1",
+    "jsdoc-to-markdown": "^8.0.0",
+    "jsdoc-tsimport-plugin": "^1.0.5",
     "less": "^4.1.2",
     "lint-staged": "^12.3.1",
-    "node-sass": "^9.0.0",
-    "standard-version": "^9.3.2",
+    "lit": "^3.1.2",
+    "mdast": "^3.0.0",
+    "memfs": "^4.6.0",
+    "mermaid": "^10.9.1",
+    "mocha": "^10.2.0",
+    "monaco-editor": "^0.47.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^3.0.3",
+    "sass": "^1.69.5",
+    "sharp": "^0.32.5",
     "stylus": "^0.56.0",
-    "tsd": "^0.19.1",
-    "yaml": "^1.10.2"
+    "typescript": "^5.3.3",
+    "unist-util-visit": "^5.0.0",
+    "uuid": "^9.0.1",
+    "yaml": "^2.3.4"
   }
 }

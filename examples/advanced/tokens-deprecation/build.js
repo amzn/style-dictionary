@@ -1,24 +1,35 @@
-const StyleDictionary = require('style-dictionary').extend(__dirname + '/config.json');
-const fs = require('fs');
-const _ = require('lodash');
+import StyleDictionary from 'style-dictionary';
+import { fileHeader } from 'style-dictionary/utils';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+import webScssTemplate from './templates/web-scss.template.js';
+import iosPlistTemplate from './templates/ios-plist.template.js';
 
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const sd = await StyleDictionary.extend(__dirname + '/config.json');
 
 console.log('Build started...');
 console.log('\n==============================================');
 
-StyleDictionary.registerFormat({
+sd.registerFormat({
   name: 'custom/format/scss',
-  formatter: _.template(fs.readFileSync(__dirname + '/templates/web-scss.template'))
+  format: async ({ dictionary, file, options }) => {
+    const { allTokens } = dictionary;
+    const header = await fileHeader({ file, commentStyle: 'long' });
+    return webScssTemplate({ allTokens, file, options, header });
+  },
 });
 
-StyleDictionary.registerFormat({
+sd.registerFormat({
   name: 'custom/format/ios-plist',
-  formatter: _.template(fs.readFileSync(__dirname + '/templates/ios-plist.template'))
+  format: async ({ dictionary, file, options }) => {
+    const header = await fileHeader({ file, commentStyle: 'xml' });
+    return iosPlistTemplate({ dictionary, options, file, header });
+  },
 });
 
 // FINALLY, BUILD ALL THE PLATFORMS
-StyleDictionary.buildAllPlatforms();
-
+await sd.buildAllPlatforms();
 
 console.log('\n==============================================');
 console.log('\nBuild completed!');

@@ -1,0 +1,34 @@
+{
+  "size": {
+    "padding": {
+      "zero": {
+        "value": 0,
+        "type": "dimension"
+      },
+      "tiny": {
+        "value": "3",
+        "type": "dimension"
+      },
+      "small": {
+        "value": "5",
+        "type": "dimension"
+      },
+      "base": {
+        "value": "10",
+        "type": "dimension"
+      },
+      "large": {
+        "value": "15",
+        "type": "dimension"
+      },
+      "xl": {
+        "value": "20",
+        "type": "dimension"
+      },
+      "xxl": {
+        "value": "30",
+        "type": "dimension"
+      }
+    }
+  }
+}

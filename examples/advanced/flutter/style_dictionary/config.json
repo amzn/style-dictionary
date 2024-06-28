@@ -1,46 +1,46 @@
 {
-    "source": [
-        "properties/**/*.json"
-    ],
-    "platforms": {
-        "flutter": {
-            "transformGroup": "flutter",
-            "buildPath": "../lib/unique_file/",
-            "files": [
-                {
-                    "destination": "style_dictionary.dart",
-                    "format": "flutter/class.dart",
-                    "className": "StyleDictionary"
-                }
-            ]
-        },
-        "flutter-separate": {
-            "transformGroup": "flutter-separate",
-            "buildPath": "../lib/",
-            "files": [
-                {
-                    "destination": "style_dictionary_color.dart",
-                    "format": "flutter/class.dart",
-                    "className": "StyleDictionaryColor",
-                    "type": "color",
-                    "filter": {
-                        "attributes": {
-                            "category": "color"
-                        }
-                    }
-                },
-                {
-                    "destination": "style_dictionary_sizes.dart",
-                    "format": "flutter/class.dart",
-                    "className": "StyleDictionarySize",
-                    "type": "float",
-                    "filter": {
-                        "attributes": {
-                            "category": "size"
-                        }
-                    }
-                }
-            ]
+  "source": ["tokens/**/*.json"],
+  "platforms": {
+    "flutter": {
+      "transformGroup": "flutter",
+      "buildPath": "../lib/unique_file/",
+      "files": [
+        {
+          "destination": "style_dictionary.dart",
+          "format": "flutter/class.dart",
+          "options": {
+            "className": "StyleDictionary"
+          }
         }
+      ]
+    },
+    "flutter-separate": {
+      "transformGroup": "flutter-separate",
+      "buildPath": "../lib/",
+      "files": [
+        {
+          "destination": "style_dictionary_color.dart",
+          "format": "flutter/class.dart",
+          "options": {
+            "className": "StyleDictionaryColor",
+            "type": "color"
+          },
+          "filter": {
+            "type": "color"
+          }
+        },
+        {
+          "destination": "style_dictionary_sizes.dart",
+          "format": "flutter/class.dart",
+          "options": {
+            "className": "StyleDictionarySize",
+            "type": "float"
+          },
+          "filter": {
+            "type": "color"
+          }
+        }
+      ]
     }
+  }
 }

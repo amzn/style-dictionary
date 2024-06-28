@@ -10,59 +10,72 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
+import { expect } from 'chai';
+import { clearOutput, fileExists } from './__helpers.js';
+import cleanFiles from '../lib/cleanFiles.js';
+import StyleDictionary from '../lib/StyleDictionary.js';
 
-var helpers    = require('./__helpers');
-var buildFiles = require('../lib/buildFiles');
-var cleanFiles = require('../lib/cleanFiles');
-
-var dictionary = {
-  properties: {
-    foo: 'bar'
-  }
+const tokens = {
+  foo: 'bar',
 };
 
-var platform = {
+const hooks = {
+  formats: {
+    foo: (dictionary) => JSON.stringify(dictionary.tokens),
+  },
+};
+
+const platform = {
   files: [
     {
       destination: '__tests__/__output/test.json',
-      format: function(dictionary) {
-        return JSON.stringify(dictionary.properties)
-      }
-    }
-  ]
+      format: 'foo',
+    },
+  ],
 };
 
-var platformWithBuildPath = {
+const platformWithBuildPath = {
   buildPath: '__tests__/__output/',
   files: [
     {
       destination: 'test.json',
-      format: function(dictionary) {
-        return JSON.stringify(dictionary.properties)
-      }
-    }
-  ]
+      format: 'foo',
+    },
+  ],
 };
 
 describe('cleanFiles', () => {
-
   beforeEach(() => {
-    helpers.clearOutput();
+    clearOutput();
   });
 
   afterEach(() => {
-    helpers.clearOutput();
+    clearOutput();
   });
 
-  it('should delete without buildPath', () => {
-    buildFiles( dictionary, platform );
-    cleanFiles( dictionary, platform );
-    expect(helpers.fileDoesNotExist('./__tests__/__output/test.json')).toBeTruthy();
+  it('should delete without buildPath', async () => {
+    const sd = new StyleDictionary({
+      hooks,
+      tokens,
+      platforms: {
+        bar: platform,
+      },
+    });
+    await sd.buildPlatform('bar');
+    await cleanFiles(platform);
+    expect(fileExists('__tests__/__output/test.json')).to.be.false;
   });
 
-  it('should delete with buildPath', () => {
-    buildFiles( dictionary, platformWithBuildPath );
-    cleanFiles( dictionary, platformWithBuildPath );
-    expect(helpers.fileDoesNotExist('./__tests__/__output/test.json')).toBeTruthy();
+  it('should delete with buildPath', async () => {
+    const sd = new StyleDictionary({
+      hooks,
+      tokens,
+      platforms: {
+        bar: platformWithBuildPath,
+      },
+    });
+    await sd.buildPlatform('bar');
+    cleanFiles(platformWithBuildPath);
+    expect(fileExists('__tests__/t__/__output/test.json')).to.be.false;
   });
 });

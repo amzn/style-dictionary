@@ -10,86 +10,105 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
+import { expect } from 'chai';
+import StyleDictionary from 'style-dictionary';
+import { fs } from 'style-dictionary/fs';
+import { resolve } from '../lib/resolve.js';
+import { buildPath } from './_constants.js';
+import { clearOutput } from '../__tests__/__helpers.js';
 
-const fs = require('fs-extra');
-const StyleDictionary = require('../index');
-const {buildPath} = require('./_constants');
-
-describe('integration', () => {
-  describe('flutter', () => {
-    StyleDictionary.extend({
-      source: [`__integration__/tokens/**/*.json?(c)`],
+describe('integration', async () => {
+  before(async () => {
+    const sd = new StyleDictionary({
+      source: [`__integration__/tokens/**/[!_]*.json?(c)`],
       platforms: {
         flutter: {
           transformGroup: `flutter`,
           buildPath,
-          files: [{
-            destination: "style_dictionary.dart",
-            format: "flutter/class.dart",
-            className: "StyleDictionary"
-          },{
-            destination: "style_dictionary_with_references.dart",
-            format: "flutter/class.dart",
-            className: "StyleDictionary",
-            options: {
-              outputReferences: true
-            }
-          }]
+          files: [
+            {
+              destination: 'style_dictionary.dart',
+              format: 'flutter/class.dart',
+              options: {
+                className: 'StyleDictionary',
+              },
+            },
+            {
+              destination: 'style_dictionary_with_references.dart',
+              format: 'flutter/class.dart',
+              options: {
+                outputReferences: true,
+                className: 'StyleDictionary',
+              },
+            },
+          ],
         },
         flutter_separate: {
           transformGroup: `flutter-separate`,
           buildPath,
-          files: [{
-            destination: "style_dictionary_color.dart",
-            format: "flutter/class.dart",
-            className: "StyleDictionaryColor",
-            type: "color",
-            filter: {
-              attributes: {
-                category: "color"
-              }
-            }
-          },{
-            destination: "style_dictionary_sizes.dart",
-            format: "flutter/class.dart",
-            className: "StyleDictionarySize",
-            type: "float",
-            filter: {
-              attributes: {
-                category: "size"
-              }
-            }
-          }]
-        }
-      }
-    }).buildAllPlatforms();
+          files: [
+            {
+              destination: 'style_dictionary_color.dart',
+              format: 'flutter/class.dart',
+              options: {
+                className: 'StyleDictionaryColor',
+                type: 'color',
+              },
+              filter: {
+                type: 'color',
+              },
+            },
+            {
+              destination: 'style_dictionary_sizes.dart',
+              format: 'flutter/class.dart',
+              options: {
+                className: 'StyleDictionarySize',
+                type: 'float',
+              },
+              filter: {
+                type: 'color',
+              },
+            },
+          ],
+        },
+      },
+    });
+    await sd.buildAllPlatforms();
+  });
 
-    describe(`flutter/class.dart`, () => {
-      const output = fs.readFileSync(`${buildPath}style_dictionary.dart`, {encoding:`UTF-8`});
+  afterEach(() => {
+    clearOutput(buildPath);
+  });
 
-      it(`should match snapshot`, () => {
-        expect(output).toMatchSnapshot();
+  describe('flutter', async () => {
+    describe(`flutter/class.dart`, async () => {
+      it(`should match snapshot`, async () => {
+        const output = fs.readFileSync(resolve(`${buildPath}style_dictionary.dart`), {
+          encoding: `UTF-8`,
+        });
+        await expect(output).to.matchSnapshot();
       });
 
-      describe(`with references`, () => {
-        const output = fs.readFileSync(`${buildPath}style_dictionary_with_references.dart`, {encoding:`UTF-8`});
-
-        it(`should match snapshot`, () => {
-          expect(output).toMatchSnapshot();
+      describe(`with references`, async () => {
+        it(`should match snapshot`, async () => {
+          const output = fs.readFileSync(
+            resolve(`${buildPath}style_dictionary_with_references.dart`),
+            {
+              encoding: `UTF-8`,
+            },
+          );
+          await expect(output).to.matchSnapshot();
         });
-
       });
 
-      describe(`separate`, () => {
-        const output = fs.readFileSync(`${buildPath}style_dictionary_color.dart`,{encoding:`UTF-8`});
-        it(`should match snapshot`, () => {
-          expect(output).toMatchSnapshot();
+      describe(`separate`, async () => {
+        it(`should match snapshot`, async () => {
+          const output = fs.readFileSync(resolve(`${buildPath}style_dictionary_color.dart`), {
+            encoding: `UTF-8`,
+          });
+          await expect(output).to.matchSnapshot();
         });
-      })
+      });
     });
   });
-});
-
-afterAll(() => {
-  fs.emptyDirSync(buildPath);
 });

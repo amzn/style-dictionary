@@ -10,52 +10,41 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
-const formats = require('../../lib/common/formats');
-const fs = require('fs-extra');
-const helpers = require('../__helpers');
-const createDictionary = require('../../lib/utils/createDictionary');
-const createFormatArgs = require('../../lib/utils/createFormatArgs');
+import { expect } from 'chai';
+import formats from '../../lib/common/formats.js';
+import createFormatArgs from '../../lib/utils/createFormatArgs.js';
+import flattenTokens from '../../lib/utils/flattenTokens.js';
 
 const file = {
-  "destination": "__output/",
-  "format": "javascript/umd",
-  "filter": {
-    "attributes": {
-      "category": "color"
-    }
-  }
+  destination: '__output/',
+  format: 'javascript/umd',
+  filter: {
+    type: 'color',
+  },
 };
 
-const properties = {
-  "color": {
-    "red": {"value": "#FF0000"}
-  }
+const tokens = {
+  color: {
+    red: { value: '#FF0000' },
+  },
 };
 
-const formatter = formats['javascript/umd'].bind(file);
-const dictionary = createDictionary({ properties });
+const format = formats['javascript/umd'];
 
 describe('formats', () => {
   describe('javascript/umd', () => {
-
-    beforeEach(() => {
-      helpers.clearOutput();
+    it('should be a valid JS file and match snapshot', async () => {
+      await expect(
+        await format(
+          createFormatArgs({
+            dictionary: { tokens, allTokens: flattenTokens(tokens) },
+            file,
+            platform: {},
+          }),
+          {},
+          file,
+        ),
+      ).to.matchSnapshot();
     });
-
-    afterEach(() => {
-      helpers.clearOutput();
-    });
-
-    it('should be a valid JS file', () => {
-      fs.writeFileSync('./__tests__/__output/umd.js', formatter(createFormatArgs({
-        dictionary,
-        file,
-        platform: {}
-      }), {}, file) );
-      const test = require('../__output/umd.js');
-      expect(test.color.red.value).toEqual(dictionary.properties.color.red.value);
-    });
-
   });
 });

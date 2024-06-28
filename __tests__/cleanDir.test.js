@@ -10,32 +10,41 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
-var helpers   = require('./__helpers');
-var buildFile = require('../lib/buildFile');
-var cleanFile = require('../lib/cleanFile');
-var cleanDir = require('../lib/cleanDir');
-
-function format() {
-  return "hi";
-}
+import { expect } from 'chai';
+import { clearOutput, dirExists } from './__helpers.js';
+import StyleDictionary from '../lib/StyleDictionary.js';
+import cleanFile from '../lib/cleanFile.js';
+import cleanDir from '../lib/cleanDir.js';
 
 describe('cleanDir', () => {
-
   beforeEach(() => {
-    helpers.clearOutput();
+    clearOutput();
   });
 
   afterEach(() => {
-    helpers.clearOutput();
+    clearOutput();
   });
 
-  it('should delete a dir properly', () => {
-    buildFile({destination:'test.txt', format}, {buildPath: '__tests__/__output/extradir1/extradir2/'}, {});
-    cleanFile({destination:'test.txt', format}, {buildPath: '__tests__/__output/extradir1/extradir2/'}, {});
-    cleanDir({destination:'test.txt', format}, {buildPath: '__tests__/__output/extradir1/extradir2/'}, {});
-    expect(helpers.dirDoesNotExist('./__tests__/__output/extradir1/extradir2')).toBeTruthy();
-    expect(helpers.dirDoesNotExist('./__tests__/__output/extradir1')).toBeTruthy();
+  it('should delete a dir properly', async () => {
+    const file = { destination: 'test.txt', format: 'foo' };
+    const buildPath = '__tests__/__output/extradir1/extradir2/';
+    const sd = new StyleDictionary({
+      hooks: {
+        formats: {
+          foo: () => 'foo',
+        },
+      },
+      platforms: {
+        foo: {
+          buildPath,
+          files: [file],
+        },
+      },
+    });
+    await sd.buildPlatform('foo');
+    await cleanFile(file, { buildPath });
+    await cleanDir(file, { buildPath });
+    expect(dirExists(buildPath)).to.be.false;
+    expect(dirExists('__tests__/__output/extradir1')).to.be.false;
   });
-
 });

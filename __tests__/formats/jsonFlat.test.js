@@ -10,40 +10,52 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
+import { expect } from 'chai';
+import formats from '../../lib/common/formats.js';
+import createFormatArgs from '../../lib/utils/createFormatArgs.js';
+import flattenTokens from '../../lib/utils/flattenTokens.js';
 
-const formats = require('../../lib/common/formats');
-const fs = require('fs-extra');
-const helpers = require('../__helpers');
-const { colorDictionary } = require('./__constants');
-const createFormatArgs = require('../../lib/utils/createFormatArgs');
+const colorTokenName = 'color-base-red-400';
+const colorTokenValue = '#EF5350';
 
-const file = {
-  "destination": "__output/",
-  "format": "json/flat"
+const colorTokens = {
+  color: {
+    base: {
+      red: {
+        400: {
+          name: colorTokenName,
+          value: colorTokenValue,
+          original: {
+            value: colorTokenValue,
+          },
+          path: ['color', 'base', 'red', '400'],
+        },
+      },
+    },
+  },
 };
 
-const formatter = formats['json/flat'].bind(file);
+const file = {
+  destination: '__output/',
+  format: 'json/flat',
+};
+
+const format = formats['json/flat'];
 
 describe('formats', () => {
   describe('json/flat', () => {
-
-    beforeEach(() => {
-      helpers.clearOutput();
-    });
-
-    afterEach(() => {
-      helpers.clearOutput();
-    });
-
-    it('should be a valid JSON file', () => {
-      fs.writeFileSync('./__tests__/__output/output.flat.json', formatter(createFormatArgs({
-        dictionary: colorDictionary,
-        file,
-        platform: {}
-      }), {}, file) );
-      const test = require('../__output/output.flat.json');
-      expect(test['color-base-red-400']).toEqual(colorDictionary.allProperties[0].value);
+    it('should be a valid JSON file and match snapshot', async () => {
+      await expect(
+        format(
+          createFormatArgs({
+            dictionary: { tokens: colorTokens, allTokens: flattenTokens(colorTokens) },
+            file,
+            platform: {},
+          }),
+          {},
+          file,
+        ),
+      ).to.matchSnapshot();
     });
   });
-
 });

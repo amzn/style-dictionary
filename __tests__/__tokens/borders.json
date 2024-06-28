@@ -1,0 +1,44 @@
+{
+  "border": {
+    "layout": {
+      "light": {
+        "value": "1px solid {color.border.light.value}",
+        "type": "border",
+        "comment": ""
+      },
+      "dark": {
+        "value": "1px solid {color.border.dark.value}",
+        "type": "border",
+        "comment": ""
+      },
+      "base": {
+        "value": "1px solid {color.border.base.value}",
+        "type": "border",
+        "comment": ""
+      }
+    },
+
+    "input": {
+      "base": {
+        "value": "1px solid {color.border.base.value}",
+        "type": "border",
+        "comment": ""
+      },
+      "focus": {
+        "value": "1px solid {color.border.focus.value}",
+        "type": "border",
+        "comment": ""
+      },
+      "error": {
+        "value": "1px solid {color.border.base.value}",
+        "type": "border",
+        "comment": ""
+      },
+      "button": {
+        "value": "1px solid {color.font.link.value}",
+        "type": "border",
+        "comment": ""
+      }
+    }
+  }
+}

@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "build": "style-dictionary build --config ./sd.config.js"
   },
   "author": "",
   "license": "Apache-2.0",
   "devDependencies": {
-    "style-dictionary": "3.9.2"
+    "style-dictionary": "4.0.0-prerelease.30"
   }
 }

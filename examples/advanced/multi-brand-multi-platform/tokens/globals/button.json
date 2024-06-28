@@ -2,12 +2,14 @@
   "button": {
     "border": {
       "radius": {
-        "value": "4px"
+        "value": "4px",
+        "type": "dimension"
       }
     },
     "text": {
       "size": {
-        "value": "{size.font.medium.value}"
+        "value": "{size.font.medium.value}",
+        "type": "fontSize"
       }
     }
   }

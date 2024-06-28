@@ -10,65 +10,97 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
+import { expect } from 'chai';
+import StyleDictionary from 'style-dictionary';
+import { stubMethod, restore } from 'hanbi';
+import { buildPath, cleanConsoleOutput } from './_constants.js';
+import { clearOutput } from '../__tests__/__helpers.js';
 
-const fs = require('fs-extra');
-const chalk = require('chalk');
-const StyleDictionary = require('../index');
-const {buildPath} = require('./_constants');
-
-const properties = {
+const tokens = {
   color: {
     red: { value: '#f00' },
     background: {
-      red: { value: '{color.red.value}' }
-    }
-  }
-}
+      red: { value: '{color.red.value}' },
+    },
+  },
+};
 
-describe('integration', () => {
-  describe('name collisions', () => {
-    it(`should warn users of name collisions for flat files`, () => {
-      console.log = jest.fn();
-      StyleDictionary.extend({
-        // we are only testing name collision warnings options so we don't need
-        // the full source.
-        properties,
-        platforms: {
-          web: {
-            buildPath,
-            files: [{
-              destination: 'variables.css',
-              format: 'css/variables',
-            }]
-          },
-        }
-      }).buildAllPlatforms();
-      expect(console.log).toHaveBeenCalledWith(`⚠️ ${buildPath}variables.css`);
-    });
-
-    it(`should not warn users of name collisions for nested files`, () => {
-      console.log = jest.fn();
-      StyleDictionary.extend({
-        // we are only testing name collision warnings options so we don't need
-        // the full source.
-        properties,
-        platforms: {
-          web: {
-            buildPath,
-            files: [{
-              destination: 'tokens.json',
-              format: 'json/nested'
-            }]
-          },
-        }
-      }).buildAllPlatforms();
-      expect(console.log).toHaveBeenCalledWith(chalk.bold.green(`✔︎ ${buildPath}tokens.json`));
-    });
-
-
+describe('integration', async () => {
+  let stub;
+  beforeEach(() => {
+    stub = stubMethod(console, 'log');
   });
-});
 
-afterAll(() => {
-  fs.emptyDirSync(buildPath);
+  afterEach(() => {
+    clearOutput(buildPath);
+    restore();
+  });
+
+  describe('name collisions', async () => {
+    it(`should warn users of name collisions for flat files, brief version`, async () => {
+      const sd = new StyleDictionary({
+        // we are only testing name collision warnings options so we don't need
+        // the full source.
+        tokens,
+        platforms: {
+          web: {
+            buildPath,
+            files: [
+              {
+                destination: 'variables.css',
+                format: 'css/variables',
+              },
+            ],
+          },
+        },
+      });
+      await sd.buildAllPlatforms();
+      await expect(stub.lastCall.args.map(cleanConsoleOutput).join('\n')).to.matchSnapshot();
+    });
+
+    it(`should warn users of name collisions for flat files`, async () => {
+      const sd = new StyleDictionary({
+        // we are only testing name collision warnings options so we don't need
+        // the full source.
+        tokens,
+        log: { verbosity: 'verbose' },
+        platforms: {
+          web: {
+            buildPath,
+            files: [
+              {
+                destination: 'variables.css',
+                format: 'css/variables',
+              },
+            ],
+          },
+        },
+      });
+      await sd.buildAllPlatforms();
+      await expect(stub.lastCall.args.map(cleanConsoleOutput).join('\n')).to.matchSnapshot();
+    });
+
+    it(`should not warn users of name collisions for nested files`, async () => {
+      const sd = new StyleDictionary({
+        // we are only testing name collision warnings options so we don't need
+        // the full source.
+        tokens,
+        platforms: {
+          web: {
+            buildPath,
+            files: [
+              {
+                destination: 'tokens.json',
+                format: 'json/nested',
+              },
+            ],
+          },
+        },
+      });
+      await sd.buildAllPlatforms();
+      expect(stub.lastCall.args.map(cleanConsoleOutput).join('\n')).to.equal(
+        `✔︎ ${buildPath}tokens.json`,
+      );
+    });
+  });
 });

@@ -10,68 +10,48 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-const fs = require('fs-extra');
-const helpers = require('../__helpers');
-const formats = require('../../lib/common/formats');
-const createDictionary = require('../../lib/utils/createDictionary');
-const createFormatArgs = require('../../lib/utils/createFormatArgs');
+import { expect } from 'chai';
+import formats from '../../lib/common/formats.js';
+import createFormatArgs from '../../lib/utils/createFormatArgs.js';
+import flattenTokens from '../../lib/utils/flattenTokens.js';
 
 const file = {
-  "destination": "__output/",
-  "format": "javascript/es6",
-  "filter": {
-    "attributes": {
-      "category": "color"
-    }
-  }
+  destination: '__output/',
+  format: 'javascript/es6',
+  filter: {
+    type: 'color',
+  },
 };
 
-const properties = {
+const tokens = {
   color: {
     red: {
-      "name": "red",
-      "value": "#EF5350",
-      "original": {
-        "value": "#EF5350"
+      name: 'red',
+      value: '#EF5350',
+      original: {
+        value: '#EF5350',
       },
-      "attributes": {
-        "category": "color",
-        "type": "base",
-        "item": "red",
-        "subitem": "400"
-      },
-      "path": [
-        "color",
-        "base",
-        "red",
-        "400"
-      ]
-    }
-  }
+      path: ['color', 'base', 'red', '400'],
+    },
+  },
 };
 
-const formatter = formats['javascript/es6'].bind(file);
-const dictionary = createDictionary({ properties });
+const format = formats['javascript/es6'];
 
 describe('formats', () => {
   describe('javascript/es6', () => {
-    beforeEach(() => {
-      helpers.clearOutput();
-    });
-
-    afterEach(() => {
-      helpers.clearOutput();
-    });
-
-    it('should be a valid JS file', () => {
-      fs.writeFileSync('./__tests__/__output/output.js', formatter(createFormatArgs({
-        dictionary,
-        file,
-        platform: {}
-      }), {}, file) );
-      const test = require('../__output/output.js');
-      expect(test.red).toEqual(dictionary.allProperties[0].value);
+    it('should be a valid JS file and match snapshot', async () => {
+      await expect(
+        await format(
+          createFormatArgs({
+            dictionary: { tokens, allTokens: flattenTokens(tokens) },
+            file,
+            platform: {},
+          }),
+          {},
+          file,
+        ),
+      ).to.matchSnapshot();
     });
   });
-
 });

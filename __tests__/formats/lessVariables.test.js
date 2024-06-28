@@ -10,63 +10,62 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
+import { expect } from 'chai';
+import formats from '../../lib/common/formats.js';
+import createFormatArgs from '../../lib/utils/createFormatArgs.js';
+import flattenTokens from '../../lib/utils/flattenTokens.js';
 
-var formats = require('../../lib/common/formats');
-var less = require('less');
-const createDictionary = require('../../lib/utils/createDictionary');
-const createFormatArgs = require('../../lib/utils/createFormatArgs');
-
-var file = {
-  "destination": "__output/",
-  "format": "less/variables",
-  "name": "foo"
+const file = {
+  destination: '__output/',
+  format: 'less/variables',
+  name: 'foo',
 };
 
-const propertyName = "color-base-red-400";
-const propertyValue = "#EF5350";
+const propertyName = 'color-base-red-400';
+const propertyValue = '#EF5350';
 
-const properties = {
+const tokens = {
   color: {
     base: {
       red: {
         400: {
-          "name": propertyName,
-          "value": propertyValue,
-          "original": {
-            "value": propertyValue
+          name: propertyName,
+          value: propertyValue,
+          original: {
+            value: propertyValue,
           },
-          "attributes": {
-            "category": "color",
-            "type": "base",
-            "item": "red",
-            "subitem": "400"
-          },
-          "path": [
-            "color",
-            "base",
-            "red",
-            "400"
-          ]
-        }
-      }
-    }
-  }
+          path: ['color', 'base', 'red', '400'],
+        },
+      },
+    },
+  },
 };
 
-const formatter = formats['less/variables'].bind(file);
-const dictionary = createDictionary({ properties });
+const format = formats['less/variables'];
 
 describe('formats', () => {
   describe('less/variables', () => {
-
-    it('should have a valid less syntax', () => {
-      expect.assertions(1);
-      return expect(less.render(formatter(createFormatArgs({
-        dictionary,
+    it('should have a valid less syntax and match snapshot', async () => {
+      const result = await format(
+        createFormatArgs({
+          dictionary: { tokens, allTokens: flattenTokens(tokens) },
+          file,
+          platform: {},
+        }),
+        {},
         file,
-        platform: {}
-      }), {}, file))).resolves.toBeDefined();
+      );
+      let _less;
+      if (typeof window === 'object') {
+        await import('less/dist/less.js');
+        // eslint-disable-next-line no-undef
+        _less = less;
+      } else {
+        _less = (await import('less')).default;
+      }
+      const lessResult = await _less.render(result);
+      await expect(result).to.matchSnapshot(1);
+      await expect(lessResult.css).to.matchSnapshot(2);
     });
-
   });
 });

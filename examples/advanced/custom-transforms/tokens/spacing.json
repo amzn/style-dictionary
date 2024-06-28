@@ -1,16 +1,16 @@
 {
   "margin": {
-    "small" : {
+    "small": {
       "value": "0.15",
-      "group": "spacing"
+      "group": "dimension"
     },
     "medium": {
       "value": "0.25",
-      "group": "spacing"
+      "group": "dimension"
     },
-    "large" : {
+    "large": {
       "value": "0.4",
-      "group": "spacing"
+      "group": "dimension"
     }
   }
 }

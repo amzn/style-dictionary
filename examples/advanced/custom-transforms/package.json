@@ -2,6 +2,7 @@
   "name": "style-dictionary-custom-transforms",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "build/index.js",
   "files": [
     "build",
@@ -15,6 +16,6 @@
   "author": "",
   "license": "Apache-2.0",
   "devDependencies": {
-    "style-dictionary": "3.9.2"
+    "style-dictionary": "4.0.0-prerelease.30"
   }
 }

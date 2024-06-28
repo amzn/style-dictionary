@@ -1,4 +1,7 @@
-module.exports = {
-  color: require('./color'),
-  size: require('./size')
-}
+import color from './color.js';
+import size from './size.js';
+
+export default {
+  color,
+  size,
+};

@@ -10,147 +10,176 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
+import { expect } from 'chai';
+import StyleDictionary from 'style-dictionary';
+import { fs } from 'style-dictionary/fs';
+import { resolve } from '../lib/resolve.js';
+import { buildPath } from './_constants.js';
+import { clearOutput } from '../__tests__/__helpers.js';
 
-const fs = require('fs-extra');
-const StyleDictionary = require('../index');
-const {buildPath} = require('./_constants');
-
-describe(`integration`, () => {
-  describe(`valid custom file headers`, () => {
+describe(`integration`, async () => {
+  before(async () => {
     // Adding a custom file header with the `.registerFileHeader`
     StyleDictionary.registerFileHeader({
-      name: `registeredFileHeader`,
+      name: `valid custom file headers test fileHeader`,
       fileHeader: (defaultMessage) => {
-        return [
-          `hello`,
-          ...defaultMessage
-        ]
-      }
+        return [`hello`, ...defaultMessage];
+      },
     });
 
-    StyleDictionary.extend({
-      fileHeader: {
-        configFileHeader: (defaultMessage) => {
-          return [
-            ...defaultMessage,
-            'hello, world!'
-          ];
-        }
+    const sd = new StyleDictionary({
+      hooks: {
+        fileHeaders: {
+          configFileHeader: (defaultMessage) => {
+            return [...defaultMessage, 'hello, world!'];
+          },
+        },
       },
 
       // only testing the file header in these tests so we are
-      // using a small properties object with a single token
-      properties: {
+      // using a small tokens object with a single token
+      tokens: {
         color: {
-          red: { value: '#ff0000' }
-        }
+          red: { value: '#ff0000' },
+        },
       },
 
       platforms: {
         css: {
           transformGroup: `css`,
           buildPath,
-          files: [{
-            destination: `registeredFileHeader.css`,
-            format: `css/variables`,
-            options: {
-              fileHeader: `registeredFileHeader`
-            }
-          },{
-            destination: `configFileHeader.css`,
-            format: `css/variables`,
-            options: {
-              fileHeader: `configFileHeader`
-            }
-          },{
-            destination: `inlineFileHeader.css`,
-            format: `css/variables`,
-            options: {
-              fileHeader: () => {
-                return [
-                  `build version 1.0.0`
-                ]
-              }
-            }
-          }]
+          files: [
+            {
+              destination: `registeredFileHeader.css`,
+              format: `css/variables`,
+              options: {
+                fileHeader: `valid custom file headers test fileHeader`,
+              },
+            },
+            {
+              destination: `configFileHeader.css`,
+              format: `css/variables`,
+              options: {
+                fileHeader: `configFileHeader`,
+              },
+            },
+            {
+              destination: `inlineFileHeader.css`,
+              format: `css/variables`,
+              options: {
+                fileHeader: () => {
+                  return [`build version 1.0.0`];
+                },
+              },
+            },
+          ],
         },
         js: {
           transformGroup: `js`,
           buildPath,
           options: {
-            fileHeader: `configFileHeader`
+            fileHeader: `configFileHeader`,
           },
-          files: [{
-            destination: `noOptions.js`,
-            format: `javascript/module`
-          },{
-            destination: `showFileHeader.js`,
-            format: `javascript/module`,
-            options: {
-              showFileHeader: false
-            }
-          },{
-            destination: `fileHeaderOverride.js`,
-            format: `javascript/module`,
-            options: {
-              fileHeader: () => [`Header overridden`]
-            }
-          }]
-        }
-      }
-    }).buildAllPlatforms();
+          files: [
+            {
+              destination: `noOptions.js`,
+              format: `javascript/module`,
+            },
+            {
+              destination: `showFileHeader.js`,
+              format: `javascript/module`,
+              options: {
+                showFileHeader: false,
+              },
+            },
+            {
+              destination: `fileHeaderOverride.js`,
+              format: `javascript/module`,
+              options: {
+                fileHeader: () => [`Header overridden`],
+              },
+            },
+          ],
+        },
+      },
+    });
 
-    describe('file options', () => {
-      it(`registered file header should match snapshot`, () => {
-        const output = fs.readFileSync(`${buildPath}registeredFileHeader.css`, {encoding:'UTF-8'});
-        expect(output).toMatchSnapshot();
+    await sd.buildAllPlatforms();
+  });
+
+  afterEach(() => {
+    clearOutput(buildPath);
+  });
+
+  describe(`valid custom file headers`, async () => {
+    describe('file options', async () => {
+      it(`registered file header should match snapshot`, async () => {
+        const output = fs.readFileSync(resolve(`${buildPath}registeredFileHeader.css`), {
+          encoding: 'UTF-8',
+        });
+        await expect(output).to.matchSnapshot();
       });
 
-      it(`config file header should match snapshot`, () => {
-        const output = fs.readFileSync(`${buildPath}configFileHeader.css`, {encoding:'UTF-8'});
-        expect(output).toMatchSnapshot();
+      it(`config file header should match snapshot`, async () => {
+        const output = fs.readFileSync(resolve(`${buildPath}configFileHeader.css`), {
+          encoding: 'UTF-8',
+        });
+        await expect(output).to.matchSnapshot();
       });
 
-      it(`inline file header should match snapshot`, () => {
-        const output = fs.readFileSync(`${buildPath}inlineFileHeader.css`, {encoding:'UTF-8'});
-        expect(output).toMatchSnapshot();
+      it(`inline file header should match snapshot`, async () => {
+        const output = fs.readFileSync(resolve(`${buildPath}inlineFileHeader.css`), {
+          encoding: 'UTF-8',
+        });
+        await expect(output).to.matchSnapshot();
       });
     });
 
-    describe('platform options', () => {
-      it(`no file options should match snapshot`, () => {
-        const output = fs.readFileSync(`${buildPath}noOptions.js`, {encoding:'UTF-8'});
-        expect(output).toMatchSnapshot();
+    describe('platform options', async () => {
+      it(`no file options should match snapshot`, async () => {
+        const output = fs.readFileSync(resolve(`${buildPath}noOptions.js`), {
+          encoding: 'UTF-8',
+        });
+        await expect(output).to.matchSnapshot();
       });
 
-      it(`showFileHeader should match snapshot`, () => {
-        const output = fs.readFileSync(`${buildPath}showFileHeader.js`, {encoding:'UTF-8'});
-        expect(output).toMatchSnapshot();
+      it(`showFileHeader should match snapshot`, async () => {
+        const output = fs.readFileSync(resolve(`${buildPath}showFileHeader.js`), {
+          encoding: 'UTF-8',
+        });
+        await expect(output).to.matchSnapshot();
       });
 
-      it(`file header override should match snapshot`, () => {
-        const output = fs.readFileSync(`${buildPath}fileHeaderOverride.js`, {encoding:'UTF-8'});
-        expect(output).toMatchSnapshot();
+      it(`file header override should match snapshot`, async () => {
+        const output = fs.readFileSync(resolve(`${buildPath}fileHeaderOverride.js`), {
+          encoding: 'UTF-8',
+        });
+        await expect(output).to.matchSnapshot();
       });
     });
   });
-  describe(`invalid custom file headers`, () => {
-    it(`should throw if trying to use an undefined file header`, () => {
-      expect(() => {
-        StyleDictionary.extend({
-          platforms: {
-            css: {
-              buildPath,
-              files: [{
+
+  describe(`invalid custom file headers`, async () => {
+    it(`should throw if trying to use an undefined file header`, async () => {
+      const sd = new StyleDictionary({
+        platforms: {
+          css: {
+            buildPath,
+            files: [
+              {
                 destination: `variables.css`,
                 options: {
-                  fileHeader: `nonexistentFileHeader`
-                }
-              }]
-            }
-          }
-        }).buildAllPlatforms();
-      }).toThrow(`Can't find fileHeader: nonexistentFileHeader`);
+                  fileHeader: `nonexistentFileHeader`,
+                },
+              },
+            ],
+          },
+        },
+      });
+
+      await expect(sd.buildAllPlatforms()).to.eventually.be.rejectedWith(
+        `Can't find fileHeader: nonexistentFileHeader`,
+      );
     });
   });
 });

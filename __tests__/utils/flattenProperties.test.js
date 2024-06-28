@@ -10,68 +10,62 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
+import { expect } from 'chai';
+import flattenTokens from '../../lib/utils/flattenTokens.js';
 
-var flattenProperties = require('../../lib/utils/flattenProperties');
 const sortBy = (key) => {
-  return (a, b) => (a[key] > b[key]) ? 1 : ((b[key] > a[key]) ? -1 : 0);
+  return (a, b) => (a[key] > b[key] ? 1 : b[key] > a[key] ? -1 : 0);
 };
 
 describe('utils', () => {
-  describe('flattenProperties', () => {
-
+  describe('flattenTokens', () => {
     it('should return an empty array', () => {
-      var ret = flattenProperties({});
-      expect(ret).toEqual([]);
+      const ret = flattenTokens({});
+      expect(ret).to.eql([]);
     });
 
     it('should return the same array', () => {
-      var to_ret = [];
-      var ret = flattenProperties({}, to_ret);
-      expect(ret).toBe(ret);
+      const to_ret = [];
+      const ret = flattenTokens({}, to_ret);
+      expect(ret).to.equal(ret);
     });
 
     it('should return leaf node values as an array', () => {
-      var properties = {
-        'black': {
-          'value': '#000000'
+      const tokens = {
+        black: {
+          value: '#000000',
         },
-        'white': {
-          'value': '#FFFFFF'
-        }
+        white: {
+          value: '#FFFFFF',
+        },
       };
 
-      var expected_ret = [
-        properties.black,
-        properties.white
-      ];
+      const expected_ret = [tokens.black, tokens.white];
 
-      var sortedExpectedRet = expected_ret.sort(sortBy('value'));
-      var ret = flattenProperties(properties);
-      var sortedRet = ret.sort(sortBy('value'));
-      expect(sortedRet).toEqual(sortedExpectedRet);
+      const sortedExpectedRet = expected_ret.sort(sortBy('value'));
+      const ret = flattenTokens(tokens);
+      const sortedRet = ret.sort(sortBy('value'));
+      expect(sortedRet).to.eql(sortedExpectedRet);
     });
 
     it('should return nested leaf node values as an array', () => {
-      var properties = {
-        'color': {
-          'black': {
-            'value': '#000000'
+      const tokens = {
+        color: {
+          black: {
+            value: '#000000',
           },
-          'white': {
-            'value': '#FFFFFF'
-          }
-        }
+          white: {
+            value: '#FFFFFF',
+          },
+        },
       };
 
-      var expected_ret = [
-        properties.color.black,
-        properties.color.white
-      ];
+      const expected_ret = [tokens.color.black, tokens.color.white];
 
-      var sortedExpectedRet = expected_ret.sort(sortBy('value'));
-      var ret = flattenProperties(properties);
-      var sortedRet = ret.sort(sortBy('value'));
-      expect(sortedRet).toEqual(sortedExpectedRet);
+      const sortedExpectedRet = expected_ret.sort(sortBy('value'));
+      const ret = flattenTokens(tokens);
+      const sortedRet = ret.sort(sortBy('value'));
+      expect(sortedRet).to.eql(sortedExpectedRet);
     });
   });
 });

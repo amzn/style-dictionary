@@ -15,7 +15,8 @@
 [![downloads](https://img.shields.io/npm/dm/style-dictionary.svg?style=flat-square)](https://www.npmjs.com/package/style-dictionary)
 
 # Style Dictionary
-> *Style once, use everywhere.*
+
+> _Style once, use everywhere._
 
 A Style Dictionary uses design tokens to define styles once and use those styles on any platform or language. It provides a single place to create and edit your styles, and exports these tokens to all the places you need - iOS, Android, CSS, JS, HTML, sketch files, style documentation, etc. It is available as a CLI through npm, but can also be used like any normal node module if you want to extend its functionality.
 
@@ -24,56 +25,67 @@ When you are managing user experiences, it can be quite challenging to keep styl
 For detailed usage head to https://amzn.github.io/style-dictionary
 
 ## Watch the Demo on YouTube
+
 [![Watch the video](/docs/assets/fake_player.png)](http://youtu.be/1HREvonfqhY)
 
 ## Experiment in the playground
+
 Try the browser-based Style Dictionary playground: [https://www.style-dictionary-play.dev/](https://www.style-dictionary-play.dev/), built by the folks at [\<div\>RIOTS](https://divriots.com/).
 
 ## Contents
-* [Installation](#installation)
-* [Usage](#usage)
-* [Example](#example)
-* [Quick Start](#quick-start)
-* [Design Tokens](#design-tokens)
-* [Extending](#extending)
-* [Contributing](#contributing)
-* [License](#license)
 
+- [Installation](#installation)
+- [Usage](#usage)
+- [Example](#example)
+- [Quick Start](#quick-start)
+- [Design Tokens](#design-tokens)
+- [Extending](#extending)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Installation
-*Note that you must have node (and npm) installed.*
+
+_Note that you must have node (and npm) installed._
 
 If you want to use the CLI, you can install it globally via npm:
+
 ```bash
 $ npm install -g style-dictionary
 ```
 
 Or you can install it like a normal npm dependency. This is a build tool and you are most likely going to want to save it as a dev dependency:
+
 ```bash
 $ npm install -D style-dictionary
 ```
 
 If you want to install it with yarn:
+
 ```bash
 $ yarn add style-dictionary --dev
 ```
 
 ## Usage
+
 ### CLI
+
 ```bash
 $ style-dictionary build
 ```
+
 Call this in the root directory of your project. The only thing needed is a `config.json` file. There are also arguments:
 
-| Flag | Short Flag | Description |
-| --- | --- | --- |
-| --config \[path\] | -c | Set the config file to use. Must be a .json file |
-| --platform \[platform\] | -p | Only build a specific platform defined in the config file. |
-| --help | -h | Display help content |
-| --version | -v | Display the version |
+| Flag                    | Short Flag | Description                                                |
+| ----------------------- | ---------- | ---------------------------------------------------------- |
+| --config \[path\]       | -c         | Set the config file to use. Must be a .json file           |
+| --platform \[platform\] | -p         | Only build a specific platform defined in the config file. |
+| --help                  | -h         | Display help content                                       |
+| --version               | -v         | Display the version                                        |
 
 ### Node
+
 You can also use the style dictionary build system in node if you want to [extend](#extending) the functionality or use it in another build system like Grunt or Gulp.
+
 ```javascript
 const StyleDictionary = require('style-dictionary').extend('config.json');
 
@@ -81,6 +93,7 @@ StyleDictionary.buildAllPlatforms();
 ```
 
 The `.extend()` method is an overloaded method that can also take an object with the configuration in the same format as a config.json file.
+
 ```javascript
 const StyleDictionary = require('style-dictionary').extend({
   source: ['tokens/**/*.json'],
@@ -88,19 +101,22 @@ const StyleDictionary = require('style-dictionary').extend({
     scss: {
       transformGroup: 'scss',
       buildPath: 'build/',
-      files: [{
-        destination: 'variables.scss',
-        format: 'scss/variables'
-      }]
-    }
+      files: [
+        {
+          destination: 'variables.scss',
+          format: 'scss/variables',
+        },
+      ],
+    },
     // ...
-  }
+  },
 });
 
 StyleDictionary.buildAllPlatforms();
 ```
 
 ## Example
+
 [Take a look at some of our examples](examples/)
 
 A style dictionary is a collection of design tokens, key/value pairs that describe stylistic attributes like colors, sizes, icons, motion, etc. A style dictionary defines these design tokens in JSON or Javascript files, and can also include static assets like images and fonts. Here is a basic example of what the package structure can look like:
@@ -119,6 +135,7 @@ A style dictionary is a collection of design tokens, key/value pairs that descri
 ```
 
 ### config.json
+
 This tells the style dictionary build system how and what to build. The default file path is `config.json` or `config.js` in the root of the project, but you can name it whatever you want by passing in the `--config` flag to the [CLI](https://amzn.github.io/style-dictionary/#/using_the_cli).
 
 ```json
@@ -128,36 +145,40 @@ This tells the style dictionary build system how and what to build. The default 
     "scss": {
       "transformGroup": "scss",
       "buildPath": "build/",
-      "files": [{
-        "destination": "scss/_variables.scss",
-        "format": "scss/variables"
-      }]
+      "files": [
+        {
+          "destination": "scss/_variables.scss",
+          "format": "scss/variables"
+        }
+      ]
     },
     "android": {
       "transformGroup": "android",
       "buildPath": "build/android/",
-      "files": [{
-        "destination": "font_dimens.xml",
-        "format": "android/fontDimens"
-      }]
+      "files": [
+        {
+          "destination": "font_dimens.xml",
+          "format": "android/fontDimens"
+        }
+      ]
     }
   }
 }
 ```
 
-| Attribute | Type | Description |
-| :--- | :--- | :--- |
-| source | Array | An array of file path [globs](https://github.com/isaacs/node-glob) to design token files. Style Dictionary will do a deep merge of all of the token files, allowing you to organize your files files however you want. |
-| include | Array | An array of file path [globs](https://github.com/isaacs/node-glob) to design token files that contain default styles. The Style Dictionary uses this as a base collection of tokens. The tokens found using the "source" attribute will overwrite tokens found using include. |
-| platforms | Object | Sets of platform files to be built. |
-| platform.transformGroup | String (optional) | Apply a group of transforms to the tokens, must either define this or `transforms`. |
-| platform.transforms | Array (optional) | Transforms to apply sequentially to all tokens. Can be a built-in one or you can create your own. |
-| platform.buildPath | String (optional) | Base path to build the files, must end with a trailing slash. |
-| platform.files | Array (optional) | Files to be generated for this platform. |
-| platform.file.destination | String (optional) | Location to build the file, will be appended to the buildPath. |
-| platform.file.format | String (optional) | Format used to generate the file. Can be a built-in one or you can create your own. [More on formats](https://amzn.github.io/style-dictionary/#/formats) |
-| platform.file.options | Object (optional) | A set of extra options associated with the file. |
-| platform.file.options.showFileHeader | Boolean | If the generated file should have a "Do not edit + Timestamp" header (where the format supports it). By default is "true". |
+| Property                             | Type              | Description                                                                                                                                                                                                                                                                   |
+| :----------------------------------- | :---------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| source                               | Array             | An array of file path [globs](https://github.com/isaacs/node-glob) to design token files. Style Dictionary will do a deep merge of all of the token files, allowing you to organize your files files however you want.                                                        |
+| include                              | Array             | An array of file path [globs](https://github.com/isaacs/node-glob) to design token files that contain default styles. The Style Dictionary uses this as a base collection of tokens. The tokens found using the "source" attribute will overwrite tokens found using include. |
+| platforms                            | Object            | Sets of platform files to be built.                                                                                                                                                                                                                                           |
+| platform.transformGroup              | String (optional) | Apply a group of transforms to the tokens, must either define this or `transforms`.                                                                                                                                                                                           |
+| platform.transforms                  | Array (optional)  | Transforms to apply sequentially to all tokens. Can be a built-in one or you can create your own.                                                                                                                                                                             |
+| platform.buildPath                   | String (optional) | Base path to build the files, must end with a trailing slash.                                                                                                                                                                                                                 |
+| platform.files                       | Array (optional)  | Files to be generated for this platform.                                                                                                                                                                                                                                      |
+| platform.file.destination            | String (optional) | Location to build the file, will be appended to the buildPath.                                                                                                                                                                                                                |
+| platform.file.format                 | String (optional) | Format used to generate the file. Can be a built-in one or you can create your own. [More on formats](https://amzn.github.io/style-dictionary/#/formats)                                                                                                                      |
+| platform.file.options                | Object (optional) | A set of extra options associated with the file.                                                                                                                                                                                                                              |
+| platform.file.options.showFileHeader | Boolean           | If the generated file should have a "Do not edit + Timestamp" header (where the format supports it). By default is "true".                                                                                                                                                    |
 
 ### Design Tokens
 
@@ -165,10 +186,10 @@ This tells the style dictionary build system how and what to build. The default 
 {
   "size": {
     "font": {
-      "small" : { "value": "10px" },
+      "small": { "value": "10px" },
       "medium": { "value": "16px" },
-      "large" : { "value": "24px" },
-      "base"  : { "value": "{size.font.medium.value}" }
+      "large": { "value": "24px" },
+      "base": { "value": "{size.font.medium.value}" }
     }
   }
 }
@@ -199,7 +220,6 @@ float const SizeFontLarge = 24.00f;
 float const SizeFontBase = 16.00f;
 ```
 
-
 ## Quick Start
 
 The style dictionary framework comes with some example code to get you started. Install the node module globally, create a directory and `cd` into it.
@@ -224,7 +244,6 @@ $ style-dictionary build
 
 Take a look at the documentation for the example code.
 
-
 ## Design Tokens
 
 A design token is an attribute to describe something visually. It is atomic (it cannot be broken down further). Design tokens have a name, a value, and optional attributes or metadata. The name of a token can be anything, but we have a proposed naming structure that we find works really well in the next section.
@@ -237,7 +256,7 @@ While not exactly necessary, we feel this classification structure of design tok
 {
   "size": {
     "font": {
-      "base":  { "value": "16" },
+      "base": { "value": "16" },
       "large": { "value": "20" }
     }
   }
@@ -258,7 +277,7 @@ You can also add a _comment_ to a design token:
 {
   "size": {
     "font": {
-      "base":  {
+      "base": {
         "value": "16",
         "comment": "the base size of the font"
       },
@@ -271,8 +290,7 @@ You can also add a _comment_ to a design token:
 }
 ```
 
-The comment  will appear in the output files, where relevant or the output format supports comments.
-
+The comment will appear in the output files, where relevant or the output format supports comments.
 
 ## Extending
 
@@ -284,12 +302,12 @@ const StyleDictionary = require('style-dictionary').extend('config.json');
 StyleDictionary.registerTransform({
   name: 'time/seconds',
   type: 'value',
-  matcher: function(token) {
-    return token.attributes.category === 'time';
+  filter: function (token) {
+    return token.type === 'time';
   },
-  transformer: function(token) {
+  transform: function (token) {
     return (parseInt(token.original.value) / 1000).toString() + 's';
-  }
+  },
 });
 
 StyleDictionary.buildAllPlatforms();
@@ -327,7 +345,6 @@ The mascot for Style Dictionary is ["Pascal"](https://github.com/amzn/style-dict
 ## Contributing
 
 Please help make this framework better. For more information take a look at [CONTRIBUTING.md](CONTRIBUTING.md)
-
 
 ## License
 

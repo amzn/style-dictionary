@@ -6,7 +6,7 @@ This means that you can centralize all your "core" design values in one single p
 
 #### Running the example
 
-First of all, set up the required dependencies running the command `npm install` in your local CLI environment (if you prefer to use *yarn*, update the commands accordingly).
+First of all, set up the required dependencies running the command `npm install` in your local CLI environment (if you prefer to use _yarn_, update the commands accordingly).
 
 At this point, run `npm run build`. This command will generate the files in the `build` folder.
 
@@ -25,11 +25,13 @@ will be rendered as:
 ```
 <img src="data:image/png;base64,PHN2ZyB4bWxucz0iaHR0..." />
 ```
+
 and in **Sass** this code:
 
 ```
 background-image: url('data:image/png;base64,$asset-image-logo');
 ```
+
 will be rendered as:
 
 ```
@@ -38,11 +40,11 @@ background-image: url('data:image/png;base64,PHN2ZyB4bWxucz0iaHR0...');
 
 #### What to look at
 
-Open the `config.json` file and see how all the "assets/embed/*" platform blocks are configured:
+Open the `config.json` file and see how all the "assets/embed/\*" platform blocks are configured:
 
 ```
     "assets/embed/json": {
-      "transforms": ["attribute/cti", "name/cti/kebab", "asset/base64"],
+      "transforms": ["attribute/cti", "name/kebab", "asset/base64"],
       "buildPath": "build/json/",
       "files": [{
         "destination": "assets_icons.json",
@@ -54,7 +56,7 @@ Open the `config.json` file and see how all the "assets/embed/*" platform blocks
       ...
 ```
 
-Here there are **three specific transforms**: *attribute/cti* to assign the Category/Type/Item attributes to the tokens, *name/cti/kebab* to assign them the correct name, and finally *asset/base64* to take the path declared in the "value" of the tokens, convert the file at that path in base64 format, and assign the output of the base64 conversion to the "value" of the token.
+Here there are **three specific transforms**: _attribute/cti_ to assign the Category/Type/Item attributes to the tokens, _name/kebab_ to assign them the correct name, and finally _asset/base64_ to take the path declared in the "value" of the tokens, convert the file at that path in base64 format, and assign the output of the base64 conversion to the "value" of the token.
 
 If you take for example the file `assets/icons.json` you will see this declaration:
 
@@ -64,6 +66,7 @@ If you take for example the file `assets/icons.json` you will see this declarati
       "alert-circle": { "value": "assets/icons/alert-circle.svg" }
 
 ```
+
 where the value of the `alert-circle` token is a path that points to the `alert-circle.svg` file in the `assets/icons/` folder.
 
 Now, `build` the dictionary and open the generated file `build/scss/assets_icons.scss`, and you will see this result:

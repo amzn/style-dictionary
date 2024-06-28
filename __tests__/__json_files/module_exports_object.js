@@ -1,4 +1,4 @@
-module.exports = {
-  "foo": "bar",
-  "bar": "{foo}"
-}
+export default {
+  foo: 'bar',
+  bar: '{foo}',
+};

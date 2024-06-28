@@ -10,56 +10,67 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
+import { expect } from 'chai';
+import StyleDictionary from 'style-dictionary';
+import { fs } from 'style-dictionary/fs';
+import { resolve } from '../lib/resolve.js';
+import { buildPath } from './_constants.js';
+import { clearOutput } from '../__tests__/__helpers.js';
 
-const fs = require('fs-extra');
-const StyleDictionary = require('../index');
-const {buildPath} = require('./_constants');
-
-describe('integration', () => {
-  describe('compose', () => {
-    StyleDictionary.extend({
-      source: [`__integration__/tokens/**/*.json?(c)`],
+describe('integration', async () => {
+  before(async () => {
+    const sd = new StyleDictionary({
+      source: [`__integration__/tokens/**/[!_]*.json?(c)`],
       platforms: {
         compose: {
           transformGroup: `compose`,
           buildPath,
-          files: [{
-            destination: "StyleDictionary.kt",
-            format: "compose/object",
-            className: "StyleDictionary",
-            packageName: "com.example.tokens"
-          },{
-            destination: "StyleDictionaryWithReferences.kt",
-            format: "compose/object",
-            className: "StyleDictionary",
-            packageName: "com.example.tokens",
-            options: {
-              outputReferences: true
-            }
-          }]
+          files: [
+            {
+              destination: 'StyleDictionary.kt',
+              format: 'compose/object',
+              options: {
+                className: 'StyleDictionary',
+                packageName: 'com.example.tokens',
+              },
+            },
+            {
+              destination: 'StyleDictionaryWithReferences.kt',
+              format: 'compose/object',
+              options: {
+                outputReferences: true,
+                className: 'StyleDictionary',
+                packageName: 'com.example.tokens',
+              },
+            },
+          ],
         },
-      }
-    }).buildAllPlatforms();
+      },
+    });
+    await sd.buildAllPlatforms();
+  });
 
-    describe(`compose/object`, () => {
-      const output = fs.readFileSync(`${buildPath}StyleDictionary.kt`, {encoding:`UTF-8`});
+  afterEach(() => {
+    clearOutput(buildPath);
+  });
 
-      it(`should match snapshot`, () => {
-        expect(output).toMatchSnapshot();
+  describe('compose', async () => {
+    describe(`compose/object`, async () => {
+      it(`should match snapshot`, async () => {
+        const output = fs.readFileSync(resolve(`${buildPath}StyleDictionary.kt`), {
+          encoding: `UTF-8`,
+        });
+        await expect(output).to.matchSnapshot();
       });
 
-      describe(`with references`, () => {
-        const output = fs.readFileSync(`${buildPath}StyleDictionaryWithReferences.kt`, {encoding:`UTF-8`});
-
-        it(`should match snapshot`, () => {
-          expect(output).toMatchSnapshot();
+      describe(`with references`, async () => {
+        it(`should match snapshot`, async () => {
+          const output = fs.readFileSync(resolve(`${buildPath}StyleDictionaryWithReferences.kt`), {
+            encoding: `UTF-8`,
+          });
+          await expect(output).to.matchSnapshot();
         });
-
       });
     });
   });
-});
-
-afterAll(() => {
-  fs.emptyDirSync(buildPath);
 });

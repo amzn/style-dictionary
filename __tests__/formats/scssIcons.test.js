@@ -10,62 +10,67 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
-const formats = require('../../lib/common/formats');
-const scss = require('node-sass');
-const createDictionary = require('../../lib/utils/createDictionary');
-const createFormatArgs = require('../../lib/utils/createFormatArgs');
+import { expect } from 'chai';
+import { compileString } from 'sass';
+import formats from '../../lib/common/formats.js';
+import createFormatArgs from '../../lib/utils/createFormatArgs.js';
+import flattenTokens from '../../lib/utils/flattenTokens.js';
 
 const file = {
-  "destination": "__output/",
-  "format": "scss/icons",
-  "name": "foo"
+  destination: '__output/',
+  format: 'scss/icons',
+  name: 'foo',
 };
 
-const propertyName = "content-icon-email";
+const propertyName = 'content-icon-email';
 const propertyValue = "'\\E001'";
-const itemClass = "3d_rotation";
+const itemClass = 'three-d_rotation';
 
-const properties = {
+const tokens = {
   content: {
     icon: {
       email: {
-        "name": propertyName,
-        "value": propertyValue,
-        "original": {
-          "value": propertyValue
+        name: propertyName,
+        value: propertyValue,
+        type: 'icon',
+        original: {
+          value: propertyValue,
         },
-        "attributes": {
-          "category": "content",
-          "type": "icon",
-          "item": itemClass
+        attributes: {
+          item: itemClass,
         },
-        path: ['content','icon','email']
-      }
-    }
-  }
+        path: ['content', 'icon', 'email'],
+      },
+    },
+  },
 };
 
 const platform = {
-  prefix: 'sd' // Style-Dictionary Prefix
+  prefix: 'sd', // Style Dictionary Prefix
+  // FIXME: check why createFormatArgs requires this prefix to be wrapped inside
+  // an options object for it to be properly set as option?
+  options: {
+    prefix: 'sd',
+  },
 };
 
-const formatter = formats['scss/icons'].bind(file);
-const dictionary = createDictionary({ properties });
+const format = formats['scss/icons'];
 
 describe('formats', () => {
   describe('scss/icons', () => {
-
-    it('should have a valid scss syntax', () => {
-      const result = scss.renderSync({
-        data: formatter(createFormatArgs({
-          dictionary,
+    it('should have a valid scss syntax and match snapshot', async () => {
+      const result = await format(
+        createFormatArgs({
+          dictionary: { tokens, allTokens: flattenTokens(tokens) },
           file,
-          platform
-        }), platform, file),
-      });
-      expect(result.css).toBeDefined();
+          platform,
+        }),
+        platform,
+        file,
+      );
+      const scssResult = compileString(result);
+      await expect(result).to.matchSnapshot(1);
+      await expect(scssResult.css).to.matchSnapshot(2);
     });
-
   });
 });

@@ -1,10 +1,10 @@
 {
   "color": {
     "core": {
-      "greener": { "value": "{color.core.green.value}" },
-      "red": { "value": "#ff0000" },
-      "blue": { "value": "#0000ff" },
-      "green": { "value": "#00ff00" }
+      "greener": { "value": "{color.core.green.value}", "type": "color" },
+      "red": { "value": "#ff0000", "type": "color" },
+      "blue": { "value": "#0000ff", "type": "color" },
+      "green": { "value": "#00ff00", "type": "color" }
     }
   }
 }

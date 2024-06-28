@@ -10,40 +10,39 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
-var filters = require('../../lib/common/filters');
+import { expect } from 'chai';
+import filters from '../../lib/common/filters.js';
 
 describe('common', () => {
   describe('filters', () => {
     describe('removePrivate', () => {
       it('should keep a regular token in for distribution', () => {
-        var regularToken = {
+        const regularToken = {
           name: 'color-border',
-          value: '#1a1aed'
-        }
+          value: '#1a1aed',
+        };
 
-        expect(filters["removePrivate"](regularToken)).toEqual(true);
+        expect(filters['removePrivate'](regularToken)).to.be.true;
       });
 
       it('should keep an unfiltered token in for distribution', () => {
-        var unfilteredToken = {
+        const unfilteredToken = {
           name: 'color-border',
           value: '#1a1aed',
-          private: false
-        }
+          private: false,
+        };
 
-        expect(filters["removePrivate"](unfilteredToken)).toEqual(true);
+        expect(filters['removePrivate'](unfilteredToken)).to.be.true;
       });
 
-
       it('should remove a filtered token from the distribution output', () => {
-        var filteredToken = {
+        const filteredToken = {
           name: 'color-border',
           value: '#1a1aed',
-          private: true
-        }
+          private: true,
+        };
 
-        expect(filters["removePrivate"](filteredToken)).toEqual(false);
+        expect(filters['removePrivate'](filteredToken)).to.be.false;
       });
     });
   });

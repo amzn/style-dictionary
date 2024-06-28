@@ -1,0 +1,50 @@
+{
+  "color": {
+    "red": {
+      "value": {
+        "r": 255,
+        "g": 0,
+        "b": 0,
+        "a": 1
+      },
+      "type": "color"
+    },
+    "otherRed": {
+      "value": "{color.red.value}",
+      "type": "color"
+    }
+  },
+
+  "size": {
+    "large": {
+      "value": 20,
+      "type": "dimension"
+    },
+    "otherLarge": {
+      "value": "{size.large.value}",
+      "type": "dimension"
+    }
+  },
+
+  "number": {
+    "test": { "value": 20, "type": "number" },
+    "otherTest": { "value": "{number.test.value}", "type": "number" }
+  },
+
+  "array": {
+    "test": { "value": ["foo", "bar"] },
+    "otherTest": { "value": "{array.test.value}" }
+  },
+
+  "object": {
+    "test": {
+      "value": {
+        "foo": "bar",
+        "test": {
+          "bar": "foo"
+        }
+      }
+    },
+    "otherTest": { "value": "{object.test.value}" }
+  }
+}

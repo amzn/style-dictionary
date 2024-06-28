@@ -10,35 +10,46 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
-var helpers   = require('./__helpers');
-var buildFile = require('../lib/buildFile');
-var cleanFile = require('../lib/cleanFile');
-
-function format() {
-  return "hi";
-}
+import { expect } from 'chai';
+import { fileExists, clearOutput } from './__helpers.js';
+import cleanFile from '../lib/cleanFile.js';
+import StyleDictionary from '../lib/StyleDictionary.js';
 
 describe('cleanFile', () => {
-
+  const buildPath = '__tests__/__output/';
   beforeEach(() => {
-    helpers.clearOutput();
+    clearOutput();
   });
 
   afterEach(() => {
-    helpers.clearOutput();
+    clearOutput();
   });
 
-  it('should delete a file properly', () => {
-    buildFile({destination:'test.txt', format}, {buildPath: '__tests__/__output/'}, {});
-    cleanFile({destination:'test.txt', format}, {buildPath: '__tests__/__output/'}, {});
-    expect(helpers.fileDoesNotExist('./__tests__/__output/test.txt')).toBeTruthy();
+  it('should delete a file properly', async () => {
+    const file = { destination: 'test.txt', format: 'foo' };
+    const sd = new StyleDictionary({
+      hooks: {
+        formats: {
+          foo: () => 'hi',
+        },
+      },
+      platforms: {
+        bar: {
+          buildPath,
+          files: [file],
+        },
+      },
+    });
+    await sd.buildPlatform('bar');
+    cleanFile(file, { buildPath });
+    expect(fileExists('__tests__/__output/test.txt')).to.be.false;
   });
 
   describe('if a file does not exist', () => {
     it('should not throw', () => {
-      expect(() => cleanFile({destination: 'non-existent.txt', format}, { buildPath: '__tests__/__output/' }, {})).not.toThrow();
-    })
-  })
-
+      expect(() =>
+        cleanFile({ destination: 'non-existent.txt', format: 'foo' }, { buildPath }, {}),
+      ).to.not.throw();
+    });
+  });
 });

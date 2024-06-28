@@ -1,6 +1,7 @@
 {
   "name": "style-dictionary-create-react-app",
   "description": "",
+  "type": "module",
   "version": "1.0.0",
   "dependencies": {
     "node-sass": "^7.0.0",
@@ -10,7 +11,8 @@
     "styled-components": "^5.3.0"
   },
   "devDependencies": {
-    "style-dictionary": "3.9.2"
+    "eslint-config-react-app": "^7.0.1",
+    "style-dictionary": "4.0.0-prerelease.30"
   },
   "resolutions": {
     "immer": "8.0.1",

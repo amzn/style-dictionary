@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "sd.config.js",
+  "type": "module",
   "scripts": {
     "build": "style-dictionary build --config ./sd.config.js"
   },
@@ -10,6 +11,6 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "style-dictionary": "3.9.2"
+    "style-dictionary": "4.0.0-prerelease.30"
   }
 }

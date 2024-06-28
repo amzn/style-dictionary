@@ -4,6 +4,7 @@
   "description": "An example to show how to automate build files that match folders",
   "main": "build/js/cjs/index.js",
   "module": "build/js/esm/index.js",
+  "type": "module",
   "files": [
     "build",
     "properties"
@@ -16,6 +17,6 @@
   "author": "Kelly Harrop <kn.harrop@gmail.com>",
   "license": "Apache-2.0",
   "devDependencies": {
-    "style-dictionary": "3.9.2"
+    "style-dictionary": "4.0.0-prerelease.30"
   }
 }

@@ -3,14 +3,15 @@
   "version": "1.0.0",
   "description": "",
   "main": "build.js",
+  "type": "module",
   "scripts": {
-    "build": "node_modules/.bin/style-dictionary build",
+    "build": "style-dictionary build",
     "clean": "rm -rf build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "Apache-2.0",
   "devDependencies": {
-    "style-dictionary": "latest"
+    "style-dictionary": "^4.0.0-prerelease.30"
   }
 }

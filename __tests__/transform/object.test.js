@@ -10,114 +10,120 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
+import { expect } from 'chai';
+import transformObject from '../../lib/transform/object.js';
 
-var transformObject = require('../../lib/transform/object');
-
-const options = {
+const config = {
   transforms: [
     {
       type: 'attribute',
-      transformer: function() {
-        return {foo: 'bar'}
-      }
-    }, {
+      transform: function () {
+        return { foo: 'bar' };
+      },
+    },
+    {
       type: 'attribute',
-      transformer: function() {
-        return {bar: 'foo'}
-      }
-    }, {
+      // verify async transforms to also work properly
+      transform: async function () {
+        await new Promise((resolve) => setTimeout(resolve, 100));
+        return { bar: 'foo' };
+      },
+    },
+    {
       type: 'name',
-      matcher: function(prop) {
-        return prop.attributes.foo === 'bar';
+      filter: function (token) {
+        return token.attributes.foo === 'bar';
       },
-      transformer: function() {
-        return "transformer result";
-      }
-    }, {
+      // verify async transforms to also work properly
+      transform: async function () {
+        await new Promise((resolve) => setTimeout(resolve, 100));
+        return 'transform result';
+      },
+    },
+    {
       type: 'value',
-      matcher: function(prop) {
-        return prop.path[0] === 'spacing';
+      filter: function (token) {
+        return token.path[0] === 'spacing';
       },
-      transformer: function(val) {
+      transform: function (val) {
         return val + 'px';
-      }
-    }
-  ]
+      },
+    },
+  ],
 };
 
 describe('transform', () => {
   describe('object', () => {
-    it('does not crash when called without parameters', () => {
-      expect(transformObject()).toEqual({});
-    })
-
-    it('returns expected result when called with an object without value property', () => {
-      const objectToTransform = {
-        "color": "#FFFF00"
-      };
-
-      const expected = {
-        "color": "#FFFF00"
-      };
-
-      const actual = transformObject(objectToTransform, options);
-      expect(actual).toEqual(expected);
-    })
-
-    it('returns expected result when called with an with value leaf', () => {
-      const objectToTransform = {
-        "font": {
-          "base": {
-            "value": "16",
-            "comment": "the base size of the font"
-          }
-        }
-      };
-
-      const expected = {
-        "font": {
-          "base": {
-            "attributes": {"bar": "foo", "foo": "bar"},
-            "comment": "the base size of the font",
-            "name": "transformer result",
-            "original":
-            {
-              "comment": "the base size of the font",
-              "value": "16"
-            },
-            "path": ["font", "base"],
-            "value": "16"
-          }
-        }
-      };
-
-      const actual = transformObject(objectToTransform, options);
-      expect(actual).toEqual(expected);
+    it('does not crash when called without parameters', async () => {
+      expect(await transformObject()).to.eql({});
     });
 
-    it('fills the transformationContext with transformed and deferred transforms', () => {
+    it('returns expected result when called with an object without value property', async () => {
+      const objectToTransform = {
+        color: '#FFFF00',
+      };
+
+      const expected = {
+        color: '#FFFF00',
+      };
+
+      const actual = await transformObject(objectToTransform, config, {});
+      expect(actual).to.eql(expected);
+    });
+
+    it('returns expected result when called with value leaf', async () => {
+      const objectToTransform = {
+        font: {
+          base: {
+            value: '16',
+            comment: 'the base size of the font',
+          },
+        },
+      };
+
+      const expected = {
+        font: {
+          base: {
+            attributes: { bar: 'foo', foo: 'bar' },
+            comment: 'the base size of the font',
+            name: 'transform result',
+            original: {
+              comment: 'the base size of the font',
+              value: '16',
+            },
+            path: ['font', 'base'],
+            value: '16',
+          },
+        },
+      };
+
+      const actual = await transformObject(objectToTransform, config, {});
+      expect(actual).to.eql(expected);
+    });
+
+    it('fills the transformationContext with transformed and deferred transforms', async () => {
       const transformedPropRefs = [];
       const deferredPropValueTransforms = [];
       const transformationContext = {
         transformedPropRefs,
-        deferredPropValueTransforms
+        deferredPropValueTransforms,
       };
 
       const objectToTransform = {
-        "spacing": {
-          "base": {
-            "value": "16"
+        spacing: {
+          base: {
+            value: '16',
           },
-          "medium": {
-            "value": "{spacing.base.value}"
-          }
-        }
+          medium: {
+            value: '{spacing.base.value}',
+          },
+        },
       };
 
-      transformObject(objectToTransform, options, transformationContext);
+      await transformObject(objectToTransform, config, {}, transformationContext);
 
-      expect(transformedPropRefs).toEqual(['spacing.base']);
-      expect(deferredPropValueTransforms).toEqual(['spacing.medium']);
-    })
+      expect(transformedPropRefs).to.eql(['spacing.base']);
+      expect(deferredPropValueTransforms).to.eql(['spacing.medium']);
+    });
   });
 });

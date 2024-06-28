@@ -10,60 +10,44 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
-const fs = require('fs-extra');
-const helpers = require('../__helpers');
-const formats = require('../../lib/common/formats');
-const createDictionary = require('../../lib/utils/createDictionary');
-const createFormatArgs = require('../../lib/utils/createFormatArgs');
+import { expect } from 'chai';
+import formats from '../../lib/common/formats.js';
+import createFormatArgs from '../../lib/utils/createFormatArgs.js';
+import flattenTokens from '../../lib/utils/flattenTokens.js';
 
 const file = {
-  "destination": "__output/",
-  "format": "javascript/module-flat",
+  destination: '__output/',
+  format: 'javascript/module-flat',
 };
-const properties = {
+const tokens = {
   color: {
     red: {
-      value: "#EF5350",
-      name: "ColorRed",
+      value: '#EF5350',
+      name: 'ColorRed',
       original: {
-        value: "#EF5350"
+        value: '#EF5350',
       },
-      attributes: {
-        category: "color",
-        type: "red"
-      },
-      path: [
-        "color",
-        "red"
-      ]
-    }
-  }
+      path: ['color', 'red'],
+    },
+  },
 };
 
-const formatter = formats['javascript/module-flat'].bind(file);
-const dictionary = createDictionary({ properties });
+const format = formats['javascript/module-flat'];
 
 describe('formats', () => {
   describe('javascript/module-flat', () => {
-
-    beforeEach(() => {
-      helpers.clearOutput();
+    it('should be a valid JS file and match snapshot', async () => {
+      await expect(
+        await format(
+          createFormatArgs({
+            dictionary: { tokens, allTokens: flattenTokens(tokens) },
+            file,
+            platform: {},
+          }),
+          {},
+          file,
+        ),
+      ).to.matchSnapshot();
     });
-
-    afterEach(() => {
-      helpers.clearOutput();
-    });
-
-    it('should be a valid JS file', () => {
-      fs.writeFileSync('./__tests__/__output/output.js', formatter(createFormatArgs({
-        dictionary,
-        file: {},
-        platform: {}
-      }), {}, {}) );
-      const test = require('../__output/output.js');
-      expect(test.ColorRed).toEqual(dictionary.allProperties[0].value);
-    });
-
   });
 });

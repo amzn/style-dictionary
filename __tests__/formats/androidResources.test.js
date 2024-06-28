@@ -10,158 +10,140 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
+import { expect } from 'chai';
+import formats from '../../lib/common/formats.js';
+import createFormatArgs from '../../lib/utils/createFormatArgs.js';
+import flattenTokens from '../../lib/utils/flattenTokens.js';
 
-const formats = require('../../lib/common/formats');
-const createDictionary = require('../../lib/utils/createDictionary');
-const createFormatArgs = require('../../lib/utils/createFormatArgs');
-
-const properties = {
-  "size": {
-    "font": {
-      "small": {
-        "value": "12rem",
-        "original": {
-          "value": "12px"
+const tokens = {
+  size: {
+    font: {
+      small: {
+        value: '12rem',
+        type: 'fontSize',
+        original: {
+          value: '12px',
         },
-        "name": "size-font-small",
-        "attributes": {
-          "category": "size",
-          "type": "font",
-          "item": "small"
-        },
-        "path": [
-          "size",
-          "font",
-          "small"
-        ]
+        name: 'size-font-small',
+        path: ['size', 'font', 'small'],
       },
-      "large": {
-        "value": "18rem",
-        "original": {
-          "value": "18px"
+      large: {
+        value: '18rem',
+        type: 'fontSize',
+        original: {
+          value: '18px',
         },
-        "name": "size-font-large",
-        "attributes": {
-          "category": "size",
-          "type": "font",
-          "item": "large"
-        },
-        "path": [
-          "size",
-          "font",
-          "large"
-        ]
-      }
-    }
-  },
-  "color": {
-    "base": {
-      "red": {
-        "value": "#ff0000",
-        "comment": "comment",
-        "original": {
-          "value": "#FF0000",
-          "comment": "comment"
-        },
-        "name": "color-base-red",
-        "attributes": {
-          "category": "color",
-          "type": "base",
-          "item": "red"
-        },
-        "path": [
-          "color",
-          "base",
-          "red"
-        ]
-      }
+        name: 'size-font-large',
+        path: ['size', 'font', 'large'],
+      },
     },
-    "white": {
-      "value": "#ffffff",
-      "original": {
-        "value": "#ffffff"
+  },
+  color: {
+    base: {
+      red: {
+        value: '#ff0000',
+        type: 'color',
+        comment: 'comment',
+        original: {
+          value: '#FF0000',
+          comment: 'comment',
+        },
+        name: 'color-base-red',
+        path: ['color', 'base', 'red'],
       },
-      "name": "color-white",
-      "attributes": {
-        "category": "color",
-        "type": "white"
+    },
+    white: {
+      value: '#ffffff',
+      type: 'color',
+      original: {
+        value: '#ffffff',
       },
-      "path": [
-        "color",
-        "white"
-      ]
-    }
+      name: 'color-white',
+      path: ['color', 'white'],
+    },
   },
 };
 
-const customProperties = {
+const customTokens = {
   backgroundColor: {
     secondary: {
-      name: "backgroundColorSecondary",
-      value: "#F2F3F4",
-      attributes: {
-        category: "backgroundColor"
-      }
-    }
+      name: 'backgroundColorSecondary',
+      value: '#F2F3F4',
+      type: 'color',
+      original: {
+        value: '#F2F3F4',
+        type: 'color',
+      },
+    },
   },
   fontColor: {
     primary: {
-      name: "fontColorPrimary",
-      value: "#000000",
-      attributes: {
-        category: "fontColor"
-      }
-    }
+      name: 'fontColorPrimary',
+      value: '#000000',
+      type: 'color',
+      original: {
+        value: '#000000',
+        type: 'color',
+      },
+    },
   },
 };
 
 const format = formats['android/resources'];
 const file = {
-  "destination": "__output/",
-  "format": 'android/resources'
+  destination: '__output/',
+  format: 'android/resources',
 };
 
-const dictionary = createDictionary({ properties });
-const customDictionary = createDictionary({ properties: customProperties });
-
 describe('formats', () => {
-
   describe(`android/resources`, () => {
-
-    it('should match default snapshot', () => {
-      expect(format(createFormatArgs({
-        dictionary,
-        file,
-        platform: {}
-      }), {}, file)).toMatchSnapshot();
-    });
-
-    it('with resourceType override should match snapshot', () => {
-      const file = {resourceType: "dimen"}
-      expect(format(createFormatArgs({
-        dictionary,
-        file,
-        platform: {}
-      }), {}, file)).toMatchSnapshot();
-    });
-
-    it('with resourceMap override should match snapshot', () => {
-      const file = {
-        resourceMap: {
-          color: 'color',
-          fontColor: 'color',
-          backgroundColor: 'color'
-        }
-      };
-      expect(
-        format(createFormatArgs({
-          dictionary: customDictionary,
+    it('should match default snapshot', async () => {
+      const f = await format(
+        createFormatArgs({
+          dictionary: { tokens, allTokens: flattenTokens(tokens) },
           file,
-          platform: {}
-        }), {}, file)
-      ).toMatchSnapshot();
+          platform: {},
+        }),
+        {},
+        file,
+      );
+      await expect(f).to.matchSnapshot();
     });
 
-  });
+    it('with resourceType override should match snapshot', async () => {
+      const file = { options: { resourceType: 'dimen' } };
+      const f = await format(
+        createFormatArgs({
+          dictionary: { tokens, allTokens: flattenTokens(tokens) },
+          file,
+          platform: {},
+        }),
+        {},
+        file,
+      );
+      await expect(f).to.matchSnapshot();
+    });
 
+    it('with resourceMap override should match snapshot', async () => {
+      const file = {
+        options: {
+          resourceMap: {
+            color: 'color',
+            fontColor: 'color',
+            backgroundColor: 'color',
+          },
+        },
+      };
+      const f = await format(
+        createFormatArgs({
+          dictionary: { tokens: customTokens, allTokens: flattenTokens(customTokens) },
+          file,
+          platform: {},
+        }),
+        {},
+        file,
+      );
+      await expect(f).to.matchSnapshot();
+    });
+  });
 });

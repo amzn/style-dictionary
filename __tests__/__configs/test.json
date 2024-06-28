@@ -1,5 +1,5 @@
 {
-  "source": ["__tests__/__properties/**/*.json"],
+  "source": ["__tests__/__tokens/**/*.json"],
   "platforms": {
     "web": {
       "transformGroup": "web",
@@ -9,10 +9,12 @@
         {
           "destination": "_icons.css",
           "format": "scss/icons"
-        },{
+        },
+        {
           "destination": "_variables.css",
           "format": "scss/variables"
-        },{
+        },
+        {
           "destination": "_styles.js",
           "format": "javascript/module"
         }
@@ -26,7 +28,8 @@
         {
           "destination": "_icons.scss",
           "format": "scss/icons"
-        },{
+        },
+        {
           "destination": "_variables.scss",
           "format": "scss/variables"
         }
@@ -40,7 +43,8 @@
         {
           "destination": "_icons.less",
           "format": "less/icons"
-        },{
+        },
+        {
           "destination": "_variables.less",
           "format": "less/variables"
         }
@@ -53,17 +57,17 @@
         {
           "destination": "android/colors.xml",
           "format": "android/colors"
-        },{
+        },
+        {
           "destination": "android/font_dimen.xml",
           "format": "android/fontDimens"
-        },{
+        },
+        {
           "destination": "android/dimens.xml",
           "format": "android/dimens"
         }
       ],
-      "actions": [
-        "android/copyImages"
-      ]
+      "actions": ["android/copyImages"]
     },
     "ios": {
       "transformGroup": "ios",
@@ -72,7 +76,8 @@
         {
           "destination": "style_dictionary.plist",
           "format": "ios/plist"
-        },{
+        },
+        {
           "destination": "style_dictionary.h",
           "format": "ios/macros"
         }

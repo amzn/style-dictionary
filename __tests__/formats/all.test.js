@@ -10,62 +10,83 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
+import { expect } from 'chai';
+import formats from '../../lib/common/formats.js';
+import createFormatArgs from '../../lib/utils/createFormatArgs.js';
+import flattenTokens from '../../lib/utils/flattenTokens.js';
+import { deepmerge } from '../../lib/utils/deepmerge.js';
 
-var formats = require('../../lib/common/formats');
-var createDictionary = require('../../lib/utils/createDictionary');
-var createFormatArgs = require('../../lib/utils/createFormatArgs');
-var _ = require('../../lib/utils/es6_');
-
-var file = {
-  "destination": "__output/",
-  "format": "javascript/es6",
-  "filter": {
-    "attributes": {
-      "category": "color"
-    }
-  }
+const file = {
+  destination: '__output/',
+  format: 'javascript/es6',
+  filter: {
+    type: 'color',
+  },
 };
 
-var properties = {
-  "color": {
-    "red": {
+const tokens = {
+  color: {
+    red: {
       value: '#FF0000',
+      type: 'color',
       original: { value: '#FF0000' },
       name: 'color_red',
       comment: 'comment',
-      attributes: {
-          category: 'color',
-          type: 'red',
-          item: undefined,
-          subitem: undefined,
-          state: undefined
-      },
-      path: ['color','red']
-    }
-  }
+      path: ['color', 'red'],
+    },
+  },
 };
 
-describe('formats', () => {
-  _.each(_.keys(formats), function(key) {
-
-    var formatter = formats[key].bind(file);
-    const dictionary = createDictionary({ properties });
-    var output = formatter(createFormatArgs({
-      dictionary,
-      file,
-      platform: {},
-    }), {}, file);
+describe('formats', async () => {
+  for (const key of Object.keys(formats)) {
+    const format = formats[key].bind(file);
 
     describe('all', () => {
-
-      it('should match ' + key + ' snapshot', () => {
-        expect(output).toMatchSnapshot();
+      it('should match ' + key + ' snapshot', async () => {
+        const output = await format(
+          createFormatArgs({
+            dictionary: { tokens, allTokens: flattenTokens(tokens) },
+            file,
+            platform: {},
+          }),
+          {},
+          file,
+        );
+        await expect(output).to.matchSnapshot();
       });
 
-      it('should return ' + key + ' as a string', () => {
-        expect(typeof output).toBe('string');
+      it('should match ' + key + ' snapshot with fileHeaderTimestamp set', async () => {
+        const _file = deepmerge(file, {
+          options: {
+            formatting: {
+              fileHeaderTimestamp: true,
+            },
+          },
+        });
+        const output = await format(
+          createFormatArgs({
+            dictionary: { tokens, allTokens: flattenTokens(tokens) },
+            file: _file,
+            platform: {},
+          }),
+          {},
+          _file,
+        );
+        await expect(output).to.matchSnapshot();
+      });
+
+      it('should return ' + key + ' as a string', async () => {
+        const output = await format(
+          createFormatArgs({
+            dictionary: { tokens, allTokens: flattenTokens(tokens) },
+            file,
+            platform: {},
+          }),
+          {},
+          file,
+        );
+        expect(typeof output).to.equal('string');
       });
     });
-
-  });
+  }
 });

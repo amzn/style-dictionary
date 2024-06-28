@@ -10,43 +10,71 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-
-var StyleDictionary = require('../index');
-var StyleDictionaryExtended = StyleDictionary.extend({
-  "platforms": {
-    "android": {
-      "actions": ["test"]
-    }
-  }
-});
-var helpers = require('./__helpers');
-var fs = require('fs-extra');
-
-StyleDictionaryExtended.registerAction({
-  name: 'test',
-  do: function() {
-    fs.writeFileSync('./__tests__/__output/action.txt', 'hi')
-  },
-  undo: function() {
-    fs.removeSync('./__tests__/__output/action.txt')
-  }
-});
+import { expect } from 'chai';
+import { fs } from 'style-dictionary/fs';
+import StyleDictionary from 'style-dictionary';
+import { clearOutput, fileExists } from './__helpers.js';
 
 describe('performAction', () => {
-
   beforeEach(() => {
-    helpers.clearOutput();
+    clearOutput();
   });
 
   afterEach(() => {
-    helpers.clearOutput();
+    clearOutput();
   });
 
   describe('handle actions', () => {
-    it('should write to a file properly', () => {
-      StyleDictionaryExtended.buildPlatform('android');
-      expect(helpers.fileExists('./__tests__/__output/action.txt')).toBeTruthy();
+    it('should write to a file properly', async () => {
+      const sd = new StyleDictionary({
+        platforms: {
+          android: {
+            actions: ['test'],
+            files: [],
+          },
+        },
+      });
+      await sd.hasInitialized;
+
+      sd.registerAction({
+        name: 'test',
+        do: function () {
+          fs.mkdirSync('__tests__/__output', { recursive: true });
+          fs.writeFileSync('__tests__/__output/action.txt', 'hi', 'utf-8');
+        },
+        undo: function () {
+          fs.unlinkSync('__tests__/__output/action.txt');
+        },
+      });
+      await sd.buildPlatform('android');
+
+      expect(fileExists('__tests__/__output/action.txt')).to.be.true;
+    });
+
+    it('should handle async actions to write to a file', async () => {
+      const sd = new StyleDictionary({
+        platforms: {
+          android: {
+            actions: ['test-async'],
+            files: [],
+          },
+        },
+      });
+      await sd.hasInitialized;
+
+      sd.registerAction({
+        name: 'test-async',
+        do: async function () {
+          fs.promises.mkdir('__tests__/__output', { recursive: true });
+          fs.promises.writeFile('__tests__/__output/action.txt', 'hi', 'utf-8');
+        },
+        undo: async function () {
+          fs.promises.unlink('__tests__/__output/action.txt');
+        },
+      });
+      await sd.buildPlatform('android');
+
+      expect(fileExists('__tests__/__output/action.txt')).to.be.true;
     });
   });
-
 });

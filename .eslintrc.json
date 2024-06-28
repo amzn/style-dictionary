@@ -1,26 +1,29 @@
 {
+  "ignorePatterns": ["/docs/dist/**/*"],
   "parserOptions": {
-    "ecmaVersion": 6,
-    "sourceType": "module",
-    "allowImportExportEverywhere": true
+    "ecmaVersion": "latest",
+    "sourceType": "module"
   },
-  "plugins": ["jest"],
   "env": {
     "node": true,
     "mocha": true,
-    "jest": true
+    "es6": true,
+    "browser": true
   },
-  "globals": {
-    "Buffer": true,
-    "escape": true
-  },
-  "extends": ["eslint:recommended", "plugin:jest/recommended"],
+  "extends": ["eslint:recommended"],
+  "plugins": ["mocha"],
   "rules": {
-    "no-console": 0,
     "no-unused-vars": 1,
-    "no-control-regex": 0,
-    "comma-dangle": 0,
-    "no-prototype-builtins": 0,
-    "jest/valid-title": 0
-  }
+    "no-console": ["error", { "allow": ["warn", "error"] }],
+    "mocha/no-exclusive-tests": "error",
+    "no-var": "error"
+  },
+  "overrides": [
+    {
+      "files": ["examples/**/*.js"],
+      "rules": {
+        "no-console": 0
+      }
+    }
+  ]
 }

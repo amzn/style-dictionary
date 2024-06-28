@@ -10,74 +10,87 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
+import { expect } from 'chai';
+import { clearOutput, dirExists } from './__helpers.js';
+import cleanFiles from '../lib/cleanFiles.js';
+import cleanDirs from '../lib/cleanDirs.js';
+import StyleDictionary from '../lib/StyleDictionary.js';
 
-var helpers    = require('./__helpers');
-var buildFiles = require('../lib/buildFiles');
-var cleanFiles = require('../lib/cleanFiles');
-var cleanDirs  = require('../lib/cleanDirs');
-
-var dictionary = {
-  properties: {
-    foo: 'bar'
-  }
+const dictionary = {
+  tokens: {
+    foo: 'bar',
+  },
 };
 
-var platform = {
+const platform = {
   files: [
     {
       destination: '__tests__/__output/extradir1/extradir2/extradir1/extradir2/test.json',
-      format: function(dictionary) {
-        return JSON.stringify(dictionary.properties)
-      }
-    }
-  ]
+      format: 'foo',
+    },
+  ],
 };
 
-var platformWithBuildPath = {
+const platformWithBuildPath = {
   buildPath: '__tests__/__output/extradir1/extradir2/',
   files: [
     {
       destination: 'test.json',
-      format: function(dictionary) {
-        return JSON.stringify(dictionary.properties)
-      }
-    }
-  ]
+      format: 'foo',
+    },
+  ],
 };
 
 describe('cleanDirs', () => {
-
   beforeEach(() => {
-    helpers.clearOutput();
+    clearOutput();
   });
 
   afterEach(() => {
-    helpers.clearOutput();
+    clearOutput();
   });
 
-  it('should delete without buildPath', () => {
-    buildFiles( dictionary, platform );
-    cleanFiles( dictionary, platform );
-    cleanDirs( dictionary, platform );
-    expect(helpers.dirDoesNotExist('./__tests__/__output/extradir1/extradir2')).toBeTruthy();
-    expect(helpers.dirDoesNotExist('./__tests__/__output/extradir1')).toBeTruthy();
+  it('should delete without buildPath', async () => {
+    const sd = new StyleDictionary({
+      hooks: {
+        formats: {
+          foo: (dictionary) => JSON.stringify(dictionary.tokens),
+        },
+      },
+      tokens: dictionary.tokens,
+      platforms: {
+        bar: platform,
+      },
+    });
+    await sd.buildAllPlatforms();
+    await cleanFiles(platform);
+    await cleanDirs(platform);
+    expect(dirExists('__tests__/__output/extradir1/extradir2')).to.be.false;
+    expect(dirExists('__tests__/__output/extradir1')).to.be.false;
   });
 
-  it('should delete with buildPath', () => {
-    buildFiles( dictionary, platformWithBuildPath );
-    cleanFiles( dictionary, platformWithBuildPath );
-    cleanDirs( dictionary, platformWithBuildPath );
-    expect(helpers.dirDoesNotExist('./__tests__/__output/extradir1/extradir2')).toBeTruthy();
-    expect(helpers.dirDoesNotExist('./__tests__/__output/extradir1')).toBeTruthy();
+  it('should delete with buildPath', async () => {
+    const sd = new StyleDictionary({
+      hooks: {
+        formats: {
+          foo: (dictionary) => JSON.stringify(dictionary.tokens),
+        },
+      },
+      tokens: dictionary.tokens,
+      platforms: {
+        bar: platformWithBuildPath,
+      },
+    });
+    await sd.buildAllPlatforms();
+    await cleanFiles(platformWithBuildPath);
+    await cleanDirs(platformWithBuildPath);
+    expect(dirExists('__tests__/__output/extradir1/extradir2')).to.be.false;
+    expect(dirExists('__tests__/t__/__output/extradir1')).to.be.false;
   });
 
-  it('should throw if buildPath does not end in a trailing slash', () => {
-    expect(
-      function() {
-        cleanDirs( {}, {
-          buildPath: "foo"
-        })
-      }
-    ).toThrow('Build path must end in a trailing slash or you will get weird file names.')
-  })
+  it('should throw if buildPath does not end in a trailing slash', async () => {
+    await expect(cleanDirs({ buildPath: 'foo' })).to.eventually.rejectedWith(
+      'Build path must end in a trailing slash or you will get weird file names.',
+    );
+  });
 });

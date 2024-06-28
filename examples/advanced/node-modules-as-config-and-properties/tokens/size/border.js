@@ -1,9 +1,9 @@
 // Look! No namespaces!
-module.exports = {
+export default {
   width: {
-    base: { value: 0.125 }
+    base: { value: 0.125 },
   },
   radius: {
-    base: { value: 0.25 }
-  }
-}
+    base: { value: 0.25 },
+  },
+};

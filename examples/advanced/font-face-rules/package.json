@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "description": "Example showing one way to generate @font-face rules",
   "main": "sd.config.js",
+  "type": "module",
   "scripts": {
     "build": "style-dictionary build --config ./sd.config.js"
   },
   "license": "Apache-2.0",
   "devDependencies": {
-    "style-dictionary": "3.9.2"
+    "style-dictionary": "4.0.0-prerelease.30"
   }
 }

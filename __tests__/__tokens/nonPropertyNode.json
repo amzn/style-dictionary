@@ -1,0 +1,15 @@
+{
+  "color": {
+    "key1": "testing",
+    "base": {
+      "red": {
+        "value": "#f00",
+        "type": "color",
+        "key2": "also testing"
+      },
+      "attributes": {
+        "key3": "more testing"
+      }
+    }
+  }
+}

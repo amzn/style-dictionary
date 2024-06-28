@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "clean": "rm -rf build",
     "build": "style-dictionary build --config ./config.js",
@@ -19,7 +20,7 @@
   },
   "homepage": "https://github.com/dbanksdesign/style-dictionary-node#readme",
   "devDependencies": {
-    "style-dictionary": "3.9.2",
+    "style-dictionary": "4.0.0-prerelease.30",
     "tinycolor2": "^1.4.1"
   }
 }

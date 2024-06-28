@@ -1,0 +1,21 @@
+{
+  "tokens": {
+    "color": {
+      "red": { "value": "#f00" },
+      "background": {
+        "red": { "value": "{color.red.value}" }
+      }
+    }
+  },
+  "platforms": {
+    "css": {
+      "buildPath": "__tests__/__output/css/",
+      "files": [
+        {
+          "format": "css/variables",
+          "destination": "vars.css"
+        }
+      ]
+    }
+  }
+}

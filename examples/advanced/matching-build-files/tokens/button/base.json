@@ -1,14 +1,16 @@
 {
-    "button": {
-        "background": {
-            "color": {
-                "value": "{color.blue.value}"
-            }
-        },
-        "text": {
-            "color": {
-                "value": "#FFFFFF"
-            }
-        }
+  "button": {
+    "background": {
+      "color": {
+        "value": "{color.blue.value}",
+        "type": "color"
+      }
+    },
+    "text": {
+      "color": {
+        "value": "#FFFFFF",
+        "type": "color"
+      }
     }
+  }
 }

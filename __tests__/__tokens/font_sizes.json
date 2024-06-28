@@ -1,0 +1,38 @@
+{
+  "size": {
+    "font": {
+      "tiny": {
+        "value": "11px",
+        "type": "fontSize"
+      },
+      "small": {
+        "value": "13px",
+        "type": "fontSize"
+      },
+      "medium": {
+        "value": "15px",
+        "type": "fontSize"
+      },
+      "large": {
+        "value": "17px",
+        "type": "fontSize"
+      },
+      "xl": {
+        "value": "21px",
+        "type": "fontSize"
+      },
+      "xxl": {
+        "value": "25px",
+        "type": "fontSize"
+      },
+      "xxxl": {
+        "value": "30px",
+        "type": "fontSize"
+      },
+      "base": {
+        "value": "{size.font.medium.value}",
+        "type": "fontSize"
+      }
+    }
+  }
+}

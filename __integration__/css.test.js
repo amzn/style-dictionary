@@ -10,75 +10,113 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
+import { expect } from 'chai';
+import StyleDictionary from 'style-dictionary';
+import { fs } from 'style-dictionary/fs';
+import { resolve } from '../lib/resolve.js';
+import { buildPath } from './_constants.js';
+import { clearOutput } from '../__tests__/__helpers.js';
 
-const fs = require('fs-extra');
-const StyleDictionary = require('../index');
-const {buildPath} = require('./_constants');
-
-describe('integration', () => {
-  describe('css', () => {
-    StyleDictionary.extend({
-      source: [`__integration__/tokens/**/*.json?(c)`],
+describe('integration', async () => {
+  before(async () => {
+    const sd = new StyleDictionary({
+      source: [`__integration__/tokens/**/[!_]*.json?(c)`],
       // Testing proper string interpolation with multiple references here.
       // This is a CSS/web-specific thing so only including them in this
       // integration test.
-      properties: {
+      tokens: {
         breakpoint: {
-          xs: { value: "304px" },
-          sm: { value: "768px" },
-          md: { value: "calc({breakpoint.xs.value} / {breakpoint.sm.value})"}
-        }
+          xs: { value: '304px' },
+          sm: { value: '768px' },
+          md: { value: 'calc({breakpoint.xs.value} / {breakpoint.sm.value})' },
+        },
       },
       platforms: {
         css: {
           transformGroup: 'css',
           buildPath,
-          files: [{
-            destination: 'variables.css',
-            format: 'css/variables'
-          },{
-            destination: 'variablesWithReferences.css',
-            format: 'css/variables',
-            options: {
-              outputReferences: true,
-              outputReferenceFallbacks: true
-            }
-          },{
-            destination: 'variablesWithSelector.css',
-            format: 'css/variables',
-            options: {
-              selector: '.test'
-            }
-          }]
-        }
-      }
-    }).buildAllPlatforms();
+          files: [
+            {
+              destination: 'variables.css',
+              format: 'css/variables',
+              options: {
+                formatting: { indentation: '    ' },
+              },
+            },
+            {
+              destination: 'variablesWithReferences.css',
+              format: 'css/variables',
+              options: {
+                outputReferences: true,
+                outputReferenceFallbacks: false,
+              },
+            },
+            {
+              destination: 'variablesWithReferenceFallbacks.css',
+              format: 'css/variables',
+              options: {
+                outputReferences: true,
+                outputReferenceFallbacks: true,
+              },
+            },
+            {
+              destination: 'variablesWithSelector.css',
+              format: 'css/variables',
+              options: {
+                selector: '.test',
+              },
+            },
+          ],
+        },
+      },
+    });
+    await sd.buildAllPlatforms();
+  });
 
-    describe('css/variables', () => {
-      const output = fs.readFileSync(`${buildPath}variables.css`, {encoding:'UTF-8'});
-      it(`should match snapshot`, () => {
-        expect(output).toMatchSnapshot();
+  afterEach(() => {
+    clearOutput(buildPath);
+  });
+
+  describe('css', async () => {
+    describe('css/variables', async () => {
+      it(`should match snapshot`, async () => {
+        const output = fs.readFileSync(resolve(`${buildPath}variables.css`), {
+          encoding: 'UTF-8',
+        });
+        await expect(output).to.matchSnapshot();
       });
 
-      describe(`with references`, () => {
-        const output = fs.readFileSync(`${buildPath}variablesWithReferences.css`, {encoding:'UTF-8'});
-        it(`should match snapshot`, () => {
-          expect(output).toMatchSnapshot();
+      describe(`with references`, async () => {
+        it(`should match snapshot`, async () => {
+          const output = fs.readFileSync(resolve(`${buildPath}variablesWithReferences.css`), {
+            encoding: 'UTF-8',
+          });
+          await expect(output).to.matchSnapshot();
         });
       });
 
-      describe(`with selector`, () => {
-        const output = fs.readFileSync(`${buildPath}variablesWithSelector.css`, {encoding:'UTF-8'});
-        it(`should match snapshot`, () => {
-          expect(output).toMatchSnapshot();
+      describe(`with referenceFallbacks`, async () => {
+        it(`should match snapshot`, async () => {
+          const output = fs.readFileSync(
+            resolve(`${buildPath}variablesWithReferenceFallbacks.css`),
+            {
+              encoding: 'UTF-8',
+            },
+          );
+          await expect(output).to.matchSnapshot();
+        });
+      });
+
+      describe(`with selector`, async () => {
+        it(`should match snapshot`, async () => {
+          const output = fs.readFileSync(resolve(`${buildPath}variablesWithSelector.css`), {
+            encoding: 'UTF-8',
+          });
+          await expect(output).to.matchSnapshot();
         });
       });
 
       // TODO: add css validator
     });
   });
-});
-
-afterAll(() => {
-  fs.emptyDirSync(buildPath);
 });

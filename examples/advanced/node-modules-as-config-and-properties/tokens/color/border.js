@@ -1,3 +1,3 @@
-module.exports = {
-  base: { value: "{color.core.grey.20.value}" }
-}
+export default {
+  base: { value: '{color.core.grey.20.value}' },
+};

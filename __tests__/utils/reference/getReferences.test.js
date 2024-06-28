@@ -11,83 +11,103 @@
  * and limitations under the License.
  */
 
-// `.getReferences` is bound to a dictionary object, so to test it we will
-// create a dictionary object and then call `.getReferences` on it.
-const createDictionary = require('../../../lib/utils/createDictionary');
+import { expect } from 'chai';
+import { restore, stubMethod } from 'hanbi';
+import { getReferences } from '../../../lib/utils/references/getReferences.js';
 
-const properties = {
+const tokens = {
   color: {
-    red: { value: "#f00" },
-    danger: { value: "{color.red.value}" }
+    red: { value: '#f00' },
+    danger: { value: '{color.red.value}' },
   },
   size: {
-    border: { value: "2px" }
+    border: { value: '2px' },
   },
   border: {
     primary: {
       // getReferences should work on objects like this:
       value: {
-        color: "{color.red.value}",
-        width: "{size.border.value}",
-        style: "solid"
+        color: '{color.red.value}',
+        width: '{size.border.value}',
+        style: 'solid',
       },
     },
     secondary: {
       // and objects that have a non-string
       value: {
-        color: "{color.red.value}",
+        color: '{color.red.value}',
         width: 2,
-        style: "solid"
-      }
+        style: 'solid',
+      },
     },
     tertiary: {
       // getReferences should work on interpolated values like this:
-      value: "{size.border.value} solid {color.red.value}"
-    }
-  }
-}
-
-const dictionary = createDictionary({ properties });
+      value: '{size.border.value} solid {color.red.value}',
+    },
+  },
+};
 
 describe('utils', () => {
   describe('reference', () => {
     describe('getReferences()', () => {
+      describe('public API', () => {
+        beforeEach(() => {
+          restore();
+        });
+
+        it('should not collect errors but rather throw immediately when using public API', () => {
+          expect(() => getReferences('{foo.bar}', tokens)).to.throw(
+            `Tries to reference foo.bar, which is not defined.`,
+          );
+        });
+
+        it('should not collect errors but rather throw immediately when using public API', async () => {
+          const badFn = () => getReferences('{foo.bar}', tokens);
+          expect(badFn).to.throw(`Tries to reference foo.bar, which is not defined.`);
+        });
+
+        it('should allow warning immediately when references are filtered out', async () => {
+          const stub = stubMethod(console, 'warn');
+          const clonedTokens = structuredClone(tokens);
+          delete clonedTokens.color.red;
+          getReferences('{color.red}', clonedTokens, {
+            unfilteredTokens: tokens,
+            warnImmediately: true,
+          });
+          expect(stub.firstCall.args[0]).to.equal(
+            `Filtered out token references were found: color.red`,
+          );
+        });
+      });
+
       it(`should return an empty array if the value has no references`, () => {
-        expect(dictionary.getReferences(properties.color.red.value)).toEqual([]);
+        expect(getReferences(tokens.color.red.value, tokens)).to.eql([]);
       });
 
       it(`should work with a single reference`, () => {
-        expect(dictionary.getReferences(properties.color.danger.value)).toEqual(
-          expect.arrayContaining([
-            {value: "#f00"}
-          ])
-        );
+        expect(getReferences(tokens.color.danger.value, tokens)).to.eql([
+          { ref: ['color', 'red'], value: '#f00' },
+        ]);
       });
 
       it(`should work with object values`, () => {
-        expect(dictionary.getReferences(properties.border.primary.value)).toEqual(
-          expect.arrayContaining([
-            {value: "2px"},
-            {value: "#f00"}
-          ])
-        );
+        expect(getReferences(tokens.border.primary.value, tokens)).to.eql([
+          { ref: ['color', 'red'], value: '#f00' },
+          { ref: ['size', 'border'], value: '2px' },
+        ]);
       });
 
       it(`should work with objects that have numbers`, () => {
-        expect(dictionary.getReferences(properties.border.secondary.value)).toEqual(
-          expect.arrayContaining([
-            {value: "#f00"}
-          ])
-        );
+        expect(getReferences(tokens.border.secondary.value, tokens)).to.eql([
+          { ref: ['color', 'red'], value: '#f00' },
+        ]);
       });
 
       it(`should work with interpolated values`, () => {
-        expect(dictionary.getReferences(properties.border.tertiary.value)).toEqual(
-          expect.arrayContaining([
-            {value: "2px"},
-            {value: "#f00"}
-          ])
-        );
+        expect(getReferences(tokens.border.tertiary.value, tokens)).to.eql([
+          { ref: ['size', 'border'], value: '2px' },
+          { ref: ['color', 'red'], value: '#f00' },
+        ]);
       });
     });
   });
