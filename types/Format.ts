@@ -11,9 +11,9 @@
  * and limitations under the License.
  */
 
-import type { Dictionary, TransformedToken } from './DesignToken.d.ts';
-import type { File } from './File.d.ts';
-import type { LocalOptions, Config, PlatformConfig } from './Config.d.ts';
+import type { Dictionary, TransformedToken } from './DesignToken.ts';
+import type { File } from './File.ts';
+import type { LocalOptions, Config, PlatformConfig } from './Config.ts';
 
 export interface FormatFnArguments {
   /**
@@ -38,7 +38,7 @@ export interface FormatFnArguments {
  * The format function receives an overloaded object as its arguments and
  * it should return a string, which will be written to a file.
  */
-export type FormatFn = ((arguments: FormatFnArguments) => unknown | Promise<unknown>) & {
+export type FormatFn = ((args: FormatFnArguments) => unknown | Promise<unknown>) & {
   nested?: boolean;
 };
 

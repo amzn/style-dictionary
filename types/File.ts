@@ -1,7 +1,7 @@
-import type { TransformedToken } from './DesignToken.d.ts';
-import type { FormatFn } from './Format.d.ts';
-import type { LocalOptions, Config } from './Config.d.ts';
-import type { Filter } from './Filter.d.ts';
+import type { TransformedToken } from './DesignToken.ts';
+import type { FormatFn } from './Format.ts';
+import type { LocalOptions, Config } from './Config.ts';
+import type { Filter } from './Filter.ts';
 
 export interface FormattingOptions {
   prefix?: string;

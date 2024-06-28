@@ -54,7 +54,6 @@ describe('utils', () => {
 
       expect(typeDtcgDelegate(tokens)).to.eql({
         dimension: {
-          $type: 'dimension',
           scale: {
             $value: '2',
             $type: 'math',
@@ -71,9 +70,7 @@ describe('utils', () => {
               },
             },
             deep2: {
-              $type: 'math',
               deeper: {
-                $type: 'other',
                 evenDeeper: {
                   $value: '12',
                   $type: 'math',
@@ -132,7 +129,6 @@ describe('utils', () => {
 
       expect(typeDtcgDelegate(tokens)).to.eql({
         dimension: {
-          $type: 'dimension',
           scale: {
             $value: '2',
             $type: 'math',
@@ -149,9 +145,7 @@ describe('utils', () => {
               },
             },
             deep2: {
-              $type: 'math',
               deeper: {
-                $type: 'other',
                 evenDeeper: {
                   $value: '12',
                   $type: 'math',
