@@ -1,145 +1,37 @@
 # Changelog
 
-## 4.0.0-prerelease.39
+## 4.0.0
 
-### Patch Changes
-
-- 894f37c: Update glob esm browser fork to latest, resolve unclear licensing issue.
-- cb78c3d: Update `typeDtcgDelegate` utility to remove the $type on token group level between parsing/preprocessing step.
-
-## 4.0.0-prerelease.38
-
-### Patch Changes
-
-- 5079154: Fix deepExtend util bug with overriding behavior for tokens.
-
-## 4.0.0-prerelease.37
-
-### Minor Changes
-
-- 8450a45: Some fixes for Expand utility:
-
-  - Array values such as `dashArray` property of `strokeStyle` tokens no longer get expanded unintentionally, `typeof 'object'` check changed to `isPlainObject` check.
-  - Nested object-value tokens (such as `style` property inside `border` tokens) will now also be expanded.
-  - When references are involved during expansion, the resolved value is used when the property is an object, if not, then we keep the reference as is.
-    This is because if the reference is to an object value, the expansion might break the reference.
-
-## 4.0.0-prerelease.36
-
-### Minor Changes
-
-- 39f0220: Allow not throwing fatal errors on broken token references/aliases, but `console.error` instead.
-
-  You can also configure this on global/platform `log` property:
-
-  ```json
-  {
-    "log": {
-      "errors": {
-        "brokenReferences": "console"
-      }
-    }
-  }
-  ```
-
-  This setting defaults to `"error"` when not configured.
-
-  `resolveReferences` and `getReferences` `warnImmediately` option is set to `true` which causes an error to be thrown/warned immediately by default, which can be configured to `false` if you know those utils are running in the transform/format hooks respectively, where the errors are collected and grouped, then thrown as 1 error/warning instead of multiple.
-
-  Some minor grammatical improvements to some of the error logs were also done.
-
-## 4.0.0-prerelease.35
-
-### Minor Changes
-
-- c06661d: Re-add and update example basic, fix copySync command in CLI, fix android templates to use $type for DTCG tokens.
-
-## 4.0.0-prerelease.34
-
-### Patch Changes
-
-- ba03ee9: Fix for expand utility on platform level to adjust the token's path property.
-
-## 4.0.0-prerelease.33
-
-### Minor Changes
-
-- 261a2cb: Handle transition timingFunction prop in cubicBezier/css transform. Handle typography fontFamily prop in fontFamily/css transform.
-
-### Patch Changes
-
-- 261a2cb: Allow border type tokens to be empty, every property is optional.
-
-## 4.0.0-prerelease.32
-
-### Minor Changes
-
-- af5cc94: Create `formatPlatform` and `formatAllPlatforms` methods.
-  This will return the outputs and destinations from the format hook for your dictionary, without building these outputs and persisting them to the filesystem.
-  Additionally, formats can now return any data type instead of requiring it to be a `string` and `destination` property in `files` is now optional.
-  This allows users to create formats intended for only formatting tokens and letting users do stuff with it during runtime rather than writing to files.
-
-### Patch Changes
-
-- 2335f13: Allow using registerHook methods to override hooks that are already registered with the same name.
-- 6e226aa: Pass the original ref path to the `getReferences` util result tokens.
-- 3f09277: Pass dictionary options to preprocessor functions.
-
-## 4.0.0-prerelease.31
-
-### Patch Changes
-
-- c708325: Moving the @zip.js/zip.js dependency from a devDependency to a normal dependency.
-
-## 4.0.0-prerelease.30
-
-### Minor Changes
-
-- 7418c97: Add a couple of utilities for converting a regular Style Dictionary tokens object/file(s) to DTCG formatted tokens:
-
-  - `convertToDTCG`
-  - `convertJSONToDTCG`
-  - `convertZIPToDTCG`
-
-  [Documentation of these utilities](https://v4.styledictionary.com/reference/utils/dtcg/)
-
-## 4.0.0-prerelease.29
-
-### Minor Changes
-
-- cb94554: 'size/rem' transform to not transform tokens that already have a unit, such as `"4px"`, this should not be transformed to `"4rem"`.
-
-### Patch Changes
-
-- cb94554: Fix typeDtcgDelegate util $type property position to be allowed anywhere in the object, not just at the top.
-- 0972b26: Pass SD options to fileheaders and filters, to make it easier to use and adjust according to config or options like usesDTCG.
-- 4ec34fd: Pass options to all of the filter functions in our built-in transforms, to check for `usesDTCG` and `$type` property.
-- 0972b26: Add unfilteredAllTokens property in dictionary object for formats, which is an unfiltered version of allTokens property, or a flattened version of the unfilteredTokens property.
-
-## 4.0.0-prerelease.28
-
-### Minor Changes
-
-- 4225d78: Added the following transforms for CSS, and added them to the `scss`, `css` and `less` transformGroups:
-
-  - `fontFamily/css` -> wraps font names with spaces in `'` quotes
-  - `cubicBezier/css` -> array value, put inside `cubic-bezier()` CSS function
-  - `strokeStyle/css/shorthand` -> object value, transform to CSS shorthand
-  - `border/css/shorthand` -> object value, transform to CSS shorthand
-  - `typography/css/shorthand` -> object value, transform to CSS shorthand
-  - `transition/css/shorthand` -> object value, transform to CSS shorthand
-  - `shadow/css/shorthand` -> object value (or array of objects), transform to CSS shorthand
-
-  The main intention here is to ensure that Style Dictionary is compliant with [DTCG draft specification](https://design-tokens.github.io/community-group/format/) out of the box with regards to exporting to CSS, where object-value tokens are not supported without transforming them to shorthands (or expanding them, which is a different feature that was added in `4.0.0-prerelease.27`).
-
-### Patch Changes
-
-- a5bafac: Colors that are not recognized by tinycolor2 as valid color formats (e.g. `linear-gradient(...)`) are now ignored by the builtin color transforms filter functions.
-
-## 4.0.0-prerelease.27
+> For a more comprehensive migration guide from version 3.x.x to version 4.0.0,
+> [visit the migration guide page](https://v4.styledictionary.com/version-4/migration/)
 
 ### Major Changes
 
+- 6cc7f31: BREAKING:
+
+  - `usesReference` util function is now `usesReferences` to be consistent plural form like the other reference util functions.
+  - `getReferences` first and second parameters have been swapped to be consistent with `resolveReferences`, so value first, then the full token object (instead of the entire dictionary instance).
+  - `getReferences` accepts a third options parameter which can be used to set reference Regex options as well as an unfilteredTokens object which can be used as a fallback when references are made to tokens that have been filtered out. There will be warnings logged for this.
+  - `format.formatter` removed old function signature of `(dictionary, platform, file)` in favor of `({ dictionary, platform, options, file })`.
+  - Types changes:
+
+    - Style Dictionary is entirely strictly typed now, and there will be `.d.ts` files published next to every file, this means that if you import from one of Style Dictionary's entrypoints, you automatically get the types implicitly with it. This is a big win for people using TypeScript, as the majority of the codebase now has much better types, with much fewer `any`s.
+    - There is no more hand-written Style Dictionary module `index.d.ts` anymore that exposes all type interfaces on itself. This means that you can no longer grab types that aren't members of the Style Dictionary class directly from the default export of the main entrypoint. External types such as `Parser`, `Transform`, `DesignTokens`, etc. can be imported from the newly added types entrypoint:
+
+    ```ts
+    import type { DesignTokens, Transform, Parser } from 'style-dictionary/types';
+    ```
+
+    Please raise an issue if you find anything missing or suddenly broken.
+
+    - `Matcher`, `Transformer`, `Formatter`, etc. are still available, although no longer directly but rather as properties on their parents, so `Filter['matcher']`, `Transform['transformer']`, `Format['formatter']`
+
+- dcbe2fb: - The project has been fully converted to [ESM format](https://nodejs.org/api/esm.html), which is also the format that the browser uses.
+  For users, this means you'll have to either use Style Dictionary in ESM JavaScript code, or dynamically import it into your CommonJS code.
+  - `StyleDictionary.extend()` method is now asynchronous, which means it returns `Promise<StyleDictionary.Core>` instead of `StyleDictionary.Core`.
+  - `allProperties` / `properties` was deprecated in v3, and is now removed from `StyleDictionary.Core`, use `allTokens` and `tokens` instead.
+  - Templates and the method `registerTemplate` were deprecated in v3, now removed. Use Formats instead.
+  - The package now uses [package entrypoints](https://nodejs.org/api/packages.html), which means that what is importable from the package is locked down to just the specified entrypoints: `style-dictionary` & `style-dictionary/fs`. If more is needed, please raise an issue explaining which file you were importing and why you need it to be public API.
 - f2ed88b: BREAKING: File headers, when registered, are put inside the `hooks.fileHeaders` property now, as opposed to `fileHeader`.
   Note the change from singular to plural form here.
 
@@ -164,6 +56,49 @@
     },
   };
   ```
+
+- 79bb201: BREAKING: Logging has been redesigned a fair bit and is more configurable now.
+
+  Before:
+
+  ```json
+  {
+    "log": "error" // 'error' | 'warn'  -> 'warn' is the default value
+  }
+  ```
+
+  After:
+
+  ```json
+  {
+    "log": {
+      "warnings": "error", // 'error' | 'warn'  -> 'warn' is the default value
+      "verbosity": "verbose", // 'default' | 'verbose' | 'silent'  -> 'default' is the default value
+      "errors": {
+        "brokenReferences": "console" // 'console' | 'throw' -> 'throw' is the default value
+      }
+    }
+  }
+  ```
+
+  Log is now and object and the old "log" option is now "warnings".
+
+  This configures whether the following five warnings will be thrown as errors instead of being logged as warnings:
+
+  - Token value collisions (in the source)
+  - Token name collisions (when exporting)
+  - Missing "undo" function for Actions
+  - File not created because no tokens found, or all of them filtered out
+  - Broken references in file when using outputReferences, but referring to a token that's been filtered out
+
+  Verbosity configures whether the following warnings/errors should display in a verbose manner:
+
+  - Token collisions of both types (value & name)
+  - Broken references due to outputReferences & filters
+  - Token reference errors
+
+  And it also configures whether success/neutral logs should be logged at all.
+  Using "silent" (or --silent in the CLI) means no logs are shown apart from fatal errors.
 
 - f2ed88b: BREAKING: Actions, when registered, are put inside the `hooks.actions` property now, as opposed to `action`.
   Note the change from singular to plural form here.
@@ -194,6 +129,23 @@
       },
     },
   };
+  ```
+
+- a4542f4: BREAKING: StyleDictionaryInstance.properties & .allProperties have been removed. They were deprecated in v3 in favor of .tokens and .allTokens.
+- 5e167de: BREAKING: moved `formatHelpers` away from the StyleDictionary class and export them in `'style-dictionary/utils'` entrypoint instead.
+
+  Before
+
+  ```js
+  import StyleDictionary from 'style-dictionary';
+
+  const { fileHeader, formattedVariables } = StyleDictionary.formatHelpers;
+  ```
+
+  After
+
+  ```js
+  import { fileHeader, formattedVariables } from 'style-dictionary/utils';
   ```
 
 - f2ed88b: Filters, when registered, are put inside the `hooks.filters` property now, as opposed to `filter`.
@@ -288,6 +240,29 @@
       },
     },
   };
+  ```
+
+- 502dbd1: BREAKING: All of our hooks, parsers, preprocessors, transforms, formats, actions, fileHeaders and filters, support async functions as well now. This means that the formatHelpers -> fileHeader helper method is now asynchronous, to support async fileheader functions.
+
+  ```js
+  import StyleDictionary from 'style-dictionary';
+
+  const { fileHeader } = StyleDictionary.formatHelpers;
+
+  StyleDictionary.registerFormat({
+    name: 'custom/css',
+    // this can be async now, usually it is if you use fileHeader format helper, since that now always returns a Promise
+    formatter: async function ({ dictionary, file, options }) {
+      const { outputReferences } = options;
+      return (
+        // this helper is now async! because the user-passed file.fileHeader might be an async function
+        (await fileHeader({ file })) +
+        ':root {\n' +
+        formattedVariables({ format: 'css', dictionary, outputReferences }) +
+        '\n}\n'
+      );
+    },
+  });
   ```
 
 - f2ed88b: BREAKING: Formats, when registered, are put inside the `hooks.formats` property now, as opposed to `format`.
@@ -480,151 +455,6 @@
   };
   ```
 
-- f2ed88b: BREAKING: Parsers, when registered, are put inside the `hooks.parsers` property now, as opposed to `parsers`.
-  `parsers` property has been repurposed: you will now also need to explicitly apply registered parsers by name in the `parsers` property, they no longer apply by default.
-  When registering a parser, you must also supply a `name` property just like with all other hooks, and the `parse` function has been renamed to `parser` for consistency.
-
-  Before:
-
-  ```js
-  export default {
-    // register it inline or by SD.registerPreprocessor
-    parsers: [
-      {
-        pattern: /\.json5$/,
-        parse: ({ contents, filePath }) => {
-          return JSON5.parse(contents);
-        },
-      },
-    ],
-  };
-  ```
-
-  After:
-
-  ```js
-  export default {
-    hooks: {
-      parsers: {
-        name: 'json5-parser',
-        pattern: /\.json5$/,
-        parser: ({ contents, filePath }) => {
-          return JSON5.parse(contents);
-        },
-      },
-    },
-    // apply it globally by name reference
-    parsers: ['json5-parser'],
-  };
-  ```
-
-- 7b82150: BREAKING: For formats using the `fileHeader` `formatHelpers` utility, it will no longer display a timestamp in the fileHeader output by default. This is now an opt-in by setting `file.formatting.fileHeaderTimestamp` to `true`. The reason for making this opt-in now is that using Style Dictionary in the context of a CI (continuous integration) pipeline is a common use-case, and when running on pull request event, output files always show a diff in git due to the timestamp changing, which often just means that the diff is bloated by redundancy.
-
-  New:
-
-  ```json
-  {
-    "platforms": {
-      "css": {
-        "files": [
-          {
-            "destination": "variables.css",
-            "format": "css/variables",
-            "options": {
-              "formatting": {
-                "fileHeaderTimestamp": true
-              }
-            }
-          }
-        ]
-      }
-    }
-  }
-  ```
-
-  or:
-
-  ```js
-  import { fileHeader } from 'style-dictionary/utils';
-
-  const headerContent = await fileHeader({ formatting: { fileHeaderTimestamp: true } });
-  ```
-
-### Minor Changes
-
-- e83886c: Allow expanding tokens on a global or platform-specific level. Supports conditionally expanding per token type, or using a function to determine this per individual token.
-
-### Patch Changes
-
-- 2f80da2: All formats using `createPropertyFormatter` or `formattedVariables` helpers now respect the `file.options.formatting` option passed by users to customize formatting.
-
-  Example:
-
-  ```js
-  {
-    platforms: {
-      css: {
-        transformGroup: 'css',
-        buildPath,
-        files: [
-          {
-            destination: 'variables.css',
-            format: 'css/variables',
-            options: {
-              formatting: { indentation: '    ' },
-            },
-          },
-        ]
-      }
-    }
-  }
-  ```
-
-## 4.0.0-prerelease.26
-
-### Minor Changes
-
-- 3485467: Fix some inconsistencies in some of the templates, usually with regards to spaces/newlines
-
-### Patch Changes
-
-- 6cfce97: Fix logging to be ordered by platform when building or cleaning platforms. This now happens in parallel, resulting in the logs being ordered randomly which was a small regression to the logging experience.
-- 061c67e: Hotfix to address outputReferencesTransformed util not handling object-value tokens properly.
-
-## 4.0.0-prerelease.25
-
-### Major Changes
-
-- 0b81a08: BREAKING: no longer wraps tokens of type asset in double quotes. Rather, we added a transform `asset/url` that will wrap such tokens inside `url("")` statements, this transform is applied to transformGroups scss, css and less.
-
-### Minor Changes
-
-- 2da5130: Added `outputReferencesTransformed` utility function to pass into outputReferences option, which will not output references for values that have been transitively transformed.
-
-### Patch Changes
-
-- 47face0: Token merging behavior changed so that upon token collisions, metadata props aren't accidentally merged together.
-
-## 4.0.0-prerelease.24
-
-### Major Changes
-
-- 5e167de: BREAKING: moved `formatHelpers` away from the StyleDictionary class and export them in `'style-dictionary/utils'` entrypoint instead.
-
-  Before
-
-  ```js
-  import StyleDictionary from 'style-dictionary';
-
-  const { fileHeader, formattedVariables } = StyleDictionary.formatHelpers;
-  ```
-
-  After
-
-  ```js
-  import { fileHeader, formattedVariables } from 'style-dictionary/utils';
-  ```
-
 - 90095a6: BREAKING: Allow specifying a `function` for `outputReferences`, conditionally outputting a ref or not per token. Also exposes `outputReferencesFilter` utility function which will determine whether a token should be outputting refs based on whether those referenced tokens were filtered out or not.
 
   If you are maintaining a custom format that allows `outputReferences` option, you'll need to take into account that it can be a function, and pass the correct options to it.
@@ -670,7 +500,7 @@
         const originalValue = usesDtcg ? token.original.$value : token.original.value;
 
         // Look here 👇
-        const shouldOutputRef =
+        const shouldOutputRefs =
           usesReferences(original) &&
           (typeof options.outputReferences === 'function'
             ? outputReferences(token, { dictionary, usesDtcg })
@@ -687,353 +517,8 @@
   });
   ```
 
-## 4.0.0-prerelease.23
-
-### Patch Changes
-
-- f8c40f7: fix(types): add missing type keyword for type export from index.d.ts
-
-## 4.0.0-prerelease.22
-
-### Patch Changes
-
-- daa78e1: Added missing type exports
-
-## 4.0.0-prerelease.21
-
-### Minor Changes
-
-- 8b6fff3: Fixes some noisy warnings still being outputted even when verbosity is set to default.
-
-  We also added log.warning "disabled" option for turning off warnings altogether, meaning you only get success logs and fatal errors.
-  This option can be used from the CLI as well using the `--no-warn` flag.
-
-### Patch Changes
-
-- 77ae35f: Fix scenario of passing absolute paths in Node env, do not remove leading slash in absolute paths.
-
-## 4.0.0-prerelease.20
-
-### Minor Changes
-
-- aff6646: Allow passing a custom FileSystem Volume to your Style Dictionary instances, to ensure input/output files are read/written from/to that specific volume.
-  Useful in case you want multiple Style Dictionary instances that are isolated from one another in terms of inputs/outputs.
-
-  ```js
-  import { Volume } from 'memfs';
-  // You will need a bundler for memfs in browser...
-  // Or use as a prebundled fork:
-  import memfs from '@bundled-es-modules/memfs';
-  const { Volume } = memfs;
-
-  const vol = new Volume();
-
-  const sd = new StyleDictionary(
-    {
-      tokens: {
-        colors: {
-          red: {
-            value: '#FF0000',
-            type: 'color',
-          },
-        },
-      },
-      platforms: {
-        css: {
-          transformGroup: 'css',
-          files: [
-            {
-              destination: 'variables.css',
-              format: 'css/variables',
-            },
-          ],
-        },
-      },
-    },
-    { volume: vol },
-  );
-
-  await sd.buildAllPlatforms();
-
-  vol.readFileSync('/variables.css');
-  /**
-   * :root {
-   *   --colors-red: #FF0000;
-   * }
-   */
-  ```
-
-  This also works when using extend:
-
-  ```js
-  const extendedSd = await sd.extend(cfg, { volume: vol });
-  ```
-
-## 4.0.0-prerelease.19
-
-### Major Changes
-
-- 79bb201: BREAKING: Logging has been redesigned a fair bit and is more configurable now.
-
-  Before:
-
-  ```json
-  {
-    "log": "error" // 'error' | 'warn'  -> 'warn' is the default value
-  }
-  ```
-
-  After:
-
-  ```json
-  {
-    "log": {
-      "warnings": "error", // 'error' | 'warn'  -> 'warn' is the default value
-      "verbosity": "verbose" // 'default' | 'verbose' | 'silent'  -> 'default' is the default value
-    }
-  }
-  ```
-
-  Log is now and object and the old "log" option is now "warnings".
-
-  This configures whether the following five warnings will be thrown as errors instead of being logged as warnings:
-
-  - Token value collisions (in the source)
-  - Token name collisions (when exporting)
-  - Missing "undo" function for Actions
-  - File not created because no tokens found, or all of them filtered out
-  - Broken references in file when using outputReferences, but referring to a token that's been filtered out
-
-  Verbosity configures whether the following warnings/errors should display in a verbose manner:
-
-  - Token collisions of both types (value & name)
-  - Broken references due to outputReferences & filters
-  - Token reference errors
-
-  And it also configures whether success/neutral logs should be logged at all.
-  Using "silent" (or --silent in the CLI) means no logs are shown apart from fatal errors.
-
-- bcb5ef3: Remove reliance on CTI token structure across transforms, actions and formats.
-
-  Breaking changes:
-
-  - Token type will now be determined by "type" (or "$type") property on the token, rather than by checking its CTI attributes. This change has been reflected in all of the format templates as well as transform "matcher" functions that were previously checking `attributes.category` as the token type indicator.
-  - Types are mostly aligned with [DTCG spec types](https://design-tokens.github.io/community-group/format/#types), although a few additional ones have been added for compatibility reasons:
-    - asset -> string type tokens where the value is a filepath to an asset
-    - icon -> content type string tokens where the content resembles an icon, e.g. for icon fonts like [Microsoft codicons](https://github.com/microsoft/vscode-codicons)
-    - html -> HTML entity strings for unicode characters
-    - content -> regular string content e.g. text content which sometimes needs to be wrapped in quotes
-  - Built-in name transforms are now reliant only on the token path, and are renamed from `name/cti/casing` to just `name/casing`. `name/ti/camel` and `name/ti/constant` have been removed. For example `name/cti/kebab` transform is now `name/kebab`.
-  - Transform `content/icon` has been renamed to `html/icon` since it targets HTML entity strings, not just any icon content.
-  - `font/objC/literal`, `font/swift/literal` and `font/flutter/literal` have been removed in favor of `font/objC/literal`, `font/swift/literal` and `font/flutter/literal`, as they do he exact same transformations.
-  - `typescript/module-declarations` format to be updated with current DesignToken type interface.
-
-  Before:
-
-  ```json
-  {
-    "color": {
-      "red": {
-        "value": "#FF0000"
-      }
-    }
-  }
-  ```
-
-  After:
-
-  ```json
-  {
-    "color": {
-      // <-- this no longer needs to be "color" in order for the tokens inside this group to be considered of type "color"
-      "red": {
-        "value": "#FF0000",
-        "type": "color"
-      }
-    }
-  }
-  ```
-
-### Patch Changes
-
-- 8e297d6: Fix outputReferences for DTCG spec tokens, by using token.original.$value instead of token.original.value.
-
-## 4.0.0-prerelease.18
-
-### Patch Changes
-
-- 738686b: Allow transformGroup to be combined with transforms, where standalone transforms will be added after the group's transforms.
-
-## 4.0.0-prerelease.17
-
-### Patch Changes
-
-- 63681a6: Fix a couple of type imports issues in .d.ts files
-
-## 4.0.0-prerelease.16
-
-### Patch Changes
-
-- 72f020d: Pass outputReferenceFallbacks option to the relevant utilities, so the option actually works.
-- d008c67: Fix a couple of spots where DTCG option wasn't properly taken into account, more tests added.
-
-## 4.0.0-prerelease.15
-
-### Major Changes
-
-- 502dbd1: BREAKING: All of our hooks, parsers, preprocessors, transforms, formats, actions, fileHeaders and filters, support async functions as well now. This means that the formatHelpers -> fileHeader helper method is now asynchronous, to support async fileheader functions.
-
-  ```js
-  import StyleDictionary from 'style-dictionary';
-
-  const { fileHeader } = StyleDictionary.formatHelpers;
-
-  StyleDictionary.registerFormat({
-    name: 'custom/css',
-    // this can be async now, usually it is if you use fileHeader format helper, since that now always returns a Promise
-    formatter: async function ({ dictionary, file, options }) {
-      const { outputReferences } = options;
-      return (
-        // this helper is now async! because the user-passed file.fileHeader might be an async function
-        (await fileHeader({ file })) +
-        ':root {\n' +
-        formattedVariables({ format: 'css', dictionary, outputReferences }) +
-        '\n}\n'
-      );
-    },
-  });
-  ```
-
-## 4.0.0-prerelease.14
-
-### Minor Changes
-
-- 606af51: Rename `typeW3CDelegate` utility function to `typeDtcgDelegate`, as using "W3C" is highly discouraged when the standard isn't a W3C standard yet.
-- 606af51: Support the use of "value"/"type"/"description" as token names or token group names, at the sacrifice of now no longer being able to combine non-DTCG and DTCG syntax within the same token dictionary.
-
-### Patch Changes
-
-- cd9f484: Escape double quotes for ts outputStringLiterals
-
-## 4.0.0-prerelease.13
-
-### Patch Changes
-
-- 24584b4: Conditionally only run dev scripts when CWD is style-dictionary, so our consumers don't run it by accident
-
-## 4.0.0-prerelease.12
-
-### Patch Changes
-
-- c2cbd1b: Publish the postinstall-dev script to NPM.
-
-## 4.0.0-prerelease.11
-
-### Patch Changes
-
-- cd48aac: Only run postinstall scripts when NODE_ENV isn't production (e.g. npm install --production or --omit=dev). To avoid errors running husky/patch-package.
-
-## 4.0.0-prerelease.10
-
-### Patch Changes
-
-- 0c1a36f: Fix small issue in type DTCG delegate utility type tracking.
-- 0c1a36f: Expose `typeDtcgDelegate` utility. Don't take `value` into account anymore to determine that it's a design token, use `$value`.
-
-## 4.0.0-prerelease.9
-
-### Minor Changes
-
-- 294fd0e: Support Design Token Community Group Draft specification for Design Tokens, by adding support for $value, $type and $description properties.
-
-### Patch Changes
-
-- 3138313: Allow transitive transforms to return undefined, by doing this the transformer can mark itself as "deferred" for that specific token. This is useful when references in properties other than "value" need to be resolved first.
-
-## 4.0.0-prerelease.8
-
-### Patch Changes
-
-- 59f3eb0: Expose flattenTokens utility.
-- 39547fb: Fix parsers async support, use resolved filePath instead of raw.
-
-## 4.0.0-prerelease.7
-
-### Minor Changes
-
-- 0410295: Improve and test the error handling of standalone usage of reference utilities.
-
-## 4.0.0-prerelease.6
-
-### Patch Changes
-
-- 1dd828c: Fix issue in browser-bundled glob, bump.
-
-## 4.0.0-prerelease.5
-
-### Major Changes
-
-- 6cc7f31: BREAKING:
-
-  - `usesReference` util function is now `usesReferences` to be consistent plural form like the other reference util functions.
-  - `getReferences` first and second parameters have been swapped to be consistent with `resolveReferences`, so value first, then the full token object (instead of the entire dictionary instance).
-  - `getReferences` accepts a third options parameter which can be used to set reference Regex options as well as an unfilteredTokens object which can be used as a fallback when references are made to tokens that have been filtered out. There will be warnings logged for this.
-  - `format.formatter` removed old function signature of `(dictionary, platform, file)` in favor of `({ dictionary, platform, options, file })`.
-  - Types changes:
-
-    - Style Dictionary is entirely strictly typed now, and there will be `.d.ts` files published next to every file, this means that if you import from one of Style Dictionary's entrypoints, you automatically get the types implicitly with it. This is a big win for people using TypeScript, as the majority of the codebase now has much better types, with much fewer `any`s.
-    - There is no more hand-written Style Dictionary module `index.d.ts` anymore that exposes all type interfaces on itself. This means that you can no longer grab types that aren't members of the Style Dictionary class directly from the default export of the main entrypoint. External types such as `Parser`, `Transform`, `DesignTokens`, etc. can be imported from the newly added types entrypoint:
-
-    ```ts
-    import type { DesignTokens, Transform, Parser } from 'style-dictionary/types';
-    ```
-
-    Please raise an issue if you find anything missing or suddenly broken.
-
-    - `Matcher`, `Transformer`, `Formatter`, etc. are still available, although no longer directly but rather as properties on their parents, so `Filter['matcher']`, `Transform['transformer']`, `Format['formatter']`
-
-### Patch Changes
-
-- e859036: Fix Windows support by using a Linux/Windows + Node/Browser compatible path utility. Upgrade to latest Glob version. Apply posix: true to prevent breaking change glob update.
-
-## 4.0.0-prerelease.4
-
-### Minor Changes
-
-- 122c8f6: Expose a new utility called resolveReferences which takes a value containing references, the dictionary object, and resolves the value's references for you.
-
-  ```js
-  import StyleDictionary from 'style-dictionary';
-  import { resolveReferences } from 'style-dictionary/utils';
-
-  const sd = new StyleDictionary({
-    tokens: {
-      foo: { value: 'foo' },
-      bar: { value: '{foo}' },
-      qux: { value: '{bar}' },
-    },
-  });
-
-  console.log(resolveReferences(sd.tokens.qux.value, sd.tokens)); // 'foo'
-  ```
-
 - 122c8f6: BREAKING: expose getReferences and usesReference utilities as standalone utils rather than requiring them to be bound to dictionary object. This makes it easier to use.
-
-### Patch Changes
-
-- 044123c: Patch StyleDictionary main type file to export default instead of "export =" which does not work in ESM.
-
-## 4.0.0-prerelease.3
-
-### Patch Changes
-
-- 8d2f6d8: Make sure fs-node.js file is published to NPM.
-
-## 4.0.0-prerelease.2
-
-### Major Changes
-
-- a4542f4: BREAKING: StyleDictionaryInstance.properties & .allProperties have been removed. They were deprecated in v3 in favor of .tokens and .allTokens.
+- 0b81a08: BREAKING: no longer wraps tokens of type asset in double quotes. Rather, we added a transform `asset/url` that will wrap such tokens inside `url("")` statements, this transform is applied to transformGroups scss, css and less.
 - a4542f4: BREAKING: StyleDictionary to be initialized with a new API and have async methods. Use:
 
   ```js
@@ -1098,41 +583,147 @@
 
   In a future release, most other methods will be made async or support async as well, such as parsers, transforms, formats etc.
 
+- f2ed88b: BREAKING: Parsers, when registered, are put inside the `hooks.parsers` property now, as opposed to `parsers`.
+  `parsers` property has been repurposed: you will now also need to explicitly apply registered parsers by name in the `parsers` property, they no longer apply by default.
+  When registering a parser, you must also supply a `name` property just like with all other hooks, and the `parse` function has been renamed to `parser` for consistency.
+
+  Before:
+
+  ```js
+  export default {
+    // register it inline or by SD.registerPreprocessor
+    parsers: [
+      {
+        pattern: /\.json5$/,
+        parse: ({ contents, filePath }) => {
+          return JSON5.parse(contents);
+        },
+      },
+    ],
+  };
+  ```
+
+  After:
+
+  ```js
+  export default {
+    hooks: {
+      parsers: {
+        name: 'json5-parser',
+        pattern: /\.json5$/,
+        parser: ({ contents, filePath }) => {
+          return JSON5.parse(contents);
+        },
+      },
+    },
+    // apply it globally by name reference
+    parsers: ['json5-parser'],
+  };
+  ```
+
+- bcb5ef3: Remove reliance on CTI token structure across transforms, actions and formats.
+
+  Breaking changes:
+
+  - Token type will now be determined by "type" (or "$type") property on the token, rather than by checking its CTI attributes. This change has been reflected in all of the format templates as well as transform "matcher" functions that were previously checking `attributes.category` as the token type indicator.
+  - Types are mostly aligned with [DTCG spec types](https://design-tokens.github.io/community-group/format/#types), although a few additional ones have been added for compatibility reasons:
+    - asset -> string type tokens where the value is a filepath to an asset
+    - icon -> content type string tokens where the content resembles an icon, e.g. for icon fonts like [Microsoft codicons](https://github.com/microsoft/vscode-codicons)
+    - html -> HTML entity strings for unicode characters
+    - content -> regular string content e.g. text content which sometimes needs to be wrapped in quotes
+  - Built-in name transforms are now reliant only on the token path, and are renamed from `name/cti/casing` to just `name/casing`. `name/ti/camel` and `name/ti/constant` have been removed. For example `name/cti/kebab` transform is now `name/kebab`.
+  - Transform `content/icon` has been renamed to `html/icon` since it targets HTML entity strings, not just any icon content.
+  - `font/objC/literal`, `font/swift/literal` and `font/flutter/literal` have been removed in favor of `font/objC/literal`, `font/swift/literal` and `font/flutter/literal`, as they do he exact same transformations.
+  - `typescript/module-declarations` format to be updated with current DesignToken type interface.
+
+  Before:
+
+  ```json
+  {
+    "color": {
+      "red": {
+        "value": "#FF0000"
+      }
+    }
+  }
+  ```
+
+  After:
+
+  ```json
+  {
+    "color": {
+      // <-- this no longer needs to be "color" in order for the tokens inside this group to be considered of type "color"
+      "red": {
+        "value": "#FF0000",
+        "type": "color"
+      }
+    }
+  }
+  ```
+
+- 7b82150: BREAKING: For formats using the `fileHeader` `formatHelpers` utility, it will no longer display a timestamp in the fileHeader output by default. This is now an opt-in by setting `file.formatting.fileHeaderTimestamp` to `true`. The reason for making this opt-in now is that using Style Dictionary in the context of a CI (continuous integration) pipeline is a common use-case, and when running on pull request event, output files always show a diff in git due to the timestamp changing, which often just means that the diff is bloated by redundancy.
+
+  New:
+
+  ```json
+  {
+    "platforms": {
+      "css": {
+        "files": [
+          {
+            "destination": "variables.css",
+            "format": "css/variables",
+            "options": {
+              "formatting": {
+                "fileHeaderTimestamp": true
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+  ```
+
+  or:
+
+  ```js
+  import { fileHeader } from 'style-dictionary/utils';
+
+  const headerContent = await fileHeader({ formatting: { fileHeaderTimestamp: true } });
+  ```
+
 ### Minor Changes
 
-- cedf8a0: Preprocessors are a new feature added to style-dictionary, which allows you to do any type of processing of the token dictionary **after** parsing, **before** resolving and transforming.
-  See [preprocessor docs](https://github.com/amzn/style-dictionary/tree/v4/docs/preprocessors.md) for more information.
-- a4542f4: options.log to be respected in all error logging, including platform specific logs.
+- 39f0220: Allow not throwing fatal errors on broken token references/aliases, but `console.error` instead.
 
-## 4.0.0-prerelease.1
+  You can also configure this on global/platform `log` property:
 
-### Patch Changes
+  ```json
+  {
+    "log": {
+      "errors": {
+        "brokenReferences": "console"
+      }
+    }
+  }
+  ```
 
-- c1dd5ec: Allow overriding CSS formatting with commentStyle and commentPosition props.
-  For commentStyle, options are 'short' or 'long'.
-  For commentPosition, options are 'above' or 'inline'.
+  This setting defaults to `"error"` when not configured.
 
-  We also ensure that the right defaults are picked for CSS, SASS/SCSS, Stylus and Less.
+  `resolveReferences` and `getReferences` `warnImmediately` option is set to `true` which causes an error to be thrown/warned immediately by default, which can be configured to `false` if you know those utils are running in the transform/format hooks respectively, where the errors are collected and grouped, then thrown as 1 error/warning instead of multiple.
 
-  This also contains a fix for ensuring that multi-line comments are automatically put "above" rather than "inline".
+  Some minor grammatical improvements to some of the error logs were also done.
 
-- 6fb81ad: Allow falsy token values for outputReferences, e.g. `0`.
-- 24d41c3: Allow outputReferences to work on non-string values.
+- 8450a45: Some fixes for Expand utility:
 
-## 4.0.0-prerelease.0
+  - Array values such as `dashArray` property of `strokeStyle` tokens no longer get expanded unintentionally, `typeof 'object'` check changed to `isPlainObject` check.
+  - Nested object-value tokens (such as `style` property inside `border` tokens) will now also be expanded.
+  - When references are involved during expansion, the resolved value is used when the property is an object, if not, then we keep the reference as is.
+    This is because if the reference is to an object value, the expansion might break the reference.
 
-### Major Changes
-
-- dcbe2fb:
-  - The project has been fully converted to [ESM format](https://nodejs.org/api/esm.html), which is also the format that the browser uses.
-    For users, this means you'll have to either use Style Dictionary in ESM JavaScript code, or dynamically import it into your CommonJS code.
-  - `StyleDictionary.extend()` method is now asynchronous, which means it returns `Promise<StyleDictionary.Core>` instead of `StyleDictionary.Core`.
-  - `allProperties` / `properties` was deprecated in v3, and is now removed from `StyleDictionary.Core`, use `allTokens` and `tokens` instead.
-  - Templates and the method `registerTemplate` were deprecated in v3, now removed. Use Formats instead.
-  - The package now uses [package entrypoints](https://nodejs.org/api/packages.html), which means that what is importable from the package is locked down to just the specified entrypoints: `style-dictionary` & `style-dictionary/fs`. If more is needed, please raise an issue explaining which file you were importing and why you need it to be public API.
-
-### Minor Changes
-
+- c06661d: Re-add and update example basic, fix copySync command in CLI, fix android templates to use $type for DTCG tokens.
 - dcbe2fb: FileSystem that is used by Style Dictionary can now be customized:
 
   ```js
@@ -1141,6 +732,195 @@
   ```
 
   By default, it uses an in-memory filesystem shim `@bundled-es-modules/memfs` in browser context, `node:fs` built-in module in Node context.
+
+- 3485467: Fix some inconsistencies in some of the templates, usually with regards to spaces/newlines
+- 606af51: Rename `typeW3CDelegate` utility function to `typeDtcgDelegate`, as using "W3C" is highly discouraged when the standard isn't a W3C standard yet.
+- 4225d78: Added the following transforms for CSS, and added them to the `scss`, `css` and `less` transformGroups:
+
+  - `fontFamily/css` -> wraps font names with spaces in `'` quotes
+  - `cubicBezier/css` -> array value, put inside `cubic-bezier()` CSS function
+  - `strokeStyle/css/shorthand` -> object value, transform to CSS shorthand
+  - `border/css/shorthand` -> object value, transform to CSS shorthand
+  - `typography/css/shorthand` -> object value, transform to CSS shorthand
+  - `transition/css/shorthand` -> object value, transform to CSS shorthand
+  - `shadow/css/shorthand` -> object value (or array of objects), transform to CSS shorthand
+
+  The main intention here is to ensure that Style Dictionary is compliant with [DTCG draft specification](https://design-tokens.github.io/community-group/format/) out of the box with regards to exporting to CSS, where object-value tokens are not supported without transforming them to shorthands (or expanding them, which is a different feature that was added in `4.0.0-prerelease.27`).
+
+- cedf8a0: Preprocessors are a new feature added to style-dictionary, which allows you to do any type of processing of the token dictionary **after** parsing, **before** resolving and transforming.
+  See [preprocessor docs](https://github.com/amzn/style-dictionary/tree/v4/docs/preprocessors.md) for more information.
+- cb94554: 'size/rem' transform to not transform tokens that already have a unit, such as `"4px"`, this should not be transformed to `"4rem"`.
+- a4542f4: options.log to be respected in all error logging, including platform specific logs.
+- 122c8f6: Expose a new utility called resolveReferences which takes a value containing references, the dictionary object, and resolves the value's references for you.
+
+  ```js
+  import StyleDictionary from 'style-dictionary';
+  import { resolveReferences } from 'style-dictionary/utils';
+
+  const sd = new StyleDictionary({
+    tokens: {
+      foo: { value: 'foo' },
+      bar: { value: '{foo}' },
+      qux: { value: '{bar}' },
+    },
+  });
+
+  console.log(resolveReferences(sd.tokens.qux.value, sd.tokens)); // 'foo'
+  ```
+
+- 0410295: Improve and test the error handling of standalone usage of reference utilities.
+- 8b6fff3: Fixes some noisy warnings still being outputted even when verbosity is set to default.
+
+  We also added log.warning "disabled" option for turning off warnings altogether, meaning you only get success logs and fatal errors.
+  This option can be used from the CLI as well using the `--no-warn` flag.
+
+- 2da5130: Added `outputReferencesTransformed` utility function to pass into outputReferences option, which will not output references for values that have been transitively transformed.
+- 606af51: Support the use of "value"/"type"/"description" as token names or token group names, at the sacrifice of now no longer being able to combine non-DTCG and DTCG syntax within the same token dictionary.
+- 7418c97: Add a couple of utilities for converting a regular Style Dictionary tokens object/file(s) to DTCG formatted tokens:
+
+  - `convertToDTCG`
+  - `convertJSONToDTCG`
+  - `convertZIPToDTCG`
+
+  [Documentation of these utilities](https://v4.styledictionary.com/reference/utils/dtcg/)
+
+- 294fd0e: Support Design Token Community Group Draft specification for Design Tokens, by adding support for $value, $type and $description properties.
+- aff6646: Allow passing a custom FileSystem Volume to your Style Dictionary instances, to ensure input/output files are read/written from/to that specific volume.
+  Useful in case you want multiple Style Dictionary instances that are isolated from one another in terms of inputs/outputs.
+
+  ```js
+  import { Volume } from 'memfs';
+  // You will need a bundler for memfs in browser...
+  // Or use as a prebundled fork:
+  import memfs from '@bundled-es-modules/memfs';
+  const { Volume } = memfs;
+
+  const vol = new Volume();
+
+  const sd = new StyleDictionary(
+    {
+      tokens: {
+        colors: {
+          red: {
+            value: '#FF0000',
+            type: 'color',
+          },
+        },
+      },
+      platforms: {
+        css: {
+          transformGroup: 'css',
+          files: [
+            {
+              destination: 'variables.css',
+              format: 'css/variables',
+            },
+          ],
+        },
+      },
+    },
+    { volume: vol },
+  );
+
+  await sd.buildAllPlatforms();
+
+  vol.readFileSync('/variables.css');
+  /**
+   * :root {
+   *   --colors-red: #FF0000;
+   * }
+   */
+  ```
+
+  This also works when using extend:
+
+  ```js
+  const extendedSd = await sd.extend(cfg, { volume: vol });
+  ```
+
+- 261a2cb: Handle transition timingFunction prop in cubicBezier/css transform. Handle typography fontFamily prop in fontFamily/css transform.
+- e83886c: Allow expanding tokens on a global or platform-specific level. Supports conditionally expanding per token type, or using a function to determine this per individual token.
+- af5cc94: Create `formatPlatform` and `formatAllPlatforms` methods.
+  This will return the outputs and destinations from the format hook for your dictionary, without building these outputs and persisting them to the filesystem.
+  Additionally, formats can now return any data type instead of requiring it to be a `string` and `destination` property in `files` is now optional.
+  This allows users to create formats intended for only formatting tokens and letting users do stuff with it during runtime rather than writing to files.
+- c06661d: Re-add and update example basic, fix copySync command in CLI, fix android templates to use $type for DTCG tokens.
+- 4556712: Make css transforms for strokeStyle, cubicBezier and fontFamily transitive, to deal with the use case where they are used within border, transition and typography tokens and those tokens have **other** properties that contain references.
+
+### Patch Changes
+
+- 894f37c: Update glob esm browser fork to latest, resolve unclear licensing issue.
+- cb78c3d: Update `typeDtcgDelegate` utility to remove the $type on token group level between parsing/preprocessing step.
+- 5079154: Fix deepExtend util bug with overriding behavior for tokens.
+- c1dd5ec: Allow overriding CSS formatting with commentStyle and commentPosition props.
+  For commentStyle, options are 'short' or 'long'.
+  For commentPosition, options are 'above' or 'inline'.
+
+  We also ensure that the right defaults are picked for CSS, SASS/SCSS, Stylus and Less.
+
+  This also contains a fix for ensuring that multi-line comments are automatically put "above" rather than "inline".
+
+- 2f80da2: All formats using `createPropertyFormatter` or `formattedVariables` helpers now respect the `file.options.formatting` option passed by users to customize formatting.
+
+  Example:
+
+  ```js
+  {
+    platforms: {
+      css: {
+        transformGroup: 'css',
+        buildPath,
+        files: [
+          {
+            destination: 'variables.css',
+            format: 'css/variables',
+            options: {
+              formatting: { indentation: '    ' },
+            },
+          },
+        ]
+      }
+    }
+  }
+  ```
+
+- 24584b4: Conditionally only run dev scripts when CWD is style-dictionary, so our consumers don't run it by accident
+- 044123c: Patch StyleDictionary main type file to export default instead of "export =" which does not work in ESM.
+- cb94554: Fix typeDtcgDelegate util $type property position to be allowed anywhere in the object, not just at the top.
+- 8e297d6: Fix outputReferences for DTCG spec tokens, by using token.original.$value instead of token.original.value.
+- 59f3eb0: Expose flattenTokens utility.
+- 72f020d: Pass outputReferenceFallbacks option to the relevant utilities, so the option actually works.
+- 39547fb: Fix parsers async support, use resolved filePath instead of raw.
+- 3138313: Allow transitive transforms to return undefined, by doing this the transformer can mark itself as "deferred" for that specific token. This is useful when references in properties other than "value" need to be resolved first.
+- cd9f484: Escape double quotes for ts outputStringLiterals
+- 0c1a36f: Fix small issue in type DTCG delegate utility type tracking.
+- d008c67: Fix a couple of spots where DTCG option wasn't properly taken into account, more tests added.
+- 6cfce97: Fix logging to be ordered by platform when building or cleaning platforms. This now happens in parallel, resulting in the logs being ordered randomly which was a small regression to the logging experience.
+- 6fb81ad: Allow falsy token values for outputReferences, e.g. `0`.
+- 0972b26: Pass SD options to fileheaders and filters, to make it easier to use and adjust according to config or options like usesDTCG.
+- 2335f13: Allow using registerHook methods to override hooks that are already registered with the same name.
+- 24d41c3: Allow outputReferences to work on non-string values.
+- 0c1a36f: Expose `typeDtcgDelegate` utility. Don't take `value` into account anymore to determine that it's a design token, use `$value`.
+- 061c67e: Hotfix to address outputReferencesTransformed util not handling object-value tokens properly.
+- 8d2f6d8: Make sure fs-node.js file is published to NPM.
+- 738686b: Allow transformGroup to be combined with transforms, where standalone transforms will be added after the group's transforms.
+- c708325: Moving the @zip.js/zip.js dependency from a devDependency to a normal dependency.
+- cd48aac: Only run postinstall scripts when NODE_ENV isn't production (e.g. npm install --production or --omit=dev). To avoid errors running husky/patch-package.
+- a5bafac: Colors that are not recognized by tinycolor2 as valid color formats (e.g. `linear-gradient(...)`) are now ignored by the builtin color transforms filter functions.
+- 4ec34fd: Pass options to all of the filter functions in our built-in transforms, to check for `usesDTCG` and `$type` property.
+- daa78e1: fix(types): Added missing type exports
+- e859036: Fix Windows support by using a Linux/Windows + Node/Browser compatible path utility. Upgrade to latest Glob version. Apply posix: true to prevent breaking change glob update.
+- 6e226aa: Pass the original ref path to the `getReferences` util result tokens.
+- 1dd828c: Fix issue in browser-bundled glob, bump.
+- 3f09277: Pass dictionary options to preprocessor functions.
+- c2cbd1b: Publish the postinstall-dev script to NPM.
+- 0972b26: Add unfilteredAllTokens property in dictionary object for formats, which is an unfiltered version of allTokens property, or a flattened version of the unfilteredTokens property.
+- 47face0: Token merging behavior changed so that upon token collisions, metadata props aren't accidentally merged together.
+- f8c40f7: fix(types): add missing type keyword for type export from index.d.ts
+- 77ae35f: Fix scenario of passing absolute paths in Node env, do not remove leading slash in absolute paths.
+- 63681a6: Fix a couple of type imports issues in .d.ts files
+- 261a2cb: Allow border type tokens to be empty, every property is optional.
+- ba03ee9: Fix for expand utility on platform level to adjust the token's path property.
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
