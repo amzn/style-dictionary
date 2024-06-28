@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.0.0-prerelease.39
+
+### Patch Changes
+
+- 894f37c: Update glob esm browser fork to latest, resolve unclear licensing issue.
+- cb78c3d: Update `typeDtcgDelegate` utility to remove the $type on token group level between parsing/preprocessing step.
+
 ## 4.0.0-prerelease.38
 
 ### Patch Changes
