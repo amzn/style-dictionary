@@ -1,7 +1,7 @@
 /**
- * @typedef {import('../../../../types/DesignToken.d.ts').TransformedToken} TransformedToken
- * @typedef {import('../../../../types/Config.d.ts').Config} Config
- * @typedef {import('../../../../types/Config.d.ts').LocalOptions} LocalOptions
+ * @typedef {import('style-dictionary/types').TransformedToken} TransformedToken
+ * @typedef {import('style-dictionary/types').Config} Config
+ * @typedef {import('style-dictionary/types').LocalOptions} LocalOptions
  */
 
 /**

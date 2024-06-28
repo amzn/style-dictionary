@@ -1,5 +1,4 @@
 import StyleDictionary from 'style-dictionary';
-import type { Config } from 'style-dictionary/types';
 import memfs from '@bundled-es-modules/memfs';
 import type { fs as VolumeType } from 'memfs';
 import { LitElement, html, css } from 'lit';
@@ -13,6 +12,7 @@ import { changeLang, init, monaco } from '../monaco/monaco.ts';
 import { analyzeDependencies } from '../utils/analyzeDependencies.ts';
 import { downloadZIP } from '../../../lib/utils/downloadFile.js';
 import type SlRadioGroup from '@shoelace-style/shoelace/dist/components/radio-group/radio-group.js';
+import type { Config } from '../../../types/Config.ts';
 
 const { Volume } = memfs;
 

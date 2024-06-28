@@ -11,10 +11,10 @@
  * and limitations under the License.
  */
 
-import type { Filter } from './Filter.d.ts';
-import type { TransformedToken } from './DesignToken.d.ts';
-import type { PlatformConfig, Config } from './Config.d.ts';
-import type { Volume } from './Volume.d.ts';
+import type { Filter } from './Filter.ts';
+import type { TransformedToken } from './DesignToken.ts';
+import type { PlatformConfig, Config } from './Config.ts';
+import type { Volume } from './Volume.ts';
 
 interface BaseTransform<Type, Value> {
   name: string;

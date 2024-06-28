@@ -11,10 +11,13 @@
  * and limitations under the License.
  */
 
-import type { DesignTokens } from './DesignToken.d.ts';
-import type { Config } from './Config.d.ts';
+import type { PreprocessedTokens } from './DesignToken.ts';
+import type { Config } from './Config.ts';
 
 export type Preprocessor = {
   name: string;
-  preprocessor: (dictionary: DesignTokens, options: Config) => DesignTokens | Promise<DesignTokens>;
+  preprocessor: (
+    dictionary: PreprocessedTokens,
+    options: Config,
+  ) => PreprocessedTokens | Promise<PreprocessedTokens>;
 };

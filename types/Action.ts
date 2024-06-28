@@ -11,9 +11,9 @@
  * and limitations under the License.
  */
 
-import type { Dictionary } from './DesignToken.d.ts';
-import type { PlatformConfig, Config } from './Config.d.ts';
-import type { Volume } from './Volume.d.ts';
+import type { Dictionary } from './DesignToken.ts';
+import type { PlatformConfig, Config } from './Config.ts';
+import type { Volume } from './Volume.ts';
 
 export interface Action {
   name: string;

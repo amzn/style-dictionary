@@ -67,6 +67,11 @@ We built this utility because it's cheaper to apply the inheritance once, rather
 
 This utility runs by default in Style-Dictionary after the parser hook and before the preprocessor hook.
 
+:::caution
+Important to note is that the `$type` prop on the group level will be removed during this step, and will only exist on the token level.
+If you want the `$type` to go back to the group level (highest possible common ancestor), then please use [`convertToDTCG`](#converttodtcg) for this.
+:::
+
 ```js
 import { typeDtcgDelegate } from 'style-dictionary/utils';
 
@@ -105,7 +110,6 @@ Output:
 ```js
 {
   dimensions: {
-    $type: 'dimension',
     sm: {
       $value: '5',
       $type: 'dimension',
