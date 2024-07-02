@@ -1,6 +1,5 @@
 import StyleDictionary from 'style-dictionary';
-import memfs from '@bundled-es-modules/memfs';
-import type { fs as VolumeType } from 'memfs';
+import { Volume } from '@bundled-es-modules/memfs';
 import { LitElement, html, css } from 'lit';
 import { posix as path } from 'path-unified';
 import '@shoelace-style/shoelace/dist/components/radio-button/radio-button.js';
@@ -13,8 +12,6 @@ import { analyzeDependencies } from '../utils/analyzeDependencies.ts';
 import { downloadZIP } from '../../../lib/utils/downloadFile.js';
 import type SlRadioGroup from '@shoelace-style/shoelace/dist/components/radio-group/radio-group.js';
 import type { Config } from '../../../types/Config.ts';
-
-const { Volume } = memfs;
 
 const defaults = {
   tokens: {
@@ -175,7 +172,7 @@ class SdPlayground extends LitElement {
   declare outputFiles: string[];
   declare _currentFile: Files;
   declare editor: any;
-  declare volume: typeof VolumeType;
+  declare volume: InstanceType<typeof Volume>;
   declare hasInitialized: Promise<void>;
   declare hasInitializedResolve: (value: void) => void;
 
