@@ -2,10 +2,10 @@
   color: {
     overlay: {
       primary: {
-        value: '{color.core.white.value}',
+        value: '{color.core.white}',
         modify: [
           {
-            type: 'alpha',
+            type: 'transparentize',
             // You can access other parts of your style dictionary in here too:
             amount: '{alpha.1}',
           },
@@ -14,10 +14,10 @@
       },
 
       secondary: {
-        value: '{color.core.white.value}',
+        value: '{color.core.white}',
         modify: [
           {
-            type: 'alpha',
+            type: 'transparentize',
             // You can access other parts of your style dictionary in here too:
             amount: '{alpha.2}',
           },

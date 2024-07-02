@@ -1,15 +1,13 @@
 {
   color: {
     font: {
-      primary: { value: '{color.core.black.value}', type: 'color' },
+      primary: { value: '{color.core.black}', type: 'color' },
       secondary: {
-        value: '{color.font.primary.value}',
+        value: '{color.font.primary}',
         modify: [
           {
-            type: 'brighten',
-            // See https://gka.github.io/chroma.js/#color-brighten
-            // for definition of brighten
-            amount: 1,
+            type: 'lighten',
+            amount: 0.2,
           },
         ],
         type: 'color',
@@ -20,10 +18,10 @@
         value: '{color.font.secondary}',
         modify: [
           {
-            // this will brighten the secondary value, which is a brightened version
+            // this will lighten the secondary value, which is a lightened version
             // of primary
-            type: 'brighten',
-            amount: 1,
+            type: 'lighten',
+            amount: 0.2,
           },
         ],
         type: 'color',
