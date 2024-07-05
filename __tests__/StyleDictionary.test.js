@@ -347,6 +347,32 @@ describe('StyleDictionary class', () => {
   });
 
   describe('reference errors', () => {
+    // This is because some of those broken refs might get fixed in the preprocessor lifecycle hook by the user
+    // or by the built-in object-value token expand preprocessor
+    it('should tolerate broken references in the initialization phase', async () => {
+      let err;
+      let sd;
+      try {
+        sd = new StyleDictionary(
+          {
+            tokens: {
+              foo: {
+                value: '{bar}',
+                type: 'typography',
+              },
+            },
+            expand: true,
+          },
+          { init: false },
+        );
+
+        await sd.init();
+      } catch (e) {
+        err = e;
+      }
+      expect(err).to.be.undefined;
+    });
+
     it('should throw an error by default if broken references are encountered', async () => {
       const sd = new StyleDictionary({
         tokens: {
@@ -700,6 +726,56 @@ Use log.verbosity "verbose" or use CLI option --verbose for more details.
       });
       await sd.hasInitialized;
       expect(sd.usesDtcg).to.be.true;
+    });
+
+    it('should expand references when using DTCG format', async () => {
+      const sd = new StyleDictionary({
+        tokens: {
+          $type: 'typography',
+          typo: {
+            $value: {
+              fontSize: '16px',
+              fontWeight: 700,
+              fontFamily: 'Arial Black, sans-serif',
+            },
+          },
+          ref: {
+            $value: '{typo}',
+          },
+        },
+        expand: true,
+      });
+      await sd.hasInitialized;
+      expect(sd.tokens).to.eql({
+        typo: {
+          fontFamily: {
+            $type: 'fontFamily',
+            $value: 'Arial Black, sans-serif',
+          },
+          fontSize: {
+            $type: 'dimension',
+            $value: '16px',
+          },
+          fontWeight: {
+            $type: 'fontWeight',
+            $value: 700,
+          },
+        },
+        ref: {
+          fontFamily: {
+            $type: 'fontFamily',
+            $value: 'Arial Black, sans-serif',
+          },
+          fontSize: {
+            $type: 'dimension',
+            $value: '16px',
+          },
+          fontWeight: {
+            $type: 'fontWeight',
+            $value: 700,
+          },
+        },
+      });
     });
   });
 
