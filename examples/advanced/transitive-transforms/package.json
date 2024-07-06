@@ -11,7 +11,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "chroma-js": "^2.1.0",
-    "style-dictionary": "4.0.0-prerelease.30"
+    "colorjs.io": "^0.5.2",
+    "style-dictionary": "^4.0.0"
   }
 }
