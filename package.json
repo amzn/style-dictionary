@@ -44,6 +44,7 @@
   ],
   "scripts": {
     "build": "node scripts/inject-version.js && tsc --emitDeclarationOnly",
+    "docs:token-build": "node ./docs/theme/build.js",
     "docs:start": "astro dev --root ./docs",
     "docs:build": "astro check  --root ./docs && astro build --root ./docs",
     "docs:preview": "astro preview --root ./docs",

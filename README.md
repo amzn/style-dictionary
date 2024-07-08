@@ -1,9 +1,5 @@
 <pre>
-<a href="https://amzn.github.io/style-dictionary/#/version_3">What's new in Style Dictionary 3.0!</a>
-</pre>
-
-<pre>
-<a href="https://github.com/amzn/style-dictionary#version-4">What's coming in Style Dictionary 4.0?</a>
+<a href="https://github.com/amzn/style-dictionary#version-4">What's new in Style Dictionary 4.0?</a>
 </pre>
 
 <img src="docs/assets/logo.png" alt="Style Dictionary logo and mascot" title="&quot;Pascal&quot;" width="100" align="right" />

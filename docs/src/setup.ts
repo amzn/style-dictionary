@@ -1,23 +1,12 @@
-import dark from '@shoelace-style/shoelace/dist/themes/dark.css?raw' assert { type: 'css' };
-import light from '@shoelace-style/shoelace/dist/themes/light.css?raw' assert { type: 'css' };
 import mermaid from 'mermaid';
 import { registeredComponents } from './components/sd-playground.ts';
+import { SdColors } from './components/colors.ts';
 
 type Theme = 'dark' | 'light';
-type EnhancedCSSSheet = CSSStyleSheet & { theme?: boolean };
 
 // Load the theme css as strings and create adopted stylesheets
 const themeAttr = 'data-theme'; // starlight theme attribute
 let currTheme: Theme;
-const sheets = {
-  dark: new CSSStyleSheet() as EnhancedCSSSheet,
-  light: new CSSStyleSheet() as EnhancedCSSSheet,
-};
-sheets.dark.replaceSync(dark);
-sheets.light.replaceSync(light);
-// mark the stylesheets so it's easier to remove them later
-sheets.dark.theme = true;
-sheets.light.theme = true;
 
 // 77rem
 const VP_THRESHOLD = 1231;
@@ -56,14 +45,9 @@ function getSelectedTheme() {
 }
 
 async function swapTheme(theme: Theme) {
-  currTheme = theme;
   // shoelace theme class
   document.documentElement.classList.add(`sl-theme-${theme}`);
-  // swap out the shoelace adopted stylesheets
-  document.adoptedStyleSheets = [
-    ...(document.adoptedStyleSheets as EnhancedCSSSheet[]).filter((sheet) => !sheet.theme),
-    sheets[theme],
-  ];
+  document.documentElement.classList.remove(`sl-theme-${theme === 'dark' ? 'light' : 'dark'}`);
 
   // change monaco theme for all sd playground instances
   registeredComponents.forEach((comp) => {
@@ -121,7 +105,7 @@ function handleResize() {
 
 async function setup() {
   handleThemeChange();
-  lazilyLoadCEs(['sd-playground', 'sd-dtcg-convert']);
+  lazilyLoadCEs(['sd-playground', 'sd-dtcg-convert', 'sd-colors', 'sd-install']);
   handleResize();
   // initial
   await swapTheme(getSelectedTheme());

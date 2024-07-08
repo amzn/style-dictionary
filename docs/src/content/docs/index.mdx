@@ -1,6 +1,10 @@
 ---
 title: Style Dictionary
 template: splash
+banner:
+  content: |
+    Version 4 is here!
+    <a href="/version-4/migration">Check it out</a>
 hero:
   tagline:
     Export your Design Tokens to any platform - iOS, Android, CSS, JS, HTML, sketch files, style documentation, or anything you can think of.
@@ -8,13 +12,11 @@ hero:
   image:
     file: ../../assets/logo.png
   actions:
-    - text: Documentation
+    - text: Get started
       link: /getting-started/installation
-      icon: right-arrow
       variant: primary
     - text: Migration to Version 4
       link: /version-4/migration/
-      icon: up-caret
       variant: secondary
     - text: GitHub
       link: https://github.com/amzn/style-dictionary
@@ -22,6 +24,10 @@ hero:
 ---
 
 import tokens from '/public/demo-tokens.json';
+import HomeBanner from '../../components/HomeBanner.astro';
+
+<HomeBanner />
+
 
 ## Live Demo
 

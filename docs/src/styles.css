@@ -1,18 +1,49 @@
-/* Dark mode colors. */
-:root {
-  --sl-color-accent-low: #074947;
-  --sl-color-accent: #3fc6bf;
-  --sl-color-accent-high: #80d9d6;
-}
-
-/* Light mode colors. */
-:root[data-theme='light'] {
-  --sl-color-accent-low: #55b3af;
-  --sl-color-accent: #047771;
-  --sl-color-accent-high: #07524f;
+@property --offset {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0;
 }
 
 :root {
+  --sl-font: 'Inter Variable', sans-serif;
+  font-feature-settings: 'ss01', 'ss02', 'case', 'salt';
+}
+
+html {
+  font-feature-settings: 'ss01', 'ss02', 'case', 'salt';
+}
+
+* {
+  outline-color: var(--sl-color-accent);
+}
+
+*:focus-visible,
+.expressive-code .copy button:hover,
+.expressive-code .copy button:focus:focus-visible {
+  outline-color: var(--sl-color-accent);
+  outline-style: solid;
+  outline-offset: 5px;
+  border-radius: 0.25rem;
+  outline-width: 2px;
+}
+
+::selection {
+  background-color: color-mix(in oklch, var(--sl-color-accent-high), transparent 90%);
+}
+
+:root {
+  --link-color: var(--sl-color-text-accent);
+  --link-color-hover: var(--sl-color-accent-high);
+
+  --sl-shadow-sm: 0 2px 0.25rem var(--sl-color-border-secondary);
+
+  --sl-badge-default-text: var(--sl-color-accent-high);
+  --sl-badge-danger-text: var(--sl-color-red-high);
+  --sl-badge-success-text: var(--sl-color-green-high);
+  --sl-badge-note-text: var(--sl-color-blue-high);
+  --sl-badge-caution-text: var(--sl-color-orange-high);
+  --sl-badge-tip-text: var(--sl-color-purple-high);
+
   /* Changes the primary theme color to purple using primitives */
   --sl-color-primary-50: var(--sl-color-teal-50) !important;
   --sl-color-primary-100: var(--sl-color-teal-100) !important;
@@ -25,6 +56,20 @@
   --sl-color-primary-800: var(--sl-color-teal-800) !important;
   --sl-color-primary-900: var(--sl-color-teal-900) !important;
   --sl-color-primary-950: var(--sl-color-teal-950) !important;
+}
+
+[data-theme='light']:root {
+  --sl-shadow-sm: 0 2px 0.25rem var(--sl-color-border-secondary);
+  --sl-badge-default-bg: var(--sl-color-accent-low);
+  --sl-badge-danger-bg: var(--sl-color-red-low);
+  --sl-badge-success-bg: var(--sl-color-green-low);
+  --sl-badge-note-bg: var(--sl-color-blue-low);
+  --sl-badge-caution-bg: var(--sl-color-orange-low);
+  --sl-badge-tip-bg: var(--sl-color-purple-low);
+
+  ::selection {
+    background-color: color-mix(in oklch, var(--sl-color-accent-low), transparent 90%);
+  }
 }
 
 table code {
@@ -41,6 +86,46 @@ table code {
 
 a {
   display: inline-block;
+  color: var(--link-color);
+  --offset: 0.25em;
+  text-underline-offset: var(--offset);
+  text-decoration: underline 2px;
+  transition:
+    --offset 200ms,
+    text-decoration-color 200ms,
+    color 200ms;
+}
+
+a[role='tab']:hover {
+  color: var(--link-color);
+}
+
+a:hover,
+a:focus {
+  --offset: 0.4em;
+  text-decoration-color: var(--link-color-hover);
+  color: var(--link-color-hover);
+}
+
+.sl-markdown-content a:not(:where(.not-content *)) {
+  color: var(--link-color);
+}
+
+.sl-markdown-content a:hover:not(:where(.not-content *)) {
+  color: var(--link-color-hover);
+}
+
+@supports not (background: paint(something)) {
+  a {
+    transition:
+      text-underline-offset 400ms,
+      text-decoration-color 400ms;
+  }
+
+  a:hover,
+  a:focus {
+    text-underline-offset: 0.4em;
+  }
 }
 
 @media (min-width: 77rem) {
@@ -90,4 +175,183 @@ a {
 
 .hidden {
   display: none !important;
+}
+
+[aria-current='page'],
+[aria-current='page']:hover,
+[aria-current='page']:focus,
+[aria-current='page']:active {
+  background-color: var(--sl-color-accent-low);
+  color: var(--sl-color-accent-high);
+  border-radius: 0 0.25rem 0.25rem 0;
+}
+
+.sidebar-pane ul ul li {
+  padding-inline-start: 0;
+}
+
+.sidebar-pane ul ul li a {
+  padding-inline: 1rem;
+  padding-block: 0.5rem;
+  display: block;
+  text-decoration: none;
+  color: var(--sl-color-font-tertiary);
+}
+
+.sidebar-pane ul ul li a:hover {
+  color: var(--sl-color-font-primary);
+}
+
+.sidebar-pane ul ul li:has([aria-current='page']) {
+  border-color: var(--sl-color-accent);
+}
+
+.sidebar-pane ul ul li a[aria-current='page'] {
+  color: var(--sl-color-accent-high);
+}
+
+.content-panel + .content-panel {
+  border: none;
+}
+
+header.header {
+  backdrop-filter: blur(2px);
+  background-color: transparent;
+  border: none;
+}
+
+.social-icons::after {
+  border: none;
+}
+
+.social-icons > a {
+  margin: 0;
+}
+
+site-search button[data-open-modal] {
+  border: none;
+  color: var(--sl-color-font-tertiary);
+}
+
+.expressive-code .frame.is-terminal .header {
+  background: var(--sl-color-bg);
+}
+
+div.monaco-editor {
+  background-color: var(--sl-color-bg-nav);
+  border-radius: 0.25rem;
+  overflow: hidden;
+}
+
+starlight-file-tree {
+  border-width: 0 !important;
+  border-radius: 1rem;
+  background-color: var(--sl-color-black) !important;
+}
+
+.sl-markdown-content code {
+  border-radius: 0.25rem;
+}
+
+.right-sidebar {
+  border: none;
+}
+
+.right-sidebar-panel a {
+  color: var(--sl-color-font-tertiary);
+  font-size: var(--sl-text-sm);
+}
+
+.right-sidebar-panel [aria-current='true'],
+.right-sidebar-panel a:hover {
+  color: var(--sl-color-accent-high);
+}
+
+.sidebar-pane {
+  border: none;
+}
+
+sd-playground::part(monaco-editor) {
+  border: 1px solid var(--sl-color-border-tertiary);
+  box-shadow: 0 0.125rem 1rem var(--sl-color-background-tertiary);
+  border-radius: 4rem;
+}
+
+.sl-link-card {
+  border-color: var(--sl-color-border-secondary);
+}
+
+.sl-link-card:hover {
+  border-color: var(--sl-color-accent);
+  background-color: var(--sl-color-accent-low);
+  box-shadow: 0 0 1rem var(--sl-color-accent-low);
+}
+
+starlight-file-tree .highlight {
+  color: var(--sl-color-accent-high);
+  background-color: var(--sl-color-accent-low);
+}
+
+starlight-file-tree .highlight svg.tree-icon {
+  fill: var(--sl-color-accent);
+}
+
+starlight-toc li {
+  /* This is to get the first level aligned with the header */
+  margin-inline-start: -0.5rem;
+}
+
+.action.primary {
+  background: linear-gradient(var(--sl-color-teal-800), var(--sl-color-teal-500));
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  border-color: var(--sl-color-border-secondary);
+  border-radius: 0.25rem;
+}
+
+.description {
+  color: var(--sl-color-font-tertiary);
+}
+
+.card:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  inset-inline-end: 0;
+  width: 6.25rem;
+  height: 6.25rem;
+  background: var(--landing-card-accent, var(--sl-color-accent));
+  border-radius: 100%;
+  filter: blur(3.25rem);
+  opacity: 0.33;
+}
+
+.starlight-aside {
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 0.5rem;
+  border-color: var(--sl-color-asides-border);
+}
+
+.starlight-aside--note {
+  --link-color: var(--sl-color-blue-high);
+  --link-color-hover: var(--sl-color-blue);
+}
+
+.starlight-aside--caution {
+  --link-color: var(--sl-color-orange-high);
+  --link-color-hover: var(--sl-color-orange);
+}
+
+.starlight-aside--danger {
+  --link-color: var(--sl-color-red-high);
+  --link-color-hover: var(--sl-color-red);
+}
+
+.starlight-aside--tip {
+  --link-color: var(--sl-color-purple-high);
+  --link-color-hover: var(--sl-color-purple);
 }
