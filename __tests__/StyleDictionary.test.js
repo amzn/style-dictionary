@@ -532,14 +532,38 @@ Use log.verbosity "verbose" or use CLI option --verbose for more details.
           color: {
             type: 'color',
             value: '#000',
+            $extensions: {
+              'com.styledictionary': {
+                preExpand: {
+                  prop: 'color',
+                  type: 'border',
+                },
+              },
+            },
           },
           style: {
             type: 'strokeStyle',
             value: 'solid',
+            $extensions: {
+              'com.styledictionary': {
+                preExpand: {
+                  prop: 'style',
+                  type: 'border',
+                },
+              },
+            },
           },
           width: {
             type: 'dimension',
             value: '2px',
+            $extensions: {
+              'com.styledictionary': {
+                preExpand: {
+                  prop: 'width',
+                  type: 'border',
+                },
+              },
+            },
           },
         },
       });
@@ -573,14 +597,38 @@ Use log.verbosity "verbose" or use CLI option --verbose for more details.
           color: {
             type: 'color',
             value: '#000',
+            $extensions: {
+              'com.styledictionary': {
+                preExpand: {
+                  prop: 'color',
+                  type: 'border',
+                },
+              },
+            },
           },
           style: {
             type: 'strokeStyle',
             value: 'solid',
+            $extensions: {
+              'com.styledictionary': {
+                preExpand: {
+                  prop: 'style',
+                  type: 'border',
+                },
+              },
+            },
           },
           width: {
             type: 'dimension',
             value: '2px',
+            $extensions: {
+              'com.styledictionary': {
+                preExpand: {
+                  prop: 'width',
+                  type: 'border',
+                },
+              },
+            },
           },
         },
       });
@@ -631,14 +679,38 @@ Use log.verbosity "verbose" or use CLI option --verbose for more details.
           color: {
             type: 'color',
             value: '#000',
+            $extensions: {
+              'com.styledictionary': {
+                preExpand: {
+                  prop: 'color',
+                  type: 'border',
+                },
+              },
+            },
           },
           style: {
             type: 'strokeStyle',
             value: 'solid',
+            $extensions: {
+              'com.styledictionary': {
+                preExpand: {
+                  prop: 'style',
+                  type: 'border',
+                },
+              },
+            },
           },
           width: {
             type: 'dimension',
             value: '2px',
+            $extensions: {
+              'com.styledictionary': {
+                preExpand: {
+                  prop: 'width',
+                  type: 'border',
+                },
+              },
+            },
           },
         },
         borderTwo: input.borderTwo,
@@ -648,28 +720,76 @@ Use log.verbosity "verbose" or use CLI option --verbose for more details.
           color: {
             type: 'color',
             value: '#000',
+            $extensions: {
+              'com.styledictionary': {
+                preExpand: {
+                  prop: 'color',
+                  type: 'border',
+                },
+              },
+            },
           },
           style: {
             type: 'strokeStyle',
             value: 'solid',
+            $extensions: {
+              'com.styledictionary': {
+                preExpand: {
+                  prop: 'style',
+                  type: 'border',
+                },
+              },
+            },
           },
           width: {
             type: 'dimension',
             value: '2px',
+            $extensions: {
+              'com.styledictionary': {
+                preExpand: {
+                  prop: 'width',
+                  type: 'border',
+                },
+              },
+            },
           },
         },
         borderTwo: {
           color: {
             type: 'color',
             value: '#ccc',
+            $extensions: {
+              'com.styledictionary': {
+                preExpand: {
+                  prop: 'color',
+                  type: 'border',
+                },
+              },
+            },
           },
           style: {
             type: 'strokeStyle',
             value: 'dashed',
+            $extensions: {
+              'com.styledictionary': {
+                preExpand: {
+                  prop: 'style',
+                  type: 'border',
+                },
+              },
+            },
           },
           width: {
             type: 'dimension',
             value: '1px',
+            $extensions: {
+              'com.styledictionary': {
+                preExpand: {
+                  prop: 'width',
+                  type: 'border',
+                },
+              },
+            },
           },
         },
       });
