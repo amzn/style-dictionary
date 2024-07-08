@@ -1,7 +1,5 @@
 import StyleDictionary from 'style-dictionary';
-import type { Config } from 'style-dictionary/types';
-import memfs from '@bundled-es-modules/memfs';
-import type { fs as VolumeType } from 'memfs';
+import { Volume } from '@bundled-es-modules/memfs';
 import { LitElement, html, css } from 'lit';
 import { posix as path } from 'path-unified';
 import '@shoelace-style/shoelace/dist/components/radio-button/radio-button.js';
@@ -13,8 +11,6 @@ import { changeLang, init, monaco } from '../monaco/monaco.ts';
 import { analyzeDependencies } from '../utils/analyzeDependencies.ts';
 import { downloadZIP } from '../../../lib/utils/downloadFile.js';
 import type SlRadioGroup from '@shoelace-style/shoelace/dist/components/radio-group/radio-group.js';
-
-const { Volume } = memfs;
 
 const defaults = {
   tokens: {
@@ -200,7 +196,7 @@ class SdPlayground extends LitElement {
   declare outputFiles: string[];
   declare _currentFile: Files;
   declare editor: any;
-  declare volume: typeof VolumeType;
+  declare volume: InstanceType<typeof Volume>;
   declare hasInitialized: Promise<void>;
   declare hasInitializedResolve: (value: void) => void;
 
@@ -442,7 +438,7 @@ class SdPlayground extends LitElement {
     const dependencies = await analyzeDependencies(script.value);
     const sdDep = dependencies.find((dep) => dep.package === 'style-dictionary');
     if (sdDep) {
-      sdDep.package = 'style-dictionary@<? version placeholder ?>';
+      sdDep.package = 'style-dictionary';
     }
     const files: Record<string, string> = {};
     files[`tokens.${tokens.lang}`] = tokens.value;

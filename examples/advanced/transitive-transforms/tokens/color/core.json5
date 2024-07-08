@@ -6,10 +6,6 @@
 
       red: {
         '100': {
-          // hue, saturation, and lightness are defined in
-          // tokens/hue.json5, tokens/saturation.json5, and tokens/lightness.json5
-          // The {h, s, l} object structure conforms to the input structure for
-          // chromajs: https://gka.github.io/chroma.js/#chroma
           value: { h: '{hue.red}', s: '{saturation.7}', l: '{lightness.7}' },
           type: 'color',
         },

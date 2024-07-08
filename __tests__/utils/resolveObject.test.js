@@ -167,6 +167,8 @@ describe('utils', () => {
       expect(GroupMessages.count(PROPERTY_REFERENCE_WARNINGS)).to.equal(0);
       expect(JSON.stringify(obj)).to.equal(
         JSON.stringify({
+          prop0: { value: 0 },
+          prop01: { value: '' },
           prop1: { value: 'test1 value' },
           prop2: { value: 'test2 value' },
           prop3: { value: 'test1 value' },

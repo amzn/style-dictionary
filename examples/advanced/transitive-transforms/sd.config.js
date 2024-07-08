@@ -1,10 +1,13 @@
 import StyleDictionary from 'style-dictionary';
 import { usesReferences } from 'style-dictionary/utils';
-import chroma from 'chroma-js';
+import Color from 'colorjs.io';
 
 const colorTransform = (token) => {
   const { value, modify = [] } = token;
-  let color = chroma(value);
+
+  // This assumes "hex" format, if you want to support { h, s, l } format you have to do
+  // `new Color('hsl', [value.h, value.s, value.l]);`
+  const color = new Color(value);
 
   // defer until reference is resolved
   if (typeof modify === 'string' && usesReferences(modify)) {
@@ -18,15 +21,22 @@ const colorTransform = (token) => {
     if (usesReferences(type) || usesReferences(amount)) {
       return undefined;
     }
-    // modifier type must match a method name in chromajs
-    // https://gka.github.io/chroma.js/
-    // chroma methods can be chained, so each time we override the color variable
-    // we can still call other chroma methods, similar to
-    // chroma(value).brighten(1).darken(1).hex();
-    color = color[type](amount);
+
+    switch (type) {
+      case 'lighten': {
+        const lightness = color.hsl.l;
+        const difference = 100 - lightness;
+        const newLightness = Math.min(100, lightness + difference * amount);
+        color.set('hsl.l', newLightness);
+        break;
+      }
+      case 'transparentize':
+        color.alpha = Math.max(0, Math.min(1, Number(amount)));
+        break;
+    }
   });
 
-  return color.hex();
+  return color.to('srgb').toString({ format: 'hex' });
 };
 
 export default {
@@ -36,21 +46,24 @@ export default {
 
   // I am directly defining transforms here
   // This would work if you were to call StyleDictionary.registerTransform() as well
-  transform: {
-    colorTransform: {
-      type: `value`,
-      // only transforms that have transitive: true will be applied to tokens
-      // that alias/reference other tokens
-      transitive: true,
-      filter: (token) => token.attributes.category === 'color' && token.modify,
-      transform: colorTransform,
-    },
+  hooks: {
+    transforms: {
+      colorTransform: {
+        type: `value`,
+        // only transforms that have transitive: true will be applied to tokens
+        // that alias/reference other tokens
+        transitive: true,
+        filter: (token) => token.attributes.category === 'color' && token.modify,
+        transform: colorTransform,
+      },
 
-    // For backwards compatibility, all built-in transforms are not transitive
-    // by default. This will make the 'color/css' transform transitive
-    'color/css': Object.assign({}, StyleDictionary.transform[`color/css`], {
-      transitive: true,
-    }),
+      // For backwards compatibility, all built-in transforms are not transitive
+      // by default. This will make the 'color/css' transform transitive
+      'color/css': {
+        ...StyleDictionary.hooks.transforms[`color/css`],
+        transitive: true,
+      },
+    },
   },
 
   platforms: {

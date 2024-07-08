@@ -9,14 +9,14 @@ const packageJSONs = globSync('./examples/*/*/package.json', { fs });
 packageJSONs.forEach(function (filePath) {
   let pkg = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
   if (pkg.devDependencies) {
-    pkg.devDependencies[name] = version;
+    pkg.devDependencies[name] = `^${version}`;
     fs.writeFileSync(filePath, JSON.stringify(pkg, null, 2));
   }
   execSync(`git add ${filePath}`);
 });
 
 // version in lib file
-const paths = ['lib/StyleDictionary.js', 'docs/src/components/sd-playground.ts'];
+const paths = ['lib/StyleDictionary.js'];
 paths.forEach((p) => {
   const indexContent = fs.readFileSync(p, 'utf-8');
   const newIndexContent = indexContent.replace('<? version placeholder ?>', version);
