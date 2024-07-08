@@ -61,6 +61,20 @@ describe('utils', () => {
       expect(tokens).to.have.nested.property('d.e.f.h', 2);
     });
 
+    it('should apply filePath for "falsy" values', async () => {
+      const { tokens } = await combineJSON(['__tests__/__json_files/not_circular.json']);
+      expect(tokens).to.have.deep.property('prop0', {
+        value: 0,
+        filePath: '__tests__/__json_files/not_circular.json',
+        isSource: true,
+      });
+      expect(tokens).to.have.deep.property('prop01', {
+        value: '',
+        filePath: '__tests__/__json_files/not_circular.json',
+        isSource: true,
+      });
+    });
+
     it('should fail on invalid JSON', async () => {
       await expectThrowsAsync(
         () => combineJSON(['__tests__/__json_files/broken/*.json']),
