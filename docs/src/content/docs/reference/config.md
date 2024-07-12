@@ -262,11 +262,15 @@ The value of expand can be multiple things:
 
 You can enable the expanding of tokens both on a global level and on a platform level.
 
-One notable difference to keep in mind is that when you configure it on a global level, the token expansion will happen immediately **after** the [parsing hook](/reference/hooks/parsers) and **before** [preprocessing](/reference/hooks/preprocessors) or [transform](/reference/hooks/transforms) hooks.\
-This means that token metadata properties that are added by Style Dictionary such as `name`, `filePath`, `path`, `attributes` etc. are not present yet.\
-The advantage is having the expanded tokens (`sd.tokens` prop) available before doing any exporting to platforms.
+Whether configured on platform or global level, the token expansion will happen immediately **after** user-configured [preprocessors](/reference/hooks/preprocessors) and **before** [transform](/reference/hooks/transforms) hooks.\
+That said, platform expand happens only when calling `(get/export/format/build)Platform` methods for the specific platform, whereas global expand happens on StyleDictionary instantiation already.
 
-If you configure it on the platform level however, the metadata mentioned earlier is available and can be used to conditionally expand tokens.
+Refer to the [lifecycle hooks diagram](/info/architecture) for a better overview.
+
+When expanding globally, token metadata properties that are added by Style Dictionary such as `name`, `filePath`, `path`, `attributes` etc. are not present yet.\
+The advantage of global expand however, is having the expanded tokens (`sd.tokens` prop) available before doing any exporting to platforms.
+
+If you configure it on the platform level, the metadata mentioned earlier is available and can be used to conditionally expand tokens.
 It also allows you to expand tokens for some platforms but not for others.\
 The downside there is needing to configure it for every platform separately.
 
