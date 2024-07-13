@@ -556,7 +556,7 @@ In v3, the following options were put on the file properties level itself next t
 - `resourceMap` -> for formats:
   - `android/resources`
 
-```json title="config.json" del={9} ins={10-13}
+```json title="config.json" del={10} ins={10-13}
 {
   "source": ["tokens.json"],
   "platforms": {
