@@ -31,12 +31,8 @@ This is a more complete package and should have everything you need to get start
 If you want to look at more advanced examples of possible applications and customizations of Style Dictionary, the [`examples/advanced`](https://github.com/amzn/style-dictionary/tree/main/examples/advanced/) folder on GitHub contains these extra folders:
 
 - [**assets-base64-embed**](https://github.com/amzn/style-dictionary/tree/main/examples/advanced/assets-base64-embed) shows how it's possible to embed and distribute assets – like images, icons and fonts – directly as design tokens.
-- [**auto-rebuild-watcher**](https://github.com/amzn/style-dictionary/tree/main/examples/advanced/auto-rebuild-watcher) shows how to setup a "watcher" that auto-rebuilds the tokens every time there is a change in the tokens.
-- [**component-cti**](https://github.com/amzn/style-dictionary/tree/main/examples/advanced/component-cti) shows how to write component tokens and still use the CTI structure.
 - [**create-react-app**](https://github.com/amzn/style-dictionary/tree/main/examples/advanced/create-react-app) shows how to integrate Style Dictionary into a React application.
 - [**create-react-native-app**](https://github.com/amzn/style-dictionary/tree/main/examples/advanced/create-react-native-app) shows how to integrate Style Dictionary into a React Native application.
-- [**custom-file-header**](https://github.com/amzn/style-dictionary/tree/main/examples/advanced/custom-file-header) shows how to define custom file headers and use them in output files.
-- [**custom-formats-with-templates**](https://github.com/amzn/style-dictionary/tree/main/examples/advanced/custom-formats-with-templates) shows how to generate custom output formats using templates, useful when you need to distribute your design tokens into your own pipelines or scripts.
 - [**custom-parser**](https://github.com/amzn/style-dictionary/tree/main/examples/advanced/custom-parser) shows how to use custom parsers for token files.
 - [**custom-transforms**](https://github.com/amzn/style-dictionary/tree/main/examples/advanced/custom-transforms) shows how to use custom transforms (and transformGroups) to apply custom "transformations" to the design tokens.
 - [**flutter**](https://github.com/amzn/style-dictionary/tree/main/examples/advanced/flutter) shows how to integrate with Flutter applications.

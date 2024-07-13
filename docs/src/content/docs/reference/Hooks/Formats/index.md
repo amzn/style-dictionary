@@ -257,8 +257,6 @@ Which should output a file that will start like this:
  */
 ```
 
-For an in-depth example see the [custom-file-header](https://github.com/amzn/style-dictionary/tree/main/examples/advanced/custom-file-header) example.
-
 ## Custom formats
 
 You can create custom formats using the [`registerFormat`](/reference/api#registerformat) function or by directly including them in your [configuration](/reference/config). A format has a name and a format function, which takes an object as the argument and should return a string which is then written to a file.
