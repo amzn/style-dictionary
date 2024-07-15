@@ -1,9 +1,8 @@
 import { LitElement, css, html } from 'lit';
-import { darkTokens } from '../../theme/tokens/dark';
-import { shades } from '../../theme/tokens/core';
+import { darkTokens } from '../../theme/tokens/dark.js';
+import { shades } from '../../theme/tokens/core.js';
 
-const colors: (keyof typeof darkTokens.color)[] = ['accent', 'green', 'orange', 'purple', 'red'];
-const colors2 = [
+const colors: (keyof typeof darkTokens.color)[] = [
   'gray',
   'red',
   'orange',
@@ -23,9 +22,6 @@ const fontCodeColors = [1, 2, 3, 4, 5, 6, 7, 8, 9, 21, 22, 23, 24, 25, 26, 27, 2
 
 export class SdColors extends LitElement {
   static styles = css`
-    :host {
-    }
-
     .color {
       display: flex;
       flex-direction: row;
@@ -64,7 +60,7 @@ export class SdColors extends LitElement {
         )}
       </ul>
       <ul>
-        ${colors2.map(
+        ${colors.map(
           (key) =>
             html`<li class="color">
               ${shades2.map(
@@ -77,7 +73,7 @@ export class SdColors extends LitElement {
               )}
             </li>`,
         )}
-        ${colors2.map(
+        ${colors.map(
           (key) =>
             html`<li class="color">
               ${shades.map(

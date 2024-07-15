@@ -41,7 +41,7 @@ export default {
   title: 'Style Dictionary',
   description:
     'Export your Design Tokens to any platform. iOS, Android, CSS, JS, HTML, sketch files, style documentation, or anything you can think of. Forward-compatible with Design Token Community Group spec.',
-  logo: { src: './src/assets/logo.svg', alt: 'Style-Dictionary logo, Pascal the chameleon.' },
+  logo: { src: './src/assets/logo.png', alt: 'Style-Dictionary logo, Pascal the chameleon.' },
   editLink: {
     baseUrl: 'https://github.com/amzn/style-dictionary/edit/v4/docs/src/content/docs/',
   },

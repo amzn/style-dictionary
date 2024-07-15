@@ -11,6 +11,7 @@ import { changeLang, init, monaco } from '../monaco/monaco.ts';
 import { analyzeDependencies } from '../utils/analyzeDependencies.ts';
 import { downloadZIP } from '../../../lib/utils/downloadFile.js';
 import type SlRadioGroup from '@shoelace-style/shoelace/dist/components/radio-group/radio-group.js';
+import type { Config } from '../../../types/Config.ts';
 
 const defaults = {
   tokens: {

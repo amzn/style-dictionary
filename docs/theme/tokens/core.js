@@ -38,19 +38,22 @@ export const hue = {
   rose: { $value: `349.70` },
 };
 
-export const lch = Object.entries(hue).reduce((acc, [key]) => {
-  acc[key] = { $value: `{lightness} {chroma} {hue.${key}}` };
+export const lch = Object.keys(hue).reduce((acc, key) => {
+  acc[/** @type {keyof hue} */ (key)] = { $value: `{lightness} {chroma} {hue.${key}}` };
   return acc;
-}, {});
+}, /** @type {typeof hue} */ ({}));
 
-export const core = Object.entries(hue).reduce((acc, [key]) => {
-  acc[key] = {
+/**
+ * @typedef {Record<keyof hue, Record<'high'|'_'|'low', {$value: string}>>} core
+ */
+export const core = Object.keys(hue).reduce((acc, key) => {
+  acc[/** @type {keyof hue} */ (key)] = {
     high: { $value: `oklch({lch.${key}} / 0.9)` },
     _: { $value: `oklch({lch.${key}} / 0.5)` },
     low: { $value: `oklch({lch.${key}} / 0.1)` },
   };
   return acc;
-}, {});
+}, /** @type {core} */ ({}));
 
 export const gray = {
   950: { $value: `oklch(18% 0.02 ${greyHue})` },

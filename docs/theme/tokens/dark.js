@@ -12,13 +12,14 @@ export const darkTokens = {
     $type: 'color',
     ...core,
     gray: Object.keys(gray)
+      .map((k) => parseFloat(k))
       .reverse()
       .reduce(
         (acc, key, i) => {
           acc[key] = Object.values(gray)[i];
           return acc;
         },
-        {
+        /** @type {Record<number,{ $value: string }>} */ ({
           7: { $value: '{color.gray.50}' },
           6: { $value: '{color.gray.200}' },
           5: { $value: '{color.gray.400}' },
@@ -26,7 +27,7 @@ export const darkTokens = {
           3: { $value: '{color.gray.600}' },
           2: { $value: '{color.gray.800}' },
           1: { $value: '{color.gray.950}' },
-        },
+        }),
       ),
     white: { $value: '#fff' },
     black: { $value: '{color.gray.50}' },
