@@ -460,10 +460,10 @@ export default {
 
 ```js script
 import StyleDictionary from 'style-dictionary';
-import { registerTransforms } from '@tokens-studio/sd-transforms';
+import { register } from '@tokens-studio/sd-transforms';
 
 // registers 'ts/color/css/hexrgba'
-registerTransforms(StyleDictionary);
+register(StyleDictionary);
 ```
 
 ### Combining multiple outputReference utility functions
