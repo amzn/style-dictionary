@@ -29,7 +29,7 @@ You use formats in your config file under `platforms` > `[Platform]` > `files` >
 }
 ```
 
-There is an extensive (but not exhaustive) list of [built-in formats](#pre-defined-formats) available in Style Dictionary.
+There is an extensive (but not exhaustive) list of [built-in formats](predefined) available in Style Dictionary.
 
 ## Format configuration
 
@@ -55,7 +55,7 @@ Formats can take configuration to make them more flexible. This allows you to re
 }
 ```
 
-In this example we are adding the `mapName` configuration to the `scss/map-deep` format. This will change the name of the SCSS map in the output. Not all formats have the configuration options; format configuration is defined by the format itself. To see the configuration options of a format, take a look at the documentation of the [specific format](#pre-defined-formats)
+In this example we are adding the `mapName` configuration to the `scss/map-deep` format. This will change the name of the SCSS map in the output. Not all formats have the configuration options; format configuration is defined by the format itself. To see the configuration options of a format, take a look at the documentation of the [specific format](predefined).
 
 ## Filtering tokens
 
@@ -170,13 +170,13 @@ export default {
 
 Not all formats use the `outputReferences` option because that file format might not support it (like JSON for example). The current list of formats that handle `outputReferences`:
 
-- [css/variables](#cssvariables)
-- [scss/variables](#scssvariables)
-- [less/variables](#lessvariables)
-- [android/resources](#androidresources)
-- [compose/object](#composeobject)
-- [ios-swift/class.swift](#ios-swiftclassswift)
-- [flutter/class.dart](#flutterclassdart)
+- [css/variables](predefined/#cssvariables)
+- [scss/variables](predefined/#scssvariables)
+- [less/variables](predefined/#lessvariables)
+- [android/resources](predefined/#androidresources)
+- [compose/object](predefined/#composeobject)
+- [ios-swift/class.swift](predefined/#ios-swiftclassswift)
+- [flutter/class.dart](predefined/#flutterclassdart)
 
 You can create custom formats that output references as well. See the [Custom format with output references](#custom-format-with-output-references) section.
 
