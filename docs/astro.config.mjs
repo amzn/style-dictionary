@@ -9,7 +9,7 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [remarkPlayground],
   },
-  site: 'https://style-dictionary-v4.netlify.app',
+  site: 'https://v4.styledictionary.com/',
   vite: {
     force: true,
     server: {

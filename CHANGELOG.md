@@ -748,7 +748,7 @@
   The main intention here is to ensure that Style Dictionary is compliant with [DTCG draft specification](https://design-tokens.github.io/community-group/format/) out of the box with regards to exporting to CSS, where object-value tokens are not supported without transforming them to shorthands (or expanding them, which is a different feature that was added in `4.0.0-prerelease.27`).
 
 - cedf8a0: Preprocessors are a new feature added to style-dictionary, which allows you to do any type of processing of the token dictionary **after** parsing, **before** resolving and transforming.
-  See [preprocessor docs](https://github.com/amzn/style-dictionary/tree/v4/docs/preprocessors.md) for more information.
+  See [preprocessor docs](https://v4.styledictionary.com/reference/hooks/preprocessors/) for more information.
 - cb94554: 'size/rem' transform to not transform tokens that already have a unit, such as `"4px"`, this should not be transformed to `"4rem"`.
 - a4542f4: options.log to be respected in all error logging, including platform specific logs.
 - 122c8f6: Expose a new utility called resolveReferences which takes a value containing references, the dictionary object, and resolves the value's references for you.
