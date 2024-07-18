@@ -110,7 +110,7 @@ export interface Config {
   hooks?: Hooks;
   expand?: ExpandConfig;
   platforms?: Record<string, PlatformConfig>;
-  parsers?: Parser[];
+  parsers?: string[];
   preprocessors?: string[];
   usesDtcg?: boolean;
 }
