@@ -28,4 +28,4 @@ We are very open to feedback and collaboration, feel free to reach out to us in 
 
 The prereleases will contain breaking changes, so it's important to read the list of changes since v3 if you're looking to migrate.
 
-You can find the list of changes in [our changelog on the v4 branch](https://github.com/amzn/style-dictionary/blob/v4/CHANGELOG.md)
+You can find the list of changes in [our changelog on the v4 branch](https://github.com/amzn/style-dictionary/blob/main/CHANGELOG.md)
