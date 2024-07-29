@@ -277,7 +277,7 @@ is equivalent to this JSON file:
 
 You might prefer authoring your design token files in Javascript because it can be a bit more friendly to read and write (don't have to quote keys, can leave dangling commas, etc.). Writing your design token files as Javascript gives you more freedom to do complex things like generating many tokens based on code:
 
-```javascript title="colors.json"
+```javascript title="colors.js"
 import Color from 'tinycolor2';
 
 const baseColors = {
