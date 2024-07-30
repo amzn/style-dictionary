@@ -224,7 +224,7 @@ float const SizeFontBase = 16.00f;
 
 The style dictionary framework comes with some example code to get you started. Install the node module globally, create a directory and `cd` into it.
 
-```
+```bash
 $ npm i -g style-dictionary
 $ mkdir MyStyleDictionary
 $ cd MyStyleDictionary
@@ -232,13 +232,13 @@ $ cd MyStyleDictionary
 
 Now run:
 
-```
+```bash
 $ style-dictionary init basic
 ```
 
 This command will copy over the example files found in [example](examples/) in this repo. Now you have an example project set up. You can make changes to the style dictionary and rebuild the project by running:
 
-```
+```bash
 $ style-dictionary build
 ```
 
