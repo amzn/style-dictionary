@@ -106,6 +106,35 @@ describe('formats', () => {
       it(key + ' snapshot', async () => {
         await expect(output).to.matchSnapshot();
       });
+
+      it(`should respect formatting options for ${key}`, async () => {
+        const file = {
+          destination: '__output/',
+          format: key,
+          options: {
+            formatting: {
+              fileHeaderTimestamp: true,
+              prefix: '$foo-',
+              suffix: ';;',
+              separator: '::',
+              lineSeparator: '\n\n',
+              indentation: '    ',
+              commentStyle: 'long',
+              commentPosition: 'above',
+            },
+          },
+        };
+        const result = await format(
+          createFormatArgs({
+            dictionary: { tokens, allTokens: flattenTokens(tokens) },
+            file,
+            platform: {},
+          }),
+          {},
+          file,
+        );
+        await expect(result).to.matchSnapshot();
+      });
     });
   }
 });
