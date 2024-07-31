@@ -2,7 +2,6 @@
 <a href="https://styledictionary.com/version-4/migration/">What's new in Style Dictionary 4.0!</a>
 </pre>
 
-
 <img src="docs/src/assets/logo.png" alt="Style Dictionary logo and mascot" title="&quot;Pascal&quot;" width="100" align="right" />
 
 [![npm version](https://img.shields.io/npm/v/style-dictionary.svg?style=flat-square)](https://badge.fury.io/js/style-dictionary)
@@ -173,7 +172,7 @@ This tells the style dictionary build system how and what to build. The default 
 | platform.buildPath                   | String (optional) | Base path to build the files, must end with a trailing slash.                                                                                                                                                                                                                 |
 | platform.files                       | Array (optional)  | Files to be generated for this platform.                                                                                                                                                                                                                                      |
 | platform.file.destination            | String (optional) | Location to build the file, will be appended to the buildPath.                                                                                                                                                                                                                |
-| platform.file.format                 | String (optional) | Format used to generate the file. Can be a built-in one or you can create your own. [More on formats](https://styledictionary.com/reference/hooks/formats/)                                                                                                                      |
+| platform.file.format                 | String (optional) | Format used to generate the file. Can be a built-in one or you can create your own. [More on formats](https://styledictionary.com/reference/hooks/formats/)                                                                                                                   |
 | platform.file.options                | Object (optional) | A set of extra options associated with the file.                                                                                                                                                                                                                              |
 | platform.file.options.showFileHeader | Boolean           | If the generated file should have a "Do not edit + Timestamp" header (where the format supports it). By default is "true".                                                                                                                                                    |
 
