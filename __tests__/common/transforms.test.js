@@ -1188,7 +1188,7 @@ describe('common', () => {
             fontWeight: '500',
             fontSize: '20px',
             fontVariant: 'small-caps',
-            fontWidth: 'condensed',
+            fontStretch: 'condensed',
             fontStyle: 'italic',
             lineHeight: '1.5',
             fontFamily: 'Arial',
