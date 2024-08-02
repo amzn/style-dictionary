@@ -331,6 +331,75 @@ Resulting in the following expanded output:
 }
 ```
 
+#### Original type metadata
+
+Because we're expanding composite type tokens, we're creating a new token for each property.
+Due to the types mapping, you might lose some information about the fact that for example a `letterSpacing` property
+that is now a token of type `dimension` used to be a `letterSpacing` property within a `typography` token.
+
+This makes it difficult to create a transform that applies to `letterSpacing` tokens specifically, without unintentionally applying it to all `dimension` tokens.
+
+Therefore, when we expand composite tokens, we add some metadata to store from what composite type it was expanded and from which property:
+
+```json
+{
+  "typo": {
+    "fontFamily": {
+      "value": "",
+      "type": "fontFamily",
+      "$extensions": {
+        "com.styledictionary": {
+          "preExpand": {
+            "type": "typography",
+            "prop": "fontFamily"
+          }
+        }
+      }
+    },
+    "fontSize": {
+      "value": "",
+      "type": "dimension",
+      "$extensions": {
+        "com.styledictionary": {
+          "preExpand": {
+            "type": "typography",
+            "prop": "fontSize"
+          }
+        }
+      }
+    },
+    "letterSpacing": {
+      "value": "",
+      "type": "dimension",
+      "$extensions": {
+        "com.styledictionary": {
+          "preExpand": {
+            "type": "typography",
+            "prop": "letterSpacing"
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+Figma allows specifying `letterSpacing` as a percentage, but for valid CSS output we must transform this to a float.
+Therefore, we need a transform that applies to `letterSpacing` tokens:
+
+```js
+StyleDictionary.registerTransform({
+  name: 'letterSpacing/percToFloat',
+  type: 'value',
+  filter: (token) =>
+    token.type === 'letterSpacing' ||
+    token.$extensions?.['com.styledictionary']?.preExpand?.prop === 'letterSpacing',
+  transform: (token) => {
+    return percentageToFloat(token.value);
+  },
+});
+```
+
 #### Example
 
 ~ sd-playground
