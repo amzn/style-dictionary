@@ -1,22 +1,7 @@
 import { LitElement, css, html } from 'lit';
-import { darkTokens } from '../../theme/tokens/dark.js';
-import { shades } from '../../theme/tokens/core.js';
+import { hue } from '../../theme/tokens/core';
 
-const colors: (keyof typeof darkTokens.color)[] = [
-  'gray',
-  'red',
-  'orange',
-  'yellow',
-  'lime',
-  'green',
-  'teal',
-  'blue',
-  'purple',
-  'pink',
-];
-
-// const shades = ['-low', '', '-high'];
-const shades2 = ['darker', 'dark', 'light', 'lighter'];
+const shades = ['-low', '', '-high'];
 
 const fontCodeColors = [1, 2, 3, 4, 5, 6, 7, 8, 9, 21, 22, 23, 24, 25, 26, 27, 28, 29];
 
@@ -52,40 +37,42 @@ export class SdColors extends LitElement {
   // Render the UI as a function of component state
   render() {
     return html` <div>
+      <h3>Color palette</h3>
       <ul>
-        ${['primary', 'secondary', 'tertiary'].map(
-          (key) => html`
-            <li class="border-color" style="border-color: var(--sl-color-border-${key})"></li>
-          `,
-        )}
-      </ul>
-      <ul>
-        ${colors.map(
-          (key) =>
-            html`<li class="color">
-              ${shades2.map(
-                (shade) => html`
-                  <div
-                    class="color__shade"
-                    style="background-color: var(--sl-color-${key}-${shade}); width:1rem; height: 1rem;"
-                  ></div>
-                `,
-              )}
-            </li>`,
-        )}
-        ${colors.map(
+        ${Object.keys(hue).map(
           (key) =>
             html`<li class="color">
               ${shades.map(
                 (shade) => html`
                   <div
                     class="color__shade"
-                    style="background-color: var(--sl-color-${key}-${shade}); width:1rem; height: 1rem;"
+                    style="background-color: var(--sl-color-${key}${shade});"
                   ></div>
                 `,
               )}
             </li>`,
         )}
+      </ul>
+      <h3>Background colors</h3>
+      <ul class="color">
+        ${['primary', 'secondary', 'tertiary'].map(
+          (key) => html`
+            <li class="color__shade" style="background-color: var(--sl-color-background-${key})">
+              ${key}
+            </li>
+          `,
+        )}
+      </ul>
+      <h3>Border colors</h3>
+      <ul>
+        ${['primary', 'secondary', 'tertiary'].map(
+          (key) => html`
+            <li class="border-color" style="border-color: var(--sl-color-border-${key})">${key}</li>
+          `,
+        )}
+      </ul>
+      <h3>Syntax highlight colors</h3>
+      <ul>
         <li class="color">
           ${fontCodeColors.map(
             (key) => html`

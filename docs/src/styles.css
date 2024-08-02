@@ -5,12 +5,26 @@
 }
 
 :root {
-  --sl-font: 'Inter Variable', sans-serif;
+  --sl-font: InterVariable, 'Inter var', 'Inter Variable', Inter, sans-serif;
   font-feature-settings: 'ss01', 'ss02', 'case', 'salt';
 }
 
 html {
   font-feature-settings: 'ss01', 'ss02', 'case', 'salt';
+}
+
+[data-has-hero]::before {
+  content: '';
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  background-image: radial-gradient(
+      at 50% 0%,
+      oklch(var(--sl-lch-purple) / 0.2) 0px,
+      transparent 50%
+    ),
+    radial-gradient(at 100% -25%, oklch(var(--sl-lch-teal) / 0.2) 0px, transparent 50%),
+    radial-gradient(at 0% 25%, oklch(var(--sl-lch-pink) / 0.1) 0px, transparent 50%);
 }
 
 * {
@@ -32,6 +46,7 @@ html {
 }
 
 :root {
+  --header-background: oklch(20% 0.03 var(--sl-hue-gray) / 0.5);
   --link-color: var(--sl-color-text-accent);
   --link-color-hover: var(--sl-color-accent-high);
 
@@ -43,6 +58,9 @@ html {
   --sl-badge-note-text: var(--sl-color-blue-high);
   --sl-badge-caution-text: var(--sl-color-orange-high);
   --sl-badge-tip-text: var(--sl-color-purple-high);
+
+  --sl-color-banner-bg: var(--sl-color-accent-low);
+  --sl-color-banner-text: var(--sl-color-accent-high);
 
   /* Changes the primary theme color to purple using primitives */
   --sl-color-primary-50: var(--sl-color-teal-50) !important;
@@ -59,6 +77,7 @@ html {
 }
 
 [data-theme='light']:root {
+  --header-background: oklch(100% 0 0 / 0.5);
   --sl-shadow-sm: 0 2px 0.25rem var(--sl-color-border-secondary);
   --sl-badge-default-bg: var(--sl-color-accent-low);
   --sl-badge-danger-bg: var(--sl-color-red-low);
@@ -66,10 +85,8 @@ html {
   --sl-badge-note-bg: var(--sl-color-blue-low);
   --sl-badge-caution-bg: var(--sl-color-orange-low);
   --sl-badge-tip-bg: var(--sl-color-purple-low);
-
-  ::selection {
-    background-color: color-mix(in oklch, var(--sl-color-accent-low), transparent 90%);
-  }
+  --sl-color-banner-bg: var(--sl-color-accent-low);
+  --sl-color-text-accent: var(--sl-color-accent-high);
 }
 
 table code {
@@ -84,9 +101,19 @@ table code {
   max-width: 900px;
 }
 
-a {
-  display: inline-block;
+.sl-banner {
+  margin: 1rem;
+  border-radius: 0.25rem;
+  box-shadow: none;
+}
+
+a[role='tab']:hover {
   color: var(--link-color);
+}
+
+.sl-markdown-content a:not(:where(.not-content *)) {
+  color: var(--link-color);
+  display: inline-block;
   --offset: 0.25em;
   text-underline-offset: var(--offset);
   text-decoration: underline 2px;
@@ -96,22 +123,10 @@ a {
     color 200ms;
 }
 
-a[role='tab']:hover {
-  color: var(--link-color);
-}
-
-a:hover,
-a:focus {
+.sl-markdown-content a:hover:not(:where(.not-content *)) {
+  color: var(--link-color-hover);
   --offset: 0.4em;
   text-decoration-color: var(--link-color-hover);
-  color: var(--link-color-hover);
-}
-
-.sl-markdown-content a:not(:where(.not-content *)) {
-  color: var(--link-color);
-}
-
-.sl-markdown-content a:hover:not(:where(.not-content *)) {
   color: var(--link-color-hover);
 }
 
@@ -215,7 +230,7 @@ a:focus {
 }
 
 header.header {
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(8px);
   background-color: transparent;
   border: none;
 }
@@ -229,8 +244,21 @@ header.header {
 }
 
 site-search button[data-open-modal] {
-  border: none;
+  background-color: var(--sl-color-background-primary);
+  border-color: var(--sl-color-border-secondary);
   color: var(--sl-color-font-tertiary);
+  border-radius: 2rem;
+  opacity: 0.5;
+}
+
+site-search button[data-open-modal]:hover {
+  border-color: var(--sl-color-border-secondary);
+  opacity: 1;
+}
+
+dialog {
+  background-color: var(--sl-color-background-primary);
+  border: none;
 }
 
 .expressive-code .frame.is-terminal .header {
@@ -241,12 +269,6 @@ div.monaco-editor {
   background-color: var(--sl-color-bg-nav);
   border-radius: 0.25rem;
   overflow: hidden;
-}
-
-starlight-file-tree {
-  border-width: 0 !important;
-  border-radius: 1rem;
-  background-color: var(--sl-color-black) !important;
 }
 
 .sl-markdown-content code {
@@ -271,6 +293,17 @@ starlight-file-tree {
   border: none;
 }
 
+sl-copy-button::part(button) {
+  color: var(--sl-color-text-accent);
+  background: var(--sl-color-accent-low);
+  border-radius: 2rem;
+  transition: all 0.2s ease;
+}
+
+sl-copy-button::part(button):hover {
+  background: var(--sl-color-accent);
+}
+
 sd-playground::part(monaco-editor) {
   border: 1px solid var(--sl-color-border-tertiary);
   box-shadow: 0 0.125rem 1rem var(--sl-color-background-tertiary);
@@ -279,12 +312,24 @@ sd-playground::part(monaco-editor) {
 
 .sl-link-card {
   border-color: var(--sl-color-border-secondary);
+  box-shadow: none;
+}
+
+.sl-link-card a {
+  text-decoration: none;
 }
 
 .sl-link-card:hover {
   border-color: var(--sl-color-accent);
   background-color: var(--sl-color-accent-low);
   box-shadow: 0 0 1rem var(--sl-color-accent-low);
+}
+
+starlight-file-tree {
+  background-color: var(--sl-color-bg-code);
+  border-radius: 0.5rem;
+  border-color: var(--sl-color-border-tertiary);
+  box-shadow: 0 0 1rem var(--sl-color-border-tertiary);
 }
 
 starlight-file-tree .highlight {
@@ -302,14 +347,35 @@ starlight-toc li {
 }
 
 .action.primary {
-  background: linear-gradient(var(--sl-color-teal-800), var(--sl-color-teal-500));
+  background: var(--sl-color-accent-low);
+  border: 1px solid var(--sl-color-accent);
+  margin: 1rem;
+  box-shadow:
+    0 0 1rem var(--sl-color-accent-low) inset,
+    0 0 1rem var(--sl-color-accent-low);
+  color: var(--sl-color-accent-high);
+  font-weight: 600;
+  font-size: 1.25rem;
+  text-align: center;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.action.primary:hover {
+  box-shadow:
+    0 0 1rem var(--sl-color-accent) inset,
+    0 0 1rem var(--sl-color-accent);
+}
+
+[data-has-hero] .sl-container {
+  max-width: 100%;
 }
 
 .card {
   position: relative;
   overflow: hidden;
   border-color: var(--sl-color-border-secondary);
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
 }
 
 .description {
@@ -354,4 +420,14 @@ starlight-toc li {
 .starlight-aside--tip {
   --link-color: var(--sl-color-purple-high);
   --link-color-hover: var(--sl-color-purple);
+}
+
+button > kbd {
+  background-color: var(--sl-color-background-tertiary);
+}
+
+.pagination-links > a {
+  display: flex;
+  color: var(--sl-color-font-tertiary);
+  text-decoration: none;
 }

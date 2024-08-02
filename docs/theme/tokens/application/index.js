@@ -7,7 +7,6 @@ import * as editor from './editor.js';
 import * as editorGroup from './editorGroup.js';
 import * as tab from './tab.js';
 import * as titleBar from './titleBar.js';
-import * as diffEditor from './diffEditor.js';
 
 // https://code.visualstudio.com/api/references/theme-color
 export default {
@@ -15,7 +14,6 @@ export default {
   ...badge,
   ...breadcrumb,
   ...button,
-  ...diffEditor,
   ...dropdown,
   ...editor,
   ...editorGroup,

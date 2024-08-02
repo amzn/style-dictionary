@@ -1,10 +1,10 @@
-import { lch, core, gray, hue } from './core.js';
+import { lch, core, gray, hue, fontCodeColors } from './core.js';
 import application from './application/index.js';
 import { syntax } from './syntax/index.js';
 import { starlight } from './starlight.js';
 
 export const lightTokens = {
-  lightness: { $value: '0.51' },
+  lightness: { $value: '0.4' },
   chroma: { $value: '0.2' },
   hue,
   lch,
@@ -26,11 +26,6 @@ export const lightTokens = {
     neutral: {
       1000: { $value: '{color.gray.950}' },
       0: { $value: '#fff' },
-    },
-    accent: {
-      low: { $value: '{color.teal.low}' },
-      _: { $value: '{color.teal._}' },
-      high: { $value: '{color.teal.high}' },
     },
     background: {
       primary: { $value: '#FFFFFF' },
@@ -59,23 +54,23 @@ export const lightTokens = {
           inactive: { $value: 'oklch({lch.pink} / 0.2)' },
         },
         secondary: {
-          active: { $value: '{color.teal._}', modify: { alpha: 0.4 } },
-          inactive: { $value: '{color.teal._}', modify: { alpha: 0.2 } },
+          active: { $value: '{color.teal._}' },
+          inactive: { $value: '{color.teal._}' },
         },
         tertiary: {
-          active: { $value: '{color.purple._}', modify: { alpha: 0.4 } },
-          inactive: { $value: '{color.purple._}', modify: { alpha: 0.2 } },
+          active: { $value: '{color.purple._}' },
+          inactive: { $value: '{color.purple._}' },
         },
       },
 
       highlight: {
         primary: {
-          active: { $value: '{color.yellow._}', modify: { alpha: 0.4 } },
-          inactive: { $value: '{color.yellow._}', modify: { alpha: 0.2 } },
+          active: { $value: '{color.yellow._}' },
+          inactive: { $value: '{color.yellow._}' },
         },
         secondary: {
-          active: { $value: '{color.blue._}', modify: { alpha: 0.4 } },
-          inactive: { $value: '{color.blue._}', modify: { alpha: 0.2 } },
+          active: { $value: '{color.blue._}' },
+          inactive: { $value: '{color.blue._}' },
         },
       },
     },
@@ -107,35 +102,15 @@ export const lightTokens = {
       link: {
         primary: {
           active: { $value: '{color.teal.high}' },
-          inactive: { $value: '{color.teal.high}', modify: { alpha: 0.8 } },
+          inactive: { $value: '{color.teal.high}' },
         },
         secondary: {
           active: { $value: '{color.pink.high}' },
-          inactive: { $value: '{color.pink.high}', modify: { alpha: 0.8 } },
+          inactive: { $value: '{color.pink.high}' },
         },
       },
 
-      code: {
-        1: { $value: '{color.red.high}' },
-        2: { $value: '{color.orange.high}' },
-        3: { $value: '{color.yellow.high}' },
-        4: { $value: '{color.lime.high}' },
-        5: { $value: '{color.green.high}' },
-        6: { $value: '{color.teal.high}' },
-        7: { $value: '{color.blue.high}' },
-        8: { $value: '{color.purple.high}' },
-        9: { $value: '{color.pink.high}' },
-
-        21: { $value: '{color.amber.high}' },
-        22: { $value: '{color.cyan.high}' },
-        23: { $value: '{color.sky.high}' },
-        24: { $value: '{color.green.high}' },
-        25: { $value: '{color.indigo.high}' },
-        26: { $value: '{color.fuschia.high}' },
-        27: { $value: '{color.violet.high}' },
-        28: { $value: '{color.rose.high}' },
-        29: { $value: '{color.teal.high}' },
-      },
+      code: fontCodeColors,
     },
     ...starlight,
   },

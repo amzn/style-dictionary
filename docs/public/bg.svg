@@ -1,0 +1,34 @@
+<svg width="800" height="800" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect fill="url(#p)" width="100%" height="100%" mask="url(#Mask)"/>
+
+  <pattern id="p" width="42" height="42" patternUnits="userSpaceOnUse">
+    <rect x="4" y="7" width="7" height="1" fill="#ffffff"/>
+    <rect x="18" y="7" width="7" height="1" fill="#ffffff66"/>
+    <rect x="32" y="7" width="7" height="1" fill="#ffffff66"/>
+    <rect x="7" y="4" width="1" height="7" fill="#ffffff"/>
+    <rect x="7" y="18" width="1" height="7" fill="#ffffff66"/>
+    <rect x="7" y="32" width="1" height="7" fill="#ffffff66"/>
+  </pattern>
+
+  <defs>
+    <linearGradient id="Gradient">
+      <stop offset="0" stop-color="black" stop-opacity="1" />
+      <stop offset="0.25" stop-color="black" stop-opacity="0.75" />
+      <stop offset="0.5" stop-color="black" stop-opacity="0.25" />
+      <stop offset="0.75" stop-color="black" stop-opacity="0.75" />
+      <stop offset="1" stop-color="black" stop-opacity="1" />
+    </linearGradient>
+    <linearGradient id="Gradient2" gradientTransform="rotate(90)">
+      <stop offset="0" stop-color="black" stop-opacity="1" />
+      <stop offset="0.25" stop-color="black" stop-opacity="0.75" />
+      <stop offset="0.5" stop-color="black" stop-opacity="0.25" />
+      <stop offset="0.75" stop-color="black" stop-opacity="0.75" />
+      <stop offset="1" stop-color="black" stop-opacity="1" />
+    </linearGradient>
+    <mask id="Mask">
+      <rect x="0" y="0" width="800" height="800" fill="white" />
+      <rect x="0" y="0" width="800" height="800" fill="url(#Gradient)" />
+      <rect x="0" y="0" width="800" height="800" fill="url(#Gradient2)" />
+    </mask>
+  </defs>
+</svg>

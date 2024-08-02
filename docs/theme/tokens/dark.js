@@ -1,4 +1,4 @@
-import { core, gray, lch, hue } from './core.js';
+import { core, gray, lch, hue, fontCodeColors } from './core.js';
 import application from './application/index.js';
 import { syntax } from './syntax/index.js';
 import { starlight } from './starlight.js';
@@ -34,11 +34,6 @@ export const darkTokens = {
     neutral: {
       1000: { $value: '#fff' },
       0: { $value: '{color.gray.50}' },
-    },
-    accent: {
-      low: { $value: '{color.teal.low}' },
-      _: { $value: '{color.teal._}' },
-      high: { $value: '{color.teal.high}' },
     },
     background: {
       primary: { $value: '{color.gray.50}' },
@@ -78,12 +73,12 @@ export const darkTokens = {
 
       highlight: {
         primary: {
-          active: { $value: '{color.yellow.low}', modify: { alpha: 0.4 } },
-          inactive: { $value: '{color.yellow.low}', modify: { alpha: 0.2 } },
+          active: { $value: '{color.yellow.low}' },
+          inactive: { $value: '{color.yellow.low}' },
         },
         secondary: {
-          active: { $value: '{color.blue.low}', modify: { alpha: 0.4 } },
-          inactive: { $value: '{color.blue.low}', modify: { alpha: 0.2 } },
+          active: { $value: '{color.blue.low}' },
+          inactive: { $value: '{color.blue.low}' },
         },
       },
     },
@@ -91,12 +86,12 @@ export const darkTokens = {
       primary: { $value: '{color.gray.500}' },
       secondary: { $value: '{color.gray.400}' },
       tertiary: { $value: '{color.gray.300}' },
-      focus: { $value: '{color.pink.low}', modify: { alpha: 0.4 } },
-      active: { $value: '{color.pink.low}', modify: { alpha: 0.8 } },
-      success: { $value: '{color.green.low}', modify: { alpha: 0.8 } },
-      danger: { $value: '{color.red.low}', modify: { alpha: 0.8 } },
-      warning: { $value: '{color.orange.low}', modify: { alpha: 0.8 } },
-      info: { $value: '{color.teal.low}', modify: { alpha: 0.8 } },
+      focus: { $value: '{color.pink.low}' },
+      active: { $value: '{color.pink.low}' },
+      success: { $value: '{color.green.low}' },
+      danger: { $value: '{color.red.low}' },
+      warning: { $value: '{color.orange.low}' },
+      info: { $value: '{color.teal.low}' },
     },
     font: {
       primary: { $value: '#FFFFFFEE' },
@@ -115,39 +110,16 @@ export const darkTokens = {
       link: {
         primary: {
           active: { $value: '{color.teal.low}' },
-          inactive: { $value: '{color.teal.low}', modify: { alpha: 0.8 } },
+          inactive: { $value: '{color.teal.low}' },
         },
         secondary: {
           active: { $value: '{color.pink.low}' },
-          inactive: { $value: '{color.pink.low}', modify: { alpha: 0.8 } },
+          inactive: { $value: '{color.pink.low}' },
         },
       },
 
-      code: {
-        1: { $value: '{color.red.high}' },
-        2: { $value: '{color.orange.high}' },
-        3: { $value: '{color.yellow.high}' },
-        4: { $value: '{color.lime.high}' },
-        5: { $value: '{color.green.high}' },
-        6: { $value: '{color.teal.high}' },
-        7: { $value: '{color.blue.high}' },
-        8: { $value: '{color.purple.high}' },
-        9: { $value: '{color.pink.high}' },
-
-        21: { $value: '{color.amber.high}' },
-        22: { $value: '{color.cyan.high}' },
-        23: { $value: '{color.sky.high}' },
-        24: { $value: '{color.green.high}' },
-        25: { $value: '{color.indigo.high}' },
-        26: { $value: '{color.fuschia.high}' },
-        27: { $value: '{color.violet.high}' },
-        28: { $value: '{color.rose.high}' },
-        29: { $value: '{color.teal.high}' },
-      },
+      code: fontCodeColors,
     },
-    // text: {
-    //   accent: { $value: '{color.accent._}' },
-    // },
     ...starlight,
   },
   syntax,

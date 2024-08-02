@@ -1,5 +1,5 @@
 import StyleDictionary from 'style-dictionary';
-import { parse, formatHex, formatHex8, oklch, formatCss } from 'culori';
+import Color from 'colorjs.io';
 import { lightTokens } from './tokens/light.js';
 import { darkTokens } from './tokens/dark.js';
 
@@ -13,36 +13,11 @@ const sd = new StyleDictionary({
         type: 'value',
         transitive: true,
         filter: (token) => {
-          return token.path[0] === 'color';
+          return token.$type === 'color';
         },
         transform: (token) => {
-          const color = parse(token.$value);
-
-          if (color && token.modify) {
-            color.alpha = token.modify.alpha;
-          }
-
-          if (color && color.alpha) {
-            return formatHex8(color);
-          }
-
-          return formatHex(color);
-        },
-      },
-      cssColor: {
-        type: 'value',
-        transitive: true,
-        filter: (token) => {
-          return token.path[0] === 'color';
-        },
-        transform: (token) => {
-          const color = parse(token.$value);
-
-          if (color && token.modify) {
-            color.alpha = token.modify.alpha;
-          }
-
-          return formatCss(oklch(color));
+          const color = new Color(token.$value);
+          return color.to('srgb').toString({ format: 'hex', collapse: false });
         },
       },
       vsCodeName: {
@@ -102,7 +77,7 @@ const sd = new StyleDictionary({
       vsCodeTheme: ({ dictionary, platform }) => {
         // VSCode theme JSON files have this structure
         const theme = {
-          name: `Nu Disco ${platform.themeType}`,
+          name: `Style Dictionary ${platform.themeType}`,
           type: platform.themeType,
           colors: {},
         };
@@ -137,11 +112,6 @@ const sd = new StyleDictionary({
 
         // Style Dictionary formats expect a string that will be then written to a file
         return JSON.stringify(theme, null, 2);
-      },
-    },
-    filters: {
-      css: (token) => {
-        return token.$type === 'color';
       },
     },
   },
@@ -180,7 +150,7 @@ const runSD = async (mode) => {
       },
       css: {
         buildPath: `docs/theme/dist/`,
-        transforms: ['attribute/cti', 'name/kebab', 'cssColor'],
+        transforms: ['attribute/cti', 'name/kebab'],
         prefix: 'sl',
         files: [
           {

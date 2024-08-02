@@ -1,6 +1,5 @@
 import mermaid from 'mermaid';
 import { registeredComponents } from './components/sd-playground.ts';
-import { SdColors } from './components/colors.ts';
 
 type Theme = 'dark' | 'light';
 

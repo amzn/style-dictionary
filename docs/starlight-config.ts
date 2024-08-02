@@ -28,12 +28,13 @@ export default {
         markBorderColor: 'var(--sl-color-purple)',
       },
       borderRadius: '0.25rem',
-      borderColor: 'var(--sl-color-border-secondary)',
+      borderColor: 'var(--sl-color-border-tertiary)',
       frames: {
         editorActiveTabIndicatorTopColor: 'var(--sl-color-accent)',
         editorActiveTabBackground: 'var(--sl-color-bg-code)',
         editorTabBarBackground: 'var(--sl-color-bg-secondary)',
         editorBackground: 'var(--sl-color-bg-code)',
+        frameBoxShadowCssValue: '0 0 1rem var(--sl-color-border-tertiary)',
       },
     },
     themes: [darkTheme, lightTheme],
@@ -185,7 +186,7 @@ export default {
   ],
   customCss: [
     '@shoelace-style/shoelace/dist/themes/light.css',
-    '@fontsource-variable/inter/index.css',
+    './src/fonts/font-face.css',
     './theme/dist/light.variables.css',
     './theme/dist/dark.variables.css',
     './src/styles.css',
@@ -193,5 +194,6 @@ export default {
   components: {
     Head: './src/components/Head.astro',
     Header: './src/components/Header.astro',
+    Hero: './src/components/Hero.astro',
   },
 } as StarlightUserConfig;

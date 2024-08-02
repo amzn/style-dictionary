@@ -1,0 +1,39 @@
+
+<div class="sd-install">
+  <code class="" data-code="" class=""> npm install style-dictionary </code>
+  <sl-copy-button value="npm install style-dictionary"></sl-copy-button>
+</div>
+
+<script>
+  import '@shoelace-style/shoelace/dist/components/copy-button/copy-button.js';
+</script>
+
+<style>
+  .sd-install {
+    display: flex;
+    flex-direction: row;
+    gap: var(--sl-spacing-medium);
+    align-items: center;
+    text-align: left;
+    border: 1px solid var(--sl-color-border-tertiary);
+    box-shadow: 0 0.125rem 1rem var(--sl-color-background-tertiary);
+    border-radius: 2rem;
+    backdrop-filter: blur(8px);
+    padding-inline: var(--sl-spacing-large);
+    padding-block: var(--sl-spacing-small);
+
+    --sl-tooltip-arrow-size: 0;
+    --sl-tooltip-background-color: var(--sl-color-backdrop-overlay);
+    --sl-tooltip-color: var(--sl-color-font-primary);
+  }
+
+  code {
+    font-size: 1rem;
+    flex: 1;
+  }
+
+  code:before {
+    content: '$ ';
+    color: var(--sl-color-font-tertiary);
+  }
+</style>

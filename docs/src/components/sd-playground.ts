@@ -63,7 +63,6 @@ class SdPlayground extends LitElement {
       :host {
         display: block;
         border: 1px solid var(--sl-color-border-tertiary);
-        box-shadow: 0 0.125rem 1rem var(--sl-color-background-tertiary);
         border-radius: 0.25rem;
       }
 

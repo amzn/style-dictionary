@@ -9,7 +9,8 @@ import type { Props } from '@astrojs/starlight/props';
 <div class="header sl-flex">
 	<div class="title-wrapper sl-flex">
     <a href="/" class="logo-link">
-		  <Logo />
+		  <Logo class="test" />
+			<span class="logo-link__text">Style Dictionary</span>
     </a>
 	</div>
 	<div class="search-wrapper sl-flex">
@@ -29,16 +30,21 @@ import type { Props } from '@astrojs/starlight/props';
 		justify-content: space-between;
 		align-items: center;
 		height: 100%;
+
 	}
 
-  .logo-link {
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    transform: rotate(0deg)
-  }
+	.logo-link {
+		display: inline-flex;
+		flex-direction: row;
+		align-items: center;
+		gap: 0.5rem;
+		color: var(--sl-color-font-primary);
+		text-decoration: none;
+	}
 
-  .logo-link:hover {
-    transform: rotate(-45deg);
-  }
+	.logo-link__text {
+		font-weight: bold;
+	}
 
 	.title-wrapper {
 		/* Prevent long titles overflowing and covering the search and menu buttons on narrow viewports. */
