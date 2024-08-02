@@ -67,6 +67,7 @@ Style Dictionary takes all the files it found and performs a deep merge. This al
 Allows users to configure [custom preprocessors](/reference/hooks/preprocessors), to process the merged dictionary as a whole, rather than per token file individually.
 These preprocessors have to be applied in the config, either on a global or platform level.
 Platform level preprocessors run once you get/export/format/build a platform, at the very start.
+Note that [tokens expansion](/reference/config#expand) runs after the user-configured preprocessors (for both global vs platform configured, respectively).
 
 ## 6. Transform the tokens
 
