@@ -59,6 +59,8 @@
     "test:coverage": "cd coverage/lcov-report && npx http-server -o -c-1",
     "test:update-snapshots": "web-test-runner --update-snapshots",
     "test:node": "mocha -r mocha-hooks.mjs './__integration__/**/*.test.js' './__tests__/**/*.test.js' './__node_tests__/**/*.test.js'",
+    "test:perf": "mocha -r mocha-hooks.mjs './__perf_tests__/**/*.test.js'",
+    "test:perf:debug": "web-test-runner --config wtr-perf.config.mjs --watch",
     "install-cli": "npm install -g $(npm pack)",
     "release": "npm run build && changeset publish",
     "prepare": "husky install",
