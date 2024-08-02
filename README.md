@@ -1,12 +1,8 @@
 <pre>
-<a href="https://amzn.github.io/style-dictionary/#/version_3">What's new in Style Dictionary 3.0!</a>
+<a href="https://styledictionary.com/version-4/migration/">What's new in Style Dictionary 4.0!</a>
 </pre>
 
-<pre>
-<a href="https://github.com/amzn/style-dictionary#version-4">What's coming in Style Dictionary 4.0?</a>
-</pre>
-
-<img src="docs/assets/logo.png" alt="Style Dictionary logo and mascot" title="&quot;Pascal&quot;" width="100" align="right" />
+<img src="docs/src/assets/logo.png" alt="Style Dictionary logo and mascot" title="&quot;Pascal&quot;" width="100" align="right" />
 
 [![npm version](https://img.shields.io/npm/v/style-dictionary.svg?style=flat-square)](https://badge.fury.io/js/style-dictionary)
 ![license](https://img.shields.io/npm/l/style-dictionary.svg?style=flat-square)
@@ -136,7 +132,7 @@ A style dictionary is a collection of design tokens, key/value pairs that descri
 
 ### config.json
 
-This tells the style dictionary build system how and what to build. The default file path is `config.json` or `config.js` in the root of the project, but you can name it whatever you want by passing in the `--config` flag to the [CLI](https://amzn.github.io/style-dictionary/#/using_the_cli).
+This tells the style dictionary build system how and what to build. The default file path is `config.json` or `config.js` in the root of the project, but you can name it whatever you want by passing in the `--config` flag to the [CLI](https://styledictionary.com/getting-started/using_the_cli/).
 
 ```json
 {
@@ -176,7 +172,7 @@ This tells the style dictionary build system how and what to build. The default 
 | platform.buildPath                   | String (optional) | Base path to build the files, must end with a trailing slash.                                                                                                                                                                                                                 |
 | platform.files                       | Array (optional)  | Files to be generated for this platform.                                                                                                                                                                                                                                      |
 | platform.file.destination            | String (optional) | Location to build the file, will be appended to the buildPath.                                                                                                                                                                                                                |
-| platform.file.format                 | String (optional) | Format used to generate the file. Can be a built-in one or you can create your own. [More on formats](https://amzn.github.io/style-dictionary/#/formats)                                                                                                                      |
+| platform.file.format                 | String (optional) | Format used to generate the file. Can be a built-in one or you can create your own. [More on formats](https://styledictionary.com/reference/hooks/formats/)                                                                                                                   |
 | platform.file.options                | Object (optional) | A set of extra options associated with the file.                                                                                                                                                                                                                              |
 | platform.file.options.showFileHeader | Boolean           | If the generated file should have a "Do not edit + Timestamp" header (where the format supports it). By default is "true".                                                                                                                                                    |
 
@@ -313,7 +309,7 @@ StyleDictionary.registerTransform({
 StyleDictionary.buildAllPlatforms();
 ```
 
-For more information on creating your own transforms and formats, take a look at our [docs](https://amzn.github.io/style-dictionary/).
+For more information on creating your own transforms and formats, take a look at our [docs](https://styledictionary.com).
 
 ## Version 4
 
@@ -340,7 +336,7 @@ We are very open to feedback and collaboration, feel free to reach out to us in 
 
 The mascot for Style Dictionary is ["Pascal"](https://github.com/amzn/style-dictionary/issues/97) the chameleon (seen below). You can also find them blending in as the logo throughout the documentation.
 
-<img src="docs/assets/logo.png" alt="Style Dictionary logo and mascot" title="&quot;Pascal&quot;" width="240" />
+<img src="docs/src/assets/logo.png" alt="Style Dictionary logo and mascot" title="&quot;Pascal&quot;" width="240" />
 
 ## Contributing
 
