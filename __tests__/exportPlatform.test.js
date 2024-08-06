@@ -484,7 +484,7 @@ Use log.verbosity "verbose" or use CLI option --verbose for more details.
 `);
 
         sd.log.verbosity = 'verbose';
-        await sd.exportPlatform('css');
+        await sd.exportPlatform('css', { cache: false });
 
         expect(cleanConsoleOutput(Array.from(logStub.calls)[1].args[0])).to.equal(`
 Unknown CSS Font Shorthand properties found for 1 tokens, CSS output for Font values will be missing some typography token properties as a result:
@@ -493,7 +493,7 @@ letterSpacing, paragraphSpacing, textColor for token at foo.bar
 `);
 
         sd.tokens.foo.bar.filePath = '/tokens.json';
-        await sd.exportPlatform('css');
+        await sd.exportPlatform('css', { cache: false });
 
         expect(cleanConsoleOutput(Array.from(logStub.calls)[2].args[0])).to.equal(`
 Unknown CSS Font Shorthand properties found for 1 tokens, CSS output for Font values will be missing some typography token properties as a result:
@@ -502,16 +502,16 @@ letterSpacing, paragraphSpacing, textColor for token at foo.bar in /tokens.json
 `);
 
         sd.log.verbosity = 'silent';
-        await sd.exportPlatform('css');
+        await sd.exportPlatform('css', { cache: false });
         expect(Array.from(logStub.calls)[3]).to.be.undefined;
 
         sd.log.verbosity = 'default';
         sd.log.warnings = 'disabled';
-        await sd.exportPlatform('css');
+        await sd.exportPlatform('css', { cache: false });
         expect(Array.from(logStub.calls)[3]).to.be.undefined;
 
         sd.log.warnings = 'error';
-        await expect(sd.exportPlatform('css')).to.be.eventually.rejectedWith(`
+        await expect(sd.exportPlatform('css', { cache: false })).to.be.eventually.rejectedWith(`
 Unknown CSS Font Shorthand properties found for 1 tokens, CSS output for Font values will be missing some typography token properties as a result:
 Use log.verbosity "verbose" or use CLI option --verbose for more details.
 `);
