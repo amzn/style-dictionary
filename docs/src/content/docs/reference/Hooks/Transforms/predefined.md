@@ -326,7 +326,7 @@ Transforms the value into a useful object ( for React Native support )
 
 ### size/remToSp
 
-Transforms the value from a REM size on web into a scale-independent pixel (sp) value for font sizes on Android. It WILL scale the number by a factor of 16 (or the value of 'basePxFontSize' on the platform in your config).
+Transforms the value from a REM size on web into a scale-independent pixel (sp) value for font sizes on Android. It WILL scale the number by a factor of 16 (or the value of `basePxFontSize` on the platform in your config).
 
 ```js
 // Matches: token.type === 'fontSize'
@@ -338,7 +338,7 @@ Transforms the value from a REM size on web into a scale-independent pixel (sp) 
 
 ### size/remToDp
 
-Transforms the value from a REM size on web into a density-independent pixel (dp) value for font sizes on Android. It WILL scale the number by a factor of 16 (or the value of 'basePxFontSize' on the platform in your config).
+Transforms the value from a REM size on web into a density-independent pixel (dp) value for font sizes on Android. It WILL scale the number by a factor of 16 (or the value of `basePxFontSize` on the platform in your config).
 
 ```js
 // Matches: token.type === 'fontSize'
@@ -362,7 +362,7 @@ Adds 'px' to the end of the number. Does not scale the number
 
 ### size/rem
 
-Adds 'rem' to the end of the number. Does not scale the number
+Adds 'rem' to the end of the number. Does not scale the number.
 
 ```js
 // Matches: token.type === 'dimension'
@@ -374,7 +374,8 @@ Adds 'rem' to the end of the number. Does not scale the number
 
 ### size/remToPt
 
-Scales the number by 16 (or the value of 'basePxFontSize' on the platform in your config) and adds 'pt' to the end.
+Scales the number and adds 'pt' to the end.
+The default `basePxFontSize` scale is `16`, [which can be configured on the platform in your config](https://styledictionary.com/reference/config/#platform).
 
 ```js
 // Matches: token.type === 'dimension'
@@ -382,11 +383,24 @@ Scales the number by 16 (or the value of 'basePxFontSize' on the platform in you
 '16pt';
 ```
 
+Configuring the `basePxFontSize`:
+
+```json title="config.json"
+{
+  "platforms": {
+    "css": {
+      "transforms": ["size/rem"],
+      "basePxFontSize": 14
+    }
+  }
+}
+```
+
 ---
 
 ### size/compose/remToSp
 
-Transforms the value from a REM size on web into a scale-independent pixel (sp) value for font sizes in Compose. It WILL scale the number by a factor of 16 (or the value of 'basePxFontSize' on the platform in your config).
+Transforms the value from a REM size on web into a scale-independent pixel (sp) value for font sizes in Compose. It WILL scale the number by a factor of 16 (or the value of `basePxFontSize` on the platform in your config).
 
 ```kotlin
 // Matches: token.type === 'fontSize'
@@ -398,7 +412,7 @@ Transforms the value from a REM size on web into a scale-independent pixel (sp) 
 
 ### size/compose/remToDp
 
-Transforms the value from a REM size on web into a density-independent pixel (dp) value for font sizes in Compose. It WILL scale the number by a factor of 16 (or the value of 'basePxFontSize' on the platform in your config).
+Transforms the value from a REM size on web into a density-independent pixel (dp) value for font sizes in Compose. It WILL scale the number by a factor of 16 (or the value of `basePxFontSize` on the platform in your config).
 
 ```kotlin
 // Matches: token.type === 'fontSize'
@@ -422,7 +436,7 @@ Adds the .em Compose extension to the end of a number. Does not scale the value
 
 ### size/swift/remToCGFloat
 
-Scales the number by 16 (or the value of 'basePxFontSize' on the platform in your config) to get to points for Swift and initializes a CGFloat
+Scales the number by 16 (or the value of `basePxFontSize` on the platform in your config) to get to points for Swift and initializes a CGFloat
 
 ```js
 // Matches: token.type === 'dimension'
@@ -433,7 +447,7 @@ Scales the number by 16 (or the value of 'basePxFontSize' on the platform in you
 
 ### size/remToPx
 
-Scales the number by 16 (or the value of 'basePxFontSize' on the platform in your config) and adds 'px' to the end.
+Scales the number by 16 (or the value of `basePxFontSize` on the platform in your config) and adds 'px' to the end.
 
 ```js
 // Matches: token.type === 'dimension'
@@ -738,7 +752,7 @@ Wraps the value in a double-quoted string to make a string literal.
 
 ### size/flutter/remToDouble
 
-Scales the number by 16 (or the value of 'basePxFontSize' on the platform in your config) to get to points for Flutter
+Scales the number by 16 (or the value of `basePxFontSize` on the platform in your config) to get to points for Flutter
 
 ```dart
 // Matches: token.type === 'dimension'
