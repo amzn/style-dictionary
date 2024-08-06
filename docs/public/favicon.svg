@@ -1,0 +1,20 @@
+<svg class="sd-logo" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path class="sd-logo-part" fill-rule="evenodd" clip-rule="evenodd" d="M120 120C120 70.1713 120 30.1713 120 0C53.7258 0 0 53.7258 0 120C30.8588 120 70.8588 120 120 120Z" fill-opacity="0.5"/>
+<path class="sd-logo-part" fill-rule="evenodd" clip-rule="evenodd" d="M200 120C200 75.8172 164.183 40 120 40C75.8172 40 40 75.8172 40 120C87.1927 120 173.528 120 200 120Z" fill-opacity="0.5"/>
+<path d="M47.75 110C58.7957 110 67.75 101.046 67.75 90C67.75 78.9543 58.7957 70 47.75 70C36.7043 70 27.75 78.9543 27.75 90C27.75 101.046 36.7043 110 47.75 110Z" fill="white"/>
+<path d="M47.75 100C53.2728 100 57.75 95.5228 57.75 90C57.75 84.4772 53.2728 80 47.75 80C42.2272 80 37.75 84.4772 37.75 90C37.75 95.5228 42.2272 100 47.75 100Z" fill="#303942"/>
+
+  <style>
+    .sd-logo-part {
+      fill: oklch(0.35 0.35 184 / 0.5);
+      stroke: oklch(0.35 0.35 184 / 1);
+      stroke-width: 4px;
+    }
+    @media (prefers-color-scheme: dark) {
+      .sd-logo-part {
+        fill: oklch(0.9 0.2 184 / 0.5);
+        stroke: oklch(0.9 0.2 184 / 1);
+      }
+    }
+  </style>
+</svg>
