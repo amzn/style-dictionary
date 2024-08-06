@@ -1,26 +1,28 @@
 ---
 import CallToAction from '@astrojs/starlight/components/CallToAction.astro'
 import SDInstall from './SDInstall.astro';
-
-const { data } = Astro.props.entry;
-const { title = data.title, tagline, image, actions = [] } = data.hero || {};
+import HeroGraphic from './HeroGraphic.astro';
 ---
 
 <section class="home-hero">
   <div class="home-hero-content">
-  <!-- <h1 data-page-title set:html={title} /> -->
-  <h1 data-page-title>
-    Style once<br/>
-    use everywhere
-  </h1>
-  {tagline && <div class="tagline" set:html={tagline} />}
+    <h1 data-page-title>
+      Style once<br/>
+      use everywhere
+    </h1>
+    <div class="tagline">
+      A Style Dictionary uses design tokens to define styles once and use those styles on any platform or language. It provides a single place to create and edit your styles, and exports these tokens to all the places you need - iOS, Android, CSS, JS, HTML, sketch files, style documentation, etc. It is available as a CLI through npm, but can also be used like any normal node module if you want to extend its functionality.
+    </div>
 
-  <div class="hero-actions">
-    <!-- <sd-install></sd-install> -->
-     <SDInstall />
-    <CallToAction variant='primary' link='/getting-started/installation'>Get started</CallToAction>
+    <div class="hero-actions">
+      <CallToAction variant='primary' link='/getting-started/installation'>Get started</CallToAction>
+      <SDInstall />
+    </div>
   </div>
-</div>
+
+  <div class="hero-graphic">
+    <HeroGraphic />
+  </div>
 </section>
 
 
@@ -38,29 +40,27 @@ const { title = data.title, tagline, image, actions = [] } = data.hero || {};
 	}
 
   .hero-actions {
-    display: grid;
-    grid-template-columns: max-content;
-    gap: 1rem;
+    display: flex;
+    flex-direction: row;
+    gap: var(--sl-spacing-large);
   }
 
   .home-hero-content {
-    max-width: 50rem;
-    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 2rem;
+    align-items: flex-start;
+    gap: var(--sl-spacing-x-large);
   }
 
   .home-hero {
-    text-align: center;
-    padding: 5rem;
-    margin: -2rem;
-    background-image:
-/* radial-gradient(at 75% 36%, var(--sl-color-accent-low) 0px, transparent 50%), */
-/* radial-gradient(at 63% 71%, var(--sl-color-purple) 0px, transparent 50%), */
-url('/bg.svg');
-background-repeat: no-repeat;
-background-position: center center;
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: var(--sl-spacing-x-large);
+    display: flex;
+    flex-direction: row;
+  }
+
+  .hero-graphic {
+    width: 400px;
   }
 </style>

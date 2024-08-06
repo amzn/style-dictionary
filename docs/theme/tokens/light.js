@@ -4,8 +4,8 @@ import { syntax } from './syntax/index.js';
 import { starlight } from './starlight.js';
 
 export const lightTokens = {
-  lightness: { $value: '0.4' },
-  chroma: { $value: '0.2' },
+  lightness: { $value: '0.35' },
+  chroma: { $value: '0.35' },
   hue,
   lch,
   color: {

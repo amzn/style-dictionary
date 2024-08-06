@@ -1,6 +1,7 @@
 ---
 title: Style once, use everywhere
 template: splash
+editUrl: false
 banner:
   content: |
     Version 4 is here!
@@ -10,18 +11,7 @@ hero:
 
 ---
 
-import tokens from '/public/demo-tokens.json';
+import Home from '../../components/Home.astro';
 
-## Live Demo
+<Home />
 
-Below is a showcase of how a set of DTCG tokens would be exported to CSS:
-
-<sd-playground tokens={JSON.stringify({ value: JSON.stringify(tokens, null, 2), lang: 'json'})} default-selected="tokens" id="main-demo">
-
-  <div style="height: 100%" slot="monaco-editor"></div>
-</sd-playground>
-
-Upload your JSON or ZIP of tokens and convert them to DTCG format:
-<sd-dtcg-convert></sd-dtcg-convert>
-
-[Read more about DTCG](/info/dtcg/)

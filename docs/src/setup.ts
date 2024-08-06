@@ -44,6 +44,7 @@ function getSelectedTheme() {
 }
 
 async function swapTheme(theme: Theme) {
+  currTheme = theme;
   // shoelace theme class
   document.documentElement.classList.add(`sl-theme-${theme}`);
   document.documentElement.classList.remove(`sl-theme-${theme === 'dark' ? 'light' : 'dark'}`);

@@ -6,7 +6,7 @@ export const hue = {
   yellow: { $value: `50.09` },
   lime: { $value: `84.45` },
   green: { $value: `160.09` },
-  teal: { $value: `174.23` },
+  teal: { $value: `184.23` },
   cyan: { $value: `191.09` },
   sky: { $value: `201.30` },
   blue: { $value: `221.99` },

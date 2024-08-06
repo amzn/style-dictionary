@@ -122,7 +122,7 @@ export async function init(elem: HTMLDivElement) {
 
   const resizeMonacoLayout = () => {
     editor.layout({
-      width: Math.min(800, elem.getBoundingClientRect().width),
+      width: elem.getBoundingClientRect().width,
       height: 400,
     });
   };

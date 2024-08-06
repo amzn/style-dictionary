@@ -46,7 +46,7 @@ export default {
   editLink: {
     baseUrl: 'https://github.com/amzn/style-dictionary/edit/main/docs',
   },
-  favicon: '/favicon.png',
+  favicon: '/favicon.svg',
   social: {
     github: 'https://github.com/amzn/style-dictionary',
     slack:

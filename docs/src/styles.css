@@ -111,6 +111,10 @@ a[role='tab']:hover {
   color: var(--link-color);
 }
 
+.sl-container > * + * {
+  margin-top: var(--sl-spacing-x-large);
+}
+
 .sl-markdown-content a:not(:where(.not-content *)) {
   color: var(--link-color);
   display: inline-block;
@@ -184,8 +188,12 @@ a[role='tab']:hover {
 }
 
 #graphDiv .clickable:hover .label-container {
-  stroke: #3fc6bf;
+  stroke: var(--sl-color-accent);
   stroke-width: 3px;
+}
+
+.expressive-code .mermaid {
+  padding: var(--sl-spacing-large);
 }
 
 .hidden {
@@ -206,8 +214,8 @@ a[role='tab']:hover {
 }
 
 .sidebar-pane ul ul li a {
-  padding-inline: 1rem;
-  padding-block: 0.5rem;
+  padding-inline: var(--sl-spacing-medium);
+  padding-block: var(--sl-spacing-x-small);
   display: block;
   text-decoration: none;
   color: var(--sl-color-font-tertiary);
@@ -349,7 +357,6 @@ starlight-toc li {
 .action.primary {
   background: var(--sl-color-accent-low);
   border: 1px solid var(--sl-color-accent);
-  margin: 1rem;
   box-shadow:
     0 0 1rem var(--sl-color-accent-low) inset,
     0 0 1rem var(--sl-color-accent-low);
@@ -358,7 +365,8 @@ starlight-toc li {
   font-size: 1.25rem;
   text-align: center;
   justify-content: center;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  padding-inline: var(--sl-spacing-x-large);
 }
 
 .action.primary:hover {
