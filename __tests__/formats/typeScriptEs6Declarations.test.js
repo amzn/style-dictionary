@@ -13,7 +13,7 @@
 import { expect } from 'chai';
 import formats from '../../lib/common/formats.js';
 import createFormatArgs from '../../lib/utils/createFormatArgs.js';
-import flattenTokens from '../../lib/utils/flattenTokens.js';
+import { convertTokenData } from '../../lib/utils/convertTokenData.js';
 
 const file = {
   destination: '__output/',
@@ -43,7 +43,7 @@ describe('formats', () => {
     it('should be a valid TS file', async () => {
       const output = await format(
         createFormatArgs({
-          dictionary: { tokens, allTokens: flattenTokens(tokens) },
+          dictionary: { tokens, allTokens: convertTokenData(tokens, { output: 'array' }) },
           file,
           platform: {},
         }),
@@ -68,7 +68,7 @@ describe('formats', () => {
 
       const output = await format(
         createFormatArgs({
-          dictionary: { tokens, allTokens: flattenTokens(tokens) },
+          dictionary: { tokens, allTokens: convertTokenData(tokens, { output: 'array' }) },
           file: customFile,
           platform: {},
         }),

@@ -13,7 +13,7 @@
 import { expect } from 'chai';
 import formats from '../../lib/common/formats.js';
 import createFormatArgs from '../../lib/utils/createFormatArgs.js';
-import flattenTokens from '../../lib/utils/flattenTokens.js';
+import { convertTokenData } from '../../lib/utils/convertTokenData.js';
 
 const file = {
   destination: '__output/',
@@ -86,7 +86,7 @@ describe('formats', () => {
       await expect(
         format(
           createFormatArgs({
-            dictionary: { tokens, allTokens: flattenTokens(tokens) },
+            dictionary: { tokens, allTokens: convertTokenData(tokens, { output: 'array' }) },
             file,
             platform: {},
           }),
@@ -100,7 +100,7 @@ describe('formats', () => {
       await expect(
         format(
           createFormatArgs({
-            dictionary: { tokens, allTokens: flattenTokens(tokens) },
+            dictionary: { tokens, allTokens: convertTokenData(tokens, { output: 'array' }) },
             file,
             platform: {},
             options: {
@@ -117,7 +117,7 @@ describe('formats', () => {
       await expect(
         format(
           createFormatArgs({
-            dictionary: { tokens, allTokens: flattenTokens(tokens) },
+            dictionary: { tokens, allTokens: convertTokenData(tokens, { output: 'array' }) },
             file,
             platform: {},
             options: {
@@ -136,7 +136,7 @@ describe('formats', () => {
       await expect(
         format(
           createFormatArgs({
-            dictionary: { tokens, allTokens: flattenTokens(tokens) },
+            dictionary: { tokens, allTokens: convertTokenData(tokens, { output: 'array' }) },
             file,
             platform: {},
             options: {
@@ -155,7 +155,10 @@ describe('formats', () => {
       await expect(
         format(
           createFormatArgs({
-            dictionary: { tokens: DTCGTokens, allTokens: flattenTokens(DTCGTokens) },
+            dictionary: {
+              tokens: DTCGTokens,
+              allTokens: convertTokenData(DTCGTokens, { output: 'array' }),
+            },
             file,
             platform: {},
             options: {

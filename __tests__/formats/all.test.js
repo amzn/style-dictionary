@@ -13,7 +13,7 @@
 import { expect } from 'chai';
 import formats from '../../lib/common/formats.js';
 import createFormatArgs from '../../lib/utils/createFormatArgs.js';
-import flattenTokens from '../../lib/utils/flattenTokens.js';
+import { convertTokenData } from '../../lib/utils/convertTokenData.js';
 import { deepmerge } from '../../lib/utils/deepmerge.js';
 
 const file = {
@@ -45,7 +45,7 @@ describe('formats', async () => {
       it('should match ' + key + ' snapshot', async () => {
         const output = await format(
           createFormatArgs({
-            dictionary: { tokens, allTokens: flattenTokens(tokens) },
+            dictionary: { tokens, allTokens: convertTokenData(tokens, { output: 'array' }) },
             file,
             platform: {},
           }),
@@ -65,7 +65,7 @@ describe('formats', async () => {
         });
         const output = await format(
           createFormatArgs({
-            dictionary: { tokens, allTokens: flattenTokens(tokens) },
+            dictionary: { tokens, allTokens: convertTokenData(tokens, { output: 'array' }) },
             file: _file,
             platform: {},
           }),
@@ -78,7 +78,7 @@ describe('formats', async () => {
       it('should return ' + key + ' as a string', async () => {
         const output = await format(
           createFormatArgs({
-            dictionary: { tokens, allTokens: flattenTokens(tokens) },
+            dictionary: { tokens, allTokens: convertTokenData(tokens, { output: 'array' }) },
             file,
             platform: {},
           }),

@@ -365,6 +365,7 @@ type getPlatform = (
   dictionary: {
     tokens: DesignTokens;
     allTokens: DesignToken[];
+    tokenMap: Map<string, DesignToken>;
   };
 }>;
 ```
@@ -376,7 +377,7 @@ Wrapper around [`exportPlatform`](#exportplatform), returns a bit more data.
 Returns an object with `platformConfig` and `dictionary` properties:
 
 - `platformConfig` a processed version of the user config for the platform
-- `dictionary` an object with `tokens` after transformations and reference resolutions, and an `allTokens` property which is a flattened (Array) version of that.
+- `dictionary` an object with `tokens` after transformations and reference resolutions, and an `allTokens` property which is a flattened (Array) version of that. There's also a `tokenMap` property which combines best of both worlds, it is a JavaScript Map that's keyed, making it easy to access a single token as well as iterate through them.
 
 This is useful if you want to use a Style Dictionary in JS build tools like Webpack.
 

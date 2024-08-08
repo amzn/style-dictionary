@@ -13,7 +13,7 @@
 import { expect } from 'chai';
 import formats from '../../lib/common/formats.js';
 import createFormatArgs from '../../lib/utils/createFormatArgs.js';
-import flattenTokens from '../../lib/utils/flattenTokens.js';
+import { convertTokenData } from '../../lib/utils/convertTokenData.js';
 
 const tokens = {
   size: {
@@ -100,7 +100,7 @@ describe('formats', () => {
     it('should match default snapshot', async () => {
       const f = await format(
         createFormatArgs({
-          dictionary: { tokens, allTokens: flattenTokens(tokens) },
+          dictionary: { tokens, allTokens: convertTokenData(tokens, { output: 'array' }) },
           file,
           platform: {},
         }),
@@ -114,7 +114,7 @@ describe('formats', () => {
       const file = { options: { resourceType: 'dimen' } };
       const f = await format(
         createFormatArgs({
-          dictionary: { tokens, allTokens: flattenTokens(tokens) },
+          dictionary: { tokens, allTokens: convertTokenData(tokens, { output: 'array' }) },
           file,
           platform: {},
         }),
@@ -136,7 +136,10 @@ describe('formats', () => {
       };
       const f = await format(
         createFormatArgs({
-          dictionary: { tokens: customTokens, allTokens: flattenTokens(customTokens) },
+          dictionary: {
+            tokens: customTokens,
+            allTokens: convertTokenData(customTokens, { output: 'array' }),
+          },
           file,
           platform: {},
         }),
