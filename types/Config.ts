@@ -54,6 +54,7 @@ export interface RegexOptions {
   opening_character?: string;
   closing_character?: string;
   separator?: string;
+  capture_groups?: boolean;
 }
 
 export interface GetReferencesOptions extends RegexOptions {

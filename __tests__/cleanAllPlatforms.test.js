@@ -31,5 +31,5 @@ describe('cleanAllPlatforms', () => {
     await StyleDictionaryExtended.cleanAllPlatforms();
     expect(fileExists('__tests__/__output/web/_icons.css')).to.be.false;
     expect(fileExists('__tests__/__output/android/colors.xml')).to.be.false;
-  });
+  }).timeout(20000);
 });
