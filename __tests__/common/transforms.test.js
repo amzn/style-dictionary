@@ -930,6 +930,16 @@ describe('common', () => {
         );
         expect(value).to.equal('1rem');
       });
+      it('zero value is returned without a unit', () => {
+        const value = transforms['size/rem'].transform(
+          {
+            value: '0',
+          },
+          {},
+          {},
+        );
+        expect(value).to.equal('0');
+      });
       it('should throw an error if prop value is Nan', () => {
         expect(() => transforms['size/dp'].transform({ value: 'a' }, {}, {})).to.throw();
       });
