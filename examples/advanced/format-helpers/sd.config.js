@@ -3,7 +3,7 @@ import {
   fileHeader,
   formattedVariables,
   sortByReference,
-} from 'style-dictionary';
+} from 'style-dictionary/utils';
 
 export default {
   hooks: {
