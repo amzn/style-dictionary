@@ -114,10 +114,6 @@ describe('formats', () => {
           options: {
             formatting: {
               fileHeaderTimestamp: true,
-              prefix: '$foo-',
-              suffix: ';;',
-              separator: '::',
-              lineSeparator: '\n\n',
               indentation: '    ',
               commentStyle: 'long',
               commentPosition: 'above',
