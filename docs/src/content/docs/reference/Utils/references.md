@@ -4,18 +4,18 @@ title: References
 
 These utilities have to do with token references/aliases.
 
-## usesReference
+## usesReferences
 
 Whether or not a token value contains references
 
 ```javascript title="build-tokens.js"
 import StyleDictionary from 'style-dictionary';
-import { usesReference } from 'style-dictionary/utils';
+import { usesReferences } from 'style-dictionary/utils';
 
-usesReference('{foo.bar}'); // true
-usesReference('solid {border.width} {border.color}'); // true
-usesReference('5px'); // false
-usesReference('[foo.bar]', {
+usesReferences('{foo.bar}'); // true
+usesReferences('solid {border.width} {border.color}'); // true
+usesReferences('5px'); // false
+usesReferences('[foo.bar]', {
   opening_character: '[',
   closing_character: ']',
 }); // true
@@ -109,7 +109,7 @@ You can use the `getReferences` utility to create your own custom formats that h
 
 ```js title="build-tokens.js"
 import StyleDictionary from 'style-dictionary';
-import { usesReference, getReferences, fileHeader } from 'style-dictionary/utils';
+import { usesReferences, getReferences, fileHeader } from 'style-dictionary/utils';
 
 const sd = new StyleDictionary({
   tokens: {
@@ -180,7 +180,7 @@ StyleDictionary.registerFormat({
       const originalIsReferenceExclusively = original.match(/^\{.+\}$/g);
 
       const shouldOutputRef =
-        usesReferences(original) &&
+        usesReferencess(original) &&
         (typeof options.outputReferences === 'function'
           ? outputReferences(token, { dictionary })
           : options.outputReferences);
