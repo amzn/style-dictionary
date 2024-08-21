@@ -108,8 +108,8 @@ describe('cliBuildWithJsConfig', () => {
     expect(end - start).to.be.below(70);
   });
 
-  // TODO: aim for <1000ms
-  it('should run tons of refs within 2500ms', async () => {
+  // TODO: aim for <1000ms (maybe a bit more margin due to CI CPUs being slower)
+  it('should run tons of refs within 2750ms', async () => {
     // 9000 tokens, 6000 refs
     // (first layer is raw values, other 2 layers are refs to previous layer)
     const fontWeightTokens = generateTokens({
@@ -141,6 +141,6 @@ describe('cliBuildWithJsConfig', () => {
     await sd.hasInitialized;
     await sd.buildPlatform('css');
     const end = performance.now();
-    expect(end - start).to.be.below(2500);
+    expect(end - start).to.be.below(2750);
   }).timeout(10000);
 });

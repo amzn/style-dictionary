@@ -13,7 +13,7 @@
 
 import type { DesignToken, DesignTokens, PreprocessedTokens } from './DesignToken.ts';
 import type { Filter } from './Filter.ts';
-import type { FileHeader, File, FormattingOptions } from './File.ts';
+import type { FileHeader, File, FormattingOverrides } from './File.ts';
 import type { Parser } from './Parser.ts';
 import type { Preprocessor } from './Preprocessor.ts';
 import type { Transform } from './Transform.ts';
@@ -36,7 +36,7 @@ export interface LocalOptions {
   fileHeader?: string | FileHeader;
   outputReferences?: OutputReferences;
   outputReferenceFallbacks?: boolean;
-  formatting?: FormattingOptions;
+  formatting?: FormattingOverrides;
   [key: string]: any;
 }
 
