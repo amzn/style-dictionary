@@ -39,3 +39,6 @@ jobs:
 
       - name: Browser tests
         run: npm run test
+
+      - name: Performance tests
+        run: npm run test:perf

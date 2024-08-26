@@ -104,6 +104,8 @@ In this scenario, you can call `.init()` manually, e.g. for testing or error han
 | `initConfig.verbosity` | `'silent'\|'default'\|'verbose'` | Verbosity of logs, overrides `log.verbosity` set in SD config or platform config.                                             |
 | `initConfig.warnings`  | `'error'\|'warn'\|'disabled'`    | Whether to throw warnings as errors, warn or disable warnings, overrides `log.verbosity` set in SD config or platform config. |
 
+---
+
 ### extend
 
 ```ts
@@ -154,56 +156,53 @@ const extendedSd = await sd.extend(cfg, { volume: vol });
 
 ---
 
-### exportPlatform
+### getPlatformTokens
+
+> Replaces the deprecated `exportPlatform` method, with a slightly different (expanded) return value
 
 ```ts
-type exportPlatform = (platform: string) => Promise<DesignTokens>;
+type getPlatformTokens = (platform: string, opts: { cache?: boolean }) => Promise<Dictionary>;
 ```
 
-Exports a tokens object with applied platform transforms.
+Exports a dictionary object containing the tokens as object or flat array, after platform specific transformations and reference resolutions.
 
-This is useful if you want to use a Style Dictionary in JS build tools like Webpack.
-
-| Param    | Type     | Description                                                           |
-| -------- | -------- | --------------------------------------------------------------------- |
-| platform | `string` | The platform to be exported. Must be defined on the style dictionary. |
+| Param    | Type                  | Description                                                                                                                                                          |
+| -------- | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| platform | `string`              | The platform to be exported. Must be defined on the style dictionary.                                                                                                |
+| opts     | `{ cache?: boolean }` | `cache` prop determines whether or not it should return the cached tokens if they've already been transformed/resolved earlier for this platform. `false` by default |
 
 ---
 
-### getPlatform
+### getPlatformConfig
+
+> Replaces the deprecated `getPlatform` method, returns just the PlatformConfig, use `getPlatformTokens` if you need the Dictionary
 
 ```ts
-type getPlatform = (platform: string) => Promise<{
-  platformConfig: PlatformConfig;
-  dictionary: {
-    tokens: DesignTokens;
-    allTokens: DesignToken[];
-  };
-}>;
+type getPlatformConfig = (platform: string, opts: { cache?: boolean }) => Promise<PlatformConfig>;
 ```
 
-`SDInstance.getPlatform(platform) ⇒ Promise<Object>`
+Returns a processed version of the user config for the platform.
 
-Wrapper around [`exportPlatform`](#exportplatform), returns a bit more data.
-
-Returns an object with `platformConfig` and `dictionary` properties:
-
-- `platformConfig` a processed version of the user config for the platform
-- `dictionary` an object with `tokens` after transformations and reference resolutions, and an `allTokens` property which is a flattened (Array) version of that.
-
-This is useful if you want to use a Style Dictionary in JS build tools like Webpack.
-
-| Param    | Type     | Description                                                           |
-| -------- | -------- | --------------------------------------------------------------------- |
-| platform | `string` | The platform to be exported. Must be defined on the style dictionary. |
+| Param    | Type                  | Description                                                                                                                                                          |
+| -------- | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| platform | `string`              | The platform to be exported. Must be defined on the style dictionary.                                                                                                |
+| opts     | `{ cache?: boolean }` | `cache` prop determines whether or not it should return the cached tokens if they've already been transformed/resolved earlier for this platform. `false` by default |
 
 ---
 
 ### formatPlatform
 
 ```ts
-type formatPlatform = (platform: string) => Promise<Array<{output: unknown; destination?:string}>
+type formatPlatform = (
+  platform: string,
+  opts: { cache?: boolean },
+) => Promise<Array<{ output: unknown; destination?: string }>>;
 ```
+
+| Param    | Type                  | Description                                                                                                                                                     |
+| -------- | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| platform | `string`              | Name of the platform you want to build.                                                                                                                         |
+| opts     | `{ cache?: boolean }` | `cache` prop determines whether or not it should reuse the cached tokens/config if they've already been processed earlier for this platform. `false` by default |
 
 Runs [`getPlatform`](#getplatform) under the hood, and then loops over the `files`, and formats the dictionary for each file, returning an array of file objects:
 
@@ -215,10 +214,14 @@ Runs [`getPlatform`](#getplatform) under the hood, and then loops over the `file
 ### formatAllPlatforms
 
 ```ts
-type formatAllPlatforms = () => Promise<
-  Record<string, Array<{ output: unknown; destination?: string }>>
->;
+type formatAllPlatforms = (opts: {
+  cache?: boolean;
+}) => Promise<Record<string, Array<{ output: unknown; destination?: string }>>>;
 ```
+
+| Param | Type                  | Description                                                                                                                                                     |
+| ----- | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| opts  | `{ cache?: boolean }` | `cache` prop determines whether or not it should reuse the cached tokens/config if they've already been processed earlier for this platform. `false` by default |
 
 Runs [`formatPlatform`](#formatplatform) under the hood but for each platform.
 
@@ -231,7 +234,7 @@ This is useful if you don't want to write to the filesystem but want to do somet
 ### buildPlatform
 
 ```ts
-type buildPlatform = (platform: string) => Promise<SDInstance>;
+type buildPlatform = (platform: string, opts: { cache?: boolean }) => Promise<SDInstance>;
 ```
 
 Takes a platform and performs all transforms to
@@ -242,9 +245,10 @@ build the artifacts of one platform to speed up the build process.
 This method is also used internally in [buildAllPlatforms](#buildallplatforms) to
 build each platform defined in the config.
 
-| Param    | Type     | Description                             |
-| -------- | -------- | --------------------------------------- |
-| platform | `string` | Name of the platform you want to build. |
+| Param    | Type                  | Description                                                                                                                                                     |
+| -------- | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| platform | `string`              | Name of the platform you want to build.                                                                                                                         |
+| opts     | `{ cache?: boolean }` | `cache` prop determines whether or not it should reuse the cached tokens/config if they've already been processed earlier for this platform. `false` by default |
 
 Example:
 
@@ -263,10 +267,14 @@ style-dictionary build --platform web
 ### buildAllPlatforms
 
 ```ts
-type buildAllPlatforms = () => Promise<SDInstance>;
+type buildAllPlatforms = (opts: { cache?: boolean }) => Promise<SDInstance>;
 ```
 
 Uses [`buildPlatform`](#buildplatform) under the hood for each platform.
+
+| Param | Type                  | Description                                                                                                                                                     |
+| ----- | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| opts  | `{ cache?: boolean }` | `cache` prop determines whether or not it should reuse the cached tokens/config if they've already been processed earlier for this platform. `false` by default |
 
 :::tip
 In the majority of cases, this is the method you'll use.
@@ -292,23 +300,24 @@ style-dictionary build
 ### cleanPlatform
 
 ```ts
-type cleanPlatform = (platform: string) => Promise<SDInstance>;
+type cleanPlatform = (platform: string, opts: { cache?: boolean }) => Promise<SDInstance>;
 ```
 
 Takes a platform and performs all transforms to
 the tokens object (non-mutative) then
 cleans all the files and performs the undo method of any [actions](/reference/hooks/actions).
 
-| Param    | Type     |
-| -------- | -------- |
-| platform | `string` |
+| Param    | Type                  | Description                                                                                                                                                     |
+| -------- | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| platform | `string`              | Name of the platform you want to clean.                                                                                                                         |
+| opts     | `{ cache?: boolean }` | `cache` prop determines whether or not it should reuse the cached tokens/config if they've already been processed earlier for this platform. `false` by default |
 
 ---
 
 ### cleanAllPlatforms
 
 ```ts
-type cleanAllPlatforms = () => Promise<SDInstance>;
+type cleanAllPlatforms = (opts: { cache?: boolean }) => Promise<SDInstance>;
 ```
 
 Uses [`cleanPlatform`](#cleanplatform) under the hood for each platform.
@@ -316,6 +325,65 @@ Uses [`cleanPlatform`](#cleanplatform) under the hood for each platform.
 Does the reverse of [buildAllPlatforms](#buildallplatforms) by
 performing a clean on each platform. This removes all the files
 defined in the platform and calls the undo method on any actions.
+
+| Param | Type                  | Description                                                                                                                                                     |
+| ----- | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| opts  | `{ cache?: boolean }` | `cache` prop determines whether or not it should reuse the cached tokens/config if they've already been processed earlier for this platform. `false` by default |
+
+---
+
+## Deprecated instance methods
+
+- For `exportPlatform`, use `getPlatformTokens` instead, turning off the cache option if needed.
+- For `getPlatform`, use `getPlatformConfig` insetad, turning off the cache option if needed.
+
+### exportPlatform
+
+```ts
+type exportPlatform = (platform: string, opts: { cache?: boolean }) => Promise<DesignTokens>;
+```
+
+Exports a tokens object with applied platform transforms.
+
+This is useful if you want to use a Style Dictionary in JS build tools like Webpack.
+
+| Param    | Type                  | Description                                                                                                                                                     |
+| -------- | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| platform | `string`              | Name of the platform you want to build.                                                                                                                         |
+| opts     | `{ cache?: boolean }` | `cache` prop determines whether or not it should reuse the cached tokens/config if they've already been processed earlier for this platform. `false` by default |
+
+---
+
+### getPlatform
+
+```ts
+type getPlatform = (
+  platform: string,
+  opts: { cache?: boolean },
+) => Promise<{
+  platformConfig: PlatformConfig;
+  dictionary: {
+    tokens: DesignTokens;
+    allTokens: DesignToken[];
+  };
+}>;
+```
+
+`SDInstance.getPlatform(platform) ⇒ Promise<Object>`
+
+Wrapper around [`exportPlatform`](#exportplatform), returns a bit more data.
+
+Returns an object with `platformConfig` and `dictionary` properties:
+
+- `platformConfig` a processed version of the user config for the platform
+- `dictionary` an object with `tokens` after transformations and reference resolutions, and an `allTokens` property which is a flattened (Array) version of that.
+
+This is useful if you want to use a Style Dictionary in JS build tools like Webpack.
+
+| Param    | Type                  | Description                                                                                                                                                     |
+| -------- | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| platform | `string`              | Name of the platform you want to build.                                                                                                                         |
+| opts     | `{ cache?: boolean }` | `cache` prop determines whether or not it should reuse the cached tokens/config if they've already been processed earlier for this platform. `false` by default |
 
 ---
 

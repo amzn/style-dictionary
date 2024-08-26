@@ -24,7 +24,7 @@ describe('buildPlatform', () => {
 
   it("should throw if passed a platform that doesn't exist", async () => {
     await expect(StyleDictionaryExtended.buildPlatform('foobar')).to.eventually.rejectedWith(
-      'Platform "foobar" does not exist',
+      'Please supply a valid platform, "foobar" does not exist',
     );
 
     await expect(StyleDictionaryExtended.buildPlatform('web')).to.eventually.be.fulfilled;
