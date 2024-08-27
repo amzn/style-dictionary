@@ -481,6 +481,7 @@ Use log.verbosity "verbose" or use CLI option --verbose for more details.`;
         expect(cleanConsoleOutput(logStub.firstCall.args[0])).to.equal(`
 Unknown CSS Font Shorthand properties found for 1 tokens, CSS output for Font values will be missing some typography token properties as a result:
 Use log.verbosity "verbose" or use CLI option --verbose for more details.
+Refer to: https://styledictionary.com/reference/logging/
 `);
 
         sd.log.verbosity = 'verbose';

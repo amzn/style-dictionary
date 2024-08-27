@@ -60,7 +60,8 @@ Collision detected at: size.padding.xxl! Original value: true, New value: true
 snapshots["StyleDictionary class collisions should throw a brief error if the collision is in source files and log is set to error and verbosity default"] = 
 `
 Token collisions detected (28):
-Use log.verbosity "verbose" or use CLI option --verbose for more details.`;
+Use log.verbosity "verbose" or use CLI option --verbose for more details.
+Refer to: https://styledictionary.com/reference/logging/`;
 /* end snapshot StyleDictionary class collisions should throw a brief error if the collision is in source files and log is set to error and verbosity default */
 
 snapshots["StyleDictionary class formatFile should support asynchronous formats"] = 

@@ -62,7 +62,8 @@ css
 ⚠️ __tests__/__output/css/vars.css
 While building vars.css, token collisions were found; output may be unexpected. Ignore this warning if intentional.
 
-Use log.verbosity "verbose" or use CLI option --verbose for more details.\n`);
+Use log.verbosity "verbose" or use CLI option --verbose for more details.
+Refer to: https://styledictionary.com/reference/logging/\n`);
     });
 
     it('should log verbosely if --verbose is used', () => {
