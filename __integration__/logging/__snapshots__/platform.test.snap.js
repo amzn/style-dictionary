@@ -23,6 +23,7 @@ snapshots["integration logging platform property reference errors should throw a
 Reference Errors:
 Some token references (1) could not be found.
 Use log.verbosity "verbose" or use CLI option --verbose for more details.
+Refer to: https://styledictionary.com/reference/logging/
 `;
 /* end snapshot integration logging platform property reference errors should throw and notify users of unknown references */
 
@@ -31,6 +32,7 @@ snapshots["integration logging platform property reference errors circular refer
 Reference Errors:
 Some token references (2) could not be found.
 Use log.verbosity "verbose" or use CLI option --verbose for more details.
+Refer to: https://styledictionary.com/reference/logging/
 `;
 /* end snapshot integration logging platform property reference errors circular references should throw and notify users */
 

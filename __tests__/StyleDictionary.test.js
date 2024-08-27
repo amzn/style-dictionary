@@ -416,6 +416,7 @@ Use log.verbosity "verbose" or use CLI option --verbose for more details.
 Reference Errors:
 Some token references (1) could not be found.
 Use log.verbosity "verbose" or use CLI option --verbose for more details.
+Refer to: https://styledictionary.com/reference/logging/
 `);
     });
 
@@ -473,6 +474,7 @@ Use log.verbosity "verbose" or use CLI option --verbose for more details.
 Reference Errors:
 Some token references (1) could not be found.
 Use log.verbosity "verbose" or use CLI option --verbose for more details.
+Refer to: https://styledictionary.com/reference/logging/
 `);
 
       expect(clearSDMeta(transformed)).to.eql({
