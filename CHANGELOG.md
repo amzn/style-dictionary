@@ -1,5 +1,53 @@
 # Changelog
 
+## 4.1.0
+
+### Minor Changes
+
+- ccf27b7: Prevent duplicate redundant calls to StyleDictionary class methods by caching platform specific config & tokens results.
+
+  Added reusable methods:
+
+  - `getPlatformTokens()` -> grabs the `tokens`/`allTokens`(new! `exportPlatform` does not return this) for a specific platform, after running platform specific preprocessors and transforms. This replaces the old `exportPlatform` method which is now deprecated and will be removed in v5.
+  - `getPlatformConfig()` -> grabs the processed/transformed `PlatformConfig` for a specific platform, replaces the now deprecated `getPlatform` method which will be removed in v5.
+
+  The reasons for deprecating those methods and replacing them with new ones is to reduce method ambiguity and make them more pure.
+
+  Add new options object to methods:
+
+  - `getPlatformTokens`
+  - `getPlatformConfig`
+  - `exportPlatform` (deprecated, see above)
+  - `getPlatform` (deprecated, see above)
+  - `formatPlatform`
+  - `formatAllPlatforms`
+  - `buildPlatform`
+  - `buildAllPlatforms`
+  - `cleanPlatform`
+  - `cleanAllPlatforms`
+
+  with property `cache`, which if set to `false`, will disable this caching of generating the platform specific config / tokens, e.g.:
+
+  ```js
+  await sd.exportPlatform('css', { cache: false });
+  await sd.buildAllPlatforms('css', { cache: false });
+  ```
+
+  Expectation is that this is usually not useful for majority of users, unless for example you're testing multiple runs of StyleDictionary while changing tokens or platform configs in between those runs.
+
+### Patch Changes
+
+- 2ec9a44: `size/rem` transform to leave 0 (string or number) values as is, since 0 doesn't need a unit.
+- f317430: Added link to logging documentation inside all of the warnings and errors that refer to verbosity.
+- 6275983: Respect `formatting` options in scss map-deep/map-flat formats, those that make sense:
+
+  - `commentPosition`
+  - `commentStyle`
+  - `indentation`
+
+  Also export a new type interface `FormattingOverrides`, which is a limited version of `FormattingOptions`.
+  These contain the formatting options that can be overridden by users, whereas the full version is meant for the format helper utilities such as `createPropertyFormatter`/`formattedVariables`.
+
 ## 4.0.1
 
 ### Patch Changes
