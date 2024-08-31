@@ -9,6 +9,36 @@ Version 4 of Style-Dictionary comes with a good amount of breaking changes compa
 In this document, we will outline those breaking changes, ordered from most impactful to least.
 Before and after examples are added to enable you to adjust your code to account for the changes.
 
+To help with the upgrade, we’ve worked with the team at codemod.com to publish codemods that will automatically update your code to many of the new APIs and patterns in Style Dictionary v4.
+
+Run all codemods listed in this guide with the Style Dictionary codemod recipe:
+
+  ```bash     
+  npx codemod styledictionary/4/migration-recipe
+  ```
+
+This will run the following codemods:
+- styledictionary/4/asynchronous-api
+- styledictionary/4/asynchronous-api-file-headers
+- styledictionary/4/format-helpers
+- styledictionary/4/formatting-options
+- styledictionary/4/hook-api-actions
+- styledictionary/4/hook-api-file-header
+- styledictionary/4/hook-api-filters
+- styledictionary/4/hook-api-formats
+- styledictionary/4/hook-api-parsers
+- styledictionary/4/hook-api-preprocessors
+- styledictionary/4/hook-api-transform
+- styledictionary/4/hook-api-transform-groups
+- styledictionary/4/instantiating-style-dictionary
+- styledictionary/4/logging
+- styledictionary/4/module-common-js
+- styledictionary/4/reference-utils
+- styledictionary/4/type
+- styledictionary/4/updated-and-removed-transforms
+
+Each of these codemods automates the changes listed in this migration guide.
+
 ## ES Modules instead of CommonJS
 
 There are different ways to write JavaScript, NodeJS came up with CommonJS format and later browsers brought ES Modules format which NodeJS also supports.
@@ -30,6 +60,12 @@ const StyleDictionary = require('style-dictionary');
 import StyleDictionary from 'style-dictionary';
 ```
 
+> **Note**: Codemod to handle ES Modules with:
+>
+> ```bash
+> npx codemod@latest styledictionary/4/module-common-js
+> ```
+
 ## Instantiating Style Dictionary
 
 Style Dictionary has become a class now in version 4 rather than just a regular JS object.
@@ -50,6 +86,12 @@ await sd.hasInitialized;
 
 console.log(sd.tokens);
 ```
+
+> **Note**: Codemod instantiating Style Dictionary with:
+>
+> ```bash
+> npx codemod@latest styledictionary/4/instantiating-style-dictionary
+> ```
 
 ## Asynchronous API
 
@@ -109,6 +151,18 @@ StyleDictionary.registerFormat({
 });
 ```
 
+> **Note**: Codemod asynchronous API with:
+>
+> ```bash
+> npx codemod@latest styledictionary/4/asynchronous-api
+> ```
+
+> **Note**: Codemod file headers to be asynchronous with:
+>
+> ```bash
+> npx codemod@latest styledictionary/4/asynchronous-api-file-headers
+> ```
+
 ## Hooks APIs
 
 We've given a name to all of the things that you can register which will execute custom behavior during the Style Dictionary lifecycle: `hooks`.
@@ -154,6 +208,12 @@ export default {
 };
 ```
 
+> **Note**: Codemod hook APIs with:
+>
+> ```bash
+> npx codemod@latest styledictionary/4/hook-api-parsers
+> ```
+
 ### Preprocessors
 
 Preprocessors, when registered, would always apply on a global level, without explicitly applying them in the config.
@@ -189,6 +249,12 @@ export default {
 };
 ```
 
+> **Note**: Codemod hook APIs with:
+>
+> ```bash
+> npx codemod@latest styledictionary/4/hook-api-preprocessors
+> ```
+
 ### Transform Groups
 
 Transform groups, when registered, are put inside the `hooks.transformGroups` property now, as opposed to `transformGroup`.
@@ -215,6 +281,12 @@ export default {
   },
 };
 ```
+
+> **Note**: Codemod hook APIs with:
+>
+> ```bash
+> npx codemod@latest styledictionary/4/hook-api-transform-groups
+> ```
 
 ### Transforms
 
@@ -267,6 +339,12 @@ export default {
 };
 ```
 
+> **Note**: Codemod hook APIs with:
+>
+> ```bash
+> npx codemod@latest styledictionary/4/hook-api-transform
+> ```
+
 ### Formats
 
 Formats, when registered, are put inside the `hooks.formats` property now, as opposed to `format`.
@@ -311,6 +389,12 @@ export default {
 };
 ```
 
+> **Note**: Codemod hook APIs with:
+>
+> ```bash
+> npx codemod@latest styledictionary/4/hook-api-formats
+> ```
+
 ### File headers
 
 File headers, when registered, are put inside the `hooks.fileHeaders` property now, as opposed to `fileHeader`.
@@ -335,6 +419,12 @@ export default {
   },
 };
 ```
+
+> **Note**: Codemod hook APIs with:
+>
+> ```bash
+> npx codemod@latest styledictionary/4/hook-api-file-header
+> ```
 
 ### Filters
 
@@ -379,6 +469,12 @@ StyleDictionary.registerFilter({
 These changes also apply for the [filter function inside transforms](#transforms).
 :::
 
+> **Note**: Codemod hook APIs with:
+>
+> ```bash
+> npx codemod@latest styledictionary/4/hook-api-filters
+> ```
+
 ### Actions
 
 Actions, when registered, are put inside the `hooks.actions` property now, as opposed to `action`.
@@ -411,6 +507,12 @@ export default {
   },
 };
 ```
+
+> **Note**: Codemod hook APIs with:
+>
+> ```bash
+> npx codemod@latest styledictionary/4/hook-api-actions
+> ```
 
 ## CTI reliance
 
@@ -466,6 +568,12 @@ Additionally, the following transforms have changed:
 }
 ```
 
+> **Note**: Codemod updated and removed transforms with:
+>
+> ```bash
+> npx codemod@latest styledictionary/4/updated-and-removed-transforms
+> ```
+
 ## Package Entrypoints
 
 We've adopted [package entrypoints](https://nodejs.org/api/packages.html#package-entry-points), which is also referred to as export maps.
@@ -518,6 +626,12 @@ import { fileHeader, formattedVariables } from 'style-dictionary/utils';
 
 const { fileHeader, formattedVariables } = StyleDictionary.formatHelpers;
 ```
+
+> **Note**: Codemod format helpers with:
+>
+> ```bash
+> npx codemod@latest styledictionary/4/format-helpers
+> ```
 
 ## Formatting options
 
@@ -577,6 +691,12 @@ In v3, the following options were put on the file properties level itself next t
 }
 ```
 
+> **Note**: Codemod formatting options with:
+>
+> ```bash
+> npx codemod@latest styledictionary/4/formatting-options
+> ```
+
 ## fileHeader default timestamp
 
 For all formats using the `fileHeader` `formatHelpers` utility (most of the built-ins do), it will no longer display a timestamp in the fileHeader output by default. This is now an opt-in by setting `file.formatting.fileHeaderTimestamp` to `true`. The reason for making this opt-in now is that using Style Dictionary in the context of a CI (continuous integration) pipeline is a common use-case, and when running on pull request event, output files always show a diff in git due to the timestamp changing, which often just means that the diff is bloated by redundancy.
@@ -629,6 +749,12 @@ declare type DesignToken = StyleDictionary.DesignToken;
 declare type Transform = StyleDictionary.Transform;
 ```
 
+> **Note**: Codemod type with:
+>
+> ```bash
+> npx codemod@latest styledictionary/4/type
+> ```
+
 [`typescript/module-declarations` format](/reference/hooks/formats/predefined#typescriptmodule-declarations) is updated with current DesignToken type interface, and type interface changes are technically always breaking, which is why it's mentioned here.
 
 ## Reference utils
@@ -662,6 +788,12 @@ StyleDictionary.registerFormat({
 ```
 
 In addition, we've added a [resolveReferences](/reference/utils/references#resolvereferences) utility to make it easy to get the resolved value of a token.
+
+> **Note**: Codemod reference utilities with:
+>
+> ```bash
+> npx codemod@latest styledictionary/4/reference-utils
+> ```
 
 ## OutputReferences function
 
@@ -716,6 +848,12 @@ you can now also customize the verbosity of the logs and silence warnings and su
   }
 }
 ```
+
+> **Note**: Codemod logging configuration with:
+>
+> ```bash
+> npx codemod@latest styledictionary/4/logging
+> ```
 
 ## Assets in CSS
 
