@@ -17,6 +17,7 @@ snapshots["integration name collisions should warn users of name collisions for 
 `⚠️ __integration__/build/variables.css
 While building variables.css, token collisions were found; output may be unexpected. Ignore this warning if intentional.
 
-Use log.verbosity "verbose" or use CLI option --verbose for more details.`;
+Use log.verbosity "verbose" or use CLI option --verbose for more details.
+Refer to: https://styledictionary.com/reference/logging/`;
 /* end snapshot integration name collisions should warn users of name collisions for flat files, brief version */
 
