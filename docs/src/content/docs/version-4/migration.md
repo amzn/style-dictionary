@@ -9,6 +9,10 @@ Version 4 of Style-Dictionary comes with a good amount of breaking changes compa
 In this document, we will outline those breaking changes, ordered from most impactful to least.
 Before and after examples are added to enable you to adjust your code to account for the changes.
 
+:::note
+**Important:** Version 4 of Style Dictionary requires Node.js 18+.
+:::
+
 To help with the upgrade, we’ve worked with the team at codemod.com to publish codemods that will automatically update your code to many of the new APIs and patterns in Style Dictionary v4.
 
 Run all codemods listed in this guide with the Style Dictionary codemod recipe:
@@ -38,6 +42,7 @@ This will run the following codemods:
 - styledictionary/4/updated-and-removed-transforms
 
 Each of these codemods automates the changes listed in this migration guide.
+
 
 ## ES Modules instead of CommonJS
 
