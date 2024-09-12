@@ -9,6 +9,10 @@ Version 4 of Style-Dictionary comes with a good amount of breaking changes compa
 In this document, we will outline those breaking changes, ordered from most impactful to least.
 Before and after examples are added to enable you to adjust your code to account for the changes.
 
+:::note
+**Important:** Version 4 of Style Dictionary requires Node.js 18+.
+:::
+
 ## ES Modules instead of CommonJS
 
 There are different ways to write JavaScript, NodeJS came up with CommonJS format and later browsers brought ES Modules format which NodeJS also supports.
