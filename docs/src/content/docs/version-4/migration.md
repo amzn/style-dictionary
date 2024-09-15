@@ -648,6 +648,8 @@ In v3, the following options were put on the file properties level itself next t
   - `compose/object`
   - `flutter/class.dart`
   - `ios-swift/any.swift`
+  - `ios-swift/class.swift`
+  - `ios-swift/enum.swift`
   - `ios/colors.h`
   - `ios/colors.m`
   - `ios/singleton.h`
