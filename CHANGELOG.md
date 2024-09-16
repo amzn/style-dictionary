@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.1.1
+
+### Patch Changes
+
+- 5db3521: Add `iosSwiftEnumOpts.className` and `iosSwiftAnyOpts.className` formats property documentation
+- 23f8a25: Use cp and rmdir commands for `copy_assets` do and undo methods, since they affect directories, not files.
+
 ## 4.1.0
 
 ### Minor Changes
