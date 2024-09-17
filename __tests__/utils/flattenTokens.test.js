@@ -67,5 +67,29 @@ describe('utils', () => {
       const sortedRet = ret.sort(sortBy('value'));
       expect(sortedRet).to.eql(sortedExpectedRet);
     });
+
+    it('should return nested leaf node values using DTCG spec as an array', () => {
+      const tokens = {
+        color: {
+          black: {
+            name: 'color.black',
+            $value: '#000000',
+            $type: 'color',
+          },
+          white: {
+            name: 'color.white',
+            $value: '#FFFFFF',
+            $type: 'color',
+          },
+        },
+      };
+      const ret = flattenTokens(tokens, { usesDtcg: true });
+
+      const expected_ret = [tokens.color.black, tokens.color.white];
+      const sortedExpectedRet = expected_ret.sort(sortBy('value'));
+      const sortedRet = ret.sort(sortBy('value'));
+
+      expect(sortedRet).to.eql(sortedExpectedRet);
+    });
   });
 });
