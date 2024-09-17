@@ -17,11 +17,12 @@ To help with the upgrade, we’ve worked with the team at [Codemod](https://gith
 
 Run all codemods listed in this guide with the [Style Dictionary codemod recipe](https://go.codemod.com/style-dictionary-recipe):
 
-  ```bash     
-  npx codemod styledictionary/4/migration-recipe
-  ```
+```bash
+npx codemod styledictionary/4/migration-recipe
+```
 
 This will run the following codemods:
+
 - [`styledictionary/4/asynchronous-api`](https://go.codemod.com/sd-async-api)
 - [`styledictionary/4/asynchronous-api-file-headers`](https://go.codemod.com/sd-async-api-file-headers)
 - [`styledictionary/4/format-helpers`](https://go.codemod.com/sd-format-helpers)
@@ -43,6 +44,7 @@ This will run the following codemods:
 
 Each of these codemods automates the changes listed in this migration guide.
 
+If a codemod does not work as expected, please [open an issue](https://go.codemod.com/codemod-issue) or use `npx codemod feedback`.
 
 ## ES Modules instead of CommonJS
 
@@ -65,11 +67,15 @@ const StyleDictionary = require('style-dictionary');
 import StyleDictionary from 'style-dictionary';
 ```
 
-> **Note**: Codemod to handle ES Modules with:
->
-> ```bash
-> npx codemod@latest styledictionary/4/module-common-js
-> ```
+:::tip
+
+Codemod to handle ES Modules with:
+
+```bash
+npx codemod@latest styledictionary/4/module-common-js
+```
+
+:::
 
 ## Instantiating Style Dictionary
 
@@ -92,11 +98,15 @@ await sd.hasInitialized;
 console.log(sd.tokens);
 ```
 
-> **Note**: Codemod instantiating Style Dictionary with:
->
-> ```bash
-> npx codemod@latest styledictionary/4/instantiating-style-dictionary
-> ```
+:::tip
+
+Codemod instantiating Style Dictionary with:
+
+```bash
+npx codemod@latest styledictionary/4/instantiating-style-dictionary
+```
+
+:::
 
 ## Asynchronous API
 
@@ -156,17 +166,25 @@ StyleDictionary.registerFormat({
 });
 ```
 
-> **Note**: Codemod asynchronous API with:
->
-> ```bash
-> npx codemod@latest styledictionary/4/asynchronous-api
-> ```
+:::tip
 
-> **Note**: Codemod file headers to be asynchronous with:
->
-> ```bash
-> npx codemod@latest styledictionary/4/asynchronous-api-file-headers
-> ```
+Codemod asynchronous API with:
+
+```bash
+npx codemod@latest styledictionary/4/asynchronous-api
+```
+
+:::
+
+:::tip
+
+Codemod file headers to be asynchronous with:
+
+```bash
+npx codemod@latest styledictionary/4/asynchronous-api-file-headers
+```
+
+:::
 
 ## Hooks APIs
 
@@ -213,11 +231,15 @@ export default {
 };
 ```
 
-> **Note**: Codemod hook APIs with:
->
-> ```bash
-> npx codemod@latest styledictionary/4/hook-api-parsers
-> ```
+:::tip
+
+Codemod hook APIs with:
+
+```bash
+npx codemod@latest styledictionary/4/hook-api-parsers
+```
+
+:::
 
 ### Preprocessors
 
@@ -254,11 +276,15 @@ export default {
 };
 ```
 
-> **Note**: Codemod hook APIs with:
->
-> ```bash
-> npx codemod@latest styledictionary/4/hook-api-preprocessors
-> ```
+:::tip
+
+Codemod hook API preprocessors with:
+
+```bash
+npx codemod@latest styledictionary/4/hook-api-preprocessors
+```
+
+:::
 
 ### Transform Groups
 
@@ -287,11 +313,15 @@ export default {
 };
 ```
 
-> **Note**: Codemod hook APIs with:
->
-> ```bash
-> npx codemod@latest styledictionary/4/hook-api-transform-groups
-> ```
+:::tip
+
+Codemod hook API transform groups with:
+
+```bash
+npx codemod@latest styledictionary/4/hook-api-transform-groups
+```
+
+:::
 
 ### Transforms
 
@@ -344,11 +374,15 @@ export default {
 };
 ```
 
-> **Note**: Codemod hook APIs with:
->
-> ```bash
-> npx codemod@latest styledictionary/4/hook-api-transform
-> ```
+:::tip
+
+Codemod hook API transforms with:
+
+```bash
+npx codemod@latest styledictionary/4/hook-api-transform
+```
+
+:::
 
 ### Formats
 
@@ -394,11 +428,15 @@ export default {
 };
 ```
 
-> **Note**: Codemod hook APIs with:
->
-> ```bash
-> npx codemod@latest styledictionary/4/hook-api-formats
-> ```
+:::tip
+
+Codemod hook API formats with:
+
+```bash
+npx codemod@latest styledictionary/4/hook-api-formats
+```
+
+:::
 
 ### File headers
 
@@ -425,11 +463,15 @@ export default {
 };
 ```
 
-> **Note**: Codemod hook APIs with:
->
-> ```bash
-> npx codemod@latest styledictionary/4/hook-api-file-header
-> ```
+:::tip
+
+Codemod hook API file headers with:
+
+```bash
+npx codemod@latest styledictionary/4/hook-api-file-header
+```
+
+:::
 
 ### Filters
 
@@ -474,11 +516,15 @@ StyleDictionary.registerFilter({
 These changes also apply for the [filter function inside transforms](#transforms).
 :::
 
-> **Note**: Codemod hook APIs with:
->
-> ```bash
-> npx codemod@latest styledictionary/4/hook-api-filters
-> ```
+:::tip
+
+Codemod hook API filters with:
+
+```bash
+npx codemod@latest styledictionary/4/hook-api-filters
+```
+
+:::
 
 ### Actions
 
@@ -513,11 +559,15 @@ export default {
 };
 ```
 
-> **Note**: Codemod hook APIs with:
->
-> ```bash
-> npx codemod@latest styledictionary/4/hook-api-actions
-> ```
+:::tip
+
+Codemod hook API actions with:
+
+```bash
+npx codemod@latest styledictionary/4/hook-api-actions
+```
+
+:::
 
 ## CTI reliance
 
@@ -573,11 +623,15 @@ Additionally, the following transforms have changed:
 }
 ```
 
-> **Note**: Codemod updated and removed transforms with:
->
-> ```bash
-> npx codemod@latest styledictionary/4/updated-and-removed-transforms
-> ```
+:::tip
+
+Codemod updated and removed transforms with:
+
+```bash
+npx codemod@latest styledictionary/4/updated-and-removed-transforms
+```
+
+:::
 
 ## Package Entrypoints
 
@@ -632,11 +686,15 @@ import { fileHeader, formattedVariables } from 'style-dictionary/utils';
 const { fileHeader, formattedVariables } = StyleDictionary.formatHelpers;
 ```
 
-> **Note**: Codemod format helpers with:
->
-> ```bash
-> npx codemod@latest styledictionary/4/format-helpers
-> ```
+:::tip
+
+Codemod format helpers with:
+
+```bash
+npx codemod@latest styledictionary/4/format-helpers
+```
+
+:::
 
 ## Formatting options
 
@@ -698,11 +756,15 @@ In v3, the following options were put on the file properties level itself next t
 }
 ```
 
-> **Note**: Codemod formatting options with:
->
-> ```bash
-> npx codemod@latest styledictionary/4/formatting-options
-> ```
+:::tip
+
+Codemod formatting options with:
+
+```bash
+npx codemod@latest styledictionary/4/formatting-options
+```
+
+:::
 
 ## fileHeader default timestamp
 
@@ -756,11 +818,15 @@ declare type DesignToken = StyleDictionary.DesignToken;
 declare type Transform = StyleDictionary.Transform;
 ```
 
-> **Note**: Codemod type with:
->
-> ```bash
-> npx codemod@latest styledictionary/4/type
-> ```
+:::tip
+
+Codemod types with:
+
+```bash
+npx codemod@latest styledictionary/4/type
+```
+
+:::
 
 [`typescript/module-declarations` format](/reference/hooks/formats/predefined#typescriptmodule-declarations) is updated with current DesignToken type interface, and type interface changes are technically always breaking, which is why it's mentioned here.
 
@@ -796,11 +862,15 @@ StyleDictionary.registerFormat({
 
 In addition, we've added a [resolveReferences](/reference/utils/references#resolvereferences) utility to make it easy to get the resolved value of a token.
 
-> **Note**: Codemod reference utilities with:
->
-> ```bash
-> npx codemod@latest styledictionary/4/reference-utils
-> ```
+:::tip
+
+Codemod reference utilities with:
+
+```bash
+npx codemod@latest styledictionary/4/reference-utils
+```
+
+:::
 
 ## OutputReferences function
 
@@ -856,11 +926,15 @@ you can now also customize the verbosity of the logs and silence warnings and su
 }
 ```
 
-> **Note**: Codemod logging configuration with:
->
-> ```bash
-> npx codemod@latest styledictionary/4/logging
-> ```
+:::tip
+
+Codemod logging configurations with:
+
+```bash
+npx codemod@latest styledictionary/4/logging
+```
+
+:::
 
 ## Assets in CSS
 
