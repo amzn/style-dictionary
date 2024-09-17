@@ -13,33 +13,33 @@ Before and after examples are added to enable you to adjust your code to account
 **Important:** Version 4 of Style Dictionary requires Node.js 18+.
 :::
 
-To help with the upgrade, we’ve worked with the team at codemod.com to publish codemods that will automatically update your code to many of the new APIs and patterns in Style Dictionary v4.
+To help with the upgrade, we’ve worked with the team at [Codemod](https://github.com/codemod-com/codemod) to publish codemods that will automatically update your code to many of the new APIs and patterns in Style Dictionary v4.
 
-Run all codemods listed in this guide with the Style Dictionary codemod recipe:
+Run all codemods listed in this guide with the [Style Dictionary codemod recipe](https://go.codemod.com/style-dictionary-recipe):
 
   ```bash     
   npx codemod styledictionary/4/migration-recipe
   ```
 
 This will run the following codemods:
-- styledictionary/4/asynchronous-api
-- styledictionary/4/asynchronous-api-file-headers
-- styledictionary/4/format-helpers
-- styledictionary/4/formatting-options
-- styledictionary/4/hook-api-actions
-- styledictionary/4/hook-api-file-header
-- styledictionary/4/hook-api-filters
-- styledictionary/4/hook-api-formats
-- styledictionary/4/hook-api-parsers
-- styledictionary/4/hook-api-preprocessors
-- styledictionary/4/hook-api-transform
-- styledictionary/4/hook-api-transform-groups
-- styledictionary/4/instantiating-style-dictionary
-- styledictionary/4/logging
-- styledictionary/4/module-common-js
-- styledictionary/4/reference-utils
-- styledictionary/4/type
-- styledictionary/4/updated-and-removed-transforms
+- [`styledictionary/4/asynchronous-api`](https://go.codemod.com/sd-async-api)
+- [`styledictionary/4/asynchronous-api-file-headers`](https://go.codemod.com/sd-async-api-file-headers)
+- [`styledictionary/4/format-helpers`](https://go.codemod.com/sd-format-helpers)
+- [`styledictionary/4/formatting-options`](https://go.codemod.com/sd-formatting-options)
+- [`styledictionary/4/hook-api-actions`](https://go.codemod.com/sd-hook-api-actions)
+- [`styledictionary/4/hook-api-file-header`](https://go.codemod.com/sd-hook-api-file-header)
+- [`styledictionary/4/hook-api-filters`](https://go.codemod.com/sd-hook-api-filters)
+- [`styledictionary/4/hook-api-formats`](https://go.codemod.com/sd-hook-api-formats)
+- [`styledictionary/4/hook-api-parsers`](https://go.codemod.com/sd-hook-api-parsers)
+- [`styledictionary/4/hook-api-preprocessors`](https://go.codemod.com/sd-hook-preprocessors)
+- [`styledictionary/4/hook-api-transform`](https://go.codemod.com/sd-hook-transform)
+- [`styledictionary/4/hook-api-transform-groups`](https://go.codemod.com/sd-hook-api)
+- [`styledictionary/4/instantiating-style-dictionary`](https://go.codemod.com/sd-instantiating)
+- [`styledictionary/4/logging`](https://codemod.com/registry/styledictionary-4-logging)
+- [`styledictionary/4/module-common-js`](https://go.codemod.com/sd-module-common-js)
+- [`styledictionary/4/reference-utils`](https://go.codemod.com/sd-reference-utils)
+- [`styledictionary/4/type`](https://go.codemod.com/sd-type)
+- [`styledictionary/4/updated-and-removed-transforms`](https://go.codemod.com/sd-update-transforms)
 
 Each of these codemods automates the changes listed in this migration guide.
 
