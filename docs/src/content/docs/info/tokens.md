@@ -253,7 +253,7 @@ This example would show a warning in the console that you have a collision at `c
 
 One way to write your design token files is to write them in Javascript rather than JSON. The only requirement for writing your source files in Javascript is to use an ES Module containing a default export of a plain object. For example:
 
-```javascript title="config.js"
+```javascript title="color.js"
 export default {
   color: {
     base: {
@@ -265,7 +265,7 @@ export default {
 
 is equivalent to this JSON file:
 
-```json title="config.json"
+```json title="color.json"
 {
   "color": {
     "base": {
