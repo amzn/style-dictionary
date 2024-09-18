@@ -1,6 +1,15 @@
 export type { Action } from './Action.ts';
 
-export type { PlatformConfig, Config, LocalOptions, LogConfig } from './Config.ts';
+export type {
+  PlatformConfig,
+  Config,
+  LocalOptions,
+  LogConfig,
+  Hooks,
+  ExpandFilter,
+  Expand,
+  ExpandConfig,
+} from './Config.ts';
 
 export type {
   DesignToken,

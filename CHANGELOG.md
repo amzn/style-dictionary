@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.1.2
+
+### Patch Changes
+
+- e9cce6a: Reuse static hooks in the constructor to set instance hooks prop, to avoid discarding built-in hooks overwrites by consumers.
+- b48d0e9: Add missing type interfaces, most notably the ExpandConfig types.
+
 ## 4.1.1
 
 ### Patch Changes

@@ -8,6 +8,10 @@ These utilities have to do with processing/formatting tokens object.
 
 Flatten dictionary tokens object to an array of flattened tokens.
 
+:::note
+Only the "value" / "$value" property is required for this utility to consider a leaf node a "token" to be added to the flattened array output.
+:::
+
 ```javascript title="build-tokens.js"
 import StyleDictionary from 'style-dictionary';
 import { flattenTokens } from 'style-dictionary/utils';

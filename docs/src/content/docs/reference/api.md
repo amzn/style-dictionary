@@ -391,6 +391,7 @@ This is useful if you want to use a Style Dictionary in JS build tools like Webp
 
 :::tip
 Can also be used on the instance if you want to register something only on that particular StyleDictionary instance, as opposed to registering it globally for all instances.
+Registering on the class means all **future** created instances will be affected. **Priorly** created instances will not be affected.
 :::
 
 ### registerAction
