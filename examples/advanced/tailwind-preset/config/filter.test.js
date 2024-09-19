@@ -4,12 +4,12 @@ import { isColor } from './filter.js';
 
 describe('isColor', () => {
   it('should handle legacy and dtcg formats', () => {
-    const token = { type: 'color' };
-    expect(isColor(token, { usesDtcg: false })).to.equal(true);
-    expect(isColor(token, { usesDtcg: true })).to.equal(false);
+    expect(isColor({ type: 'color' }, { usesDtcg: false })).to.equal(true);
+    expect(isColor({ type: 'color' }, { usesDtcg: true })).to.equal(false);
+    expect(isColor({ type: 'fontSize' }, { usesDtcg: false })).to.equal(false);
 
-    const dtcgToken = { $type: 'color' };
-    expect(isColor(dtcgToken, { usesDtcg: true })).to.equal(true);
-    expect(isColor(dtcgToken, { usesDtcg: false })).to.equal(false);
+    expect(isColor({ $type: 'color' }, { usesDtcg: true })).to.equal(true);
+    expect(isColor({ $type: 'color' }, { usesDtcg: false })).to.equal(false);
+    expect(isColor({ $type: 'fontSize' }, { usesDtcg: true })).to.equal(false);
   });
 });
