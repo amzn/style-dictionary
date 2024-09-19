@@ -4,7 +4,7 @@ import { isColor } from './filter.js';
  * Exports tailwind plugin for declaring root CSS vars
  * @see https://tailwindcss.com/docs/plugins#overview
  */
-export const cssVarsPlugin = ({ dictionary, options }) => {
+export const cssVarsPlugin = ({ dictionary }) => {
   const vars = dictionary.allTokens
     .map((token) => `'--${token.name}': '${token.value}'`)
     .join(',\n      ');
