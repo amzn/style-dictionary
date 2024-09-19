@@ -4,10 +4,14 @@ import { isColor } from './filter.js';
  * Exports tailwind plugin for declaring root CSS vars
  * @see https://tailwindcss.com/docs/plugins#overview
  */
-export const cssVarsPlugin = ({ dictionary }) => {
+export const cssVarsPlugin = ({ dictionary, options }) => {
   const vars = dictionary.allTokens
-    .map((token) => `'--${token.name}': '${token.value}'`)
+    .map((token) => {
+      const value = options.usesDtcg ? token.$value : token.value;
+      return `'--${token.name}': '${value}'`;
+    })
     .join(',\n      ');
+
   return `import plugin from 'tailwindcss/plugin';
 
 export default plugin(function ({ addBase }) {
@@ -24,6 +28,7 @@ export default plugin(function ({ addBase }) {
  */
 export const themeColors = ({ dictionary, options }) => {
   const tokens = dictionary.allTokens.filter((token) => isColor(token, options));
+
   const theme = tokens
     .map((token) => `  '${token.name}': 'rgb(var(--${token.name}) / <alpha-value>)'`)
     .join(',\n');

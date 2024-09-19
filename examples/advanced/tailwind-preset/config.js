@@ -36,6 +36,7 @@ export default {
     tailwindPreset: {
       buildPath: 'build/tailwind/',
       transformGroup: 'color/tailwind',
+      usesDtcg: true,
       files: [
         {
           destination: 'cssVarsPlugin.js',
