@@ -55,6 +55,36 @@ const sizeLarge = {
   path: ['size', 'large'],
 };
 
+const mediumShadowLayered = {
+  0: {
+    value: {
+      shadowType: 'dropShadow',
+      radius: 20,
+      color: '#0000000a',
+      offsetX: 0,
+      offsetY: 0,
+      spread: 0,
+    },
+    type: 'custom-shadow',
+    name: 'effect-shadow-medium-0',
+    path: ['effect', 'shadow', 'medium', '0'],
+  },
+  1: {
+    value: {
+      shadowType: 'dropShadow',
+      radius: 2,
+      color: '#00000014',
+      offsetX: 0,
+      offsetY: 0,
+      spread: 0,
+    },
+    type: 'custom-shadow',
+    name: 'effect-shadow-medium-1',
+    path: ['effect', 'shadow', 'medium', '1'],
+  },
+  description: null,
+};
+
 const not_kept = {
   value: 0,
   type: 'number',
@@ -83,6 +113,11 @@ const tokens = {
   size: {
     small: sizeSmall,
     large: sizeLarge,
+  },
+  effect: {
+    shadow: {
+      medium: mediumShadowLayered,
+    },
   },
 };
 
