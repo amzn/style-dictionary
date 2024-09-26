@@ -13,35 +13,24 @@
 import { expect } from 'chai';
 import sortByReference from '../../../lib/common/formatHelpers/sortByReference.js';
 
-const DEFAULT_TRANSFORMED_TOKENS = {
+const TRANSFORMED_TOKENS = (dtcg) => ({
   color: {
     primary: {
-      value: '#FF0000',
-      type: 'color',
-      original: { value: '{color.red}', type: 'color' },
+      [`${dtcg ? '$' : ''}value`]: '#FF0000',
+      [`${dtcg ? '$' : ''}type`]: 'color',
+      original: { 
+        [`${dtcg ? '$' : ''}value`]: '{color.red}',
+        [`${dtcg ? '$' : ''}type`]: 'color' },
     },
     red: {
-      value: '#FF0000',
-      type: 'color',
-      original: { value: '#FF0000', type: 'color' },
+      [`${dtcg ? '$' : ''}value`]: '#FF0000',
+      [`${dtcg ? '$' : ''}type`]: 'color',
+      original: { 
+        [`${dtcg ? '$' : ''}value`]: '#FF0000',
+        [`${dtcg ? '$' : ''}type`]: 'color' },
     },
   },
-};
-
-const DTCG_TRANSFORMED_TOKENS = {
-  color: {
-    primary: {
-      $value: '#FF0000',
-      $type: 'color',
-      original: { $value: '{color.red}', $type: 'color' },
-    },
-    red: {
-      $value: '#FF0000',
-      $type: 'color',
-      original: { $value: '#FF0000', $type: 'color' },
-    },
-  },
-};
+});
 
 describe('common', () => {
   describe('formatHelpers', () => {
