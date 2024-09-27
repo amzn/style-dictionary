@@ -8,7 +8,7 @@ You can find the source code of the built-in transforms here:
 :::
 
 :::note
-All the pre-defined transforms included in Style Dictionary **up until version 3** were using the [CTI structure](/info/tokens#category-type-item) for matching tokens.
+All the pre-defined transforms included in Style Dictionary **up until version 3** were using the [CTI structure](/info/tokens#category--type--item) for matching tokens.
 If you structure your design tokens differently you will need to write [custom transforms](/reference/hooks/transforms#defining-custom-transforms) or make sure the proper CTIs are on the attributes of your design tokens.
 
 From **version 4 onwards**, instead of using the CTI structure of a token object, we're determining the token's `type` by the `token.type` property.
