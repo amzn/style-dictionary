@@ -260,7 +260,7 @@ The trick is to dynamically generate the files array, generate one for each outp
 ```js config
 function generateComponentFiles(components) {
   return components.map((comp) => ({
-    // output the component tokens in the right folder and file e.g. components/button/button-vqrs.css
+    // output the component tokens in the right folder and file e.g. components/button/button-vars.css
     destination: `components/${comp}/${comp}-vars.css`,
     format: 'css/variables',
     // only include the tokens that are inside this component token group
