@@ -176,5 +176,41 @@ describe('integration', async () => {
       await sd.buildAllPlatforms();
       await expect(stub.lastCall.args.map(cleanConsoleOutput).join('\n')).to.matchSnapshot();
     });
+
+    it('should properly reference tokens in dtcg format', async () => {
+      const sd = new StyleDictionary({
+        tokens: {
+          base: {
+            $value: '#FF0000',
+            $type: 'color',
+          },
+          referred: {
+            $value: '{base}',
+            $type: 'color',
+          },
+        },
+        platforms: {
+          css: {
+            transformGroup: 'css',
+            buildPath,
+            files: [
+              {
+                destination: 'dtcgOutputRef.css',
+                format: 'css/variables',
+                options: {
+                  outputReferences: true,
+                  usesDtcg: true,
+                },
+              },
+            ],
+          },
+        },
+      });
+      await sd.buildAllPlatforms();
+      const output = fs.readFileSync(resolve(`${buildPath}dtcgOutputRef.css`), {
+        encoding: 'UTF-8',
+      });
+      await expect(output).to.matchSnapshot();
+    });
   });
 });
