@@ -197,7 +197,7 @@ describe('utils', () => {
       });
 
       describe('ignorePaths', () => {
-        it('should not resolve values containing constiables in ignored paths', () => {
+        it('should not resolve values containing variables in ignored paths', () => {
           const obj = {
             foo: { value: 'bar' },
             bar: {

@@ -86,6 +86,46 @@ const tokens = {
   },
 };
 
+const random_meta_tokens = {
+  description: null,
+  meta: undefined,
+  more_meta: [],
+  foo: {
+    description: null,
+    meta: undefined,
+    more_meta: [],
+    bar: {
+      description: null,
+      meta: undefined,
+      more_meta: [],
+      value: 0,
+      type: 'number',
+      original: {
+        value: 0,
+      },
+      name: 'foo-bar',
+      path: ['foo', 'bar'],
+    },
+  },
+  qux: {
+    description: null,
+    meta: undefined,
+    more_meta: [],
+    value: 0,
+    type: 'number',
+    original: {
+      value: 0,
+    },
+    name: 'qux',
+    path: ['qux'],
+  },
+};
+
+const random_meta_dictionary = {
+  tokens: random_meta_tokens,
+  allTokens: flattenTokens(random_meta_tokens),
+};
+
 const falsy_values = {
   kept: kept,
   not_kept: not_kept,
@@ -115,11 +155,11 @@ describe('filterTokens', () => {
   });
 
   it('should work with a filter function', async () => {
-    const filter = (property) => property.path.includes('size');
+    const filter = (token) => token.path.includes('size');
     const filteredDictionary = await filterTokens(dictionary, filter);
-    filteredDictionary.allTokens.forEach((property) => {
-      expect(property).to.not.equal(colorRed);
-      expect(property).not.to.not.equal(colorBlue);
+    filteredDictionary.allTokens.forEach((token) => {
+      expect(token).to.not.equal(colorRed);
+      expect(token).not.to.not.equal(colorBlue);
     });
     expect(filteredDictionary.allTokens).to.eql([sizeSmall, sizeLarge]);
     expect(filteredDictionary.tokens).to.have.property('size');
@@ -127,15 +167,26 @@ describe('filterTokens', () => {
   });
 
   it('should work with falsy values and a filter function', async () => {
-    const filter = (property) => property.path.includes('kept');
+    const filter = (token) => token.path.includes('kept');
 
     const filteredDictionary = await filterTokens(falsy_dictionary, filter);
-    filteredDictionary.allTokens.forEach((property) => {
-      expect(property).to.not.equal(not_kept);
+    filteredDictionary.allTokens.forEach((token) => {
+      expect(token).to.not.equal(not_kept);
     });
     expect(filteredDictionary.allTokens).to.eql([kept]);
     expect(filteredDictionary.tokens).to.have.property('kept');
     expect(filteredDictionary.tokens).to.not.have.property('not_kept');
+  });
+
+  it('should work with random metadata props inside tokens / token groups', async () => {
+    const filter = (token) => {
+      return token.path.includes('bar');
+    };
+
+    const filteredDictionary = await filterTokens(random_meta_dictionary, filter);
+    expect(filteredDictionary.allTokens).to.eql([random_meta_tokens.foo.bar]);
+    expect(filteredDictionary.tokens).to.have.nested.property('foo.bar');
+    expect(filteredDictionary.tokens).to.not.have.property('qux');
   });
 
   it('should work with async filters', async () => {

@@ -25,7 +25,7 @@ export interface FormattingOverrides {
 }
 
 export type FileHeader = (
-  defaultMessage: string[],
+  defaultMessage?: string[],
   options?: Config,
 ) => Promise<string[]> | string[];
 
