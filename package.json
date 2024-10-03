@@ -44,8 +44,9 @@
   ],
   "scripts": {
     "build": "node scripts/inject-version.js && tsc --emitDeclarationOnly",
-    "docs:start": "astro dev --root ./docs",
-    "docs:build": "astro check  --root ./docs && astro build --root ./docs",
+    "docs:start": "npm run docs:build:tokens && astro dev --root ./docs",
+    "docs:build": "npm run docs:build:tokens && astro check  --root ./docs && astro build --root ./docs",
+    "docs:build:tokens": "node ./docs/theme/build.js",
     "docs:preview": "astro preview --root ./docs",
     "format": "run-p format:*",
     "format:eslint": "eslint --fix \"**/*.js\"",
@@ -64,7 +65,7 @@
     "install-cli": "npm install -g $(npm pack)",
     "release": "npm run build && changeset publish",
     "prepare": "husky install",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package && npm run docs:build:tokens"
   },
   "lint-staged": {
     "*.js": [
@@ -116,8 +117,8 @@
     "tinycolor2": "^1.6.0"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.5.10",
-    "@astrojs/starlight": "^0.23.1",
+    "@astrojs/check": "^0.8.1",
+    "@astrojs/starlight": "^0.25.1",
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@changesets/cli": "^2.27.1",
     "@commitlint/cli": "^18.4.3",
@@ -127,6 +128,7 @@
     "@rollup/plugin-virtual": "^3.0.2",
     "@shoelace-style/shoelace": "^2.15.0",
     "@types/chai": "^4.3.9",
+    "@types/culori": "^2.1.1",
     "@types/tinycolor2": "^1.4.6",
     "@types/uuid": "^9.0.8",
     "@web/test-runner": "^0.18.2",
@@ -135,6 +137,7 @@
     "acorn": "^8.11.3",
     "astro": "^4.3.5",
     "chai": "^5.0.0-alpha.2",
+    "colorjs.io": "^0.5.2",
     "eslint": "^8.7.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-mocha": "^10.2.0",
