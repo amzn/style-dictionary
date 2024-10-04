@@ -177,6 +177,7 @@ Not all formats use the `outputReferences` option because that file format might
 - [compose/object](predefined/#composeobject)
 - [ios-swift/class.swift](predefined/#ios-swiftclassswift)
 - [flutter/class.dart](predefined/#flutterclassdart)
+- [markdown/table](predefined/#markdowntable)
 
 You can create custom formats that output references as well. See the [Custom format with output references](#custom-format-with-output-references) section.
 

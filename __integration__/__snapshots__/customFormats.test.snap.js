@@ -717,6 +717,10 @@ snapshots["integration custom formats inline custom with new args should match s
           "name/camel",
           "color/css",
           "size/object"
+        ],
+        "markdown": [
+          "attribute/cti",
+          "name/human"
         ]
       },
       "transforms": {
@@ -1671,6 +1675,10 @@ snapshots["integration custom formats register custom format with new args shoul
           "name/camel",
           "color/css",
           "size/object"
+        ],
+        "markdown": [
+          "attribute/cti",
+          "name/human"
         ]
       },
       "transforms": {

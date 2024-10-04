@@ -911,3 +911,24 @@ class StyleDictionary {
 ```
 
 ---
+
+### markdown/table
+
+Creates a Markdown file containing a table with a row for each property.
+
+| Param                           | Type                                  | Description                                                                                                                                                                                                |
+| ------------------------------- | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `options`                       | `Object`                              |                                                                                                                                                                                                            |
+| `options.showFileHeader`        | `boolean`                             | Whether or not to include a comment that has the build date. Defaults to `true`                                                                                                                            |
+| `options.showDescriptionColumn` | `boolean`                             | Whether or not to include the description column in the table. Defaults to `false`                                                                                                                         |
+| `options.outputReferences`      | `boolean \| OutputReferencesFunction` | Whether or not to keep [references](#references-in-output-files) (a -> b -> c) in the output. Defaults to `false`. Also allows passing a function to conditionally output references on a per token basis. |
+
+Example:
+
+```md title="colors.md"
+| Token | Type  | Value       |
+| ----- | ----- | ----------- |
+| red 5 | color | `#fffaf3f2` |
+```
+
+---
