@@ -72,7 +72,7 @@ const paragraphVisitor = (
 
 export function remarkPlayground() {
   function transformer(tree: Root) {
-    visit(tree, 'paragraph', paragraphVisitor);
+    // visit(tree, 'paragraph', paragraphVisitor);
     return tree;
   }
 

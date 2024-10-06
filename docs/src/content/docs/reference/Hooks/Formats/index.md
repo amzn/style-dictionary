@@ -29,7 +29,7 @@ You use formats in your config file under `platforms` > `[Platform]` > `files` >
 }
 ```
 
-There is an extensive (but not exhaustive) list of [built-in formats](predefined) available in Style Dictionary.
+There is an extensive (but not exhaustive) list of [built-in formats](/reference/hooks/formats/predefined) available in Style Dictionary.
 
 ## Format configuration
 
@@ -55,16 +55,16 @@ Formats can take configuration to make them more flexible. This allows you to re
 }
 ```
 
-In this example we are adding the `mapName` configuration to the `scss/map-deep` format. This will change the name of the SCSS map in the output. Not all formats have the configuration options; format configuration is defined by the format itself. To see the configuration options of a format, take a look at the documentation of the [specific format](predefined).
+In this example we are adding the `mapName` configuration to the `scss/map-deep` format. This will change the name of the SCSS map in the output. Not all formats have the configuration options; format configuration is defined by the format itself. To see the configuration options of a format, take a look at the documentation of the [specific format](/reference/hooks/formats/predefined).
 
 ## Filtering tokens
 
-A special file configuration is [`filter`](/reference/hooks/filter), which will filter the tokens before they get to the format.
+A special file configuration is [`filter`](/reference/hooks/filters), which will filter the tokens before they get to the format.
 This allows you to re-use the same format to generate multiple files with different sets of tokens.
 Filtering tokens works by adding a `filter` attribute on the file object, where `filter` is:
 
 - An object which gets passed to [Lodash's filter method](https://lodash.com/docs/4.17.14#filter).
-- A string that references the name of a registered [`filter`](/reference/hooks/filter), using the [`registerFilter`](/reference/api#registerfilter) method
+- A string that references the name of a registered [`filter`](/reference/hooks/filters), using the [`registerFilter`](/reference/api#registerfilter) method
 - A function that takes a token and returns a boolean if the token should be included (true) or excluded (false). **This is only available if you are defining your configuration in Javascript.**
 
 ```javascript
@@ -170,13 +170,13 @@ export default {
 
 Not all formats use the `outputReferences` option because that file format might not support it (like JSON for example). The current list of formats that handle `outputReferences`:
 
-- [css/variables](predefined/#cssvariables)
-- [scss/variables](predefined/#scssvariables)
-- [less/variables](predefined/#lessvariables)
-- [android/resources](predefined/#androidresources)
-- [compose/object](predefined/#composeobject)
-- [ios-swift/class.swift](predefined/#ios-swiftclassswift)
-- [flutter/class.dart](predefined/#flutterclassdart)
+- [css/variables](/reference/hooks/formats/predefined/#cssvariables)
+- [scss/variables](/reference/hooks/formats/predefined/#scssvariables)
+- [less/variables](/reference/hooks/formats/predefined/#lessvariables)
+- [android/resources](/reference/hooks/formats/predefined/#androidresources)
+- [compose/object](/reference/hooks/formats/predefined/#composeobject)
+- [ios-swift/class.swift](/reference/hooks/formats/predefined/#ios-swiftclassswift)
+- [flutter/class.dart](/reference/hooks/formats/predefined/#flutterclassdart)
 
 You can create custom formats that output references as well. See the [Custom format with output references](#custom-format-with-output-references) section.
 
@@ -205,7 +205,7 @@ By default Style Dictionary adds a file header comment in the top of files built
 
 You can remove these comments with the option: `showFileHeader: false` if you do not want them in your generated files. You can also create your own file header or extend the default one. This could be useful if you want to put a version number or hash of the source files rather than a timestamp.
 
-Custom file headers can be added the same way you would add a custom format, either by using the [`registerFileHeader`](/reference/api#registerfileheader) function or adding the [`fileHeader`](/reference/hooks/file-headers) object directly in the Style Dictionary [configuration](/reference/config). Your custom file header can be used in built-in formats as well as custom formats. To use a custom file header in a custom format see the [`fileHeader`](/reference/hooks/formats#fileheader) format helper method.
+Custom file headers can be added the same way you would add a custom format, either by using the [`registerFileHeader`](/reference/api#registerfileheader) function or adding the [`fileHeader`](/reference/hooks/file-headers) object directly in the Style Dictionary [configuration](/reference/config). Your custom file header can be used in built-in formats as well as custom formats. To use a custom file header in a custom format see the [`fileHeader`](/reference/hooks/file-headers) format helper method.
 
 ```js title="build-tokens.js"
 import StyleDictionary from 'style-dictionary';
