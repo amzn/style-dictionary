@@ -27,6 +27,14 @@ const TRANSFORMED_TOKENS = (usesDtcg) => {
           [typeKey]: 'color',
         },
       },
+      green: {
+        [valueKey]: '#00FF00',
+        [typeKey]: 'color',
+        original: {
+          [valueKey]: '#00FF00',
+          [typeKey]: 'color',
+        },
+      },
       red: {
         [valueKey]: '#FF0000',
         [typeKey]: 'color',
@@ -46,6 +54,17 @@ describe('common', () => {
         ['default', false, TRANSFORMED_TOKENS(false)],
         ['dtcg', true, TRANSFORMED_TOKENS(true)],
       ].forEach(([tokenFormat, usesDtcg, tokens]) => {
+        it(`should keep order when idx0 and idx1 have no reference(${tokenFormat})`, () => {
+          const allTokens = [tokens.color.green, tokens.color.red];
+
+          const sorted = [...allTokens].sort(
+            sortByReference(tokens, {
+              usesDtcg,
+            }),
+          );
+
+          expect(sorted).to.eql([tokens.color.green, tokens.color.red]);
+        });
         it(`should keep order when idx0 has no reference(${tokenFormat})`, () => {
           const allTokens = [tokens.color.red, tokens.color.primary];
 
