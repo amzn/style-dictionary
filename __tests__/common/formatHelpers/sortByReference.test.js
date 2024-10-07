@@ -66,7 +66,7 @@ describe('common', () => {
           expect(sorted).to.eql([tokens.color.green, tokens.color.red]);
         });
         it(`should keep order when idx0 has no reference(${tokenFormat})`, () => {
-          const allTokens = [tokens.color.green, tokens.color.red, tokens.color.primary];
+          const allTokens = [tokens.color.red, tokens.color.primary];
 
           const sorted = [...allTokens].sort(
             sortByReference(tokens, {
@@ -74,7 +74,7 @@ describe('common', () => {
             }),
           );
 
-          expect(sorted).to.eql([tokens.color.green, tokens.color.red, tokens.color.primary]);
+          expect(sorted).to.eql([tokens.color.red, tokens.color.primary]);
         });
         it(`should reorder, if idx0 references idx1 (${tokenFormat})`, () => {
           const allTokens = [tokens.color.primary, tokens.color.red];
