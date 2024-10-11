@@ -1513,3 +1513,28 @@ class {
 }`;
 /* end snapshot formats all should match flutter/class.dart snapshot with fileHeaderTimestamp set */
 
+snapshots["formats all should match markdown/table snapshot"] = 
+`
+<!--
+  Do not edit directly, this file was auto-generated.
+-->
+
+| Token | Type | Value |
+| --- | --- | --- |
+| color_red | undefined | \u0060#FF0000\u0060 |
+`;
+/* end snapshot formats all should match markdown/table snapshot */
+
+snapshots["formats all should match markdown/table snapshot with fileHeaderTimestamp set"] = 
+`
+<!--
+  Do not edit directly, this file was auto-generated.
+  Generated on Sat, 01 Jan 2000 00:00:00 GMT
+-->
+
+| Token | Type | Value |
+| --- | --- | --- |
+| color_red | undefined | \u0060#FF0000\u0060 |
+`;
+/* end snapshot formats all should match markdown/table snapshot with fileHeaderTimestamp set */
+
