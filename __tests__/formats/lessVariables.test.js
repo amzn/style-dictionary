@@ -14,6 +14,7 @@ import { expect } from 'chai';
 import formats from '../../lib/common/formats.js';
 import createFormatArgs from '../../lib/utils/createFormatArgs.js';
 import flattenTokens from '../../lib/utils/flattenTokens.js';
+import { isNode } from '../../lib/utils/isNode.js';
 
 const file = {
   destination: '__output/',
@@ -56,7 +57,7 @@ describe('formats', () => {
         file,
       );
       let _less;
-      if (typeof window === 'object') {
+      if (!isNode) {
         await import('less/dist/less.js');
         // eslint-disable-next-line no-undef
         _less = less;

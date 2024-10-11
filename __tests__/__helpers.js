@@ -15,6 +15,7 @@ import { expect } from 'chai';
 import { fs } from 'style-dictionary/fs';
 import { resolve } from '../lib/resolve.js';
 import isPlainObject from 'is-plain-obj';
+import { isNode } from '../lib/utils/isNode.js';
 
 export const cleanConsoleOutput = (str) => {
   const arr = str
@@ -70,7 +71,7 @@ export const dirExists = (dirPath, _fs = fs) => {
 export function fixDate() {
   const constantDate = new Date('2000-01-01');
   // eslint-disable-next-line no-undef
-  const __global = typeof window === 'object' ? window : globalThis;
+  const __global = isNode ? globalThis : window;
 
   // eslint-disable-next-line no-undef
   __global.Date = function () {

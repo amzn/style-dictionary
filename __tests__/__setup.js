@@ -5,6 +5,7 @@ import { fs } from 'style-dictionary/fs';
 import { chaiWtrSnapshot } from '../snapshot-plugin/chai-wtr-snapshot.js';
 import { fixDate } from './__helpers.js';
 import { writeZIP } from '../lib/utils/convertToDTCG.js';
+import { isNode } from '../lib/utils/isNode.js';
 
 /**
  * We have a bunch of files that we use a mock data for our tests
@@ -23,7 +24,7 @@ export const hasInitialized = new Promise((resolve) => {
   hasInitializedResolve = resolve;
 });
 // in case of Node env, we can resolve it immediately since we don't do this setup stuff
-if (typeof window !== 'object') {
+if (isNode) {
   hasInitializedResolve();
 }
 
