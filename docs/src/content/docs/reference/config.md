@@ -6,7 +6,7 @@ sidebar:
 
 Style dictionaries are configuration driven. Your configuration lets Style Dictionary know:
 
-1. Where to find your [design tokens](/reference/tokens)
+1. Where to find your [design tokens](/info/tokens)
 1. How to transform and format them to generate output files
 
 Here is an example configuration:
@@ -89,7 +89,7 @@ Some interesting things you can do in a JS file that you cannot do in a JSON fil
 
 ## Using configuration files
 
-By default, the Style Dictionary [CLI](/reference/using_the_cli) looks for a `config.json` or `config.js` file in the root of your package.
+By default, the Style Dictionary [CLI](/getting-started/using_the_cli) looks for a `config.json` or `config.js` file in the root of your package.
 
 ```json5
 // package.json
@@ -98,7 +98,7 @@ By default, the Style Dictionary [CLI](/reference/using_the_cli) looks for a `co
 }
 ```
 
-You can also specify a custom location when you use the [CLI](/reference/using_the_cli) with the `--config` parameter.
+You can also specify a custom location when you use the [CLI](/getting-started/using_the_cli) with the `--config` parameter.
 
 ```json5
 // package.json
@@ -109,7 +109,7 @@ You can also specify a custom location when you use the [CLI](/reference/using_t
 
 ## Using in Node
 
-You can also use Style Dictionary as an [npm module](/reference/using_the_npm_module) and further customize how Style Dictionary is run, for example running Style Dictionary multiple times with different configurations. To do this you would create a Javascript file that imports the Style Dictionary npm module and calls the [`.extend`](/reference/api#extend) and [`.buildAllPlatforms`](/reference/api#buildallplatforms) functions.
+You can also use Style Dictionary as an [npm module](/getting-started/using_the_npm_module) and further customize how Style Dictionary is run, for example running Style Dictionary multiple times with different configurations. To do this you would create a Javascript file that imports the Style Dictionary npm module and calls the [`.extend`](/reference/api#extend) and [`.buildAllPlatforms`](/reference/api#buildallplatforms) functions.
 
 ```javascript
 // build-tokens.js
@@ -172,7 +172,7 @@ A platform is a build target that tells Style Dictionary how to properly transfo
 | `buildPath`      | `string`       | Base path to build the files, must end with a trailing slash.                                                                                                                                                                                                                                               |
 | `expand`         | `ExpandConfig` | Configures whether and how composite (object-value) tokens will be expanded into separate tokens. `false` by default. Supports either `boolean`, `ExpandFilter` function or an Object containing a `typesMap` property and optionally an `include` OR `exclude` property.                                   |
 | `preprocessors`  | `string[]`     | Which [preprocessors](/reference/hooks/preprocessors) (by name) to run on the full token dictionary when building for this particular platform, before any transforms run, can be registered using `.registerPreprocessor`. You can also configure this on the global config.                               |
-| `options`        | `Object`       | Options that apply to all files in the platform, for example [`outputReferences`](/reference/hooks/format#references-in-output-files) and `showFileHeader`                                                                                                                                                  |
+| `options`        | `Object`       | Options that apply to all files in the platform, for example [`outputReferences`](/reference/hooks/formats#references-in-output-files) and `showFileHeader`                                                                                                                                                 |
 | `prefix`         | `string`       | A string that prefix the name of the design tokens.                                                                                                                                                                                                                                                         |
 | `files`          | `File[]`       | [Files](#file) to be generated for this platform.                                                                                                                                                                                                                                                           |
 | `actions`        | `string[]`     | [Actions](/reference/hooks/actions) to be performed after the files are built for that platform. Actions can be any arbitrary code you want to run like copying files, generating assets, etc. You can use pre-defined actions or create custom actions.                                                    |
@@ -188,7 +188,7 @@ A File configuration object represents a single output file. The `options` objec
 | `filter`                   | `string \| function \| Object`        | A function, string or object used to filter the tokens that will be included in the file. If a function is provided, each design token will be passed to the function and the result (true or false) will determine whether the design token is included. If an object is provided, each design token will be matched against the object using a partial deep comparison. If a match is found, the design token is included. If a string is passed, is considered a custom filter registered via [registerFilter](/reference/api#registerfilter) |
 | `options`                  | `Object`                              | A set of extra options associated with the file. Includes `showFileHeader` and [`outputReferences`](/reference/hooks/formats#references-in-output-files).                                                                                                                                                                                                                                                                                                                                                                                        |
 | `options.showFileHeader`   | `boolean`                             | If the generated file should have a comment at the top about being generated. The default fileHeader comment has "Do not edit + Timestamp". By default is "true".                                                                                                                                                                                                                                                                                                                                                                                |
-| `options.fileHeader`       | `string \|function`                   | A custom fileHeader that can be either a name of a registered file header (string) or an inline [fileHeader](/reference/hooks/formats#customfileheader) function.                                                                                                                                                                                                                                                                                                                                                                                |
+| `options.fileHeader`       | `string \|function`                   | A custom fileHeader that can be either a name of a registered file header (string) or an inline [fileHeader](/reference/hooks/formats#file-headers) function.                                                                                                                                                                                                                                                                                                                                                                                    |
 | `options.outputReferences` | `boolean \| OutputReferencesFunction` | If the file should keep token [references](/reference/hooks/formats#references-in-output-files). By default this is "false". Also allows passing a function to conditionally output references on a per token basis.                                                                                                                                                                                                                                                                                                                             |
 
 ### Expand
