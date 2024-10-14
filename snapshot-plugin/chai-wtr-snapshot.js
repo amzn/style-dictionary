@@ -4,14 +4,14 @@
  * e.g. with https://www.npmjs.com/package/pretty-format (right now we only escape tildes)
  */
 
+import { isNode } from '../lib/utils/isNode.js';
+
 // Exclude from code coverage since this is just a devtool
 /* c8 ignore start */
 
 /**
  * @typedef {import('@types/chai')} Chai
  */
-
-const isBrowser = typeof window === 'object';
 
 async function blobToDataUrl(blob) {
   let buffer = Buffer.from(await blob.text());
@@ -75,7 +75,7 @@ export function chaiWtrSnapshot(chai, utils) {
     let updateSnapshots = false;
     let currentSnapshot;
     let name;
-    if (isBrowser) {
+    if (!isNode) {
       // WTR ENV
       const { getSnapshot, getSnapshotConfig } = await import('@web/test-runner-commands');
       // eslint-disable-next-line no-undef
@@ -110,7 +110,7 @@ export function chaiWtrSnapshot(chai, utils) {
         );
       }
     } else if (currentSnapshot !== snapshot) {
-      if (isBrowser) {
+      if (!isNode) {
         const { saveSnapshot: saveSnapshotWTR } = await import('@web/test-runner-commands');
         await saveSnapshotWTR({ name, content: snapshot });
       } else {
@@ -148,7 +148,7 @@ export function chaiWtrSnapshot(chai, utils) {
     },
   };
 
-  if (isBrowser) {
+  if (!isNode) {
     return;
   }
 

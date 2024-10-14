@@ -1,6 +1,7 @@
 import StyleDictionary from 'style-dictionary';
 import { expect } from 'chai';
 import transformBuiltins from '../../lib/common/transforms.js';
+import { isNode } from '../../lib/utils/isNode.js';
 
 describe('Register overwrites', () => {
   const reset = () => {
@@ -31,7 +32,7 @@ describe('Register overwrites', () => {
     // Unfortunately, Mocha Node runs this in parallel with other test files and these tests
     // fail purely due to multiple test files writing stuff to the Register class
     // TODO: In the future we may be able to run mocha test files in parallel processes
-    if (typeof window !== 'undefined') {
+    if (!isNode) {
       expect(sd1.hooks.transforms[builtInHookName].type).to.equal('value');
       expect(sd2.hooks.transforms[builtInHookName].type).to.equal('name');
       expect(sd3.hooks.transforms[builtInHookName].type).to.equal('name');
