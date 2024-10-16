@@ -6,6 +6,10 @@ Starting in version 4.0, you can define custom preprocessors to process the dict
 This is useful if you want to do more complex transformations on the dictionary as a whole, when all other ways are not powerful enough.
 
 Preprocessors can be applied globally or per platform.
+Applying them per platform means the tokens already have some more metadata on them such as "filePath" and "path",
+and the options object resembles the `PlatformConfig` rather than the SD global config options.
+It also allows you to preprocess on a per platform basis, while global means you won't have to repeat the same preprocessing because it will happen once on a global level, so essentially applies to all platforms.
+See [lifecycle diagram](/info/architecture) for a visual diagram of the order of the lifecycle hooks.
 
 :::caution
 It should be clear that using this feature should be a last resort. Using custom parsers to parse per file or using transforms to do transformations on a per token basis,
@@ -21,7 +25,7 @@ That said, preprocessing the full dictionary gives ultimate flexibility when nee
 A preprocessor is an object with two props:
 
 - `name`: the name of the preprocessor
-- `preprocessor` a callback function that receives the dictionary and SD options as parameters, and returns the processed dictionary
+- `preprocessor` a callback function that receives the dictionary and SD options or platform config as parameters, and returns the processed dictionary
 
 ```javascript title="my-preprocessor.js"
 const myPreprocessor = {
@@ -132,7 +136,7 @@ StyleDictionary.registerPreprocessor({
 
 ## Default preprocessors
 
-There are two default preprocessors that are always applied and run before other custom preprocessors do:
+There are two default preprocessors that are always applied and run after other custom preprocessors do:
 
 - [`typeDtcgDelegate`](/reference/utils/dtcg#typedtcgdelegate), for DTCG tokens, make sure the `$type` is either already present or gets inherited from the closest ancestor that has it defined, so that the `$type` is always available on the token level, for ease of use
 - [`expandObjectTokens`](/reference/config#expand), a private preprocessor that will expand object-value (composite) tokens when user config has this enabled.

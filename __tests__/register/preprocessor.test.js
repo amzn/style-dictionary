@@ -23,11 +23,11 @@ registerSuite({
 });
 
 describe('register/transformGroup', async () => {
-  let StyleDictionaryExtended;
+  let sdInstance;
   beforeEach(async () => {
     StyleDictionary.hooks.preprocessors = {};
-    StyleDictionaryExtended = new StyleDictionary({});
-    await StyleDictionaryExtended.hasInitialized;
+    sdInstance = new StyleDictionary({});
+    await sdInstance.hasInitialized;
   });
 
   it('should support registering preprocessor on StyleDictionary class', () => {
@@ -36,12 +36,12 @@ describe('register/transformGroup', async () => {
       preprocessor: (dict) => dict,
     });
     expect(StyleDictionary.hooks.preprocessors['example-preprocessor']).to.not.be.undefined;
-    expect(StyleDictionaryExtended.hooks.preprocessors['example-preprocessor']).to.not.be.undefined;
+    expect(sdInstance.hooks.preprocessors['example-preprocessor']).to.not.be.undefined;
   });
 
   it('should throw if the preprocessor name is not a string', () => {
     expect(() => {
-      StyleDictionaryExtended.registerPreprocessor({
+      sdInstance.registerPreprocessor({
         name: true,
         preprocessor: (dict) => dict,
       });
@@ -50,7 +50,7 @@ describe('register/transformGroup', async () => {
 
   it('should throw if the preprocessor is not a function', () => {
     expect(() => {
-      StyleDictionaryExtended.registerPreprocessor({
+      sdInstance.registerPreprocessor({
         name: 'example-preprocessor',
         preprocessor: 'foo',
       });
@@ -75,7 +75,7 @@ describe('register/transformGroup', async () => {
       },
     });
 
-    StyleDictionaryExtended = new StyleDictionary({
+    sdInstance = new StyleDictionary({
       preprocessors: ['strip-descriptions'],
       tokens: {
         foo: {
@@ -86,8 +86,8 @@ describe('register/transformGroup', async () => {
         description: 'My dictionary',
       },
     });
-    await StyleDictionaryExtended.hasInitialized;
-    expect(StyleDictionaryExtended.tokens).to.eql({
+    await sdInstance.hasInitialized;
+    expect(sdInstance.tokens).to.eql({
       foo: {
         value: '4px',
         type: 'dimension',
@@ -120,7 +120,7 @@ describe('register/transformGroup', async () => {
       },
     });
 
-    StyleDictionaryExtended = new StyleDictionary({
+    sdInstance = new StyleDictionary({
       preprocessors: ['strip-descriptions'],
       tokens: {
         foo: {
@@ -131,8 +131,8 @@ describe('register/transformGroup', async () => {
         description: 'My dictionary',
       },
     });
-    await StyleDictionaryExtended.hasInitialized;
-    expect(StyleDictionaryExtended.tokens).to.eql({
+    await sdInstance.hasInitialized;
+    expect(sdInstance.tokens).to.eql({
       foo: {
         value: '4px',
         type: 'dimension',
@@ -150,7 +150,7 @@ describe('register/transformGroup', async () => {
       },
     });
 
-    StyleDictionaryExtended = new StyleDictionary({
+    sdInstance = new StyleDictionary({
       preprocessors: ['foo-processor'],
       tokens: {
         foo: {
@@ -160,7 +160,41 @@ describe('register/transformGroup', async () => {
         },
       },
     });
-    await StyleDictionaryExtended.hasInitialized;
+    await sdInstance.hasInitialized;
     expect(opts.usesDtcg).to.be.true;
+  });
+
+  it('should pass platform config options to preprocessor function as second argument for platform preprocessors', async () => {
+    let opts;
+    StyleDictionary.registerPreprocessor({
+      name: 'foo-processor',
+      preprocessor: async (dict, options) => {
+        opts = options;
+        return dict;
+      },
+    });
+
+    sdInstance = new StyleDictionary({
+      tokens: {
+        foo: {
+          $value: '4px',
+          $type: 'dimension',
+          $description: 'Foo description',
+        },
+      },
+      platforms: {
+        css: {
+          preprocessors: ['foo-processor'],
+          prefix: 'foo',
+          files: [
+            {
+              format: 'css/variables',
+            },
+          ],
+        },
+      },
+    });
+    await sdInstance.formatAllPlatforms();
+    expect(opts.prefix).to.equal('foo');
   });
 });

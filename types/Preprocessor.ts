@@ -12,12 +12,12 @@
  */
 
 import type { PreprocessedTokens } from './DesignToken.ts';
-import type { Config } from './Config.ts';
+import type { Config, PlatformConfig } from './Config.ts';
 
 export type Preprocessor = {
   name: string;
   preprocessor: (
     dictionary: PreprocessedTokens,
-    options: Config,
+    options: Config | PlatformConfig,
   ) => PreprocessedTokens | Promise<PreprocessedTokens>;
 };
