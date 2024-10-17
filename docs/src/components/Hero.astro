@@ -1,0 +1,66 @@
+---
+import CallToAction from '@astrojs/starlight/components/CallToAction.astro'
+import SDInstall from './SDInstall.astro';
+import HeroGraphic from './HeroGraphic.astro';
+---
+
+<section class="home-hero">
+  <div class="home-hero-content">
+    <h1 data-page-title>
+      Style once<br/>
+      use everywhere
+    </h1>
+    <div class="tagline">
+      A Style Dictionary uses design tokens to define styles once and use those styles on any platform or language. It provides a single place to create and edit your styles, and exports these tokens to all the places you need - iOS, Android, CSS, JS, HTML, sketch files, style documentation, etc. It is available as a CLI through npm, but can also be used like any normal node module if you want to extend its functionality.
+    </div>
+
+    <div class="hero-actions">
+      <CallToAction variant='primary' link='/getting-started/installation'>Get started</CallToAction>
+      <SDInstall />
+    </div>
+  </div>
+
+  <div class="hero-graphic">
+    <HeroGraphic />
+  </div>
+</section>
+
+
+<style>
+	h1 {
+		font-size: clamp(var(--sl-text-3xl), calc(0.25rem + 5vw), var(--sl-text-6xl));
+		line-height: var(--sl-line-height-headings);
+		font-weight: 900;
+		color: var(--sl-color-white);
+	}
+
+	.tagline {
+		font-size: clamp(var(--sl-text-base), calc(0.0625rem + 2vw), var(--sl-text-xl));
+		color: var(--sl-color-gray-2);
+	}
+
+  .hero-actions {
+    display: flex;
+    flex-direction: row;
+    gap: var(--sl-spacing-large);
+  }
+
+  .home-hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sl-spacing-x-large);
+  }
+
+  .home-hero {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: var(--sl-spacing-x-large);
+    display: flex;
+    flex-direction: row;
+  }
+
+  .hero-graphic {
+    width: 400px;
+  }
+</style>

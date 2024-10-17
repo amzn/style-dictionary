@@ -1,6 +1,6 @@
 import type * as monacoType from 'monaco-editor';
-import darkTheme from './dark-theme';
-import githubTheme from './github-light-theme';
+import darkMonacoTheme from '../../theme/dist/dark.monaco.json';
+import lightMonacoTheme from '../../theme/dist/light.monaco.json';
 
 export let monaco: typeof monacoType;
 
@@ -104,16 +104,25 @@ export async function init(elem: HTMLDivElement) {
   await ensureMonacoIsLoaded();
   monaco.editor.defineTheme(
     'my-light-theme',
-    githubTheme as monacoType.editor.IStandaloneThemeData,
+    lightMonacoTheme as monacoType.editor.IStandaloneThemeData,
   );
-  monaco.editor.defineTheme('my-dark-theme', darkTheme as monacoType.editor.IStandaloneThemeData);
+
+  monaco.editor.defineTheme(
+    'my-dark-theme',
+    darkMonacoTheme as monacoType.editor.IStandaloneThemeData,
+  );
 
   const editor = monaco.editor.create(elem, {
     theme: 'my-dark-theme',
+    minimap: {
+      enabled: false,
+    },
+    fontSize: 16,
   });
+
   const resizeMonacoLayout = () => {
     editor.layout({
-      width: Math.min(800, elem.getBoundingClientRect().width),
+      width: elem.getBoundingClientRect().width,
       height: 400,
     });
   };
