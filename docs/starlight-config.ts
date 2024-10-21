@@ -1,6 +1,16 @@
+import { ExpressiveCodeTheme } from 'astro-expressive-code';
+import fs from 'node:fs';
 import type { StarlightUserConfig } from '@astrojs/starlight/types';
 import starlightLinksValidator from 'starlight-links-validator'
 import { pluginLanguageClass } from './expressive-code-plugin-language-class.ts';
+
+const darkTheme = ExpressiveCodeTheme.fromJSONString(
+  fs.readFileSync(new URL(`./theme/dist/dark.vscode.json`, import.meta.url), 'utf-8'),
+);
+
+const lightTheme = ExpressiveCodeTheme.fromJSONString(
+  fs.readFileSync(new URL(`./theme/dist/light.vscode.json`, import.meta.url), 'utf-8'),
+);
 
 export default {
   plugins: [
@@ -14,8 +24,24 @@ export default {
     styleOverrides: {
       textMarkers: {
         defaultLuminance: ['15%', '85%'],
+        insBackground: 'var(--sl-color-green-low)',
+        insBorderColor: 'var(--sl-color-green)',
+        delBackground: 'var(--sl-color-red-low)',
+        delBorderColor: 'var(--sl-color-red)',
+        markBackground: 'var(--sl-color-purple-low)',
+        markBorderColor: 'var(--sl-color-purple)',
+      },
+      borderRadius: '0.25rem',
+      borderColor: 'var(--sl-color-border-tertiary)',
+      frames: {
+        editorActiveTabIndicatorTopColor: 'var(--sl-color-accent)',
+        editorActiveTabBackground: 'var(--sl-color-bg-code)',
+        editorTabBarBackground: 'var(--sl-color-bg-secondary)',
+        editorBackground: 'var(--sl-color-bg-code)',
+        frameBoxShadowCssValue: '0 0 1rem var(--sl-color-border-tertiary)',
       },
     },
+    themes: [darkTheme, lightTheme],
   },
   title: 'Style Dictionary',
   description:
@@ -24,7 +50,7 @@ export default {
   editLink: {
     baseUrl: 'https://github.com/amzn/style-dictionary/edit/main/docs',
   },
-  favicon: '/favicon.png',
+  favicon: '/favicon.svg',
   social: {
     github: 'https://github.com/amzn/style-dictionary',
     slack:
@@ -162,8 +188,16 @@ export default {
       },
     },
   ],
-  customCss: ['./src/styles.css'],
+  customCss: [
+    '@shoelace-style/shoelace/dist/themes/light.css',
+    './src/fonts/font-face.css',
+    './theme/dist/light.variables.css',
+    './theme/dist/dark.variables.css',
+    './src/styles.css',
+  ],
   components: {
     Head: './src/components/Head.astro',
+    Header: './src/components/Header.astro',
+    Hero: './src/components/Hero.astro',
   },
 } as StarlightUserConfig;
