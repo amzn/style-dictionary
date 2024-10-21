@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.1.4
+
+### Patch Changes
+
+- a67ed31: Pass PlatformConfig as options param to platform-applied preprocessors.
+- 19aee32: Fix `convertToBase64` util to support converting binary files such as fonts, for both Browser and NodeJS.
+
 ## 4.1.3
 
 ### Patch Changes
