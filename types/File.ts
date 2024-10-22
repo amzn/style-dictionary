@@ -1,7 +1,7 @@
-import type { TransformedToken } from './DesignToken.ts';
-import type { FormatFn } from './Format.ts';
-import type { LocalOptions, Config } from './Config.ts';
-import type { Filter } from './Filter.ts';
+import type { TransformedToken } from './DesignToken.js';
+import type { FormatFn } from './Format.js';
+import type { LocalOptions, Config } from './Config.js';
+import type { Filter } from './Filter.js';
 
 // Generally, overriding these would break most formats and are meant
 // for the FormattedVariables/createPropertyFormatter helpers,

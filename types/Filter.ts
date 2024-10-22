@@ -10,8 +10,8 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-import type { TransformedToken } from './DesignToken.ts';
-import type { Config } from './Config.ts';
+import type { TransformedToken } from './DesignToken.js';
+import type { Config } from './Config.js';
 
 export interface Filter {
   name: string;

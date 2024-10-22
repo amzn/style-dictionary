@@ -1,4 +1,4 @@
-export type { Action } from './Action.ts';
+export type { Action } from './Action.js';
 
 export type {
   PlatformConfig,
@@ -9,7 +9,7 @@ export type {
   ExpandFilter,
   Expand,
   ExpandConfig,
-} from './Config.ts';
+} from './Config.js';
 
 export type {
   DesignToken,
@@ -18,18 +18,18 @@ export type {
   TransformedToken,
   TransformedTokens,
   Dictionary,
-} from './DesignToken.ts';
+} from './DesignToken.js';
 
-export type { FileHeader, File, FormattingOptions } from './File.ts';
+export type { FileHeader, File, FormattingOptions } from './File.js';
 
-export type { Filter } from './Filter.ts';
+export type { Filter } from './Filter.js';
 
-export type { Format, FormatFnArguments, FormatFn, OutputReferences } from './Format.ts';
+export type { Format, FormatFnArguments, FormatFn, OutputReferences } from './Format.js';
 
-export type { Parser, ParserOptions } from './Parser.ts';
+export type { Parser, ParserOptions } from './Parser.js';
 
-export type { Preprocessor } from './Preprocessor.ts';
+export type { Preprocessor } from './Preprocessor.js';
 
-export type { Transform, NameTransform, AttributeTransform, ValueTransform } from './Transform.ts';
+export type { Transform, NameTransform, AttributeTransform, ValueTransform } from './Transform.js';
 
-export type { Volume } from './Volume.ts';
+export type { Volume } from './Volume.js';

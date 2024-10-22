@@ -11,8 +11,8 @@
  * and limitations under the License.
  */
 
-import type { PreprocessedTokens } from './DesignToken.ts';
-import type { Config, PlatformConfig } from './Config.ts';
+import type { PreprocessedTokens } from './DesignToken.js';
+import type { Config, PlatformConfig } from './Config.js';
 
 export type Preprocessor = {
   name: string;
