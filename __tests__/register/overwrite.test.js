@@ -2,10 +2,14 @@ import StyleDictionary from 'style-dictionary';
 import { expect } from 'chai';
 import transformBuiltins from '../../lib/common/transforms.js';
 import { isNode } from '../../lib/utils/isNode.js';
+import { transforms, transformTypes } from '../../lib/enums/index.js';
+
+const { colorHex } = transforms;
+const { value: transformTypeValue, name } = transformTypes;
 
 describe('Register overwrites', () => {
   const reset = () => {
-    StyleDictionary.hooks.transforms['color/hex'] = transformBuiltins['color/hex'];
+    StyleDictionary.hooks.transforms[colorHex] = transformBuiltins[colorHex];
   };
   beforeEach(() => {
     reset();
@@ -17,12 +21,12 @@ describe('Register overwrites', () => {
   it(`should allow overwriting built-in hooks on class, affecting any instance created AFTER doing so`, async () => {
     const sd1 = new StyleDictionary();
 
-    const builtInHookName = 'color/hex';
+    const builtInHookName = colorHex;
     const builtInHook = StyleDictionary.hooks.transforms[builtInHookName];
     StyleDictionary.registerTransform({
       ...builtInHook,
       name: builtInHookName,
-      type: 'name',
+      type: name,
     });
 
     const sd2 = new StyleDictionary();
@@ -33,28 +37,28 @@ describe('Register overwrites', () => {
     // fail purely due to multiple test files writing stuff to the Register class
     // TODO: In the future we may be able to run mocha test files in parallel processes
     if (!isNode) {
-      expect(sd1.hooks.transforms[builtInHookName].type).to.equal('value');
-      expect(sd2.hooks.transforms[builtInHookName].type).to.equal('name');
-      expect(sd3.hooks.transforms[builtInHookName].type).to.equal('name');
+      expect(sd1.hooks.transforms[builtInHookName].type).to.equal(transformTypeValue);
+      expect(sd2.hooks.transforms[builtInHookName].type).to.equal(name);
+      expect(sd3.hooks.transforms[builtInHookName].type).to.equal(name);
     }
   });
 
   it(`should allow overwriting built-in hooks on instance, affecting only that instance or its direct extensions`, async () => {
     const sd1 = new StyleDictionary();
 
-    const builtInHookName = 'color/hex';
+    const builtInHookName = colorHex;
     const builtInHook = StyleDictionary.hooks.transforms[builtInHookName];
     sd1.registerTransform({
       ...builtInHook,
       name: builtInHookName,
-      type: 'name',
+      type: name,
     });
 
     const sd2 = new StyleDictionary();
     const sd3 = await sd2.extend();
 
-    expect(sd1.hooks.transforms[builtInHookName].type).to.equal('name');
-    expect(sd2.hooks.transforms[builtInHookName].type).to.equal('value');
-    expect(sd3.hooks.transforms[builtInHookName].type).to.equal('value');
+    expect(sd1.hooks.transforms[builtInHookName].type).to.equal(name);
+    expect(sd2.hooks.transforms[builtInHookName].type).to.equal(transformTypeValue);
+    expect(sd3.hooks.transforms[builtInHookName].type).to.equal(transformTypeValue);
   });
 });

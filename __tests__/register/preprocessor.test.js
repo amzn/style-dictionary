@@ -13,6 +13,7 @@
 import { expect } from 'chai';
 import StyleDictionary from 'style-dictionary';
 import { registerSuite } from './register.suite.js';
+import { formats } from '../../lib/enums/index.js';
 
 registerSuite({
   config: {
@@ -188,7 +189,7 @@ describe('register/transformGroup', async () => {
           prefix: 'foo',
           files: [
             {
-              format: 'css/variables',
+              format: formats.cssVariables,
             },
           ],
         },

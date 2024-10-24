@@ -14,23 +14,26 @@ import { expect } from 'chai';
 import StyleDictionary from 'style-dictionary';
 import { registerSuite } from './register.suite.js';
 import transformBuiltins from '../../lib/common/transforms.js';
+import { transformTypes } from '../../lib/enums/index.js';
+
+const { value: transformTypeValue, name } = transformTypes;
 
 const transformPxAppender = {
   name: 'px-appender',
-  type: 'value',
+  type: transformTypeValue,
   transform: (token) => `${token.value}px`,
 };
 
 const transformValueIncrementer = {
   name: 'value-incrementer',
-  type: 'value',
+  type: transformTypeValue,
   filter: (token) => typeof token.value === 'number',
   transform: (token) => token.value + 1,
 };
 
 registerSuite({
   config: {
-    type: 'value',
+    type: transformTypeValue,
     transform: () => {},
   },
   registerMethod: 'registerTransform',
@@ -194,7 +197,7 @@ describe('register', () => {
     it('should error if name is not a string', () => {
       expect(() => {
         StyleDictionaryExtended.registerTransform({
-          type: 'name',
+          type: name,
         });
       }).to.throw('name must be a string');
     });
@@ -202,7 +205,7 @@ describe('register', () => {
     it('should error if filter is not a function', () => {
       expect(() => {
         StyleDictionaryExtended.registerTransform({
-          type: 'name',
+          type: name,
           name: 'name',
           filter: 'foo',
         });
@@ -212,7 +215,7 @@ describe('register', () => {
     it('should error if transform is not a function', () => {
       expect(() => {
         StyleDictionaryExtended.registerTransform({
-          type: 'name',
+          type: name,
           name: 'name',
           filter: function () {
             return true;
@@ -224,7 +227,7 @@ describe('register', () => {
 
     it('should work if type, filter, and transform are all proper', () => {
       StyleDictionaryExtended.registerTransform({
-        type: 'name',
+        type: name,
         name: 'foo',
         filter: function () {
           return true;
@@ -234,7 +237,7 @@ describe('register', () => {
         },
       });
       expect(typeof StyleDictionaryExtended.hooks.transforms.foo).to.equal('object');
-      expect(StyleDictionaryExtended).to.have.nested.property('hooks.transforms.foo.type', 'name');
+      expect(StyleDictionaryExtended).to.have.nested.property('hooks.transforms.foo.type', name);
       expect(typeof StyleDictionaryExtended.hooks.transforms.foo.filter).to.equal('function');
       expect(typeof StyleDictionaryExtended.hooks.transforms.foo.transform).to.equal('function');
     });
@@ -242,7 +245,7 @@ describe('register', () => {
     it('should properly pass the registered transform to instances', async () => {
       const SDE2 = await StyleDictionaryExtended.extend({});
       expect(typeof SDE2.hooks.transforms.foo).to.equal('object');
-      expect(SDE2).to.have.nested.property('hooks.transforms.foo.type', 'name');
+      expect(SDE2).to.have.nested.property('hooks.transforms.foo.type', name);
       expect(typeof SDE2.hooks.transforms.foo.filter).to.equal('function');
       expect(typeof SDE2.hooks.transforms.foo.transform).to.equal('function');
     });

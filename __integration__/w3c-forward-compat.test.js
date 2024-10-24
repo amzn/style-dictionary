@@ -17,6 +17,9 @@ import Color from 'tinycolor2';
 import { resolve } from '../lib/resolve.js';
 import { buildPath } from './_constants.js';
 import { clearOutput } from '../__tests__/__helpers.js';
+import { formats, transforms, transformTypes } from '../lib/enums/index.js';
+
+const { value } = transformTypes;
 
 describe('integration', async () => {
   before(async () => {
@@ -46,14 +49,14 @@ describe('integration', async () => {
       hooks: {
         transforms: {
           'custom/css/color': {
-            type: 'value',
+            type: value,
             filter: (token) => token.$type === 'color',
             transform: (token) => {
               return Color(sd.usesDtcg ? token.$value : token.value).toRgbString();
             },
           },
           'custom/add/px': {
-            type: 'value',
+            type: value,
             filter: (token) => token.$type === 'dimension',
             transform: (token) => {
               return `${sd.usesDtcg ? token.$value : token.value}px`;
@@ -63,12 +66,12 @@ describe('integration', async () => {
       },
       platforms: {
         css: {
-          transforms: ['name/kebab', 'custom/css/color', 'custom/add/px'],
+          transforms: [transforms.nameKebab, 'custom/css/color', 'custom/add/px'],
           buildPath,
           files: [
             {
               destination: 'vars.css',
-              format: 'css/variables',
+              format: formats.cssVariables,
             },
           ],
         },

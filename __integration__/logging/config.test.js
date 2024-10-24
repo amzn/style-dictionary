@@ -15,6 +15,9 @@ import { restore, stubMethod } from 'hanbi';
 import StyleDictionary from 'style-dictionary';
 import { buildPath, cleanConsoleOutput } from '../_constants.js';
 import { clearOutput } from '../../__tests__/__helpers.js';
+import { logWarningLevels, logVerbosityLevels } from '../../lib/enums/index.js';
+
+const { error: errorLog, disabled } = logWarningLevels;
 
 /**
  * These integration tests will verify the behavior and logging at the *config*
@@ -54,7 +57,7 @@ describe(`integration >`, () => {
         it(`should not log anything if the log verbosity is set to silent`, async () => {
           const sd = new StyleDictionary({
             log: {
-              verbosity: 'silent',
+              verbosity: logVerbosityLevels.silent,
             },
             source: [
               // including a specific file twice will throw value collision warnings
@@ -70,7 +73,7 @@ describe(`integration >`, () => {
         it(`should not log anything if the log warnings is set to disabled`, async () => {
           const sd = new StyleDictionary({
             log: {
-              warnings: 'disabled',
+              warnings: disabled,
             },
             source: [
               // including a specific file twice will throw value collision warnings
@@ -86,7 +89,7 @@ describe(`integration >`, () => {
         it(`should not show warnings if given higher log level`, async () => {
           const sd = new StyleDictionary(
             {
-              log: { warnings: `error` },
+              log: { warnings: errorLog },
               source: [
                 // including a specific file twice will throw value collision warnings
                 `__integration__/tokens/size/padding.json`,

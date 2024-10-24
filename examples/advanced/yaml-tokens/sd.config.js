@@ -1,4 +1,5 @@
 import yaml from 'yaml';
+import { formats, transformGroups } from 'style-dictionary/enums';
 
 export default {
   hooks: {
@@ -20,12 +21,12 @@ export default {
   source: [`tokens/**/*.yaml`],
   platforms: {
     css: {
-      transformGroup: 'css',
+      transformGroup: transformGroups.css,
       buildPath: 'build/',
       files: [
         {
           destination: 'variables.css',
-          format: 'css/variables',
+          format: formats.cssVariables,
         },
       ],
     },

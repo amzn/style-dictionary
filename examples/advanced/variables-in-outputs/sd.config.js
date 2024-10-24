@@ -1,3 +1,8 @@
+import { formats, transformGroups } from 'style-dictionary/enums';
+
+const { cssVariables, jsonNested, scssVariables } = formats;
+const { css, js } = transformGroups;
+
 export default {
   hooks: {
     formats: {
@@ -37,13 +42,13 @@ export default {
       files: [
         {
           destination: 'tokens.json',
-          format: 'json/nested',
+          format: jsonNested,
         },
       ],
     },
     js: {
       buildPath: 'build/',
-      transformGroup: 'js',
+      transformGroup: js,
       files: [
         {
           destination: 'tokens.js',
@@ -55,19 +60,19 @@ export default {
       ],
     },
     css: {
-      transformGroup: 'css',
+      transformGroup: css,
       buildPath: 'build/',
       files: [
         {
           destination: 'tokens.css',
-          format: 'css/variables',
+          format: cssVariables,
           options: {
             outputReferences: true, // new setting, if true will use variable references
           },
         },
         {
           destination: 'tokens.scss',
-          format: 'scss/variables',
+          format: scssVariables,
           options: {
             outputReferences: true, // new setting, if true will use variable references
           },

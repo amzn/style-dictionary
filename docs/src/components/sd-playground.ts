@@ -12,6 +12,7 @@ import { analyzeDependencies } from '../utils/analyzeDependencies.js';
 import { downloadZIP } from '../../../lib/utils/downloadFile.js';
 import type SlRadioGroup from '@shoelace-style/shoelace/dist/components/radio-group/radio-group.js';
 import type { Config } from '../../../types/Config.js';
+import { formats, transformGroups } from '../../../lib/enums/index.js';
 
 const defaults = {
   tokens: {
@@ -25,11 +26,11 @@ const defaults = {
   config: {
     platforms: {
       css: {
-        transformGroup: 'css',
+        transformGroup: transformGroups.css,
         files: [
           {
             destination: 'vars.css',
-            format: 'css/variables',
+            format: formats.cssVariables,
           },
         ],
       },

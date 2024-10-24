@@ -16,6 +16,10 @@ import { fs } from 'style-dictionary/fs';
 import { resolve } from '../lib/resolve.js';
 import { buildPath } from './_constants.js';
 import { clearOutput } from '../__tests__/__helpers.js';
+import { formats, transformGroups } from '../lib/enums/index.js';
+
+const { iosColorsH, iosColorsM, iosMacros, iosSingletonH, iosSingletonM, iosStaticH, iosStaticM } =
+  formats;
 
 describe('integration', async () => {
   before(async () => {
@@ -23,26 +27,26 @@ describe('integration', async () => {
       source: [`__integration__/tokens/**/[!_]*.json?(c)`],
       platforms: {
         flutter: {
-          transformGroup: `ios`,
+          transformGroup: transformGroups.ios,
           buildPath,
           files: [
             {
               destination: 'singleton.m',
-              format: 'ios/singleton.m',
+              format: iosSingletonM,
               options: {
                 className: 'StyleDictionary',
               },
             },
             {
               destination: 'singleton.h',
-              format: 'ios/singleton.h',
+              format: iosSingletonH,
               options: {
                 className: 'StyleDictionary',
               },
             },
             {
               destination: 'color.h',
-              format: 'ios/colors.h',
+              format: iosColorsH,
               options: {
                 className: 'StyleDictionaryColor',
                 type: 'StyleDictionaryColorName',
@@ -51,7 +55,7 @@ describe('integration', async () => {
             },
             {
               destination: 'color.m',
-              format: 'ios/colors.m',
+              format: iosColorsM,
               options: {
                 className: 'StyleDictionaryColor',
                 type: 'StyleDictionaryColorName',
@@ -60,11 +64,11 @@ describe('integration', async () => {
             },
             {
               destination: 'macros.h',
-              format: 'ios/macros',
+              format: iosMacros,
             },
             {
               destination: 'static.h',
-              format: 'ios/static.h',
+              format: iosStaticH,
               options: {
                 className: 'StyleDictionaryStatic',
                 type: 'CGFloat',
@@ -73,7 +77,7 @@ describe('integration', async () => {
             },
             {
               destination: 'static.m',
-              format: 'ios/static.m',
+              format: iosStaticM,
               options: {
                 className: 'StyleDictionaryStatic',
                 type: 'CGFloat',

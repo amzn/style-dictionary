@@ -1,7 +1,10 @@
 import StyleDictionary from 'style-dictionary';
+import { formats, transformGroups } from 'style-dictionary/enums';
+
+const { androidColors, androidDimens, androidFontDimens, iosMacros, scssVariables } = formats;
+const { web } = transformGroups;
 
 // HAVE THE STYLE DICTIONARY CONFIG DYNAMICALLY GENERATED
-
 function getStyleDictionaryConfig(brand, platform) {
   return {
     source: [
@@ -11,12 +14,12 @@ function getStyleDictionaryConfig(brand, platform) {
     ],
     platforms: {
       web: {
-        transformGroup: 'web',
+        transformGroup: web,
         buildPath: `build/web/${brand}/`,
         files: [
           {
             destination: 'tokens.scss',
-            format: 'scss/variables',
+            format: scssVariables,
           },
         ],
       },
@@ -26,15 +29,15 @@ function getStyleDictionaryConfig(brand, platform) {
         files: [
           {
             destination: 'tokens.colors.xml',
-            format: 'android/colors',
+            format: androidColors,
           },
           {
             destination: 'tokens.dimens.xml',
-            format: 'android/dimens',
+            format: androidDimens,
           },
           {
             destination: 'tokens.font_dimens.xml',
-            format: 'android/fontDimens',
+            format: androidFontDimens,
           },
         ],
       },
@@ -44,7 +47,7 @@ function getStyleDictionaryConfig(brand, platform) {
         files: [
           {
             destination: 'tokens.h',
-            format: 'ios/macros',
+            format: iosMacros,
           },
         ],
       },

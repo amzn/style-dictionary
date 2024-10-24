@@ -16,6 +16,10 @@ import { fs } from 'style-dictionary/fs';
 import { resolve } from '../lib/resolve.js';
 import { buildPath } from './_constants.js';
 import { clearOutput } from '../__tests__/__helpers.js';
+import { formats, transformGroups } from '../lib/enums/index.js';
+
+const { cssVariables, javascriptModule } = formats;
+const { css, js } = transformGroups;
 
 describe(`integration`, async () => {
   before(async () => {
@@ -46,26 +50,26 @@ describe(`integration`, async () => {
 
       platforms: {
         css: {
-          transformGroup: `css`,
+          transformGroup: css,
           buildPath,
           files: [
             {
               destination: `registeredFileHeader.css`,
-              format: `css/variables`,
+              format: cssVariables,
               options: {
                 fileHeader: `valid custom file headers test fileHeader`,
               },
             },
             {
               destination: `configFileHeader.css`,
-              format: `css/variables`,
+              format: cssVariables,
               options: {
                 fileHeader: `configFileHeader`,
               },
             },
             {
               destination: `inlineFileHeader.css`,
-              format: `css/variables`,
+              format: cssVariables,
               options: {
                 fileHeader: () => {
                   return [`build version 1.0.0`];
@@ -75,7 +79,7 @@ describe(`integration`, async () => {
           ],
         },
         js: {
-          transformGroup: `js`,
+          transformGroup: js,
           buildPath,
           options: {
             fileHeader: `configFileHeader`,
@@ -83,18 +87,18 @@ describe(`integration`, async () => {
           files: [
             {
               destination: `noOptions.js`,
-              format: `javascript/module`,
+              format: javascriptModule,
             },
             {
               destination: `showFileHeader.js`,
-              format: `javascript/module`,
+              format: javascriptModule,
               options: {
                 showFileHeader: false,
               },
             },
             {
               destination: `fileHeaderOverride.js`,
-              format: `javascript/module`,
+              format: javascriptModule,
               options: {
                 fileHeader: () => [`Header overridden`],
               },

@@ -1,10 +1,11 @@
 import StyleDictionary from 'style-dictionary';
+import { transformTypes } from 'style-dictionary/enums';
 
 // Register an "attribute" transform to codify the font's details
 // as named attributes.
 StyleDictionary.registerTransform({
   name: 'attribute/font',
-  type: 'attribute',
+  type: transformTypes.attribute,
   transform: (prop) => ({
     category: prop.path[0],
     type: prop.path[1],

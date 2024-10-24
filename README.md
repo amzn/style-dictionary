@@ -91,16 +91,18 @@ StyleDictionary.buildAllPlatforms();
 The `.extend()` method is an overloaded method that can also take an object with the configuration in the same format as a config.json file.
 
 ```javascript
+import { formats, transformGroups } from 'style-dictionary/enums';
+
 const StyleDictionary = require('style-dictionary').extend({
   source: ['tokens/**/*.json'],
   platforms: {
     scss: {
-      transformGroup: 'scss',
+      transformGroup: transformGroups.scss,
       buildPath: 'build/',
       files: [
         {
           destination: 'variables.scss',
-          format: 'scss/variables',
+          format: formats.scssVariables,
         },
       ],
     },
@@ -294,10 +296,11 @@ The style dictionary build system is made to be extended. We don't know exactly 
 
 ```javascript
 const StyleDictionary = require('style-dictionary').extend('config.json');
+import { transforms, transformTypes } from 'style-dictionary/enums';
 
 StyleDictionary.registerTransform({
-  name: 'time/seconds',
-  type: 'value',
+  name: transforms.timeSeconds,
+  type: transformTypes.value,
   filter: function (token) {
     return token.type === 'time';
   },
