@@ -19,6 +19,16 @@ import { resolve } from '../lib/resolve.js';
 import { clearOutput } from '../__tests__/__helpers.js';
 import { outputReferencesFilter } from '../lib/utils/references/outputReferencesFilter.js';
 import { outputReferencesTransformed } from '../lib/utils/index.js';
+import {
+  logVerbosityLevels,
+  formats,
+  transformGroups,
+  transformTypes,
+} from '../lib/enums/index.js';
+
+const { cssVariables } = formats;
+const { css } = transformGroups;
+const { verbose } = logVerbosityLevels;
 
 describe('integration', async () => {
   let stub;
@@ -48,7 +58,7 @@ describe('integration', async () => {
         hooks: {
           transforms: {
             'rgb-in-rgba': {
-              type: 'value',
+              type: transformTypes.value,
               transitive: true,
               filter: (token) => token.type === 'color',
               // quite naive transform to support rgb inside rgba
@@ -70,7 +80,7 @@ describe('integration', async () => {
             files: [
               {
                 destination: 'transformedFilteredVariables.css',
-                format: 'css/variables',
+                format: cssVariables,
                 options: {
                   outputReferences: outputReferencesTransformed,
                 },
@@ -138,12 +148,12 @@ describe('integration', async () => {
         source: [`__integration__/tokens/**/[!_]*.json?(c)`],
         platforms: {
           css: {
-            transformGroup: 'css',
+            transformGroup: css,
             buildPath,
             files: [
               {
                 destination: 'filteredVariables.css',
-                format: 'css/variables',
+                format: cssVariables,
                 // filter tokens and use outputReferences
                 // Style Dictionary should build this file ok
                 // but warn the user
@@ -164,16 +174,16 @@ describe('integration', async () => {
       const sd = new StyleDictionary({
         // we are only testing showFileHeader options so we don't need
         // the full source.
-        log: { verbosity: 'verbose' },
+        log: { verbosity: verbose },
         source: [`__integration__/tokens/**/[!_]*.json?(c)`],
         platforms: {
           css: {
-            transformGroup: 'css',
+            transformGroup: css,
             buildPath,
             files: [
               {
                 destination: 'filteredVariables.css',
-                format: 'css/variables',
+                format: cssVariables,
                 // filter tokens and use outputReferences
                 // Style Dictionary should build this file ok
                 // but warn the user
@@ -194,18 +204,18 @@ describe('integration', async () => {
 
     it('should warn the user if filters out references with a detailed message when using verbose logging', async () => {
       const sd = new StyleDictionary({
-        log: { verbosity: 'verbose' },
+        log: { verbosity: verbose },
         // we are only testing showFileHeader options so we don't need
         // the full source.
         source: [`__integration__/tokens/**/[!_]*.json?(c)`],
         platforms: {
           css: {
-            transformGroup: 'css',
+            transformGroup: css,
             buildPath,
             files: [
               {
                 destination: 'filteredVariables.css',
-                format: 'css/variables',
+                format: cssVariables,
                 // filter tokens and use outputReferences
                 // Style Dictionary should build this file ok
                 // but warn the user
@@ -236,12 +246,12 @@ describe('integration', async () => {
         },
         platforms: {
           css: {
-            transformGroup: 'css',
+            transformGroup: css,
             buildPath,
             files: [
               {
                 destination: 'dtcgOutputRef.css',
-                format: 'css/variables',
+                format: cssVariables,
                 options: {
                   outputReferences: true,
                   usesDtcg: true,

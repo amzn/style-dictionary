@@ -15,8 +15,28 @@ import { stubMethod, restore } from 'hanbi';
 import StyleDictionary from 'style-dictionary';
 import { usesReferences } from 'style-dictionary/utils';
 import { fileToJSON, cleanConsoleOutput } from './__helpers.js';
+import {
+  logWarningLevels,
+  logVerbosityLevels,
+  transforms,
+  transformGroups,
+  transformTypes,
+} from '../lib/enums/index.js';
 
 const config = fileToJSON('__tests__/__configs/test.json');
+const { default: defaultVerbosity, silent, verbose } = logVerbosityLevels;
+const { error: errorLog, disabled } = logWarningLevels;
+const { css, web } = transformGroups;
+const {
+  colorCss,
+  nameKebab,
+  typographyCssShorthand,
+  borderCssShorthand,
+  shadowCssShorthand,
+  cubicBezierCss,
+  transitionCssShorthand,
+} = transforms;
+const { value: transformTypeValue } = transformTypes;
 
 describe('exportPlatform', () => {
   let styleDictionary;
@@ -67,12 +87,12 @@ describe('exportPlatform', () => {
       const StyleDictionaryExtended = await styleDictionary.extend({
         platforms: {
           test: {
-            transforms: ['color/css', 'color/darken'],
+            transforms: [colorCss, 'color/darken'],
           },
         },
       });
       StyleDictionary.registerTransform({
-        type: 'value',
+        type: transformTypeValue,
         name: 'color/darken',
         transitive: true,
         filter: function (prop) {
@@ -103,7 +123,7 @@ describe('exportPlatform', () => {
         hooks: {
           transforms: {
             transitive: {
-              type: 'value',
+              type: transformTypeValue,
               transitive: true,
               transform: (token) => `${token.value}-bar`,
             },
@@ -150,7 +170,7 @@ describe('exportPlatform', () => {
         },
       });
       StyleDictionaryExtended.registerTransform({
-        type: 'value',
+        type: transformTypeValue,
         name: 'color/darken',
         transitive: true,
         filter: (token) => token.type === 'color',
@@ -205,7 +225,7 @@ describe('exportPlatform', () => {
       },
       platforms: {
         web: {
-          transformGroup: 'web',
+          transformGroup: web,
         },
       },
     });
@@ -279,7 +299,7 @@ describe('exportPlatform', () => {
       tokens,
       platforms: {
         css: {
-          transformGroup: `css`,
+          transformGroup: css,
         },
       },
     }).exportPlatform('css');
@@ -302,7 +322,7 @@ describe('exportPlatform', () => {
       tokens,
       platforms: {
         css: {
-          transformGroup: 'css',
+          transformGroup: css,
         },
       },
     });
@@ -358,7 +378,7 @@ describe('exportPlatform', () => {
     };
     // making the css/color transform transitive so we can be sure the references
     // get resolved properly and transformed.
-    const transitiveTransform = Object.assign({}, StyleDictionary.hooks.transforms['color/css'], {
+    const transitiveTransform = Object.assign({}, StyleDictionary.hooks.transforms[colorCss], {
       transitive: true,
     });
 
@@ -371,7 +391,7 @@ describe('exportPlatform', () => {
       },
       platforms: {
         css: {
-          transforms: ['name/kebab', 'transitiveTransform'],
+          transforms: [nameKebab, 'transitiveTransform'],
         },
       },
     });
@@ -397,7 +417,7 @@ Some token references (${amount}) could not be found.
 Use log.verbosity "verbose" or use CLI option --verbose for more details.`;
     const platforms = {
       css: {
-        transformGroup: `css`,
+        transformGroup: css,
       },
     };
 
@@ -470,7 +490,7 @@ Use log.verbosity "verbose" or use CLI option --verbose for more details.`;
           },
           platforms: {
             css: {
-              transforms: ['typography/css/shorthand'],
+              transforms: [typographyCssShorthand],
             },
           },
         });
@@ -484,7 +504,7 @@ Use log.verbosity "verbose" or use CLI option --verbose for more details.
 Refer to: https://styledictionary.com/reference/logging/
 `);
 
-        sd.log.verbosity = 'verbose';
+        sd.log.verbosity = verbose;
         await sd.exportPlatform('css', { cache: false });
 
         expect(cleanConsoleOutput(Array.from(logStub.calls)[1].args[0])).to.equal(`
@@ -502,16 +522,16 @@ Unknown CSS Font Shorthand properties found for 1 tokens, CSS output for Font va
 letterSpacing, paragraphSpacing, textColor for token at foo.bar in /tokens.json
 `);
 
-        sd.log.verbosity = 'silent';
+        sd.log.verbosity = silent;
         await sd.exportPlatform('css', { cache: false });
         expect(Array.from(logStub.calls)[3]).to.be.undefined;
 
-        sd.log.verbosity = 'default';
-        sd.log.warnings = 'disabled';
+        sd.log.verbosity = defaultVerbosity;
+        sd.log.warnings = disabled;
         await sd.exportPlatform('css', { cache: false });
         expect(Array.from(logStub.calls)[3]).to.be.undefined;
 
-        sd.log.warnings = 'error';
+        sd.log.warnings = errorLog;
         await expect(sd.exportPlatform('css', { cache: false })).to.be.eventually.rejectedWith(`
 Unknown CSS Font Shorthand properties found for 1 tokens, CSS output for Font values will be missing some typography token properties as a result:
 Use log.verbosity "verbose" or use CLI option --verbose for more details.
@@ -538,7 +558,7 @@ Use log.verbosity "verbose" or use CLI option --verbose for more details.
           },
           platforms: {
             css: {
-              transforms: ['typography/css/shorthand'],
+              transforms: [typographyCssShorthand],
             },
           },
         });
@@ -567,7 +587,7 @@ Use log.verbosity "verbose" or use CLI option --verbose for more details.
           },
           platforms: {
             css: {
-              transforms: ['typography/css/shorthand'],
+              transforms: [typographyCssShorthand],
             },
           },
         });
@@ -596,7 +616,7 @@ Use log.verbosity "verbose" or use CLI option --verbose for more details.
           },
           platforms: {
             css: {
-              transforms: ['border/css/shorthand'],
+              transforms: [borderCssShorthand],
             },
           },
         });
@@ -623,7 +643,7 @@ Use log.verbosity "verbose" or use CLI option --verbose for more details.
           },
           platforms: {
             css: {
-              transforms: ['border/css/shorthand'],
+              transforms: [borderCssShorthand],
             },
           },
         });
@@ -652,7 +672,7 @@ Use log.verbosity "verbose" or use CLI option --verbose for more details.
           },
           platforms: {
             css: {
-              transforms: ['cubicBezier/css', 'transition/css/shorthand'],
+              transforms: [cubicBezierCss, transitionCssShorthand],
             },
           },
         });
@@ -679,7 +699,7 @@ Use log.verbosity "verbose" or use CLI option --verbose for more details.
           },
           platforms: {
             css: {
-              transforms: ['cubicBezier/css', 'transition/css/shorthand'],
+              transforms: [cubicBezierCss, transitionCssShorthand],
             },
           },
         });
@@ -709,7 +729,7 @@ Use log.verbosity "verbose" or use CLI option --verbose for more details.
           },
           platforms: {
             css: {
-              transforms: ['shadow/css/shorthand'],
+              transforms: [shadowCssShorthand],
             },
           },
         });
@@ -745,7 +765,7 @@ Use log.verbosity "verbose" or use CLI option --verbose for more details.
           },
           platforms: {
             css: {
-              transforms: ['shadow/css/shorthand'],
+              transforms: [shadowCssShorthand],
             },
           },
         });
@@ -788,7 +808,7 @@ Use log.verbosity "verbose" or use CLI option --verbose for more details.
         hooks: {
           transforms: {
             'custom/add/px': {
-              type: 'value',
+              type: transformTypeValue,
               filter: (token) => {
                 return token.$type === 'dimension';
               },
@@ -800,7 +820,7 @@ Use log.verbosity "verbose" or use CLI option --verbose for more details.
         },
         platforms: {
           css: {
-            transforms: ['name/kebab', 'custom/add/px'],
+            transforms: [nameKebab, 'custom/add/px'],
           },
         },
       });

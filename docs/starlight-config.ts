@@ -52,6 +52,10 @@ export default {
           link: '/reference/api',
         },
         {
+          label: 'Enums',
+          link: '/reference/enums',
+        },
+        {
           label: 'Configuration',
           link: '/reference/config',
         },

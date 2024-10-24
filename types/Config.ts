@@ -19,6 +19,15 @@ import type { Preprocessor } from './Preprocessor.js';
 import type { Transform } from './Transform.js';
 import type { Format, OutputReferences } from './Format.js';
 import type { Action } from './Action.js';
+import {
+  logBrokenReferenceLevels,
+  logWarningLevels,
+  logVerbosityLevels,
+} from '../lib/enums/index.js';
+
+type logWarningLevels = typeof logWarningLevels;
+type logVerbosityLevels = typeof logVerbosityLevels;
+type logBrokenReferenceLevels = typeof logBrokenReferenceLevels;
 
 export interface Hooks {
   parsers?: Record<string, Omit<Parser, 'name'>>;
@@ -67,10 +76,10 @@ export interface ResolveReferencesOptionsInternal extends ResolveReferencesOptio
 }
 
 export interface LogConfig {
-  warnings?: 'warn' | 'error' | 'disabled';
-  verbosity?: 'default' | 'silent' | 'verbose';
+  warnings?: logWarningLevels[keyof logWarningLevels];
+  verbosity?: logVerbosityLevels[keyof logVerbosityLevels];
   errors?: {
-    brokenReferences?: 'throw' | 'console';
+    brokenReferences?: logBrokenReferenceLevels[keyof logBrokenReferenceLevels];
   };
 }
 

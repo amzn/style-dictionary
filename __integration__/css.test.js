@@ -16,6 +16,9 @@ import { fs } from 'style-dictionary/fs';
 import { resolve } from '../lib/resolve.js';
 import { buildPath } from './_constants.js';
 import { clearOutput } from '../__tests__/__helpers.js';
+import { formats, transformGroups } from '../lib/enums/index.js';
+
+const { cssVariables } = formats;
 
 describe('integration', async () => {
   before(async () => {
@@ -33,19 +36,19 @@ describe('integration', async () => {
       },
       platforms: {
         css: {
-          transformGroup: 'css',
+          transformGroup: transformGroups.css,
           buildPath,
           files: [
             {
               destination: 'variables.css',
-              format: 'css/variables',
+              format: cssVariables,
               options: {
                 formatting: { indentation: '    ' },
               },
             },
             {
               destination: 'variablesWithReferences.css',
-              format: 'css/variables',
+              format: cssVariables,
               options: {
                 outputReferences: true,
                 outputReferenceFallbacks: false,
@@ -53,7 +56,7 @@ describe('integration', async () => {
             },
             {
               destination: 'variablesWithReferenceFallbacks.css',
-              format: 'css/variables',
+              format: cssVariables,
               options: {
                 outputReferences: true,
                 outputReferenceFallbacks: true,
@@ -61,7 +64,7 @@ describe('integration', async () => {
             },
             {
               destination: 'variablesWithSelector.css',
-              format: 'css/variables',
+              format: cssVariables,
               options: {
                 selector: '.test',
               },
@@ -78,7 +81,7 @@ describe('integration', async () => {
   });
 
   describe('css', async () => {
-    describe('css/variables', async () => {
+    describe(cssVariables, async () => {
       it(`should match snapshot`, async () => {
         const output = fs.readFileSync(resolve(`${buildPath}variables.css`), {
           encoding: 'UTF-8',

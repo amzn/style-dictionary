@@ -15,10 +15,11 @@ import formats from '../../lib/common/formats.js';
 import createFormatArgs from '../../lib/utils/createFormatArgs.js';
 import { convertTokenData } from '../../lib/utils/convertTokenData.js';
 import { deepmerge } from '../../lib/utils/deepmerge.js';
+import { formats as fileFormats } from '../../lib/enums/index.js';
 
 const file = {
   destination: '__output/',
-  format: 'javascript/es6',
+  format: fileFormats.javascriptEs6,
   filter: {
     type: 'color',
   },

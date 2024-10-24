@@ -15,10 +15,13 @@ import { expect } from 'chai';
 import formats from '../../lib/common/formats.js';
 import createFormatArgs from '../../lib/utils/createFormatArgs.js';
 import { convertTokenData } from '../../lib/utils/convertTokenData.js';
+import { formats as fileFormats } from '../../lib/enums/index.js';
+
+const { stylusVariables } = fileFormats;
 
 const file = {
   destination: '__output/',
-  format: 'stylus/variables',
+  format: stylusVariables,
   name: 'foo',
 };
 
@@ -42,10 +45,10 @@ const tokens = {
   },
 };
 
-const format = formats['stylus/variables'];
+const format = formats[stylusVariables];
 
 describe('formats', () => {
-  describe('stylus/variables', () => {
+  describe(stylusVariables, () => {
     it('should have a valid stylus syntax and match snapshot', async () => {
       const result = format(
         createFormatArgs({

@@ -55,7 +55,7 @@ describe('transform', () => {
 
     it('should use the name on the property if set', () => {
       const name = 'name';
-      const test = tokenSetup({ value: '#fff', name: name }, 'white', ['color', 'base']);
+      const test = tokenSetup({ value: '#fff', name }, 'white', ['color', 'base']);
       expect(test).to.have.property('name', name);
     });
 

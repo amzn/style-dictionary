@@ -15,6 +15,20 @@ import { restore, stubMethod } from 'hanbi';
 import StyleDictionary from 'style-dictionary';
 import { buildPath, cleanConsoleOutput } from '../_constants.js';
 import { clearOutput } from '../../__tests__/__helpers.js';
+import {
+  formats,
+  logWarningLevels,
+  logVerbosityLevels,
+  transforms,
+  transformGroups,
+} from '../../lib/enums/index.js';
+
+const { silent, verbose } = logVerbosityLevels;
+const { error: errorLog, disabled } = logWarningLevels;
+const { attributeCti } = transforms;
+const { cssVariables } = formats;
+const { css } = transformGroups;
+
 /**
  * The last and final level of logging: file.
  * These logs happen when a file is being built and will notify the user
@@ -40,11 +54,11 @@ describe(`integration`, () => {
             source: [`__integration__/tokens/**/[!_]*.json?(c)`],
             platforms: {
               css: {
-                transformGroup: `css`,
+                transformGroup: css,
                 files: [
                   {
                     destination: `empty.css`,
-                    format: `css/variables`,
+                    format: cssVariables,
                     filter: (token) => token.type === `foo`,
                   },
                 ],
@@ -60,15 +74,15 @@ describe(`integration`, () => {
 
         it(`should not warn user about empty tokens with silent log verbosity`, async () => {
           const sd = new StyleDictionary({
-            log: { verbosity: 'silent' },
+            log: { verbosity: silent },
             source: [`__integration__/tokens/**/[!_]*.json?(c)`],
             platforms: {
               css: {
-                transformGroup: `css`,
+                transformGroup: css,
                 files: [
                   {
                     destination: `empty.css`,
-                    format: `css/variables`,
+                    format: cssVariables,
                     filter: (token) => token.type === `foo`,
                   },
                 ],
@@ -82,15 +96,15 @@ describe(`integration`, () => {
 
         it(`should not warn user about empty tokens with silent log verbosity`, async () => {
           const sd = new StyleDictionary({
-            log: { warnings: 'disabled' },
+            log: { warnings: disabled },
             source: [`__integration__/tokens/**/[!_]*.json?(c)`],
             platforms: {
               css: {
-                transformGroup: `css`,
+                transformGroup: css,
                 files: [
                   {
                     destination: `empty.css`,
-                    format: `css/variables`,
+                    format: cssVariables,
                     filter: (token) => token.type === `foo`,
                   },
                 ],
@@ -105,15 +119,15 @@ describe(`integration`, () => {
 
         it(`should not warn user about empty tokens with log level set to error`, async () => {
           const sd = new StyleDictionary({
-            log: { warnings: 'error' },
+            log: { warnings: errorLog },
             source: [`__integration__/tokens/**/[!_]*.json?(c)`],
             platforms: {
               css: {
-                transformGroup: `css`,
+                transformGroup: css,
                 files: [
                   {
                     destination: `empty.css`,
-                    format: `css/variables`,
+                    format: cssVariables,
                     filter: (token) => token.type === `foo`,
                   },
                 ],
@@ -131,12 +145,12 @@ describe(`integration`, () => {
             source: [`__integration__/tokens/**/[!_]*.json?(c)`],
             platforms: {
               css: {
-                log: { warnings: 'error' },
-                transformGroup: `css`,
+                log: { warnings: errorLog },
+                transformGroup: css,
                 files: [
                   {
                     destination: `empty.css`,
-                    format: `css/variables`,
+                    format: cssVariables,
                     filter: (token) => token.type === `foo`,
                   },
                 ],
@@ -157,12 +171,12 @@ describe(`integration`, () => {
             platforms: {
               css: {
                 // no name transform means there will be name collisions
-                transforms: [`attribute/cti`],
+                transforms: [attributeCti],
                 buildPath,
                 files: [
                   {
                     destination: `nameCollisions.css`,
-                    format: `css/variables`,
+                    format: cssVariables,
                     filter: (token) => token.type === `color`,
                   },
                 ],
@@ -177,17 +191,17 @@ describe(`integration`, () => {
 
         it(`should not warn user of name collisions with log verbosity silent`, async () => {
           const sd = new StyleDictionary({
-            log: { verbosity: 'silent' },
+            log: { verbosity: silent },
             source: [`__integration__/tokens/**/[!_]*.json?(c)`],
             platforms: {
               css: {
                 // no name transform means there will be name collisions
-                transforms: [`attribute/cti`],
+                transforms: [attributeCti],
                 buildPath,
                 files: [
                   {
                     destination: `nameCollisions.css`,
-                    format: `css/variables`,
+                    format: cssVariables,
                     filter: (token) => token.type === `color`,
                   },
                 ],
@@ -200,17 +214,17 @@ describe(`integration`, () => {
 
         it(`should not warn user of name collisions with log verbosity silent`, async () => {
           const sd = new StyleDictionary({
-            log: { warnings: 'disabled' },
+            log: { warnings: disabled },
             source: [`__integration__/tokens/**/[!_]*.json?(c)`],
             platforms: {
               css: {
                 // no name transform means there will be name collisions
-                transforms: [`attribute/cti`],
+                transforms: [attributeCti],
                 buildPath,
                 files: [
                   {
                     destination: `nameCollisions.css`,
-                    format: `css/variables`,
+                    format: cssVariables,
                     filter: (token) => token.type === `color`,
                   },
                 ],
@@ -224,17 +238,17 @@ describe(`integration`, () => {
 
         it(`should throw a brief error of name collisions with log level set to error`, async () => {
           const sd = new StyleDictionary({
-            log: { warnings: `error` },
+            log: { warnings: errorLog },
             source: [`__integration__/tokens/**/[!_]*.json?(c)`],
             platforms: {
               css: {
                 // no name transform means there will be name collisions
-                transforms: [`attribute/cti`],
+                transforms: [attributeCti],
                 buildPath,
                 files: [
                   {
                     destination: `nameCollisions.css`,
-                    format: `css/variables`,
+                    format: cssVariables,
                     filter: (token) => token.type === `color`,
                   },
                 ],
@@ -255,14 +269,14 @@ describe(`integration`, () => {
             source: [`__integration__/tokens/**/[!_]*.json?(c)`],
             platforms: {
               css: {
-                log: { warnings: `error` },
+                log: { warnings: errorLog },
                 // no name transform means there will be name collisions
-                transforms: [`attribute/cti`],
+                transforms: [attributeCti],
                 buildPath,
                 files: [
                   {
                     destination: `nameCollisions.css`,
-                    format: `css/variables`,
+                    format: cssVariables,
                     filter: (token) => token.type === `color`,
                   },
                 ],
@@ -281,17 +295,17 @@ describe(`integration`, () => {
 
         it(`should warn user of name collisions with a detailed message through "verbose" verbosity`, async () => {
           const sd = new StyleDictionary({
-            log: { verbosity: 'verbose' },
+            log: { verbosity: verbose },
             source: [`__integration__/tokens/**/[!_]*.json?(c)`],
             platforms: {
               css: {
                 // no name transform means there will be name collisions
-                transforms: [`attribute/cti`],
+                transforms: [attributeCti],
                 buildPath,
                 files: [
                   {
                     destination: `nameCollisions.css`,
-                    format: `css/variables`,
+                    format: cssVariables,
                     filter: (token) => token.type === `color`,
                   },
                 ],
@@ -306,17 +320,17 @@ describe(`integration`, () => {
 
         it(`should throw detailed error of name collisions through "verbose" verbosity and log level set to error`, async () => {
           const sd = new StyleDictionary({
-            log: { warnings: `error`, verbosity: 'verbose' },
+            log: { warnings: errorLog, verbosity: verbose },
             source: [`__integration__/tokens/**/[!_]*.json?(c)`],
             platforms: {
               css: {
                 // no name transform means there will be name collisions
-                transforms: [`attribute/cti`],
+                transforms: [attributeCti],
                 buildPath,
                 files: [
                   {
                     destination: `nameCollisions.css`,
-                    format: `css/variables`,
+                    format: cssVariables,
                     filter: (token) => token.type === `color`,
                   },
                 ],
@@ -339,12 +353,12 @@ describe(`integration`, () => {
             source: [`__integration__/tokens/**/[!_]*.json?(c)`],
             platforms: {
               css: {
-                transformGroup: `css`,
+                transformGroup: css,
                 buildPath,
                 files: [
                   {
                     destination: `filteredReferences.css`,
-                    format: `css/variables`,
+                    format: cssVariables,
                     options: {
                       outputReferences: true,
                     },
@@ -364,16 +378,16 @@ describe(`integration`, () => {
 
         it(`should not warn user of filtered references with log verbosity silent`, async () => {
           const sd = new StyleDictionary({
-            log: { verbosity: 'silent' },
+            log: { verbosity: silent },
             source: [`__integration__/tokens/**/[!_]*.json?(c)`],
             platforms: {
               css: {
-                transformGroup: `css`,
+                transformGroup: css,
                 buildPath,
                 files: [
                   {
                     destination: `filteredReferences.css`,
-                    format: `css/variables`,
+                    format: cssVariables,
                     options: {
                       outputReferences: true,
                     },
@@ -391,16 +405,16 @@ describe(`integration`, () => {
 
         it(`should not warn user of filtered references with log verbosity silent`, async () => {
           const sd = new StyleDictionary({
-            log: { warnings: 'disabled' },
+            log: { warnings: disabled },
             source: [`__integration__/tokens/**/[!_]*.json?(c)`],
             platforms: {
               css: {
-                transformGroup: `css`,
+                transformGroup: css,
                 buildPath,
                 files: [
                   {
                     destination: `filteredReferences.css`,
-                    format: `css/variables`,
+                    format: cssVariables,
                     options: {
                       outputReferences: true,
                     },
@@ -419,16 +433,16 @@ describe(`integration`, () => {
 
         it(`should throw a brief error of filtered references with log level set to error`, async () => {
           const sd = new StyleDictionary({
-            log: { warnings: `error` },
+            log: { warnings: errorLog },
             source: [`__integration__/tokens/**/[!_]*.json?(c)`],
             platforms: {
               css: {
-                transformGroup: `css`,
+                transformGroup: css,
                 buildPath,
                 files: [
                   {
                     destination: `filteredReferences.css`,
-                    format: `css/variables`,
+                    format: cssVariables,
                     options: {
                       outputReferences: true,
                     },
@@ -455,13 +469,13 @@ describe(`integration`, () => {
             source: [`__integration__/tokens/**/[!_]*.json?(c)`],
             platforms: {
               css: {
-                log: { warnings: `error` },
-                transformGroup: `css`,
+                log: { warnings: errorLog },
+                transformGroup: css,
                 buildPath,
                 files: [
                   {
                     destination: `filteredReferences.css`,
-                    format: `css/variables`,
+                    format: cssVariables,
                     options: {
                       outputReferences: true,
                     },
@@ -485,16 +499,16 @@ describe(`integration`, () => {
 
         it(`should warn user of filtered references with a detailed message through "verbose" verbosity`, async () => {
           const sd = new StyleDictionary({
-            log: { verbosity: 'verbose' },
+            log: { verbosity: verbose },
             source: [`__integration__/tokens/**/[!_]*.json?(c)`],
             platforms: {
               css: {
-                transformGroup: `css`,
+                transformGroup: css,
                 buildPath,
                 files: [
                   {
                     destination: `filteredReferences.css`,
-                    format: `css/variables`,
+                    format: cssVariables,
                     options: {
                       outputReferences: true,
                     },
@@ -514,16 +528,16 @@ describe(`integration`, () => {
 
         it(`should throw detailed error of filtered references through "verbose" verbosity and log level set to error`, async () => {
           const sd = new StyleDictionary({
-            log: { warnings: `error`, verbosity: 'verbose' },
+            log: { warnings: errorLog, verbosity: verbose },
             source: [`__integration__/tokens/**/[!_]*.json?(c)`],
             platforms: {
               css: {
-                transformGroup: `css`,
+                transformGroup: css,
                 buildPath,
                 files: [
                   {
                     destination: `filteredReferences.css`,
-                    format: `css/variables`,
+                    format: cssVariables,
                     options: {
                       outputReferences: true,
                     },

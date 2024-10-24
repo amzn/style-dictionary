@@ -9,6 +9,7 @@ They are accessible at `style-dictionary/utils` entrypoint.
 ```javascript
 import StyleDictionary from 'style-dictionary';
 import { fileHeader, formattedVariables } from 'style-dictionary/utils';
+import { propertyFormatNames } from 'style-dictionary/enums';
 
 StyleDictionary.registerFormat({
   name: 'myCustomFormat',
@@ -18,7 +19,11 @@ StyleDictionary.registerFormat({
     return (
       header +
       ':root {\n' +
-      formattedVariables({ format: 'css', dictionary, outputReferences }) +
+      formattedVariables({
+        format: propertyFormatNames.css,
+        dictionary,
+        outputReferences,
+      }) +
       '\n}\n'
     );
   },
@@ -53,6 +58,8 @@ which uses: prefix, indentation, separator, suffix, and commentStyle.
 Example:
 
 ```javascript title="build-tokens.js"
+import { propertyFormatNames } from 'style-dictionary/enums';
+
 StyleDictionary.registerFormat({
   name: 'myCustomFormat',
   format: function ({ dictionary, options }) {
@@ -60,7 +67,7 @@ StyleDictionary.registerFormat({
     const formatProperty = createPropertyFormatter({
       outputReferences,
       dictionary,
-      format: 'css',
+      format: propertyFormatNames.css,
     });
     return dictionary.allTokens.map(formatProperty).join('\n');
   },
@@ -75,21 +82,23 @@ This is for creating the comment at the top of generated files with the generate
 It will use the custom file header if defined on the configuration, or use the
 default file header.
 
-| Param                     | Type                             | Description                                                                                                                                                                 |
-| ------------------------- | -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `options`                 | `Object`                         |                                                                                                                                                                             |
-| `options.file`            | [`File`](/reference/config#file) | The file object that is passed to the format.                                                                                                                               |
-| `options.commentStyle`    | `string`                         | The only options are `'short'`, `'xml'` and `'long'`, which will use the `//`, `<!-- -->` or `/*` style comments respectively. Defaults to `'long'`.                        |
-| `options.commentPosition` | `string`                         | `'above'` or `'inline'`, so either above the token or inline with the token                                                                                                 |
-| `options.formatting`      | `Object`                         | Custom formatting properties that define parts of a comment in code. The configurable strings are: `prefix`, `lineSeparator`, `header`, `footer` and `fileHeaderTimestamp`. |
+| Param                     | Type                             | Description                                                                                                                                                                                                                                                   |
+| ------------------------- | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `options`                 | `Object`                         |                                                                                                                                                                                                                                                               |
+| `options.file`            | [`File`](/reference/config#file) | The file object that is passed to the format.                                                                                                                                                                                                                 |
+| `options.commentStyle`    | `string`                         | The only options are `'short'`, `'xml'` and `'long'`, which will use the `//`, `<!-- -->` or `/*` style comments respectively. Defaults to `'long'`. There is an [enum-like JS object](/reference/enums#comment-styles) `commentStyles` available for import. |
+| `options.commentPosition` | `string`                         | `'above'` or `'inline'`, so either above the token or inline with the token. There is an [enum-like JS object](/reference/enums#comment-positions) `commentPositions` available for import.                                                                   |
+| `options.formatting`      | `Object`                         | Custom formatting properties that define parts of a comment in code. The configurable strings are: `prefix`, `lineSeparator`, `header`, `footer` and `fileHeaderTimestamp`.                                                                                   |
 
 Example:
 
 ```js title="build-tokens.js"
+import { commentStyles } from 'style-dictionary/enums';
+
 StyleDictionary.registerFormat({
   name: 'myCustomFormat',
   format: async ({ dictionary, file }) => {
-    const header = await fileHeader({ file, commentStyle: 'short' });
+    const header = await fileHeader({ file, commentStyle: commentStyles.short });
     return (
       header + dictionary.allTokens.map((token) => `${token.name} = ${token.value};`).join('\n')
     );
@@ -122,11 +131,13 @@ This is used to create lists of variables like Sass variables or CSS custom prop
 Example:
 
 ```js title="build-tokens.js"
+import { propertyFormatNames } from 'style-dictionary/enums';
+
 StyleDictionary.registerFormat({
   name: 'myCustomFormat',
   format: function ({ dictionary, options }) {
     return formattedVariables({
-      format: 'less',
+      format: propertyFormatNames.less,
       dictionary,
       outputReferences: options.outputReferences,
     });

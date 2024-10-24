@@ -14,6 +14,11 @@ import { expect } from 'chai';
 import createPropertyFormatter from '../../../lib/common/formatHelpers/createPropertyFormatter.js';
 import { convertTokenData } from '../../../lib/utils/convertTokenData.js';
 import { outputReferencesFilter } from '../../../lib/utils/references/outputReferencesFilter.js';
+import { commentStyles, commentPositions, propertyFormatNames } from '../../../lib/enums/index.js';
+
+const { short, long } = commentStyles;
+const { above } = commentPositions;
+const { css, sass } = propertyFormatNames;
 
 const dictionary = {
   foo: {
@@ -172,7 +177,7 @@ describe('common', () => {
           const propFormatter = createPropertyFormatter({
             outputReferences: true,
             dictionary: { tokens: dictionary },
-            format: 'css',
+            format: css,
           });
           expect(propFormatter(dictionary.foo)).to.equal('  --foo: 5px;');
           expect(propFormatter(dictionary.ref)).to.equal('  --ref: var(--foo);');
@@ -182,7 +187,7 @@ describe('common', () => {
           const propFormatter = createPropertyFormatter({
             outputReferences: true,
             dictionary: { tokens: transformedDictionary },
-            format: 'css',
+            format: css,
           });
           expect(propFormatter(transformedDictionary.foo)).to.equal('  --foo: 5px;');
           expect(propFormatter(transformedDictionary.ref)).to.equal('  --ref: var(--foo);');
@@ -192,7 +197,7 @@ describe('common', () => {
           const propFormatter = createPropertyFormatter({
             outputReferences: true,
             dictionary: { tokens: numberDictionary },
-            format: 'css',
+            format: css,
           });
           expect(propFormatter(numberDictionary.foo)).to.equal('  --foo: 10;');
           expect(propFormatter(numberDictionary.ref)).to.equal('  --ref: var(--foo);');
@@ -202,7 +207,7 @@ describe('common', () => {
           const propFormatter = createPropertyFormatter({
             outputReferences: true,
             dictionary: { tokens: numberDictionary },
-            format: 'css',
+            format: css,
           });
           expect(propFormatter(numberDictionary.zero)).to.equal('  --zero: 0;');
           expect(propFormatter(numberDictionary['ref-zero'])).to.equal(
@@ -214,7 +219,7 @@ describe('common', () => {
           const propFormatter = createPropertyFormatter({
             outputReferences: true,
             dictionary: { tokens: multiDictionary },
-            format: 'css',
+            format: css,
           });
           expect(propFormatter(multiDictionary.foo)).to.equal('  --foo: 10px;');
           expect(propFormatter(multiDictionary.bar)).to.equal('  --bar: 15px;');
@@ -264,7 +269,7 @@ describe('common', () => {
               unfilteredTokens,
               allTokens,
             },
-            format: 'css',
+            format: css,
             // outputReferences function that only outputs the refs if the token name is "bar"
             outputReferences: (token) => token.name === 'bar',
           });
@@ -324,7 +329,7 @@ describe('common', () => {
               unfilteredTokens,
               allTokens,
             },
-            format: 'css',
+            format: css,
             // outputReferences function that only outputs the refs if the referred tokens are not filtered out
             outputReferences: outputReferencesFilter,
           });
@@ -385,7 +390,7 @@ describe('common', () => {
               unfilteredTokens,
               allTokens,
             },
-            format: 'css',
+            format: css,
             usesDtcg: true,
             // outputReferences function that only outputs the refs if the referred tokens are not filtered out
             outputReferences: outputReferencesFilter,
@@ -402,7 +407,7 @@ describe('common', () => {
           const propFormatter = createPropertyFormatter({
             outputReferences: true,
             dictionary: { tokens: objectDictionary },
-            format: 'css',
+            format: css,
           });
           // expect(propFormatter(objectDictionary.tokens.foo)).to.equal('  --foo: 5px;');
 
@@ -448,12 +453,12 @@ describe('common', () => {
         it('should default to putting comment next to the output value', async () => {
           // long commentStyle
           const cssFormatter = createPropertyFormatter({
-            format: 'css',
+            format: css,
             dictionary: { tokens: commentDictionary },
           });
           // short commentStyle
           const sassFormatter = createPropertyFormatter({
-            format: 'sass',
+            format: sass,
             dictionary: { tokens: commentDictionary },
           });
 
@@ -473,15 +478,21 @@ describe('common', () => {
         it('allows overriding formatting commentStyle', async () => {
           // long commentStyle
           const cssFormatter = createPropertyFormatter({
-            format: 'css',
+            format: css,
             dictionary: { tokens: commentDictionary },
-            formatting: { commentStyle: 'long', commentPosition: 'above' },
+            formatting: {
+              commentStyle: long,
+              commentPosition: above,
+            },
           });
           // short commentStyle
           const sassFormatter = createPropertyFormatter({
-            format: 'sass',
+            format: sass,
             dictionary: { tokens: commentDictionary },
-            formatting: { commentStyle: 'short', commentPosition: 'above' },
+            formatting: {
+              commentStyle: short,
+              commentPosition: above,
+            },
           });
 
           const cssRed = cssFormatter(commentDictionary.color.green);
@@ -536,7 +547,7 @@ describe('common', () => {
         it('supports DTCG spec $description property for comments', async () => {
           // long commentStyle
           const cssFormatter = createPropertyFormatter({
-            format: 'css',
+            format: css,
             dictionary: { tokens: dtcgDictionary },
             usesDtcg: true,
           });
@@ -553,7 +564,7 @@ describe('common', () => {
         it('supports DTCG spec $value for outputReferences', async () => {
           // long commentStyle
           const cssFormatter = createPropertyFormatter({
-            format: 'css',
+            format: css,
             outputReferences: true,
             dictionary: { tokens: dtcgDictionary },
             usesDtcg: true,

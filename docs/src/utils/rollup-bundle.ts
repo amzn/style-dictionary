@@ -1,5 +1,6 @@
 import * as sdFs from 'style-dictionary/fs';
 import * as sdUtils from 'style-dictionary/utils';
+import * as sdEnums from 'style-dictionary/enums';
 import { fs } from 'style-dictionary/fs';
 import { rollup } from '@rollup/browser';
 import { v4 as uuidv4 } from 'uuid';
@@ -20,14 +21,19 @@ import type { Plugin } from '@rollup/browser';
  */
 export async function bundle(inputString: string, _fs = fs) {
   const sdName = uuidv4();
-  const sdFsName = uuidv4();
-  const sdUtilsName = uuidv4();
+  const names = {
+    fs: uuidv4(),
+    utils: uuidv4(),
+    enums: uuidv4(),
+  };
   // @ts-expect-error not allowed to put stuff on global with generated type string index
   globalThis[sdName] = StyleDictionary;
   // @ts-expect-error not allowed to put stuff on global with generated type string index
-  globalThis[sdFsName] = sdFs;
+  globalThis[names.fs] = sdFs;
   // @ts-expect-error not allowed to put stuff on global with generated type string index
-  globalThis[sdUtilsName] = sdUtils;
+  globalThis[names.utils] = sdUtils;
+  // @ts-expect-error not allowed to put stuff on global with generated type string index
+  globalThis[names.enums] = sdEnums;
 
   const rollupCfg = await rollup({
     input: 'mod',
@@ -47,44 +53,54 @@ export async function bundle(inputString: string, _fs = fs) {
       },
       {
         name: 'sd-external',
-        // Naive and simplified regex version of rollup externals global plugin just for style-dictionary imports..
+        // Naive and simplified regex version of rollup externals global plugin just for style-dictionary local imports..
+        // Sorry for the spaghetti...
         transform(code) {
           let rewrittenCode = code;
-          const reg = /import (?<id>.+?) from [',"]style-dictionary(?<entrypoint>\/.+?)?[',"];?/;
-          let matchRes;
+          const reg = /import (?<ids>.+?) from [',"]style-dictionary(?<entrypoint>\/.+?)?[',"];?/;
+          let matchRes: RegExpExecArray | null;
           while ((matchRes = reg.exec(rewrittenCode)) !== null) {
             if (matchRes.groups) {
-              let { id, entrypoint } = matchRes.groups;
-              let namedImport = id;
-              let originalNamedImport = id;
+              let { ids, entrypoint } = matchRes.groups;
+              let namedImport = ids;
+              let originalNamedImport = ids;
               let replacement = '';
 
-              if (id.startsWith('{') && id.endsWith('}') && entrypoint) {
-                id = id.replace('{', '').replace('}', '').trim();
+              const replaceCode = (code: string, replacement: string) => {
+                // Remove the import statement, replace the id wherever used with the global
+                return code
+                  .replace((matchRes as RegExpExecArray)[0], '')
+                  .replace(new RegExp(namedImport, 'g'), replacement);
+              };
+
+              // named imports
+              if (ids.startsWith('{') && ids.endsWith('}') && entrypoint) {
+                ids = ids.replace('{', '').replace('}', '').trim();
                 const entry = entrypoint.replace(/^\//, '');
-                const asMatch = /(.+?) as (.+)/.exec(id);
 
-                if (asMatch && asMatch[2]) {
-                  [, originalNamedImport, namedImport] = asMatch;
-                } else {
-                  originalNamedImport = namedImport = id;
-                }
+                // could be multiple named imports
+                for (let id of ids.split(',')) {
+                  id = id.trim();
+                  const asMatch = /(.+?) as (.+)/.exec(id);
 
-                if (entry === 'fs') {
-                  replacement = `globalThis['${sdFsName}']['${originalNamedImport}']`;
-                } else if (entry === 'utils') {
-                  replacement = `globalThis['${sdUtilsName}']['${originalNamedImport}']`;
+                  if (asMatch && asMatch[2]) {
+                    [, originalNamedImport, namedImport] = asMatch;
+                  } else {
+                    originalNamedImport = namedImport = id;
+                  }
+                  replacement = `globalThis['${
+                    names[entry as keyof typeof names]
+                  }']['${originalNamedImport}']`;
+
+                  rewrittenCode = replaceCode(rewrittenCode, replacement);
                 }
               } else {
-                // Remove the import statement, replace the id wherever used with the global
+                // default import, which we only have for style dictionary main entrypoint
                 replacement = `globalThis['${sdName}']`;
+                rewrittenCode = replaceCode(rewrittenCode, replacement);
               }
-              rewrittenCode = rewrittenCode
-                .replace(matchRes[0], '')
-                .replace(new RegExp(namedImport, 'g'), replacement);
             }
           }
-
           return rewrittenCode;
         },
       },

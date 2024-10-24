@@ -1,15 +1,20 @@
 import StyleDictionary from 'style-dictionary';
+import { formats, transforms, transformGroups } from 'style-dictionary/enums';
 import tokens from './tokens/index.js';
+
+const { javascriptEs6, scssVariables } = formats;
+const { attributeCti, nameCamel, sizePx, colorHex } = transforms;
+const { scss } = transformGroups;
 
 export default {
   source: ['tokens/**/*.json'],
   platforms: {
     'esm/category': {
       buildPath: 'build/js/esm/',
-      transforms: ['attribute/cti', 'name/camel', 'size/px', 'color/hex'],
+      transforms: [attributeCti, nameCamel, sizePx, colorHex],
       files: tokens.map((tokenSet) => ({
         destination: `${tokenSet}.js`,
-        format: 'javascript/es6',
+        format: javascriptEs6,
         filter: {
           attributes: {
             category: tokenSet,
@@ -19,17 +24,17 @@ export default {
     },
     'esm/index': {
       buildPath: 'build/js/esm/',
-      transforms: ['attribute/cti', 'name/camel', 'size/px', 'color/hex'],
+      transforms: [attributeCti, nameCamel, sizePx, colorHex],
       files: [
         {
           destination: `index.js`,
-          format: 'javascript/es6',
+          format: javascriptEs6,
         },
       ],
     },
     'cjs/category': {
       buildPath: 'build/js/cjs/',
-      transforms: ['attribute/cti', 'name/camel', 'size/px', 'color/hex'],
+      transforms: [attributeCti, nameCamel, sizePx, colorHex],
       files: tokens.map((tokenSet) => ({
         destination: `${tokenSet}.js`,
         format: 'custom/cjsmodule',
@@ -42,7 +47,7 @@ export default {
     },
     'cjs/index': {
       buildPath: 'build/js/cjs/',
-      transforms: ['attribute/cti', 'name/camel', 'size/px', 'color/hex'],
+      transforms: [attributeCti, nameCamel, sizePx, colorHex],
       files: [
         {
           destination: `index.js`,
@@ -53,22 +58,22 @@ export default {
 
     // Web output in scss format
     scss: {
-      transformGroup: 'scss',
+      transformGroup: scss,
       buildPath: `build/scss/`,
       files: [
         {
           destination: `tokens.scss`,
-          format: 'scss/variables',
+          format: scssVariables,
         },
       ],
     },
     // Web output in scss partialformat
     'scss/category': {
-      transformGroup: 'scss',
+      transformGroup: scss,
       buildPath: `build/scss/`,
       files: tokens.map((tokenSet) => ({
         destination: `_${tokenSet}.scss`,
-        format: 'scss/variables',
+        format: scssVariables,
         filter: {
           attributes: {
             category: tokenSet,

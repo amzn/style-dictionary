@@ -12,17 +12,20 @@
  */
 import { expect } from 'chai';
 import transformObject from '../../lib/transform/object.js';
+import { transformTypes } from '../../lib/enums/index.js';
+
+const { value: transformTypeValue, name, attribute } = transformTypes;
 
 const config = {
   transforms: [
     {
-      type: 'attribute',
+      type: attribute,
       transform: function () {
         return { foo: 'bar' };
       },
     },
     {
-      type: 'attribute',
+      type: attribute,
       // verify async transforms to also work properly
       transform: async function () {
         await new Promise((resolve) => setTimeout(resolve, 100));
@@ -30,7 +33,7 @@ const config = {
       },
     },
     {
-      type: 'name',
+      type: name,
       filter: function (token) {
         return token.attributes.foo === 'bar';
       },
@@ -41,7 +44,7 @@ const config = {
       },
     },
     {
-      type: 'value',
+      type: transformTypeValue,
       filter: function (token) {
         return token.path[0] === 'spacing';
       },

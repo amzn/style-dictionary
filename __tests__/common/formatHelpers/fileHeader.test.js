@@ -13,6 +13,7 @@
 import { expect } from 'chai';
 import { fixDate } from '../../__helpers.js';
 import fileHeader from '../../../lib/common/formatHelpers/fileHeader.js';
+import { commentStyles } from '../../../lib/enums/index.js';
 
 const defaultLine1 = `Do not edit directly, this file was auto-generated.`;
 const defaultLine2 = `Generated on Sat, 01 Jan 2000 00:00:00 GMT`;
@@ -49,7 +50,7 @@ describe('common', () => {
       });
 
       it(`should handle commentStyle short`, async () => {
-        const comment = await fileHeader({ commentStyle: 'short' });
+        const comment = await fileHeader({ commentStyle: commentStyles.short });
         expect(comment).to.equal(
           `
 // ${defaultLine1}

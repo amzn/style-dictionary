@@ -114,6 +114,8 @@ export default {
 ```
 
 ```js config
+import { formats, transformGroups } from 'style-dictionary/enums';
+
 export default {
   hooks: {
     filters: {
@@ -124,10 +126,10 @@ export default {
   },
   platforms: {
     css: {
-      transformGroup: 'css',
+      transformGroup: transformGroups.css,
       files: [
         {
-          format: 'css/variables',
+          format: formats.cssVariables,
           destination: '_variables.css',
           filter: 'no-colors',
         },

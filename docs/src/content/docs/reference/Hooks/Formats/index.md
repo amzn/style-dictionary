@@ -144,15 +144,17 @@ It is also possible to provide a function instead of `true` or `false` to `outpu
 
 ```js
 // config.js
+import { formats, transformGroups } from 'style-dictionary/enums';
+
 export default {
   source: ['tokens.json'],
   platforms: {
     css: {
-      transformGroup: 'css',
+      transformGroup: transformGroups.css,
       files: [
         {
           destination: 'variables.css',
-          format: 'css/variables',
+          format: formats.cssVariables,
           options: {
             // Look here 👇
             outputReferences: (token, { dictionary, usesDtcg }) => {

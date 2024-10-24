@@ -15,10 +15,13 @@ import { compileString } from 'sass';
 import formats from '../../lib/common/formats.js';
 import createFormatArgs from '../../lib/utils/createFormatArgs.js';
 import { convertTokenData } from '../../lib/utils/convertTokenData.js';
+import { formats as fileFormats } from '../../lib/enums/index.js';
+
+const { scssIcons } = fileFormats;
 
 const file = {
   destination: '__output/',
-  format: 'scss/icons',
+  format: scssIcons,
   name: 'foo',
 };
 
@@ -54,10 +57,10 @@ const platform = {
   },
 };
 
-const format = formats['scss/icons'];
+const format = formats[scssIcons];
 
 describe('formats', () => {
-  describe('scss/icons', () => {
+  describe(scssIcons, () => {
     it('should have a valid scss syntax and match snapshot', async () => {
       const result = await format(
         createFormatArgs({

@@ -13,12 +13,14 @@
 import { expect } from 'chai';
 import StyleDictionary from 'style-dictionary';
 import { registerSuite } from './register.suite.js';
+import { transforms } from '../../lib/enums/index.js';
 
 const dummyTransformName = 'transformGroup.test.js';
+const { sizePx } = transforms;
 
 registerSuite({
   config: {
-    transforms: ['size/px'],
+    transforms: [sizePx],
   },
   registerMethod: 'registerTransformGroup',
   prop: 'transformGroups',
@@ -104,22 +106,22 @@ describe('register/transformGroup', async () => {
   it('should work if everything is good', () => {
     StyleDictionaryExtended.registerTransformGroup({
       name: 'foo',
-      transforms: ['size/px'],
+      transforms: [sizePx],
     });
     expect(Array.isArray(StyleDictionaryExtended.hooks.transformGroups.foo)).to.be.true;
     expect(typeof StyleDictionaryExtended.hooks.transformGroups.foo[0]).to.equal('string');
-    expect(StyleDictionaryExtended.hooks.transformGroups.foo[0]).to.equal('size/px');
+    expect(StyleDictionaryExtended.hooks.transformGroups.foo[0]).to.equal(sizePx);
   });
 
   it('should properly pass the registered transformGroup to instances when extending', async () => {
     const StyleDictionaryBase = new StyleDictionary({});
     StyleDictionaryBase.registerTransformGroup({
       name: 'bar',
-      transforms: ['size/px'],
+      transforms: [sizePx],
     });
     const SDE2 = await StyleDictionaryBase.extend({});
     expect(Array.isArray(SDE2.hooks.transformGroups.bar)).to.be.true;
     expect(typeof SDE2.hooks.transformGroups.bar[0]).to.equal('string');
-    expect(SDE2.hooks.transformGroups.bar[0]).to.equal('size/px');
+    expect(SDE2.hooks.transformGroups.bar[0]).to.equal(sizePx);
   });
 });
