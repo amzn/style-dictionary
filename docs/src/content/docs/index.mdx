@@ -1,38 +1,17 @@
 ---
-title: Style Dictionary
+title: Style once, use everywhere
 template: splash
+editUrl: false
+banner:
+  content: |
+    Version 4 is here!
+    <a href="/version-4/migration">Check it out</a>
 hero:
-  tagline:
-    Export your Design Tokens to any platform - iOS, Android, CSS, JS, HTML, sketch files, style documentation, or anything you can think of.
-    Forward-compatible with <a href="https://tr.designtokens.org/format/">Design Tokens Community Group spec</a>.
-  image:
-    file: ../../assets/logo.png
-  actions:
-    - text: Documentation
-      link: /getting-started/installation
-      icon: right-arrow
-      variant: primary
-    - text: Migration to Version 4
-      link: /version-4/migration/
-      icon: up-caret
-      variant: secondary
-    - text: GitHub
-      link: https://github.com/amzn/style-dictionary
-      icon: external
+  tagline: A Style Dictionary uses design tokens to define styles once and use those styles on any platform or language. It provides a single place to create and edit your styles, and exports these tokens to all the places you need - iOS, Android, CSS, JS, HTML, sketch files, style documentation, etc. It is available as a CLI through npm, but can also be used like any normal node module if you want to extend its functionality.
+
 ---
 
-import tokens from '/public/demo-tokens.json';
+import Home from '../../components/Home.astro';
 
-## Live Demo
+<Home />
 
-Below is a showcase of how a set of DTCG tokens would be exported to CSS:
-
-<sd-playground tokens={JSON.stringify({ value: JSON.stringify(tokens, null, 2), lang: 'json'})} default-selected="tokens" id="main-demo">
-
-  <div style="height: 100%" slot="monaco-editor"></div>
-</sd-playground>
-
-Upload your JSON or ZIP of tokens and convert them to DTCG format:
-<sd-dtcg-convert></sd-dtcg-convert>
-
-[Read more about DTCG](/info/dtcg/)

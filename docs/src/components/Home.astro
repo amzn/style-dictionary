@@ -1,0 +1,28 @@
+---
+import tokens from '../../public/demo-tokens.json';
+---
+
+<section class="home-section">
+  <h2 class="home-section-heading">Try it out</h2>
+  <sd-playground tokens={JSON.stringify({ value: JSON.stringify(tokens, null, 2), lang: 'json'})} default-selected="tokens" id="main-demo">
+    <div style="height: 100%" slot="monaco-editor"></div>
+  </sd-playground>
+</section>
+
+<section class="home-section">
+  <h2 class="home-section-heading">Convert to DTCG Spec</h2>
+  <p class="home-section-">Upload your JSON or ZIP of tokens and convert them to DTCG format:</p>
+  <sd-dtcg-convert></sd-dtcg-convert>
+</section>
+
+<style>
+  .home-section {
+    padding: var(--sl-spacing-x-large);
+    max-width: 80rem;
+    margin: 0 auto;
+  }
+  .home-section-heading {
+    font-weight: 800 !important;
+    text-align: center;
+  }
+</style>

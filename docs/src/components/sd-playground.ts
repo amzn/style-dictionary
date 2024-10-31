@@ -60,9 +60,33 @@ export const registeredComponents: SdPlayground[] = [];
 class SdPlayground extends LitElement {
   static get styles() {
     return css`
+      :host {
+        display: block;
+        border: 1px solid var(--sl-color-border-tertiary);
+        border-radius: 0.25rem;
+      }
+
       sl-radio-group {
-        margin-bottom: 4px;
-        margin-top: 16px;
+        background-color: var(--sl-color-background-tertiary);
+        border-radius: 0.25rem 0.25rem 0 0;
+      }
+      sl-radio-button::part(button) {
+        border: none;
+      }
+
+      sl-radio-button::part(button):hover {
+        background-color: transparent;
+        color: var(--sl-color-text-accent);
+      }
+
+      sl-radio-button::part(button--checked) {
+        background-color: var(--sl-color-bg-code);
+        color: var(--sl-color-text);
+        border-top: 1px solid var(--sl-color-accent);
+      }
+
+      sl-radio-button::part(button--checked):hover {
+        background-color: var(--sl-color-bg-code);
       }
 
       .output-select::part(combobox) {
