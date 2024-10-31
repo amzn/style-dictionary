@@ -845,18 +845,48 @@ Creates CSS file with @font-face declarations
 
 Creates a JSON file of the style dictionary.
 
-Example:
+| Param                     | Type                | Description                                                                                                                                                                                               |
+| ------------------------- | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `options`                 | `Object`            |                                                                                                                                                                                                           |
+| `options.stripMeta`       | `Object \| boolean` | Control whether meta data is stripped from the output tokens. `false` by default. If set to `true`, will strip known Style Dictionary meta props: `['attributes', 'filePath', 'name', 'path', 'comment']` |
+| `options.stripMeta.keep`  | `string[]`          | Array of property keys to keep in the output.                                                                                                                                                             |
+| `options.stripMeta.strip` | `string[]`          | Array of property keys to strip from the output.                                                                                                                                                          |
 
-```json title="vars.json"
+Live Demo:
+
+~ sd-playground
+
+```json tokens
 {
   "color": {
     "base": {
       "red": {
-        "value": "#ff0000"
+        "value": "#ff0000",
+        "type": "color"
       }
     }
   }
 }
+```
+
+```js config
+export default {
+  platforms: {
+    json: {
+      files: [
+        {
+          destination: 'output.json',
+          format: 'json',
+          options: {
+            stripMeta: {
+              keep: ['value'],
+            },
+          },
+        },
+      ],
+    },
+  },
+};
 ```
 
 ---
