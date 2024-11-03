@@ -1513,3 +1513,54 @@ class {
 }`;
 /* end snapshot formats all should match flutter/class.dart snapshot with fileHeaderTimestamp set */
 
+snapshots["formats all should match javascript/es6-module snapshot"] = 
+`/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+export default {
+  "color": {
+    "red": {
+      "value": "#FF0000",
+      "type": "color",
+      "original": {
+        "value": "#FF0000"
+      },
+      "name": "color_red",
+      "comment": "comment",
+      "path": [
+        "color",
+        "red"
+      ]
+    }
+  }
+};
+`;
+/* end snapshot formats all should match javascript/es6-module snapshot */
+
+snapshots["formats all should match javascript/es6-module snapshot with fileHeaderTimestamp set"] = 
+`/**
+ * Do not edit directly, this file was auto-generated.
+ * Generated on Sat, 01 Jan 2000 00:00:00 GMT
+ */
+
+export default {
+  "color": {
+    "red": {
+      "value": "#FF0000",
+      "type": "color",
+      "original": {
+        "value": "#FF0000"
+      },
+      "name": "color_red",
+      "comment": "comment",
+      "path": [
+        "color",
+        "red"
+      ]
+    }
+  }
+};
+`;
+/* end snapshot formats all should match javascript/es6-module snapshot with fileHeaderTimestamp set */
+
