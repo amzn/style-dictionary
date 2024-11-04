@@ -11,14 +11,14 @@
  * and limitations under the License.
  */
 
-import type { DesignToken, DesignTokens, PreprocessedTokens } from './DesignToken.ts';
-import type { Filter } from './Filter.ts';
-import type { FileHeader, File, FormattingOverrides } from './File.ts';
-import type { Parser } from './Parser.ts';
-import type { Preprocessor } from './Preprocessor.ts';
-import type { Transform } from './Transform.ts';
-import type { Format, OutputReferences } from './Format.ts';
-import type { Action } from './Action.ts';
+import type { DesignToken, DesignTokens, PreprocessedTokens } from './DesignToken.js';
+import type { Filter } from './Filter.js';
+import type { FileHeader, File, FormattingOverrides } from './File.js';
+import type { Parser } from './Parser.js';
+import type { Preprocessor } from './Preprocessor.js';
+import type { Transform } from './Transform.js';
+import type { Format, OutputReferences } from './Format.js';
+import type { Action } from './Action.js';
 
 export interface Hooks {
   parsers?: Record<string, Omit<Parser, 'name'>>;

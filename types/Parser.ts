@@ -11,7 +11,7 @@
  * and limitations under the License.
  */
 
-import type { DesignTokens } from './DesignToken.ts';
+import type { DesignTokens } from './DesignToken.js';
 
 export interface ParserOptions {
   contents: string;

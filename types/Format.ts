@@ -11,9 +11,9 @@
  * and limitations under the License.
  */
 
-import type { Dictionary, TransformedToken } from './DesignToken.ts';
-import type { File } from './File.ts';
-import type { LocalOptions, Config, PlatformConfig } from './Config.ts';
+import type { Dictionary, TransformedToken } from './DesignToken.js';
+import type { File } from './File.js';
+import type { LocalOptions, Config, PlatformConfig } from './Config.js';
 
 export interface FormatFnArguments {
   /**

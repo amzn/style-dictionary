@@ -1,6 +1,6 @@
 import type * as monacoType from 'monaco-editor';
-import darkTheme from './dark-theme';
-import githubTheme from './github-light-theme';
+import darkTheme from './dark-theme.js';
+import githubTheme from './github-light-theme.js';
 
 export let monaco: typeof monacoType;
 
