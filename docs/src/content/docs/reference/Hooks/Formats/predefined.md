@@ -285,6 +285,69 @@ export const ColorBackgroundBase = '#ffffff';
 export const ColorBackgroundAlt = '#fcfcfcfc';
 ```
 
+### javascript/esm
+
+Creates an ES6 module object of the style dictionary.
+
+```json title="config.json"
+{
+  "platforms": {
+    "js": {
+      "transformGroup": "js",
+      "files": [
+        {
+          "format": "javascript/esm",
+          "destination": "colors.js",
+          "options": {
+            "minify": true
+          }
+        }
+      ]
+    }
+  }
+}
+```
+
+| Param            | Type      | Description                                               |
+| ---------------- | --------- | --------------------------------------------------------- |
+| `options`        | `Object`  |                                                           |
+| `options.minify` | `boolean` | Whether or not to minify the output. Defaults to `false`. |
+
+Example:
+
+```js title="vars.js"
+export default {
+  colors: {
+    black: {
+      $value: '#000000',
+      filePath: 'src/tokens/color.json',
+      isSource: true,
+      $type: 'color',
+      original: {
+        $value: '#000000',
+        $type: 'color',
+      },
+      name: 'ColorsBlack',
+      attributes: {
+        category: 'colors',
+        type: 'black',
+      },
+      path: ['colors', 'black'],
+    },
+  },
+};
+```
+
+Example with `minify` flag:
+
+```js title="vars.js"
+export default {
+  colors: {
+    black: '#000000',
+  },
+};
+```
+
 ---
 
 ### typescript/es6-declarations
