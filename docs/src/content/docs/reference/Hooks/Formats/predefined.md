@@ -285,7 +285,7 @@ export const ColorBackgroundBase = '#ffffff';
 export const ColorBackgroundAlt = '#fcfcfcfc';
 ```
 
-### javascript/es6-module
+### javascript/esm
 
 Creates an ES6 module object of the style dictionary.
 
@@ -296,7 +296,7 @@ Creates an ES6 module object of the style dictionary.
       "transformGroup": "js",
       "files": [
         {
-          "format": "javascript/es6-module",
+          "format": "javascript/esm",
           "destination": "colors.js",
           "options": {
             "minify": true

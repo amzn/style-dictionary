@@ -1513,7 +1513,7 @@ class {
 }`;
 /* end snapshot formats all should match flutter/class.dart snapshot with fileHeaderTimestamp set */
 
-snapshots["formats all should match javascript/es6-module snapshot"] = 
+snapshots["formats all should match javascript/esm snapshot"] = 
 `/**
  * Do not edit directly, this file was auto-generated.
  */
@@ -1536,9 +1536,9 @@ export default {
   }
 };
 `;
-/* end snapshot formats all should match javascript/es6-module snapshot */
+/* end snapshot formats all should match javascript/esm snapshot */
 
-snapshots["formats all should match javascript/es6-module snapshot with fileHeaderTimestamp set"] = 
+snapshots["formats all should match javascript/esm snapshot with fileHeaderTimestamp set"] = 
 `/**
  * Do not edit directly, this file was auto-generated.
  * Generated on Sat, 01 Jan 2000 00:00:00 GMT
@@ -1562,5 +1562,5 @@ export default {
   }
 };
 `;
-/* end snapshot formats all should match javascript/es6-module snapshot with fileHeaderTimestamp set */
+/* end snapshot formats all should match javascript/esm snapshot with fileHeaderTimestamp set */
 

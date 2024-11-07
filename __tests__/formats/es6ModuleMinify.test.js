@@ -17,7 +17,7 @@ import flattenTokens from '../../lib/utils/flattenTokens.js';
 
 const file = {
   destination: '__output/',
-  format: 'javascript/es6-module',
+  format: 'javascript/esm',
   options: {
     minify: true,
   },
@@ -32,10 +32,10 @@ const tokens = {
   },
 };
 
-const format = formats['javascript/es6-module'];
+const format = formats['javascript/esm'];
 
 describe('formats', () => {
-  describe('javascript/es6-module', () => {
+  describe('javascript/esm', () => {
     it('should be a valid JS file and match snapshot', async () => {
       await expect(
         await format(
