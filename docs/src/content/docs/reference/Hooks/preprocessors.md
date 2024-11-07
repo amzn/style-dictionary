@@ -2,7 +2,7 @@
 title: Preprocessors
 ---
 
-Starting in version 4.0, you can define custom preprocessors to process the dictionary object as a whole, after it all token files have been parsed and combined into one.
+Starting in version 4.0, you can define custom preprocessors to process the dictionary object as a whole, after all token files have been parsed and combined into one.
 This is useful if you want to do more complex transformations on the dictionary as a whole, when all other ways are not powerful enough.
 
 Preprocessors can be applied globally or per platform.
