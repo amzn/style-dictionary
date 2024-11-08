@@ -43,46 +43,40 @@ snapshots["integration valid custom file headers platform options no file option
  */
 
 module.exports = {
-  "color": {
-    "red": {
-      "value": "#ff0000",
-      "original": {
-        "value": "#ff0000"
+  color: {
+    red: {
+      value: "#ff0000",
+      original: {
+        value: "#ff0000",
       },
-      "name": "ColorRed",
-      "attributes": {
-        "category": "color",
-        "type": "red"
+      name: "ColorRed",
+      attributes: {
+        category: "color",
+        type: "red",
       },
-      "path": [
-        "color",
-        "red"
-      ]
-    }
-  }
+      path: ["color", "red"],
+    },
+  },
 };
 `;
 /* end snapshot integration valid custom file headers platform options no file options should match snapshot */
 
 snapshots["integration valid custom file headers platform options showFileHeader should match snapshot"] = 
 `module.exports = {
-  "color": {
-    "red": {
-      "value": "#ff0000",
-      "original": {
-        "value": "#ff0000"
+  color: {
+    red: {
+      value: "#ff0000",
+      original: {
+        value: "#ff0000",
       },
-      "name": "ColorRed",
-      "attributes": {
-        "category": "color",
-        "type": "red"
+      name: "ColorRed",
+      attributes: {
+        category: "color",
+        type: "red",
       },
-      "path": [
-        "color",
-        "red"
-      ]
-    }
-  }
+      path: ["color", "red"],
+    },
+  },
 };
 `;
 /* end snapshot integration valid custom file headers platform options showFileHeader should match snapshot */
@@ -93,23 +87,20 @@ snapshots["integration valid custom file headers platform options file header ov
  */
 
 module.exports = {
-  "color": {
-    "red": {
-      "value": "#ff0000",
-      "original": {
-        "value": "#ff0000"
+  color: {
+    red: {
+      value: "#ff0000",
+      original: {
+        value: "#ff0000",
       },
-      "name": "ColorRed",
-      "attributes": {
-        "category": "color",
-        "type": "red"
+      name: "ColorRed",
+      attributes: {
+        category: "color",
+        type: "red",
       },
-      "path": [
-        "color",
-        "red"
-      ]
-    }
-  }
+      path: ["color", "red"],
+    },
+  },
 };
 `;
 /* end snapshot integration valid custom file headers platform options file header override should match snapshot */

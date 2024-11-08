@@ -47,7 +47,7 @@ describe('formats', () => {
 
       // assert that any lines have a DesignToken type definition
       lines.forEach((l) => {
-        expect(l.match(/^.*: DesignToken$/g).length).to.equal(1);
+        expect(l.match(/^.*: DesignToken;$/g).length).to.equal(1);
       });
     });
   });

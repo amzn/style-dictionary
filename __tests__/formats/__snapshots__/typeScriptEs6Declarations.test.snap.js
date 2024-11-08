@@ -7,8 +7,8 @@ snapshots["formats typescript/es6-declarations with outputStringLiterals should 
  */
 
 /** Used for errors */
-export const colorRed : "#FF0000";
-export const fontFamily : "\\"Source Sans Pro\\", Arial, sans-serif";
+export const colorRed: "#FF0000";
+export const fontFamily: '"Source Sans Pro", Arial, sans-serif';
 `;
 /* end snapshot formats typescript/es6-declarations with outputStringLiterals should match snapshot */
 
