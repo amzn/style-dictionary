@@ -293,15 +293,16 @@ snapshots["formats all should match compose/object snapshot"] =
 
 
 
-package ;
+package 
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.*
 
-object  {
+object {
   /** comment */
   val color_red = #FF0000
-}`;
+}
+`;
 /* end snapshot formats all should match compose/object snapshot */
 
 snapshots["formats all should match ios/macros snapshot"] = 
@@ -1100,15 +1101,16 @@ snapshots["formats all should match compose/object snapshot with fileHeaderTimes
 
 
 
-package ;
+package 
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.*
 
-object  {
+object {
   /** comment */
   val color_red = #FF0000
-}`;
+}
+`;
 /* end snapshot formats all should match compose/object snapshot with fileHeaderTimestamp set */
 
 snapshots["formats all should match ios/macros snapshot with fileHeaderTimestamp set"] = 

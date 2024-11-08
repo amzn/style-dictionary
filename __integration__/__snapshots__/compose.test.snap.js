@@ -8,7 +8,7 @@ snapshots["integration compose compose/object should match snapshot"] =
 
 
 
-package com.example.tokens;
+package com.example.tokens
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.*
@@ -176,7 +176,8 @@ object StyleDictionary {
   val sizePaddingMedium = 16.00.dp
   val sizePaddingSmall = 8.00.dp
   val sizePaddingXl = 16.00.dp
-}`;
+}
+`;
 /* end snapshot integration compose compose/object should match snapshot */
 
 snapshots["integration compose compose/object with references should match snapshot"] = 
@@ -186,7 +187,7 @@ snapshots["integration compose compose/object with references should match snaps
 
 
 
-package com.example.tokens;
+package com.example.tokens
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.*
@@ -354,6 +355,7 @@ object StyleDictionary {
   val colorFontInteractiveHover = colorBrandPrimary
   val colorFontInteractiveActive = colorBrandSecondary
   val colorFontInteractiveDisabled = colorFontTertiary
-}`;
+}
+`;
 /* end snapshot integration compose compose/object with references should match snapshot */
 
