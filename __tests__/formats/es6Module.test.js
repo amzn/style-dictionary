@@ -24,8 +24,60 @@ const file = {
 };
 
 const tokens = {
-  color: {
-    red: { value: '#FF0000' },
+  colors: {
+    red: {
+      500: {
+        value: '#ff0000',
+        type: 'color',
+        path: ['colors', 'red', '500'],
+        filePath: 'tokens.json',
+        attributes: {
+          foo: 'bar',
+        },
+        name: 'colors-red-500',
+      },
+    },
+  },
+  dimensions: {
+    xs: {
+      value: '15px',
+      type: 'dimension',
+      path: ['dimension', 'xs'],
+      filePath: 'tokens.json',
+      attributes: {
+        foo: 'bar',
+      },
+      name: 'dimension-xs',
+    },
+  },
+};
+
+const DTCGTokens = {
+  colors: {
+    red: {
+      500: {
+        $value: '#ff0000',
+        $type: 'color',
+        path: ['colors', 'red', '500'],
+        filePath: 'tokens.json',
+        attributes: {
+          foo: 'bar',
+        },
+        name: 'colors-red-500',
+      },
+    },
+  },
+  dimensions: {
+    xs: {
+      $value: '15px',
+      $type: 'dimension',
+      path: ['dimension', 'xs'],
+      filePath: 'tokens.json',
+      attributes: {
+        foo: 'bar',
+      },
+      name: 'dimension-xs',
+    },
   },
 };
 
@@ -40,6 +92,79 @@ describe('formats', () => {
             dictionary: { tokens, allTokens: flattenTokens(tokens) },
             file,
             platform: {},
+          }),
+          {},
+          file,
+        ),
+      ).to.matchSnapshot();
+    });
+
+    it('should optionally allow stripping StyleDictionary metadata', async () => {
+      await expect(
+        await format(
+          createFormatArgs({
+            dictionary: { tokens, allTokens: flattenTokens(tokens) },
+            file,
+            platform: {},
+            options: {
+              stripMeta: true,
+            },
+          }),
+          {},
+          file,
+        ),
+      ).to.matchSnapshot();
+    });
+
+    it('should optionally allow stripping everything but an allowlist of props', async () => {
+      await expect(
+        await format(
+          createFormatArgs({
+            dictionary: { tokens, allTokens: flattenTokens(tokens) },
+            file,
+            platform: {},
+            options: {
+              stripMeta: {
+                keep: ['value', 'type'],
+              },
+            },
+          }),
+          {},
+          file,
+        ),
+      ).to.matchSnapshot();
+    });
+
+    it('should optionally allow stripping custom list of metadata props', async () => {
+      await expect(
+        await format(
+          createFormatArgs({
+            dictionary: { tokens, allTokens: flattenTokens(tokens) },
+            file,
+            platform: {},
+            options: {
+              stripMeta: {
+                strip: ['attributes', 'filePath'],
+              },
+            },
+          }),
+          {},
+          file,
+        ),
+      ).to.matchSnapshot();
+    });
+
+    it('should optionally allow stripping StyleDictionary metadata for DTCG formatted tokens', async () => {
+      await expect(
+        await format(
+          createFormatArgs({
+            dictionary: { tokens: DTCGTokens, allTokens: flattenTokens(DTCGTokens) },
+            file,
+            platform: {},
+            options: {
+              usesDtcg: true,
+              stripMeta: true,
+            },
           }),
           {},
           file,

@@ -308,10 +308,13 @@ Creates an ES6 module object of the style dictionary.
 }
 ```
 
-| Param            | Type      | Description                                               |
-| ---------------- | --------- | --------------------------------------------------------- |
-| `options`        | `Object`  |                                                           |
-| `options.minify` | `boolean` | Whether or not to minify the output. Defaults to `false`. |
+| Param                     | Type                | Description                                                                                                                                                                                                                                                                                                                   |
+| ------------------------- | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `options`                 | `Object`            |                                                                                                                                                                                                                                                                                                                               |
+| `options.minify`          | `boolean`           | Whether or not to minify the output. Defaults to `false`.                                                                                                                                                                                                                                                                     |
+| `options.stripMeta`       | `Object \| boolean` | Control whether meta data is stripped from the output tokens. `false` by default. If set to `true`, will strip known Style Dictionary meta props: `['attributes', 'filePath', 'name', 'path', 'comment']`. Note that using minify means that meta is stripped as a side effect of this already, so using both is unnecessary. |
+| `options.stripMeta.keep`  | `string[]`          | Array of property keys to keep in the output.                                                                                                                                                                                                                                                                                 |
+| `options.stripMeta.strip` | `string[]`          | Array of property keys to strip from the output.                                                                                                                                                                                                                                                                              |
 
 Example:
 
@@ -344,6 +347,19 @@ Example with `minify` flag:
 export default {
   colors: {
     black: '#000000',
+  },
+};
+```
+
+Example with `stripMeta` flag:
+
+```js title="vars.js"
+export default {
+  colors: {
+    black: {
+      $value: '#000000',
+      $type: 'color',
+    },
   },
 };
 ```
