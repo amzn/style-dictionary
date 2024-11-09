@@ -51,7 +51,7 @@ export const fileToJSON = (_path, _fs = fs) => {
 export const clearOutput = (outputFolder = '__tests__/__output', _fs = fs) => {
   try {
     _fs.rmdirSync(outputFolder);
-  } catch (e) {
+  } catch {
     //
   }
 };
@@ -59,7 +59,7 @@ export const clearOutput = (outputFolder = '__tests__/__output', _fs = fs) => {
 export const fileExists = (filePath, _fs = fs) => {
   try {
     return _fs.statSync(filePath).isFile();
-  } catch (err) {
+  } catch {
     return false;
   }
 };
@@ -70,14 +70,13 @@ export const dirExists = (dirPath, _fs = fs) => {
 
 export function fixDate() {
   const constantDate = new Date('2000-01-01');
-  // eslint-disable-next-line no-undef
+
   const __global = isNode ? globalThis : window;
 
-  // eslint-disable-next-line no-undef
   __global.Date = function () {
     return constantDate;
   };
-  // eslint-disable-next-line no-undef
+
   __global.Date.now = function () {
     return constantDate;
   };

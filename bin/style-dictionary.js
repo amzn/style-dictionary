@@ -95,7 +95,6 @@ program
     console.log(
       'Running `style-dictionary build` for the first time to generate build artifacts.\n',
     );
-    /* eslint-disable no-console */
     styleDictionaryBuild();
   });
 
