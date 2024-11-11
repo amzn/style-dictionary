@@ -6,7 +6,7 @@ snapshots["formats javascript/umd should be a valid JS file and match snapshot"]
  * Do not edit directly, this file was auto-generated.
  */
 
-(function(root, factory) {
+(function (root, factory) {
   if (typeof module === "object" && module.exports) {
     module.exports = factory();
   } else if (typeof exports === "object") {
@@ -16,15 +16,15 @@ snapshots["formats javascript/umd should be a valid JS file and match snapshot"]
   } else {
     root["_styleDictionary"] = factory();
   }
-}(this, function() {
+})(this, function () {
   return {
-  "color": {
-    "red": {
-      "value": "#FF0000"
-    }
-  }
-};
-}))
+    color: {
+      red: {
+        value: "#FF0000",
+      },
+    },
+  };
+});
 `;
 /* end snapshot formats javascript/umd should be a valid JS file and match snapshot */
 
