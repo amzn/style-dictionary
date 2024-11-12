@@ -7,7 +7,7 @@ snapshots["formats javascript/module-flat should be a valid JS file and match sn
  */
 
 module.exports = {
-  "ColorRed": "#EF5350"
+  ColorRed: "#EF5350",
 };
 `;
 /* end snapshot formats javascript/module-flat should be a valid JS file and match snapshot */

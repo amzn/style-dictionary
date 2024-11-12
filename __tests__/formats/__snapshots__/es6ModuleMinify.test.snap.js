@@ -7,9 +7,9 @@ snapshots["formats javascript/esm should be a valid JS file and match snapshot"]
  */
 
 export default {
-  "color": {
-    "red": "#FF0000"
-  }
+  color: {
+    red: "#FF0000",
+  },
 };
 `;
 /* end snapshot formats javascript/esm should be a valid JS file and match snapshot */

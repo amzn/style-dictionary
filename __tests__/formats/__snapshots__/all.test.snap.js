@@ -84,21 +84,18 @@ snapshots["formats all should match javascript/module snapshot"] =
  */
 
 module.exports = {
-  "color": {
-    "red": {
-      "value": "#FF0000",
-      "type": "color",
-      "original": {
-        "value": "#FF0000"
+  color: {
+    red: {
+      value: "#FF0000",
+      type: "color",
+      original: {
+        value: "#FF0000",
       },
-      "name": "color_red",
-      "comment": "comment",
-      "path": [
-        "color",
-        "red"
-      ]
-    }
-  }
+      name: "color_red",
+      comment: "comment",
+      path: ["color", "red"],
+    },
+  },
 };
 `;
 /* end snapshot formats all should match javascript/module snapshot */
@@ -109,7 +106,7 @@ snapshots["formats all should match javascript/module-flat snapshot"] =
  */
 
 module.exports = {
-  "color_red": "#FF0000"
+  color_red: "#FF0000",
 };
 `;
 /* end snapshot formats all should match javascript/module-flat snapshot */
@@ -120,21 +117,18 @@ snapshots["formats all should match javascript/object snapshot"] =
  */
 
 var _styleDictionary = {
-  "color": {
-    "red": {
-      "value": "#FF0000",
-      "type": "color",
-      "original": {
-        "value": "#FF0000"
+  color: {
+    red: {
+      value: "#FF0000",
+      type: "color",
+      original: {
+        value: "#FF0000",
       },
-      "name": "color_red",
-      "comment": "comment",
-      "path": [
-        "color",
-        "red"
-      ]
-    }
-  }
+      name: "color_red",
+      comment: "comment",
+      path: ["color", "red"],
+    },
+  },
 };
 `;
 /* end snapshot formats all should match javascript/object snapshot */
@@ -144,7 +138,7 @@ snapshots["formats all should match javascript/umd snapshot"] =
  * Do not edit directly, this file was auto-generated.
  */
 
-(function(root, factory) {
+(function (root, factory) {
   if (typeof module === "object" && module.exports) {
     module.exports = factory();
   } else if (typeof exports === "object") {
@@ -154,25 +148,22 @@ snapshots["formats all should match javascript/umd snapshot"] =
   } else {
     root["_styleDictionary"] = factory();
   }
-}(this, function() {
+})(this, function () {
   return {
-  "color": {
-    "red": {
-      "value": "#FF0000",
-      "type": "color",
-      "original": {
-        "value": "#FF0000"
+    color: {
+      red: {
+        value: "#FF0000",
+        type: "color",
+        original: {
+          value: "#FF0000",
+        },
+        name: "color_red",
+        comment: "comment",
+        path: ["color", "red"],
       },
-      "name": "color_red",
-      "comment": "comment",
-      "path": [
-        "color",
-        "red"
-      ]
-    }
-  }
-};
-}))
+    },
+  };
+});
 `;
 /* end snapshot formats all should match javascript/umd snapshot */
 
@@ -191,7 +182,7 @@ snapshots["formats all should match typescript/es6-declarations snapshot"] =
  */
 
 /** comment */
-export const color_red : string;
+export const color_red: string;
 `;
 /* end snapshot formats all should match typescript/es6-declarations snapshot */
 
@@ -213,10 +204,10 @@ declare interface DesignToken {
 }
 
 declare const tokens: {
-  "color": {
-    "red": DesignToken
-  }
-}
+  color: {
+    red: DesignToken;
+  };
+};
 `;
 /* end snapshot formats all should match typescript/module-declarations snapshot */
 
@@ -879,21 +870,18 @@ snapshots["formats all should match javascript/module snapshot with fileHeaderTi
  */
 
 module.exports = {
-  "color": {
-    "red": {
-      "value": "#FF0000",
-      "type": "color",
-      "original": {
-        "value": "#FF0000"
+  color: {
+    red: {
+      value: "#FF0000",
+      type: "color",
+      original: {
+        value: "#FF0000",
       },
-      "name": "color_red",
-      "comment": "comment",
-      "path": [
-        "color",
-        "red"
-      ]
-    }
-  }
+      name: "color_red",
+      comment: "comment",
+      path: ["color", "red"],
+    },
+  },
 };
 `;
 /* end snapshot formats all should match javascript/module snapshot with fileHeaderTimestamp set */
@@ -905,7 +893,7 @@ snapshots["formats all should match javascript/module-flat snapshot with fileHea
  */
 
 module.exports = {
-  "color_red": "#FF0000"
+  color_red: "#FF0000",
 };
 `;
 /* end snapshot formats all should match javascript/module-flat snapshot with fileHeaderTimestamp set */
@@ -917,21 +905,18 @@ snapshots["formats all should match javascript/object snapshot with fileHeaderTi
  */
 
 var _styleDictionary = {
-  "color": {
-    "red": {
-      "value": "#FF0000",
-      "type": "color",
-      "original": {
-        "value": "#FF0000"
+  color: {
+    red: {
+      value: "#FF0000",
+      type: "color",
+      original: {
+        value: "#FF0000",
       },
-      "name": "color_red",
-      "comment": "comment",
-      "path": [
-        "color",
-        "red"
-      ]
-    }
-  }
+      name: "color_red",
+      comment: "comment",
+      path: ["color", "red"],
+    },
+  },
 };
 `;
 /* end snapshot formats all should match javascript/object snapshot with fileHeaderTimestamp set */
@@ -942,7 +927,7 @@ snapshots["formats all should match javascript/umd snapshot with fileHeaderTimes
  * Generated on Sat, 01 Jan 2000 00:00:00 GMT
  */
 
-(function(root, factory) {
+(function (root, factory) {
   if (typeof module === "object" && module.exports) {
     module.exports = factory();
   } else if (typeof exports === "object") {
@@ -952,25 +937,22 @@ snapshots["formats all should match javascript/umd snapshot with fileHeaderTimes
   } else {
     root["_styleDictionary"] = factory();
   }
-}(this, function() {
+})(this, function () {
   return {
-  "color": {
-    "red": {
-      "value": "#FF0000",
-      "type": "color",
-      "original": {
-        "value": "#FF0000"
+    color: {
+      red: {
+        value: "#FF0000",
+        type: "color",
+        original: {
+          value: "#FF0000",
+        },
+        name: "color_red",
+        comment: "comment",
+        path: ["color", "red"],
       },
-      "name": "color_red",
-      "comment": "comment",
-      "path": [
-        "color",
-        "red"
-      ]
-    }
-  }
-};
-}))
+    },
+  };
+});
 `;
 /* end snapshot formats all should match javascript/umd snapshot with fileHeaderTimestamp set */
 
@@ -991,7 +973,7 @@ snapshots["formats all should match typescript/es6-declarations snapshot with fi
  */
 
 /** comment */
-export const color_red : string;
+export const color_red: string;
 `;
 /* end snapshot formats all should match typescript/es6-declarations snapshot with fileHeaderTimestamp set */
 
@@ -1014,10 +996,10 @@ declare interface DesignToken {
 }
 
 declare const tokens: {
-  "color": {
-    "red": DesignToken
-  }
-}
+  color: {
+    red: DesignToken;
+  };
+};
 `;
 /* end snapshot formats all should match typescript/module-declarations snapshot with fileHeaderTimestamp set */
 
@@ -1521,21 +1503,18 @@ snapshots["formats all should match javascript/esm snapshot"] =
  */
 
 export default {
-  "color": {
-    "red": {
-      "value": "#FF0000",
-      "type": "color",
-      "original": {
-        "value": "#FF0000"
+  color: {
+    red: {
+      value: "#FF0000",
+      type: "color",
+      original: {
+        value: "#FF0000",
       },
-      "name": "color_red",
-      "comment": "comment",
-      "path": [
-        "color",
-        "red"
-      ]
-    }
-  }
+      name: "color_red",
+      comment: "comment",
+      path: ["color", "red"],
+    },
+  },
 };
 `;
 /* end snapshot formats all should match javascript/esm snapshot */
@@ -1547,21 +1526,18 @@ snapshots["formats all should match javascript/esm snapshot with fileHeaderTimes
  */
 
 export default {
-  "color": {
-    "red": {
-      "value": "#FF0000",
-      "type": "color",
-      "original": {
-        "value": "#FF0000"
+  color: {
+    red: {
+      value: "#FF0000",
+      type: "color",
+      original: {
+        value: "#FF0000",
       },
-      "name": "color_red",
-      "comment": "comment",
-      "path": [
-        "color",
-        "red"
-      ]
-    }
-  }
+      name: "color_red",
+      comment: "comment",
+      path: ["color", "red"],
+    },
+  },
 };
 `;
 /* end snapshot formats all should match javascript/esm snapshot with fileHeaderTimestamp set */

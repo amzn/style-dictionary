@@ -1,5 +1,20 @@
 # Changelog
 
+## 4.2.0
+
+### Minor Changes
+
+- 0fcf229: Add a new built-in format javascript/esm that outputs an ES module JS default export.
+- d7b5836: Mark javascript/esm as nested, use Prettier on all JavaScript/TypeScript formats, use 3.x.x peerDependency so the user's installation is used when possible.
+- 4bf68a3: Apply stripMeta from "json" format to the new "javascript/esm" as well.
+- 8f1b4f0: Add new utility in `style-dictionary/utils` -> `stripMeta` for stripping metadata from tokens.
+  This utility is used now as an opt-in for the built-in `'json'` format by using `options.stripMeta`, which if set to `true` will strip Style Dictionary meta props.
+  You can specify `keep`/`strip` (allow/blocklist) for granular control about which properties to keep or strip.
+
+### Patch Changes
+
+- 5e3a5af: Update .d.ts/js files type imports to use correct extensions rather than extensionless. This fixes some incompatibilities with latest TypeScript "NodeNext" moduleResolution.
+
 ## 4.1.4
 
 ### Patch Changes

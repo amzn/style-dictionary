@@ -54,7 +54,7 @@ describe('formats', () => {
 
       // assert that any lines have a string type definition
       lines.forEach((l) => {
-        expect(l.match(/^export.* : string;$/g).length).to.equal(1);
+        expect(l.match(/^export.*: string;$/g).length).to.equal(1);
       });
     });
 

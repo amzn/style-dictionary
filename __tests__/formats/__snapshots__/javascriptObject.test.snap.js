@@ -7,11 +7,11 @@ snapshots["formats javascript/object should be valid JS syntax and match snapsho
  */
 
 var foo = {
-  "color": {
-    "red": {
-      "value": "#FF0000"
-    }
-  }
+  color: {
+    red: {
+      value: "#FF0000",
+    },
+  },
 };
 `;
 /* end snapshot formats javascript/object should be valid JS syntax and match snapshot */

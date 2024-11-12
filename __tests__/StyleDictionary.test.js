@@ -18,6 +18,7 @@ import { fileToJSON, clearOutput, fileExists, clearSDMeta } from './__helpers.js
 import { resolve } from '../lib/resolve.js';
 import GroupMessages from '../lib/utils/groupMessages.js';
 import flattenTokens from '../lib/utils/flattenTokens.js';
+import { stripMeta } from '../lib/utils/stripMeta.js';
 import formats from '../lib/common/formats.js';
 import { restore, stubMethod } from 'hanbi';
 
@@ -28,18 +29,6 @@ function traverseObj(obj, fn) {
       traverseObj(obj[key], fn);
     }
   }
-}
-
-function stripMeta(obj) {
-  Object.keys(obj).forEach((key) => {
-    if (['attributes', 'name', 'original', 'path'].includes(key)) {
-      delete obj[key];
-    }
-    if (typeof obj[key] === 'object') {
-      stripMeta(obj[key]);
-    }
-  });
-  return obj;
 }
 
 const test_props = {
@@ -570,7 +559,7 @@ Refer to: https://styledictionary.com/reference/logging/
       await sd.hasInitialized;
       const cssTokens = await sd.exportPlatform('css');
       const jsTokens = await sd.exportPlatform('js');
-      expect(stripMeta(cssTokens)).to.eql({
+      expect(stripMeta(cssTokens, { keep: ['type', 'value'] })).to.eql({
         border: {
           color: {
             type: 'color',
@@ -586,7 +575,7 @@ Refer to: https://styledictionary.com/reference/logging/
           },
         },
       });
-      expect(stripMeta(jsTokens)).to.eql(input);
+      expect(stripMeta(jsTokens, { keep: ['type', 'value'] })).to.eql(input);
     });
 
     it('should allow combining global expand with per platform expand', async () => {
@@ -628,7 +617,7 @@ Refer to: https://styledictionary.com/reference/logging/
       const cssTokens = await sd.exportPlatform('css');
       const jsTokens = await sd.exportPlatform('js');
 
-      expect(stripMeta(cssTokens)).to.eql({
+      expect(stripMeta(cssTokens, { keep: ['type', 'value'] })).to.eql({
         border: {
           color: {
             type: 'color',
@@ -645,7 +634,7 @@ Refer to: https://styledictionary.com/reference/logging/
         },
         borderTwo: input.borderTwo,
       });
-      expect(stripMeta(jsTokens)).to.eql({
+      expect(stripMeta(jsTokens, { keep: ['type', 'value'] })).to.eql({
         border: {
           color: {
             type: 'color',
