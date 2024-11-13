@@ -28,6 +28,8 @@ jobs:
           # This expects you to have a script called release which does a build for your packages and calls changeset publish
           publish: npm run release
           commit: 'chore: release'
+          # to ensure the lock file also gets bumped accordingly and added to the commit
+          version: 'npx changeset version && npm install'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
