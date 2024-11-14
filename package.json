@@ -112,7 +112,8 @@
     "is-plain-obj": "^4.1.0",
     "json5": "^2.2.2",
     "patch-package": "^8.0.0",
-    "path-unified": "^0.1.0",
+    "path-unified": "^0.2.0",
+    "prettier": "^3.3.3",
     "tinycolor2": "^1.6.0"
   },
   "devDependencies": {
@@ -161,8 +162,5 @@
     "unist-util-visit": "^5.0.0",
     "uuid": "^9.0.1",
     "yaml": "^2.3.4"
-  },
-  "peerDependencies": {
-    "prettier": "3.x"
   }
 }
