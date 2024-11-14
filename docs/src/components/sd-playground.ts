@@ -1,7 +1,7 @@
 import StyleDictionary from 'style-dictionary';
 import { Volume } from '@bundled-es-modules/memfs';
 import { LitElement, html, css } from 'lit';
-import { posix as path } from 'path-unified';
+import { extname, join } from 'path-unified/posix';
 import '@shoelace-style/shoelace/dist/components/radio-button/radio-button.js';
 import '@shoelace-style/shoelace/dist/components/radio-group/radio-group.js';
 import '@shoelace-style/shoelace/dist/components/select/select.js';
@@ -377,7 +377,7 @@ class SdPlayground extends LitElement {
   changeOutputs(filePath: string, changeCurrentFile = false) {
     this.output = JSON.stringify({
       value: this.volume.readFileSync(filePath, 'utf-8'),
-      lang: path.extname(filePath).replace(/^\./g, ''),
+      lang: extname(filePath).replace(/^\./g, ''),
     });
     // call the setter so the editor value updates to the new output selection
     if (this.currentFile === 'output' || changeCurrentFile) {
@@ -389,7 +389,7 @@ class SdPlayground extends LitElement {
   traverseDir(dir = '/', files: string[] = []) {
     let _files = files;
     (this.volume.readdirSync(dir) as string[]).forEach((file: string) => {
-      const fullPath = path.join(dir, file);
+      const fullPath = join(dir, file);
       if (this.volume.lstatSync(fullPath).isDirectory()) {
         _files = [..._files, ...this.traverseDir(fullPath, _files)];
       } else {
