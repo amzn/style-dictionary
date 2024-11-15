@@ -115,8 +115,9 @@ describe('StyleDictionary class', () => {
   });
 
   describe('method signature', () => {
-    it('should accept a string as a path to a JSON file', () => {
+    it('should accept a string as a path to a JSON file', async () => {
       const StyleDictionaryExtended = new StyleDictionary('__tests__/__configs/test.json');
+      await StyleDictionaryExtended.hasInitialized;
       expect(StyleDictionaryExtended).to.have.nested.property('platforms.web');
     });
 
