@@ -67,4 +67,4 @@ We use [Astro](https://astro.build/) to transform the markdown files into a docu
 [issues]: https://github.com/amzn/style-dictionary/issues
 [license]: https://github.com/amzn/style-dictionary/blob/main/LICENSE
 [cla]: http://en.wikipedia.org/wiki/Contributor_License_Agreement
-[eslint]: https://github.com/amzn/style-dictionary/blob/main/.eslintrc.json
+[eslint]: https://github.com/amzn/style-dictionary/blob/main/eslint.config.js

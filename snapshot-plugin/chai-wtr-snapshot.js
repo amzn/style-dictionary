@@ -78,7 +78,6 @@ export function chaiWtrSnapshot(chai, utils) {
     if (!isNode) {
       // WTR ENV
       const { getSnapshot, getSnapshotConfig } = await import('@web/test-runner-commands');
-      // eslint-disable-next-line no-undef
       name = getTestPath(window.__WTR_MOCHA_RUNNER__.test, index);
       if (!name) {
         return;

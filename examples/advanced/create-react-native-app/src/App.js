@@ -8,7 +8,6 @@ export default function App() {
     <View style={styles.container}>
       <Text style={styles.title}>Testing! Testing!</Text>
       <Text style={styles.p}>All done!</Text>
-      {/* eslint-disable-next-line react/style-prop-object */}
       <StatusBar style="auto" />
     </View>
   );
