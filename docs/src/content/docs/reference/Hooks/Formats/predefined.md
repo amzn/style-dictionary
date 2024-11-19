@@ -646,6 +646,8 @@ Creates a Kotlin file for Compose containing an object with a `val` for each pro
 | `options.outputReferences` | `boolean \| OutputReferencesFunction` | Whether or not to keep [references](/reference/hooks/formats#references-in-output-files) (a -> b -> c) in the output. Defaults to `false`. Also allows passing a function to conditionally output references on a per token basis. |
 | `options.className`        | `string`                              | The name of the generated Kotlin object                                                                                                                                                                                            |
 | `options.packageName`      | `string`                              | The package for the generated Kotlin object                                                                                                                                                                                        |
+| `options.accessControl`    | `string`                              | Level of access of the generated compose properties and object. Defaults to `''`.                                                                                                                                                  |
+| `options.objectType`       | `string`                              | Type of Kotlin object. Defaults to `''` (regular object).                                                                                                                                                                          |
 
 Example:
 
