@@ -11,7 +11,6 @@
  * and limitations under the License.
  */
 import { expect } from 'chai';
-import { join } from 'path-unified';
 import Color from 'tinycolor2';
 import transforms, { isColor } from '../../lib/common/transforms.js';
 
@@ -1391,7 +1390,7 @@ describe('common', () => {
           {},
           {},
         );
-        expect(value).to.equal(join('foo.json'));
+        expect(value).to.equal('foo.json');
       });
     });
   });
