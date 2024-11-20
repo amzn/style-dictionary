@@ -1,3 +1,3 @@
-export const isColor = (token) => {
+export function isColor(token) {
 	return (token?.$type || token?.type) === 'color';
-};
+}

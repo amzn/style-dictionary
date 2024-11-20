@@ -4,7 +4,7 @@ import { isColor } from './filter.js';
  * Exports tailwind plugin for declaring root CSS vars
  * @see https://tailwindcss.com/docs/plugins#overview
  */
-export const cssVarsPlugin = ({ dictionary }) => {
+export function cssVarsPlugin({ dictionary }) {
 	const vars = dictionary.allTokens
 		.map((token) => {
 			const value = token?.$value || token?.value;
@@ -21,13 +21,13 @@ export default plugin(function ({ addBase }) {
 \t\t},
 \t});
 });\n`;
-};
+}
 
 /**
  * Exports theme color definitions
  * @see https://tailwindcss.com/docs/customizing-colors#using-css-variables
  */
-export const themeColors = ({ dictionary, options }) => {
+export function themeColors({ dictionary, options }) {
 	const tokens = dictionary.allTokens.filter((token) => isColor(token, options));
 
 	const theme = tokens
@@ -37,13 +37,13 @@ export const themeColors = ({ dictionary, options }) => {
 		.join(',\n');
 
 	return `export default {\n${theme},\n};\n`;
-};
+}
 
 /**
  * Exports tailwind preset
  * @see https://tailwindcss.com/docs/presets
  */
-export const preset = () => {
+export function preset() {
 	return `import themeColors from './themeColors.js';
 import cssVarsPlugin from './cssVarsPlugin.js';
 
@@ -57,4 +57,4 @@ export default {
 \t},
 \tplugins: [cssVarsPlugin], // <-- plugin imported here
 };\n`;
-};
+}
