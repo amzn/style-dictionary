@@ -1,0 +1,36 @@
+diff --git a/node_modules/@astrojs/starlight/utils/createTranslationSystem.ts b/node_modules/@astrojs/starlight/utils/createTranslationSystem.ts
+index 540b74b..0a06296 100644
+--- a/node_modules/@astrojs/starlight/utils/createTranslationSystem.ts
++++ b/node_modules/@astrojs/starlight/utils/createTranslationSystem.ts
+@@ -125,6 +125,7 @@ function buildResources<T extends Record<string, string | undefined>>(
+ // strings. We let TypeScript merge them into a single union type so that plugins with a TypeScript
+ // configuration preventing `UserI18nKeys` to be properly inferred can still get auto-completion
+ // for built-in UI strings.
++// @ts-expect-error not imported, only in locals.d.ts
+ export type I18nKeys = keyof BuiltInStrings | UserI18nKeys | keyof StarlightApp.I18n;
+ 
+ export type I18nT = TFunction<'starlight', undefined> & {
+diff --git a/node_modules/@astrojs/starlight/utils/translations-fs.ts b/node_modules/@astrojs/starlight/utils/translations-fs.ts
+index 4bcfcda..9b783a9 100644
+--- a/node_modules/@astrojs/starlight/utils/translations-fs.ts
++++ b/node_modules/@astrojs/starlight/utils/translations-fs.ts
+@@ -1,6 +1,7 @@
+ import fs from 'node:fs';
+ import path from 'node:path';
+ import { fileURLToPath } from 'node:url';
++// @ts-expect-error @types/js-yaml not installed
+ import yaml from 'js-yaml';
+ import type { i18nSchemaOutput } from '../schemas/i18n';
+ import { createTranslationSystem } from './createTranslationSystem';
+diff --git a/node_modules/@astrojs/starlight/utils/translations.ts b/node_modules/@astrojs/starlight/utils/translations.ts
+index 499ded2..87e0a1a 100644
+--- a/node_modules/@astrojs/starlight/utils/translations.ts
++++ b/node_modules/@astrojs/starlight/utils/translations.ts
+@@ -1,5 +1,7 @@
+ import { getCollection, type CollectionEntry, type DataCollectionKey } from 'astro:content';
++// @ts-expect-error virtual imports not working in context of installed as dependency
+ import config from 'virtual:starlight/user-config';
++// @ts-expect-error virtual imports not working in context of installed as dependency
+ import pluginTranslations from 'virtual:starlight/plugin-translations';
+ import type { i18nSchemaOutput } from '../schemas/i18n';
+ import { createTranslationSystem } from './createTranslationSystem';
