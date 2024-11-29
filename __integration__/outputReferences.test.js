@@ -86,6 +86,51 @@ describe('integration', async () => {
       await expect(output).to.matchSnapshot();
     });
 
+    it('should support outputReferencesTransformed for values that were originally objects', async () => {
+      restore();
+      const sd = new StyleDictionary({
+        tokens: {
+          axis: {
+            0: {
+              value: '0',
+              type: 'number',
+            },
+          },
+          shadow: {
+            value: {
+              x: '{axis.0}',
+              y: '{axis.0}',
+              blur: '{axis.0}',
+              spread: '{axis.0}',
+              color: 'rgba(0,0,0,0.4)',
+              type: 'innerShadow',
+            },
+            type: 'shadow',
+          },
+        },
+        platforms: {
+          css: {
+            transforms: ['shadow/css/shorthand', 'name/kebab'],
+            buildPath,
+            files: [
+              {
+                destination: 'transformedShadowVars.css',
+                format: 'css/variables',
+                options: {
+                  outputReferences: outputReferencesTransformed,
+                },
+              },
+            ],
+          },
+        },
+      });
+      await sd.buildAllPlatforms();
+      const output = fs.readFileSync(resolve(`${buildPath}transformedShadowVars.css`), {
+        encoding: 'UTF-8',
+      });
+      await expect(output).to.matchSnapshot();
+    });
+
     it('should warn the user if filters out references briefly', async () => {
       const sd = new StyleDictionary({
         // we are only testing showFileHeader options so we don't need
