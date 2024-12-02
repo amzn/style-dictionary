@@ -61,6 +61,7 @@
     "test:node": "mocha -r mocha-hooks.mjs './__integration__/**/*.test.js' './__tests__/**/*.test.js' './__node_tests__/**/*.test.js'",
     "test:perf": "mocha -r mocha-hooks.mjs './__perf_tests__/**/*.test.js'",
     "test:perf:debug": "web-test-runner --config wtr-perf.config.mjs --watch",
+    "test:strip-types": "node --experimental-strip-types __tests__/strip-types-test.js",
     "install-cli": "npm install -g $(npm pack)",
     "release": "npm run build && changeset publish",
     "prepare": "husky install",

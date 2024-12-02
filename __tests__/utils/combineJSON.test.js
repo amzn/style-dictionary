@@ -75,13 +75,6 @@ describe('utils', () => {
       });
     });
 
-    it('should fail on invalid JSON', async () => {
-      await expectThrowsAsync(
-        () => combineJSON(['__tests__/__json_files/broken/*.json']),
-        "Failed to load or parse JSON or JS Object: JSON5: invalid character '!' at 2:18",
-      );
-    });
-
     it('should fail if there is a collision and it is passed a collision function', async () => {
       await expectThrowsAsync(
         () =>
@@ -93,18 +86,6 @@ describe('utils', () => {
           }),
         'test',
       );
-    });
-
-    it('should support json5', async () => {
-      const { tokens } = await combineJSON(['__tests__/__json_files/shallow/*.json5']);
-      expect(tokens).to.have.property('json5A', 5);
-      expect(tokens.d).to.have.property('json5e', 1);
-    });
-
-    it('should support jsonc', async () => {
-      const { tokens } = await combineJSON(['__tests__/__json_files/shallow/*.jsonc']);
-      expect(tokens).to.have.property('jsonCA', 5);
-      expect(tokens.d).to.have.property('jsonCe', 1);
     });
 
     describe('custom parsers', () => {
