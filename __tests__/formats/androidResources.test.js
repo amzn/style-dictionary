@@ -89,6 +89,49 @@ const customTokens = {
   },
 };
 
+const fontAndTextCaseTokens = {
+  typo: {
+    headline: {
+      name: 'headline-font',
+      value: '@font/comic_sans_bold',
+      type: 'fontFamily',
+      original: {
+        value: '@font/comic_sans_bold',
+        type: 'fontFamily',
+      },
+    },
+    copytext: {
+      name: 'copytext-font',
+      value: '@font/comic_sans',
+      type: 'fontFamily',
+      original: {
+        value: '@font/comic_sans',
+        type: 'fontFamily',
+      },
+    },
+  },
+  textCase: {
+    headline: {
+      name: 'headline-text-case',
+      value: 'true',
+      type: 'textCase',
+      original: {
+        value: 'true',
+        type: 'textCase',
+      },
+    },
+    copytext: {
+      name: 'copytext-text-case',
+      value: 'false',
+      type: 'textCase',
+      original: {
+        value: 'none',
+        type: 'textCase',
+      },
+    },
+  },
+};
+
 const format = formats['android/resources'];
 const file = {
   destination: '__output/',
@@ -140,6 +183,19 @@ describe('formats', () => {
             tokens: customTokens,
             allTokens: convertTokenData(customTokens, { output: 'array' }),
           },
+          file,
+          platform: {},
+        }),
+        {},
+        file,
+      );
+      await expect(f).to.matchSnapshot();
+    });
+
+    it('with type & textCase should match snapshot', async () => {
+      const f = await format(
+        createFormatArgs({
+          dictionary: { fontAndTextCaseTokens, allTokens: flattenTokens(fontAndTextCaseTokens) },
           file,
           platform: {},
         }),
