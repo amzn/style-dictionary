@@ -13,7 +13,7 @@
 import { expect } from 'chai';
 import formats from '../../lib/common/formats.js';
 import createFormatArgs from '../../lib/utils/createFormatArgs.js';
-import flattenTokens from '../../lib/utils/flattenTokens.js';
+import { convertTokenData } from '../../lib/utils/convertTokenData.js';
 import { isNode } from '../../lib/utils/isNode.js';
 
 const file = {
@@ -49,7 +49,7 @@ describe('formats', () => {
     it('should have a valid less syntax and match snapshot', async () => {
       const result = await format(
         createFormatArgs({
-          dictionary: { tokens, allTokens: flattenTokens(tokens) },
+          dictionary: { tokens, allTokens: convertTokenData(tokens, { output: 'array' }) },
           file,
           platform: {},
         }),

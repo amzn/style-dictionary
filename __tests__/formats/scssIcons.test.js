@@ -14,7 +14,7 @@ import { expect } from 'chai';
 import { compileString } from 'sass';
 import formats from '../../lib/common/formats.js';
 import createFormatArgs from '../../lib/utils/createFormatArgs.js';
-import flattenTokens from '../../lib/utils/flattenTokens.js';
+import { convertTokenData } from '../../lib/utils/convertTokenData.js';
 
 const file = {
   destination: '__output/',
@@ -61,7 +61,7 @@ describe('formats', () => {
     it('should have a valid scss syntax and match snapshot', async () => {
       const result = await format(
         createFormatArgs({
-          dictionary: { tokens, allTokens: flattenTokens(tokens) },
+          dictionary: { tokens, allTokens: convertTokenData(tokens, { output: 'array' }) },
           file,
           platform,
         }),

@@ -114,7 +114,8 @@ snapshots["integration custom formats inline custom with new args should match s
           "size",
           "padding",
           "small"
-        ]
+        ],
+        "key": "{size.padding.small}"
       },
       {
         "value": "1rem",
@@ -135,7 +136,8 @@ snapshots["integration custom formats inline custom with new args should match s
           "size",
           "padding",
           "medium"
-        ]
+        ],
+        "key": "{size.padding.medium}"
       },
       {
         "value": "1rem",
@@ -156,7 +158,8 @@ snapshots["integration custom formats inline custom with new args should match s
           "size",
           "padding",
           "large"
-        ]
+        ],
+        "key": "{size.padding.large}"
       },
       {
         "value": "1rem",
@@ -177,9 +180,11 @@ snapshots["integration custom formats inline custom with new args should match s
           "size",
           "padding",
           "xl"
-        ]
+        ],
+        "key": "{size.padding.xl}"
       }
     ],
+    "tokenMap": {},
     "unfilteredTokens": {
       "size": {
         "padding": {
@@ -290,7 +295,8 @@ snapshots["integration custom formats inline custom with new args should match s
           "size",
           "padding",
           "small"
-        ]
+        ],
+        "key": "{size.padding.small}"
       },
       {
         "value": "1rem",
@@ -311,7 +317,8 @@ snapshots["integration custom formats inline custom with new args should match s
           "size",
           "padding",
           "medium"
-        ]
+        ],
+        "key": "{size.padding.medium}"
       },
       {
         "value": "1rem",
@@ -332,7 +339,8 @@ snapshots["integration custom formats inline custom with new args should match s
           "size",
           "padding",
           "large"
-        ]
+        ],
+        "key": "{size.padding.large}"
       },
       {
         "value": "1rem",
@@ -353,9 +361,11 @@ snapshots["integration custom formats inline custom with new args should match s
           "size",
           "padding",
           "xl"
-        ]
+        ],
+        "key": "{size.padding.xl}"
       }
-    ]
+    ],
+    "unfilteredTokenMap": {}
   },
   "allTokens": [
     {
@@ -377,7 +387,8 @@ snapshots["integration custom formats inline custom with new args should match s
         "size",
         "padding",
         "small"
-      ]
+      ],
+      "key": "{size.padding.small}"
     },
     {
       "value": "1rem",
@@ -398,7 +409,8 @@ snapshots["integration custom formats inline custom with new args should match s
         "size",
         "padding",
         "medium"
-      ]
+      ],
+      "key": "{size.padding.medium}"
     },
     {
       "value": "1rem",
@@ -419,7 +431,8 @@ snapshots["integration custom formats inline custom with new args should match s
         "size",
         "padding",
         "large"
-      ]
+      ],
+      "key": "{size.padding.large}"
     },
     {
       "value": "1rem",
@@ -440,7 +453,8 @@ snapshots["integration custom formats inline custom with new args should match s
         "size",
         "padding",
         "xl"
-      ]
+      ],
+      "key": "{size.padding.xl}"
     }
   ],
   "tokens": {
@@ -1075,7 +1089,8 @@ snapshots["integration custom formats register custom format with new args shoul
           "size",
           "padding",
           "small"
-        ]
+        ],
+        "key": "{size.padding.small}"
       },
       {
         "value": "1rem",
@@ -1096,7 +1111,8 @@ snapshots["integration custom formats register custom format with new args shoul
           "size",
           "padding",
           "medium"
-        ]
+        ],
+        "key": "{size.padding.medium}"
       },
       {
         "value": "1rem",
@@ -1117,7 +1133,8 @@ snapshots["integration custom formats register custom format with new args shoul
           "size",
           "padding",
           "large"
-        ]
+        ],
+        "key": "{size.padding.large}"
       },
       {
         "value": "1rem",
@@ -1138,9 +1155,11 @@ snapshots["integration custom formats register custom format with new args shoul
           "size",
           "padding",
           "xl"
-        ]
+        ],
+        "key": "{size.padding.xl}"
       }
     ],
+    "tokenMap": {},
     "unfilteredTokens": {
       "size": {
         "padding": {
@@ -1251,7 +1270,8 @@ snapshots["integration custom formats register custom format with new args shoul
           "size",
           "padding",
           "small"
-        ]
+        ],
+        "key": "{size.padding.small}"
       },
       {
         "value": "1rem",
@@ -1272,7 +1292,8 @@ snapshots["integration custom formats register custom format with new args shoul
           "size",
           "padding",
           "medium"
-        ]
+        ],
+        "key": "{size.padding.medium}"
       },
       {
         "value": "1rem",
@@ -1293,7 +1314,8 @@ snapshots["integration custom formats register custom format with new args shoul
           "size",
           "padding",
           "large"
-        ]
+        ],
+        "key": "{size.padding.large}"
       },
       {
         "value": "1rem",
@@ -1314,9 +1336,11 @@ snapshots["integration custom formats register custom format with new args shoul
           "size",
           "padding",
           "xl"
-        ]
+        ],
+        "key": "{size.padding.xl}"
       }
-    ]
+    ],
+    "unfilteredTokenMap": {}
   },
   "allTokens": [
     {
@@ -1338,7 +1362,8 @@ snapshots["integration custom formats register custom format with new args shoul
         "size",
         "padding",
         "small"
-      ]
+      ],
+      "key": "{size.padding.small}"
     },
     {
       "value": "1rem",
@@ -1359,7 +1384,8 @@ snapshots["integration custom formats register custom format with new args shoul
         "size",
         "padding",
         "medium"
-      ]
+      ],
+      "key": "{size.padding.medium}"
     },
     {
       "value": "1rem",
@@ -1380,7 +1406,8 @@ snapshots["integration custom formats register custom format with new args shoul
         "size",
         "padding",
         "large"
-      ]
+      ],
+      "key": "{size.padding.large}"
     },
     {
       "value": "1rem",
@@ -1401,7 +1428,8 @@ snapshots["integration custom formats register custom format with new args shoul
         "size",
         "padding",
         "xl"
-      ]
+      ],
+      "key": "{size.padding.xl}"
     }
   ],
   "tokens": {

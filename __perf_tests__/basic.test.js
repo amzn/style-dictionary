@@ -108,7 +108,8 @@ describe('cliBuildWithJsConfig', () => {
     expect(end - start).to.be.below(70);
   });
 
-  // TODO: aim for <1000ms (maybe a bit more margin due to CI CPUs being slower)
+  // TODO: this should be way lower in the future when transform/resolve are using tokenMap
+  // and refs are getting cached
   it('should run tons of refs within 2750ms', async () => {
     // 9000 tokens, 6000 refs
     // (first layer is raw values, other 2 layers are refs to previous layer)

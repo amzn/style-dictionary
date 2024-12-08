@@ -17,7 +17,7 @@ import chalk from 'chalk';
 import { fileToJSON, clearOutput, fileExists, clearSDMeta } from './__helpers.js';
 import { resolve } from '../lib/resolve.js';
 import GroupMessages from '../lib/utils/groupMessages.js';
-import flattenTokens from '../lib/utils/flattenTokens.js';
+import { convertTokenData } from '../lib/utils/convertTokenData.js';
 import { stripMeta } from '../lib/utils/stripMeta.js';
 import formats from '../lib/common/formats.js';
 import { restore, stubMethod } from 'hanbi';
@@ -1145,7 +1145,7 @@ ${dictionary.allTokens.map((tok) => `  ${tok.name}: "${tok.value}";`).join('\n')
         },
         {
           tokens: tokens,
-          allTokens: flattenTokens(tokens),
+          allTokens: convertTokenData(tokens, { output: 'array' }),
         },
       );
       await expect(output).to.matchSnapshot();

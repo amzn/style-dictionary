@@ -25,6 +25,10 @@ export interface DesignToken {
   comment?: string;
   themeable?: boolean;
   attributes?: Record<string, unknown>;
+  /**
+   * When flattening tokens, DesignToken is given a key that matches the original ancestor tree e.g. `{colors.red.500}`
+   */
+  key?: string;
   [key: string]: any;
 }
 
@@ -71,6 +75,8 @@ export interface TransformedTokens {
 export interface Dictionary {
   tokens: TransformedTokens;
   allTokens: TransformedToken[];
+  tokenMap: Map<string, TransformedToken>;
   unfilteredTokens?: TransformedTokens;
   unfilteredAllTokens?: TransformedToken[];
+  unfilteredTokenMap?: Map<string, TransformedToken>;
 }

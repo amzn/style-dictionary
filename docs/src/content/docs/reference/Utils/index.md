@@ -15,7 +15,7 @@ npm install -D style-dictionary
 ## Usage
 
 ```js title="script.js"
-import { flattenTokens, resolveReferences, typeDtcgDelegate } from 'style-dictionary/utils';
+import { convertTokenData, resolveReferences, typeDtcgDelegate } from 'style-dictionary/utils';
 ```
 
 Check out the next pages for more details about the specific categories of utility functions.

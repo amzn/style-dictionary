@@ -14,7 +14,7 @@ import { expect } from 'chai';
 import { compileString } from 'sass';
 import formats from '../../lib/common/formats.js';
 import createFormatArgs from '../../lib/utils/createFormatArgs.js';
-import flattenTokens from '../../lib/utils/flattenTokens.js';
+import { convertTokenData } from '../../lib/utils/convertTokenData.js';
 
 const tokens = {
   size: {
@@ -86,7 +86,7 @@ describe('formats', () => {
       const format = formats[key].bind(file);
       const output = await format(
         createFormatArgs({
-          dictionary: { tokens, allTokens: flattenTokens(tokens) },
+          dictionary: { tokens, allTokens: convertTokenData(tokens, { output: 'array' }) },
           file,
           platform: {},
         }),
@@ -122,7 +122,7 @@ describe('formats', () => {
         };
         const result = await format(
           createFormatArgs({
-            dictionary: { tokens, allTokens: flattenTokens(tokens) },
+            dictionary: { tokens, allTokens: convertTokenData(tokens, { output: 'array' }) },
             file,
             platform: {},
           }),

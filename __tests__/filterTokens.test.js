@@ -13,7 +13,7 @@
 import { expect } from 'chai';
 import filterTokens from '../lib/filterTokens.js';
 import { clearOutput } from './__helpers.js';
-import flattenTokens from '../lib/utils/flattenTokens.js';
+import { convertTokenData } from '../lib/utils/convertTokenData.js';
 
 const colorRed = {
   value: '#FF0000',
@@ -123,7 +123,7 @@ const random_meta_tokens = {
 
 const random_meta_dictionary = {
   tokens: random_meta_tokens,
-  allTokens: flattenTokens(random_meta_tokens),
+  allTokens: convertTokenData(random_meta_tokens, { output: 'array' }),
 };
 
 const falsy_values = {
@@ -133,12 +133,12 @@ const falsy_values = {
 
 const dictionary = {
   tokens,
-  allTokens: flattenTokens(tokens),
+  allTokens: convertTokenData(tokens, { output: 'array' }),
 };
 
 const falsy_dictionary = {
   tokens: falsy_values,
-  allTokens: flattenTokens(falsy_values),
+  allTokens: convertTokenData(falsy_values, { output: 'array' }),
 };
 
 describe('filterTokens', () => {
@@ -161,7 +161,10 @@ describe('filterTokens', () => {
       expect(token).to.not.equal(colorRed);
       expect(token).not.to.not.equal(colorBlue);
     });
-    expect(filteredDictionary.allTokens).to.eql([sizeSmall, sizeLarge]);
+    expect(filteredDictionary.allTokens).to.eql([
+      { ...sizeSmall, key: '{size.small}' },
+      { ...sizeLarge, key: '{size.large}' },
+    ]);
     expect(filteredDictionary.tokens).to.have.property('size');
     expect(filteredDictionary.tokens).to.not.have.property('color');
   });
@@ -173,7 +176,7 @@ describe('filterTokens', () => {
     filteredDictionary.allTokens.forEach((token) => {
       expect(token).to.not.equal(not_kept);
     });
-    expect(filteredDictionary.allTokens).to.eql([kept]);
+    expect(filteredDictionary.allTokens).to.eql([{ ...kept, key: '{kept}' }]);
     expect(filteredDictionary.tokens).to.have.property('kept');
     expect(filteredDictionary.tokens).to.not.have.property('not_kept');
   });
@@ -184,7 +187,9 @@ describe('filterTokens', () => {
     };
 
     const filteredDictionary = await filterTokens(random_meta_dictionary, filter);
-    expect(filteredDictionary.allTokens).to.eql([random_meta_tokens.foo.bar]);
+    expect(filteredDictionary.allTokens).to.eql([
+      { ...random_meta_tokens.foo.bar, key: '{foo.bar}' },
+    ]);
     expect(filteredDictionary.tokens).to.have.nested.property('foo.bar');
     expect(filteredDictionary.tokens).to.not.have.property('qux');
   });

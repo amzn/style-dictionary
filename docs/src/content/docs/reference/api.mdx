@@ -4,6 +4,8 @@ sidebar:
   order: 1
 ---
 
+import { Badge } from '@astrojs/starlight/components';
+
 ## new StyleDictionary()
 
 Create a new StyleDictionary instance.
@@ -204,7 +206,7 @@ type formatPlatform = (
 | platform | `string`              | Name of the platform you want to build.                                                                                                                         |
 | opts     | `{ cache?: boolean }` | `cache` prop determines whether or not it should reuse the cached tokens/config if they've already been processed earlier for this platform. `false` by default |
 
-Runs [`getPlatform`](#getplatform) under the hood, and then loops over the `files`, and formats the dictionary for each file, returning an array of file objects:
+Runs [`getPlatformTokens`](#getplatformtokens) under the hood, and then loops over the `files`, and formats the dictionary for each file, returning an array of file objects:
 
 - `output` property, which is usually a string but depending on the format, it could also be any other data type. This is useful if you don't intend to write to a file, but want to do something else with the formatted tokens.
 - `destination` property, this one is optional, if you don't intend on writing to a file you don't need this, but it can still be useful to name your outputs if you've got multiple `files`.
@@ -337,7 +339,9 @@ defined in the platform and calls the undo method on any actions.
 - For `exportPlatform`, use `getPlatformTokens` instead, turning off the cache option if needed.
 - For `getPlatform`, use `getPlatformConfig` insetad, turning off the cache option if needed.
 
-### exportPlatform
+### exportPlatform <Badge text="Deprecated" variant="danger" />
+
+> Deprecated in favor of [`getPlatformTokens`](#getplatformtokens).
 
 ```ts
 type exportPlatform = (platform: string, opts: { cache?: boolean }) => Promise<DesignTokens>;
@@ -354,7 +358,9 @@ This is useful if you want to use a Style Dictionary in JS build tools like Webp
 
 ---
 
-### getPlatform
+### getPlatform <Badge text="Deprecated" variant="danger" />
+
+> Deprecated in favor of [`getPlatformConfig`](#getplatformconfig).
 
 ```ts
 type getPlatform = (
@@ -365,6 +371,7 @@ type getPlatform = (
   dictionary: {
     tokens: DesignTokens;
     allTokens: DesignToken[];
+    tokenMap: Map<string, DesignToken>;
   };
 }>;
 ```
@@ -376,7 +383,7 @@ Wrapper around [`exportPlatform`](#exportplatform), returns a bit more data.
 Returns an object with `platformConfig` and `dictionary` properties:
 
 - `platformConfig` a processed version of the user config for the platform
-- `dictionary` an object with `tokens` after transformations and reference resolutions, and an `allTokens` property which is a flattened (Array) version of that.
+- `dictionary` an object with `tokens` after transformations and reference resolutions, and an `allTokens` property which is a flattened (Array) version of that. There's also a `tokenMap` property which combines best of both worlds, it is a JavaScript Map that's keyed, making it easy to access a single token as well as iterate through them.
 
 This is useful if you want to use a Style Dictionary in JS build tools like Webpack.
 

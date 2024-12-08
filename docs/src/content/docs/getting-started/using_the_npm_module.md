@@ -106,7 +106,7 @@ The [multi-brand-multi-platform example](https://github.com/amzn/style-dictionar
 There is also a utils entrypoint on the NPM module that contains helper utils.
 
 ```js title="import-utils.js"
-import { flattenTokens } from 'style-dictionary/utils';
+import { convertTokenData } from 'style-dictionary/utils';
 ```
 
 For more details, [read the utils docs](/reference/utils)

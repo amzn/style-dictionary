@@ -93,6 +93,7 @@ export interface PlatformConfig extends RegexOptions {
   transformGroup?: string;
   transforms?: string[] | Omit<Transform, 'name'>[];
   expand?: ExpandConfig;
+  preprocessors?: string[];
   prefix?: string;
   buildPath?: string;
   files?: File[];

@@ -156,7 +156,7 @@ export default {
           options: {
             // Look here 👇
             outputReferences: (token, { dictionary, usesDtcg }) => {
-              // `dictionary` contains `allTokens`, `tokens` and `unfilteredTokens` props
+              // `dictionary` contains `allTokens`, `tokens`, `tokenMap`, `unfilteredTokens`, `unfilteredAllTokens` and `unfilteredTokenMap` props
               // `usesDtcg` tells you whether the Design Token Community Group spec is used with $ prefixes ($value, $type etc.)
               // return true or false
             },
@@ -272,17 +272,19 @@ You might be wondering why the return type of a format function is `unknown`.
 [More information about this here](#custom-return-types)
 :::
 
-| Param                                 | Type                 | Description                                                                                           |
-| ------------------------------------- | -------------------- | ----------------------------------------------------------------------------------------------------- |
-| `args`                                | `Object`             | A single argument to support named parameters and destructuring.                                      |
-| `args.dictionary`                     | `Dictionary`         | Transformed Dictionary object containing allTokens, tokens and unfilteredTokens.                      |
-| `args.dictionary.allTokens`           | `TransformedToken[]` | Flattened array of all tokens, easiest to loop over and export to a flat format.                      |
-| `args.dictionary.tokens`              | `TransformedTokens`  | All tokens, still in unflattened object format.                                                       |
-| `args.dictionary.unfilteredAllTokens` | `TransformedToken[]` | Flattened array of all tokens, including tokens that were filtered out by filters.                    |
-| `args.dictionary.unfilteredTokens`    | `TransformedTokens`  | All tokens, still in unflattened object format, including tokens that were filtered out by filters.   |
-| `args.platform`                       | `Platform`           | [Platform config](/reference/config#platform)                                                         |
-| `args.file`                           | `File`               | [File config](/reference/config#file)                                                                 |
-| `args.options`                        | `Object`             | Merged object with SD [Config](/reference/config#properties) & [FormatOptions](#format-configuration) |
+| Param                                 | Type                               | Description                                                                                                           |
+| ------------------------------------- | ---------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `args`                                | `Object`                           | A single argument to support named parameters and destructuring.                                                      |
+| `args.dictionary`                     | `Dictionary`                       | Transformed Dictionary object containing allTokens, tokens and unfilteredTokens.                                      |
+| `args.dictionary.allTokens`           | `TransformedToken[]`               | Flattened array of all tokens, easiest to loop over and export to a flat format.                                      |
+| `args.dictionary.tokens`              | `TransformedTokens`                | All tokens, still in unflattened object format.                                                                       |
+| `args.dictionary.tokenMap`            | `Record<string, TransformedToken>` | All tokens as a JavaScript Map that's keyed, making it easy to access a single token as well as iterate through them. |
+| `args.dictionary.unfilteredAllTokens` | `TransformedToken[]`               | Flattened array of all tokens, including tokens that were filtered out by filters.                                    |
+| `args.dictionary.unfilteredTokens`    | `TransformedTokens`                | All tokens, still in unflattened object format, including tokens that were filtered out by filters.                   |
+| `args.dictionary.unfilteredTokenMap`  | `TransformedTokens`                | All tokens as a JavaScript Map, including tokens that were filtered out by filters.                                   |
+| `args.platform`                       | `Platform`                         | [Platform config](/reference/config#platform)                                                                         |
+| `args.file`                           | `File`                             | [File config](/reference/config#file)                                                                                 |
+| `args.options`                        | `Object`                           | Merged object with SD [Config](/reference/config#properties) & [FormatOptions](#format-configuration)                 |
 
 Example:
 

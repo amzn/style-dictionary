@@ -14,7 +14,7 @@ import { expect } from 'chai';
 // import stylus from 'stylus'; see comment in test below
 import formats from '../../lib/common/formats.js';
 import createFormatArgs from '../../lib/utils/createFormatArgs.js';
-import flattenTokens from '../../lib/utils/flattenTokens.js';
+import { convertTokenData } from '../../lib/utils/convertTokenData.js';
 
 const file = {
   destination: '__output/',
@@ -49,7 +49,7 @@ describe('formats', () => {
     it('should have a valid stylus syntax and match snapshot', async () => {
       const result = format(
         createFormatArgs({
-          dictionary: { tokens, allTokens: flattenTokens(tokens) },
+          dictionary: { tokens, allTokens: convertTokenData(tokens, { output: 'array' }) },
           file,
           platform: {},
         }),

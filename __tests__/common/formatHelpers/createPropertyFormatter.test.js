@@ -12,7 +12,7 @@
  */
 import { expect } from 'chai';
 import createPropertyFormatter from '../../../lib/common/formatHelpers/createPropertyFormatter.js';
-import flattenTokens from '../../../lib/utils/flattenTokens.js';
+import { convertTokenData } from '../../../lib/utils/convertTokenData.js';
 import { outputReferencesFilter } from '../../../lib/utils/references/outputReferencesFilter.js';
 
 const dictionary = {
@@ -257,7 +257,7 @@ describe('common', () => {
             },
           };
           const tokens = { ...unfilteredTokens };
-          const allTokens = flattenTokens(tokens);
+          const allTokens = convertTokenData(tokens, { output: 'array' });
           const propFormatter = createPropertyFormatter({
             dictionary: {
               tokens,
@@ -317,7 +317,7 @@ describe('common', () => {
           };
           const tokens = { ...unfilteredTokens };
           delete tokens.foo;
-          const allTokens = flattenTokens(tokens);
+          const allTokens = convertTokenData(tokens, { output: 'array' });
           const propFormatter = createPropertyFormatter({
             dictionary: {
               tokens,
@@ -378,7 +378,7 @@ describe('common', () => {
           };
           const tokens = { ...unfilteredTokens };
           delete tokens.foo;
-          const allTokens = flattenTokens(tokens, true);
+          const allTokens = convertTokenData(tokens, { output: 'array', usesDtcg: true });
           const propFormatter = createPropertyFormatter({
             dictionary: {
               tokens,

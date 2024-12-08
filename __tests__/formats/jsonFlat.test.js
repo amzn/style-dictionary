@@ -13,7 +13,7 @@
 import { expect } from 'chai';
 import formats from '../../lib/common/formats.js';
 import createFormatArgs from '../../lib/utils/createFormatArgs.js';
-import flattenTokens from '../../lib/utils/flattenTokens.js';
+import { convertTokenData } from '../../lib/utils/convertTokenData.js';
 
 const colorTokenName = 'color-base-red-400';
 const colorTokenValue = '#EF5350';
@@ -48,7 +48,10 @@ describe('formats', () => {
       await expect(
         format(
           createFormatArgs({
-            dictionary: { tokens: colorTokens, allTokens: flattenTokens(colorTokens) },
+            dictionary: {
+              tokens: colorTokens,
+              allTokens: convertTokenData(colorTokens, { output: 'array' }),
+            },
             file,
             platform: {},
           }),
