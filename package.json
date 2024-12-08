@@ -82,7 +82,16 @@
     "singleQuote": true,
     "arrowParens": "always",
     "trailingComma": "all",
-    "printWidth": 100
+    "printWidth": 100,
+    "useTabs": false,
+    "overrides": [
+      {
+        "files": "examples/advanced/tailwind-preset/**/*",
+        "options": {
+          "useTabs": true
+        }
+      }
+    ]
   },
   "repository": {
     "type": "git",
