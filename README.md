@@ -22,7 +22,7 @@ For detailed usage head to https://amzn.github.io/style-dictionary
 
 ## Watch the Demo on YouTube
 
-[![Watch the video](/docs/assets/fake_player.png)](http://youtu.be/1HREvonfqhY)
+[![Watch the video](/docs/src/assets/fake_player.png)](http://youtu.be/1HREvonfqhY)
 
 ## Experiment in the playground
 
