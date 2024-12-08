@@ -16,6 +16,9 @@ import { fs } from 'style-dictionary/fs';
 import { resolve } from '../lib/resolve.js';
 import { buildPath } from './_constants.js';
 import { clearOutput } from '../__tests__/__helpers.js';
+import { transformGroups } from '../lib/enums/index.js';
+
+const { js } = transformGroups;
 
 describe('integration', async () => {
   before(async () => {
@@ -34,7 +37,7 @@ describe('integration', async () => {
       },
       platforms: {
         inlineCustomFormats: {
-          transformGroup: 'js',
+          transformGroup: js,
           buildPath,
           options: {
             otherOption: `platform option`,
@@ -59,7 +62,7 @@ describe('integration', async () => {
           ],
         },
         customFormats: {
-          transformGroup: 'js',
+          transformGroup: js,
           buildPath,
           options: {
             otherOption: `platform option`,

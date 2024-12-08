@@ -15,6 +15,9 @@ import StyleDictionary from 'style-dictionary';
 import { stubMethod, restore } from 'hanbi';
 import { buildPath, cleanConsoleOutput } from './_constants.js';
 import { clearOutput } from '../__tests__/__helpers.js';
+import { formats, logVerbosityLevels } from '../lib/enums/index.js';
+
+const { cssVariables, jsonNested } = formats;
 
 const tokens = {
   color: {
@@ -48,7 +51,7 @@ describe('integration', async () => {
             files: [
               {
                 destination: 'variables.css',
-                format: 'css/variables',
+                format: cssVariables,
               },
             ],
           },
@@ -63,14 +66,14 @@ describe('integration', async () => {
         // we are only testing name collision warnings options so we don't need
         // the full source.
         tokens,
-        log: { verbosity: 'verbose' },
+        log: { verbosity: logVerbosityLevels.verbose },
         platforms: {
           web: {
             buildPath,
             files: [
               {
                 destination: 'variables.css',
-                format: 'css/variables',
+                format: cssVariables,
               },
             ],
           },
@@ -91,7 +94,7 @@ describe('integration', async () => {
             files: [
               {
                 destination: 'tokens.json',
-                format: 'json/nested',
+                format: jsonNested,
               },
             ],
           },

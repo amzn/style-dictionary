@@ -21,6 +21,17 @@ import flattenTokens from '../lib/utils/flattenTokens.js';
 import { stripMeta } from '../lib/utils/stripMeta.js';
 import formats from '../lib/common/formats.js';
 import { restore, stubMethod } from 'hanbi';
+import {
+  logWarningLevels,
+  logVerbosityLevels,
+  logBrokenReferenceLevels,
+  formats as fileFormats,
+  transformGroups,
+} from '../lib/enums/index.js';
+
+const { console: logToConsole } = logBrokenReferenceLevels;
+const { silent, verbose } = logVerbosityLevels;
+const { error: errorLog, warn } = logWarningLevels;
 
 function traverseObj(obj, fn) {
   for (let key in obj) {
@@ -276,7 +287,7 @@ describe('StyleDictionary class', () => {
       const StyleDictionaryExtended = new StyleDictionary({
         include: ['__tests__/__tokens/paddings.json'],
         source: ['__tests__/__tokens/paddings.json'],
-        log: 'error',
+        log: errorLog,
       });
       const output = fileToJSON('__tests__/__tokens/paddings.json');
       traverseObj(output, (obj) => {
@@ -293,7 +304,7 @@ describe('StyleDictionary class', () => {
       const sd = new StyleDictionary(
         {
           source: ['__tests__/__tokens/paddings.json', '__tests__/__tokens/_paddings.json'],
-          log: { warnings: 'error', verbosity: 'verbose' },
+          log: { warnings: errorLog, verbosity: verbose },
         },
         { init: false },
       );
@@ -310,7 +321,7 @@ describe('StyleDictionary class', () => {
       const sd = new StyleDictionary(
         {
           source: ['__tests__/__tokens/paddings.json', '__tests__/__tokens/_paddings.json'],
-          log: { warnings: 'error' },
+          log: { warnings: errorLog },
         },
         { init: false },
       );
@@ -327,7 +338,7 @@ describe('StyleDictionary class', () => {
       const sd = new StyleDictionary(
         {
           source: ['__tests__/__tokens/paddings.json', '__tests__/__tokens/paddings.json'],
-          log: 'warn',
+          log: warn,
         },
         { init: false },
       );
@@ -387,7 +398,7 @@ Use log.verbosity "verbose" or use CLI option --verbose for more details.
       const sd = new StyleDictionary({
         log: {
           errors: {
-            brokenReferences: 'console',
+            brokenReferences: logToConsole,
           },
         },
         tokens: {
@@ -413,9 +424,9 @@ Refer to: https://styledictionary.com/reference/logging/
       const stub = stubMethod(console, 'error');
       const sd = new StyleDictionary({
         log: {
-          verbosity: 'silent',
+          verbosity: silent,
           errors: {
-            brokenReferences: 'console',
+            brokenReferences: logToConsole,
           },
         },
         tokens: {
@@ -437,7 +448,7 @@ Refer to: https://styledictionary.com/reference/logging/
       const sd = new StyleDictionary({
         log: {
           errors: {
-            brokenReferences: 'console',
+            brokenReferences: logToConsole,
           },
         },
         tokens: {
@@ -694,7 +705,7 @@ Refer to: https://styledictionary.com/reference/logging/
         },
         platforms: {
           css: {
-            transformGroup: 'css',
+            transformGroup: transformGroups.css,
           },
         },
       });
@@ -985,7 +996,7 @@ Refer to: https://styledictionary.com/reference/logging/
         const sd = new StyleDictionary();
         const { logs } = await sd.formatFile(
           { destination, format },
-          { log: { verbosity: 'verbose' } },
+          { log: { verbosity: verbose } },
           dictionary,
         );
 
@@ -1168,7 +1179,7 @@ ${dictionary.allTokens.map((tok) => `  ${tok.name}: "${tok.value}";`).join('\n')
       const { output } = await sd.formatFile(
         {
           destination: 'test.css',
-          format: formats['css/variables'],
+          format: formats[fileFormats.cssVariables],
           options: {
             fileHeader: async () => {
               await new Promise((resolve) => setTimeout(resolve, 100));

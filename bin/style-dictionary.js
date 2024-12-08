@@ -10,9 +10,10 @@ import program from 'commander';
 // usually also node:fs in this context, but can be customized by user
 import { fs } from 'style-dictionary/fs';
 import StyleDictionary from 'style-dictionary';
+import { logWarningLevels, logVerbosityLevels } from '../lib/enums/index.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
+const { silent, verbose } = logVerbosityLevels;
 const pkg = JSON5.parse(node_fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf8'));
 
 function collect(val, arr) {
@@ -111,10 +112,10 @@ function getSD(configPath, options) {
   let verbosity;
   let warnings;
   if (options.verbose || options.silent) {
-    verbosity = options.verbose ? 'verbose' : 'silent';
+    verbosity = options.verbose ? verbose : silent;
   }
   if (options.warn === false) {
-    warnings = 'disabled';
+    warnings = logWarningLevels.disabled;
   }
   return new StyleDictionary(configPath, { verbosity, warnings });
 }

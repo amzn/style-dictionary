@@ -14,6 +14,8 @@
 import type { Dictionary, TransformedToken } from './DesignToken.js';
 import type { File } from './File.js';
 import type { LocalOptions, Config, PlatformConfig } from './Config.js';
+import { formats } from '../lib/enums/index.js';
+type formats = typeof formats;
 
 export interface FormatFnArguments {
   /**
@@ -43,7 +45,7 @@ export type FormatFn = ((args: FormatFnArguments) => unknown | Promise<unknown>)
 };
 
 export interface Format {
-  name: string;
+  name: string | formats[keyof formats];
   format: FormatFn;
 }
 

@@ -16,6 +16,10 @@ import { fs } from 'style-dictionary/fs';
 import { resolve } from '../lib/resolve.js';
 import { buildPath } from './_constants.js';
 import { clearOutput } from '../__tests__/__helpers.js';
+import { formats, transformGroups } from '../lib/enums/index.js';
+
+const { flutterClassDart } = formats;
+const { flutter, flutterSeparate } = transformGroups;
 
 describe('integration', async () => {
   before(async () => {
@@ -23,19 +27,19 @@ describe('integration', async () => {
       source: [`__integration__/tokens/**/[!_]*.json?(c)`],
       platforms: {
         flutter: {
-          transformGroup: `flutter`,
+          transformGroup: flutter,
           buildPath,
           files: [
             {
               destination: 'style_dictionary.dart',
-              format: 'flutter/class.dart',
+              format: flutterClassDart,
               options: {
                 className: 'StyleDictionary',
               },
             },
             {
               destination: 'style_dictionary_with_references.dart',
-              format: 'flutter/class.dart',
+              format: flutterClassDart,
               options: {
                 outputReferences: true,
                 className: 'StyleDictionary',
@@ -44,12 +48,12 @@ describe('integration', async () => {
           ],
         },
         flutter_separate: {
-          transformGroup: `flutter-separate`,
+          transformGroup: flutterSeparate,
           buildPath,
           files: [
             {
               destination: 'style_dictionary_color.dart',
-              format: 'flutter/class.dart',
+              format: flutterClassDart,
               options: {
                 className: 'StyleDictionaryColor',
                 type: 'color',
@@ -60,7 +64,7 @@ describe('integration', async () => {
             },
             {
               destination: 'style_dictionary_sizes.dart',
-              format: 'flutter/class.dart',
+              format: flutterClassDart,
               options: {
                 className: 'StyleDictionarySize',
                 type: 'float',

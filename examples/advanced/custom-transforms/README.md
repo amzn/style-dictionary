@@ -24,7 +24,7 @@ To declare a custom **transform**, you have to call the `registerTransform` meth
 ```js
 StyleDictionary.registerTransform({
   name: 'ratio/%',
-  type: 'value',
+  type: transformTypes.value,
   filter: function (token) {
     return token.group === 'ratio';
   },

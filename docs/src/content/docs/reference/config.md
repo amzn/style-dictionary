@@ -63,7 +63,7 @@ export default {
   transform: {
     // Now we can use the transform 'myTransform' below
     myTransform: {
-      type: 'name',
+      type: transformTypes.name,
       transform: (token) => token.path.join('_').toUpperCase(),
     },
   },

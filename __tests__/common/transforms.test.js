@@ -13,13 +13,65 @@
 import { expect } from 'chai';
 import Color from 'tinycolor2';
 import transforms, { isColor } from '../../lib/common/transforms.js';
+import { transforms as transformNames } from '../../lib/enums/index.js';
+
+const {
+  nameCamel,
+  nameKebab,
+  nameSnake,
+  nameConstant,
+  attributeColor,
+  attributeCti,
+  colorHex,
+  colorHex8,
+  colorHex8android,
+  colorRgb,
+  colorHsl4,
+  colorHsl,
+  colorComposeColor,
+  colorUIColor,
+  colorUIColorSwift,
+  colorColorSwiftUI,
+  colorHex8flutter,
+  colorCss,
+  colorSketch,
+  sizeSp,
+  sizeDp,
+  sizeObject,
+  sizeRemToSp,
+  sizeRemToDp,
+  sizePx,
+  sizeRemToPt,
+  sizeComposeRemToSp,
+  sizeComposeEm,
+  sizeComposeRemToDp,
+  sizeSwiftRemToCGFloat,
+  sizeRemToPx,
+  sizePxToRem,
+  sizeRem,
+  sizeFlutterRemToDouble,
+  contentQuote,
+  htmlIcon,
+  contentObjCLiteral,
+  assetUrl,
+  assetObjCLiteral,
+  timeSeconds,
+  fontFamilyCss,
+  cubicBezierCss,
+  typographyCssShorthand,
+  borderCssShorthand,
+  strokeStyleCssShorthand,
+  transitionCssShorthand,
+  shadowCssShorthand,
+  assetPath,
+} = transformNames;
 
 describe('common', () => {
   describe('transforms', () => {
-    describe('name/camel', () => {
+    describe(nameCamel, () => {
       it('should handle prefix', () => {
         expect(
-          transforms['name/camel'].transform(
+          transforms[nameCamel].transform(
             {
               path: ['one', 'two', 'three'],
             },
@@ -32,7 +84,7 @@ describe('common', () => {
 
       it('should handle no prefix', () => {
         expect(
-          transforms['name/camel'].transform(
+          transforms[nameCamel].transform(
             {
               path: ['one', 'two', 'three'],
             },
@@ -42,10 +94,10 @@ describe('common', () => {
       });
     });
 
-    describe('name/kebab', () => {
+    describe(nameKebab, () => {
       it('should handle prefix', () => {
         expect(
-          transforms['name/kebab'].transform(
+          transforms[nameKebab].transform(
             {
               path: ['one', 'two', 'three'],
             },
@@ -58,7 +110,7 @@ describe('common', () => {
 
       it('should handle no prefix', () => {
         expect(
-          transforms['name/kebab'].transform(
+          transforms[nameKebab].transform(
             {
               path: ['one', 'two', 'three'],
             },
@@ -68,10 +120,10 @@ describe('common', () => {
       });
     });
 
-    describe('name/snake', () => {
+    describe(nameSnake, () => {
       it('should handle prefix', () => {
         expect(
-          transforms['name/snake'].transform(
+          transforms[nameSnake].transform(
             {
               path: ['one', 'two', 'three'],
             },
@@ -84,7 +136,7 @@ describe('common', () => {
 
       it('should handle no prefix', () => {
         expect(
-          transforms['name/snake'].transform(
+          transforms[nameSnake].transform(
             {
               path: ['one', 'two', 'three'],
             },
@@ -94,10 +146,10 @@ describe('common', () => {
       });
     });
 
-    describe('name/constant', () => {
+    describe(nameConstant, () => {
       it('should handle prefix', () => {
         expect(
-          transforms['name/constant'].transform(
+          transforms[nameConstant].transform(
             {
               path: ['one', 'two', 'three'],
             },
@@ -110,7 +162,7 @@ describe('common', () => {
 
       it('should handle no prefix', () => {
         expect(
-          transforms['name/constant'].transform(
+          transforms[nameConstant].transform(
             {
               path: ['one', 'two', 'three'],
             },
@@ -120,9 +172,9 @@ describe('common', () => {
       });
     });
 
-    describe('attribute/color', () => {
+    describe(attributeColor, () => {
       it('should handle normal colors', () => {
-        const attributes = transforms['attribute/color'].transform(
+        const attributes = transforms[attributeColor].transform(
           {
             value: '#aaaaaa',
           },
@@ -134,14 +186,14 @@ describe('common', () => {
         expect(attributes).to.have.nested.property('hsl.s', 0);
       });
       it('should handle colors with transparency', () => {
-        const attributes = transforms['attribute/color'].transform(
+        const attributes = transforms[attributeColor].transform(
           {
             value: '#aaaaaa99',
           },
           {},
           {},
         );
-        const attributes2 = transforms['attribute/color'].transform(
+        const attributes2 = transforms[attributeColor].transform(
           {
             value: 'rgba(170,170,170,0.6)',
           },
@@ -158,7 +210,7 @@ describe('common', () => {
     });
 
     describe('transform', () => {
-      describe('attribute/cti', () => {
+      describe(attributeCti, () => {
         const prop = {
           path: ['color', 'background', 'button', 'primary', 'active', 'extra'],
         };
@@ -168,9 +220,9 @@ describe('common', () => {
           attributes: { category: 'size', component: 'button' },
         };
 
-        const attrs = transforms['attribute/cti'].transform(prop, {}, {});
-        const attrsShort = transforms['attribute/cti'].transform(propShort, {}, {});
-        const attrsOverride = transforms['attribute/cti'].transform(propOverride, {}, {});
+        const attrs = transforms[attributeCti].transform(prop, {}, {});
+        const attrsShort = transforms[attributeCti].transform(propShort, {}, {});
+        const attrsOverride = transforms[attributeCti].transform(propOverride, {}, {});
 
         it('should assign attributes correctly', () => {
           expect(attrs).eql({
@@ -199,9 +251,9 @@ describe('common', () => {
       });
     });
 
-    describe('color/hex', () => {
+    describe(colorHex, () => {
       it('should handle hex colors', () => {
-        const value = transforms['color/hex'].transform(
+        const value = transforms[colorHex].transform(
           {
             value: '#aaaaaa',
           },
@@ -212,7 +264,7 @@ describe('common', () => {
       });
 
       it('should handle hex8 colors', () => {
-        const value = transforms['color/hex'].transform(
+        const value = transforms[colorHex].transform(
           {
             value: '#aaaaaaaa',
           },
@@ -223,7 +275,7 @@ describe('common', () => {
       });
 
       it('should handle rgb colors', () => {
-        const value = transforms['color/hex'].transform(
+        const value = transforms[colorHex].transform(
           {
             value: 'rgb(170,170,170)',
           },
@@ -234,7 +286,7 @@ describe('common', () => {
       });
 
       it('should handle rgb (object) colors', () => {
-        const value = transforms['color/hex'].transform(
+        const value = transforms[colorHex].transform(
           {
             value: {
               r: '170',
@@ -245,7 +297,7 @@ describe('common', () => {
           {},
           {},
         );
-        const value2 = transforms['color/hex'].transform(
+        const value2 = transforms[colorHex].transform(
           {
             value: 'rgb(170,170,170)',
           },
@@ -257,7 +309,7 @@ describe('common', () => {
       });
 
       it('should handle hsl colors', () => {
-        const value = transforms['color/hex'].transform(
+        const value = transforms[colorHex].transform(
           {
             value: {
               h: '0',
@@ -268,7 +320,7 @@ describe('common', () => {
           {},
           {},
         );
-        const value2 = transforms['color/hex'].transform(
+        const value2 = transforms[colorHex].transform(
           {
             value: 'hsl(0,0,0.5)',
           },
@@ -280,9 +332,9 @@ describe('common', () => {
       });
     });
 
-    describe('color/hex8', () => {
+    describe(colorHex8, () => {
       it('should handle hex colors', () => {
-        const value = transforms['color/hex8'].transform(
+        const value = transforms[colorHex8].transform(
           {
             value: '#aaaaaa',
           },
@@ -293,7 +345,7 @@ describe('common', () => {
       });
 
       it('should handle rgb colors', () => {
-        const value = transforms['color/hex8'].transform(
+        const value = transforms[colorHex8].transform(
           {
             value: 'rgb(170,170,170)',
           },
@@ -304,7 +356,7 @@ describe('common', () => {
       });
 
       it('should handle rgba colors', () => {
-        const value = transforms['color/hex8'].transform(
+        const value = transforms[colorHex8].transform(
           {
             value: 'rgba(170,170,170,0.6)',
           },
@@ -315,9 +367,9 @@ describe('common', () => {
       });
     });
 
-    describe('color/hex8android', () => {
+    describe(colorHex8android, () => {
       it('should handle colors without alpha', () => {
-        const value = transforms['color/hex8android'].transform(
+        const value = transforms[colorHex8android].transform(
           {
             value: '#aaaaaa',
           },
@@ -328,7 +380,7 @@ describe('common', () => {
       });
 
       it('should handle colors with alpha', () => {
-        const value = transforms['color/hex8android'].transform(
+        const value = transforms[colorHex8android].transform(
           {
             value: '#aaaaaa99',
           },
@@ -339,9 +391,9 @@ describe('common', () => {
       });
     });
 
-    describe('color/rgb', () => {
+    describe(colorRgb, () => {
       it('should handle normal colors', () => {
-        const value = transforms['color/rgb'].transform(
+        const value = transforms[colorRgb].transform(
           {
             value: '#aaaaaa',
           },
@@ -352,7 +404,7 @@ describe('common', () => {
       });
 
       it('should handle colors with transparency', () => {
-        const value = transforms['color/rgb'].transform(
+        const value = transforms[colorRgb].transform(
           {
             value: '#aaaaaa99',
           },
@@ -363,9 +415,9 @@ describe('common', () => {
       });
     });
 
-    describe('color/hsl-4', () => {
+    describe(colorHsl4, () => {
       it('should handle normal colors', () => {
-        const value = transforms['color/hsl-4'].transform(
+        const value = transforms[colorHsl4].transform(
           {
             value: '#009688',
           },
@@ -376,7 +428,7 @@ describe('common', () => {
       });
 
       it('should handle colors with transparency', () => {
-        const value = transforms['color/hsl-4'].transform(
+        const value = transforms[colorHsl4].transform(
           {
             value: '#00968899',
           },
@@ -387,9 +439,9 @@ describe('common', () => {
       });
     });
 
-    describe('color/hsl', () => {
+    describe(colorHsl, () => {
       it('should handle normal colors', () => {
-        const value = transforms['color/hsl'].transform(
+        const value = transforms[colorHsl].transform(
           {
             value: '#009688',
           },
@@ -400,7 +452,7 @@ describe('common', () => {
       });
 
       it('should handle colors with transparency', () => {
-        const value = transforms['color/hsl'].transform(
+        const value = transforms[colorHsl].transform(
           {
             value: '#00968899',
           },
@@ -411,9 +463,9 @@ describe('common', () => {
       });
     });
 
-    describe('color/composeColor', () => {
+    describe(colorComposeColor, () => {
       it('should handle color without alpha', () => {
-        const value = transforms['color/composeColor'].transform(
+        const value = transforms[colorComposeColor].transform(
           {
             value: '#aaaaaa',
           },
@@ -424,7 +476,7 @@ describe('common', () => {
       });
 
       it('should handle color with alpha', () => {
-        const value = transforms['color/composeColor'].transform(
+        const value = transforms[colorComposeColor].transform(
           {
             value: '#aaaaaaff',
           },
@@ -435,9 +487,9 @@ describe('common', () => {
       });
     });
 
-    describe('color/UIColor', () => {
+    describe(colorUIColor, () => {
       it('should handle normal colors', () => {
-        const value = transforms['color/UIColor'].transform(
+        const value = transforms[colorUIColor].transform(
           {
             value: '#aaaaaa',
           },
@@ -450,7 +502,7 @@ describe('common', () => {
       });
 
       it('should retain enough precision when converting to decimal', () => {
-        const value = transforms['color/UIColor'].transform(
+        const value = transforms[colorUIColor].transform(
           {
             value: '#1d1d1d',
           },
@@ -463,7 +515,7 @@ describe('common', () => {
       });
 
       it('should handle colors with transparency', () => {
-        const value = transforms['color/UIColor'].transform(
+        const value = transforms[colorUIColor].transform(
           {
             value: '#aaaaaa99',
           },
@@ -476,9 +528,9 @@ describe('common', () => {
       });
     });
 
-    describe('color/UIColorSwift', () => {
+    describe(colorUIColorSwift, () => {
       it('should handle normal colors', () => {
-        const value = transforms['color/UIColorSwift'].transform(
+        const value = transforms[colorUIColorSwift].transform(
           {
             value: '#aaaaaa',
           },
@@ -489,7 +541,7 @@ describe('common', () => {
       });
 
       it('should retain enough precision when converting to decimal', () => {
-        const value = transforms['color/UIColorSwift'].transform(
+        const value = transforms[colorUIColorSwift].transform(
           {
             value: '#1d1d1d',
           },
@@ -500,7 +552,7 @@ describe('common', () => {
       });
 
       it('should handle colors with transparency', () => {
-        const value = transforms['color/UIColorSwift'].transform(
+        const value = transforms[colorUIColorSwift].transform(
           {
             value: '#aaaaaa99',
           },
@@ -511,9 +563,9 @@ describe('common', () => {
       });
     });
 
-    describe('color/ColorSwiftUI', () => {
+    describe(colorColorSwiftUI, () => {
       it('should handle normal colors', () => {
-        const value = transforms['color/ColorSwiftUI'].transform(
+        const value = transforms[colorColorSwiftUI].transform(
           {
             value: '#aaaaaa',
           },
@@ -524,7 +576,7 @@ describe('common', () => {
       });
 
       it('should retain enough precision when converting to decimal', () => {
-        const value = transforms['color/ColorSwiftUI'].transform(
+        const value = transforms[colorColorSwiftUI].transform(
           {
             value: '#1d1d1d',
           },
@@ -535,7 +587,7 @@ describe('common', () => {
       });
 
       it('should handle colors with transparency', () => {
-        const value = transforms['color/ColorSwiftUI'].transform(
+        const value = transforms[colorColorSwiftUI].transform(
           {
             value: '#aaaaaa99',
           },
@@ -546,9 +598,9 @@ describe('common', () => {
       });
     });
 
-    describe('color/hex8flutter', () => {
+    describe(colorHex8flutter, () => {
       it('should handle colors without alpha', () => {
-        const value = transforms['color/hex8flutter'].transform(
+        const value = transforms[colorHex8flutter].transform(
           {
             value: '#aaaaaa',
           },
@@ -559,7 +611,7 @@ describe('common', () => {
       });
 
       it('should handle colors with alpha', () => {
-        const value = transforms['color/hex8flutter'].transform(
+        const value = transforms[colorHex8flutter].transform(
           {
             value: '#aaaaaa99',
           },
@@ -570,9 +622,9 @@ describe('common', () => {
       });
     });
 
-    describe('color/css', () => {
+    describe(colorCss, () => {
       it('should handle normal colors', () => {
-        const value = transforms['color/css'].transform(
+        const value = transforms[colorCss].transform(
           {
             value: 'rgb(170, 170, 170)',
           },
@@ -583,7 +635,7 @@ describe('common', () => {
       });
 
       it('should handle colors with transparency', () => {
-        const value = transforms['color/css'].transform(
+        const value = transforms[colorCss].transform(
           {
             value: '#aaaaaa99',
           },
@@ -594,10 +646,10 @@ describe('common', () => {
       });
     });
 
-    describe('color/sketch', () => {
+    describe(colorSketch, () => {
       it('should retain hex specificity', () => {
         const originalHex = '#0b7dbb';
-        const value = transforms['color/sketch'].transform(
+        const value = transforms[colorSketch].transform(
           {
             value: originalHex,
           },
@@ -613,16 +665,16 @@ describe('common', () => {
       });
     });
 
-    describe('size/sp', () => {
+    describe(sizeSp, () => {
       it('should work', () => {
-        const value = transforms['size/sp'].transform(
+        const value = transforms[sizeSp].transform(
           {
             value: '12px',
           },
           {},
           {},
         );
-        const value2 = transforms['size/sp'].transform(
+        const value2 = transforms[sizeSp].transform(
           {
             value: '12',
           },
@@ -633,20 +685,20 @@ describe('common', () => {
         expect(value2).to.equal('12.00sp');
       });
       it('should throw an error if prop value is Nan', () => {
-        expect(() => transforms['size/sp'].transform({ value: 'a' }, {}, {})).to.throw();
+        expect(() => transforms[sizeSp].transform({ value: 'a' }, {}, {})).to.throw();
       });
     });
 
-    describe('size/dp', () => {
+    describe(sizeDp, () => {
       it('should work', () => {
-        const value = transforms['size/dp'].transform(
+        const value = transforms[sizeDp].transform(
           {
             value: '12px',
           },
           {},
           {},
         );
-        const value2 = transforms['size/dp'].transform(
+        const value2 = transforms[sizeDp].transform(
           {
             value: '12',
           },
@@ -657,13 +709,13 @@ describe('common', () => {
         expect(value2).to.equal('12.00dp');
       });
       it('should throw an error if prop value is Nan', () => {
-        expect(() => transforms['size/dp'].transform({ value: 'a' })).to.throw();
+        expect(() => transforms[sizeDp].transform({ value: 'a' })).to.throw();
       });
     });
 
-    describe('size/object', () => {
+    describe(sizeObject, () => {
       it('should work', () => {
-        const value = transforms['size/object'].transform(
+        const value = transforms[sizeObject].transform(
           {
             value: '1px',
           },
@@ -676,24 +728,20 @@ describe('common', () => {
         expect(value.scale).to.equal(16);
       });
       it('should work with custom base font', () => {
-        const value = transforms['size/object'].transform(
-          { value: '1' },
-          { basePxFontSize: 14 },
-          {},
-        );
+        const value = transforms[sizeObject].transform({ value: '1' }, { basePxFontSize: 14 }, {});
         expect(value.original).to.equal('1');
         expect(value.number).to.equal(1);
         expect(value.decimal).equal(0.01);
         expect(value.scale).to.equal(14);
       });
       it('should throw an error if prop value is NaN', () => {
-        expect(() => transforms['size/object'].transform({ value: 'a' }, {}, {})).to.throw();
+        expect(() => transforms[sizeObject].transform({ value: 'a' }, {}, {})).to.throw();
       });
     });
 
-    describe('size/remToSp', () => {
+    describe(sizeRemToSp, () => {
       it('should work', () => {
-        const value = transforms['size/remToSp'].transform(
+        const value = transforms[sizeRemToSp].transform(
           {
             value: '1',
           },
@@ -703,21 +751,17 @@ describe('common', () => {
         expect(value).to.equal('16.00sp');
       });
       it('converts rem to sp using custom base font', () => {
-        const value = transforms['size/remToSp'].transform(
-          { value: '1' },
-          { basePxFontSize: 14 },
-          {},
-        );
+        const value = transforms[sizeRemToSp].transform({ value: '1' }, { basePxFontSize: 14 }, {});
         expect(value).to.equal('14.00sp');
       });
       it('should throw an error if prop value is Nan', () => {
-        expect(() => transforms['size/dp'].transform({ value: 'a' }, {}, {})).to.throw();
+        expect(() => transforms[sizeDp].transform({ value: 'a' }, {}, {})).to.throw();
       });
     });
 
-    describe('size/remToDp', () => {
+    describe(sizeRemToDp, () => {
       it('should work', () => {
-        const value = transforms['size/remToDp'].transform(
+        const value = transforms[sizeRemToDp].transform(
           {
             value: '1',
           },
@@ -727,21 +771,17 @@ describe('common', () => {
         expect(value).to.equal('16.00dp');
       });
       it('converts rem to dp using custom base font', () => {
-        const value = transforms['size/remToDp'].transform(
-          { value: '1' },
-          { basePxFontSize: 14 },
-          {},
-        );
+        const value = transforms[sizeRemToDp].transform({ value: '1' }, { basePxFontSize: 14 }, {});
         expect(value).to.equal('14.00dp');
       });
       it('should throw an error if prop value is Nan', () => {
-        expect(() => transforms['size/dp'].transform({ value: 'a' }, {}, {})).to.throw();
+        expect(() => transforms[sizeDp].transform({ value: 'a' }, {}, {})).to.throw();
       });
     });
 
-    describe('size/px', () => {
+    describe(sizePx, () => {
       it('should work', () => {
-        const value = transforms['size/px'].transform(
+        const value = transforms[sizePx].transform(
           {
             value: '10',
           },
@@ -751,13 +791,13 @@ describe('common', () => {
         expect(value).to.equal('10px');
       });
       it('should throw an error if prop value is Nan', () => {
-        expect(() => transforms['size/dp'].transform({ value: 'a' }, {}, {})).to.throw();
+        expect(() => transforms[sizeDp].transform({ value: 'a' }, {}, {})).to.throw();
       });
     });
 
-    describe('size/remToPt', () => {
+    describe(sizeRemToPt, () => {
       it('should work', () => {
-        const value = transforms['size/remToPt'].transform(
+        const value = transforms[sizeRemToPt].transform(
           {
             value: '1',
           },
@@ -767,21 +807,17 @@ describe('common', () => {
         expect(value).to.equal('16.00f');
       });
       it('converts rem to pt using custom base font', () => {
-        const value = transforms['size/remToPt'].transform(
-          { value: '1' },
-          { basePxFontSize: 14 },
-          {},
-        );
+        const value = transforms[sizeRemToPt].transform({ value: '1' }, { basePxFontSize: 14 }, {});
         expect(value).to.equal('14.00f');
       });
       it('should throw an error if prop value is Nan', () => {
-        expect(() => transforms['size/dp'].transform({ value: 'a' }, {}, {})).to.throw();
+        expect(() => transforms[sizeDp].transform({ value: 'a' }, {}, {})).to.throw();
       });
     });
 
-    describe('size/compose/remToSp', () => {
+    describe(sizeComposeRemToSp, () => {
       it('should work', () => {
-        const value = transforms['size/compose/remToSp'].transform(
+        const value = transforms[sizeComposeRemToSp].transform(
           {
             value: '1',
           },
@@ -791,7 +827,7 @@ describe('common', () => {
         expect(value).to.equal('16.00.sp');
       });
       it('converts rem to sp using custom base font', () => {
-        const value = transforms['size/compose/remToSp'].transform(
+        const value = transforms[sizeComposeRemToSp].transform(
           { value: '1' },
           { basePxFontSize: 14 },
           {},
@@ -799,15 +835,13 @@ describe('common', () => {
         expect(value).to.equal('14.00.sp');
       });
       it('should throw an error if prop value is Nan', () => {
-        expect(() =>
-          transforms['size/compose/remToSp'].transform({ value: 'a' }, {}, {}),
-        ).to.throw();
+        expect(() => transforms[sizeComposeRemToSp].transform({ value: 'a' }, {}, {})).to.throw();
       });
     });
 
-    describe('size/compose/em', () => {
+    describe(sizeComposeEm, () => {
       it('should work', () => {
-        const value = transforms['size/compose/em'].transform(
+        const value = transforms[sizeComposeEm].transform(
           {
             value: '10',
           },
@@ -817,13 +851,13 @@ describe('common', () => {
         expect(value).to.equal('10.em');
       });
       it('should throw an error if prop value is Nan', () => {
-        expect(() => transforms['size/compose/em'].transform({ value: 'a' }, {}, {})).to.throw();
+        expect(() => transforms[sizeComposeEm].transform({ value: 'a' }, {}, {})).to.throw();
       });
     });
 
-    describe('size/compose/remToDp', () => {
+    describe(sizeComposeRemToDp, () => {
       it('should work', () => {
-        const value = transforms['size/compose/remToDp'].transform(
+        const value = transforms[sizeComposeRemToDp].transform(
           {
             value: '1',
           },
@@ -833,7 +867,7 @@ describe('common', () => {
         expect(value).to.equal('16.00.dp');
       });
       it('converts rem to dp using custom base font', () => {
-        const value = transforms['size/compose/remToDp'].transform(
+        const value = transforms[sizeComposeRemToDp].transform(
           { value: '1' },
           { basePxFontSize: 14 },
           {},
@@ -841,15 +875,13 @@ describe('common', () => {
         expect(value).to.equal('14.00.dp');
       });
       it('should throw an error if prop value is Nan', () => {
-        expect(() =>
-          transforms['size/compose/remToDp'].transform({ value: 'a' }, {}, {}),
-        ).to.throw();
+        expect(() => transforms[sizeComposeRemToDp].transform({ value: 'a' }, {}, {})).to.throw();
       });
     });
 
-    describe('size/swift/remToCGFloat', () => {
+    describe(sizeSwiftRemToCGFloat, () => {
       it('should work', () => {
-        const value = transforms['size/swift/remToCGFloat'].transform(
+        const value = transforms[sizeSwiftRemToCGFloat].transform(
           {
             value: '1',
           },
@@ -859,7 +891,7 @@ describe('common', () => {
         expect(value).to.equal('CGFloat(16.00)');
       });
       it('converts rem to CGFloat using custom base font', () => {
-        const value = transforms['size/swift/remToCGFloat'].transform(
+        const value = transforms[sizeSwiftRemToCGFloat].transform(
           { value: '1' },
           { basePxFontSize: 14 },
           {},
@@ -873,9 +905,9 @@ describe('common', () => {
       });
     });
 
-    describe('size/remToPx', () => {
+    describe(sizeRemToPx, () => {
       it('should work', () => {
-        const value = transforms['size/remToPx'].transform(
+        const value = transforms[sizeRemToPx].transform(
           {
             value: '1',
           },
@@ -885,20 +917,16 @@ describe('common', () => {
         expect(value).to.equal('16px');
       });
       it('converts rem to px using custom base font', () => {
-        const value = transforms['size/remToPx'].transform(
-          { value: '1' },
-          { basePxFontSize: 14 },
-          {},
-        );
+        const value = transforms[sizeRemToPx].transform({ value: '1' }, { basePxFontSize: 14 }, {});
         expect(value).to.equal('14px');
       });
       it('should throw an error if prop value is Nan', () => {
-        expect(() => transforms['size/dp'].transform({ value: 'a' }, {}, {})).to.throw();
+        expect(() => transforms[sizeDp].transform({ value: 'a' }, {}, {})).to.throw();
       });
     });
 
-    describe('size/pxToRem', () => {
-      const pxToRemtransform = transforms['size/pxToRem'].transform;
+    describe(sizePxToRem, () => {
+      const pxToRemtransform = transforms[sizePxToRem].transform;
 
       ['12', '12px', '12rem'].forEach((value) => {
         it(`ignoring unit, scales "${value}" to rem`, () => {
@@ -918,9 +946,9 @@ describe('common', () => {
       });
     });
 
-    describe('size/rem', () => {
+    describe(sizeRem, () => {
       it('should work', () => {
-        const value = transforms['size/rem'].transform(
+        const value = transforms[sizeRem].transform(
           {
             value: '1',
           },
@@ -932,7 +960,7 @@ describe('common', () => {
       ['0', 0].forEach((value) => {
         it('zero value is returned without a unit and remains same type', () => {
           expect(
-            transforms['size/rem'].transform(
+            transforms[sizeRem].transform(
               {
                 value,
               },
@@ -943,13 +971,13 @@ describe('common', () => {
         });
       });
       it('should throw an error if prop value is Nan', () => {
-        expect(() => transforms['size/dp'].transform({ value: 'a' }, {}, {})).to.throw();
+        expect(() => transforms[sizeDp].transform({ value: 'a' }, {}, {})).to.throw();
       });
     });
 
-    describe('size/flutter/remToDouble', () => {
+    describe(sizeFlutterRemToDouble, () => {
       it('should work', () => {
-        const value = transforms['size/flutter/remToDouble'].transform(
+        const value = transforms[sizeFlutterRemToDouble].transform(
           {
             value: '1',
           },
@@ -959,7 +987,7 @@ describe('common', () => {
         expect(value).to.equal('16.00');
       });
       it('converts rem to double using custom base font', () => {
-        const value = transforms['size/flutter/remToDouble'].transform(
+        const value = transforms[sizeFlutterRemToDouble].transform(
           { value: '1' },
           { basePxFontSize: 14 },
           {},
@@ -968,9 +996,9 @@ describe('common', () => {
       });
     });
 
-    describe('content/quote', () => {
+    describe(contentQuote, () => {
       it('should work', () => {
-        const value = transforms['content/quote'].transform(
+        const value = transforms[contentQuote].transform(
           {
             value: 'hello',
           },
@@ -981,9 +1009,9 @@ describe('common', () => {
       });
     });
 
-    describe('html/icon', () => {
+    describe(htmlIcon, () => {
       it('should work', () => {
-        const value = transforms['html/icon'].transform(
+        const value = transforms[htmlIcon].transform(
           {
             value: '&#xE001;',
           },
@@ -994,9 +1022,9 @@ describe('common', () => {
       });
     });
 
-    describe('content/objC/literal', () => {
+    describe(contentObjCLiteral, () => {
       it('should work', () => {
-        const value = transforms['content/objC/literal'].transform(
+        const value = transforms[contentObjCLiteral].transform(
           {
             value: 'hello',
           },
@@ -1007,9 +1035,9 @@ describe('common', () => {
       });
     });
 
-    describe('asset/url', () => {
+    describe(assetUrl, () => {
       it('should work', () => {
-        const value = transforms['asset/url'].transform(
+        const value = transforms[assetUrl].transform(
           {
             value: 'https://example.com',
           },
@@ -1020,7 +1048,7 @@ describe('common', () => {
       });
 
       it('should escape double quotes', () => {
-        const value = transforms['asset/url'].transform(
+        const value = transforms[assetUrl].transform(
           {
             value:
               'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="90" height="45"%3E%3Cpath d="M10 10h60" stroke="%2300F" stroke-width="5"/%3E%3Cpath d="M10 20h60" stroke="%230F0" stroke-width="5"/%3E%3Cpath d="M10 30h60" stroke="red" stroke-width="5"/%3E%3C/svg%3E"',
@@ -1034,9 +1062,9 @@ describe('common', () => {
       });
     });
 
-    describe('asset/objC/literal', () => {
+    describe(assetObjCLiteral, () => {
       it('should work', () => {
-        const value = transforms['asset/objC/literal'].transform(
+        const value = transforms[assetObjCLiteral].transform(
           {
             value: 'hello',
           },
@@ -1047,9 +1075,9 @@ describe('common', () => {
       });
     });
 
-    describe('time/seconds', () => {
+    describe(timeSeconds, () => {
       it('should work', () => {
-        const value = transforms['time/seconds'].transform(
+        const value = transforms[timeSeconds].transform(
           {
             value: '1000',
           },
@@ -1060,8 +1088,8 @@ describe('common', () => {
       });
     });
 
-    describe('fontFamily/css', () => {
-      const fontFamilyTransform = (token) => transforms['fontFamily/css'].transform(token, {}, {});
+    describe(fontFamilyCss, () => {
+      const fontFamilyTransform = (token) => transforms[fontFamilyCss].transform(token, {}, {});
 
       it('should handle simple fontFamily as is', () => {
         expect(fontFamilyTransform({ value: 'Arial', type: 'fontFamily' })).to.equal('Arial');
@@ -1132,9 +1160,8 @@ describe('common', () => {
       });
     });
 
-    describe('cubicBezier/css', () => {
-      const cubicBezierTransform = (token) =>
-        transforms['cubicBezier/css'].transform(token, {}, {});
+    describe(cubicBezierCss, () => {
+      const cubicBezierTransform = (token) => transforms[cubicBezierCss].transform(token, {}, {});
 
       it('should stringify cubicBezier values to cubicBezier() CSS function', () => {
         expect(cubicBezierTransform({ value: [0.5, 0, 1, 1], type: 'cubicBezier' })).to.equal(
@@ -1190,9 +1217,9 @@ describe('common', () => {
       });
     });
 
-    describe('typography/css/shorthand', () => {
+    describe(typographyCssShorthand, () => {
       const typographyTransform = (value, platformConfig = {}) =>
-        transforms['typography/css/shorthand'].transform({ value }, platformConfig, {});
+        transforms[typographyCssShorthand].transform({ value }, platformConfig, {});
 
       it('transforms typography object to typography shorthand', () => {
         expect(
@@ -1226,9 +1253,9 @@ describe('common', () => {
     });
 
     // https://design-tokens.github.io/community-group/format/#border
-    describe('border/css/shorthand', () => {
+    describe(borderCssShorthand, () => {
       const borderTransform = (value) =>
-        transforms['border/css/shorthand'].transform({ value, type: 'border' }, {}, {});
+        transforms[borderCssShorthand].transform({ value, type: 'border' }, {}, {});
 
       it('transforms border object to border shorthand', () => {
         expect(
@@ -1259,9 +1286,9 @@ describe('common', () => {
       });
     });
 
-    describe('strokeStyle/css/shorthand', () => {
+    describe(strokeStyleCssShorthand, () => {
       const strokeTransform = (value, platformConfig = {}) =>
-        transforms['strokeStyle/css/shorthand'].transform({ value }, platformConfig, {});
+        transforms[strokeStyleCssShorthand].transform({ value }, platformConfig, {});
 
       it('transforms strokeStyle object value to strokeStyle CSS fallback string value', () => {
         expect(
@@ -1275,9 +1302,9 @@ describe('common', () => {
       });
     });
 
-    describe('transition/css/shorthand', () => {
+    describe(transitionCssShorthand, () => {
       const transitionTransform = (value, platformConfig = {}) =>
-        transforms['transition/css/shorthand'].transform({ value }, platformConfig, {});
+        transforms[transitionCssShorthand].transform({ value }, platformConfig, {});
 
       it('transforms transition object value to transition CSS shorthand string value', () => {
         expect(
@@ -1300,9 +1327,9 @@ describe('common', () => {
       });
     });
 
-    describe('shadow/css/shorthand', () => {
+    describe(shadowCssShorthand, () => {
       const shadowTransform = (value, platformConfig = {}) =>
-        transforms['shadow/css/shorthand'].transform({ value }, platformConfig, {});
+        transforms[transformNames.shadowCssShorthand].transform({ value }, platformConfig, {});
 
       it('transforms shadow object value to shadow CSS shorthand string value', () => {
         expect(
@@ -1381,9 +1408,9 @@ describe('common', () => {
     // FIXME: find a browser/node cross compatible way to transform local path
     // current implementation incorrectly uses process.cwd() rather than using
     // the filePath of the token to determine where the asset is located relative to the token that refers to it
-    describe.skip('asset/path', () => {
+    describe.skip(assetPath, () => {
       it('should work', () => {
-        const value = transforms['asset/path'].transform(
+        const value = transforms[transformNames.assetPath].transform(
           {
             value: 'foo.json',
           },

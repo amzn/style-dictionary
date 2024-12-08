@@ -8,31 +8,32 @@ sidebar:
 
 Create a new StyleDictionary instance.
 
-| Param               | Type                                              | Description                                                                                                                                                                      |
-| ------------------- | ------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `config`            | [`Config`](/reference/config)                     | Configuration options to build your style dictionary. If you pass a string, it will be used as a path to a JSON config file. You can also pass an object with the configuration. |
-| `options`           | `Object`                                          | Options object when creating a new StyleDictionary instance.                                                                                                                     |
-| `options.init`      | `boolean`                                         | `true` by default but can be disabled to delay initializing the dictionary. You can then call `sdInstance.init()` yourself, e.g. for testing or error handling purposes.         |
-| `options.verbosity` | `'silent'\|'default'\|'verbose'`                  | Verbosity of logs, overrides `log.verbosity` set in SD config or platform config.                                                                                                |
-| `options.warnings`  | `'error'\|'warn'\|'disabled'`                     | Whether to throw warnings as errors, warn or disable warnings, overrides `log.verbosity` set in SD config or platform config.                                                    |
-| `options.volume`    | `import('memfs').IFs \| typeof import('node:fs')` | FileSystem Volume to use as an alternative to the default FileSystem, handy if you need to isolate or "containerise" StyleDictionary files                                       |
+| Param               | Type                                              | Description                                                                                                                                                                                                                                             |
+| ------------------- | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `config`            | [`Config`](/reference/config)                     | Configuration options to build your style dictionary. If you pass a string, it will be used as a path to a JSON config file. You can also pass an object with the configuration.                                                                        |
+| `options`           | `Object`                                          | Options object when creating a new StyleDictionary instance.                                                                                                                                                                                            |
+| `options.init`      | `boolean`                                         | `true` by default but can be disabled to delay initializing the dictionary. You can then call `sdInstance.init()` yourself, e.g. for testing or error handling purposes.                                                                                |
+| `options.verbosity` | `'silent'\|'default'\|'verbose'`                  | Verbosity of logs, overrides `log.verbosity` set in SD config or platform config. There is an [enum-like JS object](/reference/enums#log-verbosity-levels) `logVerbosityLevels` available, that you can import.                                         |
+| `options.warnings`  | `'error'\|'warn'\|'disabled'`                     | Whether to throw warnings as errors, warn or disable warnings, overrides `log.verbosity` set in SD config or platform config. There is an [enum-like JS object](/reference/enums#log-warning-levels) `logWarningLevels` available, that you can import. |
+| `options.volume`    | `import('memfs').IFs \| typeof import('node:fs')` | FileSystem Volume to use as an alternative to the default FileSystem, handy if you need to isolate or "containerise" StyleDictionary files                                                                                                              |
 
 Example:
 
 ```js title="build-tokens.js"
 import StyleDictionary from 'style-dictionary';
+import { formats, transformGroups } from 'style-dictionary/enums';
 
 const sd = new StyleDictionary('config.json');
 const sdTwo = new StyleDictionary({
   source: ['tokens/*.json'],
   platforms: {
     scss: {
-      transformGroup: 'scss',
+      transformGroup: transformGroups.scss,
       buildPath: 'build/',
       files: [
         {
           destination: 'variables.scss',
-          format: 'scss/variables',
+          format: formats.scssVariables,
         },
       ],
     },
@@ -48,10 +49,10 @@ import { Volume } from 'memfs';
 // You will need a bundler like webpack/rollup for memfs in browser...
 // Or use as a prebundled fork:
 import memfs from '@bundled-es-modules/memfs';
+import { formats, transformGroups } from 'style-dictionary/enums';
+
 const { Volume } = memfs;
-
 const vol = new Volume();
-
 const sd = new StyleDictionary(
   {
     tokens: {
@@ -64,11 +65,11 @@ const sd = new StyleDictionary(
     },
     platforms: {
       css: {
-        transformGroup: 'css',
+        transformGroup: transformGroups.css,
         files: [
           {
             destination: 'variables.css',
-            format: 'css/variables',
+            format: formats.cssVariables,
           },
         ],
       },
@@ -78,7 +79,6 @@ const sd = new StyleDictionary(
 );
 
 await sd.buildAllPlatforms();
-
 vol.readFileSync('/variables.css');
 /**
  * :root {
@@ -98,11 +98,11 @@ type init = (config: Config) ⇒ Promise<SDInstance>
 Called automatically when doing `new StyleDictionary(config)` unless passing a second argument with `init` property set to `false`.
 In this scenario, you can call `.init()` manually, e.g. for testing or error handling purposes.
 
-| Param                  | Type                             | Description                                                                                                                   |
-| ---------------------- | -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| `initConfig`           | `Object`                         | Init configuration options.                                                                                                   |
-| `initConfig.verbosity` | `'silent'\|'default'\|'verbose'` | Verbosity of logs, overrides `log.verbosity` set in SD config or platform config.                                             |
-| `initConfig.warnings`  | `'error'\|'warn'\|'disabled'`    | Whether to throw warnings as errors, warn or disable warnings, overrides `log.verbosity` set in SD config or platform config. |
+| Param                  | Type                             | Description                                                                                                                                                                                                                                            |
+| ---------------------- | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `initConfig`           | `Object`                         | Init configuration options.                                                                                                                                                                                                                            |
+| `initConfig.verbosity` | `'silent'\|'default'\|'verbose'` | Verbosity of logs, overrides `log.verbosity` set in SD config or platform config. There is an [enum-like JS object](/reference/enums#log-verbosity-levels) `logVerbosityLevels` available, that you can import.                                        |
+| `initConfig.warnings`  | `'error'\|'warn'\|'disabled'`    | Whether to throw warnings as errors, warn or disable warnings, overrides `log.verbosity` set in SD config or platform config.There is an [enum-like JS object](/reference/enums#log-warning-levels) `logWarningLevels` available, that you can import. |
 
 ---
 
@@ -114,19 +114,20 @@ type extend = (config: Config | string, options: Options) ⇒ Promise<SDInstance
 
 Extend a Style Dictionary instance with a config object, to create an extension instance.
 
-| Param                    | Type                                              | Description                                                                                                                                                                                                                   |
-| ------------------------ | ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `config`                 | [`Config`](/reference/config)                     | Configuration options to build your style dictionary. If you pass a string, it will be used as a path to a JSON config file. You can also pass an object with the configuration.                                              |
-| `options`                | `Object`                                          |                                                                                                                                                                                                                               |
-| `options.verbosity`      | `'silent'\|'default'\|'verbose'`                  | Verbosity of logs, overrides `log.verbosity` set in SD config or platform config.                                                                                                                                             |
-| `options.warnings`       | `'error'\|'warn'\|'disabled'`                     | Whether to throw warnings as errors, warn or disable warnings, overrides `log.verbosity` set in SD config or platform config.                                                                                                 |
-| `options.volume`         | `import('memfs').IFs \| typeof import('node:fs')` | Pass a custom Volume to use instead of filesystem shim itself. Only possible in browser or in Node if you're explicitly using `memfs` as filesystem shim (by calling `setFs()` function and setting it to the `memfs` module) |
-| `options.mutateOriginal` | `boolean`                                         | Private option, do not use                                                                                                                                                                                                    |
+| Param                    | Type                                              | Description                                                                                                                                                                                                                                             |
+| ------------------------ | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `config`                 | [`Config`](/reference/config)                     | Configuration options to build your style dictionary. If you pass a string, it will be used as a path to a JSON config file. You can also pass an object with the configuration.                                                                        |
+| `options`                | `Object`                                          |                                                                                                                                                                                                                                                         |
+| `options.verbosity`      | `'silent'\|'default'\|'verbose'`                  | Verbosity of logs, overrides `log.verbosity` set in SD config or platform config. There is an [enum-like JS object](/reference/enums#log-verbosity-levels) `logVerbosityLevels` available, that you can import.                                         |
+| `options.warnings`       | `'error'\|'warn'\|'disabled'`                     | Whether to throw warnings as errors, warn or disable warnings, overrides `log.verbosity` set in SD config or platform config. There is an [enum-like JS object](/reference/enums#log-warning-levels) `logWarningLevels` available, that you can import. |
+| `options.volume`         | `import('memfs').IFs \| typeof import('node:fs')` | Pass a custom Volume to use instead of filesystem shim itself. Only possible in browser or in Node if you're explicitly using `memfs` as filesystem shim (by calling `setFs()` function and setting it to the `memfs` module)                           |
+| `options.mutateOriginal` | `boolean`                                         | Private option, do not use                                                                                                                                                                                                                              |
 
 Example:
 
 ```js title="build-tokens.js"
 import StyleDictionary from 'style-dictionary';
+import { formats, transformGroups } from 'style-dictionary/enums';
 
 const sd = new StyleDictionary('config.json');
 
@@ -134,12 +135,12 @@ const sdExtended = await sd.extend({
   source: ['tokens/*.json'],
   platforms: {
     scss: {
-      transformGroup: 'scss',
+      transformGroup: transformGroups.scss,
       buildPath: 'build/',
       files: [
         {
           destination: 'variables.scss',
-          format: 'scss/variables',
+          format: formats.scssVariables,
         },
       ],
     },
@@ -421,7 +422,7 @@ Example:
 
 ```js
 StyleDictionary.registerAction({
-  name: 'copy_assets',
+  name: actions.copyAssets,
   do: async function (dictionary, config) {
     console.log('Copying assets directory');
     await fs.promises.copy('assets', config.buildPath + 'assets');
@@ -501,8 +502,10 @@ Add a custom [format](/reference/hooks/formats) to the Style Dictionary.
 Example:
 
 ```js
+import { formats } from 'style-dictionary/enums';
+
 StyleDictionary.registerFormat({
-  name: 'json',
+  name: formats.json,
   format: function ({ dictionary, platform, options, file }) {
     return JSON.stringify(dictionary.tokens, null, 2);
   },
@@ -582,9 +585,11 @@ Transforms can manipulate a token's name, value, or attributes.
 Example:
 
 ```js
+import { transforms, transformTypes } from 'style-dictionary/enums';
+
 StyleDictionary.registerTransform({
-  name: 'time/seconds',
-  type: 'value',
+  name: transforms.timeSeconds,
+  type: transformTypes.value,
   filter: function (token) {
     return token.type === 'time';
   },
@@ -615,9 +620,11 @@ group of transforms.
 Example:
 
 ```js
+import { transforms } from 'style-dictionary/enums';
+
 StyleDictionary.registerTransformGroup({
   name: 'Swift',
-  transforms: ['attribute/cti', 'size/pt', 'name'],
+  transforms: [transforms.attributeCti, 'size/pt', 'name'],
 });
 ```
 
