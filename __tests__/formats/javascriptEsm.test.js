@@ -96,8 +96,6 @@ describe('formats', () => {
             file,
             platform: {},
           }),
-          {},
-          file,
         ),
       ).to.matchSnapshot();
     });
@@ -113,8 +111,6 @@ describe('formats', () => {
               stripMeta: true,
             },
           }),
-          {},
-          file,
         ),
       ).to.matchSnapshot();
     });
@@ -132,8 +128,6 @@ describe('formats', () => {
               },
             },
           }),
-          {},
-          file,
         ),
       ).to.matchSnapshot();
     });
@@ -151,8 +145,6 @@ describe('formats', () => {
               },
             },
           }),
-          {},
-          file,
         ),
       ).to.matchSnapshot();
     });
@@ -172,8 +164,6 @@ describe('formats', () => {
               stripMeta: true,
             },
           }),
-          {},
-          file,
         ),
       ).to.matchSnapshot();
     });
