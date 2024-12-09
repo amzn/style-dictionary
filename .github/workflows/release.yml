@@ -29,7 +29,7 @@ jobs:
           publish: npm run release
           commit: 'chore: release'
           # to ensure the lock file also gets bumped accordingly and added to the commit
-          version: 'npx changeset version && npm install'
+          version: 'npm run version'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
