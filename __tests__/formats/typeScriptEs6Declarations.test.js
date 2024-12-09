@@ -39,18 +39,44 @@ const tokens = {
   },
 };
 
+const DTCGTokens = {
+  color: {
+    red: {
+      $description: 'Used for errors',
+      $type: 'color',
+      $value: '#FF0000',
+      name: 'colorRed',
+    },
+  },
+  font: {
+    family: {
+      $type: 'fontFamily',
+      $value: '"Source Sans Pro", Arial, sans-serif',
+      name: 'fontFamily',
+    },
+  },
+};
+
 const format = formats[typescriptEs6Declarations];
 
 describe('formats', () => {
   describe(typescriptEs6Declarations, () => {
+    const formatArgs = (usesDtcg, customFile) =>
+      createFormatArgs({
+        dictionary: {
+          tokens: usesDtcg ? DTCGTokens : tokens,
+          allTokens: convertTokenData(usesDtcg ? DTCGTokens : tokens, {
+            output: 'array',
+            usesDtcg,
+          }),
+        },
+        file: customFile ?? file,
+        platform: {},
+        options: { usesDtcg },
+      });
+
     it('should be a valid TS file', async () => {
-      const output = await format(
-        createFormatArgs({
-          dictionary: { tokens, allTokens: convertTokenData(tokens, { output: 'array' }) },
-          file,
-          platform: {},
-        }),
-      );
+      const output = await format(formatArgs(false));
 
       // get all lines that begin with export
       const lines = output.split('\n').filter((l) => l.indexOf('export') >= 0);
@@ -61,6 +87,18 @@ describe('formats', () => {
       });
     });
 
+    it('without outputStringLiterals should match snapshot', async () => {
+      const customFile = {
+        ...file,
+        options: {
+          outputStringLiterals: false,
+        },
+      };
+      const output = await format(formatArgs(false, customFile));
+
+      await expect(output).to.matchSnapshot();
+    });
+
     it('with outputStringLiterals should match snapshot', async () => {
       const customFile = {
         ...file,
@@ -68,14 +106,31 @@ describe('formats', () => {
           outputStringLiterals: true,
         },
       };
+      const output = await format(formatArgs(false, customFile));
 
-      const output = await format(
-        createFormatArgs({
-          dictionary: { tokens, allTokens: convertTokenData(tokens, { output: 'array' }) },
-          file: customFile,
-          platform: {},
-        }),
-      );
+      await expect(output).to.matchSnapshot();
+    });
+
+    it('with DTCG tokens and outputStringLiterals should match snapshot', async () => {
+      const customFile = {
+        ...file,
+        options: {
+          outputStringLiterals: true,
+        },
+      };
+      const output = await format(formatArgs(true, customFile));
+
+      await expect(output).to.matchSnapshot();
+    });
+
+    it('with DTCG tokens and without outputStringLiterals should match snapshot', async () => {
+      const customFile = {
+        ...file,
+        options: {
+          outputStringLiterals: false,
+        },
+      };
+      const output = await format(formatArgs(true, customFile));
 
       await expect(output).to.matchSnapshot();
     });
