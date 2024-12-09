@@ -14,10 +14,13 @@ import { expect } from 'chai';
 import formats from '../../lib/common/formats.js';
 import createFormatArgs from '../../lib/utils/createFormatArgs.js';
 import { convertTokenData } from '../../lib/utils/convertTokenData.js';
+import { formats as fileFormats } from '../../lib/enums/index.js';
+
+const { javascriptEs6 } = fileFormats;
 
 const file = {
   destination: '__output/',
-  format: 'javascript/es6',
+  format: javascriptEs6,
   filter: {
     type: 'color',
   },
@@ -36,10 +39,10 @@ const tokens = {
   },
 };
 
-const format = formats['javascript/es6'];
+const format = formats[javascriptEs6];
 
 describe('formats', () => {
-  describe('javascript/es6', () => {
+  describe(javascriptEs6, () => {
     it('should be a valid JS file and match snapshot', async () => {
       await expect(
         await format(

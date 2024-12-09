@@ -14,10 +14,13 @@ import { expect } from 'chai';
 import formats from '../../lib/common/formats.js';
 import createFormatArgs from '../../lib/utils/createFormatArgs.js';
 import { convertTokenData } from '../../lib/utils/convertTokenData.js';
+import { formats as fileFormats } from '../../lib/enums/index.js';
+
+const { javascriptObject } = fileFormats;
 
 const file = {
   destination: '__output/',
-  format: 'javascript/object',
+  format: javascriptObject,
   options: { name: 'foo' },
 };
 
@@ -27,10 +30,10 @@ const tokens = {
   },
 };
 
-const format = formats['javascript/object'];
+const format = formats[javascriptObject];
 
 describe('formats', () => {
-  describe('javascript/object', () => {
+  describe(javascriptObject, () => {
     it('should be valid JS syntax and match snapshot', async () => {
       await expect(
         await format(

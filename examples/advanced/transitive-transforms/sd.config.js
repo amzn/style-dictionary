@@ -1,12 +1,15 @@
 import StyleDictionary from 'style-dictionary';
 import { usesReferences } from 'style-dictionary/utils';
+import { formats, transforms } from 'style-dictionary/enums';
 import Color from 'colorjs.io';
+
+const { attributeCti, colorCss, nameKebab } = transforms;
 
 const colorTransform = (token) => {
   const { value, modify = [] } = token;
 
   // This assumes "hex" format, if you want to support { h, s, l } format you have to do
-  // `new Color('hsl', [value.h, value.s, value.l]);`
+  // 'new Color('hsl', [value.h, value.s, value.l]);'
   const color = new Color(value);
 
   // defer until reference is resolved
@@ -42,14 +45,14 @@ const colorTransform = (token) => {
 export default {
   // This will match any files ending in json or json5
   // I am using json5 here so I can add comments in the token files for reference
-  source: [`tokens/**/*.@(json|json5)`],
+  source: ['tokens/**/*.@(json|json5)'],
 
   // I am directly defining transforms here
   // This would work if you were to call StyleDictionary.registerTransform() as well
   hooks: {
     transforms: {
       colorTransform: {
-        type: `value`,
+        type: 'value',
         // only transforms that have transitive: true will be applied to tokens
         // that alias/reference other tokens
         transitive: true,
@@ -59,8 +62,8 @@ export default {
 
       // For backwards compatibility, all built-in transforms are not transitive
       // by default. This will make the 'color/css' transform transitive
-      'color/css': {
-        ...StyleDictionary.hooks.transforms[`color/css`],
+      [colorCss]: {
+        ...StyleDictionary.hooks.transforms[colorCss],
         transitive: true,
       },
     },
@@ -68,12 +71,12 @@ export default {
 
   platforms: {
     css: {
-      transforms: [`attribute/cti`, `name/kebab`, `colorTransform`, `color/css`],
-      buildPath: `build/`,
+      transforms: [attributeCti, nameKebab, 'colorTransform', colorCss],
+      buildPath: 'build/',
       files: [
         {
-          destination: `variables.css`,
-          format: `css/variables`,
+          destination: 'variables.css',
+          format: formats.cssVariables,
         },
       ],
     },

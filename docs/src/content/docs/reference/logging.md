@@ -7,13 +7,19 @@ sidebar:
 You can customize the logging behavior of Style Dictionary.
 
 ```js
+import {
+  logBrokenReferenceLevels,
+  logVerbosityLevels,
+  logWarningLevels,
+} from 'style-dictionary/enums';
+
 const sd = new StyleDictionary({
   // these are the defaults
   log: {
-    warnings: 'warn', // 'warn' | 'error' | 'disabled'
-    verbosity: 'default', // 'default' | 'silent' | 'verbose'
+    warnings: logWarningLevels.warn, // 'warn' | 'error' | 'disabled'
+    verbosity: logVerbosityLevels.default, // 'default' | 'silent' | 'verbose'
     errors: {
-      brokenReferences: 'throw', // 'throw' | 'console'
+      brokenReferences: logBrokenReferenceLevels.throw, // 'throw' | 'console'
     },
   },
 });
@@ -21,13 +27,13 @@ const sd = new StyleDictionary({
 
 > `log` can also be set on platform specific configuration
 
-| Param                         | Type                                | Description                                                                                                                                                          |
-| ----------------------------- | ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `log`                         | `Object`                            |                                                                                                                                                                      |
-| `log.warnings`                | `'warn' \| 'error' \| 'disabled'`   | Whether warnings should be logged as warnings, thrown as errors or disabled entirely. Defaults to 'warn'                                                             |
-| `log.verbosity`               | `'default' \|'silent' \| 'verbose'` | How verbose logs should be, default value is 'default'. 'silent' means no logs at all apart from fatal errors. 'verbose' means detailed error messages for debugging |
-| `log.errors`                  | `Object`                            | How verbose logs should be, default value is 'default'. 'silent' means no logs at all apart from fatal errors. 'verbose' means detailed error messages for debugging |
-| `log.errors.brokenReferences` | `'throw' \| 'console'`              | Whether broken references in tokens should throw a fatal error or only a `console.error` without exiting the process.                                                |
+| Param                         | Type                                | Description                                                                                                                                                                                                                                                                                         |
+| ----------------------------- | ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `log`                         | `Object`                            |                                                                                                                                                                                                                                                                                                     |
+| `log.warnings`                | `'warn' \| 'error' \| 'disabled'`   | Whether warnings should be logged as warnings, thrown as errors or disabled entirely. Defaults to 'warn'. There is an [enum-like JS object](/reference/enums#log-warning-levels) `logWarningLevels` available, that you can import.                                                                 |
+| `log.verbosity`               | `'default' \|'silent' \| 'verbose'` | How verbose logs should be, default value is 'default'. 'silent' means no logs at all apart from fatal errors. 'verbose' means detailed error messages for debugging. There is an [enum-like JS object](/reference/enums#log-verbosity-levels) `logVerbosityLevels` available, that you can import. |
+| `log.errors`                  | `Object`                            | How verbose logs should be, default value is 'default'. 'silent' means no logs at all apart from fatal errors. 'verbose' means detailed error messages for debugging                                                                                                                                |
+| `log.errors.brokenReferences` | `'throw' \| 'console'`              | Whether broken references in tokens should throw a fatal error or only a `console.error` without exiting the process. There is an [enum-like JS object](/reference/enums#log-broken-reference-levels) `logBrokenReferenceLevels` available, that you can import.                                    |
 
 There are five types of warnings that will be thrown as errors instead of being logged as warnings when `log.warnings` is set to `error`:
 

@@ -15,6 +15,10 @@ import StyleDictionary from 'style-dictionary';
 import { fs } from 'style-dictionary/fs';
 import { clearOutput, fileExists } from './__helpers.js';
 import memfs from '@bundled-es-modules/memfs';
+import { formats, transformGroups } from '../lib/enums/index.js';
+
+const { cssVariables } = formats;
+const { css } = transformGroups;
 
 describe('buildAllPlatforms', () => {
   beforeEach(() => {
@@ -52,12 +56,12 @@ describe('buildAllPlatforms', () => {
         source: ['__tests__/__tokens/colors.json'],
         platforms: {
           web: {
-            transformGroup: 'css',
+            transformGroup: css,
             buildPath: '__tests__/__output/css/',
             files: [
               {
                 destination: 'vars1.css',
-                format: 'css/variables',
+                format: cssVariables,
               },
             ],
           },
@@ -79,12 +83,12 @@ describe('buildAllPlatforms', () => {
         source: ['__tests__/__tokens/colors.json'],
         platforms: {
           web: {
-            transformGroup: 'css',
+            transformGroup: css,
             buildPath: '__tests__/__output/css/',
             files: [
               {
                 destination: 'vars2.css',
-                format: 'css/variables',
+                format: cssVariables,
               },
             ],
           },

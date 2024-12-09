@@ -16,6 +16,9 @@ import { fs } from 'style-dictionary/fs';
 import { resolve } from '../lib/resolve.js';
 import { buildPath } from './_constants.js';
 import { clearOutput } from '../__tests__/__helpers.js';
+import { formats } from '../lib/enums/index.js';
+
+const { composeObject } = formats;
 
 describe('integration', async () => {
   before(async () => {
@@ -28,7 +31,7 @@ describe('integration', async () => {
           files: [
             {
               destination: 'StyleDictionary.kt',
-              format: 'compose/object',
+              format: composeObject,
               options: {
                 className: 'StyleDictionary',
                 packageName: 'com.example.tokens',
@@ -36,7 +39,7 @@ describe('integration', async () => {
             },
             {
               destination: 'StyleDictionaryWithReferences.kt',
-              format: 'compose/object',
+              format: composeObject,
               options: {
                 outputReferences: true,
                 className: 'StyleDictionary',

@@ -14,10 +14,13 @@ import { expect } from 'chai';
 import formats from '../../lib/common/formats.js';
 import createFormatArgs from '../../lib/utils/createFormatArgs.js';
 import { convertTokenData } from '../../lib/utils/convertTokenData.js';
+import { formats as fileFormats } from '../../lib/enums/index.js';
+
+const { typescriptEs6Declarations } = fileFormats;
 
 const file = {
   destination: '__output/',
-  format: 'typescript/es6-declarations',
+  format: typescriptEs6Declarations,
 };
 
 const tokens = {
@@ -36,10 +39,10 @@ const tokens = {
   },
 };
 
-const format = formats['typescript/es6-declarations'];
+const format = formats[typescriptEs6Declarations];
 
 describe('formats', () => {
-  describe('typescript/es6-declarations', () => {
+  describe(typescriptEs6Declarations, () => {
     it('should be a valid TS file', async () => {
       const output = await format(
         createFormatArgs({

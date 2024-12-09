@@ -14,10 +14,13 @@ import { expect } from 'chai';
 import formats from '../../lib/common/formats.js';
 import createFormatArgs from '../../lib/utils/createFormatArgs.js';
 import { convertTokenData } from '../../lib/utils/convertTokenData.js';
+import { formats as fileFormats } from '../../lib/enums/index.js';
+
+const { iosSwiftAnySwift } = fileFormats;
 
 const originalFile = {
   destination: '__output/',
-  format: 'ios-swift/any.swift',
+  format: iosSwiftAnySwift,
   options: {
     className: 'StyleDictionary',
   },
@@ -42,10 +45,10 @@ const tokens = {
   },
 };
 
-const format = formats['ios-swift/any.swift'];
+const format = formats[iosSwiftAnySwift];
 
 describe('formats', () => {
-  describe('ios-swift/any.swift', () => {
+  describe(iosSwiftAnySwift, () => {
     beforeEach(() => {
       file = structuredClone(originalFile);
     });

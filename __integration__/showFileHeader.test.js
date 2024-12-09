@@ -16,6 +16,10 @@ import { fs } from 'style-dictionary/fs';
 import { resolve } from '../lib/resolve.js';
 import { buildPath } from './_constants.js';
 import { clearOutput } from '../__tests__/__helpers.js';
+import { formats, transformGroups } from '../lib/enums/index.js';
+
+const { cssVariables } = formats;
+const { css } = transformGroups;
 
 describe('integration', async () => {
   before(async () => {
@@ -25,16 +29,16 @@ describe('integration', async () => {
       source: [`__integration__/tokens/size/padding.json`],
       platforms: {
         css: {
-          transformGroup: 'css',
+          transformGroup: css,
           buildPath,
           files: [
             {
               destination: 'platform-none-file-none.css',
-              format: 'css/variables',
+              format: cssVariables,
             },
             {
               destination: 'platform-none-file-false.css',
-              format: 'css/variables',
+              format: cssVariables,
               options: {
                 showFileHeader: false,
               },
@@ -42,7 +46,7 @@ describe('integration', async () => {
           ],
         },
         fileHeader: {
-          transformGroup: 'css',
+          transformGroup: css,
           buildPath,
           options: {
             showFileHeader: false,
@@ -50,11 +54,11 @@ describe('integration', async () => {
           files: [
             {
               destination: 'platform-false-file-none.css',
-              format: 'css/variables',
+              format: cssVariables,
             },
             {
               destination: 'platform-false-file-true.css',
-              format: 'css/variables',
+              format: cssVariables,
               options: {
                 showFileHeader: true,
               },

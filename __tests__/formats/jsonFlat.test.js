@@ -14,6 +14,7 @@ import { expect } from 'chai';
 import formats from '../../lib/common/formats.js';
 import createFormatArgs from '../../lib/utils/createFormatArgs.js';
 import { convertTokenData } from '../../lib/utils/convertTokenData.js';
+import { formats as fileFormats } from '../../lib/enums/index.js';
 
 const colorTokenName = 'color-base-red-400';
 const colorTokenValue = '#EF5350';
@@ -37,13 +38,13 @@ const colorTokens = {
 
 const file = {
   destination: '__output/',
-  format: 'json/flat',
+  format: fileFormats.jsonFlat,
 };
 
-const format = formats['json/flat'];
+const format = formats[fileFormats.jsonFlat];
 
 describe('formats', () => {
-  describe('json/flat', () => {
+  describe(fileFormats.jsonFlat, () => {
     it('should be a valid JSON file and match snapshot', async () => {
       await expect(
         format(

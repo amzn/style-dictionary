@@ -15,6 +15,7 @@ import { compileString } from 'sass';
 import formats from '../../lib/common/formats.js';
 import createFormatArgs from '../../lib/utils/createFormatArgs.js';
 import { convertTokenData } from '../../lib/utils/convertTokenData.js';
+import { commentStyles, commentPositions, formats as fileFormats } from '../../lib/enums/index.js';
 
 const tokens = {
   size: {
@@ -76,7 +77,7 @@ const tokens = {
 };
 
 describe('formats', () => {
-  for (const key of ['scss/map-flat', 'scss/map-deep']) {
+  for (const key of [fileFormats.scssMapFlat, fileFormats.scssMapDeep]) {
     describe(key, async () => {
       const file = {
         destination: '__output/',
@@ -115,8 +116,8 @@ describe('formats', () => {
             formatting: {
               fileHeaderTimestamp: true,
               indentation: '    ',
-              commentStyle: 'long',
-              commentPosition: 'above',
+              commentStyle: commentStyles.long,
+              commentPosition: commentPositions.above,
             },
           },
         };

@@ -14,10 +14,13 @@ import { expect } from 'chai';
 import formats from '../../lib/common/formats.js';
 import createFormatArgs from '../../lib/utils/createFormatArgs.js';
 import { convertTokenData } from '../../lib/utils/convertTokenData.js';
+import { formats as formatsEnum } from '../../lib/enums/formats.js';
+
+const { javascriptEsm } = formatsEnum;
 
 const file = {
   destination: '__output/',
-  format: 'javascript/esm',
+  format: javascriptEsm,
   filter: {
     type: 'color',
   },
@@ -81,10 +84,10 @@ const DTCGTokens = {
   },
 };
 
-const format = formats['javascript/esm'];
+const format = formats[javascriptEsm];
 
 describe('formats', () => {
-  describe('javascript/esm', () => {
+  describe(javascriptEsm, () => {
     it('should be a valid JS file and match snapshot', async () => {
       await expect(
         await format(

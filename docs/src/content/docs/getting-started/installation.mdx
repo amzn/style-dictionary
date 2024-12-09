@@ -320,17 +320,18 @@ The StyleDictionary constructor can also take a [configuration](/reference/confi
 
 ```javascript title="build-tokens.js"
 import StyleDictionary from 'style-dictionary';
+import { formats, transformGroups } from 'style-dictionary/enums';
 
 const sd = new StyleDictionary({
   source: ['tokens/**/*.json'],
   platforms: {
     scss: {
-      transformGroup: 'scss',
+      transformGroup: transformGroups.scss,
       buildPath: 'build/',
       files: [
         {
           destination: 'variables.scss',
-          format: 'scss/variables',
+          format: formats.scssVariables,
         },
       ],
     },

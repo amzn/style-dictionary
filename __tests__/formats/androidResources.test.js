@@ -14,6 +14,9 @@ import { expect } from 'chai';
 import formats from '../../lib/common/formats.js';
 import createFormatArgs from '../../lib/utils/createFormatArgs.js';
 import { convertTokenData } from '../../lib/utils/convertTokenData.js';
+import { formats as fileFormats } from '../../lib/enums/index.js';
+
+const { androidResources } = fileFormats;
 
 const tokens = {
   size: {
@@ -89,10 +92,10 @@ const customTokens = {
   },
 };
 
-const format = formats['android/resources'];
+const format = formats[androidResources];
 const file = {
   destination: '__output/',
-  format: 'android/resources',
+  format: androidResources,
 };
 
 describe('formats', () => {

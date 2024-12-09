@@ -11,6 +11,7 @@ They are accessible at `style-dictionary/utils` entrypoint, you can read more ab
 ```javascript
 import StyleDictionary from 'style-dictionary';
 import { fileHeader, formattedVariables } from 'style-dictionary/utils';
+import { propertyFormatNames } from 'style-dictionary/enums';
 
 StyleDictionary.registerFormat({
   name: 'myCustomFormat',
@@ -20,7 +21,11 @@ StyleDictionary.registerFormat({
     return (
       header +
       ':root {\n' +
-      formattedVariables({ format: 'css', dictionary, outputReferences }) +
+      formattedVariables({
+        format: propertyFormatNames.css,
+        dictionary,
+        outputReferences,
+      }) +
       '\n}\n'
     );
   },

@@ -14,6 +14,10 @@ import { expect } from 'chai';
 import StyleDictionary from 'style-dictionary';
 import { buildPath } from '../__integration__/_constants.js';
 import { clearOutput } from '../__tests__/__helpers.js';
+import { formats, transformGroups } from '../lib/enums/index.js';
+
+const { cssVariables } = formats;
+const { css } = transformGroups;
 
 /**
  * Utility to programmatically generate large sets of tokens
@@ -92,12 +96,12 @@ describe('cliBuildWithJsConfig', () => {
       },
       platforms: {
         css: {
-          transformGroup: 'css',
+          transformGroup: css,
           buildPath,
           files: [
             {
               destination: 'variables.css',
-              format: 'css/variables',
+              format: cssVariables,
             },
           ],
         },
@@ -128,12 +132,12 @@ describe('cliBuildWithJsConfig', () => {
       },
       platforms: {
         css: {
-          transformGroup: 'css',
+          transformGroup: css,
           buildPath,
           files: [
             {
               destination: 'variables.css',
-              format: 'css/variables',
+              format: cssVariables,
             },
           ],
         },

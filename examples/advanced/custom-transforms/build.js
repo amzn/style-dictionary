@@ -1,8 +1,11 @@
 import StyleDictionary from 'style-dictionary';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { transforms, transformGroups, transformTypes } from 'style-dictionary/enums';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+const { attributeCti, nameConstant, sizePx, colorCss, timeSeconds } = transforms;
+const { value: transformTypeValue, name } = transformTypes;
 
 console.log('Build started...');
 console.log('\n==============================================');
@@ -10,8 +13,8 @@ console.log('\n==============================================');
 // REGISTER THE CUSTOM TRANSFORMS
 
 StyleDictionary.registerTransform({
-  name: 'size/px', // notice: the name is an override of an existing predefined method (yes, you can do it)
-  type: 'value',
+  name: sizePx, // notice: the name is an override of an existing predefined method (yes, you can do it)
+  type: transformTypeValue,
   filter: function (token) {
     // this is an example of a possible filter (based on the "cti" values) to show how a "filter" works
     return token.type === 'fontSize' || token.type === 'dimension';
@@ -23,7 +26,7 @@ StyleDictionary.registerTransform({
 
 StyleDictionary.registerTransform({
   name: 'ratio/%',
-  type: 'value',
+  type: transformTypeValue,
   filter: function (token) {
     // here we are using a custom attribute, declared in the token, to match the values where apply the transform
     return token.type === 'ratio';
@@ -35,7 +38,7 @@ StyleDictionary.registerTransform({
 
 StyleDictionary.registerTransform({
   name: 'hexRGB/hexARGB',
-  type: 'value',
+  type: transformTypeValue,
   filter: function (token) {
     return token.type === 'color';
   },
@@ -47,7 +50,7 @@ StyleDictionary.registerTransform({
 
 StyleDictionary.registerTransform({
   name: 'unitless/sp',
-  type: 'value',
+  type: transformTypeValue,
   filter: function (token) {
     return token.type === 'fontSize';
   },
@@ -60,7 +63,7 @@ StyleDictionary.registerTransform({
 StyleDictionary.registerTransform({
   // this is a silly example, to show how you can apply transform to names
   name: 'name/squiggle',
-  type: 'name',
+  type: name,
   // notice: if you don't specify a filter, the transformation will be applied to all the tokens
   transform: function (token) {
     return token.path.join('~');
@@ -75,14 +78,14 @@ StyleDictionary.registerTransform({
 StyleDictionary.registerTransformGroup({
   name: 'custom/web',
   // notice: here the "size/px" transform is not the pre-defined one, but the custom one we have declared above
-  transforms: ['attribute/cti', 'name/constant', 'size/px', 'color/css', 'time/seconds', 'ratio/%'],
+  transforms: [attributeCti, nameConstant, sizePx, colorCss, timeSeconds, 'ratio/%'],
 });
 
 StyleDictionary.registerTransformGroup({
   name: 'custom/scss',
   // this is to show one possibility for adding a few transforms to a pre-defined group
   // (however, we suggest to use the previous approach, which is more explicit and clear)
-  transforms: StyleDictionary.transformGroup['scss'].concat(['size/px', 'ratio/%']),
+  transforms: StyleDictionary.transformGroup[transformGroups.scss].concat([sizePx, 'ratio/%']),
 });
 
 StyleDictionary.registerTransformGroup({
