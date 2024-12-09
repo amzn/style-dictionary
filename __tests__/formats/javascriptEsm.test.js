@@ -155,7 +155,7 @@ describe('formats', () => {
           createFormatArgs({
             dictionary: {
               tokens: DTCGTokens,
-              allTokens: convertTokenData(tokens, { output: 'array', usesDtcg: true }),
+              allTokens: convertTokenData(DTCGTokens, { output: 'array', usesDtcg: true }),
             },
             file,
             platform: {},
