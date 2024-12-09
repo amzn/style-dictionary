@@ -41,3 +41,16 @@ snapshots["formats android/resources with resourceMap override should match snap
 </resources>`;
 /* end snapshot formats android/resources with resourceMap override should match snapshot */
 
+snapshots["formats android/resources with type & textCase should match snapshot"] = 
+`<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Do not edit directly, this file was auto-generated.
+-->
+<resources>
+  <item name="headline-font" type="font">@font/comic_sans_bold</item>
+  <item name="copytext-font" type="font">@font/comic_sans</item>
+  <bool name="headline-text-eslintcase">true</bool>
+  <bool name="copytext-text-case">false</bool>
+</resources>`;
+/* end snapshot formats android/resources with type & textCase should match snapshot */
