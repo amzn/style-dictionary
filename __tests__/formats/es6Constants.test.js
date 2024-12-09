@@ -29,12 +29,29 @@ const file = {
 const tokens = {
   color: {
     red: {
+      comment: 'comment',
       name: 'red',
-      value: '#EF5350',
       original: {
         value: '#EF5350',
       },
-      path: ['color', 'base', 'red', '400'],
+      path: ['color', 'red'],
+      type: 'color',
+      value: '#EF5350',
+    },
+  },
+};
+
+const DTCGTokens = {
+  color: {
+    red: {
+      $description: 'comment',
+      name: 'red',
+      original: {
+        $value: '#EF5350',
+      },
+      path: ['color', 'red'],
+      $type: 'color',
+      $value: '#EF5350',
     },
   },
 };
@@ -43,18 +60,30 @@ const format = formats[javascriptEs6];
 
 describe('formats', () => {
   describe(javascriptEs6, () => {
-    it('should be a valid JS file and match snapshot', async () => {
-      await expect(
-        await format(
-          createFormatArgs({
-            dictionary: { tokens, allTokens: convertTokenData(tokens, { output: 'array' }) },
-            file,
-            platform: {},
+    const formatArgs = (usesDtcg) =>
+      createFormatArgs({
+        dictionary: {
+          tokens: usesDtcg ? DTCGTokens : tokens,
+          allTokens: convertTokenData(usesDtcg ? DTCGTokens : tokens, {
+            output: 'array',
+            usesDtcg,
           }),
-          {},
-          file,
-        ),
-      ).to.matchSnapshot();
+        },
+        file,
+        platform: {},
+        options: { usesDtcg },
+      });
+
+    it('should be a valid JS file and match snapshot', async () => {
+      const output = await format(formatArgs(false));
+
+      await expect(output).to.matchSnapshot();
+    });
+
+    it('should handle DTCG token format, be a valid JS file and matches snapshot', async () => {
+      const output = await format(formatArgs(true));
+
+      await expect(output).to.matchSnapshot();
     });
   });
 });
