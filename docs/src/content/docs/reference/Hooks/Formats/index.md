@@ -380,26 +380,37 @@ To take advantage of outputting references in your custom formats there are 2 he
 ```javascript title="build-tokens.js"
 StyleDictionary.registerFormat({
   name: `es6WithReferences`,
-  format: function ({ dictionary }) {
+  format: function ({ dictionary, options }) {
+    const { usesDtcg, outputReferences } = options;
     return dictionary.allTokens
       .map((token) => {
         let value = JSON.stringify(token.value);
-        // the `dictionary` object now has `usesReference()` and
-        // `getReferences()` methods. `usesReference()` will return true if
+        const originalValue = token.original.value;
+        // the `dictionary` object now has `usesReferences()` and
+        // `getReferences()` methods. `usesReferences()` will return true if
         // the value has a reference in it. `getReferences()` will return
         // an array of references to the whole tokens so that you can access their
         // names or any other attributes.
-        if (dictionary.usesReference(token.original.value)) {
-          // Note: make sure to use `token.original.value` because
+        const shouldOutputRef =
+          usesReferences(originalValue) &&
+          (typeof outputReferences === 'function'
+            ? outputReferences(token, { dictionary, usesDtcg })
+            : outputReferences);
+
+        if (shouldOutputRef) {
+          // Note: make sure to use `originalValue` because
           // `token.value` is already resolved at this point.
-          const refs = dictionary.getReferences(token.original.value);
+          const refs = dictionary.getReferences(originalValue);
+          let isEntirelyRef = refs.length === 1 && refs[0].value === value;
           refs.forEach((ref) => {
-            value = value.replace(ref.value, function () {
-              return `${ref.name}`;
-            });
+            // wrap in template literal ${} braces if the value is more than just entirely a reference
+            value = value.replace(ref.value, isEntirelyRef ? ref.name : `\${${ref.name}}`);
           });
         }
-        return `export const ${token.name} = ${value};`;
+        // if the value is not entirely a reference, we have to wrap in template literals
+        return `export const ${token.name} = ${
+          shouldOutputRef && !isEntirelyRef ? `\`${value}\`` : value
+        };`;
       })
       .join(`\n`);
   },
