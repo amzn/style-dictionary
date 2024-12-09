@@ -12,11 +12,14 @@
  */
 import { expect } from 'chai';
 import transformToken from '../../lib/transform/token.js';
+import { transformTypes } from '../../lib/enums/index.js';
+
+const { value: transformTypeValue, name, attribute } = transformTypes;
 
 const config = {
   transforms: [
     {
-      type: 'attribute',
+      type: attribute,
       transform: function () {
         return {
           foo: 'bar',
@@ -24,13 +27,13 @@ const config = {
       },
     },
     {
-      type: 'attribute',
+      type: attribute,
       transform: function () {
         return { bar: 'foo' };
       },
     },
     {
-      type: 'name',
+      type: name,
       filter: function (prop) {
         return prop.attributes.foo === 'bar';
       },
@@ -61,7 +64,7 @@ describe('transform', () => {
         {
           transforms: [
             {
-              type: 'value',
+              type: transformTypeValue,
               transitive: true,
               transform: () => {
                 return undefined;

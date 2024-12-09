@@ -1,17 +1,22 @@
 import StyleDictionary from 'style-dictionary';
+import { formats, transforms, transformGroups, transformTypes } from 'style-dictionary/enums';
+import tokens from './tokens.js';
 // Rather than have Style Dictionary handle the merging of token files,
 // you could use node module export/require to do it yourself. This will
 // allow you to not have to copy object namespaces like you normally would.
 // Take a look at any of the .js files in components/ or tokens/
-import tokens from './tokens.js';
 
+const { cssVariables, scssVariables, javascriptEs6, json } = formats;
+const { css, js } = transformGroups;
+const { attributeCti, colorHex, colorRgb } = transforms;
+const { value: transformTypeValue, name } = transformTypes;
 const buildPath = 'build/';
 
 // You can still add custom transforms and formats like you
 // normally would and reference them in the config below.
 StyleDictionary.registerTransform({
   name: 'myRegisteredTransform',
-  type: 'value',
+  type: transformTypeValue,
   filter: (token) => token.attributes.category === 'size',
   transform: (token) => `${parseInt(token.value) * 16}px`,
 });
@@ -39,7 +44,7 @@ export default {
     transforms: {
       // Now we can use the transform 'myTransform' below
       myTransform: {
-        type: 'name',
+        type: name,
         transform: (token) => token.path.join('_').toUpperCase(),
       },
     },
@@ -58,7 +63,7 @@ export default {
   platforms: {
     custom: {
       // Using the custom transforms we defined above
-      transforms: ['attribute/cti', 'myTransform', 'myRegisteredTransform', 'color/hex'],
+      transforms: [attributeCti, 'myTransform', 'myRegisteredTransform', colorHex],
       buildPath: buildPath,
       files: [
         {
@@ -70,30 +75,30 @@ export default {
     },
 
     css: {
-      transformGroup: 'css',
+      transformGroup: css,
       buildPath: buildPath,
       files: [
         {
           destination: 'variables.css',
-          format: 'css/variables',
+          format: cssVariables,
         },
       ],
     },
 
     scss: {
       // This works, we can create new transform arrays on the fly and edit built-ins
-      transforms: StyleDictionary.hooks.transformGroups.scss.concat('color/rgb'),
+      transforms: StyleDictionary.hooks.scss.concat(colorRgb),
       buildPath: buildPath,
       files: [
         {
           destination: 'variables.scss',
-          format: 'scss/variables',
+          format: scssVariables,
         },
       ],
     },
 
     js: {
-      transforms: StyleDictionary.hooks.transformGroups.js.concat('myRegisteredTransform'),
+      transforms: StyleDictionary.hooks.js.concat('myRegisteredTransform'),
       buildPath: buildPath,
       // If you want to get super fancy, you can use node modules
       // to create a tokens object first, and then you can
@@ -101,7 +106,7 @@ export default {
       // output 1 file per color namespace.
       files: Object.keys(tokens.color).map((colorType) => ({
         destination: `${colorType}.js`,
-        format: 'javascript/es6',
+        format: javascriptEs6,
         // Filters can be functions that return a boolean
         filter: (token) => token.attributes.type === colorType,
       })),
@@ -109,12 +114,12 @@ export default {
 
     // You can still use built-in transformGroups and formats like before
     json: {
-      transformGroup: 'js',
+      transformGroup: js,
       buildPath: buildPath,
       files: [
         {
           destination: 'tokens.json',
-          format: 'json',
+          format: json,
         },
       ],
     },

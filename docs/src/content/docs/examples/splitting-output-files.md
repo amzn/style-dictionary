@@ -258,11 +258,15 @@ The trick is to dynamically generate the files array, generate one for each outp
 ```
 
 ```js config
+import { formats, transformGroups } from 'style-dictionary/enums';
+
+const { cssVariables } = formats;
+
 function generateComponentFiles(components) {
   return components.map((comp) => ({
     // output the component tokens in the right folder and file e.g. components/button/button-vars.css
     destination: `components/${comp}/${comp}-vars.css`,
-    format: 'css/variables',
+    format: cssVariables,
     // only include the tokens that are inside this component token group
     filter: (token) => token.path[0] === comp,
   }));
@@ -272,11 +276,11 @@ export default {
   source: ['tokens.json'],
   platforms: {
     css: {
-      transformGroup: 'css',
+      transformGroup: transformGroups.css,
       files: [
         {
           destination: 'global.css',
-          format: 'css/variables',
+          format: cssVariables,
           // filter only the tokens that are inside the global object
           filter: (token) => token.path[0] === 'global',
         },

@@ -13,9 +13,13 @@
 import { expect } from 'chai';
 import StyleDictionary from 'style-dictionary';
 import { fileToJSON, clearOutput, fileExists } from './__helpers.js';
+import { formats, transforms, transformGroups } from '../lib/enums/index.js';
 
 const config = fileToJSON('__tests__/__configs/test.json');
 const StyleDictionaryExtended = new StyleDictionary(config);
+const { cssVariables, json } = formats;
+const { scss } = transformGroups;
+const { attributeCti, sizePx, colorHex } = transforms;
 
 describe('buildPlatform', () => {
   beforeEach(() => {
@@ -70,11 +74,11 @@ describe('buildPlatform', () => {
       platforms: {
         test: {
           buildPath: '__tests__/__output/',
-          transforms: ['attribute/cti', 'size/px', 'color/hex'],
+          transforms: [attributeCti, sizePx, colorHex],
           files: [
             {
               destination: 'output.json',
-              format: 'json',
+              format: json,
             },
           ],
         },
@@ -104,11 +108,11 @@ describe('buildPlatform', () => {
       platforms: {
         test: {
           buildPath: '__tests__/__output/',
-          transformGroup: 'scss',
+          transformGroup: scss,
           files: [
             {
               destination: 'output.json',
-              format: 'json',
+              format: json,
             },
           ],
         },
@@ -129,11 +133,11 @@ describe('buildPlatform', () => {
       platforms: {
         test: {
           buildPath: '__tests__/__output/',
-          transformGroup: 'scss',
+          transformGroup: scss,
           files: [
             {
               destination: 'output.json',
-              format: 'json',
+              format: json,
             },
           ],
         },
@@ -155,7 +159,7 @@ describe('buildPlatform', () => {
           files: [
             {
               destination: '__tests__/__output/test.css',
-              format: 'css/variables',
+              format: cssVariables,
             },
           ],
         },

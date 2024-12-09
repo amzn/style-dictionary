@@ -15,10 +15,13 @@ import formats from '../../lib/common/formats.js';
 import createFormatArgs from '../../lib/utils/createFormatArgs.js';
 import { convertTokenData } from '../../lib/utils/convertTokenData.js';
 import { isNode } from '../../lib/utils/isNode.js';
+import { formats as fileFormats } from '../../lib/enums/index.js';
+
+const { lessVariables } = fileFormats;
 
 const file = {
   destination: '__output/',
-  format: 'less/variables',
+  format: lessVariables,
   name: 'foo',
 };
 
@@ -42,10 +45,10 @@ const tokens = {
   },
 };
 
-const format = formats['less/variables'];
+const format = formats[lessVariables];
 
 describe('formats', () => {
-  describe('less/variables', () => {
+  describe(lessVariables, () => {
     it('should have a valid less syntax and match snapshot', async () => {
       const result = await format(
         createFormatArgs({

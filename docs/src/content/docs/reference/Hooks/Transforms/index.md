@@ -108,7 +108,7 @@ import { usesReferences } from 'style-dictionary/utils';
 
 StyleDictionary.registerTransform({
   name: '',
-  type: 'value',
+  type: transformTypes.value,
   transitive: true,
   transform: (token) => {
     const darkenModifier = token.darken;

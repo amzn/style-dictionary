@@ -14,10 +14,13 @@ import { expect } from 'chai';
 import formats from '../../lib/common/formats.js';
 import createFormatArgs from '../../lib/utils/createFormatArgs.js';
 import { convertTokenData } from '../../lib/utils/convertTokenData.js';
+import { formats as fileFormats } from '../../lib/enums/index.js';
+
+const { javascriptModuleFlat } = fileFormats;
 
 const file = {
   destination: '__output/',
-  format: 'javascript/module-flat',
+  format: javascriptModuleFlat,
 };
 const tokens = {
   color: {
@@ -32,10 +35,10 @@ const tokens = {
   },
 };
 
-const format = formats['javascript/module-flat'];
+const format = formats[javascriptModuleFlat];
 
 describe('formats', () => {
-  describe('javascript/module-flat', () => {
+  describe(javascriptModuleFlat, () => {
     it('should be a valid JS file and match snapshot', async () => {
       await expect(
         await format(

@@ -1,4 +1,5 @@
 import StyleDictionary from 'style-dictionary';
+import { formats, transformGroups } from 'style-dictionary/enums';
 
 // You can use the .registerParser() method like this
 StyleDictionary.registerParser({
@@ -50,12 +51,12 @@ export default {
   source: [`tokens/**/*.json`],
   platforms: {
     css: {
-      transformGroup: 'css',
+      transformGroup: transformGroups.css,
       buildPath: 'build/',
       files: [
         {
           destination: 'variables.css',
-          format: 'css/variables',
+          format: formats.cssVariables,
         },
       ],
     },

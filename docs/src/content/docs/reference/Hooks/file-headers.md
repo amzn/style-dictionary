@@ -117,6 +117,8 @@ or platform-specific:
 ~ sd-playground
 
 ```js config
+import { transformGroups } from 'style-dictionary/enums';
+
 export default {
   hooks: {
     fileHeaders: {
@@ -129,13 +131,13 @@ export default {
   },
   platforms: {
     css: {
-      transformGroup: 'css',
+      transformGroup: transformGroups.css,
       options: {
         fileHeader: 'my-file-header',
       },
       files: [
         {
-          format: 'css/variables',
+          format: formats.cssVariables,
           destination: '_variables.css',
         },
       ],

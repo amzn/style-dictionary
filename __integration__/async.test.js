@@ -17,11 +17,12 @@ import { fs } from 'style-dictionary/fs';
 import { resolve } from '../lib/resolve.js';
 import { buildPath } from './_constants.js';
 import { clearOutput } from '../__tests__/__helpers.js';
+import { transforms, propertyFormatNames, transformTypes } from '../lib/enums/index.js';
 
 const sleep = async (time) => {
   await new Promise((resolve) => setTimeout(resolve, time));
 };
-
+const { attributeCti, nameKebab, timeSeconds, htmlIcon, sizeRem, colorCss } = transforms;
 const textFile = resolve(`${buildPath}text.txt`);
 
 // Tests all hooks async, into a single config
@@ -58,7 +59,7 @@ describe('integration', async function () {
 
     SDExtension.registerTransform({
       name: 'foo-value-transform',
-      type: 'value',
+      type: transformTypes.value,
       filter: (token) => token.value === 'foo',
       transform: async () => {
         await sleep(10);
@@ -74,7 +75,11 @@ describe('integration', async function () {
         return (
           (await fileHeader({ file })) +
           ':root {\n' +
-          formattedVariables({ format: 'css', dictionary, outputReferences }) +
+          formattedVariables({
+            format: propertyFormatNames.css,
+            dictionary,
+            outputReferences,
+          }) +
           '\n}\n'
         );
       },
@@ -96,12 +101,12 @@ describe('integration', async function () {
       platforms: {
         css: {
           transforms: [
-            'attribute/cti',
-            'name/kebab',
-            'time/seconds',
-            'html/icon',
-            'size/rem',
-            'color/css',
+            attributeCti,
+            nameKebab,
+            timeSeconds,
+            htmlIcon,
+            sizeRem,
+            colorCss,
             'foo-value-transform',
           ],
           buildPath,

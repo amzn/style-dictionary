@@ -17,6 +17,10 @@ import { fs } from 'style-dictionary/fs';
 import { resolve } from '../lib/resolve.js';
 import { buildPath } from './_constants.js';
 import { clearOutput } from '../__tests__/__helpers.js';
+import { formats, transformTypes } from '../lib/enums/index.js';
+
+const { cssVariables, scssVariables } = formats;
+const { value: transformTypeValue } = transformTypes;
 
 describe('integration', async () => {
   before(async () => {
@@ -81,7 +85,7 @@ describe('integration', async () => {
       hooks: {
         transforms: {
           hsl: {
-            type: 'value',
+            type: transformTypeValue,
             transitive: true,
             filter: (token) => token.original.value.h,
             transform: (token) => {
@@ -89,7 +93,7 @@ describe('integration', async () => {
             },
           },
           hslToHex: {
-            type: 'value',
+            type: transformTypeValue,
             transitive: true,
             filter: (token) => token.original.value.h,
             transform: (token) => {
@@ -109,12 +113,12 @@ describe('integration', async () => {
           files: [
             {
               destination: `hsl.css`,
-              format: `css/variables`,
+              format: cssVariables,
               filter: (token) => token.type === `color`,
             },
             {
               destination: `hslWithReferences.css`,
-              format: `css/variables`,
+              format: cssVariables,
               filter: (token) => token.type === `color`,
               options,
             },
@@ -129,12 +133,12 @@ describe('integration', async () => {
           files: [
             {
               destination: 'hex.css',
-              format: 'css/variables',
+              format: cssVariables,
               filter: (token) => token.type === `color`,
             },
             {
               destination: 'hexWithReferences.css',
-              format: 'css/variables',
+              format: cssVariables,
               filter: (token) => token.type === `color`,
               options,
             },
@@ -149,12 +153,12 @@ describe('integration', async () => {
           files: [
             {
               destination: 'border.css',
-              format: 'css/variables',
+              format: cssVariables,
               filter: (token) => token.type === `border`,
             },
             {
               destination: 'borderWithReferences.css',
-              format: 'css/variables',
+              format: cssVariables,
               filter: (token) => token.type === `border`,
               options,
             },
@@ -166,12 +170,12 @@ describe('integration', async () => {
           files: [
             {
               destination: 'shadow.css',
-              format: 'css/variables',
+              format: cssVariables,
               filter: (token) => token.type === `shadow`,
             },
             {
               destination: 'shadowWithReferences.css',
-              format: 'css/variables',
+              format: cssVariables,
               filter: (token) => token.type === `shadow`,
               options,
             },
@@ -184,12 +188,12 @@ describe('integration', async () => {
           files: [
             {
               destination: 'border.scss',
-              format: 'scss/variables',
+              format: scssVariables,
               filter: (token) => token.type === `border`,
             },
             {
               destination: 'borderWithReferences.scss',
-              format: 'scss/variables',
+              format: scssVariables,
               filter: (token) => token.type === `border`,
               options,
             },
@@ -205,7 +209,7 @@ describe('integration', async () => {
   });
 
   describe('object values', async () => {
-    describe('css/variables', async () => {
+    describe(cssVariables, async () => {
       describe(`hsl syntax`, async () => {
         it(`should match snapshot`, async () => {
           const output = fs.readFileSync(resolve(`${buildPath}hsl.css`), {
@@ -277,7 +281,7 @@ describe('integration', async () => {
       });
     });
 
-    describe('scss/variables', async () => {
+    describe(scssVariables, async () => {
       it(`should match snapshot`, async () => {
         const output = fs.readFileSync(resolve(`${buildPath}border.scss`), {
           encoding: 'UTF-8',

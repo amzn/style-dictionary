@@ -17,6 +17,9 @@ import { compileString } from 'sass';
 import { resolve } from '../lib/resolve.js';
 import { buildPath } from './_constants.js';
 import { clearOutput } from '../__tests__/__helpers.js';
+import { formats, transformGroups } from '../lib/enums/index.js';
+
+const { scssVariables, scssMapFlat, scssMapDeep } = formats;
 
 describe(`integration`, async () => {
   before(async () => {
@@ -24,30 +27,30 @@ describe(`integration`, async () => {
       source: [`__integration__/tokens/**/[!_]*.json?(c)`],
       platforms: {
         css: {
-          transformGroup: `scss`,
+          transformGroup: transformGroups.scss,
           buildPath,
           files: [
             {
               destination: `variables.scss`,
-              format: `scss/variables`,
+              format: scssVariables,
             },
             {
               destination: `variables-themeable.scss`,
-              format: `scss/variables`,
+              format: scssVariables,
               options: {
                 themeable: true,
               },
             },
             {
               destination: `variables-with-references.scss`,
-              format: `scss/variables`,
+              format: scssVariables,
               options: {
                 outputReferences: true,
               },
             },
             {
               destination: `filtered-variables-with-references.scss`,
-              format: `scss/variables`,
+              format: scssVariables,
               filter: (token) => token.path[1] === 'background',
               options: {
                 outputReferences: true,
@@ -55,21 +58,21 @@ describe(`integration`, async () => {
             },
             {
               destination: `map-flat.scss`,
-              format: `scss/map-flat`,
+              format: scssMapFlat,
               options: {
                 mapName: 'design-system-tokens',
               },
             },
             {
               destination: `map-deep.scss`,
-              format: `scss/map-deep`,
+              format: scssMapDeep,
               options: {
                 mapName: 'design-system-tokens',
               },
             },
             {
               destination: `map-deep-with-references.scss`,
-              format: `scss/map-deep`,
+              format: scssMapDeep,
               options: {
                 mapName: 'design-system-tokens',
                 outputReferences: true,
@@ -77,7 +80,7 @@ describe(`integration`, async () => {
             },
             {
               destination: `map-deep-not-themeable.scss`,
-              format: `scss/map-deep`,
+              format: scssMapDeep,
               options: {
                 mapName: 'design-system-tokens',
                 themeable: false,

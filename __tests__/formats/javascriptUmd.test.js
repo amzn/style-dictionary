@@ -14,10 +14,13 @@ import { expect } from 'chai';
 import formats from '../../lib/common/formats.js';
 import createFormatArgs from '../../lib/utils/createFormatArgs.js';
 import { convertTokenData } from '../../lib/utils/convertTokenData.js';
+import { formats as fileFormats } from '../../lib/enums/index.js';
+
+const { javascriptUmd } = fileFormats;
 
 const file = {
   destination: '__output/',
-  format: 'javascript/umd',
+  format: javascriptUmd,
   filter: {
     type: 'color',
   },
@@ -29,10 +32,10 @@ const tokens = {
   },
 };
 
-const format = formats['javascript/umd'];
+const format = formats[javascriptUmd];
 
 describe('formats', () => {
-  describe('javascript/umd', () => {
+  describe(javascriptUmd, () => {
     it('should be a valid JS file and match snapshot', async () => {
       await expect(
         await format(

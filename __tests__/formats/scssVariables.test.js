@@ -15,10 +15,13 @@ import { compileString } from 'sass';
 import formats from '../../lib/common/formats.js';
 import createFormatArgs from '../../lib/utils/createFormatArgs.js';
 import { convertTokenData } from '../../lib/utils/convertTokenData.js';
+import { formats as fileFormats } from '../../lib/enums/index.js';
+
+const { scssVariables } = fileFormats;
 
 const file = {
   destination: '__output/',
-  format: 'scss/variables',
+  format: scssVariables,
   name: 'foo',
 };
 
@@ -42,10 +45,10 @@ const tokens = {
   },
 };
 
-const format = formats['scss/variables'];
+const format = formats[scssVariables];
 
 describe('formats', () => {
-  describe('scss/variables', () => {
+  describe(scssVariables, () => {
     it('should have a valid scss syntax and match snapshot', async () => {
       const result = await format(
         createFormatArgs({

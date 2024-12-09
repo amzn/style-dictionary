@@ -15,10 +15,13 @@ import formats from '../../lib/common/formats.js';
 import createFormatArgs from '../../lib/utils/createFormatArgs.js';
 import { convertTokenData } from '../../lib/utils/convertTokenData.js';
 import { isNode } from '../../lib/utils/isNode.js';
+import { formats as fileFormats } from '../../lib/enums/index.js';
+
+const { lessIcons } = fileFormats;
 
 const file = {
   destination: '__output/',
-  format: 'less/icons',
+  format: lessIcons,
   name: 'foo',
 };
 
@@ -54,10 +57,10 @@ const platform = {
   },
 };
 
-const format = formats['less/icons'];
+const format = formats[lessIcons];
 
 describe('formats', () => {
-  describe('less/icons', () => {
+  describe(lessIcons, () => {
     it('should have a valid less syntax and match snapshot', async () => {
       const result = await format(
         createFormatArgs({

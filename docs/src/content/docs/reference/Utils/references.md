@@ -110,6 +110,7 @@ You can use the `getReferences` utility to create your own custom formats that h
 ```js title="build-tokens.js"
 import StyleDictionary from 'style-dictionary';
 import { usesReferences, getReferences, fileHeader } from 'style-dictionary/utils';
+import { transformGroups } from 'style-dictionary/enums';
 
 const sd = new StyleDictionary({
   tokens: {
@@ -146,7 +147,7 @@ const sd = new StyleDictionary({
   },
   platforms: {
     es6: {
-      transformGroup: 'js',
+      transformGroup: transformGroups.js,
       files: [
         {
           format: 'es6',
@@ -252,6 +253,7 @@ What that means is that you usually have to either adjust your filter or disable
 ```javascript title="build-tokens.js"
 import StyleDictionary from 'style-dictionary';
 import { outputReferencesFilter } from 'style-dictionary/utils';
+import { formats, transformGroups } from 'style-dictionary/enums';
 
 const sd = new StyleDictionary({
   tokens: {
@@ -282,11 +284,11 @@ const sd = new StyleDictionary({
   },
   platforms: {
     css: {
-      transformGroup: 'css',
+      transformGroup: transformGroups.css,
       files: [
         {
           destination: 'vars.css',
-          format: 'css/variables',
+          format: formats.cssVariables,
           filter: (token) => token.name !== 'colors-grey',
           options: {
             // returns false for the shadow token because it refs color-grey which is filtered out
@@ -345,15 +347,16 @@ Live Demo:
 
 ```js config
 import { outputReferencesFilter } from 'style-dictionary/utils';
+import { formats, transformGroups } from 'style-dictionary/enums';
 
 export default {
   platforms: {
     css: {
-      transformGroup: 'css',
+      transformGroup: transformGroups.css,
       files: [
         {
           destination: 'vars.css',
-          format: 'css/variables',
+          format: formats.cssVariables,
           filter: (token) => token.name !== 'colors-grey',
           options: {
             // returns false for the shadow token because it refs color-grey which is filtered out
@@ -374,6 +377,7 @@ the value has changed through a transitive transform compared to the original va
 ```javascript title="build-tokens.js"
 import StyleDictionary from 'style-dictionary';
 import { outputReferencesTransformed } from 'style-dictionary/utils';
+import { formats, transformGroups } from 'style-dictionary/enums';
 
 const sd = new StyleDictionary({
   tokens: {
@@ -388,7 +392,7 @@ const sd = new StyleDictionary({
   },
   platforms: {
     css: {
-      transformGroup: 'css',
+      transformGroup: transformGroups.css,
       // see https://github.com/tokens-studio/sd-transforms
       // this transform handles rgba(#000, 0.12) -> rgba(0, 0, 0, 0.12)
       // as a transitive transform
@@ -396,7 +400,7 @@ const sd = new StyleDictionary({
       files: [
         {
           destination: 'vars.css',
-          format: 'css/variables',
+          format: formats.cssVariables,
           options: {
             outputReferences: outputReferencesTransformed,
           },
@@ -438,16 +442,17 @@ Live Demo:
 
 ```js config
 import { outputReferencesTransformed } from 'style-dictionary/utils';
+import { formats, transformGroups } from 'style-dictionary/enums';
 
 export default {
   platforms: {
     css: {
-      transformGroup: 'css',
+      transformGroup: transformGroups.css,
       transforms: ['ts/color/css/hexrgba'],
       files: [
         {
           destination: 'vars.css',
-          format: 'css/variables',
+          format: formats.cssVariables,
           options: {
             outputReferences: outputReferencesTransformed,
           },
@@ -473,15 +478,16 @@ These utility functions can be quite easily combined together:
 ```javascript title="build-tokens.js"
 import StyleDictionary from 'style-dictionary';
 import { outputReferencesFilter, outputReferencesTransformed } from 'style-dictionary/utils';
+import { formats, transformGroups } from 'style-dictionary/enums';
 
 const sd = new StyleDictionary({
   platforms: {
     css: {
-      transformGroup: 'css',
+      transformGroup: transformGroups.css,
       files: [
         {
           destination: 'vars.css',
-          format: 'css/variables',
+          format: formats.cssVariables,
           options: {
             outputReferences: (token, options) =>
               outputReferencesFilter(token, options) && outputReferencesTransformed(token, options),

@@ -26,6 +26,7 @@
       "default": "./lib/fs.js"
     },
     "./utils": "./lib/utils/index.js",
+    "./enums": "./lib/enums/index.js",
     "./types": "./types/index.d.ts"
   },
   "bin": {

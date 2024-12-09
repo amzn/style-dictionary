@@ -14,12 +14,15 @@ import { expect } from 'chai';
 import { restore, stubMethod } from 'hanbi';
 import transformConfig from '../../lib/transform/config.js';
 import chalk from 'chalk';
+import { logWarningLevels, logVerbosityLevels, transformTypes } from '../../lib/enums/index.js';
+
+const { attribute } = transformTypes;
 
 const dictionary = {
   hooks: {
     transforms: {
       fooTransform: {
-        type: 'attribute',
+        type: attribute,
         transform: function () {
           return { bar: 'foo' };
         },
@@ -65,21 +68,21 @@ None of "barTransform", "bazTransform" match the name of a registered transform.
           transforms: {
             fooTransform: {
               name: 'fooTransform',
-              type: 'attribute',
+              type: attribute,
               transform: function () {
                 return { foo: 'foo' };
               },
             },
             barTransform: {
               name: 'barTransform',
-              type: 'attribute',
+              type: attribute,
               transform: function () {
                 return { bar: 'bar' };
               },
             },
             quxTransform: {
               name: 'quxTransform',
-              type: 'attribute',
+              type: attribute,
               transform: function () {
                 return { qux: 'qux' };
               },
@@ -126,7 +129,7 @@ None of "barTransform", "bazTransform" match the name of a registered transform.
 
     it('throws if an action is used without a clean function with log.warnings set to error', () => {
       const cfg = {
-        log: { warnings: 'error' },
+        log: { warnings: logWarningLevels.error },
         hooks: {
           actions: {
             foo: {},
@@ -144,7 +147,7 @@ None of "barTransform", "bazTransform" match the name of a registered transform.
 
     it('does not warn user at all when log.verbosity silent is used', () => {
       const cfg = {
-        log: { verbosity: 'silent' },
+        log: { verbosity: logVerbosityLevels.silent },
         hooks: {
           actions: {
             foo: {},

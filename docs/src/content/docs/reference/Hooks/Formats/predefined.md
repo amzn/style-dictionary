@@ -510,7 +510,7 @@ It is recommended to use the 'android/resources' format with a custom filter
 instead of this format:
 
 ```javascript title="config.js"
-format: 'android/resources',
+format: formats.androidResources, // formats enum for string 'android/resources'
 filter: {
   type: "color"
 }
@@ -536,7 +536,7 @@ It is recommended to use the 'android/resources' format with a custom filter
 instead of this format:
 
 ```javascript title="config.js"
-format: 'android/resources',
+format: formats.androidResources, // formats enum for string 'android/resources'
 filter: {
   type: "dimension"
 }
@@ -562,7 +562,7 @@ It is recommended to use the 'android/resources' format with a custom filter
 instead of this format:
 
 ```javascript title="config.js"
-format: 'android/resources',
+format: formats.androidResources, // formats enum for string 'android/resources'
 filter: {
   type: "dimension"
 }
@@ -589,7 +589,7 @@ It is recommended to use the 'android/resources' format with a custom filter
 instead of this format:
 
 ```javascript title="config.js"
-format: 'android/resources',
+format: formats.androidResources, // formats enum for string 'android/resources'
 filter: {
   type: 'time'
 }
@@ -616,7 +616,7 @@ It is recommended to use the 'android/resources' format with a custom filter
 instead of this format:
 
 ```javascript title="config.js"
-format: 'android/resources',
+format: formats.androidResources, // formats enum for string 'android/resources'
 filter: {
   type: 'content'
 }

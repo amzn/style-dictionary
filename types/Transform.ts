@@ -15,6 +15,7 @@ import type { Filter } from './Filter.js';
 import type { TransformedToken } from './DesignToken.js';
 import type { PlatformConfig, Config } from './Config.js';
 import type { Volume } from './Volume.js';
+import { transformTypes } from '../lib/enums/index.js';
 
 interface BaseTransform<Type, Value> {
   name: string;
@@ -29,8 +30,11 @@ interface BaseTransform<Type, Value> {
   ) => Promise<Value> | Value;
 }
 
-export type NameTransform = BaseTransform<'name', string>;
-export type AttributeTransform = BaseTransform<'attribute', Record<string, unknown>>;
-export type ValueTransform = BaseTransform<'value', unknown | undefined>;
+export type NameTransform = BaseTransform<typeof transformTypes.name, string>;
+export type AttributeTransform = BaseTransform<
+  typeof transformTypes.attribute,
+  Record<string, unknown>
+>;
+export type ValueTransform = BaseTransform<typeof transformTypes.value, unknown | undefined>;
 
 export type Transform = NameTransform | AttributeTransform | ValueTransform;
