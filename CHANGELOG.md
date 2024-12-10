@@ -11,6 +11,7 @@
 
 ### Patch Changes
 
+- 2966cfd: handle DTCG-format tokens in typescript/es6-declarations formatter
 - 4a7bca7: add accessControl field to Android Compose template
 - f694f67: Fix Prettier imports, see https://prettier.io/docs/en/api#custom-parser-api-removed for more info.
 - fd8cdb4: handle DTCG-format tokens in javascript/es6 formatter
