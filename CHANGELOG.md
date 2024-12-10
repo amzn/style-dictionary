@@ -1,5 +1,23 @@
 # Changelog
 
+## 4.3.0
+
+### Minor Changes
+
+- 302b466: Introduce a new entrypoint: `style-dictionary/enums` for most of the library's hard-coded string values. Most of these are built-in hooks names. This provides better type-safety for consumers as well as various maintainability related benefits for this library. [See documentation for more info](https://styledictionary.com/reference/enums).
+- 5aad797: Add tailwind preset example, remove unused .editorconfig file
+- bd8be17: Add support for native .TS token & config file processing.
+- 209085d: Add `tokenMap` properties to Dictionary, which is a JavaScript Map structure of the tokens, which makes it easy to iterate as well as access tokens. Also add `convertTokenData` utility that allows to seemlessly convert between Map, Object or Array of tokens, and deprecate the `flattenTokens` utility in favor of that one.
+
+### Patch Changes
+
+- 4a7bca7: add accessControl field to Android Compose template
+- f694f67: Fix Prettier imports, see https://prettier.io/docs/en/api#custom-parser-api-removed for more info.
+- fd8cdb4: handle DTCG-format tokens in javascript/es6 formatter
+- 6a6a409: Move prettier to dependencies since style-dictionary isn't really a prettier plugin and a direct dependency seems more accurate here.
+- 8a9cfa0: Fix `outputReferencesTransformed` util, would return `true` for tokens which original values were not strings.
+- 7a661bb: Fix font-style and font-weight logic for fonts.css.template.js
+
 ## 4.2.0
 
 ### Minor Changes
