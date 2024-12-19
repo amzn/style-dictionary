@@ -22,6 +22,6 @@
     "skipLibCheck": true,
     "declaration": true
   },
-  "include": ["lib/**/*.js", "**/*.ts"],
+  "include": ["lib/**/*.js", "**/*.ts", "bin/**/*.js"],
   "exclude": ["node_modules", "**/coverage/*"]
 }
