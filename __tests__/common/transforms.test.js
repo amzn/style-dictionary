@@ -1468,6 +1468,19 @@ describe('common', () => {
       it('should ignore gradients', () => {
         expect(isColor({ type: 'color', value: 'linear-gradient(#e66465, #9198e5)' }, {})).to.be
           .false;
+        expect(isColor({ type: 'color', value: 'linear-gradient(red, yellow)' }, {})).to.be.false;
+        expect(
+          isColor(
+            { type: 'color', value: 'linear-gradient(rgba(0, 0, 0, 0.00), rgba(0, 0, 0, 0.60))' },
+            {},
+          ),
+        ).to.be.false;
+        expect(isColor({ type: 'color', value: 'repeating-linear-gradient(#e66465, #9198e5)' }, {}))
+          .to.be.false;
+        expect(isColor({ type: 'color', value: 'radial-gradient(#e66465, #9198e5)' }, {})).to.be
+          .false;
+        expect(isColor({ type: 'color', value: 'repeating-radial-gradient(#e66465, #9198e5)' }, {}))
+          .to.be.false;
       });
 
       it('should ignore values that cannot convert to a color', () => {
