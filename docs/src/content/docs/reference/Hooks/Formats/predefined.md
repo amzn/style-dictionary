@@ -1007,6 +1007,7 @@ Creates a Dart implementation file of a class with values
 | -------------------------- | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `options.showFileHeader`   | `boolean`                             | Whether or not to include a comment that has the build date. Defaults to `true`                                                                                                                                                    |
 | `options.outputReferences` | `boolean \| OutputReferencesFunction` | Whether or not to keep [references](/reference/hooks/formats#references-in-output-files) (a -> b -> c) in the output. Defaults to `false`. Also allows passing a function to conditionally output references on a per token basis. |
+| `options.className`        | `string`                              | The name of the generated Dart Class                                                                                                                                                                                               |
 
 Example:
 
