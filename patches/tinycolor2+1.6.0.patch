@@ -1,0 +1,42 @@
+diff --git a/node_modules/tinycolor2/cjs/tinycolor.js b/node_modules/tinycolor2/cjs/tinycolor.js
+index 4f584ca..af03edf 100644
+--- a/node_modules/tinycolor2/cjs/tinycolor.js
++++ b/node_modules/tinycolor2/cjs/tinycolor.js
+@@ -1061,6 +1061,9 @@
+   // based on detected format.  Returns `{ r, g, b }` or `{ h, s, l }` or `{ h, s, v}`
+   function stringInputToObject(color) {
+     color = color.replace(trimLeft, "").replace(trimRight, "").toLowerCase();
++    if (color.startsWith("linear-gradient") || color.startsWith("radial-gradient") || color.startsWith("repeating-linear-gradient") || color.startsWith("repeating-radial-gradient")) {
++      return false;
++    }
+     var named = false;
+     if (names[color]) {
+       color = names[color];
+diff --git a/node_modules/tinycolor2/esm/tinycolor.js b/node_modules/tinycolor2/esm/tinycolor.js
+index 374f5ea..8405a82 100644
+--- a/node_modules/tinycolor2/esm/tinycolor.js
++++ b/node_modules/tinycolor2/esm/tinycolor.js
+@@ -1055,6 +1055,9 @@ function isValidCSSUnit(color) {
+ // based on detected format.  Returns `{ r, g, b }` or `{ h, s, l }` or `{ h, s, v}`
+ function stringInputToObject(color) {
+   color = color.replace(trimLeft, "").replace(trimRight, "").toLowerCase();
++  if (color.startsWith("linear-gradient") || color.startsWith("radial-gradient") || color.startsWith("repeating-linear-gradient") || color.startsWith("repeating-radial-gradient")) {
++    return false;
++  }
+   var named = false;
+   if (names[color]) {
+     color = names[color];
+diff --git a/node_modules/tinycolor2/tinycolor.js b/node_modules/tinycolor2/tinycolor.js
+index 52601df..f2ef959 100644
+--- a/node_modules/tinycolor2/tinycolor.js
++++ b/node_modules/tinycolor2/tinycolor.js
+@@ -1064,6 +1064,9 @@
+   // based on detected format.  Returns `{ r, g, b }` or `{ h, s, l }` or `{ h, s, v}`
+   function stringInputToObject(color) {
+     color = color.replace(trimLeft, "").replace(trimRight, "").toLowerCase();
++    if (color.startsWith("linear-gradient") || color.startsWith("radial-gradient") || color.startsWith("repeating-linear-gradient") || color.startsWith("repeating-radial-gradient")) {
++      return false;
++    }
+     var named = false;
+     if (names[color]) {
+       color = names[color];
