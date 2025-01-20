@@ -790,6 +790,16 @@ describe('common', () => {
         );
         expect(value).to.equal('10px');
       });
+      it('should work for negative values', () => {
+        const value = transforms[sizePx].transform(
+          {
+            value: '-10',
+          },
+          {},
+          {},
+        );
+        expect(value).to.equal('-10px');
+      });
       it('should throw an error if prop value is Nan', () => {
         expect(() => transforms[sizeDp].transform({ value: 'a' }, {}, {})).to.throw();
       });
@@ -956,6 +966,46 @@ describe('common', () => {
           {},
         );
         expect(value).to.equal('1rem');
+      });
+      it('should work for negative values with unit', () => {
+        const value = transforms[sizeRem].transform(
+          {
+            value: '-1rem',
+          },
+          {},
+          {},
+        );
+        expect(value).to.equal('-1rem');
+      });
+      it('should work for negative values', () => {
+        const value = transforms[sizeRem].transform(
+          {
+            value: '-1',
+          },
+          {},
+          {},
+        );
+        expect(value).to.equal('-1rem');
+      });
+      it('should work for positive values', () => {
+        const value = transforms[sizeRem].transform(
+          {
+            value: '+1',
+          },
+          {},
+          {},
+        );
+        expect(value).to.equal('1rem');
+      });
+      it('should work for floating values', () => {
+        const value = transforms[sizeRem].transform(
+          {
+            value: '.5',
+          },
+          {},
+          {},
+        );
+        expect(value).to.equal('0.5rem');
       });
       ['0', 0].forEach((value) => {
         it('zero value is returned without a unit and remains same type', () => {
