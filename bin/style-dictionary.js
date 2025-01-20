@@ -6,21 +6,39 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import node_fs from 'node:fs';
 import JSON5 from 'json5';
-import program from 'commander';
+import { Command } from 'commander';
 // usually also node:fs in this context, but can be customized by user
 import { fs } from 'style-dictionary/fs';
 import StyleDictionary from 'style-dictionary';
 import { logWarningLevels, logVerbosityLevels } from '../lib/enums/index.js';
 
+/**
+ * @typedef {{
+ *   config?: string;
+ *   platform?: string[];
+ *   verbose?: boolean;
+ *   warn?: boolean;
+ *   silent?: boolean;
+ * }} BuildOptions
+ */
+
+const program = new Command();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const { silent, verbose } = logVerbosityLevels;
 const pkg = JSON5.parse(node_fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf8'));
 
+/**
+ * @param {string} val
+ * @param {string[]} arr
+ */
 function collect(val, arr) {
   arr.push(val);
   return arr;
 }
 
+/**
+ * @param {BuildOptions} options
+ */
 function getConfigPath(options) {
   let configPath = options.config;
 
@@ -108,6 +126,10 @@ program.on('command:*', function () {
   process.exit(1);
 });
 
+/**
+ * @param {string} configPath
+ * @param {BuildOptions} options
+ */
 function getSD(configPath, options) {
   let verbosity;
   let warnings;
@@ -120,27 +142,33 @@ function getSD(configPath, options) {
   return new StyleDictionary(configPath, { verbosity, warnings });
 }
 
+/**
+ * @param {BuildOptions} [options]
+ */
 async function styleDictionaryBuild(options) {
   options = options || {};
   const configPath = getConfigPath(options);
   const sd = getSD(configPath, options);
 
   if (options.platform && options.platform.length > 0) {
-    return Promise.all(options.platforms.map((platform) => sd.buildPlatform(platform)));
+    await Promise.all(options.platform.map((platform) => sd.buildPlatform(platform)));
   } else {
-    return sd.buildAllPlatforms();
+    await sd.buildAllPlatforms();
   }
 }
 
+/**
+ * @param {BuildOptions} [options]
+ */
 async function styleDictionaryClean(options) {
   options = options || {};
   const configPath = getConfigPath(options);
   const sd = getSD(configPath, options);
 
   if (options.platform && options.platform.length > 0) {
-    return Promise.all(options.platforms.map((platform) => sd.cleanPlatform(platform)));
+    await Promise.all(options.platform.map((platform) => sd.cleanPlatform(platform)));
   } else {
-    return sd.cleanAllPlatforms();
+    await sd.cleanAllPlatforms();
   }
 }
 
