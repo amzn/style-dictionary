@@ -1,5 +1,13 @@
 # Changelog
 
+## 4.3.1
+
+### Patch Changes
+
+- 1684a8e: Fix sizeRem to allow negative values
+- 803d1f8: Fix gradients with rgba values returning rgba(0, 0, 0, 0)
+- 6cc1da3: Add and check types to CLI file, fix typo for --platform flag.
+
 ## 4.3.0
 
 ### Minor Changes
