@@ -790,6 +790,16 @@ describe('common', () => {
         );
         expect(value).to.equal('10px');
       });
+      it('should work for negative values', () => {
+        const value = transforms[sizePx].transform(
+          {
+            value: '-10',
+          },
+          {},
+          {},
+        );
+        expect(value).to.equal('-10px');
+      });
       it('should throw an error if prop value is Nan', () => {
         expect(() => transforms[sizeDp].transform({ value: 'a' }, {}, {})).to.throw();
       });
@@ -956,6 +966,46 @@ describe('common', () => {
           {},
         );
         expect(value).to.equal('1rem');
+      });
+      it('should work for negative values with unit', () => {
+        const value = transforms[sizeRem].transform(
+          {
+            value: '-1rem',
+          },
+          {},
+          {},
+        );
+        expect(value).to.equal('-1rem');
+      });
+      it('should work for negative values', () => {
+        const value = transforms[sizeRem].transform(
+          {
+            value: '-1',
+          },
+          {},
+          {},
+        );
+        expect(value).to.equal('-1rem');
+      });
+      it('should work for positive values', () => {
+        const value = transforms[sizeRem].transform(
+          {
+            value: '+1',
+          },
+          {},
+          {},
+        );
+        expect(value).to.equal('1rem');
+      });
+      it('should work for floating values', () => {
+        const value = transforms[sizeRem].transform(
+          {
+            value: '.5',
+          },
+          {},
+          {},
+        );
+        expect(value).to.equal('0.5rem');
       });
       ['0', 0].forEach((value) => {
         it('zero value is returned without a unit and remains same type', () => {
@@ -1468,6 +1518,19 @@ describe('common', () => {
       it('should ignore gradients', () => {
         expect(isColor({ type: 'color', value: 'linear-gradient(#e66465, #9198e5)' }, {})).to.be
           .false;
+        expect(isColor({ type: 'color', value: 'linear-gradient(red, yellow)' }, {})).to.be.false;
+        expect(
+          isColor(
+            { type: 'color', value: 'linear-gradient(rgba(0, 0, 0, 0.00), rgba(0, 0, 0, 0.60))' },
+            {},
+          ),
+        ).to.be.false;
+        expect(isColor({ type: 'color', value: 'repeating-linear-gradient(#e66465, #9198e5)' }, {}))
+          .to.be.false;
+        expect(isColor({ type: 'color', value: 'radial-gradient(#e66465, #9198e5)' }, {})).to.be
+          .false;
+        expect(isColor({ type: 'color', value: 'repeating-radial-gradient(#e66465, #9198e5)' }, {}))
+          .to.be.false;
       });
 
       it('should ignore values that cannot convert to a color', () => {

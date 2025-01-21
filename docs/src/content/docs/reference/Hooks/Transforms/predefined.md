@@ -415,7 +415,7 @@ Transforms the value from a REM size on web into a scale-independent pixel (sp) 
 Transforms the value from a REM size on web into a density-independent pixel (dp) value for font sizes in Compose. It WILL scale the number by a factor of 16 (or the value of `basePxFontSize` on the platform in your config).
 
 ```kotlin
-// Matches: token.type === 'fontSize'
+// Matches: token.type === 'dimension'
 // Returns:
 "16.0.dp"
 ```
