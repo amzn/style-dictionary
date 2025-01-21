@@ -1023,6 +1023,17 @@ describe('common', () => {
       it('should throw an error if prop value is Nan', () => {
         expect(() => transforms[sizeDp].transform({ value: 'a' }, {}, {})).to.throw();
       });
+
+      it('should not change the unit to rem if the value already has a unit', () => {
+        const value = transforms[sizeRem].transform(
+          {
+            value: '5px',
+          },
+          {},
+          {},
+        );
+        expect(value).to.equal('5px');
+      });
     });
 
     describe(sizeFlutterRemToDouble, () => {
