@@ -25,7 +25,7 @@ Transforms:
 [attribute/cti](/reference/hooks/transforms/predefined#attributecti)
 [name/pascal](/reference/hooks/transforms/predefined#namepascal)
 [size/rem](/reference/hooks/transforms/predefined#sizerem)
-[color/hex](/reference/hooks/transforms/predefined#colorhex)
+[color/hex](/reference/hooks/transforms/predefined#colorhex8)
 
 ---
 
