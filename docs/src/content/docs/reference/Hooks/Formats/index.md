@@ -88,8 +88,8 @@ Some formats can keep the references in the output. This is a bit hard to explai
 {
   "color": {
     "red": { "value": "#ff0000" },
-    "danger": { "value": "{color.red.value}" },
-    "error": { "value": "{color.danger.value}" }
+    "danger": { "value": "{color.red}" },
+    "error": { "value": "{color.danger}" }
   }
 }
 ```

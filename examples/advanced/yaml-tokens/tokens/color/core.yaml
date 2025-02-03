@@ -1,17 +1,17 @@
 color:
   base:
     white:
-      value: "#fff"
-      type: "color"
+      value: '#fff'
+      type: 'color'
     red:
       value:
         r: 255
         g: 0
         b: 0
-      type: "color"
+      type: 'color'
     green:
-      value: "rgb(0,255,0)"
-      type: "color"
+      value: 'rgb(0,255,0)'
+      type: 'color'
     success:
-      value: "{color.base.green.value}"
-      type: "color"
+      value: '{color.base.green}'
+      type: 'color'

@@ -187,7 +187,7 @@ This tells the style dictionary build system how and what to build. The default 
       "small": { "value": "10px" },
       "medium": { "value": "16px" },
       "large": { "value": "24px" },
-      "base": { "value": "{size.font.medium.value}" }
+      "base": { "value": "{size.font.medium}" }
     }
   }
 }

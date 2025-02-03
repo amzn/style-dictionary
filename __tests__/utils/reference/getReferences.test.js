@@ -18,7 +18,7 @@ import { getReferences } from '../../../lib/utils/references/getReferences.js';
 const tokens = {
   color: {
     red: { value: '#f00' },
-    danger: { value: '{color.red.value}' },
+    danger: { value: '{color.red}' },
   },
   size: {
     border: { value: '2px' },
@@ -27,22 +27,22 @@ const tokens = {
     primary: {
       // getReferences should work on objects like this:
       value: {
-        color: '{color.red.value}',
-        width: '{size.border.value}',
+        color: '{color.red}',
+        width: '{size.border}',
         style: 'solid',
       },
     },
     secondary: {
       // and objects that have a non-string
       value: {
-        color: '{color.red.value}',
+        color: '{color.red}',
         width: 2,
         style: 'solid',
       },
     },
     tertiary: {
       // getReferences should work on interpolated values like this:
-      value: '{size.border.value} solid {color.red.value}',
+      value: '{size.border} solid {color.red}',
     },
   },
 };

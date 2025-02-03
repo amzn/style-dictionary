@@ -10,12 +10,12 @@
       "red": { "value": "#FF0000", "type": "color" },
       "green": { "value": "#00FF00", "type": "color" }
     },
-    "primary": { "value": "{color.brand.primary.value}", "type": "color" },
-    "secondary": { "value": "{color.brand.secondary.value}", "type": "color" },
+    "primary": { "value": "{color.brand.primary}", "type": "color" },
+    "secondary": { "value": "{color.brand.secondary}", "type": "color" },
     "action": {
-      "primary": { "value": "{color.primary.value}", "type": "color" },
-      "secondary": { "value": "{color.secondary.value}", "type": "color" },
-      "tertiary": { "value": "{color.base.gray.medium.value}", "type": "color" }
+      "primary": { "value": "{color.primary}", "type": "color" },
+      "secondary": { "value": "{color.secondary}", "type": "color" },
+      "tertiary": { "value": "{color.base.gray.medium}", "type": "color" }
     }
   }
 }

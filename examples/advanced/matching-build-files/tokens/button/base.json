@@ -2,7 +2,7 @@
   "button": {
     "background": {
       "color": {
-        "value": "{color.blue.value}",
+        "value": "{color.blue}",
         "type": "color"
       }
     },

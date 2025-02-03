@@ -140,7 +140,7 @@ You can reference (alias) existing values by using the dot-notation object path 
       "small": { "value": "10" },
       "medium": { "value": "16" },
       "large": { "value": "24" },
-      "base": { "value": "{size.font.medium.value}" }
+      "base": { "value": "{size.font.medium}" }
     }
   }
 }

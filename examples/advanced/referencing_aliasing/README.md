@@ -16,7 +16,7 @@ The "build" command processes the JSON files in the `tokens` folder. Whenever it
 
 ```
    token: {
-       "value": "{ref.to.object.value}"
+       "value": "{ref.to.object}"
    }
 ```
 
@@ -31,11 +31,11 @@ Open the JSON files in the `tokens` folder and see how certain tokens are refere
 For example, open `color/base.json` and see how the value of the "primary" color is a **reference** to the value of the "green" color, declared as:
 
 ```
-   "primary": { "value": "{color.base.green.value}" }
+   "primary": { "value": "{color.base.green}" }
 
 ```
 
-In this case, the string `"{color.base.green.value}"` is resolved at build time, and gets its value from the value of the "green" base color, `"#00FF00"`.
+In this case, the string `"{color.base.green}"` is resolved at build time, and gets its value from the value of the "green" base color, `"#00FF00"`.
 
 The reference can point to another token in a **different JSON file**. For example open `color/font.json` and see how the value for the base/secondary font colors are references to the tokens declared in `color/base.json`:
 
@@ -43,8 +43,8 @@ The reference can point to another token in a **different JSON file**. For examp
 {
   "color": {
     "font": {
-      "base"     : { "value": "{color.base.red.value}" },
-      "secondary": { "value": "{color.base.green.value}" }
+      "base"     : { "value": "{color.base.red}" },
+      "secondary": { "value": "{color.base.green}" }
       ...
 ```
 
@@ -55,7 +55,7 @@ It is also possible to create **chains of references**, where a value references
   "button": {
     "color": {
       "primary": {
-        "value": "{color.primary.value}"
+        "value": "{color.primary}"
         ...
 ```
 

@@ -1,9 +1,9 @@
 {
   "color": {
     "font": {
-      "base": { "value": "{color.base.gray.dark.value}", "type": "color" },
-      "faded": { "value": "{color.base.gray.medium.value}", "type": "color" },
-      "error": { "value": "{color.base.red.value}", "type": "color" }
+      "base": { "value": "{color.base.gray.dark}", "type": "color" },
+      "faded": { "value": "{color.base.gray.medium}", "type": "color" },
+      "error": { "value": "{color.base.red}", "type": "color" }
     }
   }
 }

@@ -50,8 +50,8 @@ describe('integration', async () => {
           primary: {
             // getReferences should work on objects like this:
             value: {
-              color: '{color.red.value}',
-              width: '{size.border.value}',
+              color: '{color.red}',
+              width: '{size.border}',
               style: 'solid',
             },
             type: 'border',
@@ -61,10 +61,10 @@ describe('integration', async () => {
           light: {
             value: [
               {
-                color: '{color.red.value}',
+                color: '{color.red}',
               },
               {
-                color: '{color.green.value}',
+                color: '{color.green}',
               },
             ],
             type: 'shadow',
@@ -72,10 +72,10 @@ describe('integration', async () => {
           dark: {
             value: [
               {
-                color: '{color.green.value}',
+                color: '{color.green}',
               },
               {
-                color: '{color.red.value}',
+                color: '{color.red}',
               },
             ],
             type: 'shadow',

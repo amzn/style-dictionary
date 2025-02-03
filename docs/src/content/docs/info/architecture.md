@@ -77,7 +77,7 @@ Value transforms, transforms that modify a token's value, are skipped if the tok
 
 ## 7. Resolve aliases / references to other values
 
-After all the tokens have been transformed, it then does another pass over the token object looking for aliases, which look like `"{size.font.base.value}"`. When it finds these, it then replaces the reference with the transformed value. Because Style Dictionary merges all token files into a single object, aliases can be in any token file and still work.
+After all the tokens have been transformed, it then does another pass over the token object looking for aliases, which look like `"{size.font.base}"`. When it finds these, it then replaces the reference with the transformed value. Because Style Dictionary merges all token files into a single object, aliases can be in any token file and still work.
 
 ## 8. Format the tokens into files
 

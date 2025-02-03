@@ -5,6 +5,6 @@ import base from './base.js';
 // styles if you have a base style and variations.
 export default {
   ...base,
-  'background-color': { value: '{color.background.link.value}' },
-  color: { value: '{color.font.inverse.base.value}' },
+  'background-color': { value: '{color.background.link}' },
+  color: { value: '{color.font.inverse.base}' },
 };

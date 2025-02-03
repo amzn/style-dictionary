@@ -8,7 +8,7 @@
       "xl": { "value": "1.5", "type": "fontSize" },
       "xxl": { "value": "2", "type": "fontSize" },
       "xxxl": { "value": "3", "type": "fontSize" },
-      "base": { "value": "{size.font.medium.value}", "type": "fontSize" }
+      "base": { "value": "{size.font.medium}", "type": "fontSize" }
     }
   }
 }

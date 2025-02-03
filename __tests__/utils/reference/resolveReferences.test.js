@@ -201,11 +201,11 @@ describe('utils', () => {
           const obj = {
             foo: { value: 'bar' },
             bar: {
-              value: '{foo.value}',
+              value: '{foo}',
             },
           };
           const test = resolveReferences(obj.bar.value, obj, { ignorePaths: ['foo.value'] });
-          expect(test).to.equal('{foo.value}');
+          expect(test).to.equal('{foo}');
         });
       });
 
@@ -235,7 +235,7 @@ describe('utils', () => {
 
       it('should handle 0', () => {
         const obj = {
-          test: { value: '{zero.value}' },
+          test: { value: '{zero}' },
           zero: { value: 0 },
         };
         const test = resolveReferences(obj.test.value, obj, { warnImmediately: false });
