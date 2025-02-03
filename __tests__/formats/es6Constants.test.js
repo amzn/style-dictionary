@@ -56,6 +56,31 @@ const DTCGTokens = {
   },
 };
 
+const commentTokens = {
+  color: {
+    red: {
+      comment: 'comment',
+      name: 'red',
+      original: {
+        value: '#EF5350',
+      },
+      path: ['color', 'red'],
+      type: 'color',
+      value: '#EF5350',
+    },
+    blue: {
+      comment: 'multiline\ncomment',
+      name: 'blue',
+      original: {
+        value: '#4FEDF0',
+      },
+      path: ['color', 'blue'],
+      type: 'color',
+      value: '#4FEDF0',
+    },
+  },
+};
+
 const format = formats[javascriptEs6];
 
 describe('formats', () => {
@@ -83,6 +108,20 @@ describe('formats', () => {
     it('should handle DTCG token format, be a valid JS file and matches snapshot', async () => {
       const output = await format(formatArgs(true));
 
+      await expect(output).to.matchSnapshot();
+    });
+
+    it('should handle multiline comments', async () => {
+      const output = await format(
+        createFormatArgs({
+          dictionary: {
+            tokens: commentTokens,
+            allTokens: convertTokenData(commentTokens, { output: 'array' }),
+          },
+          file,
+          platform: {},
+        }),
+      );
       await expect(output).to.matchSnapshot();
     });
   });
