@@ -31,7 +31,7 @@ describe('integration', async () => {
         breakpoint: {
           xs: { value: '304px' },
           sm: { value: '768px' },
-          md: { value: 'calc({breakpoint.xs.value} / {breakpoint.sm.value})' },
+          md: { value: 'calc({breakpoint.xs} / {breakpoint.sm})' },
         },
       },
       platforms: {

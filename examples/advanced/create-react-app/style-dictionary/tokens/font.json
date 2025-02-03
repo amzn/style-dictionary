@@ -14,7 +14,7 @@
   "size": {
     "text": {
       "base": {
-        "value": "{size.text.medium.value}",
+        "value": "{size.text.medium}",
         "type": "fontSize"
       },
       "small": {

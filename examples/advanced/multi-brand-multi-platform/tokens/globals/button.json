@@ -8,7 +8,7 @@
     },
     "text": {
       "size": {
-        "value": "{size.font.medium.value}",
+        "value": "{size.font.medium}",
         "type": "fontSize"
       }
     }

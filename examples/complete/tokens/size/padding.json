@@ -7,7 +7,7 @@
       "large": { "value": "1.5", "type": "dimension" },
       "xl": { "value": "2", "type": "dimension" },
       "xxl": { "value": "3", "type": "dimension" },
-      "base": { "value": "{size.padding.medium.value}", "type": "dimension" }
+      "base": { "value": "{size.padding.medium}", "type": "dimension" }
     }
   }
 }

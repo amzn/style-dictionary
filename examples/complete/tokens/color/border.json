@@ -1,19 +1,19 @@
 {
   "color": {
     "border": {
-      "light": { "value": "{color.base.grey.200.value}", "type": "color" },
-      "base": { "value": "{color.base.grey.300.value}", "type": "color" },
-      "dark": { "value": "{color.base.grey.400.value}", "type": "color" },
-      "focus": { "value": "{color.brand.primary.base.value}", "type": "color" },
-      "error": { "value": "{color.base.red.600.value}", "type": "color" },
-      "warning": { "value": "{color.base.orange.600.value}", "type": "color" },
-      "success": { "value": "{color.base.green.600.value}", "type": "color" },
+      "light": { "value": "{color.base.grey.200}", "type": "color" },
+      "base": { "value": "{color.base.grey.300}", "type": "color" },
+      "dark": { "value": "{color.base.grey.400}", "type": "color" },
+      "focus": { "value": "{color.brand.primary.base}", "type": "color" },
+      "error": { "value": "{color.base.red.600}", "type": "color" },
+      "warning": { "value": "{color.base.orange.600}", "type": "color" },
+      "success": { "value": "{color.base.green.600}", "type": "color" },
 
       "button": {
         "secondary": {
-          "base": { "value": "{color.border.base.value}", "type": "color" },
-          "active": { "value": "{color.brand.secondary.dark.value}", "type": "color" },
-          "disabled": { "value": "{color.border.light.value}", "type": "color" }
+          "base": { "value": "{color.border.base}", "type": "color" },
+          "active": { "value": "{color.brand.secondary.dark}", "type": "color" },
+          "disabled": { "value": "{color.border.light}", "type": "color" }
         }
       }
     }

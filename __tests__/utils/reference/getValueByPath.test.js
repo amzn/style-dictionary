@@ -22,7 +22,7 @@ const dictionary = {
       },
     },
     background: {
-      primary: { value: '{color.palette.neutral.0.value}' },
+      primary: { value: '{color.palette.neutral.0}' },
     },
   },
   arr: ['one', 'two'],

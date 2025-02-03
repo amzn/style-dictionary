@@ -2,11 +2,11 @@
   "font": {
     "family": {
       "base": {
-        "value": "{asset.font.opensans.name.value}",
+        "value": "{asset.font.opensans.name}",
         "type": "fontFamily"
       },
       "icons": {
-        "value": "{asset.font.icon.name.value}",
+        "value": "{asset.font.icon.name}",
         "type": "fontFamily"
       }
     }

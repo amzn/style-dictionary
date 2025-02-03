@@ -192,13 +192,13 @@ describe('utils', () => {
           {
             foo: { value: 'bar' },
             bar: {
-              value: '{foo.value}',
+              value: '{foo}',
             },
           },
           { ignorePaths: ['foo.value'] },
         );
 
-        expect(test).to.have.nested.property('bar.value', '{foo.value}');
+        expect(test).to.have.nested.property('bar.value', '{foo}');
       });
     });
 
@@ -207,28 +207,28 @@ describe('utils', () => {
         const test = resolveObject({
           foo: { value: 'bar' },
           bar: {
-            value: '{foo.value}',
-            original: '{foo.value}',
+            value: '{foo}',
+            original: '{foo}',
           },
         });
-        expect(test).to.have.nested.property('bar.original', '{foo.value}');
+        expect(test).to.have.nested.property('bar.original', '{foo}');
       });
 
       it('should handle any nested keys under the ignoreKey', () => {
         const test = resolveObject({
           foo: { value: 'bar' },
           bar: {
-            value: '{foo.value}',
+            value: '{foo}',
             original: {
-              value: '{foo.value}',
+              value: '{foo}',
               foo: {
-                bar: '{foo.value}',
+                bar: '{foo}',
               },
             },
           },
         });
-        expect(test).to.have.nested.property('bar.original.value', '{foo.value}');
-        expect(test).to.have.nested.property('bar.original.foo.bar', '{foo.value}');
+        expect(test).to.have.nested.property('bar.original.value', '{foo}');
+        expect(test).to.have.nested.property('bar.original.foo.bar', '{foo}');
       });
 
       it('should handle passing in custom ignoreKeys', () => {
@@ -236,15 +236,15 @@ describe('utils', () => {
           {
             foo: { value: 'bar' },
             bar: {
-              value: '{foo.value}',
-              baz: '{foo.value}',
+              value: '{foo}',
+              baz: '{foo}',
             },
           },
           {
             ignoreKeys: ['baz'],
           },
         );
-        expect(test).to.have.nested.property('bar.baz', '{foo.value}');
+        expect(test).to.have.nested.property('bar.baz', '{foo}');
       });
 
       it('should handle multiple keys', () => {
@@ -252,17 +252,17 @@ describe('utils', () => {
           {
             foo: { value: 'bar' },
             bar: {
-              value: '{foo.value}',
-              original: '{foo.value}',
-              baz: '{foo.value}',
+              value: '{foo}',
+              original: '{foo}',
+              baz: '{foo}',
             },
           },
           {
             ignoreKeys: ['baz', 'original'],
           },
         );
-        expect(test).to.have.nested.property('bar.original', '{foo.value}');
-        expect(test).to.have.nested.property('bar.baz', '{foo.value}');
+        expect(test).to.have.nested.property('bar.original', '{foo}');
+        expect(test).to.have.nested.property('bar.baz', '{foo}');
       });
 
       it('should not ignore anything if set to null or empty array', () => {
@@ -270,8 +270,8 @@ describe('utils', () => {
           {
             foo: { value: 'bar' },
             bar: {
-              value: '{foo.value}',
-              original: '{foo.value}',
+              value: '{foo}',
+              original: '{foo}',
             },
           },
           {
@@ -284,8 +284,8 @@ describe('utils', () => {
           {
             foo: { value: 'bar' },
             bar: {
-              value: '{foo.value}',
-              original: '{foo.value}',
+              value: '{foo}',
+              original: '{foo}',
             },
           },
           {
@@ -298,8 +298,8 @@ describe('utils', () => {
           {
             foo: { value: 'bar' },
             bar: {
-              value: '{foo.value}',
-              original: '{foo.value}',
+              value: '{foo}',
+              original: '{foo}',
             },
           },
           {
@@ -332,7 +332,7 @@ describe('utils', () => {
 
     it('should handle 0', () => {
       const test = resolveObject({
-        test: { value: '{zero.value}' },
+        test: { value: '{zero}' },
         zero: { value: 0 },
       });
       expect(GroupMessages.fetchMessages(PROPERTY_REFERENCE_WARNINGS).length).to.equal(0);

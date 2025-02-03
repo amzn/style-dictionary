@@ -118,7 +118,7 @@ describe('transform', () => {
             value: '16',
           },
           medium: {
-            value: '{spacing.base.value}',
+            value: '{spacing.base}',
           },
         },
       };

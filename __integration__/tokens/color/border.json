@@ -1,7 +1,7 @@
 {
   "color": {
     "border": {
-      "primary": { "value": "{color.core.neutral.300.value}", "type": "color" },
+      "primary": { "value": "{color.core.neutral.300}", "type": "color" },
       "secondary": {},
       "tertiary": {}
     }

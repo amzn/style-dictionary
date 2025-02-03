@@ -6,6 +6,6 @@ export default {
   5: { value: 1.75 },
   6: { value: 2.5 },
 
-  base: { value: '{size.font.3.value}' },
-  large: { value: '{size.font.4.value}' },
+  base: { value: '{size.font.3}' },
+  large: { value: '{size.font.4}' },
 };

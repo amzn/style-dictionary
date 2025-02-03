@@ -77,27 +77,27 @@
     },
 
     "border": {
-      "light": { "value": "{color.base.squidink.10.value}", "type": "color" },
-      "base": { "value": "{color.base.squidink.20.value}", "type": "color" },
-      "dark": { "value": "{color.base.squidink.40.value}", "type": "color" },
-      "focus": { "value": "{color.base.orange.100.value}", "type": "color" }
+      "light": { "value": "{color.base.squidink.10}", "type": "color" },
+      "base": { "value": "{color.base.squidink.20}", "type": "color" },
+      "dark": { "value": "{color.base.squidink.40}", "type": "color" },
+      "focus": { "value": "{color.base.orange.100}", "type": "color" }
     },
 
     "font": {
-      "link": { "value": "{color.base.blue.100.value}", "type": "color" }
+      "link": { "value": "{color.base.blue.100}", "type": "color" }
     },
 
     "button": {
-      "base": { "value": "{color.base.blue.100.value}", "type": "color" },
+      "base": { "value": "{color.base.blue.100}", "type": "color" },
       "active": {
-        "value": "{color.button.base.value}",
+        "value": "{color.button.base}",
         "type": "color",
         "transformColor": {
           "darken": 0.5
         }
       },
       "hover": {
-        "value": "{color.button.active.value}",
+        "value": "{color.button.active}",
         "type": "color",
         "transformColor": {
           "darken": 0.2

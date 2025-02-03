@@ -1,21 +1,21 @@
 {
   "color": {
     "font": {
-      "primary": { "value": "{color.core.neutral.1100.value}", "type": "color" },
-      "secondary": { "value": "{color.core.neutral.900.value}", "type": "color" },
-      "tertiary": { "value": "{color.core.neutral.800.value}", "type": "color" },
+      "primary": { "value": "{color.core.neutral.1100}", "type": "color" },
+      "secondary": { "value": "{color.core.neutral.900}", "type": "color" },
+      "tertiary": { "value": "{color.core.neutral.800}", "type": "color" },
 
       "interactive": {
-        "_": { "value": "{color.brand.primary.value}", "type": "color" },
-        "hover": { "value": "{color.brand.primary.value}", "type": "color" },
-        "active": { "value": "{color.brand.secondary.value}", "type": "color" },
-        "disabled": { "value": "{color.font.tertiary.value}", "type": "color" }
+        "_": { "value": "{color.brand.primary}", "type": "color" },
+        "hover": { "value": "{color.brand.primary}", "type": "color" },
+        "active": { "value": "{color.brand.secondary}", "type": "color" },
+        "disabled": { "value": "{color.font.tertiary}", "type": "color" },
       },
 
-      "danger": { "value": "{color.core.red.1000.value}", "type": "color" },
-      "warning": { "value": "{color.core.orange.1000.value}", "type": "color" },
+      "danger": { "value": "{color.core.red.1000}", "type": "color" },
+      "warning": { "value": "{color.core.orange.1000}", "type": "color" },
       // make sure references without .value work too
-      "success": { "value": "{color.core.green.1000}", "type": "color" }
-    }
-  }
+      "success": { "value": "{color.core.green.1000}", "type": "color" },
+    },
+  },
 }

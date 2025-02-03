@@ -1,10 +1,10 @@
 {
   "color": {
     "background": {
-      "primary": { "value": "{color.palette.neutral.0.value}", "type": "color" },
-      "secondary": { "value": "{color.palette.neutral.5.value}", "type": "color" },
-      "tertiary": { "value": "{color.palette.neutral.10.value}", "type": "color" },
-      "base": { "value": "{color.background.primary.value}", "type": "color" }
+      "primary": { "value": "{color.palette.neutral.0}", "type": "color" },
+      "secondary": { "value": "{color.palette.neutral.5}", "type": "color" },
+      "tertiary": { "value": "{color.palette.neutral.10}", "type": "color" },
+      "base": { "value": "{color.background.primary}", "type": "color" }
     }
   }
 }

@@ -10,7 +10,7 @@
       "type": "color"
     },
     "otherRed": {
-      "value": "{color.red.value}",
+      "value": "{color.red}",
       "type": "color"
     }
   },
@@ -21,19 +21,19 @@
       "type": "dimension"
     },
     "otherLarge": {
-      "value": "{size.large.value}",
+      "value": "{size.large}",
       "type": "dimension"
     }
   },
 
   "number": {
     "test": { "value": 20, "type": "number" },
-    "otherTest": { "value": "{number.test.value}", "type": "number" }
+    "otherTest": { "value": "{number.test}", "type": "number" }
   },
 
   "array": {
     "test": { "value": ["foo", "bar"] },
-    "otherTest": { "value": "{array.test.value}" }
+    "otherTest": { "value": "{array.test}" }
   },
 
   "object": {
@@ -45,6 +45,6 @@
         }
       }
     },
-    "otherTest": { "value": "{object.test.value}" }
+    "otherTest": { "value": "{object.test}" }
   }
 }
