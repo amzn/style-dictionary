@@ -5,6 +5,6 @@ export default {
   4: { value: 3.5 },
   5: { value: 5 },
 
-  base: { value: '{size.padding.1.value}' },
-  large: { value: '{size.padding.2.value}' },
+  base: { value: '{size.padding.1}' },
+  large: { value: '{size.padding.2}' },
 };

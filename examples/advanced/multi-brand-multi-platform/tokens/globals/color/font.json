@@ -1,10 +1,10 @@
 {
   "color": {
     "font": {
-      "base": { "value": "{color.base.black.value}", "type": "color" },
-      "primary": { "value": "{color.primary.value}", "type": "color" },
-      "secondary": { "value": "{color.secondary.value}", "type": "color" },
-      "tertiary": { "value": "{color.base.gray.light.value}", "type": "color" }
+      "base": { "value": "{color.base.black}", "type": "color" },
+      "primary": { "value": "{color.primary}", "type": "color" },
+      "secondary": { "value": "{color.secondary}", "type": "color" },
+      "tertiary": { "value": "{color.base.gray.light}", "type": "color" }
     }
   }
 }

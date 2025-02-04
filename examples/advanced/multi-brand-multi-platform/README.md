@@ -84,8 +84,8 @@ These values are used as "aliases" in the `tokens/global/color/base.json` file:
     "base": {
       ...
     },
-    "primary"     : { "value": "{color.brand.primary.value}", "type": "color" },
-    "secondary"   : { "value": "{color.brand.secondary.value}", "type": "color" },
+    "primary"     : { "value": "{color.brand.primary}", "type": "color" },
+    "secondary"   : { "value": "{color.brand.secondary}", "type": "color" },
     ...
   }
 }
@@ -112,7 +112,7 @@ the value `font.platform.system` is consumed by the `tokens/globals/font/index.j
   "font": {
     "family": {
       "headers": { "value": "Montserrat", "type": "fontFamily" },
-      "base": { "value": "{font.platform.system.value}", "type": "fontFamily" }
+      "base": { "value": "{font.platform.system}", "type": "fontFamily" }
     }
   }
 }

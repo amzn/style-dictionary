@@ -111,14 +111,14 @@ describe('exportPlatform', () => {
       const sd = new StyleDictionary({
         tokens: {
           one: { value: 'foo' },
-          two: { value: '{one.value}' },
+          two: { value: '{one}' },
           three: { value: '{two}' },
           four: { value: '{one}' },
-          five: { value: '{four.value}' },
+          five: { value: '{four}' },
           six: { value: '{one}' },
           seven: { value: '{six}' },
-          eight: { value: '{one.value}' },
-          nine: { value: '{eight.value}' },
+          eight: { value: '{one}' },
+          nine: { value: '{eight}' },
         },
         hooks: {
           transforms: {
@@ -240,7 +240,7 @@ describe('exportPlatform', () => {
         red: { value: '#f00' },
         error: { value: '{colors.red}' },
         danger: { value: '{colors.error}' },
-        alert: { value: '{colors.error.value}' },
+        alert: { value: '{colors.error}' },
       },
     };
     const expected = {
@@ -286,7 +286,7 @@ describe('exportPlatform', () => {
           name: 'colors-alert',
           path: ['colors', 'alert'],
           original: {
-            value: '{colors.error.value}',
+            value: '{colors.error}',
           },
           attributes: {
             category: 'colors',
@@ -311,9 +311,9 @@ describe('exportPlatform', () => {
       color: {
         red: { value: '#f00', type: 'color' },
         error: { value: '{color.red}', type: 'color' },
-        errorWithValue: { value: '{color.red.value}', type: 'color' },
+        errorWithValue: { value: '{color.red}', type: 'color' },
         danger: { value: '{color.error}', type: 'color' },
-        dangerWithValue: { value: '{color.error.value}', type: 'color' },
+        dangerWithValue: { value: '{color.error}', type: 'color' },
         dangerErrorValue: { value: '{color.errorWithValue}', type: 'color' },
       },
     };
@@ -458,7 +458,7 @@ Use log.verbosity "verbose" or use CLI option --verbose for more details.`;
           danger: { value: '{color.core.red.value}' },
           warning: { value: '{color.base.red.valuer}' },
           info: { value: '{color.core.blue.value}' },
-          error: { value: '{color.danger.value}' },
+          error: { value: '{color.danger}' },
         },
       };
       const sd = new StyleDictionary({

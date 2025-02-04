@@ -91,7 +91,7 @@ describe(`integration`, () => {
           const sd = new StyleDictionary({
             tokens: {
               color: {
-                danger: { value: '{color.red.value}' },
+                danger: { value: '{color.red}' },
               },
             },
             platforms: {
@@ -112,11 +112,11 @@ describe(`integration`, () => {
           const sd = new StyleDictionary({
             tokens: {
               color: {
-                foo: { value: '{color.foo.value}' },
-                teal: { value: '{color.blue.value}' },
-                blue: { value: '{color.green.value}' },
-                green: { value: '{color.teal.value}' },
-                purple: { value: '{color.teal.value}' },
+                foo: { value: '{color.foo}' },
+                teal: { value: '{color.blue}' },
+                blue: { value: '{color.green}' },
+                green: { value: '{color.teal}' },
+                purple: { value: '{color.teal}' },
               },
             },
             platforms: {

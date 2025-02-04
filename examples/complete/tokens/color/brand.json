@@ -2,19 +2,19 @@
   "color": {
     "brand": {
       "primary": {
-        "lighter": { "value": "{color.base.teal.100.value}", "type": "color" },
-        "light": { "value": "{color.base.teal.300.value}", "type": "color" },
-        "base": { "value": "{color.base.teal.500.value}", "type": "color" },
-        "dark": { "value": "{color.base.teal.700.value}", "type": "color" },
-        "darker": { "value": "{color.base.teal.900.value}", "type": "color" }
+        "lighter": { "value": "{color.base.teal.100}", "type": "color" },
+        "light": { "value": "{color.base.teal.300}", "type": "color" },
+        "base": { "value": "{color.base.teal.500}", "type": "color" },
+        "dark": { "value": "{color.base.teal.700}", "type": "color" },
+        "darker": { "value": "{color.base.teal.900}", "type": "color" }
       },
 
       "secondary": {
-        "lighter": { "value": "{color.base.indigo.100.value}", "type": "color" },
-        "light": { "value": "{color.base.indigo.300.value}", "type": "color" },
-        "base": { "value": "{color.base.indigo.500.value}", "type": "color" },
-        "dark": { "value": "{color.base.indigo.700.value}", "type": "color" },
-        "darker": { "value": "{color.base.indigo.900.value}", "type": "color" }
+        "lighter": { "value": "{color.base.indigo.100}", "type": "color" },
+        "light": { "value": "{color.base.indigo.300}", "type": "color" },
+        "base": { "value": "{color.base.indigo.500}", "type": "color" },
+        "dark": { "value": "{color.base.indigo.700}", "type": "color" },
+        "darker": { "value": "{color.base.indigo.900}", "type": "color" }
       }
     }
   }

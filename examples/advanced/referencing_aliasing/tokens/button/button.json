@@ -2,15 +2,15 @@
   "button": {
     "color": {
       "primary": {
-        "value": "{color.primary.value}",
+        "value": "{color.primary}",
         "type": "color"
       },
       "secondary": {
-        "value": "{color.secondary.value}",
+        "value": "{color.secondary}",
         "type": "color"
       },
       "danger": {
-        "value": "{color.base.red.value}",
+        "value": "{color.base.red}",
         "type": "color"
       }
     },

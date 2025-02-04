@@ -23,7 +23,7 @@ const tokens = {
   color: {
     red: { value: '#f00' },
     background: {
-      red: { value: '{color.red.value}' },
+      red: { value: '{color.red}' },
     },
   },
 };

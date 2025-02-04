@@ -2,17 +2,17 @@
   "border": {
     "layout": {
       "light": {
-        "value": "1px solid {color.border.light.value}",
+        "value": "1px solid {color.border.light}",
         "type": "border",
         "comment": ""
       },
       "dark": {
-        "value": "1px solid {color.border.dark.value}",
+        "value": "1px solid {color.border.dark}",
         "type": "border",
         "comment": ""
       },
       "base": {
-        "value": "1px solid {color.border.base.value}",
+        "value": "1px solid {color.border.base}",
         "type": "border",
         "comment": ""
       }
@@ -20,22 +20,22 @@
 
     "input": {
       "base": {
-        "value": "1px solid {color.border.base.value}",
+        "value": "1px solid {color.border.base}",
         "type": "border",
         "comment": ""
       },
       "focus": {
-        "value": "1px solid {color.border.focus.value}",
+        "value": "1px solid {color.border.focus}",
         "type": "border",
         "comment": ""
       },
       "error": {
-        "value": "1px solid {color.border.base.value}",
+        "value": "1px solid {color.border.base}",
         "type": "border",
         "comment": ""
       },
       "button": {
-        "value": "1px solid {color.font.link.value}",
+        "value": "1px solid {color.font.link}",
         "type": "border",
         "comment": ""
       }

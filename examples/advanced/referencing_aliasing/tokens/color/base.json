@@ -11,7 +11,7 @@
       "green": { "value": "#00FF00", "type": "color" },
       "blue": { "value": "#0000FF", "type": "color" }
     },
-    "primary": { "value": "{color.base.green.value}", "type": "color" },
-    "secondary": { "value": "{color.base.blue.value}", "type": "color" }
+    "primary": { "value": "{color.base.green}", "type": "color" },
+    "secondary": { "value": "{color.base.blue}", "type": "color" }
   }
 }
