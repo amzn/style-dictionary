@@ -247,6 +247,41 @@ describe('utils', () => {
       });
     });
 
+    it('should handle input that is DTCG syntax already properly', () => {
+      const result = convertToDTCG({
+        colors: {
+          red: {
+            $value: '#ff0000',
+            $type: 'color',
+            $extensions: {
+              'com.example': {
+                modify: {
+                  value: 0.5, // <- to check that it doesn't incorrectly identify this as a "token"
+                  type: 'transparentize',
+                },
+              },
+            },
+          },
+        },
+      });
+      expect(result).to.eql({
+        $type: 'color',
+        colors: {
+          red: {
+            $value: '#ff0000',
+            $extensions: {
+              'com.example': {
+                modify: {
+                  value: 0.5,
+                  type: 'transparentize',
+                },
+              },
+            },
+          },
+        },
+      });
+    });
+
     it('should work with any number of nestings', () => {
       const result = convertToDTCG({
         colors: {
