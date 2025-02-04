@@ -375,7 +375,15 @@ describe('common', () => {
           {},
           {},
         );
+        const value2 = transforms[colorHex].transform(
+          {
+            value: 'hsla(0,0,0.5,1.0)',
+          },
+          {},
+          {},
+        );
         expect(value).to.equal('#80808080');
+        expect(value2).to.equal('#808080');
       });
 
       it('should handle hsl (object) colors', () => {
