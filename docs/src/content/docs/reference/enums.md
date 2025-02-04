@@ -238,7 +238,6 @@ export const transforms = {
   colorHsl: 'color/hsl',
   colorHsl4: 'color/hsl-4',
   colorHex: 'color/hex',
-  colorHex8: 'color/hex8',
   colorHex8android: 'color/hex8android',
   colorComposeColor: 'color/composeColor',
   colorUIColor: 'color/UIColor',
@@ -281,6 +280,10 @@ export const transforms = {
   contentFlutterLiteral: 'content/flutter/literal',
   assetFlutterLiteral: 'asset/flutter/literal',
   sizeFlutterRemToDouble: 'size/flutter/remToDouble',
+  /**
+   * @deprecated use 'color/hex instead
+   */
+  colorHex8: 'color/hex8',
 };
 ```
 

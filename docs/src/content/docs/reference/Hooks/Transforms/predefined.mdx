@@ -2,6 +2,8 @@
 title: Built-in transforms
 ---
 
+import { Badge } from '@astrojs/starlight/components';
+
 :::tip
 You can find the source code of the built-in transforms here:
 [lib/common/transforms.js](https://github.com/amzn/style-dictionary/blob/main/lib/common/transforms.js)
@@ -179,7 +181,9 @@ Transforms the value into an 6-digit hex string
 
 ---
 
-### color/hex8
+### color/hex8 <Badge text="Deprecated" variant="danger" />
+
+> Use color/hex instead, which also supports hex8.
 
 Transforms the value into an 8-digit hex string
 
