@@ -271,7 +271,15 @@ describe('common', () => {
           {},
           {},
         );
-        expect(value).to.equal('#aaaaaa');
+        const value2 = transforms[colorHex].transform(
+          {
+            value: '#aaaaaaff',
+          },
+          {},
+          {},
+        );
+        expect(value).to.equal('#aaaaaaaa');
+        expect(value2).to.equal('#aaaaaa');
       });
 
       it('should handle rgb colors', () => {
@@ -283,6 +291,25 @@ describe('common', () => {
           {},
         );
         expect(value).to.equal('#aaaaaa');
+      });
+
+      it('should handle rgba colors', () => {
+        const value = transforms[colorHex].transform(
+          {
+            value: 'rgba(170,170,170,0.5)',
+          },
+          {},
+          {},
+        );
+        const value2 = transforms[colorHex].transform(
+          {
+            value: 'rgba(170,170,170,1.0)',
+          },
+          {},
+          {},
+        );
+        expect(value).to.equal('#aaaaaa80');
+        expect(value2).to.equal('#aaaaaa');
       });
 
       it('should handle rgb (object) colors', () => {
@@ -297,18 +324,69 @@ describe('common', () => {
           {},
           {},
         );
-        const value2 = transforms[colorHex].transform(
+        expect(value).to.equal('#aaaaaa');
+      });
+
+      it('should handle rgba (object) colors', () => {
+        const value = transforms[colorHex].transform(
           {
-            value: 'rgb(170,170,170)',
+            value: {
+              r: '170',
+              g: '170',
+              b: '170',
+              a: '0.5',
+            },
           },
           {},
           {},
         );
-        expect(value).to.equal('#aaaaaa');
+        const value2 = transforms[colorHex].transform(
+          {
+            value: {
+              r: '170',
+              g: '170',
+              b: '170',
+              a: '1.0',
+            },
+          },
+          {},
+          {},
+        );
+        expect(value).to.equal('#aaaaaa80');
         expect(value2).to.equal('#aaaaaa');
       });
 
       it('should handle hsl colors', () => {
+        const value = transforms[colorHex].transform(
+          {
+            value: 'hsl(0,0,0.5)',
+          },
+          {},
+          {},
+        );
+        expect(value).to.equal('#808080');
+      });
+
+      it('should handle hsla colors', () => {
+        const value = transforms[colorHex].transform(
+          {
+            value: 'hsla(0,0,0.5,0.5)',
+          },
+          {},
+          {},
+        );
+        const value2 = transforms[colorHex].transform(
+          {
+            value: 'hsla(0,0,0.5,1.0)',
+          },
+          {},
+          {},
+        );
+        expect(value).to.equal('#80808080');
+        expect(value2).to.equal('#808080');
+      });
+
+      it('should handle hsl (object) colors', () => {
         const value = transforms[colorHex].transform(
           {
             value: {
@@ -320,14 +398,35 @@ describe('common', () => {
           {},
           {},
         );
-        const value2 = transforms[colorHex].transform(
+        expect(value).to.equal('#808080');
+      });
+
+      it('should handle hsla (object) colors', () => {
+        const value = transforms[colorHex].transform(
           {
-            value: 'hsl(0,0,0.5)',
+            value: {
+              h: '0',
+              s: '0',
+              l: '0.5',
+              a: '0.5',
+            },
           },
           {},
           {},
         );
-        expect(value).to.equal('#808080');
+        const value2 = transforms[colorHex].transform(
+          {
+            value: {
+              h: '0',
+              s: '0',
+              l: '0.5',
+              a: '1.0',
+            },
+          },
+          {},
+          {},
+        );
+        expect(value).to.equal('#80808080');
         expect(value2).to.equal('#808080');
       });
     });
