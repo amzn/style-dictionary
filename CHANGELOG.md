@@ -1,5 +1,15 @@
 # Changelog
 
+## 4.3.3
+
+### Patch Changes
+
+- ea0ec73: Fix convertToDTCG for sets that are already (partially) DTCG.
+- 1d4389a: - `'color/hex'` (`colorHex` enum) built-in transform can now handle alpha channels properly by outputting hex8 format if needed. This also affects the transformGroups `less` and `js` which apply this transform.
+  - `'color/hex8'` (`colorHex8` enum) built-in transform is now deprecated, use `'color/hex'` (`colorHex` enum) instead.
+- e77feb4: Move the tinycolor2 patch from a patch file to a 3-liner fix in our source code, so it gets correctly published and usable by consumers.
+- 177c25e: Account for multiline comments in javascript/es6 format
+
 ## 4.3.2
 
 ### Patch Changes
