@@ -198,7 +198,7 @@ StyleDictionary.registerFormat({
           // that creates the token name is mandatory for this format to function properly
           if (['value', 'name', 'path'].every((prop) => Object.hasOwn(ref, prop))) {
             value = value.replace(
-              // e.g. `{foo.bar.qux}` or `{foo.bar.qux.value}`
+              // e.g. `{foo.bar.qux}` or `{foo.bar.qux}`
               // replaced by `${fooBarQux}`
               new RegExp(`{${ref.path.join('.')}(.value)?}`, 'g'),
               originalIsReferenceExclusively ? ref.name : `\${${ref.name}}`,

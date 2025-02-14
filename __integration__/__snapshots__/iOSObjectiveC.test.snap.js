@@ -94,10 +94,6 @@ snapshots["integration ios objective-c ios/singleton.m should match snapshot"] =
         @"category": @"color",
         @"type": @"border",
         @"item": @"primary"
-        },
-      @"secondary": @
-        },
-      @"tertiary": @
         }
       },
     @"brand": @{

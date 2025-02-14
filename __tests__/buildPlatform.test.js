@@ -102,31 +102,6 @@ describe('buildPlatform', () => {
     expect(typeof output.object.otherTest.value).to.equal('object');
   });
 
-  it('should handle non-property nodes', async () => {
-    const StyleDictionaryExtended = new StyleDictionary({
-      source: ['__tests__/__tokens/nonPropertyNode.json'],
-      platforms: {
-        test: {
-          buildPath: '__tests__/__output/',
-          transformGroup: scss,
-          files: [
-            {
-              destination: 'output.json',
-              format: json,
-            },
-          ],
-        },
-      },
-    });
-    await StyleDictionaryExtended.buildPlatform('test');
-    expect(fileExists('__tests__/__output/output.json')).to.be.true;
-    const input = fileToJSON('__tests__/__tokens/nonPropertyNode.json');
-    const output = fileToJSON('__tests__/__output/output.json');
-    expect(output.color.key1).to.eql(input.color.key1);
-    expect(output.color.base.red.key2).to.eql(input.color.base.red.key2);
-    expect(output.color.base.attributes.key3).to.eql(input.color.base.attributes.key3);
-  });
-
   it('should handle comments', async () => {
     const StyleDictionaryExtended = new StyleDictionary({
       source: ['__tests__/__tokens/comment.json'],
