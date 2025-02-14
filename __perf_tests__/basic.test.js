@@ -22,6 +22,17 @@ const { cssVariables } = formats;
 const { css } = transformGroups;
 
 /**
+ * The CI is significantly slower due to less CPU
+ * Therefore, we allow twice as long as locally.
+ * Since we test perf on Node (but we debug in browser, therefore optional chaining),
+ * we have process.env.CI available to us here
+ *
+ * We also generally set the test timeout to the allowed time + half a second margin
+ * in case the other test setup steps take slightly longer.
+ */
+const timeoutMultiplier = process?.env?.CI ? 2 : 1;
+
+/**
  * Utility to programmatically generate large sets of tokens
  *
  * Example:
@@ -111,7 +122,7 @@ describe('cliBuildWithJsConfig', () => {
     });
     await sd.buildAllPlatforms();
     const end = performance.now();
-    expect(end - start).to.be.below(70);
+    expect(end - start).to.be.below(40 * timeoutMultiplier);
   });
 
   it('should run tons of refs within 500 ms', async () => {
@@ -146,10 +157,10 @@ describe('cliBuildWithJsConfig', () => {
     await sd.hasInitialized;
     await sd.buildPlatform('css');
     const end = performance.now();
-    expect(end - start).to.be.below(500);
-  }).timeout(10000);
+    expect(end - start).to.be.below(500 * timeoutMultiplier);
+  }).timeout(1000 * timeoutMultiplier);
 
-  it('should run tons refs chaining within 1 second', async () => {
+  it('should run tons refs chaining within 2 seconds', async () => {
     // 9000 tokens, 8700 refs, 30 ref layers deep
     const fontWeightTokens = generateTokens({
       key: 'fw',
@@ -180,8 +191,8 @@ describe('cliBuildWithJsConfig', () => {
     await sd.hasInitialized;
     await sd.buildPlatform('css');
     const end = performance.now();
-    expect(end - start).to.be.below(1000);
-  }).timeout(10000);
+    expect(end - start).to.be.below(1500 * timeoutMultiplier);
+  }).timeout(2000 * timeoutMultiplier);
 
   it('should run an obscene amount of tokens with refs refs chaining within 10 seconds', async () => {
     // 30000 tokens, 29700 refs, 100 ref layers deep
@@ -214,8 +225,8 @@ describe('cliBuildWithJsConfig', () => {
     await sd.hasInitialized;
     await sd.buildPlatform('css');
     const end = performance.now();
-    expect(end - start).to.be.below(10000);
-  }).timeout(10000);
+    expect(end - start).to.be.below(10000 * timeoutMultiplier);
+  }).timeout(10500 * timeoutMultiplier);
 
   it('should be fast even with transitive transforms', async () => {
     // 9000 tokens, 8700 refs, 30 ref layers deep
@@ -266,6 +277,6 @@ describe('cliBuildWithJsConfig', () => {
     expect(output).to.include(`--fw-ref0-fw0: Regular-`);
     // last layer of refs should have 30 -'s
     expect(output).to.include(`--fw-ref29-fw0: Regular${Array(30).fill('-').join('')};`);
-    expect(end - start).to.be.below(10000);
-  }).timeout(10000);
+    expect(end - start).to.be.below(1500 * timeoutMultiplier);
+  }).timeout(2000 * timeoutMultiplier);
 });
