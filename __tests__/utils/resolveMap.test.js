@@ -397,7 +397,7 @@ describe('utils', () => {
           },
           { output: 'map' },
         );
-        resolveMap(testData, { ignorePaths: ['{foo}'] });
+        resolveMap(testData, { ignorePaths: new Set(['{foo}']) });
         expect(testData.get('{bar}').value).to.equal('{foo}');
 
         const testData2 = convertTokenData(
@@ -409,7 +409,7 @@ describe('utils', () => {
           },
           { output: 'map' },
         );
-        resolveMap(testData2, { ignorePaths: ['{foo}'] });
+        resolveMap(testData2, { ignorePaths: new Set(['{foo}']) });
         expect(testData2.get('{bar}').value).to.equal('{foo}');
       });
     });
@@ -478,7 +478,7 @@ describe('utils', () => {
           { output: 'map' },
         );
         // original and key also still get ignored, from the defaults
-        resolveMap(testData, { ignoreKeys: ['description'] });
+        resolveMap(testData, { ignoreKeys: new Set(['description']) });
         expect(testData.get('{bar}')).to.eql({
           description: '{foo}',
           value: 'bar',

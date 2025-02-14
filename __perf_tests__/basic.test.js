@@ -112,8 +112,8 @@ describe('cliBuildWithJsConfig', () => {
     expect(end - start).to.be.below(70);
   });
 
-  it('should run tons of refs within 1000ms', async () => {
-    // 9000 tokens, 6000 refs
+  it('should run tons of refs within 500 ms', async () => {
+    // 9000 tokens, 6000 refs, 3 ref layers deep
     // (first layer is raw values, other 2 layers are refs to previous layer)
     const fontWeightTokens = generateTokens({
       key: 'fw',
@@ -144,6 +144,74 @@ describe('cliBuildWithJsConfig', () => {
     await sd.hasInitialized;
     await sd.buildPlatform('css');
     const end = performance.now();
+    expect(end - start).to.be.below(500);
+  }).timeout(10000);
+
+  it('should run tons refs chaining within 1 second', async () => {
+    // 9000 tokens, 8700 refs, 30 ref layers deep
+    const fontWeightTokens = generateTokens({
+      key: 'fw',
+      amount: 300,
+      value: 'Regular',
+      type: 'fontWeight',
+      refDepth: 30,
+    });
+
+    const start = performance.now();
+    const sd = new StyleDictionary({
+      tokens: {
+        ...fontWeightTokens,
+      },
+      platforms: {
+        css: {
+          transformGroup: css,
+          buildPath,
+          files: [
+            {
+              destination: 'variables.css',
+              format: cssVariables,
+            },
+          ],
+        },
+      },
+    });
+    await sd.hasInitialized;
+    await sd.buildPlatform('css');
+    const end = performance.now();
     expect(end - start).to.be.below(1000);
+  }).timeout(10000);
+
+  it('should run an obscene amount of tokens with refs refs chaining within 10 seconds', async () => {
+    // 30000 tokens, 29700 refs 0f 100 ref layers deep
+    const fontWeightTokens = generateTokens({
+      key: 'fw',
+      amount: 300,
+      value: 'Regular',
+      type: 'fontWeight',
+      refDepth: 100,
+    });
+
+    const start = performance.now();
+    const sd = new StyleDictionary({
+      tokens: {
+        ...fontWeightTokens,
+      },
+      platforms: {
+        css: {
+          transformGroup: css,
+          buildPath,
+          files: [
+            {
+              destination: 'variables.css',
+              format: cssVariables,
+            },
+          ],
+        },
+      },
+    });
+    await sd.hasInitialized;
+    await sd.buildPlatform('css');
+    const end = performance.now();
+    expect(end - start).to.be.below(10000);
   }).timeout(10000);
 });

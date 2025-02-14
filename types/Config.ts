@@ -69,6 +69,14 @@ export interface ResolveReferencesOptions extends RegexOptions {
 }
 
 export interface ResolveReferencesOptionsInternal extends ResolveReferencesOptions {
+  ignorePaths?: Set<string>;
+  current_context?: string;
+  stack?: string[];
+  foundCirc?: Record<string, boolean>;
+  firstIteration?: boolean;
+}
+
+export interface ResolveReferencesOptionsInternalOld extends ResolveReferencesOptions {
   ignorePaths?: string[];
   current_context?: string[];
   stack?: string[];
