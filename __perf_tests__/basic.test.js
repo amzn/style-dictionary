@@ -12,6 +12,8 @@
  */
 import { expect } from 'chai';
 import StyleDictionary from 'style-dictionary';
+import { fs } from 'style-dictionary/fs';
+import path from 'path-unified/posix';
 import { buildPath } from '../__integration__/_constants.js';
 import { clearOutput } from '../__tests__/__helpers.js';
 import { formats, transformGroups } from '../lib/enums/index.js';
@@ -182,7 +184,7 @@ describe('cliBuildWithJsConfig', () => {
   }).timeout(10000);
 
   it('should run an obscene amount of tokens with refs refs chaining within 10 seconds', async () => {
-    // 30000 tokens, 29700 refs 0f 100 ref layers deep
+    // 30000 tokens, 29700 refs, 100 ref layers deep
     const fontWeightTokens = generateTokens({
       key: 'fw',
       amount: 300,
@@ -212,6 +214,58 @@ describe('cliBuildWithJsConfig', () => {
     await sd.hasInitialized;
     await sd.buildPlatform('css');
     const end = performance.now();
+    expect(end - start).to.be.below(10000);
+  }).timeout(10000);
+
+  it('should be fast even with transitive transforms', async () => {
+    // 9000 tokens, 8700 refs, 30 ref layers deep
+    const fontWeightTokens = generateTokens({
+      key: 'fw',
+      amount: 300,
+      value: 'Regular',
+      type: 'fontWeight',
+      refDepth: 30,
+    });
+
+    const start = performance.now();
+    const sd = new StyleDictionary({
+      hooks: {
+        transforms: {
+          test: {
+            type: 'value',
+            transitive: true,
+            transform: (token) => {
+              // append a character
+              return token.value + '-';
+            },
+          },
+        },
+      },
+      tokens: {
+        ...fontWeightTokens,
+      },
+      platforms: {
+        css: {
+          transformGroup: css,
+          transforms: ['test'],
+          buildPath,
+          files: [
+            {
+              destination: 'variables.css',
+              format: cssVariables,
+            },
+          ],
+        },
+      },
+    });
+    await sd.hasInitialized;
+    await sd.buildPlatform('css');
+    const end = performance.now();
+    const output = await fs.promises.readFile(path.resolve(buildPath, 'variables.css'), 'utf-8');
+    // first layer of refs should only have a single -
+    expect(output).to.include(`--fw-ref0-fw0: Regular-`);
+    // last layer of refs should have 30 -'s
+    expect(output).to.include(`--fw-ref29-fw0: Regular${Array(30).fill('-').join('')};`);
     expect(end - start).to.be.below(10000);
   }).timeout(10000);
 });
