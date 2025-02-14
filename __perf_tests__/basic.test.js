@@ -112,9 +112,7 @@ describe('cliBuildWithJsConfig', () => {
     expect(end - start).to.be.below(70);
   });
 
-  // TODO: this should be way lower in the future when transform/resolve are using tokenMap
-  // and refs are getting cached
-  it('should run tons of refs within 2750ms', async () => {
+  it('should run tons of refs within 1000ms', async () => {
     // 9000 tokens, 6000 refs
     // (first layer is raw values, other 2 layers are refs to previous layer)
     const fontWeightTokens = generateTokens({
@@ -146,6 +144,6 @@ describe('cliBuildWithJsConfig', () => {
     await sd.hasInitialized;
     await sd.buildPlatform('css');
     const end = performance.now();
-    expect(end - start).to.be.below(2750);
+    expect(end - start).to.be.below(1000);
   }).timeout(10000);
 });

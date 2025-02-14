@@ -129,8 +129,8 @@ describe('transform', () => {
     });
 
     it('correctly transforms tokenMap and defers tokens transforms as needed', async () => {
-      const transformedPropRefs = [];
-      const deferredPropValueTransforms = [];
+      const transformedPropRefs = new Set();
+      const deferredPropValueTransforms = new Set();
       const transformationContext = {
         transformedPropRefs,
         deferredPropValueTransforms,
@@ -141,14 +141,14 @@ describe('transform', () => {
       const m = structuredClone(sd.tokenMap);
 
       await transformMap(m, config, {}, transformationContext);
-      expect(transformedPropRefs).to.eql([
+      expect([...transformedPropRefs]).to.eql([
         '{colors.red.500}',
         '{spacing.0}',
         '{spacing.1}',
         '{spacing.2}',
         '{spacing.0p5}',
       ]);
-      expect(deferredPropValueTransforms).to.eql([
+      expect([...deferredPropValueTransforms]).to.eql([
         '{colors.foreground.primary}',
         '{spacing.0p5-ref}',
         '{border}',
@@ -172,7 +172,7 @@ describe('transform', () => {
       });
 
       await transformMap(m, config, {}, transformationContext);
-      expect(transformedPropRefs).to.eql([
+      expect([...transformedPropRefs]).to.eql([
         '{colors.red.500}',
         '{spacing.0}',
         '{spacing.1}',
@@ -181,7 +181,7 @@ describe('transform', () => {
         '{colors.foreground.primary}',
         '{spacing.0p5-ref}',
       ]);
-      expect(deferredPropValueTransforms).to.eql(['{border}']);
+      expect([...deferredPropValueTransforms]).to.eql(['{border}']);
 
       // Simulate 2nd cycle of reference resolution
       m.set('{border}', {
@@ -193,7 +193,7 @@ describe('transform', () => {
       });
 
       await transformMap(m, config, {}, transformationContext);
-      expect(transformedPropRefs).to.eql([
+      expect([...transformedPropRefs]).to.eql([
         '{colors.red.500}',
         '{spacing.0}',
         '{spacing.1}',
@@ -203,7 +203,7 @@ describe('transform', () => {
         '{spacing.0p5-ref}',
         '{border}',
       ]);
-      expect(deferredPropValueTransforms).to.eql([]);
+      expect([...deferredPropValueTransforms]).to.eql([]);
 
       const result = Array.from(m).map(([key, value]) => [
         key,
