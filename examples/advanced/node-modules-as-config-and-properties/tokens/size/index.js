@@ -1,5 +1,9 @@
+import padding from './padding.js';
+import font from './font.js';
+import border from './border.js';
+
 export default {
-  padding: require('./padding'),
-  font: require('./font'),
-  border: require('./border'),
+  padding,
+  font,
+  border,
 };
