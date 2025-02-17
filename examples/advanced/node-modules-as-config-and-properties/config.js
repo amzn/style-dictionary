@@ -1,6 +1,6 @@
 import StyleDictionary from 'style-dictionary';
 import { formats, transforms, transformGroups, transformTypes } from 'style-dictionary/enums';
-import tokens from './tokens.js';
+import tokens from './tokens/index.js';
 // Rather than have Style Dictionary handle the merging of token files,
 // you could use node module export/require to do it yourself. This will
 // allow you to not have to copy object namespaces like you normally would.
@@ -87,7 +87,7 @@ export default {
 
     scss: {
       // This works, we can create new transform arrays on the fly and edit built-ins
-      transforms: StyleDictionary.hooks.scss.concat(colorRgb),
+      transforms: StyleDictionary.hooks.scss?.concat(colorRgb),
       buildPath: buildPath,
       files: [
         {
@@ -98,7 +98,7 @@ export default {
     },
 
     js: {
-      transforms: StyleDictionary.hooks.js.concat('myRegisteredTransform'),
+      transforms: StyleDictionary.hooks.js?.concat('myRegisteredTransform'),
       buildPath: buildPath,
       // If you want to get super fancy, you can use node modules
       // to create a tokens object first, and then you can
