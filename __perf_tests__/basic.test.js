@@ -96,7 +96,8 @@ describe('cliBuildWithJsConfig', () => {
     clearOutput();
   });
 
-  it('should run basic Style Dictionary within 70ms', async () => {
+  it('should run basic Style Dictionary within 40ms', async () => {
+    // -> within 40ms
     const start = performance.now();
     const sd = new StyleDictionary({
       tokens: {
@@ -126,7 +127,7 @@ describe('cliBuildWithJsConfig', () => {
   });
 
   it('should run tons of refs within 500 ms', async () => {
-    // 9000 tokens, 6000 refs, 3 ref layers deep
+    // 9000 tokens, 6000 refs, 3 ref layers deep -> within 500ms
     // (first layer is raw values, other 2 layers are refs to previous layer)
     const fontWeightTokens = generateTokens({
       key: 'fw',
@@ -161,7 +162,7 @@ describe('cliBuildWithJsConfig', () => {
   }).timeout(1000 * timeoutMultiplier);
 
   it('should run tons refs chaining within 2 seconds', async () => {
-    // 9000 tokens, 8700 refs, 30 ref layers deep
+    // 9000 tokens, 8700 refs, 30 ref layers deep -> within 1500ms
     const fontWeightTokens = generateTokens({
       key: 'fw',
       amount: 300,
@@ -195,7 +196,7 @@ describe('cliBuildWithJsConfig', () => {
   }).timeout(2000 * timeoutMultiplier);
 
   it('should run an obscene amount of tokens with refs refs chaining within 10 seconds', async () => {
-    // 30000 tokens, 29700 refs, 100 ref layers deep
+    // 30000 tokens, 29700 refs, 100 ref layers deep -> within 10000ms
     const fontWeightTokens = generateTokens({
       key: 'fw',
       amount: 300,
@@ -229,7 +230,7 @@ describe('cliBuildWithJsConfig', () => {
   }).timeout(10500 * timeoutMultiplier);
 
   it('should be fast even with transitive transforms', async () => {
-    // 9000 tokens, 8700 refs, 30 ref layers deep
+    // 9000 tokens, 8700 refs, 30 ref layers deep -> within 1500ms
     const fontWeightTokens = generateTokens({
       key: 'fw',
       amount: 300,
@@ -279,4 +280,74 @@ describe('cliBuildWithJsConfig', () => {
     expect(output).to.include(`--fw-ref29-fw0: Regular${Array(30).fill('-').join('')};`);
     expect(end - start).to.be.below(1500 * timeoutMultiplier);
   }).timeout(2000 * timeoutMultiplier);
+
+  it('should be fast even with composite token expansion', async () => {
+    // 9000 tokens, 8700 refs, 30 ref layers deep -> within 2000ms
+    const typographyTokens = {
+      family: {
+        sans: {
+          value: 'Helvetica Neue, sans-serif',
+          type: 'fontFamily',
+        },
+      },
+      weight: {
+        body: {
+          value: 'Regular',
+          type: 'fontWeight',
+        },
+      },
+      lineHeights: {
+        regular: {
+          value: 1,
+          type: 'lineHeight',
+        },
+      },
+      size: {
+        4: {
+          value: '16px',
+          type: 'dimension',
+        },
+      },
+      ...generateTokens({
+        key: 'fw',
+        amount: 300,
+        value: {
+          // inner refs as well
+          fontFamily: '{family.sans}',
+          fontWeight: '{weight.body}',
+          fontSize: '{size.4}',
+          lineHeight: '{lineHeights.regular}',
+        },
+        type: 'typography',
+        refDepth: 30,
+      }),
+    };
+
+    const start = performance.now();
+    const sd = new StyleDictionary({
+      tokens: {
+        ...typographyTokens,
+      },
+      expand: true,
+      platforms: {
+        css: {
+          transformGroup: css,
+          buildPath,
+          files: [
+            {
+              destination: 'variables.css',
+              format: cssVariables,
+            },
+          ],
+        },
+      },
+    });
+    await sd.hasInitialized;
+    await sd.buildPlatform('css');
+    const end = performance.now();
+    const output = await fs.promises.readFile(path.resolve(buildPath, 'variables.css'), 'utf-8');
+    expect(output).to.include(`--fw-ref0-fw0-font-family: 'Helvetica Neue', sans-serif;`);
+    expect(output).to.include(`--fw-ref29-fw299-font-family: 'Helvetica Neue', sans-serif;`);
+    expect(end - start).to.be.below(2000 * timeoutMultiplier);
+  }).timeout(2500 * timeoutMultiplier);
 });
