@@ -12,6 +12,7 @@
  */
 import { expect } from 'chai';
 import getValueByPath from '../../../lib/utils/references/getValueByPath.js';
+import { convertTokenData } from '../../../lib/utils/convertTokenData.js';
 
 const dictionary = {
   color: {
@@ -51,5 +52,16 @@ describe('getValueByPath()', () => {
 
   it(`works with array indices`, () => {
     expect(getValueByPath(['arr', '0'], dictionary)).to.equal(dictionary.arr[0]);
+  });
+
+  it(`works with Token Map structure`, () => {
+    const foundToken = getValueByPath(
+      ['color', 'palette', 'neutral', '0'],
+      convertTokenData(dictionary, { output: 'map' }),
+    );
+    expect(foundToken).to.eql({
+      ...dictionary.color.palette.neutral['0'],
+      key: '{color.palette.neutral.0}',
+    });
   });
 });
