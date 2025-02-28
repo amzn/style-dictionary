@@ -614,16 +614,20 @@ snapshots["integration custom formats inline custom with new args should match s
     },
     "transforms": [
       {
-        "type": "attribute"
+        "type": "attribute",
+        "name": "attribute/cti"
       },
       {
-        "type": "name"
+        "type": "name",
+        "name": "name/pascal"
       },
       {
-        "type": "value"
+        "type": "value",
+        "name": "size/rem"
       },
       {
-        "type": "value"
+        "type": "value",
+        "name": "color/hex"
       }
     ],
     "actions": []
@@ -1618,16 +1622,20 @@ snapshots["integration custom formats register custom format with new args shoul
     },
     "transforms": [
       {
-        "type": "attribute"
+        "type": "attribute",
+        "name": "attribute/cti"
       },
       {
-        "type": "name"
+        "type": "name",
+        "name": "name/pascal"
       },
       {
-        "type": "value"
+        "type": "value",
+        "name": "size/rem"
       },
       {
-        "type": "value"
+        "type": "value",
+        "name": "color/hex"
       }
     ],
     "actions": []
