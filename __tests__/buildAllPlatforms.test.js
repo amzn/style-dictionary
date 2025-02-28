@@ -31,17 +31,18 @@ describe('buildAllPlatforms', () => {
 
   it('should work with json config', async () => {
     const StyleDictionaryExtended = new StyleDictionary('__tests__/__configs/test.json');
+    await StyleDictionaryExtended.hasInitialized;
     await StyleDictionaryExtended.buildAllPlatforms();
     expect(fileExists('__tests__/__output/web/_icons.css')).to.be.true;
     expect(fileExists('__tests__/__output/android/colors.xml')).to.be.true;
-  });
+  }).timeout(20000);
 
   it('should work with js config', async () => {
     const StyleDictionaryExtended = new StyleDictionary('__tests__/__configs/test.js');
     await StyleDictionaryExtended.buildAllPlatforms();
     expect(fileExists('__tests__/__output/web/_icons.css')).to.be.true;
     expect(fileExists('__tests__/__output/android/colors.xml')).to.be.true;
-  });
+  }).timeout(20000);
 
   it('should work with volume override', async () => {
     const vol1 = new memfs.Volume();

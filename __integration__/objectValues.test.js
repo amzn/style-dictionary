@@ -28,10 +28,11 @@ describe('integration', async () => {
       outputReferences: true,
     };
     const sd = new StyleDictionary({
+      log: { verbosity: 'verbose' },
       tokens: {
-        hue: `120`,
-        saturation: `50%`,
-        lightness: `50%`,
+        hue: { value: `120` },
+        saturation: { value: `50%` },
+        lightness: { value: `50%` },
         color: {
           red: { value: '#f00', type: 'color' },
           green: {
