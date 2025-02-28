@@ -1,5 +1,18 @@
 # Changelog
 
+## 5.0.0-rc.0
+
+### Major Changes
+
+- 2b2c154: No longer allow references to non-token leaf nodes. References only work when referencing a Design Token (its value).
+  Non-token nodes will also not make it to the output, because they are filtered out during the flattening process to `tokenMap` and `tokenArray`.
+  Remove allowing references with `.value` suffix.
+- 2b2c154: BREAKING: minimum NodeJS version required is now v22.0.0 (LTS, at time of writing this). This is to support `Set.prototype.union` which we utilize in our token reference resolution utility, and it's important to use the cheaper built-in versus doing a union manually.
+
+### Minor Changes
+
+- 2b2c154: Support passing Token Map structure to `getReferences` and `resolveReferences` utils.
+
 ## 4.4.0
 
 ### Minor Changes
@@ -128,8 +141,8 @@
   with property `cache`, which if set to `false`, will disable this caching of generating the platform specific config / tokens, e.g.:
 
   ```js
-  await sd.exportPlatform('css', { cache: false });
-  await sd.buildAllPlatforms('css', { cache: false });
+  await sd.exportPlatform("css", { cache: false });
+  await sd.buildAllPlatforms("css", { cache: false });
   ```
 
   Expectation is that this is usually not useful for majority of users, unless for example you're testing multiple runs of StyleDictionary while changing tokens or platform configs in between those runs.
@@ -177,7 +190,11 @@
     - There is no more hand-written Style Dictionary module `index.d.ts` anymore that exposes all type interfaces on itself. This means that you can no longer grab types that aren't members of the Style Dictionary class directly from the default export of the main entrypoint. External types such as `Parser`, `Transform`, `DesignTokens`, etc. can be imported from the newly added types entrypoint:
 
     ```ts
-    import type { DesignTokens, Transform, Parser } from 'style-dictionary/types';
+    import type {
+      DesignTokens,
+      Transform,
+      Parser,
+    } from "style-dictionary/types";
     ```
 
     Please raise an issue if you find anything missing or suddenly broken.
@@ -198,7 +215,11 @@
   ```js
   export default {
     fileHeader: {
-      foo: (defaultMessages = []) => ['Ola, planet!', ...defaultMessages, 'Hello, World!'],
+      foo: (defaultMessages = []) => [
+        "Ola, planet!",
+        ...defaultMessages,
+        "Hello, World!",
+      ],
     },
   };
   ```
@@ -209,7 +230,11 @@
   export default {
     hooks: {
       fileHeaders: {
-        foo: (defaultMessages = []) => ['Ola, planet!', ...defaultMessages, 'Hello, World!'],
+        foo: (defaultMessages = []) => [
+          "Ola, planet!",
+          ...defaultMessages,
+          "Hello, World!",
+        ],
       },
     },
   };
@@ -295,7 +320,7 @@
   Before
 
   ```js
-  import StyleDictionary from 'style-dictionary';
+  import StyleDictionary from "style-dictionary";
 
   const { fileHeader, formattedVariables } = StyleDictionary.formatHelpers;
   ```
@@ -303,7 +328,7 @@
   After
 
   ```js
-  import { fileHeader, formattedVariables } from 'style-dictionary/utils';
+  import { fileHeader, formattedVariables } from "style-dictionary/utils";
   ```
 
 - f2ed88b: Filters, when registered, are put inside the `hooks.filters` property now, as opposed to `filter`.
@@ -354,22 +379,22 @@
   Before:
 
   ```js title="build-tokens.js" del={5} ins={6}
-  import StyleDictionary from 'style-dictionary';
+  import StyleDictionary from "style-dictionary";
 
   StyleDictionary.registerFilter({
-    name: 'colors-only',
-    matcher: (token) => token.type === 'color',
+    name: "colors-only",
+    matcher: (token) => token.type === "color",
   });
   ```
 
   After:
 
   ```js title="build-tokens.js" del={5} ins={6}
-  import StyleDictionary from 'style-dictionary';
+  import StyleDictionary from "style-dictionary";
 
   StyleDictionary.registerFilter({
-    name: 'colors-only',
-    filter: (token) => token.type === 'color',
+    name: "colors-only",
+    filter: (token) => token.type === "color",
   });
   ```
 
@@ -383,7 +408,7 @@
   export default {
     // register it inline or by SD.registerTransformGroup
     transformGroup: {
-      foo: ['foo-transform'],
+      foo: ["foo-transform"],
     },
   };
   ```
@@ -394,7 +419,7 @@
   export default {
     hooks: {
       transformGroups: {
-        foo: ['foo-transform'],
+        foo: ["foo-transform"],
       },
     },
   };
@@ -403,21 +428,21 @@
 - 502dbd1: BREAKING: All of our hooks, parsers, preprocessors, transforms, formats, actions, fileHeaders and filters, support async functions as well now. This means that the formatHelpers -> fileHeader helper method is now asynchronous, to support async fileheader functions.
 
   ```js
-  import StyleDictionary from 'style-dictionary';
+  import StyleDictionary from "style-dictionary";
 
   const { fileHeader } = StyleDictionary.formatHelpers;
 
   StyleDictionary.registerFormat({
-    name: 'custom/css',
+    name: "custom/css",
     // this can be async now, usually it is if you use fileHeader format helper, since that now always returns a Promise
     formatter: async function ({ dictionary, file, options }) {
       const { outputReferences } = options;
       return (
         // this helper is now async! because the user-passed file.fileHeader might be an async function
         (await fileHeader({ file })) +
-        ':root {\n' +
-        formattedVariables({ format: 'css', dictionary, outputReferences }) +
-        '\n}\n'
+        ":root {\n" +
+        formattedVariables({ format: "css", dictionary, outputReferences }) +
+        "\n}\n"
       );
     },
   });
@@ -432,26 +457,26 @@
   Before:
 
   ```ts
-  import StyleDictionary from 'style-dictionary';
-  import type { Formatter, FormatterArguments } from 'style-dictionary/types';
+  import StyleDictionary from "style-dictionary";
+  import type { Formatter, FormatterArguments } from "style-dictionary/types";
 
   // register it with register method
   StyleDictionary.registerFormat({
-    name: 'custom/json',
+    name: "custom/json",
     formatter: ({ dictionary }) => JSON.stringify(dictionary, null, 2),
   });
 
   export default {
     // OR define it inline
     format: {
-      'custom/json': ({ dictionary }) => JSON.stringify(dictionary, null, 2),
+      "custom/json": ({ dictionary }) => JSON.stringify(dictionary, null, 2),
     },
     platforms: {
       json: {
         files: [
           {
-            destination: 'output.json',
-            format: 'custom/json',
+            destination: "output.json",
+            format: "custom/json",
           },
         ],
       },
@@ -462,12 +487,12 @@
   After:
 
   ```ts
-  import StyleDictionary from 'style-dictionary';
-  import type { FormatFn, FormatFnArguments } from 'style-dictionary/types';
+  import StyleDictionary from "style-dictionary";
+  import type { FormatFn, FormatFnArguments } from "style-dictionary/types";
 
   // register it with register method
   StyleDictionary.registerFormat({
-    name: 'custom/json',
+    name: "custom/json",
     format: ({ dictionary }) => JSON.stringify(dictionary, null, 2),
   });
 
@@ -475,15 +500,15 @@
     // OR define it inline
     hooks: {
       formats: {
-        'custom/json': ({ dictionary }) => JSON.stringify(dictionary, null, 2),
+        "custom/json": ({ dictionary }) => JSON.stringify(dictionary, null, 2),
       },
     },
     platforms: {
       json: {
         files: [
           {
-            destination: 'output.json',
-            format: 'custom/json',
+            destination: "output.json",
+            format: "custom/json",
           },
         ],
       },
@@ -524,11 +549,11 @@
       },
     },
     // apply it globally
-    preprocessors: ['foo'],
+    preprocessors: ["foo"],
     platforms: {
       css: {
         // or apply is per platform
-        preprocessors: ['foo'],
+        preprocessors: ["foo"],
       },
     },
   };
@@ -575,16 +600,16 @@
   export default {
     // register it inline or by SD.registerTransform
     transform: {
-      'color-transform': {
-        type: 'value',
-        matcher: (token) => token.type === 'color',
+      "color-transform": {
+        type: "value",
+        matcher: (token) => token.type === "color",
         transformer: (token) => token.value,
       },
     },
     platforms: {
       css: {
         // apply it per platform
-        transforms: ['color-transform'],
+        transforms: ["color-transform"],
       },
     },
   };
@@ -597,9 +622,9 @@
     // register it inline or by SD.registerTransform
     hooks: {
       transforms: {
-        'color-transform': {
-          type: 'value',
-          filter: (token) => token.type === 'color',
+        "color-transform": {
+          type: "value",
+          filter: (token) => token.type === "color",
           transform: (token) => token.value,
         },
       },
@@ -607,7 +632,7 @@
     platforms: {
       css: {
         // apply it per platform
-        transforms: ['color-transform'],
+        transforms: ["color-transform"],
       },
     },
   };
@@ -680,27 +705,27 @@
 - a4542f4: BREAKING: StyleDictionary to be initialized with a new API and have async methods. Use:
 
   ```js
-  import StyleDictionary from 'style-dictionary';
+  import StyleDictionary from "style-dictionary";
 
   /**
    * old:
    *   const sd = StyleDictionary.extend({ source: ['tokens.json'], platforms: {} });
    *   sd.buildAllPlatforms();
    */
-  const sd = new StyleDictionary({ source: ['tokens.json'], platforms: {} });
+  const sd = new StyleDictionary({ source: ["tokens.json"], platforms: {} });
   await sd.buildAllPlatforms();
   ```
 
   You can still extend a dictionary instance with an extended config, but `.extend()` is only used for this, it is no longer used to initialize the first instance:
 
   ```js
-  import StyleDictionary from 'style-dictionary';
+  import StyleDictionary from "style-dictionary";
 
-  const sd = new StyleDictionary({ source: ['tokens.json'], platforms: {} });
+  const sd = new StyleDictionary({ source: ["tokens.json"], platforms: {} });
   const extended = await sd.extend({
     fileHeader: {
       myFileHeader: (defaultMessage) => {
-        return [...defaultMessage, 'hello, world!'];
+        return [...defaultMessage, "hello, world!"];
       },
     },
   });
@@ -709,9 +734,9 @@
   To ensure your initialized StyleDictionary instance is fully ready and has imported all your tokens, you can await `hasInitialized`:
 
   ```js
-  import StyleDictionary from 'style-dictionary';
+  import StyleDictionary from "style-dictionary";
 
-  const sd = new StyleDictionary({ source: ['tokens.json'], platforms: {} });
+  const sd = new StyleDictionary({ source: ["tokens.json"], platforms: {} });
   await sd.hasInitialized;
   console.log(sd.allTokens);
   ```
@@ -719,9 +744,12 @@
   For error handling and testing purposes, you can also manually initialize the style-dictionary config:
 
   ```js
-  import StyleDictionary from 'style-dictionary';
+  import StyleDictionary from "style-dictionary";
 
-  const sd = new StyleDictionary({ source: ['tokens.js'], platforms: {} }, { init: false });
+  const sd = new StyleDictionary(
+    { source: ["tokens.js"], platforms: {} },
+    { init: false }
+  );
   try {
     await sd.init();
   } catch (e) {
@@ -767,7 +795,7 @@
   export default {
     hooks: {
       parsers: {
-        name: 'json5-parser',
+        name: "json5-parser",
         pattern: /\.json5$/,
         parser: ({ contents, filePath }) => {
           return JSON5.parse(contents);
@@ -775,7 +803,7 @@
       },
     },
     // apply it globally by name reference
-    parsers: ['json5-parser'],
+    parsers: ["json5-parser"],
   };
   ```
 
@@ -847,9 +875,11 @@
   or:
 
   ```js
-  import { fileHeader } from 'style-dictionary/utils';
+  import { fileHeader } from "style-dictionary/utils";
 
-  const headerContent = await fileHeader({ formatting: { fileHeaderTimestamp: true } });
+  const headerContent = await fileHeader({
+    formatting: { fileHeaderTimestamp: true },
+  });
   ```
 
 ### Minor Changes
@@ -885,7 +915,7 @@
 - dcbe2fb: FileSystem that is used by Style Dictionary can now be customized:
 
   ```js
-  import { setFs } from 'style-dictionary/fs';
+  import { setFs } from "style-dictionary/fs";
   setFs(myFileSystemShim);
   ```
 
@@ -912,14 +942,14 @@
 - 122c8f6: Expose a new utility called resolveReferences which takes a value containing references, the dictionary object, and resolves the value's references for you.
 
   ```js
-  import StyleDictionary from 'style-dictionary';
-  import { resolveReferences } from 'style-dictionary/utils';
+  import StyleDictionary from "style-dictionary";
+  import { resolveReferences } from "style-dictionary/utils";
 
   const sd = new StyleDictionary({
     tokens: {
-      foo: { value: 'foo' },
-      bar: { value: '{foo}' },
-      qux: { value: '{bar}' },
+      foo: { value: "foo" },
+      bar: { value: "{foo}" },
+      qux: { value: "{bar}" },
     },
   });
 
@@ -947,10 +977,10 @@
   Useful in case you want multiple Style Dictionary instances that are isolated from one another in terms of inputs/outputs.
 
   ```js
-  import { Volume } from 'memfs';
+  import { Volume } from "memfs";
   // You will need a bundler for memfs in browser...
   // Or use as a prebundled fork:
-  import memfs from '@bundled-es-modules/memfs';
+  import memfs from "@bundled-es-modules/memfs";
   const { Volume } = memfs;
 
   const vol = new Volume();
@@ -960,29 +990,29 @@
       tokens: {
         colors: {
           red: {
-            value: '#FF0000',
-            type: 'color',
+            value: "#FF0000",
+            type: "color",
           },
         },
       },
       platforms: {
         css: {
-          transformGroup: 'css',
+          transformGroup: "css",
           files: [
             {
-              destination: 'variables.css',
-              format: 'css/variables',
+              destination: "variables.css",
+              format: "css/variables",
             },
           ],
         },
       },
     },
-    { volume: vol },
+    { volume: vol }
   );
 
   await sd.buildAllPlatforms();
 
-  vol.readFileSync('/variables.css');
+  vol.readFileSync("/variables.css");
   /**
    * :root {
    *   --colors-red: #FF0000;

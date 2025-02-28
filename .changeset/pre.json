@@ -4,5 +4,9 @@
   "initialVersions": {
     "style-dictionary": "4.3.3"
   },
-  "changesets": []
+  "changesets": [
+    "olive-shirts-juggle",
+    "three-weeks-count",
+    "yellow-bugs-bow"
+  ]
 }
