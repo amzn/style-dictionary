@@ -46,8 +46,10 @@ module.exports = {
   color: {
     red: {
       value: "#ff0000",
+      key: "{color.red}",
       original: {
         value: "#ff0000",
+        key: "{color.red}",
       },
       name: "ColorRed",
       attributes: {
@@ -66,8 +68,10 @@ snapshots["integration valid custom file headers platform options showFileHeader
   color: {
     red: {
       value: "#ff0000",
+      key: "{color.red}",
       original: {
         value: "#ff0000",
+        key: "{color.red}",
       },
       name: "ColorRed",
       attributes: {
@@ -90,8 +94,10 @@ module.exports = {
   color: {
     red: {
       value: "#ff0000",
+      key: "{color.red}",
       original: {
         value: "#ff0000",
+        key: "{color.red}",
       },
       name: "ColorRed",
       attributes: {
