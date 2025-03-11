@@ -74,6 +74,7 @@ export interface ResolveReferencesOptionsInternal extends ResolveReferencesOptio
   stack?: string[];
   foundCirc?: Record<string, boolean>;
   firstIteration?: boolean;
+  objectsOnly?: boolean;
 }
 
 export interface ResolveReferencesOptionsInternalOld extends ResolveReferencesOptions {
