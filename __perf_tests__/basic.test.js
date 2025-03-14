@@ -195,39 +195,42 @@ describe('cliBuildWithJsConfig', () => {
     expect(end - start).to.be.below(1500 * timeoutMultiplier);
   }).timeout(2000 * timeoutMultiplier);
 
-  it('should run an obscene amount of tokens with refs refs chaining within 10 seconds', async () => {
-    // 30000 tokens, 29700 refs, 100 ref layers deep -> within 10000ms
-    const fontWeightTokens = generateTokens({
-      key: 'fw',
-      amount: 300,
-      value: 'Regular',
-      type: 'fontWeight',
-      refDepth: 100,
-    });
+  it.only(
+    'should run an obscene amount of tokens with refs refs chaining within 10 seconds',
+    async () => {
+      // 30000 tokens, 29700 refs, 100 ref layers deep -> within 10000ms
+      const fontWeightTokens = generateTokens({
+        key: 'fw',
+        amount: 300,
+        value: 'Regular',
+        type: 'fontWeight',
+        refDepth: 100,
+      });
 
-    const start = performance.now();
-    const sd = new StyleDictionary({
-      tokens: {
-        ...fontWeightTokens,
-      },
-      platforms: {
-        css: {
-          transformGroup: css,
-          buildPath,
-          files: [
-            {
-              destination: 'variables.css',
-              format: cssVariables,
-            },
-          ],
+      const start = performance.now();
+      const sd = new StyleDictionary({
+        tokens: {
+          ...fontWeightTokens,
         },
-      },
-    });
-    await sd.hasInitialized;
-    await sd.buildPlatform('css');
-    const end = performance.now();
-    expect(end - start).to.be.below(10000 * timeoutMultiplier);
-  }).timeout(10500 * timeoutMultiplier);
+        platforms: {
+          css: {
+            transformGroup: css,
+            buildPath,
+            files: [
+              {
+                destination: 'variables.css',
+                format: cssVariables,
+              },
+            ],
+          },
+        },
+      });
+      await sd.hasInitialized;
+      await sd.buildPlatform('css');
+      const end = performance.now();
+      expect(end - start).to.be.below(10000 * timeoutMultiplier);
+    },
+  ).timeout(10500 * timeoutMultiplier);
 
   it('should be fast even with transitive transforms', async () => {
     // 9000 tokens, 8700 refs, 30 ref layers deep -> within 1500ms

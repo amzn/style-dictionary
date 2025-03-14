@@ -535,14 +535,17 @@ Refer to: https://styledictionary.com/reference/logging/
           color: {
             type: 'color',
             value: '#000',
+            key: '{border.color}',
           },
           style: {
             type: 'strokeStyle',
             value: 'solid',
+            key: '{border.style}',
           },
           width: {
             type: 'dimension',
             value: '2px',
+            key: '{border.width}',
           },
         },
       });
@@ -754,28 +757,34 @@ Refer to: https://styledictionary.com/reference/logging/
           fontFamily: {
             $type: 'fontFamily',
             $value: 'Arial Black, sans-serif',
+            key: '{typo.fontFamily}',
           },
           fontSize: {
             $type: 'dimension',
             $value: '16px',
+            key: '{typo.fontSize}',
           },
           fontWeight: {
             $type: 'fontWeight',
             $value: 700,
+            key: '{typo.fontWeight}',
           },
         },
         ref: {
           fontFamily: {
             $type: 'fontFamily',
             $value: 'Arial Black, sans-serif',
+            key: '{ref.fontFamily}',
           },
           fontSize: {
             $type: 'dimension',
             $value: '16px',
+            key: '{ref.fontSize}',
           },
           fontWeight: {
             $type: 'fontWeight',
             $value: 700,
+            key: '{ref.fontWeight}',
           },
         },
       });
