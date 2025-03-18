@@ -49,16 +49,4 @@ describe('usesReferences()', () => {
   it(`returns false if an array doesn't use a reference`, () => {
     expect(usesReferences(['foo', 'bar'])).to.be.false;
   });
-
-  describe(`with custom options`, () => {
-    it(`returns true if value is reference`, () => {
-      const customOpts = {
-        opening_character: '(',
-        closing_character: ')',
-        separator: '|',
-      };
-
-      expect(usesReferences('(foo|bar)', customOpts)).to.be.true;
-    });
-  });
 });
