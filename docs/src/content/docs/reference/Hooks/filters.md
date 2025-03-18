@@ -51,7 +51,7 @@ StyleDictionary.registerFilter(myFilter);
 export default {
   hooks: {
     filters: {
-      'my-filter': myFilter,
+      'my-filter': myFilter.filter,
     },
   },
   // ... the rest of the configuration
