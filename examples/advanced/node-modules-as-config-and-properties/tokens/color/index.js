@@ -1,8 +1,8 @@
-import core from './core';
-import brand from './brand';
-import font from './font';
-import background from './background';
-import border from './border';
+import core from './core.js';
+import brand from './brand.js';
+import font from './font.js';
+import background from './background.js';
+import border from './border.js';
 
 // This is kinda cool, don't have to do that
 // weird JSON structure nesting in every file.
