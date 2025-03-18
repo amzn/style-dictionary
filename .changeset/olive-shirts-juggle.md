@@ -2,4 +2,4 @@
 'style-dictionary': minor
 ---
 
-Support passing Token Map structure to getReferences and resolveReferences utils.
+Support passing Token Map structure to `getReferences` and `resolveReferences` utils.

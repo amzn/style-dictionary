@@ -1,5 +1,18 @@
 # Changelog
 
+## 5.0.0-rc.0
+
+### Major Changes
+
+- 2b2c154: No longer allow references to non-token leaf nodes. References only work when referencing a Design Token (its value).
+  Non-token nodes will also not make it to the output, because they are filtered out during the flattening process to `tokenMap` and `tokenArray`.
+  Remove allowing references with `.value` suffix.
+- 2b2c154: BREAKING: minimum NodeJS version required is now v22.0.0 (LTS, at time of writing this). This is to support `Set.prototype.union` which we utilize in our token reference resolution utility, and it's important to use the cheaper built-in versus doing a union manually.
+
+### Minor Changes
+
+- 2b2c154: Support passing Token Map structure to `getReferences` and `resolveReferences` utils.
+
 ## 4.3.3
 
 ### Patch Changes
