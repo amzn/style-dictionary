@@ -1,5 +1,18 @@
 # Changelog
 
+## 5.0.0-rc.1
+
+### Major Changes
+
+- 7909466: BREAKING: no longer possible to pass options to change the reference syntax `{ref.foo}`. The opening, closing and separator characters are now set to be aligned with the DTCG spec.
+
+### Minor Changes
+
+- d4a6fe8: When transform hooks throw errors, they will now be caught and error-handled by Style Dictionary.
+  Instead of causing a fatal failure, the error is collected and logged as a warning at the end.
+  With verbosity turned to `"verbose"`, information about which tokens in which files are causing an error in which transform, to help debugging the problem.
+  Sensible fallbacks are used when a transform cannot complete.
+
 ## 5.0.0-rc.0
 
 ### Major Changes
