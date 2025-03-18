@@ -8,11 +8,11 @@ snapshots["integration custom formats inline custom with new args should match s
       "size": {
         "padding": {
           "small": {
+            "key": "{size.padding.small}",
             "value": "0.5rem",
             "type": "dimension",
             "filePath": "__integration__/tokens/size/padding.json",
             "isSource": true,
-            "key": "{size.padding.small}",
             "original": {
               "value": 0.5,
               "type": "dimension",
@@ -31,11 +31,11 @@ snapshots["integration custom formats inline custom with new args should match s
             ]
           },
           "medium": {
+            "key": "{size.padding.medium}",
             "value": "1rem",
             "type": "dimension",
             "filePath": "__integration__/tokens/size/padding.json",
             "isSource": true,
-            "key": "{size.padding.medium}",
             "original": {
               "value": 1,
               "type": "dimension",
@@ -54,11 +54,11 @@ snapshots["integration custom formats inline custom with new args should match s
             ]
           },
           "large": {
+            "key": "{size.padding.large}",
             "value": "1rem",
             "type": "dimension",
             "filePath": "__integration__/tokens/size/padding.json",
             "isSource": true,
-            "key": "{size.padding.large}",
             "original": {
               "value": 1,
               "type": "dimension",
@@ -77,11 +77,11 @@ snapshots["integration custom formats inline custom with new args should match s
             ]
           },
           "xl": {
+            "key": "{size.padding.xl}",
             "value": "1rem",
             "type": "dimension",
             "filePath": "__integration__/tokens/size/padding.json",
             "isSource": true,
-            "key": "{size.padding.xl}",
             "original": {
               "value": 1,
               "type": "dimension",
@@ -104,11 +104,11 @@ snapshots["integration custom formats inline custom with new args should match s
     },
     "allTokens": [
       {
+        "key": "{size.padding.small}",
         "value": "0.5rem",
         "type": "dimension",
         "filePath": "__integration__/tokens/size/padding.json",
         "isSource": true,
-        "key": "{size.padding.small}",
         "original": {
           "value": 0.5,
           "type": "dimension",
@@ -127,11 +127,11 @@ snapshots["integration custom formats inline custom with new args should match s
         ]
       },
       {
+        "key": "{size.padding.medium}",
         "value": "1rem",
         "type": "dimension",
         "filePath": "__integration__/tokens/size/padding.json",
         "isSource": true,
-        "key": "{size.padding.medium}",
         "original": {
           "value": 1,
           "type": "dimension",
@@ -150,11 +150,11 @@ snapshots["integration custom formats inline custom with new args should match s
         ]
       },
       {
+        "key": "{size.padding.large}",
         "value": "1rem",
         "type": "dimension",
         "filePath": "__integration__/tokens/size/padding.json",
         "isSource": true,
-        "key": "{size.padding.large}",
         "original": {
           "value": 1,
           "type": "dimension",
@@ -173,11 +173,11 @@ snapshots["integration custom formats inline custom with new args should match s
         ]
       },
       {
+        "key": "{size.padding.xl}",
         "value": "1rem",
         "type": "dimension",
         "filePath": "__integration__/tokens/size/padding.json",
         "isSource": true,
-        "key": "{size.padding.xl}",
         "original": {
           "value": 1,
           "type": "dimension",
@@ -201,11 +201,11 @@ snapshots["integration custom formats inline custom with new args should match s
       "size": {
         "padding": {
           "small": {
+            "key": "{size.padding.small}",
             "value": "0.5rem",
             "type": "dimension",
             "filePath": "__integration__/tokens/size/padding.json",
             "isSource": true,
-            "key": "{size.padding.small}",
             "original": {
               "value": 0.5,
               "type": "dimension",
@@ -224,11 +224,11 @@ snapshots["integration custom formats inline custom with new args should match s
             ]
           },
           "medium": {
+            "key": "{size.padding.medium}",
             "value": "1rem",
             "type": "dimension",
             "filePath": "__integration__/tokens/size/padding.json",
             "isSource": true,
-            "key": "{size.padding.medium}",
             "original": {
               "value": 1,
               "type": "dimension",
@@ -247,11 +247,11 @@ snapshots["integration custom formats inline custom with new args should match s
             ]
           },
           "large": {
+            "key": "{size.padding.large}",
             "value": "1rem",
             "type": "dimension",
             "filePath": "__integration__/tokens/size/padding.json",
             "isSource": true,
-            "key": "{size.padding.large}",
             "original": {
               "value": 1,
               "type": "dimension",
@@ -270,11 +270,11 @@ snapshots["integration custom formats inline custom with new args should match s
             ]
           },
           "xl": {
+            "key": "{size.padding.xl}",
             "value": "1rem",
             "type": "dimension",
             "filePath": "__integration__/tokens/size/padding.json",
             "isSource": true,
-            "key": "{size.padding.xl}",
             "original": {
               "value": 1,
               "type": "dimension",
@@ -297,11 +297,11 @@ snapshots["integration custom formats inline custom with new args should match s
     },
     "unfilteredAllTokens": [
       {
+        "key": "{size.padding.small}",
         "value": "0.5rem",
         "type": "dimension",
         "filePath": "__integration__/tokens/size/padding.json",
         "isSource": true,
-        "key": "{size.padding.small}",
         "original": {
           "value": 0.5,
           "type": "dimension",
@@ -320,11 +320,11 @@ snapshots["integration custom formats inline custom with new args should match s
         ]
       },
       {
+        "key": "{size.padding.medium}",
         "value": "1rem",
         "type": "dimension",
         "filePath": "__integration__/tokens/size/padding.json",
         "isSource": true,
-        "key": "{size.padding.medium}",
         "original": {
           "value": 1,
           "type": "dimension",
@@ -343,11 +343,11 @@ snapshots["integration custom formats inline custom with new args should match s
         ]
       },
       {
+        "key": "{size.padding.large}",
         "value": "1rem",
         "type": "dimension",
         "filePath": "__integration__/tokens/size/padding.json",
         "isSource": true,
-        "key": "{size.padding.large}",
         "original": {
           "value": 1,
           "type": "dimension",
@@ -366,11 +366,11 @@ snapshots["integration custom formats inline custom with new args should match s
         ]
       },
       {
+        "key": "{size.padding.xl}",
         "value": "1rem",
         "type": "dimension",
         "filePath": "__integration__/tokens/size/padding.json",
         "isSource": true,
-        "key": "{size.padding.xl}",
         "original": {
           "value": 1,
           "type": "dimension",
@@ -393,11 +393,11 @@ snapshots["integration custom formats inline custom with new args should match s
   },
   "allTokens": [
     {
+      "key": "{size.padding.small}",
       "value": "0.5rem",
       "type": "dimension",
       "filePath": "__integration__/tokens/size/padding.json",
       "isSource": true,
-      "key": "{size.padding.small}",
       "original": {
         "value": 0.5,
         "type": "dimension",
@@ -416,11 +416,11 @@ snapshots["integration custom formats inline custom with new args should match s
       ]
     },
     {
+      "key": "{size.padding.medium}",
       "value": "1rem",
       "type": "dimension",
       "filePath": "__integration__/tokens/size/padding.json",
       "isSource": true,
-      "key": "{size.padding.medium}",
       "original": {
         "value": 1,
         "type": "dimension",
@@ -439,11 +439,11 @@ snapshots["integration custom formats inline custom with new args should match s
       ]
     },
     {
+      "key": "{size.padding.large}",
       "value": "1rem",
       "type": "dimension",
       "filePath": "__integration__/tokens/size/padding.json",
       "isSource": true,
-      "key": "{size.padding.large}",
       "original": {
         "value": 1,
         "type": "dimension",
@@ -462,11 +462,11 @@ snapshots["integration custom formats inline custom with new args should match s
       ]
     },
     {
+      "key": "{size.padding.xl}",
       "value": "1rem",
       "type": "dimension",
       "filePath": "__integration__/tokens/size/padding.json",
       "isSource": true,
-      "key": "{size.padding.xl}",
       "original": {
         "value": 1,
         "type": "dimension",
@@ -489,11 +489,11 @@ snapshots["integration custom formats inline custom with new args should match s
     "size": {
       "padding": {
         "small": {
+          "key": "{size.padding.small}",
           "value": "0.5rem",
           "type": "dimension",
           "filePath": "__integration__/tokens/size/padding.json",
           "isSource": true,
-          "key": "{size.padding.small}",
           "original": {
             "value": 0.5,
             "type": "dimension",
@@ -512,11 +512,11 @@ snapshots["integration custom formats inline custom with new args should match s
           ]
         },
         "medium": {
+          "key": "{size.padding.medium}",
           "value": "1rem",
           "type": "dimension",
           "filePath": "__integration__/tokens/size/padding.json",
           "isSource": true,
-          "key": "{size.padding.medium}",
           "original": {
             "value": 1,
             "type": "dimension",
@@ -535,11 +535,11 @@ snapshots["integration custom formats inline custom with new args should match s
           ]
         },
         "large": {
+          "key": "{size.padding.large}",
           "value": "1rem",
           "type": "dimension",
           "filePath": "__integration__/tokens/size/padding.json",
           "isSource": true,
-          "key": "{size.padding.large}",
           "original": {
             "value": 1,
             "type": "dimension",
@@ -558,11 +558,11 @@ snapshots["integration custom formats inline custom with new args should match s
           ]
         },
         "xl": {
+          "key": "{size.padding.xl}",
           "value": "1rem",
           "type": "dimension",
           "filePath": "__integration__/tokens/size/padding.json",
           "isSource": true,
-          "key": "{size.padding.xl}",
           "original": {
             "value": 1,
             "type": "dimension",
@@ -1019,11 +1019,11 @@ snapshots["integration custom formats register custom format with new args shoul
       "size": {
         "padding": {
           "small": {
+            "key": "{size.padding.small}",
             "value": "0.5rem",
             "type": "dimension",
             "filePath": "__integration__/tokens/size/padding.json",
             "isSource": true,
-            "key": "{size.padding.small}",
             "original": {
               "value": 0.5,
               "type": "dimension",
@@ -1042,11 +1042,11 @@ snapshots["integration custom formats register custom format with new args shoul
             ]
           },
           "medium": {
+            "key": "{size.padding.medium}",
             "value": "1rem",
             "type": "dimension",
             "filePath": "__integration__/tokens/size/padding.json",
             "isSource": true,
-            "key": "{size.padding.medium}",
             "original": {
               "value": 1,
               "type": "dimension",
@@ -1065,11 +1065,11 @@ snapshots["integration custom formats register custom format with new args shoul
             ]
           },
           "large": {
+            "key": "{size.padding.large}",
             "value": "1rem",
             "type": "dimension",
             "filePath": "__integration__/tokens/size/padding.json",
             "isSource": true,
-            "key": "{size.padding.large}",
             "original": {
               "value": 1,
               "type": "dimension",
@@ -1088,11 +1088,11 @@ snapshots["integration custom formats register custom format with new args shoul
             ]
           },
           "xl": {
+            "key": "{size.padding.xl}",
             "value": "1rem",
             "type": "dimension",
             "filePath": "__integration__/tokens/size/padding.json",
             "isSource": true,
-            "key": "{size.padding.xl}",
             "original": {
               "value": 1,
               "type": "dimension",
@@ -1115,11 +1115,11 @@ snapshots["integration custom formats register custom format with new args shoul
     },
     "allTokens": [
       {
+        "key": "{size.padding.small}",
         "value": "0.5rem",
         "type": "dimension",
         "filePath": "__integration__/tokens/size/padding.json",
         "isSource": true,
-        "key": "{size.padding.small}",
         "original": {
           "value": 0.5,
           "type": "dimension",
@@ -1138,11 +1138,11 @@ snapshots["integration custom formats register custom format with new args shoul
         ]
       },
       {
+        "key": "{size.padding.medium}",
         "value": "1rem",
         "type": "dimension",
         "filePath": "__integration__/tokens/size/padding.json",
         "isSource": true,
-        "key": "{size.padding.medium}",
         "original": {
           "value": 1,
           "type": "dimension",
@@ -1161,11 +1161,11 @@ snapshots["integration custom formats register custom format with new args shoul
         ]
       },
       {
+        "key": "{size.padding.large}",
         "value": "1rem",
         "type": "dimension",
         "filePath": "__integration__/tokens/size/padding.json",
         "isSource": true,
-        "key": "{size.padding.large}",
         "original": {
           "value": 1,
           "type": "dimension",
@@ -1184,11 +1184,11 @@ snapshots["integration custom formats register custom format with new args shoul
         ]
       },
       {
+        "key": "{size.padding.xl}",
         "value": "1rem",
         "type": "dimension",
         "filePath": "__integration__/tokens/size/padding.json",
         "isSource": true,
-        "key": "{size.padding.xl}",
         "original": {
           "value": 1,
           "type": "dimension",
@@ -1212,11 +1212,11 @@ snapshots["integration custom formats register custom format with new args shoul
       "size": {
         "padding": {
           "small": {
+            "key": "{size.padding.small}",
             "value": "0.5rem",
             "type": "dimension",
             "filePath": "__integration__/tokens/size/padding.json",
             "isSource": true,
-            "key": "{size.padding.small}",
             "original": {
               "value": 0.5,
               "type": "dimension",
@@ -1235,11 +1235,11 @@ snapshots["integration custom formats register custom format with new args shoul
             ]
           },
           "medium": {
+            "key": "{size.padding.medium}",
             "value": "1rem",
             "type": "dimension",
             "filePath": "__integration__/tokens/size/padding.json",
             "isSource": true,
-            "key": "{size.padding.medium}",
             "original": {
               "value": 1,
               "type": "dimension",
@@ -1258,11 +1258,11 @@ snapshots["integration custom formats register custom format with new args shoul
             ]
           },
           "large": {
+            "key": "{size.padding.large}",
             "value": "1rem",
             "type": "dimension",
             "filePath": "__integration__/tokens/size/padding.json",
             "isSource": true,
-            "key": "{size.padding.large}",
             "original": {
               "value": 1,
               "type": "dimension",
@@ -1281,11 +1281,11 @@ snapshots["integration custom formats register custom format with new args shoul
             ]
           },
           "xl": {
+            "key": "{size.padding.xl}",
             "value": "1rem",
             "type": "dimension",
             "filePath": "__integration__/tokens/size/padding.json",
             "isSource": true,
-            "key": "{size.padding.xl}",
             "original": {
               "value": 1,
               "type": "dimension",
@@ -1308,11 +1308,11 @@ snapshots["integration custom formats register custom format with new args shoul
     },
     "unfilteredAllTokens": [
       {
+        "key": "{size.padding.small}",
         "value": "0.5rem",
         "type": "dimension",
         "filePath": "__integration__/tokens/size/padding.json",
         "isSource": true,
-        "key": "{size.padding.small}",
         "original": {
           "value": 0.5,
           "type": "dimension",
@@ -1331,11 +1331,11 @@ snapshots["integration custom formats register custom format with new args shoul
         ]
       },
       {
+        "key": "{size.padding.medium}",
         "value": "1rem",
         "type": "dimension",
         "filePath": "__integration__/tokens/size/padding.json",
         "isSource": true,
-        "key": "{size.padding.medium}",
         "original": {
           "value": 1,
           "type": "dimension",
@@ -1354,11 +1354,11 @@ snapshots["integration custom formats register custom format with new args shoul
         ]
       },
       {
+        "key": "{size.padding.large}",
         "value": "1rem",
         "type": "dimension",
         "filePath": "__integration__/tokens/size/padding.json",
         "isSource": true,
-        "key": "{size.padding.large}",
         "original": {
           "value": 1,
           "type": "dimension",
@@ -1377,11 +1377,11 @@ snapshots["integration custom formats register custom format with new args shoul
         ]
       },
       {
+        "key": "{size.padding.xl}",
         "value": "1rem",
         "type": "dimension",
         "filePath": "__integration__/tokens/size/padding.json",
         "isSource": true,
-        "key": "{size.padding.xl}",
         "original": {
           "value": 1,
           "type": "dimension",
@@ -1404,11 +1404,11 @@ snapshots["integration custom formats register custom format with new args shoul
   },
   "allTokens": [
     {
+      "key": "{size.padding.small}",
       "value": "0.5rem",
       "type": "dimension",
       "filePath": "__integration__/tokens/size/padding.json",
       "isSource": true,
-      "key": "{size.padding.small}",
       "original": {
         "value": 0.5,
         "type": "dimension",
@@ -1427,11 +1427,11 @@ snapshots["integration custom formats register custom format with new args shoul
       ]
     },
     {
+      "key": "{size.padding.medium}",
       "value": "1rem",
       "type": "dimension",
       "filePath": "__integration__/tokens/size/padding.json",
       "isSource": true,
-      "key": "{size.padding.medium}",
       "original": {
         "value": 1,
         "type": "dimension",
@@ -1450,11 +1450,11 @@ snapshots["integration custom formats register custom format with new args shoul
       ]
     },
     {
+      "key": "{size.padding.large}",
       "value": "1rem",
       "type": "dimension",
       "filePath": "__integration__/tokens/size/padding.json",
       "isSource": true,
-      "key": "{size.padding.large}",
       "original": {
         "value": 1,
         "type": "dimension",
@@ -1473,11 +1473,11 @@ snapshots["integration custom formats register custom format with new args shoul
       ]
     },
     {
+      "key": "{size.padding.xl}",
       "value": "1rem",
       "type": "dimension",
       "filePath": "__integration__/tokens/size/padding.json",
       "isSource": true,
-      "key": "{size.padding.xl}",
       "original": {
         "value": 1,
         "type": "dimension",
@@ -1500,11 +1500,11 @@ snapshots["integration custom formats register custom format with new args shoul
     "size": {
       "padding": {
         "small": {
+          "key": "{size.padding.small}",
           "value": "0.5rem",
           "type": "dimension",
           "filePath": "__integration__/tokens/size/padding.json",
           "isSource": true,
-          "key": "{size.padding.small}",
           "original": {
             "value": 0.5,
             "type": "dimension",
@@ -1523,11 +1523,11 @@ snapshots["integration custom formats register custom format with new args shoul
           ]
         },
         "medium": {
+          "key": "{size.padding.medium}",
           "value": "1rem",
           "type": "dimension",
           "filePath": "__integration__/tokens/size/padding.json",
           "isSource": true,
-          "key": "{size.padding.medium}",
           "original": {
             "value": 1,
             "type": "dimension",
@@ -1546,11 +1546,11 @@ snapshots["integration custom formats register custom format with new args shoul
           ]
         },
         "large": {
+          "key": "{size.padding.large}",
           "value": "1rem",
           "type": "dimension",
           "filePath": "__integration__/tokens/size/padding.json",
           "isSource": true,
-          "key": "{size.padding.large}",
           "original": {
             "value": 1,
             "type": "dimension",
@@ -1569,11 +1569,11 @@ snapshots["integration custom formats register custom format with new args shoul
           ]
         },
         "xl": {
+          "key": "{size.padding.xl}",
           "value": "1rem",
           "type": "dimension",
           "filePath": "__integration__/tokens/size/padding.json",
           "isSource": true,
-          "key": "{size.padding.xl}",
           "original": {
             "value": 1,
             "type": "dimension",

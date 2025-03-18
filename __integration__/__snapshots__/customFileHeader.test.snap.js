@@ -45,8 +45,8 @@ snapshots["integration valid custom file headers platform options no file option
 module.exports = {
   color: {
     red: {
-      value: "#ff0000",
       key: "{color.red}",
+      value: "#ff0000",
       original: {
         value: "#ff0000",
         key: "{color.red}",
@@ -67,8 +67,8 @@ snapshots["integration valid custom file headers platform options showFileHeader
 `module.exports = {
   color: {
     red: {
-      value: "#ff0000",
       key: "{color.red}",
+      value: "#ff0000",
       original: {
         value: "#ff0000",
         key: "{color.red}",
@@ -93,8 +93,8 @@ snapshots["integration valid custom file headers platform options file header ov
 module.exports = {
   color: {
     red: {
-      value: "#ff0000",
       key: "{color.red}",
+      value: "#ff0000",
       original: {
         value: "#ff0000",
         key: "{color.red}",
