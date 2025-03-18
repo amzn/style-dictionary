@@ -14,6 +14,7 @@ import { expect } from 'chai';
 import StyleDictionary from 'style-dictionary';
 import { buildPath, cleanConsoleOutput } from '../_constants.js';
 import { clearOutput } from '../../__tests__/__helpers.js';
+import { restore, stubMethod } from 'hanbi';
 
 /**
  * This is the 2nd phase of logging: the platform configuration. This happens
@@ -26,6 +27,7 @@ import { clearOutput } from '../../__tests__/__helpers.js';
  */
 describe(`integration`, () => {
   afterEach(() => {
+    restore();
     clearOutput(buildPath);
   });
 
@@ -84,6 +86,49 @@ describe(`integration`, () => {
           error = e;
         }
         await expect(cleanConsoleOutput(error.message)).to.matchSnapshot();
+      });
+
+      it(`should warn and notify users of transform errors`, async () => {
+        const stub = stubMethod(console, 'log');
+        const sd = new StyleDictionary({
+          hooks: {
+            transforms: {
+              'error-transform': {
+                type: 'value',
+                filter: (token) => token.type === 'color',
+                transform: (token) => {
+                  return token.value.replace('', '');
+                },
+              },
+            },
+          },
+          tokens: {
+            colors: {
+              red: {
+                value: 123,
+                type: 'color',
+              },
+            },
+          },
+          platforms: {
+            css: {
+              buildPath: '__tests__/__output/',
+              transforms: [`error-transform`],
+              files: [{ destination: 'foo.css', format: 'css/variables' }],
+            },
+          },
+        });
+        await sd.buildAllPlatforms();
+        const firstLog = [...stub.calls][0].args[0];
+        await expect(cleanConsoleOutput(firstLog)).to.matchSnapshot(1);
+
+        sd.log.verbosity = 'verbose';
+        await sd.buildAllPlatforms({ cache: false });
+        // we skip 1 and 2 because those are success logs from building the tokens in the previous run
+        const secondLog = [...stub.calls][3].args[0];
+        await expect(cleanConsoleOutput(secondLog).split('Object.transform')[0]).to.matchSnapshot(
+          2,
+        );
       });
 
       describe(`property reference errors`, () => {

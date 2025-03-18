@@ -78,3 +78,29 @@ snapshots["transform map correctly transforms tokenMap and defers tokens transfo
 ]`;
 /* end snapshot transform map correctly transforms tokenMap and defers tokens transforms as needed */
 
+snapshots["transform map handles and collects errors from transformations"] = 
+`Transform Error: token "colors.red.500" (/foo.json) with value: 
+  \`123\` (type: number)
+could not be transformed by "test-attribute-transform" transform. Threw the following error: 
+
+num.replace is not a function
+TypeError: num.replace is not a function
+    at 
+
+Transform Error: token "colors.red.500" (/foo.json) with value: 
+  \`123\` (type: number)
+could not be transformed by "test-value-transform" transform. Threw the following error: 
+
+num.replace is not a function
+TypeError: num.replace is not a function
+    at 
+
+Transform Error: token "colors.red.500" (/foo.json) with value: 
+  \`123\` (type: number)
+could not be transformed by "test-name-transform" transform. Threw the following error: 
+
+num.replace is not a function
+TypeError: num.replace is not a function
+    at `;
+/* end snapshot transform map handles and collects errors from transformations */
+

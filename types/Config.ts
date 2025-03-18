@@ -101,7 +101,7 @@ export type ExpandConfig = Expand | boolean | ExpandFilter;
 export interface PlatformConfig {
   log?: LogConfig;
   transformGroup?: string;
-  transforms?: string[] | Omit<Transform, 'name'>[];
+  transforms?: string[] | Transform[];
   expand?: ExpandConfig;
   preprocessors?: string[];
   prefix?: string;
