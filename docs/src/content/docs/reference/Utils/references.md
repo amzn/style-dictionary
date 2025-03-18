@@ -15,10 +15,6 @@ import { usesReferences } from 'style-dictionary/utils';
 usesReferences('{foo.bar}'); // true
 usesReferences('solid {border.width} {border.color}'); // true
 usesReferences('5px'); // false
-usesReferences('[foo.bar]', {
-  opening_character: '[',
-  closing_character: ']',
-}); // true
 ```
 
 ## resolveReferences
