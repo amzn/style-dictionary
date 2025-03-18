@@ -219,10 +219,11 @@ export default {
   ],
   hooks: {
     parsers: {
-      name: 'json5-parser',
-      pattern: /\.json5$/,
-      parser: ({ contents, filePath }) => {
-        return JSON5.parse(contents);
+      'json5-parser': {
+        pattern: /\.json5$/,
+        parser: ({ contents, filePath }) => {
+          return JSON5.parse(contents);
+        },
       },
     },
   },
