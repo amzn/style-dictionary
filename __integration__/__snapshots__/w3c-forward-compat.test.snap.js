@@ -8,7 +8,7 @@ snapshots["integration DTCG draft spec forward compatibility should match snapsh
 
 :root {
   --colors-black-500: rgb(0, 0, 0);
-  --colors-black-dimension: 5px; /* Some description */
+  --colors-black-dimension: 5px; /** Some description */
   --colors-foo: rgb(0, 0, 0);
 }
 `;

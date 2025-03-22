@@ -7,7 +7,7 @@ snapshots["formats all should match css/variables snapshot"] =
  */
 
 :root {
-  --color_red: #FF0000; /* comment */
+  --color_red: #FF0000; /** comment */
 }
 `;
 /* end snapshot formats all should match css/variables snapshot */
@@ -19,7 +19,7 @@ snapshots["formats all should match css/variables snapshot with fileHeaderTimest
  */
 
 :root {
-  --color_red: #FF0000; /* comment */
+  --color_red: #FF0000; /** comment */
 }
 `;
 /* end snapshot formats all should match css/variables snapshot with fileHeaderTimestamp set */
@@ -1170,7 +1170,7 @@ snapshots["formats all should match ios-swift/class.swift snapshot"] =
 import UIKit
 
 public class {
-    public static let color_red = #FF0000 /* comment */
+    public static let color_red = #FF0000 /** comment */
 }`;
 /* end snapshot formats all should match ios-swift/class.swift snapshot */
 
@@ -1187,7 +1187,7 @@ snapshots["formats all should match ios-swift/class.swift snapshot with fileHead
 import UIKit
 
 public class {
-    public static let color_red = #FF0000 /* comment */
+    public static let color_red = #FF0000 /** comment */
 }`;
 /* end snapshot formats all should match ios-swift/class.swift snapshot with fileHeaderTimestamp set */
 
@@ -1203,7 +1203,7 @@ snapshots["formats all should match ios-swift/enum.swift snapshot"] =
 import UIKit
 
 public enum {
-    public static let color_red = #FF0000 /* comment */
+    public static let color_red = #FF0000 /** comment */
 }`;
 /* end snapshot formats all should match ios-swift/enum.swift snapshot */
 
@@ -1220,7 +1220,7 @@ snapshots["formats all should match ios-swift/enum.swift snapshot with fileHeade
 import UIKit
 
 public enum {
-    public static let color_red = #FF0000 /* comment */
+    public static let color_red = #FF0000 /** comment */
 }`;
 /* end snapshot formats all should match ios-swift/enum.swift snapshot with fileHeaderTimestamp set */
 
@@ -1236,7 +1236,7 @@ snapshots["formats all should match ios-swift/any.swift snapshot"] =
 import UIKit
 
 public class {
-    public static let color_red = #FF0000 /* comment */
+    public static let color_red = #FF0000 /** comment */
 }`;
 /* end snapshot formats all should match ios-swift/any.swift snapshot */
 
@@ -1253,7 +1253,7 @@ snapshots["formats all should match ios-swift/any.swift snapshot with fileHeader
 import UIKit
 
 public class {
-    public static let color_red = #FF0000 /* comment */
+    public static let color_red = #FF0000 /** comment */
 }`;
 /* end snapshot formats all should match ios-swift/any.swift snapshot with fileHeaderTimestamp set */
 
@@ -1424,7 +1424,7 @@ import 'dart:ui';
 class {
     ._();
 
-    static const color_red = #FF0000; /* comment */
+    static const color_red = #FF0000; /** comment */
 }`;
 /* end snapshot formats all should match flutter/class.dart snapshot */
 
@@ -1444,7 +1444,7 @@ import 'dart:ui';
 class {
     ._();
 
-    static const color_red = #FF0000; /* comment */
+    static const color_red = #FF0000; /** comment */
 }`;
 /* end snapshot formats all should match flutter/class.dart snapshot with fileHeaderTimestamp set */
 
