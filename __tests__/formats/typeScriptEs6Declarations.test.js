@@ -13,7 +13,7 @@
 import { expect } from 'chai';
 import formats from '../../lib/common/formats.js';
 import createFormatArgs from '../../lib/utils/createFormatArgs.js';
-import { convertTokenData } from '../../lib/utils/index.js';
+import { convertTokenData } from '../../lib/utils/convertTokenData.js';
 import { formats as fileFormats } from '../../lib/enums/index.js';
 
 const { typescriptEs6Declarations } = fileFormats;
