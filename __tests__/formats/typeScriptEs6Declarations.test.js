@@ -25,6 +25,10 @@ const file = {
 
 const tokens = {
   color: {
+    blue: {
+      name: 'colorBlue',
+      value: '#0000FF',
+    },
     red: {
       comment: 'Used for errors',
       name: 'colorRed',
@@ -41,6 +45,11 @@ const tokens = {
 
 const DTCGTokens = {
   color: {
+    blue: {
+      $type: 'color',
+      $value: '#0000FF',
+      name: 'colorBlue',
+    },
     red: {
       $description: 'Used for errors',
       $type: 'color',
