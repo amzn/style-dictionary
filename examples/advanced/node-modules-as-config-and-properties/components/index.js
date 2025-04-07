@@ -1,4 +1,4 @@
-import button from './button.js';
+import button from './button/index.js';
 
 export default {
   component: {
