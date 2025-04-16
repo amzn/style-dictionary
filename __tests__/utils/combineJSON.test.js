@@ -108,6 +108,19 @@ describe('utils', () => {
         expect(tokens).to.have.property('bar', '{foo}');
       });
 
+      it('should not add filePath to nested value objects', async () => {
+        const { tokens } = await combineJSON(['__tests__/__json_files/nested_value.json']);
+        expect(tokens.colors.semantic).to.have.deep.property('value', {
+          value: '#FF0000',
+          filePath: '__tests__/__json_files/nested_value.json',
+          isSource: true,
+        });
+
+        // The semantic group should not have `filePath` and `isSource`
+        expect(tokens.colors.semantic).to.not.have.property('filePath');
+        expect(tokens.colors.semantic).to.not.have.property('isSource');
+      });
+
       it('should multiple parsers on the same file', async () => {
         const testOutput = { test: 'test' };
         const parsers = {

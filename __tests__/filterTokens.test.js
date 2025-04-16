@@ -86,6 +86,15 @@ const tokens = {
   },
 };
 
+const nestedValueTokens = {
+  colors: {
+    semantic: {
+      active: colorBlue,
+      value: colorRed,
+    },
+  },
+};
+
 const random_meta_tokens = {
   description: null,
   meta: undefined,
@@ -136,6 +145,11 @@ const dictionary = {
   allTokens: convertTokenData(tokens, { output: 'array' }),
 };
 
+const nestedValueDictionary = {
+  tokens: nestedValueTokens,
+  allTokens: convertTokenData(nestedValueTokens, { output: 'array' }),
+};
+
 const falsy_dictionary = {
   tokens: falsy_values,
   allTokens: convertTokenData(falsy_values, { output: 'array' }),
@@ -167,6 +181,12 @@ describe('filterTokens', () => {
     ]);
     expect(filteredDictionary.tokens).to.have.property('size');
     expect(filteredDictionary.tokens).to.not.have.property('color');
+  });
+
+  it('should filter tokens with nested value properties', async () => {
+    const filter = (token) => token?.path?.includes('red');
+    const filteredDictionary = await filterTokens(nestedValueDictionary, filter);
+    expect(filteredDictionary.allTokens).to.eql([{ ...colorRed, key: '{colors.semantic.value}' }]);
   });
 
   it('should work with falsy values and a filter function', async () => {
