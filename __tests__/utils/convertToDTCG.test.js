@@ -500,6 +500,36 @@ describe('utils', () => {
       expect(colorsKeys[0]).to.equal('$type');
       expect(dimensionsKeys[0]).to.equal('$type');
     });
+
+    it('should handle nested value properties in tokens', () => {
+      const result = convertToDTCG({
+        spacing: {
+          base: {
+            value: {
+              value: '5px',
+              type: 'spacing',
+            },
+          },
+          ref: {
+            value: '{spacing.base}',
+            type: 'spacing',
+          },
+        },
+      });
+      expect(result).to.eql({
+        $type: 'spacing',
+        spacing: {
+          base: {
+            value: {
+              $value: '5px',
+            },
+          },
+          ref: {
+            $value: '{spacing.base}',
+          },
+        },
+      });
+    });
   });
 
   describe('convertJSONToDTCG', async () => {

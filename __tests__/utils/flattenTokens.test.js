@@ -149,5 +149,21 @@ describe('utils', () => {
         '{spacing.lg}',
       ]);
     });
+
+    it('should handle tokens with `.value` in their name', () => {
+      const tokens = {
+        colors: {
+          semantic: {
+            value: {
+              value: '#FF0000',
+              type: 'color',
+            },
+          },
+        },
+      };
+      const ret = flattenTokens(tokens);
+      expect(ret).to.have.lengthOf(1);
+      expect(ret.map((r) => r.key)).to.eql(['{colors.semantic.value}']);
+    });
   });
 });
