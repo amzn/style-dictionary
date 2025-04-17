@@ -64,5 +64,34 @@ describe('utils', () => {
         value: '5px',
       });
     });
+
+    it('should support asynchronous preprocessors in the order of the config array', async () => {
+      const output = await preprocess(
+        {
+          foo: {
+            value: '5px',
+          },
+        },
+        ['preprocessorA', 'preprocessorC', 'preprocessorB'],
+        {
+          preprocessorB: (tokens) => {
+            tokens.baz = tokens.qux;
+            return tokens;
+          },
+          preprocessorC: async (tokens) => {
+            await new Promise((resolve) => setTimeout(resolve, 100));
+            tokens.qux = tokens.bar;
+            return tokens;
+          },
+          preprocessorA: (tokens) => {
+            tokens.bar = tokens.foo;
+            return tokens;
+          },
+        },
+      );
+      expect(output).to.have.property('baz').eql({
+        value: '5px',
+      });
+    });
   });
 });
