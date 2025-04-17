@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.3.4
+
+### Patch Changes
+
+- ee85609: fix misaligned comments in typescript/es6-declarations
+- 6ff17ec: If several preprocessors are defined in the SD configuration, the execution of the preprocessors is now guaranteed in the exact order in which they were configured in the SD configuration.
+
 ## 4.3.3
 
 ### Patch Changes
