@@ -29,7 +29,7 @@ async function renderMermaid() {
   const direction = getViewportWidth() > VP_THRESHOLD ? 'LR' : 'TB';
   mermaid.initialize({
     startOnLoad: false,
-    theme,
+    theme: theme === 'light' ? 'base' : 'dark',
   });
   const elements = [...document.querySelectorAll('.mermaid')] as HTMLPreElement[];
   await Promise.all(
