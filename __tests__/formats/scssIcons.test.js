@@ -20,7 +20,7 @@ import { formats as fileFormats } from '../../lib/enums/index.js';
 const { scssIcons } = fileFormats;
 
 const file = {
-  destination: '__output/',
+  destination: 'output.scss',
   format: scssIcons,
   name: 'foo',
 };
