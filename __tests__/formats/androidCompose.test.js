@@ -66,7 +66,7 @@ const tokens = {
 
 const format = formats['compose/object'];
 const file = {
-  destination: '__output/',
+  destination: 'output.xml',
   format: 'compose/object',
 };
 

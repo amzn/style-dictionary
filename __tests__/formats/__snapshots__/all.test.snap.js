@@ -661,7 +661,7 @@ object {
 snapshots["formats all should match ios/macros snapshot"] = 
 `
 //
-// __output/
+// output.txt
 //
 
 // Do not edit directly, this file was auto-generated.
@@ -677,7 +677,7 @@ snapshots["formats all should match ios/macros snapshot"] =
 snapshots["formats all should match ios/macros snapshot with fileHeaderTimestamp set"] = 
 `
 //
-// __output/
+// output.txt
 //
 
 // Do not edit directly, this file was auto-generated.
@@ -745,7 +745,7 @@ snapshots["formats all should match ios/plist snapshot with fileHeaderTimestamp 
 snapshots["formats all should match ios/singleton.m snapshot"] = 
 `
 //
-// __output/
+// output.txt
 //
 
 // Do not edit directly, this file was auto-generated.
@@ -789,7 +789,7 @@ snapshots["formats all should match ios/singleton.m snapshot"] =
 snapshots["formats all should match ios/singleton.m snapshot with fileHeaderTimestamp set"] = 
 `
 //
-// __output/
+// output.txt
 //
 
 // Do not edit directly, this file was auto-generated.
@@ -834,7 +834,7 @@ snapshots["formats all should match ios/singleton.m snapshot with fileHeaderTime
 snapshots["formats all should match ios/singleton.h snapshot"] = 
 `
 //
-// __output/
+// output.txt
 //
 
 // Do not edit directly, this file was auto-generated.
@@ -855,7 +855,7 @@ snapshots["formats all should match ios/singleton.h snapshot"] =
 snapshots["formats all should match ios/singleton.h snapshot with fileHeaderTimestamp set"] = 
 `
 //
-// __output/
+// output.txt
 //
 
 // Do not edit directly, this file was auto-generated.
@@ -876,7 +876,7 @@ snapshots["formats all should match ios/singleton.h snapshot with fileHeaderTime
 
 snapshots["formats all should match ios/static.h snapshot"] = 
 `
-// __output/
+// output.txt
 //
 
 // Do not edit directly, this file was auto-generated.
@@ -890,7 +890,7 @@ extern const color_red;`;
 
 snapshots["formats all should match ios/static.h snapshot with fileHeaderTimestamp set"] = 
 `
-// __output/
+// output.txt
 //
 
 // Do not edit directly, this file was auto-generated.
@@ -906,7 +906,7 @@ extern const color_red;`;
 snapshots["formats all should match ios/static.m snapshot"] = 
 `
 //
-// __output/
+// output.txt
 //
 
 // Do not edit directly, this file was auto-generated.
@@ -921,7 +921,7 @@ const color_red = #FF0000;`;
 snapshots["formats all should match ios/static.m snapshot with fileHeaderTimestamp set"] = 
 `
 //
-// __output/
+// output.txt
 //
 
 // Do not edit directly, this file was auto-generated.
@@ -937,7 +937,7 @@ const color_red = #FF0000;`;
 snapshots["formats all should match ios/colors.h snapshot"] = 
 `
 //
-// __output/
+// output.txt
 //
 
 // Do not edit directly, this file was auto-generated.
@@ -958,7 +958,7 @@ color_red
 snapshots["formats all should match ios/colors.h snapshot with fileHeaderTimestamp set"] = 
 `
 //
-// __output/
+// output.txt
 //
 
 // Do not edit directly, this file was auto-generated.
@@ -980,7 +980,7 @@ color_red
 snapshots["formats all should match ios/colors.m snapshot"] = 
 `
 //
-// __output/
+// output.txt
 //
 
 // Do not edit directly, this file was auto-generated.
@@ -1013,7 +1013,7 @@ snapshots["formats all should match ios/colors.m snapshot"] =
 snapshots["formats all should match ios/colors.m snapshot with fileHeaderTimestamp set"] = 
 `
 //
-// __output/
+// output.txt
 //
 
 // Do not edit directly, this file was auto-generated.
@@ -1047,7 +1047,7 @@ snapshots["formats all should match ios/colors.m snapshot with fileHeaderTimesta
 snapshots["formats all should match ios/strings.h snapshot"] = 
 `
 //
-// __output/
+// output.txt
 //
 
 // Do not edit directly, this file was auto-generated.
@@ -1066,7 +1066,7 @@ extern NSString * const color_red;
 snapshots["formats all should match ios/strings.h snapshot with fileHeaderTimestamp set"] = 
 `
 //
-// __output/
+// output.txt
 //
 
 // Do not edit directly, this file was auto-generated.
@@ -1086,7 +1086,7 @@ extern NSString * const color_red;
 snapshots["formats all should match ios/strings.m snapshot"] = 
 `
 //
-// __output/
+// output.txt
 //
 
 // Do not edit directly, this file was auto-generated.
@@ -1123,7 +1123,7 @@ NSString * const color_red = #FF0000;
 snapshots["formats all should match ios/strings.m snapshot with fileHeaderTimestamp set"] = 
 `
 //
-// __output/
+// output.txt
 //
 
 // Do not edit directly, this file was auto-generated.
@@ -1161,7 +1161,7 @@ NSString * const color_red = #FF0000;
 snapshots["formats all should match ios-swift/class.swift snapshot"] = 
 `
 //
-// __output/
+// output.txt
 //
 
 // Do not edit directly, this file was auto-generated.
@@ -1177,7 +1177,7 @@ public class {
 snapshots["formats all should match ios-swift/class.swift snapshot with fileHeaderTimestamp set"] = 
 `
 //
-// __output/
+// output.txt
 //
 
 // Do not edit directly, this file was auto-generated.
@@ -1194,7 +1194,7 @@ public class {
 snapshots["formats all should match ios-swift/enum.swift snapshot"] = 
 `
 //
-// __output/
+// output.txt
 //
 
 // Do not edit directly, this file was auto-generated.
@@ -1210,7 +1210,7 @@ public enum {
 snapshots["formats all should match ios-swift/enum.swift snapshot with fileHeaderTimestamp set"] = 
 `
 //
-// __output/
+// output.txt
 //
 
 // Do not edit directly, this file was auto-generated.
@@ -1227,7 +1227,7 @@ public enum {
 snapshots["formats all should match ios-swift/any.swift snapshot"] = 
 `
 //
-// __output/
+// output.txt
 //
 
 // Do not edit directly, this file was auto-generated.
@@ -1243,7 +1243,7 @@ public class {
 snapshots["formats all should match ios-swift/any.swift snapshot with fileHeaderTimestamp set"] = 
 `
 //
-// __output/
+// output.txt
 //
 
 // Do not edit directly, this file was auto-generated.
@@ -1412,7 +1412,7 @@ snapshots["formats all should match sketch/palette/v2 snapshot with fileHeaderTi
 snapshots["formats all should match flutter/class.dart snapshot"] = 
 `
 //
-// __output/
+// output.txt
 //
 
 // Do not edit directly, this file was auto-generated.
@@ -1431,7 +1431,7 @@ class {
 snapshots["formats all should match flutter/class.dart snapshot with fileHeaderTimestamp set"] = 
 `
 //
-// __output/
+// output.txt
 //
 
 // Do not edit directly, this file was auto-generated.

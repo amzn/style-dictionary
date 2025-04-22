@@ -20,7 +20,7 @@ import { formats as fileFormats } from '../../lib/enums/index.js';
 const { lessIcons } = fileFormats;
 
 const file = {
-  destination: '__output/',
+  destination: 'output.less',
   format: lessIcons,
   name: 'foo',
 };

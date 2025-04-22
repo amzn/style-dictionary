@@ -19,7 +19,7 @@ import { formats as fileFormats } from '../../lib/enums/index.js';
 const { jsonNested } = fileFormats;
 
 const file = {
-  destination: 'output/',
+  destination: 'output.json',
   format: jsonNested,
 };
 
