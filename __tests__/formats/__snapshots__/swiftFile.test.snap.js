@@ -4,7 +4,7 @@ export const snapshots = {};
 snapshots["formats ios-swift/any.swift should match default snapshot"] = 
 `
 //
-// __output/
+// output.swift
 //
 
 // Do not edit directly, this file was auto-generated.
@@ -20,7 +20,7 @@ public class StyleDictionary {
 snapshots["formats ios-swift/any.swift with import override should match snapshot"] = 
 `
 //
-// __output/
+// output.swift
 //
 
 // Do not edit directly, this file was auto-generated.
@@ -37,7 +37,7 @@ public class StyleDictionary {
 snapshots["formats ios-swift/any.swift with objectType override should match snapshot"] = 
 `
 //
-// __output/
+// output.swift
 //
 
 // Do not edit directly, this file was auto-generated.
@@ -53,7 +53,7 @@ public struct StyleDictionary {
 snapshots["formats ios-swift/any.swift with access control override should match snapshot"] = 
 `
 //
-// __output/
+// output.swift
 //
 
 // Do not edit directly, this file was auto-generated.

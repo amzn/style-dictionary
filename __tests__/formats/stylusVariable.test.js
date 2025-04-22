@@ -20,7 +20,7 @@ import { formats as fileFormats } from '../../lib/enums/index.js';
 const { stylusVariables } = fileFormats;
 
 const file = {
-  destination: '__output/',
+  destination: 'output.stylus',
   format: stylusVariables,
   name: 'foo',
 };

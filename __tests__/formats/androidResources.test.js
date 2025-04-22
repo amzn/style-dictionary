@@ -94,7 +94,7 @@ const customTokens = {
 
 const format = formats[androidResources];
 const file = {
-  destination: '__output/',
+  destination: 'output.xml',
   format: androidResources,
 };
 
