@@ -1,5 +1,13 @@
 # Changelog
 
+## 5.0.0-rc.2
+
+### Patch Changes
+
+- a9c0461: SD will use posix style paths (`'/'`) as much as possible and rely on `node:fs` to translate to win32 paths whenever a call to the filesystem is done. The exception is for dynamic imports of JS files (SD config, token files).
+- a9c0461: Allow buildPaths without a trailing slash, by making use of `path.join()` utility.
+- 3a91a3f: Dynamically import prettier and plugins so that they can be chunked separately by bundlers, and only imported on demand. This will significantly improve bundle size for users of Style Dictionary.
+
 ## 5.0.0-rc.1
 
 ### Major Changes
