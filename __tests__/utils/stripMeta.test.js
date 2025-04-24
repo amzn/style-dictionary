@@ -160,5 +160,43 @@ describe('utils', () => {
         },
       });
     });
+
+    it('should handle tokens with nested value properties', async () => {
+      const tokenWithValueSuffix = {
+        colors: {
+          red: {
+            500: {
+              value: {
+                value: '#ff0000',
+                type: 'color',
+                name: 'colors-red-500',
+              },
+              type: {
+                value: 'red',
+                type: 'color',
+                name: 'red',
+              },
+            },
+          },
+        },
+      };
+      const resultStandard = stripMeta(tokenWithValueSuffix, {
+        strip: ['type', 'name'],
+      });
+      expect(resultStandard).to.deep.equal({
+        colors: {
+          red: {
+            500: {
+              value: {
+                value: '#ff0000',
+              },
+              type: {
+                value: 'red',
+              },
+            },
+          },
+        },
+      });
+    });
   });
 });

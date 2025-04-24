@@ -169,6 +169,35 @@ const objectDictionary = {
   },
 };
 
+const nestedValueDictionary = {
+  foo: {
+    original: {
+      value: '5px',
+      type: 'spacing',
+    },
+    name: 'foo',
+    path: ['foo'],
+    value: '5px',
+    type: 'spacing',
+  },
+  borders: {
+    value: {
+      original: {
+        value: {
+          width: '{foo}',
+          style: 'dashed',
+          color: '#FF00FF',
+        },
+        type: 'border',
+      },
+      name: 'value',
+      path: ['borders', 'value'],
+      value: '5px dashed #FF00FF',
+      type: 'border',
+    },
+  },
+};
+
 describe('common', () => {
   describe('formatHelpers', () => {
     describe('createPropertyFormatter', () => {
@@ -338,68 +367,6 @@ describe('common', () => {
           expect(propFormatter(tokens['ref bar'])).to.equal('  --ref-bar: var(--bar);');
         });
 
-        it('DTCG: should make it easy to not output refs for tokens that contains refs that are filtered out', () => {
-          const unfilteredTokens = {
-            foo: {
-              $value: '5px',
-              original: {
-                $value: '5px',
-                type: 'spacing',
-              },
-              name: 'foo',
-              path: ['foo'],
-              $type: 'spacing',
-            },
-            bar: {
-              $value: '10px',
-              original: {
-                $value: '10px',
-                $type: 'spacing',
-              },
-              name: 'bar',
-              path: ['bar'],
-              $type: 'spacing',
-            },
-            'ref foo': {
-              $value: '5px',
-              original: {
-                $value: '{foo}',
-                $type: 'spacing',
-              },
-              name: 'ref-foo',
-              path: ['ref foo'],
-              $type: 'spacing',
-            },
-            'ref bar': {
-              $value: '10px',
-              original: {
-                $value: '{bar}',
-                $type: 'spacing',
-              },
-              name: 'ref-bar',
-              path: ['ref bar'],
-              $type: 'spacing',
-            },
-          };
-          const tokens = { ...unfilteredTokens };
-          delete tokens.foo;
-          const allTokens = convertTokenData(tokens, { output: 'array', usesDtcg: true });
-          const propFormatter = createPropertyFormatter({
-            dictionary: {
-              tokens,
-              unfilteredTokens,
-              allTokens,
-            },
-            format: css,
-            usesDtcg: true,
-            // outputReferences function that only outputs the refs if the referred tokens are not filtered out
-            outputReferences: outputReferencesFilter,
-          });
-
-          expect(propFormatter(tokens['ref foo'])).to.equal('  --ref-foo: 5px;');
-          expect(propFormatter(tokens['ref bar'])).to.equal('  --ref-bar: var(--bar);');
-        });
-
         it('should support object value references for outputReferences', () => {
           // The ref is an object type value, which means there will usually be some kind of transform (e.g. a CSS shorthand transform)
           // to change it from an object to a string. In our example, we use a border CSS shorthand for border token.
@@ -413,6 +380,18 @@ describe('common', () => {
 
           expect(propFormatter(objectDictionary.ref)).to.equal(
             '  --ref: var(--foo) dashed #FF00FF;',
+          );
+        });
+
+        it('should handle nested values in references', () => {
+          const propFormatter = createPropertyFormatter({
+            outputReferences: true,
+            dictionary: { tokens: nestedValueDictionary },
+            format: css,
+          });
+          expect(propFormatter(nestedValueDictionary.foo)).to.equal('  --foo: 5px;');
+          expect(propFormatter(nestedValueDictionary.borders.value)).to.equal(
+            '  --value: var(--foo) dashed #FF00FF;',
           );
         });
       });
