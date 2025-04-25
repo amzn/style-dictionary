@@ -48,26 +48,27 @@ export interface LocalOptions {
   formatting?: FormattingOverrides;
   [key: string]: any;
 }
-
-export interface RegexOptions {
-  regex?: RegExp;
-  opening_character?: string;
-  closing_character?: string;
-  separator?: string;
-}
-
-export interface GetReferencesOptions extends RegexOptions {
+export interface GetReferencesOptions {
   usesDtcg?: boolean;
   unfilteredTokens?: PreprocessedTokens;
   warnImmediately?: boolean;
 }
 
-export interface ResolveReferencesOptions extends RegexOptions {
+export interface ResolveReferencesOptions {
   usesDtcg?: boolean;
   warnImmediately?: boolean;
 }
 
 export interface ResolveReferencesOptionsInternal extends ResolveReferencesOptions {
+  ignorePaths?: Set<string>;
+  current_context?: string;
+  stack?: string[];
+  foundCirc?: Record<string, boolean>;
+  firstIteration?: boolean;
+  objectsOnly?: boolean;
+}
+
+export interface ResolveReferencesOptionsInternalOld extends ResolveReferencesOptions {
   ignorePaths?: string[];
   current_context?: string[];
   stack?: string[];
@@ -97,10 +98,10 @@ export interface Expand {
 
 export type ExpandConfig = Expand | boolean | ExpandFilter;
 
-export interface PlatformConfig extends RegexOptions {
+export interface PlatformConfig {
   log?: LogConfig;
   transformGroup?: string;
-  transforms?: string[] | Omit<Transform, 'name'>[];
+  transforms?: string[] | Transform[];
   expand?: ExpandConfig;
   preprocessors?: string[];
   prefix?: string;

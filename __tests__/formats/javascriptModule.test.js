@@ -19,7 +19,7 @@ import { formats as fileFormats } from '../../lib/enums/index.js';
 const { javascriptModule } = fileFormats;
 
 const file = {
-  destination: '__output/',
+  destination: 'output.js',
   format: javascriptModule,
   filter: {
     type: 'color',

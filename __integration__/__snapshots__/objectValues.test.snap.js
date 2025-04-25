@@ -152,7 +152,7 @@ snapshots["integration object values css/variables hsl syntax with references sh
 
 :root {
   --color-red: #ff0000;
-  --color-green: hsl(120, 50%, 50%);
+  --color-green: hsl(var(--hue), var(--saturation), var(--lightness));
 }
 `;
 /* end snapshot integration object values css/variables hsl syntax with references should match snapshot */

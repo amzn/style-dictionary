@@ -19,7 +19,7 @@ import { formats as fileFormats } from '../../lib/enums/index.js';
 const { javascriptModuleFlat } = fileFormats;
 
 const file = {
-  destination: '__output/',
+  destination: 'output.js',
   format: javascriptModuleFlat,
 };
 const tokens = {

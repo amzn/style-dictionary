@@ -19,7 +19,7 @@ import { formats as fileFormats } from '../../lib/enums/index.js';
 const { typescriptEs6Declarations } = fileFormats;
 
 const file = {
-  destination: '__output/',
+  destination: 'output.ts',
   format: typescriptEs6Declarations,
 };
 

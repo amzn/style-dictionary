@@ -87,10 +87,4 @@ describe('cleanDirs', () => {
     expect(dirExists('__tests__/__output/extradir1/extradir2')).to.be.false;
     expect(dirExists('__tests__/t__/__output/extradir1')).to.be.false;
   });
-
-  it('should throw if buildPath does not end in a trailing slash', async () => {
-    await expect(cleanDirs({ buildPath: 'foo' })).to.eventually.rejectedWith(
-      'Build path must end in a trailing slash or you will get weird file names.',
-    );
-  });
 });

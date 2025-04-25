@@ -535,14 +535,17 @@ Refer to: https://styledictionary.com/reference/logging/
           color: {
             type: 'color',
             value: '#000',
+            key: '{border.color}',
           },
           style: {
             type: 'strokeStyle',
             value: 'solid',
+            key: '{border.style}',
           },
           width: {
             type: 'dimension',
             value: '2px',
+            key: '{border.width}',
           },
         },
       });
@@ -754,28 +757,34 @@ Refer to: https://styledictionary.com/reference/logging/
           fontFamily: {
             $type: 'fontFamily',
             $value: 'Arial Black, sans-serif',
+            key: '{typo.fontFamily}',
           },
           fontSize: {
             $type: 'dimension',
             $value: '16px',
+            key: '{typo.fontSize}',
           },
           fontWeight: {
             $type: 'fontWeight',
             $value: 700,
+            key: '{typo.fontWeight}',
           },
         },
         ref: {
           fontFamily: {
             $type: 'fontFamily',
             $value: 'Arial Black, sans-serif',
+            key: '{ref.fontFamily}',
           },
           fontSize: {
             $type: 'dimension',
             $value: '16px',
+            key: '{ref.fontSize}',
           },
           fontWeight: {
             $type: 'fontWeight',
             $value: 700,
+            key: '{ref.fontWeight}',
           },
         },
       });
@@ -837,32 +846,9 @@ Refer to: https://styledictionary.com/reference/logging/
       ],
     };
 
-    const platformWithBadBuildPath = {
-      buildPath: '__tests__/__output',
-      files: [
-        {
-          destination: 'test.json',
-          format: 'foo',
-        },
-      ],
-    };
-
     const platformWithoutFiles = {
       buildPath: '__tests__/__output/',
     };
-
-    it("should throw if build path doesn't have a trailing slash", async () => {
-      const sd = new StyleDictionary({
-        ...dictionary,
-        hooks,
-        platforms: {
-          foo: platformWithBadBuildPath,
-        },
-      });
-      await expect(sd.buildPlatform('foo')).to.eventually.rejectedWith(
-        'Build path must end in a trailing slash or you will get weird file names.',
-      );
-    });
 
     it('should throw if there is no files property', async () => {
       const sd = new StyleDictionary({

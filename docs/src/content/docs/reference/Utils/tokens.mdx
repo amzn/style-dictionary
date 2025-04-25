@@ -79,7 +79,7 @@ Available data structures:
 | `options.usesDtcg` | `boolean`                       | Whether the input data uses DTCG syntax, `false` by default. |
 | `options.output`   | `'object' \| 'array' \| 'map'`  | Output data format                                           |
 
-We are currently considering making the `Map` structure the de-facto standard in a future v5, making the `Object`/`Array` versions available only through this utility. This is to optimize the library's base functionality.
+We are currently considering making the `Map` structure the de-facto standard in a future v6, making the `Object`/`Array` versions available only through this utility. This is to optimize the library's base functionality.
 
 This utility auto-detects the input data type and allows you to specify the desired output data type.
 You can optionally pass `usesDtcg` flag as well if you use DTCG format, this is necessary for converting from Object to `Map`/`Array`, since we need to know whether to use the `$value` or `value` to identify tokens in the `Object`.

@@ -19,7 +19,7 @@ import { formats as fileFormats } from '../../lib/enums/index.js';
 const { javascriptEs6 } = fileFormats;
 
 const file = {
-  destination: '__output/',
+  destination: 'output.js',
   format: javascriptEs6,
   filter: {
     type: 'color',

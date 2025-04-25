@@ -14,6 +14,7 @@
 import { expect } from 'chai';
 import { restore, stubMethod } from 'hanbi';
 import { getReferences } from '../../../lib/utils/references/getReferences.js';
+import { convertTokenData } from '../../../lib/utils/convertTokenData.js';
 
 const tokens = {
   color: {
@@ -107,6 +108,15 @@ describe('utils', () => {
         expect(getReferences(tokens.border.tertiary.value, tokens)).to.eql([
           { ref: ['size', 'border'], value: '2px' },
           { ref: ['color', 'red'], value: '#f00' },
+        ]);
+      });
+
+      it(`should work with Token Map input values`, () => {
+        expect(
+          getReferences(tokens.border.tertiary.value, convertTokenData(tokens, { output: 'map' })),
+        ).to.eql([
+          { key: '{size.border}', ref: ['size', 'border'], value: '2px' },
+          { key: '{color.red}', ref: ['color', 'red'], value: '#f00' },
         ]);
       });
     });

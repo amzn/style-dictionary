@@ -19,7 +19,7 @@ import { formats as fileFormats } from '../../lib/enums/index.js';
 const { javascriptObject } = fileFormats;
 
 const file = {
-  destination: '__output/',
+  destination: 'output.js',
   format: javascriptObject,
   options: { name: 'foo' },
 };

@@ -19,7 +19,7 @@ import { formats as fileFormats } from '../../lib/enums/index.js';
 const { javascriptUmd } = fileFormats;
 
 const file = {
-  destination: '__output/',
+  destination: 'output.js',
   format: javascriptUmd,
   filter: {
     type: 'color',

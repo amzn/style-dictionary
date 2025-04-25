@@ -63,7 +63,7 @@ export interface TransformedToken extends DesignToken {
    */
   filePath: string;
   /**
-   * If the token is from a file defined in the source array as opposed to include in the [configuration](https://amzn.github.io/style-dictionary/#/config).
+   * If the token is from a file defined in the source array as opposed to include in the [configuration](https://styledictionary.com/reference/config).
    */
   isSource: boolean;
 }

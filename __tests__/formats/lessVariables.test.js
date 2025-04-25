@@ -20,7 +20,7 @@ import { formats as fileFormats } from '../../lib/enums/index.js';
 const { lessVariables } = fileFormats;
 
 const file = {
-  destination: '__output/',
+  destination: 'output.less',
   format: lessVariables,
   name: 'foo',
 };

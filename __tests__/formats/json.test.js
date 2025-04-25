@@ -19,7 +19,7 @@ import { formats as fileFormats } from '../../lib/enums/index.js';
 const { json } = fileFormats;
 
 const file = {
-  destination: '__output/',
+  destination: 'output.json',
   format: json,
 };
 

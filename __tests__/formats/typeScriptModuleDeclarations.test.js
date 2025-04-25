@@ -19,7 +19,7 @@ import { formats as fileFormats } from '../../lib/enums/index.js';
 const { typescriptModuleDeclarations } = fileFormats;
 
 const file = {
-  destination: '__output/',
+  destination: 'output.d.ts',
   format: typescriptModuleDeclarations,
   filter: { type: 'color' },
 };

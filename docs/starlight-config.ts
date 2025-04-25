@@ -41,8 +41,8 @@ export default {
       autogenerate: { directory: 'info' },
     },
     {
-      label: 'Version 4',
-      autogenerate: { directory: 'version-4' },
+      label: 'Versions',
+      autogenerate: { directory: 'versions' },
     },
     {
       label: 'Reference',

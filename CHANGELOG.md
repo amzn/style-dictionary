@@ -1,5 +1,29 @@
 # Changelog
 
+## 5.0.0
+
+### Major Changes
+
+- 02300b1: No longer allow references to non-token leaf nodes. References only work when referencing a Design Token (its value).
+  Non-token nodes will also not make it to the output, because they are filtered out during the flattening process to `tokenMap` and `tokenArray`.
+  Remove allowing references with `.value` suffix.
+- f19a0cb: BREAKING: no longer possible to pass options to change the reference syntax `{ref.foo}`. The opening, closing and separator characters are now set to be aligned with the DTCG spec.
+- 02300b1: BREAKING: minimum NodeJS version required is now v22.0.0 (LTS, at time of writing this). This is to support `Set.prototype.union` which we utilize in our token reference resolution utility, and it's important to use the cheaper built-in versus doing a union manually.
+
+### Minor Changes
+
+- 02300b1: Support passing Token Map structure to `getReferences` and `resolveReferences` utils.
+- b80e75b: When transform hooks throw errors, they will now be caught and error-handled by Style Dictionary.
+  Instead of causing a fatal failure, the error is collected and logged as a warning at the end.
+  With verbosity turned to `"verbose"`, information about which tokens in which files are causing an error in which transform, to help debugging the problem.
+  Sensible fallbacks are used when a transform cannot complete.
+
+### Patch Changes
+
+- a23f353: SD will use posix style paths (`'/'`) as much as possible and rely on `node:fs` to translate to win32 paths whenever a call to the filesystem is done. The exception is for dynamic imports of JS files (SD config, token files).
+- a23f353: Allow buildPaths without a trailing slash, by making use of `path.join()` utility.
+- 9bbbc8a: Dynamically import prettier and plugins so that they can be chunked separately by bundlers, and only imported on demand. This will significantly improve bundle size for users of Style Dictionary.
+
 ## 4.4.0
 
 ### Minor Changes
@@ -107,8 +131,8 @@
 
   Added reusable methods:
 
-  - `getPlatformTokens()` -> grabs the `tokens`/`allTokens`(new! `exportPlatform` does not return this) for a specific platform, after running platform specific preprocessors and transforms. This replaces the old `exportPlatform` method which is now deprecated and will be removed in v5.
-  - `getPlatformConfig()` -> grabs the processed/transformed `PlatformConfig` for a specific platform, replaces the now deprecated `getPlatform` method which will be removed in v5.
+  - `getPlatformTokens()` -> grabs the `tokens`/`allTokens`(new! `exportPlatform` does not return this) for a specific platform, after running platform specific preprocessors and transforms. This replaces the old `exportPlatform` method which is now deprecated and will be removed in v6.
+  - `getPlatformConfig()` -> grabs the processed/transformed `PlatformConfig` for a specific platform, replaces the now deprecated `getPlatform` method which will be removed in v6.
 
   The reasons for deprecating those methods and replacing them with new ones is to reduce method ambiguity and make them more pure.
 
@@ -161,7 +185,7 @@
 ## 4.0.0
 
 > For a more comprehensive migration guide from version 3.x.x to version 4.0.0,
-> [visit the migration guide page](https://v4.styledictionary.com/version-4/migration/)
+> [visit the migration guide page](https://styledictionary.com/version-4/migration/)
 
 ### Major Changes
 
@@ -849,7 +873,9 @@
   ```js
   import { fileHeader } from 'style-dictionary/utils';
 
-  const headerContent = await fileHeader({ formatting: { fileHeaderTimestamp: true } });
+  const headerContent = await fileHeader({
+    formatting: { fileHeaderTimestamp: true },
+  });
   ```
 
 ### Minor Changes
@@ -906,7 +932,7 @@
   The main intention here is to ensure that Style Dictionary is compliant with [DTCG draft specification](https://design-tokens.github.io/community-group/format/) out of the box with regards to exporting to CSS, where object-value tokens are not supported without transforming them to shorthands (or expanding them, which is a different feature that was added in `4.0.0-prerelease.27`).
 
 - cedf8a0: Preprocessors are a new feature added to style-dictionary, which allows you to do any type of processing of the token dictionary **after** parsing, **before** resolving and transforming.
-  See [preprocessor docs](https://v4.styledictionary.com/reference/hooks/preprocessors/) for more information.
+  See [preprocessor docs](https://styledictionary.com/reference/hooks/preprocessors/) for more information.
 - cb94554: 'size/rem' transform to not transform tokens that already have a unit, such as `"4px"`, this should not be transformed to `"4rem"`.
 - a4542f4: options.log to be respected in all error logging, including platform specific logs.
 - 122c8f6: Expose a new utility called resolveReferences which takes a value containing references, the dictionary object, and resolves the value's references for you.
@@ -940,7 +966,7 @@
   - `convertJSONToDTCG`
   - `convertZIPToDTCG`
 
-  [Documentation of these utilities](https://v4.styledictionary.com/reference/utils/dtcg/)
+  [Documentation of these utilities](https://styledictionary.com/reference/utils/dtcg/)
 
 - 294fd0e: Support Design Token Community Group Draft specification for Design Tokens, by adding support for $value, $type and $description properties.
 - aff6646: Allow passing a custom FileSystem Volume to your Style Dictionary instances, to ensure input/output files are read/written from/to that specific volume.

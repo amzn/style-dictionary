@@ -91,6 +91,7 @@ describe('exportPlatform', () => {
           },
         },
       });
+      await StyleDictionaryExtended.hasInitialized;
       StyleDictionary.registerTransform({
         type: transformTypeValue,
         name: 'color/darken',
@@ -220,7 +221,7 @@ describe('exportPlatform', () => {
           },
         },
         hue: {
-          red: 20,
+          red: { value: 20 },
         },
       },
       platforms: {
@@ -248,9 +249,11 @@ describe('exportPlatform', () => {
         red: {
           value: '#f00',
           name: 'colors-red',
+          key: '{colors.red}',
           path: ['colors', 'red'],
           original: {
             value: '#f00',
+            key: '{colors.red}',
           },
           attributes: {
             category: 'colors',
@@ -260,9 +263,11 @@ describe('exportPlatform', () => {
         error: {
           value: '#f00',
           name: 'colors-error',
+          key: '{colors.error}',
           path: ['colors', 'error'],
           original: {
             value: '{colors.red}',
+            key: '{colors.error}',
           },
           attributes: {
             category: 'colors',
@@ -272,9 +277,11 @@ describe('exportPlatform', () => {
         danger: {
           value: '#f00',
           name: 'colors-danger',
+          key: '{colors.danger}',
           path: ['colors', 'danger'],
           original: {
             value: '{colors.error}',
+            key: '{colors.danger}',
           },
           attributes: {
             category: 'colors',
@@ -284,9 +291,11 @@ describe('exportPlatform', () => {
         alert: {
           value: '#f00',
           name: 'colors-alert',
+          key: '{colors.alert}',
           path: ['colors', 'alert'],
           original: {
             value: '{colors.error}',
+            key: '{colors.alert}',
           },
           attributes: {
             category: 'colors',
@@ -343,78 +352,11 @@ describe('exportPlatform', () => {
     });
   });
 
-  describe('non-token references', async () => {
-    const tokens = {
-      nonTokenColor: 'hsl(10,20%,20%)',
-      hue: {
-        red: '10',
-        green: '120',
-        blue: '220',
-      },
-      comment: 'hello',
-      color: {
-        red: {
-          // Note having references as part of the value,
-          // either in an object like this, or in an interpolated
-          // string like below, requires the use of transitive
-          // transforms if you want it to be transformed.
-          value: {
-            h: '{hue.red}',
-            s: '100%',
-            l: '50%',
-          },
-          type: 'color',
-        },
-        blue: {
-          value: '{nonTokenColor}',
-          comment: '{comment}',
-          type: 'color',
-        },
-        green: {
-          value: 'hsl({hue.green}, 50%, 50%)',
-          type: 'color',
-        },
-      },
-    };
-    // making the css/color transform transitive so we can be sure the references
-    // get resolved properly and transformed.
-    const transitiveTransform = Object.assign({}, StyleDictionary.hooks.transforms[colorCss], {
-      transitive: true,
-    });
-
-    const sd = new StyleDictionary({
-      tokens,
-      hooks: {
-        transforms: {
-          transitiveTransform,
-        },
-      },
-      platforms: {
-        css: {
-          transforms: [nameKebab, 'transitiveTransform'],
-        },
-      },
-    });
-    const actual = await sd.exportPlatform('css');
-
-    it('should work if referenced directly', () => {
-      expect(actual.color.blue.value).to.equal('#3d2c29');
-    });
-    it('should work if referenced from a non-value', () => {
-      expect(actual.color.blue.comment).to.equal(tokens.comment);
-    });
-    it('should work if interpolated', () => {
-      expect(actual.color.green.value).to.equal('#40bf40');
-    });
-    it('should work if part of an object value', () => {
-      expect(actual.color.red.value).to.equal('#ff2b00');
-    });
-  });
-
   describe('reference warnings', () => {
     const errorMessage = (amount = 1) => `Reference Errors:
 Some token references (${amount}) could not be found.
-Use log.verbosity "verbose" or use CLI option --verbose for more details.`;
+Use log.verbosity "verbose" or use CLI option --verbose for more details.
+Refer to: https://styledictionary.com/reference/logging/`;
     const platforms = {
       css: {
         transformGroup: css,
@@ -423,8 +365,8 @@ Use log.verbosity "verbose" or use CLI option --verbose for more details.`;
 
     it('should throw if there are simple property reference errors', async () => {
       const tokens = {
-        a: '#ff0000',
-        b: '{c}',
+        a: { value: '#ff0000' },
+        b: { value: '{c}' },
       };
 
       const sd = new StyleDictionary({
@@ -437,8 +379,8 @@ Use log.verbosity "verbose" or use CLI option --verbose for more details.`;
 
     it('should throw if there are circular reference errors', async () => {
       const tokens = {
-        a: '{b}',
-        b: '{a}',
+        a: { value: '{b}' },
+        b: { value: '{a}' },
       };
 
       const sd = new StyleDictionary({
@@ -455,9 +397,9 @@ Use log.verbosity "verbose" or use CLI option --verbose for more details.`;
             red: { valuer: '#ff0000' }, // notice misspelling
             blue: { 'value:': '#0000ff' },
           },
-          danger: { value: '{color.core.red.value}' },
+          danger: { value: '{color.core.red}' },
           warning: { value: '{color.base.red.valuer}' },
-          info: { value: '{color.core.blue.value}' },
+          info: { value: '{color.core.blue}' },
           error: { value: '{color.danger}' },
         },
       };
@@ -494,9 +436,13 @@ Use log.verbosity "verbose" or use CLI option --verbose for more details.`;
             },
           },
         });
+        await sd.hasInitialized;
+
+        // keep track of the original tokenMap for subsequent tests
+        // to re-execute the transforms
+        const originalMap = structuredClone(sd.tokenMap);
 
         await sd.exportPlatform('css');
-        console.warn(cleanConsoleOutput(logStub.firstCall.args[0]));
 
         expect(cleanConsoleOutput(logStub.firstCall.args[0])).to.equal(`
 Unknown CSS Font Shorthand properties found for 1 tokens, CSS output for Font values will be missing some typography token properties as a result:
@@ -505,17 +451,18 @@ Refer to: https://styledictionary.com/reference/logging/
 `);
 
         sd.log.verbosity = verbose;
+        // use structuredClone again here or the transformMap will also mutate the originalMap
+        sd.tokenMap = structuredClone(originalMap);
         await sd.exportPlatform('css', { cache: false });
-
         expect(cleanConsoleOutput(Array.from(logStub.calls)[1].args[0])).to.equal(`
 Unknown CSS Font Shorthand properties found for 1 tokens, CSS output for Font values will be missing some typography token properties as a result:
 
 letterSpacing, paragraphSpacing, textColor for token at foo.bar
 `);
 
-        sd.tokens.foo.bar.filePath = '/tokens.json';
+        sd.tokenMap = structuredClone(originalMap);
+        sd.tokenMap.set('{foo.bar}', { ...sd.tokenMap.get('{foo.bar}'), filePath: '/tokens.json' });
         await sd.exportPlatform('css', { cache: false });
-
         expect(cleanConsoleOutput(Array.from(logStub.calls)[2].args[0])).to.equal(`
 Unknown CSS Font Shorthand properties found for 1 tokens, CSS output for Font values will be missing some typography token properties as a result:
 
@@ -523,16 +470,19 @@ letterSpacing, paragraphSpacing, textColor for token at foo.bar in /tokens.json
 `);
 
         sd.log.verbosity = silent;
+        sd.tokenMap = structuredClone(originalMap);
         await sd.exportPlatform('css', { cache: false });
         expect(Array.from(logStub.calls)[3]).to.be.undefined;
 
         sd.log.verbosity = defaultVerbosity;
         sd.log.warnings = disabled;
-        await sd.exportPlatform('css', { cache: false });
+        sd.tokenMap = structuredClone(originalMap);
+        await sd.exportPlatform(css, { cache: false });
         expect(Array.from(logStub.calls)[3]).to.be.undefined;
 
         sd.log.warnings = errorLog;
-        await expect(sd.exportPlatform('css', { cache: false })).to.be.eventually.rejectedWith(`
+        sd.tokenMap = structuredClone(originalMap);
+        await expect(sd.exportPlatform(css, { cache: false })).to.be.eventually.rejectedWith(`
 Unknown CSS Font Shorthand properties found for 1 tokens, CSS output for Font values will be missing some typography token properties as a result:
 Use log.verbosity "verbose" or use CLI option --verbose for more details.
 `);
@@ -800,7 +750,7 @@ Use log.verbosity "verbose" or use CLI option --verbose for more details.
               },
             },
           },
-          reftest: { $value: '{zero.$value}' },
+          reftest: { $value: '{zero}' },
           zero: { $value: '0' },
           reftest2: { $value: '{one}' },
           one: { $value: '1' },
@@ -813,7 +763,7 @@ Use log.verbosity "verbose" or use CLI option --verbose for more details.
                 return token.$type === 'dimension';
               },
               transform: (token) => {
-                return `${sd.usesDtcg ? token.$value : token.value}px`;
+                return `${sd.usesDtcg ? token.$value : token}px`;
               },
             },
           },

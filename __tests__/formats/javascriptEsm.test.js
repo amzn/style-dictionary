@@ -19,7 +19,7 @@ import { formats as formatsEnum } from '../../lib/enums/formats.js';
 const { javascriptEsm } = formatsEnum;
 
 const file = {
-  destination: '__output/',
+  destination: 'output.js',
   format: javascriptEsm,
   filter: {
     type: 'color',

@@ -877,13 +877,7 @@ $design-system-tokens: (
       'disabled': $color-background-disabled
     ),
     'border': (
-      'primary': $color-border-primary,
-      'secondary': (
-
-      ),
-      'tertiary': (
-
-      )
+      'primary': $color-border-primary
     ),
     'brand': (
       'primary': $color-brand-primary,
@@ -1265,13 +1259,7 @@ $design-system-tokens: (
       'disabled': $color-background-disabled
     ),
     'border': (
-      'primary': $color-border-primary,
-      'secondary': (
-
-      ),
-      'tertiary': (
-
-      )
+      'primary': $color-border-primary
     ),
     'brand': (
       'primary': $color-brand-primary,
@@ -1653,13 +1641,7 @@ $design-system-tokens: (
       'disabled': $color-background-disabled
     ),
     'border': (
-      'primary': $color-border-primary,
-      'secondary': (
-
-      ),
-      'tertiary': (
-
-      )
+      'primary': $color-border-primary
     ),
     'brand': (
       'primary': $color-brand-primary,

@@ -9,7 +9,7 @@ Transforms are functions that modify a design token (in a non-destructive way). 
 The need for custom transforms is that Style Dictionary expects the tokens to be declared according to certain criteria, to use the pre-defined transforms and formats/templates. For example, the _web_ transformGroup consists of the _attribute/cti_, _name/kebab_, _size/px_ and _color/css_ transforms.
 The _size/px_ adds 'px' to the end of the number, and is applied only if `token.attributes.category === 'size'`. This means that your token needs to be expressed without units, and be under the _'size'_ "category. If you need a different logic or you want to organize your tokens differently, probably you can't use the out-of-the-box transformation groups, but you have to declare your custom ones.
 
-If [custom formats](https://v4.styledictionary.com/reference/hooks/formats/#custom-formats) are the way to allow users to customize the format of the _output_ of Style Dictionary, custom transforms are the way to allow them to customize both the _input_ (the token names/values/attributes) and the _output_ (the actual values expressed in the design tokens). For this reasons, custom transforms are probably one of the **most powerful features** of Style Dictionary: they make it extremely versatile, allowing limitless possibilities of extension and customization of the entire design token pipeline.
+If [custom formats](https://styledictionary.com/reference/hooks/formats/#custom-formats) are the way to allow users to customize the format of the _output_ of Style Dictionary, custom transforms are the way to allow them to customize both the _input_ (the token names/values/attributes) and the _output_ (the actual values expressed in the design tokens). For this reasons, custom transforms are probably one of the **most powerful features** of Style Dictionary: they make it extremely versatile, allowing limitless possibilities of extension and customization of the entire design token pipeline.
 
 #### Running the example
 
@@ -34,7 +34,7 @@ StyleDictionary.registerTransform({
 });
 ```
 
-More information can be found on the [documentation](https://amzn.github.io/style-dictionary/#/api?id=registertransform).
+More information can be found on the [documentation](https://styledictionary.com/reference/api/#registertransform).
 
 To use this new custom transform, we need to create a new custom transformGroup that references it.
 
@@ -47,7 +47,7 @@ StyleDictionary.registerTransformGroup({
 });
 ```
 
-More information can be found on the [documentation](https://amzn.github.io/style-dictionary/#/api?id=registertransformgroup).
+More information can be found on the [documentation](https://styledictionary.com/reference/api/#registertransformgroup).
 
 Once registered, the custom group can be associated to one or more **platforms** in the `config.json` file:
 
@@ -68,7 +68,7 @@ Once registered, the custom group can be associated to one or more **platforms**
 
 When you register a new group, you can use a new array of transforms, or you can "extend" an existing group (see the code in the `build.js` file). Even though the second option seems simpler, we suggest to always declare explicitly your array: it's clearer to see what transformations will be applied, and you will always be in full control of the code.
 
-Tip: to know what transforms are included in a pre-defined group you can [refer to the documentation](https://amzn.github.io/style-dictionary/#/transform_groups) or you can add a `console.log(StyleDictionary.transformGroup['group_name'])`
+Tip: to know what transforms are included in a pre-defined group you can [refer to the documentation](https://styledictionary.com/reference/hooks/transform-groups/predefined/) or you can add a `console.log(StyleDictionary.hooks.transformGroups['group_name'])`
 in your code and look the array of transforms associated with the it, directly in your console.
 
 #### What to look at

@@ -1,6 +1,6 @@
 ## Node Modules as Config and Token files
 
-This example shows some advanced features using Style Dictionary with node modules. Make sure you are familiar with Style Dictionary concepts first by reading the [docs](https://amzn.github.io/style-dictionary) first.
+This example shows some advanced features using Style Dictionary with node modules. Make sure you are familiar with Style Dictionary concepts first by reading the [docs](https://styledictionary.com) first.
 
 #### Running the example
 

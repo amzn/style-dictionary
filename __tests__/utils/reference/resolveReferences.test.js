@@ -18,6 +18,7 @@ import {
   resolveReferences as publicResolveReferences,
 } from '../../../lib/utils/references/resolveReferences.js';
 import GroupMessages from '../../../lib/utils/groupMessages.js';
+import { convertTokenData } from '../../../lib/utils/convertTokenData.js';
 
 const PROPERTY_REFERENCE_WARNINGS = GroupMessages.GROUP.PropertyReferenceWarnings;
 
@@ -194,6 +195,13 @@ describe('utils', () => {
           'test1 value, 5, 6 and 5',
         );
         expect(GroupMessages.count(PROPERTY_REFERENCE_WARNINGS)).to.equal(0);
+      });
+
+      it('should handle Token Map inputs', function () {
+        const data = { foo: { value: 'bar' }, bar: { value: '{foo}' } };
+        const asMap = convertTokenData(data, { output: 'map' });
+        const test = resolveReferences('{foo}', asMap);
+        expect(test).to.equal('bar');
       });
 
       describe('ignorePaths', () => {
