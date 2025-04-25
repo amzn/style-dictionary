@@ -36,14 +36,38 @@ const borderOutput = {
   color: {
     type: 'color',
     value: '#000',
+    $extensions: {
+      'com.styledictionary': {
+        preExpand: {
+          prop: 'color',
+          type: 'border',
+        },
+      },
+    },
   },
   style: {
     type: 'strokeStyle',
     value: 'solid',
+    $extensions: {
+      'com.styledictionary': {
+        preExpand: {
+          prop: 'style',
+          type: 'border',
+        },
+      },
+    },
   },
   width: {
     type: 'dimension',
     value: '2px',
+    $extensions: {
+      'com.styledictionary': {
+        preExpand: {
+          prop: 'width',
+          type: 'border',
+        },
+      },
+    },
   },
 };
 
@@ -51,14 +75,38 @@ const typographyOutput = {
   fontWeight: {
     type: 'fontWeight',
     value: '800',
+    $extensions: {
+      'com.styledictionary': {
+        preExpand: {
+          prop: 'fontWeight',
+          type: 'typography',
+        },
+      },
+    },
   },
   fontSize: {
     type: 'dimension',
     value: '16px',
+    $extensions: {
+      'com.styledictionary': {
+        preExpand: {
+          prop: 'fontSize',
+          type: 'typography',
+        },
+      },
+    },
   },
   fontFamily: {
     type: 'fontFamily',
     value: 'Arial Black',
+    $extensions: {
+      'com.styledictionary': {
+        preExpand: {
+          prop: 'fontFamily',
+          type: 'typography',
+        },
+      },
+    },
   },
 };
 
@@ -118,16 +166,40 @@ describe('utils', () => {
               type: 'color',
               value: '#000',
               path: ['input', 'border', 'color'],
+              $extensions: {
+                'com.styledictionary': {
+                  preExpand: {
+                    prop: 'color',
+                    type: 'border',
+                  },
+                },
+              },
             },
             style: {
               type: 'strokeStyle',
               value: 'solid',
               path: ['input', 'border', 'style'],
+              $extensions: {
+                'com.styledictionary': {
+                  preExpand: {
+                    prop: 'style',
+                    type: 'border',
+                  },
+                },
+              },
             },
             width: {
               type: 'dimension',
               value: '2px',
               path: ['input', 'border', 'width'],
+              $extensions: {
+                'com.styledictionary': {
+                  preExpand: {
+                    prop: 'width',
+                    type: 'border',
+                  },
+                },
+              },
             },
           });
         });
@@ -148,14 +220,38 @@ describe('utils', () => {
             color: {
               $type: 'color',
               $value: '#000',
+              $extensions: {
+                'com.styledictionary': {
+                  preExpand: {
+                    prop: 'color',
+                    type: 'border',
+                  },
+                },
+              },
             },
             style: {
               $type: 'strokeStyle',
               $value: 'solid',
+              $extensions: {
+                'com.styledictionary': {
+                  preExpand: {
+                    prop: 'style',
+                    type: 'border',
+                  },
+                },
+              },
             },
             width: {
               $type: 'dimension',
               $value: '2px',
+              $extensions: {
+                'com.styledictionary': {
+                  preExpand: {
+                    prop: 'width',
+                    type: 'border',
+                  },
+                },
+              },
             },
           });
         });
@@ -192,44 +288,124 @@ describe('utils', () => {
               offsetX: {
                 type: 'dimension',
                 value: '2px',
+                $extensions: {
+                  'com.styledictionary': {
+                    preExpand: {
+                      prop: 'offsetX',
+                      type: 'shadow',
+                    },
+                  },
+                },
               },
               offsetY: {
                 type: 'dimension',
                 value: '4px',
+                $extensions: {
+                  'com.styledictionary': {
+                    preExpand: {
+                      prop: 'offsetY',
+                      type: 'shadow',
+                    },
+                  },
+                },
               },
               blur: {
                 type: 'dimension',
                 value: '2px',
+                $extensions: {
+                  'com.styledictionary': {
+                    preExpand: {
+                      prop: 'blur',
+                      type: 'shadow',
+                    },
+                  },
+                },
               },
               spread: {
                 type: 'dimension',
                 value: '0',
+                $extensions: {
+                  'com.styledictionary': {
+                    preExpand: {
+                      prop: 'spread',
+                      type: 'shadow',
+                    },
+                  },
+                },
               },
               color: {
                 type: 'color',
                 value: '#000',
+                $extensions: {
+                  'com.styledictionary': {
+                    preExpand: {
+                      prop: 'color',
+                      type: 'shadow',
+                    },
+                  },
+                },
               },
             },
             2: {
               offsetX: {
                 type: 'dimension',
                 value: '10px',
+                $extensions: {
+                  'com.styledictionary': {
+                    preExpand: {
+                      prop: 'offsetX',
+                      type: 'shadow',
+                    },
+                  },
+                },
               },
               offsetY: {
                 type: 'dimension',
                 value: '12px',
+                $extensions: {
+                  'com.styledictionary': {
+                    preExpand: {
+                      prop: 'offsetY',
+                      type: 'shadow',
+                    },
+                  },
+                },
               },
               blur: {
                 type: 'dimension',
                 value: '4px',
+                $extensions: {
+                  'com.styledictionary': {
+                    preExpand: {
+                      prop: 'blur',
+                      type: 'shadow',
+                    },
+                  },
+                },
               },
               spread: {
                 type: 'dimension',
                 value: '3px',
+                $extensions: {
+                  'com.styledictionary': {
+                    preExpand: {
+                      prop: 'spread',
+                      type: 'shadow',
+                    },
+                  },
+                },
               },
               color: {
                 type: 'color',
                 value: '#ccc',
+                $extensions: {
+                  'com.styledictionary': {
+                    preExpand: {
+                      prop: 'color',
+                      type: 'shadow',
+                    },
+                  },
+                },
               },
             },
           });
@@ -388,26 +564,80 @@ describe('utils', () => {
               dashArray: {
                 value: ['0.5rem', '0.25rem'],
                 type: 'dimension',
+                $extensions: {
+                  'com.styledictionary': {
+                    preExpand: {
+                      prop: 'dashArray',
+                      type: 'strokeStyle',
+                    },
+                  },
+                },
               },
               lineCap: {
                 value: 'round',
                 type: 'lineCap',
+                $extensions: {
+                  'com.styledictionary': {
+                    preExpand: {
+                      prop: 'lineCap',
+                      type: 'strokeStyle',
+                    },
+                  },
+                },
               },
             },
             border: {
               // color can remain unresolved ref because its resolved value is not an object
-              color: { value: '{black}', type: 'color' },
-              width: { value: '3px', type: 'dimension' },
+              color: {
+                value: '{black}',
+                type: 'color',
+                $extensions: {
+                  'com.styledictionary': {
+                    preExpand: {
+                      prop: 'color',
+                      type: 'border',
+                    },
+                  },
+                },
+              },
+              width: {
+                value: '3px',
+                type: 'dimension',
+                $extensions: {
+                  'com.styledictionary': {
+                    preExpand: {
+                      prop: 'width',
+                      type: 'border',
+                    },
+                  },
+                },
+              },
               // style must be its resolved value because it is an object and potentially gets expanded,
               // breaking the original reference
               style: {
                 dashArray: {
                   value: ['0.5rem', '0.25rem'],
                   type: 'dimension',
+                  $extensions: {
+                    'com.styledictionary': {
+                      preExpand: {
+                        prop: 'dashArray',
+                        type: 'strokeStyle',
+                      },
+                    },
+                  },
                 },
                 lineCap: {
                   value: 'round',
                   type: 'lineCap',
+                  $extensions: {
+                    'com.styledictionary': {
+                      preExpand: {
+                        prop: 'lineCap',
+                        type: 'strokeStyle',
+                      },
+                    },
+                  },
                 },
               },
             },
@@ -448,44 +678,124 @@ describe('utils', () => {
                 offsetX: {
                   type: 'dimension',
                   value: '2px',
+                  $extensions: {
+                    'com.styledictionary': {
+                      preExpand: {
+                        prop: 'offsetX',
+                        type: 'shadow',
+                      },
+                    },
+                  },
                 },
                 offsetY: {
                   type: 'dimension',
                   value: '4px',
+                  $extensions: {
+                    'com.styledictionary': {
+                      preExpand: {
+                        prop: 'offsetY',
+                        type: 'shadow',
+                      },
+                    },
+                  },
                 },
                 blur: {
                   type: 'dimension',
                   value: '2px',
+                  $extensions: {
+                    'com.styledictionary': {
+                      preExpand: {
+                        prop: 'blur',
+                        type: 'shadow',
+                      },
+                    },
+                  },
                 },
                 spread: {
                   type: 'dimension',
                   value: '0',
+                  $extensions: {
+                    'com.styledictionary': {
+                      preExpand: {
+                        prop: 'spread',
+                        type: 'shadow',
+                      },
+                    },
+                  },
                 },
                 color: {
                   type: 'color',
                   value: '#000',
+                  $extensions: {
+                    'com.styledictionary': {
+                      preExpand: {
+                        prop: 'color',
+                        type: 'shadow',
+                      },
+                    },
+                  },
                 },
               },
               2: {
                 offsetX: {
                   type: 'dimension',
                   value: '10px',
+                  $extensions: {
+                    'com.styledictionary': {
+                      preExpand: {
+                        prop: 'offsetX',
+                        type: 'shadow',
+                      },
+                    },
+                  },
                 },
                 offsetY: {
                   type: 'dimension',
                   value: '12px',
+                  $extensions: {
+                    'com.styledictionary': {
+                      preExpand: {
+                        prop: 'offsetY',
+                        type: 'shadow',
+                      },
+                    },
+                  },
                 },
                 blur: {
                   type: 'dimension',
                   value: '4px',
+                  $extensions: {
+                    'com.styledictionary': {
+                      preExpand: {
+                        prop: 'blur',
+                        type: 'shadow',
+                      },
+                    },
+                  },
                 },
                 spread: {
                   type: 'dimension',
                   value: '3px',
+                  $extensions: {
+                    'com.styledictionary': {
+                      preExpand: {
+                        prop: 'spread',
+                        type: 'shadow',
+                      },
+                    },
+                  },
                 },
                 color: {
                   type: 'color',
                   value: '#ccc',
+                  $extensions: {
+                    'com.styledictionary': {
+                      preExpand: {
+                        prop: 'color',
+                        type: 'shadow',
+                      },
+                    },
+                  },
                 },
               },
             },
@@ -517,28 +827,76 @@ describe('utils', () => {
               color: {
                 $type: 'color',
                 $value: '#000',
+                $extensions: {
+                  'com.styledictionary': {
+                    preExpand: {
+                      prop: 'color',
+                      type: 'border',
+                    },
+                  },
+                },
               },
               style: {
                 $type: 'strokeStyle',
                 $value: 'solid',
+                $extensions: {
+                  'com.styledictionary': {
+                    preExpand: {
+                      prop: 'style',
+                      type: 'border',
+                    },
+                  },
+                },
               },
               width: {
                 $type: 'dimension',
                 $value: '2px',
+                $extensions: {
+                  'com.styledictionary': {
+                    preExpand: {
+                      prop: 'width',
+                      type: 'border',
+                    },
+                  },
+                },
               },
             },
             borderRef: {
               color: {
                 $type: 'color',
                 $value: '#000',
+                $extensions: {
+                  'com.styledictionary': {
+                    preExpand: {
+                      prop: 'color',
+                      type: 'border',
+                    },
+                  },
+                },
               },
               style: {
                 $type: 'strokeStyle',
                 $value: 'solid',
+                $extensions: {
+                  'com.styledictionary': {
+                    preExpand: {
+                      prop: 'style',
+                      type: 'border',
+                    },
+                  },
+                },
               },
               width: {
                 $type: 'dimension',
                 $value: '2px',
+                $extensions: {
+                  'com.styledictionary': {
+                    preExpand: {
+                      prop: 'width',
+                      type: 'border',
+                    },
+                  },
+                },
               },
             },
           });
