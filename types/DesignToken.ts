@@ -37,6 +37,8 @@ export interface DesignTokens {
   [key: string]: DesignTokens | DesignToken | string | undefined;
 }
 
+export type TokenMap<T extends DesignToken = DesignToken> = Map<string, T>;
+
 // Same as DesignTokens but without the $type group property
 // after preprocessing the type is delegated to tokens level
 export interface PreprocessedTokens {
@@ -78,5 +80,5 @@ export interface Dictionary {
   tokenMap: Map<string, TransformedToken>;
   unfilteredTokens?: TransformedTokens;
   unfilteredAllTokens?: TransformedToken[];
-  unfilteredTokenMap?: Map<string, TransformedToken>;
+  unfilteredTokenMap?: TokenMap<TransformedToken>;
 }

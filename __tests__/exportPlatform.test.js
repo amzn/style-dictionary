@@ -253,7 +253,6 @@ describe('exportPlatform', () => {
           path: ['colors', 'red'],
           original: {
             value: '#f00',
-            key: '{colors.red}',
           },
           attributes: {
             category: 'colors',
@@ -267,7 +266,6 @@ describe('exportPlatform', () => {
           path: ['colors', 'error'],
           original: {
             value: '{colors.red}',
-            key: '{colors.error}',
           },
           attributes: {
             category: 'colors',
@@ -281,7 +279,6 @@ describe('exportPlatform', () => {
           path: ['colors', 'danger'],
           original: {
             value: '{colors.error}',
-            key: '{colors.danger}',
           },
           attributes: {
             category: 'colors',
@@ -295,7 +292,6 @@ describe('exportPlatform', () => {
           path: ['colors', 'alert'],
           original: {
             value: '{colors.error}',
-            key: '{colors.alert}',
           },
           attributes: {
             category: 'colors',
@@ -407,7 +403,7 @@ Refer to: https://styledictionary.com/reference/logging/`;
         tokens,
         platforms,
       });
-      await expect(sd.exportPlatform('css')).to.eventually.be.rejectedWith(errorMessage(4));
+      await expect(sd.exportPlatform('css')).to.eventually.be.rejectedWith(errorMessage(3));
     });
   });
 

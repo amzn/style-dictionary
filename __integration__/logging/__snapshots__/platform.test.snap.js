@@ -57,3 +57,22 @@ TypeError: token.value.replace is not a function
 at `;
 /* end snapshot integration logging platform should warn and notify users of transform errors 2 */
 
+snapshots["integration logging platform property reference errors should throw and notify users of unknown references verbose mode"] = 
+`
+Reference Errors:
+Some token references (1) could not be found.
+
+{color.danger} tries to reference {color.red}, which is not defined.
+`;
+/* end snapshot integration logging platform property reference errors should throw and notify users of unknown references verbose mode */
+
+snapshots["integration logging platform property reference errors circular references should throw and notify users verbose mode"] = 
+`
+Reference Errors:
+Some token references (2) could not be found.
+
+Circular definition cycle for {color.foo} => {color.foo}, {color.foo}
+Circular definition cycle for {color.teal} => {color.teal}, {color.blue}, {color.green}, {color.teal}
+`;
+/* end snapshot integration logging platform property reference errors circular references should throw and notify users verbose mode */
+

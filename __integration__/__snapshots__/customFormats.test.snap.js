@@ -15,8 +15,7 @@ snapshots["integration custom formats inline custom with new args should match s
             "isSource": true,
             "original": {
               "value": 0.5,
-              "type": "dimension",
-              "key": "{size.padding.small}"
+              "type": "dimension"
             },
             "name": "SizePaddingSmall",
             "attributes": {
@@ -38,8 +37,7 @@ snapshots["integration custom formats inline custom with new args should match s
             "isSource": true,
             "original": {
               "value": 1,
-              "type": "dimension",
-              "key": "{size.padding.medium}"
+              "type": "dimension"
             },
             "name": "SizePaddingMedium",
             "attributes": {
@@ -61,8 +59,7 @@ snapshots["integration custom formats inline custom with new args should match s
             "isSource": true,
             "original": {
               "value": 1,
-              "type": "dimension",
-              "key": "{size.padding.large}"
+              "type": "dimension"
             },
             "name": "SizePaddingLarge",
             "attributes": {
@@ -84,8 +81,7 @@ snapshots["integration custom formats inline custom with new args should match s
             "isSource": true,
             "original": {
               "value": 1,
-              "type": "dimension",
-              "key": "{size.padding.xl}"
+              "type": "dimension"
             },
             "name": "SizePaddingXl",
             "attributes": {
@@ -111,8 +107,7 @@ snapshots["integration custom formats inline custom with new args should match s
         "isSource": true,
         "original": {
           "value": 0.5,
-          "type": "dimension",
-          "key": "{size.padding.small}"
+          "type": "dimension"
         },
         "name": "SizePaddingSmall",
         "attributes": {
@@ -134,8 +129,7 @@ snapshots["integration custom formats inline custom with new args should match s
         "isSource": true,
         "original": {
           "value": 1,
-          "type": "dimension",
-          "key": "{size.padding.medium}"
+          "type": "dimension"
         },
         "name": "SizePaddingMedium",
         "attributes": {
@@ -157,8 +151,7 @@ snapshots["integration custom formats inline custom with new args should match s
         "isSource": true,
         "original": {
           "value": 1,
-          "type": "dimension",
-          "key": "{size.padding.large}"
+          "type": "dimension"
         },
         "name": "SizePaddingLarge",
         "attributes": {
@@ -180,8 +173,7 @@ snapshots["integration custom formats inline custom with new args should match s
         "isSource": true,
         "original": {
           "value": 1,
-          "type": "dimension",
-          "key": "{size.padding.xl}"
+          "type": "dimension"
         },
         "name": "SizePaddingXl",
         "attributes": {
@@ -208,8 +200,7 @@ snapshots["integration custom formats inline custom with new args should match s
             "isSource": true,
             "original": {
               "value": 0.5,
-              "type": "dimension",
-              "key": "{size.padding.small}"
+              "type": "dimension"
             },
             "name": "SizePaddingSmall",
             "attributes": {
@@ -231,8 +222,7 @@ snapshots["integration custom formats inline custom with new args should match s
             "isSource": true,
             "original": {
               "value": 1,
-              "type": "dimension",
-              "key": "{size.padding.medium}"
+              "type": "dimension"
             },
             "name": "SizePaddingMedium",
             "attributes": {
@@ -254,8 +244,7 @@ snapshots["integration custom formats inline custom with new args should match s
             "isSource": true,
             "original": {
               "value": 1,
-              "type": "dimension",
-              "key": "{size.padding.large}"
+              "type": "dimension"
             },
             "name": "SizePaddingLarge",
             "attributes": {
@@ -277,8 +266,7 @@ snapshots["integration custom formats inline custom with new args should match s
             "isSource": true,
             "original": {
               "value": 1,
-              "type": "dimension",
-              "key": "{size.padding.xl}"
+              "type": "dimension"
             },
             "name": "SizePaddingXl",
             "attributes": {
@@ -304,8 +292,7 @@ snapshots["integration custom formats inline custom with new args should match s
         "isSource": true,
         "original": {
           "value": 0.5,
-          "type": "dimension",
-          "key": "{size.padding.small}"
+          "type": "dimension"
         },
         "name": "SizePaddingSmall",
         "attributes": {
@@ -327,8 +314,7 @@ snapshots["integration custom formats inline custom with new args should match s
         "isSource": true,
         "original": {
           "value": 1,
-          "type": "dimension",
-          "key": "{size.padding.medium}"
+          "type": "dimension"
         },
         "name": "SizePaddingMedium",
         "attributes": {
@@ -350,8 +336,7 @@ snapshots["integration custom formats inline custom with new args should match s
         "isSource": true,
         "original": {
           "value": 1,
-          "type": "dimension",
-          "key": "{size.padding.large}"
+          "type": "dimension"
         },
         "name": "SizePaddingLarge",
         "attributes": {
@@ -373,8 +358,7 @@ snapshots["integration custom formats inline custom with new args should match s
         "isSource": true,
         "original": {
           "value": 1,
-          "type": "dimension",
-          "key": "{size.padding.xl}"
+          "type": "dimension"
         },
         "name": "SizePaddingXl",
         "attributes": {
@@ -400,8 +384,7 @@ snapshots["integration custom formats inline custom with new args should match s
       "isSource": true,
       "original": {
         "value": 0.5,
-        "type": "dimension",
-        "key": "{size.padding.small}"
+        "type": "dimension"
       },
       "name": "SizePaddingSmall",
       "attributes": {
@@ -423,8 +406,7 @@ snapshots["integration custom formats inline custom with new args should match s
       "isSource": true,
       "original": {
         "value": 1,
-        "type": "dimension",
-        "key": "{size.padding.medium}"
+        "type": "dimension"
       },
       "name": "SizePaddingMedium",
       "attributes": {
@@ -446,8 +428,7 @@ snapshots["integration custom formats inline custom with new args should match s
       "isSource": true,
       "original": {
         "value": 1,
-        "type": "dimension",
-        "key": "{size.padding.large}"
+        "type": "dimension"
       },
       "name": "SizePaddingLarge",
       "attributes": {
@@ -469,8 +450,7 @@ snapshots["integration custom formats inline custom with new args should match s
       "isSource": true,
       "original": {
         "value": 1,
-        "type": "dimension",
-        "key": "{size.padding.xl}"
+        "type": "dimension"
       },
       "name": "SizePaddingXl",
       "attributes": {
@@ -496,8 +476,7 @@ snapshots["integration custom formats inline custom with new args should match s
           "isSource": true,
           "original": {
             "value": 0.5,
-            "type": "dimension",
-            "key": "{size.padding.small}"
+            "type": "dimension"
           },
           "name": "SizePaddingSmall",
           "attributes": {
@@ -519,8 +498,7 @@ snapshots["integration custom formats inline custom with new args should match s
           "isSource": true,
           "original": {
             "value": 1,
-            "type": "dimension",
-            "key": "{size.padding.medium}"
+            "type": "dimension"
           },
           "name": "SizePaddingMedium",
           "attributes": {
@@ -542,8 +520,7 @@ snapshots["integration custom formats inline custom with new args should match s
           "isSource": true,
           "original": {
             "value": 1,
-            "type": "dimension",
-            "key": "{size.padding.large}"
+            "type": "dimension"
           },
           "name": "SizePaddingLarge",
           "attributes": {
@@ -565,8 +542,7 @@ snapshots["integration custom formats inline custom with new args should match s
           "isSource": true,
           "original": {
             "value": 1,
-            "type": "dimension",
-            "key": "{size.padding.xl}"
+            "type": "dimension"
           },
           "name": "SizePaddingXl",
           "attributes": {
@@ -1030,8 +1006,7 @@ snapshots["integration custom formats register custom format with new args shoul
             "isSource": true,
             "original": {
               "value": 0.5,
-              "type": "dimension",
-              "key": "{size.padding.small}"
+              "type": "dimension"
             },
             "name": "SizePaddingSmall",
             "attributes": {
@@ -1053,8 +1028,7 @@ snapshots["integration custom formats register custom format with new args shoul
             "isSource": true,
             "original": {
               "value": 1,
-              "type": "dimension",
-              "key": "{size.padding.medium}"
+              "type": "dimension"
             },
             "name": "SizePaddingMedium",
             "attributes": {
@@ -1076,8 +1050,7 @@ snapshots["integration custom formats register custom format with new args shoul
             "isSource": true,
             "original": {
               "value": 1,
-              "type": "dimension",
-              "key": "{size.padding.large}"
+              "type": "dimension"
             },
             "name": "SizePaddingLarge",
             "attributes": {
@@ -1099,8 +1072,7 @@ snapshots["integration custom formats register custom format with new args shoul
             "isSource": true,
             "original": {
               "value": 1,
-              "type": "dimension",
-              "key": "{size.padding.xl}"
+              "type": "dimension"
             },
             "name": "SizePaddingXl",
             "attributes": {
@@ -1126,8 +1098,7 @@ snapshots["integration custom formats register custom format with new args shoul
         "isSource": true,
         "original": {
           "value": 0.5,
-          "type": "dimension",
-          "key": "{size.padding.small}"
+          "type": "dimension"
         },
         "name": "SizePaddingSmall",
         "attributes": {
@@ -1149,8 +1120,7 @@ snapshots["integration custom formats register custom format with new args shoul
         "isSource": true,
         "original": {
           "value": 1,
-          "type": "dimension",
-          "key": "{size.padding.medium}"
+          "type": "dimension"
         },
         "name": "SizePaddingMedium",
         "attributes": {
@@ -1172,8 +1142,7 @@ snapshots["integration custom formats register custom format with new args shoul
         "isSource": true,
         "original": {
           "value": 1,
-          "type": "dimension",
-          "key": "{size.padding.large}"
+          "type": "dimension"
         },
         "name": "SizePaddingLarge",
         "attributes": {
@@ -1195,8 +1164,7 @@ snapshots["integration custom formats register custom format with new args shoul
         "isSource": true,
         "original": {
           "value": 1,
-          "type": "dimension",
-          "key": "{size.padding.xl}"
+          "type": "dimension"
         },
         "name": "SizePaddingXl",
         "attributes": {
@@ -1223,8 +1191,7 @@ snapshots["integration custom formats register custom format with new args shoul
             "isSource": true,
             "original": {
               "value": 0.5,
-              "type": "dimension",
-              "key": "{size.padding.small}"
+              "type": "dimension"
             },
             "name": "SizePaddingSmall",
             "attributes": {
@@ -1246,8 +1213,7 @@ snapshots["integration custom formats register custom format with new args shoul
             "isSource": true,
             "original": {
               "value": 1,
-              "type": "dimension",
-              "key": "{size.padding.medium}"
+              "type": "dimension"
             },
             "name": "SizePaddingMedium",
             "attributes": {
@@ -1269,8 +1235,7 @@ snapshots["integration custom formats register custom format with new args shoul
             "isSource": true,
             "original": {
               "value": 1,
-              "type": "dimension",
-              "key": "{size.padding.large}"
+              "type": "dimension"
             },
             "name": "SizePaddingLarge",
             "attributes": {
@@ -1292,8 +1257,7 @@ snapshots["integration custom formats register custom format with new args shoul
             "isSource": true,
             "original": {
               "value": 1,
-              "type": "dimension",
-              "key": "{size.padding.xl}"
+              "type": "dimension"
             },
             "name": "SizePaddingXl",
             "attributes": {
@@ -1319,8 +1283,7 @@ snapshots["integration custom formats register custom format with new args shoul
         "isSource": true,
         "original": {
           "value": 0.5,
-          "type": "dimension",
-          "key": "{size.padding.small}"
+          "type": "dimension"
         },
         "name": "SizePaddingSmall",
         "attributes": {
@@ -1342,8 +1305,7 @@ snapshots["integration custom formats register custom format with new args shoul
         "isSource": true,
         "original": {
           "value": 1,
-          "type": "dimension",
-          "key": "{size.padding.medium}"
+          "type": "dimension"
         },
         "name": "SizePaddingMedium",
         "attributes": {
@@ -1365,8 +1327,7 @@ snapshots["integration custom formats register custom format with new args shoul
         "isSource": true,
         "original": {
           "value": 1,
-          "type": "dimension",
-          "key": "{size.padding.large}"
+          "type": "dimension"
         },
         "name": "SizePaddingLarge",
         "attributes": {
@@ -1388,8 +1349,7 @@ snapshots["integration custom formats register custom format with new args shoul
         "isSource": true,
         "original": {
           "value": 1,
-          "type": "dimension",
-          "key": "{size.padding.xl}"
+          "type": "dimension"
         },
         "name": "SizePaddingXl",
         "attributes": {
@@ -1415,8 +1375,7 @@ snapshots["integration custom formats register custom format with new args shoul
       "isSource": true,
       "original": {
         "value": 0.5,
-        "type": "dimension",
-        "key": "{size.padding.small}"
+        "type": "dimension"
       },
       "name": "SizePaddingSmall",
       "attributes": {
@@ -1438,8 +1397,7 @@ snapshots["integration custom formats register custom format with new args shoul
       "isSource": true,
       "original": {
         "value": 1,
-        "type": "dimension",
-        "key": "{size.padding.medium}"
+        "type": "dimension"
       },
       "name": "SizePaddingMedium",
       "attributes": {
@@ -1461,8 +1419,7 @@ snapshots["integration custom formats register custom format with new args shoul
       "isSource": true,
       "original": {
         "value": 1,
-        "type": "dimension",
-        "key": "{size.padding.large}"
+        "type": "dimension"
       },
       "name": "SizePaddingLarge",
       "attributes": {
@@ -1484,8 +1441,7 @@ snapshots["integration custom formats register custom format with new args shoul
       "isSource": true,
       "original": {
         "value": 1,
-        "type": "dimension",
-        "key": "{size.padding.xl}"
+        "type": "dimension"
       },
       "name": "SizePaddingXl",
       "attributes": {
@@ -1511,8 +1467,7 @@ snapshots["integration custom formats register custom format with new args shoul
           "isSource": true,
           "original": {
             "value": 0.5,
-            "type": "dimension",
-            "key": "{size.padding.small}"
+            "type": "dimension"
           },
           "name": "SizePaddingSmall",
           "attributes": {
@@ -1534,8 +1489,7 @@ snapshots["integration custom formats register custom format with new args shoul
           "isSource": true,
           "original": {
             "value": 1,
-            "type": "dimension",
-            "key": "{size.padding.medium}"
+            "type": "dimension"
           },
           "name": "SizePaddingMedium",
           "attributes": {
@@ -1557,8 +1511,7 @@ snapshots["integration custom formats register custom format with new args shoul
           "isSource": true,
           "original": {
             "value": 1,
-            "type": "dimension",
-            "key": "{size.padding.large}"
+            "type": "dimension"
           },
           "name": "SizePaddingLarge",
           "attributes": {
@@ -1580,8 +1533,7 @@ snapshots["integration custom formats register custom format with new args shoul
           "isSource": true,
           "original": {
             "value": 1,
-            "type": "dimension",
-            "key": "{size.padding.xl}"
+            "type": "dimension"
           },
           "name": "SizePaddingXl",
           "attributes": {

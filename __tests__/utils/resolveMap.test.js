@@ -11,7 +11,7 @@
  * and limitations under the License.
  */
 import { expect } from 'chai';
-import { resolveMap } from '../../lib/utils/resolveMap.js';
+import { resolveMap } from '../../lib/utils/references/resolveMap.js';
 import GroupMessages from '../../lib/utils/groupMessages.js';
 import { convertTokenData } from '../../lib/utils/convertTokenData.js';
 

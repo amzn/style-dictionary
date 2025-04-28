@@ -283,7 +283,7 @@ You might be wondering why the return type of a format function is `unknown`.
 | `args.dictionary.tokenMap`            | `Record<string, TransformedToken>` | All tokens as a JavaScript Map that's keyed, making it easy to access a single token as well as iterate through them. |
 | `args.dictionary.unfilteredAllTokens` | `TransformedToken[]`               | Flattened array of all tokens, including tokens that were filtered out by filters.                                    |
 | `args.dictionary.unfilteredTokens`    | `TransformedTokens`                | All tokens, still in unflattened object format, including tokens that were filtered out by filters.                   |
-| `args.dictionary.unfilteredTokenMap`  | `TransformedTokens`                | All tokens as a JavaScript Map, including tokens that were filtered out by filters.                                   |
+| `args.dictionary.unfilteredTokenMap`  | `TokenMap<TransformedToken>`       | All tokens as a JavaScript Map, including tokens that were filtered out by filters.                                   |
 | `args.platform`                       | `Platform`                         | [Platform config](/reference/config#platform)                                                                         |
 | `args.file`                           | `File`                             | [File config](/reference/config#file)                                                                                 |
 | `args.options`                        | `Object`                           | Merged object with SD [Config](/reference/config#properties) & [FormatOptions](#format-configuration)                 |
