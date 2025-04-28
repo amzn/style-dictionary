@@ -905,6 +905,9 @@ snapshots["integration custom formats inline custom with new args should match s
         },
         "size/flutter/remToDouble": {
           "type": "value"
+        },
+        "duration/stringify": {
+          "type": "value"
         }
       },
       "formats": {},
@@ -1872,6 +1875,9 @@ snapshots["integration custom formats register custom format with new args shoul
           "type": "value"
         },
         "size/flutter/remToDouble": {
+          "type": "value"
+        },
+        "duration/stringify": {
           "type": "value"
         }
       },
