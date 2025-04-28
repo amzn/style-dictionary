@@ -1,5 +1,17 @@
 # Changelog
 
+## 4.4.0
+
+### Minor Changes
+
+- f2395f3: Add a 'flat' option to the javascriptEsm format
+- 2f13dcb: Added support for using the selector option as a string or string array in the css/variables formatter. When an array is provided, the CSS variables will be nested within the specified selectors in order
+
+### Patch Changes
+
+- ee85609: fix misaligned comments in typescript/es6-declarations
+- 6ff17ec: If several preprocessors are defined in the SD configuration, the execution of the preprocessors is now guaranteed in the exact order in which they were configured in the SD configuration.
+
 ## 4.3.3
 
 ### Patch Changes
