@@ -899,6 +899,32 @@ describe('common', () => {
         );
         expect(value).to.equal('-10px');
       });
+      it('should work with object values with unit', () => {
+        const value = transforms[sizePx].transform(
+          {
+            value: {
+              value: '24',
+              unit: 'px',
+            },
+          },
+          {},
+          {},
+        );
+        expect(value).to.equal('24px');
+      });
+      it('should work with object values with unit and negative value', () => {
+        const value = transforms[sizePx].transform(
+          {
+            value: {
+              value: '-24',
+              unit: 'px',
+            },
+          },
+          {},
+          {},
+        );
+        expect(value).to.equal('-24px');
+      });
       it('should throw an error if prop value is Nan', () => {
         expect(() => transforms[sizeDp].transform({ value: 'a' }, {}, {})).to.throw();
       });
