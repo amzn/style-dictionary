@@ -232,7 +232,7 @@ describe('resolveRefs()', () => {
       });
     });
 
-    it('returns a rich error object for broken/circular refs', () => {
+    it('returns a rich error object for broken/circular refs, with token partially resolved', () => {
       const tokens = {
         circ1: {
           $value: '{circ2}',
@@ -269,9 +269,9 @@ describe('resolveRefs()', () => {
             chain: ['{circ1}', '{circ2}', '{circ3}', '{circ1}'],
             token: {
               $value: {
-                nested: '{foo} {circ1} {qux}',
+                nested: '16px {circ1} {qux}',
               },
-              prop: 'some {foo}',
+              prop: 'some 16px',
             },
             type: 'circular',
           },
@@ -279,9 +279,9 @@ describe('resolveRefs()', () => {
             ref: '{qux}',
             token: {
               $value: {
-                nested: '{foo} {circ1} {qux}',
+                nested: '16px {circ1} {qux}',
               },
-              prop: 'some {foo}',
+              prop: 'some 16px',
             },
             type: 'not-found',
           },

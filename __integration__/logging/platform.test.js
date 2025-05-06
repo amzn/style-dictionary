@@ -20,6 +20,10 @@ import { logVerbosityLevels } from '../../lib/enums/logVerbosityLevels.js';
 const { verbose } = logVerbosityLevels;
 
 /**
+ * @typedef {import('../../types/ReferenceError.d.ts').ReferenceError} RefError
+ */
+
+/**
  * This is the 2nd phase of logging: the platform configuration. This happens
  * after the Style Dictionary configuration is verified and property files are
  * parsed and merged. The platform configuration phase will verify the configuration
@@ -134,7 +138,7 @@ describe(`integration`, () => {
         );
       });
 
-      describe(`property reference errors`, () => {
+      describe(`token reference errors`, () => {
         it(`should throw and notify users of unknown references`, async () => {
           const sd = new StyleDictionary({
             tokens: {
@@ -147,12 +151,30 @@ describe(`integration`, () => {
             },
           });
           // unknown actions should throw
+          /** @type {RefError} */
           let error;
           try {
             await sd.buildAllPlatforms();
           } catch (e) {
             error = e;
           }
+
+          expect(error.errors).to.eql([
+            {
+              ref: '{color.red}',
+              token: {
+                attributes: {},
+                key: '{color.danger}',
+                name: 'danger',
+                original: {
+                  value: '{color.red}',
+                },
+                path: ['color', 'danger'],
+                value: '{color.red}',
+              },
+              type: 'not-found',
+            },
+          ]);
           await expect(cleanConsoleOutput(error.message)).to.matchSnapshot();
         });
 
@@ -273,7 +295,7 @@ describe(`integration`, () => {
                   value: '{color.blue}',
                 },
                 path: ['color', 'teal'],
-                value: '{color.blue}',
+                value: '{color.teal}',
               },
               type: 'circular',
             },

@@ -359,7 +359,7 @@ Refer to: https://styledictionary.com/reference/logging/`;
       },
     };
 
-    it('should throw if there are simple property reference errors', async () => {
+    it('should throw if there are simple token reference errors', async () => {
       const tokens = {
         a: { value: '#ff0000' },
         b: { value: '{c}' },
@@ -386,7 +386,7 @@ Refer to: https://styledictionary.com/reference/logging/`;
       await expect(sd.exportPlatform('css')).to.eventually.be.rejectedWith(errorMessage());
     });
 
-    it('should throw if there are complex property reference errors', async () => {
+    it('should throw if there are complex token reference errors', async () => {
       const tokens = {
         color: {
           core: {

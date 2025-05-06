@@ -18,23 +18,23 @@ Unknown transformGroup "foo" found in platform "css":
 "foo" does not match the name of a registered transformGroup.
 `;
 /* end snapshot integration logging platform should throw and notify users of unknown transformGroups */
-snapshots["integration logging platform property reference errors should throw and notify users of unknown references"] = 
+snapshots["integration logging platform token reference errors should throw and notify users of unknown references"] = 
 `
 Reference Errors:
 Some token references (1) could not be found.
 Use log.verbosity "verbose" or use CLI option --verbose for more details.
 Refer to: https://styledictionary.com/reference/logging/
 `;
-/* end snapshot integration logging platform property reference errors should throw and notify users of unknown references */
+/* end snapshot integration logging platform token reference errors should throw and notify users of unknown references */
 
-snapshots["integration logging platform property reference errors circular references should throw and notify users"] = 
+snapshots["integration logging platform token reference errors circular references should throw and notify users"] = 
 `
 Reference Errors:
 Some token references (2) could not be found.
 Use log.verbosity "verbose" or use CLI option --verbose for more details.
 Refer to: https://styledictionary.com/reference/logging/
 `;
-/* end snapshot integration logging platform property reference errors circular references should throw and notify users */
+/* end snapshot integration logging platform token reference errors circular references should throw and notify users */
 
 snapshots["integration logging platform should warn and notify users of transform errors 1"] = 
 `
@@ -57,16 +57,16 @@ TypeError: token.value.replace is not a function
 at `;
 /* end snapshot integration logging platform should warn and notify users of transform errors 2 */
 
-snapshots["integration logging platform property reference errors should throw and notify users of unknown references verbose mode"] = 
+snapshots["integration logging platform token reference errors should throw and notify users of unknown references verbose mode"] = 
 `
 Reference Errors:
 Some token references (1) could not be found.
 
 {color.danger} tries to reference {color.red}, which is not defined.
 `;
-/* end snapshot integration logging platform property reference errors should throw and notify users of unknown references verbose mode */
+/* end snapshot integration logging platform token reference errors should throw and notify users of unknown references verbose mode */
 
-snapshots["integration logging platform property reference errors circular references should throw and notify users verbose mode"] = 
+snapshots["integration logging platform token reference errors circular references should throw and notify users verbose mode"] = 
 `
 Reference Errors:
 Some token references (2) could not be found.
@@ -74,5 +74,5 @@ Some token references (2) could not be found.
 Circular definition cycle for {color.foo} => {color.foo}, {color.foo}
 Circular definition cycle for {color.teal} => {color.teal}, {color.blue}, {color.green}, {color.teal}
 `;
-/* end snapshot integration logging platform property reference errors circular references should throw and notify users verbose mode */
+/* end snapshot integration logging platform token reference errors circular references should throw and notify users verbose mode */
 

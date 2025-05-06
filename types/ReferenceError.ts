@@ -4,7 +4,7 @@ import type { TransformedToken } from './DesignToken.js';
 type refErrorTypesType = typeof referenceErrorTypes;
 type refErrorTypes = refErrorTypesType[keyof refErrorTypesType];
 
-export interface ReferenceError {
+export interface ReferenceErrorObject {
   type: refErrorTypes;
   ref: string;
 
@@ -15,4 +15,6 @@ export interface ReferenceError {
   chain?: string[];
 }
 
-export type ReferenceErrors = ReferenceError[];
+export interface ReferenceError extends Error {
+  errors: ReferenceErrorObject[];
+}
