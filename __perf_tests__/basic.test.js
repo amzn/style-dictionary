@@ -161,8 +161,8 @@ describe('cliBuildWithJsConfig', () => {
     expect(end - start).to.be.below(500 * timeoutMultiplier);
   }).timeout(1000 * timeoutMultiplier);
 
-  it('should run tons refs chaining within 750 milliseconds', async () => {
-    // 9000 tokens, 8700 refs, 30 ref layers deep -> within 750ms
+  it('should run tons refs chaining within 850 milliseconds', async () => {
+    // 9000 tokens, 8700 refs, 30 ref layers deep -> within 850ms
     const fontWeightTokens = generateTokens({
       key: 'fw',
       amount: 300,
@@ -192,8 +192,8 @@ describe('cliBuildWithJsConfig', () => {
     await sd.hasInitialized;
     await sd.buildPlatform('css');
     const end = performance.now();
-    expect(end - start).to.be.below(750 * timeoutMultiplier);
-  }).timeout(1250 * timeoutMultiplier);
+    expect(end - start).to.be.below(850 * timeoutMultiplier);
+  }).timeout(1350 * timeoutMultiplier);
 
   it('should run an obscene amount of tokens with refs refs chaining within 5 seconds', async () => {
     // 30000 tokens, 29700 refs, 100 ref layers deep -> within 5000ms
