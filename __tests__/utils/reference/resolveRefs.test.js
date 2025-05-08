@@ -15,7 +15,7 @@ import {
   resolveRefs,
   resolveRefValueWrapper,
   _resolveReferences,
-} from '../../../lib/utils/references/resolveRefsNew.js';
+} from '../../../lib/utils/references/resolveRefs.js';
 import { convertTokenData } from '../../../lib/utils/convertTokenData.js';
 
 describe('resolveRefs()', () => {
@@ -34,11 +34,13 @@ describe('resolveRefs()', () => {
       expect(_resolveReferences('{foo}', tokenMap, { usesDtcg: true, token: tokens.foo })).to.eql({
         resolved: '16px',
         errors: [],
+        refs: ['{foo}'],
       });
 
       expect(_resolveReferences('{bar}', tokenMap, { usesDtcg: true, token: tokens.bar })).to.eql({
         resolved: '16px',
         errors: [],
+        refs: ['{bar}', '{foo}'],
       });
     });
 
@@ -78,6 +80,7 @@ describe('resolveRefs()', () => {
             type: 'not-found',
           },
         ],
+        refs: ['{bar}', '{ay}', '{foo}', '{qux}'],
       });
     });
 
@@ -127,6 +130,7 @@ describe('resolveRefs()', () => {
             type: 'not-found',
           },
         ],
+        refs: ['{bar}', '{circ1}', '{circ2}', '{circ3}', '{foo}', '{qux}'],
       });
     });
 
@@ -167,6 +171,7 @@ describe('resolveRefs()', () => {
             type: 'not-found',
           },
         ],
+        refs: ['{bar}', '{circ1}', '{foo}', '{qux}'],
       });
     });
 
@@ -184,6 +189,7 @@ describe('resolveRefs()', () => {
       expect(_resolveReferences('{bar}', tokenMap, { usesDtcg: true, token: tokens.bar })).to.eql({
         resolved: '16px',
         errors: [],
+        refs: ['{bar}', '{foo}'],
       });
     });
 
@@ -201,6 +207,48 @@ describe('resolveRefs()', () => {
       expect(_resolveReferences('{bar}', tokenMap, { usesDtcg: true, token: tokens.bar })).to.eql({
         resolved: 16,
         errors: [],
+        refs: ['{bar}', '{foo}'],
+      });
+    });
+
+    it(`keeps track of references, including deep refs`, () => {
+      const tokens = {
+        m: {
+          $value: '4px',
+        },
+        x: {
+          $value: '8px',
+        },
+        y: {
+          $value: '{x} {foo}',
+        },
+        z: {
+          $value: '{y}',
+        },
+        foo: {
+          $value: '16px',
+        },
+        bar: {
+          $value: '24px',
+        },
+        baz: {
+          $value: '{foo} {z}',
+        },
+        qux: {
+          $value: '{baz} {bar}',
+        },
+      };
+      const tokenMap = convertTokenData(tokens, { output: 'map', usesDtcg: true });
+
+      const res = _resolveReferences(tokens.qux.$value, tokenMap, {
+        usesDtcg: true,
+        token: tokens.qux,
+      });
+
+      expect(res).to.eql({
+        resolved: '16px 8px 16px 24px',
+        errors: [],
+        refs: ['{baz}', '{foo}', '{z}', '{y}', '{x}', '{bar}'],
       });
     });
   });
@@ -229,6 +277,7 @@ describe('resolveRefs()', () => {
           prop: 'some 16px',
         },
         errors: [],
+        refs: ['{foo}'],
       });
     });
 
@@ -286,6 +335,7 @@ describe('resolveRefs()', () => {
             type: 'not-found',
           },
         ],
+        refs: ['{foo}', '{circ1}', '{circ2}', '{circ3}', '{qux}'],
       });
     });
 
@@ -319,6 +369,7 @@ describe('resolveRefs()', () => {
           $value: '{foo} x',
         },
         errors: [],
+        refs: [], // empty due to objectsOnly
       });
 
       // referenced value is not an object so keep ref
@@ -331,6 +382,7 @@ describe('resolveRefs()', () => {
           $value: '{foo}',
         },
         errors: [],
+        refs: ['{foo}'],
       });
 
       // exclusively a ref, and resolved is an object, resolve :)!
@@ -343,6 +395,7 @@ describe('resolveRefs()', () => {
           $value: { fontSize: '16px' },
         },
         errors: [],
+        refs: ['{object}'],
       });
     });
   });
@@ -378,8 +431,8 @@ describe('resolveRefs()', () => {
       const tokenMap = convertTokenData(tokens, { output: 'map', usesDtcg: true });
       expect(resolveRefs(tokenMap, { usesDtcg: true })).to.eql({
         resolved: new Map([
-          ['{foo}', { $value: '16px', key: '{foo}' }],
-          ['{bar}', { $value: '16px', key: '{bar}' }],
+          ['{foo}', { $value: '16px', key: '{foo}', refs: [] }],
+          ['{bar}', { $value: '16px', key: '{bar}', refs: ['{foo}'] }],
         ]),
         errors: [],
       });
@@ -401,8 +454,8 @@ describe('resolveRefs()', () => {
         resolveRefs(tokenMap, { usesDtcg: true, ignoreKeys: new Set(['description']) }),
       ).to.eql({
         resolved: new Map([
-          ['{foo}', { $value: '16px', key: '{foo}' }],
-          ['{bar}', { $value: '16px', description: '{foo}', key: '{bar}' }],
+          ['{foo}', { $value: '16px', key: '{foo}', refs: [] }],
+          ['{bar}', { $value: '16px', description: '{foo}', key: '{bar}', refs: ['{foo}'] }],
         ]),
         errors: [],
       });
@@ -421,8 +474,8 @@ describe('resolveRefs()', () => {
       const tokenMap = convertTokenData(tokens, { output: 'map' });
       expect(resolveRefs(tokenMap)).to.eql({
         resolved: new Map([
-          ['{foo}', { value: '16px', key: '{foo}' }],
-          ['{bar}', { value: '16px', key: '{bar}' }],
+          ['{foo}', { value: '16px', key: '{foo}', refs: [] }],
+          ['{bar}', { value: '16px', key: '{bar}', refs: ['{foo}'] }],
         ]),
         errors: [],
       });
@@ -460,8 +513,8 @@ describe('resolveRefs()', () => {
       resolveRefs(tokenMap, { usesDtcg: true, mutateMap: true });
       expect(tokenMap).to.eql(
         new Map([
-          ['{foo}', { $value: '16px', key: '{foo}' }],
-          ['{bar}', { $value: '16px', key: '{bar}' }],
+          ['{foo}', { $value: '16px', key: '{foo}', refs: [] }],
+          ['{bar}', { $value: '16px', key: '{bar}', refs: ['{foo}'] }],
         ]),
       );
     });

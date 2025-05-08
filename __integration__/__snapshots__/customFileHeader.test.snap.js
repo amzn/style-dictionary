@@ -56,6 +56,7 @@ module.exports = {
         type: "red",
       },
       path: ["color", "red"],
+      refs: [],
     },
   },
 };
@@ -77,6 +78,7 @@ snapshots["integration valid custom file headers platform options showFileHeader
         type: "red",
       },
       path: ["color", "red"],
+      refs: [],
     },
   },
 };
@@ -102,6 +104,7 @@ module.exports = {
         type: "red",
       },
       path: ["color", "red"],
+      refs: [],
     },
   },
 };

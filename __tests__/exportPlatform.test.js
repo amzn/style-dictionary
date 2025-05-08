@@ -258,6 +258,7 @@ describe('exportPlatform', () => {
             category: 'colors',
             type: 'red',
           },
+          refs: [],
         },
         error: {
           value: '#f00',
@@ -271,6 +272,7 @@ describe('exportPlatform', () => {
             category: 'colors',
             type: 'error',
           },
+          refs: ['{colors.red}'],
         },
         danger: {
           value: '#f00',
@@ -284,6 +286,7 @@ describe('exportPlatform', () => {
             category: 'colors',
             type: 'danger',
           },
+          refs: ['{colors.error}'],
         },
         alert: {
           value: '#f00',
@@ -297,6 +300,7 @@ describe('exportPlatform', () => {
             category: 'colors',
             type: 'alert',
           },
+          refs: ['{colors.error}'],
         },
       },
     };
