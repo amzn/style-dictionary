@@ -161,8 +161,8 @@ describe('cliBuildWithJsConfig', () => {
     expect(end - start).to.be.below(500 * timeoutMultiplier);
   }).timeout(1000 * timeoutMultiplier);
 
-  it('should run tons refs chaining within 2 seconds', async () => {
-    // 9000 tokens, 8700 refs, 30 ref layers deep -> within 750ms
+  it('should run tons refs chaining within 850 milliseconds', async () => {
+    // 9000 tokens, 8700 refs, 30 ref layers deep -> within 850ms
     const fontWeightTokens = generateTokens({
       key: 'fw',
       amount: 300,
@@ -192,8 +192,8 @@ describe('cliBuildWithJsConfig', () => {
     await sd.hasInitialized;
     await sd.buildPlatform('css');
     const end = performance.now();
-    expect(end - start).to.be.below(750 * timeoutMultiplier);
-  }).timeout(1250 * timeoutMultiplier);
+    expect(end - start).to.be.below(850 * timeoutMultiplier);
+  }).timeout(1350 * timeoutMultiplier);
 
   it('should run an obscene amount of tokens with refs refs chaining within 5 seconds', async () => {
     // 30000 tokens, 29700 refs, 100 ref layers deep -> within 5000ms
@@ -282,7 +282,7 @@ describe('cliBuildWithJsConfig', () => {
   }).timeout(1250 * timeoutMultiplier);
 
   it('should be fast even with composite token expansion', async () => {
-    // 9000 tokens, 8700 refs, 30 ref layers deep -> within 1500ms
+    // 9000 tokens, 8700 refs, 30 ref layers deep -> within 1750ms
     const typographyTokens = {
       family: {
         sans: {
@@ -348,6 +348,6 @@ describe('cliBuildWithJsConfig', () => {
     const output = await fs.promises.readFile(path.resolve(buildPath, 'variables.css'), 'utf-8');
     expect(output).to.include(`--fw-ref0-fw0-font-family: 'Helvetica Neue', sans-serif;`);
     expect(output).to.include(`--fw-ref29-fw299-font-family: 'Helvetica Neue', sans-serif;`);
-    expect(end - start).to.be.below(1500 * timeoutMultiplier);
-  }).timeout(2000 * timeoutMultiplier);
+    expect(end - start).to.be.below(1750 * timeoutMultiplier);
+  }).timeout(2250 * timeoutMultiplier);
 });

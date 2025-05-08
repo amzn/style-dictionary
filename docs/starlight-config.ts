@@ -23,11 +23,14 @@ export default {
     baseUrl: 'https://github.com/amzn/style-dictionary/edit/main/docs',
   },
   favicon: '/favicon.png',
-  social: {
-    github: 'https://github.com/amzn/style-dictionary',
-    slack:
-      'https://join.slack.com/t/tokens-studio/shared_invite/zt-1p8ea3m6t-C163oJcN9g3~YZTKRgo2hg',
-  },
+  social: [
+    { icon: 'github', label: 'GitHub', href: 'https://github.com/amzn/style-dictionary' },
+    {
+      icon: 'slack',
+      label: 'Slack',
+      href: 'https://join.slack.com/t/tokens-studio/shared_invite/zt-1p8ea3m6t-C163oJcN9g3~YZTKRgo2hg',
+    },
+  ],
   tableOfContents: {
     maxHeadingLevel: 4,
   },

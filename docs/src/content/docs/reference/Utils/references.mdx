@@ -2,6 +2,8 @@
 title: References
 ---
 
+import { Badge } from '@astrojs/starlight/components';
+
 These utilities have to do with token references/aliases.
 
 ## usesReferences
@@ -17,7 +19,128 @@ usesReferences('solid {border.width} {border.color}'); // true
 usesReferences('5px'); // false
 ```
 
-## resolveReferences
+## resolveRefs
+
+> Replaces the deprecated `resolveReferences` method and makes `getReferences` redundant.
+
+Takes a tokenMap and resolves any reference inside it.
+
+Optionally allows mutating the input, or resolving a single token value only.
+
+Besides the resolved map/value, it also will add a `refs` property to each tokens in the resolved map.
+This keeps track of all references (including deep/nested) of a token value.
+When using `tokenValue` option to resolve only for a single value, this property will be on the return object.
+
+```javascript title="build-tokens.js"
+import StyleDictionary from 'style-dictionary';
+import { resolveRefs } from 'style-dictionary/utils';
+
+const sd = new StyleDictionary({
+  tokens: {
+    colors: {
+      black: {
+        value: '#000',
+        type: 'color',
+      },
+    },
+    spacing: {
+      2: {
+        value: '2px',
+        type: 'dimension',
+      },
+    },
+    border: {
+      value: 'solid {spacing.2} {colors.black}',
+    },
+  },
+});
+await sd.hasInitialized;
+
+const { resolved, refs, errors } = resolveRefs(sd.tokenMap, { tokenValue: sd.tokens.border.value }); // "solid 2px #000"
+
+// alternative way, yet identical to line above -> "solid 2px #000"
+const { resolved, refs, errors } = resolveRefs(sd.tokenMap, {
+  tokenValue: 'solid {spacing.2} {colors.black}',
+});
+
+// Assumes DTCG spec format, with $ prefix ($value, $type)
+const { resolved, refs, errors } = resolveRefs(sd.tokenMap, {
+  tokenValue: 'solid {spacing.2} {colors.black}',
+  usesDtcg: true,
+});
+
+// Not passing a tokenValue option means resolving the entire Map.
+// Returns a cloned tokenMap but with all references resolved
+// The refs prop will be on each token in the resolved Map
+const { resolved, errors } = resolveRefs(sd.tokenMap);
+
+// resolves all references in sd.tokenMap, mutating the input argument directly.
+// This is much cheaper for large inputs than cloning.
+resolveRefs(sd.tokenMap, { mutateMap: true });
+```
+
+:::tip
+You can use the [`convertTokenData`](/reference/utils/tokens#converttokendata) utility to convert from a tokens object or a token array to a Map structure.
+:::
+
+| Param            | Type                                                                      | Description                                                                                                                                                                                                                                                          |
+| ---------------- | ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| tokenMap         | `TokenMap`                                                                | The token Map(), usually the SD instance's `.tokenMap` property.                                                                                                                                                                                                     |
+| opts             | `object`                                                                  | Options object to configure how the utility behaves.                                                                                                                                                                                                                 |
+| opts.mutateMap   | `boolean` -> default `false`                                              | Whether to mutate the input `tokenMap` argument when resolving its references. When false, it will create a clone and not mutate the input.                                                                                                                          |
+| opts.tokenValue  | `unknown`                                                                 | You can pass a `tokenValue` to resolve references for a single token value instead of an entire `tokenMap`. This option is mutually exclusive with `mutateMap` option.                                                                                               |
+| opts.usesDtcg    | `boolean` -> default `false`                                              | Whether DTCG syntax is used or not.                                                                                                                                                                                                                                  |
+| opts.objectsOnly | `boolean` -> default `false`                                              | When set to `true`, we only resolve for values that are exclusively references, and resolved values are objects. This is mostly used interally, for Expand API, for optimization reasons. to                                                                         |
+| opts.trackRefs   | `boolean` -> default `true`                                               | Whether or not to track references for token values and store them as `.refs` property on the token.                                                                                                                                                                 |
+| opts.ignoreKeys  | `Set<string>` -> default `Set(['original', 'key', 'path', 'attributes'])` | When resolving an entire Map, we also allow resolving references in sibling properties, e.g. a token's `$description` or `$extensions`. By passing `ignoreKeys`, you can configure which keys to skip for resolving references.                                      |
+| opts.ignorePaths | `Set<string>` -> default empty `Set`                                      | You can configure for which token paths to skip reference resolution. Used mostly internally for transitive transforms cycling. Make sure the values match the `token.key` property exactly, e.g. `{colors.red.500}` -> will skip resolving references to this token |
+
+### Error handling
+
+In case of broken references, this utility does not throw errors.
+It tries to resolve whatever it can, and gracefully fails when encountering a broken or circular reference.
+
+Throwing errors is then up to you.
+It is recommended to extend the Javascript `Error` object and pass along the `errors` data to it,
+so that your consumers can catch the error and analyze/debug it more easily.
+We do this in the Style Dictionary [`getPlatformTokens`](/reference/api#getplatformtokens) as well when exporting tokens for a specific platform.
+
+```javascript title="build-tokens.js"
+import StyleDictionary from 'style-dictionary';
+import { resolveRefs } from 'style-dictionary/utils';
+
+const sd = new StyleDictionary({
+  tokens: {
+    colors: {
+      black: {
+        value: '#000',
+        type: 'color',
+      },
+    },
+    border: {
+      value: 'solid {not.found} {colors.black} {border}',
+    },
+  },
+});
+await sd.hasInitialized;
+
+const { resolved, errors } = resolveRefs(sd.tokenMap);
+console.log(resolved.get('{border}').value); // 'solid {not.found} #000 {border}'
+console.log(errors); // ReferenceErrorObject(2)
+```
+
+#### ReferenceErrorObject
+
+| Param  | Type                        | Description                                                                                                                                                                                                                        |
+| ------ | --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| type   | `'not-found' \| 'circular'` | What type of broken reference we encountered.                                                                                                                                                                                      |
+| ref    | `string`                    | The reference that's broken, e.g. `{colors.notfound}`.                                                                                                                                                                             |
+| token? | `Token`                     | Token associated with the failed reference resolution. Useful to be able to tell the user which token in which set has the broken reference (use `token.path` and `token.filePath`).                                               |
+| chain? | `TokenMap`                  | In case of a circular reference error, we provide the full chain of references that's causing the circular looping, e.g. `['{foo}', '{foo}']` would be a self-reference. `['{foo}', '{bar}', '{qux}', '{foo}']` would be circular. |
+
+## resolveReferences <Badge text="Deprecated" variant="danger" />
+
+> Use `resolveRefs` instead, which allows more options and has better error handling
 
 Takes a token value string value and resolves any reference inside it
 
@@ -56,9 +179,14 @@ You can pass a third `options` argument where you can pass some configuration op
 
 > Also supports passing a Token Map() data structure. This is more performant, and will become the standard in the next major version.
 
-## getReferences
+## getReferences <Badge text="Deprecated" variant="danger" />
 
-Whether or not a token value contains references
+> When using `resolveRefs`, a `refs` property is added to each token in the Map, containing an array of reference strings.
+> You can then use these keys on the Map if you also need the token data.
+
+Return an array of references metadata for a given token value.
+
+The metadata is "shallow", so any nested references in the metadata is not resolved.
 
 ```javascript title="build-tokens.js"
 import StyleDictionary from 'style-dictionary';

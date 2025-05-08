@@ -168,11 +168,51 @@ type getPlatformTokens = (platform: string, opts: { cache?: boolean }) => Promis
 ```
 
 Exports a dictionary object containing the tokens as object or flat array, after platform specific transformations and reference resolutions.
+This method is used internally by `formatPlatform`/`buildPlatform`/`exportPlatform` etc.
 
 | Param    | Type                  | Description                                                                                                                                                          |
 | -------- | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | platform | `string`              | The platform to be exported. Must be defined on the style dictionary.                                                                                                |
 | opts     | `{ cache?: boolean }` | `cache` prop determines whether or not it should return the cached tokens if they've already been transformed/resolved earlier for this platform. `false` by default |
+
+#### Error handling
+
+You can try-catch this method (or any method that's using this one internally) to catch for example broken references error, and debug its `errors` property.
+
+```javascript title="build-tokens.js"
+import { ReferenceError } from 'style-dictionary/utils';
+import StyleDictionary from 'style-dictionary';
+
+const sd = new StyleDictionary({
+  tokens: {
+    colors: {
+      black: {
+        value: '#000',
+        type: 'color',
+      },
+    },
+    border: {
+      // contains a not-found and a circular (self-)reference error
+      value: 'solid {not.found} {colors.black} {border}',
+    },
+  },
+  platforms: {
+    css: {
+      files: [{ destination: 'vars.css', format: 'css/variables' }],
+    },
+  },
+});
+
+try {
+  await sd.buildAllPlatforms();
+} catch (err) {
+  if (err instanceof ReferenceError) {
+    console.log(err.errors); // ReferenceErrorObject(2)
+  }
+}
+```
+
+More info: [reference errors](/reference/utils/references#error-handling).
 
 ---
 
@@ -372,7 +412,7 @@ type getPlatform = (
   dictionary: {
     tokens: DesignTokens;
     allTokens: DesignToken[];
-    tokenMap: Map<string, DesignToken>;
+    tokenMap: TokenMap;
   };
 }>;
 ```

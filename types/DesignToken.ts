@@ -26,6 +26,11 @@ export interface DesignToken {
   themeable?: boolean;
   attributes?: Record<string, unknown>;
   /**
+   * After reference resolution which happens, we'll have added a refs property on the token
+   * that keeps track of the dependency chain of references of the token value.
+   */
+  refs?: Set<string>;
+  /**
    * When flattening tokens, DesignToken is given a key that matches the original ancestor tree e.g. `{colors.red.500}`
    */
   key?: string;
@@ -36,6 +41,8 @@ export interface DesignTokens {
   $type?: string;
   [key: string]: DesignTokens | DesignToken | string | undefined;
 }
+
+export type TokenMap<T extends DesignToken = DesignToken> = Map<string, T>;
 
 // Same as DesignTokens but without the $type group property
 // after preprocessing the type is delegated to tokens level
@@ -78,5 +85,5 @@ export interface Dictionary {
   tokenMap: Map<string, TransformedToken>;
   unfilteredTokens?: TransformedTokens;
   unfilteredAllTokens?: TransformedToken[];
-  unfilteredTokenMap?: Map<string, TransformedToken>;
+  unfilteredTokenMap?: TokenMap<TransformedToken>;
 }
