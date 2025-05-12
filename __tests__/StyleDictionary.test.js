@@ -482,17 +482,17 @@ Refer to: https://styledictionary.com/reference/logging/
         foo: {
           value: '{bar}',
           type: 'other',
-          refs: ['{bar}'],
+          refs: new Set(['{bar}']),
         },
         baz: {
           value: '8px',
           type: 'dimension',
-          refs: [],
+          refs: new Set([]),
         },
         qux: {
           value: '8px',
           type: 'dimension',
-          refs: ['{baz}'],
+          refs: new Set(['{baz}']),
         },
       });
     });

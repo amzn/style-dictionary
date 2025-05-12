@@ -28,7 +28,7 @@ snapshots["integration custom formats inline custom with new args should match s
               "padding",
               "small"
             ],
-            "refs": []
+            "refs": {}
           },
           "medium": {
             "key": "{size.padding.medium}",
@@ -51,7 +51,7 @@ snapshots["integration custom formats inline custom with new args should match s
               "padding",
               "medium"
             ],
-            "refs": []
+            "refs": {}
           },
           "large": {
             "key": "{size.padding.large}",
@@ -74,7 +74,7 @@ snapshots["integration custom formats inline custom with new args should match s
               "padding",
               "large"
             ],
-            "refs": []
+            "refs": {}
           },
           "xl": {
             "key": "{size.padding.xl}",
@@ -97,7 +97,7 @@ snapshots["integration custom formats inline custom with new args should match s
               "padding",
               "xl"
             ],
-            "refs": []
+            "refs": {}
           }
         }
       }
@@ -124,7 +124,7 @@ snapshots["integration custom formats inline custom with new args should match s
           "padding",
           "small"
         ],
-        "refs": []
+        "refs": {}
       },
       {
         "key": "{size.padding.medium}",
@@ -147,7 +147,7 @@ snapshots["integration custom formats inline custom with new args should match s
           "padding",
           "medium"
         ],
-        "refs": []
+        "refs": {}
       },
       {
         "key": "{size.padding.large}",
@@ -170,7 +170,7 @@ snapshots["integration custom formats inline custom with new args should match s
           "padding",
           "large"
         ],
-        "refs": []
+        "refs": {}
       },
       {
         "key": "{size.padding.xl}",
@@ -193,7 +193,7 @@ snapshots["integration custom formats inline custom with new args should match s
           "padding",
           "xl"
         ],
-        "refs": []
+        "refs": {}
       }
     ],
     "tokenMap": {},
@@ -221,7 +221,7 @@ snapshots["integration custom formats inline custom with new args should match s
               "padding",
               "small"
             ],
-            "refs": []
+            "refs": {}
           },
           "medium": {
             "key": "{size.padding.medium}",
@@ -244,7 +244,7 @@ snapshots["integration custom formats inline custom with new args should match s
               "padding",
               "medium"
             ],
-            "refs": []
+            "refs": {}
           },
           "large": {
             "key": "{size.padding.large}",
@@ -267,7 +267,7 @@ snapshots["integration custom formats inline custom with new args should match s
               "padding",
               "large"
             ],
-            "refs": []
+            "refs": {}
           },
           "xl": {
             "key": "{size.padding.xl}",
@@ -290,7 +290,7 @@ snapshots["integration custom formats inline custom with new args should match s
               "padding",
               "xl"
             ],
-            "refs": []
+            "refs": {}
           }
         }
       }
@@ -317,7 +317,7 @@ snapshots["integration custom formats inline custom with new args should match s
           "padding",
           "small"
         ],
-        "refs": []
+        "refs": {}
       },
       {
         "key": "{size.padding.medium}",
@@ -340,7 +340,7 @@ snapshots["integration custom formats inline custom with new args should match s
           "padding",
           "medium"
         ],
-        "refs": []
+        "refs": {}
       },
       {
         "key": "{size.padding.large}",
@@ -363,7 +363,7 @@ snapshots["integration custom formats inline custom with new args should match s
           "padding",
           "large"
         ],
-        "refs": []
+        "refs": {}
       },
       {
         "key": "{size.padding.xl}",
@@ -386,7 +386,7 @@ snapshots["integration custom formats inline custom with new args should match s
           "padding",
           "xl"
         ],
-        "refs": []
+        "refs": {}
       }
     ],
     "unfilteredTokenMap": {}
@@ -413,7 +413,7 @@ snapshots["integration custom formats inline custom with new args should match s
         "padding",
         "small"
       ],
-      "refs": []
+      "refs": {}
     },
     {
       "key": "{size.padding.medium}",
@@ -436,7 +436,7 @@ snapshots["integration custom formats inline custom with new args should match s
         "padding",
         "medium"
       ],
-      "refs": []
+      "refs": {}
     },
     {
       "key": "{size.padding.large}",
@@ -459,7 +459,7 @@ snapshots["integration custom formats inline custom with new args should match s
         "padding",
         "large"
       ],
-      "refs": []
+      "refs": {}
     },
     {
       "key": "{size.padding.xl}",
@@ -482,7 +482,7 @@ snapshots["integration custom formats inline custom with new args should match s
         "padding",
         "xl"
       ],
-      "refs": []
+      "refs": {}
     }
   ],
   "tokens": {
@@ -509,7 +509,7 @@ snapshots["integration custom formats inline custom with new args should match s
             "padding",
             "small"
           ],
-          "refs": []
+          "refs": {}
         },
         "medium": {
           "key": "{size.padding.medium}",
@@ -532,7 +532,7 @@ snapshots["integration custom formats inline custom with new args should match s
             "padding",
             "medium"
           ],
-          "refs": []
+          "refs": {}
         },
         "large": {
           "key": "{size.padding.large}",
@@ -555,7 +555,7 @@ snapshots["integration custom formats inline custom with new args should match s
             "padding",
             "large"
           ],
-          "refs": []
+          "refs": {}
         },
         "xl": {
           "key": "{size.padding.xl}",
@@ -578,7 +578,7 @@ snapshots["integration custom formats inline custom with new args should match s
             "padding",
             "xl"
           ],
-          "refs": []
+          "refs": {}
         }
       }
     }
@@ -1043,7 +1043,7 @@ snapshots["integration custom formats register custom format with new args shoul
               "padding",
               "small"
             ],
-            "refs": []
+            "refs": {}
           },
           "medium": {
             "key": "{size.padding.medium}",
@@ -1066,7 +1066,7 @@ snapshots["integration custom formats register custom format with new args shoul
               "padding",
               "medium"
             ],
-            "refs": []
+            "refs": {}
           },
           "large": {
             "key": "{size.padding.large}",
@@ -1089,7 +1089,7 @@ snapshots["integration custom formats register custom format with new args shoul
               "padding",
               "large"
             ],
-            "refs": []
+            "refs": {}
           },
           "xl": {
             "key": "{size.padding.xl}",
@@ -1112,7 +1112,7 @@ snapshots["integration custom formats register custom format with new args shoul
               "padding",
               "xl"
             ],
-            "refs": []
+            "refs": {}
           }
         }
       }
@@ -1139,7 +1139,7 @@ snapshots["integration custom formats register custom format with new args shoul
           "padding",
           "small"
         ],
-        "refs": []
+        "refs": {}
       },
       {
         "key": "{size.padding.medium}",
@@ -1162,7 +1162,7 @@ snapshots["integration custom formats register custom format with new args shoul
           "padding",
           "medium"
         ],
-        "refs": []
+        "refs": {}
       },
       {
         "key": "{size.padding.large}",
@@ -1185,7 +1185,7 @@ snapshots["integration custom formats register custom format with new args shoul
           "padding",
           "large"
         ],
-        "refs": []
+        "refs": {}
       },
       {
         "key": "{size.padding.xl}",
@@ -1208,7 +1208,7 @@ snapshots["integration custom formats register custom format with new args shoul
           "padding",
           "xl"
         ],
-        "refs": []
+        "refs": {}
       }
     ],
     "tokenMap": {},
@@ -1236,7 +1236,7 @@ snapshots["integration custom formats register custom format with new args shoul
               "padding",
               "small"
             ],
-            "refs": []
+            "refs": {}
           },
           "medium": {
             "key": "{size.padding.medium}",
@@ -1259,7 +1259,7 @@ snapshots["integration custom formats register custom format with new args shoul
               "padding",
               "medium"
             ],
-            "refs": []
+            "refs": {}
           },
           "large": {
             "key": "{size.padding.large}",
@@ -1282,7 +1282,7 @@ snapshots["integration custom formats register custom format with new args shoul
               "padding",
               "large"
             ],
-            "refs": []
+            "refs": {}
           },
           "xl": {
             "key": "{size.padding.xl}",
@@ -1305,7 +1305,7 @@ snapshots["integration custom formats register custom format with new args shoul
               "padding",
               "xl"
             ],
-            "refs": []
+            "refs": {}
           }
         }
       }
@@ -1332,7 +1332,7 @@ snapshots["integration custom formats register custom format with new args shoul
           "padding",
           "small"
         ],
-        "refs": []
+        "refs": {}
       },
       {
         "key": "{size.padding.medium}",
@@ -1355,7 +1355,7 @@ snapshots["integration custom formats register custom format with new args shoul
           "padding",
           "medium"
         ],
-        "refs": []
+        "refs": {}
       },
       {
         "key": "{size.padding.large}",
@@ -1378,7 +1378,7 @@ snapshots["integration custom formats register custom format with new args shoul
           "padding",
           "large"
         ],
-        "refs": []
+        "refs": {}
       },
       {
         "key": "{size.padding.xl}",
@@ -1401,7 +1401,7 @@ snapshots["integration custom formats register custom format with new args shoul
           "padding",
           "xl"
         ],
-        "refs": []
+        "refs": {}
       }
     ],
     "unfilteredTokenMap": {}
@@ -1428,7 +1428,7 @@ snapshots["integration custom formats register custom format with new args shoul
         "padding",
         "small"
       ],
-      "refs": []
+      "refs": {}
     },
     {
       "key": "{size.padding.medium}",
@@ -1451,7 +1451,7 @@ snapshots["integration custom formats register custom format with new args shoul
         "padding",
         "medium"
       ],
-      "refs": []
+      "refs": {}
     },
     {
       "key": "{size.padding.large}",
@@ -1474,7 +1474,7 @@ snapshots["integration custom formats register custom format with new args shoul
         "padding",
         "large"
       ],
-      "refs": []
+      "refs": {}
     },
     {
       "key": "{size.padding.xl}",
@@ -1497,7 +1497,7 @@ snapshots["integration custom formats register custom format with new args shoul
         "padding",
         "xl"
       ],
-      "refs": []
+      "refs": {}
     }
   ],
   "tokens": {
@@ -1524,7 +1524,7 @@ snapshots["integration custom formats register custom format with new args shoul
             "padding",
             "small"
           ],
-          "refs": []
+          "refs": {}
         },
         "medium": {
           "key": "{size.padding.medium}",
@@ -1547,7 +1547,7 @@ snapshots["integration custom formats register custom format with new args shoul
             "padding",
             "medium"
           ],
-          "refs": []
+          "refs": {}
         },
         "large": {
           "key": "{size.padding.large}",
@@ -1570,7 +1570,7 @@ snapshots["integration custom formats register custom format with new args shoul
             "padding",
             "large"
           ],
-          "refs": []
+          "refs": {}
         },
         "xl": {
           "key": "{size.padding.xl}",
@@ -1593,7 +1593,7 @@ snapshots["integration custom formats register custom format with new args shoul
             "padding",
             "xl"
           ],
-          "refs": []
+          "refs": {}
         }
       }
     }

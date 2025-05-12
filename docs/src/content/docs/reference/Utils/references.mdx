@@ -27,8 +27,8 @@ Takes a tokenMap and resolves any reference inside it.
 
 Optionally allows mutating the input, or resolving a single token value only.
 
-Besides the resolved map/value, it also will add a `refs` property to each tokens in the resolved map.
-This keeps track of all references (including deep/nested) of a token value.
+Besides the resolved map/value, it also will add a `refs` property (a Set of strings) to each tokens in the resolved map.
+This keeps track of all unique references (including deep/nested) of a token value.
 When using `tokenValue` option to resolve only for a single value, this property will be on the return object.
 
 ```javascript title="build-tokens.js"
@@ -181,8 +181,8 @@ You can pass a third `options` argument where you can pass some configuration op
 
 ## getReferences <Badge text="Deprecated" variant="danger" />
 
-> When using `resolveRefs`, a `refs` property is added to each token in the Map, containing an array of reference strings.
-> You can then use these keys on the Map if you also need the token data.
+> When using `resolveRefs`, a `refs` property is added to each token in the Map, containing an Set of reference strings.
+> You can then use these values as keys on the Map if you also need the token data.
 
 Return an array of references metadata for a given token value.
 

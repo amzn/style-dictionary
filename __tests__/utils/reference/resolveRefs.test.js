@@ -34,13 +34,13 @@ describe('resolveRefs()', () => {
       expect(_resolveReferences('{foo}', tokenMap, { usesDtcg: true, token: tokens.foo })).to.eql({
         resolved: '16px',
         errors: [],
-        refs: ['{foo}'],
+        refs: new Set(['{foo}']),
       });
 
       expect(_resolveReferences('{bar}', tokenMap, { usesDtcg: true, token: tokens.bar })).to.eql({
         resolved: '16px',
         errors: [],
-        refs: ['{bar}', '{foo}'],
+        refs: new Set(['{bar}', '{foo}']),
       });
     });
 
@@ -80,7 +80,7 @@ describe('resolveRefs()', () => {
             type: 'not-found',
           },
         ],
-        refs: ['{bar}', '{ay}', '{foo}', '{qux}'],
+        refs: new Set(['{bar}', '{ay}', '{foo}', '{qux}']),
       });
     });
 
@@ -130,7 +130,7 @@ describe('resolveRefs()', () => {
             type: 'not-found',
           },
         ],
-        refs: ['{bar}', '{circ1}', '{circ2}', '{circ3}', '{foo}', '{qux}'],
+        refs: new Set(['{bar}', '{circ1}', '{circ2}', '{circ3}', '{foo}', '{qux}']),
       });
     });
 
@@ -171,7 +171,7 @@ describe('resolveRefs()', () => {
             type: 'not-found',
           },
         ],
-        refs: ['{bar}', '{circ1}', '{foo}', '{qux}'],
+        refs: new Set(['{bar}', '{circ1}', '{foo}', '{qux}']),
       });
     });
 
@@ -189,7 +189,7 @@ describe('resolveRefs()', () => {
       expect(_resolveReferences('{bar}', tokenMap, { usesDtcg: true, token: tokens.bar })).to.eql({
         resolved: '16px',
         errors: [],
-        refs: ['{bar}', '{foo}'],
+        refs: new Set(['{bar}', '{foo}']),
       });
     });
 
@@ -207,7 +207,7 @@ describe('resolveRefs()', () => {
       expect(_resolveReferences('{bar}', tokenMap, { usesDtcg: true, token: tokens.bar })).to.eql({
         resolved: 16,
         errors: [],
-        refs: ['{bar}', '{foo}'],
+        refs: new Set(['{bar}', '{foo}']),
       });
     });
 
@@ -248,7 +248,7 @@ describe('resolveRefs()', () => {
       expect(res).to.eql({
         resolved: '16px 8px 16px 24px',
         errors: [],
-        refs: ['{baz}', '{foo}', '{z}', '{y}', '{x}', '{bar}'],
+        refs: new Set(['{baz}', '{foo}', '{z}', '{y}', '{x}', '{bar}']),
       });
     });
   });
@@ -277,7 +277,7 @@ describe('resolveRefs()', () => {
           prop: 'some 16px',
         },
         errors: [],
-        refs: ['{foo}'],
+        refs: new Set(['{foo}']),
       });
     });
 
@@ -335,7 +335,7 @@ describe('resolveRefs()', () => {
             type: 'not-found',
           },
         ],
-        refs: ['{foo}', '{circ1}', '{circ2}', '{circ3}', '{qux}'],
+        refs: new Set(['{foo}', '{circ1}', '{circ2}', '{circ3}', '{qux}']),
       });
     });
 
@@ -369,7 +369,7 @@ describe('resolveRefs()', () => {
           $value: '{foo} x',
         },
         errors: [],
-        refs: [], // empty due to objectsOnly
+        refs: new Set([]), // empty due to objectsOnly
       });
 
       // referenced value is not an object so keep ref
@@ -382,7 +382,7 @@ describe('resolveRefs()', () => {
           $value: '{foo}',
         },
         errors: [],
-        refs: ['{foo}'],
+        refs: new Set(['{foo}']),
       });
 
       // exclusively a ref, and resolved is an object, resolve :)!
@@ -395,7 +395,7 @@ describe('resolveRefs()', () => {
           $value: { fontSize: '16px' },
         },
         errors: [],
-        refs: ['{object}'],
+        refs: new Set(['{object}']),
       });
     });
   });
@@ -415,6 +415,7 @@ describe('resolveRefs()', () => {
       expect(resolveRefs(tokenMap, { usesDtcg: true, tokenValue: '{bar}' })).to.eql({
         resolved: '16px',
         errors: [],
+        refs: new Set(['{bar}', '{foo}']),
       });
     });
 
@@ -431,8 +432,8 @@ describe('resolveRefs()', () => {
       const tokenMap = convertTokenData(tokens, { output: 'map', usesDtcg: true });
       expect(resolveRefs(tokenMap, { usesDtcg: true })).to.eql({
         resolved: new Map([
-          ['{foo}', { $value: '16px', key: '{foo}', refs: [] }],
-          ['{bar}', { $value: '16px', key: '{bar}', refs: ['{foo}'] }],
+          ['{foo}', { $value: '16px', key: '{foo}', refs: new Set([]) }],
+          ['{bar}', { $value: '16px', key: '{bar}', refs: new Set(['{foo}']) }],
         ]),
         errors: [],
       });
@@ -454,8 +455,11 @@ describe('resolveRefs()', () => {
         resolveRefs(tokenMap, { usesDtcg: true, ignoreKeys: new Set(['description']) }),
       ).to.eql({
         resolved: new Map([
-          ['{foo}', { $value: '16px', key: '{foo}', refs: [] }],
-          ['{bar}', { $value: '16px', description: '{foo}', key: '{bar}', refs: ['{foo}'] }],
+          ['{foo}', { $value: '16px', key: '{foo}', refs: new Set([]) }],
+          [
+            '{bar}',
+            { $value: '16px', description: '{foo}', key: '{bar}', refs: new Set(['{foo}']) },
+          ],
         ]),
         errors: [],
       });
@@ -474,8 +478,8 @@ describe('resolveRefs()', () => {
       const tokenMap = convertTokenData(tokens, { output: 'map' });
       expect(resolveRefs(tokenMap)).to.eql({
         resolved: new Map([
-          ['{foo}', { value: '16px', key: '{foo}', refs: [] }],
-          ['{bar}', { value: '16px', key: '{bar}', refs: ['{foo}'] }],
+          ['{foo}', { value: '16px', key: '{foo}', refs: new Set([]) }],
+          ['{bar}', { value: '16px', key: '{bar}', refs: new Set(['{foo}']) }],
         ]),
         errors: [],
       });
@@ -492,10 +496,10 @@ describe('resolveRefs()', () => {
       };
 
       const tokenMap = convertTokenData(tokens, { output: 'map' });
-
       expect(resolveRefs(tokenMap, { tokenValue: tokens.bar.value })).to.eql({
         resolved: '16px',
         errors: [],
+        refs: new Set(['{foo}']),
       });
     });
 
@@ -513,8 +517,8 @@ describe('resolveRefs()', () => {
       resolveRefs(tokenMap, { usesDtcg: true, mutateMap: true });
       expect(tokenMap).to.eql(
         new Map([
-          ['{foo}', { $value: '16px', key: '{foo}', refs: [] }],
-          ['{bar}', { $value: '16px', key: '{bar}', refs: ['{foo}'] }],
+          ['{foo}', { $value: '16px', key: '{foo}', refs: new Set([]) }],
+          ['{bar}', { $value: '16px', key: '{bar}', refs: new Set(['{foo}']) }],
         ]),
       );
     });
