@@ -253,12 +253,12 @@ describe('exportPlatform', () => {
           path: ['colors', 'red'],
           original: {
             value: '#f00',
-            key: '{colors.red}',
           },
           attributes: {
             category: 'colors',
             type: 'red',
           },
+          refs: new Set([]),
         },
         error: {
           value: '#f00',
@@ -267,12 +267,12 @@ describe('exportPlatform', () => {
           path: ['colors', 'error'],
           original: {
             value: '{colors.red}',
-            key: '{colors.error}',
           },
           attributes: {
             category: 'colors',
             type: 'error',
           },
+          refs: new Set(['{colors.red}']),
         },
         danger: {
           value: '#f00',
@@ -281,12 +281,12 @@ describe('exportPlatform', () => {
           path: ['colors', 'danger'],
           original: {
             value: '{colors.error}',
-            key: '{colors.danger}',
           },
           attributes: {
             category: 'colors',
             type: 'danger',
           },
+          refs: new Set(['{colors.error}']),
         },
         alert: {
           value: '#f00',
@@ -295,12 +295,12 @@ describe('exportPlatform', () => {
           path: ['colors', 'alert'],
           original: {
             value: '{colors.error}',
-            key: '{colors.alert}',
           },
           attributes: {
             category: 'colors',
             type: 'alert',
           },
+          refs: new Set(['{colors.error}']),
         },
       },
     };
@@ -363,7 +363,7 @@ Refer to: https://styledictionary.com/reference/logging/`;
       },
     };
 
-    it('should throw if there are simple property reference errors', async () => {
+    it('should throw if there are simple token reference errors', async () => {
       const tokens = {
         a: { value: '#ff0000' },
         b: { value: '{c}' },
@@ -390,7 +390,7 @@ Refer to: https://styledictionary.com/reference/logging/`;
       await expect(sd.exportPlatform('css')).to.eventually.be.rejectedWith(errorMessage());
     });
 
-    it('should throw if there are complex property reference errors', async () => {
+    it('should throw if there are complex token reference errors', async () => {
       const tokens = {
         color: {
           core: {
@@ -407,7 +407,7 @@ Refer to: https://styledictionary.com/reference/logging/`;
         tokens,
         platforms,
       });
-      await expect(sd.exportPlatform('css')).to.eventually.be.rejectedWith(errorMessage(4));
+      await expect(sd.exportPlatform('css')).to.eventually.be.rejectedWith(errorMessage(3));
     });
   });
 

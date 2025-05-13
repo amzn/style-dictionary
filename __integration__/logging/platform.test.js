@@ -15,6 +15,13 @@ import StyleDictionary from 'style-dictionary';
 import { buildPath, cleanConsoleOutput } from '../_constants.js';
 import { clearOutput } from '../../__tests__/__helpers.js';
 import { restore, stubMethod } from 'hanbi';
+import { logVerbosityLevels } from '../../lib/enums/logVerbosityLevels.js';
+
+const { verbose } = logVerbosityLevels;
+
+/**
+ * @typedef {import('../../types/ReferenceError.d.ts').ReferenceError} RefError
+ */
 
 /**
  * This is the 2nd phase of logging: the platform configuration. This happens
@@ -131,9 +138,52 @@ describe(`integration`, () => {
         );
       });
 
-      describe(`property reference errors`, () => {
+      describe(`token reference errors`, () => {
         it(`should throw and notify users of unknown references`, async () => {
           const sd = new StyleDictionary({
+            tokens: {
+              color: {
+                danger: { value: '{color.red}' },
+              },
+            },
+            platforms: {
+              css: {},
+            },
+          });
+          // unknown actions should throw
+          /** @type {RefError} */
+          let error;
+          try {
+            await sd.buildAllPlatforms();
+          } catch (e) {
+            error = e;
+          }
+
+          expect(error.errors).to.eql([
+            {
+              ref: '{color.red}',
+              token: {
+                attributes: {},
+                key: '{color.danger}',
+                name: 'danger',
+                original: {
+                  value: '{color.red}',
+                },
+                path: ['color', 'danger'],
+                value: '{color.red}',
+                refs: new Set(['{color.red}']),
+              },
+              type: 'not-found',
+            },
+          ]);
+          await expect(cleanConsoleOutput(error.message)).to.matchSnapshot();
+        });
+
+        it(`should throw and notify users of unknown references verbose mode`, async () => {
+          const sd = new StyleDictionary({
+            log: {
+              verbosity: verbose,
+            },
             tokens: {
               color: {
                 danger: { value: '{color.red}' },
@@ -150,6 +200,23 @@ describe(`integration`, () => {
           } catch (e) {
             error = e;
           }
+          expect(error.errors).to.eql([
+            {
+              ref: '{color.red}',
+              token: {
+                attributes: {},
+                key: '{color.danger}',
+                name: 'danger',
+                original: {
+                  value: '{color.red}',
+                },
+                path: ['color', 'danger'],
+                value: '{color.red}',
+                refs: new Set(['{color.red}']),
+              },
+              type: 'not-found',
+            },
+          ]);
           await expect(cleanConsoleOutput(error.message)).to.matchSnapshot();
         });
 
@@ -175,6 +242,68 @@ describe(`integration`, () => {
           } catch (e) {
             error = e;
           }
+          await expect(cleanConsoleOutput(error.message)).to.matchSnapshot();
+        });
+
+        it(`circular references should throw and notify users verbose mode`, async () => {
+          const sd = new StyleDictionary({
+            log: {
+              verbosity: verbose,
+            },
+            tokens: {
+              color: {
+                foo: { value: '{color.foo}' },
+                teal: { value: '{color.blue}' },
+                blue: { value: '{color.green}' },
+                green: { value: '{color.teal}' },
+                purple: { value: '{color.teal}' },
+              },
+            },
+            platforms: {
+              css: {},
+            },
+          });
+          // unknown actions should throw
+          let error;
+          try {
+            await sd.buildAllPlatforms();
+          } catch (e) {
+            error = e;
+          }
+          expect(error.errors).to.eql([
+            {
+              ref: '{color.foo}',
+              token: {
+                attributes: {},
+                key: '{color.foo}',
+                name: 'foo',
+                original: {
+                  value: '{color.foo}',
+                },
+                path: ['color', 'foo'],
+                value: '{color.foo}',
+                refs: new Set(['{color.foo}']),
+              },
+              chain: ['{color.foo}', '{color.foo}'],
+              type: 'circular',
+            },
+            {
+              chain: ['{color.teal}', '{color.blue}', '{color.green}', '{color.teal}'],
+              ref: '{color.teal}',
+              token: {
+                attributes: {},
+                key: '{color.teal}',
+                name: 'teal',
+                original: {
+                  value: '{color.blue}',
+                },
+                path: ['color', 'teal'],
+                value: '{color.teal}',
+                refs: new Set(['{color.blue}', '{color.green}', '{color.teal}']),
+              },
+              type: 'circular',
+            },
+          ]);
           await expect(cleanConsoleOutput(error.message)).to.matchSnapshot();
         });
       });

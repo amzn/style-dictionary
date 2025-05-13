@@ -33,3 +33,5 @@ export type { Preprocessor } from './Preprocessor.js';
 export type { Transform, NameTransform, AttributeTransform, ValueTransform } from './Transform.js';
 
 export type { Volume } from './Volume.js';
+
+export type { ReferenceErrorObject, ReferenceError } from './ReferenceError.js';

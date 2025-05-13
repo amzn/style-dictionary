@@ -49,7 +49,6 @@ module.exports = {
       value: "#ff0000",
       original: {
         value: "#ff0000",
-        key: "{color.red}",
       },
       name: "ColorRed",
       attributes: {
@@ -57,6 +56,7 @@ module.exports = {
         type: "red",
       },
       path: ["color", "red"],
+      refs: {},
     },
   },
 };
@@ -71,7 +71,6 @@ snapshots["integration valid custom file headers platform options showFileHeader
       value: "#ff0000",
       original: {
         value: "#ff0000",
-        key: "{color.red}",
       },
       name: "ColorRed",
       attributes: {
@@ -79,6 +78,7 @@ snapshots["integration valid custom file headers platform options showFileHeader
         type: "red",
       },
       path: ["color", "red"],
+      refs: {},
     },
   },
 };
@@ -97,7 +97,6 @@ module.exports = {
       value: "#ff0000",
       original: {
         value: "#ff0000",
-        key: "{color.red}",
       },
       name: "ColorRed",
       attributes: {
@@ -105,6 +104,7 @@ module.exports = {
         type: "red",
       },
       path: ["color", "red"],
+      refs: {},
     },
   },
 };

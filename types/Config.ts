@@ -11,7 +11,12 @@
  * and limitations under the License.
  */
 
-import type { DesignToken, DesignTokens, PreprocessedTokens } from './DesignToken.js';
+import type {
+  DesignToken,
+  DesignTokens,
+  PreprocessedTokens,
+  TransformedToken,
+} from './DesignToken.js';
 import type { Filter } from './Filter.js';
 import type { FileHeader, File, FormattingOverrides } from './File.js';
 import type { Parser } from './Parser.js';
@@ -59,6 +64,9 @@ export interface ResolveReferencesOptions {
   warnImmediately?: boolean;
 }
 
+/**
+ * @deprecated
+ */
 export interface ResolveReferencesOptionsInternal extends ResolveReferencesOptions {
   ignorePaths?: Set<string>;
   current_context?: string;
@@ -66,6 +74,18 @@ export interface ResolveReferencesOptionsInternal extends ResolveReferencesOptio
   foundCirc?: Record<string, boolean>;
   firstIteration?: boolean;
   objectsOnly?: boolean;
+}
+
+export interface ResolveReferencesOptionsInternalNew extends ResolveReferencesOptions {
+  ignorePaths?: Set<string>;
+  current_context?: string;
+  stack?: string[];
+  foundCirc?: Record<string, boolean>;
+  firstIteration?: boolean;
+  objectsOnly?: boolean;
+  tokenChain?: Partial<TransformedToken>[];
+  token: Partial<TransformedToken>;
+  nestedRefToken?: Partial<TransformedToken>;
 }
 
 export interface ResolveReferencesOptionsInternalOld extends ResolveReferencesOptions {
