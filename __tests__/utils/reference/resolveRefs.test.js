@@ -412,7 +412,7 @@ describe('resolveRefs()', () => {
       };
 
       const tokenMap = convertTokenData(tokens, { output: 'map', usesDtcg: true });
-      expect(resolveRefs(tokenMap, { usesDtcg: true, tokenValue: '{bar}' })).to.eql({
+      expect(resolveRefs(tokenMap, { usesDtcg: true, value: '{bar}' })).to.eql({
         resolved: '16px',
         errors: [],
         refs: new Set(['{bar}', '{foo}']),
@@ -496,7 +496,7 @@ describe('resolveRefs()', () => {
       };
 
       const tokenMap = convertTokenData(tokens, { output: 'map' });
-      expect(resolveRefs(tokenMap, { tokenValue: tokens.bar.value })).to.eql({
+      expect(resolveRefs(tokenMap, { value: tokens.bar.value })).to.eql({
         resolved: '16px',
         errors: [],
         refs: new Set(['{foo}']),
@@ -524,8 +524,8 @@ describe('resolveRefs()', () => {
     });
 
     it('throws an error when you combine single token + mutate map options', () => {
-      expect(() => resolveRefs(new Map(), { mutateMap: true, tokenValue: '{foo}' })).to.throw(
-        '`mutateMap` and `tokenValue` option cannot be combined.',
+      expect(() => resolveRefs(new Map(), { mutateMap: true, value: '{foo}' })).to.throw(
+        '`mutateMap` and `value` option cannot be combined.',
       );
     });
   });

@@ -29,7 +29,7 @@ Optionally allows mutating the input, or resolving a single token value only.
 
 Besides the resolved map/value, it also will add a `refs` property (a Set of strings) to each tokens in the resolved map.
 This keeps track of all unique references (including deep/nested) of a token value.
-When using `tokenValue` option to resolve only for a single value, this property will be on the return object.
+When using `value` option to resolve only for a single value, this property will be on the return object.
 
 ```javascript title="build-tokens.js"
 import StyleDictionary from 'style-dictionary';
@@ -56,20 +56,20 @@ const sd = new StyleDictionary({
 });
 await sd.hasInitialized;
 
-const { resolved, refs, errors } = resolveRefs(sd.tokenMap, { tokenValue: sd.tokens.border.value }); // "solid 2px #000"
+const { resolved, refs, errors } = resolveRefs(sd.tokenMap, { value: sd.tokens.border.value }); // "solid 2px #000"
 
 // alternative way, yet identical to line above -> "solid 2px #000"
 const { resolved, refs, errors } = resolveRefs(sd.tokenMap, {
-  tokenValue: 'solid {spacing.2} {colors.black}',
+  value: 'solid {spacing.2} {colors.black}',
 });
 
 // Assumes DTCG spec format, with $ prefix ($value, $type)
 const { resolved, refs, errors } = resolveRefs(sd.tokenMap, {
-  tokenValue: 'solid {spacing.2} {colors.black}',
+  value: 'solid {spacing.2} {colors.black}',
   usesDtcg: true,
 });
 
-// Not passing a tokenValue option means resolving the entire Map.
+// Not passing a value option means resolving the entire Map.
 // Returns a cloned tokenMap but with all references resolved
 // The refs prop will be on each token in the resolved Map
 const { resolved, errors } = resolveRefs(sd.tokenMap);
@@ -88,7 +88,7 @@ You can use the [`convertTokenData`](/reference/utils/tokens#converttokendata) u
 | tokenMap         | `TokenMap`                                                                | The token Map(), usually the SD instance's `.tokenMap` property.                                                                                                                                                                                                     |
 | opts             | `object`                                                                  | Options object to configure how the utility behaves.                                                                                                                                                                                                                 |
 | opts.mutateMap   | `boolean` -> default `false`                                              | Whether to mutate the input `tokenMap` argument when resolving its references. When false, it will create a clone and not mutate the input.                                                                                                                          |
-| opts.tokenValue  | `unknown`                                                                 | You can pass a `tokenValue` to resolve references for a single token value instead of an entire `tokenMap`. This option is mutually exclusive with `mutateMap` option.                                                                                               |
+| opts.value       | `unknown`                                                                 | You can pass a `value` to resolve references for a single token value instead of an entire `tokenMap`. This option is mutually exclusive with `mutateMap` option.                                                                                                    |
 | opts.usesDtcg    | `boolean` -> default `false`                                              | Whether DTCG syntax is used or not.                                                                                                                                                                                                                                  |
 | opts.objectsOnly | `boolean` -> default `false`                                              | When set to `true`, we only resolve for values that are exclusively references, and resolved values are objects. This is mostly used interally, for Expand API, for optimization reasons. to                                                                         |
 | opts.trackRefs   | `boolean` -> default `true`                                               | Whether or not to track references for token values and store them as `.refs` property on the token.                                                                                                                                                                 |
