@@ -204,7 +204,15 @@ class SdPlayground extends LitElement {
           if ((ev.target as SlRadioGroup).value === 'eject') {
             return;
           }
-          this.currentFile = (ev.target as HTMLInputElement).value as Files;
+          const nextCurrentFile = (ev.target as HTMLInputElement).value as Files;
+          // Auto save when switching to output tab
+          if (nextCurrentFile === 'output' && this.currentFile !== 'output') {
+            this.saveFile().then(() => {
+              this.currentFile = nextCurrentFile;
+            });
+          } else {
+            this.currentFile = nextCurrentFile;
+          }
         }}
         name="file-switch"
       >
