@@ -63,8 +63,8 @@ Source style dictionary starter files created!
 Running `style-dictionary build` for the first time to generate build artifacts.
 
 
-scss
-✔︎  build/scss/_variables.scss
+css
+✔︎  build/scss/_variables.css
 
 android
 ✔︎  build/android/font_dimens.xml
@@ -107,8 +107,8 @@ Pat yourself on the back, you built your first style dictionary! Take a look at 
   - compose
     - StyleDictionaryColor.kt
     - StyleDictionarySize.kt
-  - scss
-    - \_variables.scss
+  - css
+    - \_variables.css
   - ios
     - StyleDictionaryColor.h
     - StyleDictionaryColor.m
@@ -121,7 +121,7 @@ Pat yourself on the back, you built your first style dictionary! Take a look at 
 
 </FileTree>
 
-If you open `config.json` you will see there are 3 platforms defined: scss, android, ios. Each platform has a transformGroup, buildPath, and files defined. The buildPath and files of the platform should match up to the files what were built. Those files should look like these:
+If you open `config.json` you will see there are 3 platforms defined: css, android, ios. Each platform has a transformGroup, buildPath, and files defined. The buildPath and files of the platform should match up to the files what were built. Those files should look like these:
 
 **Android**
 
@@ -177,21 +177,23 @@ object StyleDictionarySize {
 }
 ```
 
-**SCSS**
+**CSS**
 
-```scss title="_variables.scss"
-$color-base-gray-light: #cccccc;
-$color-base-gray-medium: #999999;
-$color-base-gray-dark: #111111;
-$color-base-red: #ff0000;
-$color-base-green: #00ff00;
-$color-font-base: #ff0000;
-$color-font-secondary: #00ff00;
-$color-font-tertiary: #cccccc;
-$size-font-small: 0.75rem;
-$size-font-medium: 1rem;
-$size-font-large: 2rem;
-$size-font-base: 1rem;
+```css title="_variables.css"
+:root {
+  --color-base-gray-light: #cccccc;
+  --color-base-gray-medium: #999999;
+  --color-base-gray-dark: #111111;
+  --color-base-red: #ff0000;
+  --color-base-green: #00ff00;
+  --color-font-base: #ff0000;
+  --color-font-secondary: #00ff00;
+  --color-font-tertiary: #cccccc;
+  --size-font-small: 0.75rem;
+  --size-font-medium: 1rem;
+  --size-font-large: 2rem;
+  --size-font-base: 1rem;
+}
 ```
 
 **iOS**
@@ -268,15 +270,17 @@ object StyleDictionaryColor {
 }
 ```
 
-```scss title="_variables.scss"
-$color-base-gray-light: #cccccc;
-$color-base-gray-medium: #999999;
-$color-base-gray-dark: #000000;
-$color-base-red: #ff0000;
-$color-base-green: #00ff00;
-$color-font-base: #ff0000;
-$color-font-secondary: #00ff00;
-$color-font-tertiary: #cccccc;
+```css title="_variables.css"
+:root {
+  --color-base-gray-light: #cccccc;
+  --color-base-gray-medium: #999999;
+  --color-base-gray-dark: #000000;
+  --color-base-red: #ff0000;
+  --color-base-green: #00ff00;
+  --color-font-base: #ff0000;
+  --color-font-secondary: #00ff00;
+  --color-font-tertiary: #cccccc;
+}
 ```
 
 ```swift title="StyleDictionaryColor.h"

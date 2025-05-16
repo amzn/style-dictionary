@@ -18,7 +18,7 @@ import { deepmerge } from '../../lib/utils/deepmerge.js';
 import { formats as fileFormats } from '../../lib/enums/index.js';
 
 const file = {
-  destination: '__output/',
+  destination: 'output.txt',
   format: fileFormats.javascriptEs6,
   filter: {
     type: 'color',

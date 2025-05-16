@@ -19,7 +19,7 @@ import { formats as fileFormats } from '../../lib/enums/index.js';
 const { iosSwiftAnySwift } = fileFormats;
 
 const originalFile = {
-  destination: '__output/',
+  destination: 'output.swift',
   format: iosSwiftAnySwift,
   options: {
     className: 'StyleDictionary',

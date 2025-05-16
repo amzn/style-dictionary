@@ -37,7 +37,7 @@ const colorTokens = {
 };
 
 const file = {
-  destination: '__output/',
+  destination: 'output.json',
   format: fileFormats.jsonFlat,
 };
 
