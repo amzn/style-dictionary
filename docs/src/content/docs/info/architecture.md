@@ -11,10 +11,10 @@ flowchart LR
     subgraph global
         direction TB
         Z[Config] -->|Parse config| X
-        X[Parsed Config] -->|Run| A
-        A[Token Files] -->|Parsers| B
-        B[JavaScript Objects] -->|Combine| C
-        C[Dictionary] -->|Preprocessors| C
+        X["Parsed Config (1)"] -->|Run| A
+        A["Token Files (2)"] -->|Parsers| B
+        B["JavaScript Objects (3)"] -->|Combine| C
+        C["Dictionary (4)"] -->|Preprocessors| C
         click X "#1-parse-the-config" "Explanation about parsing config"
         click A "#2-find-all-token-files" "Explanation about finding tokens files"
         click B "#3-parse-token-files" "Explanation about parsing tokens files"
@@ -23,10 +23,10 @@ flowchart LR
 
     subgraph platform
         direction TB
-        D[Dictionary] -->|Preprocessors| D
+        D["Dictionary (5)"] -->|Preprocessors| D
         D -->|Transforms| E
-        E[Transformed Dictionary] -->|Resolve references| F
-        F[Resolved Dictionary] -->|Transitive transforms| E
+        E["Transformed Dictionary (6)"] -->|Resolve references| F
+        F["Resolved Dictionary (7)"] -->|Transitive transforms| E
         click D "#5-run-preprocessors-over-the-dictionary" "Explanation about preprocessing the dictionary"
         click E "#6-transform-the-tokens" "Explanation about transforming tokens"
         click F "#7-resolve-aliases--references-to-other-values" "Explanation about token references resolution"
@@ -37,7 +37,7 @@ flowchart LR
         G[Resolved Dictionary] --> |Filters| H
         H[Filtered Dictionary] --> |Formats| I
         H[Filtered Dictionary] --> |File headers| I
-        I[Platform output] --> |Actions| J[Actions output]
+        I["Platform output (8)"] --> |Actions| J["Actions output (9)"]
         click I "#8-format-the-tokens-into-files" "Explanation about formatting tokens to output files"
         click J "#9-run-actions" "Explanation about running actions"
     end

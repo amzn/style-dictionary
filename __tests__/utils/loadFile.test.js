@@ -50,13 +50,18 @@ describe('utils', () => {
 
     it('should throw error if it tries to import TS files with unsupported Node env', async () => {
       if (isNode) {
-        let err;
-        try {
-          await loadFile('__tests__/__json_files/tokens.ts');
-        } catch (e) {
-          err = e;
+        const version = process.version;
+        const major = parseFloat(/v(\d+)\..+/g.exec(version)[1]);
+
+        if (major < 23) {
+          let err;
+          try {
+            await loadFile('__tests__/__json_files/tokens.ts');
+          } catch (e) {
+            err = e;
+          }
+          await expect(err.message).to.matchSnapshot();
         }
-        await expect(err.message).to.matchSnapshot();
       }
     });
 

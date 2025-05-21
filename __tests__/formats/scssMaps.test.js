@@ -80,7 +80,7 @@ describe('formats', () => {
   for (const key of [fileFormats.scssMapFlat, fileFormats.scssMapDeep]) {
     describe(key, async () => {
       const file = {
-        destination: '__output/',
+        destination: 'output.scss',
         format: key,
       };
 
