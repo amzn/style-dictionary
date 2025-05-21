@@ -200,11 +200,16 @@ class SdPlayground extends LitElement {
   render() {
     return html`
       <sl-radio-group
-        @sl-change=${(ev: Event) => {
+        @sl-change=${async (ev: Event) => {
           if ((ev.target as SlRadioGroup).value === 'eject') {
             return;
           }
-          this.currentFile = (ev.target as HTMLInputElement).value as Files;
+          const nextCurrentFile = (ev.target as HTMLInputElement).value as Files;
+          // Auto save when switching to output tab
+          if (nextCurrentFile === 'output' && this.currentFile !== 'output') {
+            await this.saveFile();
+          }
+          this.currentFile = nextCurrentFile;
         }}
         name="file-switch"
       >
