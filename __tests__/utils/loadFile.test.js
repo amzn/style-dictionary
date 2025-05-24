@@ -25,6 +25,17 @@ describe('utils', () => {
       expect(tokens.d).to.have.property('jsonCe', 1);
     });
 
+    it('should support js', async () => {
+      const tokens = await loadFile('__tests__/__json_files/simple.js');
+      expect(tokens).to.have.property('foo', 'bar');
+    });
+
+    it('should structuredClone the original module', async () => {
+      const load = () => loadFile('__tests__/__json_files/simple.js');
+      (await load()).bar = 'baz';
+      expect(await load()).not.have.property('bar');
+    });
+
     it('should throw error if it tries to import TS files with unsupported Node env', async () => {
       if (isNode) {
         const version = process.version;
