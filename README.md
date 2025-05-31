@@ -5,7 +5,7 @@
 <img src="docs/src/assets/logo.png" alt="Style Dictionary logo and mascot" title="&quot;Pascal&quot;" width="100" align="right" />
 
 [![npm version](https://img.shields.io/npm/v/style-dictionary.svg?style=flat-square)](https://badge.fury.io/js/style-dictionary)
-![license](https://img.shields.io/npm/l/style-dictionary.svg?style=flat-square)
+[![license](https://img.shields.io/npm/l/style-dictionary.svg?style=flat-square)](https://github.com/style-dictionary/style-dictionary/blob/main/LICENSE)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/amzn/style-dictionary/blob/main/CONTRIBUTING.md#submitting-pull-requests)
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/amzn/style-dictionary/Test?style=flat-square)](https://github.com/amzn/style-dictionary/actions/workflows/test.yml)
 [![downloads](https://img.shields.io/npm/dm/style-dictionary.svg?style=flat-square)](https://www.npmjs.com/package/style-dictionary)
