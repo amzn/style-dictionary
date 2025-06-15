@@ -64,6 +64,7 @@ const {
   transitionCssShorthand,
   shadowCssShorthand,
   assetPath,
+  durationStringify,
 } = transformNames;
 
 describe('common', () => {
@@ -1245,6 +1246,22 @@ describe('common', () => {
           {},
         );
         expect(value).to.equal('1.00s');
+      });
+    });
+
+    describe(durationStringify, () => {
+      it('should work', () => {
+        const value = transforms[durationStringify].transform(
+          {
+            value: {
+              unit: 'ms',
+              value: '200',
+            },
+          },
+          {},
+          {},
+        );
+        expect(value).to.equal('200ms');
       });
     });
 
